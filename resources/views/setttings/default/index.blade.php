@@ -47,7 +47,7 @@
                             <div class="form-material">
                                 <input class="form-control" type="text" name="price"
                                        placeholder="$0.00"
-                                       @if($info->ship_price) value="${{ $info->ship_price }}"@endif>
+                                       @if($info->ship_price) value="{{ $info->ship_price }}"@endif>
                                 <label>Shipping Price</label>
                             </div>
                         </div>

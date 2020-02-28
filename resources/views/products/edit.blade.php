@@ -20,7 +20,7 @@
 
 
 
-    <form action="{{ route('product.save') }}"  class="form-horizontal push-30-t push-30"
+    <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30-t push-30"
           id="my-awesome-dropzone" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content">
@@ -43,6 +43,7 @@
                                 <div class="col-xs-12">
                                     <label for="product-name">Title</label>
                                     <input class="form-control" type="text" id="product-name" name="title"
+                                           value="{{ $product->title }}"
                                            placeholder="Short Sleeve Shirt" required>
                                 </div>
                             </div>
@@ -53,7 +54,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <textarea class="js-summernote" name="description" placeholder="Please Enter Description here !"></textarea>
+                                    <textarea class="js-summernote" name="description"
+                                              placeholder="Please Enter Description here !">{{ $product->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +70,7 @@
                                 <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
 
                                     {{--                                            <input name="file" type="file" multiple />--}}
-                                    <input type="file" name="images[]" class="push-30-t push-30 dz-clickable" multiple required>
+                                    <input type="file" name="images[]" class="push-30-t push-30 dz-clickable" multiple>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +86,7 @@
                                         <div class="col-xs-12 push-10">
                                             <label>Price</label>
                                             <input type="text" class="form-control" name="price"
+                                                   value="{{ $product->price }}"
                                                    placeholder="$ 0.00" required>
                                         </div>
                                     </div>
@@ -93,6 +96,7 @@
                                         <div class="col-xs-12 push-10">
                                             <label>Compare at Price</label>
                                             <input type="text" class="form-control" name="compare_price"
+                                                   value="{{ $product->compare_price }}"
                                                    placeholder="$ 0.00">
                                         </div>
                                     </div>
@@ -104,43 +108,10 @@
                                         <div class="col-xs-12 push-10">
                                             <label>Cost Per Item</label>
                                             <input type="text" class="form-control" name="cost"
+                                                   value="{{ $product->cost }}"
                                                    placeholder="$ 0.00">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">More Details</h3>
-                        </div>
-                        <div class="block-content">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="ship_info">Shipping Info</label>
-                                    <input class="form-control" type="text" id="ship_info" name="ship_info"
-                                           placeholder="Shipping Information (Optional)">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="ship_info">Processing Time</label>
-                                    <input class="form-control" type="text" id="processing_time" name="ship_info"
-                                           placeholder="Shipping Information (Optional)">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12 push-10">
-                                    <label>Shipping Price</label>
-                                    <input type="text" class="form-control" name="shipping_price"
-                                           placeholder="$ 0.00">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12 push-10">
-                                    <label>Warned Platform</label>
-                                    <textarea name="warning_info" class="form-control" cols="5" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -154,80 +125,18 @@
                                 <div class="col-xs-12 push-10">
                                     <label class="css-input css-checkbox css-checkbox-primary" for="val-terms">
                                         <input type="checkbox" id="val-terms" name="variants"
-                                               value="1" ><span></span> This product has multiple options, like
+                                               value="1"
+                                               @if ($product->hasVariants != null)
+                                               checked
+                                            @endif><span></span> This product has multiple options, like
                                         different sizes or colors
                                     </label>
                                 </div>
                             </div>
-
-                            <div class="variant_options" style="display: none;">
-                                <hr>
-                                <h3 class="font-w300">Options</h3>
-                                <br>
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <h5>Option 1</h5>
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <input type="text" class="form-control" value="Size">
-                                            </div>
-                                            <div class="col-sm-9">
-                                                <input class="js-tags-input form-control" type="text"
-                                                       id="product-meta-keywords" name="option1" value="">
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-default btn-square option_btn_1 mt-2">
-                                            Add another option
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="option_2" style="display: none;">
-                                    <hr>
-                                    <div class="form-group">
-                                        <div class="col-xs-12 push-10">
-                                            <h5>Option 2</h5>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Color">
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <input class="js-tags-input form-control" type="text"
-                                                           id="product-meta-keywords" name="option2">
-                                                </div>
-                                            </div>
-                                            <button type="button"
-                                                    class="btn btn-default btn-square option_btn_2 mt-2">Add another
-                                                option
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="option_3" style="display: none;">
-                                    <hr>
-                                    <div class="form-group">
-                                        <div class="col-xs-12 push-10">
-                                            <h5>Option 3</h5>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Material">
-                                                </div>
-                                                <div class="col-sm-9">
-                                                    <input class="js-tags-input form-control" type="text"
-                                                           id="product-meta-keywords" name="option3">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10 text-right">
-                                        <button type="button"
-                                                class="btn btn-primary btn-sm btn-square variants_preview_btn">
-                                            Preview
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="variants_table" style="display: none;">
+                            <div class="variant_options" @if ($product->hasVariants == null)
+                            style="display: none;"
+                                @endif>
+                                <div class="variants_table">
                                     <hr>
                                     <h3 class="block-title">Preview</h3>
                                     <br>
@@ -245,7 +154,18 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                @foreach($product->hasVariants as $item)
+                                                <tr>
+                                                    <td class="variant_title">{{ $item->title }}<input type="hidden" name="variant_title[]" value="{{ $item->title }}">
+                                                        <input type="hidden" name="variant_id[]" value="{{ $item->id }}"></td>
+                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="{{ $item->price }}">
+                                                    </td>
+                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="{{ $item->compare_price }}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="{{ $item->quantity }}" placeholder="0"></td>
+                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="{{ $item->sku }}"></td>
+                                                    <td><input type="text" class="form-control" name="variant_barcode[]" value="{{ $item->barcode }}"></td>
+                                                </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -263,17 +183,19 @@
                             </div>
                             <div class="block-content">
                                 <div class="form-group product_category">
-                                    @foreach($categories as $category)
+                                   <?php $pcategories = json_decode($product->category);
+                                    $psubcategories = json_decode($product->sub_category);
+                                    ?>
+                                    @foreach($pcategories as $category)
                                         <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" name="category[]"
-                                                   value="{{ $category->title }}" ><span></span>{{ $category->title }}
+                                            <input type="checkbox" name="category[]" value="{{ $category }}" checked><span></span>{{ $category }}
                                         </label>
                                         <div class="row product_sub_cat">
                                             <div class="col-xs-12 col-xs-push-1">
-                                                @foreach($category->hasSub as $sub)
+                                                @foreach($psubcategories as $sub)
                                                     <label class="css-input css-checkbox css-checkbox-primary">
                                                         <input type="checkbox" name="sub_cat[]"
-                                                               value="{{ $sub->title }}"><span></span>{{ $sub->title }}
+                                                               value="{{ $sub }}" checked><span></span>{{ $sub }}
                                                     </label>
                                                     <br>
                                                 @endforeach
@@ -294,13 +216,14 @@
                                 <div class="col-xs-12 push-10">
                                     <label>Product Type</label>
                                     <input type="text" class="form-control" name="product_type"
-                                           placeholder="eg. Shirts" required>
+                                           placeholder="eg. Shirts" required value="{{ $product->type }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Vendor</label>
-                                    <input type="text" class="form-control" name="vendor" placeholder="eg. Nike" required>
+                                    <input type="text" class="form-control" name="vendor" placeholder="eg. Nike" value="{{ $product->vendor }}"
+                                           required>
                                 </div>
                             </div>
                             <hr>
@@ -310,7 +233,7 @@
                                         <h5>Tags</h5>
                                         <br>
                                         <input class="js-tags-input form-control" type="text"
-                                               id="product-meta-keywords" name="tags" value="" required>
+                                               id="product-meta-keywords" name="tags" value="{{ $product->tags }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -326,25 +249,25 @@
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Quantity</label>
-                                    <input type="text" class="form-control" name="quantity" placeholder="0" required>
+                                    <input type="text" class="form-control" name="quantity" value="{{ $product->quantity }}" placeholder="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Weight</label>
-                                    <input type="text" class="form-control" name="weight" placeholder="0.0Kg">
+                                    <input type="text" class="form-control" name="weight" placeholder="0.0Kg" value="{{ $product->weight }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>SKU</label>
-                                    <input type="text" class="form-control" name="sku" required>
+                                    <input type="text" class="form-control" name="sku" value="{{ $product->sku }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Barcode</label>
-                                    <input type="text" class="form-control" name="barcode">
+                                    <input type="text" class="form-control" name="barcode" value="{{ $product->barcode }}">
                                 </div>
                             </div>
                         </div>
@@ -384,10 +307,10 @@
                             jQuery.each(substr2, function (index2, item2) {
                                 jQuery.each(substr3, function (index3, item3) {
                                     $('tbody').append('   <tr>\n' +
-                                        '                                                    <td class="variant_title">' + item1 + '/' + item2 + '/' + item3 + '<input type="hidden" name="variant_title[]" value="' + item1 + '/' + item2 + '/' + item3  + '"></td>\n' +
+                                        '                                                    <td class="variant_title">' + item1 + '/' + item2 + '/' + item3 + '<input type="hidden" name="variant_title[]" value="' + item1 + '/' + item2 + '/' + item3 + '"></td>\n' +
                                         '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
                                         '                                                    </td>\n' +
-                                        '                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="'+comparePrice+'" placeholder="$0.00"></td>\n' +
+                                        '                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="' + comparePrice + '" placeholder="$0.00"></td>\n' +
                                         '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" placeholder="0"></td>\n' +
                                         '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' + sku++ + '"></td>\n' +
                                         '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +

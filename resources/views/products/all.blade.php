@@ -53,8 +53,10 @@
                                     <button class="btn btn-xs btn-primary" type="button" data-toggle="modal"
                                             data-target="#modal-popin{{$product->id}}" title="View Product"><i
                                             class="fa fa-clipboard"></i></button>
-                                    <button class="btn btn-xs btn-warning" type="button" title="Edit Product"><i
-                                            class="fa fa-pencil"></i></button>
+                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-xs btn-warning"
+                                       type="button" data-toggle="tooltip" title=""
+                                       data-original-title="Edit Product"><i
+                                            class="fa fa-pencil"></i></a>
                                     <a href="{{ route('product.delete', $product->id) }}" class="btn btn-xs btn-danger"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Delete Product"><i class="fa fa-times"></i></a>

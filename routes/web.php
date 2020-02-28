@@ -25,7 +25,8 @@ Route::get('/subcategory/{id}/delete','CategoryController@subdelete')->name('sub
 
 Route::get('/products','ProductController@index')->name('product.create');
 Route::get('/products/all','ProductController@all')->name('product.all');
-Route::get('/products/{id}/edit','ProductController@edit')->name('product.edit');
+Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
+Route::any('/products/{id}/update','ProductController@update')->name('product.update');
 Route::post('/products/save','ProductController@save')->name('product.save');
 Route::post('/products/variant/save','ProductController@variant')->name('product.variant');
 Route::get('/products/{id}/delete','ProductController@delete')->name('product.delete');
