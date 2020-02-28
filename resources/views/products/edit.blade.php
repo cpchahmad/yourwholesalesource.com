@@ -17,9 +17,6 @@
             color: rgba(255, 255, 255, 0.5);
         }
     </style>
-
-
-
     <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30-t push-30"
           id="my-awesome-dropzone" method="post" enctype="multipart/form-data">
         @csrf
@@ -32,12 +29,10 @@
                     <button type="submit" class="btn btn-success btn-square">Update</button>
                 </div>
             </div>
-            <!-- Info -->
             <div class="row">
                 <div class="col-sm-8">
                     <div class="block">
                         <div class="block-content block-content-full">
-
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="product-name">Title</label>
@@ -67,8 +62,6 @@
 
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-
-                                    {{--                                            <input name="file" type="file" multiple />--}}
                                     <input type="file" name="images[]" class="push-30-t push-30 dz-clickable" multiple>
                                 </div>
                             </div>
@@ -154,17 +147,30 @@
                                                 </thead>
                                                 <tbody>
                                                 @foreach($product->hasVariants as $item)
-                                                <tr>
-                                                    <td class="variant_title">{{ $item->title }}<input type="hidden" name="variant_title[]" value="{{ $item->title }}">
-                                                        <input type="hidden" name="variant_id[]" value="{{ $item->id }}"></td>
-                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="{{ $item->price }}">
-                                                    </td>
-                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="{{ $item->compare_price }}" placeholder="$0.00"></td>
-                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="{{ $item->quantity }}" placeholder="0"></td>
-                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="{{ $item->sku }}"></td>
-                                                    <td><input type="text" class="form-control" name="variant_barcode[]" value="{{ $item->barcode }}"></td>
-                                                </tr>
-                                                    @endforeach
+                                                    <tr>
+                                                        <td class="variant_title">{{ $item->title }}<input type="hidden"
+                                                                                                           name="variant_title[]"
+                                                                                                           value="{{ $item->title }}">
+                                                            <input type="hidden" name="variant_id[]"
+                                                                   value="{{ $item->id }}"></td>
+                                                        <td><input type="text" class="form-control"
+                                                                   name="variant_price[]" placeholder="$0.00"
+                                                                   value="{{ $item->price }}">
+                                                        </td>
+                                                        <td><input type="text" class="form-control"
+                                                                   name="variant_comparePrice[]"
+                                                                   value="{{ $item->compare_price }}"
+                                                                   placeholder="$0.00"></td>
+                                                        <td><input type="text" class="form-control"
+                                                                   name="variant_quantity[]"
+                                                                   value="{{ $item->quantity }}" placeholder="0"></td>
+                                                        <td><input type="text" class="form-control" name="variant_sku[]"
+                                                                   value="{{ $item->sku }}"></td>
+                                                        <td><input type="text" class="form-control"
+                                                                   name="variant_barcode[]"
+                                                                   value="{{ $item->barcode }}"></td>
+                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -182,12 +188,13 @@
                             </div>
                             <div class="block-content">
                                 <div class="form-group product_category">
-                                   <?php $pcategories = json_decode($product->category);
+                                    <?php $pcategories = json_decode($product->category);
                                     $psubcategories = json_decode($product->sub_category);
                                     ?>
                                     @foreach($pcategories as $category)
                                         <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" name="category[]" value="{{ $category }}" checked><span></span>{{ $category }}
+                                            <input type="checkbox" name="category[]" value="{{ $category }}"
+                                                   checked><span></span>{{ $category }}
                                         </label>
                                         <div class="row product_sub_cat">
                                             <div class="col-xs-12 col-xs-push-1">
@@ -221,7 +228,8 @@
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Vendor</label>
-                                    <input type="text" class="form-control" name="vendor" placeholder="eg. Nike" value="{{ $product->vendor }}"
+                                    <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
+                                           value="{{ $product->vendor }}"
                                            required>
                                 </div>
                             </div>
@@ -232,7 +240,8 @@
                                         <h5>Tags</h5>
                                         <br>
                                         <input class="js-tags-input form-control" type="text"
-                                               id="product-meta-keywords" name="tags" value="{{ $product->tags }}" required>
+                                               id="product-meta-keywords" name="tags" value="{{ $product->tags }}"
+                                               required>
                                     </div>
                                 </div>
                             </div>
@@ -248,25 +257,29 @@
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Quantity</label>
-                                    <input type="text" class="form-control" name="quantity" value="{{ $product->quantity }}" placeholder="0" required>
+                                    <input type="text" class="form-control" name="quantity"
+                                           value="{{ $product->quantity }}" placeholder="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Weight</label>
-                                    <input type="text" class="form-control" name="weight" placeholder="0.0Kg" value="{{ $product->weight }}">
+                                    <input type="text" class="form-control" name="weight" placeholder="0.0Kg"
+                                           value="{{ $product->weight }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>SKU</label>
-                                    <input type="text" class="form-control" name="sku" value="{{ $product->sku }}" required>
+                                    <input type="text" class="form-control" name="sku" value="{{ $product->sku }}"
+                                           required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Barcode</label>
-                                    <input type="text" class="form-control" name="barcode" value="{{ $product->barcode }}">
+                                    <input type="text" class="form-control" name="barcode"
+                                           value="{{ $product->barcode }}">
                                 </div>
                             </div>
                         </div>

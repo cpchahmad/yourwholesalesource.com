@@ -1,6 +1,5 @@
 @extends('layout.index')
 @section('content')
-
     <div class="content">
         <div class="row">
             <div class="col-sm-6">
@@ -157,8 +156,8 @@
                                                 <div class="col-sm-12">
                                                     <h3 class="font-w300">Description</h3>
                                                     @if ($product->description)
-                                                    <p>{{ strip_tags($product->description) }}</p>
-@else
+                                                        <p>{{ strip_tags($product->description) }}</p>
+                                                    @else
                                                         <p class="text-warning text-center">No Description Avialable</p>
                                                     @endif
                                                 </div>
