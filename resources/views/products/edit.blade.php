@@ -29,8 +29,7 @@
                     <h1 class="font-w700">Add Product</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('product.create') }}" class="btn btn-default btn-square ">Discard</a>
-                    <button type="submit" class="btn btn-primary btn-square">Save</button>
+                    <button type="submit" class="btn btn-success btn-square">Update</button>
                 </div>
             </div>
             <!-- Info -->
@@ -277,61 +276,11 @@
                     <div class="row ">
                         <div class="col-sm-12 text-right">
                             <hr>
-                            <a href="{{ route('product.create') }}" class="btn btn-default btn-square ">Discard</a>
-                            <button type="submit" class="btn btn-primary btn-square">Save</button>
+                            <button type="submit" class="btn btn-success btn-square">Update</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('input[type="checkbox"][name="variants"]').click(function () {
-                if ($(this).prop("checked") == true) {
-                    $('.variant_options').show();
-                    $('.variants_preview_btn').click(function () {
-                        var price = $('input[type="text"][name="price"]').val();
-                        var comparePrice = $('input[type="text"][name="compare_price"]').val();
-                        var sku = $('input[type="text"][name="sku"]').val();
-                        var option1 = $('input[type="text"][name="option1"]').val();
-                        var option2 = $('input[type="text"][name="option2"]').val();
-                        var option3 = $('input[type="text"][name="option3"]').val();
-                        var substr1 = option1.split(',');
-                        var substr2 = option2.split(',');
-                        var substr3 = option3.split(',');
-                        $('.variants_table').show();
-                        $("tbody").empty();
-                        jQuery.each(substr1, function (index1, item1) {
-                            jQuery.each(substr2, function (index2, item2) {
-                                jQuery.each(substr3, function (index3, item3) {
-                                    $('tbody').append('   <tr>\n' +
-                                        '                                                    <td class="variant_title">' + item1 + '/' + item2 + '/' + item3 + '<input type="hidden" name="variant_title[]" value="' + item1 + '/' + item2 + '/' + item3 + '"></td>\n' +
-                                        '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
-                                        '                                                    </td>\n' +
-                                        '                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="' + comparePrice + '" placeholder="$0.00"></td>\n' +
-                                        '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" placeholder="0"></td>\n' +
-                                        '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' + sku++ + '"></td>\n' +
-                                        '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
-                                        '                                                </tr>');
-                                });
-                            });
-                        });
-                        // $('.variants_preview_btn').hide();
-                    });
-                } else if ($(this).prop("checked") == false) {
-                    $('.variant_options').hide();
-                }
-            });
-            $('.option_btn_1').click(function () {
-                $('.option_2').show();
-                $('.option_btn_1').hide();
-            });
-            $('.option_btn_2').click(function () {
-                $('.option_3').show();
-                $('.option_btn_2').hide();
-            });
-        });
-    </script>
 @endsection
