@@ -147,7 +147,7 @@
                                                         </div>
                                                         <div class="col-sm-6 text-center">
                                                             <span
-                                                                class="text-capitalize">@if ($product->hasVaraints){{ count($product->hasVariants) }}@else 0 @endif</span>
+                                                                class="text-capitalize">{{ count($product->hasVariants) }}</span>
                                                         </div>
                                                     </div>
 
