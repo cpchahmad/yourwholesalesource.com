@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/views/products/all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/all.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/setttings/category/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/category/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +115,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CMS" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -151,7 +150,7 @@
       <workItem from="1582696764179" duration="5175000" />
       <workItem from="1582783970834" duration="12025000" />
       <workItem from="1582808158316" duration="235000" />
-      <workItem from="1582873665926" duration="12224000" />
+      <workItem from="1582873665926" duration="14539000" />
     </task>
     <servers />
   </component>
@@ -171,10 +170,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="580" y="189" key="FileChooserDialogImpl" timestamp="1582805257572">
+    <state x="580" y="189" key="FileChooserDialogImpl" timestamp="1582891791532">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="580" y="189" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1582805257572" />
+    <state x="580" y="189" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1582891791532" />
     <state x="380" y="169" key="IDE.errors.dialog" timestamp="1582630926317">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
