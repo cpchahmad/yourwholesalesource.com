@@ -1,5 +1,5 @@
 /*!
-* OneUI - v3.5.0 - Auto-compiled on 2018-10-01 - Copyright 2018 
+* OneUI - v3.5.0 - Auto-compiled on 2018-10-01 - Copyright 2018
 * @author pixelcave
 */
 html,
@@ -14,6 +14,30 @@ body {
 }
 .no-focus *:focus {
   outline: 0 !important;
+}
+.block-options {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    padding-left: 1.25rem;
+}
+.btn-block-option {
+    display: inline-block;
+    padding: 6px 5px;
+    line-height: 1;
+    color: #adb5bd;
+    background: 0 0;
+    border: none;
+    cursor: pointer;
+}
+.btn-block-option:hover {
+    color: #fff;
+    opacity: 1;
+}
+.countries-section{
+    overflow: auto;
+    display: inline-block;
+    width: 100%;
+    max-height: 200px;
 }
 a {
   color: #5c90d2;
@@ -6109,6 +6133,7 @@ fieldset[disabled] .form-material.floating > label {
   font-weight: 600;
   text-transform: uppercase;
   line-height: 1.2;
+    display: inline-flex;
 }
 .block-title.text-normal {
   text-transform: none;

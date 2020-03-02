@@ -81,6 +81,7 @@ class ProductController extends Controller
         return redirect()->route('product.all')->with('success','Item Updated successfully!');
     }
     public function save(Request $request){
+//        dd($request);
         if (Product::where('title', $request->title)->exists()) {
             $product = Product::where('title', $request->title)->first();
         } else {
@@ -92,7 +93,7 @@ class ProductController extends Controller
             foreach($request->file('images') as $image)
             {
                 $destinationPath = 'images/';
-                $filename = $image->getClientOriginalName();
+                $filename = str_replace(' ','-',$image->getClientOriginalName());
                 $image->move($destinationPath, $filename);
                 array_push($images, $filename);
             }

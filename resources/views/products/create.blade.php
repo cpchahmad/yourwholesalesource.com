@@ -61,10 +61,11 @@
                             <h3 class="block-title">Images</h3>
                         </div>
                         <div class="block-content">
+                            <div class="row preview-drop"></div>
 
                             <div class="row">
                                 <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-                                    <input type="file" name="images[]" class="push-30-t push-30 dz-clickable" multiple
+                                    <input type="file" name="images[]" class="push-30-t push-30 dz-clickable images-upload" multiple
                                            required>
                                 </div>
                             </div>
@@ -262,14 +263,14 @@
                                 <div class="form-group product_category">
                                     @foreach($categories as $category)
                                         <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" name="category[]"
+                                            <input type="checkbox" name="category[]" class="category_checkbox"
                                                    value="{{ $category->title }}"><span></span>{{ $category->title }}
                                         </label>
                                         <div class="row product_sub_cat">
                                             <div class="col-xs-12 col-xs-push-1">
                                                 @foreach($category->hasSub as $sub)
                                                     <label class="css-input css-checkbox css-checkbox-primary">
-                                                        <input type="checkbox" name="sub_cat[]"
+                                                        <input type="checkbox" class="sub_cat_checkbox" name="sub_cat[]"
                                                                value="{{ $sub->title }}"><span></span>{{ $sub->title }}
                                                     </label>
                                                     <br>

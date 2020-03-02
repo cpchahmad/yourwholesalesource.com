@@ -43,6 +43,7 @@
     <!-- Bootstrap and OneUI CSS framework -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/summernote/summernote.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropzonejs/dropzone.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
@@ -480,6 +481,8 @@
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
 <!-- Page JS Code -->
 <script src="{{ asset('assets/js/pages/base_pages_dashboard.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}"></script>
+
 <script>
     jQuery(function () {
         App.initHelpers('slick');

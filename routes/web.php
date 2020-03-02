@@ -35,3 +35,14 @@ Route::get('/default/settings','DefaultSettingsController@index')->name('default
 Route::post('/default/settings/save','DefaultSettingsController@save')->name('default_info.save');
 Route::any('/default/settings/{id}/update','DefaultSettingsController@update')->name('default_info.update');
 
+Route::get('/zones','ZoneController@index')->name('zone.index');
+Route::post('/zones','ZoneController@create')->name('zone.create');
+Route::post('/zone/{id}/update','ZoneController@update')->name('zone.update');
+Route::any('/zone/{id}/delete','ZoneController@delete')->name('zone.delete');
+
+
+
+Route::post('/zone/rate/{id}','ZoneController@rate_create')->name('zone.rate.create');
+Route::post('/zone/rate/{id}/update','ZoneController@rate_update')->name('zone.rate.update');
+Route::any('/zone/rate/{id}/delete','ZoneController@rate_delete')->name('zone.rate.delete');
+

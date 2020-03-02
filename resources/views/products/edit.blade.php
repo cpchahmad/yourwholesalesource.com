@@ -193,7 +193,7 @@
                                     ?>
                                     @foreach($pcategories as $category)
                                         <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" name="category[]" value="{{ $category }}"
+                                            <input type="checkbox" class="category_checkbox" name="category[]" value="{{ $category }}"
                                                    checked><span></span>{{ $category }}
                                         </label>
                                         <div class="row product_sub_cat">
@@ -201,7 +201,7 @@
                                                 @foreach($psubcategories as $sub)
                                                     <label class="css-input css-checkbox css-checkbox-primary">
                                                         <input type="checkbox" name="sub_cat[]"
-                                                               value="{{ $sub }}" checked><span></span>{{ $sub }}
+                                                               class="sub_cat_checkbox"      value="{{ $sub }}" checked><span></span>{{ $sub }}
                                                     </label>
                                                     <br>
                                                 @endforeach

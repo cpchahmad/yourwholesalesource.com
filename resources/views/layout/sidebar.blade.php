@@ -78,6 +78,9 @@
                         <a class="nav-item"  href="{{ route('category.create') }}"><i class="si si-camcorder"></i><span class="sidebar-mini-hide">Categories</span></a>
                     </li>
                     <li>
+                        <a class="nav-item"  href="{{route('zone.index')}}"><i class="si si-map"></i><span class="sidebar-mini-hide">Shipping Zones</span></a>
+                    </li>
+                    <li>
                         <a class="nav-item"  href="{{ route('default_info') }}"><i class="si si-info"></i><span class="sidebar-mini-hide">Default Info</span></a>
                     </li>
                 </ul>
