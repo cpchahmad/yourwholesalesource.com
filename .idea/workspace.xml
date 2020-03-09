@@ -2,16 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layout/shopify_sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DefaultSettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DefaultSettingsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/oneui.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/oneui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/admin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/all.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
@@ -136,6 +145,8 @@
       <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Y1Z9bnwzlw3AUsHVLVAqz4JTdD" />
@@ -149,17 +160,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/layout" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\ERDPSHOPIFY\resources\views\setttings\category" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\resources\views\layout" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\css" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\database\seeds" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\database\migrations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\ERDPSHOPIFY\resources\views\setttings\category" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -204,7 +216,12 @@
       <workItem from="1582808158316" duration="235000" />
       <workItem from="1582873665926" duration="14539000" />
       <workItem from="1583129076162" duration="3402000" />
-      <workItem from="1583133736061" duration="20001000" />
+      <workItem from="1583133736061" duration="20299000" />
+      <workItem from="1583230748176" duration="14732000" />
+      <workItem from="1583313433125" duration="615000" />
+      <workItem from="1583387336428" duration="25895000" />
+      <workItem from="1583475283471" duration="6353000" />
+      <workItem from="1583732071911" duration="25954000" />
     </task>
     <servers />
   </component>

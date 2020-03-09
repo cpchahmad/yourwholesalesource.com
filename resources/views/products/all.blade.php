@@ -1,20 +1,15 @@
 @extends('layout.index')
 @section('content')
     <div class="content">
-        <div class="row">
+        <div class="row" style="margin-bottom: 10px">
             <div class="col-sm-6">
-                <h1 class="font-w700">All Products</h1>
+                <h3 class="font-w700">All Products</h3>
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('product.create') }}" class="btn btn-primary btn-square">Add New Product</a>
+                <a href="{{ route('product.create') }}" class="btn btn-info btn-square ">Add New Product</a>
             </div>
         </div>
         <div class="block">
-            <div class="block-header">
-                <div class="block-options">
-                </div>
-                <h3 class="block-title">All Products</h3>
-            </div>
             <div class="block-content">
                 <table class="js-table-sections table table-hover">
                     <thead>
@@ -47,11 +42,11 @@
                             <td>{{ $product->quantity }}</td>
                             <td>{{ $product->sku }}</td>
                             <td>{{ $product->barcode }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button class="btn btn-xs btn-primary" type="button" data-toggle="modal"
-                                            data-target="#modal-popin{{$product->id}}" title="View Product"><i
-                                            class="fa fa-clipboard"></i></button>
+                            <td class="text-center">
+
+                                    <a class="btn btn-xs btn-primary" type="button" href="{{ route('product.view', $product->id) }}" {{-- data-toggle="modal"
+                                            data-target="#modal-popin{{$product->id}}"--}} title="View Product"><i
+                                            class="fa fa-eye"></i></a>
                                     <a href="{{ route('product.edit', $product->id) }}" class="btn btn-xs btn-warning"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Edit Product"><i
@@ -59,7 +54,7 @@
                                     <a href="{{ route('product.delete', $product->id) }}" class="btn btn-xs btn-danger"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Delete Product"><i class="fa fa-times"></i></a>
-                                </div>
+
                             </td>
                         </tr>
                         <div class="modal fade" id="modal-popin{{$product->id}}" tabindex="-1" role="dialog"

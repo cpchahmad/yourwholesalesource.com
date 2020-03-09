@@ -49,6 +49,9 @@
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/magnific-popup/magnific-popup.min.css')}}">
+{{--    <link rel="stylesheet" href="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.css') }}">--}}
+
 
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
@@ -395,13 +398,13 @@
             <li>
                 <div class="btn-group">
                     <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
-                        <img src="assets/img/avatars/avatar10.jpg" alt="Avatar">
+                        <img src="{{asset('assets/img/avatars/avatar10.jpg')}}" alt="Avatar">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li class="dropdown-header">Profile</li>
                         <li>
-                            <a tabindex="-1" href="base_pages_login.html">
+                            <a tabindex="-1" href="{{route('logout')}}">
                                 <i class="si si-logout pull-right"></i>Log out
                             </a>
                         </li>
@@ -479,6 +482,9 @@
 <script src="{{ asset('assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/select2/select2.full.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+<script src="{{asset('assets/js/plugins/magnific-popup/magnific-popup.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <!-- Page JS Code -->
 <script src="{{ asset('assets/js/pages/base_pages_dashboard.js') }}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
@@ -493,7 +499,7 @@
     });
     jQuery(function () {
         // Init page helpers (Summernote + CKEditor + SimpleMDE plugins)
-        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo']);
+        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo','magnific-popup']);
     });
 </script>
 </body>

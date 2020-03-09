@@ -614,10 +614,10 @@ var App = function() {
         var $baseYear = ($yearCopy.length > 0 && $yearCopy.html().length > 0) ? $yearCopy.html() : $date.getFullYear();
 
         if (parseInt($baseYear) >= $date.getFullYear()) {
-            $yearCopy.text($date.getFullYear());
-        } else {
-            $yearCopy.text($baseYear + '-' + $date.getFullYear().toString().substr(2, 2));
-        }
+            $yearCopy.text($date.getFullYear());
+        } else {
+            $yearCopy.text($baseYear + '-' + $date.getFullYear().toString().substr(2, 2));
+        }
     };
 
     // Manage page loading screen functionality
@@ -736,12 +736,12 @@ var App = function() {
             // When a row is clicked in tbody
             jQuery('tbody > tr', $table).on('click', function(e) {
                 if (e.target.type !== 'checkbox'
-                        && e.target.type !== 'button'
-                        && e.target.tagName.toLowerCase() !== 'a'
-                        && !jQuery(e.target).parent('a').length
-                        && !jQuery(e.target).parent('button').length
-                        && !jQuery(e.target).parent('.custom-control').length
-                        && !jQuery(e.target).parent('label').length) {
+                    && e.target.type !== 'button'
+                    && e.target.tagName.toLowerCase() !== 'a'
+                    && !jQuery(e.target).parent('a').length
+                    && !jQuery(e.target).parent('button').length
+                    && !jQuery(e.target).parent('.custom-control').length
+                    && !jQuery(e.target).parent('label').length) {
                     var $checkbox       = jQuery('input:checkbox', this);
                     var $checkedStatus  = $checkbox.prop('checked');
 
@@ -1020,6 +1020,43 @@ var App = function() {
             width: '100%',
             defaultText: 'Add tag',
             removeWithBackspace: true,
+            delimiter: [',']
+        });
+        jQuery('.js-tags-options').tagsInput({
+            height: '36px',
+            width: '100%',
+            defaultText: 'Add tag',
+            removeWithBackspace: true,
+            onChange: function(){
+                var price = $('input[type="text"][name="price"]').val();
+                var cost = $('input[type="text"][name="cost"]').val();
+                var comparePrice = $('input[type="text"][name="compare_price"]').val();
+                var sku = $('input[type="text"][name="sku"]').val();
+                var option1 = $('input[type="text"][name="option1"]').val();
+                var option2 = $('input[type="text"][name="option2"]').val();
+                var option3 = $('input[type="text"][name="option3"]').val();
+                var substr1 = option1.split(',');
+                var substr2 = option2.split(',');
+                var substr3 = option3.split(',');
+                $('.variants_table').show();
+                $("tbody").empty();
+                jQuery.each(substr1, function (index1, item1) {
+                    jQuery.each(substr2, function (index2, item2) {
+                        jQuery.each(substr3, function (index3, item3) {
+                            $('tbody').append('   <tr>\n' +
+                                '                                                    <td class="variant_title">' + item1 + '/' + item2 + '/' + item3 + '<input type="hidden" name="variant_title[]" value="' + item1 + '/' + item2 + '/' + item3 + '"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
+                                '                                                    </td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="' + comparePrice + '" placeholder="$0.00"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" placeholder="0"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' + sku++ + '"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
+                                '                                                </tr>');
+                        });
+                    });
+                });
+            },
             delimiter: [',']
         });
     };

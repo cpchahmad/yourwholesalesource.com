@@ -73,7 +73,11 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="nav-main-heading"><span class="sidebar-mini-hide">Settings</span></li>
+                    <li>
+                        <a class="nav-item" href="{{route('sales-managers.index')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Sales Managers</span></a>
+                    </li>
                     <li>
                         <a class="nav-item"  href="{{ route('category.create') }}"><i class="si si-camcorder"></i><span class="sidebar-mini-hide">Categories</span></a>
                     </li>
@@ -83,6 +87,7 @@
                     <li>
                         <a class="nav-item"  href="{{ route('default_info') }}"><i class="si si-info"></i><span class="sidebar-mini-hide">Default Info</span></a>
                     </li>
+
                 </ul>
             </div>
             <!-- END Side Content -->
