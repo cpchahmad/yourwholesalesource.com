@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DefaultSettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DefaultSettingsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ProductVariant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ProductVariant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/ProductVariantTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/ProductVariantTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/oneui.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/oneui.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/admin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/all.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/products/product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/setttings/category/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/category/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/setttings/default/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/default/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/setttings/zones/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/zones/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +213,7 @@
       <workItem from="1583387336428" duration="25895000" />
       <workItem from="1583475283471" duration="6353000" />
       <workItem from="1583732071911" duration="27932000" />
-      <workItem from="1583818024359" duration="20914000" />
+      <workItem from="1583818024359" duration="21577000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
