@@ -46,7 +46,7 @@ $(document).ready(function () {
         }
     });
 
-    $('body').on('click','.upload-photo',function () {
+    $('body').on('click','.dropzone',function () {
         $('.images-upload').trigger('click');
     });
 
@@ -208,6 +208,7 @@ $(document).ready(function () {
     });
 
     $('.submit_all').click(function () {
+        $('.pre-loader').css('display','flex');
         if($('#forms-div').find('form').length > 0){
             let forms = new Array();
             $('#forms-div').find('form').each(function () {

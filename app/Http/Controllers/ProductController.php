@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Image;
 use App\Product;
 use App\ProductVariant;
+use App\WarnedPlatform;
 use Illuminate\Http\Request;
+use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 
 class ProductController extends Controller
 {
     public function index(){
         $categories = Category::latest()->get();
+        $platforms = WarnedPlatform::all();
         return view('products.create')->with([
-            'categories' => $categories
+            'categories' => $categories,
+            'platforms' => $platforms
         ]);
     }
     public function all(){
@@ -31,9 +36,11 @@ class ProductController extends Controller
 
         $categories = Category::latest()->get();
         $product = Product::find($id);
+        $platforms = WarnedPlatform::all();
 
         return view('products.edit')->with([
             'categories' => $categories,
+            'platforms' => $platforms,
             'product' => $product
         ]);
     }
@@ -175,10 +182,13 @@ class ProductController extends Controller
 
                 }
                 if($request->input('type') == 'more-details') {
-                    $product->ship_info = $request->ship_info;
-                    $product->ship_processing_time = $request->ship_processing_time;
-                    $product->ship_price = $request->ship_price;
-                    $product->warned_platform = $request->warned_platform;
+//                    $product->ship_info = $request->ship_info;
+//                    $product->ship_processing_time = $request->ship_processing_time;
+//                    $product->ship_price = $request->ship_price;
+//                    $product->warned_platform = $request->warned_platform;
+                    if ($request->platforms){
+                        $product->has_platforms()->sync($request->platforms);
+                    }
                     $product->save();
 
                 }
@@ -191,27 +201,25 @@ class ProductController extends Controller
                         $destinationPath = 'images/variants/';
                         $filename = now()->format('YmdHi').str_replace(' ','-',$image->getClientOriginalName());
                         $image->move($destinationPath, $filename);
-                        $variant->image = $filename ;
+                        $image = new Image();
+                        $image->isV = 1;
+                        $image->product_id = $product->id;
+                        $image->image = $filename;
+                        $image->save();
+                        $variant->image = $image->id;
                         $variant->save();
                         return redirect()->back();
                     }
 
                 }
                 if($request->input('type') == 'existing-product-image-delete'){
-                    $images = json_decode($product->images);
-                    $images = array_diff( $images, [$request->input('file')] );
-                    $new_array = [];
-                    foreach ($images as $image){
-                        array_push($new_array,$image);
-                    }
-                    $product->images = json_encode($new_array);
-                    $product->save();
+                    Image::find($request->input('file'))->delete();
                     return response()->json([
                         'success' => 'ok'
                     ]);
                 }
                 if($request->input('type') == 'existing-product-image-add'){
-                    $images = json_decode($product->images);
+//                    $images = json_decode($product->images);
                     if($request->hasFile('images'))
                     {
                         foreach($request->file('images') as $image)
@@ -219,9 +227,13 @@ class ProductController extends Controller
                             $destinationPath = 'images/';
                             $filename = now()->format('YmdHi').str_replace(' ','-',$image->getClientOriginalName());
                             $image->move($destinationPath, $filename);
-                            array_push($images, $filename);
+                            $image = new Image();
+                            $image->isV = 0;
+                            $image->product_id = $product->id;
+                            $image->image = $filename;
+                            $image->save();
                         }
-                        $product->images = json_encode($images);
+//                        $product->images = json_encode($images);
                     }
                     $product->save();
                 }
@@ -232,24 +244,13 @@ class ProductController extends Controller
 //        }
 //        return redirect()->route('product.all')->with('success','Item Updated successfully!');
     }
+
     public function save(Request $request){
 //        dd($request);
         if (Product::where('title', $request->title)->exists()) {
             $product = Product::where('title', $request->title)->first();
         } else {
             $product = new Product();
-        }
-        if($request->hasFile('images'))
-        {
-            $images = [];
-            foreach($request->file('images') as $image)
-            {
-                $destinationPath = 'images/';
-                $filename = now()->format('YmdHi').str_replace(' ','-',$image->getClientOriginalName());
-                $image->move($destinationPath, $filename);
-                array_push($images, $filename);
-            }
-            $product->images = json_encode($images);
         }
         $product->title = $request->title;
         $product->description = $request->description;
@@ -263,10 +264,10 @@ class ProductController extends Controller
         $product->weight = $request->weight;
         $product->sku = $request->sku;
         $product->barcode = $request->barcode;
-        $product->ship_info = $request->ship_info;
-        $product->ship_processing_time = $request->ship_processing_time;
-        $product->ship_price = $request->ship_price;
-        $product->warned_platform = $request->warned_platform;
+//        $product->ship_info = $request->ship_info;
+//        $product->ship_processing_time = $request->ship_processing_time;
+//        $product->ship_price = $request->ship_price;
+//        $product->warned_platform = $request->warned_platform;
         $product->fulfilled_by = $request->input('fulfilled-by');
 
         if ($request->variants){
@@ -279,8 +280,28 @@ class ProductController extends Controller
         if ($request->sub_cat){
             $product->has_subcategories()->attach($request->sub_cat);
         }
+        if ($request->platforms){
+            $product->has_platforms()->attach($request->platforms);
+        }
         if ($request->variants) {
             $this->ProductVariants($request, $product->id);
+        }
+        if($request->hasFile('images'))
+        {
+//            $images = [];
+            foreach($request->file('images') as $image)
+            {
+                $destinationPath = 'images/';
+                $filename = now()->format('YmdHi').str_replace(' ','-',$image->getClientOriginalName());
+                $image->move($destinationPath, $filename);
+//                array_push($images, $filename);
+                $image = new Image();
+                $image->isV = 0;
+                $image->product_id = $product->id;
+                $image->image = $filename;
+                $image->save();
+            }
+
         }
         return redirect()->back()->with('success','Item created successfully!');
     }
@@ -329,6 +350,100 @@ class ProductController extends Controller
         }
         else{
             return redirect('/products');
+        }
+    }
+
+    public function import_to_shopify(Request $request){
+        $product = Product::find($request->id);
+        if($product != null){
+            $variants_array = [];
+            $options_array = [];
+            $images_array = [];
+            //converting variants into shopify api format
+            foreach ($product->hasVariants as $index =>  $varaint) {
+                array_push($variants_array, [
+                    'title' => $varaint->title,
+//                    'image_id' => $image_id,
+                    'sku' => $varaint->sku,
+                    'option1' => $varaint->option1,
+                    'option2' => $varaint->option2,
+                    'option3' => $varaint->option3,
+                    'inventory_quantity' => $varaint->quantity,
+                    'grams' => $product->weight * 1000,
+                    'weight' => $product->weight,
+                    'weight_unit' => 'kg',
+                    'barcode' => $varaint->barcode,
+                    'price' => $varaint->price,
+                    'cost' => $varaint->cost,
+                ]);
+            }
+//            dd($variants_array);
+            /*Product Options*/
+            if(count($product->option1($product)) > 0){
+                $temp = [];
+                foreach ($product->option1($product) as $a){
+                    array_push($temp,$a);
+                }
+                array_push($options_array, [
+                    'name' => 'Option1',
+                    'position' => '1',
+                    'values' => json_encode($temp),
+                ]);
+            }
+            if(count($product->option2($product)) > 0){
+                $temp = [];
+                foreach ($product->option2($product) as $a){
+                    array_push($temp,$a);
+                }
+                array_push($options_array, [
+                    'name' => 'Option2',
+                    'position' => '2',
+                    'values' => json_encode($temp),
+                ]);
+            }
+            if(count($product->option3($product)) > 0){
+                $temp = [];
+                foreach ($product->option3($product) as $a){
+                    array_push($temp,$a);
+                }
+                array_push($options_array, [
+                    'name' => 'Option3',
+                    'position' => '3',
+                    'values' => json_encode($temp),
+                ]);
+            }
+            /*Product Images*/
+
+            foreach ($product->has_images as $index => $image){
+                if($image->isV == 0){
+                    $src = asset('images').'/'.$image->image;
+                }
+                else{
+                    $src = asset('images/variants').'/'.$image->image;
+                }
+                array_push($images_array, [
+                    'alt' => $product->title.'_'.$index,
+                    'position' => $index+1,
+//                    'src' =>'https://9to5google.com/wp-content/uploads/sites/4/2020/01/Samsung-Galaxy-S20-rumors.jpg?quality=82&strip=all&w=1500',
+                    'src' => $src,
+                ]);
+            }
+            dd($images_array);
+            $shop = ShopifyApp::shop();
+            $product = [
+                "product" => [
+                    "title" => $product->title,
+                    "body_html" => $product->description,
+                    "vendor" => $product->vendor,
+                    "tags" => $product->tags,
+                    "product_type" => $product->type,
+                    "variants" => $variants_array,
+                    "options" => $options_array,
+                    "images" => $images_array,
+                ]
+            ];
+            $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $product);
+            dd($response);
         }
     }
 }

@@ -40,6 +40,10 @@ Route::get('/default/settings','DefaultSettingsController@index')->name('default
 Route::post('/default/settings/save','DefaultSettingsController@save')->name('default_info.save');
 Route::any('/default/settings/{id}/update','DefaultSettingsController@update')->name('default_info.update');
 
+Route::post('/create/platform','DefaultSettingsController@create_platform')->name('create_platform');
+Route::post('/update/platform/{id}','DefaultSettingsController@update_platform')->name('update_platform');
+Route::get('/delete/platform/{id}','DefaultSettingsController@delete_platform')->name('delete_platform');
+
 Route::get('/zones','ZoneController@index')->name('zone.index');
 Route::post('/zones','ZoneController@create')->name('zone.create');
 Route::post('/zone/{id}/update','ZoneController@update')->name('zone.update');
@@ -55,6 +59,8 @@ Route::get('/sales-managers','DefaultSettingsController@show_sales_managers')->n
 Route::post('/sales-managers','DefaultSettingsController@create_manager')->name('sales-managers.create');
 Route::any('/sales-managers/{id}/delete','DefaultSettingsController@delete_manager')->name('sales-managers.delete');
 Route::any('/sales-managers/{id}/set','DefaultSettingsController@set_manager_as_user')->name('sales-managers.set_manager_as_user');
+
+Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
 
 
 

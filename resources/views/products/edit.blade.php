@@ -33,6 +33,7 @@
                     <h3 class="font-w700">Update Product</h3>
                 </div>
                 <div class="col-sm-6 text-right">
+                    <a href="{{ route('product.view',$product->id) }}" class="btn btn-primary btn-square ">Preview</a>
                     <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New</a>
                 </div>
             </div>
@@ -73,16 +74,20 @@
                                 <h3 class="block-title">Images</h3>
                             </div>
                             <div class="block-content">
-                                @if($product->images != null)
+                                @if(count($product->has_images) >0)
                                     <div class="row editable">
 
-                                        @foreach(json_decode($product->images) as $image)
+                                        @foreach($product->has_images as $image)
                                             <div class="col-lg-4 preview-image animated fadeIn">
                                                 <div class="img-container fx-img-zoom-in fx-opt-slide-right">
-                                                    <img class="img-responsive" src="{{asset('images')}}/{{$image}}" alt="">
+                                                    @if($image->isV == 0)
+                                                    <img class="img-responsive" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                    @else
+                                                        <img class="img-responsive" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        @endif
                                                     <div class="img-options">
                                                         <div class="img-options-content">
-                                                            <a class="btn btn-sm btn-default delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image}}"><i class="fa fa-times"></i> Delete</a>
+                                                            <a class="btn btn-sm btn-default delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -92,13 +97,17 @@
                                     </div>
                                     <hr>
                                 @endif
-                                <div class="row preview-drop"></div>
+{{--                                <div class="row preview-drop"></div>--}}
                                 <div class="row">
-                                    <form class="product-images-form" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                                    <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                       @csrf
                                         <input type="hidden" name="type" value="existing-product-image-add">
-                                    <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-                                        <input type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
+                                    <div class="{{--col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3--}} col-md-12 " style="padding-bottom: 13px;">
+                                        <div class="dropzone dz-clickable">
+                                            <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
+                                            <div class="row preview-drop"></div>
+                                        </div>
+                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                     </div>
                                     </form>
                                 </div>
@@ -294,31 +303,18 @@
                                 @csrf
                                 <input type="hidden" name="type" value="more-details">
                                 <div class="block-content">
-{{--                                    <div class="form-group">--}}
-{{--                                        <div class="col-xs-12">--}}
-{{--                                            <label for="ship_info">Shipping Info</label>--}}
-{{--                                            <input class="form-control" type="text" id="ship_info" name="ship_info"--}}
-{{--                                             value="{{$product->ship_info}}"      placeholder="Shipping Information (Optional)">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <div class="col-xs-12">--}}
-{{--                                            <label for="ship_info">Processing Time</label>--}}
-{{--                                            <input class="form-control" type="text" id="processing_time" name="ship_processing_time"--}}
-{{--                                                   value="{{$product->ship_processing_time}}"     placeholder="Shipping Information (Optional)">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <div class="col-xs-12 push-10">--}}
-{{--                                            <label>Shipping Price</label>--}}
-{{--                                            <input type="text" class="form-control" name="ship_price"--}}
-{{--                                                   value="{{$product->ship_price}}"        placeholder="$ 0.00">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
                                     <div class="form-group">
                                         <div class="col-xs-12 push-10">
                                             <label>Warned Platform</label>
-                                            <textarea name="warned_platform" class="form-control" cols="5" rows="5"> {{$product->warned_platform}}</textarea>
+                                            <br>
+                                            @foreach($platforms as $platform)
+                                                <label class="css-input css-checkbox css-checkbox-primary">
+                                                    <input type="checkbox" name="platforms[]"
+                                                     @if(in_array($platform->id,$product->warned_platforms($product))) checked @endif
+                                                           value="{{ $platform->id }}"><span></span>{{ $platform->name }}
+                                                </label>
+                                                <br>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -369,8 +365,8 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                                 @if($v->image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                                 @else src="{{asset('images/variants')}}/{{$v->image}}" @endif alt="">
+                                                                 @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif alt="">
                                                         </td>
                                                         <td>
                                                             <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">

@@ -12,6 +12,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "osiset/basic-shopify-api": "^7.0",
+        "osiset/laravel-shopify": "^10.3",
         "spatie/laravel-permission": "^3.11"
     },
     "require-dev": {

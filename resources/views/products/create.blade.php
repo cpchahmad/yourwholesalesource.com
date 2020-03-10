@@ -60,17 +60,21 @@
                             <h3 class="block-title">Images</h3>
                         </div>
                         <div class="block-content">
-                            <div class="row preview-drop"></div>
+
 
                             {{--                            <div class="row" style="padding: 20px">--}}
                             {{--                                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-5">--}}
                             {{--                                    <a style="cursor: pointer" class="btn btn-sm btn-primary upload-photo"> Upload Photos</a>--}}
                             {{--                                </div>--}}
-
                             {{--                            </div>--}}
                             <div class="row" {{--style="display: none"--}}>
-                                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
-                                    <input type="file"  name="images[]" class="push-30-t push-30 dz-clickable images-upload" multiple required>
+                                <div class="{{--col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3--}} col-md-12" style="padding-bottom: 13px;">
+                                    <div class="dropzone dz-clickable">
+                                        <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
+                                        <div class="row preview-drop"></div>
+                                    </div>
+
+                                    <input style="display: none" accept="image/*"  type="file"  name="images[]" class="push-30-t dz-hidden-input push-30 images-upload" multiple required>
                                 </div>
                             </div>
                         </div>
@@ -354,31 +358,38 @@
                             <h3 class="block-title">More Details</h3>
                         </div>
                         <div class="block-content">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="ship_info">Shipping Info</label>
-                                    <input class="form-control" type="text" id="ship_info" name="ship_info"
-                                           placeholder="Shipping Information (Optional)">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="ship_info">Processing Time</label>
-                                    <input class="form-control" type="text" id="processing_time" name="ship_processing_time"
-                                           placeholder="Shipping Information (Optional)">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12 push-10">
-                                    <label>Shipping Price</label>
-                                    <input type="text" class="form-control" name="ship_price"
-                                           placeholder="$ 0.00">
-                                </div>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <div class="col-xs-12">--}}
+{{--                                    <label for="ship_info">Shipping Info</label>--}}
+{{--                                    <input class="form-control" type="text" id="ship_info" name="ship_info"--}}
+{{--                                           placeholder="Shipping Information (Optional)">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <div class="col-xs-12">--}}
+{{--                                    <label for="ship_info">Processing Time</label>--}}
+{{--                                    <input class="form-control" type="text" id="processing_time" name="ship_processing_time"--}}
+{{--                                           placeholder="Shipping Information (Optional)">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <div class="col-xs-12 push-10">--}}
+{{--                                    <label>Shipping Price</label>--}}
+{{--                                    <input type="text" class="form-control" name="ship_price"--}}
+{{--                                           placeholder="$ 0.00">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Warned Platform</label>
-                                    <textarea name="warned_platform" class="form-control" cols="5" rows="5"></textarea>
+                                    <br>
+                                    @foreach($platforms as $platform)
+                                    <label class="css-input css-checkbox css-checkbox-primary">
+                                        <input type="checkbox" name="platforms[]"
+                                               value="{{ $platform->id }}"><span></span>{{ $platform->name }}
+                                    </label>
+                                        <br>
+                                        @endforeach
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,11 @@
 @extends('layout.index')
 @section('content')
     <div class="content">
-        <h2 class="content-heading">Shipping Zones</h2>
-        <div class="row">
-            <div class="col-md-12 text-right">
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-sm-6">
+                <h3 class="font-w700">Shipping Zones</h3>
+            </div>
+            <div class="col-sm-6 text-right">
                 <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create_zone_modal">Create Shipping Zone</button>
             </div>
         </div>

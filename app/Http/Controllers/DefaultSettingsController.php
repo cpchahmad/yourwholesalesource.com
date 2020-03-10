@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DefaultInfo;
 use App\User;
+use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,8 +13,10 @@ class DefaultSettingsController extends Controller
     public function index()
     {
         $info = DefaultInfo::get()->first();
+        $platforms = WarnedPlatform::all();
         return view('setttings.default.index')->with([
-            'info' => $info
+            'info' => $info,
+            'platforms' =>$platforms
         ]);
     }
 
@@ -93,5 +96,17 @@ class DefaultSettingsController extends Controller
         $user = User::find($request->id);
         $user->assignRole('non-shopify-users');
         return redirect()->back()->with('success', 'Manager Set as Non-Shopify User Successfully');
+    }
+    public function create_platform(Request $request){
+        WarnedPlatform::create($request->all());
+        return redirect()->back()->with('success', 'Platform Success Successfully');
+    }
+    public function update_platform(Request $request){
+        WarnedPlatform::find($request->id)->update($request->all());
+        return redirect()->back()->with('success', 'Platform Updated Successfully');
+    }
+    public function delete_platform(Request $request){
+        WarnedPlatform::find($request->id)->delete();
+        return redirect()->back()->with('success', 'Platform Deleted Successfully');
     }
 }

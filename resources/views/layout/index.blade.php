@@ -59,6 +59,7 @@
 </head>
 <body>
 <!-- Page Container -->
+
 <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
     <!-- Side Overlay-->
 {{--    <aside id="side-overlay">--}}
@@ -461,6 +462,7 @@
 @include('flash_message.message')
     @yield('content')
     </main>
+
 </div>
 <!-- END Page Container -->
 <!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
@@ -502,5 +504,13 @@
         App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo','magnific-popup']);
     });
 </script>
+
+<div class="pre-loader">
+    <div class="loader">
+
+    </div>
+</div>
+
+
 </body>
 </html>

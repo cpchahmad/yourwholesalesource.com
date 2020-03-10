@@ -1,13 +1,17 @@
 @extends('layout.index')
 @section('content')
     <div class="content">
-        <h2 class="content-heading">Categories</h2>
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-sm-6">
+                <h3 class="font-w700">Categories</h3>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="block" style="height: 28rem;">
-                    <div class="block-header">
-                        <h3 class="block-title">Create Category</h3>
-                    </div>
+{{--                    <div class="block-header">--}}
+{{--                        <h3 class="block-title">Create Category</h3>--}}
+{{--                    </div>--}}
                     <div class="block-content block-content-narrow">
                         <form class="form-horizontal" action="{{ route('category.save') }}" method="post">
                             @csrf
@@ -22,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-9">
-                                    <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                                    <button class="btn btn-sm btn-primary" type="submit">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -32,9 +36,9 @@
             @if ($categories)
                 <div class="col-md-6">
                     <div class="block" style="min-height: 28rem;">
-                        <div class="block-header">
-                            <h3 class="block-title">Create SubCategory</h3>
-                        </div>
+{{--                        <div class="block-header">--}}
+{{--                            <h3 class="block-title">Create SubCategory</h3>--}}
+{{--                        </div>--}}
                         <div class="block-content block-content-narrow">
                             <form class="form-horizontal push-10-t" action="{{ route('sub.save') }}" method="post">
                                 @csrf
@@ -82,7 +86,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-9">
-                                        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                                        <button class="btn btn-sm btn-primary" type="submit">Save</button>
                                     </div>
                                 </div>
                             </form>
@@ -92,11 +96,11 @@
             @endif
         </div>
         <div class="block">
-            <div class="block-header">
-                <div class="block-options">
-                </div>
-                <h3 class="block-title">Categories</h3>
-            </div>
+{{--            <div class="block-header">--}}
+{{--                <div class="block-options">--}}
+{{--                </div>--}}
+{{--                <h3 class="block-title">Categories</h3>--}}
+{{--            </div>--}}
             <div class="block-content">
                 @if ($categories)
                     <table class="js-table-sections table table-hover">
@@ -120,14 +124,13 @@
                                     <span class="label label-primary"></span>
                                 </td>
                                 <td class="hidden-xs">
-                                    <div class="btn-group">
+
                                         <button class="btn btn-xs btn-warning" type="button" data-toggle="modal"
                                                 data-target="#modal-popin{{$category->id}}" title="Edit Category"><i
                                                 class="fa fa-pencil"></i></button>
                                         <a href="{{ route('category.delete', $category->id) }}"
                                            class="btn btn-xs btn-danger" type="button" data-toggle="tooltip" title=""
                                            data-original-title="Delete Category"><i class="fa fa-times"></i></a>
-                                    </div>
                                 </td>
                             </tr>
                             <div class="modal fade" id="modal-popin{{$category->id}}" tabindex="-1" role="dialog"
@@ -175,14 +178,14 @@
                                             <small></small>
                                         </td>
                                         <td class="hidden-xs">
-                                            <div class="btn-group">
+
                                                 <button class="btn btn-xs btn-warning" type="button" data-toggle="modal"
                                                         data-target="#sub{{$sub->id}}" title="Edit SubCategory"><i
                                                         class="fa fa-pencil"></i></button>
                                                 <a href="{{ route('sub.delete', $sub->id) }}"
                                                    class="btn btn-xs btn-danger" data-toggle="tooltip" title=""
                                                    data-original-title="Delete SubCategory"><i class="fa fa-times"></i></a>
-                                            </div>
+
                                         </td>
                                     </tr>
                                     <div class="modal fade" id="sub{{$sub->id}}" tabindex="-1" role="dialog"

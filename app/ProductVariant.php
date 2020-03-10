@@ -9,4 +9,7 @@ class ProductVariant extends Model
     public function hasCategory(){
         return $this->belongsTo('App\Product', 'product_id', 'id');
     }
+    public function has_image(){
+        return $this->belongsTo('App\Image', 'image');
+    }
 }

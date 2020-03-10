@@ -43,6 +43,20 @@ trait ProductVariantTrait {
         $sum =  $product->hasVariants->sum('quantity');
         return $sum;
     }
+    public function warned_platforms($product){
+        $array =  $product->has_platforms->pluck('id')->toArray();
+        return $array;
+    }
+    public function images($product){
+        $array =  $product->hasVariants->pluck('image')->toArray();
+        $temp = [];
+        foreach ($array as $a){
+            if($a != null){
+                array_push($temp,$a);
+            }
+        }
+        return $temp;
+    }
 
 
 }

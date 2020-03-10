@@ -6,6 +6,13 @@
         }
     </style>
     <div class="content">
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6 text-right">
+                <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
+            </div>
+        </div>
         <div class="block">
             <div class="block-content">
                 <div class="row items-push">
@@ -13,8 +20,8 @@
                         <!-- Images -->
                         <div class="row js-gallery">
                             <?php
-                            if($product->images != null){
-                                $images = json_decode($product->images);
+                            if(count($product->has_images) > 0){
+                                $images = $product->has_images;
                             }
                             else{
                                 $images = [];
@@ -24,17 +31,30 @@
 
                             <div class="col-xs-12 push-10">
                                 @if(count($images) > 0)
-                                    <a class="img-link" href="{{asset('images')}}/{{$images[0]}}">
-                                        <img class="img-responsive" src="{{asset('images')}}/{{$images[0]}}" alt="">
-                                    </a>
+                                    @if($images[0]->isV == 0)
+                                        <a class="img-link" href="{{asset('images')}}/{{$images[0]->image}}">
+                                            <img class="img-responsive" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
+                                        </a>
+                                    @else
+                                        <a class="img-link" href="{{asset('images/variants')}}/{{$images[0]->image}}">
+                                            <img class="img-responsive" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
+                                        </a>
+                                    @endif
+
                                 @endif
                             </div>
                             @if(count($images) > 0)
                                 @foreach($images as $image)
                                     <div class="col-xs-4">
-                                        <a class="img-link" href="{{asset('images')}}/{{$image}}">
-                                            <img class="img-responsive" src="{{asset('images')}}/{{$image}}" alt="">
-                                        </a>
+                                        @if($image->isV == 0)
+                                            <a class="img-link" href="{{asset('images')}}/{{$image->image}}">
+                                                <img class="img-responsive" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                            </a>
+                                        @else
+                                            <a class="img-link" href="{{asset('images/variants')}}/{{$image->image}}">
+                                                <img class="img-responsive" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                            </a>
+                                        @endif
                                     </div>
                                 @endforeach
                             @endif
@@ -228,8 +248,8 @@
                                             <tr>
                                                 <td>
                                                     <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                         @if($variant->image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                         @else src="{{asset('images/variants')}}/{{$variant->image}}" @endif alt=""></td>
+                                                         @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                         @else src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @endif alt=""></td>
                                                 <td>
                                                     {{$variant->title}}
                                                 </td>
