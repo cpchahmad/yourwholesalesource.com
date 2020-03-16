@@ -85,7 +85,7 @@
                         </div>
                         <div class="block-content">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <div class="col-xs-12 push-10">
                                             <label>Price</label>
@@ -94,15 +94,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="col-xs-12 ">
-                                            <label>Compare at Price</label>
-                                            <input type="text" class="form-control" name="compare_price"
-                                                   placeholder="$ 0.00">
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                <div class="col-sm-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <div class="col-xs-12 ">--}}
+{{--                                            <label>Compare at Price</label>--}}
+{{--                                            <input type="text" class="form-control" name="compare_price"--}}
+{{--                                                   placeholder="$ 0.00">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
