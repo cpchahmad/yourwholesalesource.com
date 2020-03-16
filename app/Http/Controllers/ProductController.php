@@ -12,6 +12,16 @@ use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 
 class ProductController extends Controller
 {
+   private $helper;
+
+    /**
+     * ProductController constructor.
+     */
+    public function __construct()
+    {
+        $this->helper = new HelperController();
+    }
+
     public function index()
     {
         $categories = Category::latest()->get();
@@ -245,7 +255,6 @@ class ProductController extends Controller
 
     public function save(Request $request)
     {
-//        dd($request);
         if (Product::where('title', $request->title)->exists()) {
             $product = Product::where('title', $request->title)->first();
         } else {
@@ -300,7 +309,7 @@ class ProductController extends Controller
             }
 
         }
-        return redirect()->back()->with('success', 'Item created successfully!');
+        return redirect()->route('import_to_shopify',$product->id);
     }
 
     public function ProductVariants($data, $id)
@@ -424,18 +433,27 @@ class ProductController extends Controller
                 array_push($images_array, [
                     'alt' => $product->title . '_' . $index,
                     'position' => $index + 1,
-//                    'src' =>'https://9to5google.com/wp-content/uploads/sites/4/2020/01/Samsung-Galaxy-S20-rumors.jpg?quality=82&strip=all&w=1500',
                     'src' => $src,
                 ]);
             }
-//            dd($images_array);
-            $shop = ShopifyApp::shop();
+            $shop = $this->helper->getShop();
+            /*Categories and Subcategories*/
+            $tags = $product->tags;
+            if(count($product->has_categories) > 0){
+                $categories = implode(',',$product->has_categories->pluck('title')->toArray());
+                $tags = $tags.','.$categories;
+            }
+            if(count($product->has_subcategories) > 0){
+                $subcategories = implode(',',$product->has_subcategories->pluck('title')->toArray());
+                $tags = $tags.','.$subcategories;
+            }
+
             $productdata = [
                 "product" => [
                     "title" => $product->title,
                     "body_html" => $product->description,
                     "vendor" => $product->vendor,
-                    "tags" => $product->tags,
+                    "tags" => $tags,
                     "product_type" => $product->type,
                     "variants" => $variants_array,
                     "options" => $options_array,
@@ -445,6 +463,9 @@ class ProductController extends Controller
 
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
             $product_shopify_id =  $response->body->product->id;
+            $product->shopify_id = $product_shopify_id;
+            $product->save();
+
             $shopifyImages = $response->body->product->images;
             $shopifyVariants = $response->body->product->variants;
             foreach ($product->hasVariants as $index => $v){
@@ -466,6 +487,7 @@ class ProductController extends Controller
                     $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
                 }
             }
+            return redirect()->route('product.view',$product->id)->with('success','Product Generated and Push to Store Successfully!');
         }
     }
 }

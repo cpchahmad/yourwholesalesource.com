@@ -358,7 +358,9 @@
                                                     <tbody class="js-table-sections-header">
                                                     <tr>
                                                         <td class="text-center">
-                                                            <i class="fa fa-angle-right"></i>
+                                                            <label class="css-input css-checkbox css-checkbox-primary">
+                                                                <input type="checkbox" value="{{$v->id}}" id="row_{{$index}}" name="variants[]"><span></span>
+                                                            </label>
                                                         </td>
                                                         <td class="variant_title">
                                                             {{$v->title}}
