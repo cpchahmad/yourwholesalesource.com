@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,7 +154,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/layout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BoomPupVersion2" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -167,18 +167,6 @@
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\database\seeds" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\database\migrations" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -216,7 +204,9 @@
       <workItem from="1583387336428" duration="25895000" />
       <workItem from="1583475283471" duration="6353000" />
       <workItem from="1583732071911" duration="27932000" />
-      <workItem from="1583818024359" duration="24557000" />
+      <workItem from="1583818024359" duration="25221000" />
+      <workItem from="1583990893577" duration="1622000" />
+      <workItem from="1584339890794" duration="4079000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
@@ -225,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583762103060</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="16032020">
+      <created>1584342173519</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1584342173519</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,36 +245,64 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="09032020F" />
-    <option name="LAST_COMMIT_MESSAGE" value="09032020F" />
+    <MESSAGE value="16032020" />
+    <option name="LAST_COMMIT_MESSAGE" value="16032020" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="392" y="92" key="#Composer/0.0.1600.860@0.0.1600.860" timestamp="1582112130439" />
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser" timestamp="1584340540640">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1584340540640" />
     <state x="530" y="189" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582634641816">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="530" y="189" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1582634641816" />
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0" timestamp="1584343568041">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/0.0.1366.728@0.0.1366.728" timestamp="1584343568041" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml" timestamp="1582194985095">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="580" y="189" key="FileChooserDialogImpl" timestamp="1582891791532">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1584342172170">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584342172170" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1584342158875">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1584342158875" />
+    <state x="495" y="160" key="FileChooserDialogImpl" timestamp="1584340446080">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="495" y="160" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584340446080" />
     <state x="580" y="189" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1582891791532" />
     <state x="380" y="169" key="IDE.errors.dialog" timestamp="1582630926317">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="380" y="169" key="IDE.errors.dialog/0.0.1600.860@0.0.1600.860" timestamp="1582630926317" />
-    <state x="508" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1582783970218">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="504" y="298" key="ReplaceDuplicatesPrompt" timestamp="1584343571252">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="504" y="298" key="ReplaceDuplicatesPrompt/0.0.1366.728@0.0.1366.728" timestamp="1584343571252" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584342181534">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584342181534" />
+    <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="434" y="219" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584339893009" />
     <state x="508" y="259" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1582783970218" />
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1582621608010">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1584344048059">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584344048059" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
 </project>

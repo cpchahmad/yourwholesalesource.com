@@ -65,53 +65,53 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
+        $shop =$this->helper->getShop();
         if ($product != null) {
             if ($request->has('type')) {
                 if ($request->input('type') == 'variant-option-delete') {
+                    $deleted_variants = null;
                     if ($request->has('delete_option1')) {
                         if ($request->has('delete_option2')) {
                             if ($request->has('delete_option3')) {
-                                $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
-                                    ->whereIn('option2', $request->input('delete_option2'))
-                                    ->whereIn('option3', $request->input('delete_option3'))->delete();
+                               $deleted_variants = $this->delete_three_options_variants($request, $product);
                             } else {
-                                $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
-                                    ->whereIn('option2', $request->input('delete_option2'))->delete();
+                                $deleted_variants = $this->delete_two_options_variants($request, $product);
                             }
                         } else {
-                            $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))->delete();
+                            $deleted_variants = $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))->get();
+                            $this->delete_variants($deleted_variants);
                         }
 
                     } else if ($request->has('delete_option2')) {
                         if ($request->has('delete_option1')) {
                             if ($request->has('delete_option3')) {
-                                $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
-                                    ->whereIn('option2', $request->input('delete_option2'))
-                                    ->whereIn('option3', $request->input('delete_option3'))->delete();
+                                $deleted_variants = $this->delete_three_options_variants($request, $product);
+
                             } else {
-                                $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
-                                    ->whereIn('option2', $request->input('delete_option2'))->delete();
+                                $deleted_variants = $this->delete_two_options_variants($request, $product);
                             }
                         } else {
-                            $product->hasVariants()->whereIn('option2', $request->input('delete_option2'))->delete();
+                            $deleted_variants = $product->hasVariants()->whereIn('option2', $request->input('delete_option2'))->get();
+                            $this->delete_variants($deleted_variants);
                         }
                     } else {
                         if ($request->has('delete_option2')) {
                             if ($request->has('delete_option1')) {
-                                $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
-                                    ->whereIn('option2', $request->input('delete_option2'))
-                                    ->whereIn('option3', $request->input('delete_option3'))->delete();
+                                $deleted_variants = $this->delete_three_options_variants($request, $product);
                             } else {
-                                $product->hasVariants()->whereIn('option1', $request->input('delete_option2'))
-                                    ->whereIn('option2', $request->input('delete_option3'))->delete();
+                               $deleted_variants = $this->delete_two_options_variants($request, $product);
                             }
                         } else {
-                            $product->hasVariants()->whereIn('option3', $request->input('delete_option3'))->delete();
+                            $deleted_variants = $product->hasVariants()->whereIn('option3', $request->input('delete_option3'))->get();
+                            $this->delete_variants($deleted_variants);
                         }
                     }
                     if (count($product->hasVariants) == 0) {
                         $product->variants = 0;
                         $product->save();
+                    }
+                    foreach ($deleted_variants as $deleted){
+                        $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '/variants/' . $deleted->shopify_id . '.json');
                     }
                     return redirect()->back();
                 }
@@ -138,7 +138,6 @@ class ProductController extends Controller
                     return redirect()->back();
                 }
                 if ($request->input('type') == 'single-variant-update') {
-//                    dd($request->all());
                     $variant = ProductVariant::find($request->variant_id);
                     $variant->title = $request->input('option1') . '/' . $request->input('option2') . '/' . $request->input('option3');
                     $variant->option1 = $request->input('option1');
@@ -193,10 +192,6 @@ class ProductController extends Controller
 
                 }
                 if ($request->input('type') == 'more-details') {
-//                    $product->ship_info = $request->ship_info;
-//                    $product->ship_processing_time = $request->ship_processing_time;
-//                    $product->ship_price = $request->ship_price;
-//                    $product->warned_platform = $request->warned_platform;
                     if ($request->platforms) {
                         $product->has_platforms()->sync($request->platforms);
                     }
@@ -229,7 +224,6 @@ class ProductController extends Controller
                     ]);
                 }
                 if ($request->input('type') == 'existing-product-image-add') {
-//                    $images = json_decode($product->images);
                     if ($request->hasFile('images')) {
                         foreach ($request->file('images') as $image) {
                             $destinationPath = 'images/';
@@ -241,16 +235,11 @@ class ProductController extends Controller
                             $image->image = $filename;
                             $image->save();
                         }
-//                        $product->images = json_encode($images);
                     }
                     $product->save();
                 }
             }
         }
-//        else{
-//            return redirect('/products');
-//        }
-//        return redirect()->route('product.all')->with('success','Item Updated successfully!');
     }
 
     public function save(Request $request)
@@ -272,10 +261,6 @@ class ProductController extends Controller
         $product->weight = $request->weight;
         $product->sku = $request->sku;
         $product->barcode = $request->barcode;
-//        $product->ship_info = $request->ship_info;
-//        $product->ship_processing_time = $request->ship_processing_time;
-//        $product->ship_price = $request->ship_price;
-//        $product->warned_platform = $request->warned_platform;
         $product->fulfilled_by = $request->input('fulfilled-by');
 
         if ($request->variants) {
@@ -488,6 +473,29 @@ class ProductController extends Controller
                 }
             }
             return redirect()->route('product.view',$product->id)->with('success','Product Generated and Push to Store Successfully!');
+        }
+    }
+
+    public function delete_three_options_variants(Request $request, $product)
+    {
+        $deleted_variants = $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
+            ->whereIn('option2', $request->input('delete_option2'))
+            ->whereIn('option3', $request->input('delete_option3'))->get();
+        $this->delete_variants($deleted_variants);
+        return $deleted_variants;
+    }
+
+    public function delete_two_options_variants(Request $request, $product)
+    {
+        $deleted_variants = $product->hasVariants()->whereIn('option1', $request->input('delete_option1'))
+            ->whereIn('option2', $request->input('delete_option2'))->get();
+        $this->delete_variants($deleted_variants);
+        return $deleted_variants;
+    }
+
+    public function delete_variants($variants){
+        foreach ($variants as $variant){
+            $variant->delete();
         }
     }
 }
