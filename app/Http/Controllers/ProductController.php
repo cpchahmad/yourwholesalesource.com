@@ -288,19 +288,11 @@ class ProductController extends Controller
                     $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json');
                     if(count($resp->body->metafields) > 0){
                         foreach ($resp->body->metafields as $m){
-                            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
+                            if($m->namespace == 'platform'){
+                                $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
+                            }
                         }
                     }
-
-                    $productdata = [
-                        "metafield" => [
-                            "key" => "warned_platform_count",
-                            "value"=> count($product->has_platforms),
-                            "value_type"=> "string",
-                            "namespace"=> "global"
-                        ]
-                    ];
-                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     foreach ($product->has_platforms as $index => $platform){
                         $index = $index+1;
                         $productdata = [
@@ -308,7 +300,7 @@ class ProductController extends Controller
                                 "key" => "warned_platform".$index,
                                 "value"=> $platform->name,
                                 "value_type"=> "string",
-                                "namespace"=> "global"
+                                "namespace"=> "platform"
                             ]
                         ];
                         $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
@@ -365,7 +357,7 @@ class ProductController extends Controller
                             $image->save();
                             $imageData = [
                                 'image' => [
-                                    'src' => asset('images/variants') . '/' . $image->image,
+                                    'src' =>  asset('images') . '/' . $image->image,
                                 ]
                             ];
                             $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
