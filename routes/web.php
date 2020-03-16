@@ -34,7 +34,7 @@ Route::post('/products/save','ProductController@save')->name('product.save');
 Route::post('/products/variant/save','ProductController@variant')->name('product.variant');
 Route::get('/products/{id}/delete','ProductController@delete')->name('product.delete');
 Route::get('/products/{id}/varaints/new','ProductController@add_existing_product_new_variants')->name('product.existing_product_new_variants');
-
+Route::get('/products-tabs/{id}/delete','ProductController@delete_tab')->name('product.tab.delete');
 
 Route::get('/default/settings','DefaultSettingsController@index')->name('default_info');
 Route::post('/default/settings/save','DefaultSettingsController@save')->name('default_info.save');

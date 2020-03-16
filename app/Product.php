@@ -23,5 +23,8 @@ class Product extends Model
     public function has_platforms(){
         return $this->belongsToMany('App\WarnedPlatform','product_platform','product_id','platform_id');
     }
+    public function has_tabs(){
+        return $this->hasMany('App\AdditionalTab','product_id');
+    }
 
 }

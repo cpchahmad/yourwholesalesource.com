@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddShopifyIdToProducts extends Migration
+class CreateAdditionalTabsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddShopifyIdToProducts extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::create('additional_tabs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('title')->nullable();
+            $table->text('description')->nullable();
             $table->text('shopify_id')->nullable();
+            $table->unsignedInteger('product_id')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ class AddShopifyIdToProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('additional_tabs');
     }
 }

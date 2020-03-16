@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdditionalTab;
 use App\Category;
 use App\Image;
 use App\Product;
@@ -262,6 +263,7 @@ class ProductController extends Controller
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                 }
+
                 if ($request->input('type') == 'organization') {
                     $product->type = $request->type;
                     $product->vendor = $request->vendor;
@@ -306,6 +308,7 @@ class ProductController extends Controller
                         $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     }
                 }
+
                 if ($request->input('type') == 'variant-image-update') {
 //                    dd($request);
                     $variant = ProductVariant::find($request->variant_id);
@@ -335,6 +338,7 @@ class ProductController extends Controller
                     }
 
                 }
+
                 if ($request->input('type') == 'existing-product-image-delete') {
                     $image =  Image::find($request->input('file'));
                     $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
@@ -344,6 +348,7 @@ class ProductController extends Controller
                         'success' => 'ok'
                     ]);
                 }
+
                 if ($request->input('type') == 'existing-product-image-add') {
                     if ($request->hasFile('images')) {
                         foreach ($request->file('images') as $image) {
@@ -366,6 +371,47 @@ class ProductController extends Controller
                         }
                     }
                     $product->save();
+                }
+
+                if ($request->input('type') == 'add-additional-tab'){
+//                    dd($request);
+                    $additional_tab = new AdditionalTab();
+                    $additional_tab->title = $request->input('title');
+                    $additional_tab->description = $request->input('description');
+                    $additional_tab->product_id = $product->id;
+                    $additional_tab->save();
+
+                    $productdata = [
+                        "metafield" => [
+                            "key" => $additional_tab->title,
+                            "value"=> $additional_tab->description,
+                            "value_type"=> "string",
+                            "namespace"=> "tabs"
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
+                    $additional_tab->shopify_id = $resp->body->metafield->id;
+                    $additional_tab->save();
+                    return redirect()->back()->with('success','Additional Tabs Added Successfully');
+                }
+                if ($request->input('type') == 'edit-additional-tab'){
+//                    dd($request);
+                    $additional_tab = AdditionalTab::find($request->input('tab_id'));
+                    $additional_tab->title = $request->input('title');
+                    $additional_tab->description = $request->input('description');
+                    $additional_tab->product_id = $product->id;
+                    $additional_tab->save();
+
+                    $productdata = [
+                        "metafield" => [
+                            "key" => $additional_tab->title,
+                            "value"=> $additional_tab->description,
+                            "value_type"=> "string",
+                            "namespace"=> "tabs"
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
+                    return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
             }
         }
@@ -675,5 +721,14 @@ class ProductController extends Controller
             ]);
         }
         return $options_array;
+    }
+
+    public function delete_tab(Request $request){
+        $tab = AdditionalTab::find($request->id);
+        $product = Product::find($tab->product_id);
+        $shop = $this->helper->getShop();
+        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$tab->shopify_id.'.json');
+        $tab->delete();
+        return redirect()->back()->with('success','Additional Tab Deleted Successfully!');
     }
 }

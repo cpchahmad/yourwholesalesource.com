@@ -81,10 +81,10 @@
                                             <div class="col-lg-4 preview-image animated fadeIn">
                                                 <div class="img-container fx-img-zoom-in fx-opt-slide-right">
                                                     @if($image->isV == 0)
-                                                    <img class="img-responsive" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                        <img class="img-responsive" src="{{asset('images')}}/{{$image->image}}" alt="">
                                                     @else
                                                         <img class="img-responsive" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                        @endif
+                                                    @endif
                                                     <div class="img-options">
                                                         <div class="img-options-content">
                                                             <a class="btn btn-sm btn-default delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
@@ -97,18 +97,18 @@
                                     </div>
                                     <hr>
                                 @endif
-{{--                                <div class="row preview-drop"></div>--}}
+                                {{--                                <div class="row preview-drop"></div>--}}
                                 <div class="row">
                                     <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
-                                      @csrf
+                                        @csrf
                                         <input type="hidden" name="type" value="existing-product-image-add">
-                                    <div class="{{--col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3--}} col-md-12 " style="padding-bottom: 13px;">
-                                        <div class="dropzone dz-clickable">
-                                            <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
-                                            <div class="row preview-drop"></div>
+                                        <div class="{{--col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3--}} col-md-12 " style="padding-bottom: 13px;">
+                                            <div class="dropzone dz-clickable">
+                                                <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
+                                                <div class="row preview-drop"></div>
+                                            </div>
+                                            <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                         </div>
-                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
-                                    </div>
                                     </form>
                                 </div>
                             </div>
@@ -238,7 +238,7 @@
                                                 <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                                 <label class="css-input css-checkbox css-checkbox-primary">
                                                     <input type="checkbox" name="category[]" class="category_checkbox"
-                                                         @if(in_array($category->id,$product->category($product))) checked @endif  value="{{ $category->id }}"><span></span>{{ $category->title }}
+                                                           @if(in_array($category->id,$product->category($product))) checked @endif  value="{{ $category->id }}"><span></span>{{ $category->title }}
                                                 </label>
                                                 <div class="row product_sub_cat" style="display: none">
                                                     <div class="col-xs-12 col-xs-push-1">
@@ -271,7 +271,7 @@
                                         <div class="col-xs-12 push-10">
                                             <label>Product Type</label>
                                             <input type="text" class="form-control" name="product_type"
-                                                 value="{{$product->type}}"  placeholder="eg. Shirts" required>
+                                                   value="{{$product->type}}"  placeholder="eg. Shirts" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -310,13 +310,13 @@
                                             @foreach($platforms as $platform)
                                                 <label class="css-input css-checkbox css-checkbox-primary">
                                                     <input type="checkbox" name="platforms[]"
-                                                     @if(in_array($platform->id,$product->warned_platforms($product))) checked @endif
+                                                           @if(in_array($platform->id,$product->warned_platforms($product))) checked @endif
                                                            value="{{ $platform->id }}"><span></span>{{ $platform->name }}
                                                 </label>
                                                 <br>
                                             @endforeach
                                         </div>
-{{--                                        <input type="submit" value="save">--}}
+                                        {{--                                        <input type="submit" value="save">--}}
                                     </div>
                                 </div>
                             </form>
@@ -350,68 +350,68 @@
                                         <th style="vertical-align: top">Barcode</th>
                                     </tr>
                                     </thead>
-                                        @if(count($product->hasVariants) > 0)
-                                            @foreach($product->hasVariants as $index => $v)
-                                                <form action="{{route('product.update',$product->id)}}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="type" value="single-variant-update">
-                                                    <input type="hidden" name="variant_id" value="{{$v->id}}">
-                                                    <tbody class="js-table-sections-header">
-                                                    <tr>
-                                                        <td class="text-center">
-                                                            <label class="css-input css-checkbox css-checkbox-primary">
-                                                                <input type="checkbox" value="{{$v->id}}" id="row_{{$index}}" name="variants[]"><span></span>
-                                                            </label>
-                                                        </td>
-                                                        <td class="variant_title">
-                                                            {{$v->title}}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                                 @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                                 @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif alt="">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
-                                                        </td>
-                                                        <td><input type="text" class="form-control" name="compare_price" value="{{$v->compare_price}}" placeholder="$0.00"></td>
-                                                        <td><input type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
-                                                        <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
-                                                        <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                        <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
-                                                        </td>
+                                    @if(count($product->hasVariants) > 0)
+                                        @foreach($product->hasVariants as $index => $v)
+                                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="type" value="single-variant-update">
+                                                <input type="hidden" name="variant_id" value="{{$v->id}}">
+                                                <tbody class="js-table-sections-header">
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <label class="css-input css-checkbox css-checkbox-primary">
+                                                            <input type="checkbox" value="{{$v->id}}" id="row_{{$index}}" name="variants[]"><span></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="variant_title">
+                                                        {{$v->title}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                             @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                             @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif alt="">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
+                                                    </td>
+                                                    <td><input type="text" class="form-control" name="compare_price" value="{{$v->compare_price}}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
+                                                    <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
+                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
+                                                    </td>
 
-                                                    </tr>
-                                                    </tbody>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td style="vertical-align: middle"> @if($v->option1 != null) Option1: @endif</td>
-                                                        <td>
-                                                            @if($v->option1 != null)
-                                                                <input type="text" class="form-control" name="option1" placeholder="$0.00" value="{{$v->option1}}">
-                                                            @endif
-                                                        </td>
-                                                        <td style="vertical-align: middle">@if($v->option2 != null) Option2: @endif</td>
-                                                        <td>
-                                                            @if($v->option2 != null)
-                                                                <input type="text" class="form-control" name="option2" placeholder="$0.00" value="{{$v->option2}}">
-                                                            @endif
-                                                        </td>
-                                                        <td style="vertical-align: middle">@if($v->option3 != null) Option3: @endif</td>
-                                                        <td>
-                                                            @if($v->option3 != null)
-                                                                <input type="text" class="form-control" name="option3" placeholder="$0.00" value="{{$v->option3}}">
-                                                            @endif
-                                                        </td>
-                                                        <td></td>
+                                                </tr>
+                                                </tbody>
+                                                <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td style="vertical-align: middle"> @if($v->option1 != null) Option1: @endif</td>
+                                                    <td>
+                                                        @if($v->option1 != null)
+                                                            <input type="text" class="form-control" name="option1" placeholder="$0.00" value="{{$v->option1}}">
+                                                        @endif
+                                                    </td>
+                                                    <td style="vertical-align: middle">@if($v->option2 != null) Option2: @endif</td>
+                                                    <td>
+                                                        @if($v->option2 != null)
+                                                            <input type="text" class="form-control" name="option2" placeholder="$0.00" value="{{$v->option2}}">
+                                                        @endif
+                                                    </td>
+                                                    <td style="vertical-align: middle">@if($v->option3 != null) Option3: @endif</td>
+                                                    <td>
+                                                        @if($v->option3 != null)
+                                                            <input type="text" class="form-control" name="option3" placeholder="$0.00" value="{{$v->option3}}">
+                                                        @endif
+                                                    </td>
+                                                    <td></td>
 
-                                                    </tr>
-                                                    </tbody>
-                                                </form>
-                                            @endforeach
-                                        @endif
+                                                </tr>
+                                                </tbody>
+                                            </form>
+                                        @endforeach
+                                    @endif
                                 </table>
                             </div>
                             <div class="form-image-src" style="display: none">
@@ -424,7 +424,7 @@
                                             <input type="file" name="varaint_src" class="varaint_file_input" accept="image/*">
                                         </form>
                                     @endforeach
-                                    @endif
+                                @endif
                             </div>
                         </div>
                         <div class="modal fade" id="edit_options" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
@@ -570,6 +570,135 @@
                             </div>
                         </div>
                     @endif
+                </div>
+                {{--Tabs Block--}}
+                <div class="col-md-12">
+
+                    <div class="block">
+                        <div class="block-header d-inline-flex" >
+                            <h3 class="block-title">Additional Tabs</h3>
+                            <div class="float-right d-inline-block" style="float: right">
+                                <a style="margin-left: 10px;" data-toggle="modal" data-target="#add_tabs_modal">Add Tab</a>
+                            </div>
+                        </div>
+                        <div class="block-content">
+                            @if(count($product->has_tabs) > 0)
+                                <div class="block">
+
+                                    <ul class="nav nav-tabs" data-toggle="tabs">
+                                        @foreach($product->has_tabs as $index => $tab)
+                                            <li @if($index == 0) class="active" @endif>
+                                                <a href="#tab{{$index}}">{{$tab->title}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="block-content tab-content">
+                                        @foreach($product->has_tabs as $index => $tab)
+                                            <div class="tab-pane @if($index == 0) active @endif" id="tab{{$index}}">
+                                                <div class="row">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-info" data-toggle="modal" data-target="#edit_tabs_modal{{$index}}"> Edit Tab</button>
+
+                                                        <button class="btn btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>
+                                                    </div>
+                                                </div>
+                                                <p>{!! $tab->description !!}</p>
+                                            </div>
+                                            <div class="modal fade" id="edit_tabs_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-popout" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="block block-themed block-transparent mb-0">
+                                                            <div class="block-header bg-primary-dark">
+                                                                <h3 class="block-title">Edit {{$tab->title}} tab</h3>
+                                                                <div class="block-options">
+                                                                    <button type="button" class="btn-block-option">
+                                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="type" value="edit-additional-tab">
+                                                                <input type="hidden" name="tab_id" value="{{$tab->id}}">
+                                                                <div class="block-content" style="padding: 20px !important;">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12" style="margin-bottom: 10px">
+                                                                            <label for="product-name">Title</label>
+                                                                            <input class="form-control" type="text" id="" name="title"
+                                                                                   value="{{$tab->title}}" placeholder=""  required>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                    <textarea class="js-summernote" name="description" required
+                                              placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <button class="btn btn-primary">Save</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </form>
+                                                            <div class="block-content block-content-full text-right border-top">
+
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                                                                    Discard
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <p>No Tabs Found!</p>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="modal fade" id="add_tabs_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-popout" role="document">
+                            <div class="modal-content">
+                                <div class="block block-themed block-transparent mb-0">
+                                    <div class="block-header bg-primary-dark">
+                                        <h3 class="block-title">Add Additional Tabs</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option">
+                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <form action="{{route('product.update',$product->id)}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="type" value="add-additional-tab">
+                                        <div class="block-content" style="padding: 20px !important;">
+                                            <div class="row">
+                                                <div class="col-md-12" style="margin-bottom: 10px">
+                                                    <label for="product-name">Title</label>
+                                                    <input class="form-control" type="text" id="" name="title"
+                                                           value=""  placeholder="" required>
+                                                </div>
+                                                <div class="col-md-12">
+                                    <textarea class="js-summernote" name="description" required
+                                              placeholder="Please Enter Description here !"></textarea>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                    <div class="block-content block-content-full text-right border-top">
+
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                                            Discard
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="content">
                     <div class="row ">
