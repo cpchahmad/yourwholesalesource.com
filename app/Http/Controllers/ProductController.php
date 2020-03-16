@@ -111,9 +111,9 @@ class ProductController extends Controller
                         $product->save();
                     }
                     foreach ($deleted_variants as $deleted){
-                        $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '/variants/' . $deleted->shopify_id . '.json');
+                        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' .$product->shopify_id. '/variants/' .$deleted->shopify_id. '.json');
                     }
-                    return redirect()->back();
+                    return redirect()->back()->with('success','Selected Options and Related Variants Deleted Successfully');
                 }
                 if ($request->input('type') == 'existing-product-new-variants') {
                     if ($request->variants) {

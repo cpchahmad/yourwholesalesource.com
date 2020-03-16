@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ERDPSHOPIFY.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
     </list>
@@ -206,7 +205,7 @@
       <workItem from="1583732071911" duration="27932000" />
       <workItem from="1583818024359" duration="25221000" />
       <workItem from="1583990893577" duration="1622000" />
-      <workItem from="1584339890794" duration="4079000" />
+      <workItem from="1584339890794" duration="4322000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
@@ -222,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584342173519</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="16032020-deleted-variants_sync">
+      <created>1584344080762</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584344080763</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +252,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="09032020F" />
     <MESSAGE value="16032020" />
-    <option name="LAST_COMMIT_MESSAGE" value="16032020" />
+    <MESSAGE value="16032020-deleted-variants_sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="16032020-deleted-variants_sync" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
@@ -269,14 +276,14 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1584342172170">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1584344079916">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584342172170" />
-    <state x="129" y="55" key="DiffContextDialog" timestamp="1584342158875">
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584344079916" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1584344059991">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1584342158875" />
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1584344059991" />
     <state x="495" y="160" key="FileChooserDialogImpl" timestamp="1584340446080">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -290,10 +297,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="504" y="298" key="ReplaceDuplicatesPrompt/0.0.1366.728@0.0.1366.728" timestamp="1584343571252" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584342181534">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584344084614">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584342181534" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584344084614" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
