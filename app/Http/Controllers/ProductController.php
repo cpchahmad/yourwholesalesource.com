@@ -8,11 +8,10 @@ use App\Product;
 use App\ProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
-use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 
 class ProductController extends Controller
 {
-   private $helper;
+    private $helper;
 
     /**
      * ProductController constructor.
@@ -68,12 +67,13 @@ class ProductController extends Controller
         $shop =$this->helper->getShop();
         if ($product != null) {
             if ($request->has('type')) {
+                /*Variants Option Delete from Shopify and Database*/
                 if ($request->input('type') == 'variant-option-delete') {
                     $deleted_variants = null;
                     if ($request->has('delete_option1')) {
                         if ($request->has('delete_option2')) {
                             if ($request->has('delete_option3')) {
-                               $deleted_variants = $this->delete_three_options_variants($request, $product);
+                                $deleted_variants = $this->delete_three_options_variants($request, $product);
                             } else {
                                 $deleted_variants = $this->delete_two_options_variants($request, $product);
                             }
@@ -99,7 +99,7 @@ class ProductController extends Controller
                             if ($request->has('delete_option1')) {
                                 $deleted_variants = $this->delete_three_options_variants($request, $product);
                             } else {
-                               $deleted_variants = $this->delete_two_options_variants($request, $product);
+                                $deleted_variants = $this->delete_two_options_variants($request, $product);
                             }
                         } else {
                             $deleted_variants = $product->hasVariants()->whereIn('option3', $request->input('delete_option3'))->get();
@@ -110,33 +110,68 @@ class ProductController extends Controller
                         $product->variants = 0;
                         $product->save();
                     }
+                    /*Deleting Variants from shopify*/
                     foreach ($deleted_variants as $deleted){
                         $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' .$product->shopify_id. '/variants/' .$deleted->shopify_id. '.json');
                     }
                     return redirect()->back()->with('success','Selected Options and Related Variants Deleted Successfully');
                 }
+                /*New Variants Option Add from Shopify and Database*/
                 if ($request->input('type') == 'existing-product-new-variants') {
                     if ($request->variants) {
                         $product->variants = $request->variants;
                     }
                     $product->save();
                     $this->ProductVariants($request, $product->id);
+                    $variants_array =  $this->variants_template_array($product);
+
+                    $productdata = [
+                        "product" => [
+                            "options" => $this->options_update_template_array($product),
+                            "variants" => $variants_array,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $shopifyVariants = $resp->body->product->variants;
+                    foreach ($product->hasVariants as $index => $v){
+                        $v->shopify_id = $shopifyVariants[$index]->id;
+                        $v->save();
+                    }
                     return redirect()->route('product.edit', $product->id);
                 }
+                /*new Option Add Shopify and Database*/
                 if ($request->input('type') == 'new-option-add') {
+                    $variants_array = [];
                     foreach ($product->hasVariants as $v) {
+
                         if ($request->input('option') == 'option2') {
                             $v->option2 = $request->input('value');
                             $v->title = $v->title . $request->input('value') . '/';
+                            array_push($variants_array,[
+                                'id' => $v->shopify_id,
+                                'option2' =>  $request->input('value')
+                            ]);
                         }
                         if ($request->input('option') == 'option3') {
                             $v->option3 = $request->input('value');
                             $v->title = $v->title . $request->input('value');
+                            array_push($variants_array,[
+                                'id' => $v->shopify_id,
+                                'option3' =>  $request->input('value')
+                            ]);
                         }
                         $v->save();
                     }
+                    $productdata = [
+                        "product" => [
+                            "options" => $this->options_update_template_array($product),
+                            "variants" => $variants_array,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                     return redirect()->back();
                 }
+                /*Single Variant Update Shopify and Database*/
                 if ($request->input('type') == 'single-variant-update') {
                     $variant = ProductVariant::find($request->variant_id);
                     $variant->title = $request->input('option1') . '/' . $request->input('option2') . '/' . $request->input('option3');
@@ -152,13 +187,37 @@ class ProductController extends Controller
                     $variant->product_id = $id;
                     $variant->save();
 
+                    $productdata = [
+                        "variant" => [
+                            'title' => $variant->title,
+                            'sku' => $variant->sku,
+                            'option1' => $variant->option1,
+                            'option2' => $variant->option2,
+                            'option3' => $variant->option3,
+                            'grams' => $product->weight * 1000,
+                            'weight' => $product->weight,
+                            'weight_unit' => 'kg',
+                            'barcode' => $variant->barcode,
+                            'price' => $variant->price,
+                            'cost' => $variant->cost,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
                 }
+                /*Product Basic Update Shopify and Database*/
                 if ($request->input('type') == 'basic-info') {
                     $product->title = $request->title;
                     $product->description = $request->description;
                     $product->save();
-                    return redirect()->back();
+                    $productdata = [
+                        "product" => [
+                            "title" => $request->title,
+                            "body_html" => $request->description,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                 }
+                /*Pricing Update*/
                 if ($request->input('type') == 'pricing') {
                     $product->price = $request->price;
                     $product->compare_price = $request->compare_price;
@@ -169,12 +228,15 @@ class ProductController extends Controller
                     $product->barcode = $request->barcode;
                     $product->save();
 
+
                 }
+
                 if ($request->input('type') == 'fulfilled') {
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->save();
 
                 }
+
                 if ($request->input('type') == 'category') {
                     if ($request->category) {
                         $product->has_categories()->sync($request->category);
@@ -183,6 +245,22 @@ class ProductController extends Controller
                         $product->has_subcategories()->sync($request->sub_cat);
                     }
                     $product->save();
+
+                    $tags = $product->tags;
+                    if(count($product->has_categories) > 0){
+                        $categories = implode(',',$product->has_categories->pluck('title')->toArray());
+                        $tags = $tags.','.$categories;
+                    }
+                    if(count($product->has_subcategories) > 0){
+                        $subcategories = implode(',',$product->has_subcategories->pluck('title')->toArray());
+                        $tags = $tags.','.$subcategories;
+                    }
+                    $productdata = [
+                        "product" => [
+                            "tags" => $tags,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                 }
                 if ($request->input('type') == 'organization') {
                     $product->type = $request->type;
@@ -190,13 +268,51 @@ class ProductController extends Controller
                     $product->tags = $request->tags;
                     $product->save();
 
+                    $productdata = [
+                        "product" => [
+                            "vendor" => $request->vendor,
+                            "product_type" => $request->type,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+
                 }
+
                 if ($request->input('type') == 'more-details') {
                     if ($request->platforms) {
                         $product->has_platforms()->sync($request->platforms);
                     }
                     $product->save();
+                    $metafields = [];
 
+                    $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json');
+                    if(count($resp->body->metafields) > 0){
+                        foreach ($resp->body->metafields as $m){
+                            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
+                        }
+                    }
+
+                    $productdata = [
+                        "metafield" => [
+                            "key" => "warned_platform_count",
+                            "value"=> count($product->has_platforms),
+                            "value_type"=> "string",
+                            "namespace"=> "global"
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
+                    foreach ($product->has_platforms as $index => $platform){
+                        $index = $index+1;
+                        $productdata = [
+                            "metafield" => [
+                                "key" => "warned_platform".$index,
+                                "value"=> $platform->name,
+                                "value_type"=> "string",
+                                "namespace"=> "global"
+                            ]
+                        ];
+                        $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
+                    }
                 }
                 if ($request->input('type') == 'variant-image-update') {
 //                    dd($request);
@@ -213,12 +329,25 @@ class ProductController extends Controller
                         $image->save();
                         $variant->image = $image->id;
                         $variant->save();
+
+                        $imageData = [
+                            'image' => [
+                                'src' => asset('images/variants') . '/' . $image->image,
+                                'variant_ids' => [$variant->shopify_id]
+                            ]
+                        ];
+                        $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
+                        $image->shopify_id = $imageResponse->body->image->id;
+                        $image->save();
                         return redirect()->back();
                     }
 
                 }
                 if ($request->input('type') == 'existing-product-image-delete') {
-                    Image::find($request->input('file'))->delete();
+                    $image =  Image::find($request->input('file'));
+                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
+                    $image->delete();
+
                     return response()->json([
                         'success' => 'ok'
                     ]);
@@ -233,6 +362,14 @@ class ProductController extends Controller
                             $image->isV = 0;
                             $image->product_id = $product->id;
                             $image->image = $filename;
+                            $image->save();
+                            $imageData = [
+                                'image' => [
+                                    'src' => asset('images/variants') . '/' . $image->image,
+                                ]
+                            ];
+                            $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
+                            $image->shopify_id = $imageResponse->body->image->id;
                             $image->save();
                         }
                     }
@@ -354,59 +491,9 @@ class ProductController extends Controller
             $options_array = [];
             $images_array = [];
             //converting variants into shopify api format
-            foreach ($product->hasVariants as $index => $varaint) {
-                array_push($variants_array, [
-                    'title' => $varaint->title,
-//                    'image_id' => $image_id,
-                    'sku' => $varaint->sku,
-                    'option1' => $varaint->option1,
-                    'option2' => $varaint->option2,
-                    'option3' => $varaint->option3,
-                    'inventory_quantity' => $varaint->quantity,
-                    'inventory_management' => 'shopify',
-                    'grams' => $product->weight * 1000,
-                    'weight' => $product->weight,
-                    'weight_unit' => 'kg',
-                    'barcode' => $varaint->barcode,
-                    'price' => $varaint->price,
-                    'cost' => $varaint->cost,
-                ]);
-            }
-//            dd($variants_array);
+            $variants_array =  $this->variants_template_array($product,$variants_array);
             /*Product Options*/
-            if (count($product->option1($product)) > 0) {
-                $temp = [];
-                foreach ($product->option1($product) as $a) {
-                    array_push($temp, $a);
-                }
-                array_push($options_array, [
-                    'name' => 'Option1',
-                    'position' => '1',
-                    'values' => json_encode($temp),
-                ]);
-            }
-            if (count($product->option2($product)) > 0) {
-                $temp = [];
-                foreach ($product->option2($product) as $a) {
-                    array_push($temp, $a);
-                }
-                array_push($options_array, [
-                    'name' => 'Option2',
-                    'position' => '2',
-                    'values' => json_encode($temp),
-                ]);
-            }
-            if (count($product->option3($product)) > 0) {
-                $temp = [];
-                foreach ($product->option3($product) as $a) {
-                    array_push($temp, $a);
-                }
-                array_push($options_array, [
-                    'name' => 'Option3',
-                    'position' => '3',
-                    'values' => json_encode($temp),
-                ]);
-            }
+            $options_array = $this->options_template_array($product,$options_array);
             /*Product Images*/
 
             foreach ($product->has_images as $index => $image) {
@@ -447,6 +534,7 @@ class ProductController extends Controller
             ];
 
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
+//            dd($response);
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
             $product->save();
@@ -497,5 +585,103 @@ class ProductController extends Controller
         foreach ($variants as $variant){
             $variant->delete();
         }
+    }
+
+    public function variants_template_array($product){
+        $variants_array = [];
+        foreach ($product->hasVariants as $index => $varaint) {
+            array_push($variants_array, [
+                'title' => $varaint->title,
+                'sku' => $varaint->sku,
+                'option1' => $varaint->option1,
+                'option2' => $varaint->option2,
+                'option3' => $varaint->option3,
+                'inventory_quantity' => $varaint->quantity,
+                'inventory_management' => 'shopify',
+                'grams' => $product->weight * 1000,
+                'weight' => $product->weight,
+                'weight_unit' => 'kg',
+                'barcode' => $varaint->barcode,
+                'price' => $varaint->price,
+                'cost' => $varaint->cost,
+            ]);
+        }
+        return $variants_array;
+    }
+
+    public function options_template_array($product){
+        $options_array = [];
+        if (count($product->option1($product)) > 0) {
+            $temp = [];
+            foreach ($product->option1($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option1',
+                'position' => '1',
+                'values' => json_encode($temp),
+            ]);
+        }
+        if (count($product->option2($product)) > 0) {
+            $temp = [];
+            foreach ($product->option2($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option2',
+                'position' => '2',
+                'values' => json_encode($temp),
+            ]);
+        }
+        if (count($product->option3($product)) > 0) {
+            $temp = [];
+            foreach ($product->option3($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option3',
+                'position' => '3',
+                'values' => json_encode($temp),
+            ]);
+        }
+        return $options_array;
+    }
+
+    public function options_update_template_array($product){
+        $options_array = [];
+        if (count($product->option1($product)) > 0) {
+            $temp = [];
+            foreach ($product->option1($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option1',
+                'position' => '1',
+                'values' => $temp,
+            ]);
+        }
+        if (count($product->option2($product)) > 0) {
+            $temp = [];
+            foreach ($product->option2($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option2',
+                'position' => '2',
+                'values' => $temp,
+            ]);
+        }
+        if (count($product->option3($product)) > 0) {
+            $temp = [];
+            foreach ($product->option3($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option3',
+                'position' => '3',
+                'values' => $temp,
+            ]);
+        }
+        return $options_array;
     }
 }

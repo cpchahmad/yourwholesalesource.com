@@ -316,6 +316,7 @@
                                                 <br>
                                             @endforeach
                                         </div>
+{{--                                        <input type="submit" value="save">--}}
                                     </div>
                                 </div>
                             </form>
@@ -379,6 +380,7 @@
                                                         <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
                                                         <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
                                                         </td>
+
                                                     </tr>
                                                     </tbody>
                                                     <tbody>

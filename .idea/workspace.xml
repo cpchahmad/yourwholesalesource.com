@@ -4,6 +4,7 @@
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +206,7 @@
       <workItem from="1583732071911" duration="27932000" />
       <workItem from="1583818024359" duration="25221000" />
       <workItem from="1583990893577" duration="1622000" />
-      <workItem from="1584339890794" duration="4322000" />
+      <workItem from="1584339890794" duration="19485000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
@@ -272,6 +273,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/0.0.1366.728@0.0.1366.728" timestamp="1584343568041" />
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1" timestamp="1584345213955">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1/0.0.1366.728@0.0.1366.728" timestamp="1584345213955" />
+    <state x="420" y="213" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#" timestamp="1584345232021">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="420" y="213" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.0.1366.728@0.0.1366.728" timestamp="1584345232021" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml" timestamp="1582194985095">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -306,10 +315,10 @@
     </state>
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584339893009" />
     <state x="508" y="259" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1582783970218" />
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1584344048059">
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1584361960767">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584344048059" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584361960767" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
 </project>
