@@ -83,7 +83,7 @@ class ZoneController extends Controller
 
             }
             if($message == null){
-                $message = "No Shipping Carrier Available For Your ".$country." Right Now!";
+                $message = "No Shipping Carrier Available For ".$country." Right Now!";
                 return response()->json([
                     'status' => 'no-zone-found',
                     'message' => $message,
@@ -103,7 +103,7 @@ class ZoneController extends Controller
 
         }
         else{
-            $message = "No Shipping Carrier Available For Your ".$country;
+            $message = "No Shipping Carrier Available For ".$country;
             return response()->json([
                 'status' => 'no-zone-found',
                 'message' => $message,
