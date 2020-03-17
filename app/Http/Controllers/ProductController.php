@@ -598,6 +598,18 @@ class ProductController extends Controller
                 $v->shopify_id = $shopifyVariants[$index]->id;
                 $v->save();
             }
+            foreach ($product->has_platforms as $index => $platform){
+                $index = $index+1;
+                $productdata = [
+                    "metafield" => [
+                        "key" => "warned_platform".$index,
+                        "value"=> $platform->name,
+                        "value_type"=> "string",
+                        "namespace"=> "platform"
+                    ]
+                ];
+                $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product_shopify_id.'/metafields.json',$productdata);
+            }
             foreach ($product->has_images as $index => $image){
                 $image->shopify_id = $shopifyImages[$index]->id;
                 $image->save();
@@ -649,8 +661,8 @@ class ProductController extends Controller
                 'option1' => $varaint->option1,
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
-                'inventory_quantity' => $varaint->quantity,
-                'inventory_management' => 'shopify',
+//                'inventory_quantity' => $varaint->quantity,
+//                'inventory_management' => 'shopify',
                 'grams' => $product->weight * 1000,
                 'weight' => $product->weight,
                 'weight_unit' => 'kg',
