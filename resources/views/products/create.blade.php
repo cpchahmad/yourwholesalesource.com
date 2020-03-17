@@ -16,11 +16,16 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
         }
+
+         .mb2{
+             margin-bottom: 10px !important;
+         }
+
     </style>
     <form id="create_product_form" action="{{ route('product.save') }}" class="form-horizontal {{--push-30-t--}} push-30" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content">
-            <div class="row" style="margin-bottom: 10px">
+            <div class="row mb2">
                 <div class="col-sm-6">
                     <h3 class="font-w700">Add Product</h3>
                 </div>
@@ -231,14 +236,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{--                                <div class="form-group">--}}
-                                {{--                                    <div class="col-xs-12 push-10 text-right">--}}
-                                {{--                                        <button type="button"--}}
-                                {{--                                                class="btn btn-primary btn-sm btn-square variants_preview_btn">--}}
-                                {{--                                            Preview--}}
-                                {{--                                        </button>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
                                 <div class="variants_table" style="display: none;">
                                     <hr>
                                     <h3 class="block-title">Preview</h3>
@@ -358,29 +355,8 @@
                             <h3 class="block-title">More Details</h3>
                         </div>
                         <div class="block-content">
-{{--                            <div class="form-group">--}}
-{{--                                <div class="col-xs-12">--}}
-{{--                                    <label for="ship_info">Shipping Info</label>--}}
-{{--                                    <input class="form-control" type="text" id="ship_info" name="ship_info"--}}
-{{--                                           placeholder="Shipping Information (Optional)">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <div class="col-xs-12">--}}
-{{--                                    <label for="ship_info">Processing Time</label>--}}
-{{--                                    <input class="form-control" type="text" id="processing_time" name="ship_processing_time"--}}
-{{--                                           placeholder="Shipping Information (Optional)">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <div class="col-xs-12 push-10">--}}
-{{--                                    <label>Shipping Price</label>--}}
-{{--                                    <input type="text" class="form-control" name="ship_price"--}}
-{{--                                           placeholder="$ 0.00">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <div class="form-group">
-                                <div class="col-xs-12 push-10">
+                                <div class="col-xs-12">
                                     <label>Warned Platform</label>
                                     <br>
                                     @foreach($platforms as $platform)
@@ -390,6 +366,19 @@
                                     </label>
                                         <br>
                                         @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label>Product Status</label>
+                                    <br>
+                                    <label class="css-input css-radio  css-radio-primary push-10-r">
+                                        <input type="radio" name="status" value="1" checked=""><span></span> Published
+                                    </label>
+                                    <br>
+                                    <label class="css-input css-radio  css-radio-primary">
+                                        <input type="radio" name="status" value="0"><span></span> Draft
+                                    </label>
                                 </div>
                             </div>
                         </div>

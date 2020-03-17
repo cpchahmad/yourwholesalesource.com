@@ -307,6 +307,12 @@ class ProductController extends Controller
                         ];
                         $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     }
+
+                     $this->product_status_change($request, $product, $shop);
+
+                }
+                if($request->input('type') == 'status_update'){
+                    $this->product_status_change($request, $product, $shop);
                 }
 
                 if ($request->input('type') == 'variant-image-update') {
@@ -394,6 +400,7 @@ class ProductController extends Controller
                     $additional_tab->save();
                     return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
+
                 if ($request->input('type') == 'edit-additional-tab'){
 //                    dd($request);
                     $additional_tab = AdditionalTab::find($request->input('tab_id'));
@@ -437,6 +444,7 @@ class ProductController extends Controller
         $product->sku = $request->sku;
         $product->barcode = $request->barcode;
         $product->fulfilled_by = $request->input('fulfilled-by');
+        $product->status =  $request->input('status');
 
         if ($request->variants) {
             $product->variants = $request->variants;
@@ -557,6 +565,12 @@ class ProductController extends Controller
                 $subcategories = implode(',',$product->has_subcategories->pluck('title')->toArray());
                 $tags = $tags.','.$subcategories;
             }
+            if($product->status == 1){
+                $published = true;
+            }
+            else{
+                $published = false;
+            }
 
             $productdata = [
                 "product" => [
@@ -568,6 +582,7 @@ class ProductController extends Controller
                     "variants" => $variants_array,
                     "options" => $options_array,
                     "images" => $images_array,
+                    "published"=>  $published
                 ]
             ];
 
@@ -730,5 +745,27 @@ class ProductController extends Controller
         $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$tab->shopify_id.'.json');
         $tab->delete();
         return redirect()->back()->with('success','Additional Tab Deleted Successfully!');
+    }
+
+    /**
+     * @param Request $request
+     * @param $product
+     * @param $shop
+     */
+    public function product_status_change(Request $request, $product, $shop)
+    {
+        $product->status = $request->input('status');
+        $product->save();
+        if ($product->status == 1) {
+            $published = true;
+        } else {
+            $published = false;
+        }
+        $productData = [
+            'product' => [
+                'published' => $published
+            ]
+        ];
+        $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productData);
     }
 }

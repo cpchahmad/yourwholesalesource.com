@@ -16,6 +16,9 @@
             font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
         }
+        .mb2{
+            margin-bottom: 10px !important;
+        }
     </style>
 
     <input type="text" name="cost" value="{{$product->cost}}" style="display: none">
@@ -29,7 +32,7 @@
             @csrf
             <input type="hidden" name="type" value="existing-product-new-variants">
             <div class="content">
-                <div class="row" style="margin-bottom: 10px">
+                <div class="row mb2">
                     <div class="col-sm-6">
                         <h3 class="font-w700">New Variants</h3>
                     </div>

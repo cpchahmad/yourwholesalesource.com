@@ -66,10 +66,13 @@
                         <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Products</span></a>
                         <ul>
                             <li>
-                                <a href="{{ route('product.create') }}">Add New</a>
+                                <a href="{{ route('product.create') }}">Add New Product</a>
                             </li>
                             <li>
-                                <a class="nav-item" href="{{ route('product.all')}}">View All</a>
+                                <a class="nav-item" href="{{ route('product.all')}}">View All Products</a>
+                            </li>
+                            <li>
+                                <a class="nav-item"  href="{{ route('category.create') }}">Manage Categories</a>
                             </li>
                         </ul>
                     </li>
@@ -78,9 +81,7 @@
                     <li>
                         <a class="nav-item" href="{{route('sales-managers.index')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Sales Managers</span></a>
                     </li>
-                    <li>
-                        <a class="nav-item"  href="{{ route('category.create') }}"><i class="si si-camcorder"></i><span class="sidebar-mini-hide">Categories</span></a>
-                    </li>
+
                     <li>
                         <a class="nav-item"  href="{{route('zone.index')}}"><i class="si si-map"></i><span class="sidebar-mini-hide">Shipping Zones</span></a>
                     </li>

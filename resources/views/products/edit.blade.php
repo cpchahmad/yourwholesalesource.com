@@ -25,10 +25,15 @@
             height: 50px !important;
             border-radius: 0;
         }
+
+         .mb2{
+             margin-bottom: 10px !important;
+         }
+
     </style>
     <div data-action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" data-method="post" data-enctype="multipart/form-data">
         <div class="content edit-content" data-route="{{route('product.update', $product->id)}}">
-            <div class="row" style="margin-bottom: 10px">
+            <div class="row mb2">
                 <div class="col-sm-6">
                     <h3 class="font-w700">Update Product</h3>
                 </div>
@@ -75,7 +80,7 @@
                             </div>
                             <div class="block-content">
                                 @if(count($product->has_images) >0)
-                                    <div class="row editable">
+                                    <div class="row editable <!--js-masonry-->">
 
                                         @foreach($product->has_images as $image)
                                             <div class="col-lg-4 preview-image animated fadeIn">
@@ -317,6 +322,19 @@
                                             @endforeach
                                         </div>
                                         {{--                                        <input type="submit" value="save">--}}
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label>Product Status</label>
+                                            <br>
+                                            <label class="css-input css-radio  css-radio-primary push-10-r">
+                                                <input type="radio" name="status" value="1" @if($product->status == 1) checked="" @endif><span></span> Published
+                                            </label>
+                                            <br>
+                                            <label class="css-input css-radio  css-radio-primary">
+                                                <input type="radio" name="status" @if($product->status == 0) checked="" @endif value="0"><span></span> Draft
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </form>

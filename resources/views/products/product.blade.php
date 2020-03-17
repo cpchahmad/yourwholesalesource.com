@@ -4,9 +4,13 @@
         .img-avatar {
             border-radius: 0;
         }
+        .mb2{
+             margin-bottom: 10px !important;
+
+        }
     </style>
     <div class="content">
-        <div class="row" style="margin-bottom: 10px">
+        <div class="row mb2">
             <div class="col-sm-6">
             </div>
             <div class="col-sm-6 text-right">
@@ -119,26 +123,6 @@
                         <p>{!! $product->description !!}</p>
                         <!-- END Vital Info -->
                     </div>
-                    {{--                    <div class="col-xs-12">--}}
-                    {{--                        <!-- Author -->--}}
-                    {{--                        <div class="block block-rounded remove-margin-b">--}}
-                    {{--                            <div class="block-content block-content-full bg-gray-lighter clearfix">--}}
-                    {{--                                <div class="pull-right">--}}
-                    {{--                                    <img class="img-avatar" src="assets/img/avatars/avatar2.jpg" alt="">--}}
-                    {{--                                </div>--}}
-                    {{--                                <div class="pull-left push-5-t">--}}
-                    {{--                                    <div class="push-10">--}}
-                    {{--                                        By <a class="font-w600" href="javascript:void(0)">Emma Cooper</a>--}}
-                    {{--                                    </div>--}}
-                    {{--                                    <div>--}}
-                    {{--                                        <a class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-plus push-5-r"></i> Follow</a>--}}
-                    {{--                                        <a class="btn btn-sm btn-default" href="javascript:void(0)"><i class="fa fa-envelope"></i></a>--}}
-                    {{--                                    </div>--}}
-                    {{--                                </div>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                        <!-- END Author -->--}}
-                    {{--                    </div>--}}
                     <div class="col-xs-12">
                         <!-- Extra Info -->
                         <div class="block">

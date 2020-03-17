@@ -1,8 +1,13 @@
 @extends('layout.index')
 @section('content')
+    <style>
+        .mb2{
+            margin-bottom: 10px !important;
+        }
+    </style>
     <div  class="form-horizontal push-30">
     <div class="content">
-        <div class="row" style="margin-bottom: 10px">
+        <div class="row mb2">
             <div class="col-sm-6">
                 <h3 class="font-w700">Sales Managers</h3>
             </div>

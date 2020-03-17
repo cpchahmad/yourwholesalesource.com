@@ -485,6 +485,9 @@
 <script src="{{ asset('assets/js/plugins/select2/select2.full.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
 <script src="{{asset('assets/js/plugins/magnific-popup/magnific-popup.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/masonry/imagesloaded.pkgd.js')}}"></script>
+<script src="{{asset('assets/js/plugins/masonry/masonry.pkgd.js')}}"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- Page JS Code -->
@@ -501,7 +504,7 @@
     });
     jQuery(function () {
         // Init page helpers (Summernote + CKEditor + SimpleMDE plugins)
-        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo','magnific-popup']);
+        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo','magnific-popup','masonry']);
     });
 </script>
 

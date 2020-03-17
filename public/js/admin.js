@@ -187,12 +187,6 @@ $(document).ready(function () {
         }
 
     });
-    // $('body').on('click','.set_as_non_shopify_user',function () {
-    //     $('#create_manager_form').find('#manager_name').val($(this).data('name'));
-    //     $('#create_manager_form').find('#manager_email').val($(this).data('email'));
-    //     $('#create_manager_form').submit();
-    //
-    // });
 
     $('body').on('submit','.product-images-form',function (e) {
         e.preventDefault();
@@ -284,6 +278,27 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    $('body').on('change','.status-switch',function () {
+        var status = '';
+        if($(this).is(':checked')){
+            status = 1;
+            $('.status-text').text('Published')
+        }
+        else{
+            status = 0;
+            $('.status-text').text('Draft')
+        }
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data:{
+                _token: $(this).data('csrf'),
+                type : 'status_update',
+                status : status
+            }
+        })
     });
 
 });
