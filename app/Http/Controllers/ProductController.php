@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\AdditionalTab;
 use App\Category;
+use App\Exports\ProductsExport;
 use App\Image;
 use App\Product;
 use App\ProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ProductController extends Controller
 {
@@ -308,7 +311,7 @@ class ProductController extends Controller
                         $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     }
 
-                     $this->product_status_change($request, $product, $shop);
+                    $this->product_status_change($request, $product, $shop);
 
                 }
                 if($request->input('type') == 'status_update'){
@@ -779,5 +782,143 @@ class ProductController extends Controller
             ]
         ];
         $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productData);
+    }
+
+    public function getExportFile(Request $request){
+        $shopify_product_id = $request->input('product_id');
+        $shop = $this->helper->getShop();
+        $productJson  = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $shopify_product_id . '.json');
+
+        if($productJson->errors){
+            return redirect()->back();
+        }
+        else{
+            $productData = $productJson->body->product;
+        }
+        $variants = $productData->variants;
+        $images = $productData->images;
+        $options = $productData->options;
+        $product = [];
+        foreach ($variants as $index => $variant){
+            $temp = [];
+            $temp['handle'] = $productData->handle;
+            if($index == 0){
+
+                $temp['title'] = $productData->title;
+                $temp['body_html'] = $productData->body_html;
+                $temp['vendor'] = $productData->vendor;
+                $temp['product_type'] = $productData->product_type;
+                $temp['tags'] = $productData->tags;
+                if($productData->published_at != null){
+                    $temp['published'] = 'TRUE';
+                }
+                else{
+                    $temp['published'] = 'FALSE';
+                }
+                if(array_key_exists('0',$options)){
+                    $temp['option1_name'] = $options[0]->name;
+                }
+                else{
+                    $temp['option1_name'] = '';
+                }
+                if(array_key_exists('1',$options)){
+                    $temp['option2_name'] = $options[1]->name;
+                }
+                else{
+                    $temp['option2_name'] = '';
+                }
+                if(array_key_exists('2',$options)){
+                    $temp['option3_name'] = $options[2]->name;
+                }
+                else{
+                    $temp['option3_name'] = '';
+                }
+
+            }
+            else{
+                $temp['title'] = '';
+                $temp['body_html'] = '';
+                $temp['vendor'] ='';
+                $temp['product_type'] = '';
+                $temp['tags'] = '';
+                $temp['published'] = '';
+                $temp['option1_name'] = '';
+                $temp['option2_name'] = '';
+                $temp['option3_name'] = '';
+            }
+            $temp['variant_option1'] = $variant->option1;
+            $temp['variant_option2'] = $variant->option2;
+            $temp['variant_option3'] = $variant->option3;
+            $temp['variant_sku'] = $variant->sku;
+            $temp['variant_grams'] = $variant->grams;
+            $temp['variant_inventory_tracker'] = $variant->inventory_management;
+            $temp['variant_qty'] = $variant->inventory_quantity;
+            $temp['variant_policy'] = $variant->inventory_policy;
+            $temp['variant_fulfillment_service'] = $variant->fulfillment_service;
+            $temp['variant_price'] = $variant->price;
+            $temp['variant_compare_price'] = '';
+            $temp['variant_shipping'] = $variant->requires_shipping;
+            $temp['variant_taxable'] = $variant->taxable;
+            $temp['variant_barcode'] = $variant->barcode;
+            $temp['variant_weight_unit'] = $variant->weight_unit;
+            $temp['variant_weight'] = $variant->weight;
+
+            foreach ($images as $i){
+                if($i->id == $variant->image_id){
+                    $temp['variant_image'] = $i->src;
+                    break;
+                }
+            }
+            if(!array_key_exists('variant_image',$temp)){
+                $temp['variant_image'] = '';
+            }
+            array_push($product,$temp);
+
+        }
+
+        foreach ($images as $index => $image){
+            if(array_key_exists($index,$product)){
+                $product[$index]['image_src'] = $image->src;
+                $product[$index]['image_position'] = $image->position;
+                $product[$index]['image_alt'] = $image->alt;
+            }
+            else{
+                $temp = [];
+                $temp['handle'] = $productData->handle;
+                $temp['title'] = '';
+                $temp['body_html'] = '';
+                $temp['vendor'] ='';
+                $temp['product_type'] = '';
+                $temp['tags'] = '';
+                $temp['published'] = '';
+                $temp['option1_name'] = '';
+                $temp['option2_name'] = '';
+                $temp['option3_name'] = '';
+                $temp['variant_option1'] = '';
+                $temp['variant_option2'] = '';
+                $temp['variant_option3'] = '';
+                $temp['variant_sku'] = '';
+                $temp['variant_grams'] ='';
+                $temp['variant_inventory_tracker'] = '';
+                $temp['variant_qty'] = '';
+                $temp['variant_policy'] ='';
+                $temp['variant_fulfillment_service'] = '';
+                $temp['variant_price'] = '';
+                $temp['variant_compare_price'] = '';
+                $temp['variant_shipping'] = '';
+                $temp['variant_taxable'] = '';
+                $temp['variant_barcode'] = '';
+                $temp['variant_weight_unit'] = '';
+                $temp['variant_weight'] = '';
+                $temp['variant_image'] = '';
+                $temp['image_src'] = $image->src;
+                $temp['image_position'] = $image->position;
+                $temp['image_alt'] = $image->alt;
+                array_push($product,$temp);
+            }
+        }
+
+        return Excel::download(new ProductsExport($product), 'products.csv');
+
     }
 }

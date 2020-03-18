@@ -24,9 +24,9 @@ class CORS
             return \Response::make('OK', 200, $headers);
         }
         $response = $next($request);
-        foreach ($headers as $key => $value){
-            $response->header($key, $value);
-        }
+//        foreach ($headers as $key => $value){
+//            $response->header($key, $value);
+//        }
 
         return $response;
     }

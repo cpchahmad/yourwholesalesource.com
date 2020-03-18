@@ -98,3 +98,4 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::get('/getShippingRates', 'ZoneController@getShippingRates');
+Route::get('/getExportFile', 'ProductController@getExportFile');
