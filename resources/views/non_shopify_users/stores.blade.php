@@ -4,6 +4,9 @@
         .mb2{
             margin-bottom: 10px !important;
         }
+        .swal2-popup {
+            font-size: 1.5rem !important;
+        }
     </style>
     <div class="content" >
         <div class="row mb2">
@@ -16,6 +19,7 @@
         </div>
         <div class="block">
             <div class="block-content">
+                @if(count($shops) > 0)
                 <table class="js-table-sections table table-hover">
                     <thead>
                     <tr>
@@ -38,7 +42,7 @@
                             </td>
                             <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
                             <td class="text-right" style="vertical-align: middle">
-                                <a href="" class="btn btn-xs btn-danger"
+                                <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger"
                                    type="button" data-toggle="tooltip" title=""
                                    data-original-title="Remove Store"><i class="fa fa-times"></i></a>
 
@@ -47,6 +51,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                    @else
+                <p> No Store Added!</p>
+                    @endif
             </div>
         </div>
     </div>

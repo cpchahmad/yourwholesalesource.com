@@ -60,4 +60,10 @@ class SingleStoreController extends Controller
            ]);
        }
     }
+    public function de_associate(Request $request){
+        $shop = Shop::find($request->id);
+        $user =  Auth::user();
+        $user->has_shops()->detach([$shop->id]);
+        return redirect()->back()->with('success','Store Removed Successfully!');
+    }
 }

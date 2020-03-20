@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['role:non-shopify-users']], function () {
         Route::prefix('users')->group(function () {
+            Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
+
             Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
             Route::get('/stores','ShopifyUsersController@stores')->name('users.stores');
             Route::group(['middleware' => ['check_user_shop']], function () {
