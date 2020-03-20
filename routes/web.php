@@ -13,6 +13,7 @@
 
 use Illuminate\Support\Facades\Redirect;
 Route::get('/reset', 'HelperController@reset_all');
+Route::get('/generate-super-admin', 'HelperController@SuperAdminCreate');
 /*Shopify Store Routes*/
 Route::get('/getShippingRates', 'ZoneController@getShippingRates');
 Route::get('/getExportFile', 'ProductController@getExportFile');

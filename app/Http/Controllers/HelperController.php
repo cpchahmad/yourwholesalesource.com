@@ -16,6 +16,7 @@ use App\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use OhMyBrew\ShopifyApp\Models\Shop;
 use Spatie\Permission\Models\Role;
 
@@ -51,6 +52,7 @@ class HelperController extends Controller
                 DB::table('model_has_roles')->truncate();
 
                 Artisan::call('db:seed');
+                $this->SuperAdminCreate();
 
                 return "Database Reset successfully executed";
             }
@@ -58,5 +60,13 @@ class HelperController extends Controller
         else{
            return 'Please Enter Password for Reset';
         }
+    }
+    public function SuperAdminCreate()
+    {
+        $user =  User::create([
+            'name' => 'Super Admin',
+            'email' => 'admin@wefullfill.com',
+            'password' => Hash::make('wefullfill@admin'),
+        ]);
     }
 }

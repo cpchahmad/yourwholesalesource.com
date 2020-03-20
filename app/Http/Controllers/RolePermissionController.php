@@ -8,20 +8,26 @@ class RolePermissionController extends Controller
 {
    public function check_roles(){
        $user = Auth::user();
-       if($user->hasRole('non-shopify-users') && $user->hasRole('sales-manager')){
-          return redirect()->route('system.selection');
+       if($user->email == 'admin@wefullfill.com'){
+           return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
        }
        else{
-           if($user->hasRole('non-shopify-users')){
-               return redirect()->route('users.dashboard');
-           }
-           else if($user->hasRole('sales-manager')){
-               return redirect()->route('managers.dashboard');
+           if($user->hasRole('non-shopify-users') && $user->hasRole('sales-manager')){
+               return redirect()->route('system.selection');
            }
            else{
-               return redirect()->route('admin.dashboard');
+               if($user->hasRole('non-shopify-users')){
+                   return redirect()->route('users.dashboard');
+               }
+               else if($user->hasRole('sales-manager')){
+                   return redirect()->route('managers.dashboard');
+               }
+               else{
+                   return redirect()->route('admin.dashboard');
+               }
            }
        }
+
    }
    public function selection(){
        return view('selection');
