@@ -34,7 +34,7 @@ class AfterAuthenticateJob implements ShouldQueue
     {
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
-        if($user != null){
+        if($user != null && $user->email != 'admin@wefullfill.com'){
             if(!in_array($currentShop->id,$user->has_shops->pluck('id')->toArray())){
                 $user->has_shops()->attach([$currentShop->id]);
             }
