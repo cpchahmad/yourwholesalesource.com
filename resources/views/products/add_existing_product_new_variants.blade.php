@@ -21,9 +21,10 @@
         }
     </style>
 
-    <input type="text" name="cost" name="cost" value="{{$product->cost}}" style="display: none">
-    <input type="text" name="price" name="price" value="{{$product->price}}" style="display: none">
-    <input type="text" name="sku" name="sku" value="{{$product->sku}}" style="display: none">
+    <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
+    <input type="text" name="price" value="{{$product->price}}" style="display: none">
+    <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
+    <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
 
 
     <div class="form-horizontal push-30">
