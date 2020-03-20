@@ -107,7 +107,7 @@
                         <div class="clearfix" style="margin-top: 5px">
                             <div class="pull-right" style="display: flex">
                                 <span class="h2 font-w700 text-success">${{number_format($product->price,2)}} </span>
-                                <span style="font-size: 17px;top: 23px;position: absolute;right: 17px;"  class="font-w100 text-danger"><del>${{number_format($product->compare_price,2)}}</del></span>
+{{--                                <span style="font-size: 17px;top: 23px;position: absolute;right: 17px;"  class="font-w100 text-danger"><del>${{number_format($product->compare_price,2)}}</del></span>--}}
                             </div>
                             @if($product->quantity > 0)
                                 <span class="h5">
