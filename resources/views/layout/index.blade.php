@@ -42,7 +42,7 @@
 
     <!-- Bootstrap and OneUI CSS framework -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/summernote/summernote.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropzonejs/dropzone.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
