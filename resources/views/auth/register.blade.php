@@ -36,7 +36,7 @@
                     </div>
                     <div class="block-content block-content-full block-content-narrow">
                         <!-- Register Title -->
-                        <h1 class="h2 font-w600 push-30-t push-5">Fantasy Supplier</h1>
+                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>
                         <p>Please fill the following details to create a new account.</p>
                         <!-- END Register Title -->
 

@@ -29,7 +29,7 @@
                     </div>
                     <div class="block-content block-content-full block-content-narrow">
                         <!-- Login Title -->
-                        <h1 class="h2 font-w600 push-30-t push-5">Fantasy Supplier</h1>
+                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>
                         <p>Welcome, please login.</p>
                         <!-- END Login Title -->
                         <div class="block">
