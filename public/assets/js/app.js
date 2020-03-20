@@ -1030,8 +1030,8 @@ var App = function() {
             onChange: function(){
                 var price = $('input[type="text"][name="price"]').val();
                 var cost = $('input[type="text"][name="cost"]').val();
-                var comparePrice = $('input[type="text"][name="compare_price"]').val();
                 var sku = $('input[type="text"][name="sku"]').val();
+                var quantity = $('input[type="text"][name="quantity"]').val();
                 var option1 = $('input[type="text"][name="option1"]').val();
                 var option2 = $('input[type="text"][name="option2"]').val();
                 var option3 = $('input[type="text"][name="option3"]').val();
@@ -1040,17 +1040,26 @@ var App = function() {
                 var substr3 = option3.split(',');
                 $('.variants_table').show();
                 $("tbody").empty();
+                var title = '';
                 jQuery.each(substr1, function (index1, item1) {
+                    title = item1;
                     jQuery.each(substr2, function (index2, item2) {
+                        if(item2 !== ''){
+                            title = title+'/'+item2;
+                        }
                         jQuery.each(substr3, function (index3, item3) {
+
+                            if(item3 !== ''){
+                                title = title+'/'+item3;
+                            }
+
                             $('tbody').append('   <tr>\n' +
-                                '                                                    <td class="variant_title">' + item1 + '/' + item2 + '/' + item3 + '<input type="hidden" name="variant_title[]" value="' + item1 + '/' + item2 + '/' + item3 + '"></td>\n' +
+                                '                                                    <td class="variant_title">' + title + '<input type="hidden" name="variant_title[]" value="' + title + '"></td>\n' +
                                 '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
                                 '                                                    </td>\n' +
-                                '                                                    <td><input type="text" class="form-control" name="variant_comparePrice[]" value="' + comparePrice + '" placeholder="$0.00"></td>\n' +
                                 '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
-                                '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" placeholder="0"></td>\n' +
-                                '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' + sku++ + '"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
+                                '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
                                 '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
                                 '                                                </tr>');
                         });

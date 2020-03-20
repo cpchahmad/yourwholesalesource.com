@@ -48,8 +48,8 @@
                         </li>
                     </ul>
                 </div>
-                <a class="h5 text-white" href="index.html">
-                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">Edropship</span>
+                <a class="h5 text-white" href="{{route('admin.dashboard')}}">
+                    <span class="h4 font-w600 sidebar-mini-hide">WeFullFill</span>
                 </a>
             </div>
             <!-- END Side Header -->
@@ -63,30 +63,30 @@
 
                     <li class="nav-main-heading"><span class="sidebar-mini-hide">User Interface</span></li>
                     <li>
-                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Products</span></a>
+                        <a class="nav-submenu active" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Products</span></a>
                         <ul>
                             <li>
-                                <a href="{{ route('product.create') }}">Add New Product</a>
+                                <a class="active" href="{{ route('product.create') }}">Add New Product</a>
                             </li>
                             <li>
-                                <a class="nav-item" href="{{ route('product.all')}}">View All Products</a>
+                                <a  class="nav-item active" href="{{ route('product.all')}}">View All Products</a>
                             </li>
                             <li>
-                                <a class="nav-item"  href="{{ route('category.create') }}">Manage Categories</a>
+                                <a class="nav-item active"  href="{{ route('category.create') }}">Manage Categories</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="nav-main-heading"><span class="sidebar-mini-hide">Settings</span></li>
                     <li>
-                        <a class="nav-item" href="{{route('sales-managers.index')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Sales Managers</span></a>
+                        <a class="nav-item active" href="{{route('sales-managers.index')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Sales Managers</span></a>
                     </li>
 
                     <li>
-                        <a class="nav-item"  href="{{route('zone.index')}}"><i class="si si-map"></i><span class="sidebar-mini-hide">Shipping Zones</span></a>
+                        <a class="nav-item active"  href="{{route('zone.index')}}"><i class="si si-map"></i><span class="sidebar-mini-hide">Shipping Zones</span></a>
                     </li>
                     <li>
-                        <a class="nav-item"  href="{{ route('default_info') }}"><i class="si si-info"></i><span class="sidebar-mini-hide">Default Info</span></a>
+                        <a class="nav-item active"  href="{{ route('default_info') }}"><i class="si si-info"></i><span class="sidebar-mini-hide">Warned Platforms</span></a>
                     </li>
 
                 </ul>

@@ -80,7 +80,8 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::post('/user/authenticate','SingleStoreController@authenticate')->name('store.user.authenticate');
         Route::post('/user/store/association','SingleStoreController@associate')->name('store.user.associate');
 
-        Route::get('/dashboard','SingleStoreController@index')->name('store.index');
+        Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard');
+        Route::get('/setting','SingleStoreController@setting')->name('store.index');
     });
 });
 /*Main Routes*/

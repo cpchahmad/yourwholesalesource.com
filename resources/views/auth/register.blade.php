@@ -3,19 +3,26 @@
 @section('content')
     <style>
         .block > .nav-tabs.nav-tabs-alt > li > a:hover {
-            -webkit-box-shadow: 0 2px #47c37b !important;
-            box-shadow: 0 2px #47c37b !important;
+            -webkit-box-shadow: 0 2px #7eaa41 !important;
+            box-shadow: 0 2px #7eaa41 !important;
         }
         .block > .nav-tabs.nav-tabs-alt > li.active > a,
         .block > .nav-tabs.nav-tabs-alt > li.active > a:hover,
         .block > .nav-tabs.nav-tabs-alt > li.active > a:focus {
-            -webkit-box-shadow: 0 2px #47c37b !important;
-            box-shadow: 0 2px #47c37b !important;
+            -webkit-box-shadow: 0 2px #7eaa41 !important;
+            box-shadow: 0 2px #7eaa41 !important;
         }
         .block > .nav-tabs > li > a:hover {
-            color: #47c37b;
+            color: #7eaa41;
             background-color: transparent;
             border-color: transparent;
+        }
+        .form-material.form-material-success > .form-control:focus {
+            -webkit-box-shadow: 0 2px 0 #7eaa41;
+            box-shadow: 0 2px 0 #7eaa41;
+        }
+        .form-material.form-material-success > .form-control:focus + label {
+            color: #7eaa41;
         }
     </style>
     <div class="content overflow-hidden">
@@ -23,21 +30,22 @@
             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
                 <!-- Register Block -->
                 <div class="block block-themed animated fadeIn">
-                    <div class="block-header bg-success">
+                    <div class="block-header" style="background-color: #7eaa41;">
                         <ul class="block-options">
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#modal-terms">View Terms</a>
                             </li>
-{{--                            <li>--}}
-{{--                                <a href="{{route('login')}}" data-toggle="tooltip" data-placement="top" title="Log In">Already a user?</a>--}}
-{{--                            </li>--}}
                         </ul>
                         <h3 class="block-title">Register</h3>
                     </div>
                     <div class="block-content block-content-full block-content-narrow">
                         <!-- Register Title -->
-                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>
-                        <p>Please fill the following details to create a new account.</p>
+                        <div class="text-center">
+                            <img src="{{asset('assets/img/logos/1.png')}}" style="width:50%" alt="">
+                            <p class="font-w600 push-15-t push-15" style="font-size: 14px">Please fill the following details to create a new account.</p>
+                        </div>
+{{--                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>--}}
+{{--                        <p>Please fill the following details to create a new account.</p>--}}
                         <!-- END Register Title -->
 
                         <div class="block">
@@ -110,16 +118,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--                            <div class="form-group">--}}
-                                        {{--                                <div class="col-xs-12">--}}
-                                        {{--                                    <label class="css-input switch switch-sm switch-success">--}}
-                                        {{--                                        <input type="checkbox" id="register-terms" name="register-terms"><span></span> I agree with terms &amp; conditions--}}
-                                        {{--                                    </label>--}}
-                                        {{--                                </div>--}}
-                                        {{--                            </div>--}}
                                         <div class="form-group">
                                             <div class="col-xs-12 col-sm-6 col-md-5">
-                                                <button class="btn btn-block btn-success" type="submit">Sign Up</button>
+                                                <button class="btn btn-block" style="background-color:#7eaa41;color: white" type="submit">Sign Up</button>
                                             </div>
                                         </div>
                                     </form>
@@ -132,7 +133,7 @@
                                             <label for="shop">Store Domain</label>
                                         </div>
 
-                                        <button class="btn btn-success" type="submit">Sign Up</button>
+                                        <button class="btn" style="background-color:#7eaa41;color: white" type="submit">Sign Up</button>
                                     </form>
                                 </div>
                             </div>

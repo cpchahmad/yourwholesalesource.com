@@ -48,47 +48,33 @@
                         </li>
                     </ul>
                 </div>
-                <a class="h5 text-white" href="index.html">
-                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">Edropship</span>
+                <a class="h5 text-white" href="{{route('managers.dashboard')}}">
+                 <span class="h4 font-w600 sidebar-mini-hide">Wefullfill</span>
                 </a>
             </div>
             <!-- END Side Header -->
 
             <!-- Side Content -->
             <div class="side-content side-content-full">
-{{--                <ul class="nav-main">--}}
-{{--                    <li>--}}
-{{--                        <a class="active" href="/"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>--}}
-{{--                    </li>--}}
+                <ul class="nav-main">
+                    <li>
+                        <a class="active" href=""><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                    </li>
 
-{{--                    <li class="nav-main-heading"><span class="sidebar-mini-hide">User Interface</span></li>--}}
-{{--                    <li>--}}
-{{--                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Products</span></a>--}}
-{{--                        <ul>--}}
-{{--                            <li>--}}
-{{--                                <a href="{{ route('product.create') }}">Add New</a>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a class="nav-item" href="{{ route('product.all')}}">View All</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a  class="nav-item active" href=""><i class="si si-user"></i><span class="sidebar-mini-hide">Users</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-item active"  href=""><i class="si si-camcorder"></i><span class="sidebar-mini-hide">Stores</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-item active"  href=""><i class="si si-map"></i><span class="sidebar-mini-hide">Payments</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-item active"  href=""><i class="si si-info"></i><span class="sidebar-mini-hide">Settings</span></a>
+                    </li>
 
-{{--                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Settings</span></li>--}}
-{{--                    <li>--}}
-{{--                        <a class="nav-item" href="{{route('sales-managers.index')}}"><i class="si si-user"></i><span class="sidebar-mini-hide">Sales Managers</span></a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a class="nav-item"  href="{{ route('category.create') }}"><i class="si si-camcorder"></i><span class="sidebar-mini-hide">Categories</span></a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a class="nav-item"  href="{{route('zone.index')}}"><i class="si si-map"></i><span class="sidebar-mini-hide">Shipping Zones</span></a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a class="nav-item"  href="{{ route('default_info') }}"><i class="si si-info"></i><span class="sidebar-mini-hide">Default Info</span></a>--}}
-{{--                    </li>--}}
-
-{{--                </ul>--}}
+                </ul>
             </div>
             <!-- END Side Content -->
         </div>

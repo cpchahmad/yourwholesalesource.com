@@ -65,13 +65,6 @@
                             <h3 class="block-title">Images</h3>
                         </div>
                         <div class="block-content">
-
-
-                            {{--                            <div class="row" style="padding: 20px">--}}
-                            {{--                                <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-5">--}}
-                            {{--                                    <a style="cursor: pointer" class="btn btn-sm btn-primary upload-photo"> Upload Photos</a>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
                             <div class="row" {{--style="display: none"--}}>
                                 <div class="{{--col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3--}} col-md-12" style="padding-bottom: 13px;">
                                     <div class="dropzone dz-clickable">
@@ -79,7 +72,7 @@
                                         <div class="row preview-drop"></div>
                                     </div>
 
-                                    <input style="display: none" accept="image/*"  type="file"  name="images[]" class="push-30-t dz-hidden-input push-30 images-upload" multiple required>
+                                    <input style="display: none" accept="image/*"  type="file"  name="images[]" class="push-30-t dz-hidden-input push-30 images-upload" multiple>
                                 </div>
                             </div>
                         </div>
@@ -99,15 +92,6 @@
                                         </div>
                                     </div>
                                 </div>
-{{--                                <div class="col-sm-6">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <div class="col-xs-12 ">--}}
-{{--                                            <label>Compare at Price</label>--}}
-{{--                                            <input type="text" class="form-control" name="compare_price"--}}
-{{--                                                   placeholder="$ 0.00">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -125,7 +109,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
                                             <label>Quantity</label>
-                                            <input type="text" class="form-control" name="quantity" placeholder="0" required>
+                                            <input type="text" class="form-control" name="quantity" placeholder="0" >
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +231,6 @@
                                                 <tr>
                                                     <th style="width: 20%;">Title</th>
                                                     <th style="width: 15%;">Price</th>
-                                                    <th style="width: 17%;">Compare Price</th>
                                                     <th style="width: 17%;">Cost</th>
                                                     <th style="width: 10%;">Quantity</th>
                                                     <th style="width: 20%;">SKU</th>
@@ -327,14 +310,14 @@
                                 <div class="col-xs-12 push-10">
                                     <label>Product Type</label>
                                     <input type="text" class="form-control" name="product_type"
-                                           placeholder="eg. Shirts" required>
+                                           placeholder="eg. Shirts">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Vendor</label>
                                     <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
-                                           required>
+                                           >
                                 </div>
                             </div>
                             <hr>
@@ -344,7 +327,7 @@
                                         <h5>Tags</h5>
                                         <br>
                                         <input class="js-tags-input form-control" type="text"
-                                               id="product-meta-keywords" name="tags" value="" required>
+                                               id="product-meta-keywords" name="tags" value="">
                                     </div>
                                 </div>
                             </div>

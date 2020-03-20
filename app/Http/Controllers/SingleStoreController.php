@@ -11,12 +11,15 @@ use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 class SingleStoreController extends Controller
 {
     public function index(){
+        return view('single-store.dashboard');
+    }
+    public function setting(){
         /*Ossiset Shop Model*/
         $shop =  ShopifyApp::shop();
         /*Local Shop Model!*/
         $shop= Shop::find($shop->id);
         if(count($shop->has_user) > 0){
-         $associated_user =   $shop->has_user[0];
+            $associated_user =   $shop->has_user[0];
         }
         else{
             $associated_user = null;

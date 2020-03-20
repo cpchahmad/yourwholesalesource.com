@@ -8,6 +8,32 @@
         #sidebar{
             display: none !important;
         }
+        .block > .nav-tabs.nav-tabs-alt > li > a:hover {
+            -webkit-box-shadow: 0 2px #7eaa41 !important;
+            box-shadow: 0 2px #7eaa41 !important;
+        }
+        .block > .nav-tabs.nav-tabs-alt > li.active > a,
+        .block > .nav-tabs.nav-tabs-alt > li.active > a:hover,
+        .block > .nav-tabs.nav-tabs-alt > li.active > a:focus {
+            -webkit-box-shadow: 0 2px #7eaa41 !important;
+            box-shadow: 0 2px #7eaa41 !important;
+        }
+        .block > .nav-tabs > li > a:hover {
+            color: #7eaa41;
+            background-color: transparent;
+            border-color: transparent;
+        }
+        .form-material.form-material-success > .form-control:focus {
+            -webkit-box-shadow: 0 2px 0 #7eaa41;
+            box-shadow: 0 2px 0 #7eaa41;
+        }
+        .form-material.form-material-success > .form-control:focus + label {
+            color: #7eaa41;
+        }
+        }
+        .switch-success input:checked + span {
+            background-color: #7eaa41 !important;
+        }
     </style>
     <div class="content overflow-hidden">
         <div class="row">
@@ -16,21 +42,23 @@
 
 
                 <div class="block block-themed animated fadeIn">
-                    <div class="block-header bg-primary">
+                    <div class="block-header" style="background-color: #7eaa41;">
                         <ul class="block-options">
                             <li>
                                 <a href="{{ route('password.request') }}">Forgot Password?</a>
                             </li>
-{{--                            <li>--}}
-{{--                                <a href="{{route('register')}}" data-toggle="tooltip" data-placement="top" title="New Account">Create an account ?</a>--}}
-{{--                            </li>--}}
                         </ul>
                         <h3 class="block-title">Login</h3>
                     </div>
                     <div class="block-content block-content-full block-content-narrow">
                         <!-- Login Title -->
-                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>
-                        <p>Welcome, please login.</p>
+                        <div class="text-center">
+                            <img src="{{asset('assets/img/logos/1.png')}}" style="width:50%" alt="">
+                            <p class="font-w600 push-15-t push-15" style="font-size: 14px">Welcome, please login.</p>
+                        </div>
+
+{{--                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>--}}
+
                         <!-- END Login Title -->
                         <div class="block">
                             <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs">
@@ -43,12 +71,12 @@
                             </ul>
                             <div class="block-content tab-content">
                                 <div class="tab-pane active" id="btabs-alt-static-home">
-                                    <form method="POST" action="{{ route('login') }}" class="form-horizontal push-30-t push-2">
+                                    <form method="POST" action="{{ route('login') }}" class="form-horizontal push-5-t push-2">
                                         @csrf
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <div class="form-material form-material-primary floating">
-                                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                <div class="form-material form-material-success">
+                                                    <input id="email" type="email" placeholder="Enter Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                                     <label for="email">Email Address</label>
                                                 </div>
 
@@ -61,8 +89,8 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <div class="form-material form-material-primary floating">
-                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                                <div class="form-material form-material-success">
+                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password" required autocomplete="current-password">
                                                     <label for="password">Password</label>
                                                 </div>
                                                 @error('password')
@@ -74,14 +102,14 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <label class="css-input switch switch-sm switch-primary">
+                                                <label class="css-input switch switch-sm switch-success">
                                                     <input type="checkbox" id="login-remember-me" name="remember"><span></span> Remember Me?
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12 col-sm-6 col-md-4">
-                                                <button class="btn btn-block btn-primary" type="submit">Log in </button>
+                                                <button class="btn btn-block " style="background-color:#7eaa41;color: white" type="submit">Log in </button>
                                             </div>
 
                                         </div>
@@ -95,7 +123,7 @@
                                             <label for="shop">Store Domain</label>
                                         </div>
 
-                                        <button class="btn btn-primary" type="submit">Log in </button>
+                                        <button class="btn " style="background-color:#7eaa41;color: white" type="submit">Log in </button>
                                     </form>
                                 </div>
                             </div>

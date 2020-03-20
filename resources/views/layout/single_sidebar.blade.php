@@ -48,8 +48,8 @@
                         </li>
                     </ul>
                 </div>
-                <a class="h5 text-white" href="index.html">
-                    <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">Edropship</span>
+                <a class="h5 text-white" href="{{route('store.dashboard')}}">
+                    <span class="h4 font-w600 sidebar-mini-hide">WeFullFill</span>
                 </a>
             </div>
             <!-- END Side Header -->
@@ -58,8 +58,35 @@
             <div class="side-content side-content-full">
                 <ul class="nav-main">
                     <li>
-                        <a class="active" href="{{route('store.index')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Store Association</span></a>
+                        <a class="active" href="{{route('store.dashboard')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                     </li>
+                    <li>
+                        <a class="nav-submenu active" data-toggle="nav-submenu" href="#"><i class="fa fa-shopping-basket"></i><span class="sidebar-mini-hide">Products</span></a>
+                        <ul>
+                            <li>
+                                <a class="nav-item active" href="">Search Products</a>
+                            </li>
+                            <li>
+                                <a class="nav-item active" href="">Import List</a>
+                            </li>
+                            <li>
+                                <a class="nav-item active"  href="">My Products</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="active" ><i class="fa fa-first-order"></i><span class="sidebar-mini-hide">Orders</span></a>
+                    </li>
+                    <li>
+                        <a class="active" ><i class="fa fa-pencil"></i><span class="sidebar-mini-hide">Custom</span></a>
+                    </li>
+                    <li>
+                        <a class="active" ><i class="fa fa-user"></i><span class="sidebar-mini-hide">Customers</span></a>
+                    </li>
+                    <li>
+                        <a class="active" href="{{route('store.index')}}"><i class="si si-settings"></i><span class="sidebar-mini-hide">Settings</span></a>
+                    </li>
+
                 </ul>
             </div>
             <!-- END Side Content -->

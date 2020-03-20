@@ -1,4 +1,4 @@
-@extends('layout.manager')
+@extends('layout.single')
 @section('content')
     <main id="main-container">
         <!-- Page Header -->

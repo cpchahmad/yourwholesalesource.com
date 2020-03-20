@@ -2,9 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="17032020-lastfinal">
+      <change afterPath="$PROJECT_DIR$/public/assets/img/favicons/wefullfill.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/img/logos/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/img/logos/2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/images/variants/202003161219s20_render_xee---Copy.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/images/variants/202003161221s20_render_xee---Copy.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SingleStoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SingleStoreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/ProductVariantTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/ProductVariantTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/credential.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/credential.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/manager.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/manager.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/manger_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/manger_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/shopify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/shopify.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/shopify_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/shopify_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/single.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/single_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/single_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/non_shopify_users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/non_shopify_users/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/products/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sales_managers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales_managers/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/selection.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/selection.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,20 +180,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/js/plugins" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/img/logos" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\ERDPSHOPIFY\resources\views\setttings\category" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\img\logos" />
+      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\img\favicons" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\js\plugins" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\resources\views\layout" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\css" />
-      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\database\seeds" />
-      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\database\migrations" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\ERDPSHOPIFY\resources\views\setttings\category" />
     </key>
   </component>
   <component name="RunManager">
@@ -218,7 +240,7 @@
       <workItem from="1584596575677" duration="94000" />
       <workItem from="1584603530327" duration="19101000" />
       <workItem from="1584683878888" duration="10739000" />
-      <workItem from="1584699507532" duration="2328000" />
+      <workItem from="1584699507532" duration="9650000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
@@ -339,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584701379019</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="20032020F">
+      <created>1584701990388</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1584701990388</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,10 +433,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1584701377667">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1584709153444">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584701377667" />
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584709153444" />
     <state x="129" y="55" key="DiffContextDialog" timestamp="1584699821851">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -421,10 +450,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="380" y="169" key="IDE.errors.dialog/0.0.1600.860@0.0.1600.860" timestamp="1582630926317" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1584689270031">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1584706773386">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1584689270031" />
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1584706773386" />
     <state x="504" y="298" key="ReplaceDuplicatesPrompt" timestamp="1584441527708">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -433,10 +462,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584701384028">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1584701993464">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584701384028" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584701993464" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -446,10 +475,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1584684862528" />
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1584701956722">
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1584708175984">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584701956722" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584708175984" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
 </project>
