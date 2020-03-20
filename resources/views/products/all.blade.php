@@ -22,6 +22,7 @@
         </div>
         <div class="block">
             <div class="block-content">
+                @if(count($products) >0)
                 <table class="js-table-sections table table-hover">
                     <thead>
                     <tr>
@@ -86,6 +87,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                    @else
+                <p>No Products Created</p>
+                    @endif
             </div>
         </div>
     </div>

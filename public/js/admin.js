@@ -67,11 +67,6 @@ $(document).ready(function () {
                 $('.preview-drop').append(' <div class="col-lg-4 preview-image animated fadeIn">\n' +
                     '            <div class="img-container fx-img-zoom-in fx-opt-slide-right">\n' +
                     '                <img class="img-responsive" src="'+e.target.result+'" alt="">\n' +
-                    // '                <div class="img-options">\n' +
-                    // // '                    <div class="img-options-content">\n' +
-                    // // '                        <a class="btn btn-sm btn-default delete-file" data-file="'+f.name+'"><i class="fa fa-times"></i> Delete</a>\n' +
-                    // // '                    </div>\n' +
-                    // '                </div>\n' +
                     '            </div>\n' +
                     '        </div>');
 

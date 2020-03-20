@@ -107,6 +107,7 @@
 {{--                <h3 class="block-title">Categories</h3>--}}
 {{--            </div>--}}
             <div class="block-content">
+                @if(count($categories) > 0)
                 @if ($categories)
                     <table class="js-table-sections table table-hover">
                         <thead>
@@ -235,6 +236,9 @@
                 @else
                     <h3>no found</h3>
                 @endif
+                    @else
+                <p>No Categories Created</p>
+                    @endif
             </div>
         </div>
     </div>

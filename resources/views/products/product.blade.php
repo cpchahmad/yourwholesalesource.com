@@ -217,6 +217,7 @@
 
                                 <!-- Comments -->
                                 <div class="tab-pane pull-r-l active" id="ecom-product-comments">
+                                    @if(count($product->hasVariants) > 0)
                                     <table class="table table-striped table-borderless remove-margin-b">
                                         <thead>
                                         <tr>
@@ -250,6 +251,9 @@
                                         @endforeach
                                         </tbody>
                                     </table>
+                                        @else
+                                        <p>This Product has Zero Variants</p>
+                                    @endif
                                 </div>
                                 <!-- END Comments -->
 

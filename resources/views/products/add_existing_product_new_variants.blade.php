@@ -21,10 +21,9 @@
         }
     </style>
 
-    <input type="text" name="cost" value="{{$product->cost}}" style="display: none">
-    <input type="text" name="price" value="{{$product->price}}" style="display: none">
-    <input type="text" name="compare_price" value="{{$product->compare_price}}" style="display: none">
-    <input type="text" name="sku" value="{{$product->sku}}" style="display: none">
+    <input type="text" name="cost" name="cost" value="{{$product->cost}}" style="display: none">
+    <input type="text" name="price" name="price" value="{{$product->price}}" style="display: none">
+    <input type="text" name="sku" name="sku" value="{{$product->sku}}" style="display: none">
 
 
     <div class="form-horizontal push-30">
@@ -128,7 +127,6 @@
                                                     <tr>
                                                         <th style="width: 20%;">Title</th>
                                                         <th style="width: 15%;">Price</th>
-                                                        <th style="width: 17%;">Compare Price</th>
                                                         <th style="width: 17%;">Cost</th>
                                                         <th style="width: 10%;">Quantity</th>
                                                         <th style="width: 20%;">SKU</th>
