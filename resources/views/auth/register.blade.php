@@ -1,6 +1,23 @@
 @extends('layout.credential')
 
 @section('content')
+    <style>
+        .block > .nav-tabs.nav-tabs-alt > li > a:hover {
+            -webkit-box-shadow: 0 2px #47c37b !important;
+            box-shadow: 0 2px #47c37b !important;
+        }
+        .block > .nav-tabs.nav-tabs-alt > li.active > a,
+        .block > .nav-tabs.nav-tabs-alt > li.active > a:hover,
+        .block > .nav-tabs.nav-tabs-alt > li.active > a:focus {
+            -webkit-box-shadow: 0 2px #47c37b !important;
+            box-shadow: 0 2px #47c37b !important;
+        }
+        .block > .nav-tabs > li > a:hover {
+            color: #47c37b;
+            background-color: transparent;
+            border-color: transparent;
+        }
+    </style>
     <div class="content overflow-hidden">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
@@ -23,82 +40,103 @@
                         <p>Please fill the following details to create a new account.</p>
                         <!-- END Register Title -->
 
-                        <!-- Register Form -->
-                        <!-- jQuery Validation (.js-validation-register class is initialized in js/pages/base_pages_register.js) -->
-                        <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                            <form method="POST" action="{{ route('register') }}" class="form-horizontal push-50-t push-5">
-                                @csrf
+                        <div class="block">
+                            <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs">
+                                <li class="active">
+                                    <a href="#btabs-alt-static-home">By Account</a>
+                                </li>
+                                <li class="">
+                                    <a href="#btabs-alt-static-profile">By Store</a>
+                                </li>
+                            </ul>
+                            <div class="block-content tab-content">
+                                <div class="tab-pane active" id="btabs-alt-static-home">
+                                    <form method="POST" action="{{ route('register') }}" class="form-horizontal push-5-t push-5">
+                                        @csrf
 
-                                <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-success">
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
-                                               placeholder="Enter User Name" autofocus>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material form-material-success">
+                                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
+                                                           placeholder="Enter User Name" autofocus>
 
-                                        @error('name')
-                                        <span class="invalid-feedback" role="alert" style="color: red">
+                                                    @error('name')
+                                                    <span class="invalid-feedback" role="alert" style="color: red">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                        <label for="name">Username</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-success">
-                                        <input id="email" type="email"
-                                               placeholder="Enter Email Address"
-                                               class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                                    @enderror
+                                                    <label for="name">Username</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material form-material-success">
+                                                    <input id="email" type="email"
+                                                           placeholder="Enter Email Address"
+                                                           class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert" style="color: red">
+                                                    @error('email')
+                                                    <span class="invalid-feedback" role="alert" style="color: red">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                        <label for="email">Email</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-success">
-                                        <input id="password" type="password"
-                                               placeholder="Enter a 8 Character Password"
-                                               class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                        @error('password')
-                                        <span class="invalid-feedback" role="alert" style="color: red">
+                                                    @enderror
+                                                    <label for="email">Email</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material form-material-success">
+                                                    <input id="password" type="password"
+                                                           placeholder="Enter a 8 Character Password"
+                                                           class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                                    @error('password')
+                                                    <span class="invalid-feedback" role="alert" style="color: red">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                        @enderror
-                                        <label for="password">Password</label>
-                                    </div>
+                                                    @enderror
+                                                    <label for="password">Password</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material form-material-success">
+                                                    <input id="password-confirm"
+                                                           placeholder="Enter Your 8 Character Password Againn...."
+                                                           type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                                    <label for="password-confirm">Confirm Password</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--                            <div class="form-group">--}}
+                                        {{--                                <div class="col-xs-12">--}}
+                                        {{--                                    <label class="css-input switch switch-sm switch-success">--}}
+                                        {{--                                        <input type="checkbox" id="register-terms" name="register-terms"><span></span> I agree with terms &amp; conditions--}}
+                                        {{--                                    </label>--}}
+                                        {{--                                </div>--}}
+                                        {{--                            </div>--}}
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-sm-6 col-md-5">
+                                                <button class="btn btn-block btn-success" type="submit">Sign Up</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane " id="btabs-alt-static-profile">
+                                    <form method="POST" action="{{ route('authenticate') }}">
+                                        {{ csrf_field() }}
+                                        <div class="form-material form-material-success">
+                                            <input id="shop" name="shop" class="form-control" type="text" autofocus="autofocus" placeholder="example.myshopify.com">
+                                            <label for="shop">Store Domain</label>
+                                        </div>
+
+                                        <button class="btn btn-success" type="submit">Sign Up</button>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-success">
-                                        <input id="password-confirm"
-                                               placeholder="Enter Your 8 Character Password Againn...."
-                                               type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                        <label for="password-confirm">Confirm Password</label>
-                                    </div>
-                                </div>
-                            </div>
-{{--                            <div class="form-group">--}}
-{{--                                <div class="col-xs-12">--}}
-{{--                                    <label class="css-input switch switch-sm switch-success">--}}
-{{--                                        <input type="checkbox" id="register-terms" name="register-terms"><span></span> I agree with terms &amp; conditions--}}
-{{--                                    </label>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-                            <div class="form-group">
-                                <div class="col-xs-12 col-sm-6 col-md-5">
-                                    <button class="btn btn-block btn-success" type="submit">Sign Up</button>
-                                </div>
-                            </div>
-                        </form>
-                        <!-- END Register Form -->
+                        </div>
                         <a href="{{route('login')}}" data-toggle="tooltip" data-placement="top" title="Log In">Already a user?</a>
                     </div>
                 </div>

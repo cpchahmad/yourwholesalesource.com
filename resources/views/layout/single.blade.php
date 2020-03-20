@@ -48,6 +48,9 @@
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
 {{--    <link rel="stylesheet" href="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.css') }}">--}}
 
 
@@ -60,9 +63,8 @@
 <div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
     <!-- Side Overlay-->
 
-
     <!-- Sidebar -->
-@include('layout.shopify_sidebar')
+@include('layout.single_sidebar')
 <!-- END Sidebar -->
 
     <!-- Header -->
@@ -86,10 +88,6 @@
                 </div>
             </li>
             <li>
-                <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-                {{--                <button class="btn btn-default" data-toggle="layout" data-action="side_overlay_toggle" type="button">--}}
-                {{--                    <i class="fa fa-tasks"></i>--}}
-                {{--                </button>--}}
             </li>
         </ul>
         <!-- END Header Navigation Right -->
@@ -108,12 +106,7 @@
                     <i class="fa fa-ellipsis-v"></i>
                 </button>
             </li>
-            <li>
-                <!-- Opens the Apps modal found at the bottom of the page, before including JS code -->
-                {{--                <button class="btn btn-default pull-right" data-toggle="modal" data-target="#apps-modal" type="button">--}}
-                {{--                    <i class="si si-grid"></i>--}}
-                {{--                </button>--}}
-            </li>
+
             <li class="visible-xs">
                 <!-- Toggle class helper (for .js-header-search below), functionality initialized in App() -> uiToggleClass() -->
                 <button class="btn btn-default" data-toggle="class-toggle" data-target=".js-header-search" data-class="header-search-xs-visible" type="button">
@@ -156,11 +149,13 @@
 <script src="{{ asset('assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/select2/select2.full.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- Page JS Code -->
-{{--<script src="{{ asset('assets/js/pages/base_pages_dashboard.js') }}"></script>--}}
-<script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('assets/js/pages/base_pages_dashboard.js') }}"></script>
+<script src="{{ asset('js/single-store.js') }}"></script>
 
 <script>
     jQuery(function () {
@@ -175,5 +170,9 @@
         App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo']);
     });
 </script>
+<div class="pre-loader">
+    <div class="loader">
+    </div>
+</div>
 </body>
 </html>

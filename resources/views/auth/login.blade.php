@@ -13,6 +13,8 @@
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
                 <!-- Login Block -->
+
+
                 <div class="block block-themed animated fadeIn">
                     <div class="block-header bg-primary">
                         <ul class="block-options">
@@ -30,53 +32,78 @@
                         <h1 class="h2 font-w600 push-30-t push-5">Fantasy Supplier</h1>
                         <p>Welcome, please login.</p>
                         <!-- END Login Title -->
+                        <div class="block">
+                            <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs">
+                                <li class="active">
+                                    <a href="#btabs-alt-static-home">By Account</a>
+                                </li>
+                                <li class="">
+                                    <a href="#btabs-alt-static-profile">By Store</a>
+                                </li>
+                            </ul>
+                            <div class="block-content tab-content">
+                                <div class="tab-pane active" id="btabs-alt-static-home">
+                                    <form method="POST" action="{{ route('login') }}" class="form-horizontal push-30-t push-2">
+                                        @csrf
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material form-material-primary floating">
+                                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                                    <label for="email">Email Address</label>
+                                                </div>
 
+                                                @error('email')
+                                                <span class="invalid-feedback" role="alert" style="color: red">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <div class="form-material form-material-primary floating">
+                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                                    <label for="password">Password</label>
+                                                </div>
+                                                @error('password')
+                                                <span class="invalid-feedback" role="alert" style="color: red">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <label class="css-input switch switch-sm switch-primary">
+                                                    <input type="checkbox" id="login-remember-me" name="remember"><span></span> Remember Me?
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                                <button class="btn btn-block btn-primary" type="submit">Log in </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane " id="btabs-alt-static-profile">
+                                    <form method="POST" action="{{ route('authenticate') }}">
+                                        {{ csrf_field() }}
+                                        <div class="form-material">
+                                            <input id="shop" name="shop" class="form-control" type="text" autofocus="autofocus" placeholder="example.myshopify.com">
+                                            <label for="shop">Store Domain</label>
+                                        </div>
+
+                                        <button class="btn btn-primary" type="submit">Log in </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Login Form -->
                         <!-- jQuery Validation (.js-validation-login class is initialized in js/pages/base_pages_login.js) -->
                         <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                        <form method="POST" action="{{ route('login') }}" class="form-horizontal push-30-t push-2">
-                            @csrf
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-primary floating">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                        <label for="email">Email Address</label>
-                                    </div>
 
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert" style="color: red">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <div class="form-material form-material-primary floating">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                        <label for="password">Password</label>
-                                    </div>
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert" style="color: red">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label class="css-input switch switch-sm switch-primary">
-                                        <input type="checkbox" id="login-remember-me" name="remember"><span></span> Remember Me?
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12 col-sm-6 col-md-4">
-                                    <button class="btn btn-block btn-primary" type="submit">Log in </button>
-                                </div>
-
-                            </div>
-                        </form>
                         <!-- END Login Form -->
                         <a href="{{route('register')}}" data-toggle="tooltip" data-placement="top" title="New Account">Create an account?</a>
                     </div>

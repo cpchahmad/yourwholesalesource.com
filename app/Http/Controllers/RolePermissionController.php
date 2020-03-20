@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RolePermissionController extends Controller
@@ -24,5 +25,9 @@ class RolePermissionController extends Controller
    }
    public function selection(){
        return view('selection');
+   }
+
+   public function store_connect(Request $request){
+       return view('non_shopify_users.store_connect');
    }
 }

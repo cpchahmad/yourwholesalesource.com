@@ -58,10 +58,7 @@
             <div class="side-content side-content-full">
                 <ul class="nav-main">
                     <li>
-                        <a class="active" href="{{route('users.dashboard')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
-                    </li>
-                    <li>
-                        <a class="active" href="{{route('users.stores')}}"><i class="si si-home"></i><span class="sidebar-mini-hide">Stores</span></a>
+                        <a class="active" href="{{route('store.index')}}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Store Association</span></a>
                     </li>
                 </ul>
             </div>
