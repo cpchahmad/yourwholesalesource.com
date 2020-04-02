@@ -17,7 +17,8 @@ class SuperAdminCheck
     public function handle($request, Closure $next)
     {
         $shop = ShopifyApp::shop();
-        if($shop->shopify_domain == 'fantasy-supplier.myshopify.com'){
+//        dd( in_array($shop->shopify_domain,['fantasy-supplier.myshopify.com','wefullfill.myshopify.com']));
+        if(in_array($shop->shopify_domain,['fantasy-supplier.myshopify.com','wefullfill.myshopify.com'])){
             return $next($request);
         }
         else{

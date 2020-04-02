@@ -11,6 +11,9 @@ class RolePermissionController extends Controller
        if($user->email == 'admin@wefullfill.com'){
            return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
        }
+       elseif ($user->email == 'super_admin@wefullfill.com'){
+           return redirect('/shop/install?shop=wefullfill.myshopify.com');
+       }
        else{
            if($user->hasRole('non-shopify-users') && $user->hasRole('sales-manager')){
                return redirect()->route('system.selection');

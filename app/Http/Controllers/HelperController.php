@@ -63,10 +63,19 @@ class HelperController extends Controller
     }
     public function SuperAdminCreate()
     {
-        $user =  User::create([
-            'name' => 'Super Admin',
-            'email' => 'admin@wefullfill.com',
-            'password' => Hash::make('wefullfill@admin'),
-        ]);
+        if (!User::where('email', 'super_admin@wefullfill.com')->exists()) {
+            User::create([
+                'name' => 'Super Admin',
+                'email' => 'super_admin@wefullfill.com',
+                'password' => Hash::make('wefullfill@admin'),
+            ]);
+        }
+        if (!User::where('email', 'super_admin@wefullfill.com')->exists()) {
+            User::create([
+                'name' => 'Super Admin',
+                'email' => 'admin@wefullfill.com',
+                'password' => Hash::make('wefullfill@admin'),
+            ]);
+        }
     }
 }
