@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use OhMyBrew\ShopifyApp\Models\Shop;
+use OhMyBrew\ShopifyApp\ShopifyApp;
 use Spatie\Permission\Models\Role;
 
 class HelperController extends Controller
 {
     public function getShop(){
-        $shop = Shop::where('shopify_domain','fantasy-supplier.myshopify.com')->first();
-        return $shop;
+        $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+        return Shop::where('shopify_domain',$current_shop->shopify_domain)->first();
     }
     public function reset_all(Request $request){
         if($request->has('pass')){
