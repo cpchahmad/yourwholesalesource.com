@@ -98,14 +98,14 @@
                     <i class="fa fa-search"></i>
                 </button>
             </li>
-            <li class="js-header-search header-search">
-                <form class="form-horizontal" action="base_pages_search.html" method="post">
-                    <div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
-                        <input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Search..">
-                        <span class="input-group-addon"><i class="si si-magnifier"></i></span>
-                    </div>
-                </form>
-            </li>
+{{--            <li class="js-header-search header-search">--}}
+{{--                <form class="form-horizontal" action="base_pages_search.html" method="post">--}}
+{{--                    <div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">--}}
+{{--                        <input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Search..">--}}
+{{--                        <span class="input-group-addon"><i class="si si-magnifier"></i></span>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </li>--}}
         </ul>
         <!-- END Header Navigation Left -->
     </header>
@@ -152,7 +152,7 @@
     });
     jQuery(function () {
         // Init page helpers (Summernote + CKEditor + SimpleMDE plugins)
-        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo']);
+        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo','magnific-popup','masonry']);
     });
 </script>
 <div class="pre-loader">

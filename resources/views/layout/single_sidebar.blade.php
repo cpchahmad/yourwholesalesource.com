@@ -64,10 +64,13 @@
                         <a class="nav-submenu active" data-toggle="nav-submenu" href="#"><i class="fa fa-shopping-basket"></i><span class="sidebar-mini-hide">Products</span></a>
                         <ul>
                             <li>
-                                <a class="nav-item active" href="">Search Products</a>
+                                <a class="nav-item active" href="{{route('store.product.wefulfill')}}">WeFullFill Products</a>
                             </li>
                             <li>
-                                <a class="nav-item active" href="">Import List</a>
+                                <a class="nav-item active" href="">AliExpress Products</a>
+                            </li>
+                            <li>
+                                <a class="nav-item active" href="{{route('store.import_list')}}">Import List</a>
                             </li>
                             <li>
                                 <a class="nav-item active"  href="">My Products</a>
@@ -75,16 +78,31 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="active" ><i class="fa fa-first-order"></i><span class="sidebar-mini-hide">Orders</span></a>
+                        <a class="nav-submenu active" data-toggle="nav-submenu" href="#"><i class="fa fa-shopping-basket"></i><span class="sidebar-mini-hide">Orders</span></a>
+                        <ul>
+                            <li>
+                                <a class="nav-item active" >Fullfilment by WeFullFill </a>
+                            </li>
+                            <li>
+                                <a class="nav-item active" href="">Fullfilment by AliExpress </a>
+                            </li>
+                            <li>
+                                <a class="nav-item active" href="">Payment History</a>
+                            </li>
+                            <li>
+                                <a class="nav-item active"  href="">Tracking Info</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a class="active" ><i class="fa fa-pencil"></i><span class="sidebar-mini-hide">Custom</span></a>
-                    </li>
+
                     <li>
                         <a class="active" ><i class="fa fa-user"></i><span class="sidebar-mini-hide">Customers</span></a>
                     </li>
                     <li>
                         <a class="active" href="{{route('store.index')}}"><i class="si si-settings"></i><span class="sidebar-mini-hide">Settings</span></a>
+                    </li>
+                    <li>
+                        <a class="active" ><i class="fa fa-info"></i><span class="sidebar-mini-hide">Help Center</span></a>
                     </li>
 
                 </ul>

@@ -67,4 +67,14 @@ $(document).ready(function () {
             },
         });
     });
+
+    $('body').on('click','.see-more-block',function () {
+        $('.after12').show();
+        $(this).hide();
+    });
+    $('body').on('click','.see-less-block',function () {
+        $('.after12').hide();
+        $('.see-more-block').show();
+
+    });
 });

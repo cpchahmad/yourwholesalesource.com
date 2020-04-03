@@ -27,6 +27,13 @@ class HelperController extends Controller
         $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
         return Shop::where('shopify_domain',$current_shop->shopify_domain)->first();
     }
+    public function getLocalShop(){
+        /*Ossiset Shop Model*/
+        $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+        /*Local Shop Model!*/
+        $shop= \App\Shop::find($shop->id);
+        return $shop;
+    }
     public function reset_all(Request $request){
         if($request->has('pass')){
             if($request->input('pass')== 'fantasy-reset')

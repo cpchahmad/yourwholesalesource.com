@@ -83,6 +83,12 @@ Route::group(['middleware' => ['auth.shop']], function () {
 
         Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard');
         Route::get('/setting','SingleStoreController@setting')->name('store.index');
+        Route::get('/products/wefullfill','SingleStoreController@wefullfill_products')->name('store.product.wefulfill');
+        Route::get('/products/wefullfill/{id}','SingleStoreController@view_fantasy_product')->name('store.product.wefulfill.show');
+        /*Import List Route*/
+        Route::get('/wefullfill/{id}/add-to-import-list','RetailerProductController@add_to_import_list')->name('store.product.wefulfill.add-to-import-list');
+        Route::get('/import-list','RetailerProductController@import_list')->name('store.import_list');
+
     });
 });
 /*Main Routes*/
