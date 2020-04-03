@@ -107,15 +107,15 @@ class RetailerProductController extends Controller
                 /*Shop Product Import Relation*/
                 $shop = $this->helper->getLocalShop();
                 if($shop != null){
-                    if(!in_array($retailerProduct->id,$shop->has_imported->pluck('id')->toArray())){
-                        $shop->has_imported()->attach([$retailerProduct->id]);
+                    if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray())){
+                        $shop->has_imported()->attach([$product->id]);
                     }
                 }
                 /*Shop-User Import Relation*/
                 if(count($this->helper->getLocalShop()->has_user) > 0){
                     $user = $this->helper->getLocalShop()->has_user[0];
-                    if(!in_array($retailerProduct->id,$user->has_imported->pluck('id')->toArray())){
-                        $user->has_imported()->attach([$retailerProduct->id]);
+                    if(!in_array($product->id,$user->has_imported->pluck('id')->toArray())){
+                        $user->has_imported()->attach([$product->id]);
                     }
                 }
 

@@ -8,6 +8,9 @@ use App\DefaultInfo;
 use App\Image;
 use App\Product;
 use App\ProductVariant;
+use App\RetailerImage;
+use App\RetailerProduct;
+use App\RetailerProductVariant;
 use App\ShippingRate;
 use App\SubCategory;
 use App\User;
@@ -85,5 +88,16 @@ class HelperController extends Controller
                 'password' => Hash::make('wefullfill@admin'),
             ]);
         }
+    }
+
+    public function deleteRetailer(){
+        RetailerProduct::truncate();
+        RetailerProductVariant::truncate();
+        RetailerImage::truncate();
+        DB::table('retailer_product_category')->truncate();
+        DB::table('retailer_product_subcategory')->truncate();
+        DB::table('retailer_product_shop')->truncate();
+        DB::table('retailer_product_user')->truncate();
+
     }
 }
