@@ -1,22 +1,6 @@
 @extends('layout.single')
 @section('content')
-    <style>
-        .mb2{
-            margin-bottom: 10px !important;
-        }
-        .vertical-line{
-            font-size: large;
-            text-align: center;
-            border-left: 2px solid whitesmoke;
-            height: 30px;
-            border-right: 2px solid whitesmoke;
-            font-weight: bold;
-        }
-        .swal2-popup {
-            font-size: 1.5rem !important;
-        }
-    </style>
-    <div class="content">
+    <div class="content content-narrow">
         <div class="row mb2">
             <div class="col-md-4">
                 <h3 class="font-w700">Store Association </h3>
@@ -96,8 +80,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
 @endsection

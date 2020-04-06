@@ -1,5 +1,25 @@
 @extends('layout.index')
 @section('content')
+    <div class="bg-body-light">
+        <div class="content content-full pt-2 pb-2">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h4 my-2">
+                    {{ $product->title }}
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Products</a>
+                        </li>
+                        <li class="breadcrumb-item">{{ $product->title }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
     <style>
         .img-avatar {
             border-radius: 0;

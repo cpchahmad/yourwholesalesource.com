@@ -1,51 +1,54 @@
 @extends('layout.index')
 @section('content')
-    <style>
-        .mb2{
-            margin-bottom: 10px !important;
-        }
-        .img-avatar2 {
-            display: inline-block !important;
-            width: 50px;
-            height: 50px;
-            /* border-radius: 50%; */
-        }
-    </style>
+
+    <div class="bg-body-light">
+        <div class="content content-full pt-2 pb-2">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h4 my-2">
+                    Products
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Products</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
     <div class="content">
-        <div class="row mb2">
+        <div class="row mb-3">
             <div class="col-sm-6">
-                <h3 class="font-w700">All Products</h3>
+
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{ route('product.create') }}" class="btn btn-info btn-square ">Add New Product</a>
+                <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
             </div>
         </div>
         <div class="block">
             <div class="block-content">
                 @if(count($products) >0)
-                <table class="js-table-sections table table-hover">
+                    <div class="table-responsive">
+                    <table class="table table-borderless table-striped table-vcenter">
                     <thead>
                     <tr>
-                        <th style="width: 30px;">#</th>
                         <th style="width:5% "></th>
                         <th>Title</th>
-                        <th>Vendor</th>
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
                     </thead>
-                    <?php $i = 1;?>
-
                     <tbody>
                     @foreach($products as $product)
                         <tr>
-                            <td class="text-center" style="vertical-align: middle">
-                                {{ $i++ }}
-                            </td>
                             <td class="text-center">
-                                <img class="img-avatar2" style="border: 1px solid whitesmoke"
+                                <a href="{{ route('product.view', $product->id) }}">
+                                <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke"
                                      @if(count($product->has_images) > 0)
                                      @if($product->has_images[0]->isV == 0)
                                      src="{{asset('images')}}/{{$product->has_images[0]->image}}"
@@ -55,40 +58,47 @@
                                       src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                      @endif
                                      alt="">
+                                </a>
                             </td>
                             <td class="font-w600" style="vertical-align: middle">
-                                {{ $product->title }}</td>
-                            <td style="vertical-align: middle">{{ $product->vendor }}</td>
+                                <a href="{{ route('product.view', $product->id) }}">
+                                {{ $product->title }}
+                                </a>
+                            </td>
+
                             <td style="vertical-align: middle">
-                                ${{ $product->price }}
+                                ${{ number_format($product->price, 2) }}
                             </td>
                             <td style="vertical-align: middle">{{ $product->quantity }}</td>
                             <td style="vertical-align: middle">
-                                <label class="css-input switch  switch-sm switch-primary">
-                                    <input data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}"  class="status-switch" type="checkbox" @if($product->status ==1)checked="" @endif><span></span>
-                                   <span class="status-text">@if($product->status ==1) Published @else Draft @endif</span>
-                                </label>
+                                <div class="custom-control custom-switch custom-control-success mb-1">
+                                    <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">
+                                    <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>
+                                </div>
+
                             </td>
                             <td class="text-right" style="vertical-align: middle">
 
-                                    <a class="btn btn-xs btn-primary" type="button" href="{{ route('product.view', $product->id) }}" {{-- data-toggle="modal"
-                                            data-target="#modal-popin{{$product->id}}"--}} title="View Product"><i
-                                            class="fa fa-eye"></i></a>
-                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-xs btn-warning"
+                    <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
+                                    <a class="btn btn-xs btn-sm btn-success" type="button" href="{{ route('product.view', $product->id) }}" title="View Product">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Edit Product"><i
-                                            class="fa fa-pencil"></i></a>
-                                    <a href="{{ route('product.delete', $product->id) }}" class="btn btn-xs btn-danger"
+                                            class="fa fa-edit"></i></a>
+                                    <a href="{{ route('product.delete', $product->id) }}" class="btn btn-sm btn-danger"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Delete Product"><i class="fa fa-times"></i></a>
-
+                    </div>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                    </div>
                     @else
-                <p>No Products Created</p>
+                    <p>No Products created.</p>
                     @endif
             </div>
         </div>

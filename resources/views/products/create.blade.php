@@ -1,5 +1,27 @@
 @extends('layout.index')
 @section('content')
+    <div class="bg-body-light">
+        <div class="content content-full pt-3 pb-3">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h5 my-2">
+                    Add New Product
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Products</a>
+                        </li>
+
+                        <li class="breadcrumb-item">Add New</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
     <style>
         div.tagsinput span.tag {
             padding: 2px 5px;
@@ -26,12 +48,9 @@
         @csrf
         <div class="content">
             <div class="row mb2">
-                <div class="col-sm-6">
-                    <h3 class="font-w700">Add Product</h3>
-                </div>
-                <div class="col-sm-6 text-right">
+                <div class="col-sm-12 text-right mb-3">
                     <a href="{{ route('product.create') }}" class="btn btn-default btn-square ">Discard</a>
-                    <button class="btn btn-primary btn-square submit-button">Save</button>
+                    <button class="btn btn-success btn-square submit-button">Save</button>
                 </div>
             </div>
             <!-- Info -->
@@ -83,24 +102,17 @@
                         </div>
                         <div class="block-content">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <div class="col-xs-12 push-10">
                                             <label>Price</label>
-                                            <input type="text" class="form-control" name="price"
-                                                   placeholder="$ 0.00" required>
-                                        </div>
+                                            <input type="text" class="form-control" name="price" placeholder="$ 0.00" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-md-6 ">
                                     <div class="form-group">
-                                        <div class="col-xs-12 ">
-                                            <label>Cost Per Item</label>
-                                            <input type="text" class="form-control" name="cost"
-                                                   placeholder="$ 0.00">
-                                        </div>
+                                    <label>Cost Per Item</label>
+                                    <input type="text" class="form-control" name="cost"
+                                           placeholder="$ 0.00">
                                     </div>
                                 </div>
                             </div>
@@ -252,14 +264,33 @@
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
+                                Status
+                            </div>
+                        </div>
+                        <div class="block-content pt-0">
+                            <div class="form-group">
+                                <label class="css-input css-radio  css-radio-primary push-10-r">
+                                    <input type="radio" name="status" value="1" checked=""><span></span> Published
+                                </label>
+                                <br>
+                                <label class="css-input css-radio  css-radio-primary">
+                                    <input type="radio" name="status" value="0"><span></span> Draft
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">
                                 Mark as Fulfilled
                             </div>
                         </div>
-                        <div class="block-content" >
+                        <div class="block-content pt-0" >
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label class="css-input css-radio css-radio-primary">
-                                        <input type="radio" name="fulfilled-by" value="Fantasy" checked=""><span></span> By Fantasy Supplier
+                                        <input type="radio" name="fulfilled-by" value="Fantasy" checked=""><span></span> By WeFullFill
                                     </label>
                                 </div>
                                 <div class="col-xs-12">
@@ -274,12 +305,13 @@
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
-                                Product Category
+                                <h3 class="block-title">Product Category</h3>
                             </div>
-                            <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">
+                        </div>
+                            <div class="block-content" style="height: 300px;overflow-y: auto;overflow-x: hidden;">
                                 <div class="form-group product_category">
                                     @foreach($categories as $category)
-                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
+                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"><i class="fa fa-angle-right"></i></span>
                                         <label class="css-input css-checkbox css-checkbox-primary">
                                             <input type="checkbox" name="category[]" class="category_checkbox"
                                                    value="{{ $category->id }}"><span></span>{{ $category->title }}
@@ -299,13 +331,12 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
                     </div>
                     <div class="block">
                         <div class="block-header">
                             <h3 class="block-title">Organization</h3>
                         </div>
-                        <div class="block-content">
+                        <div class="block-content pt-0">
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Product Type</label>
@@ -316,16 +347,13 @@
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <label>Vendor</label>
-                                    <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
-                                           >
+                                    <input type="text" class="form-control" name="vendor" placeholder="eg. Nike">
                                 </div>
                             </div>
-                            <hr>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-primary">
-                                        <h5>Tags</h5>
-                                        <br>
+                                        <label>Tags</label>
                                         <input class="js-tags-input form-control" type="text"
                                                id="product-meta-keywords" name="tags" value="">
                                     </div>
@@ -349,19 +377,6 @@
                                     </label>
                                         <br>
                                         @endforeach
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label>Product Status</label>
-                                    <br>
-                                    <label class="css-input css-radio  css-radio-primary push-10-r">
-                                        <input type="radio" name="status" value="1" checked=""><span></span> Published
-                                    </label>
-                                    <br>
-                                    <label class="css-input css-radio  css-radio-primary">
-                                        <input type="radio" name="status" value="0"><span></span> Draft
-                                    </label>
                                 </div>
                             </div>
                         </div>

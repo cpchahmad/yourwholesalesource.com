@@ -7,84 +7,50 @@
     <title>WeFullfill</title>
 
     <meta name="description" content="WeFullfill 2020 created by TetraLogicx Pvt. Limited.">
-    <meta name="author" content="pixelcave">
+    <meta name="author" content="tetralogicx">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
 
-    <!-- Icons -->
-    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+
     <link rel="shortcut icon" href="{{ asset('assets/img/favicons/wefullfill.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/img/favicons/wefullfill.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/wefullfill.png') }}">
 
-    <!-- END Icons -->
+    <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
+    <meta property="og:site_name" content="OneUI">
+    <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
 
-    <!-- Stylesheets -->
-    <!-- Web fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
-
-    <!-- Page JS Plugins CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/slick/slick.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/slick/slick-theme.min.css') }}">
-
-    <!-- Bootstrap and OneUI CSS framework -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/summernote/summernote.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropzonejs/dropzone.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2-bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('assets/js/plugins/sweetalert2/sweetalert2.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
 
-
-    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
-    <!-- END Stylesheets -->
 </head>
 <body>
-<!-- Page Container -->
-<main id="main-container">
-    @include('flash_message.message')
-    @yield('content')
-</main>
-<!-- END Page Container -->
-<!-- OneUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock, Appear, CountTo, Placeholder, Cookie and App.js -->
-<script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/jquery.scrollLock.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/jquery.countTo.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/jquery.placeholder.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
-<script src="{{ asset('assets/js/app.js') }}"></script>
 
-<!-- Page Plugins -->
-<script src="{{ asset('assets/js/plugins/slick/slick.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/chartjs/Chart.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/summernote/summernote.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/dropzonejs/dropzone.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/select2/select2.full.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<div id="page-container">
 
-<!-- Page JS Code -->
-<script src="{{ asset('assets/js/pages/base_pages_dashboard.js') }}"></script>
-<script src="{{ asset('js/admin.js') }}"></script>
+    <!-- Main Container -->
+    <main id="main-container">
+        @include('flash_message.message')
+        <div class="bg-image" style="background-image: url('{{ asset('assets/media/photos/photo6@2x.jpg') }}');">
+            <div class="hero-static bg-white-95">
+                <div class="content">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 
-<script>
-    jQuery(function () {
-        App.initHelpers('slick');
-    });
-    jQuery(function () {
-        // Init page helpers (Table Tools helper)
-        App.initHelpers('table-tools');
-    });
-    jQuery(function () {
-        // Init page helpers (Summernote + CKEditor + SimpleMDE plugins)
-        App.initHelpers(['maxlength', 'select2', 'tags-inputs', 'summernote', 'appear', 'appear-countTo']);
-    });
-</script>
+
+
+
+<script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
+<script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
+
+
 </body>
 </html>
