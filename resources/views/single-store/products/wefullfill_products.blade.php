@@ -1,58 +1,58 @@
 @extends('layout.single')
 @section('content')
-    <style>
-        .mb2{
-            margin-bottom: 10px !important;
-        }
-        .pointer{
-            cursor: pointer;
-        }
-        .pointer:hover{
-            background-color: lightgray;
-            color: white;
-        }
-        .padding10{
-            padding: 5px !important;
-        }
-    </style>
+
+    <div class="bg-body-light">
+        <div class="content content-full pt-2 pb-2">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h4 my-2">
+                    WeFullFill Products
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">WeFullFill Products</a>
+                        </li>
+{{--                        <li>--}}
+{{--                            <a class="btn btn-block btn-danger" href="{{route('store.product.wefulfill')}}">Clear <i class="fa fa-close"></i></a>--}}
+{{--                        </li>--}}
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
     <div class="content">
-        <div class="content-grid">
-            <div class="row mb2">
-                <h3 class="font-w700" style="display: contents">WeFullFill Products </h3>
-                <div class="d-inline-block pull-right">
-                    <a class="btn btn-block btn-danger" href="{{route('store.product.wefulfill')}}">Clear <i class="fa fa-close"></i></a>
+        <form class="js-form-icon-search push" action="{{route('store.product.wefulfill')}}" method="get">
+            <div class="input-group input-group-lg">
+                <input type="text" class="js-icon-search form-control font-size-base" name="search" placeholder="Search by title, tags keyword">
+                <div class="input-group-append">
+                    <button type="submit">
+                    <span class="input-group-text">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    </button>
                 </div>
             </div>
-            <form action="{{route('store.product.wefulfill')}}" method="get">
-            <div class="row mb2 ">
+        </form>
 
-                <div class="col-md-10">
-                        <input type="search" class="form-control" placeholder="Search by title, tags keyword" name="search">
-                </div>
-                <div class="col-md-2">
-                      <button class="btn btn-block btn-primary">Search</button>
-                </div>
-
-            </div>
-            </form>
-            <div class="row mb2">
+            <div class="row mb-2" style="padding: 0 14px;">
                 @foreach($categories as $index => $category)
                     @if($index < 11)
-                        <div class="col-xs-3 before12 ">
+                        <div class="col-sm-3 p-0">
                             <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
-                            <div class="block pointer">
-                                <div class="block-content">
-                                    <p>{{$category->title}}</p>
+                            <div class="block m-0">
+                                <div class="block-content p-3 text-center">
+                                    <p class="m-0" style="font-size:14px;">{{$category->title}}</p>
                                 </div>
                             </div>
                             </a>
                         </div>
                     @endif
                     @if($index == 11)
-                        <div class="col-xs-3 before12 see-more-block  ">
-                            <div class="block pointer">
-                                <div class="block-content">
-                                    <p>See More ....</p>
+                        <div class="col-sm-3 p-0 see-more-block">
+                            <div class="block">
+                                <div class="block-content p-3 text-center">
+                                    <p  class="m-0" style="font-size:14px;">See More ....</p>
                                 </div>
                             </div>
                         </div>
@@ -179,6 +179,6 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
 @endsection

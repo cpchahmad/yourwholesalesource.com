@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="17032020-lastfinal">
-      <change afterPath="$PROJECT_DIR$/public/images/variants/202003161221s20_render_xee---Copy.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HelperController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HelperController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RolePermissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RolePermissionController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +38,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -159,7 +159,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/img/logos" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
@@ -180,6 +180,18 @@
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -220,6 +232,11 @@
       <workItem from="1584603530327" duration="19101000" />
       <workItem from="1584683878888" duration="10739000" />
       <workItem from="1584699507532" duration="12796000" />
+      <workItem from="1585902659968" duration="14228000" />
+      <workItem from="1585939000044" duration="3963000" />
+      <workItem from="1585996481972" duration="6238000" />
+      <workItem from="1586068367423" duration="2307000" />
+      <workItem from="1586090842433" duration="10162000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
@@ -464,14 +481,38 @@
     </state>
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584339893009" />
     <state x="508" y="259" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1582783970218" />
+    <state x="494" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585905081681">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="494" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.736@0.0.1366.736" timestamp="1585905081681" />
     <state x="92" y="92" width="1182" height="544" key="dock-window-1" timestamp="1584684862528">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1584684862528" />
+    <state x="339" y="164" key="run.anything.popup" timestamp="1585939147955">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.736@0.0.1366.736" timestamp="1585939147955" />
     <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1584712168780">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584712168780" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/products/create.blade.php</url>
+          <line>57</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/products/all.blade.php</url>
+          <line>39</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

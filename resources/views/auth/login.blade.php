@@ -1,212 +1,99 @@
 @extends('layout.credential')
-
 @section('content')
-    <style>
-        #header-navbar{
-            display: none !important;
-        }
-        #sidebar{
-            display: none !important;
-        }
-        .block > .nav-tabs.nav-tabs-alt > li > a:hover {
-            -webkit-box-shadow: 0 2px #7eaa41 !important;
-            box-shadow: 0 2px #7eaa41 !important;
-        }
-        .block > .nav-tabs.nav-tabs-alt > li.active > a,
-        .block > .nav-tabs.nav-tabs-alt > li.active > a:hover,
-        .block > .nav-tabs.nav-tabs-alt > li.active > a:focus {
-            -webkit-box-shadow: 0 2px #7eaa41 !important;
-            box-shadow: 0 2px #7eaa41 !important;
-        }
-        .block > .nav-tabs > li > a:hover {
-            color: #7eaa41;
-            background-color: transparent;
-            border-color: transparent;
-        }
-        .form-material.form-material-success > .form-control:focus {
-            -webkit-box-shadow: 0 2px 0 #7eaa41;
-            box-shadow: 0 2px 0 #7eaa41;
-        }
-        .form-material.form-material-success > .form-control:focus + label {
-            color: #7eaa41;
-        }
-        }
-        .switch-success input:checked + span {
-            background-color: #7eaa41 !important;
-        }
-    </style>
-    <div class="content overflow-hidden">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-                <!-- Login Block -->
-
-
-                <div class="block block-themed animated fadeIn">
-                    <div class="block-header" style="background-color: #7eaa41;">
-                        <ul class="block-options">
-                            <li>
-                                <a href="{{ route('password.request') }}">Forgot Password?</a>
-                            </li>
-                        </ul>
-                        <h3 class="block-title">Login</h3>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-4">
+            <div class="block block-themed block-fx-shadow mb-0">
+                <div class="block-header bg-success">
+                    <h3 class="block-title">Sign In</h3>
+                    <div class="block-options">
+                        <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">Forgot Password?</a>
+                        <a class="btn-block-option" href="{{route('register')}}" data-toggle="tooltip" data-placement="left" title="New Account">
+                            <i class="fa fa-user-plus"></i>
+                        </a>
                     </div>
-                    <div class="block-content block-content-full block-content-narrow">
-                        <!-- Login Title -->
-                        <div class="text-center">
-                            <img src="{{asset('assets/img/logos/1.png')}}" style="width:50%" alt="">
-                            <p class="font-w600 push-15-t push-15" style="font-size: 14px">Welcome, please login.</p>
-                        </div>
+                </div>
+                <div class="block-content">
+                    <div class="">
+                        <h3 class="mb-2">WeFullFill</h3>
+                        <p>Welcome, please login.</p>
 
-{{--                        <h1 class="h2 font-w600 push-30-t push-5">WeFullFill</h1>--}}
-
-                        <!-- END Login Title -->
                         <div class="block">
-                            <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs">
-                                <li class="active">
-                                    <a href="#btabs-alt-static-home">By Account</a>
+                            <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#by_email">By Email</a>
                                 </li>
-                                <li class="">
-                                    <a href="#btabs-alt-static-profile">By Store</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#by_store">By Store</a>
                                 </li>
                             </ul>
                             <div class="block-content tab-content">
-                                <div class="tab-pane active" id="btabs-alt-static-home">
-                                    <form method="POST" action="{{ route('login') }}" class="form-horizontal push-5-t push-2">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="col-xs-12">
-                                                <div class="form-material form-material-success">
-                                                    <input id="email" type="email" placeholder="Enter Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                                    <label for="email">Email Address</label>
-                                                </div>
-
+                                <div class="tab-pane active" id="by_email" role="tabpanel">
+                                    <form class="js-validation-signin" action="{{ route('login') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <div class="py-3">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input name="email" required value="{{ old('email') }}" class="form-control form-control-alt form-control-lg">
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert" style="color: red">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-xs-12">
-                                                <div class="form-material form-material-success">
-                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password" required autocomplete="current-password">
-                                                    <label for="password">Password</label>
-                                                </div>
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control form-control-alt form-control-lg" name="password">
+
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert" style="color: red">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                                 @enderror
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-xs-12">
-                                                <label class="css-input switch switch-sm switch-success">
-                                                    <input type="checkbox" id="login-remember-me" name="remember"><span></span> Remember Me?
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                                <button class="btn btn-block " style="background-color:#7eaa41;color: white" type="submit">Log in </button>
-                                            </div>
 
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="login-remember" name="remember">
+                                                    <label class="custom-control-label font-w400" for="login-remember">Remember Me</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-xl-5">
+                                                <button type="submit" class="btn btn-block btn-success">
+                                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane " id="btabs-alt-static-profile">
+                                <div class="tab-pane" id="by_store" role="tabpanel">
+                                    <div class="py-3">
                                     <form method="POST" action="{{ route('authenticate') }}">
                                         {{ csrf_field() }}
-                                        <div class="form-material">
-                                            <input id="shop" name="shop" class="form-control" type="text" autofocus="autofocus" placeholder="example.myshopify.com">
-                                            <label for="shop">Store Domain</label>
+                                        <div class="form-group">
+                                            <label for="shop">Domain</label>
+                                                <input id="shop" name="shop" class="form-control form-control-alt form-control-lg"
+                                                       type="text" autofocus="autofocus" placeholder="example.myshopify.com">
+
                                         </div>
 
-                                        <button class="btn " style="background-color:#7eaa41;color: white" type="submit">Log in </button>
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-xl-5">
+                                                <button type="submit" class="btn btn-block btn-success">
+                                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
+                                                </button>
+                                            </div>
+                                        </div>
                                     </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Login Form -->
-                        <!-- jQuery Validation (.js-validation-login class is initialized in js/pages/base_pages_login.js) -->
-                        <!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
 
-                        <!-- END Login Form -->
-                        <a href="{{route('register')}}" data-toggle="tooltip" data-placement="top" title="New Account">Create an account?</a>
                     </div>
                 </div>
-                <!-- END Login Block -->
             </div>
         </div>
     </div>
-{{--    <div class="container">--}}
-{{--        <div class="row justify-content-center">--}}
-{{--            <div class="col-md-8">--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-header">{{ __('Login') }}</div>--}}
-
-{{--                    <div class="card-body">--}}
-{{--                        <form method="POST" action="{{ route('login') }}">--}}
-{{--                            @csrf--}}
-
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>--}}
-
-{{--                                    @error('email')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                    <strong>{{ $message }}</strong>--}}
-{{--                                </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">--}}
-
-{{--                                    @error('password')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                    <strong>{{ $message }}</strong>--}}
-{{--                                </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="form-group row">--}}
-{{--                                <div class="col-md-6 offset-md-4">--}}
-{{--                                    <div class="form-check">--}}
-{{--                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>--}}
-
-{{--                                        <label class="form-check-label" for="remember">--}}
-{{--                                            {{ __('Remember Me') }}--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="form-group row mb-0">--}}
-{{--                                <div class="col-md-8 offset-md-4">--}}
-{{--                                    <button type="submit" class="btn btn-primary">--}}
-{{--                                        {{ __('Login') }}--}}
-{{--                                    </button>--}}
-
-{{--                                    @if (Route::has('password.request'))--}}
-{{--                                        <a class="btn btn-link" href="{{ route('password.request') }}">--}}
-{{--                                            {{ __('Forgot Your Password?') }}--}}
-{{--                                        </a>--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 @endsection
