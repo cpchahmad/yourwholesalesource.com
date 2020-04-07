@@ -593,10 +593,20 @@ class ProductController extends Controller
 //            dd($response);
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
+            $price = $product->price;
             $product->save();
 
             $shopifyImages = $response->body->product->images;
             $shopifyVariants = $response->body->product->variants;
+            if(count($product->hasVariants) == 0){
+                $variant_id = $shopifyVariants[0]->id;
+                $i = [
+                    'variant' => [
+                        'price' =>$price
+                    ]
+                ];
+                $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+            }
             foreach ($product->hasVariants as $index => $v){
                 $v->shopify_id = $shopifyVariants[$index]->id;
                 $v->save();
@@ -613,10 +623,13 @@ class ProductController extends Controller
                 ];
                 $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product_shopify_id.'/metafields.json',$productdata);
             }
-            foreach ($product->has_images as $index => $image){
-                $image->shopify_id = $shopifyImages[$index]->id;
-                $image->save();
+            if(count($shopifyImages) == count($product->has_images)){
+                foreach ($product->has_images as $index => $image){
+                    $image->shopify_id = $shopifyImages[$index]->id;
+                    $image->save();
+                }
             }
+
             foreach ($product->hasVariants as $index => $v){
                 if($v->has_image != null){
                     $i = [
