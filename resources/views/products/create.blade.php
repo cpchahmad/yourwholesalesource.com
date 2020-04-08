@@ -22,28 +22,6 @@
         </div>
     </div>
 
-    <style>
-        div.tagsinput span.tag {
-            padding: 2px 5px;
-            height: 22px;
-            line-height: 18px;
-            color: #fff;
-            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: 600;
-            background-color: #5c90d2;
-            border: none;
-        }
-
-        div.tagsinput span.tag a {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-         .mb2{
-             margin-bottom: 10px !important;
-         }
-
-    </style>
     <form id="create_product_form" action="{{ route('product.save') }}" class="form-horizontal {{--push-30-t--}} push-30" method="post" enctype="multipart/form-data">
         @csrf
         <div class="content">
@@ -165,11 +143,11 @@
                         <div class="block-content">
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
-                                    <label class="css-input css-checkbox css-checkbox-primary" for="val-terms">
-                                        <input type="checkbox" id="val-terms" name="variants"
-                                               value="1"><span></span> This product has multiple options, like
-                                        different sizes or colors
-                                    </label>
+                                    <div class="custom-control custom-checkbox d-inline-block">
+                                        <input type="checkbox" name="variants" class="custom-control-input" id="val-terms"  value="1">
+                                        <label class="custom-control-label" for="val-terms">This product has multiple options, like
+                                            different sizes or colors</label>
+                                    </div>
                                 </div>
                             </div>
 
@@ -189,7 +167,7 @@
                                                        id="product-meta-keywords" name="option1" value="">
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-default btn-square option_btn_1 mt-2">
+                                        <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">
                                             Add another option
                                         </button>
                                     </div>
@@ -209,7 +187,7 @@
                                                 </div>
                                             </div>
                                             <button type="button"
-                                                    class="btn btn-default btn-square option_btn_2 mt-2">Add another
+                                                    class="btn btn-light btn-square option_btn_2 mt-2">Add another
                                                 option
                                             </button>
                                         </div>
@@ -238,12 +216,12 @@
                                     <br>
                                     <div class="form-group">
                                         <div class="col-xs-12 push-10">
-                                            <table class="table table-hover">
+                                            <table class="table table-hover table-responsive">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 20%;">Title</th>
-                                                    <th style="width: 15%;">Price</th>
-                                                    <th style="width: 17%;">Cost</th>
+                                                    <th style="width: 10%;">Title</th>
+                                                    <th style="width: 20%;">Price</th>
+                                                    <th style="width: 23%;">Cost</th>
                                                     <th style="width: 10%;">Quantity</th>
                                                     <th style="width: 20%;">SKU</th>
                                                     <th style="width: 20%;">Barcode</th>
@@ -269,13 +247,14 @@
                         </div>
                         <div class="block-content pt-0">
                             <div class="form-group">
-                                <label class="css-input css-radio  css-radio-primary push-10-r">
-                                    <input type="radio" name="status" value="1" checked=""><span></span> Published
-                                </label>
-                                <br>
-                                <label class="css-input css-radio  css-radio-primary">
-                                    <input type="radio" name="status" value="0"><span></span> Draft
-                                </label>
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" class="custom-control-input" id="example-radio-customPublished" name="status" value="1" checked="">
+                                    <label class="custom-control-label" for="example-radio-customPublished">Published</label>
+                                </div>
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" class="custom-control-input" id="example-radio-customDraft" name="status" value="0" >
+                                    <label class="custom-control-label" for="example-radio-customDraft">Draft</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -288,17 +267,14 @@
                         </div>
                         <div class="block-content pt-0" >
                             <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label class="css-input css-radio css-radio-primary">
-                                        <input type="radio" name="fulfilled-by" value="Fantasy" checked=""><span></span> By WeFullFill
-                                    </label>
-                                </div>
-                                <div class="col-xs-12">
-                                    <label class="css-input css-radio  css-radio-primary push-10-r">
-                                        <input type="radio" name="fulfilled-by" value="AliExpress" ><span></span> By AliExpress
-                                    </label>
-                                </div>
-
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
+                                <label class="custom-control-label" for="example-radio-customfulfilled">By WeFullFill</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
+                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -311,18 +287,18 @@
                             <div class="block-content" style="height: 300px;overflow-y: auto;overflow-x: hidden;">
                                 <div class="form-group product_category">
                                     @foreach($categories as $category)
-                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"><i class="fa fa-angle-right"></i></span>
-                                        <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" name="category[]" class="category_checkbox"
-                                                   value="{{ $category->id }}"><span></span>{{ $category->title }}
-                                        </label>
+                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px;vertical-align: middle"><i class="fa fa-angle-right"></i></span>
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox" id="rowcat_{{$category->title}}">
+                                            <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>
+                                        </div>
                                         <div class="row product_sub_cat" style="display: none">
                                             <div class="col-xs-12 col-xs-push-1">
                                                 @foreach($category->hasSub as $sub)
-                                                    <label class="css-input css-checkbox css-checkbox-primary">
-                                                        <input type="checkbox" class="sub_cat_checkbox" name="sub_cat[]"
-                                                               value="{{ $sub->id }}"><span></span>{{ $sub->title }}
-                                                    </label>
+                                                    <div class="custom-control custom-checkbox d-inline-block">
+                                                        <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox" id="rowsub_{{$sub->title}}">
+                                                        <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
+                                                    </div>
                                                     <br>
                                                 @endforeach
                                             </div>
@@ -331,6 +307,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                        <div class="block-footer" style="height: 15px"></div>
                     </div>
                     <div class="block">
                         <div class="block-header">
@@ -371,10 +348,10 @@
                                     <label>Warned Platform</label>
                                     <br>
                                     @foreach($platforms as $platform)
-                                    <label class="css-input css-checkbox css-checkbox-primary">
-                                        <input type="checkbox" name="platforms[]"
-                                               value="{{ $platform->id }}"><span></span>{{ $platform->name }}
-                                    </label>
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" name="platforms[]" value="{{$platform->id}}" class="custom-control-input" id="row_{{$platform->name}}">
+                                            <label class="custom-control-label" for="row_{{$platform->name}}">{{$platform->name}}</label>
+                                        </div>
                                         <br>
                                         @endforeach
                                 </div>
@@ -394,24 +371,4 @@
             </div>
         </div>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('input[type="checkbox"][name="variants"]').click(function () {
-                if ($(this).prop("checked") == true) {
-                    $('.variant_options').show();
-                } else if ($(this).prop("checked") == false) {
-                    $('.variant_options').hide();
-                }
-            });
-            $('.option_btn_1').click(function () {
-                $('.option_2').show();
-                $('.option_btn_1').hide();
-            });
-            $('.option_btn_2').click(function () {
-                $('.option_3').show();
-                $('.option_btn_2').hide();
-            });
-        });
-    </script>
 @endsection

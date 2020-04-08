@@ -9,6 +9,10 @@
     </main>
 
     @include('inc.footer')
+    <div class="pre-loader">
+        <div class="loader">
+        </div>
+    </div>
 </div>
 
 </body>

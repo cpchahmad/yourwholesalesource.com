@@ -75,10 +75,13 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/sales-managers/{id}/delete','DefaultSettingsController@delete_manager')->name('sales-managers.delete');
     Route::any('/sales-managers/{id}/set','DefaultSettingsController@set_manager_as_user')->name('sales-managers.set_manager_as_user');
 
+    Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
+
 });
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {
-    Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
+    Route::get('/import/{id}/to-store','RetailerProductController@import_to_shopify')->name('retailer.import_to_shopify');
+
     Route::prefix('store')->group(function () {
         Route::post('/user/authenticate','SingleStoreController@authenticate')->name('store.user.authenticate');
         Route::post('/user/store/association','SingleStoreController@associate')->name('store.user.associate');
@@ -90,6 +93,11 @@ Route::group(['middleware' => ['auth.shop']], function () {
         /*Import List Route*/
         Route::get('/wefullfill/{id}/add-to-import-list','RetailerProductController@add_to_import_list')->name('store.product.wefulfill.add-to-import-list');
         Route::get('/import-list','RetailerProductController@import_list')->name('store.import_list');
+        Route::get('/my_products','RetailerProductController@my_products')->name('store.my_products');
+
+        Route::get('/products/delete/{id}','RetailerProductController@delete')->name('store.product.delete');
+        Route::post('/import-list/{id}/update','RetailerProductController@update')->name('store.import_list.product.update');
+
 
     });
 });

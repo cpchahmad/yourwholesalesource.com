@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    /*Admin Module - Rate Type Selection*/
     $('body').on('change','.rate_type_select',function () {
         if ($(this).val() !== 'flat') {
             $('.condition-div').show();
@@ -10,6 +12,7 @@ $(document).ready(function () {
             $('.condition-div').hide();
         }
     });
+    /* Admin Module - Category Open JS */
     $('body').on('click','.category_down',function () {
         if($(this).data('value') === 0){
             $(this).find('i').addClass('fa-angle-down');
@@ -24,6 +27,7 @@ $(document).ready(function () {
         }
         $(this).next().next().toggle();
     });
+    /* Admin Module - Category Checkbox Selection JS */
     $('body').on('change','.category_checkbox',function () {
         if($(this).is(':checked')){
             $(this).parent().next().find('input[type=checkbox]').prop('checked',true);
@@ -34,6 +38,7 @@ $(document).ready(function () {
             $(this).parent().next().hide();
         }
     });
+    /* Admin Module - SubCategory Checkbox Selection JS */
     $('body').on('change','.sub_cat_checkbox',function () {
         if($(this).is(':checked')){
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
@@ -45,12 +50,13 @@ $(document).ready(function () {
             }
         }
     });
-
+    /* Admin Module - Dropzone Click JS */
     $('body').on('click','.dropzone',function () {
         $('.images-upload').trigger('click');
     });
 
     var storedFiles = [];
+    /* Admin Module - Images UPLOAD JS */
     $('body').on('change','.images-upload',function (e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
@@ -65,8 +71,8 @@ $(document).ready(function () {
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.preview-drop').append(' <div class="col-lg-4 preview-image animated fadeIn">\n' +
-                    '            <div class="img-container fx-img-zoom-in fx-opt-slide-right">\n' +
-                    '                <img class="img-responsive" src="'+e.target.result+'" alt="">\n' +
+                    '            <div class="img-fluid options-item">\n' +
+                    '                <img class="img-fluid options-item" src="'+e.target.result+'" alt="">\n' +
                     '            </div>\n' +
                     '        </div>');
 
@@ -75,14 +81,17 @@ $(document).ready(function () {
         });
     });
 
+    /* Admin Module - Add Option of Variants JS */
     $('body').on('click','.add-option-div',function () {
         $(this).parent().hide();
         $(this).parent().next().show();
     });
+    /* Admin Module - Delete Option of Variants JS */
     $('body').on('click','.delete-option-value',function () {
         $(this).parents('.div2').hide();
         $(this).parents('.div2').prev().show();
     });
+    /*Admin Module - Remove Option of Variants JS*/
     $('body').on('click','.remove-option',function () {
         $(this).parents('.badge').hide();
         $('.variant-options-update-save').data('deleted','1');
@@ -127,6 +136,7 @@ $(document).ready(function () {
         }
     });
 
+    /*Admin Module - Save Options of Variants JS*/
     $('body').on('click','.variant-options-update-save',function () {
         if($(this).data('deleted') === '1'){
             $(this).next().trigger('click');
@@ -183,6 +193,7 @@ $(document).ready(function () {
 
     });
 
+    /*Admin Module - Product Images Save JS*/
     $('body').on('submit','.product-images-form',function (e) {
         e.preventDefault();
         var formData = new FormData(this);
@@ -195,7 +206,7 @@ $(document).ready(function () {
             processData: false,
         });
     });
-
+    /*Admin Module - Update Product  Save JS*/
     $('.submit_all').click(function () {
         $('.pre-loader').css('display','flex');
         if($('#forms-div').find('form').length > 0){
@@ -225,6 +236,7 @@ $(document).ready(function () {
             ajaxCall(forms);
         }
     });
+    /*Stack ajax*/
     function ajaxCall(toAdd) {
         if (toAdd.length) {
             var request = toAdd.shift();
@@ -248,7 +260,7 @@ $(document).ready(function () {
             window.location.reload();
         }
     }
-
+    /*Admin Module - Variant Image Change JS*/
     $('body').on('click','.img-avatar-variant',function () {
         var target = $(this).data('form');
         $(target).find('input[type=file]').trigger('click');
@@ -256,6 +268,7 @@ $(document).ready(function () {
     $('.varaint_file_input').change(function () {
         $(this).parents('form').submit();
     });
+    /*Admin Module - Image Delete JS*/
     $('body').on('click','.delete-file',function () {
         var $this = $(this);
         var file = $(this).data("file");
@@ -274,7 +287,7 @@ $(document).ready(function () {
             }
         });
     });
-
+   /*Admin Module - Product STatus Change JS*/
     $('body').on('change','.status-switch',function () {
         var status = '';
         if($(this).is(':checked')){
@@ -296,4 +309,76 @@ $(document).ready(function () {
         })
     });
 
+    /*Input Tag Script JS*/
+    $('.js-tags-input').tagsInput({
+        height: '36px',
+        width: '100%',
+        defaultText: 'Add tag',
+        removeWithBackspace: true,
+        delimiter: [',']
+    });
+    $('.js-tags-options').tagsInput({
+        height: '36px',
+        width: '100%',
+        defaultText: 'Add tag',
+        removeWithBackspace: true,
+        onChange: function(){
+            var price = $('input[type="text"][name="price"]').val();
+            var cost = $('input[type="text"][name="cost"]').val();
+            var sku = $('input[type="text"][name="sku"]').val();
+            var quantity = $('input[type="text"][name="quantity"]').val();
+            var option1 = $('input[type="text"][name="option1"]').val();
+            var option2 = $('input[type="text"][name="option2"]').val();
+            var option3 = $('input[type="text"][name="option3"]').val();
+            var substr1 = option1.split(',');
+            var substr2 = option2.split(',');
+            var substr3 = option3.split(',');
+            $('.variants_table').show();
+            $("tbody").empty();
+            var title = '';
+            jQuery.each(substr1, function (index1, item1) {
+                title = item1;
+                jQuery.each(substr2, function (index2, item2) {
+                    if(item2 !== ''){
+                        title = item1+'/'+item2;
+                    }
+                    jQuery.each(substr3, function (index3, item3) {
+
+                        if(item3 !== ''){
+                            title = item1+'/'+item2+'/'+item3;
+                        }
+
+                        $('tbody').append('   <tr>\n' +
+                            '                                                    <td class="variant_title">' + title + '<input type="hidden" name="variant_title[]" value="' + title + '"></td>\n' +
+                            '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
+                            '                                                    </td>\n' +
+                            '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
+                            '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
+                            '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
+                            '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
+                            '                                                </tr>');
+                    });
+                });
+            });
+        },
+        delimiter: [',']
+    });
+
+    $('input[type="checkbox"][name="variants"]').click(function () {
+        if ($(this).prop("checked") == true) {
+            $('.variant_options').show();
+        } else if ($(this).prop("checked") == false) {
+            $('.variant_options').hide();
+        }
+    });
+    $('.option_btn_1').click(function () {
+        $('.option_2').show();
+        $('.option_btn_1').hide();
+    });
+    $('.option_btn_2').click(function () {
+        $('.option_3').show();
+        $('.option_btn_2').hide();
+    });
 });
+
+

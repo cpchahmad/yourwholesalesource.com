@@ -77,4 +77,132 @@ $(document).ready(function () {
         $('.see-more-block').show();
 
     });
+
+    $('.js-tags-input').tagsInput({
+        height: '36px',
+        width: '100%',
+        defaultText: 'Add tag',
+        removeWithBackspace: true,
+        delimiter: [',']
+    });
+    /*Retailer Module - Images Update JS*/
+    $('body').on('click','.delete-file',function () {
+        var $this = $(this);
+        var file = $(this).data("file");
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data: {
+                _token: $(this).data('token'),
+                request_type: $(this).data('type'),
+                file: file,
+            },
+            success:function (data) {
+                if(data.success === 'ok'){
+                    $this.parents('.preview-image').remove();
+                }
+            }
+        });
+    });
+    $('body').on('click','.img-avatar-variant',function () {
+        var target = $(this).data('form');
+        $(target).find('input[type=file]').trigger('click');
+    });
+    $('.varaint_file_input').change(function () {
+        $(this).parents('form').submit();
+    });
+
+    /* Admin Module - Images UPLOAD JS */
+    $('body').on('click','.dropzone',function () {
+        $(this).next().trigger('click');
+    });
+    $('body').on('change','.images-upload',function (e) {
+        var $this = $(this);
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function (f) {
+            $this.parent().find('.preview-drop').empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $this.parent().find('.preview-drop').append(' <div class="col-lg-4 preview-image animated fadeIn">\n' +
+                    '            <div class="img-fluid options-item">\n' +
+                    '                <img class="img-fluid options-item" src="'+e.target.result+'" alt="">\n' +
+                    '            </div>\n' +
+                    '        </div>');
+
+            }
+            reader.readAsDataURL(f);
+        });
+    });
+
+    $('body').on('submit','.product-images-form',function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+        });
+    });
+
+    /*Ajax Forms Save*/
+    /*Admin Module - Update Product  Save JS*/
+    $('.btn_save_retailer_product').click(function () {
+        $('.pre-loader').css('display','flex');
+        var forms_div =  $(this).data('tabs');
+        console.log($(forms_div).find('form').length);
+        if($(forms_div).find('form').length > 0){
+            let forms = new Array();
+            $(forms_div).find('form').each(function () {
+                if($(this).hasClass('product-images-form')){
+                    $(this).submit();
+                }
+                else{
+                    forms.push({
+                        'data' : $(this).serialize(),
+                        'url' : $(this).attr('action'),
+                        'method' : $(this).attr('method'),
+                    });
+                }
+
+            });
+            ajaxCall(forms);
+        }
+    });
+    /*Stack ajax*/
+    function ajaxCall(toAdd) {
+        if (toAdd.length) {
+            var request = toAdd.shift();
+            var data = request.data;
+            var url = request.url;
+            var type = request.method;
+
+            $.ajax({
+                url: url,
+                type:type,
+                data: data,
+                success: function(response) {
+                    ajaxCall(toAdd);
+                },
+                error:function () {
+                    ajaxCall(toAdd);
+                }
+            });
+
+        } else {
+            $('.pre-loader').css('display', 'none');
+            Swal.fire(
+                'Updated!',
+                'Your Product has been Updated Successfully',
+                'success'
+            );
+            setTimeout(function () {
+                window.location.reload();
+            },1000)
+
+        }
+    }
 });

@@ -17,19 +17,13 @@
             </div>
         </div>
     </div>
-    <style>
-        .mb2{
-            margin-bottom: 10px !important;
-        }
-    </style>
     <div  class="form-horizontal push-30">
     <div class="content">
         <div class="row mb2">
             <div class="col-sm-6">
-                <h3 class="font-w700">Sales Managers</h3>
             </div>
             <div class="col-sm-6 text-right">
-                <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#create_manager_modal">Add New</a>
+                <a class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_manager_modal">Add New</a>
             </div>
         </div>
 
@@ -38,7 +32,7 @@
                 <div class="block">
                     <div class="block-content">
                         @if (count($sales_managers) > 0)
-                            <table class="table table-hover">
+                            <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
                                     <th>Title</th>
@@ -70,7 +64,7 @@
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ route('sales-managers.delete', $manager->id) }}"
-                                               class="btn btn-xs btn-danger" type="button" data-toggle="tooltip" title=""
+                                               class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                data-original-title="Delete Manager"><i class="fa fa-times"></i></a>
                                         </td>
 
@@ -106,18 +100,20 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
+                                        <label for="material-error">Name</label>
                                         <input required class="form-control" type="text" id="manager_name" name="name"
                                                placeholder="Enter Sales Manager Title here">
-                                        <label for="material-error">Name</label>
-                                    </div>
+
+                                </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
+                                        <label for="material-error">Email</label>
                                         <input required class="form-control" type="email" id="manager_email" name="email"
                                                placeholder="Enter Sales Manager Email here">
-                                        <label for="material-error">Email</label>
+
                                     </div>
                                 </div>
                             </div>

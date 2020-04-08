@@ -4,13 +4,13 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                  Import List
+                    My Products
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Import List</a>
+                            <a class="link-fx" href="">My Products</a>
                         </li>
                     </ol>
                 </nav>
@@ -49,7 +49,6 @@
                 </div>
             </div>
 
-
             @if(count($products) > 0)
             @foreach($products as $index => $product)
 
@@ -74,14 +73,9 @@
                             <a class="nav-link" href="#product_{{$product->id}}_description">Description</a>
                         </li>
                         <li class="nav-item ml-auto action_buttons_in_tabs">
-                            <div class="block-options pl-3 pr-2">
-
+                            <div class="block-options pl-3 pr-2" style="margin-top: 7px">
                                 <button  class="btn btn-sm btn-outline-success btn_save_retailer_product" style="vertical-align: bottom" title="Save Product" data-tabs=".product_tab_panes_{{$index}}"><i class="fa fa-save"></i></button>
                                 <button  class="btn btn-sm btn-outline-danger" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
-                                <button onclick="window.location.href='{{route('retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-primary" style="margin-top:7px" >
-                                    <i class="si si-cloud-upload mr-1"></i>
-                                    Import to store
-                                </button>
                             </div>
                         </li>
                     </ul>
@@ -99,46 +93,46 @@
                                 ?>
                                 <div class="col-md-3">
                                     <div class="js-gallery">
-                                    @if(count($images) > 0)
-                                        @if($images[0]->isV == 0)
-                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
-                                                <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
-                                            </a>
-                                        @else
-                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
-                                                <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
-                                            </a>
+                                        @if(count($images) > 0)
+                                            @if($images[0]->isV == 0)
+                                                <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
+                                                    <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
+                                                </a>
+                                            @else
+                                                <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
+                                                    <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
+                                                </a>
+                                            @endif
                                         @endif
-                                    @endif
                                     </div>
                                 </div>
                                 <div class="col-md-9">
                                     <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
                                         @csrf
                                         <input type="hidden" name="request_type" value="basic-info">
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" class="form-control" name="title" value="{{$product->title}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tags</label>
-                                        <input class="js-tags-input form-control" type="text"
-                                               value="{{$product->tags}}"   name="tags" >
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Type</label>
-                                                <input type="text" class="form-control" name="type" value="{{$product->type}}">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" class="form-control" name="title" value="{{$product->title}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tags</label>
+                                            <input class="js-tags-input form-control" type="text"
+                                                   value="{{$product->tags}}"   name="tags" >
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Type</label>
+                                                    <input type="text" class="form-control" name="type" value="{{$product->type}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Vendor</label>
+                                                    <input type="text" class="form-control" name="vendor" value="{{$product->vendor}}">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Vendor</label>
-                                                <input type="text" class="form-control" name="vendor" value="{{$product->vendor}}">
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     </form>
                                 </div>
@@ -259,8 +253,8 @@
                             <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
                                 @csrf
                                 <input type="hidden" name="request_type" value="description">
-                            <textarea class="js-summernote" name="description"
-                                      placeholder="Please Enter Description here !">{{$product->description}}</textarea>
+                                <textarea class="js-summernote" name="description"
+                                          placeholder="Please Enter Description here !">{{$product->description}}</textarea>
 
                             </form>
                         </div>
@@ -269,12 +263,12 @@
 
 
             @endforeach
-            @else
-                <div class="block">
-                    <div class="block-content ">
-                        <p class="text-center"> No Products Found in Import List!</p>
+                @else
+                    <div class="block">
+                        <div class="block-content ">
+                            <p class="text-center"> No Product Found !</p>
+                        </div>
                     </div>
-                </div>
             @endif
 
         </div>

@@ -10,5 +10,11 @@
 
 <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
 <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
+
+<script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
-<script>jQuery(function(){ One.helpers(['summernote']); });</script>
+<script src="{{ asset('assets/js/plugins/dropzone/dist/dropzone.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+<script src="{{asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections']); });</script>

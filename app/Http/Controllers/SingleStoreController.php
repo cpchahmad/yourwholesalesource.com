@@ -44,7 +44,8 @@ class SingleStoreController extends Controller
         return view('single-store.products.wefullfill_products')->with([
             'categories' => $categories,
             'products' => $products,
-            'shop' => $shop
+            'shop' => $shop,
+            'search' =>$request->input('search')
         ]);
     }
     public function view_fantasy_product($id){

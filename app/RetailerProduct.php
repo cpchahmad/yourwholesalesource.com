@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Traits\ProductVariantTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class RetailerProduct extends Model
 {
+    use ProductVariantTrait;
     public function hasVariants(){
-        return $this->hasMany('App\RetailerProductVariant');
+        return $this->hasMany('App\RetailerProductVariant','product_id');
     }
     public function has_images(){
         return $this->hasMany('App\RetailerImage','product_id');

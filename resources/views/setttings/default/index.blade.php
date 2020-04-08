@@ -17,19 +17,8 @@
             </div>
         </div>
     </div>
-    <style>
-        .mb2{
-            margin-bottom: 10px !important;
-        }
-    </style>
     <div class="content">
-        <div class="row mb2">
-            <div class="col-sm-6">
-                <h3 class="font-w700">Default Setting</h3>
-            </div>
-            <div class="col-sm-6 text-right">
-            </div>
-        </div>
+
 {{--        <div class="block">--}}
 {{--            <div class="block-header">--}}
 {{--                <h3 class="block-title">Shipping Information</h3>--}}
@@ -99,9 +88,6 @@
        <div class="row">
            <div class="col-md-4">
                <div class="block">
-                   <div class="block-header">
-                       <h3 class="block-title">Create Warned Platform</h3>
-                   </div>
                    <div class="block-content block-content-narrow">
                        <form class="form-horizontal push-10-t"
                              action="{{ route('create_platform') }}"
@@ -110,15 +96,16 @@
                            <div class="form-group">
                                <div class="col-sm-12">
                                    <div class="form-material">
+                                       <label>Title</label>
                                        <input class="form-control" type="text" name="name" required
                                               placeholder="Enter Warned Platform Title here">
-                                       <label>Title</label>
+
                                    </div>
                                </div>
                            </div>
                            <div class="form-group">
                                <div class="col-sm-9">
-                                       <button class="btn btn-sm btn-success" type="submit">Save</button>
+                                       <button class="btn btn-sm btn-primary" type="submit">Save</button>
                                </div>
                            </div>
                        </form>
@@ -127,12 +114,9 @@
            </div>
            <div class="col-md-8">
                <div class="block">
-                   <div class="block-header">
-                       <h3 class="block-title">Warned Platform</h3>
-                   </div>
                    <div class="block-content block-content-narrow">
                        @if(count($platforms) > 0)
-                           <table class="table table-hover">
+                           <table class="table table-hover table-striped table-borderless table-vcenter">
                                <thead>
                                <tr>
                                    <th>Title</th>
@@ -143,10 +127,10 @@
                                @foreach($platforms as $index => $p)
                                    <tr>
                                        <td>{{$p->name}}</td>
-                                       <td class="text-right">
-                                           <a class="btn btn-xs btn-warning"
-                                              type="button" data-toggle="modal" data-target="#edit_platform_modal{{$index}}"><i class="fa fa-pencil"></i></a>
-                                           <a href="{{ route('delete_platform', $p->id) }}" class="btn btn-xs btn-danger"
+                                       <td class="btn-group" style="float: right">
+                                           <a class="btn btn-sm btn-warning text-white"
+                                              type="button" data-toggle="modal" data-target="#edit_platform_modal{{$index}}"><i class="fa fa-edit"></i></a>
+                                           <a href="{{ route('delete_platform', $p->id) }}" class="btn btn-sm btn-danger"
                                               type="button" data-toggle="tooltip" title=""
                                               data-original-title="Delete Plateform"><i class="fa fa-times"></i></a>
                                        </td>
@@ -169,9 +153,10 @@
                                                            <div class="form-group">
                                                                <div class="col-sm-12">
                                                                    <div class="form-material">
+                                                                       <label for="material-error">Title</label>
                                                                        <input required class="form-control" type="text" id="name" name="name"
                                                                               value="{{$p->name}}">
-                                                                       <label for="material-error">Title</label>
+
                                                                    </div>
                                                                </div>
                                                            </div>
