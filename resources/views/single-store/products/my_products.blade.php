@@ -19,31 +19,42 @@
     </div>
     <div class="content">
         <div class="content-grid">
-
+            <form action="">
             <div class="row mb2">
-                <div class="col-md-7">
-                    <input type="search" name="search" placeholder="Search By Keyword" class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <select name="source" class="form-control">
-                        <option value="all">All Sources</option>
-                        <option value="Fantasy">WeFullFill</option>
-                        <option value="AliExpress">AliExpress</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-block btn-primary"><i class="fa fa-search" style="margin-right: 5px"></i>Search</button>
-                </div>
+
+                    <div class="col-md-7">
+                        <input type="search" value="{{$search}}" name="search" placeholder="Search By Keyword" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <select name="source" class="form-control">
+                            <option @if($source == 'all') selected @endif value="all">All Sources</option>
+                            <option @if($source == 'Fantasy') selected @endif value="Fantasy">WeFullFill</option>
+                            <option @if($source == 'AliExpress') selected @endif value="AliExpress">AliExpress</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-search" style="margin-right: 5px"></i>Search</button>
+                    </div>
+
             </div>
+            </form>
             <div class="block mb2">
                 <div class="block-content" style="padding: 1.25rem 0.75rem 1px !important;">
                     <div class="p-2">
                         <div class="custom-control custom-checkbox d-inline-block">
-                            <input type="checkbox" class="custom-control-input" id="row_1" name="row_1">
-                            <label class="custom-control-label" for="row_1"></label>
+                            <input type="checkbox" class="custom-control-input select_all_checkbox" id="row_selected_all" >
+                            <label class="custom-control-label" for="row_selected_all"></label>
                         </div>
                         <div class="product-count d-inline-block">
                             <p style="font-size: 13px;font-weight: 600">  Showing  {{count($products)}} products </p>
+                        </div>
+                        <div class="selected-product-count d-none" >
+                            <p style="font-size: 13px;font-weight: 600">  Selected  products </p>
+                        </div>
+                        <div class="mb-3 checkbox_selection_options d-none ml-1" >
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Small Outline Primary">
+                                <button type="button" class="remove_all_btn  btn btn-outline-danger">Remove All</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,8 +67,8 @@
                     <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" role="tablist">
                         <li class="nav-item import_checkbox_select">
                             <div class="custom-control custom-checkbox d-inline-block">
-                                <input type="checkbox" class="custom-control-input" id="row_{{$product->title}}">
-                                <label class="custom-control-label" for="row_{{$product->title}}"></label>
+                                <input type="checkbox" class="custom-control-input select_one_checkbox" data-remove_url="{{route('store.product.delete',$product->id)}}" data-method="GET"  id="row_{{$product->id}}">
+                                <label class="custom-control-label" for="row_{{$product->id}}"></label>
                             </div>
                         </li>
                         <li class="nav-item">

@@ -283,11 +283,23 @@ class RetailerProductController extends Controller
 
     public function import_list(Request $request){
         $productQuery = RetailerProduct::where('toShopify',0)->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
-       $products = $productQuery->paginate(12);
-       $shop = $this->helper->getLocalShop();
+        if($request->has('search')){
+            $productQuery->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('source')){
+            if($request->input('source') != 'all'){
+                $productQuery->where('fulfilled_by',$request->input('source'));
+            }
+
+        }
+        $products = $productQuery->paginate(12);
+        $shop = $this->helper->getLocalShop();
         return view('single-store.products.import_list')->with([
             'products' => $products,
-            'shop' => $shop
+            'shop' => $shop,
+            'search' => $request->input('search'),
+            'source' => $request->input('source'),
+
         ]);
     }
 
@@ -310,9 +322,9 @@ class RetailerProductController extends Controller
         $product->has_subcategories()->detach();
 
         $shop = Shop::find($shop->id);
-        $shop->has_imported()->detach([$product->id]);
+        $shop->has_imported()->detach([$product->linked_product_id]);
         if(count($shop->has_user) > 0){
-            $shop->has_user[0]->has_imported()->detach([$product->id]);
+            $shop->has_user[0]->has_imported()->detach([$product->linked_product_id]);
         }
         $product->delete();
         return redirect()->back()->with('success', 'Product Deleted with Variants Successfully');
@@ -320,11 +332,22 @@ class RetailerProductController extends Controller
 
     public function my_products(Request $request){
         $productQuery = RetailerProduct::where('toShopify',1)->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
+        if($request->has('search')){
+            $productQuery->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('source')){
+            if($request->input('source') != 'all'){
+                $productQuery->Where('fulfilled_by',$request->input('source'));
+            }
+
+        }
         $products = $productQuery->paginate(12);
         $shop = $this->helper->getLocalShop();
         return view('single-store.products.my_products')->with([
             'products' => $products,
-            'shop' => $shop
+            'shop' => $shop,
+            'search' => $request->input('search'),
+            'source' => $request->input('source'),
         ]);
     }
 
@@ -432,7 +455,7 @@ class RetailerProductController extends Controller
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
         else{
-           echo 'imported already';
+            echo 'imported already';
         }
     }
 

@@ -205,4 +205,135 @@ $(document).ready(function () {
 
         }
     }
+
+    $('body').on('change','.select_all_checkbox',function () {
+        if($(this).is(':checked')){
+            $('.select_one_checkbox').prop('checked','checked');
+            onSelectAllCommon();
+        }
+        else{
+            $('.select_one_checkbox').prop('checked','');
+            display($('.product-count'),true);
+            display($('.selected-product-count'),false);
+            display($('.checkbox_selection_options'),false);
+        }
+    });
+
+    $('body').on('change','.select_one_checkbox',function () {
+        if ($(this).is(':checked')) {
+            $('.select_all_checkbox').prop('checked','checked');
+            onSelectAllCommon();
+        }
+        else{
+            var checked = $('.select_one_checkbox:checked').length;
+            $('.selected-product-count').empty();
+            $('.selected-product-count').append('  <p style="font-size: 13px;font-weight: 600">  Selected  '+checked+' products </p>');
+            if(checked === 0){
+                $('.select_all_checkbox').prop('checked','');
+                display($('.product-count'),true);
+                display($('.selected-product-count'),false);
+                display($('.checkbox_selection_options'),false);
+            }
+        }
+    });
+
+    $('body').on('click','.import_all_btn ',function () {
+        $('.pre-loader').css('display','flex');
+        let forms = new Array();
+        if($('.select_one_checkbox:checked').length > 0){
+
+            $('.select_one_checkbox:checked').each(function () {
+                forms.push({
+                        'url' : $(this).data('url'),
+                        'method' : $(this).data('method'),
+                    });
+            });
+            StackAjax(forms,'import');
+        }
+        else{
+            $('.pre-loader').css('display','none');
+            alertify.error('Please Select One Product To Import!');
+        }
+    });
+
+    $('body').on('click','.remove_all_btn ',function () {
+        $('.pre-loader').css('display','flex');
+        let forms = new Array();
+        if($('.select_one_checkbox:checked').length > 0){
+
+            $('.select_one_checkbox:checked').each(function () {
+                forms.push({
+                    'url' : $(this).data('remove_url'),
+                    'method' : $(this).data('method'),
+                });
+            });
+            StackAjax(forms,'remove');
+        }
+        else{
+            $('.pre-loader').css('display','none');
+            alertify.error('Please Select One Product To Remove!');
+        }
+    });
+
+    function display($this,$option) {
+        if($option){
+            $this.addClass('d-inline-block');
+            $this.removeClass('d-none');
+        }
+        else{
+            $this.addClass('d-none');
+            $this.removeClass('d-inline-block');
+        }
+
+    }
+
+    function onSelectAllCommon() {
+
+        display($('.product-count'),false);
+        var selected = $('.select_one_checkbox:checked').length;
+        $('.selected-product-count').empty();
+        $('.selected-product-count').append('  <p style="font-size: 13px;font-weight: 600">  Selected  '+selected+' products </p>');
+        display($('.selected-product-count'),true);
+        display($('.checkbox_selection_options'),true);
+    }
+    function StackAjax(toAdd,call) {
+        if (toAdd.length) {
+            var request = toAdd.shift();
+            var url = request.url;
+            var type = request.method;
+
+            $.ajax({
+                url: url,
+                type:type,
+                success: function(response) {
+                    StackAjax(toAdd,call);
+                },
+                error:function () {
+                    StackAjax(toAdd,call);
+                }
+            });
+
+        } else {
+            $('.pre-loader').css('display', 'none');
+            if(call === 'import'){
+                Swal.fire(
+                    'Imported!',
+                    'Your Products Has Been Imported To Your Store Successfully',
+                    'success'
+                );
+            }
+            else{
+                Swal.fire(
+                    'Deleted!',
+                    'Your Products Has Been Deleted Successfully',
+                    'success'
+                );
+            }
+
+            setTimeout(function () {
+                window.location.reload();
+            },1000)
+
+        }
+    }
 });
