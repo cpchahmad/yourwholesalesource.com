@@ -51,7 +51,7 @@
                                         <td class="font-w600">{{ $zone->name }}</td>
                                         <td>
                                             @foreach($zone->has_countries as $country)
-                                                <span class="label label-primary">{{$country->name}}</span>
+                                                <span class="badge badge-primary">{{$country->name}}</span>
                                             @endforeach
                                         </td>
                                         <td class="text-center">
