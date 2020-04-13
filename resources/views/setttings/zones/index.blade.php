@@ -398,7 +398,7 @@
                                     <div class="col-md-12">
                                         <div class="custom-control custom-checkbox d-inline-block">
                                             <input type="checkbox" name="countries[]" value="{{$country->id}}" class="custom-control-input" id="row_country{{$country->id}}">
-                                            <label class="custom-control-label" for="row_{{$country->id}}">{{$country->name}}</label>
+                                            <label class="custom-control-label" for="row_country{{$country->id}}">{{$country->name}}</label>
                                         </div>
                                     </div>
 
