@@ -23,7 +23,7 @@
     </div>
     <div class="content">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
@@ -182,7 +182,7 @@
                     </div>
                 @endif
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
