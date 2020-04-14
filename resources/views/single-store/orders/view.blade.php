@@ -36,7 +36,7 @@
                             <span class="badge badge-primary" style="float: right;font-size: medium"> Ordered</span>
 
                         @else
-                                <span class="badge badge-success" style="float: right;font-size: medium"> {{$order->status}}</span>
+                            <span class="badge badge-success" style="float: right;font-size: medium"> {{$order->status}}</span>
                         @endif
                     </div>
                     <div class="block-content">
@@ -45,6 +45,7 @@
                             <tr>
                                 <th></th>
                                 <th>Name</th>
+                                <th>Fulfilled By</th>
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
 
@@ -65,6 +66,13 @@
                                     </td>
                                     <td>
                                         {{$item->name}}
+                                    </td>
+                                    <td>
+                                        @if($item->fulfilled_by == 'store')
+                                            <span class="badge badge-danger"> Store</span>
+                                        @else
+                                            <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                        @endif
                                     </td>
                                     <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
                                     <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
@@ -140,37 +148,37 @@
                     </div>
                 </div>
                 @if($order->has_payment != null)
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">
-                            Transaction History
-                        </h3>
-                    </div>
-                    <div class="block-content">
-                        <ul class="timeline timeline-alt">
+                    <div class="block">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">
+                                Transaction History
+                            </h3>
+                        </div>
+                        <div class="block-content">
+                            <ul class="timeline timeline-alt">
 
-                            <li class="timeline-event">
-                                <div class="timeline-event-icon bg-success">
-                                    <i class="fa fa-dollar-sign"></i>
-                                </div>
-                                <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
-                                    <div class="block-header block-header-default">
-                                        <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} {{$order->currency}}</h3>
-                                        <div class="block-options">
-                                            <div class="timeline-event-time block-options-item font-size-sm font-w600">
-                                               {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}
+                                <li class="timeline-event">
+                                    <div class="timeline-event-icon bg-success">
+                                        <i class="fa fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
+                                        <div class="block-header block-header-default">
+                                            <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} {{$order->currency}}</h3>
+                                            <div class="block-options">
+                                                <div class="timeline-event-time block-options-item font-size-sm font-w600">
+                                                    {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="block-content">
+                                            <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
+                                        </div>
                                     </div>
-                                    <div class="block-content">
-                                        <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                    @endif
+                @endif
             </div>
             <div class="col-md-4">
                 <div class="block">
