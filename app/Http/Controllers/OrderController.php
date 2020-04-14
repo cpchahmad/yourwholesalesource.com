@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderTransaction;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
+use App\RetailerProductVariant;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -20,6 +22,56 @@ class OrderController extends Controller
         $this->helper = new HelperController();
     }
 
+    public function index(Request $request){
+        $orders  = RetailerOrder::where('shop_id',$this->helper->getShop()->id)->newQuery();
+        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
+
+        return view('single-store.orders.index')->with([
+            'orders' => $orders
+        ]);
+    }
+
+    public function view_order($id){
+        $order  = RetailerOrder::find($id);
+        if($order != null){
+            return view('single-store.orders.view')->with([
+                'order' => $order
+            ]);
+        }
+    }
+
+    public function proceed_payment(Request $request){
+       $order = RetailerOrder::find($request->input('order_id'));
+       if($order != null && $order->paid == 0){
+           $last_four = substr($request->input('card_number'),0,3);
+           $new_transaction = new OrderTransaction();
+           $new_transaction->note = $request->input('note');
+           $new_transaction->amount =  $order->cost_to_pay;
+           $new_transaction->name = $request->input('card_name');
+           $new_transaction->card_last_four = $last_four;
+           $new_transaction->retailer_order_id = $order->id;
+           $new_transaction->user_id = $order->user_id;
+           $new_transaction->shop_id = $order->shop_id;
+           $new_transaction->save();
+
+           $order->paid = 1;
+           $order->status = 'paid';
+           $order->save();
+           return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+       }
+       else{
+           return redirect()->back();
+       }
+    }
+
+    public function delete($id){
+        $r = RetailerOrder::find($id);
+        foreach ($r->line_items as $i){
+            $i->delete();
+        }
+        $r->delete();
+        return redirect()->back()->with('success','Order Deleted Successfully!');
+    }
     public function getOrders(){
         $shop = $this->helper->getShop();
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json');
@@ -72,6 +124,7 @@ class OrderController extends Controller
                        $new->sync_status = 1;
                        $new->save();
 
+                       $cost_to_pay = 0;
 
                        foreach ($order->line_items as $item){
                            $new_line = new RetailerOrderLineItem();
@@ -100,8 +153,17 @@ class OrderController extends Controller
                            else{
                                $new_line->fulfilled_by = 'store';
                            }
+
+                          $related_variant =  RetailerProductVariant::where('shopify_id',$item->variant_id)->first();
+                           if($related_variant != null){
+                               $new_line->cost = $related_variant->cost;
+                               $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
+                           }
+
                            $new_line->save();
                        }
+                       $new->cost_to_pay = $cost_to_pay;
+                       $new->save();
 
                    }
                 }

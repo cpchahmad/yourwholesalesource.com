@@ -64,18 +64,12 @@
             </a>
             <ul class="nav-main-submenu open">
                 <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
+                    <a class="nav-main-link" href="{{route('store.orders')}}">
                         <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">By WeFullfill</span>
+                        <span class="nav-main-link-name">My Orders</span>
                     </a>
                 </li>
 
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">By Aliexpress</span>
-                    </a>
-                </li>
 
                 <li class="nav-main-item">
                     <a class="nav-main-link" href="{{route('store.import_list')}}">

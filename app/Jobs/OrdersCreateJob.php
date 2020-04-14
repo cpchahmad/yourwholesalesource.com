@@ -3,6 +3,7 @@
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
+use App\RetailerProductVariant;
 use App\Shop;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -96,6 +97,7 @@ class OrdersCreateJob implements ShouldQueue
                 $new->sync_status = 1;
                 $new->save();
 
+                $cost_to_pay = 0;
 
                 foreach ($order->line_items as $item){
                     $new_line = new RetailerOrderLineItem();
@@ -124,8 +126,17 @@ class OrdersCreateJob implements ShouldQueue
                     else{
                         $new_line->fulfilled_by = 'store';
                     }
+
+                    $related_variant =  RetailerProductVariant::where('shopify_id',$item->variant_id)->first();
+                    if($related_variant != null){
+                        $new_line->cost = $related_variant->cost;
+                        $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
+                    }
                     $new_line->save();
                 }
+
+                $new->cost_to_pay = $cost_to_pay;
+                $new->save();
 
             }
         }

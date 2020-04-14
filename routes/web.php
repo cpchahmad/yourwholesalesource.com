@@ -98,6 +98,12 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/products/delete/{id}','RetailerProductController@delete')->name('store.product.delete');
         Route::post('/import-list/{id}/update','RetailerProductController@update')->name('store.import_list.product.update');
 
+        Route::get('/getOrders', 'OrderController@getOrders')->name('store.sync.orders');
+        Route::get('/orders', 'OrderController@index')->name('store.orders');
+        Route::get('/order/delete/{id}', 'OrderController@delete')->name('store.order.delete');
+        Route::get('/order/view/{id}', 'OrderController@view_order')->name('store.order.view');
+        Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+
 
     });
 });
