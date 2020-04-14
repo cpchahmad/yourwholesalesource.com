@@ -45,7 +45,6 @@
                             <tr>
                                 <th></th>
                                 <th>Name</th>
-                                <th>Fulfilled By</th>
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
 
@@ -66,14 +65,13 @@
                                     </td>
                                     <td>
                                         {{$item->name}}
-                                    </td>
-                                    <td>
                                         @if($item->fulfilled_by == 'store')
-                                            <span class="badge badge-danger"> Store</span>
+                                            <span style="margin-left: 5px" class="badge badge-danger"> Store</span>
                                         @else
-                                            <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                            <span style="margin-left: 5px class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                         @endif
                                     </td>
+
                                     <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
                                     <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
 
