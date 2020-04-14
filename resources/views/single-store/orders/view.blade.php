@@ -65,11 +65,11 @@
                                     </td>
                                     <td>
                                         {{$item->name}}
-                                        @if($item->fulfilled_by == 'store')
-                                            <span style="margin-left: 5px" class="badge badge-danger"> Store</span>
-                                        @else
-                                            <span style="margin-left: 5px class="badge badge-success"> {{$item->fulfilled_by}} </span>
-                                        @endif
+{{--                                        @if($item->fulfilled_by == 'store')--}}
+{{--                                            <span style="margin-left: 5px" class="badge badge-danger"> Store</span>--}}
+{{--                                        @else--}}
+{{--                                            <span style="margin-left: 5px class="badge badge-success"> {{$item->fulfilled_by}} </span>--}}
+{{--                                        @endif--}}
                                     </td>
 
                                     <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
