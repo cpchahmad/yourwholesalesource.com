@@ -379,6 +379,42 @@ $(document).ready(function () {
         $('.option_3').show();
         $('.option_btn_2').hide();
     });
+    /*Fulfillment Control*/
+    $('.fulfill_quantity').change(function () {
+        if($(this).val() > $(this).attr('max')){
+            $(this).val($(this).attr('max'));
+            alertify.error('Please provide correct quantity of item!');
+        }
+        var total_fulfillable = 0;
+        $('.fulfill_quantity').each(function () {
+            total_fulfillable = total_fulfillable + parseInt($(this).val()) ;
+        });
+        $('.fulfillable_quantity_drop').empty();
+        $('.fulfillable_quantity_drop').append(total_fulfillable+' of '+$('.fulfillable_quantity_drop').data('total'));
+        if(total_fulfillable === 0) {
+            $('.atleast-one-item').show();
+            $('.fulfill_items_btn').attr('disabled',true);
+        }
+        else{
+            $('.atleast-one-item').hide();
+            $('.fulfill_items_btn').attr('disabled',false);
+        }
+
+    });
+
+    $('.fulfill_items_btn').click(function () {
+        var total_fulfillable = 0;
+        $('.fulfill_quantity').each(function () {
+            total_fulfillable = total_fulfillable + parseInt($(this).val()) ;
+        });
+        if(total_fulfillable > 0) {
+           $('#fulfilment_process_form').submit();
+        }
+        else{
+            $('.atleast-one-item').hide();
+            $('.fulfill_items_btn').attr('disabled',false);
+        }
+    });
 });
 
 

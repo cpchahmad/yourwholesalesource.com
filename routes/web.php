@@ -77,6 +77,17 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
 
+    Route::get('/orders','AdminOrderController@index')->name('admin.orders');
+    Route::get('/orders/view/{id}','AdminOrderController@view_order')->name('admin.order.view');
+    Route::get('/orders/view/{id}/fulfillment','AdminOrderController@fulfill_order')->name('admin.order.fulfillment');
+    Route::post('/orders/view/{id}/fulfillment/process','AdminOrderController@fulfillment_order')->name('admin.order.fulfillment.process');
+    Route::get('/orders/{id}/fulfillment/cancel/{fulfillment_id}','AdminOrderController@fulfillment_cancel_order')->name('admin.order.fulfillment.cancel');
+    Route::post('/orders/{id}/fulfillment/tracking','AdminOrderController@fulfillment_add_tracking')->name('admin.order.fulfillment.tracking');
+
+
+
+
+
 });
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {

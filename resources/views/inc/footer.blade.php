@@ -16,5 +16,7 @@
 <script src="{{ asset('assets/js/plugins/dropzone/dist/dropzone.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
 <script src="{{asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections']); });</script>

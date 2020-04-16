@@ -31,6 +31,8 @@ class OrderController extends Controller
         ]);
     }
 
+
+
     public function view_order($id){
         $order  = RetailerOrder::find($id);
         if($order != null){
@@ -169,6 +171,7 @@ class OrderController extends Controller
                 }
            }
         }
+        return redirect()->route('store.orders')->with('success','Orders Synced Successfully');
     }
 
 }

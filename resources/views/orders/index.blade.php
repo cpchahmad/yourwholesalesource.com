@@ -1,17 +1,17 @@
-@extends('layout.single')
+@extends('layout.index')
 @section('content')
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                    Orders
+                    All Orders
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">My Orders</a>
+                            <a class="link-fx" href="">All Orders</a>
                         </li>
                     </ol>
                 </nav>
@@ -33,7 +33,6 @@
             </div>
         </form>
 
-
         <div class="row" >
             <div class="col-md-12">
                 <div class="block">
@@ -44,14 +43,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Shop</th>
                                     <th>Order Date</th>
                                     <th>Price</th>
-                                    <th>Cost</th>
                                     <th>Status</th>
-                                    <th style="text-align: right">
-                                        <a href="{{route('store.sync.orders')}}"
-                                             class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
-                                             data-original-title="Sync Orders"><i class="fa fa-sync"></i> Sync New Orders</a></th>
+                                    <th></th>
                                 </tr>
                                 </thead>
 
@@ -59,26 +55,25 @@
                                     <tbody class="">
                                     <tr>
                                         <td>{{$index+1}}</td>
-                                        <td class="font-w600"><a href="{{route('store.order.view',$order->id)}}">{{ $order->name }}</a></td>
+                                        <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
+                                        <td>
+                                            @if($order->has_store != null)
+                                                <span class="badge badge-primary" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
+                                            @else
+                                                <span class="badge badge-warning" style="font-size: 12px"> Manual </span>
+                                            @endif
+                                        </td>
                                         <td>
                                             {{date_create($order->shopify_created_at)->format('D m, Y h:i a') }}
                                         </td>
 
                                         <td>
-                                            {{number_format($order->total_price,2)}} {{$order->currency}}
-                                        </td>
-                                        <td>
                                             {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
-
                                         </td>
-                                        <td>
-                                            @if($order->status == 'new')
-                                                <span class="badge badge-warning" style="font-size: small">
-                                                {{$order->status}}
-                                                </span>
-                                            @elseif($order->status == 'paid')
-                                                <span class="badge badge-primary" style="font-size: small"> Ordered</span>
 
+                                        <td>
+                                           @if($order->status == 'paid')
+                                                <span class="badge badge-primary" style="font-size: small"> {{$order->status}}</span>
                                             @elseif($order->status == 'unfulfilled')
                                                 <span class="badge badge-warning" style="font-size: small"> {{$order->status}}</span>
 
@@ -91,12 +86,9 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('store.order.view',$order->id)}}"
+                                                <a href="{{route('admin.order.view',$order->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Order"><i class="fa fa-eye"></i></a>
-                                                <a href="{{route('store.order.delete',$order->id)}}"
-                                                   class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                                   data-original-title="Delete Order"><i class="fa fa-times"></i></a>
                                             </div>
 
                                         </td>

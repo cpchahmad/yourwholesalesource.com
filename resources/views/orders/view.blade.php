@@ -1,4 +1,4 @@
-@extends('layout.single')
+@extends('layout.index')
 @section('content')
 
     <div class="bg-body-light">
@@ -11,7 +11,7 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            My Orders
+                            All Orders
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx active" href=""> {{$order->name}}</a>
@@ -22,6 +22,14 @@
         </div>
     </div>
     <div class="content">
+        @if($order->status == "shipped")
+            <div class="row mb2">
+                <div class="col-md-12">
+                    <button class="btn btn-sm btn-success"  style="float: right"> Mark as Delivered </button>
+                </div>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-md-9">
                 <div class="block">
@@ -29,23 +37,21 @@
                         <h3 class="block-title">
                             Line Items
                         </h3>
-                        @if($order->status == 'new')
-                            <span class="badge badge-warning" style="float: right;font-size: medium"> {{$order->status}}</span>
-
-                        @elseif($order->status == 'paid')
-                            <span class="badge badge-primary" style="float: right;font-size: medium">Ordered</span>
+                        @if($order->status == 'paid')
+                            <span class="badge badge-primary" style="float: right;font-size: medium"> {{$order->status}}</span>
 
                         @elseif($order->status == 'unfulfilled')
-                            <span class="badge badge-warning" style="font-size: small"> {{$order->status}}</span>
+                            <span class="badge badge-warning" style="float: right;font-size: medium"> {{$order->status}}</span>
 
                         @elseif($order->status == 'shipped')
-                            <span class="badge" style="font-size: small;background: orange;color: white;"> {{$order->status}}</span>
+                            <span class="badge " style="float: right;font-size: medium;background: orange;color: white;"> {{$order->status}}</span>
                         @else
                             <span class="badge badge-success" style="float: right;font-size: medium"> {{$order->status}}</span>
                         @endif
                     </div>
                     <div class="block-content">
-                        <table class="table table-hover table-borderless table-striped table-vcenter">
+
+                        <table class="table table-borderless table-striped table-vcenter">
                             <thead>
                             <tr>
                                 <th></th>
@@ -60,50 +66,55 @@
                             <tbody>
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
-                                <tr>
-                                    <td>
-                                        @if($item->linked_variant != null)
-                                            <img class="img-avatar"
-                                                 @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                 @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif alt="">
-                                        @else
-                                            <img class="img-avatar img-avatar-variant"
-                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        {{$item->name}}
+                                    <tr>
+                                        <td>
+                                            @if($item->linked_variant != null)
+                                                <img class="img-avatar"
+                                                     @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                     @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif alt="">
+                                            @else
+                                                <img class="img-avatar img-avatar-variant"
+                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{$item->name}}
 
-                                    </td>
-                                    <td>
-                                        @if($item->fulfilled_by == 'store')
-                                            <span class="badge badge-danger"> Store</span>
-                                        @else
-                                            <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
-                                        @endif
-                                    </td>
+                                        </td>
+                                        <td>
+                                            @if($item->fulfilled_by == 'store')
+                                                <span class="badge badge-danger"> Store</span>
+                                            @else
+                                                <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                            @endif
+                                        </td>
 
-                                    <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
-                                    <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
-                                    <td>
-                                        @if($item->fulfillment_status == null)
-                                            <span class="badge badge-warning"> Unfulfilled</span>
-                                        @elseif($item->fulfillment_status == 'partially-fulfilled')
-                                            <span class="badge badge-danger"> Partially Fulfilled</span>
-                                        @else
-                                            <span class="badge badge-success"> Fulfilled</span>
-                                        @endif
-                                    </td>
+                                        <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
+                                        <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
+                                        <td>
+                                            @if($item->fulfillment_status == null)
+                                                <span class="badge badge-warning"> Unfulfilled</span>
+                                            @elseif($item->fulfillment_status == 'partially-fulfilled')
+                                                <span class="badge badge-danger"> Partially Fulfilled</span>
+                                            @else
+                                                <span class="badge badge-success"> Fulfilled</span>
+                                            @endif
+                                        </td>
 
-                                </tr>
+                                    </tr>
                                 @endif
                             @endforeach
+                            <tr>
+                                <td colspan="12" class="text-right">
+                                    @if($order->getStatus($order) == "unfulfilled")
+                                        <button class="btn btn-primary" onclick="window.location.href='{{route('admin.order.fulfillment',$order->id)}}'"> Mark as Fulfilled </button>
+                                    @endif
+                                </td>
+                            </tr>
 
                             </tbody>
 
-
                         </table>
-
                     </div>
                 </div>
                 @if($order->checkStoreItem($order) > 0)
@@ -196,20 +207,13 @@
 
                             <tr>
                                 <td>
-                                    Cost @if($order->paid == 0) to Pay @else Paid @endif
+                                    Cost Paid
                                 </td>
                                 <td align="right">
                                     {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
                                 </td>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td align="right">
-                                    @if($order->paid == 0)
-                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-coins"></i> Pay</button>
-                                    @endif
-                                </td>
-                            </tr>
+
 
                             </tbody>
 
@@ -224,6 +228,73 @@
                             <h3 class="block-title">
                                 Fulfillments
                             </h3>
+                            @if($order->status == "fulfilled")
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_tracking_modal"  style="float: right"> Add tracking </button>
+                                <div class="modal fade" id="add_tracking_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+                                        <div class="modal-content">
+                                            <div class="block block-themed block-transparent mb-0">
+                                                <div class="block-header bg-primary-dark">
+                                                    <h3 class="block-title">Add Tracking to Fulfillment</h3>
+                                                    <div class="block-options">
+                                                        <button type="button" class="btn-block-option">
+                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <form action="{{route('admin.order.fulfillment.tracking',$order->id)}}" method="post">
+                                                    @csrf
+                                                    <div class="block-content" style="height: 500px; overflow: auto">
+                                                        @foreach($order->fulfillments as $fulfillment)
+                                                            <input type="hidden" name="fulfillment[]" value="{{$fulfillment->id}}">
+                                                            <div class="block">
+                                                                <div class="block-header block-header-default">
+                                                                    <h3 class="block-title">
+                                                                        {{$fulfillment->name}}
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="block-content">
+                                                                    <table class="table table-borderless  table-vcenter">
+                                                                        <thead>
+
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>Tracking Number <span style="color: red">*</span></td>
+                                                                            <td>
+                                                                                <input type="text" required name="tracking_number[]" class="form-control" placeholder="#XXXXXX" >
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Tracking Url <span style="color: red">*</span></td>
+                                                                            <td>
+                                                                                <input type="url" required name="tracking_url[]" class="form-control" placeholder="https://example/tracking/XXXXX">
+                                                                            </td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Tracking Notes</td>
+                                                                            <td>
+                                                                                <input type="text" name="tracking_notes[]" class="form-control" placeholder="Notes for this fulfillment">
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                    <div class="block-content block-content-full text-right border-top">
+                                                        <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -271,6 +342,13 @@
 
                                         </tr>
                                     @endforeach
+                                    @if($order->status == "fulfilled")
+                                        <tr>
+                                            <td colspan="12" class="text-right">
+                                                <button class="btn btn-sm btn-danger" onclick="window.location.href='{{route('admin.order.fulfillment.cancel',['id'=>$order->id,'fulfillment_id'=>$fulfillment->id])}}'"> Cancel Fulfillment </button>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     </tbody>
 
                                 </table>
@@ -310,6 +388,7 @@
                         </div>
                     </div>
                 @endif
+
             </div>
             <div class="col-md-3">
                 <div class="block">
@@ -375,62 +454,6 @@
             </div>
         </div>
     </div>
-    @if($order->paid == 0)
-        <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-popout" role="document">
-                <div class="modal-content">
-                    <div class="block block-themed block-transparent mb-0">
-                        <div class="block-header bg-primary-dark">
-                            <h3 class="block-title">Payment for Order <{{$order->name}}></h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option">
-                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <form action="{{route('store.order.proceed.payment')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="order_id" value="{{$order->id}}">
-                            <div class="block-content font-size-sm">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Card Name</label>
-                                            <input  class="form-control" type="text" required=""  name="card_name"
-                                                    placeholder="Enter Card Title here">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Card Number</label>
-                                            <input type="text" required=""  name="card_number"  class="form-control js-card js-masked-enabled"
-                                                   placeholder="9999-9999-9999-9999">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Amount to Pay</label>
-                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay,2)}} USD"  name="amount"
-                                                    placeholder="Enter 14 Digit Card Number here">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="block-content block-content-full text-right border-top">
-                                <button type="submit" class="btn btn-success" >Proceed Payment</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
 
 
 @endsection
