@@ -1,5 +1,6 @@
 <?php namespace App\Jobs;
 
+use App\Customer;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
@@ -76,6 +77,26 @@ class OrdersCreateJob implements ShouldQueue
                 $new->currency = $order->currency;
                 $new->total_discounts = $order->total_discounts;
                 if(isset($order->customer)){
+                    if (Customer::where('customer_shopify_id',$order->customer->id)->exists()){
+                        $customer = Customer::where('customer_shopify_id',$order->customer->id)->first();
+                        $new->customer_id = $customer->id;
+                    }
+                    else{
+                        $customer = new Customer();
+                        $customer->customer_shopify_id = $order->customer->id;
+                        $customer->first_name = $order->customer->first_name;
+                        $customer->last_name = $order->customer->last_name;
+                        $customer->phone = $order->customer->phone;
+                        $customer->email = $order->customer->email;
+                        $customer->total_spent = $order->customer->total_spent;
+                        $customer->shop_id = $shop->id;
+                        $local_shop = $this->helper->getLocalShop();
+                        if(count($local_shop->has_user) > 0){
+                            $customer->user_id = $local_shop->has_user[0]->id;
+                        }
+                        $customer->save();
+                        $new->customer_id = $customer->id;
+                    }
                     $new->customer = json_encode($order->customer,true);
                 }
                 if(isset($order->shipping_address)){

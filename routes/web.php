@@ -114,6 +114,12 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/order/delete/{id}', 'OrderController@delete')->name('store.order.delete');
         Route::get('/order/view/{id}', 'OrderController@view_order')->name('store.order.view');
         Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+        Route::get('/customers', 'SingleStoreController@customers')->name('store.customers');
+        Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
+        Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');
+
+
+
 
 
     });

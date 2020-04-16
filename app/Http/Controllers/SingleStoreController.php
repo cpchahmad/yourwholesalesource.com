@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Customer;
 use App\Product;
 use App\Shop;
 use App\User;
@@ -111,5 +112,54 @@ class SingleStoreController extends Controller
         $user =  Auth::user();
         $user->has_shops()->detach([$shop->id]);
         return redirect()->back()->with('success','Store Removed Successfully!');
+    }
+
+
+    public function customers(Request $request){
+        $customersQ  =Customer::where('shop_id',$this->helper->getShop()->id)->newQuery();
+        $customers = $customersQ->paginate(30);
+        return view('single-store.customers.index')->with([
+            'customers' => $customers,
+        ]);
+    }
+
+    public function customer_view($id){
+        $customer = Customer::find($id);
+        return view('single-store.customers.view')->with([
+            'customer' => $customer,
+        ]);
+    }
+
+    public function getCustomers(){
+       $shop =  $this->helper->getShop();
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/customers.json');
+        if($response->errors){
+            return redirect()->back();
+        }
+        else{
+            $customers = $response->body->customers;
+            foreach ($customers as $index => $customer){
+                if (Customer::where('customer_shopify_id',$customer->id)->exists()){
+                    $new_customer = Customer::where('customer_shopify_id',$customer->id)->first();
+                }
+                else{
+                    $new_customer = new Customer();
+                }
+                $new_customer->customer_shopify_id = $customer->id;
+                $new_customer->first_name = $customer->first_name;
+                $new_customer->last_name = $customer->last_name;
+                $new_customer->phone = $customer->phone;
+                $new_customer->email = $customer->email;
+                $new_customer->total_spent = $customer->total_spent;
+                $new_customer->shop_id = $shop->id;
+                $local_shop = $this->helper->getLocalShop();
+                if(count($local_shop->has_user) > 0){
+                    $new_customer->user_id = $local_shop->has_user[0]->id;
+                }
+                $new_customer->save();
+            }
+            return redirect()->back()->with('success','Customers Synced Successfully!');
+        }
+
     }
 }
