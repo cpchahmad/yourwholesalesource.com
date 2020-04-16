@@ -7,8 +7,8 @@ namespace App\Traits;
 trait RetailerOrderTrait
 {
     public function getStatus($order){
-        $quanity = $order->line_items->sum('quantity');
-        $fulfillable_quanity = $order->line_items->sum('fulfillable_quantity');
+        $quanity = $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('quantity');
+        $fulfillable_quanity = $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
         if($fulfillable_quanity == 0){
             return 'fulfilled';
         }
@@ -23,10 +23,10 @@ trait RetailerOrderTrait
         return $order->line_items()->where('fulfilled_by','store')->count();
     }
     public function total_quantity($order){
-        return $order->line_items->sum('quantity');
+        return $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('quantity');
     }
     public function total_fulfillable($order){
-        return $order->line_items->sum('fulfillable_quantity');
+        return $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
     }
 
 }
