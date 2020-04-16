@@ -236,7 +236,7 @@
                                                 </td>
                                                 <td class="text-center btn-group" style="float: right">
                                                     <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                                            data-target="#edit_rate_modal{{$new_index}}"><i
+                                                            data-target="#edit_rate_modal{{$rate->id}}{{$rate->shipping_price}}"><i
                                                             class="fa fa-edit"></i>
                                                     </button>
                                                     <a href="{{ route('zone.rate.delete', $rate->id) }}"
@@ -244,7 +244,7 @@
                                                        data-original-title="Delete Rate"><i class="fa fa-times"></i></a>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="edit_rate_modal{{$new_index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                            <div class="modal fade" id="edit_rate_modal{{$rate->id}}{{$rate->shipping_price}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-popout" role="document">
                                                     <div class="modal-content">
                                                         <div class="block block-themed block-transparent mb-0">

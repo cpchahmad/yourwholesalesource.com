@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SingleStoreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SingleStoreController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/OrdersCreateJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/OrdersCreateJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/shopify-app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/shopify-app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/single_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/single_sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/single-store/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/single-store/orders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/setttings/zones/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/zones/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +244,7 @@
       <workItem from="1586853600369" duration="19567000" />
       <workItem from="1586931250161" duration="3445000" />
       <workItem from="1586936700607" duration="10120000" />
-      <workItem from="1587021330366" duration="22131000" />
+      <workItem from="1587021330366" duration="23534000" />
     </task>
     <task id="LOCAL-00001" summary="09032020F">
       <created>1583762103060</created>
@@ -581,7 +575,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587041972527</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="16042020F-customers and order update">
+      <created>1587053335367</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1587053335367</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +604,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="16032020-last" />
     <MESSAGE value="17032020" />
     <MESSAGE value="17032020-last" />
     <MESSAGE value="18032020" />
@@ -628,7 +628,8 @@
     <MESSAGE value="14042020F" />
     <MESSAGE value="adjustments" />
     <MESSAGE value="16042020F-orders" />
-    <option name="LAST_COMMIT_MESSAGE" value="16042020F-orders" />
+    <MESSAGE value="16042020F-customers and order update" />
+    <option name="LAST_COMMIT_MESSAGE" value="16042020F-customers and order update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
@@ -661,14 +662,14 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1587041971490">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1587053334361">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587041971490" />
-    <state x="129" y="55" key="DiffContextDialog" timestamp="1587041997271">
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587053334361" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1587053627885">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587041997271" />
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587053627885" />
     <state x="495" y="160" key="FileChooserDialogImpl" timestamp="1586252409111">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -698,10 +699,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1587041998314">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1587053635001">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587041998314" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587053635001" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -719,10 +720,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586346184176" />
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1587053150579">
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1587054729370">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587053150579" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587054729370" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
   <component name="XDebuggerManager">
