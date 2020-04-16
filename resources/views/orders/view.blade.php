@@ -84,6 +84,8 @@
                                         <td>
                                             @if($item->fulfilled_by == 'store')
                                                 <span class="badge badge-danger"> Store</span>
+                                            @elseif ($item->fulfilled_by == 'Fantasy')
+                                                <span class="badge badge-success"> WeFullFill </span>
                                             @else
                                                 <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                             @endif
