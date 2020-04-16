@@ -75,7 +75,13 @@ class ZoneController extends Controller
             foreach ($zones as $zone) {
                 if($zone->has_rate != null){
                     if (count($zone->has_rate) > 0) {
-                        $message = '$ <prp_up> ' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
+                        if($zone->has_rate[0]->shipping_price > 0){
+                            $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
+
+                        }
+                        else{
+                            $message = '<prp_up> Free Shipping </prp_up>';
+                        }
                         $message_2 = '<prp_up>'.$zone->has_rate[0]->shipping_time.'</prp_up>';
                          $message_3 = '<prp_up>'.$zone->has_rate[0]->processing_time.'</prp_up> after payment';
                         break;
