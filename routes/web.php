@@ -120,10 +120,6 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
         Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');
 
-
-
-
-
     });
 });
 /*Main Routes*/
@@ -156,3 +152,5 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 });
+
+Route::get('/variant/{id}/change/image/{image_id}', 'ProductController@change_image')->name('change_image');

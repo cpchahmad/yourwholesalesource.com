@@ -359,4 +359,26 @@ $(document).ready(function () {
 
         }
     }
+    /*Select Photos From Existing*/
+    $('.choose-variant-image').click(function () {
+        var current = $(this);
+        $.ajax({
+            url: '/variant/'+$(this).data('variant')+'/change/image/'+$(this).data('image')+'?type='+$(this).data('type'),
+            type: 'GET',
+            success:function (response) {
+                if(response.message == 'success'){
+                    current.removeClass('bg-info');
+                    current.addClass('bg-success');
+                    current.text('Updated');
+                    alertify.success('Variant image has been updated!');
+                    current.parents('.modal').prev()
+                        .attr('src', current.prev().attr('src'));
+                }
+                else{
+                    alertify.error('Something went wrong!');
+                }
+            }
+        })
+
+    });
 });

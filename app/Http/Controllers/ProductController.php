@@ -8,6 +8,8 @@ use App\Exports\ProductsExport;
 use App\Image;
 use App\Product;
 use App\ProductVariant;
+use App\RetailerImage;
+use App\RetailerProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -941,8 +943,27 @@ class ProductController extends Controller
                 array_push($product,$temp);
             }
         }
-
         return Excel::download(new ProductsExport($product), 'products.csv');
+    }
+
+    public function change_image($id,$image_id,Request $request){
+        if($request->input('type') == 'product'){
+            $variant = ProductVariant::find($id);
+            $variant->image = $image_id;
+            $variant->save();
+            return response()->json([
+               'message' => 'success'
+            ]);
+        }
+        else{
+            $variant = RetailerProductVariant::find($id);
+            $variant->image = $image_id;
+            $variant->save();
+            return response()->json([
+                'message' => 'success'
+            ]);
+        }
 
     }
+
 }

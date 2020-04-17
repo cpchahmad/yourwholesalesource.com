@@ -355,9 +355,46 @@
                                                         {{$v->title}}
                                                     </td>
                                                     <td class="text-center">
-                                                        <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                        <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
                                                              @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif alt="">
+                                                             @else @if($v->has_image->isV == 0) src="{{asset('images')}}/{{$v->has_image->image}}" @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
+                                                        <div class="modal fade" id="select_image_modal{{ $v->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-popout" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="block block-themed block-transparent mb-0">
+                                                                        <div class="block-header bg-primary-dark">
+                                                                            <h3 class="block-title">Select Image For Variant</h3>
+                                                                            <div class="block-options">
+                                                                                <button type="button" class="btn-block-option">
+                                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="block-content font-size-sm">
+                                                                            <div class="row">
+                                                                                @foreach($product->has_images as $image)
+                                                                                    <div class="col-md-4">
+                                                                                        @if($image->isV == 0)
+                                                                                            <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                                                        @else
+                                                                                            <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                                                        @endif
+                                                                                        <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="product" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                            <p class="text-center font-weight-bold">OR</p>
+                                                                            <hr>
+                                                                            <a class="img-avatar-variant btn btn-sm btn-primary text-white mb2" data-form="#varaint_image_form_{{$index}}">Upload New Picture</a>
+
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
@@ -373,8 +410,7 @@
                                                 </tbody>
                                                 <tbody>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
+
                                                     <td style="vertical-align: middle"> @if($v->option1 != null) Option1: @endif</td>
                                                     <td>
                                                         @if($v->option1 != null)
@@ -393,7 +429,6 @@
                                                             <input type="text" class="form-control" name="option3" placeholder="$0.00" value="{{$v->option3}}">
                                                         @endif
                                                     </td>
-                                                    <td></td>
 
                                                 </tr>
                                                 </tbody>
