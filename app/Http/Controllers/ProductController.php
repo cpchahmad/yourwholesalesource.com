@@ -345,9 +345,15 @@ class ProductController extends Controller
                             ]
                         ];
                         $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
-                        $image->shopify_id = $imageResponse->body->image->id;
-                        $image->save();
-                        return redirect()->back();
+                        if($imageResponse->errors){
+                            return redirect()->back()->with('error','Product not found on your store');
+                        }
+                        else{
+                            $image->shopify_id = $imageResponse->body->image->id;
+                            $image->save();
+                            return redirect()->back();
+                        }
+
                     }
 
                 }
