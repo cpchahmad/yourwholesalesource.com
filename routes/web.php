@@ -105,6 +105,8 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/wefullfill/{id}/add-to-import-list','RetailerProductController@add_to_import_list')->name('store.product.wefulfill.add-to-import-list');
         Route::get('/import-list','RetailerProductController@import_list')->name('store.import_list');
         Route::get('/my_products','RetailerProductController@my_products')->name('store.my_products');
+        Route::get('/my_products/{id}','RetailerProductController@edit_my_product')->name('store.my_product.edit');
+
 
         Route::get('/products/delete/{id}','RetailerProductController@delete')->name('store.product.delete');
         Route::post('/import-list/{id}/update','RetailerProductController@update')->name('store.import_list.product.update');

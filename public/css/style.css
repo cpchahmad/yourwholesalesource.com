@@ -85,6 +85,11 @@ div.tagsinput span.tag a {
     height: 220px;
     width: 100%;
 }
+.image-holder-my-product{
+    background-size: cover;
+    height: 270px;
+    width: 100%;
+}
 .pointer{
     cursor: pointer;
 }

@@ -350,6 +350,14 @@ class RetailerProductController extends Controller
             'source' => $request->input('source'),
         ]);
     }
+    public function edit_my_product($id){
+        $product = RetailerProduct::find($id);
+        $shop= $this->helper->getLocalShop();
+        return view('single-store.products.edit_my_product')->with([
+            'product' => $product,
+            'shop' => $shop
+        ]);
+    }
 
     public function import_to_shopify(Request $request)
     {

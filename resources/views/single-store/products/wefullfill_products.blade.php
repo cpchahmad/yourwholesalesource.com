@@ -112,35 +112,11 @@
                             </div>
                             <div class="block-content" style="padding-bottom: 10px">
                                 <div class="push-10">
-                                    <a class="h4" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
-                                    <div class="h6 font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}</div>
+                                    <a class="h6" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
+                                    <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}</div>
                                 </div>
-                                {{--                                    <p class="text-muted"> Category & Tags </p>--}}
-                                {{--                                    @if(count($product->has_categories) > 0)--}}
-                                {{--                                        <div class="tags" style="margin-top: 5px">--}}
-                                {{--                                            @if($product->tags != null)--}}
-                                {{--                                                @foreach($product->has_categories as $cat)--}}
-                                {{--                                                    <span class="badge badge-primary">{{$cat->title}}</span>--}}
-                                {{--                                                @endforeach--}}
-                                {{--                                            @endif--}}
-                                {{--                                        </div>--}}
 
-                                {{--                                    @endif--}}
-                                {{--                                    @if(count($product->has_subcategories) > 0)--}}
-                                {{--                                        <div class="tags" style="margin-top: 5px">--}}
-                                {{--                                            @foreach($product->has_subcategories as $subcat)--}}
-                                {{--                                                <span class="badge badge-primary">{{$subcat->title}}</span>--}}
-                                {{--                                            @endforeach--}}
-                                {{--                                        </div>--}}
-                                {{--                                    @endif--}}
 
-                                {{--                                    @if($product->tags != null)--}}
-                                {{--                                        <div class="tags" style="margin-top: 5px">--}}
-                                {{--                                            @foreach(explode(',',$product->tags) as $tag)--}}
-                                {{--                                                <span class="badge badge-primary">{{$tag}}</span>--}}
-                                {{--                                            @endforeach--}}
-                                {{--                                        </div>--}}
-                                {{--                                    @endif--}}
                                 <hr>
                                 <p class="text-muted font-size-sm">Shipping Price $50.00 / Estimated 7 Days Delivery /  <a class="" href="">Fast Shipping</a></p>
                                 <hr>

@@ -172,6 +172,29 @@ $(document).ready(function () {
             ajaxCall(forms);
         }
     });
+
+    $('.btn_save_my_product').click(function () {
+        $('.pre-loader').css('display','flex');
+        var forms_div = '.my_product_form_div';
+        console.log($(forms_div).find('form').length);
+        if($(forms_div).find('form').length > 0){
+            let forms = new Array();
+            $(forms_div).find('form').each(function () {
+                if($(this).hasClass('product-images-form')){
+                    $(this).submit();
+                }
+                else{
+                    forms.push({
+                        'data' : $(this).serialize(),
+                        'url' : $(this).attr('action'),
+                        'method' : $(this).attr('method'),
+                    });
+                }
+
+            });
+            ajaxCall(forms);
+        }
+    });
     /*Stack ajax*/
     function ajaxCall(toAdd) {
         if (toAdd.length) {
