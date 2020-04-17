@@ -181,11 +181,11 @@
                             <div class="block-content" >
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input" id="example-radio-customPublished"name="status" value="1" @if($product->fulfilled_by == 'Fantasy') checked @endif >
+                                        <input type="radio" required class="custom-control-input" id="example-radio-customPublished"  name="status" value="1" @if($product->fulfilled_by == 'Fantasy') checked @endif >
                                         <label class="custom-control-label" for="example-radio-customPublished">Published</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input" id="example-radio-customDraft" name="status" value="0" @if($product->fulfilled_by == 'AliExpress') checked @endif >
+                                        <input type="radio" required class="custom-control-input" id="example-radio-customDraft" name="status" value="0" @if($product->fulfilled_by == 'AliExpress') checked @endif >
                                         <label class="custom-control-label" for="example-radio-customDraft">Draft</label>
                                     </div>
                                 </div>
@@ -278,6 +278,12 @@
                             @csrf
                             <input type="hidden" name="type" value="more-details">
                             <div class="block-content">
+                                <div class="form-group">
+                                <div class="col-xs-12 push-10">
+                                    <label>Processing Time</label>
+                                    <input type="text" class="form-control" name="processing_time" placeholder="eg. 7 working days" value="{{$product->processing_time}}">
+                                </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
                                         <label>Warned Platform</label>

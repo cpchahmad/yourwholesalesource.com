@@ -284,6 +284,9 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'more-details') {
+                    if($request->input('processing_time') != null){
+                        $product->processing_time = $request->input('processing_time');
+                    }
                     if ($request->platforms) {
                         $product->has_platforms()->sync($request->platforms);
                     }
@@ -312,6 +315,7 @@ class ProductController extends Controller
                     }
 
                     $this->product_status_change($request, $product, $shop);
+
 
                 }
                 if($request->input('type') == 'status_update'){
@@ -448,6 +452,7 @@ class ProductController extends Controller
         $product->barcode = $request->barcode;
         $product->fulfilled_by = $request->input('fulfilled-by');
         $product->status =  $request->input('status');
+        $product->processing_time = $request->input('processing_time');
 
         if ($request->variants) {
             $product->variants = $request->variants;

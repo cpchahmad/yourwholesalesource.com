@@ -268,11 +268,11 @@
                         <div class="block-content pt-0" >
                             <div class="form-group">
                             <div class="custom-control custom-radio mb-1">
-                                <input type="radio" class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
                                 <label class="custom-control-label" for="example-radio-customfulfilled">By WeFullFill</label>
                             </div>
                             <div class="custom-control custom-radio mb-1">
-                                <input type="radio" class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
+                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
                                 <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                             </div>
                             </div>
@@ -343,6 +343,12 @@
                             <h3 class="block-title">More Details</h3>
                         </div>
                         <div class="block-content">
+                            <div class="form-group">
+                                <div class="col-xs-12 push-10">
+                                    <label>Processing Time</label>
+                                    <input type="text" class="form-control" name="processing_time" placeholder="eg. 7 working days" value="">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label>Warned Platform</label>

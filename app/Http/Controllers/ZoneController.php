@@ -82,8 +82,14 @@ class ZoneController extends Controller
                         else{
                             $message = '<prp_up> Free Shipping </prp_up>';
                         }
+                        if($product->processing_time != null){
+                            $message_3 = '<prp_up>'.$product->processing_time.'</prp_up> after payment';
+                        }
+                        else{
+                            $message_3 = '<prp_up>'.$zone->has_rate[0]->processing_time.'</prp_up> after payment';
+
+                        }
                         $message_2 = '<prp_up>'.$zone->has_rate[0]->shipping_time.'</prp_up>';
-                         $message_3 = '<prp_up>'.$zone->has_rate[0]->processing_time.'</prp_up> after payment';
                         break;
                     }
                 }
