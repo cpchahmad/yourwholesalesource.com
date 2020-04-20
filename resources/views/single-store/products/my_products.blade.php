@@ -97,12 +97,11 @@
                                                 </div>
                                                 <hr>
                                                 <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-outline-secondary"  title="Share Product"><i class="fa fa-share-alt"></i></button>
                                                     <button type="button"  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.wefulfill.show',$product->linked_product_id)}}'" title="View Product"><i class="fa fa-eye"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.my_product.edit',$product->id)}}'" title="Edit Product"><i class="fa fa-pencil-alt"></i></button>
                                                     <button  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary"   title="Synced"><i class="fa fa-sync"></i></button>
-                                                    <button type="button" class="btn btn-outline-secondary"    title="Chained"><i class="fa fa-link"></i></button>
+
                                                 </div>
                                             </div>
                                         </div>

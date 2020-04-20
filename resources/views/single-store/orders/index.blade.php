@@ -72,18 +72,19 @@
 
                                         </td>
                                         <td>
-                                            @if($order->status == 'new')
-                                                <span class="badge badge-warning" style="font-size: small">
-                                                {{$order->status}}
-                                                </span>
-                                            @elseif($order->status == 'paid')
-                                                <span class="badge badge-primary" style="font-size: small"> Ordered</span>
+                                            @if($order->status == 'paid')
+                                                <span class="badge badge-primary" style="float: right;font-size: medium"> {{$order->status}}</span>
 
                                             @elseif($order->status == 'unfulfilled')
                                                 <span class="badge badge-warning" style="font-size: small"> {{$order->status}}</span>
-
+                                            @elseif($order->status == 'partially-shipped')
+                                                <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{$order->status}}</span>
                                             @elseif($order->status == 'shipped')
-                                                <span class="badge" style="font-size: small;background: orange;color: white;"> {{$order->status}}</span>
+                                                <span class="badge " style="font-size: small;background: orange;color: white;"> {{$order->status}}</span>
+                                            @elseif($order->status == 'delivered')
+                                                <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{$order->status}}</span>
+                                            @elseif($order->status == 'completed')
+                                                <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{$order->status}}</span>
                                             @else
                                                 <span class="badge badge-success" style="font-size: small"> {{$order->status}}</span>
                                             @endif

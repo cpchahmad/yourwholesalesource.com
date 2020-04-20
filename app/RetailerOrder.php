@@ -23,4 +23,7 @@ class RetailerOrder extends Model
     public function fulfillments(){
         return $this->hasMany('App\OrderFulfillment','retailer_order_id');
     }
+    public function logs(){
+        return $this->hasMany('App\OrderLog','retailer_order_id');
+    }
 }

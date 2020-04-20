@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\OrderLog;
 use App\OrderTransaction;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
@@ -58,8 +59,16 @@ class OrderController extends Controller
             $new_transaction->save();
 
             $order->paid = 1;
-            $order->status = 'paid';
+            $order->status = 'Paid';
             $order->save();
+
+            /*Maintaining Log*/
+            $order_log =  new OrderLog();
+            $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+            $order_log->status = "paid";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+
             return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
         }
         else{
@@ -194,6 +203,13 @@ class OrderController extends Controller
                         $new->cost_to_pay = $cost_to_pay;
                         $new->save();
 
+
+                        /*Maintaining Log*/
+                        $order_log =  new OrderLog();
+                        $order_log->message = "Order synced to WeFullFill on ".date_create($new->created_at)->format('d M, Y h:i a');
+                        $order_log->status = "Newly Synced";
+                        $order_log->retailer_order_id = $new->id;
+                        $order_log->save();
                     }
                 }
             }

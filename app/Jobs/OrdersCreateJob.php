@@ -1,6 +1,7 @@
 <?php namespace App\Jobs;
 
 use App\Customer;
+use App\OrderLog;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
@@ -158,6 +159,13 @@ class OrdersCreateJob implements ShouldQueue
 
                 $new->cost_to_pay = $cost_to_pay;
                 $new->save();
+
+                /*Maintaining Log*/
+                $order_log =  new OrderLog();
+                $order_log->message = "Order synced to WeFullFill on ".date_create($new->created_at)->format('d M, Y h:i a');
+                $order_log->status = "Newly Synced";
+                $order_log->retailer_order_id = $new->id;
+                $order_log->save();
 
             }
         }

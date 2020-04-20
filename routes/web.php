@@ -83,10 +83,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('/orders/view/{id}/fulfillment/process','AdminOrderController@fulfillment_order')->name('admin.order.fulfillment.process');
     Route::get('/orders/{id}/fulfillment/cancel/{fulfillment_id}','AdminOrderController@fulfillment_cancel_order')->name('admin.order.fulfillment.cancel');
     Route::post('/orders/{id}/fulfillment/tracking','AdminOrderController@fulfillment_add_tracking')->name('admin.order.fulfillment.tracking');
-
-
-
-
+    Route::get('/orders/{id}/mark-as-delivered','AdminOrderController@mark_as_delivered')->name('admin.order.mark_as_delivered');
 
 });
 /*Single Store Routes*/
@@ -116,6 +113,8 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/order/delete/{id}', 'OrderController@delete')->name('store.order.delete');
         Route::get('/order/view/{id}', 'OrderController@view_order')->name('store.order.view');
         Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+        Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
+
         Route::get('/customers', 'SingleStoreController@customers')->name('store.customers');
         Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
         Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');

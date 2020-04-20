@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FulfillmentLineItem;
 use App\OrderFulfillment;
+use App\OrderLog;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use Illuminate\Http\Request;
@@ -103,6 +104,13 @@ class AdminOrderController extends Controller
                         $fulfillment->name = $response->body->fulfillment->name;
                         $fulfillment->save();
 
+                        /*Maintaining Log*/
+                        $order_log =  new OrderLog();
+                        $order_log->message = "A fulfillment named ". $fulfillment->name." has been processed successfully on ".date_create($fulfillment->created_at)->format('d M, Y h:i a');
+                        $order_log->status = "Fulfillment";
+                        $order_log->retailer_order_id = $order->id;
+                        $order_log->save();
+
                         foreach ($request->input('item_id') as $index => $item){
                             if($fulfillable_quantities[$index] > 0 ){
                                 $fulfillment_line_item = new FulfillmentLineItem();
@@ -110,6 +118,7 @@ class AdminOrderController extends Controller
                                 $fulfillment_line_item->order_fulfillment_id =$fulfillment->id;
                                 $fulfillment_line_item->order_line_item_id = $item;
                                 $fulfillment_line_item->save();
+
                             }
                         }
                         return redirect()->route('admin.order.view',$id)->with('success','Order Line Items Marked as Fulfilled Successfully!');
@@ -155,9 +164,18 @@ class AdminOrderController extends Controller
                         }
                         $item->delete();
                     }
+                    $order_log =  new OrderLog();
+                    $order_log->message = "A fulfillment named ". $fulfillment->name." has been cancelled successfully on ".now()->format('d M, Y h:i a');
+
                     $fulfillment->delete();
                     $order->status = $order->getStatus($order);
                     $order->save();
+
+                    /*Maintaining Log*/
+
+                    $order_log->status = "Fulfillment Cancelled";
+                    $order_log->retailer_order_id = $order->id;
+                    $order_log->save();
 
                     return redirect()->back()->with('success','Order Fulfillment Cancelled Successfully');
                 }
@@ -197,13 +215,35 @@ class AdminOrderController extends Controller
                           $current->tracking_url = $tracking_urls[$index];
                           $current->tracking_notes = $tracking_notes[$index];
                           $current->save();
+
+                          /*Maintaining Log*/
+                          $order_log =  new OrderLog();
+                          $order_log->message = "Tracking detailed added to fulfillment named ". $current->name."  successfully on ".now()->format('d M, Y h:i a');
+                          $order_log->status = "Tracking Details Added";
+                          $order_log->retailer_order_id = $order->id;
+                          $order_log->save();
                       }
 
                   }
                }
 
-               $order->status = 'shipped';
+               $count = 0;
+               $fulfillment_count = count($order->fulfillments);
+               foreach ($order->fulfillments as $f){
+                   if($f->tracking_number != null){
+                    $count ++;
+                   }
+               }
+               if($count == $fulfillment_count){
+                   $order->status = 'shipped';
+               }
+               else{
+                   $order->status = 'partially-shipped';
+               }
+
                $order->save();
+
+
                return redirect()->back()->with('success','Tracking Details Added To Fulfillment Successfully!');
 
             }
@@ -216,4 +256,48 @@ class AdminOrderController extends Controller
 
         }
     }
+
+    public function mark_as_delivered(Request $request){
+        $order = RetailerOrder::find($request->id);
+        if($order != null) {
+            $order->status = 'delivered';
+            $order->save();
+
+            /*Maintaining Log*/
+            $order_log =  new OrderLog();
+            $order_log->message = "Order marked as delivered successfully on ".now()->format('d M, Y h:i a');
+            $order_log->status = "Delivered";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+
+            return redirect()->back()->with('success', 'Order Marked as Delivered Successfully');
+        }  else{
+            return redirect()->back()->with('error','Order Marked as Delivered Failed');
+
+        }
+
+    }
+
+    public function mark_as_completed(Request $request){
+        $order = RetailerOrder::find($request->id);
+        if($order != null){
+            $order->status = 'completed';
+            $order->save();
+
+            $order_log =  new OrderLog();
+            $order_log->message = "Order marked as completed successfully on ".now()->format('d M, Y h:i a');
+            $order_log->status = "Completed";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+
+            return redirect()->back()->with('success','Order Marked as Completed Successfully');
+        }
+        else{
+            return redirect()->back()->with('error','Order Marked as Completed Failed');
+
+        }
+
+    }
+
+
 }
