@@ -78,7 +78,7 @@
                                     <div class="tab-pane active" id="product_{{$product->id}}_products" role="tabpanel">
                                         <div class="block">
                                             <div class="options-container">
-                                                <a href="{{route('store.product.wefulfill.show',$product->id)}}">
+                                                <a href="{{route('store.my_product.wefulfill.show',$product->id)}}">
                                                     <div class="image-holder-my-product" style="background-image:  @if(count($product->has_images) > 0)
                                                     @if($product->has_images[0]->isV == 0)
                                                         url({{asset('images')}}/{{$product->has_images[0]->image}})
@@ -92,12 +92,12 @@
                                             </div>
                                             <div class="block-content" style="padding-bottom: 10px">
                                                 <div class="push-10">
-                                                    <a class="h6" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
+                                                    <a class="h6" href="{{route('store.my_product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
                                                     <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}  <span class="mb2 font-size-sm" style="float: right;color: grey">@if($product->fulfilled_by == "Fantasy") WeFulfill @else {{$product->fulfilled_by}} @endif </span></div>
                                                 </div>
                                                 <hr>
                                                 <div class="btn-group" role="group">
-                                                    <button type="button"  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.wefulfill.show',$product->id)}}'" title="View Product"><i class="fa fa-eye"></i></button>
+                                                    <button type="button"  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.my_product.wefulfill.show',$product->id)}}'" title="View Product"><i class="fa fa-eye"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.my_product.edit',$product->id)}}'" title="Edit Product"><i class="fa fa-pencil-alt"></i></button>
                                                     <button  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary"   title="Synced"><i class="fa fa-sync"></i></button>

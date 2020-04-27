@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Customer;
 use App\Product;
+use App\RetailerImage;
+use App\RetailerProduct;
 use App\Shop;
 use App\User;
 use Illuminate\Http\Request;
@@ -51,6 +53,14 @@ class SingleStoreController extends Controller
     }
     public function view_fantasy_product($id){
         $product = Product::find($id);
+        $shop= $this->helper->getLocalShop();
+        return view('single-store.products.view_product')->with([
+            'product' => $product,
+            'shop' => $shop
+        ]);
+    }
+    public function view_my_product($id){
+        $product = RetailerProduct::find($id);
         $shop= $this->helper->getLocalShop();
         return view('single-store.products.view_product')->with([
             'product' => $product,
