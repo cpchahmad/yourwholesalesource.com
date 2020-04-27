@@ -27,8 +27,10 @@
             <div class="col-md-9">
             </div>
             <div class="col-md-3 text-right">
-                @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
-                    <a href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}" class="btn btn-primary btn-square ">Add to Import List</a>
+                @if(!$product instanceof \App\RetailerProduct)
+                    @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
+                        <a href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}" class="btn btn-primary btn-square ">Add to Import List</a>
+                    @endif
                 @endif
             </div>
         </div>
@@ -123,12 +125,12 @@
 
                             @if($product->quantity > 0)
                                 <span class="h5">
-                                <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
-                            </span>
+                            <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                        </span>
                             @else
                                 <span class="h5">
-                                <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
-                            </span>
+                            <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
+                        </span>
                             @endif
                             <div class="text-right d-inline-block" style="float: right">
                                 <span class="h3 font-w700 text-success">${{number_format($product->price,2)}} </span>
