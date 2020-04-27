@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('/products/save','ProductController@save')->name('product.save');
     Route::post('/products/variant/save','ProductController@variant')->name('product.variant');
     Route::get('/products/{id}/delete','ProductController@delete')->name('product.delete');
+    Route::get('/products/{id}/images-position-update','ProductController@update_image_position')->name('product.update_image_position');
+
     Route::get('/products/{id}/varaints/new','ProductController@add_existing_product_new_variants')->name('product.existing_product_new_variants');
     Route::get('/products-tabs/{id}/delete','ProductController@delete_tab')->name('product.tab.delete');
 

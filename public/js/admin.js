@@ -437,6 +437,37 @@ $(document).ready(function () {
         })
 
     });
+    /* Image Re-arrange JS */
+    $('#image-sortable').sortable({
+        update: function(event, ui) {
+            var orders = [];
+            $(this).find('.preview-image').each(function () {
+                orders.push($(this).data('id'));
+            });
+            console.log(orders);
+            $.ajax({
+                url: $('#image-sortable').data('route'),
+                method:'get',
+                data:{
+                    positions: orders,
+                    product: $('#image-sortable').data('product'),
+                },
+                success:function (response) {
+                    if(response.message === 'success'){
+                        alertify.success('Image Position Changed Successfully!');
+                    }
+                    else{
+                        alertify.error('Internal Server Error!');
+
+                    }
+                },
+                error:function(){
+                    alertify.error('Internal Server Error!');
+                }
+            });
+        }
+    });
+    // $( "#image-sortable" ).disableSelection();
 });
 
 

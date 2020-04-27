@@ -1020,4 +1020,49 @@ class ProductController extends Controller
         }
     }
 
+    public function update_image_position(Request $request){
+        $positions = $request->input('positions');
+        $product = $request->input('product');
+        $images_array = [];
+        $shop = $this->helper->getShop();
+        foreach ($positions as $index => $position){
+            $image = Image::where('product_id',$product)
+                ->where('id',$position)->first();
+            array_push($images_array, [
+                'id' => $image->shopify_id,
+                'position' => $index + 1,
+            ]);
+        }
+        $related_product = Product::find($product);
+        if($related_product != null){
+            $data = [
+                'product' => [
+                    'images' => $images_array
+                ]
+            ];
+            $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $related_product->shopify_id .'.json', $data);
+            if(!$imagesResponse->errors){
+                foreach ($positions as $index => $position){
+                    $image = Image::where('product_id',$product)
+                        ->where('id',$position)->first();
+                    $image->position = $index + 1;
+                    $image->save();
+                }
+                return response()->json([
+                    'message' => 'success'
+                ]);
+            }else{
+                return response()->json([
+                    'message' => 'error'
+                ]);
+            }
+
+        }
+        else{
+            return response()->json([
+                'message' => 'error'
+            ]);
+        }
+    }
+
 }

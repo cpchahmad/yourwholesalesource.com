@@ -60,25 +60,24 @@
                         </div>
                         <div class="block-content">
                             @if(count($product->has_images) >0)
-                                <div class="row editable ">
-
-                                    @foreach($product->has_images as $image)
-                                        <div class="col-lg-4 preview-image animated fadeIn">
-                                            <div class="options-container fx-img-zoom-in fx-opt-slide-right">
-                                                @if($image->isV == 0)
-                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                @else
-                                                    <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                @endif
-                                                <div class="options-overlay bg-black-75">
-                                                    <div class="options-overlay-content">
-                                                        <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
+                                <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
+                                        @foreach($product->has_images()->orderBy('position')->get() as $image)
+                                                <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}">
+                                                    <div class="options-container fx-img-zoom-in fx-opt-slide-right">
+                                                        @if($image->isV == 0)
+                                                            <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                        @else
+                                                            <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        @endif
+                                                        <div class="options-overlay bg-black-75">
+                                                            <div class="options-overlay-content">
+                                                                <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
 
+                                        @endforeach
                                 </div>
                                 <hr>
                             @endif
