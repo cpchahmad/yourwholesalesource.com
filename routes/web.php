@@ -24,6 +24,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', function(){
     Auth::logout();
+    session_destroy();
     return Redirect::to('login');
 })->name('logout');
 /*Super Admin Routes*/

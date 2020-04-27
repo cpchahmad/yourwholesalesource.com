@@ -81,7 +81,7 @@ class RetailerProductController extends Controller
                             $retailerProductVariant->option2 = $variant->option2;
                             $retailerProductVariant->option3 = $variant->option3;
                             $retailerProductVariant->price = $variant->price;
-                            $retailerProductVariant->cost = $variant->price;
+                            $retailerProductVariant->cost = $variant->cost;
                             $retailerProductVariant->quantity = $variant->quantity;
                             $retailerProductVariant->sku = $variant->sku;
                             $retailerProductVariant->barcode = $variant->barcode;
