@@ -999,6 +999,7 @@ class ProductController extends Controller
         foreach ($image->has_variants as $v) {
             array_push($variant_ids, $v->shopify_id);
         }
+        array_push($variant_ids,$variant->shopify_id);
         $i = [
             'image' => [
                 'id' => $image->shopify_id,
@@ -1006,7 +1007,6 @@ class ProductController extends Controller
             ]
         ];
         $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
-        dd($imagesResponse);
         if (!$imagesResponse->errors) {
             $variant->image = $image_id;
             $variant->save();
