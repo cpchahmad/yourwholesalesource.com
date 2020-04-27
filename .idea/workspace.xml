@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminOrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/RetailerOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/RetailerOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/orders/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/single-store/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/single-store/orders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/single-store/orders/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/single-store/orders/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/single-store/products/my_products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/single-store/products/my_products.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,42 +247,11 @@
       <workItem from="1587107427139" duration="15886000" />
       <workItem from="1587139386492" duration="2847000" />
       <workItem from="1587201000334" duration="381000" />
-      <workItem from="1587360542877" duration="10760000" />
-    </task>
-    <task id="LOCAL-00011" summary="17032020-lastfinal">
-      <created>1584454627530</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1584454627530</updated>
-    </task>
-    <task id="LOCAL-00012" summary="17032020-lastfinal">
-      <created>1584454743140</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1584454743140</updated>
-    </task>
-    <task id="LOCAL-00013" summary="18032020">
-      <created>1584516940732</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1584516940732</updated>
-    </task>
-    <task id="LOCAL-00014" summary="17032020-lastfinal">
-      <created>1584536620949</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1584536620949</updated>
-    </task>
-    <task id="LOCAL-00015" summary="20032020Fazal">
-      <created>1584699838063</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1584699838063</updated>
+      <workItem from="1587360542877" duration="14082000" />
+      <workItem from="1587456904244" duration="189000" />
+      <workItem from="1587457223374" duration="5000" />
+      <workItem from="1587975074959" duration="52000" />
+      <workItem from="1587975187150" duration="3775000" />
     </task>
     <task id="LOCAL-00016" summary="20032020F">
       <created>1584700104033</created>
@@ -601,7 +561,42 @@
       <option name="project" value="LOCAL" />
       <updated>1587369823709</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="20042020-orders-update">
+      <created>1587380783030</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1587380783030</updated>
+    </task>
+    <task id="LOCAL-00061" summary="27042020F">
+      <created>1587975245629</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1587975245629</updated>
+    </task>
+    <task id="LOCAL-00062" summary="27042020F">
+      <created>1587975631132</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1587975631132</updated>
+    </task>
+    <task id="LOCAL-00063" summary="27042020F">
+      <created>1587975700819</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1587975700819</updated>
+    </task>
+    <task id="LOCAL-00064" summary="27042020F">
+      <created>1587978379853</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1587978379853</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,8 +618,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="02042020-wefullfill@admin" />
-    <MESSAGE value="02042020F" />
     <MESSAGE value="03042020F" />
     <MESSAGE value="07042020F-productControllerFixes" />
     <MESSAGE value="08042020FAZAL - Major Update" />
@@ -648,7 +641,9 @@
     <MESSAGE value="17042020F-new_my_product_layout" />
     <MESSAGE value="17042020F-existing-image-selection" />
     <MESSAGE value="20042020-bug-fixed!" />
-    <option name="LAST_COMMIT_MESSAGE" value="20042020-bug-fixed!" />
+    <MESSAGE value="20042020-orders-update" />
+    <MESSAGE value="27042020F" />
+    <option name="LAST_COMMIT_MESSAGE" value="27042020F" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
@@ -668,10 +663,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/0.0.1366.728@0.0.1366.728" timestamp="1584343568041" />
-    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1" timestamp="1584441523764">
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1" timestamp="1587978249603">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1/0.0.1366.728@0.0.1366.728" timestamp="1584441523764" />
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1/0.0.1366.728@0.0.1366.728" timestamp="1587978249603" />
     <state x="420" y="213" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#" timestamp="1584345232021">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -681,14 +676,14 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1587380735030">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1587978378701">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587380735030" />
-    <state x="129" y="55" key="DiffContextDialog" timestamp="1587380730275">
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587978378701" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1587978375467">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587380730275" />
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1587978375467" />
     <state x="495" y="160" key="FileChooserDialogImpl" timestamp="1587110132530">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -710,18 +705,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1587130432938" />
-    <state x="504" y="298" key="ReplaceDuplicatesPrompt" timestamp="1584441527708">
+    <state x="504" y="298" key="ReplaceDuplicatesPrompt" timestamp="1587978255398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="504" y="298" key="ReplaceDuplicatesPrompt/0.0.1366.728@0.0.1366.728" timestamp="1584441527708" />
+    <state x="504" y="298" key="ReplaceDuplicatesPrompt/0.0.1366.728@0.0.1366.728" timestamp="1587978255398" />
     <state x="184" y="6" key="SettingsEditor" timestamp="1584700673851">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1587369830121">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1587978392651">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587369830121" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587978392651" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -739,10 +734,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586346184176" />
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1587380750853">
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1587977199875">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587380750853" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1587977199875" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
   <component name="XDebuggerManager">
