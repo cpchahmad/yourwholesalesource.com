@@ -330,7 +330,7 @@ class ProductController extends Controller
                     if ($request->hasFile('varaint_src')) {
                         $image = $request->file('varaint_src');
                         $destinationPath = 'images/variants/';
-                        $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                        $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                         $image->move($destinationPath, $filename);
                         $image = new Image();
                         $image->isV = 1;
@@ -374,7 +374,7 @@ class ProductController extends Controller
                     if ($request->hasFile('images')) {
                         foreach ($request->file('images') as $image) {
                             $destinationPath = 'images/';
-                            $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                             $image->move($destinationPath, $filename);
                             $image = new Image();
                             $image->isV = 0;
@@ -482,7 +482,7 @@ class ProductController extends Controller
 //            $images = [];
             foreach ($request->file('images') as $image) {
                 $destinationPath = 'images/';
-                $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                 $image->move($destinationPath, $filename);
 //                array_push($images, $filename);
                 $image = new Image();

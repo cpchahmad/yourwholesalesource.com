@@ -213,7 +213,7 @@ class RetailerProductController extends Controller
                     if ($request->hasFile('varaint_src')) {
                         $image = $request->file('varaint_src');
                         $destinationPath = 'images/variants/';
-                        $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                        $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                         $image->move($destinationPath, $filename);
                         $image = new RetailerImage();
                         $image->isV = 1;
