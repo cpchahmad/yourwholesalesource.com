@@ -30,11 +30,16 @@ class AppServiceProvider extends ServiceProvider
             }
             else {
               $auth_shop =  ShopifyApp::shop();
-              $shop = Shop::find($auth_shop->id);
-              if(count($shop->has_user) > 0){
-                  if($shop->has_user[0]->has_wallet != null){
-                     $wallet =  $shop->has_user[0]->has_wallet;
-                      $balance = $wallet->available;
+              if($auth_shop != null){
+                  $shop = Shop::find($auth_shop->id);
+                  if(count($shop->has_user) > 0){
+                      if($shop->has_user[0]->has_wallet != null){
+                          $wallet =  $shop->has_user[0]->has_wallet;
+                          $balance = $wallet->available;
+                      }
+                      else{
+                          $balance = 0;
+                      }
                   }
                   else{
                       $balance = 0;
@@ -43,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
               else{
                   $balance = 0;
               }
+
 
             }
 
