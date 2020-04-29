@@ -59,7 +59,7 @@
         </li>
         <li class="nav-main-item open">
             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon si si-layers"></i>
+                <i class="nav-main-link-icon si si-bag"></i>
                 <span class="nav-main-link-name">Orders</span>
             </a>
             <ul class="nav-main-submenu open">
@@ -90,7 +90,7 @@
 
         <li class="nav-main-item">
             <a class="nav-main-link" href="{{route('store.customers')}}">
-                <i class="nav-main-link-icon si si-wrench"></i>
+                <i class="nav-main-link-icon si si-user"></i>
                 <span class="nav-main-link-name">Customer</span>
             </a>
         </li>
@@ -103,8 +103,16 @@
         </li>
 
         <li class="nav-main-item">
+            <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
+                <i class="nav-main-link-icon si si-wallet"></i>
+                <span class="nav-main-link-name">Wallet</span>
+            </a>
+        </li>
+
+
+        <li class="nav-main-item">
             <a class="nav-main-link" href="#">
-                <i class="nav-main-link-icon si si-wrench"></i>
+                <i class="nav-main-link-icon fa fa-hands-helping"></i>
                 <span class="nav-main-link-name">Help Center</span>
             </a>
         </li>
@@ -142,6 +150,10 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
+            <div class="d-inline-block mr-3">
+                Wallet Balance  : {{number_format($balance,2)}} USD
+            </div>
+
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">

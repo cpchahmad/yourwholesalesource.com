@@ -94,6 +94,12 @@
                     <span class="nav-main-link-name">Sales Managers</span>
                 </a>
             </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('admin.wallets')}}">
+                    <i class="nav-main-link-icon fa fa-wallet"></i>
+                    <span class="nav-main-link-name">Wallets</span>
+                </a>
+            </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('zone.index')}}">

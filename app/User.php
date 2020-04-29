@@ -47,4 +47,7 @@ class User extends Authenticatable
     public function has_imported(){
         return $this->belongsToMany('App\Product','retailer_product_user','user_id','product_id');
     }
+    public function has_wallet(){
+        return $this->hasOne('App\Wallet','user_id');
+    }
 }

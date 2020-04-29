@@ -87,6 +87,15 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('/orders/{id}/fulfillment/tracking','AdminOrderController@fulfillment_add_tracking')->name('admin.order.fulfillment.tracking');
     Route::get('/orders/{id}/mark-as-delivered','AdminOrderController@mark_as_delivered')->name('admin.order.mark_as_delivered');
 
+    /*Admin Wallet Routes*/
+    Route::get('/wallets', 'WalletController@index')->name('admin.wallets');
+    Route::get('/wallets/{id}', 'WalletController@wallet_details')->name('admin.wallets.detail');
+    Route::get('/wallet/request/approve/{id}', 'WalletController@approved_bank_statement')->name('admin.wallets.approve.request');
+    Route::post('/wallet/top-up', 'WalletController@topup_wallet_by_admin')->name('admin.user.wallet.topup');
+
+
+
+
 });
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {
@@ -123,6 +132,8 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
         Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');
 
+
+
     });
 });
 /*Main Routes*/
@@ -138,7 +149,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['role:non-shopify-users']], function () {
         Route::prefix('users')->group(function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
-
             Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
             Route::get('/stores','ShopifyUsersController@stores')->name('users.stores');
             Route::group(['middleware' => ['check_user_shop']], function () {
@@ -153,6 +163,14 @@ Route::group(['middleware' => ['auth']], function () {
                 return view('sales_managers.index');
             })->name('managers.dashboard');
         });
+    });
+});
+
+/*Common Routes*/
+Route::group(['middleware' => ['check_user_or_shop']], function () {
+    Route::prefix('store')->group(function () {
+        Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
+        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
     });
 });
 

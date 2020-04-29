@@ -468,6 +468,32 @@ $(document).ready(function () {
         }
     });
     // $( "#image-sortable" ).disableSelection();
+
+    /* Approve Bank Transfer JS */
+    $('body').on('click','.approve-bank-transfer-button',function () {
+        var button = $(this);
+            Swal.fire({
+                title: ' Are you sure?',
+                html:'<p> A amount of '+ $(this).data('amount') +' will be added to wallet number '+ $(this).data('wallet')+' !</p>',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Approved!',
+                        'Amount added to wallet!',
+                        'success'
+                    );
+                   window.location.href = button.data('route');
+                }
+            });
+
+
+    });
+
 });
 
 

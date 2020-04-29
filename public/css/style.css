@@ -104,3 +104,10 @@ div.tagsinput span.tag a {
 #image-sortable{
     list-style: none;
 }
+.pay-options{
+    cursor: pointer;
+}
+.pay-options:hover{
+    background: lightgray;
+    color: white;
+}
