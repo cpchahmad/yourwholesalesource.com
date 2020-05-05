@@ -130,7 +130,7 @@ $(document).ready(function () {
                     '            </div>\n' +
                     '        </div>');
 
-            }
+            };
             reader.readAsDataURL(f);
         });
     });
@@ -155,7 +155,7 @@ $(document).ready(function () {
         var forms_div =  $(this).data('tabs');
         console.log($(forms_div).find('form').length);
         if($(forms_div).find('form').length > 0){
-            let forms = new Array();
+            let forms = [];
             $(forms_div).find('form').each(function () {
                 if($(this).hasClass('product-images-form')){
                     $(this).submit();
@@ -178,7 +178,7 @@ $(document).ready(function () {
         var forms_div = '.my_product_form_div';
         console.log($(forms_div).find('form').length);
         if($(forms_div).find('form').length > 0){
-            let forms = new Array();
+            let forms = [];
             $(forms_div).find('form').each(function () {
                 if($(this).hasClass('product-images-form')){
                     $(this).submit();
@@ -262,7 +262,7 @@ $(document).ready(function () {
 
     $('body').on('click','.import_all_btn ',function () {
         $('.pre-loader').css('display','flex');
-        let forms = new Array();
+        let forms = [];
         if($('.select_one_checkbox:checked').length > 0){
 
             $('.select_one_checkbox:checked').each(function () {
@@ -281,7 +281,7 @@ $(document).ready(function () {
 
     $('body').on('click','.remove_all_btn ',function () {
         $('.pre-loader').css('display','flex');
-        let forms = new Array();
+        let forms = [];
         if($('.select_one_checkbox:checked').length > 0){
 
             $('.select_one_checkbox:checked').each(function () {
@@ -381,4 +381,54 @@ $(document).ready(function () {
         })
 
     });
+    /*Paypal Order Payment Button JS*/
+    $('body').on('click','.paypal-pay-button',function () {
+        var button = $(this);
+        Swal.fire({
+            title: ' Are you sure?',
+            html:'<p> A amount of '+ $(this).data('pay') +' will be deducted through your Paypal Account</p>',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Pay'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Processing!',
+                    'You will be redirected to paypal in seconds!',
+                    'success'
+                );
+                window.location.href = button.data('href');
+            }
+        });
+
+
+    });
+
+    /*Wallet Order Payment Button JS*/
+    $('body').on('click','.wallet-pay-button',function () {
+        var button = $(this);
+        Swal.fire({
+            title: ' Are you sure?',
+            html:'<p> A amount of '+ $(this).data('pay') +' will be deducted through your wallet </p>',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Pay'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Processing!',
+                    'Payment Processing Please Wait!',
+                    'success'
+                );
+                window.location.href = button.data('href');
+            }
+        });
+
+
+    });
+
 });

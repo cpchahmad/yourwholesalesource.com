@@ -26,14 +26,14 @@
                         <div class="timeline-event-icon bg-success">
                             <i class="fa fa-star"></i>
                         </div>
-                        @elseif($log->status == "Tracking Details Added")
+                        @elseif($log->status == "Order Payment")
                         <div class="timeline-event-icon bg-amethyst">
-                            <i class="fa fa-truck"></i>
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
                         </div>
-                        @elseif($log->status == "Delivered")
-                        <div class="timeline-event-icon" style="background: deeppink">
-                            <i class="fa fa-home"></i>
-                        </div>
+                        @elseif($log->status == "Top-up By Paypal")
+                            <div class="timeline-event-icon bg-success">
+                                <i class="fab fa-paypal"></i>
+                            </div>
                         @elseif($log->status == "Completed")
                         <div class="timeline-event-icon" style="background: darkslategray">
                             <i class="fa fa-check"></i>

@@ -217,7 +217,11 @@
                                 <td></td>
                                 <td align="right">
                                     @if($order->paid == 0)
-                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-coins"></i> Pay</button>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
+
+                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+
                                     @endif
                                 </td>
                             </tr>
@@ -321,7 +325,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="block-content">
-                                                        <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
+                                                        @if($order->pay_by == 'Paypal')
+                                                            <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
+
+                                                        @elseif($order->pay_by == 'Wallet')
+                                                            <p> Cost-Payment Captured On Wallet  by {{$order->has_payment->name}} </p>
+
+                                                        @else
+                                                            <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </li>
@@ -420,7 +432,7 @@
                         @php
                             $customer = json_decode($order->customer);
                             $billing = json_decode($order->billing_address);
-                            $shipping = json_decode($order->shipping_address);
+                            $shipping = json_decode($order->shipping_address)
                         @endphp
                         <div class="block-content">
                             <p style="font-size: 14px">{{$customer->first_name}} {{$customer->last_name}} <br>{{$customer->orders_count}} Orders</p>

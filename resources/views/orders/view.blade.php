@@ -398,7 +398,13 @@
                                                       </div>
                                                   </div>
                                                   <div class="block-content">
+                                                      @if($order->pay_by == 'Paypal')
+                                                          <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
+
+                                                      @else
+
                                                       <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
+                                                          @endif
                                                   </div>
                                               </div>
                                           </li>
@@ -494,7 +500,7 @@
                             </h3>
                         </div>
                         @php
-                            $shipping = json_decode($order->shipping_address);
+                            $shipping = json_decode($order->shipping_address)
                         @endphp
                         <div class="block-content">
                             @if($shipping != null)

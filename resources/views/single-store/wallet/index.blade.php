@@ -81,21 +81,52 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 ">
-                            <div class="block pay-options">
-                                <div class="block-content">
-                                    <p class="text-center"> Transfer Wallet-to-Wallet </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="block pay-options">
+                        <div class="col-md-6">
+                            <div class="block pay-options" data-toggle="modal" data-target="#paypal_topup_modal">
                                <div class="block-content">
                                    <p class="text-center"> Top-up with Paypal </p>
                                </div>
                             </div>
+                            <div class="modal fade" id="paypal_topup_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-popout" role="document">
+                                    <div class="modal-content">
+                                        <div class="block block-themed block-transparent mb-0">
+                                            <div class="block-header bg-primary-dark">
+                                                <h3 class="block-title">TOPUP VIA PAYPAL</h3>
+                                                <div class="block-options">
+                                                    <button type="button" class="btn-block-option">
+                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <form action="{{route('store.wallet.paypal.topup',$wallet->id)}}" method="post">
+                                                @csrf
+                                                <input type="hidden" value="{{$user->id}}" name="user_id">
+                                                <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
+                                                <div class="block-content font-size-sm">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
+                                                                <label for="material-error">Amount</label>
+                                                                <input required class="form-control" type="number"  name="amount"
+                                                                       value=""  placeholder="Enter Top-up Amount here">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="block-content block-content-full text-right border-top">
+                                                    <button type="submit" class="btn btn-sm btn-primary">Request Top-up</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-md-4 ">
+                        <div class="col-md-6 ">
                             <div class="block pay-options"  data-toggle="modal" data-target="#bank_transfer_modal">
                                 <div class="block-content">
                                     <p class="text-center" > Top-up with Bank Transfer </p>
