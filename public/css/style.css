@@ -94,7 +94,7 @@ div.tagsinput span.tag a {
     cursor: pointer;
 }
 .pointer:hover{
-    background-color: lightgray;
+    background-color: #3e4959;
     color: white;
 }
 .padding10{
@@ -108,6 +108,9 @@ div.tagsinput span.tag a {
     cursor: pointer;
 }
 .pay-options:hover{
-    background: lightgray;
+    background: #3e4959;
     color: white;
+}
+.pagination{
+    justify-content: center;
 }

@@ -21,10 +21,13 @@
 
     <div class="content">
         <div class="row mb-3">
-            <div class="col-sm-6">
-
+            <div class="col-sm-9">
+                <form action="" method="GET" class="d-flex">
+                    <input type="search" class="form-control d-inline-block" value="{{$search}}" name="search" placeholder="Search By Keyword">
+                    <input type="submit" value="Search" class="btn btn-primary btn-sm  d-inline-block" style="margin-left: 10px">
+                </form>
             </div>
-            <div class="col-sm-6 text-right">
+            <div class="col-sm-3 text-right">
                 <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
             </div>
         </div>
@@ -100,6 +103,11 @@
                     @else
                     <p>No Products created.</p>
                     @endif
+                    <div class="row">
+                        <div class="col-md-12 text-center" style="font-size: 17px">
+                            {!! $products->links() !!}
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

@@ -13,6 +13,7 @@ use App\RetailerProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use OhMyBrew\ShopifyApp\Models\Shop;
 
 
 class ProductController extends Controller
@@ -37,11 +38,15 @@ class ProductController extends Controller
         ]);
     }
 
-    public function all()
+    public function all(Request $request)
     {
-        $products = Product::all();
+        $productQ = Product::query();
+        if($request->has('search')){
+            $productQ->where('title','LIKE','%'.$request->input('search').'%');
+        }
         return view('products.all')->with([
-            'products' => $products
+            'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
+            'search' =>$request->input('search')
         ]);
     }
 
@@ -812,7 +817,7 @@ class ProductController extends Controller
 
     public function getExportFile(Request $request){
         $shopify_product_id = $request->input('product_id');
-        $shop = $this->helper->getShop();
+        $shop = Shop::where('shopify_domain',$request->input('shop'))->first();
         $productJson  = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $shopify_product_id . '.json');
 
         if($productJson->errors){

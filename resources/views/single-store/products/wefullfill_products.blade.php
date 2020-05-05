@@ -86,15 +86,25 @@
                         <div class="block">
                             <div class="options-container">
                                 <a href="{{route('store.product.wefulfill.show',$product->id)}}">
-                                    <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)
+                                    {{--                                    <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)--}}
+                                    {{--                                    @if($product->has_images[0]->isV == 0)--}}
+                                    {{--                                        url({{asset('images')}}/{{$product->has_images[0]->image}})--}}
+                                    {{--                                    @else url({{asset('images/variants')}}/{{$product->has_images[0]->image}})--}}
+                                    {{--                                    @endif--}}
+                                    {{--                                    @else--}}
+                                    {{--                                        url(https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg)--}}
+                                    {{--                                    @endif">--}}
+                                    {{--                                    </div>--}}
+                                    @if(count($product->has_images) > 0)
                                     @if($product->has_images[0]->isV == 0)
-                                        url({{asset('images')}}/{{$product->has_images[0]->image}})
-                                    @else url({{asset('images/variants')}}/{{$product->has_images[0]->image}})
+                                        <img class="img-fluid options-item" src="{{asset('images')}}/{{$product->has_images[0]->image}}">
+                                    @else   <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$product->has_images[0]->image}}" alt="">
                                     @endif
                                     @else
-                                        url(https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg)
-                                    @endif">
-                                    </div>
+                                        <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                    @endif
+
+
                                 </a>
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
@@ -112,13 +122,15 @@
                             </div>
                             <div class="block-content" style="padding-bottom: 10px">
                                 <div class="push-10">
-                                    <a class="h6" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
+                                    <a class="h6" style="font-size: 0.9rem" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
                                     <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}</div>
                                 </div>
 
-
+                                @if($product->processing_time != null)
                                 <hr>
-                                <p class="text-muted font-size-sm">Shipping Price $50.00 / Estimated 7 Days Delivery /  <a class="" href="">Fast Shipping</a></p>
+                                <p class="text-muted font-size-sm">  Estimated {{$product->processing_time}} Delivery  </p>
+
+                                @endif
                                 <hr>
                                 @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
                                     <button onclick="window.location.href='{{ route('store.product.wefulfill.add-to-import-list',$product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
@@ -134,7 +146,7 @@
                 <div class="col-md-12">
                     <div class="block">
                         <div class="block-content ">
-                           <p class="text-center"> No Product Found !</p>
+                            <p class="text-center"> No Product Found !</p>
                         </div>
                     </div>
                 </div>
@@ -143,9 +155,9 @@
 
         </div>
         <div class="row">
-            <div class="col-md-12 text-center" style="font-size: 17px">
-                {!! $products->links() !!}
-            </div>
+                <div class="col-md-12 text-center" style="font-size: 17px">
+                    {!! $products->links() !!}
+                </div>
         </div>
     </div>
 

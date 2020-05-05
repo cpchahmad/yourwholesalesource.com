@@ -151,7 +151,8 @@
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3">
-                Wallet Balance  : {{number_format($balance,2)}} USD
+                <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
+
             </div>
 
             <div class="dropdown d-inline-block ml-2">
