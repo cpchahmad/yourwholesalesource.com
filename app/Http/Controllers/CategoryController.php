@@ -34,6 +34,13 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::find($id);
+        if ($request->hasFile('icon')) {
+            $image =  $request->file('icon');
+            $destinationPath = 'icons/';
+            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+            $image->move($destinationPath, $filename);
+            $category->icon = $filename;
+        }
         $category->title = $request->title;
         $category->save();
         return redirect()->back()->with('success','Category updated successfully!');

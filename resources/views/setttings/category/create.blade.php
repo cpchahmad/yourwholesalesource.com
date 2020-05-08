@@ -124,7 +124,7 @@
                                 <td class="text-center">
                                     <i class="fa fa-angle-right"></i>
                                 </td>
-                                <td class="font-w600">{{ $category->title }}</td>
+                                <td class="font-w600"> @if($category->icon != null) <img class="img-avatar img-avatar48" src="{{asset('icons')}}/{{$category->icon}}" alt=""> @endif {{ $category->title }}</td>
                                 <td>
                                     <span class="label label-primary"></span>
                                 </td>
@@ -155,11 +155,16 @@
                                             <div class="block-content">
                                                 <form class="form-horizontal push-10-t"
                                                       action="{{ route('category.update', $category->id) }}"
-                                                      method="post">
+                                                      method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="form-group">
+                                                        <label for="">Title</label>
                                                         <input type="text" class="form-control" name="title"
                                                                value="{{ $category->title }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Icon</label>
+                                                        <input type="file" class="form-control" name="icon">
                                                     </div>
                                                     <div class="form-group text-right">
                                                         <button class="btn btn-sm btn-success " type="submit">Update
