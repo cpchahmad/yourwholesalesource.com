@@ -266,14 +266,7 @@
       <workItem from="1588663612053" duration="2044000" />
       <workItem from="1588665692298" duration="15212000" />
       <workItem from="1588916141235" duration="6963000" />
-      <workItem from="1588965308524" duration="3198000" />
-    </task>
-    <task id="LOCAL-00033" summary="09042020F">
-      <created>1586445897893</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1586445897893</updated>
+      <workItem from="1588965308524" duration="4124000" />
     </task>
     <task id="LOCAL-00034" summary="12:25-10042020Fazal">
       <created>1586503539935</created>
@@ -611,7 +604,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588920632349</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="09052020-category-icon">
+      <created>1588969199661</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1588969199661</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -633,7 +633,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="13042020F" />
     <MESSAGE value="14042020" />
     <MESSAGE value="14042020Fazal" />
     <MESSAGE value="14042020F" />
@@ -658,7 +657,8 @@
     <MESSAGE value="05052020F-fixes" />
     <MESSAGE value="birthday-fixes" />
     <MESSAGE value="birthday-tracking" />
-    <option name="LAST_COMMIT_MESSAGE" value="birthday-tracking" />
+    <MESSAGE value="09052020-category-icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="09052020-category-icon" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
@@ -691,14 +691,14 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1588920631566">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1588970215450">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588920631566" />
-    <state x="129" y="55" key="DiffContextDialog" timestamp="1588917555411">
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588970215450" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1588970213845">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1588917555411" />
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1588970213845" />
     <state x="495" y="160" key="FileChooserDialogImpl" timestamp="1587110132530">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -728,10 +728,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1588920635702">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1588969202648">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1588920635702" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1588969202648" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

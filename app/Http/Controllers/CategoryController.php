@@ -36,7 +36,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         if ($request->hasFile('icon')) {
             $image =  $request->file('icon');
-            $destinationPath = 'icons/';
+            $destinationPath = 'categories-icons/';
             $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
             $image->move($destinationPath, $filename);
             $category->icon = $filename;

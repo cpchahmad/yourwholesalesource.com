@@ -39,7 +39,7 @@
                         <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
-                                    <p class="m-0" style="font-size:14px;"> @if($category->icon != null) <img class="img-avatar" src="{{asset('icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
+                                    <p class="m-0" style="font-size:14px;"> @if($category->icon != null) <img class="img-avatar" src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
                             </div>
                         </a>
@@ -60,7 +60,7 @@
                         <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
-                                    <p class="m-0" style="font-size:14px;"> @if($category->icon != null) <img class="img-avatar" src="{{asset('icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
+                                    <p class="m-0" style="font-size:14px;"> @if($category->icon != null) <img class="img-avatar" src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
                             </div>
                         </a>
