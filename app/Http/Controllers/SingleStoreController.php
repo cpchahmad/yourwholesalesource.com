@@ -7,6 +7,7 @@ use App\Customer;
 use App\OrderTransaction;
 use App\Product;
 use App\RetailerImage;
+use App\RetailerOrder;
 use App\RetailerProduct;
 use App\Shop;
 use App\User;
@@ -178,6 +179,19 @@ class SingleStoreController extends Controller
         $payments = OrderTransaction::where('shop_id',$shop->id)->newQuery();
         return view('single-store.orders.payment_history')->with([
            'payments' =>  $payments->orderBy('created_at')->paginate(20),
+        ]);
+    }
+
+    public function tracking_info(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $orders = RetailerOrder::where('shop_id',$shop->id)->newQuery();
+        if($request->has('search')){
+            $orders->where('name','LIKE','%'.$request->input('search').'%');
+        }
+        return view('single-store.orders.tracking_info')->with([
+            'orders' =>  $orders->orderBy('created_at')->paginate(20),
+            'search' =>$request->input('search')
+
         ]);
     }
 }
