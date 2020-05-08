@@ -284,15 +284,11 @@
                                             @foreach($product->has_images()->orderBy('position')->get() as $image)
                                                 <div class="col-md-4 mb2 preview-image animated fadeIn" >
                                                     <div class="options-container fx-img-zoom-in fx-opt-slide-right">
-                                                        <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)
                                                         @if($image->isV == 0)
-                                                            url({{asset('images')}}/{{$image->image}})
-                                                        @else url({{asset('images/variants')}}/{{$image->image}})
-                                                        @endif
+                                                            <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
                                                         @else
-                                                            url(https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg)
-                                                        @endif">
-                                                        </div>
+                                                            <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        @endif
                                                         <div class="options-overlay bg-black-75">
                                                             <div class="options-overlay-content">
                                                                 <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('store.import_list.product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
