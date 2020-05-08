@@ -61,13 +61,14 @@ class RetailerProductController extends Controller
                 $retailerProduct->save();
                 /*Product Images Copy*/
                 if(count($product->has_images) > 0){
-                    foreach ($product->has_images as $image){
+                    foreach ($product->has_images()->orderBy('position')->get() as $index => $image){
                         $retailerProductImage = new RetailerImage();
                         $retailerProductImage->isV = $image->isV;
                         $retailerProductImage->product_id = $retailerProduct->id;
                         $retailerProductImage->shop_id =  $retailerProduct->shop_id;
                         $retailerProductImage->user_id =  $retailerProduct->user_id;
                         $retailerProductImage->image = $image->image;
+                        $retailerProductImage->position = $index+1;
                         $retailerProductImage->save();
                     }
                 }

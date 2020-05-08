@@ -217,9 +217,6 @@
                                                                                 <a class="img-avatar-variant btn btn-sm btn-primary text-white mb2" data-form="#varaint_image_form_{{$index}}{{$v->id}}">Upload New Picture</a>
 
                                                                             </div>
-
-
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
