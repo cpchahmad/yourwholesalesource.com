@@ -72,7 +72,7 @@
 
 
                 <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.import_list')}}">
+                    <a class="nav-main-link" href="{{route('store.payments')}}">
                         <i class="nav-main-link-icon si si-bag"></i>
                         <span class="nav-main-link-name">Payment History</span>
                     </a>

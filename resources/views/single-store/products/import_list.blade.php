@@ -102,7 +102,7 @@
                             <div class="row">
                                 <?php
                                 if(count($product->has_images) > 0){
-                                    $images = $product->has_images;
+                                    $images = $product->has_images()->orderBy('position')->get();
                                 }
                                 else{
                                     $images = [];
@@ -238,6 +238,26 @@
                                                     </tbody>
                                                 </form>
                                             @endforeach
+                                            @else
+
+                                            <tr>
+                                                <td class="variant_title">
+                                                    Default
+                                                </td>
+                                                <td class="text-center">
+                                                    <img class="img-avatar " style="border: 1px solid whitesmoke" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
+                                                </td>
+                                                <td><input type="text" class="form-control" readonly value="{{$product->cost}}" placeholder="$0.00"></td>
+                                                <td><input type="text" class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
+                                                <td><input type="text" class="form-control" name="sku" value="{{$product->sku}}"></td>
+                                                <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder="">
+                                                </td>
+
+                                            </tr>
+
                                         @endif
                                     </table>
                                 </div>
@@ -264,7 +284,7 @@
                                     @if(count($product->has_images) >0)
                                         <div class="row editable ">
 
-                                            @foreach($product->has_images as $image)
+                                            @foreach($product->has_images()->orderBy('position')->get() as $image)
                                                 <div class="col-md-4 mb2 preview-image animated fadeIn" >
                                                     <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                         <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)

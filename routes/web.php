@@ -132,6 +132,9 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
         Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');
 
+        Route::get('/payments', 'SingleStoreController@payment_history')->name('store.payments');
+
+
 
 
     });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Customer;
+use App\OrderTransaction;
 use App\Product;
 use App\RetailerImage;
 use App\RetailerProduct;
@@ -171,5 +172,12 @@ class SingleStoreController extends Controller
             return redirect()->back()->with('success','Customers Synced Successfully!');
         }
 
+    }
+    public function payment_history(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $payments = OrderTransaction::where('shop_id',$shop->id)->newQuery();
+        return view('single-store.orders.payment_history')->with([
+           'payments' =>  $payments->orderBy('created_at')->paginate(20),
+        ]);
     }
 }

@@ -96,14 +96,17 @@
                                     {{--                                    @endif">--}}
                                     {{--                                    </div>--}}
                                     @if(count($product->has_images) > 0)
-                                    @if($product->has_images[0]->isV == 0)
-                                        <img class="img-fluid options-item" src="{{asset('images')}}/{{$product->has_images[0]->image}}">
-                                    @else   <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$product->has_images[0]->image}}" alt="">
-                                    @endif
+                                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                            @if($index == 0)
+                                                @if($image->isV == 0)
+                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">
+                                                @else   <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                @endif
+                                            @endif
+                                        @endforeach
                                     @else
                                         <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                     @endif
-
 
                                 </a>
                                 <div class="options-overlay bg-black-75">
@@ -127,8 +130,8 @@
                                 </div>
 
                                 @if($product->processing_time != null)
-                                <hr>
-                                <p class="text-muted font-size-sm">  Estimated {{$product->processing_time}} Delivery  </p>
+                                    <hr>
+                                    <p class="text-muted font-size-sm">  Estimated {{$product->processing_time}} Processing Time  </p>
 
                                 @endif
                                 <hr>
@@ -155,9 +158,9 @@
 
         </div>
         <div class="row">
-                <div class="col-md-12 text-center" style="font-size: 17px">
-                    {!! $products->links() !!}
-                </div>
+            <div class="col-md-12 text-center" style="font-size: 17px">
+                {!! $products->links() !!}
+            </div>
         </div>
     </div>
 

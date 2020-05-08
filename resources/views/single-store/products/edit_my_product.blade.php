@@ -38,7 +38,7 @@
                 <div class="row mb2">
                     <?php
                     if(count($product->has_images) > 0){
-                        $images = $product->has_images;
+                        $images = $product->has_images()->orderBy('position')->get();
                     }
                     else{
                         $images = [];
@@ -113,7 +113,7 @@
                         @if(count($product->has_images) >0)
                             <div class="row editable ">
 
-                                @foreach($product->has_images as $image)
+                                @foreach($product->has_images()->orderBy('position')->get() as $image)
                                     <div class="col-md-4 mb2 preview-image animated fadeIn" >
                                         <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                             <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)

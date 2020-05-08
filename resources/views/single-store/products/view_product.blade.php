@@ -47,7 +47,7 @@
                         <div class="row js-gallery" >
                             <?php
                             if(count($product->has_images) > 0){
-                                $images = $product->has_images;
+                                $images = $product->has_images()->orderBy('position')->get();
                             }
                             else{
                                 $images = [];

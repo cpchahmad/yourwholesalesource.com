@@ -341,6 +341,7 @@ class ProductController extends Controller
                         $image->isV = 1;
                         $image->product_id = $product->id;
                         $image->image = $filename;
+                        $image->position = count($product->has_images)+1;
                         $image->save();
                         $variant->image = $image->id;
                         $variant->save();
@@ -377,7 +378,7 @@ class ProductController extends Controller
 
                 if ($request->input('type') == 'existing-product-image-add') {
                     if ($request->hasFile('images')) {
-                        foreach ($request->file('images') as $image) {
+                        foreach ($request->file('images') as $index => $image) {
                             $destinationPath = 'images/';
                             $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                             $image->move($destinationPath, $filename);
@@ -385,6 +386,7 @@ class ProductController extends Controller
                             $image->isV = 0;
                             $image->product_id = $product->id;
                             $image->image = $filename;
+                            $image->position = count($product->has_images) + $index+1;
                             $image->save();
                             $imageData = [
                                 'image' => [
