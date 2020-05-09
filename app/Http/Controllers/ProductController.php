@@ -283,7 +283,7 @@ class ProductController extends Controller
                     $productdata = [
                         "product" => [
                             "vendor" => $request->vendor,
-                            "product_type" => $request->type,
+                            "product_type" => $request->product_type,
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
