@@ -275,7 +275,7 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'organization') {
-                    $product->type = $request->type;
+                    $product->type = $request->product_type;
                     $product->vendor = $request->vendor;
                     $product->tags = $request->tags;
                     $product->save();
