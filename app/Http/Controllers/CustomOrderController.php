@@ -36,7 +36,7 @@ class CustomOrderController extends Controller
 
         $customers = Customer::where('user_id',Auth::id())->get();
         return view('non_shopify_users.orders.create')->with([
-            'products' => $products->paginate(50),
+            'products' => $products->get(),
             'customers' => $customers,
             'countries' => Country::all(),
         ]);
@@ -87,7 +87,7 @@ class CustomOrderController extends Controller
             });
         }
         $html = view('non_shopify_users.orders.product-browse-section')->with([
-            'products' => $products->paginate(50),
+            'products' => $products->get(),
         ])->render();
 
         return response()->json([
