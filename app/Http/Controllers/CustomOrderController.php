@@ -30,6 +30,10 @@ class CustomOrderController extends Controller
 
     public function show_create_form(){
         $products = Product::query();
+        $products->whereHas('hasVariants',function (){
+
+        });
+
         $customers = Customer::where('user_id',Auth::id())->get();
         return view('non_shopify_users.orders.create')->with([
             'products' => $products->paginate(50),
