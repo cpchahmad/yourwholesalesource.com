@@ -154,6 +154,8 @@ class CustomOrderController extends Controller
             if($variant != null){
                 $new_line = new RetailerOrderLineItem();
                 $new_line->retailer_order_id = $new->id;
+                $new_line->shopify_product_id = $variant->linked_product->shopify_id;
+                $new_line->shopify_variant_id = $variant->shopify;
                 $new_line->title = $variant->linked_product->title;
                 $new_line->quantity = $request->input('quantity')[$index];
                 $new_line->sku = $variant->sku;
