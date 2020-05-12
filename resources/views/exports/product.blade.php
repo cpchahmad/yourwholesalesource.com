@@ -7,7 +7,7 @@
         <th>Vendor</th>
         <th>Type</th>
         <th>Tags</th>
-        <th>Published</th>
+{{--        <th>Published</th>--}}
         <th>Option1 Name</th>
         <th>Option1 Value</th>
         <th>Option2 Name</th>
@@ -42,7 +42,7 @@
             <td>{{ $product['vendor'] }}</td>
             <td>{{ $product['product_type'] }}</td>
             <td>{{ $product['tags'] }}</td>
-            <td>{{ $product['published'] }}</td>
+{{--            <td>{{ $product['published'] }}</td>--}}
             <td>{{ $product['option1_name'] }}</td>
             <td>{{ $product['variant_option1'] }}</td>
             <td>{{ $product['option2_name'] }}</td>
