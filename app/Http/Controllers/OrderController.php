@@ -9,6 +9,8 @@ use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
+use App\ShippingRate;
+use App\Zone;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -202,6 +204,35 @@ class OrderController extends Controller
                         }
                         $new->cost_to_pay = $cost_to_pay;
                         $new->save();
+
+                        if(isset($order->shipping_address)){
+                            $total_weight = 0;
+                            $country = $order->shipping_address->country;
+                            foreach ($new->line_items as $index => $v){
+                                if($v->linked_product != null){
+                                    $total_weight = $total_weight + ( $v->linked_product->weight *  $v->quantity);
+                                }
+                            }
+                            $zoneQuery = Zone::query();
+                            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                                $q->where('name',$country);
+                            });
+                            $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+                            $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
+                            $shipping_rates->whereRaw('min <='.$total_weight);
+                            $shipping_rates->whereRaw('max >='.$total_weight);
+                            $shipping_rates =  $shipping_rates->first();
+                            if($shipping_rates != null){
+                                $new->shipping_price = $shipping_rates->shipping_price;
+                                $new->total_price =  $order->total_price + $shipping_rates->shipping_price;
+                                $new->save;
+                            }
+                            else{
+                                $new->shipping_price = 0;
+                                $new->save;
+                            }
+                        }
 
 
                         /*Maintaining Log*/
