@@ -37,7 +37,7 @@ class WalletController extends Controller
             } else {
                 $wallet = $user->has_wallet;
             }
-            return view('single-store.wallet.index')->with([
+            return view('non_shopify_users.wallet.index')->with([
                 'user' => $user,
                 'wallet' => $wallet
             ]);
@@ -58,6 +58,8 @@ class WalletController extends Controller
             }
         }
     }
+
+
 
     /**
      * @param $id

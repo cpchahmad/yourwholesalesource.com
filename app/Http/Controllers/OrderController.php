@@ -25,7 +25,7 @@ class OrderController extends Controller
     }
 
     public function index(Request $request){
-        $orders  = RetailerOrder::where('shop_id',$this->helper->getShop()->id)->newQuery();
+        $orders  = RetailerOrder::where('shop_id',$this->helper->getShop()->id)->where('custom',0)->newQuery();
         $orders = $orders->orderBy('created_at','DESC')->paginate(30);
 
         return view('single-store.orders.index')->with([

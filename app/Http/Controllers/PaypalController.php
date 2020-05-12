@@ -36,6 +36,13 @@ class PaypalController extends Controller
                  'qty' =>$item->quantity
              ]);
          }
+         if($retailer_order->shipping_price != null){
+             array_push($items,[
+                 'name' => 'Shipping Price',
+                 'price' => $retailer_order->shipping_price,
+                 'qty' =>1
+             ]);
+         }
          $data = [];
          $data['items'] = $items;
          $data['invoice_id'] = 'WeFullFill-Invoice'.rand(1,1000);
@@ -62,8 +69,14 @@ class PaypalController extends Controller
     public function paypal_payment_cancel(Request $request)
     {   $retailer_order = RetailerOrder::find($request->id);
       if($retailer_order != null){
-          return redirect()->route('store.order.view',$retailer_order->id)->with('error','Paypal Transaction Process cancelled successfully');
+          if($retailer_order->custom == 0){
+              return redirect()->route('store.order.view',$retailer_order->id)->with('error','Paypal Transaction Process cancelled successfully');
 
+          }
+          else{
+              return redirect()->route('users.order.view',$retailer_order->id)->with('error','Paypal Transaction Process cancelled successfully');
+
+          }
       }
       else{
           return redirect()->route('store.orders')->with('error','Paypal Transaction Process cancelled successfully');
@@ -99,8 +112,13 @@ class PaypalController extends Controller
             $order_log->status = "paid";
             $order_log->retailer_order_id = $retailer_order->id;
             $order_log->save();
+            if($retailer_order->custom == 0){
+                return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+            }
+            else{
+                return redirect()->route('users.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
 
-            return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+            }
         }
         else{
             return redirect()->route('store.orders')->with('error','Order Not Found!');

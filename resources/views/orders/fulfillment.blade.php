@@ -104,13 +104,17 @@
                     <div class="block-content">
                         @if($shipping != null)
                             <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
+                                @if($order->custom == 0)
                                 <br> {{$shipping->company}}
+                                @endif
                                 <br> {{$shipping->address1}}
                                 <br> {{$shipping->address2}}
                                 <br> {{$shipping->city}}
                                 <br> {{$shipping->province}} {{$shipping->zip}}
                                 <br> {{$shipping->country}}
+                                @if($order->custom == 0)
                                 <br> {{$shipping->phone}}
+                                    @endif
                             </p>
                             @else
                             <p style="font-size: 14px"> No Shipping Address

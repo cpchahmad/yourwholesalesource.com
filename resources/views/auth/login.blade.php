@@ -29,7 +29,7 @@
                             <div class="block-content tab-content">
                                 <div class="tab-pane active" id="by_email" role="tabpanel">
                                     <form class="js-validation-signin" action="{{ route('login') }}" method="POST">
-                                        {{ csrf_field() }}
+                                     @csrf
                                         <div class="py-3">
                                             <div class="form-group">
                                                 <label>Email</label>
@@ -70,7 +70,7 @@
                                 <div class="tab-pane" id="by_store" role="tabpanel">
                                     <div class="py-3">
                                     <form method="POST" action="{{ route('authenticate') }}">
-                                        {{ csrf_field() }}
+                                       @csrf
                                         <div class="form-group">
                                             <label for="shop">Domain</label>
                                                 <input id="shop" name="shop" class="form-control form-control-alt form-control-lg"

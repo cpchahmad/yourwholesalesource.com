@@ -131,7 +131,7 @@
 
                                 @if($product->processing_time != null)
                                     <hr>
-                                    <p class="text-muted font-size-sm">  Estimated {{$product->processing_time}} Processing Time  </p>
+                                    <p class="text-muted font-size-sm">  Dispatch Within {{$product->processing_time}} </p>
 
                                 @endif
                                 <hr>

@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Redirect;
+
 Route::get('/reset', 'HelperController@reset_all');
 Route::get('/reset-retailers', 'HelperController@deleteRetailer');
 
@@ -152,6 +153,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
             Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
             Route::get('/stores','ShopifyUsersController@stores')->name('users.stores');
+            Route::get('/custom-orders','CustomOrderController@index')->name('users.custom.orders');
+            Route::get('/custom-orders/create','CustomOrderController@show_create_form')->name('users.custom.orders.create');
+            Route::post('/get/shipping', 'CustomOrderController@getShippingRate')->name('users.order.shipping.rate');
+            Route::post('/custom-orders/create','CustomOrderController@save_draft_order')->name('users.custom.orders.create.post');
+            Route::get('/custom-order/view/{id}', 'CustomOrderController@view_order')->name('users.order.view');
+            Route::get('/custom-order/delete/{id}', 'CustomOrderController@delete')->name('users.order.delete');
+
+
+
+
             Route::group(['middleware' => ['check_user_shop']], function () {
 
             });
@@ -190,3 +201,5 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 });
 
 Route::get('/variant/{id}/change/image/{image_id}', 'ProductController@change_image')->name('change_image');
+Route::get('/search/products', 'CustomOrderController@find_products')->name('find_products');
+Route::get('/get_selected_variants', 'CustomOrderController@get_selected_variants')->name('get_selected_variants');

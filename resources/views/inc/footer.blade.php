@@ -2,7 +2,7 @@
     <div class="content py-3">
         <div class="row font-size-sm">
             <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
-                Developed for <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="" target="_blank">Fantasy Supplier</a>
+                Developed for <i class="fa fa-bolt text-danger"></i> by <a class="font-w600" href="https://tetralogicx.com" target="_blank">Tetralogicx Pvt Ltd</a>
             </div>
         </div>
     </div>
@@ -12,6 +12,7 @@
 <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
 
 <script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('js/shopify-user.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/dropzone/dist/dropzone.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>

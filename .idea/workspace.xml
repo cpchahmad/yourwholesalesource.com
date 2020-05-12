@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="592cbccb-ea98-4898-96af-a86e6d741a64" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/non_shopify_users/orders/view.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminOrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminOrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaypalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaypalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WalletController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WalletController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/RetailerOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/RetailerOrder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/shopify-user.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/shopify-user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/inc/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inc/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/shopify_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/shopify_sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/fulfillment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/fulfillment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/orders/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/orders/view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/single-store/products/wefullfill_products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/single-store/products/wefullfill_products.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +176,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/setttings/wallets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/non_shopify_users" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
@@ -168,11 +185,11 @@
       <recent name="C:\laragon\www\ERDPSHOPIFY\resources\views\setttings\category" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\resources\views\non_shopify_users" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\resources\views\setttings\wallets" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\resources\views\single-store\products" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\js\plugins" />
       <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\img\logos" />
-      <recent name="C:\xampp\htdocs\Fantasy-Supplier-Dropshipping-Applicaiton\public\assets\img\favicons" />
     </key>
   </component>
   <component name="RunManager">
@@ -264,20 +281,9 @@
       <workItem from="1588665692298" duration="15212000" />
       <workItem from="1588916141235" duration="6963000" />
       <workItem from="1588965308524" duration="4815000" />
-    </task>
-    <task id="LOCAL-00035" summary="13042020F">
-      <created>1586774574309</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1586774574309</updated>
-    </task>
-    <task id="LOCAL-00036" summary="130420202F">
-      <created>1586774884698</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1586774884698</updated>
+      <workItem from="1589012856168" duration="7086000" />
+      <workItem from="1589188420390" duration="17458000" />
+      <workItem from="1589230176772" duration="13502000" />
     </task>
     <task id="LOCAL-00037" summary="13042020F">
       <created>1586775090948</created>
@@ -608,7 +614,21 @@
       <option name="project" value="LOCAL" />
       <updated>1588970232532</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="09052020-fix">
+      <created>1589013011130</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1589013011131</updated>
+    </task>
+    <task id="LOCAL-00085" summary="09052020-fix">
+      <created>1589013023375</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1589013023375</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +650,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="14042020" />
     <MESSAGE value="14042020Fazal" />
     <MESSAGE value="14042020F" />
     <MESSAGE value="adjustments" />
@@ -655,7 +674,8 @@
     <MESSAGE value="birthday-fixes" />
     <MESSAGE value="birthday-tracking" />
     <MESSAGE value="09052020-category-icon" />
-    <option name="LAST_COMMIT_MESSAGE" value="09052020-category-icon" />
+    <MESSAGE value="09052020-fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="09052020-fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
@@ -666,15 +686,15 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1588016364803" />
-    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588966196546">
+    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589257076340">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1588966196546" />
+    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1589257076340" />
     <state x="530" y="189" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1582634641816" />
-    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0" timestamp="1584343568041">
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0" timestamp="1589278191051">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/0.0.1366.728@0.0.1366.728" timestamp="1584343568041" />
+    <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0/0.0.1366.728@0.0.1366.728" timestamp="1589278191051" />
     <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method1" timestamp="1588064102182">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -688,10 +708,10 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1588970231651">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1589013020974">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588970231651" />
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589013020974" />
     <state x="129" y="55" key="DiffContextDialog" timestamp="1588970213845">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -713,10 +733,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="309" y="178" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1586939166223" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1588919074941">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1589215812355">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1588919074941" />
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1589215812355" />
     <state x="504" y="298" key="ReplaceDuplicatesPrompt" timestamp="1587978255398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -725,10 +745,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1588970296335">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1589013029495">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1588970296335" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589013029495" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -742,14 +762,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1588017305582" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1586346184176">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1589255711681">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1586346184176" />
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1588968993668">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1589255711681" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1589279663298">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1588968993668" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1589279663298" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
 </project>

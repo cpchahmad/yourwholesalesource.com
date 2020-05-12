@@ -114,3 +114,10 @@ div.tagsinput span.tag a {
 .pagination{
     justify-content: center;
 }
+
+.img-avatar16 {
+    display: inline-block !important;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 0;
+}

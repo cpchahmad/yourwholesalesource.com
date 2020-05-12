@@ -1,17 +1,17 @@
-@extends('layout.index')
+@extends('layout.shopify')
 @section('content')
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                    All Orders
+                   Custom Orders
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">All Orders</a>
+                            <a class="link-fx" href="">My Custom Orders</a>
                         </li>
                     </ol>
                 </nav>
@@ -33,6 +33,7 @@
             </div>
         </form>
 
+
         <div class="row" >
             <div class="col-md-12">
                 <div class="block">
@@ -43,12 +44,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Shop / User</th>
-                                    <th>Custom</th>
                                     <th>Order Date</th>
-                                    <th>Price</th>
+                                    <th>Cost</th>
                                     <th>Status</th>
-                                    <th></th>
+                                    <th style="text-align: right">
+                                        <a href="{{route('users.custom.orders.create')}}"
+                                           class="btn btn-sm btn-success" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
+                                           data-original-title="Sync Orders"><i class="fa fa-plus"></i> Add New Order</a></th>
                                 </tr>
                                 </thead>
 
@@ -56,33 +58,14 @@
                                     <tbody class="">
                                     <tr>
                                         <td>{{$index+1}}</td>
-                                        <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
-                                        <td>
-                                            @if($order->custom == 0)
-                                                @if($order->has_store != null)
-                                                    <span class="badge badge-primary" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
-                                                @else
-                                                    <span class="badge badge-warning" style="font-size: 12px"> Manual </span>
-                                                @endif
-                                            @else
-                                                <span class="badge badge-primary" style="font-size: 12px"> {{$order->has_user->email}}</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($order->custom == 1)
-                                                <span class="badge badge-primary" style="font-size: 12px"> Custom </span>
-                                            @else
-                                                <span class="badge badge-warning" style="font-size: 12px"> Shopify </span>
-                                            @endif
-                                        </td>
+                                        <td class="font-w600"><a href="{{route('users.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>
                                             {{date_create($order->shopify_created_at)->format('D m, Y h:i a') }}
                                         </td>
-
                                         <td>
                                             {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
-                                        </td>
 
+                                        </td>
                                         <td>
                                             @if($order->status == 'paid')
                                                 <span class="badge badge-primary" style="float: right;font-size: medium"> {{$order->status}}</span>
@@ -104,9 +87,12 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('admin.order.view',$order->id)}}"
+                                                <a href="{{route('users.order.view',$order->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Order"><i class="fa fa-eye"></i></a>
+                                                <a href="{{route('users.order.delete',$order->id)}}"
+                                                   class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="Delete Order"><i class="fa fa-times"></i></a>
                                             </div>
 
                                         </td>
@@ -117,7 +103,7 @@
                                 @endforeach
                             </table>
                         @else
-                            <p>No Orders Found</p>
+                            <p>No Orders Found  <a href="{{route('users.custom.orders.create')}}" class="btn btn-sm btn-success" style="font-size: 12px;float: right" type="button" data-toggle="tooltip" title="" data-original-title="Sync Orders"><i class="fa fa-plus"></i> Add New Order</a></p>
                         @endif
                     </div>
                 </div>

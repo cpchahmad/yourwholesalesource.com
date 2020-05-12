@@ -20,6 +20,14 @@ class RetailerOrder extends Model
         return $this->belongsTo('App\Shop','shop_id');
     }
 
+    public function has_customer(){
+        return $this->belongsTo('App\Customer','customer_id');
+    }
+
+    public function has_user(){
+        return $this->belongsTo('App\User','user_id');
+    }
+
     public function fulfillments(){
         return $this->hasMany('App\OrderFulfillment','retailer_order_id');
     }
