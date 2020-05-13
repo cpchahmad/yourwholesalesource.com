@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('layout.shopify')
 @section('content')
     <style>
         iframe{
@@ -10,6 +10,7 @@
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
                     {{ \Illuminate\Support\Str::limit($product->title,20,'...') }}
+
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -19,7 +20,7 @@
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Products</a>
                         </li>
-                        <li class="breadcrumb-item">  {{ \Illuminate\Support\Str::limit($product->title,20,'...') }}
+                        <li class="breadcrumb-item">                    {{ \Illuminate\Support\Str::limit($product->title,20,'...') }}
                         </li>
                     </ol>
                 </nav>
@@ -28,10 +29,7 @@
     </div>
     <div class="content">
         <div class="row mb2">
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6 text-right">
-                <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
+            <div class="col-md-9">
             </div>
         </div>
         <div class="block">
@@ -119,19 +117,18 @@
                         <h2>
                             <a href="{{route('product.edit',$product->id)}}">
                                 {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WEFULLFILL @endif</span>
-
                             </a>
                         </h2>
                         <div class="clearfix" style="margin-top: 5px;width: 100%">
 
                             @if($product->quantity > 0)
                                 <span class="h5">
-                                <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
-                            </span>
+                            <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                        </span>
                             @else
                                 <span class="h5">
-                                <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
-                            </span>
+                            <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
+                        </span>
                             @endif
                             <div class="text-right d-inline-block" style="float: right">
                                 <span class="h3 font-w700 text-success">${{number_format($product->price,2)}} </span>
@@ -198,3 +195,4 @@
         </div>
     </div>
 @endsection
+

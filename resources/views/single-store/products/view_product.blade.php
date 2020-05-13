@@ -123,7 +123,7 @@
                         <!-- Vital Info -->
                         <h2>
                             <a href="{{route('product.edit',$product->id)}}">
-                                {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">{{$product->fulfilled_by}}</span>
+                                {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WEFULLFILL @endif</span>
                             </a>
                         </h2>
                         <div class="clearfix" style="margin-top: 5px;width: 100%">

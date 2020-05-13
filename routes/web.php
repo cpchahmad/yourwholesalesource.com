@@ -161,6 +161,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/custom-order/delete/{id}', 'CustomOrderController@delete')->name('users.order.delete');
 
 
+            Route::get('/products/wefullfill','CustomOrderController@wefullfill_products')->name('users.product.wefulfill');
+            Route::get('/products/wefullfill/{id}','CustomOrderController@view_fantasy_product')->name('users.product.wefulfill.show');
+
 
 
             Route::group(['middleware' => ['check_user_shop']], function () {

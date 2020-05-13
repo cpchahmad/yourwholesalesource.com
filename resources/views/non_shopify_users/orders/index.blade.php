@@ -5,7 +5,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                   Custom Orders
+                    Custom Orders
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -80,8 +80,10 @@
                                                 <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{$order->status}}</span>
                                             @elseif($order->status == 'completed')
                                                 <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{$order->status}}</span>
+                                            @elseif($order->status == 'new')
+                                                <span class="badge badge-warning" style="font-size: small"> Draft </span>
                                             @else
-                                                <span class="badge badge-success" style="font-size: small"> {{$order->status}}</span>
+                                                <span class="badge badge-success" style="font-size: small">  {{$order->status}} </span>
                                             @endif
 
                                         </td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Country;
 use App\Customer;
 use App\OrderLog;
@@ -231,6 +232,33 @@ class CustomOrderController extends Controller
         }
         $r->delete();
         return redirect()->back()->with('success','Order Deleted Successfully!');
+    }
+
+    public function wefullfill_products(Request $request){
+        $categories = Category::all();
+        $productQuery = Product::where('status',1)->newQuery();
+        if($request->has('category')){
+            $productQuery->whereHas('has_categories',function($q) use ($request){
+                return $q->where('title','LIKE','%'.$request->input('category').'%');
+            });
+        }
+        if($request->has('search')){
+            $productQuery->where('title','LIKE','%'.$request->input('search').'%')->orWhere('tags','LIKE','%'.$request->input('search').'%');
+        }
+        $products = $productQuery->paginate(12);
+
+        return view('non_shopify_users.product.wefullfill_products')->with([
+            'categories' => $categories,
+            'products' => $products,
+            'search' =>$request->input('search')
+        ]);
+    }
+    public function view_fantasy_product($id){
+        $product = Product::find($id);
+
+        return view('non_shopify_users.product.view_product')->with([
+            'product' => $product,
+        ]);
     }
 
 

@@ -24,6 +24,14 @@
 
 
             <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('users.product.wefulfill')}}">
+                    <i class="nav-main-link-icon si si-present"></i>
+                    <span class="nav-main-link-name">Products</span>
+                </a>
+            </li>
+
+
+            <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-layers"></i>
                     <span class="nav-main-link-name">Orders</span>
@@ -32,7 +40,7 @@
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('users.custom.orders')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Custom Orders</span>
+                            <span class="nav-main-link-name">Orders</span>
                         </a>
                     </li>
 
@@ -66,7 +74,7 @@
                     <span class="nav-main-link-name">Settings</span>
                 </a>
             </li>
-            <li class="nav-main-item">
+            <li class="nav-main-item" style="display: none">
                 <a class="nav-main-link active" href="{{route('users.stores')}}">
                     <i class="nav-main-link-icon si si-share"></i>
                     <span class="nav-main-link-name">Stores</span>
