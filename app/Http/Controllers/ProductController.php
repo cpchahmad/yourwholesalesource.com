@@ -950,7 +950,7 @@ class ProductController extends Controller
                 array_push($product,$temp);
             }
         }
-        return Excel::download(new ProductsExport($product), 'products.csv');
+        return Excel::download(new ProductsExport($product), $productData->handle.'.csv');
     }
 
     public function change_image($id,$image_id,Request $request){
