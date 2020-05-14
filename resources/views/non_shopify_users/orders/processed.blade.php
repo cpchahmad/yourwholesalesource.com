@@ -176,7 +176,7 @@
                                     Cost Paid
                                 </td>
                                 <td align="right">
-                                    {{number_format($orders->where('paid',1)->sum('cost_to_pay'),2)}} {{$order->currency}}
+                                    {{number_format($orders->where('paid',1)->sum('cost_to_pay'),2)}} USD
                                 </td>
                             </tr>
 
@@ -185,7 +185,7 @@
                                     Cost to Pay
                                 </td>
                                 <td align="right">
-                                    {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}
+                                    {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} USD
                                 </td>
                             </tr>
                             <tr>
