@@ -157,3 +157,8 @@ div.tagsinput span.tag a {
     text-align: center;
     line-height: 30px;
 }
+
+.invalid-feedback{
+    display: block !important;
+    margin-top: 5px;
+}
