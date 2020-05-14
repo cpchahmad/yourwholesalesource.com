@@ -1,8 +1,8 @@
 @extends('layout.credential')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 col-xl-4">
-            <div class="block block-themed block-fx-shadow mb-0">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12">
+            <div class="block block-themed  mb-0">
                 <div class="block-header bg-success">
                     <h3 class="block-title">Sign In</h3>
                     <div class="block-options">
@@ -14,9 +14,7 @@
                 </div>
                 <div class="block-content">
                     <div class="">
-                        <h3 class="mb-2">WeFullFill</h3>
                         <p>Welcome, please Create an account to continue.</p>
-
                         <div class="block">
                             <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" role="tablist">
                                 <li class="nav-item">

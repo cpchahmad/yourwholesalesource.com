@@ -121,3 +121,39 @@ div.tagsinput span.tag a {
     height: 25px !important;
     border-radius: 0;
 }
+
+.RightSections{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.right {
+    padding: 0px 50px;
+    color: white;
+}
+.description-title {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.description-content {
+    font-size: 16px;
+    line-height: 40px;
+}
+.description-tags {
+    margin-top: 40px;
+}
+
+.tag_item {
+    width: 30%;
+    margin-right: 2%;
+    margin-bottom: 15px;
+    height: 30px;
+    border-radius: 15px;
+    background-color:#5ec47b;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}

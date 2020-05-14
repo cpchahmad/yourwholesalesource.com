@@ -1,8 +1,8 @@
 @extends('layout.credential')
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 col-xl-4">
-            <div class="block block-themed block-fx-shadow mb-0">
+        <div class="col-md-12 col-lg-12 col-xl-12">
+            <div class="block block-themed  mb-0">
                 <div class="block-header bg-success">
                     <h3 class="block-title">Reset Password</h3>
                     <div class="block-options">
@@ -13,7 +13,6 @@
                 </div>
                 <div class="block-content">
                     <div class="">
-                        <h3 class="mb-2">WeFullFill</h3>
                         <p>Welcome, please enter email to reset password.</p>
                         <div class="block">
 
