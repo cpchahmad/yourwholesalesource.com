@@ -218,7 +218,13 @@ class WalletController extends Controller
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
                 $new_transaction->amount =  $retailer_order->cost_to_pay;
-                $new_transaction->name = $retailer_order->has_store->shopify_domain;
+                if($retailer_order->custom == 0){
+                    $new_transaction->name = $retailer_order->has_store->shopify_domain;
+                }
+                else{
+                    $new_transaction->name = Auth::user()->email;
+                }
+
                 $new_transaction->retailer_order_id = $retailer_order->id;
                 $new_transaction->user_id = $retailer_order->user_id;
                 $new_transaction->shop_id = $retailer_order->shop_id;
