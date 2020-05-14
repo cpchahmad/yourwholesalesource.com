@@ -7,6 +7,7 @@ use App\Country;
 use App\Customer;
 use App\Imports\UsersImport;
 use App\OrderLog;
+use App\OrderTransaction;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerOrder;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Srmklive\PayPal\Services\ExpressCheckout;
 
 class CustomOrderController extends Controller
 {
@@ -462,7 +464,110 @@ class CustomOrderController extends Controller
         return view('non_shopify_users.orders.processed')->with([
             'orders' => $custom_orders->get(),
             'data' => $temp_data,
+            'file' => $new_file
         ]);
+    }
+
+
+    public function bulk_import_order_paypal(Request $request){
+        $new_file = UserFile::find($request->id);
+        $custom_orders = RetailerOrder::where('user_id',Auth::id())->where('custom',1)->where('paid',0)->newQuery();
+        $custom_orders->whereHas('imported',function ($q) use ($new_file){
+            $q->where('file_id','=',$new_file->id);
+        });
+        $custom_orders = $custom_orders->get();
+        if(count($custom_orders) > 0){
+            $items = [];
+            $order_total = 0;
+            foreach ($custom_orders as $retailer_order){
+                $order_total = $order_total + $retailer_order->cost_to_pay;
+
+                /*adding order-lime-items for paying through paypal*/
+                foreach ($retailer_order->line_items as $item){
+                    array_push($items,[
+                        'name' => $item->title .' - '.$item->variant_title,
+                        'price' => $item->cost,
+                        'qty' =>$item->quantity
+                    ]);
+                }
+                if($retailer_order->shipping_price != null){
+                    array_push($items,[
+                        'name' => $retailer_order->name .' Shipping Price',
+                        'price' => $retailer_order->shipping_price,
+                        'qty' =>1
+                    ]);
+                }
+            }
+
+
+            $data = [];
+            $data['items'] = $items;
+            $data['invoice_id'] = 'WeFullFill-Import-Bulk-Pay'.rand(1,1000);
+            $data['invoice_description'] = "WeFullFill-Import-Bulk-Pay-Invoice-".rand(1,1000);;
+            $data['return_url'] = route('users.orders.bulk.paypal.success',$new_file->id);
+            $data['cancel_url'] = route('users.orders.bulk.paypal.cancel',$new_file->id);
+            $data['total'] = $order_total;
+
+            $provider = new ExpressCheckout;
+            $response = $provider->setExpressCheckout($data);
+            foreach ($custom_orders as $retailer_order){
+                $retailer_order->paypal_token  = $response['TOKEN'];
+                $retailer_order->save();
+            }
+
+            return redirect($response['paypal_link']);
+        }
+    }
+
+    public function bulk_import_order_paypal_cancel(Request $request){
+        return redirect()->route('users.files.view',$request->id)->with('error','Paypal Transaction Process cancelled successfully');
+    }
+    public function bulk_import_order_paypal_success(Request $request){
+        $file = UserFile::find($request->id);
+        $provider = new ExpressCheckout;
+        $response = $provider->getExpressCheckoutDetails($request->token);
+
+        $custom_orders = RetailerOrder::where('user_id',Auth::id())->where('custom',1)
+            ->where('paid',0)
+            ->where('paypal_token',$request->token)
+            ->newQuery();
+        $custom_orders->whereHas('imported',function ($q) use ($file){
+            $q->where('file_id','=',$file->id);
+        });
+        $custom_orders = $custom_orders->get();
+
+        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING']) && $file  != null && count($custom_orders) > 0)
+        {
+            foreach ($custom_orders as $retailer_order){
+                $retailer_order->paypal_payer_id =$request->PayerID;
+                $new_transaction = new OrderTransaction();
+                $new_transaction->amount =  $retailer_order->cost_to_pay;
+                $new_transaction->name = $response['FIRSTNAME'].' '.$response['LASTNAME'];
+                $new_transaction->retailer_order_id = $retailer_order->id;
+                $new_transaction->paypal_payment_id = $request->PayerID;
+                $new_transaction->user_id = $retailer_order->user_id;
+                $new_transaction->shop_id = $retailer_order->shop_id;
+                $new_transaction->save();
+
+                $retailer_order->paid = 1;
+                $retailer_order->status = 'Paid';
+                $retailer_order->pay_by = 'Paypal';
+                $retailer_order->save();
+
+                /*Maintaining Log*/
+                $order_log =  new OrderLog();
+                $order_log->message = "An amount of ".$new_transaction->amount." USD used to WeFullFill through BULK PAYPAL PAYMENT of ". $response['AMT']." USD on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+                $order_log->status = "paid";
+                $order_log->retailer_order_id = $retailer_order->id;
+                $order_log->save();
+
+            }
+             return redirect()->route('users.files.view',$request->id)->with('success','Bulk Payment Processed Successfully!');
+
+        }
+        else{
+            return redirect()->route('users.files.view',$request->id)->with('error','Bulk Orders Not Found!');
+        }
     }
 
 }

@@ -119,9 +119,7 @@
                                                         <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                                     @endif
                                                 </td>
-
                                                 <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
-
                                                 <td>
                                                     @if($item->fulfillment_status == null)
                                                         <span class="badge badge-warning"> Unfulfilled</span>
@@ -143,6 +141,68 @@
                         @else
                             <p>No Orders Found </p>
                         @endif
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">
+                            Summary
+                        </h3>
+                    </div>
+                    <div class="block-content">
+                        <table class="table table-borderless table-vcenter">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Paid Orders
+                                </td>
+                                <td align="right">
+                                    {{$orders->where('paid',1)->count()}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Unpaid Orders
+                                </td>
+                                <td align="right">
+                                    {{$orders->where('paid',0)->count()}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Cost Paid
+                                </td>
+                                <td align="right">
+                                    {{number_format($orders->where('paid',1)->sum('cost_to_pay'),2)}} {{$order->currency}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Cost to Pay
+                                </td>
+                                <td align="right">
+                                    {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td align="right">
+                                    @if($orders->where('paid',0)->count() > 0)
+                                    <button class="btn btn-success paypal-pay-button" data-href="{{route('users.orders.bulk.paypal',$file->id)}}" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+{{--                                    <button class="btn btn-success wallet-pay-button" data-href="" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>--}}
+                                        @endif
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+
+                        </table>
+
                     </div>
                 </div>
                 <div class="block">

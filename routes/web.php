@@ -163,6 +163,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/files', 'CustomOrderController@files')->name('users.files');
             Route::get('/files/{id}', 'CustomOrderController@file')->name('users.files.view');
 
+            Route::get('/bulk-pay-through-paypal/{id}', 'CustomOrderController@bulk_import_order_paypal')->name('users.orders.bulk.paypal');
+            Route::get('/bulk-pay-through-paypal/{id}/cancel', 'CustomOrderController@bulk_import_order_paypal_cancel')->name('users.orders.bulk.paypal.cancel');
+            Route::get('/bulk-pay-through-paypal/{id}/success', 'CustomOrderController@bulk_import_order_paypal_success')->name('users.orders.bulk.paypal.success');
+
+
             Route::get('/products/wefullfill','CustomOrderController@wefullfill_products')->name('users.product.wefulfill');
             Route::get('/products/wefullfill/{id}','CustomOrderController@view_fantasy_product')->name('users.product.wefulfill.show');
 
