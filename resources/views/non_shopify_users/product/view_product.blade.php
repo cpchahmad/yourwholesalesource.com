@@ -165,7 +165,9 @@
                                                     <td>
                                                         <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
                                                              @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @endif alt=""></td>
+                                                             @else @if($variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @else src="{{asset('images')}}/{{$variant->has_image->image}}" @endif @endif alt="">
+                                                    </td>
+
                                                     <td>
                                                         {{$variant->title}}
                                                     </td>
