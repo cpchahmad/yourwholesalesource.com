@@ -293,7 +293,7 @@ class CustomOrderController extends Controller
                 }
                 if($atleast_one_varaint){
                     $new = new RetailerOrder();
-                    $new->name = $order_name;
+                    $new->name = '#WFI-'.$order_name;
                     $new->taxes_included = '0';
                     $new->total_tax = '0';
                     $new->currency = 'USD';
@@ -438,6 +438,7 @@ class CustomOrderController extends Controller
             return view('non_shopify_users.orders.processed')->with([
                 'orders' => $custom_orders->get(),
                 'data' => $temp_data,
+                'file' => $new_file
             ]);
         }
         else{
