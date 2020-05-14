@@ -169,3 +169,11 @@ div.tagsinput span.tag a {
     display: block !important;
     margin-top: 5px;
 }
+
+.left {
+    border-radius: 5px;
+    background-color: white;
+    width: 90%;
+    height: 390px;
+    margin-top: 30px;
+}
