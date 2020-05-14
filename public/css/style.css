@@ -123,14 +123,14 @@ div.tagsinput span.tag a {
 }
 
 .RightSections{
-    min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 .leftSection {
-    min-height: 100vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,7 +171,5 @@ div.tagsinput span.tag a {
 }
 
 .left {
-    border-radius: 5px;
     width: 90%;
-    height: 390px;
 }
