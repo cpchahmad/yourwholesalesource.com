@@ -54,7 +54,7 @@
                                   Start Your Dropshipping in Minutes
                               </div>
                               <div class="description-content">
-                                  NextsChain is One-Stop e-commerce Solution, Helping you  <span style="font-size: 16px;font-weight: 700;">SAVE MORE TIME AND HIGH PROFIT</span>.
+                                  WEFULLFILL is One-Stop e-commerce Solution, Helping you  <span style="font-size: 16px;font-weight: 700;">SAVE MORE TIME AND HIGH PROFIT</span>.
                                   No inventory, no risk, Let's start dropshipping!
                               </div>
 
