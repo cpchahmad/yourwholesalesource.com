@@ -159,7 +159,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/custom-orders/create','CustomOrderController@save_draft_order')->name('users.custom.orders.create.post');
             Route::get('/custom-order/view/{id}', 'CustomOrderController@view_order')->name('users.order.view');
             Route::get('/custom-order/delete/{id}', 'CustomOrderController@delete')->name('users.order.delete');
-
+            Route::post('/order_file_processing', 'CustomOrderController@process_file')->name('order_file_processing');
+            Route::get('/files', 'CustomOrderController@files')->name('users.files');
+            Route::get('/files/{id}', 'CustomOrderController@file')->name('users.files.view');
 
             Route::get('/products/wefullfill','CustomOrderController@wefullfill_products')->name('users.product.wefulfill');
             Route::get('/products/wefullfill/{id}','CustomOrderController@view_fantasy_product')->name('users.product.wefulfill.show');

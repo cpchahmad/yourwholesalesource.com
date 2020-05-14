@@ -43,6 +43,12 @@
                             <span class="nav-main-link-name">Orders</span>
                         </a>
                     </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('users.files')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Imported Files</span>
+                        </a>
+                    </li>
 
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="">

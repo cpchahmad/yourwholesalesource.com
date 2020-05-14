@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Country;
 use App\Customer;
+use App\Imports\UsersImport;
 use App\OrderLog;
 use App\Product;
 use App\ProductVariant;
@@ -13,10 +14,14 @@ use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\ShippingRate;
+use App\UserFile;
+use App\UserFileTemp;
 use App\Zone;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomOrderController extends Controller
 {
@@ -255,11 +260,210 @@ class CustomOrderController extends Controller
     }
     public function view_fantasy_product($id){
         $product = Product::find($id);
-
         return view('non_shopify_users.product.view_product')->with([
             'product' => $product,
         ]);
     }
 
+    public function process_file(Request $request){
+        if($request->hasFile('import_order_file')){
+
+            $image =  $request->file('import_order_file');
+            $destinationPath = 'import-orders/';
+            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+            $image->move($destinationPath, $filename);
+
+            $new_file = new UserFile();
+            $new_file->file = $filename;
+            $new_file->user_id = Auth::id();
+            $new_file->save();
+
+            Excel::import(new UsersImport($new_file->id,Auth::id()),'import-orders/'.$filename);
+            $process_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->get()->groupBy('order_number');
+            foreach ($process_data as $index => $data){
+                $order_name = $index;
+                $atleast_one_varaint = false;
+                foreach ($data as $item){
+                    if(ProductVariant::where('sku',$item->sku)->exists()){
+                        $atleast_one_varaint = true;
+                        break;
+                    }
+                }
+                if($atleast_one_varaint){
+                    $new = new RetailerOrder();
+                    $new->name = $order_name;
+                    $new->taxes_included = '0';
+                    $new->total_tax = '0';
+                    $new->currency = 'USD';
+                    $new->total_discounts = '0';
+
+                    $new_user = false;
+                    foreach ($data as $item){
+                        if (Customer::where('email',$item->email)->exists()){
+                            $customer = Customer::where('email',$item->email)->first();
+                            $new->customer_id = $customer->id;
+                            $new_user = false;
+                            break;
+                        }
+                        else{
+                            $new_user = true;
+                        }
+                    }
+                    $name = explode(' ',$data[0]->name);
+                    $first_name = $name[0];
+                    if(array_key_exists(1,$name)){
+                        $last_name = $name[1];
+                    }
+                    $address1 = $data[0]->address1;
+                    $address2 = $data[0]->address2;
+                    $city = $data[0]->city;
+                    $postcode = $data[0]->postcode;
+                    $country = $data[0]->country;
+                    $phone = $data[0]->phone;
+                    $email = $data[0]->email;
+
+                    if($new_user){
+                        $customer = new Customer();
+                        $customer->first_name = $first_name;
+                        $customer->last_name = $last_name;
+                        $customer->email = $email;
+                        $customer->phone = $phone;
+                        $customer->user_id = Auth::id();
+                        $customer->save();
+                        $new->customer_id = $customer->id;
+
+                    }
+                    $shipping_address = [
+                        "first_name"=>$first_name,
+                        "last_name"=>$last_name,
+                        "address1"=>$address1,
+                        "address2"=>$first_name,
+                        "city"=>$city,
+                        "province" => "",
+                        "zip"=>$postcode,
+                        "country"=>$country,
+                    ];
+
+
+                    $new->shipping_address = json_encode($shipping_address,true);
+
+                    $new->email = $email;
+                    $new->status = 'new';
+                    $new->user_id = Auth::id();
+                    $new->fulfilled_by = 'fantasy';
+                    $new->sync_status = 1;
+                    $new->save();
+                    $cost_to_pay = 0;
+                    $total_weight = 0;
+
+                    foreach ($data as $item){
+                        $variant = ProductVariant::where('sku',$item->sku)->first();
+                        if($variant != null){
+
+                            $item->status = 1;
+                            $item->order_id = $new->id;
+                            $item->save();
+
+                            $new_line = new RetailerOrderLineItem();
+                            $new_line->retailer_order_id = $new->id;
+                            $new_line->shopify_product_id = $variant->linked_product->shopify_id;
+                            $new_line->shopify_variant_id = $variant->shopify_id;
+                            $new_line->title = $variant->linked_product->title;
+                            $new_line->quantity = $item->quantity;
+                            $new_line->sku = $variant->sku;
+                            $new_line->variant_title = $variant->variant_title;
+                            $new_line->title = $variant->title;
+                            $new_line->vendor = $variant->linked_product->title;
+                            $new_line->price = $variant->price;
+                            $new_line->requires_shipping = 'true';
+                            $new_line->name = $variant->linked_product->title.' - '. $variant->title;
+                            $new_line->fulfillable_quantity =$item->quantity;
+                            $new_line->fulfilled_by = 'Fantasy';
+                            $new_line->cost = $variant->price;
+                            $cost_to_pay = $cost_to_pay + $variant->price * $item->quantity;;
+                            $total_weight = $total_weight + $variant->linked_product->weight;
+                            $new_line->save();
+                        }
+
+                    }
+
+                    $new->subtotal_price = $cost_to_pay;
+                    $new->shipping_price = 0;
+                    $total_cost = $cost_to_pay;
+                    $new->total_weight = $total_weight;
+                    $new->total_price = $total_cost;
+                    $new->cost_to_pay = $total_cost;
+                    $new->custom = 1;
+                    $new->save();
+
+
+                    $zoneQuery = Zone::query();
+                    $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                        $q->where('name',$country);
+                    });
+                    $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+                    $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
+                    $shipping_rates->whereRaw('min <='.$total_weight);
+                    $shipping_rates->whereRaw('max >='.$total_weight);
+                    $shipping_rates =  $shipping_rates->first();
+                    if($shipping_rates != null){
+                        $new->shipping_price = $shipping_rates->shipping_price;
+                        $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                        $new->save;
+                    }
+                    else{
+                        $new->shipping_price = 0;
+                        $new->save;
+                    }
+                }
+
+
+                /*Maintaining Log*/
+                $order_log =  new OrderLog();
+                $order_log->message = "Custom Order Created to WeFullFill through file import on ".date_create($new->created_at)->format('d M, Y h:i a');
+                $order_log->status = "Newly Synced";
+                $order_log->retailer_order_id = $new->id;
+                $order_log->save();
+            }
+
+            $custom_orders = RetailerOrder::where('user_id',Auth::id())->newQuery();
+            $custom_orders->whereHas('imported',function ($q) use ($new_file){
+                $q->where('file_id','=',$new_file->id);
+            });
+
+            $temp_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->where('status',0)->get();
+
+            return view('non_shopify_users.orders.processed')->with([
+                'orders' => $custom_orders->get(),
+                'data' => $temp_data,
+            ]);
+        }
+        else{
+            return redirect()->back();
+        }
+    }
+
+    public function files(Request $request){
+        $files = UserFile::where('user_id',Auth::id())->get();
+        return view('non_shopify_users.orders.import_files')->with([
+            'files' => $files,
+        ]);
+    }
+
+    public function file(Request $request){
+        $new_file = UserFile::find($request->id);
+        $custom_orders = RetailerOrder::where('user_id',Auth::id())->newQuery();
+        $custom_orders->whereHas('imported',function ($q) use ($new_file){
+            $q->where('file_id','=',$new_file->id);
+        });
+
+        $temp_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->where('status',0)->get();
+
+        return view('non_shopify_users.orders.processed')->with([
+            'orders' => $custom_orders->get(),
+            'data' => $temp_data,
+        ]);
+    }
 
 }

@@ -34,4 +34,7 @@ class RetailerOrder extends Model
     public function logs(){
         return $this->hasMany('App\OrderLog','retailer_order_id');
     }
+    public function imported(){
+        return $this->hasOne('App\UserFileTemp','order_id');
+    }
 }

@@ -208,8 +208,15 @@ $(document).ready(function () {
                 window.location.href = button.data('href');
             }
         });
-
-
     });
+
+    $('body').on('click','.import_button',function () {
+        $('#import-file-input').trigger('click');
+    });
+
+    $('body').on('change','#import-file-input',function () {
+        $('#import-form').submit();
+    });
+
 
     });
