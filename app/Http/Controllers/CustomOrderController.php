@@ -416,15 +416,14 @@ class CustomOrderController extends Controller
                         $new->shipping_price = 0;
                         $new->save;
                     }
+
+                    /*Maintaining Log*/
+                    $order_log =  new OrderLog();
+                    $order_log->message = "Custom Order Created to WeFullFill through file import on ".date_create($new->created_at)->format('d M, Y h:i a');
+                    $order_log->status = "Newly Synced";
+                    $order_log->retailer_order_id = $new->id;
+                    $order_log->save();
                 }
-
-
-                /*Maintaining Log*/
-                $order_log =  new OrderLog();
-                $order_log->message = "Custom Order Created to WeFullFill through file import on ".date_create($new->created_at)->format('d M, Y h:i a');
-                $order_log->status = "Newly Synced";
-                $order_log->retailer_order_id = $new->id;
-                $order_log->save();
             }
 
             $custom_orders = RetailerOrder::where('user_id',Auth::id())->newQuery();
