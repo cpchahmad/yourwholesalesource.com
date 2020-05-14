@@ -67,23 +67,23 @@
                                 </div>
                                 <div class="tab-pane" id="by_store" role="tabpanel">
                                     <div class="py-3">
-                                    <form method="POST" action="{{ route('authenticate') }}">
-                                       @csrf
-                                        <div class="form-group">
-                                            <label for="shop">Domain</label>
+                                        <form method="POST" action="{{ route('authenticate') }}">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="shop">Domain</label>
                                                 <input id="shop" name="shop" class="form-control form-control-alt form-control-lg"
                                                        type="text" autofocus="autofocus" placeholder="example.myshopify.com">
 
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-md-6 col-xl-5">
-                                                <button type="submit" class="btn btn-block btn-success">
-                                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
-                                                </button>
                                             </div>
-                                        </div>
-                                    </form>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-xl-5">
+                                                    <button type="submit" class="btn btn-block btn-success">
+                                                        <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/credential.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/credential.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,14 +270,7 @@
       <workItem from="1589012856168" duration="7086000" />
       <workItem from="1589188420390" duration="17458000" />
       <workItem from="1589230176772" duration="20026000" />
-      <workItem from="1589366655232" duration="23498000" />
-    </task>
-    <task id="LOCAL-00061" summary="27042020F">
-      <created>1587975245629</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1587975245629</updated>
+      <workItem from="1589366655232" duration="23783000" />
     </task>
     <task id="LOCAL-00062" summary="27042020F">
       <created>1587975631132</created>
@@ -614,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589457716368</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="14052020F-front-login/register-design">
+      <created>1589457953135</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1589457953135</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -694,14 +695,14 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1589457715594">
+    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1589457952405">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589457715594" />
-    <state x="129" y="55" key="DiffContextDialog" timestamp="1589372799758">
+    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589457952405" />
+    <state x="129" y="55" key="DiffContextDialog" timestamp="1589457948017">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1589372799758" />
+    <state x="129" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1589457948017" />
     <state x="495" y="160" key="FileChooserDialogImpl" timestamp="1587110132530">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -731,10 +732,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1589457719867">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1589457956744">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589457719867" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589457956744" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

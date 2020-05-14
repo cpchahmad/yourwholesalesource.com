@@ -129,6 +129,13 @@ div.tagsinput span.tag a {
     justify-content: center;
     flex-direction: column;
 }
+.leftSection {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .right {
     padding: 0px 50px;
     color: white;
