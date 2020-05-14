@@ -40,15 +40,14 @@
                 <div class="content">
 
                     <div class="row">
-                        <div class="col-md-4 leftSection">
+                        <div class="col-md-5 leftSection">
                             <div class="logo mb2 d-inline-block">
                                 <img style="width: 100%;max-width: 77px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/we_full_fill_logo.png') }}" alt="">
                                 <h1 class="d-inline-block text-white">WEFULLFILL</h1>
                             </div>
-
                             @yield('content')
                         </div>
-                        <div class="col-md-8 RightSections">
+                        <div class="col-md-7 RightSections">
                           <div class="right">
                               <div class="description-title">
                                   Start Your Dropshipping in Minutes
