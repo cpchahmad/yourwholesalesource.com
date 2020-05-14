@@ -192,7 +192,7 @@
                                 <td></td>
                                 <td align="right">
                                     @if($orders->where('paid',0)->count() > 0)
-                                    <button class="btn btn-success paypal-pay-button" data-href="{{route('users.orders.bulk.paypal',$file->id)}}" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                    <button class="btn btn-success paypal-pay-button" data-href="{{route('users.orders.bulk.paypal',$file->id)}}" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
 {{--                                    <button class="btn btn-success wallet-pay-button" data-href="" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>--}}
                                         @endif
                                 </td>
