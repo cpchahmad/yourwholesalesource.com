@@ -34,7 +34,7 @@
 
     <!-- Main Container -->
     <main id="main-container">
-        @include('flash_message.message')
+{{--        @include('flash_message.message')--}}
         <div class="bg-image" style="background-image: url('{{ asset('assets/join-page2.jpg') }}');">
             <div class="hero-static">
                 <div class="content">
