@@ -33,6 +33,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>File</th>
+                                    <th>Date</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -42,6 +43,7 @@
                                     <tr>
                                         <td>{{$index+1}}</td>
                                         <td>{{$file->file}}</td>
+                                        <td>{{date_create($file->created_at)->format('d m, Y - h:i a')}}</td>
                                       <td align="right">
                                           <div class="btn-group">
                                               <a href="{{asset('import-orders')}}/{{$file->file}}" target="_blank"
