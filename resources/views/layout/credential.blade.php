@@ -34,41 +34,42 @@
 
     <!-- Main Container -->
     <main id="main-container">
-{{--        @include('flash_message.message')--}}
+        {{--        @include('flash_message.message')--}}
         <div class="bg-image" style="background-image: url('{{ asset('assets/join-page2.jpg') }}');">
             <div class="hero-static">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-4 leftSection">
-                            <div class="logo mb2 d-inline-block">
-                                <img style="width: 100%;max-width: 77px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/we_full_fill_logo.png') }}" alt="">
-                                <h1 class="d-inline-block text-white">WEFULLFILL</h1>
-                            </div>
                             <div class="left">
+                                <div class="logo mb2 d-inline-block">
+                                    <img style="width: 100%;max-width: 77px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/we_full_fill_logo.png') }}" alt="">
+                                    <h1 class="d-inline-block text-white">WEFULLFILL</h1>
+                                </div>
+
                                 @yield('content')
                             </div>
                         </div>
                         <div class="col-md-7 RightSections">
-                          <div class="right">
-                              <div class="description-title">
-                                  Start Your Dropshipping in Minutes
-                              </div>
-                              <div class="description-content">
-                                  WEFULLFILL is One-Stop e-commerce Solution, Helping you  <span style="font-size: 16px;font-weight: 700;">SAVE MORE TIME AND HIGH PROFIT</span>.
-                                  No inventory, no risk, Let's start dropshipping!
-                              </div>
+                            <div class="right">
+                                <div class="description-title">
+                                    Start Your Dropshipping in Minutes
+                                </div>
+                                <div class="description-content">
+                                    WEFULLFILL is One-Stop e-commerce Solution, Helping you  <span style="font-size: 16px;font-weight: 700;">SAVE MORE TIME AND HIGH PROFIT</span>.
+                                    No inventory, no risk, Let's start dropshipping!
+                                </div>
 
-                              <div class="description-tags">
-                                  <div class="tag_item">Forever Free Plan</div>
-                                  <div class="tag_item">Fast Shipping</div>
-                                  <div class="tag_item">Stable Supply Price</div>
-                                  <div class="tag_item">Language Translate</div>
-                                  <div class="tag_item">Customize Packaging</div>
-                                  <div class="tag_item">Bulk Place Orders</div>
-                                  <div class="tag_item">Quantity Control</div>
-                                  <div class="tag_item">Automate Manage</div>
-                              </div>
-                          </div>
+                                <div class="description-tags">
+                                    <div class="tag_item">Forever Free Plan</div>
+                                    <div class="tag_item">Fast Shipping</div>
+                                    <div class="tag_item">Stable Supply Price</div>
+                                    <div class="tag_item">Language Translate</div>
+                                    <div class="tag_item">Customize Packaging</div>
+                                    <div class="tag_item">Bulk Place Orders</div>
+                                    <div class="tag_item">Quantity Control</div>
+                                    <div class="tag_item">Automate Manage</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
