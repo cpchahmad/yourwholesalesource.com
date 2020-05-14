@@ -19,7 +19,7 @@ Route::get('/reset-retailers', 'HelperController@deleteRetailer');
 Route::get('/generate-super-admin', 'HelperController@SuperAdminCreate');
 /*Shopify Store Routes*/
 Route::get('/getShippingRates', 'ZoneController@getShippingRates');
-Route::get('/getExportFile', 'ProductController@getExportFile');
+Route::get('/getExportFile', 'ProductController@getExportFile')->name('app.download.product');
 /*Auth Routes*/
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
