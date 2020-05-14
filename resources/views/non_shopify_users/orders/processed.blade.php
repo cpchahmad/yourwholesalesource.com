@@ -25,9 +25,10 @@
                 <div class="block">
                     <div class="block-content">
                         @if (count($orders) > 0)
-                            <table class="table table-hover table-borderless table-striped table-vcenter">
+                            <table class="table js-table-sections table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Order Date</th>
@@ -38,8 +39,11 @@
                                 </thead>
 
                                 @foreach($orders as $index => $order)
-                                    <tbody class="">
+                                    <tbody class="js-table-sections-header">
                                     <tr>
+                                        <td class="text-center">
+                                            <i class="fa fa-angle-right text-muted"></i>
+                                        </td>
                                         <td>{{$index+1}}</td>
                                         <td class="font-w600"><a href="{{route('users.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>
@@ -84,7 +88,56 @@
 
                                     </tr>
                                     </tbody>
+                                    <tbody>
+                                    @foreach($order->line_items as $item)
+                                        @if($item->fulfilled_by != 'store')
+                                            <tr>
+                                                <td class="text-center">
 
+                                                </td>
+                                                <td>
+                                                    @if($item->linked_real_variant != null)
+                                                        <img class="img-avatar"
+                                                             @if($item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                             @else @if($item->linked_real_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_real_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_real_variant->has_image->image}}" @endif @endif alt="">
+                                                    @else
+                                                        <img class="img-avatar img-avatar-variant"
+                                                             src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{$item->name}}
+
+                                                </td>
+                                                <td>
+                                                    Fulfilled By:
+                                                    @if($item->fulfilled_by == 'store')
+                                                        <span class="badge badge-danger"> Store</span>
+                                                    @elseif ($item->fulfilled_by == 'Fantasy')
+                                                        <span class="badge badge-success"> WeFullFill </span>
+                                                    @else
+                                                        <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                                    @endif
+                                                </td>
+
+                                                <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
+
+                                                <td>
+                                                    @if($item->fulfillment_status == null)
+                                                        <span class="badge badge-warning"> Unfulfilled</span>
+                                                    @elseif($item->fulfillment_status == 'partially-fulfilled')
+                                                        <span class="badge badge-danger"> Partially Fulfilled</span>
+                                                    @else
+                                                        <span class="badge badge-success"> Fulfilled</span>
+                                                    @endif
+                                                </td>
+                                                <td></td>
+
+                                            </tr>
+                                        @endif
+                                    @endforeach
+
+                                    </tbody>
                                 @endforeach
                             </table>
                         @else
