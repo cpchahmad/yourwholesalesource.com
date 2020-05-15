@@ -173,3 +173,25 @@ div.tagsinput span.tag a {
 .left {
     width: 90%;
 }
+
+@media (max-width: 1149px){
+    .tag_item {
+        width: 45%;
+    }
+}
+@media (max-width: 910px){
+    .RightSections{
+        display: none;
+    }
+    .leftSection{
+        max-width: 100% !important;
+        flex: 100%;
+    }
+}
+
+@media (max-width: 1032px){
+    .submit-column {
+        max-width: 100% !important;
+        flex: 100%;
+    }
+}

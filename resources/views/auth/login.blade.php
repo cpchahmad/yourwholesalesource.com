@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     <div class="form-group row">
-                        <div class="col-md-6 col-xl-5">
+                        <div class="col-md-6 col-xl-5 submit-column">
                             <button type="submit" class="btn btn-block btn-success">
                                 <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                             </button>
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 col-xl-5">
+                            <div class="col-md-6 col-xl-5 submit-column">
                                 <button type="submit" class="btn btn-block btn-success">
                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                                 </button>
