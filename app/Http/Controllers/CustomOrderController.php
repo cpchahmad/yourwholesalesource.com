@@ -92,7 +92,7 @@ class CustomOrderController extends Controller
             $products->where('title','LIKE','%'.$request->input('search').'%');
             $products->orWhereHas('hasVariants',function ($q) use ($request){
                 $q->where('title','LIKE','%'.$request->input('search').'%');
-                $q->where('sku','LIKE','%'.$request->input('search').'%');
+                $q->orwhere('sku','LIKE','%'.$request->input('search').'%');
             });
         }
         $html = view('non_shopify_users.orders.product-browse-section')->with([
