@@ -51,13 +51,13 @@ class User extends Authenticatable
         return $this->hasOne('App\Wallet','user_id');
     }
     public function has_manager(){
-        return $this->belongsTo('App\User','sales_manager_id');
+        return $this->belongsTo('App\User','sale_manager_id');
     }
     public function has_users(){
-        return $this->hasMany('App\User','sales_manager_id');
+        return $this->hasMany('App\User','sale_manager_id');
     }
     public function has_sales_stores(){
-        return $this->hasMany('App\Shop','sales_manager_id');
+        return $this->hasMany('App\Shop','sale_manager_id');
     }
 
     public function has_files(){

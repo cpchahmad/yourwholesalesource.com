@@ -19,6 +19,6 @@ class Shop extends Model
     }
 
     public function has_manager(){
-        return $this->belongsTo('App\User','sales_manager_id');
+        return $this->belongsTo('App\User','sale_manager_id');
     }
 }
