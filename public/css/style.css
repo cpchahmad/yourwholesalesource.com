@@ -199,4 +199,5 @@ div.tagsinput span.tag a {
 .sales-stores-section{
     height: 120px;
     overflow: auto;
+    margin-bottom: 10px;
 }

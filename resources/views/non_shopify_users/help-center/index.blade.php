@@ -125,7 +125,7 @@
                             <form action="{{route('help-center.ticket.create')}}" method="post"  enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="source" value="non-shopify-user">
-                                <input type="hidden" name="manager_id" value="{{$user->sales_manager_id}}">
+                                <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <input type="hidden" name="type" value="user-ticket">
 

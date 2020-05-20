@@ -204,11 +204,11 @@ class DefaultSettingsController extends Controller
     public function detach_manager_models($user): void
     {
         foreach ($user->has_sales_stores as $shop) {
-            $shop->sales_manager_id = null;
+            $shop->sale_manager_id = null;
             $shop->save();
         }
         foreach ($user->has_users as $non) {
-            $non->sales_manager_id = null;
+            $non->sale_manager_id = null;
             $non->save();
         }
     }
@@ -222,14 +222,14 @@ class DefaultSettingsController extends Controller
         if ($request->has('stores')) {
             foreach ($request->input('stores') as $store) {
                 $shop = Shop::find($store);
-                $shop->sales_manager_id = $manager->id;
+                $shop->sale_manager_id = $manager->id;
                 $shop->save();
             }
         }
         if ($request->has('users')) {
             foreach ($request->input('users') as $u) {
                 $non = User::find($u);
-                $non->sales_manager_id = $manager->id;
+                $non->sale_manager_id = $manager->id;
                 $non->save();
             }
         }
