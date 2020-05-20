@@ -67,18 +67,26 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('/zone/{id}/update','ZoneController@update')->name('zone.update');
     Route::any('/zone/{id}/delete','ZoneController@delete')->name('zone.delete');
 
-
-
     Route::post('/zone/rate/{id}','ZoneController@rate_create')->name('zone.rate.create');
     Route::post('/zone/rate/{id}/update','ZoneController@rate_update')->name('zone.rate.update');
     Route::any('/zone/rate/{id}/delete','ZoneController@rate_delete')->name('zone.rate.delete');
 
     Route::get('/sales-managers','DefaultSettingsController@show_sales_managers')->name('sales-managers.index');
+    Route::get('/sales-manager/create','DefaultSettingsController@show_sales_manager_create')->name('sales-managers.create.form');
+    Route::get('/sales-manager/edit/{id}','DefaultSettingsController@show_sales_manager_edit')->name('sales-managers.edit.form');
+    Route::get('/sales-manager/view/{id}','DefaultSettingsController@show_sales_manager')->name('sales-managers.view');
+
     Route::post('/sales-managers','DefaultSettingsController@create_manager')->name('sales-managers.create');
+    Route::post('/sales-manager/update/{id}','DefaultSettingsController@update_manager')->name('sales-managers.update');
     Route::any('/sales-managers/{id}/delete','DefaultSettingsController@delete_manager')->name('sales-managers.delete');
     Route::any('/sales-managers/{id}/set','DefaultSettingsController@set_manager_as_user')->name('sales-managers.set_manager_as_user');
-
     Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
+
+    Route::get('/ticket-category','DefaultSettingsController@view_ticket_categories')->name('ticket.category.index');
+    Route::post('/ticket-category','DefaultSettingsController@create_ticket_categories')->name('ticket.category.create');
+    Route::post('/ticket-category/{id}/update','DefaultSettingsController@update_ticket_categories')->name('ticket.category.update');
+    Route::any('/ticket-category/{id}/delete','DefaultSettingsController@delete_ticket_categories')->name('ticket.category.delete');
+
 
     Route::get('/orders','AdminOrderController@index')->name('admin.orders');
     Route::get('/orders/view/{id}','AdminOrderController@view_order')->name('admin.order.view');
@@ -136,6 +144,9 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/payments', 'SingleStoreController@payment_history')->name('store.payments');
         Route::get('/tracking-info', 'SingleStoreController@tracking_info')->name('store.tracking');
 
+        Route::get('/help-center','SingleStoreController@helpcenter')->name('store.help-center');
+        Route::get('/help-center/ticket/{id}', 'SingleStoreController@view_ticket')->name('help-center.store.ticket.view');
+
     });
 });
 /*Main Routes*/
@@ -167,11 +178,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/bulk-pay-through-paypal/{id}/cancel', 'CustomOrderController@bulk_import_order_paypal_cancel')->name('users.orders.bulk.paypal.cancel');
             Route::get('/bulk-pay-through-paypal/{id}/success', 'CustomOrderController@bulk_import_order_paypal_success')->name('users.orders.bulk.paypal.success');
 
-
             Route::get('/products/wefullfill','CustomOrderController@wefullfill_products')->name('users.product.wefulfill');
             Route::get('/products/wefullfill/{id}','CustomOrderController@view_fantasy_product')->name('users.product.wefulfill.show');
 
-
+            Route::get('/help-center','CustomOrderController@helpcenter')->name('users.help-center');
+            Route::get('/help-center/ticket/{id}', 'CustomOrderController@view_ticket')->name('help-center.users.ticket.view');
 
             Route::group(['middleware' => ['check_user_shop']], function () {
 
@@ -181,6 +192,20 @@ Route::group(['middleware' => ['auth']], function () {
     /*Sales Manager Routes*/
     Route::group(['middleware' => ['role:sales-manager']], function () {
         Route::prefix('managers')->group(function () {
+            Route::get('/tickets','ManagerController@tickets')->name('sales_managers.tickets');
+            Route::get('/tickets/{id}', 'ManagerController@view_ticket')->name('sales_managers.ticket.view');
+
+            Route::get('/orders','ManagerController@index')->name('sales_managers.orders');
+            Route::get('/orders/view/{id}','ManagerController@view_order')->name('sales_managers.order.view');
+            Route::get('/orders/view/{id}/fulfillment','ManagerController@fulfill_order')->name('sales_managers.order.fulfillment');
+            Route::post('/orders/view/{id}/fulfillment/process','ManagerController@fulfillment_order')->name('sales_managers.order.fulfillment.process');
+            Route::get('/orders/{id}/fulfillment/cancel/{fulfillment_id}','ManagerController@fulfillment_cancel_order')->name('sales_managers.order.fulfillment.cancel');
+            Route::post('/orders/{id}/fulfillment/tracking','ManagerController@fulfillment_add_tracking')->name('sales_managers.order.fulfillment.tracking');
+            Route::get('/orders/{id}/mark-as-delivered','ManagerController@mark_as_delivered')->name('sales_managers.order.mark_as_delivered');
+
+            Route::get('/stores','ManagerController@stores')->name('sales_managers.stores');
+            Route::get('/users','ManagerController@users')->name('sales_managers.users');
+
             Route::get('/home',function (){
                 return view('sales_managers.index');
             })->name('managers.dashboard');
@@ -204,6 +229,11 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/topup-through-paypal/{id}', 'WalletController@paypal_topup_payment')->name('store.wallet.paypal.topup');
         Route::get('/topup-through-paypal/{id}/cancel', 'WalletController@paypal_topup_payment_cancel')->name('store.wallet.paypal.topup.cancel');
         Route::get('/topup-through-paypal/{id}/success', 'WalletController@paypal_topup_payment_success')->name('store.wallet.paypal.topup.success');
+
+        Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
+        Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
+
+
 
 
 

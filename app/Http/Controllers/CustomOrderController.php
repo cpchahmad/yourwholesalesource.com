@@ -15,10 +15,12 @@ use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\ShippingRate;
+use App\Ticket;
+use App\TicketCategory;
+use App\User;
 use App\UserFile;
 use App\UserFileTemp;
 use App\Zone;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -570,6 +572,27 @@ class CustomOrderController extends Controller
         else{
             return redirect()->route('users.files.view',$request->id)->with('error','Bulk Orders Not Found!');
         }
+    }
+
+    public function helpcenter(Request $request){
+        $user = User::find(Auth::id());
+        $tickets = Ticket::where('user_id',$user->id)->where('source','non-shopify-user')->newQuery();
+        $tickets = $tickets->paginate(30);
+
+        return view('non_shopify_users.help-center.index')->with([
+            'user' => $user,
+            'tickets' => $tickets,
+            'categories' => TicketCategory::all(),
+            ]);
+    }
+
+    public function view_ticket(Request $request){
+        $user = User::find(Auth::id());
+        $ticket = Ticket::find($request->id);
+        return view('non_shopify_users.help-center.view')->with([
+            'user' => $user,
+            'ticket' => $ticket,
+        ]);
     }
 
 }

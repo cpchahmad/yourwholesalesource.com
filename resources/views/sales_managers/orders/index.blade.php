@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('layout.manager')
 @section('content')
 
     <div class="bg-body-light">
@@ -104,7 +104,7 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('admin.order.view',$order->id)}}"
+                                                <a href="{{route('sales_managers.order.view',$order->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Order"><i class="fa fa-eye"></i></a>
                                             </div>
@@ -116,6 +116,7 @@
 
                                 @endforeach
                             </table>
+
                         @else
                             <p>No Orders Found</p>
                         @endif

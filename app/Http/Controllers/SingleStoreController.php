@@ -10,6 +10,8 @@ use App\RetailerImage;
 use App\RetailerOrder;
 use App\RetailerProduct;
 use App\Shop;
+use App\Ticket;
+use App\TicketCategory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -192,6 +194,27 @@ class SingleStoreController extends Controller
             'orders' =>  $orders->orderBy('created_at')->paginate(20),
             'search' =>$request->input('search')
 
+        ]);
+    }
+
+    public function helpcenter(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $tickets = Ticket::where('shop_id',$shop->id)->where('source','store')->newQuery();
+        $tickets = $tickets->paginate(30);
+
+        return view('single-store.help-center.index')->with([
+            'shop' => $shop,
+            'tickets' => $tickets,
+            'categories' => TicketCategory::all(),
+        ]);
+    }
+
+    public function view_ticket(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $ticket = Ticket::find($request->id);
+        return view('single-store.help-center.view')->with([
+            'shop' => $shop,
+            'ticket' => $ticket,
         ]);
     }
 }

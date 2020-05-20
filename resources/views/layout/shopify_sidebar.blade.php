@@ -88,7 +88,7 @@
             </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
+                <a class="nav-main-link" href="{{route('users.help-center')}}">
                     <i class="nav-main-link-icon si si-wrench"></i>
                     <span class="nav-main-link-name">Help Center</span>
                 </a>

@@ -13,4 +13,12 @@ class Shop extends Model
     public function has_imported(){
         return $this->belongsToMany('App\Product','retailer_product_shop','shop_id','product_id');
     }
+
+    public function has_orders(){
+        return $this->hasMany('App\RetailerOrder','shop_id');
+    }
+
+    public function has_manager(){
+        return $this->belongsTo('App\User','sales_manager_id');
+    }
 }

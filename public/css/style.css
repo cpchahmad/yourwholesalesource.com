@@ -195,3 +195,8 @@ div.tagsinput span.tag a {
         flex: 100%;
     }
 }
+
+.sales-stores-section{
+    height: 120px;
+    overflow: auto;
+}

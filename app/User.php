@@ -50,4 +50,20 @@ class User extends Authenticatable
     public function has_wallet(){
         return $this->hasOne('App\Wallet','user_id');
     }
+    public function has_manager(){
+        return $this->belongsTo('App\User','sales_manager_id');
+    }
+    public function has_users(){
+        return $this->hasMany('App\User','sales_manager_id');
+    }
+    public function has_sales_stores(){
+        return $this->hasMany('App\Shop','sales_manager_id');
+    }
+
+    public function has_files(){
+        return $this->hasMany('App\UserFile','user_id');
+    }
+    public function has_orders(){
+        return $this->hasMany('App\RetailerOrder','user_id');
+    }
 }
