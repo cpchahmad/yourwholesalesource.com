@@ -532,12 +532,22 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::find($id);
-        $product->delete();
+        $shop = $this->helper->getShop();
+        if($product->toShopify == 1){
+            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+        }
         $variants = ProductVariant::where('product_id', $id)->get();
         foreach ($variants as $variant) {
             $variant->delete();
         }
-        return redirect()->back()->with('error', 'Product Deleted with Variants!');
+        foreach ($product->has_images as $image){
+            $image->delete();
+        }
+        $product->has_categories()->detach();
+        $product->has_subcategories()->detach();
+
+        $product->delete();
+        return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
     }
 
     public function add_existing_product_new_variants(Request $request)
