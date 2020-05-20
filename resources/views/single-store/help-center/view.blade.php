@@ -123,9 +123,7 @@
                             <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$ticket->has_manager->name}} </span>
                             <hr>
                             <span class="font-weight-bold">Manager Email: </span>  <span class="text-center"> {{$ticket->has_manager->email}} </span>
-
                         </div>
-
                     </div>
                 </div>
             </div>

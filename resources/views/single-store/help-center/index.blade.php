@@ -68,8 +68,9 @@
                                             </td>
                                             <td>
                                                 @if($ticket->category == 'default')
-                                                <span class="badge badge-light">{{$ticket->category}}</span>
+                                                    <span class="badge badge-light">{{$ticket->category}}</span>
                                                 @else
+                                                    <span class="badge" style="background: {{$ticket->has_category_color}};color: white">{{$ticket->category}}</span>
                                                 @endif
                                             </td>
                                             <td>
