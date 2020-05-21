@@ -274,14 +274,7 @@
       <workItem from="1589827892210" duration="665000" />
       <workItem from="1589877116598" duration="40060000" />
       <workItem from="1590046649392" duration="9524000" />
-      <workItem from="1590093763563" duration="9106000" />
-    </task>
-    <task id="LOCAL-00083" summary="09052020-category-icon">
-      <created>1588970232532</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1588970232532</updated>
+      <workItem from="1590093763563" duration="9399000" />
     </task>
     <task id="LOCAL-00084" summary="09052020-fix">
       <created>1589013011130</created>
@@ -619,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590103889073</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="20022020F-sales-manager-module">
+      <created>1590104603281</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1590104603281</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -699,10 +699,10 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="303" y="0" key="CommitChangelistDialog2" timestamp="1590103887458">
+    <state x="51" y="0" key="CommitChangelistDialog2" timestamp="1590104602200">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="303" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1590103887458" />
+    <state x="51" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1590104602200" />
     <state x="129" y="55" key="DiffContextDialog" timestamp="1589539828217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -736,10 +736,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1590103911811">
+    <state x="21" y="97" key="Vcs.Push.Dialog.v2" timestamp="1590104607554">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1590103911811" />
+    <state x="21" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1590104607554" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
