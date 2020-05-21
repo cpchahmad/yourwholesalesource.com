@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
+use App\Customer;
 use App\FulfillmentLineItem;
 use App\ManagerLog;
 use App\OrderFulfillment;
 use App\OrderLog;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
+use App\RetailerProduct;
+use App\Shop;
 use App\Ticket;
 use App\User;
+use App\Wallet;
+use App\WalletLog;
+use App\WalletRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ManagerController extends Controller
 {
@@ -26,13 +35,13 @@ class ManagerController extends Controller
     {
         $this->helper = new HelperController();
     }
-   public function tickets(){
-       $tickets = Ticket::where('manager_id',Auth::id())->newQuery();
-       $tickets = $tickets->paginate(30);
-       return view('sales_managers.tickets.index')->with([
-           'tickets' => $tickets
-       ]);
-   }
+    public function tickets(){
+        $tickets = Ticket::where('manager_id',Auth::id())->newQuery();
+        $tickets = $tickets->paginate(30);
+        return view('sales_managers.tickets.index')->with([
+            'tickets' => $tickets
+        ]);
+    }
     public function view_ticket(Request $request){
         $manager = User::find(Auth::id());
         $ticket = Ticket::find($request->id);
@@ -437,11 +446,199 @@ class ManagerController extends Controller
             'stores'=>$stores
         ]);
     }
+    public function store(Request $request){
+        $store = Shop::find($request->id);
+        if (count($store->has_user) > 0) {
+            if ($store->has_user[0]->has_wallet == null) {
+                $wallet = null;
+            } else {
+                $wallet = $store->has_user[0]->has_wallet;
+            }
+        } else {
+            $wallet = null;
+        }
+        return view('sales_managers.stores.view')->with([
+            'store' => $store,
+            'wallet' => $wallet
+        ]);
+    }
+    public function product($id){
+        $product = RetailerProduct::find($id);
+        return view('sales_managers.products.view_product')->with([
+            'product' => $product,
+        ]);
+    }
+
+    public function customer_view($id){
+        $customer = Customer::find($id);
+        return view('sales_managers.customers.view')->with([
+            'customer' => $customer,
+        ]);
+    }
+
+    public function user(Request $request){
+        $user = User::find($request->id);
+
+        if ($user->has_wallet == null) {
+            $wallet = null;
+        } else {
+            $wallet = $user->has_wallet;
+        }
+
+        return view('sales_managers.users.view')->with([
+            'user' => $user,
+            'wallet' => $wallet
+        ]);
+    }
+
     public function users(Request $request){
         $manager= User::find(Auth::id());
         $users = $manager->has_users;
         return view('sales_managers.users.index')->with([
             'users'=>$users
         ]);
+    }
+
+    public function view_setting(){
+        $manager = User::find(Auth::id());
+        return view('sales_managers.settings.index')->with([
+            'manager' => $manager,
+            'countries' => Country::all(),
+        ]);
+    }
+
+    public function save_personal_info(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        if($manager != null){
+            $manager->name =  $request->input('name');
+            $manager->save();
+            if($request->hasFile('profile')){
+                $file = $request->file('profile');
+                $name = Str::slug($file->getClientOriginalName());
+                $profile = date("mmYhisa_") . $name;
+                $file->move(public_path() . '/managers-profiles/', $profile);
+                $manager->profile = $profile;
+                $manager->save();
+            }
+            return redirect()->back()->with('success','Personal Information Updated Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Manager Not Found!');
+        }
+    }
+    public function save_address(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        if($manager != null){
+            $manager->address =  $request->input('address');
+            $manager->address2 =  $request->input('address2');
+            $manager->city =  $request->input('city');
+            $manager->state =  $request->input('state');
+            $manager->zip =  $request->input('zip');
+            $manager->country =  $request->input('country');
+            $manager->save();
+            return redirect()->back()->with('success','Address Updated Successfully!');
+
+        }
+        else{
+            return redirect()->back()->with('error','Manager Not Found!');
+        }
+    }
+    public function change_password(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        if($manager != null){
+            $array_to_check = [
+                'email' => $manager->email,
+                'password' =>$request->input('current_password')
+            ];
+            if(Auth::validate($array_to_check)){
+                if($request->input('new_password') == $request->input('new_password_again')){
+                    $manager->password = Hash::make($request->input('new_password'));
+                    $manager->save();
+                    return redirect()->back()->with('success','Password Changed Successfully!');
+
+                }
+                else{
+                    return redirect()->back()->with('error','New Password Mismatched!');
+                }
+            }
+            else{
+                return redirect()->back()->with('error','Current Password is Invalid!');
+            }
+
+        }
+        else{
+            return redirect()->back()->with('error','Manager Not Found!');
+        }
+    }
+
+    public function wallet_index(){
+        $manager = User::find(Auth::id());
+        $users  = $manager->has_users;
+        foreach ($users as $user){
+            if ($user->has_wallet == null) {
+                $this->wallet_create($user->id);
+            }
+        }
+        return view('sales_managers.wallets.index')->with([
+            'users' => $users
+        ]);
+    }
+
+    public function wallet_details(Request $request,$id){
+        $wallet = Wallet::find($id);
+        $user = User::find($wallet->user_id);
+        return view('sales_managers.wallets.wallet_detail')->with([
+            'user' => $user,
+            'wallet' => $wallet
+        ]);
+    }
+
+    public function approved_bank_statement($id){
+        $req = WalletRequest::find($id);
+        if($req->status == 0){
+            $related_wallet = Wallet::find($req->wallet_id);
+            if($related_wallet!= null){
+                $related_wallet->pending =  $related_wallet->pending - $req->amount;
+                $related_wallet->available =   $related_wallet->available + $req->amount;
+                $related_wallet->save();
+                $req->status = 1;
+                $req->save();
+                $wallet_log = new WalletLog();
+                $wallet_log->wallet_id =$related_wallet->id;
+                $wallet_log->status = "Bank Transfer Approved";
+                $wallet_log->amount = $req->amount;
+                $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved By Your Manager At ' . now()->format('d M, Y h:i a'). ' By Administration';
+                $wallet_log->save();
+                return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
+            }
+            else{
+                return redirect()->back()->with('error','No wallet found related to this request!');
+            }
+        }
+        else{
+            return redirect()->back()->with('error','You cant approve an already approved request!');
+        }
+    }
+
+    public function topup_wallet_by_admin(Request $request){
+        $wallet = Wallet::find($request->input('wallet_id'));
+        if($wallet != null){
+            if($request->input('amount') > 0){
+                $wallet->available =  $wallet->available + $request->input('amount');
+                $wallet->save();
+                $wallet_log = new WalletLog();
+                $wallet_log->wallet_id =$wallet->id;
+                $wallet_log->status = "Top-up By Manager";
+                $wallet_log->amount = $request->input('amount');
+                $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Your Manager';
+                $wallet_log->save();
+                return redirect()->back()->with('success','Wallet Top-up Successfully!');
+            }
+
+
+        }else{
+            return redirect()->back()->with('error','Wallet Not Found!');
+        }
+
     }
 }

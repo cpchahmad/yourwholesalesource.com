@@ -18,4 +18,8 @@ class Wallet extends Model
         return $this->hasMany('App\WalletRequest','wallet_id');
     }
 
+    public function owner(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+
 }

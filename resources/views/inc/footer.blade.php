@@ -13,6 +13,7 @@
 
 <script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{ asset('js/shopify-user.js') }}"></script>
+<script src="{{ asset('js/manager.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/dropzone/dist/dropzone.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>

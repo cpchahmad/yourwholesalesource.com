@@ -5,69 +5,79 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                    All Orders
+                    {{$customer->first_name}} {{$customer->last_name}}
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">All Orders</a>
+                            Customers
+                        </li>
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx active" href="">  {{$customer->first_name}} {{$customer->last_name}}</a>
                         </li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
-
     <div class="content">
-        <form class="js-form-icon-search push" action="" method="get">
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search by name, title of products" value="" name="search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                        <a class="btn btn-danger" href=""> <i class="fa fa-times"></i> Clear </a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">
+                            Personal Information
+                        </h3>
+
+                    </div>
+                    <div class="block-content">
+                        <table class="table table-hover table-borderless table-striped table-vcenter">
+                            <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Total Orders</th>
+                                <th>Total Spent</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>  {{$customer->first_name}} {{$customer->last_name}} </td>
+                                <td>  {{$customer->email}} </td>
+                                <td> @if($customer->phone != null) {{$customer->phone}} @else No Phone Number @endif  </td>
+                                <td>  {{count($customer->has_orders)}} Orders </td>
+                                <td>  {{number_format($customer->total_spent,2)}} USD </td>
+
+                            </tr>
+                            </tbody>
+
+                        </table>
 
                     </div>
                 </div>
-            </div>
-        </form>
-
-        <div class="row" >
-            <div class="col-md-12">
                 <div class="block">
                     <div class="block-content">
-                        @if (count($orders) > 0)
+                        @if (count($customer->has_orders) > 0)
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Shop / User</th>
-                                    <th>Source</th>
                                     <th>Order Date</th>
                                     <th>Price</th>
+                                    <th>Cost</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="">
-                                @foreach($orders as $index => $order)
+                                @foreach($customer->has_orders as $index => $order)
 
                                     <tr>
                                         <td>{{$index+1}}</td>
                                         <td class="font-w600"><a href="{{route('sales_managers.order.view',$order->id)}}">{{ $order->name }}</a></td>
-                                        <td>
-                                            @if($order->custom == 0)
-                                                @if($order->has_store != null)
-                                                    <span class="badge badge-primary" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
-                                                @else
-                                                    <span class="badge badge-warning" style="font-size: 12px"> Manual </span>
-                                                @endif
-                                            @else
-                                                <span class="badge badge-primary" style="font-size: 12px"> {{$order->has_user->email}}</span>
-                                            @endif
-                                        </td>
                                         <td>
                                             @if($order->custom == 1)
                                                 <span class="badge badge-primary" style="font-size: 12px"> Custom </span>
@@ -113,24 +123,18 @@
 
                                     </tr>
 
-
                                 @endforeach
-                                </tbody>
+                                    </tbody>
                             </table>
-
                         @else
-                            <p>No Orders Found</p>
+                            <p>No Orders Found </p>
                         @endif
-                            <div class="row">
-                                <div class="col-md-12 text-center" style="font-size: 17px">
-                                    {!! $orders->links() !!}
-                                </div>
-                            </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 @endsection

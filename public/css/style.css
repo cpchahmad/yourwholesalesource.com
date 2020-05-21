@@ -41,6 +41,13 @@ div.tagsinput span.tag a {
     border-radius: 0;
 }
 
+.img-avatar200 {
+    display: inline-block !important;
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 0;
+}
+
 .mb2{
     margin-bottom: 10px !important;
 }

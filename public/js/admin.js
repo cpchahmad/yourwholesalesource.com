@@ -490,10 +490,43 @@ $(document).ready(function () {
                    window.location.href = button.data('route');
                 }
             });
+    });
 
+    $('body').on('keyup','#search-create-input-stores-users',function () {
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'GET',
+            data:{
+              search : $(this).val(),
+            },
+            success:function (response) {
+                if(response.message === 'success'){
+                    $('.drop-content').empty();
+                    $('.drop-content').append(response.html);
+                }
+            }
+        })
 
     });
 
+
+    $('body').on('keyup','#search-edit-input-stores-users',function () {
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'GET',
+            data:{
+                search : $(this).val(),
+                id:$(this).data('manager'),
+            },
+            success:function (response) {
+                if(response.message === 'success'){
+                    $('.drop-content').empty();
+                    $('.drop-content').append(response.html);
+                }
+            }
+        })
+
+    });
 });
 
 

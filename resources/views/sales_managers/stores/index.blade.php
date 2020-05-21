@@ -30,6 +30,7 @@
                             <th>Shopify Domain</th>
                             <th>Imported Products</th>
                             <th>Orders</th>
+                            <th>Tickets</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -48,9 +49,13 @@
                                     {{count($store->has_orders)}}
 
                                 </td>
+                                <td>
+                                    {{count($store->has_tickets)}}
+
+                                </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
-                                        <a class="btn btn-xs btn-sm btn-success" type="button" href="" title="View Store">
+                                        <a class="btn btn-xs btn-sm btn-success" type="button" href="{{route('sales_managers.stores.view',$store->id)}}" title="View Store">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

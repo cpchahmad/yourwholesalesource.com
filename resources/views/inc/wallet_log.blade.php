@@ -26,6 +26,10 @@
                         <div class="timeline-event-icon bg-success">
                             <i class="fa fa-star"></i>
                         </div>
+                        @elseif($log->status == "Top-up By Manager")
+                            <div class="timeline-event-icon bg-success">
+                                <i class="fa fa-user"></i>
+                            </div>
                         @elseif($log->status == "Order Payment")
                         <div class="timeline-event-icon bg-amethyst">
                             <i class="fa fa-credit-card" aria-hidden="true"></i>

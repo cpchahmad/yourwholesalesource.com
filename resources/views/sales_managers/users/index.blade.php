@@ -30,6 +30,7 @@
                             <th>Email</th>
                             <th>Imported Files</th>
                             <th>Orders</th>
+                            <th>Tickets</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -48,9 +49,13 @@
                                     {{count($user->has_orders)}}
 
                                 </td>
+                                <td>
+                                    {{count($user->has_tickets)}}
+
+                                </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
-                                        <a class="btn btn-xs btn-sm btn-success" type="button" href="" title="View User">
+                                        <a class="btn btn-xs btn-sm btn-success" type="button" href="{{route('sales_managers.users.view',$user->id)}}" title="View User">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </div>

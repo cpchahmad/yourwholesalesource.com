@@ -43,22 +43,31 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-material">
+                                <input  class="form-control" data-route="{{route('sales-managers.edit.search')}}" data-manager="{{$manager->id}}" type="search" id="search-edit-input-stores-users" name="search"
+                                       placeholder="Search by Keyword in Users/Stores">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="drop-content">
                     <div @if(count($stores) > 5 || count($manager->has_sales_stores) >5) class="sales-stores-section"  @else class="mb2" @endif >
                         <label style="margin-left: 15px" for="material-error">Stores</label>
                         @if(count($stores) > 0 || count($manager->has_sales_stores) >0)
                             @foreach($manager->has_sales_stores as $store)
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox d-inline-block">
-                                        <input type="checkbox" name="stores[]" checked value="{{$store->id}}" class="custom-control-input" id="sales_store_{{$store->id}}">
-                                        <label class="custom-control-label"  for="sales_store_{{$store->id}}">{{$store->shopify_domain}}</label>
+                                        <input type="checkbox" name="stores[]" checked value="{{$store->id}}" class="custom-control-input " id="sales_store_{{$store->id}}">
+                                        <label class="custom-control-label"  for="sales_store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
                                     </div>
                                 </div>
                             @endforeach
                             @foreach($stores as $store)
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox d-inline-block">
-                                        <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input" id="store_{{$store->id}}">
-                                        <label class="custom-control-label"  for="store_{{$store->id}}">{{$store->shopify_domain}}</label>
+                                        <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="store_{{$store->id}}">
+                                        <label class="custom-control-label"  for="store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
                                     </div>
                                 </div>
                             @endforeach
@@ -76,15 +85,15 @@
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox d-inline-block">
                                         <input type="checkbox" name="users[]" checked value="{{$user->id}}" class="custom-control-input" id="selected_user_{{$user->id}}">
-                                        <label class="custom-control-label"  for="selected_user_{{$user->id}}">{{$user->email}}</label>
+                                        <label class="custom-control-label"  for="selected_user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
                                     </div>
                                 </div>
                             @endforeach
                             @foreach($users as $user)
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox d-inline-block">
-                                        <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input" id="user_{{$user->id}}">
-                                        <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->email}}</label>
+                                        <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                        <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
                                     </div>
                                 </div>
                             @endforeach
@@ -92,6 +101,7 @@
                             <p> No User Available</p>
                         </div>
                         @endif
+                    </div>
                     </div>
 
                     <div class="block-content block-content-full text-right border-top">

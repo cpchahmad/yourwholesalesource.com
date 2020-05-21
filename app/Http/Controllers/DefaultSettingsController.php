@@ -76,6 +76,75 @@ class DefaultSettingsController extends Controller
 
     }
 
+    public function search_create_content_sale_manager(Request $request){
+        $shops = Shop::query();
+        $shops->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
+        $shops->whereDoesntHave('has_manager', function () {
+        });
+        $shops->where('shopify_domain','LIKE','%'.$request->input('search').'%');
+        $shops = $shops->get();
+
+        $users = User::role('non-shopify-users')->newQuery();
+        $users->where('email','LIKE','%'.$request->input('search').'%');
+        $users->where('name','LIKE','%'.$request->input('search').'%');
+        $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+        $users->whereDoesntHave('has_manager', function () {
+
+        });
+        $users = $users->get();
+
+        $html = view('inc.create_content_sale_manager')->with([
+            'stores' => $shops,
+            'users' => $users,
+        ])->render();
+
+        return response()->json([
+            'message' => 'success',
+            'html' =>$html,
+        ]);
+    }
+
+    public function search_edit_content_sale_manager(Request $request){
+        $manager = User::find($request->input('id'));
+        if($manager != null){
+            $shops = Shop::query();
+            $shops->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
+            $shops->whereDoesntHave('has_manager', function () {
+
+            });
+            $shops->where('shopify_domain','LIKE','%'.$request->input('search').'%');
+            $shops = $shops->get();
+
+
+            $users = User::role('non-shopify-users')->newQuery();
+            $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+            $users->where('email','LIKE','%'.$request->input('search').'%');
+            $users->where('name','LIKE','%'.$request->input('search').'%');
+            $users->whereDoesntHave('has_manager', function () {
+
+            });
+            $users = $users->get();
+
+            $html = view('inc.edit_content_sale_manager')->with([
+                'stores' => $shops,
+                'users' => $users,
+                'manager' => $manager
+            ])->render();
+
+            return response()->json([
+                'message' => 'success',
+                'html' =>$html,
+            ]);
+        }
+        else{
+            return response()->json([
+                'message' => 'error',
+            ]);
+
+        }
+    }
+
+
     public function show_sales_manager(Request $request){
         $manager = User::find($request->id);
         if($manager != null){

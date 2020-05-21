@@ -158,12 +158,13 @@
                                                         @else
                                                             <p> No Order Logs Found </p>
                                                         @endif
-                                                        @endforeach
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                @endforeach
                             </table>
                         @else
                             <p>No Order Founds</p>

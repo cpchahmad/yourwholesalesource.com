@@ -37,6 +37,12 @@
                     <span class="nav-main-link-name">Orders</span>
                 </a>
             </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.wallets')}}">
+                    <i class="nav-main-link-icon si si-wallet"></i>
+                    <span class="nav-main-link-name">Wallets</span>
+                </a>
+            </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link active"  href="{{route('sales_managers.stores')}}">
@@ -53,7 +59,7 @@
 
 
             <li class="nav-main-item">
-                <a class="nav-main-link active" href="">
+                <a class="nav-main-link active" href="{{route('sales_managers.settings')}}">
                     <i class="nav-main-link-icon si si-wrench"></i>
                     <span class="nav-main-link-name">Settings</span>
                 </a>

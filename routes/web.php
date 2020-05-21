@@ -75,6 +75,10 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/sales-manager/create','DefaultSettingsController@show_sales_manager_create')->name('sales-managers.create.form');
     Route::get('/sales-manager/edit/{id}','DefaultSettingsController@show_sales_manager_edit')->name('sales-managers.edit.form');
     Route::get('/sales-manager/view/{id}','DefaultSettingsController@show_sales_manager')->name('sales-managers.view');
+    Route::get('/sales-manager/create/search','DefaultSettingsController@search_create_content_sale_manager')->name('sales-managers.create.search');
+    Route::get('/sales-manager/edit-search','DefaultSettingsController@search_edit_content_sale_manager')->name('sales-managers.edit.search');
+
+
 
     Route::post('/sales-managers','DefaultSettingsController@create_manager')->name('sales-managers.create');
     Route::post('/sales-manager/update/{id}','DefaultSettingsController@update_manager')->name('sales-managers.update');
@@ -204,7 +208,26 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/orders/{id}/mark-as-delivered','ManagerController@mark_as_delivered')->name('sales_managers.order.mark_as_delivered');
 
             Route::get('/stores','ManagerController@stores')->name('sales_managers.stores');
+            Route::get('/stores/{id}','ManagerController@store')->name('sales_managers.stores.view');
+            Route::get('/products/{id}','ManagerController@product')->name('sales_managers.products.view');
+            Route::get('/customers/{id}', 'ManagerController@customer_view')->name('sales_managers.customer.view');
+
+
             Route::get('/users','ManagerController@users')->name('sales_managers.users');
+            Route::get('/users/{id}','ManagerController@user')->name('sales_managers.users.view');
+
+            Route::get('/settings','ManagerController@view_setting')->name('sales_managers.settings');
+            Route::post('/settings/personal','ManagerController@save_personal_info')->name('sales_managers.save_personal_info');
+            Route::post('/settings/personal/address','ManagerController@save_address')->name('sales_managers.save_address');
+            Route::post('/change/password','ManagerController@change_password')->name('sales_managers.change_password');
+
+
+            Route::get('/wallets', 'ManagerController@wallet_index')->name('sales_managers.wallets');
+            Route::get('/wallets/{id}', 'ManagerController@wallet_details')->name('sales_managers.wallets.detail');
+            Route::get('/wallet/request/approve/{id}', 'ManagerController@approved_bank_statement')->name('sales_managers.wallets.approve.request');
+            Route::post('/wallet/top-up', 'ManagerController@topup_wallet_by_admin')->name('sales_managers.user.wallet.topup');
+
+
 
             Route::get('/home',function (){
                 return view('sales_managers.index');
@@ -232,10 +255,6 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 
         Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
         Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
-
-
-
-
 
     });
 });
