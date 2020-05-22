@@ -59,22 +59,28 @@
             </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                <a class="nav-main-link" href="{{route('stores.index')}}">
+                    <i class="nav-main-link-icon si si-home"></i>
                     <span class="nav-main-link-name">Stores </span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('users.index')}}">
+                    <i class="nav-main-link-icon si si-user"></i>
+                    <span class="nav-main-link-name">Non Shopify Users</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('sales-managers.index')}}">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <i class="nav-main-link-icon si si-users"></i>
                     <span class="nav-main-link-name">Sales Managers</span>
                 </a>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('ticket.category.index')}}">
+                <a class="nav-main-link" href="{{route('tickets.index')}}">
                     <i class="nav-main-link-icon fa fa-ticket-alt"></i>
-                    <span class="nav-main-link-name">Ticket Categories</span>
+                    <span class="nav-main-link-name">Tickets</span>
                 </a>
             </li>
             <li class="nav-main-item">
@@ -86,14 +92,14 @@
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('zone.index')}}">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <i class="nav-main-link-icon si si-map"></i>
                     <span class="nav-main-link-name">Shipping Zones</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('default_info') }}">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <i class="nav-main-link-icon si si-support"></i>
                     <span class="nav-main-link-name">Supported Plateforms</span>
                 </a>
             </li>

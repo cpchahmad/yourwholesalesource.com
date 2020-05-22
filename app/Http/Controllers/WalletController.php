@@ -108,7 +108,7 @@ class WalletController extends Controller
 
     public function index(){
         $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
-        $users  = User::whereNotIn('id',$admins)->get();
+        $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->get();
         foreach ($users as $user){
             if ($user->has_wallet == null) {
                $this->wallet_create($user->id);

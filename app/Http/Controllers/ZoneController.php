@@ -12,9 +12,9 @@ class ZoneController extends Controller
 {
    public function index(){
       $countries = Country::all();
-       $zones =  Zone::all();
+       $zones =  Zone::query();
        return view('setttings.zones.index')->with([
-           'zones'=>$zones,
+           'zones'=>$zones->orderBy('created_at','DESC')->get(),
            'countries' =>$countries
        ]);
    }

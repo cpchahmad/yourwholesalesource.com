@@ -21,10 +21,10 @@
             <form class="js-form-icon-search push" action="" method="get">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="search" class="form-control" placeholder="Search by name" value="" name="search">
+                        <input type="search" class="form-control" placeholder="Search by name" value="{{$search}}" name="search">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                            <a class="btn btn-danger" href=""> <i class="fa fa-times"></i> Clear </a>
+                            <a class="btn btn-danger" href="{{route('sales_managers.tickets')}}"> <i class="fa fa-times"></i> Clear </a>
                         </div>
                     </div>
                 </div>
@@ -41,11 +41,9 @@
                                         <th>Title</th>
                                         <th>Source</th>
                                         <th>Priority</th>
-                                        <th style="width: 5%" >Files</th>
                                         <th>Category</th>
                                         <th>Status</th>
-
-                                        <th>Last Reply at</th>
+                                        <th>Last Reply</th>
                                         <th style="text-align: right">
                                         </th>
                                     </tr>
@@ -63,7 +61,6 @@
                                                <span class="badge @if($ticket->priority == 'low') badge-primary @elseif($ticket->priority == 'medium') badge-warning @else badge-danger @endif" >{{$ticket->priority}}</span>
 
                                             </td>
-                                            <td>{{count($ticket->has_attachments)}}</td>
                                             <td>
                                                 @if($ticket->category == 'default')
                                                 <span class="badge badge-light">{{$ticket->category}}</span>

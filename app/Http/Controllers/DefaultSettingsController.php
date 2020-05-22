@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\DefaultInfo;
 use App\Shop;
+use App\Ticket;
 use App\TicketCategory;
 use App\User;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class DefaultSettingsController extends Controller
@@ -44,7 +47,7 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'Updated Sucessfully');
     }
     public function show_sales_managers(){
-        $sales_managers = User::role('sales-manager')->get();
+        $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         return view('setttings.sales-managers.index')->with([
             'sales_managers' => $sales_managers
         ]);
@@ -305,9 +308,9 @@ class DefaultSettingsController extends Controller
     }
 
     public function view_ticket_categories(Request $request){
-        $categories = TicketCategory::all();
+        $categories = TicketCategory::query();
         return view('setttings.ticket_categories.index')->with([
-            'categories' => $categories
+            'categories' => $categories->orderBy('created_at','DESC')->get(),
         ]);
     }
 
@@ -323,4 +326,74 @@ class DefaultSettingsController extends Controller
         TicketCategory::find($request->id)->delete();
         return redirect()->back()->with('success','Ticket Category Deleted Successfully!');
     }
+
+    public function tickets(Request $request){
+        $tickets = Ticket::query();
+        $tickets = $tickets->orderBy('updated_at','DESC')->paginate(30);
+        return view('setttings.tickets.index')->with([
+            'tickets' => $tickets
+        ]);
+    }
+    public function ticket(Request $request){
+        $ticket = Ticket::find($request->id);
+        $manager = User::find($ticket->manager_id);
+        return view('setttings.tickets.view')->with([
+            'manager' => $manager,
+            'ticket' => $ticket,
+        ]);
+    }
+    public function stores(Request $request){
+        $stores= Shop::query();
+        $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
+        $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
+        return view('setttings.stores.index')->with([
+            'stores'=>$stores
+        ]);
+    }
+
+    public function store(Request $request){
+        $store = Shop::find($request->id);
+        if (count($store->has_user) > 0) {
+            if ($store->has_user[0]->has_wallet == null) {
+                $wallet = null;
+            } else {
+                $wallet = $store->has_user[0]->has_wallet;
+            }
+        } else {
+            $wallet = null;
+        }
+        return view('setttings.stores.view')->with([
+            'store' => $store,
+            'wallet' => $wallet
+        ]);
+    }
+    public function customer_view($id){
+        $customer = Customer::find($id);
+        return view('setttings.customers.view')->with([
+            'customer' => $customer,
+        ]);
+    }
+
+    public function user(Request $request){
+        $user = User::find($request->id);
+        if ($user->has_wallet == null) {
+            $wallet = null;
+        } else {
+            $wallet = $user->has_wallet;
+        }
+        return view('setttings.users.view')->with([
+            'user' => $user,
+            'wallet' => $wallet
+        ]);
+    }
+
+    public function users(Request $request){
+        $users = User::role('non-shopify-users')->newQuery();
+        $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+        $users = $users->orderBy('created_at','DESC')->paginate(30);
+        return view('setttings.users.index')->with([
+            'users'=>$users
+        ]);
+    }
+
 }

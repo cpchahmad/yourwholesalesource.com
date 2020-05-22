@@ -54,7 +54,7 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+
                                         <th>Name</th>
                                         <th>Source</th>
                                         <th>Order Date</th>
@@ -64,9 +64,9 @@
                                     </tr>
                                     </thead>
                                     <tbody class="">
-                                    @foreach($store->has_orders as $index => $order)
+                                    @foreach($store->has_orders()->orderBy('created_at','DESC')->get() as $index => $order)
                                         <tr>
-                                            <td>{{$index+1}}</td>
+
                                             <td class="font-w600"><a href="{{route('sales_managers.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                             <td>
                                                 @if($order->custom == 1)
@@ -203,30 +203,26 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Title</th>
 
+                                        <th>Title</th>
                                         <th>Priority</th>
-                                        <th style="width: 5%" >Files</th>
                                         <th>Category</th>
                                         <th>Status</th>
-
                                         <th>Last Reply at</th>
                                         <th style="text-align: right">
                                         </th>
                                     </tr>
                                     </thead>
 
-                                    @foreach($store->has_tickets as $index => $ticket)
+                                    @foreach($store->has_tickets()->orderBy('updated_at','DESC')->get() as $index => $ticket)
                                         <tbody class="">
                                         <tr>
-                                            <td>{{$index+1}}</td>
+
                                             <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
                                             <td>
                                                 <span class="badge @if($ticket->priority == 'low') badge-primary @elseif($ticket->priority == 'medium') badge-warning @else badge-danger @endif" >{{$ticket->priority}}</span>
 
                                             </td>
-                                            <td>{{count($ticket->has_attachments)}}</td>
                                             <td>
                                                 @if($ticket->category == 'default')
                                                     <span class="badge badge-light">{{$ticket->category}}</span>
@@ -272,10 +268,9 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Featured Image</th>
+
+                                        <th>Image</th>
                                         <th>Title</th>
-                                        <th>Variants</th>
                                         <th>Price</th>
                                         <th>Fulfilled By</th>
                                         <th style="text-align: right">
@@ -283,11 +278,9 @@
                                     </tr>
                                     </thead>
                                     <tbody class="">
-                                    @foreach($store->has_products as $index => $product)
+                                    @foreach($store->has_products()->orderBy('created_at','DESC')->get() as $index => $product)
                                         <tr>
-                                            <td>
-                                                {{$index+1}}
-                                            </td>
+
                                             <td>
                                                 <img @if(count($product->has_images) > 0)
                                                      @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
@@ -305,7 +298,6 @@
                                             <td>
                                                 <a href="{{route('sales_managers.products.view',$product->id)}}">{{$product->title}}</a>
                                             </td>
-                                            <td>{{count($product->hasVariants)}}</td>
                                             <td>${{number_format($product->price,2)}}</td>
                                             <td><span class="mb2 font-size-sm" style="color: grey">@if($product->fulfilled_by == "Fantasy") WeFulfill @else {{$product->fulfilled_by}} @endif</span></td>
                                             <td class="">
@@ -334,7 +326,7 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Total Orders</th>
@@ -344,9 +336,9 @@
                                     </tr>
                                     </thead>
                                     <tbody class="">
-                                    @foreach($store->has_customers as $index => $customer)
+                                    @foreach($store->has_customers()->orderBy('created_at','DESC')->get() as $index => $customer)
                                         <tr>
-                                            <td>{{$index+1}}</td>
+
                                             <td class="font-w600"><a href="{{route('sales_managers.customer.view',$customer->id)}}">{{ $customer->first_name }} {{$customer->last_name}}</a></td>
                                             <td>
                                                 {{$customer->email}}
@@ -386,7 +378,7 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+
                                         <th>Order</th>
                                         <th style="width: 10%">Payer</th>
                                         <th>Amount</th>
@@ -398,7 +390,6 @@
                                     @foreach($store->has_payments()->orderBy('created_at','DESC')->get() as $index => $payment)
                                         <tbody class="">
                                         <tr>
-                                            <td>{{$index+1}}</td>
                                             <td class="font-w600"> @if($payment->has_order)<a href="{{route('store.order.view',$payment->has_order->id)}}">{{ $payment->has_order->name }}</a> @else Order Details Deleted @endif</td>
                                             <td>
                                                 {{$payment->name}}

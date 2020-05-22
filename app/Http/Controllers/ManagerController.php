@@ -35,11 +35,19 @@ class ManagerController extends Controller
     {
         $this->helper = new HelperController();
     }
-    public function tickets(){
+    public function tickets(Request $request){
         $tickets = Ticket::where('manager_id',Auth::id())->newQuery();
+
+        if($request->has('search')){
+            $tickets->where('title','LIKE','%'.$request->input('search').'%');
+            $tickets->orwhere('email','LIKE','%'.$request->input('search').'%');
+
+        }
+
         $tickets = $tickets->paginate(30);
         return view('sales_managers.tickets.index')->with([
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'search' =>$request->input('search'),
         ]);
     }
     public function view_ticket(Request $request){
@@ -554,6 +562,7 @@ class ManagerController extends Controller
                 if($request->input('new_password') == $request->input('new_password_again')){
                     $manager->password = Hash::make($request->input('new_password'));
                     $manager->save();
+
                     return redirect()->back()->with('success','Password Changed Successfully!');
 
                 }
@@ -607,8 +616,14 @@ class ManagerController extends Controller
                 $wallet_log->wallet_id =$related_wallet->id;
                 $wallet_log->status = "Bank Transfer Approved";
                 $wallet_log->amount = $req->amount;
-                $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved By Your Manager At ' . now()->format('d M, Y h:i a'). ' By Administration';
+                $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved By Your Manager At ' . now()->format('d M, Y h:i a'). ' By Manager';
                 $wallet_log->save();
+
+                $ml = new ManagerLog();
+                $ml->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved By Your Manager At ' . now()->format('d M, Y h:i a'). ' By Manager';
+                $ml->status = "Top-up Request Approval";
+                $ml->manager_id = Auth::id();
+                $ml->save();
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }
             else{
@@ -632,6 +647,13 @@ class ManagerController extends Controller
                 $wallet_log->amount = $request->input('amount');
                 $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Your Manager';
                 $wallet_log->save();
+
+                $ml = new ManagerLog();
+                $ml->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Your Manager';
+                $ml->status = "Top-up By Manager";
+                $ml->manager_id = Auth::id();
+                $ml->save();
+
                 return redirect()->back()->with('success','Wallet Top-up Successfully!');
             }
 

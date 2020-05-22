@@ -1,4 +1,4 @@
-@extends('layout.manager')
+@extends('layout.index')
 @section('content')
 
     <div class="bg-body-light">
@@ -60,9 +60,10 @@
                                     </tr>
                                     </thead>
                                     <tbody class="">
-                                    @foreach($user->has_orders()->orderBy('created_at','DESC')->get() as $index => $order)
+                                    @foreach($user->has_orders()->orderBy('created_at')->get() as $index => $order)
                                         <tr>
-                                            <td class="font-w600"><a href="{{route('sales_managers.order.view',$order->id)}}">{{ $order->name }}</a></td>
+
+                                            <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                             <td>
                                                 @if($order->custom == 1)
                                                     <span class="badge badge-primary" style="font-size: 12px"> Custom </span>
@@ -101,7 +102,7 @@
                                                 <div class="btn-group">
                                                     <a class="btn btn-sm btn-primary text-white" type="button" data-toggle="modal" data-target="#tracking_{{$order->id}}_modal"
                                                        data-original-title="View Tracking"><i class="fa fa-truck"></i></a>
-                                                    <a href="{{route('sales_managers.order.view',$order->id)}}"
+                                                    <a href="{{route('admin.order.view',$order->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Order"><i class="fa fa-eye"></i></a>
                                                 </div>
@@ -212,18 +213,15 @@
                                     @foreach($user->has_tickets()->orderBy('updated_at','DESC')->get() as $index => $ticket)
                                         <tbody class="">
                                         <tr>
-
                                             <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
                                             <td>
                                                 <span class="badge @if($ticket->priority == 'low') badge-primary @elseif($ticket->priority == 'medium') badge-warning @else badge-danger @endif" >{{$ticket->priority}}</span>
-
                                             </td>
                                             <td>
                                                 @if($ticket->category == 'default')
                                                     <span class="badge badge-light">{{$ticket->category}}</span>
                                                 @else
                                                     <span class="badge" style="background: {{$ticket->has_category->color}};color: white">{{$ticket->category}}</span>
-
                                                 @endif
                                             </td>
                                             <td>
@@ -235,7 +233,7 @@
                                             <td>{{\Carbon\Carbon::parse($ticket->last_reply_at)->diffForHumans()}}</td>
                                             <td class="">
                                                 <div class="btn-group">
-                                                    <a href="{{route('sales_managers.ticket.view',$ticket->id)}}"
+                                                    <a href="{{route('tickets.view',$ticket->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Ticket"><i class="fa fa-eye"></i></a>
                                                     <a href=""
@@ -277,7 +275,7 @@
                                     @foreach($user->has_customers()->orderBy('created_at','DESC')->get() as $index => $customer)
                                         <tr>
 
-                                            <td class="font-w600"><a href="{{route('sales_managers.customer.view',$customer->id)}}">{{ $customer->first_name }} {{$customer->last_name}}</a></td>
+                                            <td class="font-w600"><a href="{{route('customers.view',$customer->id)}}">{{ $customer->first_name }} {{$customer->last_name}}</a></td>
                                             <td>
                                                 {{$customer->email}}
 
@@ -290,7 +288,7 @@
                                             </td>
                                             <td class="text-right">
                                                 <div class="btn-group">
-                                                    <a href="{{route('sales_managers.customer.view',$customer->id)}}"
+                                                    <a href="{{route('customers.view',$customer->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Customer"><i class="fa fa-eye"></i></a>
                                                 </div>
@@ -316,7 +314,6 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-
                                         <th>Order</th>
                                         <th style="width: 10%">Payer</th>
                                         <th>Amount</th>
@@ -391,7 +388,7 @@
                                         <td>{{number_format($wallet->used,2)}} USD</td>
                                         <td>{{count($wallet->requests)}}</td>
                                         <td class="text-center">
-                                            <a href="{{route('sales_managers.wallets.detail',$wallet->id)}}"
+                                            <a href="{{route('admin.wallets.detail',$wallet->id)}}"
                                                class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                data-original-title="View Wallet"><i class="fa fa-eye"></i></a>
                                         </td>

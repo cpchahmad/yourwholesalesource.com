@@ -46,7 +46,9 @@
                                     <tbody class="">
                                     @foreach($sales_managers as $index => $manager)
                                         <tr>
-                                            <td class="font-w600">{{ $manager->name }}</td>
+                                            <td class="font-w600 d-flex">
+                                                <img class="img-avatar" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="">
+                                                <span style="margin-left: 10px;">{{ $manager->name }}</span></td>
                                             <td>
                                                 {{$manager->email}}
                                             </td>

@@ -66,7 +66,7 @@
                     @endif
                 <div class="block">
                     <div class="block-header">
-                        <h5 class="block-title">Reply To Manager</h5>
+                        <h5 class="block-title">Reply</h5>
                     </div>
                     <div class="block-content">
                         <div class="p-2">

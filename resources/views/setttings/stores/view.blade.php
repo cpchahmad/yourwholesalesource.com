@@ -1,20 +1,20 @@
-@extends('layout.manager')
+@extends('layout.index')
 @section('content')
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                   {{$user->name}}
+                    {{explode('.',$store->shopify_domain)[0]}}
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx active" href="">Users</a>
+                            <a class="link-fx active" href="">Stores</a>
                         </li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx active" href="">{{$user->name}}</a>
+                            <a class="link-fx active" href=""> {{explode('.',$store->shopify_domain)[0]}}</a>
                         </li>
                     </ol>
                 </nav>
@@ -29,6 +29,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="#tickets">Tickets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#customers">Customers</a>
@@ -47,10 +50,11 @@
                 <div class="tab-pane active" id="orders" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
-                            @if (count($user->has_orders) > 0)
+                            @if (count($store->has_orders) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
+
                                         <th>Name</th>
                                         <th>Source</th>
                                         <th>Order Date</th>
@@ -60,9 +64,10 @@
                                     </tr>
                                     </thead>
                                     <tbody class="">
-                                    @foreach($user->has_orders()->orderBy('created_at','DESC')->get() as $index => $order)
+                                    @foreach($store->has_orders()->orderBy('created_at','DESC')->get() as $index => $order)
                                         <tr>
-                                            <td class="font-w600"><a href="{{route('sales_managers.order.view',$order->id)}}">{{ $order->name }}</a></td>
+
+                                            <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                             <td>
                                                 @if($order->custom == 1)
                                                     <span class="badge badge-primary" style="font-size: 12px"> Custom </span>
@@ -101,7 +106,7 @@
                                                 <div class="btn-group">
                                                     <a class="btn btn-sm btn-primary text-white" type="button" data-toggle="modal" data-target="#tracking_{{$order->id}}_modal"
                                                        data-original-title="View Tracking"><i class="fa fa-truck"></i></a>
-                                                    <a href="{{route('sales_managers.order.view',$order->id)}}"
+                                                    <a href="{{route('admin.order.view',$order->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Order"><i class="fa fa-eye"></i></a>
                                                 </div>
@@ -194,11 +199,10 @@
                 <div class="tab-pane" id="tickets" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
-                            @if(count($user->has_tickets) > 0)
+                            @if(count($store->has_tickets) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-
                                         <th>Title</th>
                                         <th>Priority</th>
                                         <th>Category</th>
@@ -209,14 +213,12 @@
                                     </tr>
                                     </thead>
 
-                                    @foreach($user->has_tickets()->orderBy('updated_at','DESC')->get() as $index => $ticket)
+                                    @foreach($store->has_tickets()->orderBy('updated_at','DESC')->get() as $index => $ticket)
                                         <tbody class="">
                                         <tr>
-
                                             <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
                                             <td>
                                                 <span class="badge @if($ticket->priority == 'low') badge-primary @elseif($ticket->priority == 'medium') badge-warning @else badge-danger @endif" >{{$ticket->priority}}</span>
-
                                             </td>
                                             <td>
                                                 @if($ticket->category == 'default')
@@ -235,7 +237,7 @@
                                             <td>{{\Carbon\Carbon::parse($ticket->last_reply_at)->diffForHumans()}}</td>
                                             <td class="">
                                                 <div class="btn-group">
-                                                    <a href="{{route('sales_managers.ticket.view',$ticket->id)}}"
+                                                    <a href="{{route('tickets.view',$ticket->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Ticket"><i class="fa fa-eye"></i></a>
                                                     <a href=""
@@ -256,11 +258,67 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="products" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            @if(count($store->has_products) > 0)
+                                <table class="table table-hover table-borderless table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                        <th>Fulfilled By</th>
+                                        <th style="text-align: right">
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="">
+                                    @foreach($store->has_products()->orderBy('created_at','DESC')->get() as $index => $product)
+                                        <tr>
+                                            <td>
+                                                <img @if(count($product->has_images) > 0)
+                                                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                     @if($index == 0)
+                                                     @if($image->isV == 0)
+                                                     src="{{asset('images')}}/{{$image->image}}"
+                                                     @else src="{{asset('images/variants')}}/{{$image->image}}"
+                                                     @endif
+                                                     @endif
+                                                     @endforeach
+                                                     @else
+                                                     s="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                     @endif alt="" class="img-avatar">
+                                            </td>
+                                            <td>
+                                                <a href="{{route('product.view',$product->linked_product_id)}}">{{$product->title}}</a>
+                                            </td>
 
+                                            <td>${{number_format($product->price,2)}}</td>
+                                            <td><span class="mb2 font-size-sm" style="color: grey">@if($product->fulfilled_by == "Fantasy") WeFulfill @else {{$product->fulfilled_by}} @endif</span></td>
+                                            <td class="">
+                                                <div class="btn-group">
+                                                    <a href="{{route('product.view',$product->linked_product_id)}}"
+                                                       class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                       data-original-title="View Product"><i class="fa fa-eye"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+
+                                </table>
+                            @else
+
+                                <p class="text-center"> No Product Found !</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div class="tab-pane" id="customers" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
-                            @if (count($user->has_customers) > 0)
+                            @if (count($store->has_customers) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
@@ -274,10 +332,9 @@
                                     </tr>
                                     </thead>
                                     <tbody class="">
-                                    @foreach($user->has_customers()->orderBy('created_at','DESC')->get() as $index => $customer)
+                                    @foreach($store->has_customers()->orderBy('created_at','DESC')->get() as $index => $customer)
                                         <tr>
-
-                                            <td class="font-w600"><a href="{{route('sales_managers.customer.view',$customer->id)}}">{{ $customer->first_name }} {{$customer->last_name}}</a></td>
+                                            <td class="font-w600"><a href="{{route('customers.view',$customer->id)}}">{{ $customer->first_name }} {{$customer->last_name}}</a></td>
                                             <td>
                                                 {{$customer->email}}
 
@@ -290,7 +347,7 @@
                                             </td>
                                             <td class="text-right">
                                                 <div class="btn-group">
-                                                    <a href="{{route('sales_managers.customer.view',$customer->id)}}"
+                                                    <a href="{{route('customers.view',$customer->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Customer"><i class="fa fa-eye"></i></a>
                                                 </div>
@@ -312,11 +369,10 @@
                 <div class="tab-pane" id="payments" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
-                            @if (count($user->has_payments) > 0)
+                            @if (count($store->has_payments) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-
                                         <th>Order</th>
                                         <th style="width: 10%">Payer</th>
                                         <th>Amount</th>
@@ -325,9 +381,10 @@
                                     </tr>
                                     </thead>
 
-                                    @foreach($user->has_payments()->orderBy('created_at','DESC')->get() as $index => $payment)
+                                    @foreach($store->has_payments()->orderBy('created_at','DESC')->get() as $index => $payment)
                                         <tbody class="">
                                         <tr>
+
                                             <td class="font-w600"> @if($payment->has_order)<a href="{{route('store.order.view',$payment->has_order->id)}}">{{ $payment->has_order->name }}</a> @else Order Details Deleted @endif</td>
                                             <td>
                                                 {{$payment->name}}
@@ -391,7 +448,7 @@
                                         <td>{{number_format($wallet->used,2)}} USD</td>
                                         <td>{{count($wallet->requests)}}</td>
                                         <td class="text-center">
-                                            <a href="{{route('sales_managers.wallets.detail',$wallet->id)}}"
+                                            <a href="{{route('admin.wallets.detail',$wallet->id)}}"
                                                class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                data-original-title="View Wallet"><i class="fa fa-eye"></i></a>
                                         </td>

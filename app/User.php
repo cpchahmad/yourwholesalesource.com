@@ -69,10 +69,18 @@ class User extends Authenticatable
     public function has_tickets(){
         return $this->hasMany('App\Ticket','user_id');
     }
+
+    public function has_manager_tickets(){
+        return $this->hasMany(Ticket::class,'manager_id','id');
+    }
+
     public function has_payments(){
         return $this->hasMany(OrderTransaction::class,'user_id');
     }
     public function has_customers(){
         return $this->hasMany(Customer::class,'user_id');
+    }
+    public function has_manager_logs(){
+        return $this->hasMany(ManagerLog::class,'manager_id');
     }
 }

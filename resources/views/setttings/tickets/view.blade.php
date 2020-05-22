@@ -1,4 +1,4 @@
-@extends('layout.manager')
+@extends('layout.index')
 @section('content')
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
@@ -9,7 +9,6 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item">Help-Center</li>
                         <li class="breadcrumb-item">Tickets</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href=""> {{$ticket->title}} </a>
@@ -69,7 +68,7 @@
                 @endif
                 <div class="block">
                     <div class="block-header">
-                        <h5 class="block-title">Reply</h5>
+                        <h5 class="block-title">Reply </h5>
                     </div>
                     <div class="block-content">
                         <div class="p-2">
@@ -172,6 +171,9 @@
                             <hr>
                             <span class="font-weight-bold">Ticket Time: </span>  <span class="text-center">{{$ticket->created_at->diffForHumans()}}</span>
                             <hr>
+                            <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$ticket->has_manager->name}} </span>
+                            <hr>
+                            <span class="font-weight-bold">Manager Email: </span>  <span class="text-center"> {{$ticket->has_manager->email}} </span>
 
                         </div>
 

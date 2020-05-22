@@ -77,14 +77,22 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/sales-manager/view/{id}','DefaultSettingsController@show_sales_manager')->name('sales-managers.view');
     Route::get('/sales-manager/create/search','DefaultSettingsController@search_create_content_sale_manager')->name('sales-managers.create.search');
     Route::get('/sales-manager/edit-search','DefaultSettingsController@search_edit_content_sale_manager')->name('sales-managers.edit.search');
-
-
-
     Route::post('/sales-managers','DefaultSettingsController@create_manager')->name('sales-managers.create');
     Route::post('/sales-manager/update/{id}','DefaultSettingsController@update_manager')->name('sales-managers.update');
     Route::any('/sales-managers/{id}/delete','DefaultSettingsController@delete_manager')->name('sales-managers.delete');
     Route::any('/sales-managers/{id}/set','DefaultSettingsController@set_manager_as_user')->name('sales-managers.set_manager_as_user');
     Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
+
+    Route::get('/tickets','DefaultSettingsController@tickets')->name('tickets.index');
+    Route::get('/tickets/{id}','DefaultSettingsController@ticket')->name('tickets.view');
+
+    Route::get('/stores','DefaultSettingsController@stores')->name('stores.index');
+    Route::get('/stores/{id}','DefaultSettingsController@store')->name('stores.view');
+    Route::get('/stores/customers/{id}','DefaultSettingsController@customer_view')->name('customers.view');
+
+    Route::get('/non-shopify-users','DefaultSettingsController@users')->name('users.index');
+    Route::get('/non-shopify-users/{id}','DefaultSettingsController@user')->name('users.view');
+
 
     Route::get('/ticket-category','DefaultSettingsController@view_ticket_categories')->name('ticket.category.index');
     Route::post('/ticket-category','DefaultSettingsController@create_ticket_categories')->name('ticket.category.create');
@@ -227,10 +235,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/wallet/request/approve/{id}', 'ManagerController@approved_bank_statement')->name('sales_managers.wallets.approve.request');
             Route::post('/wallet/top-up', 'ManagerController@topup_wallet_by_admin')->name('sales_managers.user.wallet.topup');
 
-
-
             Route::get('/home',function (){
-                return view('sales_managers.index');
+                $manager = \App\User::find(\Illuminate\Support\Facades\Auth::id());
+                return view('sales_managers.index')->with('manager',$manager);
             })->name('managers.dashboard');
         });
     });
