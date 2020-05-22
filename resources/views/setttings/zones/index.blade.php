@@ -105,8 +105,8 @@
                                                                 @foreach($countries as $country)
                                                                     <div class="col-md-12">
                                                                         <div class="custom-control custom-checkbox d-inline-block">
-                                                                            <input type="checkbox" name="countries[]"  @if(in_array($country->id,$zone->has_countries->pluck('id')->toArray())) checked @endif value="{{$country->id}}" class="custom-control-input" id="rowedit_country{{$zone->id}}{{$country->id}}">
-                                                                            <label class="custom-control-label"  for="rowedit_country{{$zone->id}}{{$country->id}}">{{$country->name}}</label>
+                                                                            <input type="checkbox" name="countries[]"  @if(in_array($country->id,$zone->has_countries->pluck('id')->toArray())) checked @endif value="{{$country->id}}" class="custom-control-input" id="row_edit_country_{{$zone->id}}_{{$country->id}}">
+                                                                            <label class="custom-control-label"  for="row_edit_country_{{$zone->id}}_{{$country->id}}">{{$country->name}}</label>
                                                                         </div>
                                                                     </div>
 
