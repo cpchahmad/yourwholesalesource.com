@@ -18,17 +18,6 @@
         </div>
     </div>
     <div class="content">
-        <form class="js-form-icon-search push" action="" method="get">
-            <div class="form-group">
-                <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search by name" value="" name="search">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                        <a class="btn btn-danger" href=""> <i class="fa fa-times"></i> Clear </a>
-                    </div>
-                </div>
-            </div>
-        </form>
         <div class="row mb2">
             <div class="col-md-8">
             </div>
@@ -36,6 +25,42 @@
                 <button class="btn btn-primary btn-sm" onclick="window.location.href='{{route('ticket.category.index')}}'"> Manage Ticket Categories</button>
             </div>
         </div>
+        <form class="js-form-icon-search" style="margin: 20px 0px" action="" method="get">
+            <div class="">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search by name" value="{{$search}}" name="search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <a class="btn btn-danger" href="{{route('sales_managers.tickets')}}"> <i class="fa fa-times"></i> Clear </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6  mb2">
+                <form class="d-flex text-right" action="" method="get">
+                    <select name="priority" id="" class="form-control">
+                        <option value="" style="display: none">Priority</option>
+                        <option @if($priority == 'low') selected @endif value="low">Low</option>
+                        <option @if($priority == 'medium') selected @endif value="medium">Medium</option>
+                        <option @if($priority == 'high') selected @endif value="high">High</option>
+                    </select>
+
+
+                    <select name="status" style="margin-left: 10px" class="form-control">
+                        <option value="" style="display: none">Status</option>
+                        @foreach($statuses as $status)
+                            <option @if($selected_status == $status->id) selected @endif value="{{$status->id}}">{{$status->status}}</option>
+                        @endforeach
+                    </select>
+
+                    <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
+                </form>
+            </div>
+        </div>
+
         <div class="block">
             <div class="block-content">
                 <div class="row">

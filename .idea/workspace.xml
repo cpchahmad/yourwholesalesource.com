@@ -5,21 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DefaultSettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DefaultSettingsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ManagerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WalletController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WalletController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ZoneController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ZoneController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/manger_sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/manger_sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/non_shopify_users/help-center/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/non_shopify_users/help-center/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales_managers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales_managers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales_managers/stores/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales_managers/stores/view.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/sales_managers/tickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales_managers/tickets/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales_managers/tickets/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales_managers/tickets/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/sales_managers/users/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sales_managers/users/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/setttings/sales-managers/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/sales-managers/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/setttings/sales-managers/view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/sales-managers/view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/setttings/tickets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/setttings/tickets/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,14 +279,7 @@
       <workItem from="1589877116598" duration="40060000" />
       <workItem from="1590046649392" duration="9524000" />
       <workItem from="1590093763563" duration="9546000" />
-      <workItem from="1590164934674" duration="12719000" />
-    </task>
-    <task id="LOCAL-00087" summary="12052020F">
-      <created>1589281055062</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1589281055062</updated>
+      <workItem from="1590164934674" duration="15493000" />
     </task>
     <task id="LOCAL-00088" summary="12052020F">
       <created>1589281247900</created>
@@ -637,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590167579749</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="23052020F">
+      <created>1590183452493</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1590183452494</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,7 +646,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="30042020F-wallet" />
     <MESSAGE value="30042020F" />
     <MESSAGE value="05052020F" />
     <MESSAGE value="05052020F-fixes" />
@@ -684,7 +670,8 @@
     <MESSAGE value="20022020F-sales-manager-module" />
     <MESSAGE value="20022020F-fix" />
     <MESSAGE value="22022020F-fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="22022020F-fix" />
+    <MESSAGE value="23052020F" />
+    <option name="LAST_COMMIT_MESSAGE" value="23052020F" />
   </component>
   <component name="WindowStateProjectService">
     <state x="392" y="92" key="#Composer" timestamp="1582112130439">
@@ -695,10 +682,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="488" y="80" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1589427505688" />
-    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590175527864">
+    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1590188954501">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590175527864" />
+    <state x="452" y="160" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1590188954501" />
     <state x="530" y="189" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1582634641816" />
     <state x="424" y="0" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#method0" timestamp="1589884299716">
       <screen x="0" y="0" width="1366" height="728" />
@@ -717,10 +704,10 @@
     </state>
     <state x="424" y="98" width="645" height="571" key="#phpunit.xml/0.0.1366.728@0.0.1366.728" timestamp="1587052621514" />
     <state x="497" y="116" width="620" height="627" key="#phpunit.xml/0.0.1600.860@0.0.1600.860" timestamp="1582194985095" />
-    <state x="51" y="0" key="CommitChangelistDialog2" timestamp="1590167578211">
+    <state x="51" y="0" key="CommitChangelistDialog2" timestamp="1590183451372">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="51" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1590167578211" />
+    <state x="51" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1590183451372" />
     <state x="129" y="55" key="DiffContextDialog" timestamp="1589539828217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -754,10 +741,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584700673851" />
-    <state x="21" y="97" key="Vcs.Push.Dialog.v2" timestamp="1590167588315">
+    <state x="21" y="97" key="Vcs.Push.Dialog.v2" timestamp="1590183491200">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="21" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1590167588315" />
+    <state x="21" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1590183491200" />
     <state x="434" y="219" key="com.intellij.ide.util.TipDialog" timestamp="1584339893009">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -779,10 +766,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1589539387667" />
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1590178462253">
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1590188929813">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590178462253" />
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590188929813" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
 </project>

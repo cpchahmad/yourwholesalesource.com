@@ -13,6 +13,7 @@ use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\Shop;
 use App\Ticket;
+use App\TicketStatus;
 use App\User;
 use App\Wallet;
 use App\WalletLog;
@@ -41,13 +42,29 @@ class ManagerController extends Controller
         if($request->has('search')){
             $tickets->where('title','LIKE','%'.$request->input('search').'%');
             $tickets->orwhere('email','LIKE','%'.$request->input('search').'%');
-
         }
+
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $tickets->where('status_id','=',$request->input('status'));
+
+            }
+        }
+
+        if($request->has('priority')){
+            if($request->input('priority') != null) {
+                $tickets->where('priority', '=', $request->input('priority'));
+            }
+        }
+
 
         $tickets = $tickets->paginate(30);
         return view('sales_managers.tickets.index')->with([
             'tickets' => $tickets,
             'search' =>$request->input('search'),
+            'statuses' => TicketStatus::all(),
+            'selected_status' =>$request->input('status'),
+            'priority' =>$request->input('priority'),
         ]);
     }
     public function view_ticket(Request $request){

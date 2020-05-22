@@ -7,6 +7,7 @@ use App\DefaultInfo;
 use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
+use App\TicketStatus;
 use App\User;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
@@ -329,9 +330,29 @@ class DefaultSettingsController extends Controller
 
     public function tickets(Request $request){
         $tickets = Ticket::query();
+        if($request->has('search')){
+            $tickets->where('title','LIKE','%'.$request->input('search').'%');
+            $tickets->orwhere('email','LIKE','%'.$request->input('search').'%');
+        }
+
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $tickets->where('status_id','=',$request->input('status'));
+
+            }
+        }
+        if($request->has('priority')){
+            if($request->input('priority') != null) {
+                $tickets->where('priority', '=', $request->input('priority'));
+            }
+        }
         $tickets = $tickets->orderBy('updated_at','DESC')->paginate(30);
         return view('setttings.tickets.index')->with([
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'search' =>$request->input('search'),
+            'statuses' => TicketStatus::all(),
+            'selected_status' =>$request->input('status'),
+            'priority' =>$request->input('priority'),
         ]);
     }
     public function ticket(Request $request){
