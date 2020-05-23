@@ -12,6 +12,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .btn {
     font-family: 'Sofia_Pro_Light', 'sans-serif';
     font-size: 15px;
+    border-radius: 0;
 }
 label {
     font-weight: 600;
