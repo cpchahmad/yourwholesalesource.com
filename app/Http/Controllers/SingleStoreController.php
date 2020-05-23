@@ -228,8 +228,8 @@ class SingleStoreController extends Controller
             $country = $request->input('country');
         }
         else{
-//            $country = "United States";
-            $country = "Afghanistan";
+            $country = "United States";
+//            $country = "Afghanistan";
         }
 
         $product = Product::find($request->input('product'));
