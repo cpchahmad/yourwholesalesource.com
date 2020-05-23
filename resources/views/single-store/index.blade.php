@@ -26,54 +26,43 @@
                             </div>
                         </form>
                             @else
-                            <div class="row push-15">
-                                <div class="col-md-5"><a href="" class="btn btn-primary">I dont have an account!</a></div>
-                                <div class="col-md-2" ><div class="vertical-line">Or</div></div>
-                                <div class="col-md-5 text-right"><a data-toggle="modal" data-target="#associate_modal" class="btn btn-primary">Associate with an account!</a></div>
-                                <div class="modal fade" id="associate_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-popout" role="document">
-                                        <div class="modal-content">
-                                            <div class="block block-themed block-transparent mb-0">
-                                                <div class="block-header bg-primary-dark">
-                                                    <h3 class="block-title">Associate with an account</h3>
-                                                    <div class="block-options">
-                                                        <button type="button" class="btn-block-option">
-                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                        </button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="block">
+                                        <div class="block-header">
+                                            <h3 class="block-title">Associate with an account</h3>
+                                        </div>
+                                        <form id="authenticate_user_form" data-store="{{$shop->shopify_domain}}" data-token="{{csrf_token()}}" data-route="{{route('store.user.associate')}}" action="{{route('store.user.authenticate')}}" method="post">
+                                            @csrf
+                                            <div class="block-content ">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Email Address</label>
+                                                            <input required class="form-control" type="email" id="user-email" name="email"
+                                                                   value=""   placeholder="Enter Registered Email Address">
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <form id="authenticate_user_form" data-store="{{$shop->shopify_domain}}" data-token="{{csrf_token()}}" data-route="{{route('store.user.associate')}}" action="{{route('store.user.authenticate')}}" method="post">
-                                                    @csrf
-                                                    <div class="block-content font-size-sm">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <input required class="form-control" type="email" id="user-email" name="email"
-                                                                           value=""   placeholder="Enter Registered Email Address">
-                                                                    <label for="material-error">Email Address</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <input required class="form-control" type="password" id="user-password" name="password"
-                                                                           value=""  placeholder="Enter Password">
-                                                                    <label for="material-error">Password</label>
-                                                                </div>
-                                                            </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Password</label>
+                                                            <input required class="form-control" type="password" id="user-password" name="password"
+                                                                   value=""  placeholder="Enter Password">
+
                                                         </div>
                                                     </div>
-                                                    <input type="submit" hidden>
-                                                </form>
-                                                <div class="block-content block-content-full text-right border-top">
-                                                    <button type="submit" class="btn btn-sm authenticate_user btn-primary" >Authenticate</button>
                                                 </div>
                                             </div>
+                                            <input type="submit" hidden>
+                                        </form>
+                                        <div class="block-content block-content-full text-right border-top">
+                                            <button type="submit" class="btn btn-sm authenticate_user btn-primary" >Authenticate</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         @endif
                     </div>

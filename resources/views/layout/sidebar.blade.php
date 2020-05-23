@@ -52,59 +52,54 @@
                 </ul>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <i class="nav-main-link-icon si si-layers"></i>
+                <a class="nav-main-link" href="{{route('admin.orders')}}">
+                    <i class="nav-main-link-icon si si-bag"></i>
                     <span class="nav-main-link-name">Orders</span>
                 </a>
-                <ul class="nav-main-submenu open">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">All Orders</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Payment History</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Tracking Info</span>
-                        </a>
-                    </li>
-
-                </ul>
             </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                <a class="nav-main-link" href="{{route('stores.index')}}">
+                    <i class="nav-main-link-icon si si-home"></i>
                     <span class="nav-main-link-name">Stores </span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('users.index')}}">
+                    <i class="nav-main-link-icon si si-user"></i>
+                    <span class="nav-main-link-name">Non Shopify Users</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('sales-managers.index')}}">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <i class="nav-main-link-icon si si-users"></i>
                     <span class="nav-main-link-name">Sales Managers</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('tickets.index')}}">
+                    <i class="nav-main-link-icon fa fa-ticket-alt"></i>
+                    <span class="nav-main-link-name">Tickets</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('admin.wallets')}}">
+                    <i class="nav-main-link-icon fa fa-wallet"></i>
+                    <span class="nav-main-link-name">Wallets</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('zone.index')}}">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <i class="nav-main-link-icon si si-map"></i>
                     <span class="nav-main-link-name">Shipping Zones</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('default_info') }}">
-                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <i class="nav-main-link-icon si si-support"></i>
                     <span class="nav-main-link-name">Supported Plateforms</span>
                 </a>
             </li>
@@ -145,26 +140,26 @@
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
-                    <span class="d-none d-sm-inline-block ml-1">Adam</span>
+                    <span class="d-none d-sm-inline-block ml-1">Admin</span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
-                    <div class="p-3 text-center bg-primary">
-                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="">
-                    </div>
+{{--                    <div class="p-3 text-center bg-primary">--}}
+{{--                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="">--}}
+{{--                    </div>--}}
                     <div class="p-2">
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_profile.html">
-                            <span>Profile</span>
-                            <span>
-                                            <span class="badge badge-pill badge-success">1</span>
-                                            <i class="si si-user ml-1"></i>
-                                        </span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                            <span>Settings</span>
-                            <i class="si si-settings"></i>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_signin.html">
+{{--                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_profile.html">--}}
+{{--                            <span>Profile</span>--}}
+{{--                            <span>--}}
+{{--                                            <span class="badge badge-pill badge-success">1</span>--}}
+{{--                                            <i class="si si-user ml-1"></i>--}}
+{{--                                        </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">--}}
+{{--                            <span>Settings</span>--}}
+{{--                            <i class="si si-settings"></i>--}}
+{{--                        </a>--}}
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="/logout">
                             <span>Log Out</span>
                             <i class="si si-logout ml-1"></i>
                         </a>
@@ -172,35 +167,35 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block ml-2">
-                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="si si-bell"></i>
-                    <span class="badge badge-primary badge-pill">6</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
-                    <div class="p-2 bg-primary text-center">
-                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
-                    </div>
-                    <ul class="nav-items mb-0">
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">You have a new follower</div>
-                                    <small class="text-muted">15 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="p-2 border-top">
-                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
-                        </a>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="dropdown d-inline-block ml-2">--}}
+{{--                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                    <i class="si si-bell"></i>--}}
+{{--                    <span class="badge badge-primary badge-pill">6</span>--}}
+{{--                </button>--}}
+{{--                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">--}}
+{{--                    <div class="p-2 bg-primary text-center">--}}
+{{--                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>--}}
+{{--                    </div>--}}
+{{--                    <ul class="nav-items mb-0">--}}
+{{--                        <li>--}}
+{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
+{{--                                <div class="mr-2 ml-3">--}}
+{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="media-body pr-2">--}}
+{{--                                    <div class="font-w600">You have a new follower</div>--}}
+{{--                                    <small class="text-muted">15 min ago</small>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                    <div class="p-2 border-top">--}}
+{{--                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">--}}
+{{--                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         </div>
         <!-- END Right Section -->

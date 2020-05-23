@@ -16,3 +16,195 @@ label {
 .table thead th, .table td {
     font-size: 14px;
 }
+div.tagsinput span.tag {
+    padding: 2px 5px;
+    height: 22px;
+    line-height: 18px;
+    color: #fff;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    background-color: #5c90d2;
+    border: none;
+}
+
+div.tagsinput span.tag a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+}
+/*.swal2-popup {*/
+/*    font-size: 1.5rem !important;*/
+/*}*/
+.img-avatar {
+    display: inline-block !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 0;
+}
+
+.img-avatar200 {
+    display: inline-block !important;
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 0;
+}
+
+.mb2{
+    margin-bottom: 10px !important;
+}
+.dz-clickable .dz-message {
+    text-align: center;
+}
+.product_category .category_checkbox{
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.countries-section{
+    height: 300px;
+    overflow: auto;
+}
+.product_sub_cat{
+    margin-left: 30px;
+}
+
+.pre-loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #a9a9a933;
+    z-index: 9999999999;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.loader {
+    background: url(https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 184px;
+    width: 200px;
+    height: 200px;
+}
+.image-holder{
+    background-size: cover;
+    height: 220px;
+    width: 100%;
+}
+.image-holder-my-product{
+    background-size: cover;
+    height: 270px;
+    width: 100%;
+}
+.pointer{
+    cursor: pointer;
+}
+.pointer:hover{
+    background-color: #3e4959;
+    color: white;
+}
+.padding10{
+    padding: 5px !important;
+}
+
+#image-sortable{
+    list-style: none;
+}
+.pay-options{
+    cursor: pointer;
+}
+.pay-options:hover{
+    background: #3e4959;
+    color: white;
+}
+.pagination{
+    justify-content: center;
+}
+
+.img-avatar16{
+    display: inline-block !important;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 0;
+}
+
+.RightSections{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.leftSection {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.right {
+    padding: 0px 50px;
+    color: white;
+}
+.description-title {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.description-content {
+    font-size: 16px;
+    line-height: 40px;
+}
+.description-tags {
+    margin-top: 40px;
+}
+
+.tag_item {
+    width: 30%;
+    margin-right: 2%;
+    margin-bottom: 15px;
+    height: 30px;
+    border-radius: 15px;
+    background-color:#5ec47b;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+}
+
+.invalid-feedback{
+    display: block !important;
+    margin-top: 5px;
+}
+
+.left {
+    width: 90%;
+}
+
+@media (max-width: 1149px){
+    .tag_item {
+        width: 45%;
+    }
+}
+@media (max-width: 910px){
+    .RightSections{
+        display: none;
+    }
+    .leftSection{
+        max-width: 100% !important;
+        flex: 100%;
+    }
+}
+
+@media (max-width: 1032px){
+    .submit-column {
+        max-width: 100% !important;
+        flex: 100%;
+    }
+}
+
+.sales-stores-section{
+    height: 120px;
+    overflow: auto;
+    margin-bottom: 10px;
+}

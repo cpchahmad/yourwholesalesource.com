@@ -21,10 +21,13 @@
 
     <div class="content">
         <div class="row mb-3">
-            <div class="col-sm-6">
-
+            <div class="col-sm-9">
+                <form action="" method="GET" class="d-flex">
+                    <input type="search" class="form-control d-inline-block" value="{{$search}}" name="search" placeholder="Search By Keyword">
+                    <input type="submit" value="Search" class="btn btn-primary btn-sm  d-inline-block" style="margin-left: 10px">
+                </form>
             </div>
-            <div class="col-sm-6 text-right">
+            <div class="col-sm-3 text-right">
                 <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
             </div>
         </div>
@@ -48,16 +51,18 @@
                         <tr>
                             <td class="text-center">
                                 <a href="{{ route('product.view', $product->id) }}">
-                                <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke"
-                                     @if(count($product->has_images) > 0)
-                                     @if($product->has_images[0]->isV == 0)
-                                     src="{{asset('images')}}/{{$product->has_images[0]->image}}"
-                                     @else src="{{asset('images/variants')}}/{{$product->has_images[0]->image}}"
-                                         @endif
-                                     @else
-                                      src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                     @endif
-                                     alt="">
+                                    @if(count($product->has_images) > 0)
+                                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                            @if($index == 0)
+                                                @if($image->isV == 0)
+                                                    <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke" src="{{asset('images')}}/{{$image->image}}">
+                                                @else   <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                    @endif
                                 </a>
                             </td>
                             <td class="font-w600" style="vertical-align: middle">
@@ -100,6 +105,11 @@
                     @else
                     <p>No Products created.</p>
                     @endif
+                    <div class="row">
+                        <div class="col-md-12 text-center" style="font-size: 17px">
+                            {!! $products->links() !!}
+                        </div>
+                    </div>
             </div>
         </div>
     </div>

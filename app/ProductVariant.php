@@ -12,4 +12,7 @@ class ProductVariant extends Model
     public function has_image(){
         return $this->belongsTo('App\Image', 'image');
     }
+    public function linked_product(){
+        return $this->belongsTo('App\Product', 'product_id');
+    }
 }

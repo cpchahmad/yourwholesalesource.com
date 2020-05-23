@@ -708,6 +708,7 @@ export default class Helpers {
         jQuery('.js-masked-ssn:not(.js-masked-enabled)').mask('999-99-9999');
         jQuery('.js-masked-pkey:not(.js-masked-enabled)').mask('a*-999-a999');
         jQuery('.js-masked-time:not(.js-masked-enabled)').mask('99:99');
+        jQuery('.js-card:not(.js-masked-enabled)').mask('9999-9999-9999-9999');
 
         jQuery('.js-masked-date')
             .add('.js-masked-date-dash')

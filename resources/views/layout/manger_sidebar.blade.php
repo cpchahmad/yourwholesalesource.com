@@ -1,84 +1,159 @@
-<nav id="sidebar">
-    <!-- Sidebar Scroll Container -->
-    <div id="sidebar-scroll">
-        <!-- Sidebar Content -->
-        <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
-        <div class="sidebar-content">
-            <!-- Side Header -->
-            <div class="side-header side-content bg-white-op">
-                <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
-                <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
-                    <i class="fa fa-times"></i>
-                </button>
-                <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
-                <div class="btn-group pull-right">
-                    <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
-                        <i class="si si-drop"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
-                        <li>
-                            <a data-toggle="theme" data-theme="default" tabindex="-1" href="javascript:void(0)">
-                                <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
-                                <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="theme" data-theme="assets/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
-                                <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="theme" data-theme="assets/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
-                                <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="theme" data-theme="assets/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
-                                <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
-                                <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <a class="h5 text-white" href="{{route('managers.dashboard')}}">
-                 <span class="h4 font-w600 sidebar-mini-hide">Wefullfill</span>
-                </a>
-            </div>
-            <!-- END Side Header -->
-
-            <!-- Side Content -->
-            <div class="side-content side-content-full">
-                <ul class="nav-main">
-                    <li>
-                        <a class="active" href=""><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
-                    </li>
-
-                    <li>
-                        <a  class="nav-item active" href=""><i class="si si-user"></i><span class="sidebar-mini-hide">Users</span></a>
-                    </li>
-                    <li>
-                        <a class="nav-item active"  href=""><i class="si si-camcorder"></i><span class="sidebar-mini-hide">Stores</span></a>
-                    </li>
-                    <li>
-                        <a class="nav-item active"  href=""><i class="si si-map"></i><span class="sidebar-mini-hide">Payments</span></a>
-                    </li>
-                    <li>
-                        <a class="nav-item active"  href=""><i class="si si-info"></i><span class="sidebar-mini-hide">Settings</span></a>
-                    </li>
-
-                </ul>
-            </div>
-            <!-- END Side Content -->
+<nav id="sidebar" aria-label="Main Navigation">
+    <div class="content-header bg-white-5">
+        <a class="font-w600 text-dual" href="index.html">
+            <i class="fa fa-circle-notch text-primary"></i>
+            <span class="smini-hide">
+                            <span class="font-w700 font-size-h5">WeFullFill</span>
+                        </span>
+        </a>
+        <div>
+            <a class="d-lg-none btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                <i class="fa fa-fw fa-times"></i>
+            </a>
         </div>
-        <!-- Sidebar Content -->
     </div>
-    <!-- END Sidebar Scroll Container -->
+
+    <div class="content-side content-side-full">
+        <ul class="nav-main">
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('managers.dashboard')}}">
+                    <i class="nav-main-link-icon si si-speedometer"></i>
+                    <span class="nav-main-link-name">Dashboard</span>
+                </a>
+            </li>
+
+
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.tickets')}}">
+                    <i class="nav-main-link-icon fa fa-ticket-alt"></i>
+                    <span class="nav-main-link-name">Tickets</span>
+                </a>
+            </li>
+
+
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.orders')}}">
+                    <i class="nav-main-link-icon si si-bag"></i>
+                    <span class="nav-main-link-name">Orders</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.wallets')}}">
+                    <i class="nav-main-link-icon si si-wallet"></i>
+                    <span class="nav-main-link-name">Wallets</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link active"  href="{{route('sales_managers.stores')}}">
+                    <i class="nav-main-link-icon fa fa-store"></i>
+                    <span class="nav-main-link-name">Stores</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link active"  href="{{route('sales_managers.users')}}">
+                    <i class="nav-main-link-icon fa fa-users"></i>
+                    <span class="nav-main-link-name">Non Shopify Users</span>
+                </a>
+            </li>
+
+
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.settings')}}">
+                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <span class="nav-main-link-name">Settings</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
 </nav>
+
+<header id="page-header">
+    <div class="content-header">
+        <div class="d-flex align-items-center">
+            <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+                <i class="fa fa-fw fa-ellipsis-v"></i>
+            </button>
+
+            <button type="button" class="btn btn-sm btn-dual d-sm-none" data-toggle="layout" data-action="header_search_on">
+                <i class="si si-magnifier"></i>
+            </button>
+            <form class="d-none d-sm-inline-block" action="" method="POST">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                    <div class="input-group-append">
+                                    <span class="input-group-text bg-body border-0">
+                                        <i class="si si-magnifier"></i>
+                                    </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div class="d-flex align-items-center">
+            <!-- User Dropdown -->
+            <div class="dropdown d-inline-block ml-2">
+                <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="rounded" @if(\Illuminate\Support\Facades\Auth::user()->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{\Illuminate\Support\Facades\Auth::user()->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                    <span class="d-none d-sm-inline-block ml-1">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
+                    <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
+                    <div class="p-3 text-center bg-primary">
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" @if(\Illuminate\Support\Facades\Auth::user()->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{\Illuminate\Support\Facades\Auth::user()->profile}}" @endif alt="">
+                    </div>
+                    <div class="p-2">
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('sales_managers.settings')}}">
+                            <span>Settings</span>
+                            <i class="si si-settings"></i>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="/logout">
+                            <span>Log Out</span>
+                            <i class="si si-logout ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- END Right Section -->
+    </div>
+    <!-- END Header Content -->
+
+    <!-- Header Search -->
+    <div id="page-header-search" class="overlay-header bg-white">
+        <div class="content-header">
+            <form class="w-100" action="be_pages_generic_search.html" method="POST">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                        <button type="button" class="btn btn-danger" data-toggle="layout" data-action="header_search_off">
+                            <i class="fa fa-fw fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- END Header Search -->
+
+    <!-- Header Loader -->
+    <!-- Please check out the Loaders page under Components category to see examples of showing/hiding it -->
+    <div id="page-header-loader" class="overlay-header bg-white">
+        <div class="content-header">
+            <div class="w-100 text-center">
+                <i class="fa fa-fw fa-circle-notch fa-spin"></i>
+            </div>
+        </div>
+    </div>
+</header>
+

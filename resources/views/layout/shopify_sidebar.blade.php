@@ -16,69 +16,42 @@
     <div class="content-side content-side-full">
         <ul class="nav-main">
             <li class="nav-main-item">
-                <a class="nav-main-link active" href="{{route('store.dashboard')}}">
+                <a class="nav-main-link active" href="{{route('users.dashboard')}}">
                     <i class="nav-main-link-icon si si-speedometer"></i>
                     <span class="nav-main-link-name">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-main-item open">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <i class="nav-main-link-icon si si-layers"></i>
+
+
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('users.product.wefulfill')}}">
+                    <i class="nav-main-link-icon si si-present"></i>
                     <span class="nav-main-link-name">Products</span>
                 </a>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">By WeFullfill</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">By Aliexpress</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.import_list')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Import List</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">My Products</span>
-                        </a>
-                    </li>
-
-                </ul>
             </li>
-            <li class="nav-main-item open">
+
+
+            <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-layers"></i>
                     <span class="nav-main-link-name">Orders</span>
                 </a>
                 <ul class="nav-main-submenu open">
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
+                        <a class="nav-main-link" href="{{route('users.custom.orders')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">By WeFullfill</span>
+                            <span class="nav-main-link-name">Orders</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('users.files')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Imported Files</span>
                         </a>
                     </li>
 
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">By Aliexpress</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.import_list')}}">
+                        <a class="nav-main-link" href="">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">Payment History</span>
                         </a>
@@ -93,23 +66,29 @@
 
                 </ul>
             </li>
-
             <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
-                    <i class="nav-main-link-icon si si-wrench"></i>
-                    <span class="nav-main-link-name">Customer</span>
+                <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
+                    <i class="nav-main-link-icon si si-wallet"></i>
+                    <span class="nav-main-link-name">Wallet</span>
                 </a>
             </li>
 
+
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('store.index')}}">
+                <a class="nav-main-link" href="">
                     <i class="nav-main-link-icon si si-wrench"></i>
                     <span class="nav-main-link-name">Settings</span>
                 </a>
             </li>
+            <li class="nav-main-item" style="display: none">
+                <a class="nav-main-link active" href="{{route('users.stores')}}">
+                    <i class="nav-main-link-icon si si-share"></i>
+                    <span class="nav-main-link-name">Stores</span>
+                </a>
+            </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="#">
+                <a class="nav-main-link" href="{{route('users.help-center')}}">
                     <i class="nav-main-link-icon si si-wrench"></i>
                     <span class="nav-main-link-name">Help Center</span>
                 </a>
@@ -147,6 +126,10 @@
 
 
         <div class="d-flex align-items-center">
+            <div class="d-inline-block mr-3">
+                <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
+
+            </div>
             <!-- User Dropdown -->
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -170,7 +153,7 @@
                             <span>Settings</span>
                             <i class="si si-settings"></i>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_signin.html">
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="/logout">
                             <span>Log Out</span>
                             <i class="si si-logout ml-1"></i>
                         </a>
@@ -178,90 +161,7 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block ml-2">
-                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="si si-bell"></i>
-                    <span class="badge badge-primary badge-pill">6</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
-                    <div class="p-2 bg-primary text-center">
-                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
-                    </div>
-                    <ul class="nav-items mb-0">
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">You have a new follower</div>
-                                    <small class="text-muted">15 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-plus-circle text-info"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">1 new sale, keep it up</div>
-                                    <small class="text-muted">22 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-times-circle text-danger"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">Update failed, restart server</div>
-                                    <small class="text-muted">26 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-plus-circle text-info"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">2 new sales, keep it up</div>
-                                    <small class="text-muted">33 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-user-plus text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">You have a new subscriber</div>
-                                    <small class="text-muted">41 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-dark media py-2" href="javascript:void(0)">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">You have a new follower</div>
-                                    <small class="text-muted">42 min ago</small>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="p-2 border-top">
-                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
-                        </a>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
         <!-- END Right Section -->

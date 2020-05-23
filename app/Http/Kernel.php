@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'super-admin-store' => \App\Http\Middleware\SuperAdminCheck::class,
         'check_user_shop' => \App\Http\Middleware\CheckUserShops::class,
+        'check_user_or_shop' => \App\Http\Middleware\AuthShopOrUser::class,
     ];
 
     /**

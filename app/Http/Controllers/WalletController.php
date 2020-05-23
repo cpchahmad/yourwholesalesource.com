@@ -1,0 +1,339 @@
+<?php
+
+namespace App\Http\Controllers;
+
+
+use App\OrderLog;
+use App\OrderTransaction;
+use App\PaypalWalletTransaction;
+use App\RetailerOrder;
+use App\User;
+use App\Wallet;
+use App\WalletLog;
+use App\WalletRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Srmklive\PayPal\Services\ExpressCheckout;
+
+class WalletController extends Controller
+{
+
+    private $helper;
+
+    /**
+     * WalletController constructor.
+     */
+    public function __construct()
+    {
+        $this->helper = new HelperController();
+    }
+
+    public function user_wallet_view()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->has_wallet == null) {
+                $wallet = $this->wallet_create(Auth::id());
+            } else {
+                $wallet = $user->has_wallet;
+            }
+            return view('non_shopify_users.wallet.index')->with([
+                'user' => $user,
+                'wallet' => $wallet
+            ]);
+        } else {
+            $shop = $this->helper->getLocalShop();
+            if (count($shop->has_user) > 0) {
+                if ($shop->has_user[0]->has_wallet == null) {
+                    $wallet = $this->wallet_create($shop->has_user[0]->id);
+                } else {
+                    $wallet = $shop->has_user[0]->has_wallet;
+                }
+                return view('single-store.wallet.index')->with([
+                    'user' => $shop->has_user[0],
+                    'wallet' => $wallet
+                ]);
+            } else {
+                return view('single-store.wallet.index');
+            }
+        }
+    }
+
+
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function wallet_create($id)
+    {
+        $wallet = Wallet::create([
+            'user_id' => $id,
+            'wallet_token' => 'WFF00100' . rand(10000000000, 99999999999),
+            'pending' => 0,
+            'available' => 0,
+            'transferred' => 0,
+            'used' => 0,
+        ]);
+        $wallet_log = new WalletLog();
+        $wallet_log->wallet_id = $wallet->id;
+        $wallet_log->status = "CREATED";
+        $wallet_log->amount = 0;
+        $wallet_log->message = 'Wallet ' . $wallet->wallet_token . ' Initiated at ' . now()->format('d M, Y h:i a');
+        $wallet_log->save();
+        return $wallet;
+    }
+
+    public function request_wallet_topup_bank(Request $request)
+    {
+       $user = User::find($request->input('user_id'));
+       $wallet = Wallet::find($request->input('wallet_id'));
+       if($user != null && $wallet != null){
+          WalletRequest::create($request->all());
+           $wallet_log = new WalletLog();
+           $wallet_log->wallet_id = $request->input('wallet_id');
+           $wallet_log->status = "Top-up Request Through Bank Transfer";
+           $wallet_log->amount = $request->input('amount');
+           $wallet_log->message = 'A Top-up Request of Amount '.number_format($request->input('amount'),2).' USD Through Bank Transfer Against Wallet ' . $wallet->wallet_token . ' Requested At ' . now()->format('d M, Y h:i a');
+           $wallet_log->save();
+           $wallet->pending = $wallet->pending + $request->input('amount');
+           $wallet->save();
+          return redirect()->back()->with('success', 'Your Top-up Request Submit Successfully to Administration. Please Wait For Approval!');
+       }
+       else{
+           return redirect()->back()->with('error', 'Something Goes Wrong!');
+       }
+
+    }
+
+    public function index(){
+        $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
+        $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->get();
+        foreach ($users as $user){
+            if ($user->has_wallet == null) {
+               $this->wallet_create($user->id);
+            }
+        }
+        return view('setttings.wallets.index')->with([
+            'users' => $users
+        ]);
+    }
+
+    public function wallet_details(Request $request,$id){
+        $wallet = Wallet::find($id);
+        $user = User::find($wallet->user_id);
+        return view('setttings.wallets.wallet_detail')->with([
+            'user' => $user,
+            'wallet' => $wallet
+        ]);
+    }
+
+    public function approved_bank_statement($id){
+        $req = WalletRequest::find($id);
+        if($req->status == 0){
+            $related_wallet = Wallet::find($req->wallet_id);
+            if($related_wallet!= null){
+                $related_wallet->pending =  $related_wallet->pending - $req->amount;
+                $related_wallet->available =   $related_wallet->available + $req->amount;
+                $related_wallet->save();
+                $req->status = 1;
+                $req->save();
+                $wallet_log = new WalletLog();
+                $wallet_log->wallet_id =$related_wallet->id;
+                $wallet_log->status = "Bank Transfer Approved";
+                $wallet_log->amount = $req->amount;
+                $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . now()->format('d M, Y h:i a'). ' By Administration';
+                $wallet_log->save();
+                return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
+            }
+            else{
+                return redirect()->back()->with('error','No wallet found related to this request!');
+            }
+        }
+        else{
+            return redirect()->back()->with('error','You cant approve an already approved request!');
+        }
+    }
+
+    public function topup_wallet_by_admin(Request $request){
+        $wallet = Wallet::find($request->input('wallet_id'));
+        if($wallet != null){
+            if($request->input('amount') > 0){
+                $wallet->available =  $wallet->available + $request->input('amount');
+                $wallet->save();
+                $wallet_log = new WalletLog();
+                $wallet_log->wallet_id =$wallet->id;
+                $wallet_log->status = "Top-up By Admin";
+                $wallet_log->amount = $request->input('amount');
+                $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Administration';
+                $wallet_log->save();
+                return redirect()->back()->with('success','Wallet Top-up Successfully!');
+            }
+
+
+        }else{
+            return redirect()->back()->with('error','Wallet Not Found!');
+        }
+
+    }
+
+    public function order_payment_by_wallet(Request $request){
+        $retailer_order = RetailerOrder::find($request->id);
+        if($retailer_order->paid == 0){
+            if (Auth::check()) {
+                $user = Auth::user();
+                if ($user->has_wallet == null) {
+                    return redirect()->back()->with('error','Wallet Does not Exist!');
+                } else {
+                    $wallet = $user->has_wallet;
+                }
+
+            } else {
+                $shop = $this->helper->getLocalShop();
+                if (count($shop->has_user) > 0) {
+                    if ($shop->has_user[0]->has_wallet == null) {
+                        return redirect()->back()->with('error','Wallet Does not Exist!');
+
+                    } else {
+                        $wallet = $shop->has_user[0]->has_wallet;
+                    }
+
+                } else {
+                    return redirect()->back()->with('error','Wallet Does not Exist!');
+
+                }
+            }
+            if($wallet->available >= $retailer_order->cost_to_pay){
+                /*Wallet Deduction*/
+                $wallet->available =   $wallet->available -  $retailer_order->cost_to_pay;
+                $wallet->used =  $wallet->used + $retailer_order->cost_to_pay;
+                $wallet->save();
+                /*Maintaining Wallet Log*/
+                $wallet_log = new WalletLog();
+                $wallet_log->wallet_id =$wallet->id;
+                $wallet_log->status = "Order Payment";
+                $wallet_log->amount = $retailer_order->cost_to_pay;
+                $wallet_log->message = 'An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
+                $wallet_log->save();
+                /*Order Processing*/
+                $new_transaction = new OrderTransaction();
+                $new_transaction->amount =  $retailer_order->cost_to_pay;
+                if($retailer_order->custom == 0){
+                    $new_transaction->name = $retailer_order->has_store->shopify_domain;
+                }
+                else{
+                    $new_transaction->name = Auth::user()->email;
+                }
+
+                $new_transaction->retailer_order_id = $retailer_order->id;
+                $new_transaction->user_id = $retailer_order->user_id;
+                $new_transaction->shop_id = $retailer_order->shop_id;
+                $new_transaction->save();
+                /*Changing Order Status*/
+                $retailer_order->paid = 1;
+                $retailer_order->status = 'Paid';
+                $retailer_order->pay_by = 'Wallet';
+                $retailer_order->save();
+
+                /*Maintaining Log*/
+                $order_log =  new OrderLog();
+                $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill through Wallet on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+                $order_log->status = "paid";
+                $order_log->retailer_order_id = $retailer_order->id;
+                $order_log->save();
+                return redirect()->back()->with('success','Order Cost Deducted From Wallet Successfully!');
+            }
+            else{
+                return redirect()->back()->with('error','Wallet Doesnot Have Required Amount!');
+            }
+        }
+        else{
+            return redirect()->back()->with('error','Order Cost Already Paid!');
+        }
+    }
+
+    public function paypal_topup_payment(Request $request)
+    {
+        $wallet = Wallet::find($request->id);
+        if($wallet  != null){
+            $items = [];
+            $order_total = $request->input('amount');
+
+            /*adding order-lime-items for paying through paypal*/
+
+                array_push($items,[
+                    'name' => 'Top Up',
+                    'price' => $request->input('amount'),
+                    'qty' =>1
+                ]);
+
+            $data = [];
+            $data['items'] = $items;
+            $data['invoice_id'] = 'WeFullFill-Wallet-Top-up_'.rand(1,1000);
+            $data['invoice_description'] = $data['invoice_id']." Invoice";
+            $data['return_url'] = route('store.wallet.paypal.topup.success',$wallet->id);
+            $data['cancel_url'] = route('store.wallet.paypal.topup.cancel',$wallet->id);
+            $data['total'] = $order_total;
+
+            $provider = new ExpressCheckout;
+            $response = $provider->setExpressCheckout($data);
+
+//        dd($response);
+
+            return redirect($response['paypal_link']);
+        }
+        else{
+            return redirect()->back()->with('error','Wallet doesnot exist!');
+        }
+
+    }
+
+
+    public function paypal_topup_payment_cancel(Request $request)
+    {   $wallet = Wallet::find($request->id);
+        if($wallet != null){
+            return redirect()->route('store.user.wallet.show')->with('error','Paypal Transaction Process cancelled successfully');
+
+        }
+        else{
+            return redirect()->route('store.user.wallet.show')->with('error','Paypal Transaction Process cancelled successfully');
+        }
+    }
+
+    public function paypal_topup_payment_success(Request $request)
+    {
+
+        $wallet = Wallet::find($request->id);
+        $provider = new ExpressCheckout;
+        $response = $provider->getExpressCheckoutDetails($request->token);
+        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING']) && $wallet  != null)
+        {
+            $wallet->available =  $wallet->available + $response['AMT'];
+            $wallet->save();
+
+            $wallet_log = new WalletLog();
+            $wallet_log->wallet_id =$wallet->id;
+            $wallet_log->status = "Top-up By Paypal";
+            $wallet_log->amount = $response['AMT'];
+            $wallet_log->message = 'An Amount '.number_format($response['AMT'],2).' USD For Wallet ' . $wallet->wallet_token . ' Top-up At ' . now()->format('d M, Y h:i a');
+            $wallet_log->save();
+
+            $paypal_wallet_log  = new PaypalWalletTransaction();
+            $paypal_wallet_log->amount = $response['AMT'];
+            $paypal_wallet_log->wallet_id = $wallet->id;
+            $paypal_wallet_log->reason = 'TOP-UP';
+            $paypal_wallet_log->status = 'success';
+            $paypal_wallet_log->paypal_payment_id = $request->PayerID;
+            $paypal_wallet_log->paypal_token = $request->token;
+            $paypal_wallet_log->save();
+
+            return redirect()->route('store.user.wallet.show')->with('success','Wallet Top-up Transaction Process Successfully!');
+        }
+        else{
+            return redirect()->route('store.orders')->with('error','Wallet Doesnot Exist!');
+        }
+
+    }
+
+}
+

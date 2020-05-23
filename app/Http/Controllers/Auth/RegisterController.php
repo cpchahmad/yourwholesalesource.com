@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\WalletController;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -70,6 +71,8 @@ class RegisterController extends Controller
         ]);
         /*Assigning User Role of Non-Shopify-User */
         $user->assignRole('non-shopify-users');
+        $wallet = new WalletController();
+        $wallet->wallet_create($user->id);
         return  $user;
     }
 }

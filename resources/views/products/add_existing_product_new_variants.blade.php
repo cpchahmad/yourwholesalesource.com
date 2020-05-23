@@ -1,31 +1,29 @@
 @extends('layout.index')
 @section('content')
-    <style>
-        div.tagsinput span.tag {
-            padding: 2px 5px;
-            height: 22px;
-            line-height: 18px;
-            color: #fff;
-            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-weight: 600;
-            background-color: #5c90d2;
-            border: none;
-        }
 
-        div.tagsinput span.tag a {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .mb2{
-            margin-bottom: 10px !important;
-        }
-    </style>
 
     <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
     <input type="text" name="price" value="{{$product->price}}" style="display: none">
     <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
     <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
-
+    <div class="bg-body-light">
+        <div class="content content-full pt-2 pb-2">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h4 my-2">
+                    New Variant
+                </h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-alt">
+                        <li class="breadcrumb-item" aria-current="page">
+                            <a class="link-fx" href="">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">Products</li>
+                        <li class="breadcrumb-item">New Variant</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 
     <div class="form-horizontal push-30">
         <form action="{{route('product.update',$product->id)}}" method="post">
@@ -34,11 +32,9 @@
             <div class="content">
                 <div class="row mb2">
                     <div class="col-sm-6">
-                        <h3 class="font-w700">New Variants</h3>
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-default btn-square ">Back to Editing</a>
-                        <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
+                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-light btn-square ">Back to Editing</a>
                     </div>
                 </div>
                 <div class="row">
@@ -50,11 +46,11 @@
                             <div class="block-content">
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
-                                        <label class="css-input css-checkbox css-checkbox-primary" for="val-terms">
-                                            <input type="checkbox" id="val-terms" name="variants"
-                                                   value="1"><span></span> This product has multiple options, like
-                                            different sizes or colors
-                                        </label>
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" name="variants" class="custom-control-input" id="val-terms"  value="1">
+                                            <label class="custom-control-label" for="val-terms">This product has multiple options, like
+                                                different sizes or colors</label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -74,7 +70,7 @@
                                                            id="product-meta-keywords" name="option1" value="">
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-default btn-square option_btn_1 mt-2">
+                                            <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">
                                                 Add another option
                                             </button>
                                         </div>
@@ -94,7 +90,7 @@
                                                     </div>
                                                 </div>
                                                 <button type="button"
-                                                        class="btn btn-default btn-square option_btn_2 mt-2">Add another
+                                                        class="btn btn-light btn-square option_btn_2 mt-2">Add another
                                                     option
                                                 </button>
                                             </div>

@@ -8,9 +8,12 @@ use App\Exports\ProductsExport;
 use App\Image;
 use App\Product;
 use App\ProductVariant;
+use App\RetailerImage;
+use App\RetailerProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use OhMyBrew\ShopifyApp\Models\Shop;
 
 
 class ProductController extends Controller
@@ -35,11 +38,15 @@ class ProductController extends Controller
         ]);
     }
 
-    public function all()
+    public function all(Request $request)
     {
-        $products = Product::all();
+        $productQ = Product::query();
+        if($request->has('search')){
+            $productQ->where('title','LIKE','%'.$request->input('search').'%');
+        }
         return view('products.all')->with([
-            'products' => $products
+            'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
+            'search' =>$request->input('search')
         ]);
     }
 
@@ -268,7 +275,7 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'organization') {
-                    $product->type = $request->type;
+                    $product->type = $request->product_type;
                     $product->vendor = $request->vendor;
                     $product->tags = $request->tags;
                     $product->save();
@@ -276,7 +283,7 @@ class ProductController extends Controller
                     $productdata = [
                         "product" => [
                             "vendor" => $request->vendor,
-                            "product_type" => $request->type,
+                            "product_type" => $request->product_type,
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
@@ -284,6 +291,9 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'more-details') {
+                    if($request->input('processing_time') != null){
+                        $product->processing_time = $request->input('processing_time');
+                    }
                     if ($request->platforms) {
                         $product->has_platforms()->sync($request->platforms);
                     }
@@ -313,6 +323,7 @@ class ProductController extends Controller
 
                     $this->product_status_change($request, $product, $shop);
 
+
                 }
                 if($request->input('type') == 'status_update'){
                     $this->product_status_change($request, $product, $shop);
@@ -324,12 +335,13 @@ class ProductController extends Controller
                     if ($request->hasFile('varaint_src')) {
                         $image = $request->file('varaint_src');
                         $destinationPath = 'images/variants/';
-                        $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                        $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                         $image->move($destinationPath, $filename);
                         $image = new Image();
                         $image->isV = 1;
                         $image->product_id = $product->id;
                         $image->image = $filename;
+                        $image->position = count($product->has_images)+1;
                         $image->save();
                         $variant->image = $image->id;
                         $variant->save();
@@ -341,9 +353,15 @@ class ProductController extends Controller
                             ]
                         ];
                         $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
-                        $image->shopify_id = $imageResponse->body->image->id;
-                        $image->save();
-                        return redirect()->back();
+                        if($imageResponse->errors){
+                            return redirect()->back()->with('error','Product not found on your store');
+                        }
+                        else{
+                            $image->shopify_id = $imageResponse->body->image->id;
+                            $image->save();
+                            return redirect()->back();
+                        }
+
                     }
 
                 }
@@ -360,14 +378,15 @@ class ProductController extends Controller
 
                 if ($request->input('type') == 'existing-product-image-add') {
                     if ($request->hasFile('images')) {
-                        foreach ($request->file('images') as $image) {
+                        foreach ($request->file('images') as $index => $image) {
                             $destinationPath = 'images/';
-                            $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                             $image->move($destinationPath, $filename);
                             $image = new Image();
                             $image->isV = 0;
                             $image->product_id = $product->id;
                             $image->image = $filename;
+                            $image->position = count($product->has_images) + $index+1;
                             $image->save();
                             $imageData = [
                                 'image' => [
@@ -448,6 +467,7 @@ class ProductController extends Controller
         $product->barcode = $request->barcode;
         $product->fulfilled_by = $request->input('fulfilled-by');
         $product->status =  $request->input('status');
+        $product->processing_time = $request->input('processing_time');
 
         if ($request->variants) {
             $product->variants = $request->variants;
@@ -469,7 +489,7 @@ class ProductController extends Controller
 //            $images = [];
             foreach ($request->file('images') as $image) {
                 $destinationPath = 'images/';
-                $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                 $image->move($destinationPath, $filename);
 //                array_push($images, $filename);
                 $image = new Image();
@@ -512,12 +532,22 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::find($id);
-        $product->delete();
+        $shop = $this->helper->getShop();
+        if($product->toShopify == 1){
+            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+        }
         $variants = ProductVariant::where('product_id', $id)->get();
         foreach ($variants as $variant) {
             $variant->delete();
         }
-        return redirect()->back()->with('error', 'Product Deleted with Variants!');
+        foreach ($product->has_images as $image){
+            $image->delete();
+        }
+        $product->has_categories()->detach();
+        $product->has_subcategories()->detach();
+
+        $product->delete();
+        return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
     }
 
     public function add_existing_product_new_variants(Request $request)
@@ -593,10 +623,20 @@ class ProductController extends Controller
 //            dd($response);
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
+            $price = $product->price;
             $product->save();
 
             $shopifyImages = $response->body->product->images;
             $shopifyVariants = $response->body->product->variants;
+            if(count($product->hasVariants) == 0){
+                $variant_id = $shopifyVariants[0]->id;
+                $i = [
+                    'variant' => [
+                        'price' =>$price
+                    ]
+                ];
+                $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+            }
             foreach ($product->hasVariants as $index => $v){
                 $v->shopify_id = $shopifyVariants[$index]->id;
                 $v->save();
@@ -613,10 +653,13 @@ class ProductController extends Controller
                 ];
                 $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product_shopify_id.'/metafields.json',$productdata);
             }
-            foreach ($product->has_images as $index => $image){
-                $image->shopify_id = $shopifyImages[$index]->id;
-                $image->save();
+            if(count($shopifyImages) == count($product->has_images)){
+                foreach ($product->has_images as $index => $image){
+                    $image->shopify_id = $shopifyImages[$index]->id;
+                    $image->save();
+                }
             }
+
             foreach ($product->hasVariants as $index => $v){
                 if($v->has_image != null){
                     $i = [
@@ -786,7 +829,7 @@ class ProductController extends Controller
 
     public function getExportFile(Request $request){
         $shopify_product_id = $request->input('product_id');
-        $shop = $this->helper->getShop();
+        $shop = Shop::where('shopify_domain',$request->input('shop'))->first();
         $productJson  = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $shopify_product_id . '.json');
 
         if($productJson->errors){
@@ -917,8 +960,126 @@ class ProductController extends Controller
                 array_push($product,$temp);
             }
         }
+        return Excel::download(new ProductsExport($product), $productData->handle.'.csv');
+    }
 
-        return Excel::download(new ProductsExport($product), 'products.csv');
+    public function change_image($id,$image_id,Request $request){
+        if($request->input('type') == 'product'){
+            $shop = $this->helper->getShop();
+            $variant = ProductVariant::find($id);
+            if($variant->linked_product != null) {
+                if ($variant->linked_product->shopify_id != null) {
+                    $image = Image::find($image_id);
+                    return $this->shopify_image_selection($image_id, $image, $shop, $variant);
+                }
+                else{
+                    return response()->json([
+                        'message' => 'false'
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    'message' => 'false'
+                ]);
+            }
+        }
+        else{
+
+            $variant = RetailerProductVariant::find($id);
+            $shop = $this->helper->getSpecificShop($variant->shop_id);
+            if($variant->linked_product != null){
+             if($variant->linked_product->toShopify == 1){
+                 $image = RetailerImage::find($image_id);
+                 return $this->shopify_image_selection($image_id, $image, $shop, $variant);
+             }
+             else{
+                 $variant->image = $image_id;
+                 $variant->save();
+                 return response()->json([
+                     'message' => 'success'
+                 ]);
+             }
+            }
+            else{
+                return response()->json([
+                    'message' => 'false'
+                ]);
+            }
+        }
 
     }
+
+    public function shopify_image_selection($image_id, $image, $shop, $variant)
+    {
+        $variant_ids = [];
+        foreach ($image->has_variants as $v) {
+            array_push($variant_ids, $v->shopify_id);
+        }
+        array_push($variant_ids,$variant->shopify_id);
+        $i = [
+            'image' => [
+                'id' => $image->shopify_id,
+                'variant_ids' => $variant_ids
+            ]
+        ];
+        $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
+        if (!$imagesResponse->errors) {
+            $variant->image = $image_id;
+            $variant->save();
+            return response()->json([
+                'message' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'false'
+            ]);
+        }
+    }
+
+    public function update_image_position(Request $request){
+        $positions = $request->input('positions');
+        $product = $request->input('product');
+        $images_array = [];
+        $shop = $this->helper->getShop();
+        foreach ($positions as $index => $position){
+            $image = Image::where('product_id',$product)
+                ->where('id',$position)->first();
+            array_push($images_array, [
+                'id' => $image->shopify_id,
+                'position' => $index + 1,
+            ]);
+        }
+        $related_product = Product::find($product);
+        if($related_product != null){
+            $data = [
+                'product' => [
+                    'images' => $images_array
+                ]
+            ];
+            $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $related_product->shopify_id .'.json', $data);
+            if(!$imagesResponse->errors){
+                foreach ($positions as $index => $position){
+                    $image = Image::where('product_id',$product)
+                        ->where('id',$position)->first();
+                    $image->position = $index + 1;
+                    $image->save();
+                }
+                return response()->json([
+                    'message' => 'success'
+                ]);
+            }else{
+                return response()->json([
+                    'message' => 'error'
+                ]);
+            }
+
+        }
+        else{
+            return response()->json([
+                'message' => 'error'
+            ]);
+        }
+    }
+
 }
