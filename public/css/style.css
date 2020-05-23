@@ -1,10 +1,11 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Sofia_Pro_Light', 'sans-serif';
     color: #575757;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Montserrat', sans-serif;
     color: #575757;
+    font-weight: 400;
 }
 label {
     font-weight: 600;
