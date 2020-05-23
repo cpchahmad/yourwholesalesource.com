@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     /*font-weight: 400;*/
 }
 
-.btn {
+.btn, .form-control {
     font-family: 'Sofia_Pro_Light', 'sans-serif';
     font-size: 15px;
     border-radius: 0;
