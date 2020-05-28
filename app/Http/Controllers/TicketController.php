@@ -87,11 +87,11 @@ class TicketController extends Controller
             $ticket->last_reply_at = now();
             if($request->input('source') == 'manager'){
                 $ticket->status_id = '2';
-                $ticket->status = 'Waiting Client Feedback';
+                $ticket->status = 'Replied';
             }
             else{
                 $ticket->status_id = '3';
-                $ticket->status = 'Waiting Support Feedback';
+                $ticket->status = 'Waiting For Replied';
             }
 
             $ticket->save();
