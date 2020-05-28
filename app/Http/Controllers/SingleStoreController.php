@@ -250,6 +250,7 @@ class SingleStoreController extends Controller
         $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
         $shipping_rates->whereRaw('min <='.$total_weight);
         $shipping_rates->whereRaw('max >='.$total_weight);
+
         $shipping_rates =  $shipping_rates->get();
 
         $html = view('inc.calculate_shipping')->with([
