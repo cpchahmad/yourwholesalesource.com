@@ -18,7 +18,7 @@ class SuperAdminCheck
     {
         $shop = ShopifyApp::shop();
 //        dd( in_array($shop->shopify_domain,['fantasy-supplier.myshopify.com','wefullfill.myshopify.com']));
-        if(in_array($shop->shopify_domain,['fantasy-supplier.myshopify.com','wefullfill.myshopify.com'])){
+        if(in_array($shop->shopify_domain,['wefullfill.myshopify.com'])){
             return $next($request);
         }
         else{

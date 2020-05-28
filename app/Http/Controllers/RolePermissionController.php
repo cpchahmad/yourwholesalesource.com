@@ -8,10 +8,10 @@ class RolePermissionController extends Controller
 {
    public function check_roles(){
        $user = Auth::user();
-       if($user->email == 'admin@wefullfill.com'){
-           return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
-       }
-       elseif ($user->email == 'super_admin@wefullfill.com'){
+//       if($user->email == 'admin@wefullfill.com'){
+//           return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
+//       }
+       if ($user->email == 'super_admin@wefullfill.com'){
            return redirect('/shop/install?shop=wefullfill.myshopify.com');
        }
        else{

@@ -34,14 +34,14 @@ class AfterAuthenticateJob implements ShouldQueue
     {
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
-        if($user != null && !in_array($user->email,['super_admin@wefullfill.com','admin@wefullfill.com'])){
+        if($user != null && !in_array($user->email,['super_admin@wefullfill.com'])){
             if(!in_array($currentShop->id,$user->has_shops->pluck('id')->toArray())){
                 $user->has_shops()->attach([$currentShop->id]);
             }
             session(['return_to'=>'/users/home']);
         }
         else{
-            if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com','fantasy-supplier.myshopify.com'])){
+            if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
                 session(['return_to'=>'/store/dashboard']);
             }
             else{
