@@ -175,14 +175,14 @@
                                                                 <div class="col-sm-6">
                                                                     <div class="form-material">
                                                                         <label for="material-error ">Max Condition</label>
-                                                                        <input class="form-control max-condtion" type="number" name="max">
+                                                                        <input class="form-control max-condtion" step="any" type="number" name="max">
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <div class="form-material">
                                                                         <label for="material-error ">Min Condition</label>
-                                                                        <input class="form-control min-condtion " type="number" name="min">
+                                                                        <input class="form-control min-condtion " step="any" type="number" name="min">
 
                                                                     </div>
                                                                 </div>
@@ -296,14 +296,14 @@
                                                                         <div class="col-sm-6">
                                                                             <div class="form-material">
                                                                                 <label for="material-error ">Min Condition</label>
-                                                                                <input class="form-control min-condtion " @if($rate->type != 'flat') required @endif value="{{$rate->min}}" type="number" name="min">
+                                                                                <input class="form-control min-condtion " step="any" @if($rate->type != 'flat') required @endif value="{{$rate->min}}" type="number" name="min">
 
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <div class="form-material">
                                                                                 <label for="material-error ">Max Condition</label>
-                                                                                <input class="form-control max-condtion" @if($rate->type != 'flat') required @endif value="{{$rate->max}}" type="number" name="max">
+                                                                                <input class="form-control max-condtion" step="any" @if($rate->type != 'flat') required @endif value="{{$rate->max}}" type="number" name="max">
 
                                                                             </div>
                                                                         </div>
