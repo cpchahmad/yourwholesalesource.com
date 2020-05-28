@@ -533,9 +533,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
-        if($product->toShopify == 1){
-            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
-        }
+        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
         $variants = ProductVariant::where('product_id', $id)->get();
         foreach ($variants as $variant) {
             $variant->delete();
