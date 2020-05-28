@@ -220,6 +220,16 @@
       <workItem from="1584596575677" duration="94000" />
       <workItem from="1584603530327" duration="19101000" />
       <workItem from="1584683878888" duration="10739000" />
+<<<<<<< HEAD
+      <workItem from="1584699507532" duration="12796000" />
+      <workItem from="1585902659968" duration="14228000" />
+      <workItem from="1585939000044" duration="3963000" />
+      <workItem from="1585996481972" duration="6238000" />
+      <workItem from="1586068367423" duration="2307000" />
+      <workItem from="1586090842433" duration="10162000" />
+      <workItem from="1586248465605" duration="2056000" />
+      <workItem from="1586417389596" duration="6000" />
+=======
       <workItem from="1584699507532" duration="14378000" />
       <workItem from="1584870606218" duration="16000" />
       <workItem from="1585053514670" duration="56000" />
@@ -368,6 +378,7 @@
       <option name="presentableId" value="LOCAL-00103" />
       <option name="project" value="LOCAL" />
       <updated>1589449569097</updated>
+>>>>>>> 1098cc99747271374b77a0db75ca3ddd075b57c2
     </task>
     <task id="LOCAL-00104" summary="14052020F-bulk-payment">
       <created>1589450487938</created>
@@ -762,11 +773,20 @@
     <state x="339" y="162" key="run.anything.popup" timestamp="1589539387667">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+<<<<<<< HEAD
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.736@0.0.1366.736" timestamp="1585939147955" />
+    <state x="395" y="154" width="672" height="581" key="search.everywhere.popup" timestamp="1586281746597">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1584712168780" />
+    <state x="395" y="154" width="672" height="581" key="search.everywhere.popup/0.0.1366.736@0.0.1366.736" timestamp="1586281746597" />
+=======
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1589539387667" />
     <state x="395" y="152" width="672" height="574" key="search.everywhere.popup" timestamp="1590195800112">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="395" y="152" width="672" height="574" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1590195800112" />
+>>>>>>> 1098cc99747271374b77a0db75ca3ddd075b57c2
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1582621608010" />
   </component>
 </project>

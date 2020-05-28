@@ -1,20 +1,33 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Sofia_Pro_Light', 'sans-serif';
     color: #575757;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'Montserrat', sans-serif;
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-family: 'Sofia_Pro_Light', 'sans-serif';
     color: #575757;
+    /*font-weight: 400;*/
+}
+
+.btn, .form-control {
+    font-family: 'Sofia_Pro_Light', 'sans-serif';
+    font-size: 15px;
+    border-radius: 0;
 }
 label {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
 }
+.nav-main-link {
+    font-size: 15px;
+}
+
 .import_checkbox_select {
     padding: 7px 20px 6px;
 }
 .table thead th, .table td {
-    font-size: 14px;
+    font-size: 15px;
+    text-transform: capitalize;
 }
 div.tagsinput span.tag {
     padding: 2px 5px;
