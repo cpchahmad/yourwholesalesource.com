@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\DefaultInfo;
+use App\Product;
 use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
 use App\TicketStatus;
 use App\User;
 use App\WarnedPlatform;
+use App\Wishlist;
+use App\WishlistStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -361,6 +364,34 @@ class DefaultSettingsController extends Controller
         return view('setttings.tickets.view')->with([
             'manager' => $manager,
             'ticket' => $ticket,
+        ]);
+    }
+
+    public function wishlist(Request $request){
+        $wishlist = Wishlist::query();
+        if($request->has('search')){
+            $wishlist->where('product_name','LIKE','%'.$request->input('search').'%');
+            $wishlist->orwhere('description','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $wishlist->where('status_id','=',$request->input('status'));
+
+            }
+        }
+        $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
+        return view('setttings.wishlist.index')->with([
+            'wishlist' => $wishlist,
+            'search' =>$request->input('search'),
+            'statuses' => WishlistStatus::all(),
+            'selected_status' =>$request->input('status'),
+        ]);
+    }
+    public function view_wishlist(Request $request){
+        $wishlist = Wishlist::find($request->id);
+        return view('setttings.wishlist.view')->with([
+            'wishlist' => $wishlist,
+            'products' => Product::all(),
         ]);
     }
     public function stores(Request $request){

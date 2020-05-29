@@ -45,7 +45,7 @@
                                 </td>
                                 <td>
                                     @if($store->has_manager != null)
-                                        <img class="img-avatar" @if($store->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$store->has_manager->profile}}" @endif alt="">
+                                        <img class="rounded img-avatar" @if($store->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$store->has_manager->profile}}" @endif alt="">
                                         <span style="margin-left: 10px">{{$store->has_manager->name}}</span>
                                     @else
                                         Manager Deleted

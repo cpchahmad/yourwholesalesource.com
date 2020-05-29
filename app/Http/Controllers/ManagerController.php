@@ -8,6 +8,7 @@ use App\FulfillmentLineItem;
 use App\ManagerLog;
 use App\OrderFulfillment;
 use App\OrderLog;
+use App\Product;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
@@ -18,6 +19,8 @@ use App\User;
 use App\Wallet;
 use App\WalletLog;
 use App\WalletRequest;
+use App\Wishlist;
+use App\WishlistStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -73,6 +76,36 @@ class ManagerController extends Controller
         return view('sales_managers.tickets.view')->with([
             'manager' => $manager,
             'ticket' => $ticket,
+        ]);
+    }
+
+    public function wishlist(Request $request){
+        $wishlist = Wishlist::where('manager_id',Auth::id())->newQuery();
+        if($request->has('search')){
+            $wishlist->where('product_name','LIKE','%'.$request->input('search').'%');
+            $wishlist->orwhere('description','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $wishlist->where('status_id','=',$request->input('status'));
+
+            }
+        }
+        $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
+        return view('sales_managers.wishlist.index')->with([
+            'wishlist' => $wishlist,
+            'search' =>$request->input('search'),
+            'statuses' => WishlistStatus::all(),
+            'selected_status' =>$request->input('status'),
+        ]);
+    }
+    public function view_wishlist(Request $request){
+        $manager = User::find(Auth::id());
+        $wishlist = Wishlist::find($request->id);
+        return view('sales_managers.wishlist.view')->with([
+            'manager' => $manager,
+            'wishlist' => $wishlist,
+            'products' => Product::all(),
         ]);
     }
 
@@ -489,18 +522,20 @@ class ManagerController extends Controller
     }
     public function product($id){
         $product = RetailerProduct::find($id);
+        if($product == null){
+            $product = Product::find($id);
+
+        }
         return view('sales_managers.products.view_product')->with([
             'product' => $product,
         ]);
     }
-
     public function customer_view($id){
         $customer = Customer::find($id);
         return view('sales_managers.customers.view')->with([
             'customer' => $customer,
         ]);
     }
-
     public function user(Request $request){
         $user = User::find($request->id);
 
@@ -515,7 +550,6 @@ class ManagerController extends Controller
             'wallet' => $wallet
         ]);
     }
-
     public function users(Request $request){
         $manager= User::find(Auth::id());
         $users = $manager->has_users;
@@ -523,7 +557,6 @@ class ManagerController extends Controller
             'users'=>$users
         ]);
     }
-
     public function view_setting(){
         $manager = User::find(Auth::id());
         return view('sales_managers.settings.index')->with([
@@ -531,7 +564,6 @@ class ManagerController extends Controller
             'countries' => Country::all(),
         ]);
     }
-
     public function save_personal_info(Request $request){
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
@@ -596,7 +628,6 @@ class ManagerController extends Controller
             return redirect()->back()->with('error','Manager Not Found!');
         }
     }
-
     public function wallet_index(){
         $manager = User::find(Auth::id());
         $users  = $manager->has_users;
@@ -609,7 +640,6 @@ class ManagerController extends Controller
             'users' => $users
         ]);
     }
-
     public function wallet_details(Request $request,$id){
         $wallet = Wallet::find($id);
         $user = User::find($wallet->user_id);
@@ -618,7 +648,6 @@ class ManagerController extends Controller
             'wallet' => $wallet
         ]);
     }
-
     public function approved_bank_statement($id){
         $req = WalletRequest::find($id);
         if($req->status == 0){
@@ -651,7 +680,6 @@ class ManagerController extends Controller
             return redirect()->back()->with('error','You cant approve an already approved request!');
         }
     }
-
     public function topup_wallet_by_admin(Request $request){
         $wallet = Wallet::find($request->input('wallet_id'));
         if($wallet != null){

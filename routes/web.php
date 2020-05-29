@@ -86,6 +86,10 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/tickets','DefaultSettingsController@tickets')->name('tickets.index');
     Route::get('/tickets/{id}','DefaultSettingsController@ticket')->name('tickets.view');
 
+    Route::get('/wishlists','DefaultSettingsController@wishlist')->name('wishlist.index');
+    Route::get('/wishlists/{id}','DefaultSettingsController@view_wishlist')->name('wishlist.view');
+
+
     Route::get('/stores','DefaultSettingsController@stores')->name('stores.index');
     Route::get('/stores/{id}','DefaultSettingsController@store')->name('stores.view');
     Route::get('/stores/customers/{id}','DefaultSettingsController@customer_view')->name('customers.view');
@@ -158,6 +162,9 @@ Route::group(['middleware' => ['auth.shop']], function () {
 
         Route::get('/help-center','SingleStoreController@helpcenter')->name('store.help-center');
         Route::get('/help-center/ticket/{id}', 'SingleStoreController@view_ticket')->name('help-center.store.ticket.view');
+        Route::get('/wishlist','SingleStoreController@wishlist')->name('store.wishlist');
+        Route::get('/wishlist/{id}','SingleStoreController@view_wishlist')->name('store.wishlist.view');
+
 
     });
 });
@@ -196,6 +203,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/help-center','CustomOrderController@helpcenter')->name('users.help-center');
             Route::get('/help-center/ticket/{id}', 'CustomOrderController@view_ticket')->name('help-center.users.ticket.view');
 
+            Route::get('/wishlist','CustomOrderController@wishlist')->name('users.wishlist');
+            Route::get('/wishlist/{id}','CustomOrderController@view_wishlist')->name('users.wishlist.view');
+
             Route::group(['middleware' => ['check_user_shop']], function () {
 
             });
@@ -206,6 +216,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::prefix('managers')->group(function () {
             Route::get('/tickets','ManagerController@tickets')->name('sales_managers.tickets');
             Route::get('/tickets/{id}', 'ManagerController@view_ticket')->name('sales_managers.ticket.view');
+
+            Route::get('/wishlist','ManagerController@wishlist')->name('sales_managers.wishlist');
+            Route::get('/wishlist/{id}', 'ManagerController@view_wishlist')->name('sales_managers.wishlist.view');
+
 
             Route::get('/orders','ManagerController@index')->name('sales_managers.orders');
             Route::get('/orders/view/{id}','ManagerController@view_order')->name('sales_managers.order.view');
@@ -262,6 +276,16 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 
         Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
         Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
+
+        Route::post('/wishlist/create', 'WishlistController@create_wishlist')->name('wishlist.create');
+        Route::post('/wishlist/thread/create', 'WishlistController@create_wishlist_thread')->name('wishlist.thread.create');
+
+
+        Route::post('/wishlist/accepted', 'WishlistController@accept_wishlist')->name('wishlist.accept');
+        Route::post('/wishlist/approved', 'WishlistController@approve_wishlist')->name('wishlist.approve');
+        Route::post('/wishlist/completed', 'WishlistController@completed_wishlist')->name('wishlist.completed');
+        Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
+
 
     });
 });

@@ -109,6 +109,13 @@
             </a>
         </li>
 
+        <li class="nav-main-item">
+            <a class="nav-main-link"  href="{{route('store.wishlist')}}">
+                <i class="nav-main-link-icon fa fa-heart"></i>
+                <span class="nav-main-link-name">Wishlist</span>
+            </a>
+        </li>
+
 
         <li class="nav-main-item">
             <a class="nav-main-link" href="{{route('store.help-center')}}">

@@ -89,6 +89,12 @@
                     <span class="nav-main-link-name">Wallets</span>
                 </a>
             </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('wishlist.index')}}">
+                    <i class="nav-main-link-icon fa fa-heart"></i>
+                    <span class="nav-main-link-name">Wishlist</span>
+                </a>
+            </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('zone.index')}}">

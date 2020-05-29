@@ -45,6 +45,13 @@
             </li>
 
             <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.wishlist')}}">
+                    <i class="nav-main-link-icon fa fa-heart"></i>
+                    <span class="nav-main-link-name">Wishlist</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
                 <a class="nav-main-link active"  href="{{route('sales_managers.stores')}}">
                     <i class="nav-main-link-icon fa fa-store"></i>
                     <span class="nav-main-link-name">Stores</span>

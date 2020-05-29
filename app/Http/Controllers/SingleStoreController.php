@@ -15,6 +15,7 @@ use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
 use App\User;
+use App\Wishlist;
 use App\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -209,6 +210,26 @@ class SingleStoreController extends Controller
             'shop' => $shop,
             'tickets' => $tickets,
             'categories' => TicketCategory::all(),
+        ]);
+    }
+
+    public function wishlist(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $wishlist = Wishlist::where('shop_id',$shop->id)->newQuery();
+        $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
+
+        return view('single-store.wishlist.index')->with([
+            'shop' => $shop,
+            'wishlist' => $wishlist,
+            'countries' => Country::all(),
+        ]);
+    }
+    public function view_wishlist(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $wishlist = Wishlist::find($request->id);
+        return view('single-store.wishlist.view')->with([
+            'shop' => $shop,
+            'wishlist' => $wishlist,
         ]);
     }
 

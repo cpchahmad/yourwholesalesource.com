@@ -20,6 +20,7 @@ use App\TicketCategory;
 use App\User;
 use App\UserFile;
 use App\UserFileTemp;
+use App\Wishlist;
 use App\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -592,6 +593,27 @@ class CustomOrderController extends Controller
         return view('non_shopify_users.help-center.view')->with([
             'user' => $user,
             'ticket' => $ticket,
+        ]);
+    }
+
+    public function wishlist(Request $request){
+        $user = User::find(Auth::id());
+        $wishlists = Wishlist::where('user_id',$user->id)->newQuery();
+        $wishlists = $wishlists->orderBy('created_at','DESC')->paginate(30);
+
+        return view('non_shopify_users.wishlist.index')->with([
+            'user' => $user,
+            'wishlist' => $wishlists,
+            'countries' => Country::all(),
+        ]);
+    }
+
+    public function view_wishlist(Request $request){
+        $user = User::find(Auth::id());
+        $wishlists = Wishlist::find($request->id);
+        return view('non_shopify_users.wishlist.view')->with([
+            'user' => $user,
+            'wishlist' => $wishlists,
         ]);
     }
 
