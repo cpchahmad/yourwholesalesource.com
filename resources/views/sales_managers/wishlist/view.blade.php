@@ -60,7 +60,7 @@
                                     <button class="btn btn-danger" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                 @endif
                             </div>
-                            @if($wishlist->status_id == 1)
+                                @if(in_array($wishlist->status_id,[1,4]))
                                 <div class="modal fade" id="mark-approved-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">
