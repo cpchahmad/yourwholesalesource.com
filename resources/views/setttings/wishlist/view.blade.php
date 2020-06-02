@@ -290,7 +290,7 @@
                         <div class="options-container">
                             <a href="{{route('product.view',$wishlist->has_product->id)}}">
                                 @if(count($wishlist->has_product->has_images) > 0)
-                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                    @foreach($wishlist->has_product->has_images()->orderBy('position')->get() as $index => $image)
                                         @if($index == 0)
                                             @if($image->isV == 0)
                                                 <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">
