@@ -86,15 +86,6 @@
                         <div class="block">
                             <div class="options-container">
                                 <a href="{{route('store.product.wefulfill.show',$product->id)}}">
-                                    {{--                                    <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)--}}
-                                    {{--                                    @if($product->has_images[0]->isV == 0)--}}
-                                    {{--                                        url({{asset('images')}}/{{$product->has_images[0]->image}})--}}
-                                    {{--                                    @else url({{asset('images/variants')}}/{{$product->has_images[0]->image}})--}}
-                                    {{--                                    @endif--}}
-                                    {{--                                    @else--}}
-                                    {{--                                        url(https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg)--}}
-                                    {{--                                    @endif">--}}
-                                    {{--                                    </div>--}}
                                     @if(count($product->has_images) > 0)
                                         @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                             @if($index == 0)

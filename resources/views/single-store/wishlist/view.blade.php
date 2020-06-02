@@ -28,12 +28,9 @@
                     </div>
                     <div class="block-content">
                         <div class="p-2">
-                            @if($wishlist->has_product != null)
-                                Wishlist Product :   <a href="{{route('store.product.wefulfill.show',$wishlist->has_product->id)}}">{{$wishlist->has_product->title}}</a>
-                                <hr>
-                            @endif
+
                             @if($wishlist->reference != null)
-                            <p>Reference: <span class="badge badge-primary" style="font-size: small">{{$wishlist->reference}} </span></p>
+                            <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
                             <hr>
                             @endif
                             <p>
@@ -130,6 +127,7 @@
                         </div>
                     @endforeach
                 @endif
+                @if(!in_array($wishlist->status_id,[3,5]))
                 <div class="block">
                     <div class="block-header">
                         <h5 class="block-title">Reply To Manager</h5>
@@ -160,8 +158,66 @@
                         </div>
                     </div>
                 </div>
+                    @endif
             </div>
             <div class="col-md-4">
+                @if($wishlist->has_product != null)
+                    <div class="block">
+                        <div class="block-header">
+                            <h5 class="block-title">Reference Product</h5>
+                        </div>
+                        <div class="options-container">
+                            <a href="{{route('store.product.wefulfill.show',$wishlist->has_product->id)}}">
+                                @if(count($wishlist->has_product->has_images) > 0)
+                                    @foreach($wishlist->has_product->has_images()->orderBy('position')->get() as $index => $image)
+                                        @if($index == 0)
+                                            @if($image->isV == 0)
+                                                <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">
+                                            @else   <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                @endif
+
+                            </a>
+                            <div class="options-overlay bg-black-75">
+                                <div class="options-overlay-content">
+                                    <div class="push-20">
+                                        <a class="btn btn-sm btn-primary" href="{{route('store.product.wefulfill.show',$wishlist->has_product->id)}}">View</a>
+
+                                        @if(!in_array($wishlist->has_product->id,$shop->has_imported->pluck('id')->toArray()))
+                                            <a class="btn btn-sm btn-success" href="{{route('store.product.wefulfill.add-to-import-list',$wishlist->has_product->id)}}">
+                                                <i class="fa fa-plus"></i> Add to Import List
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-content" style="padding-bottom: 10px">
+                            <div class="push-10">
+                                <a class="h6" style="font-size: 0.9rem" href="{{route('store.product.wefulfill.show',$wishlist->has_product->id)}}">{{$wishlist->has_product->title}}</a>
+                                <div class="font-w600 text-success mt-1 push-10-l">${{number_format($wishlist->has_product->price,2)}}</div>
+                            </div>
+
+                            @if($wishlist->has_product->processing_time != null)
+                                <hr>
+                                <p class="text-muted font-size-sm">  Dispatch Within {{$wishlist->has_product->processing_time}} </p>
+
+                            @endif
+                            <hr>
+                            @if(!in_array($wishlist->has_product->id,$shop->has_imported->pluck('id')->toArray()))
+                                <button onclick="window.location.href='{{ route('store.product.wefulfill.add-to-import-list',$wishlist->has_product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
+                            @else
+                                <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
+                            @endif
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
+                        </div>
+                    </div>
+                    <hr>
+                @endif
                 <div class="block">
                     <div class="block-header">
                         <h5 class="block-title">Wishlist Details</h5>

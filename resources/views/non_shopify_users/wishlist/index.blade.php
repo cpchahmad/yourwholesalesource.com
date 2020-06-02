@@ -142,7 +142,8 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Product Name</label>
+                                                <label for="material-error">Product Name <i class="fa fa-question-circle"  title="This is the name of product you want to request in your wishlist"> </i></label>
+
                                                 <input required class="form-control" type="text"  name="product_name"
                                                        placeholder="Enter Title here">
                                             </div>
@@ -151,7 +152,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Target Dropshipping Cost</label>
+                                                <label for="material-error">Target Dropshipping Cost <i class="fa fa-question-circle"  title="This is the cost of product you want to request in your wishlist"> </i></label>
                                                 <input required class="form-control" type="number" step="any"  name="cost"
                                                         placeholder="Enter Dropshipping Cost here">
                                             </div>
@@ -160,7 +161,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Monthly Sales/Orders</label>
+                                                <label for="material-error">Expected Monthly Sales <i class="fa fa-question-circle"  title="This is the expected monthly sales of product you want to request in your wishlist"> </i></label>
                                                 <input required class="form-control" type="number" step="any"  name="monthly_sales"
                                                        placeholder="Monthly Sales/Orders">
                                             </div>
@@ -169,7 +170,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Reference</label>
+                                                <label for="material-error">Reference <i class="fa fa-question-circle"  title="Reference link to product you want to request in your wishlist"> </i></label>
                                                 <input  class="form-control" type="url"  name="reference"
                                                        placeholder="Enter Reference here">
                                             </div>
@@ -178,8 +179,9 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Selling Markets</label>
-                                                <select class="form-control" name="countries[]" required size="5" multiple="">
+                                                <label for="material-error">Selling Markets <i class="fa fa-question-circle"  title="Countries where product you want to sale. "> </i></label>
+                                                <select class="form-control js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="countries[]" required  multiple="">
+                                                    <option></option>
                                                     @foreach($countries as $country)
                                                         <option value="{{$country->id}}">{{$country->name}}</option>
                                                     @endforeach
@@ -192,7 +194,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Attachments </label>
+                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product"> </i></label>
                                                 <input type="file" name="attachments[]" class="form-control" multiple>
                                             </div>
                                         </div>
@@ -201,7 +203,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Description</label>
+                                                <label for="material-error">Description <i class="fa fa-question-circle"  title="Description of product you want to request in wishlist"> </i></label>
                                                 <textarea required class="js-summernote" name="description"
                                                           placeholder="Please Enter Description here !"></textarea>
                                             </div>

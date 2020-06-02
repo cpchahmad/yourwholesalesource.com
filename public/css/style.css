@@ -221,3 +221,11 @@ div.tagsinput span.tag a {
     overflow: auto;
     margin-bottom: 10px;
 }
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background-color: #5c80d1;
+    color: white;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+    color: white;
+}
