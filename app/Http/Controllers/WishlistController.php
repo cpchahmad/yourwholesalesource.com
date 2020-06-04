@@ -184,11 +184,17 @@ class WishlistController extends Controller
         if($manager != null && $wish != null){
             if($wish->has_store_product == 1){
                $related_product_id = $this->import_to_store($wish);
-                $wish->status_id = 5;
-                $wish->related_product_id = $related_product_id;
-                $wish->updated_at = now();
-                $wish->save();
-                return redirect()->back()->with('success','Wishlist Completed Successfully!');
+               if($related_product_id != null){
+                   $wish->status_id = 5;
+                   $wish->related_product_id = $related_product_id;
+                   $wish->updated_at = now();
+                   $wish->save();
+                   return redirect()->back()->with('success','Wishlist Completed Successfully!');
+               }
+               else{
+                   return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
+               }
+
             }
             else{
                 $wish->status_id = 5;
@@ -286,6 +292,9 @@ class WishlistController extends Controller
             }
 
             return $retailerProduct->id;
+        }
+        else{
+            return null;
         }
 
 
