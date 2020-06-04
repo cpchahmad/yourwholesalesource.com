@@ -83,7 +83,7 @@
                                                         @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                             @if($index == 0)
                                                                 @if($product->import_from_shopify == 1)
-                                                                    url({{$image->image}})
+                                                                    <img class="img-fluid options-item" src="{{$image->image}}">
                                                                 @else
                                                                     @if($image->isV == 0)
                                                                         <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">
