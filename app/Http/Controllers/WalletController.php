@@ -89,15 +89,28 @@ class WalletController extends Controller
        $user = User::find($request->input('user_id'));
        $wallet = Wallet::find($request->input('wallet_id'));
        if($user != null && $wallet != null){
-          WalletRequest::create($request->all());
+         $wallet_request = WalletRequest::create($request->all());
+           if ($request->hasFile('attachment')) {
+               $image = $request->file('attachment');
+               $destinationPath = 'wallet-attachment/';
+               $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+               $image->move($destinationPath, $filename);
+               $wallet_request->attachment = $filename;
+               $wallet_request->save();
+
+           }
            $wallet_log = new WalletLog();
            $wallet_log->wallet_id = $request->input('wallet_id');
            $wallet_log->status = "Top-up Request Through Bank Transfer";
            $wallet_log->amount = $request->input('amount');
            $wallet_log->message = 'A Top-up Request of Amount '.number_format($request->input('amount'),2).' USD Through Bank Transfer Against Wallet ' . $wallet->wallet_token . ' Requested At ' . now()->format('d M, Y h:i a');
+
+
            $wallet_log->save();
            $wallet->pending = $wallet->pending + $request->input('amount');
            $wallet->save();
+
+
           return redirect()->back()->with('success', 'Your Top-up Request Submit Successfully to Administration. Please Wait For Approval!');
        }
        else{

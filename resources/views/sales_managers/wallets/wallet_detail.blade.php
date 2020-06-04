@@ -132,25 +132,23 @@
                                     </div>
                                 </div>
                                 <div class="block-content">
-                                    @if (count($wallet->requests) > 0)
+                                    @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)
                                         <table class="table table-hover table-borderless table-striped table-vcenter">
                                             <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Bank</th>
                                                 <th>Cheque</th>
-                                                <th>Cheque Title</th>
+                                                <th>Company/Sender Title</th>
                                                 <th>Amount</th>
-                                                <th>Notes</th>
+                                                <th>Bank Proof Copy</th>
                                                 <th>Status</th>
                                                 <th></th>
                                             </tr>
                                             </thead>
 
-                                            @foreach($wallet->requests as $index => $req)
+                                            @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
                                                 <tbody class="">
                                                 <tr>
-                                                    <td>{{$index+1}}</td>
                                                     <td class="font-w600">{{ $req->bank_name }}</td>
                                                     <td>
                                                         {{$req->cheque}}
@@ -161,8 +159,14 @@
                                                     <td>
                                                         {{number_format($req->amount,2)}} USD
                                                     </td>
-                                                    <td>
-                                                        {{$req->notes}}
+                                                    <td class="js-gallery">
+                                                        @if($req->attachment != null)
+                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
+                                                                View Proof
+                                                            </a>
+                                                        @else
+                                                            No Proof Provided
+                                                        @endif
                                                     </td>
 
                                                     <td>
@@ -173,12 +177,88 @@
                                                         @endif
                                                     </td>
                                                     <td>
-
-
-                                                    </td>
-                                                    <td class="text-center">
+                                                    <td class="text-right">
                                                         @if($req->status == 0)
-                                                        <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Bank Transfer</button>
+                                                            <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Request</button>
+                                                        @endif
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+
+                                            @endforeach
+                                        </table>
+                                    @else
+                                        <p>No  Bank Transfer Requests Found</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="block">
+                                <div class="block-header">
+                                    <div class="block-title">
+                                        AliBaba Top-up Requests
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    @if (count($wallet->requests()->where('type','alibaba')->get()) > 0)
+                                        <table class="table table-hover table-borderless table-striped table-vcenter">
+                                            <thead>
+                                            <tr>
+                                                <th>Company/Sender Title</th>
+                                                <th>Alibaba Order Number </th>
+                                                <th>Amount</th>
+                                                <th>Bank Proof Copy</th>
+                                                <th>Notes</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+
+                                            @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
+                                                <tbody class="">
+                                                <tr>
+
+                                                    <td>
+                                                        {{$req->cheque_title}}
+                                                    </td>
+                                                    <td>
+                                                        {{$req->cheque}}
+                                                    </td>
+
+                                                    <td>
+                                                        {{number_format($req->amount,2)}} USD
+                                                    </td>
+                                                    <td class="js-gallery">
+                                                        @if($req->attachment != null)
+                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
+                                                                View Proof
+                                                            </a>
+                                                        @else
+                                                            No Proof Provided
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($req->notes != null)
+                                                            {{$req->notes}}
+                                                        @else
+                                                            No Notes
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if($req->status == 0)
+                                                            <span class="badge badge-warning">Pending</span>
+                                                        @else
+                                                            <span class="badge badge-success">Approved</span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-right">
+                                                        @if($req->status == 0)
+                                                            <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Request</button>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -187,7 +267,7 @@
                                             @endforeach
                                         </table>
                                     @else
-                                        <p>No Requests Found</p>
+                                        <p>No AliBaba Top-up Requests Found</p>
                                     @endif
                                 </div>
                             </div>

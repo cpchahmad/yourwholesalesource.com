@@ -263,7 +263,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['check_user_or_shop']], function () {
     Route::prefix('store')->group(function () {
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
-        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
+//        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
         Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
         Route::get('/pay-through-wallet/{id}', 'WalletController@order_payment_by_wallet')->name('store.order.wallet.pay');
 

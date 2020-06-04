@@ -81,18 +81,63 @@
                         </div>
                     </div>
                     <div class="row">
+                        {{--                        <div class="col-md-6">--}}
+                        {{--                            <div class="block pay-options" data-toggle="modal" data-target="#paypal_topup_modal">--}}
+                        {{--                               <div class="block-content">--}}
+                        {{--                                   <p class="text-center"> Top-up with Paypal </p>--}}
+                        {{--                               </div>--}}
+                        {{--                            </div>--}}
+                        {{--                            <div class="modal fade" id="paypal_topup_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">--}}
+                        {{--                                <div class="modal-dialog modal-dialog-popout" role="document">--}}
+                        {{--                                    <div class="modal-content">--}}
+                        {{--                                        <div class="block block-themed block-transparent mb-0">--}}
+                        {{--                                            <div class="block-header bg-primary-dark">--}}
+                        {{--                                                <h3 class="block-title">TOPUP VIA PAYPAL</h3>--}}
+                        {{--                                                <div class="block-options">--}}
+                        {{--                                                    <button type="button" class="btn-block-option">--}}
+                        {{--                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>--}}
+                        {{--                                                    </button>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+
+                        {{--                                            <form action="{{route('store.wallet.paypal.topup',$wallet->id)}}" method="post">--}}
+                        {{--                                                @csrf--}}
+                        {{--                                                <input type="hidden" value="{{$user->id}}" name="user_id">--}}
+                        {{--                                                <input type="hidden" value="{{$wallet->id}}" name="wallet_id">--}}
+                        {{--                                                <div class="block-content font-size-sm">--}}
+                        {{--                                                    <div class="form-group">--}}
+                        {{--                                                        <div class="col-sm-12">--}}
+                        {{--                                                            <div class="form-material">--}}
+                        {{--                                                                <label for="material-error">Amount</label>--}}
+                        {{--                                                                <input required class="form-control" type="number"  name="amount"--}}
+                        {{--                                                                       value=""  placeholder="Enter Top-up Amount here">--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                </div>--}}
+
+                        {{--                                                <div class="block-content block-content-full text-right border-top">--}}
+                        {{--                                                    <button type="submit" class="btn btn-sm btn-primary">Request Top-up</button>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </form>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+
+                        {{--                        </div>--}}
                         <div class="col-md-6">
-                            <div class="block pay-options" data-toggle="modal" data-target="#paypal_topup_modal">
-                               <div class="block-content">
-                                   <p class="text-center"> Top-up with Paypal </p>
-                               </div>
+                            <div class="block pay-options" data-toggle="modal" data-target="#alibaba_topup_modal">
+                                <div class="block-content">
+                                    <p class="text-center"> Top-up with AliBaba </p>
+                                </div>
                             </div>
-                            <div class="modal fade" id="paypal_topup_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                            <div class="modal fade" id="alibaba_topup_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
                                     <div class="modal-content">
                                         <div class="block block-themed block-transparent mb-0">
                                             <div class="block-header bg-primary-dark">
-                                                <h3 class="block-title">TOPUP VIA PAYPAL</h3>
+                                                <h3 class="block-title">TOPUP VIA Alibaba</h3>
                                                 <div class="block-options">
                                                     <button type="button" class="btn-block-option">
                                                         <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
@@ -100,11 +145,32 @@
                                                 </div>
                                             </div>
 
-                                            <form action="{{route('store.wallet.paypal.topup',$wallet->id)}}" method="post">
+                                            <form action="{{route('store.user.wallet.request.topup',$wallet->id)}}" method="post">
                                                 @csrf
                                                 <input type="hidden" value="{{$user->id}}" name="user_id">
                                                 <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
+                                                <input type="hidden" value="alibaba" name="type">
+                                                <input type="hidden" value="alibaba" name="bank_name">
                                                 <div class="block-content font-size-sm">
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
+                                                                <label for="material-error">Alibaba Order Number</label>
+                                                                <input  class="form-control" type="text"  name="cheque"
+                                                                        value="" required  placeholder="Enter Order Number here">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
+                                                                <label for="material-error">Company/Sender Title</label>
+                                                                <input  class="form-control" type="text"  name="cheque_title"
+                                                                        value="" required  placeholder="Enter Company/Sender Title here">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
@@ -114,10 +180,27 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
+                                                                <label for="material-error">Bank Proof Copy (Optional)</label>
+                                                                <input  class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
+                                                                <label for="material-error">Notes (Optional)</label>
+                                                                <input  class="form-control" type="text"  name="notes"
+                                                                        value=""   placeholder="Enter Notes here">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 <div class="block-content block-content-full text-right border-top">
-                                                    <button type="submit" class="btn btn-sm btn-primary">Request Top-up</button>
+                                                    <button type="submit" class="btn btn-sm btn-primary">Save</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -144,26 +227,27 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <form action="{{route('store.user.wallet.request.topup')}}" method="post">
+                                            <form action="{{route('store.user.wallet.request.topup')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" value="{{$user->id}}" name="user_id">
                                                 <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
+                                                <input type="hidden" name="type" value="bank transfer">
                                                 <div class="block-content font-size-sm">
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
                                                                 <label for="material-error">Cheque Number</label>
                                                                 <input  class="form-control" type="text"  name="cheque"
-                                                                       value="" required  placeholder="Enter Cheque Number here">
+                                                                        value="" required  placeholder="Enter Cheque Number here">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Cheque Title</label>
+                                                                <label for="material-error">Company/Sender Title</label>
                                                                 <input  class="form-control" type="text"  name="cheque_title"
-                                                                       value="" required  placeholder="Enter Cheque Title here">
+                                                                        value="" required  placeholder="Enter Company/Sender Title here">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -179,7 +263,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Amount</label>
+                                                                <label for="material-error">Amount (USD)</label>
                                                                 <input required class="form-control" type="number"  name="amount"
                                                                        value=""  placeholder="Enter Cheque Amount here">
                                                             </div>
@@ -188,9 +272,17 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
+                                                                <label for="material-error">Bank Proof Copy</label>
+                                                                <input required class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
                                                                 <label for="material-error">Notes (Optional)</label>
                                                                 <input  class="form-control" type="text"  name="notes"
-                                                                             value=""   placeholder="Enter Notes here">
+                                                                        value=""   placeholder="Enter Notes here">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -215,24 +307,23 @@
                                     </div>
                                 </div>
                                 <div class="block-content">
-                                    @if (count($wallet->requests) > 0)
+                                    @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)
                                         <table class="table table-hover table-borderless table-striped table-vcenter">
                                             <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Bank</th>
                                                 <th>Cheque</th>
-                                                <th>Cheque Title</th>
+                                                <th>Company/Sender Title</th>
                                                 <th>Amount</th>
+                                                <th>Bank Proof Copy</th>
                                                 <th>Notes</th>
                                                 <th>Status</th>
                                             </tr>
                                             </thead>
 
-                                            @foreach($wallet->requests as $index => $req)
+                                            @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
                                                 <tbody class="">
                                                 <tr>
-                                                    <td>{{$index+1}}</td>
                                                     <td class="font-w600">{{ $req->bank_name }}</td>
                                                     <td>
                                                         {{$req->cheque}}
@@ -243,8 +334,94 @@
                                                     <td>
                                                         {{number_format($req->amount,2)}} USD
                                                     </td>
+                                                    <td class="js-gallery">
+                                                        @if($req->attachment != null)
+                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
+                                                                View Proof
+                                                            </a>
+                                                        @else
+                                                            No Proof Provided
+                                                        @endif
+                                                    </td>
                                                     <td>
-                                                        {{$req->notes}}
+                                                        @if($req->notes != null)
+                                                            {{$req->notes}}
+                                                        @else
+                                                            No Notes
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if($req->status == 0)
+                                                            <span class="badge badge-warning">Pending</span>
+                                                        @else
+                                                            <span class="badge badge-success">Approved</span>
+                                                        @endif
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+
+                                            @endforeach
+                                        </table>
+                                    @else
+                                        <p>No  Bank Transfer Requests Found</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="block">
+                                <div class="block-header">
+                                    <div class="block-title">
+                                        AliBaba Top-up Requests
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    @if (count($wallet->requests()->where('type','alibaba')->get()) > 0)
+                                        <table class="table table-hover table-borderless table-striped table-vcenter">
+                                            <thead>
+                                            <tr>
+                                                <th>Company/Sender Title</th>
+                                                <th>Alibaba Order Number </th>
+                                                <th>Amount</th>
+                                                <th>Bank Proof Copy</th>
+                                                <th>Notes</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            </thead>
+
+                                            @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
+                                                <tbody class="">
+                                                <tr>
+
+                                                    <td>
+                                                        {{$req->cheque_title}}
+                                                    </td>
+                                                    <td>
+                                                        {{$req->cheque}}
+                                                    </td>
+
+                                                    <td>
+                                                        {{number_format($req->amount,2)}} USD
+                                                    </td>
+                                                    <td class="js-gallery">
+                                                        @if($req->attachment != null)
+                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
+                                                                View Proof
+                                                            </a>
+                                                        @else
+                                                            No Proof Provided
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($req->notes != null)
+                                                            {{$req->notes}}
+                                                        @else
+                                                            No Notes
+                                                        @endif
                                                     </td>
 
                                                     <td>
@@ -264,7 +441,7 @@
                                             @endforeach
                                         </table>
                                     @else
-                                        <p>No Requests Found</p>
+                                        <p>No AliBaba Top-up Requests Found</p>
                                     @endif
                                 </div>
                             </div>
