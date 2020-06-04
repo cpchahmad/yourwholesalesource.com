@@ -77,7 +77,13 @@ class SingleStoreController extends Controller
             $shipping_rates->whereRaw('max >='.$total_weight);
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
-                $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
+                if($shipping_rates->shipping_price > 0){
+                    $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
+
+                }
+                else{
+                    $product->new_shipping_price = 'Free Shipping';
+                }
             }
             else{
                 $product->new_shipping_price = 'Free Shipping';
