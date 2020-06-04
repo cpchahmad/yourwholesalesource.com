@@ -30,10 +30,10 @@
                     <div class="block-content">
                         <div class="p-2">
 
-                                @if($wishlist->reference != null)
-                                    <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
-                                    <hr>
-                                @endif
+                            @if($wishlist->reference != null)
+                                <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
+                                <hr>
+                            @endif
                             <p>
                                 {!! $wishlist->description !!}
                             </p>
@@ -56,7 +56,7 @@
                                     <button class="btn btn-danger" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                 @endif
                             </div>
-                                @if(in_array($wishlist->status_id,[1,4]))
+                            @if(in_array($wishlist->status_id,[1,4]))
                                 <div class="modal fade" id="mark-approved-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">
@@ -141,21 +141,21 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @if($wishlist->has_store_product != 1)
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Wishlist Product</label>
+                                                                        <select name="link_product_id" style="width: 100%;" data-placeholder="Choose Reference Product" required class="form-control js-select2">
+                                                                            @foreach($products as $product)
+                                                                                <option value="{{$product->id}}">{{$product->title}}</option>
+                                                                            @endforeach
+                                                                        </select>
 
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <label for="material-error">Wishlist Product</label>
-                                                                    <select name="link_product_id" style="width: 100%;" data-placeholder="Choose Reference Product" required class="form-control js-select2">
-                                                                        @foreach($products as $product)
-                                                                            <option value="{{$product->id}}">{{$product->title}}</option>
-                                                                        @endforeach
-                                                                    </select>
-
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-
+                                                        @endif
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">
@@ -201,7 +201,6 @@
                                                                 <label for="material-error">Rejected Reason</label>
                                                                 <textarea required class="js-summernote" name="reject_reason"
                                                                           placeholder="Please Enter Reject Reason here !"></textarea>
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -250,36 +249,36 @@
                     @endforeach
                 @endif
                 @if(!in_array($wishlist->status_id,[3,5]))
-                <div class="block">
-                    <div class="block-header">
-                        <h5 class="block-title">Reply</h5>
-                    </div>
-                    <div class="block-content">
-                        <div class="p-2">
-                            <form action="{{route('wishlist.thread.create')}}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="manager_id" value="{{$wishlist->manager_id}}">
-                                <input type="hidden" name="source" value="manager">
-                                <input type="hidden" name="wishlist_id" value="{{$wishlist->id}}">
-                                <div class="form-group">
-                                    <div class="form-material">
-                                        <label for="material-error">Message</label>
-                                        <textarea required class="js-summernote" name="reply"
-                                                  placeholder="Please Enter Message here !"></textarea>
+                    <div class="block">
+                        <div class="block-header">
+                            <h5 class="block-title">Reply</h5>
+                        </div>
+                        <div class="block-content">
+                            <div class="p-2">
+                                <form action="{{route('wishlist.thread.create')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="manager_id" value="{{$wishlist->manager_id}}">
+                                    <input type="hidden" name="source" value="manager">
+                                    <input type="hidden" name="wishlist_id" value="{{$wishlist->id}}">
+                                    <div class="form-group">
+                                        <div class="form-material">
+                                            <label for="material-error">Message</label>
+                                            <textarea required class="js-summernote" name="reply"
+                                                      placeholder="Please Enter Message here !"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-material">
-                                        <label for="material-error">Attachments </label>
-                                        <input type="file" name="attachments[]" class="form-control" multiple>
+                                    <div class="form-group">
+                                        <div class="form-material">
+                                            <label for="material-error">Attachments </label>
+                                            <input type="file" name="attachments[]" class="form-control" multiple>
+                                        </div>
                                     </div>
-                                </div>
-                                <input type="submit" class="btn btn-primary" value="Save">
-                            </form>
+                                    <input type="submit" class="btn btn-primary" value="Save">
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    @endif
+                @endif
             </div>
             <div class="col-md-4">
                 @if($wishlist->has_product != null)
@@ -324,6 +323,49 @@
                             @endif
                             <hr>
                             <button onclick="window.location.href='{{route('product.view',$wishlist->has_product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
+                        </div>
+                    </div>
+                    <hr>
+                @elseif($wishlist->has_retailer_product != null)
+                    <div class="block">
+                        <div class="block-header">
+                            <h5 class="block-title">Reference Product</h5>
+                        </div>
+                        <div class="options-container">
+                            <a href="{{route('product.view',$wishlist->has_retailer_product->id)}}">
+                                @if(count($wishlist->has_retailer_product->has_images) > 0)
+                                    @foreach($wishlist->has_retailer_product->has_images()->orderBy('position')->get() as $index => $image)
+                                        @if($index == 0)
+                                            <img class="img-fluid options-item" src="{{$image->image}}">
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                @endif
+
+                            </a>
+                            <div class="options-overlay bg-black-75">
+                                <div class="options-overlay-content">
+                                    <div class="push-20">
+                                        <a class="btn btn-sm btn-primary" href="{{route('product.retailer.view',$wishlist->has_retailer_product->id)}}">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-content" style="padding-bottom: 10px">
+                            <div class="push-10">
+                                <a class="h6" style="font-size: 0.9rem" href="{{route('product.retailer.view',$wishlist->has_retailer_product->id)}}">{{$wishlist->has_retailer_product->title}}</a>
+                                <div class="font-w600 text-success mt-1 push-10-l">${{number_format($wishlist->has_retailer_product->price,2)}}</div>
+                            </div>
+
+                            @if($wishlist->has_retailer_product->processing_time != null)
+                                <hr>
+                                <p class="text-muted font-size-sm">  Dispatch Within {{$wishlist->has_retailer_product->processing_time}} </p>
+
+                            @endif
+                            <hr>
+                            <button onclick="window.location.href='{{route('product.retailer.view',$wishlist->has_retailer_product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
                             <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
                         </div>
                     </div>

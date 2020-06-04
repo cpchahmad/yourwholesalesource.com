@@ -47,14 +47,18 @@
 
                             <div class="col-md-12 mb2">
                                 @if(count($images) > 0)
-                                    @if($images[0]->isV == 0)
-                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
-                                            <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
-                                        </a>
+                                    @if($product->import_from_shopify == 1)
+                                        <img class="img-fluid options-item" src="{{$images[0]->image}}">
                                     @else
-                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
-                                            <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
-                                        </a>
+                                        @if($images[0]->isV == 0)
+                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
+                                                <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
+                                            </a>
+                                        @else
+                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
+                                                <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
+                                            </a>
+                                        @endif
                                     @endif
 
                                 @endif
@@ -62,14 +66,20 @@
                             @if(count($images) > 0)
                                 @foreach($images as $image)
                                     <div class="col-md-4">
-                                        @if($image->isV == 0)
-                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$image->image}}">
-                                                <img class="img-fluid" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                        @if($product->import_from_shopify == 1)
+                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{$image->image}}">
+                                                <img class="img-fluid" src="{{$image->image}}" alt="">
                                             </a>
                                         @else
-                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$image->image}}">
-                                                <img class="img-fluid" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                            </a>
+                                            @if($image->isV == 0)
+                                                <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$image->image}}">
+                                                    <img class="img-fluid" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                </a>
+                                            @else
+                                                <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$image->image}}">
+                                                    <img class="img-fluid" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 @endforeach
@@ -160,9 +170,15 @@
                                             @foreach($product->hasVariants as $index => $variant)
                                                 <tr>
                                                     <td>
-                                                        <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                             @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else @if($variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @else src="{{asset('images')}}/{{$variant->has_image->image}}" @endif @endif alt="">
+                                                        @if($product->import_from_shopify == 1)
+                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                                 @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else  src="{{$variant->has_image->image}}" @endif alt="">
+                                                        @else
+                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                                 @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else @if($variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @else src="{{asset('images')}}/{{$variant->has_image->image}}" @endif @endif alt="">
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         {{$variant->title}}

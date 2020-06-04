@@ -9,6 +9,7 @@ use App\Image;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerImage;
+use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
@@ -53,6 +54,14 @@ class ProductController extends Controller
     public function view($id)
     {
         $product = Product::find($id);
+        return view('products.product')->with([
+            'product' => $product
+        ]);
+    }
+
+    public function retailer_view($id)
+    {
+        $product = RetailerProduct::find($id);
         return view('products.product')->with([
             'product' => $product
         ]);

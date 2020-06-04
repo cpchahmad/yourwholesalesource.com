@@ -82,10 +82,14 @@
                                                     <div class="image-holder-my-product" style="background-image:  @if(count($product->has_images) > 0)
                                                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                     @if($index == 0)
+                                                    @if($product->import_from_shopify == 1)
+                                                        url({{$image->image}})
+                                                        @else
                                                     @if($image->isV == 0)
                                                         url({{asset('images')}}/{{$image->image}})
                                                     @else url({{asset('images/variants')}}/{{$image->image}})
                                                     @endif
+                                                        @endif
                                                     @endif
                                                     @endforeach
                                                     @else

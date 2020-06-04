@@ -475,4 +475,17 @@ $(document).ready(function () {
         }
     });
 
+    /*Wishlist Switch for has_product*/
+    $('body').on('change','#sw-custom',function () {
+        if($(this).is(':checked')){
+            $(this).next('.custom-control-label').text('Yes');
+            $('#product_shopify_id').attr('required',true);
+            $('.product-shopify').show();
+        }
+        else{
+            $(this).next('.custom-control-label').text('No');
+            $('#product_shopify_id').attr('required',false);
+            $('.product-shopify').hide();
+        }
+    });
 });

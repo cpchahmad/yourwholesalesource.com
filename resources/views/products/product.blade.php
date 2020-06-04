@@ -30,9 +30,11 @@
         <div class="row mb2">
             <div class="col-sm-6">
             </div>
-            <div class="col-sm-6 text-right">
-                <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
-            </div>
+            @if($product->import_from_shopify != 1)
+                <div class="col-sm-6 text-right">
+                    <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
+                </div>
+            @endif
         </div>
         <div class="block">
             <div class="block-content">
@@ -52,6 +54,11 @@
 
                             <div class="col-md-12 mb2">
                                 @if(count($images) > 0)
+                                    @if($product->import_from_shopify == 1)
+                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{$images[0]->image}}">
+                                            <img class="img-fluid" src="{{$images[0]->image}}" alt="">
+                                        </a>
+                                        @else
                                     @if($images[0]->isV == 0)
                                         <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
                                             <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
@@ -61,12 +68,18 @@
                                             <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
                                         </a>
                                     @endif
+                                        @endif
 
                                 @endif
                             </div>
                             @if(count($images) > 0)
                                 @foreach($images as $image)
                                     <div class="col-md-4">
+                                        @if($product->import_from_shopify == 1)
+                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{$image->image}}">
+                                                <img class="img-fluid" src="{{$image->image}}" alt="">
+                                            </a>
+                                        @else
                                         @if($image->isV == 0)
                                             <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$image->image}}">
                                                 <img class="img-fluid" src="{{asset('images')}}/{{$image->image}}" alt="">
@@ -76,6 +89,7 @@
                                                 <img class="img-fluid" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                             </a>
                                         @endif
+                                            @endif
                                     </div>
                                 @endforeach
                             @endif
@@ -117,10 +131,13 @@
                     <div class="col-sm-6">
                         <!-- Vital Info -->
                         <h2>
-                            <a href="{{route('product.edit',$product->id)}}">
+                            @if($product->import_from_shopify == 1)
                                 {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WEFULLFILL @endif</span>
-
-                            </a>
+                                @else
+                                <a href="{{route('product.edit',$product->id)}}">
+                                    {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WEFULLFILL @endif</span>
+                                </a>
+                            @endif
                         </h2>
                         <div class="clearfix" style="margin-top: 5px;width: 100%">
 
@@ -166,9 +183,16 @@
                                             @foreach($product->hasVariants as $index => $variant)
                                                 <tr>
                                                     <td>
-                                                        <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                             @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else @if($variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @else src="{{asset('images')}}/{{$variant->has_image->image}}" @endif @endif alt="">
+                                                        @if($product->import_from_shopify == 1)
+                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                                 @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else  src="{{$variant->has_image->image}}" @endif @ alt="">
+                                                            @else
+                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                                 @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else @if($variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @else src="{{asset('images')}}/{{$variant->has_image->image}}" @endif @endif alt="">
+                                                            @endif
+
                                                     </td>
                                                     <td>
                                                         {{$variant->title}}

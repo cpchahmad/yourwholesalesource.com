@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 Route::get('/reset', 'HelperController@reset_all');
@@ -44,6 +45,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/products','ProductController@index')->name('product.create');
     Route::get('/products/all','ProductController@all')->name('product.all');
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
+    Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
     Route::any('/products/{id}/update','ProductController@update')->name('product.update');
     Route::post('/products/save','ProductController@save')->name('product.save');

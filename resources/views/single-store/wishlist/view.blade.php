@@ -30,8 +30,8 @@
                         <div class="p-2">
 
                             @if($wishlist->reference != null)
-                            <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
-                            <hr>
+                                <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
+                                <hr>
                             @endif
                             <p>
                                 {!! $wishlist->description !!}
@@ -42,62 +42,84 @@
                                     <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">
                                 @endforeach
                             </div>
-                                <hr>
-                                <div class="text-right p-2">
-                                    @if($wishlist->status_id == 2)
-                                        <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
-                                    @endif
-
-                                </div>
+                            <hr>
+                            <div class="text-right p-2">
                                 @if($wishlist->status_id == 2)
-                                    <div class="modal fade" id="mark-approved-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-popout" role="document">
-                                            <div class="modal-content">
-                                                <div class="block block-themed block-transparent mb-0">
-                                                    <div class="block-header bg-primary-dark">
-                                                        <h3 class="block-title">Mark as Approved</h3>
-                                                        <div class="block-options">
-                                                            <button type="button" class="btn-block-option">
-                                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                            </button>
-                                                        </div>
+                                    <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
+                                @endif
+
+                            </div>
+                            @if($wishlist->status_id == 2)
+                                <div class="modal fade" id="mark-approved-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                        <div class="modal-content">
+                                            <div class="block block-themed block-transparent mb-0">
+                                                <div class="block-header bg-primary-dark">
+                                                    <h3 class="block-title">Mark as Approved</h3>
+                                                    <div class="block-options">
+                                                        <button type="button" class="btn-block-option">
+                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                        </button>
                                                     </div>
-                                                    <form action="{{route('wishlist.accept')}}" method="post">
-                                                        @csrf
-                                                        <input  type="hidden" name="wishlist_id" value="{{$wishlist->id}}">
-                                                        <input  type="hidden" name="manager_id" value="{{$wishlist->manager_id}}">
-                                                        <div class="block-content font-size-sm">
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Target Dropshipping Cost</label>
-                                                                        <input readonly class="form-control" type="text" value="{{$wishlist->cost}}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Approved Cost</label>
-                                                                        <input readonly class="form-control" type="number" step="any" name="approved_price" value="{{$wishlist->approved_price}}">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="block-content block-content-full text-right border-top">
-
-                                                            <button type="submit" class="btn btn-sm btn-success">Accept</button>
-                                                        </div>
-                                                    </form>
                                                 </div>
+                                                <form action="{{route('wishlist.accept')}}" method="post">
+                                                    @csrf
+                                                    <input  type="hidden" name="wishlist_id" value="{{$wishlist->id}}">
+                                                    <input  type="hidden" name="manager_id" value="{{$wishlist->manager_id}}">
+                                                    <div class="block-content font-size-sm">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Target Dropshipping Cost</label>
+                                                                    <input readonly class="form-control" type="text" value="{{$wishlist->cost}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Approved Cost</label>
+                                                                    <input readonly class="form-control" type="number" step="any" name="approved_price" value="{{$wishlist->approved_price}}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Your Store has that product?</label>
+                                                                    <div class="custom-control custom-switch custom-control-lg mb-2">
+                                                                        <input type="checkbox" class="custom-control-input" id="sw-custom" name="has_product" value="1">
+                                                                        <label class="custom-control-label" for="sw-custom">No</label>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group product-shopify" style="display: none">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Product Shopify ID</label>
+                                                                    <input id="product_shopify_id" class="form-control" type="text"  name="product_shopify_id">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="block-content block-content-full text-right border-top">
+
+                                                        <button type="submit" class="btn btn-sm btn-success">Accept</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -128,37 +150,37 @@
                     @endforeach
                 @endif
                 @if(!in_array($wishlist->status_id,[3,5]))
-                <div class="block">
-                    <div class="block-header">
-                        <h5 class="block-title">Reply To Manager</h5>
-                    </div>
-                    <div class="block-content">
-                        <div class="p-2">
-                            <form action="{{route('wishlist.thread.create')}}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="manager_id" value="{{$wishlist->manager_id}}">
-                                <input type="hidden" name="shop_id" value="{{$wishlist->shop_id}}">
-                                <input type="hidden" name="source" value="store">
-                                <input type="hidden" name="wishlist_id" value="{{$wishlist->id}}">
-                                <div class="form-group">
-                                    <div class="form-material">
-                                        <label for="material-error">Message</label>
-                                        <textarea required class="js-summernote" name="reply"
-                                                  placeholder="Please Enter Message here !"></textarea>
+                    <div class="block">
+                        <div class="block-header">
+                            <h5 class="block-title">Reply To Manager</h5>
+                        </div>
+                        <div class="block-content">
+                            <div class="p-2">
+                                <form action="{{route('wishlist.thread.create')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="manager_id" value="{{$wishlist->manager_id}}">
+                                    <input type="hidden" name="shop_id" value="{{$wishlist->shop_id}}">
+                                    <input type="hidden" name="source" value="store">
+                                    <input type="hidden" name="wishlist_id" value="{{$wishlist->id}}">
+                                    <div class="form-group">
+                                        <div class="form-material">
+                                            <label for="material-error">Message</label>
+                                            <textarea required class="js-summernote" name="reply"
+                                                      placeholder="Please Enter Message here !"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-material">
-                                        <label for="material-error">Attachments </label>
-                                        <input type="file" name="attachments[]" class="form-control" multiple>
+                                    <div class="form-group">
+                                        <div class="form-material">
+                                            <label for="material-error">Attachments </label>
+                                            <input type="file" name="attachments[]" class="form-control" multiple>
+                                        </div>
                                     </div>
-                                </div>
-                                <input type="submit" class="btn btn-primary" value="Save">
-                            </form>
+                                    <input type="submit" class="btn btn-primary" value="Save">
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    @endif
+                @endif
             </div>
             <div class="col-md-4">
                 @if($wishlist->has_product != null)
@@ -217,7 +239,52 @@
                         </div>
                     </div>
                     <hr>
+                @elseif($wishlist->has_retailer_product != null)
+                    <div class="block">
+                        <div class="block-header">
+                            <h5 class="block-title">Reference Product</h5>
+                        </div>
+                        <div class="options-container">
+                            <a href="{{route('store.product.wefulfill.show',$wishlist->has_retailer_product->id)}}">
+                                @if(count($wishlist->has_retailer_product->has_images) > 0)
+                                    @foreach($wishlist->has_retailer_product->has_images()->orderBy('position')->get() as $index => $image)
+                                        @if($index == 0)
+                                            <img class="img-fluid options-item" src="{{$image->image}}">
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                @endif
+
+                            </a>
+                            <div class="options-overlay bg-black-75">
+                                <div class="options-overlay-content">
+                                    <div class="push-20">
+                                        <a class="btn btn-sm btn-primary" href="{{route('store.my_product.wefulfill.show',$wishlist->has_retailer_product->id)}}">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-content" style="padding-bottom: 10px">
+                            <div class="push-10">
+                                <a class="h6" style="font-size: 0.9rem" href="{{route('store.my_product.wefulfill.show',$wishlist->has_retailer_product->id)}}">{{$wishlist->has_retailer_product->title}}</a>
+                                <div class="font-w600 text-success mt-1 push-10-l">${{number_format($wishlist->has_retailer_product->price,2)}}</div>
+                            </div>
+
+                            @if($wishlist->has_retailer_product->processing_time != null)
+                                <hr>
+                                <p class="text-muted font-size-sm">  Dispatch Within {{$wishlist->has_retailer_product->processing_time}} </p>
+
+                            @endif
+                            <hr>
+                            <button onclick="window.location.href='{{route('store.my_product.wefulfill.show',$wishlist->has_retailer_product->id)}}'" class="btn btn-primary btn-block mb2"> View </button>
+                            <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
+                        </div>
+                    </div>
+                    <hr>
                 @endif
+
                 <div class="block">
                     <div class="block-header">
                         <h5 class="block-title">Wishlist Details</h5>
@@ -249,7 +316,7 @@
                             @if($wishlist->approved_price != null)
                                 <span class="font-weight-bold">Approved Cost: </span> {{number_format($wishlist->approved_price,2)}} USD
                                 <hr>
-                                @endif
+                            @endif
                             @if($wishlist->reject_reason != null)
                                 <span class="font-weight-bold">Reject Reason: </span>  {!! $wishlist->reject_reason !!}
                             @endif
