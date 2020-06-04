@@ -217,14 +217,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Tax
-                                </td>
-                                <td align="right">
-                                    {{number_format($order->total_tax,2)}} {{$order->currency}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     Total
                                 </td>
                                 <td align="right">
