@@ -283,6 +283,7 @@
                 @endif
             </div>
             <div class="col-md-4">
+                @if($wishlist->has_store_product != 1)
                 @if($wishlist->has_product != null)
                     <div class="block">
                         <div class="block-header">
@@ -329,7 +330,9 @@
                         </div>
                     </div>
                     <hr>
-                @elseif($wishlist->has_retailer_product != null)
+                    @endif
+                    @else
+                @if($wishlist->has_retailer_product != null)
                     <div class="block">
                         <div class="block-header">
                             <h5 class="block-title">Reference Product</h5>
@@ -372,6 +375,7 @@
                         </div>
                     </div>
                     <hr>
+                @endif
                 @endif
                 <div class="block">
                     <div class="block-header">
