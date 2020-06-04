@@ -106,7 +106,7 @@
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('default_info') }}">
                     <i class="nav-main-link-icon si si-support"></i>
-                    <span class="nav-main-link-name">Supported Plateforms</span>
+                    <span class="nav-main-link-name">Settings</span>
                 </a>
             </li>
 

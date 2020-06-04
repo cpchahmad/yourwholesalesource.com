@@ -219,7 +219,7 @@ class WishlistController extends Controller
 
             $product = $response->body->product;
             $retailerProduct = new RetailerProduct();
-            $product->shopify_id = $product->id;
+            $retailerProduct->shopify_id = $product->id;
             $retailerProduct->title = $product->title;
             $retailerProduct->description = $product->body_html;
             $retailerProduct->type = $product->product_type;

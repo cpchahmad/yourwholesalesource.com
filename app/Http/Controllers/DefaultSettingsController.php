@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Customer;
 use App\DefaultInfo;
 use App\Product;
@@ -23,10 +24,23 @@ class DefaultSettingsController extends Controller
     {
         $info = DefaultInfo::get()->first();
         $platforms = WarnedPlatform::all();
+        $admin_settings = AdminSetting::all()->first();
+
         return view('setttings.default.index')->with([
             'info' => $info,
-            'platforms' =>$platforms
+            'platforms' =>$platforms,
+            'settings' =>$admin_settings
         ]);
+    }
+
+    public function save_percentage(Request $request)
+    {
+      AdminSetting::UpdateOrcreate([
+          'id' => 1,
+      ],[
+         'payment_charge_percentage'  => $request->input('payment_charge_percentage')
+      ]);
+        return redirect()->back()->with('success', 'Payment Charge Percentage Saved Successfully');
     }
 
     public function save(Request $request)

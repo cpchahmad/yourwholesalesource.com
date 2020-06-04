@@ -25,6 +25,7 @@ Route::get('/getExportFile', 'ProductController@getExportFile')->name('app.downl
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', function(){
+    session()->flush();
     Auth::logout();
     return Redirect::to('login');
 })->name('logout');
@@ -58,6 +59,9 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('/default/settings','DefaultSettingsController@index')->name('default_info');
     Route::post('/default/settings/save','DefaultSettingsController@save')->name('default_info.save');
+
+    Route::post('/charge/payment/save','DefaultSettingsController@save_percentage')->name('payment.charge.save');
+
     Route::any('/default/settings/{id}/update','DefaultSettingsController@update')->name('default_info.update');
 
     Route::post('/create/platform','DefaultSettingsController@create_platform')->name('create_platform');
