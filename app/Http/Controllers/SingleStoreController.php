@@ -17,6 +17,7 @@ use App\TicketCategory;
 use App\User;
 use App\Wishlist;
 use App\Zone;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
@@ -39,6 +40,18 @@ class SingleStoreController extends Controller
         return view('single-store.dashboard');
     }
     public function wefullfill_products(Request $request){
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.ipdata.co/country_name?api-key=878bb41d66f819dc08ffdec4fc14d763252af1c959f305c712443925');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            $country = 'United States';
+        }
+        curl_close($ch);
+        $country = $result;
+
         $categories = Category::all();
         $productQuery = Product::where('status',1)->newQuery();
         if($request->has('category')){
@@ -50,6 +63,28 @@ class SingleStoreController extends Controller
             $productQuery->where('title','LIKE','%'.$request->input('search').'%')->orWhere('tags','LIKE','%'.$request->input('search').'%');
         }
         $products = $productQuery->paginate(12);
+
+        foreach ($products as $product){
+            $total_weight = $product->weight;
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name',$country);
+            });
+            $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+            $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
+            $shipping_rates->whereRaw('min <='.$total_weight);
+            $shipping_rates->whereRaw('max >='.$total_weight);
+            $shipping_rates =  $shipping_rates->first();
+            if($shipping_rates != null){
+                $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
+            }
+            else{
+                $product->new_shipping_price = 'Free Shipping';
+
+            }
+
+        }
 
         $shop= $this->helper->getLocalShop();
         return view('single-store.products.wefullfill_products')->with([
