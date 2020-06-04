@@ -74,7 +74,7 @@
                                         @if($item->linked_variant != null)
                                             <img class="img-avatar"
                                                  @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                 @else @if($item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
+                                                 @else @if(\Illuminate\Support\Str::contains($item->linked_variant->has_image->image,['https://','http://'])) src="{{$item->linked_variant->has_image->image}}" @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
                                         @else
                                             <img class="img-avatar img-avatar-variant"
                                                  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
@@ -143,7 +143,7 @@
                                                 @if($item->linked_variant != null)
                                                     <img class="img-avatar"
                                                          @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                         @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif alt="">
+                                                         @else @if(\Illuminate\Support\Str::contains($item->linked_variant->has_image->image,['https://','http://'])) src="{{$item->linked_variant->has_image->image}}" @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
                                                 @else
                                                     <img class="img-avatar img-avatar-variant"
                                                          src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
@@ -190,21 +190,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Tax
-                                </td>
-                                <td align="right">
-                                    {{number_format($order->total_tax,2)}} {{$order->currency}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     Total
                                 </td>
                                 <td align="right">
                                     {{number_format($order->total_price,2)}} {{$order->currency}}
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>
                                     Cost @if($order->paid == 0) to Pay @else Paid @endif
@@ -212,14 +203,25 @@
                                 <td align="right">
                                     {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
                                 </td>
+
                             </tr>
+                            <tr>
+                                <td>
+                                   WeFullFill Charges ({{$settings->payment_charge_percentage}}%)
+                                    <p class="text-primary" style="font-size: 11px"> Only Applicable on Card and Paypal Payment </p>
+                                </td>
+                                <td align="right">
+                                    {{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} {{$order->currency}}
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td></td>
                                 <td align="right">
                                     @if($order->paid == 0)
                                         <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
 
-                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->payment_charge_percentage/100),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
                                         <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
                                     @endif
@@ -510,6 +512,24 @@
                                         <div class="form-material">
                                             <label for="material-error">Amount to Pay</label>
                                             <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay,2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">Total Cost</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay+$order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
                                                     placeholder="Enter 14 Digit Card Number here">
                                         </div>
                                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\RetailerOrder;
@@ -24,9 +25,10 @@ class PaypalController extends Controller
     public function paypal_order_payment(Request $request)
     {
      $retailer_order = RetailerOrder::find($request->id);
+     $setting = AdminSetting::all()->first();
      if($retailer_order->paid == 0){
          $items = [];
-         $order_total = $retailer_order->cost_to_pay;
+         $order_total = $retailer_order->cost_to_pay ;
 
          /*adding order-lime-items for paying through paypal*/
          foreach ($retailer_order->line_items as $item){
@@ -43,6 +45,17 @@ class PaypalController extends Controller
                  'qty' =>1
              ]);
          }
+
+         if($setting != null){
+             if($setting->payment_charge_percentage != null){
+                 $order_total = $order_total + ($retailer_order->cost_to_pay*$setting->payment_charge_percentage/100);
+                     array_push($items,[
+                         'name' => 'WeFullFill Charges('.$setting->payment_charge_percentage.'%)',
+                         'price' => $retailer_order->cost_to_pay*$setting->payment_charge_percentage/100,
+                         'qty' =>1
+                     ]);
+             }
+         }
          $data = [];
          $data['items'] = $items;
          $data['invoice_id'] = 'WeFullFill-Invoice'.rand(1,1000);
@@ -53,9 +66,10 @@ class PaypalController extends Controller
 
          $provider = new ExpressCheckout;
          $response = $provider->setExpressCheckout($data);
+
          $retailer_order->paypal_token  = $response['TOKEN'];
          $retailer_order->save();
-//        dd($response);
+
 
          return redirect($response['paypal_link']);
      }

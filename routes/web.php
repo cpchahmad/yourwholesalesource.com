@@ -156,7 +156,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/orders', 'OrderController@index')->name('store.orders');
         Route::get('/order/delete/{id}', 'OrderController@delete')->name('store.order.delete');
         Route::get('/order/view/{id}', 'OrderController@view_order')->name('store.order.view');
-        Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+
         Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
 
         Route::get('/customers', 'SingleStoreController@customers')->name('store.customers');
@@ -266,6 +266,8 @@ Route::group(['middleware' => ['auth']], function () {
 /*Common Routes*/
 Route::group(['middleware' => ['check_user_or_shop']], function () {
     Route::prefix('store')->group(function () {
+        Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
 //        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
         Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');

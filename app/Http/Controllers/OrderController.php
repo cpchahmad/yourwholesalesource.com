@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Customer;
 use App\OrderLog;
 use App\OrderTransaction;
@@ -39,20 +40,23 @@ class OrderController extends Controller
 
     public function view_order($id){
         $order  = RetailerOrder::find($id);
+        $settings = AdminSetting::all()->first();
         if($order != null){
             return view('single-store.orders.view')->with([
-                'order' => $order
+                'order' => $order,
+                'settings' =>$settings
             ]);
         }
     }
 
     public function proceed_payment(Request $request){
         $order = RetailerOrder::find($request->input('order_id'));
+        $settings = AdminSetting::all()->first();
         if($order != null && $order->paid == 0){
             $last_four = substr($request->input('card_number'),0,3);
             $new_transaction = new OrderTransaction();
             $new_transaction->note = $request->input('note');
-            $new_transaction->amount =  $order->cost_to_pay;
+            $new_transaction->amount =  $order->cost_to_pay + ($order->cost_to_pay * $settings->payment_charge_percentage/100);
             $new_transaction->name = $request->input('card_name');
             $new_transaction->card_last_four = $last_four;
             $new_transaction->retailer_order_id = $order->id;

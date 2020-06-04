@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Category;
 use App\Country;
 use App\Customer;
@@ -223,9 +224,11 @@ class CustomOrderController extends Controller
 
     public function view_order($id){
         $order  = RetailerOrder::find($id);
+        $settings = AdminSetting::all()->first();
         if($order != null){
             return view('non_shopify_users.orders.view')->with([
-                'order' => $order
+                'order' => $order,
+                'settings' =>$settings
             ]);
         }
     }

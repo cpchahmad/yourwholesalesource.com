@@ -196,14 +196,7 @@
                                     {{number_format($order->shipping_price,2)}} {{$order->currency}}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    Tax
-                                </td>
-                                <td align="right">
-                                    {{number_format($order->total_tax,2)}} {{$order->currency}}
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td>
                                     Total
@@ -222,12 +215,22 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+                                    WeFullFill Charges ({{$settings->payment_charge_percentage}}%)
+                                    <p class="text-primary" style="font-size: 11px"> Only Applicable on Card and Paypal Payment </p>
+                                </td>
+                                <td align="right">
+                                    {{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} {{$order->currency}}
+                                </td>
+                            </tr>
+
+                            <tr>
                                 <td></td>
                                 <td align="right">
                                     @if($order->paid == 0)
                                         <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
 
-                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->payment_charge_percentage/100),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
                                         <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
                                     @endif
@@ -506,6 +509,24 @@
                                         <div class="form-material">
                                             <label for="material-error">Amount to Pay</label>
                                             <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay,2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">Total Cost</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay+$order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
                                                     placeholder="Enter 14 Digit Card Number here">
                                         </div>
                                     </div>
