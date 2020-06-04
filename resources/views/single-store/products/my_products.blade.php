@@ -78,26 +78,27 @@
                                     <div class="tab-pane active" id="product_{{$product->id}}_products" role="tabpanel">
                                         <div class="block">
                                             <div class="options-container">
-                                                <a href="{{route('store.my_product.wefulfill.show',$product->id)}}">
-                                                    <div class="image-holder-my-product" style="background-image:  @if(count($product->has_images) > 0)
-                                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                    @if($index == 0)
-                                                    @if($product->import_from_shopify == 1)
-                                                        url({{$image->image}})
-                                                        @else
-                                                    @if($image->isV == 0)
-                                                        url({{asset('images')}}/{{$image->image}})
-                                                    @else url({{asset('images/variants')}}/{{$image->image}})
-                                                    @endif
-                                                        @endif
-                                                    @endif
-                                                    @endforeach
+                                                <a href="{{route('store.product.wefulfill.show',$product->id)}}">
+                                                    @if(count($product->has_images) > 0)
+                                                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                            @if($index == 0)
+                                                                @if($product->import_from_shopify == 1)
+                                                                    url({{$image->image}})
+                                                                @else
+                                                                    @if($image->isV == 0)
+                                                                        <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">
+                                                                    @else   <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                                    @endif
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
                                                     @else
-                                                        url(https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg)
-                                                    @endif">
-                                                    </div>
+                                                        <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                    @endif
+
                                                 </a>
                                             </div>
+
                                             <div class="block-content" style="padding-bottom: 10px">
                                                 <div class="push-10">
                                                     <a class="h6" href="{{route('store.my_product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
