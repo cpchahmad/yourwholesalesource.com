@@ -4,10 +4,10 @@ $(document).ready(function () {
     $('body').on('change','.rate_type_select',function () {
         if ($(this).val() !== 'flat') {
             $('.condition-div').show();
-            $('.max-condtion').attr('required','true');
+            // $('.max-condtion').attr('required','true');
             $('.min-condtion').attr('required','true');
         } else {
-            $('.max-condtion').attr('required','false');
+            // $('.max-condtion').attr('required','false');
             $('.min-condtion').attr('required','false');
             $('.condition-div').hide();
         }

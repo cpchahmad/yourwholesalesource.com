@@ -126,9 +126,19 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label>Percentage</label>
+                                        <label>Credit Card Percentage</label>
                                         <input class="form-control" type="number" step="any" name="payment_charge_percentage" required
                                          @if($settings != null)  value="{{$settings->payment_charge_percentage}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>Paypal Percentage</label>
+                                        <input class="form-control" type="number" step="any" name="paypal_percentage" required
+                                               @if($settings != null)  value="{{$settings->paypal_percentage}}" @endif>
 
                                     </div>
                                 </div>

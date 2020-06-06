@@ -129,7 +129,7 @@
                         <div class="col-md-6">
                             <div class="block pay-options" data-toggle="modal" data-target="#alibaba_topup_modal">
                                 <div class="block-content">
-                                    <p class="text-center"> Top-up with AliBaba </p>
+                                    <p class="text-center"> Top-up with AliBaba Order </p>
                                 </div>
                             </div>
                             <div class="modal fade" id="alibaba_topup_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
@@ -152,11 +152,15 @@
                                                 <input type="hidden" value="alibaba" name="type">
                                                 <input type="hidden" value="alibaba" name="bank_name">
                                                 <div class="block-content font-size-sm">
-
+                                                    <div class="text-center" style="margin-bottom: 20px">
+                                                        <a target="_blank" href="https://www.alibaba.com/product-detail/Drop-shipping-service-with-fast-delivery_62322670218.html?spm=a2747.manage.0.0.6d6d71d2pQDQTq">
+                                                            <img style="width: 100%; max-width: 200px" src="{{asset('assets/alibaba_trademark.png')}}" alt="">
+                                                        </a>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Alibaba Order Number</label>
+                                                                <label for="material-error">Alibaba Order Number <i class="fa fa-question-circle" title="Order Number of Alibaba"></i></label>
                                                                 <input  class="form-control" type="text"  name="cheque"
                                                                         value="" required  placeholder="Enter Order Number here">
                                                             </div>
@@ -165,7 +169,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Company/Sender Title</label>
+                                                                <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of company or sender who place the order"></i></label>
                                                                 <input  class="form-control" type="text"  name="cheque_title"
                                                                         value="" required  placeholder="Enter Company/Sender Title here">
                                                             </div>
@@ -174,7 +178,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Amount</label>
+                                                                <label for="material-error">Amount <i class="fa fa-question-circle" title="Amount of Order"></i></label>
                                                                 <input required class="form-control" type="number"  name="amount"
                                                                        value=""  placeholder="Enter Top-up Amount here">
                                                             </div>
@@ -183,7 +187,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Bank Proof Copy (Optional)</label>
+                                                                <label for="material-error">Alibaba Proof Copy <i class="fa fa-question-circle" title="Proof of alibaba receipt of your order (optional)"></i></label>
                                                                 <input  class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
                                                             </div>
                                                         </div>
@@ -191,7 +195,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Notes (Optional)</label>
+                                                                <label for="material-error">Notes <i class="fa fa-question-circle" title="Optional notes according to this order"></i></label>
                                                                 <input  class="form-control" type="text"  name="notes"
                                                                         value=""   placeholder="Enter Notes here">
                                                             </div>
@@ -233,19 +237,33 @@
                                                 <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
                                                 <input type="hidden" name="type" value="bank transfer">
                                                 <div class="block-content font-size-sm">
+
+                                                    <div class="info-box">
+                                                        <p style="padding: 10px">
+                                                            BENEFICIAL NAME: Fantasy Supply Limited <i class="fa fa-question-circle" title="Fantasy Supply Limited is the mother company of Wefullfill"></i><br>
+                                                            BANK NAME: Oversea-Chinese Banking Corporation Limited Singapore<br>
+                                                            SWFIT CODE:OCBCSGSG<br>
+                                                            Bank Account: 501246136301<br>
+                                                            Bank Address: OCBC Bank,65 Chulia Street, OCBC Centre, Singapore 049513<br>
+                                                            Intermeidary Bank: JP Morgan Chase Bank, New York, USA<br>
+                                                            SWIFIT CODE:CHASUS33<br>
+
+                                                        </p>
+                                                    </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Cheque Number</label>
+                                                                <label for="material-error">Cheque Number <i class="fa fa-question-circle" title="Cheque number of the deposit (optional)"></i></label>
                                                                 <input  class="form-control" type="text"  name="cheque"
-                                                                        value="" required  placeholder="Enter Cheque Number here">
+                                                                        value=""  placeholder="Enter Cheque Number here">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Company/Sender Title</label>
+                                                                <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of Company or Sender who made this deposit"></i></label>
                                                                 <input  class="form-control" type="text"  name="cheque_title"
                                                                         value="" required  placeholder="Enter Company/Sender Title here">
                                                             </div>
@@ -254,7 +272,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Bank Name</label>
+                                                                <label for="material-error">Bank Name <i class="fa fa-question-circle" title="Name of the bank where you deposit amount"></i></label>
                                                                 <input required class="form-control" type="text"  name="bank_name"
                                                                        value=""  placeholder="Enter Bank Title here">
                                                             </div>
@@ -263,7 +281,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Amount (USD)</label>
+                                                                <label for="material-error">Amount (USD) <i class="fa fa-question-circle" title="Deposit amount in USD"></i></label>
                                                                 <input required class="form-control" type="number"  name="amount"
                                                                        value=""  placeholder="Enter Cheque Amount here">
                                                             </div>
@@ -272,7 +290,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Bank Proof Copy</label>
+                                                                <label for="material-error">Bank Proof Copy <i class="fa fa-question-circle" title="Proof of bank receipt of deposit"></i></label>
                                                                 <input required class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
                                                             </div>
                                                         </div>
@@ -280,7 +298,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Notes (Optional)</label>
+                                                                <label for="material-error">Notes <i class="fa fa-question-circle" title="Optional notes for this deposit"></i></label>
                                                                 <input  class="form-control" type="text"  name="notes"
                                                                         value=""   placeholder="Enter Notes here">
                                                             </div>
@@ -326,7 +344,12 @@
                                                 <tr>
                                                     <td class="font-w600">{{ $req->bank_name }}</td>
                                                     <td>
+                                                        @if($req->cheque != null)
                                                         {{$req->cheque}}
+                                                        @else
+                                                            <span class="text-primary-dark">No Cheque Provided</span>
+                                                            @endif
+
                                                     </td>
                                                     <td>
                                                         {{$req->cheque_title}}

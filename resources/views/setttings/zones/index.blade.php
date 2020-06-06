@@ -172,16 +172,16 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row condition-div" style="display: none">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error ">Max Condition</label>
-                                                                        <input class="form-control max-condtion" step="any" type="number" name="max">
+{{--                                                                <div class="col-sm-6">--}}
+{{--                                                                    <div class="form-material">--}}
+{{--                                                                        <label for="material-error ">Max Condition</label>--}}
+{{--                                                                        <input class="form-control max-condtion" step="any" type="number" name="max">--}}
 
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+                                                                <div class="col-sm-12">
                                                                     <div class="form-material">
-                                                                        <label for="material-error ">Min Condition</label>
+                                                                        <label for="material-error ">Unit Per Kg</label>
                                                                         <input class="form-control min-condtion " step="any" type="number" name="min">
 
                                                                     </div>
@@ -224,7 +224,7 @@
                                                 </td>
                                                 <td class="font-w600" style="vertical-align: top"> Type: {{ str_replace('_',' ',$rate->type)  }}</td>
                                                 <td style="vertical-align: top">
-                                                    Condition: @if($rate->type == 'flat') None @elseif($rate->type == 'order_price') {{$rate->min}} - {{$rate->max}} $ @else  {{$rate->min}} - {{$rate->max}} Kgs @endif
+                                                    Condition: @if($rate->type == 'flat') None @elseif($rate->type == 'order_price') {{$rate->min}}  @else  {{$rate->min}}  Kgs @endif
                                                 </td>
                                                 <td style="width: 25%;vertical-align: top" >
                                                     <p>Shipping Time : {{$rate->shipping_time}}<br>
@@ -293,20 +293,20 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row condition-div" @if($rate->type == 'flat') style="display: none" @endif>
-                                                                        <div class="col-sm-6">
+                                                                        <div class="col-sm-12">
                                                                             <div class="form-material">
-                                                                                <label for="material-error ">Min Condition</label>
+                                                                                <label for="material-error ">Unit Per Kg</label>
                                                                                 <input class="form-control min-condtion " step="any" @if($rate->type != 'flat') required @endif value="{{$rate->min}}" type="number" name="min">
 
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div class="form-material">
-                                                                                <label for="material-error ">Max Condition</label>
-                                                                                <input class="form-control max-condtion" step="any" @if($rate->type != 'flat') required @endif value="{{$rate->max}}" type="number" name="max">
+{{--                                                                        <div class="col-sm-6">--}}
+{{--                                                                            <div class="form-material">--}}
+{{--                                                                                <label for="material-error ">Max Condition</label>--}}
+{{--                                                                                <input class="form-control max-condtion" step="any" @if($rate->type != 'flat') required @endif value="{{$rate->max}}" type="number" name="max">--}}
 
-                                                                            </div>
-                                                                        </div>
+{{--                                                                            </div>--}}
+{{--                                                                        </div>--}}
                                                                     </div>
                                                                     <div class="form-group row ">
                                                                         <div class="col-sm-6">

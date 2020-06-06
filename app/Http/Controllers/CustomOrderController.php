@@ -442,10 +442,13 @@ class CustomOrderController extends Controller
 
             $temp_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->where('status',0)->get();
 
+            $settings = AdminSetting::all()->first();
+
             return view('non_shopify_users.orders.processed')->with([
                 'orders' => $custom_orders->get(),
                 'data' => $temp_data,
-                'file' => $new_file
+                'file' => $new_file,
+                'settings' =>$settings
             ]);
         }
         else{
@@ -468,17 +471,19 @@ class CustomOrderController extends Controller
         });
 
         $temp_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->where('status',0)->get();
-
+        $settings = AdminSetting::all()->first();
         return view('non_shopify_users.orders.processed')->with([
             'orders' => $custom_orders->get(),
             'data' => $temp_data,
-            'file' => $new_file
+            'file' => $new_file,
+            'settings' =>$settings
         ]);
     }
 
 
     public function bulk_import_order_paypal(Request $request){
         $new_file = UserFile::find($request->id);
+        $setting = AdminSetting::all()->first();
         $custom_orders = RetailerOrder::where('user_id',Auth::id())->where('custom',1)->where('paid',0)->newQuery();
         $custom_orders->whereHas('imported',function ($q) use ($new_file){
             $q->where('file_id','=',$new_file->id);
@@ -505,6 +510,16 @@ class CustomOrderController extends Controller
                         'qty' =>1
                     ]);
                 }
+                if($setting != null){
+                    if($setting->payment_charge_percentage != null){
+                        $order_total = $order_total + (number_format($retailer_order->cost_to_pay*$setting->paypal_percentage/100,2));
+                        array_push($items,[
+                            'name' => 'WeFullFill Charges('.$setting->paypal_percentage.'%)',
+                            'price' => number_format($retailer_order->cost_to_pay*$setting->paypal_percentage/100,2),
+                            'qty' =>1
+                        ]);
+                    }
+                }
             }
 
 
@@ -517,7 +532,9 @@ class CustomOrderController extends Controller
             $data['total'] = $order_total;
 
             $provider = new ExpressCheckout;
+
             $response = $provider->setExpressCheckout($data);
+
             foreach ($custom_orders as $retailer_order){
                 $retailer_order->paypal_token  = $response['TOKEN'];
                 $retailer_order->save();

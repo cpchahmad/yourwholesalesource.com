@@ -185,43 +185,34 @@
                                     Subtotal ({{count($order->line_items)}} items)
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->subtotal_price,2)}} {{$order->currency}}
+                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} {{$order->currency}}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Total
+                                    Shipping Price
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->total_price,2)}} {{$order->currency}}
+                                    {{number_format($order->shipping_price,2)}} {{$order->currency}}
                                 </td>
                             </tr>
+
                             <tr>
                                 <td>
-                                    Cost @if($order->paid == 0) to Pay @else Paid @endif
+                                    Total Cost @if($order->paid == 0) to Pay @endif
                                 </td>
                                 <td align="right">
                                     {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
                                 </td>
-
                             </tr>
-                            <tr>
-                                <td>
-                                   WeFullFill Charges ({{$settings->payment_charge_percentage}}%)
-                                    <p class="text-primary" style="font-size: 11px"> Only Applicable on Card and Paypal Payment </p>
-                                </td>
-                                <td align="right">
-                                    {{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} {{$order->currency}}
-                                </td>
-                            </tr>
-
                             <tr>
                                 <td></td>
                                 <td align="right">
                                     @if($order->paid == 0)
                                         <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
 
-                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->payment_charge_percentage/100),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+
                                         <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
                                     @endif

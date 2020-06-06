@@ -48,12 +48,12 @@ class PaypalController extends Controller
 
          if($setting != null){
              if($setting->payment_charge_percentage != null){
-                 $order_total = $order_total + ($retailer_order->cost_to_pay*$setting->payment_charge_percentage/100);
-                     array_push($items,[
-                         'name' => 'WeFullFill Charges('.$setting->payment_charge_percentage.'%)',
-                         'price' => $retailer_order->cost_to_pay*$setting->payment_charge_percentage/100,
-                         'qty' =>1
-                     ]);
+                 $order_total = $order_total + (number_format($retailer_order->cost_to_pay*$setting->paypal_percentage/100,2));
+                 array_push($items,[
+                     'name' => 'WeFullFill Charges('.$setting->paypal_percentage.'%)',
+                     'price' => number_format($retailer_order->cost_to_pay*$setting->paypal_percentage/100,2),
+                     'qty' =>1
+                 ]);
              }
          }
          $data = [];

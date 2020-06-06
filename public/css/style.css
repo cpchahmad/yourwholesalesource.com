@@ -161,7 +161,7 @@ div.tagsinput span.tag a {
     color: white;
 }
 .description-title {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 700;
     margin-bottom: 30px;
 }
@@ -228,4 +228,8 @@ div.tagsinput span.tag a {
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
     color: white;
+}
+.info-box{
+    border: 2px solid darkgrey;
+    margin-bottom: 15px;
 }

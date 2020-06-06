@@ -204,7 +204,7 @@
                                     Subtotal ({{count($order->line_items)}} items)
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->subtotal_price,2)}} {{$order->currency}}
+                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} {{$order->currency}}
                                 </td>
                             </tr>
                             <tr>
@@ -215,25 +215,15 @@
                                     {{number_format($order->shipping_price,2)}} {{$order->currency}}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    Total
-                                </td>
-                                <td align="right">
-                                    {{number_format($order->total_price,2)}} {{$order->currency}}
-                                </td>
-                            </tr>
 
                             <tr>
                                 <td>
-                                    Cost Paid
+                                    Total Cost
                                 </td>
                                 <td align="right">
                                     {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
                                 </td>
                             </tr>
-
-
                             </tbody>
 
 
