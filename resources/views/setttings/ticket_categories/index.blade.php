@@ -33,7 +33,7 @@
                             <table class="table table-hover table-borderless table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th style="width: 30px;">#</th>
+
                                     <th >Title</th>
                                     <th>Color</th>
                                     <th></th>
@@ -43,9 +43,7 @@
                                 @foreach($categories as $index => $category)
                                     <tbody class="">
                                     <tr>
-                                        <td class="text-center">
-                                           {{$index+1}}
-                                        </td>
+
                                         <td class="font-w600">{{ $category->name }}</td>
                                         <td>
                                            {{$category->color}}

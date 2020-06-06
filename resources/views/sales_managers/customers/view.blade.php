@@ -63,7 +63,7 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+
                                     <th>Name</th>
                                     <th>Order Date</th>
                                     <th>Price</th>
@@ -76,7 +76,7 @@
                                 @foreach($customer->has_orders as $index => $order)
 
                                     <tr>
-                                        <td>{{$index+1}}</td>
+
                                         <td class="font-w600"><a href="{{route('sales_managers.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>
                                             @if($order->custom == 1)

@@ -69,7 +69,7 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+
                                     <th>Title</th>
                                     <th>Source</th>
                                     <th>Manager</th>
@@ -85,7 +85,7 @@
                                 @foreach($tickets as $index => $ticket)
                                     <tbody class="">
                                     <tr>
-                                        <td>{{$index+1}}</td>
+
                                         <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
                                         <td>
                                             @if($ticket->source == 'store') {{explode('.',$ticket->email)[0]}} @else {{$ticket->has_user->name}}  @endif   <span class="badge badge-primary">{{$ticket->source}}</span>

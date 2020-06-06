@@ -23,7 +23,7 @@
                 <table class="js-table-sections table table-hover">
                     <thead>
                     <tr>
-                        <th style="width: 30px;">#</th>
+
                         <th>Title</th>
                         <th>Domain</th>
                         <th></th>
@@ -34,9 +34,7 @@
                     <tbody>
                     @foreach($shops as $index => $shop)
                         <tr>
-                            <td class="text-center" style="vertical-align: middle">
-                                {{ $index+1 }}
-                            </td>
+
                             <td class="font-w600" style="vertical-align: middle">
                                 {{explode('.',$shop->shopify_domain)[0]}}
                             </td>

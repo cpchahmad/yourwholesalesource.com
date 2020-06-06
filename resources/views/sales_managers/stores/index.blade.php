@@ -25,7 +25,7 @@
                     <table class="table table-hover table-borderless table-striped table-vcenter">
                         <thead>
                         <tr>
-                            <th>#</th>
+
                             <th>Title</th>
                             <th>Shopify Domain</th>
                             <th>Imported Products</th>
@@ -37,7 +37,7 @@
                         <tbody class="">
                         @foreach($stores as $index => $store)
                             <tr>
-                                <td>{{$index+1}}</td>
+
                                 <td class="font-w600">{{ explode('.',$store->shopify_domain)[0]}}</td>
                                 <td>
                                     <span class="badge badge-primary">{{$store->shopify_domain}}</span>

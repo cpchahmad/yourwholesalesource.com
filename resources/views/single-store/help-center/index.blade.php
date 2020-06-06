@@ -42,7 +42,7 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+
                                         <th>Title</th>
                                         <th>Store</th>
                                         <th>Priority</th>
@@ -57,7 +57,7 @@
                                     @foreach($tickets as $index => $ticket)
                                         <tbody class="">
                                         <tr>
-                                            <td>{{$index+1}}</td>
+
                                             <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
                                             <td>
                                               {{$ticket->email}}

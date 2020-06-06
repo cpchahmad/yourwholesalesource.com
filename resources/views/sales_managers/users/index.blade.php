@@ -25,7 +25,7 @@
                     <table class="table table-hover table-borderless table-striped table-vcenter">
                         <thead>
                         <tr>
-                            <th>#</th>
+
                             <th>Title</th>
                             <th>Email</th>
                             <th>Imported Files</th>
@@ -37,7 +37,7 @@
                         <tbody class="">
                         @foreach($users as $index => $user)
                             <tr>
-                                <td>{{$index+1}}</td>
+
                                 <td class="font-w600">{{$user->name}}</td>
                                 <td>
                                     <span class="badge badge-primary">{{$user->email}}</span>

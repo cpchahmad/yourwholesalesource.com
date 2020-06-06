@@ -16,7 +16,7 @@
         <thead>
         <tr>
             <td></td>
-            <td>Rate</td>
+            <td></td>
             <td>Estimated Delivery Time</td>
             <td>Shipping Price</td>
         </tr>

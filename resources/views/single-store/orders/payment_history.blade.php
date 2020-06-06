@@ -26,7 +26,7 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+
                                     <th>Order</th>
                                     <th style="width: 10%">Payer</th>
                                     <th>Amount</th>
@@ -39,7 +39,7 @@
                                 @foreach($payments as $index => $payment)
                                     <tbody class="">
                                     <tr>
-                                        <td>{{$index+1}}</td>
+
                                         <td class="font-w600"> @if($payment->has_order)<a href="{{route('store.order.view',$payment->has_order->id)}}">{{ $payment->has_order->name }}</a> @else Order Details Deleted @endif</td>
                                         <td>
                                             {{$payment->name}}

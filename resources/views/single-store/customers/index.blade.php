@@ -42,7 +42,7 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Total Orders</th>
@@ -59,7 +59,7 @@
                                 @foreach($customers as $index => $customer)
                                     <tbody class="">
                                     <tr>
-                                        <td>{{$index+1}}</td>
+
                                         <td class="font-w600"><a href="{{route('store.customer.view',$customer->id)}}">{{ $customer->first_name }} {{$customer->last_name}}</a></td>
                                         <td>
                                             {{$customer->email}}

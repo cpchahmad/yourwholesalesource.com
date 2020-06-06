@@ -29,7 +29,7 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th>#</th>
+
                                     <th>Name</th>
                                     <th>Order Date</th>
                                     <th>Cost</th>
@@ -44,7 +44,7 @@
                                         <td class="text-center">
                                             <i class="fa fa-angle-right text-muted"></i>
                                         </td>
-                                        <td>{{$index+1}}</td>
+
                                         <td class="font-w600"><a href="{{route('users.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>
                                             {{date_create($order->shopify_created_at)->format('D m, Y h:i a') }}

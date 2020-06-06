@@ -52,7 +52,7 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+
                                     <th>Product</th>
                                     <th>Cost</th>
                                     <th>Source</th>
@@ -67,7 +67,7 @@
                                 @foreach($wishlist as $index => $item)
                                     <tbody class="">
                                     <tr>
-                                        <td>{{$index+1}}</td>
+
                                         <td class="font-w600"><a href="">{{ $item->product_name }}</a></td>
                                         <td>{{number_format($item->cost,2)}} USD</td>
                                         <td>
