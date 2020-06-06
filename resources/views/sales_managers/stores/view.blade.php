@@ -218,7 +218,7 @@
                                         <tbody class="">
                                         <tr>
 
-                                            <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
+                                            <td class="font-w600"><a href="{{route('sales_managers.ticket.view',$ticket->id)}}">{{ $ticket->title }}</a></td>
                                             <td>
                                                 <span class="badge @if($ticket->priority == 'low') badge-primary @elseif($ticket->priority == 'medium') badge-warning @else badge-danger @endif" >{{$ticket->priority}}</span>
 

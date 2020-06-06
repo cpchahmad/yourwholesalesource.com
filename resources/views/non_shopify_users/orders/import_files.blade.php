@@ -31,7 +31,6 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>File</th>
                                     <th>Date</th>
                                     <th></th>
@@ -41,7 +40,6 @@
                                 @foreach($files as $index => $file)
                                     <tbody class="">
                                     <tr>
-                                        <td>{{$index+1}}</td>
                                         <td>{{$file->file}}</td>
                                         <td>{{date_create($file->created_at)->format('d m, Y - h:i a')}}</td>
                                       <td align="right">

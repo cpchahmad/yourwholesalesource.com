@@ -419,7 +419,6 @@
                                             @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
                                                 <tbody class="">
                                                 <tr>
-
                                                     <td>
                                                         {{$req->cheque_title}}
                                                     </td>

@@ -76,7 +76,7 @@
                                     <tbody class="">
                                     <tr>
 
-                                        <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
+                                        <td class="font-w600"><a href="{{route('sales_managers.ticket.view',$ticket->id)}}">{{ $ticket->title }}</a></td>
                                         <td>
                                             {{$ticket->email}}
                                         </td>

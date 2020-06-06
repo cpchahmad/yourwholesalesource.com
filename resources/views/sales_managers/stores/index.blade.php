@@ -38,7 +38,7 @@
                         @foreach($stores as $index => $store)
                             <tr>
 
-                                <td class="font-w600">{{ explode('.',$store->shopify_domain)[0]}}</td>
+                                <td class="font-w600"><a href="{{route('sales_managers.stores.view',$store->id)}}">{{ explode('.',$store->shopify_domain)[0]}}</a></td>
                                 <td>
                                     <span class="badge badge-primary">{{$store->shopify_domain}}</span>
                                 </td>

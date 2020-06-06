@@ -42,8 +42,7 @@
                                 @foreach($users as $index => $user)
                                     <tbody class="">
                                     <tr>
-
-                                        <td class="font-w600">{{ $user->name }}</td>
+                                        <td class="font-w600">  <a href="{{route('sales_managers.wallets.detail',$user->has_wallet->id)}}"> {{ $user->name }}</a></td>
                                         <td>
                                            {{$user->email}}
                                         </td>

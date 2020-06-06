@@ -67,7 +67,7 @@
                                     <tbody class="">
                                     <tr>
 
-                                        <td class="font-w600"><a href="">{{ $item->product_name }}</a></td>
+                                        <td class="font-w600"><a href="{{route('sales_managers.wishlist.view',$item->id)}}">{{ $item->product_name }}</a></td>
                                         <td>{{number_format($item->cost,2)}} USD</td>
                                         <td>
                                             @if($item->has_user != null)

@@ -39,7 +39,7 @@
                         @foreach($users as $index => $user)
                             <tr>
 
-                                <td class="font-w600">{{$user->name}}</td>
+                                <td class="font-w600"><a href="{{route('users.view',$user->id)}}">{{$user->name}}</a></td>
                                 <td>
                                     <span class="badge badge-primary">{{$user->email}}</span>
                                 </td>
