@@ -16,7 +16,6 @@
         <thead>
         <tr>
             <td></td>
-            <td></td>
             <td>Estimated Delivery Time</td>
             <td>Shipping Price</td>
         </tr>
@@ -25,7 +24,6 @@
         @foreach($rates as $rate)
             <tr>
                 <td><input type="radio" class="shipping_price_radio" data-country="{{$selected}}" name="shipping_price" data-price="${{number_format($rate->shipping_price,2)}}"></td>
-                <td> {{$rate->name}}</td>
                 <td>{{$rate->shipping_time}}</td>
                 <td>${{number_format($rate->shipping_price,2)}}</td>
             </tr>
