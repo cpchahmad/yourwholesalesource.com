@@ -12,7 +12,7 @@
 </div>
 
 @if(count($rates) > 0)
-    <table class="table table-vcenter table-hover table-striped  table-responsive">
+    <table class="table table-vcenter table-hover table-striped">
         <thead>
         <tr>
             <td></td>
