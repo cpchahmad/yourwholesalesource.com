@@ -241,6 +241,9 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/wishlist/accepted', 'WishlistController@accept_wishlist')->name('wishlist.accept');
         Route::post('/wishlist/approved', 'WishlistController@approve_wishlist')->name('wishlist.approve');
         Route::post('/wishlist/completed', 'WishlistController@completed_wishlist')->name('wishlist.completed');
+        Route::post('/wishlist/completed/map_product', 'WishlistController@map_product')->name('wishlist.completed.map_product');
+
+
         Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
 
 

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\ManagerLog;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\User;
+use App\WarnedPlatform;
 use App\Wishlist;
 use App\WishlistAttachment;
 use App\WishlistThread;
@@ -183,17 +185,28 @@ class WishlistController extends Controller
         $wish = Wishlist::find($request->input('wishlist_id'));
         if($manager != null && $wish != null){
             if($wish->has_store_product == 1){
-               $related_product_id = $this->import_to_store($wish);
-               if($related_product_id != null){
-                   $wish->status_id = 5;
-                   $wish->related_product_id = $related_product_id;
-                   $wish->updated_at = now();
-                   $wish->save();
-                   return redirect()->back()->with('success','Wishlist Completed Successfully!');
+               if($this->check_product($wish,$request->input('product_shopify_id'))){
+                 $response = $this->fetch_product($wish,$request->input('product_shopify_id'));
+                if(!$response->errors){
+                    $categories = Category::latest()->get();
+                    $platforms = WarnedPlatform::all();
+                    return view('sales_managers.wishlist.map_product')->with([
+                        'product' => $response->body->product,
+                        'wishlist' => $wish,
+                        'product_shopify_id' => $request->input('product_shopify_id'),
+                        'categories' => $categories,
+                        'platforms' => $platforms
+                    ]);
+                }
+                else{
+                    return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
+                }
+
                }
                else{
                    return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
                }
+
 
             }
             else{
@@ -211,93 +224,140 @@ class WishlistController extends Controller
         }
     }
 
+    public function check_product(Wishlist $wishlist,$shopify_product_id){
+        $response = $this->fetch_product($wishlist, $shopify_product_id);
+        if(!$response->errors){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
 
-    public function import_to_store(Wishlist $wishlist){
-        $shop = $this->helper->getSpecificShop($wishlist->has_store->id);
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$wishlist->product_shopify_id.'.json');
+    public function map_product(Request $request){
+        dd($request);
+    }
+
+//    public function setCompleted(){
+//        $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'));
+//        if($related_product_id != null){
+//            $wish->status_id = 5;
+//            $wish->related_product_id = $related_product_id;
+//            $wish->updated_at = now();
+//            $wish->save();
+//            return redirect()->back()->with('success','Wishlist Completed Successfully!');
+//        }
+//        else{
+//            return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
+//        }
+//    }
+
+    public function import_to_store(Wishlist $wishlist,$shopify_product_id){
+        $response = $this->fetch_product($wishlist, $shopify_product_id);
         if(!$response->errors){
 
             $product = $response->body->product;
-            $retailerProduct = new RetailerProduct();
-            $retailerProduct->shopify_id = $product->id;
-            $retailerProduct->title = $product->title;
-            $retailerProduct->description = $product->body_html;
-            $retailerProduct->type = $product->product_type;
-            $retailerProduct->tags = $product->tags;
-            $retailerProduct->vendor = $product->vendor;
-            $retailerProduct->price = $wishlist->approved_price;
-            $retailerProduct->cost = $wishlist->approved_price;
-
-            if(count($product->variants) > 0){
-                $retailerProduct->variants = 1;
-            }
-            $retailerProduct->status = 1;
-            $retailerProduct->fulfilled_by = 'Fantasy';
-            $retailerProduct->toShopify = 1;
-            $retailerProduct->shop_id = $wishlist->shop_id;
-            $retailerProduct->import_from_shopify = 1;
-            $retailerProduct->save();
-
-            /*Product Images SYNC*/
-            if(count($product->images) > 0){
-                foreach ($product->images as $index => $image){
-                    $retailerProductImage = new RetailerImage();
-                    if(count($image->variant_ids) > 0){
-                        $retailerProductImage->isV = 1;
-                    }
-                    else{
-                        $retailerProductImage->isV = 0;
-                    }
-                    $retailerProductImage->shopify_id = $image->id;
-                    $retailerProductImage->product_id = $retailerProduct->id;
-                    $retailerProductImage->shop_id =  $wishlist->shop_id;
-                    $retailerProductImage->image = $image->src;
-                    $retailerProductImage->position = $image->position;
-                    $retailerProductImage->save();
-                }
-            }
-            /*Product Variants SYNC*/
-
-            if(count($product->variants) > 0){
-                foreach ($product->variants as $index => $variant){
-                    $retailerProductVariant = new RetailerProductVariant();
-                    $retailerProductVariant->shopify_id = $variant->id;
-                    $retailerProductVariant->title = $variant->title;
-                    $retailerProductVariant->option1 = $variant->option1;
-                    $retailerProductVariant->option2 = $variant->option2;
-                    $retailerProductVariant->option3 = $variant->option3;
-                    $retailerProductVariant->price = $wishlist->approved_price;
-                    $retailerProductVariant->cost = $wishlist->approved_price;
-                    $retailerProductVariant->quantity = $variant->inventory_quantity;
-                    $retailerProductVariant->sku = $variant->sku;
-                    $retailerProductVariant->barcode = $variant->barcode;
-                    $retailerProductVariant->product_id = $retailerProduct->id;
-                    $retailerProductVariant->shop_id =  $wishlist->shop_id;
-
-                    if($variant->image_id != null){
-                        $image_linked = $retailerProduct->has_images()->where('shopify_id',$variant->image_id)->first();
-                        $retailerProductVariant->image =$image_linked->id;
-                    }
-
-                    if($index == 0){
-                        $retailerProduct->quantity = $variant->inventory_quantity;
-                        $retailerProduct->weight = $variant->weight;
-                        $retailerProduct->sku = $variant->sku;
-                        $retailerProduct->barcode = $variant->barcode;
-                        $retailerProduct->save();
-                    }
-
-                    $retailerProductVariant->save();
-                }
-            }
-
-            return $retailerProduct->id;
+            return $this->map_to_retailer_product($wishlist, $product);
         }
         else{
             return null;
         }
 
 
+    }
+
+    /**
+     * @param Wishlist $wishlist
+     * @param $product
+     * @return mixed
+     */
+    public function map_to_retailer_product(Wishlist $wishlist, $product): mixed
+    {
+        $retailerProduct = new RetailerProduct();
+        $retailerProduct->shopify_id = $product->id;
+        $retailerProduct->title = $product->title;
+        $retailerProduct->description = $product->body_html;
+        $retailerProduct->type = $product->product_type;
+        $retailerProduct->tags = $product->tags;
+        $retailerProduct->vendor = $product->vendor;
+        $retailerProduct->price = $wishlist->approved_price;
+        $retailerProduct->cost = $wishlist->approved_price;
+
+        if (count($product->variants) > 0) {
+            $retailerProduct->variants = 1;
+        }
+        $retailerProduct->status = 1;
+        $retailerProduct->fulfilled_by = 'Fantasy';
+        $retailerProduct->toShopify = 1;
+        $retailerProduct->shop_id = $wishlist->shop_id;
+        $retailerProduct->import_from_shopify = 1;
+        $retailerProduct->save();
+
+        /*Product Images SYNC*/
+        if (count($product->images) > 0) {
+            foreach ($product->images as $index => $image) {
+                $retailerProductImage = new RetailerImage();
+                if (count($image->variant_ids) > 0) {
+                    $retailerProductImage->isV = 1;
+                } else {
+                    $retailerProductImage->isV = 0;
+                }
+                $retailerProductImage->shopify_id = $image->id;
+                $retailerProductImage->product_id = $retailerProduct->id;
+                $retailerProductImage->shop_id = $wishlist->shop_id;
+                $retailerProductImage->image = $image->src;
+                $retailerProductImage->position = $image->position;
+                $retailerProductImage->save();
+            }
+        }
+        /*Product Variants SYNC*/
+
+        if (count($product->variants) > 0) {
+            foreach ($product->variants as $index => $variant) {
+                $retailerProductVariant = new RetailerProductVariant();
+                $retailerProductVariant->shopify_id = $variant->id;
+                $retailerProductVariant->title = $variant->title;
+                $retailerProductVariant->option1 = $variant->option1;
+                $retailerProductVariant->option2 = $variant->option2;
+                $retailerProductVariant->option3 = $variant->option3;
+                $retailerProductVariant->price = $wishlist->approved_price;
+                $retailerProductVariant->cost = $wishlist->approved_price;
+                $retailerProductVariant->quantity = $variant->inventory_quantity;
+                $retailerProductVariant->sku = $variant->sku;
+                $retailerProductVariant->barcode = $variant->barcode;
+                $retailerProductVariant->product_id = $retailerProduct->id;
+                $retailerProductVariant->shop_id = $wishlist->shop_id;
+
+                if ($variant->image_id != null) {
+                    $image_linked = $retailerProduct->has_images()->where('shopify_id', $variant->image_id)->first();
+                    $retailerProductVariant->image = $image_linked->id;
+                }
+
+                if ($index == 0) {
+                    $retailerProduct->quantity = $variant->inventory_quantity;
+                    $retailerProduct->weight = $variant->weight;
+                    $retailerProduct->sku = $variant->sku;
+                    $retailerProduct->barcode = $variant->barcode;
+                    $retailerProduct->save();
+                }
+
+                $retailerProductVariant->save();
+            }
+        }
+
+        return $retailerProduct->id;
+    }
+
+    /**
+     * @param Wishlist $wishlist
+     * @param $shopify_product_id
+     * @return mixed
+     */
+    public function fetch_product(Wishlist $wishlist, $shopify_product_id)
+    {
+        $shop = $this->helper->getSpecificShop($wishlist->has_store->id);
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $shopify_product_id . '.json');
+        return $response;
     }
 
 

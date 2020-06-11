@@ -155,6 +155,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            @else
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Product Already at Store (Shopify Product ID)</label>
+                                                                        <input  class="form-control" type="text" name="product_shopify_id" value="{{$wishlist->product_shopify_id}}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         @endif
 
                                                     </div>
