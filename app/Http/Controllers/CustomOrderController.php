@@ -76,7 +76,14 @@ class CustomOrderController extends Controller
             $shipping_rates->whereRaw('max >='.$total_weight);
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
-                $rate = $shipping_rates->shipping_price;
+                if($shipping_rates->min > 0){
+                    $ratio = $total_weight/$shipping_rates->min;
+                    $rate = $shipping_rates->shipping_price*$ratio;
+
+                }
+                else{
+                    $rate = 0;
+                }
             }
             else{
                 $rate = 0;

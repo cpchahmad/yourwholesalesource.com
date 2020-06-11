@@ -310,10 +310,22 @@ class SingleStoreController extends Controller
         $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
         $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
-        $shipping_rates->whereRaw('min <='.$total_weight);
-        $shipping_rates->whereRaw('max >='.$total_weight);
+//        $shipping_rates->whereRaw('min <='.$total_weight);
+//        $shipping_rates->whereRaw('max >='.$total_weight);
 
         $shipping_rates =  $shipping_rates->get();
+
+        foreach ($shipping_rates as $shipping_rate){
+            if($shipping_rate->min > 0){
+                $ratio = $total_weight/$shipping_rate->min;
+                $shipping_rate->shipping_price =  $shipping_rate->shipping_price*$ratio;
+            }
+            else{
+                $ratio = 0;
+                $shipping_rate->shipping_price =  $shipping_rate->shipping_price*$ratio;
+            }
+
+        }
 
         $html = view('inc.calculate_shipping')->with([
             'countries' => Country::all(),
