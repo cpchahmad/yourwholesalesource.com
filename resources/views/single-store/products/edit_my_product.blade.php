@@ -51,7 +51,7 @@
                                 @if($product->import_from_shopify == 1)
                                     <a class="img-link img-link-zoom-in img-lightbox" href="{{$images[0]->image}}">
                                         <img class="img-fluid" src="{{$images[0]->image}}" alt="">
-                                    </a>>
+                                    </a>
                                 @else
                                 @if($images[0]->isV == 0)
                                     <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
