@@ -302,7 +302,7 @@ class WishlistController extends Controller
         $response = $this->fetch_product($wishlist, $shopify_product_id);
         if(!$response->errors){
             $product = $response->body->product;
-            return $this->map_to_retailer_product($wishlist, $product,$linked_product_id);
+            return $this->map_to_retailer_product($wishlist,$product,$linked_product_id);
         }
         else{
             return null;
@@ -315,7 +315,7 @@ class WishlistController extends Controller
     public function map_to_retailer_product(Wishlist $wishlist, $product,$linked_product_id)
     {
         if (RetailerProduct::where('shopify_id', $product->id)->exists()) {
-            $product = Product::where('shopify_id', $product->id)->first();
+            $retailerProduct = RetailerProduct::where('shopify_id', $product->id)->first();
         } else {
             $retailerProduct = new RetailerProduct();
         }
