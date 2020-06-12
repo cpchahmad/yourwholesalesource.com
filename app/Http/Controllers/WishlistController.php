@@ -188,27 +188,27 @@ class WishlistController extends Controller
         $wish = Wishlist::find($request->input('wishlist_id'));
         if($manager != null && $wish != null){
             if($wish->has_store_product == 1){
-               if($this->check_product($wish,$request->input('product_shopify_id'))){
-                 $response = $this->fetch_product($wish,$request->input('product_shopify_id'));
-                if(!$response->errors){
-                    $categories = Category::latest()->get();
-                    $platforms = WarnedPlatform::all();
-                    return view('sales_managers.wishlist.map_product')->with([
-                        'product' => $response->body->product,
-                        'wishlist' => $wish,
-                        'product_shopify_id' => $request->input('product_shopify_id'),
-                        'categories' => $categories,
-                        'platforms' => $platforms
-                    ]);
+                if($this->check_product($wish,$request->input('product_shopify_id'))){
+                    $response = $this->fetch_product($wish,$request->input('product_shopify_id'));
+                    if(!$response->errors){
+                        $categories = Category::latest()->get();
+                        $platforms = WarnedPlatform::all();
+                        return view('sales_managers.wishlist.map_product')->with([
+                            'product' => $response->body->product,
+                            'wishlist' => $wish,
+                            'product_shopify_id' => $request->input('product_shopify_id'),
+                            'categories' => $categories,
+                            'platforms' => $platforms
+                        ]);
+                    }
+                    else{
+                        return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
+                    }
+
                 }
                 else{
                     return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
                 }
-
-               }
-               else{
-                   return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
-               }
 
 
             }
@@ -276,12 +276,8 @@ class WishlistController extends Controller
 
     }
 
-    /**
-     * @param Wishlist $wishlist
-     * @param $product
-     * @return mixed
-     */
-    public function map_to_retailer_product(Wishlist $wishlist, $product,$linked_product_id): mixed
+
+    public function map_to_retailer_product(Wishlist $wishlist, $product,$linked_product_id)
     {
         $retailerProduct = new RetailerProduct();
         $retailerProduct->shopify_id = $product->id;
@@ -513,21 +509,21 @@ class WishlistController extends Controller
 
         }
         $count_product_images = count($product->has_images);
-        if (!$response->errors) {
-            $shopify_product = $response->body->product;
-            foreach ($shopify_product->images as $index => $image) {
-                $image = file_get_contents($image->src);
-                $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . 'jpg';
-                file_put_contents(public_path('images/' . $filename), $image);
-                $image = new Image();
-                $image->isV = 0;
-                $image->position = $index + 1 + $count_product_images;
-                $image->product_id = $product->id;
-                $image->image = $filename;
-                $image->save();
-            }
 
+        $shopify_product = $response->body->product;
+        foreach ($shopify_product->images as $index => $image) {
+            $image = file_get_contents($image->src);
+            $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . 'jpg';
+            file_put_contents(public_path('images/' . $filename), $image);
+            $image = new Image();
+            $image->isV = 0;
+            $image->position = $index + 1 + $count_product_images;
+            $image->product_id = $product->id;
+            $image->image = $filename;
+            $image->save();
         }
+
+
 
         /*Import to WeFullFill Store*/
         $variants_array = [];
