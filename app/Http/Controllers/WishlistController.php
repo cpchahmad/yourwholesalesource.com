@@ -251,7 +251,7 @@ class WishlistController extends Controller
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
                 $wish->save();
-                return redirect()->back()->with('success','Wishlist Completed Successfully!');
+                return redirect()->route('sales_managers.wishlist')->with('success','Wishlist Completed Successfully!');
             }
             else{
                 return redirect()->route('sales_managers.wishlist')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');

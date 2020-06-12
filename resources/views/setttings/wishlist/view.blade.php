@@ -147,10 +147,21 @@
                                                                     <div class="form-material">
                                                                         <label for="material-error">Wishlist Product</label>
                                                                         <select name="link_product_id" style="width: 100%;" data-placeholder="Choose Reference Product" required class="form-control js-select2">
+                                                                            <option ></option>
                                                                             @foreach($products as $product)
                                                                                 <option value="{{$product->id}}">{{$product->title}}</option>
                                                                             @endforeach
                                                                         </select>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Product Already at Store (Shopify Product ID)</label>
+                                                                        <input  class="form-control" type="text" name="product_shopify_id" value="{{$wishlist->product_shopify_id}}">
 
                                                                     </div>
                                                                 </div>
