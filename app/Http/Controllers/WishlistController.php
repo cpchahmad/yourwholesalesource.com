@@ -251,15 +251,37 @@ class WishlistController extends Controller
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
                 $wish->save();
-                return redirect()->route('sales_managers.wishlist')->with('success','Wishlist Completed Successfully!');
+                if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                    return redirect()->route('wishlist.index')->with('success','Wishlist Completed Successfully!');
+
+                }
+                else{
+                    return redirect()->route('sales_managers.wishlist')->with('success','Wishlist Completed Successfully!');
+                }
+
             }
             else{
-                return redirect()->route('sales_managers.wishlist')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');
+                if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                    return redirect()->route('wishlist.index')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');
+
+                }
+                else{
+                    return redirect()->route('sales_managers.wishlist')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');
+
+                }
 
             }
         }
         else{
-            return redirect()->route('sales_managers.wishlist')->with('errors','Wishlist Not Found!');
+            if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                return redirect()->route('wishlist.index')->with('errors','Wishlist Not Found!');
+
+            }
+            else{
+                return redirect()->route('sales_managers.wishlist')->with('errors','Wishlist Not Found!');
+
+
+            }
         }
     }
 
