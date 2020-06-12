@@ -252,7 +252,7 @@
                                 </div>
                             @else
                                 <div class="variants_table">
-
+                                    <input type="hidden" name="variants" value="1">
                                     <div class="form-group">
                                         <div class="col-xs-12 push-10">
                                             <table class="table table-hover table-responsive">

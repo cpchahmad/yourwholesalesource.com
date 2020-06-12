@@ -30,6 +30,9 @@ class HelperController extends Controller
         $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
         return Shop::where('shopify_domain',$current_shop->shopify_domain)->first();
     }
+    public function getAdminShop(){
+        return Shop::where('shopify_domain','wefullfill.myshopify.com')->first();
+    }
     public function getLocalShop(){
         /*Ossiset Shop Model*/
         $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();

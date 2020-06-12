@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Image;
 use App\ManagerLog;
+use App\Product;
+use App\ProductVariant;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
@@ -235,29 +238,36 @@ class WishlistController extends Controller
     }
 
     public function map_product(Request $request){
-        dd($request);
+
+        $wish = Wishlist::find($request->input('wishlist_id'));
+        $response = $this->fetch_product($wish,$request->input('product_shopify_id'));
+        if($wish !=null ){
+            if(!$response->errors){
+                /*Create and Synced Product to Admin*/
+                $product =  $this->create_sync_product_to_admin($request, $response);
+                /*Import Product to requested store*/
+                $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
+                $wish->status_id = 5;
+                $wish->related_product_id = $related_product_id;
+                $wish->updated_at = now();
+                $wish->save();
+                return redirect()->back()->with('success','Wishlist Completed Successfully!');
+            }
+            else{
+                return redirect()->route('sales_managers.wishlist')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');
+
+            }
+        }
+        else{
+            return redirect()->route('sales_managers.wishlist')->with('errors','Wishlist Not Found!');
+        }
     }
 
-//    public function setCompleted(){
-//        $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'));
-//        if($related_product_id != null){
-//            $wish->status_id = 5;
-//            $wish->related_product_id = $related_product_id;
-//            $wish->updated_at = now();
-//            $wish->save();
-//            return redirect()->back()->with('success','Wishlist Completed Successfully!');
-//        }
-//        else{
-//            return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
-//        }
-//    }
-
-    public function import_to_store(Wishlist $wishlist,$shopify_product_id){
+    public function import_to_store(Wishlist $wishlist,$shopify_product_id,$linked_product_id){
         $response = $this->fetch_product($wishlist, $shopify_product_id);
         if(!$response->errors){
-
             $product = $response->body->product;
-            return $this->map_to_retailer_product($wishlist, $product);
+            return $this->map_to_retailer_product($wishlist, $product,$linked_product_id);
         }
         else{
             return null;
@@ -271,7 +281,7 @@ class WishlistController extends Controller
      * @param $product
      * @return mixed
      */
-    public function map_to_retailer_product(Wishlist $wishlist, $product): mixed
+    public function map_to_retailer_product(Wishlist $wishlist, $product,$linked_product_id): mixed
     {
         $retailerProduct = new RetailerProduct();
         $retailerProduct->shopify_id = $product->id;
@@ -340,6 +350,7 @@ class WishlistController extends Controller
                     $retailerProduct->barcode = $variant->barcode;
                     $retailerProduct->save();
                 }
+                $retailerProduct->linked_product_id = $linked_product_id;
 
                 $retailerProductVariant->save();
             }
@@ -360,5 +371,269 @@ class WishlistController extends Controller
         return $response;
     }
 
+    public function ProductVariants($data, $id)
+    {
+        for ($i = 0; $i < count($data->variant_title); $i++) {
+            $options = explode('/', $data->variant_title[$i]);
+            $variants = new  ProductVariant();
+            if (!empty($options[0])) {
+                $variants->option1 = $options[0];
+            }
+            if (!empty($options[1])) {
+                $variants->option2 = $options[1];
+            }
+            if (!empty($options[2])) {
+                $variants->option3 = $options[2];
+            }
+            $variants->title = $data->variant_title[$i];
+            $variants->price = $data->variant_price[$i];
+            $variants->compare_price = $data->variant_comparePrice[$i];
+            $variants->quantity = $data->variant_quantity[$i];
+            $variants->cost = $data->variant_cost[$i];
+            $variants->sku = $data->variant_sku[$i];
+            $variants->barcode = $data->variant_barcode[$i];
+            $variants->product_id = $id;
+            $variants->save();
+        }
+    }
+
+    public function variants_template_array($product){
+        $variants_array = [];
+        foreach ($product->hasVariants as $index => $varaint) {
+            array_push($variants_array, [
+                'title' => $varaint->title,
+                'sku' => $varaint->sku,
+                'option1' => $varaint->option1,
+                'option2' => $varaint->option2,
+                'option3' => $varaint->option3,
+//                'inventory_quantity' => $varaint->quantity,
+//                'inventory_management' => 'shopify',
+                'grams' => $product->weight * 1000,
+                'weight' => $product->weight,
+                'weight_unit' => 'kg',
+                'barcode' => $varaint->barcode,
+                'price' => $varaint->price,
+                'cost' => $varaint->cost,
+            ]);
+        }
+        return $variants_array;
+    }
+
+    public function options_template_array($product){
+        $options_array = [];
+        if (count($product->option1($product)) > 0) {
+            $temp = [];
+            foreach ($product->option1($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option1',
+                'position' => '1',
+                'values' => json_encode($temp),
+            ]);
+        }
+        if (count($product->option2($product)) > 0) {
+            $temp = [];
+            foreach ($product->option2($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option2',
+                'position' => '2',
+                'values' => json_encode($temp),
+            ]);
+        }
+        if (count($product->option3($product)) > 0) {
+            $temp = [];
+            foreach ($product->option3($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option3',
+                'position' => '3',
+                'values' => json_encode($temp),
+            ]);
+        }
+        return $options_array;
+    }
+
+    /**
+     * @param Request $request
+     * @param $response
+     * @return Product
+     */
+    public function create_sync_product_to_admin(Request $request, $response): Product
+    {
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->compare_price = $request->compare_price;
+        $product->cost = $request->cost;
+        $product->type = $request->product_type;
+        $product->vendor = $request->vendor;
+        $product->tags = $request->tags;
+        $product->quantity = $request->quantity;
+        $product->weight = $request->weight;
+        $product->sku = $request->sku;
+        $product->barcode = $request->barcode;
+        $product->fulfilled_by = $request->input('fulfilled-by');
+        $product->status = $request->input('status');
+        $product->processing_time = $request->input('processing_time');
+
+        if ($request->variants) {
+            $product->variants = $request->variants;
+        }
+        $product->save();
+        if ($request->category) {
+            $product->has_categories()->attach($request->category);
+        }
+        if ($request->sub_cat) {
+            $product->has_subcategories()->attach($request->sub_cat);
+        }
+        if ($request->platforms) {
+            $product->has_platforms()->attach($request->platforms);
+        }
+        if ($request->variants) {
+            $this->ProductVariants($request, $product->id);
+        }
+        if ($request->hasFile('images')) {
+
+            foreach ($request->file('images') as $index => $image) {
+                $destinationPath = 'images/';
+                $filename = now()->format('YmdHi') . str_replace([' ', '(', ')'], '-', $image->getClientOriginalName());
+                $image->move($destinationPath, $filename);
+                $image = new Image();
+                $image->isV = 0;
+                $image->product_id = $product->id;
+                $image->position = $index + 1;
+                $image->image = $filename;
+                $image->save();
+            }
+
+        }
+        $count_product_images = count($product->has_images);
+        if (!$response->errors) {
+            $shopify_product = $response->body->product;
+            foreach ($shopify_product->images as $index => $image) {
+                $image = file_get_contents($image->src);
+                $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . 'jpg';
+                file_put_contents(public_path('images/' . $filename), $image);
+                $image = new Image();
+                $image->isV = 0;
+                $image->position = $index + 1 + $count_product_images;
+                $image->product_id = $product->id;
+                $image->image = $filename;
+                $image->save();
+            }
+
+        }
+
+        /*Import to WeFullFill Store*/
+        $variants_array = [];
+        $options_array = [];
+        $images_array = [];
+        //converting variants into shopify api format
+        $variants_array = $this->variants_template_array($product, $variants_array);
+        /*Product Options*/
+        $options_array = $this->options_template_array($product, $options_array);
+        /*Product Images*/
+
+        foreach ($product->has_images as $index => $image) {
+            if ($image->isV == 0) {
+                $src = asset('images') . '/' . $image->image;
+            } else {
+                $src = asset('images/variants') . '/' . $image->image;
+            }
+            array_push($images_array, [
+                'alt' => $product->title . '_' . $index,
+                'position' => $index + 1,
+                'src' => $src,
+            ]);
+        }
+        $shop = $this->helper->getAdminShop();
+        /*Categories and Subcategories*/
+        $tags = $product->tags;
+        if (count($product->has_categories) > 0) {
+            $categories = implode(',', $product->has_categories->pluck('title')->toArray());
+            $tags = $tags . ',' . $categories;
+        }
+        if (count($product->has_subcategories) > 0) {
+            $subcategories = implode(',', $product->has_subcategories->pluck('title')->toArray());
+            $tags = $tags . ',' . $subcategories;
+        }
+        if ($product->status == 1) {
+            $published = true;
+        } else {
+            $published = false;
+        }
+
+        $productdata = [
+            "product" => [
+                "title" => $product->title,
+                "body_html" => $product->description,
+                "vendor" => $product->vendor,
+                "tags" => $tags,
+                "product_type" => $product->type,
+                "variants" => $variants_array,
+                "options" => $options_array,
+                "images" => $images_array,
+                "published" => $published
+            ]
+        ];
+
+        $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
+//            dd($response);
+        $product_shopify_id = $response->body->product->id;
+        $product->shopify_id = $product_shopify_id;
+        $price = $product->price;
+        $product->save();
+
+        $shopifyImages = $response->body->product->images;
+        $shopifyVariants = $response->body->product->variants;
+        if (count($product->hasVariants) == 0) {
+            $variant_id = $shopifyVariants[0]->id;
+            $i = [
+                'variant' => [
+                    'price' => $price
+                ]
+            ];
+            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id . '.json', $i);
+        }
+        foreach ($product->hasVariants as $index => $v) {
+            $v->shopify_id = $shopifyVariants[$index]->id;
+            $v->save();
+        }
+        foreach ($product->has_platforms as $index => $platform) {
+            $index = $index + 1;
+            $productdata = [
+                "metafield" => [
+                    "key" => "warned_platform" . $index,
+                    "value" => $platform->name,
+                    "value_type" => "string",
+                    "namespace" => "platform"
+                ]
+            ];
+            $resp = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/metafields.json', $productdata);
+        }
+        if (count($shopifyImages) == count($product->has_images)) {
+            foreach ($product->has_images as $index => $image) {
+                $image->shopify_id = $shopifyImages[$index]->id;
+                $image->save();
+            }
+        }
+        foreach ($product->hasVariants as $index => $v) {
+            if ($v->has_image != null) {
+                $i = [
+                    'image' => [
+                        'id' => $v->has_image->shopify_id,
+                        'variant_ids' => [$v->shopify_id]
+                    ]
+                ];
+                $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
+            }
+        }
+        return $product;
+    }
 
 }
