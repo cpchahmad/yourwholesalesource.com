@@ -390,15 +390,15 @@ class WishlistController extends Controller
 
                 $retailerProductVariant->save();
 
-                $shop = $this->helper->getSpecificShop($retailerProduct->shop_id);
+                $shop = $this->helper->getSpecificLocalShop($retailerProduct->shop_id);
                 if($shop != null){
                     if(!in_array($linked_product_id,$shop->has_imported->pluck('id')->toArray())){
                         $shop->has_imported()->attach([$linked_product_id]);
                     }
                 }
                 /*Shop-User Import Relation*/
-                if(count($this->helper->getSpecificShop($retailerProduct->shop_id)->has_user) > 0){
-                    $user = $this->helper->getSpecificShop($retailerProduct->shop_id)->has_user[0];
+                if(count($this->helper->getSpecificLocalShop($retailerProduct->shop_id)->has_user) > 0){
+                    $user = $this->helper->getSpecificLocalShop($retailerProduct->shop_id)->has_user[0];
                     if(!in_array($linked_product_id,$user->has_imported->pluck('id')->toArray())){
                         $user->has_imported()->attach([$linked_product_id]);
                     }

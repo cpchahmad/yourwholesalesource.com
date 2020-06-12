@@ -43,6 +43,12 @@ class HelperController extends Controller
     public  function getSpecificShop($id){
       return Shop::find($id);
     }
+
+    public  function getSpecificLocalShop($id){
+        $shop= \App\Shop::find($id);
+        return $shop;
+    }
+
     public function reset_all(Request $request){
         if($request->has('pass')){
             if($request->input('pass')== 'fantasy-reset')
