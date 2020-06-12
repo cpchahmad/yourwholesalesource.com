@@ -279,7 +279,12 @@ class WishlistController extends Controller
 
     public function map_to_retailer_product(Wishlist $wishlist, $product,$linked_product_id)
     {
-        $retailerProduct = new RetailerProduct();
+        if (RetailerProduct::where('shopify_id', $product->id)->exists()) {
+            $product = Product::where('shopify_id', $product->id)->first();
+        } else {
+            $retailerProduct = new RetailerProduct();
+        }
+
         $retailerProduct->shopify_id = $product->id;
         $retailerProduct->title = $product->title;
         $retailerProduct->description = $product->body_html;
@@ -349,6 +354,20 @@ class WishlistController extends Controller
                 $retailerProduct->linked_product_id = $linked_product_id;
 
                 $retailerProductVariant->save();
+
+                $shop = $this->helper->getSpecificShop($retailerProduct->shop_id);
+                if($shop != null){
+                    if(!in_array($linked_product_id,$shop->has_imported->pluck('id')->toArray())){
+                        $shop->has_imported()->attach([$linked_product_id]);
+                    }
+                }
+                /*Shop-User Import Relation*/
+                if(count($this->helper->getSpecificShop($retailerProduct->shop_id)->has_user) > 0){
+                    $user = $this->helper->getSpecificShop($retailerProduct->shop_id)->has_user[0];
+                    if(!in_array($linked_product_id,$user->has_imported->pluck('id')->toArray())){
+                        $user->has_imported()->attach([$linked_product_id]);
+                    }
+                }
             }
         }
 

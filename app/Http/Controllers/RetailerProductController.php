@@ -110,7 +110,7 @@ class RetailerProductController extends Controller
                 $retailerProduct->has_subcategories()->attach($subcategory_ids);
 
                 /*Shop Product Import Relation*/
-                $shop = $this->helper->getLocalShop();
+                $shop = $this->helper->getSpecificShop();
                 if($shop != null){
                     if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray())){
                         $shop->has_imported()->attach([$product->id]);
