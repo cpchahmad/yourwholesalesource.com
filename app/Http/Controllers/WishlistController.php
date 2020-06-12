@@ -193,13 +193,26 @@ class WishlistController extends Controller
                     if(!$response->errors){
                         $categories = Category::latest()->get();
                         $platforms = WarnedPlatform::all();
-                        return view('sales_managers.wishlist.map_product')->with([
-                            'product' => $response->body->product,
-                            'wishlist' => $wish,
-                            'product_shopify_id' => $request->input('product_shopify_id'),
-                            'categories' => $categories,
-                            'platforms' => $platforms
-                        ]);
+                        if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                            return view('setttings.wishlist.map_product')->with([
+                                'product' => $response->body->product,
+                                'wishlist' => $wish,
+                                'product_shopify_id' => $request->input('product_shopify_id'),
+                                'categories' => $categories,
+                                'platforms' => $platforms
+                            ]);
+
+                        }
+                        else{
+                            return view('sales_managers.wishlist.map_product')->with([
+                                'product' => $response->body->product,
+                                'wishlist' => $wish,
+                                'product_shopify_id' => $request->input('product_shopify_id'),
+                                'categories' => $categories,
+                                'platforms' => $platforms
+                            ]);
+                        }
+
                     }
                     else{
                         return redirect()->back()->with('error','Wishlist cant be completed because user enter shopify id doesnt belong to any product!');
