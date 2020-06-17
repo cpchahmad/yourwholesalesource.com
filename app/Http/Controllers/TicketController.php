@@ -172,7 +172,6 @@ class TicketController extends Controller
             $tl->ticket_id = $ticket->id;
             $tl->save();
 
-            $manager = User::role('sales-manager')->find(Auth::id());
             $ml = new ManagerLog();
             $ml->message = 'A Reply Added By Manager on Ticket at ' . date_create(now())->format('d M, Y h:i a');
             $ml->status = "Reply From Manager";
