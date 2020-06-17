@@ -527,6 +527,17 @@ $(document).ready(function () {
         })
 
     });
+
+    $('body').on('change','.preference-check',function () {
+        if($(this).val() === '0'){
+            $(this).parents('.form-group').next().show();
+            $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
+        }
+        else{
+            $(this).parents('.form-group').next().hide();
+            $(this).parents('.form-group').next().find('.shop-preference').attr('required',false);
+        }
+    });
 });
 
 

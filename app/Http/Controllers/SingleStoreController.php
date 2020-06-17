@@ -54,6 +54,12 @@ class SingleStoreController extends Controller
 
         $categories = Category::all();
         $productQuery = Product::where('status',1)->newQuery();
+
+        $productQuery->where('global',0)->whereHas('has_preferences',function ($q){
+            return $q->where('shopify_domain','=',$this->helper->getLocalShop()->shopify_domain);
+        });
+        $productQuery->orwhere('global',1);
+
         if($request->has('category')){
             $productQuery->whereHas('has_categories',function($q) use ($request){
                 return $q->where('title','LIKE','%'.$request->input('category').'%');
@@ -62,6 +68,7 @@ class SingleStoreController extends Controller
         if($request->has('search')){
             $productQuery->where('title','LIKE','%'.$request->input('search').'%')->orWhere('tags','LIKE','%'.$request->input('search').'%');
         }
+
         $products = $productQuery->paginate(12);
 
         foreach ($products as $product){
@@ -343,7 +350,7 @@ class SingleStoreController extends Controller
         ])->render();
 
         return response()->json([
-           'html' => $html
+            'html' => $html
         ]);
 
 

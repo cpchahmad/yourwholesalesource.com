@@ -364,6 +364,34 @@
                             </div>
                         </div>
                     </div>
+                    <div class="block">
+                        <div class="block-header">
+                            <h3 class="block-title">Preferences</h3>
+                        </div>
+                        <div class="block-content">
+                            <div class="form-group">
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" required class="custom-control-input preference-check" id="prefer-global" name="global" value="1" checked="">
+                                    <label class="custom-control-label " for="prefer-global">Global</label>
+                                </div>
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" required class="custom-control-input preference-check" id="prefer-store" name="global" value="0" >
+                                    <label class="custom-control-label" for="prefer-store">Selected Stores</label>
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none">
+                                <div class="form-material">
+                                    <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
+                                    <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
+                                        <option></option>
+                                        @foreach($shops as $shop)
+                                            <option value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="content">
                     <div class="row ">

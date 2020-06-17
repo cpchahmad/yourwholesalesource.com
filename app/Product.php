@@ -27,4 +27,8 @@ class Product extends Model
         return $this->hasMany('App\AdditionalTab','product_id');
     }
 
+    public function has_preferences(){
+        return $this->belongsToMany('App\Shop','product_shop','product_id','shop_id');
+    }
+
 }

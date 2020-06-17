@@ -18,6 +18,7 @@ use App\WishlistThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use OhMyBrew\ShopifyApp\Models\Shop;
 
 class WishlistController extends Controller
 {
@@ -193,13 +194,15 @@ class WishlistController extends Controller
                     if(!$response->errors){
                         $categories = Category::latest()->get();
                         $platforms = WarnedPlatform::all();
+                        $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
                         if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
                             return view('setttings.wishlist.map_product')->with([
                                 'product' => $response->body->product,
                                 'wishlist' => $wish,
                                 'product_shopify_id' => $request->input('product_shopify_id'),
                                 'categories' => $categories,
-                                'platforms' => $platforms
+                                'platforms' => $platforms,
+                                'shops' => $shops
                             ]);
 
                         }
@@ -209,7 +212,8 @@ class WishlistController extends Controller
                                 'wishlist' => $wish,
                                 'product_shopify_id' => $request->input('product_shopify_id'),
                                 'categories' => $categories,
-                                'platforms' => $platforms
+                                'platforms' => $platforms,
+                                'shops' => $shops
                             ]);
                         }
 
@@ -547,6 +551,14 @@ class WishlistController extends Controller
         if ($request->variants) {
             $this->ProductVariants($request, $product->id);
         }
+
+        $product->global = $request->input('global');
+        $product->save();
+
+        if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
+            $product->has_preferences()->attach($request->input('shops'));
+        }
+
         if ($request->hasFile('images')) {
 
             foreach ($request->file('images') as $index => $image) {
