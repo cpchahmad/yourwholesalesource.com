@@ -12,9 +12,9 @@
 <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
 
 
-<script src="{{ asset('js/admin.js') }}"></script>
-<script src="{{ asset('js/shopify-user.js') }}"></script>
-<script src="{{ asset('js/manager.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}?v={{now()}}"></script>
+<script src="{{ asset('js/shopify-user.js') }}?v={{now()}}"></script>
+<script src="{{ asset('js/manager.js') }}?v={{now()}}"></script>
 <script src="{{ asset('assets/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
 
