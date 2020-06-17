@@ -141,6 +141,9 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/help-center/ticket/{id}', 'SingleStoreController@view_ticket')->name('help-center.store.ticket.view');
         Route::get('/wishlist','SingleStoreController@wishlist')->name('store.wishlist');
         Route::get('/wishlist/{id}','SingleStoreController@view_wishlist')->name('store.wishlist.view');
+        Route::get('/refunds', 'SingleStoreController@refunds')->name('store.refunds');
+
+
 
 
     });

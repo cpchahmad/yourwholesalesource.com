@@ -147,7 +147,6 @@ class SingleStoreController extends Controller
             'associated_user' =>$associated_user
         ]);
     }
-
     public function authenticate(Request $request){
         if(Auth::validate($request->except('_token'))){
             $authenticate = true;
@@ -354,6 +353,19 @@ class SingleStoreController extends Controller
         ]);
 
 
+    }
+
+    public function refunds(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $orders = RetailerOrder::where('shop_id',$shop->id)->newQuery();
+        if($request->has('search')){
+            $orders->where('name','LIKE','%'.$request->input('search').'%');
+        }
+        return view('single-store.orders.refunds')->with([
+            'orders' =>  $orders->orderBy('created_at')->paginate(20),
+            'search' =>$request->input('search')
+
+        ]);
     }
 
 

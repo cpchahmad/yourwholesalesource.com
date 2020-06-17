@@ -112,10 +112,11 @@ div.tagsinput span.tag a {
 }
 .pointer{
     cursor: pointer;
+    color: black;
 }
 .pointer:hover{
     background-color: #3e4959;
-    color: white;
+    color: white !important;
 }
 .padding10{
     padding: 5px !important;
