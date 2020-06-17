@@ -39,4 +39,8 @@ class Ticket extends Model
     {
         return $this->hasMany(TicketLog::class,'ticket_id');
     }
+    public function has_reviews()
+    {
+        return $this->hasMany(ManagerReview::class,'ticket_id');
+    }
 }

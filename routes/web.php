@@ -221,7 +221,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 /*Common Routes*/
 Route::group(['middleware' => ['check_user_or_shop']], function () {
-    Route::prefix('store')->group(function () {
+    Route::prefix('app')->group(function () {
         Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
 
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
@@ -236,15 +236,17 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::get('/topup-through-paypal/{id}/success', 'WalletController@paypal_topup_payment_success')->name('store.wallet.paypal.topup.success');
         Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
         Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
+        Route::get('/ticket/status/{id}/completed', 'TicketController@marked_as_completed')->name('help-center.ticket.marked_as_completed');
+        Route::get('/ticket/status/{id}/closed', 'TicketController@marked_as_closed')->name('help-center.ticket.marked_as_closed');
         Route::post('/wishlist/create', 'WishlistController@create_wishlist')->name('wishlist.create');
         Route::post('/wishlist/thread/create', 'WishlistController@create_wishlist_thread')->name('wishlist.thread.create');
         Route::post('/wishlist/accepted', 'WishlistController@accept_wishlist')->name('wishlist.accept');
         Route::post('/wishlist/approved', 'WishlistController@approve_wishlist')->name('wishlist.approve');
         Route::post('/wishlist/completed', 'WishlistController@completed_wishlist')->name('wishlist.completed');
         Route::post('/wishlist/completed/map_product', 'WishlistController@map_product')->name('wishlist.completed.map_product');
-
-
         Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
+
+        Route::post('/ticket/review', 'TicketController@post_review')->name('ticket.post_review');
 
 
     });

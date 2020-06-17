@@ -488,4 +488,59 @@ $(document).ready(function () {
             $('.product-shopify').hide();
         }
     });
+    if(!$('body').find('.rating-stars').hasClass('disabled')){
+        /* 1. Visualizing things on Hover - See next part for action on click */
+        $('body').on('mouseover','#stars li',function(){
+            // $('#stars li').on('mouseover', function(){
+            var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+            // Now highlight all the stars that's not after the current hovered star
+            $(this).parent().children('li.star').each(function(e){
+                if (e < onStar) {
+                    $(this).addClass('hover');
+                }
+                else {
+                    $(this).removeClass('hover');
+                }
+            });
+
+        })
+        $('body').on('mouseout','#stars li',function(){
+            $(this).parent().children('li.star').each(function(e){
+                $(this).removeClass('hover');
+            });
+        });
+
+
+        /* 2. Action to perform on click */
+        $('body').on('click','#stars li',function(){
+            // $('#stars li').on('click', function(){
+            $('#rating-input').val($(this).data('value'));
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('li.star');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+
+
+        });
+    }
+
+    if($('body').find('input[name=rating]').length > 0){
+        $('input[name=rating]').each(function () {
+            var rating = $(this).val();
+            $(this).closest('div').find('.star').each(function (index) {
+                if(index < rating){
+                    $(this).addClass('selected');
+                }
+            })
+        });
+
+    }
 });

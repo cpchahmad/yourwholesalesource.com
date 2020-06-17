@@ -36,6 +36,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#manager_log">Log</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#manager_reviews">Reviews</a>
+                </li>
             </ul>
             <div class="block-content tab-content">
                 <div class="tab-pane active" id="stores" role="tabpanel">
@@ -132,7 +135,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="tab-pane" id="tickets" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
@@ -320,6 +322,51 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="manager_reviews" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            @if(count($manager->has_reviews) > 0)
+                                <div class="block">
+                                    <div class="block-content">
+                                        @foreach($manager->has_reviews as $review)
+                                            <div class="d-flex">
+                                                <input type="hidden" name="rating" value="{{$review->rating}}">
+                                                <div class='rating-stars disabled'>
+                                                    <ul id='stars' style="margin-bottom: 5px">
+                                                        <li class='star' title='Poor' data-value='1'>
+                                                            <i class='fa fa-star fa-fw'></i>
+                                                        </li>
+                                                        <li class='star' title='Fair' data-value='2'>
+                                                            <i class='fa fa-star fa-fw '></i>
+                                                        </li>
+                                                        <li class='star' title='Good' data-value='3'>
+                                                            <i class='fa fa-star fa-fw '></i>
+                                                        </li>
+                                                        <li class='star' title='Excellent' data-value='4'>
+                                                            <i class='fa fa-star fa-fw '></i>
+                                                        </li>
+                                                        <li class='star' title='WOW!!!' data-value='5'>
+                                                            <i class='fa fa-star fa-fw '></i>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div style="margin-left: auto">
+                                                    <span class="badge badge-primary">{{$review->created_at->diffForHumans()}}</span>
+                                                </div>
+                                            </div>
+                                            <p>By {{$review->name}} ({{$review->email}}) on Ticket # <a href="{{route('tickets.view',$review->has_ticket->id)}}">{{$review->has_ticket->token}}</a></p>
+                                            <p>{!! $review->review !!}</p>
+                                            <hr>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @else
+                                <p class="text-center"> No Reviews Found </p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
         </div>

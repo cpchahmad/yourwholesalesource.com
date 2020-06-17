@@ -83,4 +83,7 @@ class User extends Authenticatable
     public function has_manager_logs(){
         return $this->hasMany(ManagerLog::class,'manager_id');
     }
+    public function has_reviews(){
+        return $this->hasMany(ManagerReview::class,'manager_id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ManagerLog;
+use App\ManagerReview;
 use App\Ticket;
 use App\TicketAttachment;
 use App\TicketCategory;
@@ -69,7 +70,7 @@ class TicketController extends Controller
         }
 
         else{
-          return redirect()->back()->with('error','Associated Manager Not Found');
+            return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
     public function create_ticket_thread(Request $request){
@@ -139,6 +140,66 @@ class TicketController extends Controller
         else{
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
+    }
+
+    public function marked_as_completed($id,Request $request){
+        $ticket = Ticket::find($id);
+        $ticket->status_id = '5';
+        $ticket->status = 'Completed';
+        $ticket->save();
+        $tl = new TicketLog();
+        $tl->message = 'Ticket Marked as Completed at ' . date_create(now())->format('d M, Y h:i a');
+        $tl->status = "Completed By User";
+        $tl->ticket_id = $ticket->id;
+        $tl->save();
+        return redirect()->back()->with('success','Ticket marked as completed successfully!');
+    }
+
+    public function marked_as_closed($id,Request $request){
+        $manager = User::role('sales-manager')->find(Auth::id());
+        if($manager == null){
+            $manager = User::role('sales-manager')->find($request->input('manager_id'));
+        }
+
+        if($manager != null){
+            $ticket = Ticket::find($id);
+            $ticket->status_id = '4';
+            $ticket->status = 'Closed';
+            $ticket->save();
+            $tl = new TicketLog();
+            $tl->message = 'Ticket Marked as Closed By Manager at ' . date_create(now())->format('d M, Y h:i a');
+            $tl->status = "Closed By Manager";
+            $tl->ticket_id = $ticket->id;
+            $tl->save();
+
+            $manager = User::role('sales-manager')->find(Auth::id());
+            $ml = new ManagerLog();
+            $ml->message = 'A Reply Added By Manager on Ticket at ' . date_create(now())->format('d M, Y h:i a');
+            $ml->status = "Reply From Manager";
+            $ml->manager_id = $manager->id;
+            $ml->save();
+
+            return redirect()->back()->with('success','Ticket marked as completed successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Manager not Found!');
+        }
+    }
+
+    public function post_review(Request $request){
+        $ticket = Ticket::find($request->input('ticket_id'));
+        $manager = User::role('sales-manager')->find($request->input('manager_id'));
+
+        if($ticket !=  null && $manager != null){
+            ManagerReview::create($request->all());
+            $ticket->review = 1;
+            $ticket->save();
+            return redirect()->back()->with('success','Ticket Review Added Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Invalid Data Passed!');
+        }
+
     }
 
 }
