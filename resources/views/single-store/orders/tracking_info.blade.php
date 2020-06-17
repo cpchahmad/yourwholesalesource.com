@@ -41,6 +41,7 @@
                                     <th>Order Date</th>
                                     <th>Price</th>
                                     <th>Cost</th>
+                                    <th>Payment Status</th>
                                     <th>Status</th>
                                     <th style="text-align: right">
                                 </tr>
@@ -60,6 +61,16 @@
                                         </td>
                                         <td>
                                             {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
+
+                                        </td>
+                                        <td>
+                                            @if($order->paid == '0')
+                                                <span class="badge badge-warning" style="font-size: small"> unpaid </span>
+                                            @elseif($order->paid == '1')
+                                                <span class="badge badge-success" style="font-size: small"> paid </span>
+                                            @elseif($order->paid == '2')
+                                                <span class="badge badge-danger" style="font-size: small;"> refunded</span>
+                                            @endif
 
                                         </td>
                                         <td>

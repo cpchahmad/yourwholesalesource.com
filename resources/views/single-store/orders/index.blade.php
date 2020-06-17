@@ -47,6 +47,7 @@
                                     <th>Order Date</th>
                                     <th>Price</th>
                                     <th>Cost</th>
+                                    <th>Payment Status</th>
                                     <th>Status</th>
                                     <th style="text-align: right">
                                         <a href="{{route('store.sync.orders')}}"
@@ -72,9 +73,18 @@
 
                                         </td>
                                         <td>
+                                            @if($order->paid == '0')
+                                                <span class="badge badge-warning" style="font-size: small"> unpaid </span>
+                                            @elseif($order->paid == '1')
+                                                <span class="badge badge-success" style="font-size: small"> paid </span>
+                                            @elseif($order->paid == '2')
+                                                <span class="badge badge-danger" style="font-size: small;"> refunded</span>
+                                            @endif
+
+                                        </td>
+                                        <td>
                                             @if($order->status == 'paid')
                                                 <span class="badge badge-primary" style="float: right;font-size: medium"> {{$order->status}}</span>
-
                                             @elseif($order->status == 'unfulfilled')
                                                 <span class="badge badge-warning" style="font-size: small"> {{$order->status}}</span>
                                             @elseif($order->status == 'partially-shipped')

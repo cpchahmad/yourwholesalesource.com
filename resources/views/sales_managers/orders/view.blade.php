@@ -38,7 +38,7 @@
                             Line Items
                         </h3>
                         @if($order->status == 'paid')
-                            <span class="badge badge-primary" style="float: right;font-size: medium"> {{$order->status}}</span>
+                            <span class="badge badge-primary" style="float: right;font-size: medium"> new </span>
 
                         @elseif($order->status == 'unfulfilled')
                             <span class="badge badge-warning" style="float: right;font-size: medium"> {{$order->status}}</span>
