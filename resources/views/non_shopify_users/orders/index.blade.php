@@ -119,6 +119,11 @@
 
                                 @endforeach
                             </table>
+                            <div class="row">
+                                <div class="col-md-12 text-center" style="font-size: 17px">
+                                    {!! $orders->links() !!}
+                                </div>
+                            </div>
                         @else
                             <p>No Orders Found  <a href="{{route('users.custom.orders.create')}}" class="btn btn-sm btn-success" style="font-size: 12px;float: right" type="button" data-toggle="tooltip" title="" data-original-title="Sync Orders"><i class="fa fa-plus"></i> Add New Order</a></p>
                         @endif

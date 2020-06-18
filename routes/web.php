@@ -104,7 +104,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/wallet/request/approve/{id}', 'WalletController@approved_bank_statement')->name('admin.wallets.approve.request');
     Route::post('/wallet/top-up', 'WalletController@topup_wallet_by_admin')->name('admin.user.wallet.topup');
 
-
+    Route::get('/refunds','DefaultSettingsController@refunds')->name('refunds.index');
+    Route::get('/refunds/{id}', 'DefaultSettingsController@view_refund')->name('refunds.view');
 
 
 });
@@ -142,6 +143,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/wishlist','SingleStoreController@wishlist')->name('store.wishlist');
         Route::get('/wishlist/{id}','SingleStoreController@view_wishlist')->name('store.wishlist.view');
         Route::get('/refunds', 'SingleStoreController@refunds')->name('store.refunds');
+        Route::get('/refunds/{id}', 'SingleStoreController@refund')->name('store.refund');
 
 
 
@@ -181,6 +183,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/help-center/ticket/{id}', 'CustomOrderController@view_ticket')->name('help-center.users.ticket.view');
             Route::get('/wishlist','CustomOrderController@wishlist')->name('users.wishlist');
             Route::get('/wishlist/{id}','CustomOrderController@view_wishlist')->name('users.wishlist.view');
+            Route::get('/refunds', 'CustomOrderController@refunds')->name('users.refunds');
+            Route::get('/refunds/{id}', 'CustomOrderController@refund')->name('users.refund');
             Route::group(['middleware' => ['check_user_shop']], function () {
 
             });
@@ -218,6 +222,10 @@ Route::group(['middleware' => ['auth']], function () {
                 $manager = \App\User::find(\Illuminate\Support\Facades\Auth::id());
                 return view('sales_managers.index')->with('manager',$manager);
             })->name('managers.dashboard');
+
+            Route::get('/refunds','ManagerController@refunds')->name('sales_managers.refunds');
+            Route::get('/refunds/{id}', 'ManagerController@view_refund')->name('sales_managers.refunds.view');
+
         });
     });
 });
@@ -250,6 +258,12 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
 
         Route::post('/ticket/review', 'TicketController@post_review')->name('ticket.post_review');
+        /*Refund*/
+        Route::post('/create/refund', 'RefundController@create_refund')->name('refund.create');
+        Route::post('/create/refund/thread', 'RefundController@create_refund_thread')->name('refund.create.thread');
+        Route::get('/refund/approve/{id}/order/{order_id}', 'RefundController@approve_refund')->name('refund.approve');
+
+
 
 
     });

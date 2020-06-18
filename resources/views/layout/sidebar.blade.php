@@ -78,6 +78,12 @@
                 </a>
             </li>
             <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('refunds.index')}}">
+                    <i class="nav-main-link-icon fa fa-receipt"></i>
+                    <span class="nav-main-link-name">Refunds</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('tickets.index')}}">
                     <i class="nav-main-link-icon fa fa-ticket-alt"></i>
                     <span class="nav-main-link-name">Tickets</span>

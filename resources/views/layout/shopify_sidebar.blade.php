@@ -49,18 +49,10 @@
                             <span class="nav-main-link-name">Imported Files</span>
                         </a>
                     </li>
-
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
+                        <a class="nav-main-link" href="{{route('users.refunds')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Payment History</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Tracking Info</span>
+                            <span class="nav-main-link-name">Refunds</span>
                         </a>
                     </li>
 

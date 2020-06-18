@@ -9,6 +9,7 @@ use App\ManagerLog;
 use App\OrderFulfillment;
 use App\OrderLog;
 use App\Product;
+use App\Refund;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
@@ -708,4 +709,43 @@ class ManagerController extends Controller
         }
 
     }
+
+    public function refunds(Request $request){
+        $tickets = Refund::where('manager_id',Auth::id())->newQuery();
+
+        if($request->has('search')){
+            $tickets->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $tickets->where('status_id','=',$request->input('status'));
+
+            }
+        }
+        if($request->has('priority')){
+            if($request->input('priority') != null) {
+                $tickets->where('priority', '=', $request->input('priority'));
+            }
+        }
+
+
+        $tickets = $tickets->paginate(30);
+        return view('sales_managers.refunds.index')->with([
+            'tickets' => $tickets,
+            'search' =>$request->input('search'),
+            'statuses' => TicketStatus::all(),
+            'selected_status' =>$request->input('status'),
+            'priority' =>$request->input('priority'),
+        ]);
+    }
+    public function view_refund(Request $request){
+        $manager = User::find(Auth::id());
+        $ticket = Refund::find($request->id);
+        return view('sales_managers.refunds.view')->with([
+            'manager' => $manager,
+            'ticket' => $ticket,
+        ]);
+    }
+
+
 }

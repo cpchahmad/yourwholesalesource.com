@@ -6,6 +6,7 @@ use App\AdminSetting;
 use App\Customer;
 use App\DefaultInfo;
 use App\Product;
+use App\Refund;
 use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
@@ -460,6 +461,43 @@ class DefaultSettingsController extends Controller
         $users = $users->orderBy('created_at','DESC')->paginate(30);
         return view('setttings.users.index')->with([
             'users'=>$users
+        ]);
+    }
+
+    public function refunds(Request $request){
+        $tickets = Refund::query();
+
+        if($request->has('search')){
+            $tickets->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $tickets->where('status_id','=',$request->input('status'));
+
+            }
+        }
+        if($request->has('priority')){
+            if($request->input('priority') != null) {
+                $tickets->where('priority', '=', $request->input('priority'));
+            }
+        }
+
+
+        $tickets = $tickets->paginate(30);
+        return view('setttings.refunds.index')->with([
+            'tickets' => $tickets,
+            'search' =>$request->input('search'),
+            'statuses' => TicketStatus::all(),
+            'selected_status' =>$request->input('status'),
+            'priority' =>$request->input('priority'),
+        ]);
+    }
+    public function view_refund(Request $request){
+        $manager = User::find(Auth::id());
+        $ticket = Refund::find($request->id);
+        return view('setttings.refunds.view')->with([
+            'manager' => $manager,
+            'ticket' => $ticket,
         ]);
     }
 

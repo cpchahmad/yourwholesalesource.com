@@ -11,6 +11,7 @@ use App\OrderLog;
 use App\OrderTransaction;
 use App\Product;
 use App\ProductVariant;
+use App\Refund;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
@@ -648,6 +649,30 @@ class CustomOrderController extends Controller
         return view('non_shopify_users.wishlist.view')->with([
             'user' => $user,
             'wishlist' => $wishlists,
+        ]);
+    }
+
+    public function refunds(Request $request){
+        $user = User::find(Auth::id());
+        $refunds = Refund::where('user_id',$user->id)->newQuery();
+        if($request->has('search')){
+            $refunds->where('order_name','LIKE','%'.$request->input('search').'%');
+        }
+        $orders = RetailerOrder::where('user_id',$user->id)->where('paid',1)->get();
+        return view('non_shopify_users.orders.refunds')->with([
+            'refunds' =>  $refunds->orderBy('created_at')->paginate(20),
+            'search' =>$request->input('search'),
+            'user' => $user,
+            'orders' =>$orders
+        ]);
+    }
+
+    public function refund(Request $request){
+        $user = User::find(Auth::id());
+        $refund = Refund::find($request->id);
+        return view('non_shopify_users.orders.view-refund')->with([
+            'user' => $user,
+            'ticket' => $refund,
         ]);
     }
 

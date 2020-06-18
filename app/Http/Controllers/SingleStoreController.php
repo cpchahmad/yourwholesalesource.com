@@ -7,6 +7,7 @@ use App\Country;
 use App\Customer;
 use App\OrderTransaction;
 use App\Product;
+use App\Refund;
 use App\RetailerImage;
 use App\RetailerOrder;
 use App\RetailerProduct;
@@ -280,7 +281,7 @@ class SingleStoreController extends Controller
         ]);
     }
     public function view_wishlist(Request $request){
-        $shop = $this->helper->getLocalShop();
+        $shops = $this->helper->getLocalShop();
         $wishlist = Wishlist::find($request->id);
         return view('single-store.wishlist.view')->with([
             'shop' => $shop,
@@ -355,16 +356,29 @@ class SingleStoreController extends Controller
 
     }
 
-    public function refunds(Request $request){
+    public function refunds(Request $request)
+    {
         $shop = $this->helper->getLocalShop();
-        $orders = RetailerOrder::where('shop_id',$shop->id)->newQuery();
+        $refunds = Refund::where('shop_id',$shop->id)->newQuery();
         if($request->has('search')){
-            $orders->where('name','LIKE','%'.$request->input('search').'%');
+            $refunds->where('order_name','LIKE','%'.$request->input('search').'%');
         }
+        $orders = RetailerOrder::where('shop_id',$shop->id)->where('paid',1)->get();
         return view('single-store.orders.refunds')->with([
-            'orders' =>  $orders->orderBy('created_at')->paginate(20),
-            'search' =>$request->input('search')
+            'refunds' =>  $refunds->orderBy('created_at')->paginate(20),
+            'search' =>$request->input('search'),
+            'shop' => $shop,
+            'orders' =>$orders
+        ]);
+    }
 
+    public function refund(Request $request)
+    {
+        $shop = $this->helper->getLocalShop();
+        $refund = Refund::find($request->id);
+        return view('single-store.orders.view-refund')->with([
+            'shop' => $shop,
+            'ticket' => $refund,
         ]);
     }
 

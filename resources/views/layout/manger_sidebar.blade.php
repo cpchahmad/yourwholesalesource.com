@@ -38,6 +38,12 @@
                 </a>
             </li>
             <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('sales_managers.refunds')}}">
+                    <i class="nav-main-link-icon fa fa-receipt"></i>
+                    <span class="nav-main-link-name">Refunds</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
                 <a class="nav-main-link active" href="{{route('sales_managers.wallets')}}">
                     <i class="nav-main-link-icon si si-wallet"></i>
                     <span class="nav-main-link-name">Wallets</span>
