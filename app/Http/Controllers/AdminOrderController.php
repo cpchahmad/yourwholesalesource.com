@@ -23,7 +23,7 @@ class AdminOrderController extends Controller
     }
 
     public function index(Request $request){
-        $orders  = RetailerOrder::where('paid',1)->newQuery();
+        $orders  = RetailerOrder::whereIn('paid',[1,2])->newQuery();
         $orders = $orders->orderBy('created_at','DESC')->paginate(30);
 
         return view('orders.index')->with([
@@ -41,60 +41,71 @@ class AdminOrderController extends Controller
     public function fulfill_order($id){
         $order  = RetailerOrder::find($id);
         if($order != null){
-            return view('orders.fulfillment')->with([
-                'order' => $order
-            ]);
+            if($order->paid == 1){
+                return view('orders.fulfillment')->with([
+                    'order' => $order
+                ]);
+            }
+            else{
+                return redirect()-back()->with('error','Refunded Order Cant Be Processed Fulfillment');
+            }
+
         }
     }
     public function fulfillment_order(Request $request,$id){
         $order  = RetailerOrder::find($id);
         if($order != null){
-            $fulfillable_quantities = $request->input('item_fulfill_quantity');
-            if($order->custom == 0){
-                $shop = $this->helper->getSpecificShop($order->shop_id);
-                $shopify_fulfillment = null;
-                if($shop != null){
-                    $location_response = $shop->api()->rest('GET','/admin/locations.json');
-                    if(!$location_response->errors){
-                        $data = [
-                            "fulfillment" => [
-                                "location_id"=> $location_response->body->locations[0]->id,
-                                "tracking_number"=> null,
-                                "line_items" => [
+            if($order->paid == 1){
+                $fulfillable_quantities = $request->input('item_fulfill_quantity');
+                if($order->custom == 0){
+                    $shop = $this->helper->getSpecificShop($order->shop_id);
+                    $shopify_fulfillment = null;
+                    if($shop != null){
+                        $location_response = $shop->api()->rest('GET','/admin/locations.json');
+                        if(!$location_response->errors){
+                            $data = [
+                                "fulfillment" => [
+                                    "location_id"=> $location_response->body->locations[0]->id,
+                                    "tracking_number"=> null,
+                                    "line_items" => [
 
+                                    ]
                                 ]
-                            ]
-                        ];
-                        foreach ($request->input('item_id') as $index => $item) {
-                            $line_item = RetailerOrderLineItem::find($item);
-                            if ($line_item != null && $fulfillable_quantities[$index] > 0) {
-                                array_push($data['fulfillment']['line_items'], [
-                                    "id" => $line_item->retailer_product_variant_id,
-                                    "quantity" => $fulfillable_quantities[$index],
-                                ]);
+                            ];
+                            foreach ($request->input('item_id') as $index => $item) {
+                                $line_item = RetailerOrderLineItem::find($item);
+                                if ($line_item != null && $fulfillable_quantities[$index] > 0) {
+                                    array_push($data['fulfillment']['line_items'], [
+                                        "id" => $line_item->retailer_product_variant_id,
+                                        "quantity" => $fulfillable_quantities[$index],
+                                    ]);
+                                }
+                            }
+                            $response = $shop->api()->rest('POST','/admin/orders/'.$order->shopify_order_id.'/fulfillments.json',$data);
+                            if($response->errors){
+                                return redirect()->back()->with('error','Cant Fulfill Items of Order in Related Store!');
+
+                            }
+                            else{
+
+                                return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, $response);
                             }
                         }
-                        $response = $shop->api()->rest('POST','/admin/orders/'.$order->shopify_order_id.'/fulfillments.json',$data);
-                        if($response->errors){
-                            return redirect()->back()->with('error','Cant Fulfill Items of Order in Related Store!');
-
-                        }
                         else{
-
-                            return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, $response);
+                            return redirect()->back()->with('error','Cant Fulfill Item Cause Related Store Dont have Location Stored!');
                         }
                     }
                     else{
-                        return redirect()->back()->with('error','Cant Fulfill Item Cause Related Store Dont have Location Stored!');
+                        return redirect()->back()->with('error','Order Related Store Not Found');
                     }
                 }
+
                 else{
-                    return redirect()->back()->with('error','Order Related Store Not Found');
+                    return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, '');
                 }
             }
             else{
-                return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, '');
-
+                return redirect()-back()->with('error','Refunded Order Cant Be Processed Fulfillment');
             }
         }
         else{
@@ -107,24 +118,29 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::find($request->id);
         $fulfillment = OrderFulfillment::find($request->fulfillment_id);
         if($order != null && $fulfillment != null){
-            if($order->custom == 0){
-                $shop = $this->helper->getSpecificShop($order->shop_id);
-                if($shop != null){
-                    $response = $shop->api()->rest('POST','/admin/orders/'.$order->shopify_order_id.'/fulfillments/'.$fulfillment->fulfillment_shopify_id.'/cancel.json');
-                    if($response->errors){
-                        return redirect()->back()->with('error','Order Fulfillment Cancellation Failed!');
+            if($order->paid == 1){
+                if($order->custom == 0){
+                    $shop = $this->helper->getSpecificShop($order->shop_id);
+                    if($shop != null){
+                        $response = $shop->api()->rest('POST','/admin/orders/'.$order->shopify_order_id.'/fulfillments/'.$fulfillment->fulfillment_shopify_id.'/cancel.json');
+                        if($response->errors){
+                            return redirect()->back()->with('error','Order Fulfillment Cancellation Failed!');
+                        }
+                        else{
+                            return $this->unset_fullfilment($fulfillment, $order);
+                        }
                     }
                     else{
-                        return $this->unset_fullfilment($fulfillment, $order);
+                        return redirect()->back()->with('error','Order Related Store Not Found');
+
                     }
                 }
                 else{
-                    return redirect()->back()->with('error','Order Related Store Not Found');
-
+                    return $this->unset_fullfilment($fulfillment, $order);
                 }
             }
             else{
-                return $this->unset_fullfilment($fulfillment, $order);
+                return redirect()-back()->with('error','Refunded Order Cant Be Processed Fulfillment');
             }
 
         }
@@ -136,82 +152,84 @@ class AdminOrderController extends Controller
     public function fulfillment_add_tracking(Request $request){
         $order = RetailerOrder::find($request->id);
         if($order != null ){
-            $fulfillments = $request->input('fulfillment');
-            $tracking_numbers = $request->input('tracking_number');
-            $tracking_urls = $request->input('tracking_url');
-            $tracking_notes = $request->input('tracking_notes');
-            if($order->custom == 0){
-                $shop = $this->helper->getSpecificShop($order->shop_id);
-                if($shop != null){
-                    foreach ($fulfillments as $index => $f){
-                        $current = OrderFulfillment::find($f);
-                        if($current != null){
-                            $data = [
-                                "fulfillment" => [
-                                    "tracking_number"=> $tracking_numbers[$index],
-                                    "tracking_url" =>$tracking_urls[$index],
-                                ]
-                            ];
-                            $response = $shop->api()->rest('PUT','/admin/orders/'.$order->shopify_order_id.'/fulfillments/'.$current->fulfillment_shopify_id.'.json',$data);
+            if($order->paid == 1) {
+                $fulfillments = $request->input('fulfillment');
+                $tracking_numbers = $request->input('tracking_number');
+                $tracking_urls = $request->input('tracking_url');
+                $tracking_notes = $request->input('tracking_notes');
+                if ($order->custom == 0) {
+                    $shop = $this->helper->getSpecificShop($order->shop_id);
+                    if ($shop != null) {
+                        foreach ($fulfillments as $index => $f) {
+                            $current = OrderFulfillment::find($f);
+                            if ($current != null) {
+                                $data = [
+                                    "fulfillment" => [
+                                        "tracking_number" => $tracking_numbers[$index],
+                                        "tracking_url" => $tracking_urls[$index],
+                                    ]
+                                ];
+                                $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
 
-                            if(!$response->errors){
-                                $current->tracking_number = $tracking_numbers[$index];
-                                $current->tracking_url = $tracking_urls[$index];
-                                $current->tracking_notes = $tracking_notes[$index];
-                                $current->save();
+                                if (!$response->errors) {
+                                    $current->tracking_number = $tracking_numbers[$index];
+                                    $current->tracking_url = $tracking_urls[$index];
+                                    $current->tracking_notes = $tracking_notes[$index];
+                                    $current->save();
 
-                                /*Maintaining Log*/
-                                $order_log =  new OrderLog();
-                                $order_log->message = "Tracking detailed added to fulfillment named ". $current->name."  successfully on ".now()->format('d M, Y h:i a');
-                                $order_log->status = "Tracking Details Added";
-                                $order_log->retailer_order_id = $order->id;
-                                $order_log->save();
+                                    /*Maintaining Log*/
+                                    $order_log = new OrderLog();
+                                    $order_log->message = "Tracking detailed added to fulfillment named " . $current->name . "  successfully on " . now()->format('d M, Y h:i a');
+                                    $order_log->status = "Tracking Details Added";
+                                    $order_log->retailer_order_id = $order->id;
+                                    $order_log->save();
+                                }
+
                             }
-
                         }
+                    } else {
+                        return redirect()->back()->with('error', 'Order Related Store Not Found');
+                    }
+                } else {
+                    foreach ($fulfillments as $index => $f) {
+                        $current = OrderFulfillment::find($f);
+                        if ($current != null) {
+                            $current->tracking_number = $tracking_numbers[$index];
+                            $current->tracking_url = $tracking_urls[$index];
+                            $current->tracking_notes = $tracking_notes[$index];
+                            $current->save();
+
+                            /*Maintaining Log*/
+                            $order_log = new OrderLog();
+                            $order_log->message = "Tracking detailed added to fulfillment named " . $current->name . "  successfully on " . now()->format('d M, Y h:i a');
+                            $order_log->status = "Tracking Details Added";
+                            $order_log->retailer_order_id = $order->id;
+                            $order_log->save();
+                        }
+
                     }
                 }
-                else{
-                    return redirect()->back()->with('error','Order Related Store Not Found');
-                }
-            }
-            else{
-                foreach ($fulfillments as $index => $f){
-                    $current = OrderFulfillment::find($f);
-                    if($current != null){
-                        $current->tracking_number = $tracking_numbers[$index];
-                        $current->tracking_url = $tracking_urls[$index];
-                        $current->tracking_notes = $tracking_notes[$index];
-                        $current->save();
-
-                        /*Maintaining Log*/
-                        $order_log =  new OrderLog();
-                        $order_log->message = "Tracking detailed added to fulfillment named ". $current->name."  successfully on ".now()->format('d M, Y h:i a');
-                        $order_log->status = "Tracking Details Added";
-                        $order_log->retailer_order_id = $order->id;
-                        $order_log->save();
+                $count = 0;
+                $fulfillment_count = count($order->fulfillments);
+                foreach ($order->fulfillments as $f) {
+                    if ($f->tracking_number != null) {
+                        $count++;
                     }
+                }
+                if ($count == $fulfillment_count) {
+                    $order->status = 'shipped';
+                } else {
+                    $order->status = 'partially-shipped';
+                }
 
-                }
-            }
-            $count = 0;
-            $fulfillment_count = count($order->fulfillments);
-            foreach ($order->fulfillments as $f){
-                if($f->tracking_number != null){
-                    $count ++;
-                }
-            }
-            if($count == $fulfillment_count){
-                $order->status = 'shipped';
+                $order->save();
+
+
+                return redirect()->back()->with('success', 'Tracking Details Added To Fulfillment Successfully!');
             }
             else{
-                $order->status = 'partially-shipped';
+                return redirect()-back()->with('error','Refunded Order Cant Be Processed Fulfillment');
             }
-
-            $order->save();
-
-
-            return redirect()->back()->with('success','Tracking Details Added To Fulfillment Successfully!');
 
         }
         else{
@@ -223,17 +241,22 @@ class AdminOrderController extends Controller
     public function mark_as_delivered(Request $request){
         $order = RetailerOrder::find($request->id);
         if($order != null) {
-            $order->status = 'delivered';
-            $order->save();
+            if($order->paid == 1) {
+                $order->status = 'delivered';
+                $order->save();
 
-            /*Maintaining Log*/
-            $order_log =  new OrderLog();
-            $order_log->message = "Order marked as delivered successfully on ".now()->format('d M, Y h:i a');
-            $order_log->status = "Delivered";
-            $order_log->retailer_order_id = $order->id;
-            $order_log->save();
+                /*Maintaining Log*/
+                $order_log =  new OrderLog();
+                $order_log->message = "Order marked as delivered successfully on ".now()->format('d M, Y h:i a');
+                $order_log->status = "Delivered";
+                $order_log->retailer_order_id = $order->id;
+                $order_log->save();
 
-            return redirect()->back()->with('success', 'Order Marked as Delivered Successfully');
+                return redirect()->back()->with('success', 'Order Marked as Delivered Successfully');
+            }
+            else{
+                return redirect()-back()->with('error','Refunded Order Cant Be Processed Fulfillment');
+            }
         }  else{
             return redirect()->back()->with('error','Order Marked as Delivered Failed');
 
@@ -244,16 +267,21 @@ class AdminOrderController extends Controller
     public function mark_as_completed(Request $request){
         $order = RetailerOrder::find($request->id);
         if($order != null){
-            $order->status = 'completed';
-            $order->save();
+            if($order->paid == 1) {
+                $order->status = 'completed';
+                $order->save();
 
-            $order_log =  new OrderLog();
-            $order_log->message = "Order marked as completed successfully on ".now()->format('d M, Y h:i a');
-            $order_log->status = "Completed";
-            $order_log->retailer_order_id = $order->id;
-            $order_log->save();
+                $order_log =  new OrderLog();
+                $order_log->message = "Order marked as completed successfully on ".now()->format('d M, Y h:i a');
+                $order_log->status = "Completed";
+                $order_log->retailer_order_id = $order->id;
+                $order_log->save();
 
-            return redirect()->back()->with('success','Order Marked as Completed Successfully');
+                return redirect()->back()->with('success','Order Marked as Completed Successfully');
+            }
+            else{
+                return redirect()-back()->with('error','Refunded Order Cant Be Processed Fulfillment');
+            }
         }
         else{
             return redirect()->back()->with('error','Order Marked as Completed Failed');
