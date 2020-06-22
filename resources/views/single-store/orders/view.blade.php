@@ -29,6 +29,97 @@
                 </div>
             </div>
         @endif
+        @if($order->paid == 1)
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary" data-target="#create_refund_modal" data-toggle="modal">Generate Refund</button>
+                </div>
+            </div>
+            <div class="modal fade" id="create_refund_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+                    <div class="modal-content">
+                        <div class="block block-themed block-transparent mb-0">
+                            <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Generate Refund</h3>
+                                <div class="block-options">
+                                    <button type="button" class="btn-block-option">
+                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <form action="{{route('refund.create')}}" method="post"  enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="source" value="store">
+                                <input type="hidden" name="manager_id" value="{{$shop->sale_manager_id}}">
+                                <input type="hidden" name="shop_id" value="{{$shop->id}}">
+                                <input type="hidden" name="type" value="store-ticket">
+
+                                <div class="block-content font-size-sm">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Refund Title</label>
+                                                <input required class="form-control" type="text"  name="title"
+                                                       placeholder="Enter Title here">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Order</label>
+                                                <select name="order_id" class="form-control" required>
+                                                        <option value="{{$order->id}}">{{$order->name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Priority</label>
+                                                <select name="priority" class="form-control" required>
+                                                    <option value="low">Low</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="high">High</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Attachments </label>
+                                                <input type="file" name="attachments[]" class="form-control" multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Reason</label>
+                                                <textarea required class="js-summernote" name="message"
+                                                          placeholder="Please Enter Description here !"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="block-content block-content-full text-right border-top">
+
+                                    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        @endif
         <div class="row">
             <div class="col-md-9">
                 <div class="block">
@@ -76,44 +167,44 @@
                             <tbody>
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
-                                <tr>
-                                    <td>
-                                        @if($item->linked_variant != null)
-                                            <img class="img-avatar"
-                                                 @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                 @else @if(\Illuminate\Support\Str::contains($item->linked_variant->has_image->image,['https://','http://'])) src="{{$item->linked_variant->has_image->image}}" @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
-                                        @else
-                                            <img class="img-avatar img-avatar-variant"
-                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        {{$item->name}}
+                                    <tr>
+                                        <td>
+                                            @if($item->linked_variant != null)
+                                                <img class="img-avatar"
+                                                     @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                     @else @if(\Illuminate\Support\Str::contains($item->linked_variant->has_image->image,['https://','http://'])) src="{{$item->linked_variant->has_image->image}}" @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
+                                            @else
+                                                <img class="img-avatar img-avatar-variant"
+                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{$item->name}}
 
-                                    </td>
-                                    <td>
-                                        @if($item->fulfilled_by == 'store')
-                                            <span class="badge badge-danger"> Store</span>
-                                        @elseif ($item->fulfilled_by == 'Fantasy')
-                                            <span class="badge badge-success"> WeFullFill </span>
-                                        @else
-                                            <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
-                                        @endif
-                                    </td>
+                                        </td>
+                                        <td>
+                                            @if($item->fulfilled_by == 'store')
+                                                <span class="badge badge-danger"> Store</span>
+                                            @elseif ($item->fulfilled_by == 'Fantasy')
+                                                <span class="badge badge-success"> WeFullFill </span>
+                                            @else
+                                                <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                            @endif
+                                        </td>
 
-                                    <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
-                                    <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
-                                    <td>
-                                        @if($item->fulfillment_status == null)
-                                            <span class="badge badge-warning"> Unfulfilled</span>
-                                        @elseif($item->fulfillment_status == 'partially-fulfilled')
-                                            <span class="badge badge-danger"> Partially Fulfilled</span>
-                                        @else
-                                            <span class="badge badge-success"> Fulfilled</span>
-                                        @endif
-                                    </td>
+                                        <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
+                                        <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
+                                        <td>
+                                            @if($item->fulfillment_status == null)
+                                                <span class="badge badge-warning"> Unfulfilled</span>
+                                            @elseif($item->fulfillment_status == 'partially-fulfilled')
+                                                <span class="badge badge-danger"> Partially Fulfilled</span>
+                                            @else
+                                                <span class="badge badge-success"> Fulfilled</span>
+                                            @endif
+                                        </td>
 
-                                </tr>
+                                    </tr>
                                 @endif
                             @endforeach
 
@@ -349,51 +440,51 @@
                                     <div class="block-content">
                                         <ul class="timeline timeline-alt">
                                             @foreach($order->logs as $log)
-                                            <li class="timeline-event">
-                                                @if($log->status == "Newly Synced")
-                                                <div class="timeline-event-icon bg-warning">
-                                                    <i class="fa fa-sync"></i>
-                                                </div>
+                                                <li class="timeline-event">
+                                                    @if($log->status == "Newly Synced")
+                                                        <div class="timeline-event-icon bg-warning">
+                                                            <i class="fa fa-sync"></i>
+                                                        </div>
                                                     @elseif($log->status == "paid")
-                                                    <div class="timeline-event-icon bg-success">
-                                                        <i class="fa fa-dollar-sign"></i>
-                                                    </div>
-                                                @elseif($log->status == "Fulfillment")
-                                                    <div class="timeline-event-icon bg-primary">
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                @elseif($log->status == "Fulfillment Cancelled")
-                                                    <div class="timeline-event-icon bg-danger">
-                                                        <i class="fa fa-ban"></i>
-                                                    </div>
-                                                @elseif($log->status == "Tracking Details Added")
-                                                    <div class="timeline-event-icon bg-amethyst">
-                                                        <i class="fa fa-truck"></i>
-                                                    </div>
-                                                @elseif($log->status == "Delivered")
-                                                    <div class="timeline-event-icon" style="background: deeppink">
-                                                        <i class="fa fa-home"></i>
-                                                    </div>
-                                                @elseif($log->status == "Completed")
-                                                    <div class="timeline-event-icon" style="background: darkslategray">
-                                                        <i class="fa fa-check"></i>
-                                                    </div>
-                                                @endif
-                                                <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
-                                                    <div class="block-header block-header-default">
-                                                        <h3 class="block-title">{{$log->status}}</h3>
-                                                        <div class="block-options">
-                                                            <div class="timeline-event-time block-options-item font-size-sm font-w600">
-                                                                {{date_create($log->created_at)->format('d M, Y h:i a')}}
+                                                        <div class="timeline-event-icon bg-success">
+                                                            <i class="fa fa-dollar-sign"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Fulfillment")
+                                                        <div class="timeline-event-icon bg-primary">
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Fulfillment Cancelled")
+                                                        <div class="timeline-event-icon bg-danger">
+                                                            <i class="fa fa-ban"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Tracking Details Added")
+                                                        <div class="timeline-event-icon bg-amethyst">
+                                                            <i class="fa fa-truck"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Delivered")
+                                                        <div class="timeline-event-icon" style="background: deeppink">
+                                                            <i class="fa fa-home"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Completed")
+                                                        <div class="timeline-event-icon" style="background: darkslategray">
+                                                            <i class="fa fa-check"></i>
+                                                        </div>
+                                                    @endif
+                                                    <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
+                                                        <div class="block-header block-header-default">
+                                                            <h3 class="block-title">{{$log->status}}</h3>
+                                                            <div class="block-options">
+                                                                <div class="timeline-event-time block-options-item font-size-sm font-w600">
+                                                                    {{date_create($log->created_at)->format('d M, Y h:i a')}}
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <div class="block-content">
+                                                            <p> {{$log->message}} </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="block-content">
-                                                        <p> {{$log->message}} </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                                @endforeach
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

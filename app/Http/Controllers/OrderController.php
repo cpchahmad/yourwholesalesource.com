@@ -13,6 +13,7 @@ use App\RetailerProductVariant;
 use App\ShippingRate;
 use App\Zone;
 use Illuminate\Http\Request;
+use function Psy\sh;
 
 class OrderController extends Controller
 {
@@ -39,12 +40,14 @@ class OrderController extends Controller
 
 
     public function view_order($id){
+        $shop = $this->helper->getLocalShop();
         $order  = RetailerOrder::find($id);
         $settings = AdminSetting::all()->first();
         if($order != null){
             return view('single-store.orders.view')->with([
                 'order' => $order,
-                'settings' =>$settings
+                'settings' =>$settings,
+                'shop' => $shop
             ]);
         }
     }
