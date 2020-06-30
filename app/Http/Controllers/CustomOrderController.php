@@ -297,7 +297,8 @@ class CustomOrderController extends Controller
         return view('non_shopify_users.product.wefullfill_products')->with([
             'categories' => $categories,
             'products' => $products,
-            'search' =>$request->input('search')
+            'search' =>$request->input('search'),
+            'filter' => $request->input('filter')
         ]);
     }
     public function view_fantasy_product($id){

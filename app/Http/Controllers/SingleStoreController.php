@@ -139,7 +139,9 @@ class SingleStoreController extends Controller
             'categories' => $categories,
             'products' => $products,
             'shop' => $shop,
-            'search' =>$request->input('search')
+            'search' =>$request->input('search'),
+            'filter' => $request->input('filter')
+
         ]);
     }
     public function view_fantasy_product($id){
