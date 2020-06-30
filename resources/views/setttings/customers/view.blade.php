@@ -114,6 +114,7 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
+
                                                 <a href="{{route('admin.order.view',$order->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Order"><i class="fa fa-eye"></i></a>

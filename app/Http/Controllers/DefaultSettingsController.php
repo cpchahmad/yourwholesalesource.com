@@ -411,11 +411,13 @@ class DefaultSettingsController extends Controller
         ]);
     }
     public function stores(Request $request){
+        $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         $stores= Shop::query();
         $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
         $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
         return view('setttings.stores.index')->with([
-            'stores'=>$stores
+            'stores'=>$stores,
+            'managers' => $sales_managers
         ]);
     }
 
@@ -456,11 +458,13 @@ class DefaultSettingsController extends Controller
     }
 
     public function users(Request $request){
+        $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         $users = User::role('non-shopify-users')->newQuery();
         $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
         $users = $users->orderBy('created_at','DESC')->paginate(30);
         return view('setttings.users.index')->with([
-            'users'=>$users
+            'users'=>$users,
+            'managers' => $sales_managers
         ]);
     }
 
@@ -481,8 +485,6 @@ class DefaultSettingsController extends Controller
                 $tickets->where('priority', '=', $request->input('priority'));
             }
         }
-
-
         $tickets = $tickets->paginate(30);
         return view('setttings.refunds.index')->with([
             'tickets' => $tickets,
@@ -499,6 +501,30 @@ class DefaultSettingsController extends Controller
             'manager' => $manager,
             'ticket' => $ticket,
         ]);
+    }
+
+    public function assign_manager(Request $request,$id){
+        $manager = User::role('sales-manager')->find($request->input('sale_manager_id'));
+        if($manager != null){
+            if($request->input('type') == 'user'){
+                $user = User::role('non-shopify-users')->find($id);
+                $user->sale_manager_id = $manager->id;
+                $user->save();
+
+            }
+            else{
+                $shop = Shop::find($id);
+                $shop->sale_manager_id = $manager->id;
+                $shop->save();
+            }
+            return redirect()->back()->with('success','Manager Updated Successfully!');
+        }
+        else{
+           return redirect()->back()->with('error','Manager Not Found!');
+        }
+
+
+
     }
 
 }

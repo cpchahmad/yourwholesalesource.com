@@ -38,14 +38,14 @@
                             Line Items
                         </h3>
                         @if($order->paid == '0')
-                            <span class="badge badge-warning" style="font-size: medium; margin-right: 10px"> unpaid </span>
+                            <span class="badge badge-warning" style="font-size: medium; margin-right: 10px"> Unpaid </span>
                         @elseif($order->paid == '1')
-                            <span class="badge badge-success" style="font-size: small; margin-right: 10px"> paid </span>
+                            <span class="badge badge-success" style="font-size: medium; margin-right: 10px"> Paid </span>
                         @elseif($order->paid == '2')
-                            <span class="badge badge-danger" style="font-size: small; margin-right: 10px"> refunded</span>
+                            <span class="badge badge-danger" style="font-size: medium; margin-right: 10px"> Refunded</span>
                         @endif
                         @if($order->status == 'paid')
-                            <span class="badge badge-primary" style="float: right;font-size: medium"> new </span>
+                            <span class="badge badge-primary" style="float: right;font-size: medium"> New </span>
 
                         @elseif($order->status == 'unfulfilled')
                             <span class="badge badge-warning" style="float: right;font-size: medium"> {{$order->status}}</span>

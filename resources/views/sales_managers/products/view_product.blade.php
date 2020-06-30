@@ -129,9 +129,15 @@
                         <div class="clearfix" style="margin-top: 5px;width: 100%">
 
                             @if($product->quantity > 0)
-                                <span class="h5">
-                            <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
-                        </span>
+                                @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
+                                    <span class="h5">
+                                        <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                                    </span>
+                                @else
+                                    <span class="h5">
+                                <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
+                            </span>
+                                @endif
                             @else
                                 <span class="h5">
                             <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>

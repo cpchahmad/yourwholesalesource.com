@@ -64,12 +64,52 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
+                                        <a class="btn btn-primary text-white" data-toggle="modal" data-target="#assign_manager_{{$store->id}}" type="button">Assign Manager</a>
                                         <a class="btn btn-xs btn-sm btn-success" type="button" href="{{route('stores.view',$store->id)}}" title="View Store">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="assign_manager_{{$store->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-popout" role="document">
+                                    <div class="modal-content">
+                                        <div class="block block-themed block-transparent mb-0">
+                                            <div class="block-header bg-primary-dark">
+                                                <h3 class="block-title">Manage Sales Manager</h3>
+                                                <div class="block-options">
+                                                    <button type="button" class="btn-block-option">
+                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <form action="{{route('assign_manager',$store->id)}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="type" value="store">
+                                                <div class="block-content font-size-sm">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <label for="">Sales Managers</label>
+                                                            <select required name="sale_manager_id" class="form-control">
+                                                                @foreach($managers as $manager)
+                                                                    <option  @if($store->has_manager != null) @if($store->has_manager->id == $manager->if) selected @endif @endif value="{{$manager->id}}"> {{$manager->name}} {{$manager->last_name}} ({{$manager->email}}) </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="block-content block-content-full text-right border-top">
+
+                                                    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         @endforeach
                         </tbody>
                     </table>

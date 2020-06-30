@@ -106,6 +106,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('/refunds','DefaultSettingsController@refunds')->name('refunds.index');
     Route::get('/refunds/{id}', 'DefaultSettingsController@view_refund')->name('refunds.view');
+    Route::post('/assign_manager/{id}', 'DefaultSettingsController@assign_manager')->name('assign_manager');
+
 
 
 });

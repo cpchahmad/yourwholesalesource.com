@@ -58,17 +58,17 @@
                                         <a class="img-link img-link-zoom-in img-lightbox" href="{{$images[0]->image}}">
                                             <img class="img-fluid" src="{{$images[0]->image}}" alt="">
                                         </a>
-                                        @else
-                                    @if($images[0]->isV == 0)
-                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
-                                            <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
-                                        </a>
                                     @else
-                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
-                                            <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
-                                        </a>
-                                    @endif
+                                        @if($images[0]->isV == 0)
+                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
+                                                <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
+                                            </a>
+                                        @else
+                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
+                                                <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
+                                            </a>
                                         @endif
+                                    @endif
 
                                 @endif
                             </div>
@@ -80,16 +80,16 @@
                                                 <img class="img-fluid" src="{{$image->image}}" alt="">
                                             </a>
                                         @else
-                                        @if($image->isV == 0)
-                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$image->image}}">
-                                                <img class="img-fluid" src="{{asset('images')}}/{{$image->image}}" alt="">
-                                            </a>
-                                        @else
-                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$image->image}}">
-                                                <img class="img-fluid" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                            </a>
-                                        @endif
+                                            @if($image->isV == 0)
+                                                <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$image->image}}">
+                                                    <img class="img-fluid" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                </a>
+                                            @else
+                                                <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$image->image}}">
+                                                    <img class="img-fluid" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                </a>
                                             @endif
+                                        @endif
                                     </div>
                                 @endforeach
                             @endif
@@ -133,7 +133,7 @@
                         <h2>
                             @if($product->import_from_shopify == 1)
                                 {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WEFULLFILL @endif</span>
-                                @else
+                            @else
                                 <a href="{{route('product.edit',$product->id)}}">
                                     {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WEFULLFILL @endif</span>
                                 </a>
@@ -142,9 +142,15 @@
                         <div class="clearfix" style="margin-top: 5px;width: 100%">
 
                             @if($product->quantity > 0)
-                                <span class="h5">
-                                <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                                @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
+                                    <span class="h5">
+                                        <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                                    </span>
+                                @else
+                                    <span class="h5">
+                                <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
                             </span>
+                                @endif
                             @else
                                 <span class="h5">
                                 <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
@@ -187,11 +193,11 @@
                                                             <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
                                                                  @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                                  @else  src="{{$variant->has_image->image}}" @endif @ alt="">
-                                                            @else
+                                                        @else
                                                             <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
                                                                  @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                                  @else @if($variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @else src="{{asset('images')}}/{{$variant->has_image->image}}" @endif @endif alt="">
-                                                            @endif
+                                                        @endif
 
                                                     </td>
                                                     <td>
