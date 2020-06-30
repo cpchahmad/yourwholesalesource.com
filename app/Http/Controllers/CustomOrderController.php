@@ -269,6 +269,9 @@ class CustomOrderController extends Controller
         if($request->has('search')){
             $productQuery->where('title','LIKE','%'.$request->input('search').'%')->orWhere('tags','LIKE','%'.$request->input('search').'%');
         }
+        if($request->has('tag')){
+            $productQuery->orWhere('tags','LIKE','%'.$request->input('tag').'%');
+        }
         $products = $productQuery->paginate(12);
 
         return view('non_shopify_users.product.wefullfill_products')->with([
