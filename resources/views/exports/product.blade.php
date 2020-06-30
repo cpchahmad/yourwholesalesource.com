@@ -38,7 +38,7 @@
         <tr>
             <td>{{ $product['handle'] }}</td>
             <td>{{ $product['title'] }}</td>
-            <td>{{ $product['body_html'] }}</td>
+            <td>{!! $product['body_html'] !!}</td>
             <td>{{ $product['vendor'] }}</td>
             <td>{{ $product['product_type'] }}</td>
             <td>{{ $product['tags'] }}</td>
