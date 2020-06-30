@@ -34,10 +34,15 @@ class CustomOrderController extends Controller
 {
     public function index(Request $request){
         $orders  = RetailerOrder::where('user_id',Auth::id())->where('custom',1)->newQuery();
-        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
+        if($request->has('search')){
+            $orders->where('name','LIKE','%'.$request->input('search').'%');
 
+        }
+        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
         return view('non_shopify_users.orders.index')->with([
-            'orders' => $orders
+            'orders' => $orders,
+            'search' => $request->input('search')
+
         ]);
     }
 
@@ -628,7 +633,7 @@ class CustomOrderController extends Controller
                 $order_log->save();
 
             }
-             return redirect()->route('users.files.view',$request->id)->with('success','Bulk Payment Processed Successfully!');
+            return redirect()->route('users.files.view',$request->id)->with('success','Bulk Payment Processed Successfully!');
 
         }
         else{
@@ -645,7 +650,7 @@ class CustomOrderController extends Controller
             'user' => $user,
             'tickets' => $tickets,
             'categories' => TicketCategory::all(),
-            ]);
+        ]);
     }
 
     public function view_ticket(Request $request){

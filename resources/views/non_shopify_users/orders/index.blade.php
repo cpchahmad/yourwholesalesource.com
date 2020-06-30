@@ -23,10 +23,11 @@
         <form class="js-form-icon-search push" action="" method="get">
             <div class="form-group">
                 <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Search by name, title of products" value="" name="search">
+                    <input type="search" class="form-control" placeholder="Search by Order ID" value="{{$search}}" name="search" required >
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                         <a class="btn btn-danger" href=""> <i class="fa fa-times"></i> Clear </a>
+
                     </div>
                 </div>
             </div>

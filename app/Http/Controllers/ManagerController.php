@@ -117,10 +117,16 @@ class ManagerController extends Controller
         $shop_array = $manager->has_sales_stores()->pluck('id')->toArray();
         $orders->WhereIn('user_id',$users_array);
         $orders->orWhereIn('shop_id',$shop_array);
+        if($request->has('search')){
+            $orders->where('name','LIKE','%'.$request->input('search').'%');
+
+        }
         $orders = $orders->orderBy('created_at','DESC')->paginate(30);
 //        dd($orders);
         return view('sales_managers.orders.index')->with([
-            'orders' => $orders
+            'orders' => $orders,
+            'search' => $request->input('search')
+
         ]);
     }
     public function view_order($id){

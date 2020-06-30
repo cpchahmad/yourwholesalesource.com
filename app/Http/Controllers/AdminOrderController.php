@@ -24,10 +24,15 @@ class AdminOrderController extends Controller
 
     public function index(Request $request){
         $orders  = RetailerOrder::whereIn('paid',[1,2])->newQuery();
+        if($request->has('search')){
+            $orders->where('name','LIKE','%'.$request->input('search').'%');
+
+        }
         $orders = $orders->orderBy('created_at','DESC')->paginate(30);
 
         return view('orders.index')->with([
-            'orders' => $orders
+            'orders' => $orders,
+            'search' => $request->input('search')
         ]);
     }
     public function view_order($id){
