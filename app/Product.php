@@ -30,5 +30,11 @@ class Product extends Model
     public function has_preferences(){
         return $this->belongsToMany('App\Shop','product_shop','product_id','shop_id');
     }
+    public function has_retailer_products(){
+        return $this->hasMany(RetailerProduct::class,'link_product_id');
+    }
+    public function has_imported(){
+        return $this->belongsToMany('App\Shop','retailer_product_shop','product_id','shop_id');
+    }
 
 }

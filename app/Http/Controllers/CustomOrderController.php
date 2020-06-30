@@ -272,7 +272,27 @@ class CustomOrderController extends Controller
         if($request->has('tag')){
             $productQuery->orWhere('tags','LIKE','%'.$request->input('tag').'%');
         }
-        $products = $productQuery->paginate(12);
+        if($request->has('filter')){
+            if($request->input('filter') == 'most-order'){
+//                $productQuery->withCount(['has_retailer_products' => function(Builder  $q){
+//                    $q->whereHas('hasVariants',function ($va){
+//                        dd($va);
+//                    });
+//                }]);
+                $products = $productQuery->paginate(12);
+
+            }
+            elseif($request->input('filter') == 'most-imported'){
+                $products =   $productQuery->withCount(['has_imported'])->orderBy('has_imported_count', 'DESC')->paginate(12);
+            }
+            elseif($request->input('filter') == 'new-arrival'){
+                $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
+
+            }
+        }
+        else{
+            $products = $productQuery->paginate(12);
+        }
 
         return view('non_shopify_users.product.wefullfill_products')->with([
             'categories' => $categories,

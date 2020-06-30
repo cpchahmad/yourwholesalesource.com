@@ -112,6 +112,25 @@
                 </a>
             </div>
         </div>
+        <div class="row mb-2">
+            <div class="col-md-6 text-right">
+            </div>
+            <div class="col-md-6 text-right">
+                <form action="" method="get">
+                    <div class="d-flex">
+                        <select name="filter" class="form-control" required>
+                            <option value="">Filter By</option>
+                            <option value="most-order">Most Order</option>
+                            <option value="most-imported">Most Imported</option>
+                            <option value="new-arrival">New Arrival</option>
+                        </select>
+                        <input type="submit" style="margin-left: 10px" class="btn btn-sm btn-primary" value="Filter">
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
         <div class="row" style="margin-top: 20px">
             @if(count($products) > 0)
                 @foreach($products as $index => $product)

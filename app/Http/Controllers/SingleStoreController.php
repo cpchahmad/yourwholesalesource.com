@@ -19,6 +19,7 @@ use App\User;
 use App\Wishlist;
 use App\Zone;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
@@ -73,8 +74,29 @@ class SingleStoreController extends Controller
         if($request->has('tag')){
             $productQuery->orWhere('tags','LIKE','%'.$request->input('tag').'%');
         }
+        if($request->has('filter')){
+            if($request->input('filter') == 'most-order'){
+//                $productQuery->withCount(['has_retailer_products' => function(Builder  $q){
+//                    $q->whereHas('hasVariants',function ($va){
+//                        dd($va);
+//                    });
+//                }]);
+                $products = $productQuery->paginate(12);
 
-        $products = $productQuery->paginate(12);
+            }
+            elseif($request->input('filter') == 'most-imported'){
+                $products =   $productQuery->withCount(['has_imported'])->orderBy('has_imported_count', 'DESC')->paginate(12);
+            }
+            elseif($request->input('filter') == 'new-arrival'){
+                $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
+
+            }
+        }
+        else{
+            $products = $productQuery->paginate(12);
+        }
+
+
 
         foreach ($products as $product){
             $total_weight = $product->weight;
