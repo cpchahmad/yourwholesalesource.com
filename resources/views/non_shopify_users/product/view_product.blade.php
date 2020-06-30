@@ -79,17 +79,27 @@
                             @endif
                         </div>
                         <hr>
-                        @if(count($product->has_categories) > 0)
+                        @if(count($product->has_platforms) > 0)
                             <div class="tags" style="margin-top: 5px">
-                                @if($product->tags != null)
-                                    <h4 style="margin-bottom: 5px">Categories</h4>
-                                    @foreach($product->has_categories as $cat)
-                                        <span class="badge badge-primary">{{$cat->title}}</span>
-                                    @endforeach
-                                @endif
+
+                                <h4 style="margin-bottom: 5px">Warned Platforms</h4>
+                                @foreach($product->has_platforms as $cat)
+                                    <span class="badge badge-primary">{{$cat->name}}</span>
+                                @endforeach
+
                             </div>
                             <hr>
                         @endif
+                        @if(count($product->has_categories) > 0)
+                            <div class="tags" style="margin-top: 5px">
+
+                                <h4 style="margin-bottom: 5px">Categories</h4>
+                                @foreach($product->has_categories as $cat)
+                                    <span class="badge badge-primary">{{$cat->title}}</span>
+                                @endforeach
+
+                                <hr>
+                                @endif
                         @if(count($product->has_subcategories) > 0)
                             <div class="tags" style="margin-top: 5px">
                                 <h4 style="margin-bottom: 5px">Subcategories</h4>

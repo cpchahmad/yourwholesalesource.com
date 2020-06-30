@@ -98,14 +98,24 @@
                             @endif
                         </div>
                         <hr>
+                        @if(count($product->has_platforms) > 0)
+                            <div class="tags" style="margin-top: 5px">
+
+                                    <h4 style="margin-bottom: 5px">Warned Platforms</h4>
+                                    @foreach($product->has_platforms as $cat)
+                                        <span class="badge badge-primary">{{$cat->name}}</span>
+                                    @endforeach
+
+                            </div>
+                            <hr>
+                        @endif
                         @if(count($product->has_categories) > 0)
                             <div class="tags" style="margin-top: 5px">
-                                @if($product->tags != null)
-                                    <h4 style="margin-bottom: 5px">Categories</h4>
-                                    @foreach($product->has_categories as $cat)
-                                        <span class="badge badge-primary">{{$cat->title}}</span>
-                                    @endforeach
-                                @endif
+                                <h4 style="margin-bottom: 5px">Categories</h4>
+                                @foreach($product->has_categories as $cat)
+                                    <span class="badge badge-primary">{{$cat->title}}</span>
+                                @endforeach
+
                             </div>
                             <hr>
                         @endif
@@ -121,14 +131,12 @@
 
                         @if($product->tags != null)
                             <div class="tags" style="margin-top: 5px">
-
                                 <h4 style="margin-bottom: 5px">Tags</h4>
                                 @foreach(explode(',',$product->tags) as $tag)
                                     <span class="badge badge-info">{{$tag}}</span>
                                 @endforeach
                             </div>
-
-                    @endif
+                        @endif
                     <!-- END Images -->
                     </div>
                     <div class="col-sm-6">
