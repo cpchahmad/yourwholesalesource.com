@@ -24,6 +24,11 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-content">
+                        <div class="text-right">
+                            <a href="{{route('users.files.download_processed_orders',$file->id)}}" target="_blank"
+                               class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
+                               data-original-title="Download Processed Orders Excel File">Processed Orders Export</a>
+                        </div>
                         @if (count($orders) > 0)
                             <table class="table js-table-sections table-hover table-borderless table-striped table-vcenter">
                                 <thead>
@@ -208,8 +213,14 @@
                 <div class="block">
                     <div class="block-header">
                         <h5 class="block-title"> Unprocessed Data </h5>
+                        <div class="text-right">
+                            <a href="{{route('users.files.download_unprocessed_orders',$file->id)}}" target="_blank"
+                               class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" title=""
+                               data-original-title="Download Processed Orders Excel File">Unprocessed Orders Export</a>
+                        </div>
                     </div>
                     <div class="block-content">
+
                         @if (count($data) > 0)
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>

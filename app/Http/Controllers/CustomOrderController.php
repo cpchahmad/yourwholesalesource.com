@@ -6,6 +6,8 @@ use App\AdminSetting;
 use App\Category;
 use App\Country;
 use App\Customer;
+use App\Exports\ProcessedOrder;
+use App\Exports\UnprocessedOrder;
 use App\Imports\UsersImport;
 use App\OrderLog;
 use App\OrderTransaction;
@@ -524,6 +526,26 @@ class CustomOrderController extends Controller
             'file' => $new_file,
             'settings' =>$settings
         ]);
+    }
+
+
+    public function download_processed_orders($id){
+        $new_file = UserFile::find($id);
+        $custom_orders = RetailerOrder::where('user_id',Auth::id())->newQuery();
+        $custom_orders->whereHas('imported',function ($q) use ($new_file){
+            $q->where('file_id','=',$new_file->id);
+        });
+        $orders =$custom_orders->get();
+        return Excel::download(new ProcessedOrder($orders), now().'ProcessedOrders'.'.csv');
+
+    }
+
+    public function download_unprocessed_orders($id){
+        $new_file = UserFile::find($id);
+        $temp_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->where('status',0)->get();
+
+        return Excel::download(new UnprocessedOrder($temp_data), now().'UnprocessedFileOrders'.'.csv');
+
     }
 
 

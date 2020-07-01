@@ -5,7 +5,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                     Import Files
+                    Import Files
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -33,6 +33,7 @@
                                 <tr>
                                     <th>File</th>
                                     <th>Date</th>
+                                    <th>Download</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -42,16 +43,25 @@
                                     <tr>
                                         <td>{{$file->file}}</td>
                                         <td>{{date_create($file->created_at)->format('d m, Y - h:i a')}}</td>
-                                      <td align="right">
-                                          <div class="btn-group">
-                                              <a href="{{asset('import-orders')}}/{{$file->file}}" target="_blank"
-                                                 class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
-                                                 data-original-title="Download File"><i class="fa fa-download"></i></a>
-                                              <a href="{{route('users.files.view',$file->id)}}"
-                                                 class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
-                                                 data-original-title="View File"><i class="fa fa-eye"></i></a>
-                                          </div>
-                                      </td>
+                                        <td>
+                                            <a href="{{route('users.files.download_processed_orders',$file->id)}}" target="_blank"
+                                               class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
+                                               data-original-title="Download Processed Orders Excel File">Processed Orders Export</a>
+                                            <a href="{{route('users.files.download_unprocessed_orders',$file->id)}}" target="_blank"
+                                               class="btn btn-sm btn-warning" type="button" data-toggle="tooltip" title=""
+                                               data-original-title="Download Unrocessed Orders Excel File">Unprocessed Orders Export</a>
+
+                                        </td>
+                                        <td align="right">
+                                            <div class="btn-group">
+                                                <a href="{{asset('import-orders')}}/{{$file->file}}" target="_blank"
+                                                   class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="Download File"><i class="fa fa-download"></i></a>
+                                                <a href="{{route('users.files.view',$file->id)}}"
+                                                   class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="View File"><i class="fa fa-eye"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
 
