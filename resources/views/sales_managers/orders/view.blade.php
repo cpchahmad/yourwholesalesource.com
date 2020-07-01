@@ -29,6 +29,11 @@
                 </div>
             </div>
         @endif
+        <div class="row mb2" style="margin-bottom: 10px">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-danger" onclick="window.location.href='{{route('app.refund_cancel_order',$order->id)}}'">Cancel and Refund Order</button>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-md-9">
@@ -86,15 +91,15 @@
                                     <tr>
                                         <td>
                                             @if($order->custom == 0)
-                                            @if($item->linked_variant != null)
-                                                <img class="img-avatar"
-                                                     @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                     @else @if($item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
-                                            @else
-                                                <img class="img-avatar img-avatar-variant"
-                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                            @endif
+                                                @if($item->linked_variant != null)
+                                                    <img class="img-avatar"
+                                                         @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                         @else @if($item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
                                                 @else
+                                                    <img class="img-avatar img-avatar-variant"
+                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                @endif
+                                            @else
                                                 @if($item->linked_real_variant != null)
                                                     <img class="img-avatar"
                                                          @if($item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
@@ -380,115 +385,115 @@
                     @endforeach
                 @endif
 
-                    <div class="block">
+                <div class="block">
 
-                        <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" role="tablist">
-                            @if($order->has_payment != null)
+                    <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" role="tablist">
+                        @if($order->has_payment != null)
                             <li class="nav-item">
                                 <a class="nav-link active" href="#transaction_history"> Transaction History</a>
                             </li>
-                            @endif
-                            <li class="nav-item">
-                                <a class="nav-link" href="#order_history">Order History</a>
-                            </li>
-                        </ul>
-                        <div class="block-content tab-content">
-                            @if($order->has_payment != null)
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="#order_history">Order History</a>
+                        </li>
+                    </ul>
+                    <div class="block-content tab-content">
+                        @if($order->has_payment != null)
                             <div class="tab-pane active" id="transaction_history" role="tabpanel">
-                              <div class="block">
-                                  <div class="block-content">
-                                      <ul class="timeline timeline-alt">
-                                          <li class="timeline-event">
-                                              <div class="timeline-event-icon bg-success">
-                                                  <i class="fa fa-dollar-sign"></i>
-                                              </div>
-                                              <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
-                                                  <div class="block-header block-header-default">
-                                                      <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} {{$order->currency}}</h3>
-                                                      <div class="block-options">
-                                                          <div class="timeline-event-time block-options-item font-size-sm font-w600">
-                                                              {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                  <div class="block-content">
-                                                      @if($order->pay_by == 'Paypal')
-                                                          <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
-
-                                                      @else
-
-                                                      <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
-                                                          @endif
-                                                  </div>
-                                              </div>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                            </div>
-                            @endif
-                            <div class="tab-pane" id="order_history" role="tabpanel">
-                                @if(count($order->logs) > 0)
-                                    <div class="block">
-                                        <div class="block-content">
-                                            <ul class="timeline timeline-alt">
-                                                @foreach($order->logs as $log)
-                                                    <li class="timeline-event">
-                                                        @if($log->status == "Newly Synced")
-                                                            <div class="timeline-event-icon bg-warning">
-                                                                <i class="fa fa-sync"></i>
-                                                            </div>
-                                                        @elseif($log->status == "paid")
-                                                            <div class="timeline-event-icon bg-success">
-                                                                <i class="fa fa-dollar-sign"></i>
-                                                            </div>
-                                                        @elseif($log->status == "Fulfillment")
-                                                            <div class="timeline-event-icon bg-primary">
-                                                                <i class="fa fa-star"></i>
-                                                            </div>
-                                                        @elseif($log->status == "Fulfillment Cancelled")
-                                                            <div class="timeline-event-icon bg-danger">
-                                                                <i class="fa fa-ban"></i>
-                                                            </div>
-                                                        @elseif($log->status == "Tracking Details Added")
-                                                            <div class="timeline-event-icon bg-amethyst">
-                                                                <i class="fa fa-truck"></i>
-                                                            </div>
-                                                        @elseif($log->status == "Delivered")
-                                                            <div class="timeline-event-icon" style="background: deeppink">
-                                                                <i class="fa fa-home"></i>
-                                                            </div>
-                                                        @elseif($log->status == "Completed")
-                                                            <div class="timeline-event-icon" style="background: darkslategray">
-                                                                <i class="fa fa-check"></i>
-                                                            </div>
-                                                        @endif
-                                                        <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
-                                                            <div class="block-header block-header-default">
-                                                                <h3 class="block-title">{{$log->status}}</h3>
-                                                                <div class="block-options">
-                                                                    <div class="timeline-event-time block-options-item font-size-sm font-w600">
-                                                                        {{date_create($log->created_at)->format('d M, Y h:i a')}}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="block-content">
-                                                                <p> {{$log->message}} </p>
+                                <div class="block">
+                                    <div class="block-content">
+                                        <ul class="timeline timeline-alt">
+                                            <li class="timeline-event">
+                                                <div class="timeline-event-icon bg-success">
+                                                    <i class="fa fa-dollar-sign"></i>
+                                                </div>
+                                                <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
+                                                    <div class="block-header block-header-default">
+                                                        <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} {{$order->currency}}</h3>
+                                                        <div class="block-options">
+                                                            <div class="timeline-event-time block-options-item font-size-sm font-w600">
+                                                                {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
+                                                    </div>
+                                                    <div class="block-content">
+                                                        @if($order->pay_by == 'Paypal')
+                                                            <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
+
+                                                        @else
+
+                                                            <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                @else
-                                <p> No Order Logs Found </p>
-                                @endif
+                                </div>
                             </div>
+                        @endif
+                        <div class="tab-pane" id="order_history" role="tabpanel">
+                            @if(count($order->logs) > 0)
+                                <div class="block">
+                                    <div class="block-content">
+                                        <ul class="timeline timeline-alt">
+                                            @foreach($order->logs as $log)
+                                                <li class="timeline-event">
+                                                    @if($log->status == "Newly Synced")
+                                                        <div class="timeline-event-icon bg-warning">
+                                                            <i class="fa fa-sync"></i>
+                                                        </div>
+                                                    @elseif($log->status == "paid")
+                                                        <div class="timeline-event-icon bg-success">
+                                                            <i class="fa fa-dollar-sign"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Fulfillment")
+                                                        <div class="timeline-event-icon bg-primary">
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Fulfillment Cancelled")
+                                                        <div class="timeline-event-icon bg-danger">
+                                                            <i class="fa fa-ban"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Tracking Details Added")
+                                                        <div class="timeline-event-icon bg-amethyst">
+                                                            <i class="fa fa-truck"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Delivered")
+                                                        <div class="timeline-event-icon" style="background: deeppink">
+                                                            <i class="fa fa-home"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Completed")
+                                                        <div class="timeline-event-icon" style="background: darkslategray">
+                                                            <i class="fa fa-check"></i>
+                                                        </div>
+                                                    @endif
+                                                    <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
+                                                        <div class="block-header block-header-default">
+                                                            <h3 class="block-title">{{$log->status}}</h3>
+                                                            <div class="block-options">
+                                                                <div class="timeline-event-time block-options-item font-size-sm font-w600">
+                                                                    {{date_create($log->created_at)->format('d M, Y h:i a')}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="block-content">
+                                                            <p> {{$log->message}} </p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @else
+                                <p> No Order Logs Found </p>
+                            @endif
                         </div>
-
-
                     </div>
+
+
+                </div>
 
             </div>
             <div class="col-md-3">
@@ -520,7 +525,7 @@
                             @if($shipping != null)
                                 <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
                                     @if($order->custom == 0)
-                                    <br> {{$shipping->company}}
+                                        <br> {{$shipping->company}}
                                     @endif
                                     <br> {{$shipping->address1}}
                                     <br> {{$shipping->address2}}
@@ -528,8 +533,8 @@
                                     <br> {{$shipping->province}} {{$shipping->zip}}
                                     <br> {{$shipping->country}}
                                     @if($order->custom == 0)
-                                    <br> {{$shipping->phone}}
-                                        @endif
+                                        <br> {{$shipping->phone}}
+                                    @endif
                                 </p>
                             @endif
                         </div>

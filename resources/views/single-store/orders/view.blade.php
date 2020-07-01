@@ -29,6 +29,13 @@
                 </div>
             </div>
         @endif
+        @if($order->paid == 0)
+            <div class="row mb2" style="margin-bottom: 10px">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-danger" onclick="window.location.href='{{route('app.order.cancel',$order->id)}}'">Cancel Order</button>
+                </div>
+            </div>
+        @endif
         @if($order->paid == 1)
             <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-12 text-right">
@@ -70,7 +77,7 @@
                                             <div class="form-material">
                                                 <label for="material-error">Order</label>
                                                 <select name="order_id" class="form-control" required>
-                                                        <option value="{{$order->id}}">{{$order->name}}</option>
+                                                    <option value="{{$order->id}}">{{$order->name}}</option>
                                                 </select>
                                             </div>
                                         </div>

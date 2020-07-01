@@ -29,7 +29,6 @@ class RefundController extends Controller
         $this->helper = new HelperController();
     }
 
-
     public function create_refund(Request $request){
 //        dd($request);
         $manager = User::find($request->input('manager_id'));
@@ -100,6 +99,7 @@ class RefundController extends Controller
             return redirect()->back()->with('success','Order Cant Refund Automatically Because Of Its Status');
         }
     }
+
     public function refund_order(Refund $refund,RetailerOrder $order){
 
         /*Add to Cost to Wallet*/
@@ -137,6 +137,7 @@ class RefundController extends Controller
         $wallet_log->save();
 
         /*Refund Order*/
+        $order->status = 'cancelled';
         $order->paid = 2;
         $order->save();
         /*Order Log*/
@@ -240,4 +241,81 @@ class RefundController extends Controller
 
         }
     }
+
+    public function cancel_order($id){
+        $order = RetailerOrder::find($id);
+        if($order != null){
+            $order->status = 'cancelled';
+            $order->save();
+            /*Order Log*/
+            $order_log =  new OrderLog();
+            $order_log->message = "Order cancelled at  ".now()->format('d M, Y h:i a');
+            $order_log->status = "cancelled";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+        }
+        else{
+            return redirect()->back()->with('error','Order Not Found!');
+
+        }
+    }
+
+    public function refund_cancel_order($id){
+        $order = RetailerOrder::find($id);
+        if($order != null){
+            /*Add to Cost to Wallet*/
+            $walletController = new WalletController();
+            if ($order->has_user != null) {
+                $user = User::find($order->has_user->id);
+                if ($user->has_wallet == null) {
+
+                    $wallet = $walletController->wallet_create($order->has_user->id);
+                } else {
+                    $wallet = $user->has_wallet;
+                }
+            } else {
+                $shop = $order->has_store;
+                if (count($shop->has_user) > 0) {
+                    if ($shop->has_user[0]->has_wallet == null) {
+                        $wallet = $walletController->wallet_create($shop->has_user[0]->id);
+                    } else {
+                        $wallet = $shop->has_user[0]->has_wallet;
+                    }
+                }
+                else {
+                    return redirect()->back()->with('error', 'Order Cant Refund Automatically Because No Wallet Found!');
+                }
+            }
+
+            $wallet->available = $wallet->available+(int)$order->cost_to_pay;
+            $wallet->save();
+            /*Wallet Log*/
+            $wallet_log = new WalletLog();
+            $wallet_log->wallet_id = $wallet->id;
+            $wallet_log->status = "Top-up through Refund";
+            $wallet_log->amount = $order->cost_to_pay;
+            $wallet_log->message = 'A Top-up of Amount '.number_format($order->cost_to_pay,2).' USD On Behalf on Refund '.$order->name.' Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a');
+            $wallet_log->save();
+
+            /*Refund Order*/
+            $order->status = 'cancelled';
+            $order->paid = 2;
+            $order->save();
+            /*Order Log*/
+            $order_log =  new OrderLog();
+            $order_log->message = "An amount of ".$order->cost_to_pay." USD refunded to Wallet on ".now()->format('d M, Y h:i a');
+            $order_log->status = "refunded";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+
+            return redirect()->back()->with('success','Order Refunded Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Order Not Found!');
+
+        }
+    }
+
+
+
 }

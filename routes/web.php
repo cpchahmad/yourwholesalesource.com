@@ -266,6 +266,10 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/create/refund', 'RefundController@create_refund')->name('refund.create');
         Route::post('/create/refund/thread', 'RefundController@create_refund_thread')->name('refund.create.thread');
         Route::get('/refund/approve/{id}/order/{order_id}', 'RefundController@approve_refund')->name('refund.approve');
+        Route::get('cancel/order/{id}', 'RefundController@cancel_order')->name('app.order.cancel');
+        Route::get('cancel/refund/order/{id}', 'RefundController@refund_cancel_order')->name('app.refund_cancel_order');
+
+
     });
 });
 
