@@ -74,32 +74,34 @@
                                         </td>
                                         <td>
                                             @if($order->paid == '0')
-                                                <span class="badge badge-warning" style="font-size: small"> unpaid </span>
+                                                <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
                                             @elseif($order->paid == '1')
-                                                <span class="badge badge-success" style="font-size: small"> paid </span>
+                                                <span class="badge badge-success" style="font-size: small"> Paid </span>
                                             @elseif($order->paid == '2')
-                                                <span class="badge badge-danger" style="font-size: small;"> refunded</span>
+                                                <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
                                             @endif
 
                                         </td>
                                         <td>
-                                            @if($order->status == 'paid')
-                                                <span class="badge badge-primary" style="float: right;font-size: medium"> {{$order->status}}</span>
+                                            @if($order->status == 'Paid')
+                                                <span class="badge badge-primary" style="float: right;font-size: medium"> Pending</span>
 
                                             @elseif($order->status == 'unfulfilled')
-                                                <span class="badge badge-warning" style="font-size: small"> {{$order->status}}</span>
+                                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
                                             @elseif($order->status == 'partially-shipped')
-                                                <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{$order->status}}</span>
+                                                <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
                                             @elseif($order->status == 'shipped')
-                                                <span class="badge " style="font-size: small;background: orange;color: white;"> {{$order->status}}</span>
+                                                <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
                                             @elseif($order->status == 'delivered')
-                                                <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{$order->status}}</span>
+                                                <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
                                             @elseif($order->status == 'completed')
-                                                <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{$order->status}}</span>
+                                                <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
                                             @elseif($order->status == 'new')
                                                 <span class="badge badge-warning" style="font-size: small"> Draft </span>
+                                            @elseif($order->status == 'cancelled')
+                                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
                                             @else
-                                                <span class="badge badge-success" style="font-size: small">  {{$order->status}} </span>
+                                                <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
                                             @endif
 
                                         </td>

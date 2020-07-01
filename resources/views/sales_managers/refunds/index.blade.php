@@ -82,17 +82,17 @@
                                         </td>
                                         <td>
                                             @if($refund->has_order->paid == '0')
-                                                <span class="badge badge-warning" style="font-size: small"> unpaid </span>
+                                                <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
                                             @elseif($refund->has_order->paid == '1')
-                                                <span class="badge badge-success" style="font-size: small"> paid </span>
+                                                <span class="badge badge-success" style="font-size: small"> Paid </span>
                                             @elseif($refund->has_order->paid == '2')
-                                                <span class="badge badge-danger" style="font-size: small;"> refunded</span>
+                                                <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
                                             @endif
 
                                         </td>
                                         <td>
-                                            @if($refund->has_order->status == 'paid')
-                                                <span class="badge badge-primary" style="float: right;font-size: medium"> {{$refund->has_order->status}}</span>
+                                            @if($refund->has_order->status == 'Paid')
+                                                <span class="badge badge-primary" style="float: right;font-size: medium"> Pending </span>
                                             @elseif($refund->has_order->status == 'unfulfilled')
                                                 <span class="badge badge-warning" style="font-size: small"> {{$refund->has_order->status}}</span>
                                             @elseif($refund->has_order->status == 'partially-shipped')
@@ -103,7 +103,8 @@
                                                 <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{$refund->has_order->status}}</span>
                                             @elseif($refund->has_order->status == 'completed')
                                                 <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{$refund->has_order->status}}</span>
-                                            @else
+                                            @elseif($refund->has_order->status == 'cancelled')
+                                                <span class="badge " style="font-size: small;background: red;color: white;"> {{$refund->has_order->status}}</span>
                                                 <span class="badge badge-success" style="font-size: small"> {{$refund->has_order->status}}</span>
                                             @endif
 

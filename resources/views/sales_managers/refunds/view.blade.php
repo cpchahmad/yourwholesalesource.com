@@ -177,16 +177,16 @@
                                 <hr>
                                 <span class="font-weight-bold">Order Payment Status: </span>
                                 @if($ticket->has_order->paid == '0')
-                                    <span class="badge badge-warning" style="font-size: small"> unpaid </span>
+                                    <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
                                 @elseif($ticket->has_order->paid == '1')
-                                    <span class="badge badge-success" style="font-size: small"> paid </span>
+                                    <span class="badge badge-success" style="font-size: small"> Paid </span>
                                 @elseif($ticket->has_order->paid == '2')
-                                    <span class="badge badge-danger" style="font-size: small;"> refunded</span>
+                                    <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
                                 @endif
                                 <hr>
                                 <span class="font-weight-bold">Order Status: </span>
 
-                                @if($ticket->has_order->status == 'paid')
+                                @if($ticket->has_order->status == 'Paid')
                                     <span class="badge badge-primary" style="float: right;font-size: medium"> {{$ticket->has_order->status}}</span>
                                 @elseif($ticket->has_order->status == 'unfulfilled')
                                     <span class="badge badge-warning" style="font-size: small"> {{$ticket->has_order->status}}</span>
@@ -198,6 +198,8 @@
                                     <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{$ticket->has_order->status}}</span>
                                 @elseif($ticket->has_order->status == 'completed')
                                     <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{$ticket->has_order->status}}</span>
+                                @elseif($ticket->has_order->status == 'cancelled')
+                                    <span class="badge " style="font-size: small;background: red;color: white;"> {{$ticket->has_order->status}}</span>
                                 @else
                                     <span class="badge badge-success" style="font-size: small"> {{$ticket->has_order->status}}</span>
                                 @endif

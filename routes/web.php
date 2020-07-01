@@ -178,8 +178,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/files/{id}', 'CustomOrderController@file')->name('users.files.view');
             Route::get('/files/{id}/download_processed_orders', 'CustomOrderController@download_processed_orders')->name('users.files.download_processed_orders');
             Route::get('/files/{id}/download_unprocessed_orders', 'CustomOrderController@download_unprocessed_orders')->name('users.files.download_unprocessed_orders');
-
-
             Route::get('/bulk-pay-through-paypal/{id}', 'CustomOrderController@bulk_import_order_paypal')->name('users.orders.bulk.paypal');
             Route::get('/bulk-pay-through-paypal/{id}/cancel', 'CustomOrderController@bulk_import_order_paypal_cancel')->name('users.orders.bulk.paypal.cancel');
             Route::get('/bulk-pay-through-paypal/{id}/success', 'CustomOrderController@bulk_import_order_paypal_success')->name('users.orders.bulk.paypal.success');
@@ -268,10 +266,6 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/create/refund', 'RefundController@create_refund')->name('refund.create');
         Route::post('/create/refund/thread', 'RefundController@create_refund_thread')->name('refund.create.thread');
         Route::get('/refund/approve/{id}/order/{order_id}', 'RefundController@approve_refund')->name('refund.approve');
-
-
-
-
     });
 });
 

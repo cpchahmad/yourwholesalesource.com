@@ -30,7 +30,7 @@
             </div>
         @endif
         @if($order->paid == 1)
-            <div class="row mb2" style="margin-bottom: 10px">
+                <div class="row mb2" style="margin-bottom: 10px">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-primary" data-target="#create_refund_modal" data-toggle="modal">Generate Refund</button>
                 </div>
@@ -128,27 +128,31 @@
                             Line Items
                         </h3>
                         @if($order->paid == '0')
-                            <span class="badge badge-warning" style="font-size: medium; margin-right: 10px"> Unpaid </span>
+                            <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
                         @elseif($order->paid == '1')
-                            <span class="badge badge-success" style="font-size: medium; margin-right: 10px"> Paid </span>
+                            <span class="badge badge-success" style="font-size: small"> Paid </span>
                         @elseif($order->paid == '2')
-                            <span class="badge badge-danger" style="font-size: medium; margin-right: 10px"> Refunded</span>
+                            <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
                         @endif
-                        @if($order->status == 'paid')
-                            <span class="badge badge-primary" style="float: right;font-size: medium"> Pending </span>
 
+                        @if($order->status == 'Paid')
+                            <span class="badge badge-primary" style="float: right;font-size: medium"> Pending</span>
                         @elseif($order->status == 'unfulfilled')
-                            <span class="badge badge-warning" style="float: right;font-size: medium"> {{$order->status}}</span>
+                            <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
                         @elseif($order->status == 'partially-shipped')
-                            <span class="badge " style="float: right;font-size: medium;background: darkolivegreen;color: white;"> {{$order->status}}</span>
+                            <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
                         @elseif($order->status == 'shipped')
-                            <span class="badge " style="float: right;font-size: medium;background: orange;color: white;"> {{$order->status}}</span>
+                            <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
                         @elseif($order->status == 'delivered')
-                            <span class="badge " style="float: right;font-size: medium;background: deeppink;color: white;"> {{$order->status}}</span>
+                            <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
                         @elseif($order->status == 'completed')
-                            <span class="badge " style="float: right;font-size: medium;background: darkslategray;color: white;"> {{$order->status}}</span>
+                            <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
+                        @elseif($order->status == 'new')
+                            <span class="badge badge-warning" style="font-size: small"> Draft </span>
+                        @elseif($order->status == 'cancelled')
+                            <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
                         @else
-                            <span class="badge badge-success" style="float: right;font-size: medium"> {{$order->status}}</span>
+                            <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
                         @endif
                     </div>
                     <div class="block-content">
