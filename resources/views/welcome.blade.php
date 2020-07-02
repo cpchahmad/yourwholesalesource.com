@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-6">
                 <form action="" method="get" class="d-flex">
-                    <input type="text" required class="js-flatpickr form-control bg-white flatpickr-input"  name="date-range" placeholder="Select Date Range For Filtering" data-mode="range" value="{{$date_range}}"  readonly="readonly">
+                    <input type="text" required class="js-flatpickr form-control bg-white flatpickr-input"  name="date-range" placeholder="@if($date_range != null) {{$date_range}}  @else Select Date Range For Filtering @endif " data-mode="range"  readonly="readonly">
                     <input type="submit" class="btn btn-primary" style="margin-left: 10px" value="Filter">
                 </form>
             </div>

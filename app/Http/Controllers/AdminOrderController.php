@@ -438,6 +438,8 @@ class AdminOrderController extends Controller
 
 
 
+
+
         } else {
 
             $orders = RetailerOrder::whereIN('paid',[1,2])->count();
@@ -460,9 +462,10 @@ class AdminOrderController extends Controller
 
             $shopQ = DB::table('shops')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                    ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
-                    ->groupBy('date')
-                    ->get();
+                ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
+                ->groupBy('date')
+                ->get();
+
 
 
 
@@ -489,26 +492,25 @@ class AdminOrderController extends Controller
                                 ->whereIn('paid',[1,2]);
                         });
                 });
-        })
-            ->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+        })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
             ->groupBy('products.id')
             ->orderBy('sold','DESC')
             ->get()
             ->take(10);
 
         $top_stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->join('retailer_products',function($join){
-        $join->on('retailer_products.shop_id','=','shops.id')
-            ->join('retailer_order_line_items',function ($j){
-                $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
-                    ->join('retailer_orders',function($o){
-                        $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
-                            ->whereIn('paid',[1,2]);
-                    });
-            });
-    })
-        ->select('shops.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-        ->groupBy('shops.id')
-        ->orderBy('sold','DESC')
+            $join->on('retailer_products.shop_id','=','shops.id')
+                ->join('retailer_order_line_items',function ($j){
+                    $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
+                        ->join('retailer_orders',function($o){
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                });
+        })
+            ->select('shops.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('shops.id')
+            ->orderBy('sold','DESC')
             ->get()
             ->take(10);
 
@@ -532,7 +534,7 @@ class AdminOrderController extends Controller
 
 
         return view('welcome')->with([
-            'date_range' => $request->input('date_range'),
+            'date_range' => $request->input('date-range'),
             'orders' => $orders,
             'refunds' => $refund,
             'sales' =>$sales,
