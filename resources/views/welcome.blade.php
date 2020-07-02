@@ -86,6 +86,138 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Products</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_products) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Product</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach($top_products as $product)
+                                        <tr>
+                                    <td class="font-w600">
+                                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                            @if($index == 0)
+                                                @if($image->isV == 0)
+                                                    <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                @else
+                                                    <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                      {{$product->title}}
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        {{$product->sold}}
+                                    </td>
+                                    <td class="">
+                                       ${{number_format($product->selling_cost,2)}}
+                                    </td>
+                                        </tr>
+                                        @endforeach
+
+                                </tbody>
+                                @else
+                                    <p  class="text-center"> No Top Users Found </p>
+                                @endif
+                            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Stores</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_stores) > 0)
+                        <table class="table table-striped table-hover table-borderless table-vcenter">
+                            <thead>
+                            <tr class="text-uppercase">
+                                <th class="font-w700">Store</th>
+                                <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Orders</th>
+                                <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach($top_stores as $store)
+                                <tr>
+                                    <td class="font-w600">
+                                        {{explode('.',$store->shopify_domain)[0]}}
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        {{$store->sold}}
+                                    </td>
+                                    <td class="">
+                                        ${{number_format($store->selling_cost,2)}}
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                        @else
+                            <p  class="text-center"> No Top Users Found </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Non Shopify Users</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_users) > 0)
+                        <table class="table table-striped table-hover table-borderless table-vcenter">
+                            <thead>
+                            <tr class="text-uppercase">
+                                <th class="font-w700">User</th>
+                                <th class="font-w700">Email</th>
+                                <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Orders</th>
+                                <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach($top_users as $user)
+                                <tr>
+                                    <td class="font-w600">
+                                        {{$user->name}} {{$user->last_name}}
+                                    </td>
+                                    <td class="font-w600">
+                                        {{$user->email}}
+                                    </td>
+                                    <td class="d-none d-sm-table-cell text-center">
+                                        {{$user->sold}}
+                                    </td>
+                                    <td class="">
+                                        ${{number_format($user->selling_cost,2)}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        @else
+                            <p  class="text-center"> No Top Users Found </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @endsection

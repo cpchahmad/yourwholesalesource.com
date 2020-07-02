@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\FulfillmentLineItem;
 use App\OrderFulfillment;
 use App\OrderLog;
+use App\Product;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
+use App\RetailerProduct;
 use App\Shop;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\DB;
+use function foo\func;
 
 class AdminOrderController extends Controller
 {
@@ -459,7 +464,11 @@ class AdminOrderController extends Controller
                     ->groupBy('date')
                     ->get();
 
+
+
         }
+
+
         $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
         $graph_one_order_values = $ordersQ->pluck('total')->toArray();
         $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
@@ -471,12 +480,62 @@ class AdminOrderController extends Controller
         $graph_four_order_values = $shopQ->pluck('total')->toArray();
 
 
+        $top_products =  Product::join('retailer_products',function($join){
+            $join->on('products.id','=','retailer_products.linked_product_id')
+                ->join('retailer_order_line_items',function ($j){
+                    $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
+                        ->join('retailer_orders',function($o){
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                });
+        })
+            ->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('products.id')
+            ->orderBy('sold','DESC')
+            ->get()
+            ->take(10);
+
+        $top_stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->join('retailer_products',function($join){
+        $join->on('retailer_products.shop_id','=','shops.id')
+            ->join('retailer_order_line_items',function ($j){
+                $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
+                    ->join('retailer_orders',function($o){
+                        $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                            ->whereIn('paid',[1,2]);
+                    });
+            });
+    })
+        ->select('shops.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+        ->groupBy('shops.id')
+        ->orderBy('sold','DESC')
+            ->get()
+            ->take(10);
+
+        $top_users = User::role('non-shopify-users')->join('retailer_products',function($join){
+            $join->on('retailer_products.user_id','=','users.id')
+                ->join('retailer_order_line_items',function ($j){
+                    $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
+                        ->join('retailer_orders',function($o){
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                });
+        })
+            ->select('users.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('users.id')
+            ->orderBy('sold','DESC')
+            ->get()
+            ->take(10);
+
+//        dd($top_products);
+
+
         return view('welcome')->with([
             'date_range' => $request->input('date_range'),
             'orders' => $orders,
             'refunds' => $refund,
             'sales' =>$sales,
-//            'profit' => $profit
             'stores' => $stores,
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
@@ -485,6 +544,9 @@ class AdminOrderController extends Controller
             'graph_three_values' => $graph_three_order_values,
             'graph_four_values' => $graph_four_order_values,
             'graph_four_labels' => $graph_four_order_dates,
+            'top_products' => $top_products,
+            'top_stores' => $top_stores,
+            'top_users' => $top_users
         ]);
     }
 
