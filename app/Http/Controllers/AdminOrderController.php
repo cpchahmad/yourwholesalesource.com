@@ -7,7 +7,10 @@ use App\OrderFulfillment;
 use App\OrderLog;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
+use App\Shop;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminOrderController extends Controller
 {
@@ -391,5 +394,98 @@ class AdminOrderController extends Controller
         return redirect()->back()->with('success', 'Order Fulfillment Cancelled Successfully');
     }
 
+    public function dashboard(Request $request)
+    {
+        if ($request->has('date-range')) {
+            $date_range = explode(' to ',$request->input('date-range'));
+            $start_date = $date_range[0];
+            $end_date = $date_range[1];
+            $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
+            $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
+
+            $orders = RetailerOrder::whereIN('paid',[1,2])->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $sales = RetailerOrder::whereIN('paid',[1,2])->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $refund = RetailerOrder::whereIN('paid',[2])->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+
+
+            $ordersQ = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[1,2])
+                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('date')
+                ->get();
+
+
+            $ordersQR = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[2])
+                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('date')
+                ->get();
+
+            $shopQ = DB::table('shops')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+                ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
+                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('date')
+                ->get();
+
+
+
+        } else {
+
+            $orders = RetailerOrder::whereIN('paid',[1,2])->count();
+            $sales = RetailerOrder::whereIN('paid',[1,2])->sum('cost_to_pay');
+            $refund = RetailerOrder::whereIN('paid',[2])->sum('cost_to_pay');
+            $stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->count();
+
+            $ordersQ = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[1,2])
+                ->groupBy('date')
+                ->get();
+
+
+            $ordersQR = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[2])
+                ->groupBy('date')
+                ->get();
+
+            $shopQ = DB::table('shops')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+                    ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
+                    ->groupBy('date')
+                    ->get();
+
+        }
+        $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
+        $graph_one_order_values = $ordersQ->pluck('total')->toArray();
+        $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
+
+        $graph_three_order_dates = $ordersQR->pluck('date')->toArray();
+        $graph_three_order_values = $ordersQR->pluck('total_sum')->toArray();
+
+        $graph_four_order_dates = $shopQ->pluck('date')->toArray();
+        $graph_four_order_values = $shopQ->pluck('total')->toArray();
+
+
+        return view('welcome')->with([
+            'date_range' => $request->input('date_range'),
+            'orders' => $orders,
+            'refunds' => $refund,
+            'sales' =>$sales,
+//            'profit' => $profit
+            'stores' => $stores,
+            'graph_one_labels' => $graph_one_order_dates,
+            'graph_one_values' => $graph_one_order_values,
+            'graph_two_values' => $graph_two_order_values,
+            'graph_three_labels' => $graph_three_order_dates,
+            'graph_three_values' => $graph_three_order_values,
+            'graph_four_values' => $graph_four_order_values,
+            'graph_four_labels' => $graph_four_order_dates,
+        ]);
+    }
 
 }

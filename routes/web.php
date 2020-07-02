@@ -31,9 +31,7 @@ Route::get('/logout', function(){
 })->name('logout');
 /*Super Admin Routes*/
 Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('admin.dashboard');
+    Route::get('/','AdminOrderController@dashboard')->name('admin.dashboard');
     Route::get('/categories','CategoryController@index')->name('category.create');
     Route::post('/categories/save','CategoryController@save')->name('category.save');
     Route::any('/categories/{id}/update','CategoryController@update')->name('category.update');

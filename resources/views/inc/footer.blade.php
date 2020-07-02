@@ -11,7 +11,7 @@
 <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
 <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>]
 <script src="{{ asset('js/admin.js') }}?v={{now()}}"></script>
 <script src="{{ asset('js/shopify-user.js') }}?v={{now()}}"></script>
 <script src="{{ asset('js/manager.js') }}?v={{now()}}"></script>
@@ -22,9 +22,11 @@
 <script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
 <script src="{{asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/select2/js/select2.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/flatpickr/flatpickr.js')}}"></script>
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="{{ asset('assets/js/plugins/jquery-ui/jquery-ui.js') }}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections','core-bootstrap-tooltip','select2']); });</script>
+<script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections','core-bootstrap-tooltip','select2','flatpickr']); });</script>
+
