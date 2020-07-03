@@ -1107,7 +1107,6 @@ class ProductController extends Controller
         $shop = $this->helper->getAdminShop();
         $products = Product::whereNotNull('shopify_id')->get();
         foreach ($products as $product){
-
             if(count($product->hasVariants) == 0){
                 $response =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
 
@@ -1120,7 +1119,7 @@ class ProductController extends Controller
                             'inventory_management' => 'shopify',
                         ]
                     ];
-                    $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
                 }
 
             }
