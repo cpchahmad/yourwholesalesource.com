@@ -635,6 +635,9 @@ $(document).ready(function () {
                     }],
                     yAxes: [{
                         display: true,
+                        ticks: {
+                            beginAtZero: true
+                        },
                         scaleLabel: {
                             display: true,
                             labelString: 'Value'
@@ -686,6 +689,9 @@ $(document).ready(function () {
                     }],
                     yAxes: [{
                         display: true,
+                        ticks: {
+                            beginAtZero: true
+                        },
                         scaleLabel: {
                             display: true,
                             labelString: 'Sales'
@@ -737,6 +743,9 @@ $(document).ready(function () {
                     }],
                     yAxes: [{
                         display: true,
+                        ticks: {
+                            beginAtZero: true
+                        },
                         scaleLabel: {
                             display: true,
                             labelString: 'Refunds'
@@ -788,6 +797,9 @@ $(document).ready(function () {
                     }],
                     yAxes: [{
                         display: true,
+                        ticks: {
+                            beginAtZero: true
+                        },
                         scaleLabel: {
                             display: true,
                             labelString: 'Stores'
