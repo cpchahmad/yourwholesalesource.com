@@ -649,7 +649,9 @@ class ProductController extends Controller
                 $variant_id = $shopifyVariants[0]->id;
                 $i = [
                     'variant' => [
-                        'price' =>$price
+                        'price' =>$price,
+                        'inventory_quantity' => $product->quantity,
+                        'inventory_management' => 'shopify',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
@@ -724,8 +726,8 @@ class ProductController extends Controller
                 'option1' => $varaint->option1,
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
-//                'inventory_quantity' => $varaint->quantity,
-//                'inventory_management' => 'shopify',
+                'inventory_quantity' => $varaint->quantity,
+                'inventory_management' => 'shopify',
                 'grams' => $product->weight * 1000,
                 'weight' => $product->weight,
                 'weight_unit' => 'kg',
@@ -1006,17 +1008,17 @@ class ProductController extends Controller
             $variant = RetailerProductVariant::find($id);
             $shop = $this->helper->getSpecificShop($variant->shop_id);
             if($variant->linked_product != null){
-             if($variant->linked_product->toShopify == 1){
-                 $image = RetailerImage::find($image_id);
-                 return $this->shopify_image_selection($image_id, $image, $shop, $variant);
-             }
-             else{
-                 $variant->image = $image_id;
-                 $variant->save();
-                 return response()->json([
-                     'message' => 'success'
-                 ]);
-             }
+                if($variant->linked_product->toShopify == 1){
+                    $image = RetailerImage::find($image_id);
+                    return $this->shopify_image_selection($image_id, $image, $shop, $variant);
+                }
+                else{
+                    $variant->image = $image_id;
+                    $variant->save();
+                    return response()->json([
+                        'message' => 'success'
+                    ]);
+                }
             }
             else{
                 return response()->json([
@@ -1098,5 +1100,45 @@ class ProductController extends Controller
             ]);
         }
     }
+
+
+    public function getQuantitySync(){
+
+        $shop = $this->helper->getAdminShop();
+        $products = Product::whereNotNull('shopify_id')->get();
+        foreach ($products as $product){
+
+            if(count($product->hasVariants) == 0){
+                $response =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
+
+                if(!$response->errors){
+                    $shopifyVariants = $response->body->product->variants;
+                    $variant_id = $shopifyVariants[0]->id;
+                    $i = [
+                        'variant' => [
+                            'inventory_quantity' => $product->quantity,
+                            'inventory_management' => 'shopify',
+                        ]
+                    ];
+                    $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                }
+
+            }
+            else{
+                foreach ($product->hasVariants as $variant){
+                    $variant_id = $variant->shopify_id;
+                    $i = [
+                        'variant' => [
+                            'inventory_quantity' => $variant->quantity,
+                            'inventory_management' => 'shopify',
+                        ]
+                    ];
+                    $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                }
+
+            }
+        }
+    }
+
 
 }
