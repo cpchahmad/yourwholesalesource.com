@@ -98,10 +98,10 @@
             <div class="col-md-12">
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Products</h3>
+                        <h3 class="block-title">Top Selling Products - Stores</h3>
                     </div>
                     <div class="block-content ">
-                        @if(count($top_products) > 0)
+                        @if(count($top_products_stores) > 0)
                             <table class="table table-striped table-hover table-borderless table-vcenter">
                                 <thead>
                                 <tr class="text-uppercase">
@@ -112,7 +112,7 @@
                                 </thead>
                                 <tbody>
 
-                                @foreach($top_products as $product)
+                                @foreach($top_products_stores as $product)
                                     <tr>
                                         <td class="font-w600">
                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
@@ -137,7 +137,55 @@
 
                                 </tbody>
                                 @else
-                                    <p  class="text-center"> No Top Users Found </p>
+                                    <p  class="text-center"> No Top Products Based on Stores Found </p>
+                                @endif
+                            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Selling Products - Non Shopify Users</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_products_users) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Product</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($top_products_users as $product)
+                                    <tr>
+                                        <td class="font-w600">
+                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                @if($index == 0)
+                                                    @if($image->isV == 0)
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                    @else
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                            {{$product->title}}
+                                        </td>
+                                        <td class="d-none d-sm-table-cell text-center">
+                                            {{$product->sold}}
+                                        </td>
+                                        <td class="">
+                                            ${{number_format($product->selling_cost,2)}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                                @else
+                                    <p  class="text-center"> No Top Products Based on Users Found </p>
                                 @endif
                             </table>
                     </div>
@@ -177,7 +225,7 @@
                                 </tbody>
                             </table>
                         @else
-                            <p  class="text-center"> No Top Users Found </p>
+                            <p  class="text-center"> No Top Stores Found </p>
                         @endif
                     </div>
                 </div>

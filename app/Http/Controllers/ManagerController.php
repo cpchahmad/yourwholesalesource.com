@@ -144,8 +144,9 @@ class ManagerController extends Controller
         $graph_four_order_values = $shopQ->pluck('total')->toArray();
 
 
-        $top_products =  Product::join('retailer_order_line_items',function($join) use ($users_id ,$shops_id){
-            $join->join('retailer_orders',function($o) use ($users_id ,$shops_id){
+        $top_products_users =  Product::join('retailer_order_line_items',function($join) use ($users_id ,$shops_id) {
+            $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')
+                ->join('retailer_orders',function($o) use ($users_id ,$shops_id) {
                     $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
                         ->whereIn('paid',[1,2])
                         ->whereIn('user_id',$users_id)
@@ -155,7 +156,37 @@ class ManagerController extends Controller
             ->groupBy('products.id')
             ->orderBy('sold','DESC')
             ->get()
-            ->take(10);
+            ->take(5);
+
+        $top_products_stores = Product::join('retailer_products',function($join) use ($users_id ,$shops_id) {
+            $join->on('retailer_products.linked_product_id', '=', 'products.id')
+                ->join('retailer_order_line_items', function ($join) use ($users_id ,$shops_id) {
+                    $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                        ->join('retailer_orders', function ($o) use ($users_id ,$shops_id) {
+                            $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                ->whereIn('paid', [1, 2])
+                                ->whereIn('user_id',$users_id)
+                                ->whereIn('shop_id',$shops_id);
+                        });
+                });
+        })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('products.id')
+            ->orderBy('sold','DESC')
+            ->get()
+            ->take(5);
+
+//        $top_products =  Product::join('retailer_order_line_items',function($join) use ($users_id ,$shops_id){
+//            $join->join('retailer_orders',function($o) use ($users_id ,$shops_id){
+//                $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+//                    ->whereIn('paid',[1,2])
+//                    ->whereIn('user_id',$users_id)
+//                    ->whereIn('shop_id',$shops_id);
+//            });
+//        })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+//            ->groupBy('products.id')
+//            ->orderBy('sold','DESC')
+//            ->get()
+//            ->take(10);
 
         $top_stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->join('retailer_products',function($join) use ($shops_id){
             $join->on('retailer_products.shop_id','=','shops.id')
@@ -182,9 +213,9 @@ class ManagerController extends Controller
                         $p->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id');
                     });
                     $j->join('retailer_orders',function($o){
-                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
-                                ->whereIn('paid',[1,2]);
-                        });
+                        $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                            ->whereIn('paid',[1,2]);
+                    });
                 });
         })
             ->select('users.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
@@ -209,7 +240,8 @@ class ManagerController extends Controller
             'graph_three_values' => $graph_three_order_values,
             'graph_four_values' => $graph_four_order_values,
             'graph_four_labels' => $graph_four_order_dates,
-            'top_products' => $top_products,
+            'top_products_stores' => $top_products_stores,
+            'top_products_users' => $top_products_users,
             'top_stores' => $top_stores,
             'top_users' => $top_users,
             'manager'=>$manager,
