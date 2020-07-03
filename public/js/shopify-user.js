@@ -218,5 +218,209 @@ $(document).ready(function () {
         $('#import-form').submit();
     });
 
+    if($('body').find('#canvas-graph-one').length > 0){
+        console.log('ok');
+        var config = {
+            type: 'bar',
+            data: {
+                labels: JSON.parse($('#canvas-graph-one').attr('data-labels')),
+                datasets: [{
+                    label: 'Order Count',
+                    backgroundColor: '#00e2ff',
+                    borderColor: '#00e2ff',
+                    data: JSON.parse($('#canvas-graph-one').attr('data-values')),
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Summary Orders Count'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
+        };
 
-    });
+        var ctx = document.getElementById('canvas-graph-one').getContext('2d');
+        window.myBar = new Chart(ctx, config);
+    }
+
+    if($('body').find('#canvas-graph-two').length > 0){
+        console.log('ok');
+        var config = {
+            type: 'line',
+            data: {
+                labels: JSON.parse($('#canvas-graph-two').attr('data-labels')),
+                datasets: [{
+                    label: 'Orders Sales',
+                    backgroundColor: '#5c80d1',
+                    borderColor: '#5c80d1',
+                    data: JSON.parse($('#canvas-graph-two').attr('data-values')),
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Summary Orders Sales'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Sales'
+                        }
+                    }]
+                }
+            }
+        };
+
+        var ctx_2 = document.getElementById('canvas-graph-two').getContext('2d');
+        window.myLine = new Chart(ctx_2, config);
+    }
+
+    if($('body').find('#canvas-graph-three').length > 0){
+        console.log('ok');
+        var config = {
+            type: 'line',
+            data: {
+                labels: JSON.parse($('#canvas-graph-three').attr('data-labels')),
+                datasets: [{
+                    label: 'Refunds',
+                    backgroundColor: '#d18386',
+                    borderColor: '#d14d48',
+                    data: JSON.parse($('#canvas-graph-three').attr('data-values')),
+                    fill: 'start',
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Summary Orders Refunds'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Refunds'
+                        }
+                    }]
+                }
+            }
+        };
+
+        var ctx_3 = document.getElementById('canvas-graph-three').getContext('2d');
+        window.myLine = new Chart(ctx_3, config);
+    }
+
+    if($('body').find('#canvas-graph-four').length > 0){
+        console.log('ok');
+        var config = {
+            type: 'line',
+            data: {
+                labels: JSON.parse($('#canvas-graph-four').attr('data-labels')),
+                datasets: [{
+                    label: 'Profit',
+                    backgroundColor: '#61d154',
+                    borderColor: '#61d154',
+                    data: JSON.parse($('#canvas-graph-four').attr('data-values')),
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Summary Profit'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Date'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Profit'
+                        }
+                    }]
+                }
+            }
+        };
+
+        var ctx_4 = document.getElementById('canvas-graph-four').getContext('2d');
+        window.myLine = new Chart(ctx_4, config);
+    }
+
+
+});

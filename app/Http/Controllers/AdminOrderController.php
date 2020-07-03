@@ -402,7 +402,7 @@ class AdminOrderController extends Controller
     public function dashboard(Request $request)
     {
         if ($request->has('date-range')) {
-            $date_range = explode(' to ',$request->input('date-range'));
+            $date_range = explode('-',$request->input('date-range'));
             $start_date = $date_range[0];
             $end_date = $date_range[1];
             $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
@@ -465,10 +465,6 @@ class AdminOrderController extends Controller
                 ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
                 ->groupBy('date')
                 ->get();
-
-
-
-
         }
 
 

@@ -35,6 +35,10 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{now()}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 </head>
 <body>
@@ -62,6 +66,8 @@
 
 <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
 <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>]
+
 <script src="{{ asset('js/single-store.js') }}?v={{now()}}"></script>
 <script src="{{ asset('assets/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins/dropzone/dist/dropzone.js') }}"></script>

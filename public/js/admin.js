@@ -595,6 +595,8 @@ $(document).ready(function () {
 
     }
 
+
+
     if($('body').find('#canvas-graph-one').length > 0){
         console.log('ok');
         var config = {
