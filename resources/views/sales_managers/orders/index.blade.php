@@ -96,7 +96,7 @@
 
                                         <td>
                                             @if($order->status == 'Paid')
-                                                <span class="badge badge-primary" style="float: right;font-size: medium"> Pending</span>
+                                                <span class="badge badge-primary" style="font-size: small"> Pending</span>
                                             @elseif($order->status == 'unfulfilled')
                                                 <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
                                             @elseif($order->status == 'partially-shipped')

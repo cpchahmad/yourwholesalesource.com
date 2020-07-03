@@ -121,7 +121,7 @@
                             <span class="font-weight-bold">Order Status: </span>
 
                             @if($ticket->has_order->status == 'Paid')
-                                <span class="badge badge-primary" style="float: right;font-size: medium"> Pending </span>
+                                <span class="badge badge-primary" style="font-size: small"> Pending</span>
                             @elseif($ticket->has_order->status == 'unfulfilled')
                                 <span class="badge badge-warning" style="font-size: small"> {{$ticket->has_order->status}}</span>
                             @elseif($ticket->has_order->status == 'partially-shipped')
@@ -137,6 +137,7 @@
                             @else
                                 <span class="badge badge-success" style="font-size: small"> {{$ticket->has_order->status}}</span>
                             @endif
+
                             <hr>
                             <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{explode('.',$ticket->has_store->shopify_domain)[0]}}</span>
                             <hr>
