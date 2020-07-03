@@ -220,10 +220,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/wallets/{id}', 'ManagerController@wallet_details')->name('sales_managers.wallets.detail');
             Route::get('/wallet/request/approve/{id}', 'ManagerController@approved_bank_statement')->name('sales_managers.wallets.approve.request');
             Route::post('/wallet/top-up', 'ManagerController@topup_wallet_by_admin')->name('sales_managers.user.wallet.topup');
-            Route::get('/home',function (){
-                $manager = \App\User::find(\Illuminate\Support\Facades\Auth::id());
-                return view('sales_managers.index')->with('manager',$manager);
-            })->name('managers.dashboard');
+            Route::get('/home','ManagerController@dashboard')->name('managers.dashboard');
 
             Route::get('/refunds','ManagerController@refunds')->name('sales_managers.refunds');
             Route::get('/refunds/{id}', 'ManagerController@view_refund')->name('sales_managers.refunds.view');

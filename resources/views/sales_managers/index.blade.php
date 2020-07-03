@@ -1,485 +1,317 @@
 @extends('layout.manager')
 @section('content')
-    <main id="main-container">
-        <!-- Page Header -->
-        <div class="content bg-image overflow-hidden" style="background-image: url({{asset('assets/media/photos/photo3@2x.jpg')}});">
-            <div class="push-50-t push-15">
-                <h1 class="h2 text-white animated zoomIn">Dashboard</h1>
-                <h2 class="h5 text-white animated zoomIn">Welcome to WeFullfill</h2>
+    <style>
+        .daterangepicker .right{
+            color: inherit !important;
+        }
+        .daterangepicker {
+            width: 668px !important;
+        }
+
+    </style>
+    <div class="bg-body-light">
+        <div class="content content-full pt-2 pb-2">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h4 my-2">
+                    Dashboard
+                </h1>
             </div>
         </div>
-        <!-- END Page Header -->
+    </div>
 
-        <!-- Stats -->
-        <div class="content bg-white border-b">
-            <div class="row items-push text-uppercase">
-                <div class="col-md-6 ">
-                    <div class="font-w700 text-gray-darker animated fadeIn">New Tickets</div>
-                    <a class="h2 font-w300 text-primary animated flipInX" >{{count($manager->has_manager_tickets()->where('status_id',1)->get())}}</a>
+
+
+    <div class="content">
+        <div class="row mb-2">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8 d-flex">
+                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
                 </div>
-                <div class="col-md-6">
-                    <div class="font-w700 text-gray-darker animated fadeIn">Closed Tickets</div>
-                    <a class="h2 font-w300 text-primary animated flipInX" >{{count($manager->has_manager_tickets()->where('status_id',4)->get())}}</a>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="font-w700 text-gray-darker animated fadeIn">Waiting Client Feedback Tickets </div>
-                    <a class="h2 font-w300 text-primary animated flipInX" >{{count($manager->has_manager_tickets()->where('status_id',2)->get())}}</a>
-                </div>
-                <div class="col-md-6">
-                    <div class="font-w700 text-gray-darker animated fadeIn">Waiting Support Feedback Tickets</div>
-                    <a class="h2 font-w300 text-primary animated flipInX" >{{count($manager->has_manager_tickets()->where('status_id',3)->get())}}</a>
+                <button class="btn btn-primary filter_by_date" data-url="{{route('managers.dashboard')}}" style="margin-left: 10px"> Filter </button>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-md-6 ">
+                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-w700 text-gray-darker animated fadeIn">New Tickets</div>
+                        <a class="h2 font-w300 text-primary animated flipInX" >{{$new_tickets}}</a>
+                    </div>
                 </div>
 
             </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-w700 text-gray-darker animated fadeIn">Closed Tickets</div>
+                        <a class="h2 font-w300 text-primary animated flipInX" >{{$closed_tickets}}</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 ">
+                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-w700 text-gray-darker animated fadeIn">Waiting Client Feedback Tickets </div>
+                        <a class="h2 font-w300 text-primary animated flipInX" >{{$waiting_clients_tickets}}</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-w700 text-gray-darker animated fadeIn">Waiting Support Feedback Tickets</div>
+                        <a class="h2 font-w300 text-primary animated flipInX" >{{$waiting_support_tickets}}</a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-        <!-- END Stats -->
+        <div class="row">
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Orders</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Refunds</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">New Store</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{$stores}}</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-one" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-two" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-three" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-four" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Products</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_products) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Product</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-{{--        <!-- Page Content -->--}}
-{{--        <div class="content">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-8">--}}
-{{--                    <!-- Main Dashboard Chart -->--}}
-{{--                    <div class="block">--}}
-{{--                        <div class="block-header">--}}
-{{--                            <ul class="block-options">--}}
-{{--                                <li>--}}
-{{--                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                            <h3 class="block-title">Weekly Overview</h3>--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content block-content-full bg-gray-lighter text-center">--}}
-{{--                            <!-- Chart.js Charts (initialized in js/pages/base_pages_dashboard.js), for more examples you can check out http://www.chartjs.org/docs/ -->--}}
-{{--                            <div style="height: 374px;"><canvas class="js-dash-chartjs-lines"></canvas></div>--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content text-center">--}}
-{{--                            <div class="row items-push text-center">--}}
-{{--                                <div class="col-xs-6 col-lg-3">--}}
-{{--                                    <div class="push-10"><i class="si si-graph fa-2x"></i></div>--}}
-{{--                                    <div class="h5 font-w300 text-muted">+ 205 Sales</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-xs-6 col-lg-3">--}}
-{{--                                    <div class="push-10"><i class="si si-users fa-2x"></i></div>--}}
-{{--                                    <div class="h5 font-w300 text-muted">+ 25% Clients</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-xs-6 col-lg-3 visible-lg">--}}
-{{--                                    <div class="push-10"><i class="si si-star fa-2x"></i></div>--}}
-{{--                                    <div class="h5 font-w300 text-muted">+ 10 Ratings</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-xs-6 col-lg-3 visible-lg">--}}
-{{--                                    <div class="push-10"><i class="si si-share fa-2x"></i></div>--}}
-{{--                                    <div class="h5 font-w300 text-muted">+ 35 Followers</div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <!-- END Main Dashboard Chart -->--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4">--}}
-{{--                    <!-- Latest Sales Widget -->--}}
-{{--                    <div class="block">--}}
-{{--                        <div class="block-header">--}}
-{{--                            <ul class="block-options">--}}
-{{--                                <li>--}}
-{{--                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                            <h3 class="block-title">Latest Sales</h3>--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content bg-gray-lighter">--}}
-{{--                            <div class="row items-push">--}}
-{{--                                <div class="col-xs-4">--}}
-{{--                                    <div class="text-muted"><small><i class="si si-calendar"></i> 24 hrs</small></div>--}}
-{{--                                    <div class="font-w600">18 Sales</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-xs-4">--}}
-{{--                                    <div class="text-muted"><small><i class="si si-calendar"></i> 7 days</small></div>--}}
-{{--                                    <div class="font-w600">78 Sales</div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-xs-4 h1 font-w300 text-right">$769</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content">--}}
-{{--                            <div class="pull-t pull-r-l">--}}
-{{--                                <!-- Slick slider (.js-slider class is initialized in App() -> uiHelperSlick()) -->--}}
-{{--                                <!-- For more info and examples you can check out http://kenwheeler.github.io/slick/ -->--}}
-{{--                                <div class="js-slider remove-margin-b" data-slider-autoplay="true" data-slider-autoplay-speed="2500">--}}
-{{--                                    <div>--}}
-{{--                                        <table class="table remove-margin-b font-s13">--}}
-{{--                                            <tbody>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600">--}}
-{{--                                                    <a href="javascript:void(0)">Admin Template</a>--}}
-{{--                                                </td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right" style="width: 70px;">23:01</td>--}}
-{{--                                                <td class="font-w600 text-success text-right" style="width: 70px;">+ $21</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">22:15</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $52</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">HTML Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">22:01</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $16</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">Admin Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">21:45</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $23</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">21:15</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $48</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">Admin Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">20:11</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $23</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">20:01</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $50</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">HTML Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">19:35</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $16</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">19:17</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $60</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">17:49</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $59</td>--}}
-{{--                                            </tr>--}}
-{{--                                            </tbody>--}}
-{{--                                        </table>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <table class="table remove-margin-b font-s13">--}}
-{{--                                            <tbody>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600">--}}
-{{--                                                    <a href="javascript:void(0)">Admin Template</a>--}}
-{{--                                                </td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right" style="width: 70px;">16:10</td>--}}
-{{--                                                <td class="font-w600 text-success text-right" style="width: 70px;">+ $21</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">16:06</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $48</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">15:21</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $52</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">Admin Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">12:10</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $23</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">Admin Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">12:09</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $23</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">HTML Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">11:39</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $16</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">Admin Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">11:33</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $23</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">Admin Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">11:18</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $23</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">WP Theme</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">09:49</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $50</td>--}}
-{{--                                            </tr>--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="font-w600"><a href="javascript:void(0)">HTML Template</a></td>--}}
-{{--                                                <td class="hidden-xs text-muted text-right">09:35</td>--}}
-{{--                                                <td class="font-w600 text-success text-right">+ $16</td>--}}
-{{--                                            </tr>--}}
-{{--                                            </tbody>--}}
-{{--                                        </table>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <!-- END Slick slider -->--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <!-- END Latest Sales Widget -->--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-8">--}}
-{{--                    <!-- News -->--}}
-{{--                    <div class="block">--}}
-{{--                        <div class="block-header">--}}
-{{--                            <ul class="block-options">--}}
-{{--                                <li>--}}
-{{--                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                            <h3 class="block-title"> Updates</h3>--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content bg-gray-lighter">--}}
-{{--                            <!-- Slick slider (.js-slider class is initialized in App() -> uiHelperSlick()) -->--}}
-{{--                            <!-- For more info and examples you can check out http://kenwheeler.github.io/slick/ -->--}}
-{{--                            <div class="js-slider remove-margin-b" data-slider-autoplay="true" data-slider-autoplay-speed="4000">--}}
-{{--                                <div>--}}
-{{--                                    <blockquote>--}}
-{{--                                        <p>Be yourself; everyone else is already taken.</p>--}}
-{{--                                        <footer>Oscar Wilde</footer>--}}
-{{--                                    </blockquote>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <blockquote>--}}
-{{--                                        <p>Don't cry because it's over, smile because it happened.</p>--}}
-{{--                                        <footer>Dr. Seuss</footer>--}}
-{{--                                    </blockquote>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <blockquote>--}}
-{{--                                        <p>Strive not to be a success, but rather to be of value.</p>--}}
-{{--                                        <footer>Albert Einstein</footer>--}}
-{{--                                    </blockquote>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <blockquote>--}}
-{{--                                        <p>Every child is an artist. The problem is how to remain an artist once he grows up.</p>--}}
-{{--                                        <footer>Pablo Picasso</footer>--}}
-{{--                                    </blockquote>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <blockquote>--}}
-{{--                                        <p>There is only one way to avoid criticism: do nothing, say nothing, and be nothing.</p>--}}
-{{--                                        <footer>Aristotle</footer>--}}
-{{--                                    </blockquote>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!-- END Slick slider -->--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content">--}}
-{{--                            <ul class="list list-timeline pull-t">--}}
-{{--                                <!-- Twitter Notification -->--}}
-{{--                                <li>--}}
-{{--                                    <div class="list-timeline-time">12 hrs ago</div>--}}
-{{--                                    <i class="fa fa-twitter list-timeline-icon bg-info"></i>--}}
-{{--                                    <div class="list-timeline-content">--}}
-{{--                                        <p class="font-w600">+ 1150 Followers</p>--}}
-{{--                                        <p class="font-s13">You’re getting more and more followers, keep it up!</p>--}}
-{{--                                    </div>--}}
-{{--                                </li>--}}
-{{--                                <!-- END Twitter Notification -->--}}
+                                @foreach($top_products as $product)
+                                    <tr>
+                                        <td class="font-w600">
+                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                @if($index == 0)
+                                                    @if($image->isV == 0)
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                    @else
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                            {{$product->title}}
+                                        </td>
+                                        <td class="d-none d-sm-table-cell text-center">
+                                            {{$product->sold}}
+                                        </td>
+                                        <td class="">
+                                            ${{number_format($product->selling_cost,2)}}
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-{{--                                <!-- Generic Notification -->--}}
-{{--                                <li>--}}
-{{--                                    <div class="list-timeline-time">4 hrs ago</div>--}}
-{{--                                    <i class="fa fa-briefcase list-timeline-icon bg-city"></i>--}}
-{{--                                    <div class="list-timeline-content">--}}
-{{--                                        <p class="font-w600">+ 3 New Products were added!</p>--}}
-{{--                                        <p class="font-s13">Congratulations!</p>--}}
-{{--                                    </div>--}}
-{{--                                </li>--}}
-{{--                                <!-- END Generic Notification -->--}}
+                                </tbody>
+                                @else
+                                    <p  class="text-center"> No Top Users Found </p>
+                                @endif
+                            </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Stores</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_stores) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Store</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Orders</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-{{--                                <!-- System Notification -->--}}
-{{--                                <li>--}}
-{{--                                    <div class="list-timeline-time">1 day ago</div>--}}
-{{--                                    <i class="fa fa-check list-timeline-icon bg-success"></i>--}}
-{{--                                    <div class="list-timeline-content">--}}
-{{--                                        <p class="font-w600">Database backup completed!</p>--}}
-{{--                                        <p class="font-s13">Download the <a href="javascript:void(0)">latest backup</a>.</p>--}}
-{{--                                    </div>--}}
-{{--                                </li>--}}
-{{--                                <!-- END System Notification -->--}}
+                                @foreach($top_stores as $store)
+                                    <tr>
+                                        <td class="font-w600">
+                                            {{explode('.',$store->shopify_domain)[0]}}
+                                        </td>
+                                        <td class="d-none d-sm-table-cell text-center">
+                                            {{$store->sold}}
+                                        </td>
+                                        <td class="">
+                                            ${{number_format($store->selling_cost,2)}}
+                                        </td>
+                                    </tr>
+                                @endforeach
 
-{{--                                <!-- Facebook Notification -->--}}
-{{--                                <li>--}}
-{{--                                    <div class="list-timeline-time">3 hrs ago</div>--}}
-{{--                                    <i class="fa fa-facebook list-timeline-icon bg-default"></i>--}}
-{{--                                    <div class="list-timeline-content">--}}
-{{--                                        <p class="font-w600">+ 290 Page Likes</p>--}}
-{{--                                        <p class="font-s13">This is great, keep it up!</p>--}}
-{{--                                    </div>--}}
-{{--                                </li>--}}
-{{--                                <!-- END Facebook Notification -->--}}
+                                </tbody>
+                            </table>
+                        @else
+                            <p  class="text-center"> No Top Users Found </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Non Shopify Users</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_users) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">User</th>
+                                    <th class="font-w700">Email</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Orders</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
-{{--                                <!-- Social Notification -->--}}
-{{--                                <li>--}}
-{{--                                    <div class="list-timeline-time">2 days ago</div>--}}
-{{--                                    <i class="fa fa-user-plus list-timeline-icon bg-modern"></i>--}}
-{{--                                    <div class="list-timeline-content">--}}
-{{--                                        <p class="font-w600">+ 3 Friend Requests</p>--}}
-{{--                                        <ul class="nav-users push-10-t push">--}}
-{{--                                            <li>--}}
-{{--                                                <a href="base_pages_profile.html">--}}
-{{--                                                    <img class="img-avatar" src="assets/img/avatars/avatar9.jpg" alt="">--}}
-{{--                                                    <i class="fa fa-circle text-success"></i> Eugene Burke--}}
-{{--                                                    <div class="font-w400 text-muted"><small>Graphic Designer</small></div>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <a href="base_pages_profile.html">--}}
-{{--                                                    <img class="img-avatar" src="assets/img/avatars/avatar5.jpg" alt="">--}}
-{{--                                                    <i class="fa fa-circle text-warning"></i> Rebecca Gray--}}
-{{--                                                    <div class="font-w400 text-muted"><small>Photographer</small></div>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                            <li>--}}
-{{--                                                <a href="base_pages_profile.html">--}}
-{{--                                                    <img class="img-avatar" src="assets/img/avatars/avatar10.jpg" alt="">--}}
-{{--                                                    <i class="fa fa-circle text-danger"></i> Bruce Edwards--}}
-{{--                                                    <div class="font-w400 text-muted"><small>UI Designer</small></div>--}}
-{{--                                                </a>--}}
-{{--                                            </li>--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                </li>--}}
-{{--                                <!-- END Social Notification -->--}}
+                                @foreach($top_users as $user)
+                                    <tr>
+                                        <td class="font-w600">
+                                            {{$user->name}} {{$user->last_name}}
+                                        </td>
+                                        <td class="font-w600">
+                                            {{$user->email}}
+                                        </td>
+                                        <td class="d-none d-sm-table-cell text-center">
+                                            {{$user->sold}}
+                                        </td>
+                                        <td class="">
+                                            ${{number_format($user->selling_cost,2)}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p  class="text-center"> No Top Users Found </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
 
-{{--                                <!-- System Notification -->--}}
-{{--                                <li class="push-5">--}}
-{{--                                    <div class="list-timeline-time">1 week ago</div>--}}
-{{--                                    <i class="fa fa-cog list-timeline-icon bg-primary-dark"></i>--}}
-{{--                                    <div class="list-timeline-content">--}}
-{{--                                        <p class="font-w600">System updated to v2.02</p>--}}
-{{--                                        <p class="font-s13">Check the complete changelog at the <a href="javascript:void(0)">activity page</a>.</p>--}}
-{{--                                    </div>--}}
-{{--                                </li>--}}
-{{--                                <!-- END System Notification -->--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <!-- END News -->--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4">--}}
-{{--                    <!-- Content Grid -->--}}
-{{--                    <div class="content-grid">--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-xs-12">--}}
-{{--                                <!-- Author of the Month -->--}}
-{{--                                <a class="block block-link-hover2" href="base_pages_profile.html">--}}
-{{--                                    <div class="block-header">--}}
-{{--                                        <h3 class="block-title text-center">Author of the Month</h3>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="block-content block-content-full text-center bg-image" style="background-image: url('assets/img/photos/photo2.jpg');">--}}
-{{--                                        <div>--}}
-{{--                                            <img class="img-avatar img-avatar96 img-avatar-thumb" src="assets/img/avatars/avatar1.jpg" alt="">--}}
-{{--                                        </div>--}}
-{{--                                        <div class="h5 text-white push-15-t push-5">Megan Dean</div>--}}
-{{--                                        <div class="h5 text-white-op">Web Developer</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="block-content">--}}
-{{--                                        <div class="row items-push text-center">--}}
-{{--                                            <div class="col-xs-6">--}}
-{{--                                                <div class="push-5"><i class="si si-briefcase fa-2x"></i></div>--}}
-{{--                                                <div class="h5 font-w300 text-muted">9 Projects</div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-xs-6">--}}
-{{--                                                <div class="push-5"><i class="si si-camera fa-2x"></i></div>--}}
-{{--                                                <div class="h5 font-w300 text-muted">74 Photos</div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                                <!-- END Author of the Month -->--}}
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        if($('body').find('#reportrange').length > 0){
+            var start = moment().subtract(29, 'days');
+            var end = moment();
 
-{{--                                <!-- Mini Stats -->--}}
-{{--                                <a class="block block-link-hover3" href="javascript:void(0)">--}}
-{{--                                    <table class="block-table text-center">--}}
-{{--                                        <tbody>--}}
-{{--                                        <tr>--}}
-{{--                                            <td style="width: 50%;">--}}
-{{--                                                <div class="push-30 push-30-t">--}}
-{{--                                                    <i class="si si-graph fa-3x text-primary"></i>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td class="bg-gray-lighter" style="width: 50%;">--}}
-{{--                                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 78</div>--}}
-{{--                                                <div class="h5 text-muted text-uppercase push-5-t">Sales</div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </a>--}}
-{{--                                <a class="block block-link-hover3" href="javascript:void(0)">--}}
-{{--                                    <table class="block-table text-center">--}}
-{{--                                        <tbody>--}}
-{{--                                        <tr>--}}
-{{--                                            <td style="width: 50%;">--}}
-{{--                                                <div class="push-30 push-30-t">--}}
-{{--                                                    <i class="si si-social-dribbble fa-3x text-smooth"></i>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td class="bg-gray-lighter" style="width: 50%;">--}}
-{{--                                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 69</div>--}}
-{{--                                                <div class="h5 text-muted text-uppercase push-5-t">Likes</div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </a>--}}
-{{--                                <a class="block block-link-hover3" href="javascript:void(0)">--}}
-{{--                                    <table class="block-table text-center">--}}
-{{--                                        <tbody>--}}
-{{--                                        <tr>--}}
-{{--                                            <td style="width: 50%;">--}}
-{{--                                                <div class="push-30 push-30-t">--}}
-{{--                                                    <i class="si si-social-youtube fa-3x text-city"></i>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td class="bg-gray-lighter" style="width: 50%;">--}}
-{{--                                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 88</div>--}}
-{{--                                                <div class="h5 text-muted text-uppercase push-5-t">Subs</div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </a>--}}
-{{--                                <a class="block block-link-hover3" href="javascript:void(0)">--}}
-{{--                                    <table class="block-table text-center">--}}
-{{--                                        <tbody>--}}
-{{--                                        <tr>--}}
-{{--                                            <td style="width: 50%;">--}}
-{{--                                                <div class="push-30 push-30-t">--}}
-{{--                                                    <i class="si si-users fa-3x text-primary-dark"></i>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                            <td class="bg-gray-lighter" style="width: 50%;">--}}
-{{--                                                <div class="h1 font-w700"><span class="h2 text-muted">+</span> 96</div>--}}
-{{--                                                <div class="h5 text-muted text-uppercase push-5-t"> Followers</div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </a>--}}
-{{--                                <!-- END Mini Stats -->--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <!-- END Content Grid -->--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <!-- END Page Content -->--}}
-    </main>
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+            if($('#reportrange span').text() === ''){
+                $('#reportrange span').html('Select Date Range');
+            }
+
+
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, cb);
+
+            // cb(start, end);
+        }
+
+        $('body').on('click','.filter_by_date', function() {
+            let daterange_string = $('#reportrange').find('span').text();
+            if(daterange_string !== '' && daterange_string !== 'Select Date Range'){
+                window.location.href = $(this).data('url')+'?date-range='+daterange_string;
+            }
+            else{
+                alertify.error('Please Select Range');
+            }
+        });
+    </script>
+
     @endsection

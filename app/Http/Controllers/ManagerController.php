@@ -22,8 +22,10 @@ use App\WalletLog;
 use App\WalletRequest;
 use App\Wishlist;
 use App\WishlistStatus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -40,6 +42,185 @@ class ManagerController extends Controller
     {
         $this->helper = new HelperController();
     }
+
+    public function dashboard(Request $request){
+        $manager = User::find(Auth::id());
+        $users_id = $manager->has_users->pluck('id')->toArray();
+        $shops_id = $manager->has_sales_stores->pluck('id')->toArray();
+
+        if ($request->has('date-range')) {
+            $date_range = explode('-',$request->input('date-range'));
+            $start_date = $date_range[0];
+            $end_date = $date_range[1];
+            $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
+            $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
+
+            $orders = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $sales = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $refund = RetailerOrder::whereIN('paid',[2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->whereIn('id',$shops_id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+
+            $new_tickets =  $manager->has_manager_tickets()->where('status_id',1) ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $waiting_client_tickets =  $manager->has_manager_tickets()->where('status_id',2)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $waiting_support_tickets =  $manager->has_manager_tickets()->where('status_id',3)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $closed_tickets =  $manager->has_manager_tickets()->where('status_id',4)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+
+
+            $ordersQ = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[1,2])
+                ->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)
+                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('date')
+                ->get();
+
+
+            $ordersQR = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[2])
+                ->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)
+                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('date')
+                ->get();
+
+            $shopQ = DB::table('shops')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+                ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
+                ->whereIn('id',$shops_id)
+                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('date')
+                ->get();
+
+
+
+
+
+        } else {
+
+            $orders = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->count();
+            $sales = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->sum('cost_to_pay');
+            $refund = RetailerOrder::whereIN('paid',[2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->sum('cost_to_pay');
+            $stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->whereIn('id',$shops_id)->count();
+
+            $new_tickets =  $manager->has_manager_tickets()->where('status_id',1)->count();
+            $waiting_client_tickets =  $manager->has_manager_tickets()->where('status_id',2)->count();
+            $waiting_support_tickets =  $manager->has_manager_tickets()->where('status_id',3)->count();
+            $closed_tickets =  $manager->has_manager_tickets()->where('status_id',4)->count();
+
+            $ordersQ = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[1,2])
+                ->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)
+                ->groupBy('date')
+                ->get();
+
+
+            $ordersQR = DB::table('retailer_orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+                ->whereIn('paid',[2])
+                ->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)
+                ->groupBy('date')
+                ->get();
+
+            $shopQ = DB::table('shops')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+                ->whereNotIn('shopify_domain',['wefullfill.myshopify.com'])
+                ->whereIn('id',$shops_id)
+                ->groupBy('date')
+                ->get();
+
+
+        }
+
+
+        $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
+        $graph_one_order_values = $ordersQ->pluck('total')->toArray();
+        $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
+
+        $graph_three_order_dates = $ordersQR->pluck('date')->toArray();
+        $graph_three_order_values = $ordersQR->pluck('total_sum')->toArray();
+
+        $graph_four_order_dates = $shopQ->pluck('date')->toArray();
+        $graph_four_order_values = $shopQ->pluck('total')->toArray();
+
+
+        $top_products =  Product::join('retailer_order_line_items',function($join) use ($users_id ,$shops_id){
+            $join->join('retailer_orders',function($o) use ($users_id ,$shops_id){
+                    $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                        ->whereIn('paid',[1,2])
+                        ->whereIn('user_id',$users_id)
+                        ->whereIn('shop_id',$shops_id);
+                });
+        })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('products.id')
+            ->orderBy('sold','DESC')
+            ->get()
+            ->take(10);
+
+        $top_stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->join('retailer_products',function($join) use ($shops_id){
+            $join->on('retailer_products.shop_id','=','shops.id')
+                ->whereIn('retailer_products.shop_id',$shops_id)
+                ->join('retailer_order_line_items',function ($j){
+                    $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
+                        ->join('retailer_orders',function($o){
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                });
+        })
+            ->select('shops.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('shops.id')
+            ->orderBy('sold','DESC')
+            ->get()
+            ->take(10);
+
+        $top_users = User::role('non-shopify-users')->join('retailer_products',function($join) use ($users_id){
+            $join->on('retailer_products.user_id','=','users.id')
+                ->whereIn('retailer_products.user_id',$users_id)
+                ->join('retailer_order_line_items',function ($j){
+                    $j->join('products',function ($p){
+                        $p->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id');
+                    });
+                    $j->join('retailer_orders',function($o){
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                });
+        })
+            ->select('users.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->groupBy('users.id')
+            ->orderBy('sold','DESC')
+            ->get()
+            ->take(10);
+
+//        dd($top_products);
+
+
+        return view('sales_managers.index')->with([
+            'date_range' => $request->input('date-range'),
+            'orders' => $orders,
+            'refunds' => $refund,
+            'sales' =>$sales,
+            'stores' => $stores,
+            'graph_one_labels' => $graph_one_order_dates,
+            'graph_one_values' => $graph_one_order_values,
+            'graph_two_values' => $graph_two_order_values,
+            'graph_three_labels' => $graph_three_order_dates,
+            'graph_three_values' => $graph_three_order_values,
+            'graph_four_values' => $graph_four_order_values,
+            'graph_four_labels' => $graph_four_order_dates,
+            'top_products' => $top_products,
+            'top_stores' => $top_stores,
+            'top_users' => $top_users,
+            'manager'=>$manager,
+            'new_tickets' => $new_tickets,
+            'closed_tickets' => $closed_tickets,
+            'waiting_clients_tickets' => $waiting_client_tickets,
+            'waiting_support_tickets' => $waiting_support_tickets
+        ]);
+    }
+
+
     public function tickets(Request $request){
         $tickets = Ticket::where('manager_id',Auth::id())->newQuery();
 
