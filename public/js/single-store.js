@@ -544,17 +544,17 @@ $(document).ready(function () {
 
     }
 
-    if($('body').find('#canvas-graph-one').length > 0){
+    if($('body').find('#canvas-graph-one-store').length > 0){
         console.log('ok');
         var config = {
             type: 'bar',
             data: {
-                labels: JSON.parse($('#canvas-graph-one').attr('data-labels')),
+                labels: JSON.parse($('#canvas-graph-one-store').attr('data-labels')),
                 datasets: [{
                     label: 'Order Count',
                     backgroundColor: '#00e2ff',
                     borderColor: '#00e2ff',
-                    data: JSON.parse($('#canvas-graph-one').attr('data-values')),
+                    data: JSON.parse($('#canvas-graph-one-store').attr('data-values')),
                     fill: false,
                 }]
             },
@@ -594,21 +594,21 @@ $(document).ready(function () {
             }
         };
 
-        var ctx = document.getElementById('canvas-graph-one').getContext('2d');
+        var ctx = document.getElementById('canvas-graph-one-store').getContext('2d');
         window.myBar = new Chart(ctx, config);
     }
 
-    if($('body').find('#canvas-graph-two').length > 0){
+    if($('body').find('#canvas-graph-two-store').length > 0){
         console.log('ok');
         var config = {
             type: 'line',
             data: {
-                labels: JSON.parse($('#canvas-graph-two').attr('data-labels')),
+                labels: JSON.parse($('#canvas-graph-two-store').attr('data-labels')),
                 datasets: [{
                     label: 'Orders Sales',
                     backgroundColor: '#5c80d1',
                     borderColor: '#5c80d1',
-                    data: JSON.parse($('#canvas-graph-two').attr('data-values')),
+                    data: JSON.parse($('#canvas-graph-two-store').attr('data-values')),
                     fill: false,
                 }]
             },
@@ -648,21 +648,21 @@ $(document).ready(function () {
             }
         };
 
-        var ctx_2 = document.getElementById('canvas-graph-two').getContext('2d');
+        var ctx_2 = document.getElementById('canvas-graph-two-store').getContext('2d');
         window.myLine = new Chart(ctx_2, config);
     }
 
-    if($('body').find('#canvas-graph-three').length > 0){
+    if($('body').find('#canvas-graph-three-store').length > 0){
         console.log('ok');
         var config = {
             type: 'line',
             data: {
-                labels: JSON.parse($('#canvas-graph-three').attr('data-labels')),
+                labels: JSON.parse($('#canvas-graph-three-store').attr('data-labels')),
                 datasets: [{
                     label: 'Profit',
                     backgroundColor: '#89d18a',
                     borderColor: '#5fd154',
-                    data: JSON.parse($('#canvas-graph-three').attr('data-values')),
+                    data: JSON.parse($('#canvas-graph-three-store').attr('data-values')),
                     fill: 'start',
                 }]
             },
@@ -702,21 +702,21 @@ $(document).ready(function () {
             }
         };
 
-        var ctx_3 = document.getElementById('canvas-graph-three').getContext('2d');
+        var ctx_3 = document.getElementById('canvas-graph-three-store').getContext('2d');
         window.myLine = new Chart(ctx_3, config);
     }
 
-    if($('body').find('#canvas-graph-four').length > 0){
+    if($('body').find('#canvas-graph-four-store').length > 0){
         console.log('ok');
         var config = {
             type: 'line',
             data: {
-                labels: JSON.parse($('#canvas-graph-four').attr('data-labels')),
+                labels: JSON.parse($('#canvas-graph-four-store').attr('data-labels')),
                 datasets: [{
                     label: 'Products',
                     backgroundColor: '#cd99d1',
                     borderColor: '#cd2bd1',
-                    data: JSON.parse($('#canvas-graph-four').attr('data-values')),
+                    data: JSON.parse($('#canvas-graph-four-store').attr('data-values')),
                     fill: false,
                 }]
             },
@@ -756,7 +756,7 @@ $(document).ready(function () {
             }
         };
 
-        var ctx_4 = document.getElementById('canvas-graph-four').getContext('2d');
+        var ctx_4 = document.getElementById('canvas-graph-four-store').getContext('2d');
         window.myLine = new Chart(ctx_4, config);
     }
 

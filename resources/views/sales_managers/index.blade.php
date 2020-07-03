@@ -22,10 +22,8 @@
 
 
     <div class="content">
-        <div class="row mb-2">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-8 d-flex">
+        <div class="row mb-2" style="padding-bottom:1.875rem">
+            <div class="col-md-4 d-flex">
                 <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                     <i class="fa fa-calendar"></i>&nbsp;
                     <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
@@ -110,14 +108,14 @@
             <div class="col-md-6">
                 <div class="block block-rounded block-link-pop">
                     <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-one" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                        <canvas id="canvas-graph-one-managers" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="block block-rounded block-link-pop">
                     <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-two" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                        <canvas id="canvas-graph-two-managers" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
                     </div>
                 </div>
             </div>
@@ -126,20 +124,20 @@
             <div class="col-md-6">
                 <div class="block block-rounded block-link-pop">
                     <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-three" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
+                        <canvas id="canvas-graph-three-managers" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="block block-rounded block-link-pop">
                     <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-four" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
+                        <canvas id="canvas-graph-four-managers" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Top Products</h3>

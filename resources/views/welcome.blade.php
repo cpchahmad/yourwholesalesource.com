@@ -19,10 +19,8 @@
         </div>
     </div>
     <div class="content">
-        <div class="row mb-2">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-8 d-flex">
+        <div class="row mb-2" style="padding-bottom:1.875rem">
+            <div class="col-md-4 d-flex">
                     <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                         <i class="fa fa-calendar"></i>&nbsp;
                         <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
@@ -97,7 +95,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Top Products</h3>
