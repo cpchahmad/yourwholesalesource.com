@@ -71,7 +71,6 @@ class ProductController extends Controller
 
     public function Edit($id)
     {
-
         $categories = Category::latest()->get();
         $product = Product::find($id);
         $platforms = WarnedPlatform::all();
