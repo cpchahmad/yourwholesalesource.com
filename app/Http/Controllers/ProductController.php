@@ -165,7 +165,6 @@ class ProductController extends Controller
                 if ($request->input('type') == 'new-option-add') {
                     $variants_array = [];
                     foreach ($product->hasVariants as $v) {
-
                         if ($request->input('option') == 'option2') {
                             $v->option2 = $request->input('value');
                             $v->title = $v->title . $request->input('value') . '/';
