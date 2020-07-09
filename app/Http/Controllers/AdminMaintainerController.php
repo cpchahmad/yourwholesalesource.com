@@ -30,7 +30,8 @@ class AdminMaintainerController extends Controller
                  $retailer_product = $item->linked_product;
                  $admin_product = $retailer_product->linked_product;
                  if(count($admin_product->hasVariants) > 0){
-                 $variant_id =  $admin_product->hasVariants->where('title',$item->title)->first()->shopify_id;
+                 $variant_id =  $admin_product->hasVariants->where('title',$item->title)->first();
+                 dd($variant_id);
                  }
                  else{
                      $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products/'.$admin_product->shopify_id.'.json');
