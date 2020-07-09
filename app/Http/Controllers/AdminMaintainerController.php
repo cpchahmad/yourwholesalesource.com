@@ -102,7 +102,7 @@ class AdminMaintainerController extends Controller
             ];
         }
         else{
-            $billing = [];
+            $billing = null;
         }
         if($order->shipping_address != null){
             $shipping_address = json_decode($order->shipping_address);
@@ -120,7 +120,7 @@ class AdminMaintainerController extends Controller
             ];
         }
         else{
-            $shipping = [];
+            $shipping = null;
         }
 
         $orderData = [
@@ -137,8 +137,10 @@ class AdminMaintainerController extends Controller
             ]
         ];
 
-        dd($orderData);
 
+
+        $response = $admin_store->api()->rest('POST', '/admin/api/2019-10/draft_orders.json', $orderData);
+        dd($response);
 
 
     }
