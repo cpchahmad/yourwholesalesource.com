@@ -23,7 +23,19 @@ class AdminMaintainerController extends Controller
         $line_items = [];
         if($order->custom == 1){
             foreach ($order->line_items as $item){
-                dd($item->linked_real_product);
+                if($item->linked_real_variant != null){
+                    array_push($line_items, [
+                        "variant_id" => $item->linked_real_variant->shopify_id,
+                        "quantity" => $item->quantity,
+                    ]);
+                }
+                else{
+                    array_push($line_items, [
+                        "title"=> $item->name,
+                        "price"=> $item->cost,
+                        "quantity"=> $item->qunatity,
+                    ]);
+                }
             }
         }
         else{
