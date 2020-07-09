@@ -18,6 +18,7 @@ use function Psy\sh;
 class OrderController extends Controller
 {
     private $helper;
+    private $admin;
 
     /**
      * OrderController constructor.
@@ -26,6 +27,7 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->admin = new AdminMaintainerController();
     }
 
     public function index(Request $request){
@@ -82,7 +84,7 @@ class OrderController extends Controller
             $order_log->status = "paid";
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
-
+            $this->admin->sync_order_to_admin_store($order);
             return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
         }
         else{
