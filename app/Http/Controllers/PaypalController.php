@@ -12,6 +12,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 class PaypalController extends Controller
 {
     private $helper;
+    private $admin;
 
     /**
      * PaypalController constructor.
@@ -20,6 +21,7 @@ class PaypalController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->admin = new AdminMaintainerController();
     }
 
     public function paypal_order_payment(Request $request)
@@ -138,5 +140,9 @@ class PaypalController extends Controller
             return redirect()->route('store.orders')->with('error','Order Not Found!');
         }
 
+    }
+    public function test($id){
+        $order = RetailerOrder::find($id);
+        $this->admin->sync_order_to_admin_store($order);
     }
 }
