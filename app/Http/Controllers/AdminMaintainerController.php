@@ -77,10 +77,10 @@ class AdminMaintainerController extends Controller
                 }
 
             }
-            dd($line_items);
+
         }
 
-
+        dd($line_items);
 
 
 //        dd(CountrySubdivisions::getCode('United States','Alabama'));
