@@ -20,4 +20,8 @@ class RetailerProduct extends Model
     public function has_subcategories(){
         return $this->belongsToMany('App\SubCategory','retailer_product_subcategory','product_id','subcategory_id');
     }
+
+    public function linked_product(){
+        return $this->belongsTo('App\Product','linked_product_id');
+    }
 }
