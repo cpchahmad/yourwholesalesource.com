@@ -137,8 +137,6 @@ class AdminMaintainerController extends Controller
                 "title" => 'WefullFill Shipping'
             ];
         }
-
-
         $orderData = [
             "draft_order" => [
                 "line_items" => $line_items,
@@ -148,11 +146,16 @@ class AdminMaintainerController extends Controller
                 "shipping_line" => $shipping_line,
             ]
         ];
-
-
-
         $response = $admin_store->api()->rest('POST', '/admin/api/2019-10/draft_orders.json', $orderData);
-        dd($response);
+
+        if(!$response->errors){
+            $draft_order = $response->body->draft_order;
+            $admin_order_response = $admin_store->api()->rest('PUT', '/admin/api/2020-04/draft_orders/'.$draft_order->id.'/complete.json');
+            dd($admin_order_response);
+        }
+        else{
+            return 0;
+        }
 
 
     }
