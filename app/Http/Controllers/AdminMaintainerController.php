@@ -81,59 +81,67 @@ class AdminMaintainerController extends Controller
         }
 
         dd($line_items);
+        if($order->email == null){
+            $email = 'super_admin@wefullfill.com';
+        }
+        else{
+            $email =  $order->email;
+        }
+        if($order->billing_address != null){
+            $billing_address = json_decode($order->billing_address);
+            $billing =  [
+                "address1" =>$billing_address->address1,
+                "address2" => $billing_address->address2,
+                "city" =>$billing_address->city,
+                "first_name" => $billing_address->first_name,
+                "last_name" => $billing_address->last_name,
+                "province" => $billing_address->province,
+                "country" =>$billing_address->country,
+                "phone" =>$billing_address->phone,
+                "zip" => $billing_address->zip,
+                "name" => $billing_address->first_name . ' ' . $billing_address->last_name,
 
+            ];
+        }
+        else{
+            $billing = [];
+        }
+        if($order->shipping_address != null){
+            $shipping_address = json_decode($order->shipping_address);
+            $shipping =  [
+                "address1" =>$shipping_address->address1,
+                "address2" => $shipping_address->address2,
+                "city" =>$shipping_address->city,
+                "first_name" => $shipping_address->first_name,
+                "last_name" => $shipping_address->last_name,
+                "province" => $shipping_address->province,
+                "country" =>$shipping_address->country,
+                "phone" =>$shipping_address->phone,
+                "zip" => $shipping_address->zip,
+                "name" => $shipping_address->first_name . ' ' . $shipping_address->last_name,
 
-//        dd(CountrySubdivisions::getCode('United States','Alabama'));
+            ];
+        }
+        else{
+            $shipping = [];
+        }
 
-//        $draft_orders = $this->helper->getShopify()->call([
-//            'METHOD' => 'POST',
-//            'URL' => '/admin/draft_orders.json',
-//            'DATA' =>
-//                [
-//                    "draft_order" => [
-//                        'line_items' => $line_items,
-//                        "customer" => [
-//                            "id" => $request->input('customer_id'),
-//                        ],
-//                        "shipping_address" => [
-//                            "address1" => $request->input('receipent_address1'),
-//                            "address2" => $request->input('receipent_address2'),
-//                            "city" => $request->input('receipent_city'),
-//                            "company" => $request->input('receipent_business'),
-//                            "first_name" => $request->input('receipent_first_name'),
-//                            "last_name" => $request->input('receipent_last_name'),
-//                            "province" => $request->input('receipent_state'),
-//                            "country" => $request->input('receipent_country'),
-//                            "phone" => $request->input('receipent_phone'),
-//                            "zip" => $request->input('receipent_postecode'),
-//                            "name" => $request->input('receipent_first_name') . ' ' . $request->input('receipent_last_name'),
-//                            "country_code" => Countries::getCode($request->input('receipent_country')),
-//                            "province_code" => CountrySubdivisions::getCode($request->input('receipent_country'), $request->input('receipent_state'))
-//                        ],
-//                        "billing_address" => [
-//                            "address1" => $request->input('billing_address1'),
-//                            "address2" => $request->input('billing_address2'),
-//                            "city" => $request->input('billing_city'),
-//                            "company" => $request->input('billing_business'),
-//                            "first_name" => $request->input('billing_first_name'),
-//                            "last_name" => $request->input('billing_last_name'),
-//                            "province" => $request->input('billing_state'),
-//                            "country" => $request->input('billing_country'),
-//                            "zip" => $request->input('billing_postecode'),
-//                            "name" => $request->input('billing_first_name') . ' ' . $request->input('billing_last_name'),
-//                            "country_code" => Countries::getCode($request->input('billing_country')),
-//                            "province_code" => CountrySubdivisions::getCode($request->input('billing_country'), $request->input('billing_state'))
-//                        ],
-//                        "shipping_line" => [
-//                            "custom" => true,
-//                            "price" => $request->input('new_shipping_price'),
-//                            "title" => $request->input('shipping_method')
-//                        ],
-////                        "use_customer_default_address" => false
-//                    ]
-//
-//                ]
-//        ]);
+        $orderData = [
+            "draft_order" => [
+                "line_items" => $line_items,
+                "email" =>$email,
+                "shipping_address" => $shipping,
+                "billing_address" => $billing,
+                "shipping_line" => [
+                    "custom" => true,
+                    "price" => $order->shipping_price,
+                    "title" => 'WefullFill Shipping'
+                ],
+            ]
+        ];
+
+        dd($orderData);
+
 
 
     }
