@@ -22,7 +22,7 @@ class AdminMaintainerController extends Controller
         $line_items = [];
         if($order->custom == 1){
             foreach ($order->line_items as $item){
-                dd($item->linked_real_variant);
+                dd($item->linked_real_product);
             }
         }
         else{
