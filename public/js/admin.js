@@ -257,7 +257,7 @@ $(document).ready(function () {
             });
 
         } else {
-            window.location.reload();
+            // window.location.reload();
         }
     }
     /*Admin Module - Variant Image Change JS*/
