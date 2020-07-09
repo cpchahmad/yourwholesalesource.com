@@ -33,15 +33,11 @@ class AdminMaintainerController extends Controller
                  $variant_id =  $admin_product->hasVariants()->where('title',$item->title)->first()->shopify_id;
                  }
                  else{
-                     $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products'.$admin_product->shopify_id.'.json');
+                     $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products/'.$admin_product->shopify_id.'.json');
                      if(!$response->errors){
                          $shopifyVariants = $response->body->product->variants;
                          $variant_id = $shopifyVariants[0]->id;
                      }
-                     else{
-                         dd($response);
-                     }
-
                  }
                  dd($variant_id);
             }
