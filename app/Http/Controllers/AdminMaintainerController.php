@@ -30,6 +30,7 @@ class AdminMaintainerController extends Controller
                  $retailer_product = $item->linked_product;
                  $admin_product = $retailer_product->linked_product;
                  if(count($admin_product->hasVariants) > 0){
+                     dd($admin_product->hasVariants);
                  $variant_id =  $admin_product->hasVariants->where('title',$item->title)->first();
                  dd($variant_id);
                  }
