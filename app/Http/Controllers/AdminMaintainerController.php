@@ -80,7 +80,6 @@ class AdminMaintainerController extends Controller
 
         }
 
-        dd($line_items);
         if($order->email == null){
             $email = 'super_admin@wefullfill.com';
         }
