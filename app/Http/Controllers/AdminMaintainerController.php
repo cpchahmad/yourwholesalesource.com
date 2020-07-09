@@ -49,7 +49,7 @@ class AdminMaintainerController extends Controller
                         $variant_id = $shopifyVariants[0]->id;
                     }
                 }
-                if($variant != null){
+                if($variant_id != null){
                     array_push($line_items, [
                         "variant_id" => $variant_id,
                         "quantity" => $item->quantity,
