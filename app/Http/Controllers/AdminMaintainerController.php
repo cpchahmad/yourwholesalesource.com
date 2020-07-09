@@ -25,7 +25,7 @@ class AdminMaintainerController extends Controller
         }
         else{
             foreach ($order->line_items as $item){
-                dd($item->linked_variant);
+                dd($item->linked_real_variant);
             }
         }
 
