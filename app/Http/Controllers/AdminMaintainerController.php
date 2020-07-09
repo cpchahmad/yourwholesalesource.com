@@ -145,7 +145,7 @@ class AdminMaintainerController extends Controller
                 "email" =>$email,
                 "shipping_address" => $shipping,
                 "billing_address" => $billing,
-                "shipping_line" => ,
+                "shipping_line" => $shipping_line,
             ]
         ];
 
