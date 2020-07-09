@@ -27,21 +27,28 @@ class AdminMaintainerController extends Controller
         }
         else{
             foreach ($order->line_items as $item){
-                 $retailer_product = $item->linked_product;
-                 $admin_product = $retailer_product->linked_product;
-                 if(count($admin_product->hasVariants) > 0){
-                     dd($admin_product->hasVariants);
-                 $variant_id =  $admin_product->hasVariants->where('title',$item->title)->first();
-                 dd($variant_id);
-                 }
-                 else{
-                     $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products/'.$admin_product->shopify_id.'.json');
-                     if(!$response->errors){
-                         $shopifyVariants = $response->body->product->variants;
-                         $variant_id = $shopifyVariants[0]->id;
-                     }
-                 }
-                 dd($variant_id);
+                $retailer_product = $item->linked_product;
+                $retailer_variant = $item->linked_variant;
+                $admin_product = $retailer_product->linked_product;
+                if(count($admin_product->hasVariants) > 0){
+                    $variant =  $admin_product->hasVariants->where('option1',$retailer_variant->option1)
+                        ->where('option2',$retailer_variant->option2)
+                        ->where('option3',$retailer_variant->option3)->first();
+                    if($variant != null){
+                        $variant_id = $variant->shopify_id;
+                    }
+                    else{
+                        $variant_id = null;
+                    }
+                }
+                else{
+                    $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products/'.$admin_product->shopify_id.'.json');
+                    if(!$response->errors){
+                        $shopifyVariants = $response->body->product->variants;
+                        $variant_id = $shopifyVariants[0]->id;
+                    }
+                }
+                dd($variant_id);
             }
         }
 
