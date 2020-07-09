@@ -21,7 +21,9 @@ class AdminMaintainerController extends Controller
         $admin_store = $this->helper->getAdminShop();
         $line_items = [];
         if($order->custom == 1){
-
+            foreach ($order->line_items as $item){
+                dd($item->linked_real_variant);
+            }
         }
         else{
             foreach ($order->line_items as $item){
