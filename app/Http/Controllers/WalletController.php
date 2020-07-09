@@ -19,6 +19,7 @@ class WalletController extends Controller
 {
 
     private $helper;
+    private $admin;
 
     /**
      * WalletController constructor.
@@ -26,6 +27,7 @@ class WalletController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->admin = new AdminMaintainerController();
     }
 
     public function user_wallet_view()
@@ -254,6 +256,10 @@ class WalletController extends Controller
                 $order_log->status = "paid";
                 $order_log->retailer_order_id = $retailer_order->id;
                 $order_log->save();
+
+
+                $this->admin->sync_order_to_admin_store($retailer_order);
+
                 return redirect()->back()->with('success','Order Cost Deducted From Wallet Successfully!');
             }
             else{

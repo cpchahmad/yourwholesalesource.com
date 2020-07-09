@@ -128,6 +128,7 @@ class PaypalController extends Controller
             $order_log->status = "paid";
             $order_log->retailer_order_id = $retailer_order->id;
             $order_log->save();
+            $this->admin->sync_order_to_admin_store($retailer_order);
             if($retailer_order->custom == 0){
                 return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
             }

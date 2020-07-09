@@ -235,7 +235,6 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
 
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
-//        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
         Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
         Route::get('/pay-through-wallet/{id}', 'WalletController@order_payment_by_wallet')->name('store.order.wallet.pay');
         Route::get('/pay-through-paypal/{id}', 'PaypalController@paypal_order_payment')->name('store.order.paypal.pay');

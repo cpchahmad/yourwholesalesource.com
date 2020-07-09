@@ -34,6 +34,17 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 
 class CustomOrderController extends Controller
 {
+    private $admin;
+
+    /**
+     * CustomOrderController constructor.
+     * @param $admin
+     */
+    public function __construct()
+    {
+        $this->admin = new AdminMaintainerController();
+    }
+
     public function index(Request $request){
         $orders  = RetailerOrder::where('user_id',Auth::id())->where('custom',1)->newQuery();
         if($request->has('search')){
@@ -653,6 +664,7 @@ class CustomOrderController extends Controller
                 $order_log->status = "paid";
                 $order_log->retailer_order_id = $retailer_order->id;
                 $order_log->save();
+                $this->admin->sync_order_to_admin_store($retailer_order);
 
             }
             return redirect()->route('users.files.view',$request->id)->with('success','Bulk Payment Processed Successfully!');
