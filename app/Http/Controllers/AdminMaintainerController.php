@@ -123,17 +123,29 @@ class AdminMaintainerController extends Controller
             $shipping = null;
         }
 
+        if($order->shipping_price != null){
+            $shipping_line =  [
+                "custom" => true,
+                "price" => $order->shipping_price,
+                "title" => 'WefullFill Shipping'
+            ];
+        }
+        else{
+            $shipping_line =  [
+                "custom" => true,
+                "price" => 0,
+                "title" => 'WefullFill Shipping'
+            ];
+        }
+
+
         $orderData = [
             "draft_order" => [
                 "line_items" => $line_items,
                 "email" =>$email,
                 "shipping_address" => $shipping,
                 "billing_address" => $billing,
-                "shipping_line" => [
-                    "custom" => true,
-                    "price" => $order->shipping_price,
-                    "title" => 'WefullFill Shipping'
-                ],
+                "shipping_line" => ,
             ]
         ];
 
