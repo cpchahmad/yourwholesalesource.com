@@ -151,7 +151,15 @@ class AdminMaintainerController extends Controller
         if(!$response->errors){
             $draft_order = $response->body->draft_order;
             $admin_order_response = $admin_store->api()->rest('PUT', '/admin/api/2020-04/draft_orders/'.$draft_order->id.'/complete.json');
-            dd($admin_order_response);
+            if(!$admin_order_response->errors){
+                $admin_order = $response->body->draft_order;
+                $order->admin_shopify_id = $admin_order->order_id;
+                $order->save();
+                return 1;
+            }
+            else{
+                return 2;
+            }
         }
         else{
             return 0;
