@@ -96,7 +96,6 @@ class AdminMaintainerController extends Controller
                 "last_name" => $billing_address->last_name,
                 "province" => $billing_address->province,
                 "country" =>$billing_address->country,
-                "phone" =>$billing_address->phone,
                 "zip" => $billing_address->zip,
                 "name" => $billing_address->first_name . ' ' . $billing_address->last_name,
 
@@ -115,7 +114,6 @@ class AdminMaintainerController extends Controller
                 "last_name" => $shipping_address->last_name,
                 "province" => $shipping_address->province,
                 "country" =>$shipping_address->country,
-                "phone" =>$shipping_address->phone,
                 "zip" => $shipping_address->zip,
                 "name" => $shipping_address->first_name . ' ' . $shipping_address->last_name,
 
