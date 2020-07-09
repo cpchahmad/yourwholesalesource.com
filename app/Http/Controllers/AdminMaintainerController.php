@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\RetailerOrder;
+
 class AdminMaintainerController extends Controller
 {
     private $helper;
@@ -48,15 +49,27 @@ class AdminMaintainerController extends Controller
                         $variant_id = $shopifyVariants[0]->id;
                     }
                 }
-                dd($variant_id);
+                if($variant != null){
+                    array_push($line_items, [
+                        "variant_id" => $variant_id,
+                        "quantity" => $item->quantity,
+                    ]);
+                }
+                else{
+                    array_push($line_items, [
+                        "title"=> $item->name,
+                        "price"=> $item->cost,
+                        "quantity"=> $item->qunatity,
+                    ]);
+
+                }
+
             }
+            dd($line_items);
         }
 
 
-//        array_push($line_items, [
-//            "variant_id" => $request->input('product_id'),
-//            "quantity" => 1,
-//        ]);
+
 
 //        dd(CountrySubdivisions::getCode('United States','Alabama'));
 
