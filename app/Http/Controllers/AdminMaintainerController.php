@@ -233,7 +233,7 @@ class AdminMaintainerController extends Controller
             if(count($data['fulfillment']['line_items']) > 0){
                 $response = $admin_shop->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
                 if(!$response->errors){
-                    $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
+                    $fulfillment->admin_fulfillment_shopify_id = $response->body->fulfillment->id;
                     $fulfillment->save();
                 }
             }
@@ -241,5 +241,11 @@ class AdminMaintainerController extends Controller
         } else {
             return 0;
         }
+    }
+
+    public function admin_order_fulfillment_cancel(RetailerOrder $order,OrderFulfillment $fulfillment){
+        $admin_shop = $this->helper->getAdminShop();
+        $response = $admin_shop->api()->rest('POST','/admin/orders/'.$order->admin_shopify_id.'/fulfillments/'.$fulfillment->admin_fulfillment_shopify_id.'/cancel.json');
+
     }
 }
