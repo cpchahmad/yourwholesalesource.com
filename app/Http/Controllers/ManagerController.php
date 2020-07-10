@@ -33,7 +33,7 @@ class ManagerController extends Controller
 {
 
     private $helper;
-
+    private $admin_maintainer;
     /**
      * AdminOrderController constructor.
      * @param $helper
@@ -41,6 +41,7 @@ class ManagerController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->admin_maintainer = new AdminMaintainerController();
     }
 
     public function dashboard(Request $request){
@@ -481,7 +482,10 @@ class ManagerController extends Controller
                                     ]
                                 ];
                                 $response = $shop->api()->rest('PUT','/admin/orders/'.$order->shopify_order_id.'/fulfillments/'.$current->fulfillment_shopify_id.'.json',$data);
-
+                                if($order->admin_shopify_id != null)
+                                {
+                                    $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
+                                }
                                 if(!$response->errors){
                                     $current->tracking_number = $tracking_numbers[$index];
                                     $current->tracking_url = $tracking_urls[$index];
@@ -518,6 +522,17 @@ class ManagerController extends Controller
                             $current->tracking_url = $tracking_urls[$index];
                             $current->tracking_notes = $tracking_notes[$index];
                             $current->save();
+
+                            if($order->admin_shopify_id != null)
+                            {
+                                $data = [
+                                    "fulfillment" => [
+                                        "tracking_number" => $tracking_numbers[$index],
+                                        "tracking_url" => $tracking_urls[$index],
+                                    ]
+                                ];
+                                $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
+                            }
 
                             /*Maintaining Log*/
                             $order_log =  new OrderLog();
@@ -686,6 +701,9 @@ class ManagerController extends Controller
 
             }
         }
+        if($order->admin_shopify_id != null) {
+            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+        }
 
         $manager = User::find(Auth::id());
         $ml = new ManagerLog();
@@ -719,7 +737,9 @@ class ManagerController extends Controller
         }
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $fulfillment->name . " has been cancelled successfully on " . now()->format('d M, Y h:i a');
-
+        if($order->admin_shopify_id != null) {
+            $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
+        }
         $fulfillment->delete();
         $order->status = $order->getStatus($order);
         $order->save();
