@@ -246,6 +246,12 @@ class AdminMaintainerController extends Controller
     public function admin_order_fulfillment_cancel(RetailerOrder $order,OrderFulfillment $fulfillment){
         $admin_shop = $this->helper->getAdminShop();
         $response = $admin_shop->api()->rest('POST','/admin/orders/'.$order->admin_shopify_id.'/fulfillments/'.$fulfillment->admin_fulfillment_shopify_id.'/cancel.json');
+    }
+
+    public function admin_order_fulfillment_add_tracking(RetailerOrder $order,OrderFulfillment $fulfillment,$data){
+        $admin_shop = $this->helper->getAdminShop();
+        $response = $admin_shop->api()->rest('PUT', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $fulfillment->admin_fulfillment_shopify_id . '.json', $data);
 
     }
+
 }

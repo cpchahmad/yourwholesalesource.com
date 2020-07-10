@@ -185,7 +185,10 @@ class AdminOrderController extends Controller
                                     ]
                                 ];
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
-
+                               if($order->admin_shopify_id != null)
+                               {
+                                   $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
+                               }
                                 if (!$response->errors) {
                                     $current->tracking_number = $tracking_numbers[$index];
                                     $current->tracking_url = $tracking_urls[$index];
@@ -362,7 +365,9 @@ class AdminOrderController extends Controller
 
             }
         }
-        $this->admin_maintainer->admin_order_fullfillment($order,$request,$fulfillment);
+        if($order->admin_shopify_id != null) {
+            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+        }
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
     }
 
@@ -388,8 +393,9 @@ class AdminOrderController extends Controller
         }
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $fulfillment->name . " has been cancelled successfully on " . now()->format('d M, Y h:i a');
-
-        $this->admin_maintainer->admin_order_fulfillment_cancel($order,$fulfillment);
+        if($order->admin_shopify_id != null) {
+            $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
+        }
         $fulfillment->delete();
         $order->status = $order->getStatus($order);
         $order->save();
