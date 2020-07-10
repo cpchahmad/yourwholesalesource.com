@@ -217,6 +217,17 @@ class AdminOrderController extends Controller
                             $current->tracking_notes = $tracking_notes[$index];
                             $current->save();
 
+                            if($order->admin_shopify_id != null)
+                            {
+                                $data = [
+                                    "fulfillment" => [
+                                        "tracking_number" => $tracking_numbers[$index],
+                                        "tracking_url" => $tracking_urls[$index],
+                                    ]
+                                ];
+                                $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
+                            }
+
                             /*Maintaining Log*/
                             $order_log = new OrderLog();
                             $order_log->message = "Tracking detailed added to fulfillment named " . $current->name . "  successfully on " . now()->format('d M, Y h:i a');
