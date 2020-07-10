@@ -158,11 +158,11 @@ class AdminMaintainerController extends Controller
                 return 1;
             }
             else{
-               dd($admin_order_response);
+             return 2;
             }
         }
         else{
-            dd($response);
+          return 0;
         }
 
 
