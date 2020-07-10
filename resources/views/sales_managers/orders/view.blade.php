@@ -197,7 +197,6 @@
                                             </td>
                                             <td>
                                                 {{$item->name}}
-
                                             </td>
                                             <td>
                                                 <span class="badge badge-danger"> Store</span>
