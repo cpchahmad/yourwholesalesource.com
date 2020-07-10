@@ -183,11 +183,10 @@ class AdminMaintainerController extends Controller
 
             foreach ($request->input('item_id') as $index => $item) {
                 $line_item = RetailerOrderLineItem::find($item);
-                dd($line_item);
                 if ($line_item != null && $fulfillable_quantities[$index] > 0) {
                     if ($order->custom == 1) {
-                        if ($item->linked_real_variant != null) {
-                            $item_variant_id = $item->linked_real_variant->shopify_id;
+                        if ($line_item->linked_real_variant != null) {
+                            $item_variant_id = $line_item->linked_real_variant->shopify_id;
                             foreach ($admin_variants as $variant){
                                 if($variant->variant_id == $item_variant_id){
                                     array_push($data['fulfillment']['line_items'], [
@@ -199,8 +198,8 @@ class AdminMaintainerController extends Controller
                         }
                     }
                     else{
-                        $retailer_product = $item->linked_product;
-                        $retailer_variant = $item->linked_variant;
+                        $retailer_product = $line_item->linked_product;
+                        $retailer_variant = $line_item->linked_variant;
                         $admin_product = $retailer_product->linked_product;
                         if (count($admin_product->hasVariants) > 0) {
                             $variant = $admin_product->hasVariants->where('option1', $retailer_variant->option1)
