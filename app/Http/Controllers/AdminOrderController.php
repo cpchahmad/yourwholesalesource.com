@@ -20,6 +20,7 @@ use function foo\func;
 class AdminOrderController extends Controller
 {
     private $helper;
+    private $admin_maintainer;
 
     /**
      * AdminOrderController constructor.
@@ -28,6 +29,7 @@ class AdminOrderController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->admin_maintainer = new AdminMaintainerController();
     }
 
     public function index(Request $request){
@@ -75,7 +77,7 @@ class AdminOrderController extends Controller
                     $shopify_fulfillment = null;
                     if($shop != null){
                         $location_response = $shop->api()->rest('GET','/admin/locations.json');
-                        if(!$location_response->errors){
+                        if(!$location_response-> errors){
                             $data = [
                                 "fulfillment" => [
                                     "location_id"=> $location_response->body->locations[0]->id,
@@ -360,6 +362,7 @@ class AdminOrderController extends Controller
 
             }
         }
+        $this->admin_maintainer->admin_order_fullfillment($order,$request,$fulfillment);
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
     }
 
