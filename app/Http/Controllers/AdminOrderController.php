@@ -389,6 +389,7 @@ class AdminOrderController extends Controller
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $fulfillment->name . " has been cancelled successfully on " . now()->format('d M, Y h:i a');
 
+        $this->admin_maintainer->admin_order_fulfillment_cancel($order,$fulfillment);
         $fulfillment->delete();
         $order->status = $order->getStatus($order);
         $order->save();
