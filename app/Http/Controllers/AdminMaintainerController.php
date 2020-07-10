@@ -183,6 +183,7 @@ class AdminMaintainerController extends Controller
 
             foreach ($request->input('item_id') as $index => $item) {
                 $line_item = RetailerOrderLineItem::find($item);
+                dd($line_item);
                 if ($line_item != null && $fulfillable_quantities[$index] > 0) {
                     if ($order->custom == 1) {
                         if ($item->linked_real_variant != null) {
