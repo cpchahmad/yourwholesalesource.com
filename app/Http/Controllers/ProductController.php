@@ -28,7 +28,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
-        $this->notify = new NotigficationController();
+        $this->notify = new NotificationController();
     }
 
     public function index()
