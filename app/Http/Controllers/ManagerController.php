@@ -34,6 +34,7 @@ class ManagerController extends Controller
 
     private $helper;
     private $admin_maintainer;
+    private $notify;
     /**
      * AdminOrderController constructor.
      * @param $helper
@@ -42,6 +43,7 @@ class ManagerController extends Controller
     {
         $this->helper = new HelperController();
         $this->admin_maintainer = new AdminMaintainerController();
+        $this->notify = new NotificationController();
     }
 
     public function dashboard(Request $request){
@@ -253,7 +255,6 @@ class ManagerController extends Controller
         ]);
     }
 
-
     public function tickets(Request $request){
         $tickets = Ticket::where('manager_id',Auth::id())->newQuery();
 
@@ -285,6 +286,7 @@ class ManagerController extends Controller
             'priority' =>$request->input('priority'),
         ]);
     }
+
     public function view_ticket(Request $request){
         $manager = User::find(Auth::id());
         $ticket = Ticket::find($request->id);
@@ -314,6 +316,7 @@ class ManagerController extends Controller
             'selected_status' =>$request->input('status'),
         ]);
     }
+
     public function view_wishlist(Request $request){
         $manager = User::find(Auth::id());
         $wishlist = Wishlist::find($request->id);
@@ -343,6 +346,7 @@ class ManagerController extends Controller
 
         ]);
     }
+
     public function view_order($id){
         $order  = RetailerOrder::find($id);
         $manager = User::find(Auth::id());
@@ -353,9 +357,9 @@ class ManagerController extends Controller
         }
 
     }
+
     public function fulfill_order($id){
         $order  = RetailerOrder::find($id);
-
         if($order != null){
             if($order->paid == 1) {
                 return view('sales_managers.orders.fulfillment')->with([
@@ -565,6 +569,8 @@ class ManagerController extends Controller
                     $order->status = 'partially-shipped';
                 }
                 $order->save();
+                $this->notify->generate('Order','Order Tracking Details',$order->name.' tracking details added successfully!',$order);
+
                 return redirect()->back()->with('success','Tracking Details Added To Fulfillment Successfully!');
             }
             else{
@@ -597,6 +603,8 @@ class ManagerController extends Controller
                 $ml->status = "Order Marked as Delivered";
                 $ml->manager_id = $manager->id;
                 $ml->save();
+                $this->notify->generate('Order','Order Marked as Delivered',$order->name.' marked as delivered successfully!',$order);
+
 
                 return redirect()->back()->with('success', 'Order Marked as Delivered Successfully');
             }
@@ -630,6 +638,8 @@ class ManagerController extends Controller
                 $ml->status = "Order Marked as Completed";
                 $ml->manager_id = $manager->id;
                 $ml->save();
+                $this->notify->generate('Order','Order Marked as Completed',$order->name.' marked as completed successfully!',$order);
+
 
                 return redirect()->back()->with('success','Order Marked as Completed Successfully');
             }
@@ -704,6 +714,7 @@ class ManagerController extends Controller
         if($order->admin_shopify_id != null) {
             $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
         }
+        $this->notify->generate('Order','Order Fulfillment',$order->name.' line items fulfilled',$order);
 
         $manager = User::find(Auth::id());
         $ml = new ManagerLog();
@@ -740,6 +751,8 @@ class ManagerController extends Controller
         if($order->admin_shopify_id != null) {
             $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
         }
+        $this->notify->generate('Order','Order Fulfillment Cancellation',$order->name.' line items fulfillment cancelled',$order);
+
         $fulfillment->delete();
         $order->status = $order->getStatus($order);
         $order->save();
@@ -933,6 +946,8 @@ class ManagerController extends Controller
                 $ml->status = "Top-up Request Approval";
                 $ml->manager_id = Auth::id();
                 $ml->save();
+                $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . now()->format('d M, Y h:i a'). ' By Manager',$related_wallet);
+
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }
             else{
@@ -961,6 +976,8 @@ class ManagerController extends Controller
                 $ml->status = "Top-up By Manager";
                 $ml->manager_id = Auth::id();
                 $ml->save();
+                $this->notify->generate('Wallet','Wallet Top-up By Admin','A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Manager',$wallet);
+
 
                 return redirect()->back()->with('success','Wallet Top-up Successfully!');
             }
