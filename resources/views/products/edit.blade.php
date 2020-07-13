@@ -2,6 +2,7 @@
 @section('content')
 
     <div class="bg-body-light">
+        <div id="notification" data-route="{{route('product.notification.update',$product->id)}}"></div>
         <div class="content content-full pt-3 pb-3">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h5 my-2">

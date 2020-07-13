@@ -1151,4 +1151,10 @@ class ProductController extends Controller
     }
 
 
+    public function product_notification(Request $request,$id){
+        $product = Product::find($id);
+        $this->notify->generate('Product','Product Update',$product->title.' Information Updated',$product);
+    }
+
+
 }

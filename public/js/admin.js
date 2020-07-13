@@ -257,7 +257,11 @@ $(document).ready(function () {
             });
 
         } else {
-             window.location.reload();
+            $.ajax({
+                url: $('#notification').data('route'),
+                type:'GET',
+            });
+             // window.location.reload();
         }
     }
     /*Admin Module - Variant Image Change JS*/

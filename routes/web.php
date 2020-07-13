@@ -106,6 +106,10 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/refunds/{id}', 'DefaultSettingsController@view_refund')->name('refunds.view');
     Route::post('/assign_manager/{id}', 'DefaultSettingsController@assign_manager')->name('assign_manager');
 
+    /*Product Notification Update*/
+    Route::get('/notification/{id}/product', 'ProductController@product_notification')->name('product.notification.update');
+
+
 
 
 });
