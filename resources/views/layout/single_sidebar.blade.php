@@ -33,14 +33,6 @@
                         <span class="nav-main-link-name">By WeFullfill</span>
                     </a>
                 </li>
-
-{{--                <li class="nav-main-item">--}}
-{{--                    <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">--}}
-{{--                        <i class="nav-main-link-icon si si-bag"></i>--}}
-{{--                        <span class="nav-main-link-name">By Aliexpress</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-
                 <li class="nav-main-item">
                     <a class="nav-main-link" href="{{route('store.import_list')}}">
                         <i class="nav-main-link-icon si si-bag"></i>
@@ -153,6 +145,7 @@
            else{
                $manager = null;
            }
+
         @endphp
         <!-- User Dropdown -->
             @if($manager != null)
@@ -222,90 +215,51 @@
                 </div>
             </div>
 
-{{--            <div class="dropdown d-inline-block ml-2">--}}
-{{--                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                    <i class="si si-bell"></i>--}}
-{{--                    <span class="badge badge-primary badge-pill">6</span>--}}
-{{--                </button>--}}
-{{--                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">--}}
-{{--                    <div class="p-2 bg-primary text-center">--}}
-{{--                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>--}}
-{{--                    </div>--}}
-{{--                    <ul class="nav-items mb-0">--}}
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">You have a new follower</div>--}}
-{{--                                    <small class="text-muted">15 min ago</small>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-plus-circle text-info"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">1 new sale, keep it up</div>--}}
-{{--                                    <small class="text-muted">22 min ago</small>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-times-circle text-danger"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">Update failed, restart server</div>--}}
-{{--                                    <small class="text-muted">26 min ago</small>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-plus-circle text-info"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">2 new sales, keep it up</div>--}}
-{{--                                    <small class="text-muted">33 min ago</small>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-user-plus text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">You have a new subscriber</div>--}}
-{{--                                    <small class="text-muted">41 min ago</small>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="javascript:void(0)">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">You have a new follower</div>--}}
-{{--                                    <small class="text-muted">42 min ago</small>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                    <div class="p-2 border-top">--}}
-{{--                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">--}}
-{{--                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="dropdown d-inline-block ml-2">
+                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="si si-bell"></i>
+                    <span class="badge badge-primary badge-pill">{{count($notifications)}}</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                    <div class="p-2 bg-primary text-center">
+                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
+                    </div>
+                    <ul class="nav-items mb-0">
+                        @if(count($notifications) > 0)
+                            @foreach($notifications as $notification)
+                        <li>
+                            <a class="text-dark media py-2" href="javascript:void(0)">
+                                <div class="mr-2 ml-3">
+                                    <i class="fa fa-fw fa-check-circle text-success"></i>
+                                </div>
+                                <div class="media-body pr-2">
+                                    <div class="font-w600">{{$notification->message}}</div>
+                                    <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
+                                </div>
+                            </a>
+                        </li>
+                            @endforeach
+                            @else
+                            <li>
+                                <a class="text-dark media py-2" href="javascript:void(0)">
+                                    <div class="mr-2 ml-3">
+                                        <i class="fa fa-fw fa-check-circle text-success"></i>
+                                    </div>
+                                    <div class="media-body pr-2">
+                                        <div class="font-w600">No Notification</div>
+                                    </div>
+                                </a>
+                            </li>
+                        @endif
+
+                    </ul>
+                    <div class="p-2 border-top">
+                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
+                        </a>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <!-- END Right Section -->

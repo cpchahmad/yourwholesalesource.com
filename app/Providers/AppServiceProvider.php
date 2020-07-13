@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Notification;
 use App\Shop;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('*', function ($view)
         {
+            $query = Notification::query();
+
             if (Auth::check()) {
                 $user = Auth::user();
                 if ($user->has_wallet == null) {
@@ -27,15 +30,27 @@ class AppServiceProvider extends ServiceProvider
                 } else {
                     $balance  = $user->has_wallet->available;
                 }
+                $query->whereHas('to_users',function ($q) use ($user){
+                    $q->where('email',$user->email);
+                });
             }
             else {
               $auth_shop =  ShopifyApp::shop();
               if($auth_shop != null){
+
                   $shop = Shop::find($auth_shop->id);
+                  $query->whereHas('to_shops',function ($q) use ($shop){
+                      $q->where('shopify_domain',$shop->shopify_domain);
+                  });
                   if(count($shop->has_user) > 0){
                       if($shop->has_user[0]->has_wallet != null){
                           $wallet =  $shop->has_user[0]->has_wallet;
                           $balance = $wallet->available;
+                          $user = $shop->has_user[0];
+                          $query->orwhereHas('to_users',function ($q) use ($user){
+                              $q->where('email',$user->email);
+                          });
+
                       }
                       else{
                           $balance = 0;
@@ -51,8 +66,12 @@ class AppServiceProvider extends ServiceProvider
 
 
             }
+            $notifications = $query->orderBy('created_at','DESC')->get();
 
-            $view->with('balance', $balance );
+            $view->with([
+                'balance' => $balance,
+                'notifications' => $notifications
+            ]);
 
         });
         Schema::defaultStringLength(191);
