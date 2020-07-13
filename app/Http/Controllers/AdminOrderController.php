@@ -21,6 +21,7 @@ class AdminOrderController extends Controller
 {
     private $helper;
     private $admin_maintainer;
+    private $notify;
 
     /**
      * AdminOrderController constructor.
@@ -30,6 +31,7 @@ class AdminOrderController extends Controller
     {
         $this->helper = new HelperController();
         $this->admin_maintainer = new AdminMaintainerController();
+        $this->notify = new NotificationController();
     }
 
     public function index(Request $request){
@@ -252,6 +254,7 @@ class AdminOrderController extends Controller
                 }
 
                 $order->save();
+                $this->notify->generate('Order','Order Tracking Details',$order->name.' tracking details added successfully!',$order);
 
 
                 return redirect()->back()->with('success', 'Tracking Details Added To Fulfillment Successfully!');
@@ -280,6 +283,8 @@ class AdminOrderController extends Controller
                 $order_log->status = "Delivered";
                 $order_log->retailer_order_id = $order->id;
                 $order_log->save();
+                $this->notify->generate('Order','Order Marked as Delivered',$order->name.' marked as delivered successfully!',$order);
+
 
                 return redirect()->back()->with('success', 'Order Marked as Delivered Successfully');
             }
@@ -305,6 +310,8 @@ class AdminOrderController extends Controller
                 $order_log->status = "Completed";
                 $order_log->retailer_order_id = $order->id;
                 $order_log->save();
+                $this->notify->generate('Order','Order Marked as Completed',$order->name.' marked as completed successfully!',$order);
+
 
                 return redirect()->back()->with('success','Order Marked as Completed Successfully');
             }
@@ -379,6 +386,7 @@ class AdminOrderController extends Controller
         if($order->admin_shopify_id != null) {
             $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
         }
+        $this->notify->generate('Order','Order Fulfillment',$order->name.' line items fulfilled',$order);
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
     }
 
@@ -407,6 +415,8 @@ class AdminOrderController extends Controller
         if($order->admin_shopify_id != null) {
             $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
         }
+        $this->notify->generate('Order','Order Fulfillment Cancellation',$order->name.' line items fulfillment cancelled',$order);
+
         $fulfillment->delete();
         $order->status = $order->getStatus($order);
         $order->save();
