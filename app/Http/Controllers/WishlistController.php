@@ -24,6 +24,7 @@ class WishlistController extends Controller
 {
 
     private $helper;
+    private $notify;
 
     /**
      * WishlistController constructor.
@@ -32,6 +33,8 @@ class WishlistController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->notify = new NotificationController();
+
     }
 
     public function create_wishlist(Request $request){
@@ -77,6 +80,7 @@ class WishlistController extends Controller
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
+
     public function create_wishlist_thread(Request $request){
         $manager = User::find($request->input('manager_id'));
         $wish = Wishlist::find($request->input('wishlist_id'));
@@ -111,6 +115,7 @@ class WishlistController extends Controller
                 $tl->status = "Reply From Manager";
                 $tl->manager_id = $manager->id;
                 $tl->save();
+                $this->notify->generate('Wish-list','Wishlist Thread','You have a new message from wishlist named '.$wish->product_name,$wish);
             }
 
             return redirect()->back()->with('success','Reply sent successfully!');
@@ -135,6 +140,9 @@ class WishlistController extends Controller
             $tl->manager_id = $manager->id;
             $tl->save();
 
+            $this->notify->generate('Wish-list','Wishlist Approved','Wishlist named '.$wish->product_name.' has been approved by your manager',$wish);
+
+
             return redirect()->back()->with('success','Wishlist Approved Successfully!');
 
         }
@@ -156,6 +164,7 @@ class WishlistController extends Controller
             $tl->status = "Manager Rejected Wishlist";
             $tl->manager_id = $manager->id;
             $tl->save();
+            $this->notify->generate('Wish-list','Wishlist Rejected','Wishlist named '.$wish->product_name.' has been rejected by your manager',$wish);
 
             return redirect()->back()->with('success','Wishlist Rejected Successfully!');
 
@@ -176,6 +185,8 @@ class WishlistController extends Controller
             $wish->status_id = 3;
             $wish->updated_at = now();
             $wish->save();
+            $this->notify->generate('Wish-list','Wishlist Accepted','Wishlist named '.$wish->product_name.' has been accepted',$wish);
+
             return redirect()->back()->with('success','Wishlist Accepted Successfully!');
         }
 
@@ -234,6 +245,9 @@ class WishlistController extends Controller
                 $wish->related_product_id = $request->input('link_product_id');
                 $wish->updated_at = now();
                 $wish->save();
+
+                $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
+
                 return redirect()->back()->with('success','Wishlist Completed Successfully!');
             }
 
@@ -268,6 +282,10 @@ class WishlistController extends Controller
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
                 $wish->save();
+
+                $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
+
+
                 if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
                     return redirect()->route('wishlist.index')->with('success','Wishlist Completed Successfully!');
 

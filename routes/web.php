@@ -247,10 +247,12 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/topup-through-paypal/{id}', 'WalletController@paypal_topup_payment')->name('store.wallet.paypal.topup');
         Route::get('/topup-through-paypal/{id}/cancel', 'WalletController@paypal_topup_payment_cancel')->name('store.wallet.paypal.topup.cancel');
         Route::get('/topup-through-paypal/{id}/success', 'WalletController@paypal_topup_payment_success')->name('store.wallet.paypal.topup.success');
+
         Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
         Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
         Route::get('/ticket/status/{id}/completed', 'TicketController@marked_as_completed')->name('help-center.ticket.marked_as_completed');
         Route::get('/ticket/status/{id}/closed', 'TicketController@marked_as_closed')->name('help-center.ticket.marked_as_closed');
+
         Route::post('/wishlist/create', 'WishlistController@create_wishlist')->name('wishlist.create');
         Route::post('/wishlist/thread/create', 'WishlistController@create_wishlist_thread')->name('wishlist.thread.create');
         Route::post('/wishlist/accepted', 'WishlistController@accept_wishlist')->name('wishlist.accept');

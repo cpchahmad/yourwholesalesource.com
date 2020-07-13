@@ -19,6 +19,7 @@ class RefundController extends Controller
 {
 
     private $helper;
+    private $notify;
 
     /**
      * RefundController constructor.
@@ -27,6 +28,7 @@ class RefundController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->notify = new NotificationController();
     }
 
     public function create_refund(Request $request){
@@ -156,6 +158,8 @@ class RefundController extends Controller
         $tl->status = "Generated";
         $tl->refund_id = $refund->id;
         $tl->save();
+
+        $this->notify->generate('Refund','Order Refund',$order->name.' Refund Approved',$refund);
         return redirect()->back()->with('success','Order Refunded Successfully!');
 
 
@@ -220,9 +224,13 @@ class RefundController extends Controller
                 $tl->status = "Reply From Manager";
                 $tl->manager_id = $manager->id;
                 $tl->save();
+
+                $this->notify->generate('Refund','Order Refund Thread',$ticket->order_name.' Refund has a new message in conversation',$ticket);
+
             }
 
             return redirect()->back()->with('success','Reply sent successfully!');
+
 
         }
         else{
@@ -253,6 +261,8 @@ class RefundController extends Controller
             $order_log->status = "cancelled";
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
+            $this->notify->generate('Order','Order Cancelled',$order->name.' has been cancelled',$order);
+
         }
         else{
             return redirect()->back()->with('error','Order Not Found!');
@@ -307,6 +317,9 @@ class RefundController extends Controller
             $order_log->status = "refunded";
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
+
+            $this->notify->generate('Order','Order Cancelled and Refund',$order->name.' has been cancelled and refunded',$order);
+
 
             return redirect()->back()->with('success','Order Refunded Successfully!');
         }

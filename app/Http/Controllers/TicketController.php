@@ -16,6 +16,17 @@ use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
+    private $notify;
+
+    /**
+     * TicketController constructor.
+     * @param $notify
+     */
+    public function __construct()
+    {
+        $this->notify = new NotificationController();
+    }
+
     public function create_ticket(Request $request){
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
@@ -73,6 +84,7 @@ class TicketController extends Controller
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
+
     public function create_ticket_thread(Request $request){
         $manager = User::find($request->input('manager_id'));
         $ticket = Ticket::find($request->input('ticket_id'));
@@ -131,6 +143,7 @@ class TicketController extends Controller
                 $tl->status = "Reply From Manager";
                 $tl->manager_id = $manager->id;
                 $tl->save();
+                $this->notify->generate('Ticket','Ticket Thread','You have a new Message in ticket named '.$ticket->title,$ticket);
             }
 
             return redirect()->back()->with('success','Reply sent successfully!');
@@ -152,6 +165,8 @@ class TicketController extends Controller
         $tl->status = "Completed By User";
         $tl->ticket_id = $ticket->id;
         $tl->save();
+
+
         return redirect()->back()->with('success','Ticket marked as completed successfully!');
     }
 
@@ -173,10 +188,11 @@ class TicketController extends Controller
             $tl->save();
 
             $ml = new ManagerLog();
-            $ml->message = 'A Reply Added By Manager on Ticket at ' . date_create(now())->format('d M, Y h:i a');
-            $ml->status = "Reply From Manager";
+            $ml->message = 'A Ticket Closed By Manager at ' . date_create(now())->format('d M, Y h:i a');
+            $ml->status = "Closed By Manager";
             $ml->manager_id = $manager->id;
             $ml->save();
+            $this->notify->generate('Ticket','Ticket Marked as Closed',$ticket->title.' has been closed by your manager',$ticket);
 
             return redirect()->back()->with('success','Ticket marked as completed successfully!');
         }

@@ -20,6 +20,7 @@ class WalletController extends Controller
 
     private $helper;
     private $admin;
+    private $notify;
 
     /**
      * WalletController constructor.
@@ -28,6 +29,7 @@ class WalletController extends Controller
     {
         $this->helper = new HelperController();
         $this->admin = new AdminMaintainerController();
+        $this->notify = new NotificationController();
     }
 
     public function user_wallet_view()
@@ -159,6 +161,8 @@ class WalletController extends Controller
                 $wallet_log->amount = $req->amount;
                 $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . now()->format('d M, Y h:i a'). ' By Administration';
                 $wallet_log->save();
+
+                $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . now()->format('d M, Y h:i a'). ' By Administration',$related_wallet);
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }
             else{
@@ -182,6 +186,8 @@ class WalletController extends Controller
                 $wallet_log->amount = $request->input('amount');
                 $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Administration';
                 $wallet_log->save();
+                $this->notify->generate('Wallet','Wallet Top-up By Admin','A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Administration',$wallet);
+
                 return redirect()->back()->with('success','Wallet Top-up Successfully!');
             }
 
@@ -230,6 +236,8 @@ class WalletController extends Controller
                 $wallet_log->amount = $retailer_order->cost_to_pay;
                 $wallet_log->message = 'An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
                 $wallet_log->save();
+                $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
                 $new_transaction->amount =  $retailer_order->cost_to_pay;
