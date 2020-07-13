@@ -253,11 +253,13 @@ class ProductController extends Controller
 
 
                 }
+
                 if ($request->input('type') == 'fulfilled') {
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->save();
 
                 }
+
                 if ($request->input('type') == 'category') {
                     if ($request->category) {
                         $product->has_categories()->sync($request->category);
@@ -283,6 +285,7 @@ class ProductController extends Controller
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                 }
+
                 if ($request->input('type') == 'organization') {
                     $product->type = $request->product_type;
                     $product->vendor = $request->vendor;
@@ -298,6 +301,7 @@ class ProductController extends Controller
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
 
                 }
+
                 if ($request->input('type') == 'more-details') {
                     if($request->input('processing_time') != null){
                         $product->processing_time = $request->input('processing_time');
@@ -333,9 +337,11 @@ class ProductController extends Controller
 
 
                 }
+
                 if($request->input('type') == 'status_update'){
                     $this->product_status_change($request, $product, $shop);
                 }
+
                 if ($request->input('type') == 'variant-image-update') {
 //                    dd($request);
                     $variant = ProductVariant::find($request->variant_id);
@@ -372,6 +378,7 @@ class ProductController extends Controller
                     }
 
                 }
+
                 if ($request->input('type') == 'existing-product-image-delete') {
                     $image =  Image::find($request->input('file'));
                     $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
@@ -381,6 +388,7 @@ class ProductController extends Controller
                         'success' => 'ok'
                     ]);
                 }
+
                 if ($request->input('type') == 'existing-product-image-add') {
                     if ($request->hasFile('images')) {
                         foreach ($request->file('images') as $index => $image) {
@@ -405,6 +413,7 @@ class ProductController extends Controller
                     }
                     $product->save();
                 }
+
                 if ($request->input('type') == 'add-additional-tab'){
 //                    dd($request);
                     $additional_tab = new AdditionalTab();
@@ -426,6 +435,7 @@ class ProductController extends Controller
                     $additional_tab->save();
                     return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
+
                 if ($request->input('type') == 'edit-additional-tab'){
 //                    dd($request);
                     $additional_tab = AdditionalTab::find($request->input('tab_id'));
@@ -445,6 +455,7 @@ class ProductController extends Controller
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
                     return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
+
                 if ($request->input('type') == 'shop-preferences'){
                     $product->global = $request->input('global');
                     $product->save();
