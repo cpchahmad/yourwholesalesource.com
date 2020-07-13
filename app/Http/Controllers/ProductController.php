@@ -20,6 +20,7 @@ use OhMyBrew\ShopifyApp\Models\Shop;
 class ProductController extends Controller
 {
     private $helper;
+    private $notify;
 
     /**
      * ProductController constructor.
@@ -27,6 +28,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->notify = new NotificationController();
     }
 
     public function index()
@@ -86,7 +88,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $shop =$this->helper->getShop();
+        $shop = $this->helper->getShop();
         if ($product != null) {
             if ($request->has('type')) {
                 /*Variants Option Delete from Shopify and Database*/
@@ -136,6 +138,7 @@ class ProductController extends Controller
                     foreach ($deleted_variants as $deleted){
                         $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' .$product->shopify_id. '/variants/' .$deleted->shopify_id. '.json');
                     }
+                    $this->notify->generate('Product','Variants Deletion',$product->title.' Variants Deleted Please Update Your Imported Product',$product->id);
                     return redirect()->back()->with('success','Selected Options and Related Variants Deleted Successfully');
                 }
                 /*New Variants Option Add from Shopify and Database*/
@@ -159,6 +162,8 @@ class ProductController extends Controller
                         $v->shopify_id = $shopifyVariants[$index]->id;
                         $v->save();
                     }
+                    $this->notify->generate('Product','New Variants',$product->title.' New Variants Added Please Update Your Imported Product',$product);
+
                     return redirect()->route('product.edit', $product->id);
                 }
                 /*new Option Add Shopify and Database*/
@@ -190,6 +195,7 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $this->notify->generate('Product','New Option',$product->title.' New Option Added Please Update Your Imported Product',$product);
                     return redirect()->back();
                 }
                 /*Single Variant Update Shopify and Database*/
@@ -224,6 +230,8 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
+                    $this->notify->generate('Product','Variants Update',$product->title.' Variants Updated Please Update Your Imported Product',$product);
+
                 }
                 /*Product Basic Update Shopify and Database*/
                 if ($request->input('type') == 'basic-info') {
@@ -237,6 +245,8 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $this->notify->generate('Product','Basic Information',$product->title.' Basic Information Updated Please Update Your Imported Product',$product);
+
                 }
                 /*Pricing Update*/
                 if ($request->input('type') == 'pricing') {
@@ -280,6 +290,8 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $this->notify->generate('Product','Basic Information',$product->title.' Basic Information Updated Please Update Your Imported Product',$product);
+
                 }
                 if ($request->input('type') == 'organization') {
                     $product->type = $request->product_type;
@@ -294,6 +306,7 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $this->notify->generate('Product','Basic Information',$product->title.' Basic Information Updated Please Update Your Imported Product',$product);
 
                 }
                 if ($request->input('type') == 'more-details') {
@@ -364,6 +377,7 @@ class ProductController extends Controller
                         else{
                             $image->shopify_id = $imageResponse->body->image->id;
                             $image->save();
+                            $this->notify->generate('Product','Variants Update',$product->title.' Variants Updated Please Update Your Imported Product',$product);
                             return redirect()->back();
                         }
 
@@ -399,6 +413,8 @@ class ProductController extends Controller
                             $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
                             $image->shopify_id = $imageResponse->body->image->id;
                             $image->save();
+                            $this->notify->generate('Product','Variants Update',$product->title.' Variants Updated Please Update Your Imported Product',$product);
+
                         }
                     }
                     $product->save();
