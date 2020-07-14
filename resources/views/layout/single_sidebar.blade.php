@@ -224,7 +224,7 @@
                     </ul>
                     <div class="p-2 border-top">
                         <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
+                            <i class="fa fa-fw fa-arrow-down mr-1"></i> See All
                         </a>
                     </div>
                 </div>
