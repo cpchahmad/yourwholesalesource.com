@@ -148,6 +148,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/wishlist/{id}','SingleStoreController@view_wishlist')->name('store.wishlist.view');
         Route::get('/refunds', 'SingleStoreController@refunds')->name('store.refunds');
         Route::get('/refunds/{id}', 'SingleStoreController@refund')->name('store.refund');
+        Route::get('/notifications/{id}', 'SingleStoreController@show_notification')->name('store.notification');
 
 
 
@@ -191,6 +192,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/wishlist/{id}','CustomOrderController@view_wishlist')->name('users.wishlist.view');
             Route::get('/refunds', 'CustomOrderController@refunds')->name('users.refunds');
             Route::get('/refunds/{id}', 'CustomOrderController@refund')->name('users.refund');
+            Route::get('/notifications/{id}', 'CustomOrderController@show_notification')->name('users.notification');
+
+
             Route::group(['middleware' => ['check_user_shop']], function () {
 
             });

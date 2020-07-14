@@ -9,6 +9,7 @@ use App\Customer;
 use App\Exports\ProcessedOrder;
 use App\Exports\UnprocessedOrder;
 use App\Imports\UsersImport;
+use App\Notification;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\Product;
@@ -740,5 +741,38 @@ class CustomOrderController extends Controller
             'ticket' => $refund,
         ]);
     }
+
+    public function show_notification($id){
+        $notification = Notification::find($id);
+        if($notification != null){
+            $notification->read = 1;
+            $notification->save();
+            if($notification->type == 'Product'){
+                return redirect()->route('users.product.wefulfill.show',$notification->type_id);
+            }
+            elseif ($notification->type == 'Order'){
+                return redirect()->route('users.order.view',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Refund'){
+                return redirect()->route('users.refund',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Wish-list'){
+                return redirect()->route('users.wishlist.view',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Ticket'){
+                return redirect()->route('help-center.users.ticket.view',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Wallet'){
+                return redirect()->route('store.user.wallet.show');
+
+            }
+
+        }
+    }
+
 
 }

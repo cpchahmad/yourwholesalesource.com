@@ -152,6 +152,51 @@
             </div>
             <!-- User Dropdown -->
             <div class="dropdown d-inline-block ml-2">
+                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="si si-bell"></i>
+                    <span class="badge badge-primary badge-pill">{{count($notifications->where('read',0)->get())}}</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                    <div class="p-2 bg-primary text-center">
+                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
+                    </div>
+                    <ul class="nav-items mb-0">
+                        @if(count($notifications) > 0)
+                            @foreach($notifications as $notification)
+                                <li>
+                                    <a class="text-dark media py-2" href="{{route('stpre.notification',$notification->id)}}">
+                                        <div class="mr-2 ml-3">
+                                            <i class="fa fa-fw fa-check-circle text-success"></i>
+                                        </div>
+                                        <div class="media-body pr-2">
+                                            <div class="font-w600">{{$notification->message}}</div>
+                                            <small class="text-muted">{{$notification->created_at->diffForHumans()}}</small>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
+                        @else
+                            <li>
+                                <a class="text-dark media py-2" href="javascript:void(0)">
+                                    <div class="mr-2 ml-3">
+                                        <i class="fa fa-fw fa-check-circle text-success"></i>
+                                    </div>
+                                    <div class="media-body pr-2">
+                                        <div class="font-w600">No Notification</div>
+                                    </div>
+                                </a>
+                            </li>
+                        @endif
+
+                    </ul>
+                    <div class="p-2 border-top">
+                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                            <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
                     <span class="d-none d-sm-inline-block ml-1">Adam</span>
@@ -180,6 +225,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
         <!-- END Right Section -->
     </div>

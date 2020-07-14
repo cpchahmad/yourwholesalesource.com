@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Country;
 use App\Customer;
+use App\Notification;
 use App\OrderTransaction;
 use App\Product;
 use App\Refund;
@@ -530,6 +531,37 @@ class SingleStoreController extends Controller
             'shop' => $shop,
             'ticket' => $refund,
         ]);
+    }
+    public function show_notification($id){
+        $notification = Notification::find($id);
+        if($notification != null){
+            $notification->read = 1;
+            $notification->save();
+            if($notification->type == 'Product'){
+                return redirect()->route('store.product.wefulfill.show',$notification->type_id);
+            }
+            elseif ($notification->type == 'Order'){
+                return redirect()->route('store.order.view',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Refund'){
+                return redirect()->route('store.refund',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Wish-list'){
+                return redirect()->route('store.wishlist.view',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Ticket'){
+                return redirect()->route('help-center.store.ticket.view',$notification->type_id);
+
+            }
+            elseif ($notification->type == 'Wallet'){
+                return redirect()->route('store.user.wallet.show');
+
+            }
+
+        }
     }
 
 
