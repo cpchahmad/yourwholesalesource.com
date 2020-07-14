@@ -197,7 +197,7 @@
                         @if(count($notifications) > 0)
                             @foreach($notifications as $notification)
                                 <li>
-                                    <a class="text-dark media py-2" href="{{route('stpre.notification',$notification->id)}}">
+                                    <a class="text-dark media py-2" href="{{route('store.notification',$notification->id)}}">
                                         <div class="mr-2 ml-3">
                                             <i class="fa fa-fw fa-check-circle text-success"></i>
                                         </div>
