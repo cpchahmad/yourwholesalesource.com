@@ -166,18 +166,7 @@ class SingleStoreController extends Controller
     }
     public function wefullfill_products(Request $request){
 
-
-//        $ch = curl_init();
-//        curl_setopt($ch, CURLOPT_URL, 'https://api.ipdata.co/country_name?api-key=878bb41d66f819dc08ffdec4fc14d763252af1c959f305c712443925');
-//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//        $result = curl_exec($ch);
-//        if (curl_errno($ch)) {
-//            $country = 'United States';
-//        }
-//        curl_close($ch);
-//        $country = $result;
         $country = $this->ip_info($this->getRealIpAddr(),'Country');
-//        dd($country);
         $categories = Category::all();
         $productQuery = Product::where('status',1)->newQuery();
 
@@ -200,11 +189,17 @@ class SingleStoreController extends Controller
         }
         if($request->has('filter')){
             if($request->input('filter') == 'most-order'){
-//                $productQuery->withCount(['has_retailer_products' => function(Builder  $q){
-//                    $q->whereHas('hasVariants',function ($va){
-//                        dd($va);
-//                    });
-//                }]);
+
+               $productQuery->join('retailer_order_line_items',function($join) {
+                    $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')
+                        ->join('retailer_orders',function($o) {
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                    ->groupBy('products.id')
+                    ->orderBy('sold','DESC');
+
                 $products = $productQuery->paginate(12);
 
             }
