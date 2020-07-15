@@ -99,6 +99,7 @@
                             </div>
                         </div>
                     </div>
+                    @if(count($product->hasVariants) = 0)
                     <div class="block">
                         <div class="block-header">
                             <h3 class="block-title">Pricing</h3>
@@ -167,6 +168,7 @@
                             </div>
                         </form>
                     </div>
+                    @endif
                     @if($product->variants == 1)
                         <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
@@ -198,7 +200,7 @@
                                                 <tbody class="js-table-sections-header">
                                                 <tr>
                                                     <td class="variant_title">
-                                                        {{$v->title}}
+                                                       @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) {{$v->option2}} @endif    @if($v->option3 != null) {{$v->option3}} @endif
                                                     </td>
                                                     <td class="text-center">
                                                         <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
