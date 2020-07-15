@@ -183,8 +183,6 @@ class CustomOrderController extends Controller
         }
 
         $new->shipping_address = json_encode($request->except(['line_items','quantity','c_first_name','c_last_name','_token','email']),true);
-
-
         $new->status = 'new';
         $new->user_id = Auth::id();
         $new->fulfilled_by = 'fantasy';
