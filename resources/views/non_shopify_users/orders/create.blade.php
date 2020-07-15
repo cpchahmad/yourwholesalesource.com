@@ -133,6 +133,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-md-12 mb2">
+                                            <label>Street (optional)</label>
+                                            <input type="text" class="form-control" name="phone"
+                                                   value=""  placeholder="" >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
