@@ -251,7 +251,7 @@ class ProductController extends Controller
                     $product->barcode = $request->barcode;
                     $product->save();
 
-                    if (count($product->hasVariants) > 0) {
+                    if (count($product->hasVariants) == 0) {
                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
                        if(!$response->errors){
                            $shopifyVariants = $response->body->product->variants;
