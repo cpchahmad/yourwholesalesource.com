@@ -177,7 +177,7 @@ class SingleStoreController extends Controller
 //        curl_close($ch);
 //        $country = $result;
         $country = $this->ip_info($this->getRealIpAddr(),'Country');
-        dd($country);
+//        dd($country);
         $categories = Category::all();
         $productQuery = Product::where('status',1)->newQuery();
 
