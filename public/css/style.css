@@ -262,3 +262,11 @@ div.tagsinput span.tag a {
 .rating-stars ul > li.star.selected > i.fa {
     color:#FF912C;
 }
+
+#fixed-manager{
+    position: fixed;
+    z-index: 999999999;
+    right: 0;
+    top: 50%;
+    transform: rotate(90deg);
+}
