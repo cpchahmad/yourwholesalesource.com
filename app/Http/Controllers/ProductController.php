@@ -890,7 +890,7 @@ class ProductController extends Controller
             if($index == 0){
 
                 $temp['title'] = $productData->title;
-                $temp['body_html'] = $productData->body_html;
+                $temp['body_html'] = strip_tags($productData->body_html);
                 $temp['vendor'] = $productData->vendor;
                 $temp['product_type'] = $productData->product_type;
                 $temp['tags'] = $productData->tags;
