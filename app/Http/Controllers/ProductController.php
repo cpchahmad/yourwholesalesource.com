@@ -251,6 +251,22 @@ class ProductController extends Controller
                     $product->barcode = $request->barcode;
                     $product->save();
 
+                    if (count($product->hasVariants) > 0) {
+                       $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+                       if(!$response->errors){
+                           $shopifyVariants = $response->body->product->variants;
+                           $variant_id = $shopifyVariants[0]->id;
+                           $i = [
+                               'variant' => [
+                                   'price' =>$product->price,
+                                   'inventory_quantity' => $product->quantity,
+                                   'inventory_management' => 'shopify',
+                               ]
+                           ];
+                           $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                       }
+
+                    }
 
                 }
 
