@@ -259,8 +259,6 @@ class ProductController extends Controller
                            $i = [
                                'variant' => [
                                    'price' =>$product->price,
-                                   'inventory_quantity' => $product->quantity,
-                                   'inventory_management' => 'shopify',
                                ]
                            ];
                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
@@ -677,8 +675,6 @@ class ProductController extends Controller
                 $i = [
                     'variant' => [
                         'price' =>$price,
-                        'inventory_quantity' => $product->quantity,
-                        'inventory_management' => 'shopify',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
