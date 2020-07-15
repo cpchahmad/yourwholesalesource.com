@@ -550,6 +550,7 @@
                                     <br> {{$shipping->city}}
                                     <br> {{$shipping->province}} {{$shipping->zip}}
                                     <br> {{$shipping->country}}
+                                    <br>{{$shipping->phone}}
 
                                 </p>
                             @endif
