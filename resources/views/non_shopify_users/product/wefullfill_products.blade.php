@@ -163,7 +163,10 @@
                             <div class="block-content" style="padding-bottom: 10px">
                                 <div class="push-10">
                                     <a class="h6" style="font-size: 0.9rem" href="{{route('users.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
-                                    <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}</div>
+                                    <div class="d-flex">
+                                        <div class="font-w600 text-success mt-1">${{number_format($product->price,2)}}</div>
+                                        <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">{{$product->new_shipping_price}}</div>
+                                    </div>
                                 </div>
 
                                 @if($product->processing_time != null)
