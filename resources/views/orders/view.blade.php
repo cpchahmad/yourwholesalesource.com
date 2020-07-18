@@ -22,6 +22,11 @@
         </div>
     </div>
     <div class="content">
+        <div class="row mb2">
+            <div class="col-md-12">
+                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right"> Download CSV </button>
+            </div>
+        </div>
         @if($order->status == "shipped")
             <div class="row mb2">
                 <div class="col-md-12">
