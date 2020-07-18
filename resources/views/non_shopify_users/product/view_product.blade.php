@@ -214,7 +214,7 @@
                                                     <td>
                                                         {{$variant->title}}
                                                     </td>
-                                                    <td class="drop-shipping text-center">N/A</td>
+                                                    <td class="drop-shipping">N/A</td>
                                                     <td>
                                                         @if($variant->quantity >0)
                                                             {{$variant->quantity}}
