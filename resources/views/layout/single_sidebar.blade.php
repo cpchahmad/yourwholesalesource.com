@@ -165,7 +165,7 @@
                         </div>
                         <div class="p-2">
                             <p class="p-2" style="margin-bottom: 0"> I am here to help you with any kind of queries you might have. Feel free to contact me using tickets so that i can help you with understanding how can you get most of WeFullFill. Thanks </p>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('users.help-center')}}">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('store.help-center')}}">
                                 <span>Contact Me</span>
                                 <i class="fa fa-ticket-alt"></i>
                             </a>
