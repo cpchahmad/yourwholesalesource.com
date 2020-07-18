@@ -28,14 +28,11 @@
         </div>
     </div>
     <div class="content">
-        <div class="row mb2">
-            <div class="col-md-9">
-            </div>
-        </div>
+
         <div class="block">
             <div class="block-content">
                 <div class="row items-push">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <!-- Images -->
                         <div class="row js-gallery" >
                             <?php
