@@ -14,6 +14,11 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
+
+
+Route::get('/order/download/{id}/csv', 'HelperController@download_order')->name('app.order.download');
+
+
 Route::get('/reset', 'HelperController@reset_all');
 Route::get('/reset-retailers', 'HelperController@deleteRetailer');
 

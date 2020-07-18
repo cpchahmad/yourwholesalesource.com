@@ -7,6 +7,7 @@ use App\Category;
 use App\Country;
 use App\Customer;
 use App\Exports\ProcessedOrder;
+use App\Exports\RetailerOrderExport;
 use App\Exports\UnprocessedOrder;
 use App\Imports\UsersImport;
 use App\Notification;
@@ -559,6 +560,12 @@ class CustomOrderController extends Controller
         $temp_data = UserFileTemp::where('user_id',$new_file->user_id)->where('file_id',$new_file->id)->where('status',0)->get();
 
         return Excel::download(new UnprocessedOrder($temp_data), now().'UnprocessedFileOrders'.'.csv');
+
+    }
+
+    public function download_order($id){
+        $order = RetailerOrder::find($id);
+        return Excel::download(new RetailerOrderExport($order), now().' '.$order->name.' Order'.'.csv');
 
     }
 
