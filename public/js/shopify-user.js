@@ -1,4 +1,52 @@
 $(document).ready(function () {
+
+    $('body').on('click','.calculate_shipping_btn',function () {
+        var button = $(this);
+        $.ajax({
+            url:$(this).data('route'),
+            type: 'GET',
+            data:{
+                product: $(this).data('product')
+            },
+            success:function (response) {
+                var modal = button.data('target');
+                $(modal).find('.loader-div').hide();
+                $(modal).find('.drop-content').empty();
+                $(modal).find('.drop-content').append(response.html);
+
+            }
+        });
+    });
+    $('body').on('change','.shipping_country_select',function () {
+        $(this).parents('.modal').find('.drop-content').hide();
+        $(this).parents('.modal').find('.loader-div').show();
+        var select = $(this);
+        $.ajax({
+            url:$(this).data('route'),
+            type: 'GET',
+            data:{
+                product: $(this).data('product'),
+                country :$(this).val(),
+            },
+            success:function (response) {
+                var modal = '#'+select.parents('.modal').attr('id');
+                console.log(modal);
+                $(modal).find('.loader-div').hide();
+                $(modal).find('.drop-content').empty();
+                $(modal).find('.drop-content').append(response.html);
+                $(modal).find('.drop-content').show();
+
+            }
+        });
+    });
+    $('body').on('change','.shipping_price_radio',function () {
+        if($(this).is(':checked')){
+            $(this).parents('.block-content').find('.drop-shipping').text($(this).data('price'));
+            $(this).parents('.block-content').find('.calculate_shipping_btn').text($(this).data('country'));
+        }
+    });
+
+
     $('.de-associate-button').click(function () {
         var $this = $(this);
         Swal.fire({
