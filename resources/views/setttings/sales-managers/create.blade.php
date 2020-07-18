@@ -45,6 +45,15 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="form-material">
+                                <label for="material-error">Password</label>
+                                <input required class="form-control" type="password" id="manager_password" name="password"
+                                       placeholder="Enter Sales Manager Password here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-material">
                                 <input  class="form-control" type="search" data-route="{{route('sales-managers.create.search')}}"  id="search-create-input-stores-users" name="search"
                                         placeholder="Search by Keyword in Users/Stores">
 

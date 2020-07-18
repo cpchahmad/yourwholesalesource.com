@@ -165,8 +165,7 @@
                                                                 <div class="col-sm-6">
                                                                     <div class="form-material">
                                                                         <label for="material-error">Price</label>
-                                                                        <input required class="form-control" type="number" name="shipping_price"
-                                                                        >
+                                                                        <input required class="form-control" type="number" name="shipping_price">
 
                                                                     </div>
                                                                 </div>

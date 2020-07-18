@@ -217,7 +217,7 @@ class DefaultSettingsController extends Controller
             $user =  User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make($request->input('password')),
             ]);
             /*Assigning User Role of Non-Shopify-User */
             $user->assignRole('sales-manager');
