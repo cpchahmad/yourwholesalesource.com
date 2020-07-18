@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 
 
 
-Route::get('/order/download/{id}/csv', 'HelperController@download_order')->name('app.order.download');
+Route::get('/order/download/{id}/csv', 'CustomOrderController@download_order')->name('app.order.download');
 
 
 Route::get('/reset', 'HelperController@reset_all');
