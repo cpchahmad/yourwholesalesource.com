@@ -197,7 +197,8 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        {{$variant->title}}
+                                                        @if($variant->option1 != null) {{$variant->option1}} @endif    @if($variant->option2 != null) / {{$variant->option2}} @endif    @if($variant->option3 != null) / {{$variant->option3}} @endif
+
                                                     </td>
                                                     <td>
                                                         @if($variant->quantity >0)

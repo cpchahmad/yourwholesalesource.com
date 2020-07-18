@@ -193,7 +193,8 @@
                                         <tbody class="">
                                         <tr>
                                             <td class="variant_title">
-                                                {{$v->title}}
+                                                @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
+
 
                                             </td>
                                             <td class="text-center">
