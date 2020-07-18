@@ -169,6 +169,34 @@
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Title</th>
+                                                <th>
+                                                    <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">Shipping</a>
+                                                </th>
+                                                <div class="modal fade" id="shipping_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="block block-themed block-transparent mb-0">
+                                                                <div class="block-header bg-primary-dark">
+                                                                    <h3 class="block-title">Calculate Shipping Zone</h3>
+                                                                    <div class="block-options">
+                                                                        <button type="button" class="btn-block-option">
+                                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="block-content font-size-sm">
+                                                                    <div class="text-center loader-div p-2">
+                                                                        <h5>Calculating Shipping Price....</h5>
+                                                                        <img src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                                                                    </div>
+                                                                    <div class="drop-content">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
                                                 <th>Cost</th>
@@ -186,6 +214,7 @@
                                                     <td>
                                                         {{$variant->title}}
                                                     </td>
+                                                    <td class="drop-shipping text-center">N/A</td>
                                                     <td>
                                                         @if($variant->quantity >0)
                                                             {{$variant->quantity}}
