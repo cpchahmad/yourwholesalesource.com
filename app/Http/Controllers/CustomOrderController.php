@@ -322,11 +322,11 @@ class CustomOrderController extends Controller
             $total_weight = $product->weight;
             $zoneQuery = Zone::query();
             $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-                $q->where('name',$country);
+                $q->where('name','LIKE','%'.$country.'%');
             });
             $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-            $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
+            $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
                 if($shipping_rates->shipping_price > 0){

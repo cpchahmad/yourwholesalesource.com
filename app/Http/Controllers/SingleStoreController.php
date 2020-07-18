@@ -224,13 +224,11 @@ class SingleStoreController extends Controller
             $total_weight = $product->weight;
             $zoneQuery = Zone::query();
             $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-                $q->where('name',$country);
+                $q->where('name','LIKE','%'.$country.'%');
             });
             $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-            $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
-//            $shipping_rates->whereRaw('min <='.$total_weight);
-//            $shipping_rates->whereRaw('max >='.$total_weight);
+            $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
                 if($shipping_rates->shipping_price > 0){
@@ -242,8 +240,6 @@ class SingleStoreController extends Controller
                     else{
                         $product->new_shipping_price = 'Free Shipping';
                     }
-//                    $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
-
                 }
                 else{
                     $product->new_shipping_price = 'Free Shipping';
@@ -470,11 +466,11 @@ class SingleStoreController extends Controller
 
         $zoneQuery = Zone::query();
         $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-            $q->where('name',$country);
+            $q->where('name','LIKE','%'.$country.'%');
         });
         $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-        $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
+        $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
 //        $shipping_rates->whereRaw('min <='.$total_weight);
 //        $shipping_rates->whereRaw('max >='.$total_weight);
 
