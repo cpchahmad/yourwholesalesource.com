@@ -38,6 +38,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 class CustomOrderController extends Controller
 {
     private $admin;
+    private $notify;
 
     /**
      * CustomOrderController constructor.
@@ -46,6 +47,7 @@ class CustomOrderController extends Controller
     public function __construct()
     {
         $this->admin = new AdminMaintainerController();
+        $this->notify = new NotificationController();
     }
 
     public function index(Request $request){
