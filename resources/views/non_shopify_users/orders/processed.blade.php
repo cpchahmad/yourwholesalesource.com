@@ -5,7 +5,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                   Bulk Import Orders
+                    Bulk Import Orders
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -209,9 +209,10 @@
                                 <td></td>
                                 <td align="right">
                                     @if($orders->where('paid',0)->count() > 0)
-                                    <button class="btn btn-success paypal-pay-button" data-href="{{route('users.orders.bulk.paypal',$file->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                                    <button class="btn btn-success wallet-pay-button" data-href="{{route('users.orders.bulk.wallet',$file->id)}}" data-pay="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
-                                        @endif
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
+                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('users.orders.bulk.paypal',$file->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('users.orders.bulk.wallet',$file->id)}}" data-pay="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                    @endif
                                 </td>
                             </tr>
 
@@ -270,6 +271,81 @@
             </div>
         </div>
     </div>
+    @if($order->paid == 0)
+        <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout" role="document">
+                <div class="modal-content">
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary-dark">
+                            <h3 class="block-title">Payment for Bulk </h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option">
+                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <form action="{{route('users.orders.bulk.card',$file->id)}}" method="post">
+                            @csrf
+
+                            <div class="block-content font-size-sm">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">Card Name</label>
+                                            <input  class="form-control" type="text" required=""  name="card_name"
+                                                    placeholder="Enter Card Title here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">Card Number</label>
+                                            <input type="text" required=""  name="card_number"  class="form-control js-card js-masked-enabled"
+                                                   placeholder="9999-9999-9999-9999">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">Amount to Pay</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-error">Total Cost</label>
+                                            <input  class="form-control" type="text" readonly value="{{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                    placeholder="Enter 14 Digit Card Number here">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="block-content block-content-full text-right border-top">
+                                <button type="submit" class="btn btn-success" >Proceed Payment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 
 
 @endsection

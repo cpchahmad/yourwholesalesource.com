@@ -606,6 +606,48 @@ class CustomOrderController extends Controller
 
     }
 
+    public function bulk_import_order_card(Request $request){
+
+        $new_file = UserFile::find($request->id);
+        $setting = AdminSetting::all()->first();
+        $custom_orders = RetailerOrder::where('user_id',Auth::id())->where('custom',1)->where('paid',0)->newQuery();
+        $custom_orders->whereHas('imported',function ($q) use ($new_file){
+            $q->where('file_id','=',$new_file->id);
+        });
+        $custom_orders = $custom_orders->get();
+        $order_total = $custom_orders->sum('cost_to_pay');
+
+        foreach ($custom_orders as $order){
+            $settings = AdminSetting::all()->first();
+            if($order != null && $order->paid == 0){
+                $last_four = substr($request->input('card_number'),0,3);
+                $new_transaction = new OrderTransaction();
+                $new_transaction->note = $request->input('note');
+                $new_transaction->amount =  $order->cost_to_pay + ($order->cost_to_pay * $settings->payment_charge_percentage/100);
+                $new_transaction->name = $request->input('card_name');
+                $new_transaction->card_last_four = $last_four;
+                $new_transaction->retailer_order_id = $order->id;
+                $new_transaction->user_id = $order->user_id;
+                $new_transaction->shop_id = $order->shop_id;
+                $new_transaction->save();
+
+                $order->paid = 1;
+                $order->status = 'Paid';
+                $order->save();
+
+                /*Maintaining Log*/
+                $order_log =  new OrderLog();
+                $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+                $order_log->status = "paid";
+                $order_log->retailer_order_id = $order->id;
+                $order_log->save();
+                $this->admin->sync_order_to_admin_store($order);
+            }
+
+        }
+        return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+    }
+
     public function bulk_import_order_wallet(Request $request){
         if (Auth::check()) {
             $user = Auth::user();
@@ -694,7 +736,6 @@ class CustomOrderController extends Controller
 
 
     }
-
 
     public function bulk_import_order_paypal(Request $request){
         $new_file = UserFile::find($request->id);
