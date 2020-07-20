@@ -42,7 +42,7 @@
                                     <tbody class="">
                                     <tr>
                                         <td>{{$file->file}}</td>
-                                        <td>{{$file->created_at->diffForHumans()}}</td>
+                                        <td> {{$file->created_at->diffForHumans()}}</td>
                                         <td>
                                             <a href="{{route('users.files.download_processed_orders',$file->id)}}" target="_blank"
                                                class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
