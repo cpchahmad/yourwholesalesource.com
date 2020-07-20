@@ -555,7 +555,9 @@
                                     <br> {{$shipping->city}}
                                     <br> {{$shipping->province}} {{$shipping->zip}}
                                     <br> {{$shipping->country}}
+                                    @if(isset($shipping->phone))
                                     <br>{{$shipping->phone}}
+                                        @endif
 
                                 </p>
                             @endif
