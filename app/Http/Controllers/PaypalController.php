@@ -67,16 +67,20 @@ class PaypalController extends Controller
          $data['total'] = $order_total;
 
          $provider = new ExpressCheckout;
-         $response = $provider->setExpressCheckout($data);
+         try {
+             $response = $provider->setExpressCheckout($data);
 
-         $retailer_order->paypal_token  = $response['TOKEN'];
-         $retailer_order->save();
+             $retailer_order->paypal_token = $response['TOKEN'];
+             $retailer_order->save();
 
-
-         return redirect($response['paypal_link']);
+             return redirect($response['paypal_link']);
+         }
+         catch (\Exception $e){
+             return redirect()->back()->with('error','System Process Failure');
+         }
      }
      else{
-         return redirect()->back()->with('error','This order status is  paid!');
+         return redirect()->back()->with('error','This order status is paid');
      }
 
     }

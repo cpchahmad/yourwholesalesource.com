@@ -656,14 +656,21 @@ class CustomOrderController extends Controller
 
             $provider = new ExpressCheckout;
 
-            $response = $provider->setExpressCheckout($data);
+            try {
 
-            foreach ($custom_orders as $retailer_order){
-                $retailer_order->paypal_token  = $response['TOKEN'];
-                $retailer_order->save();
+                $response = $provider->setExpressCheckout($data);
+
+                foreach ($custom_orders as $retailer_order){
+                    $retailer_order->paypal_token  = $response['TOKEN'];
+                    $retailer_order->save();
+                }
+
+                return redirect($response['paypal_link']);
+            }
+            catch (\Exception $e){
+                return redirect()->back()->with('error','System Process Failure');
             }
 
-            return redirect($response['paypal_link']);
         }
     }
 
