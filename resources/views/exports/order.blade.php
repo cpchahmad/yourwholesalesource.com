@@ -76,7 +76,9 @@
             </td>
             <td>{{$shipping->first_name}} {{$shipping->last_name}} </td>
             <td>{{$order->email}}</td>
-            <td>{{$shipping->phone}}</td>
+            <td>@if(isset($shipping->phone))
+                  {{$shipping->phone}}
+                @endif</td>
             <td>{{$shipping->address1}}</td>
             <td>{{$shipping->address2}}</td>
             <td>{{$shipping->city}}</td>
