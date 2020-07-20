@@ -93,12 +93,12 @@
             </a>
         </li>
 
-        <li class="nav-main-item">
-            <a class="nav-main-link" href="{{route('store.index')}}">
-                <i class="nav-main-link-icon si si-wrench"></i>
-                <span class="nav-main-link-name">Settings</span>
-            </a>
-        </li>
+{{--        <li class="nav-main-item">--}}
+{{--            <a class="nav-main-link" href="{{route('store.index')}}">--}}
+{{--                <i class="nav-main-link-icon si si-wrench"></i>--}}
+{{--                <span class="nav-main-link-name">Settings</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
 
         <li class="nav-main-item">
             <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
@@ -249,10 +249,10 @@
                                             <i class="si si-user ml-1"></i>
                                         </span>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                            <span>Settings</span>
-                            <i class="si si-settings"></i>
-                        </a>
+{{--                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">--}}
+{{--                            <span>Settings</span>--}}
+{{--                            <i class="si si-settings"></i>--}}
+{{--                        </a>--}}
                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="/logout">
                             <span>Log Out</span>
                             <i class="si si-logout ml-1"></i>
