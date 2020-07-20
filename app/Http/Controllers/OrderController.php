@@ -213,6 +213,10 @@ class OrderController extends Controller
                                 $new_line->cost = $related_variant->cost;
                                 $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
                             }
+                            else{
+                                $new_line->cost = $retailer_product->cost;
+                                $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
+                            }
 
                             $new_line->save();
                         }
