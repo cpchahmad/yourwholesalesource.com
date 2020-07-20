@@ -557,7 +557,7 @@ class CustomOrderController extends Controller
     }
 
     public function files(Request $request){
-        $files = UserFile::where('user_id',Auth::id())->orderBy('created_at')->get();
+        $files = UserFile::where('user_id',Auth::id())->orderBy('created_at','DESC')->get();
         return view('non_shopify_users.orders.import_files')->with([
             'files' => $files,
         ]);
