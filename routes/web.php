@@ -191,7 +191,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/bulk-pay-through-paypal/{id}/cancel', 'CustomOrderController@bulk_import_order_paypal_cancel')->name('users.orders.bulk.paypal.cancel');
             Route::get('/bulk-pay-through-paypal/{id}/success', 'CustomOrderController@bulk_import_order_paypal_success')->name('users.orders.bulk.paypal.success');
             Route::get('/bulk-pay-through-wallet/{id}', 'CustomOrderController@bulk_import_order_wallet')->name('users.orders.bulk.wallet');
-            Route::get('/bulk-pay-through-card/{id}', 'CustomOrderController@bulk_import_order_card')->name('users.orders.bulk.card');
+            Route::post('/bulk-pay-through-card/{id}', 'CustomOrderController@bulk_import_order_card')->name('users.orders.bulk.card');
 
 
             Route::get('/products/wefullfill','CustomOrderController@wefullfill_products')->name('users.product.wefulfill');
