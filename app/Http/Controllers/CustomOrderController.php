@@ -93,27 +93,26 @@ class CustomOrderController extends Controller
             }
             $zoneQuery = Zone::query();
             $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-                $q->where('name',$country);
+                $q->where('name','LIKE','%'.$country.'%');
             });
             $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-            $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
+            $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
-                if($shipping_rates->min > 0){
-                    if($shipping_rates->type == 'flat'){
-                        $rate = $shipping_rates->shipping_price;
-                    }
-                    else{
+                if($shipping_rates->type == 'flat'){
+                    $rate = $shipping_rates->shipping_price;
+                }
+                else{
+                    if($shipping_rates->min > 0){
                         $ratio = $total_weight/$shipping_rates->min;
                         $rate = $shipping_rates->shipping_price*$ratio;
                     }
-
-
+                    else{
+                        $rate = 0;
+                    }
                 }
-                else{
-                    $rate = 0;
-                }
+
             }
             else{
                 $rate = 0;
@@ -339,18 +338,18 @@ class CustomOrderController extends Controller
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
                 if($shipping_rates->shipping_price > 0){
-                    if($shipping_rates->min > 0){
-                        if($shipping_rates->type == 'flat'){
-                            $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
-                        }
-                        else{
+
+                    if($shipping_rates->type == 'flat'){
+                        $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
+                    }
+                    else{
+                        if($shipping_rates->min > 0){
                             $ratio = $total_weight/$shipping_rates->min;
                             $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price*$ratio,2);
                         }
-
-                    }
-                    else{
-                        $product->new_shipping_price = 'Free Shipping';
+                        else{
+                            $product->new_shipping_price = 'Free Shipping';
+                        }
                     }
                 }
                 else{
@@ -523,23 +522,23 @@ class CustomOrderController extends Controller
 
                     $shipping_rates =  $shipping_rates->first();
                     if($shipping_rates != null){
-                        if($shipping_rates->min > 0){
-                            if($shipping_rates->type == 'flat'){
-                                $new->shipping_price = $shipping_rates->shipping_price;
-                                $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
-                                $new->save;
-                            }
-                            else{
+
+                        if($shipping_rates->type == 'flat'){
+                            $new->shipping_price = $shipping_rates->shipping_price;
+                            $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                            $new->save;
+                        }
+                        else{
+                            if($shipping_rates->min > 0){
                                 $ratio = $total_weight/$shipping_rates->min;
                                 $new->shipping_price = $shipping_rates->shipping_price*$ratio;
                                 $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
                                 $new->save;
                             }
-
-                        }
-                        else{
-                            $new->shipping_price = 0;
-                            $new->save;
+                            else{
+                                $new->shipping_price = 0;
+                                $new->save;
+                            }
                         }
                     }
                     else{

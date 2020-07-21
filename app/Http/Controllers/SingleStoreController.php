@@ -233,19 +233,17 @@ class SingleStoreController extends Controller
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
                 if($shipping_rates->shipping_price > 0){
-
-                    if($shipping_rates->min > 0){
-                        if($shipping_rates->type == 'flat'){
-                            $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
-                        }
-                        else{
+                    if($shipping_rates->type == 'flat'){
+                        $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
+                    }
+                    else{
+                        if($shipping_rates->min > 0){
                             $ratio = $total_weight/$shipping_rates->min;
                             $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price*$ratio,2);
                         }
-
-                    }
-                    else{
-                        $product->new_shipping_price = 'Free Shipping';
+                        else{
+                            $product->new_shipping_price = 'Free Shipping';
+                        }
                     }
                 }
                 else{

@@ -240,22 +240,22 @@ class OrderController extends Controller
                             $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
                             $shipping_rates =  $shipping_rates->first();
                             if($shipping_rates != null){
-                                if($shipping_rates->min > 0){
-                                    if($shipping_rates->type == 'flat'){
-                                        $new->shipping_price = $shipping_rates->shipping_price;
-                                        $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
-                                        $new->save;
-                                    }
-                                    else{
+                                if($shipping_rates->type == 'flat'){
+                                    $new->shipping_price = $shipping_rates->shipping_price;
+                                    $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                                    $new->save;
+                                }
+                                else{
+                                    if($shipping_rates->min > 0){
                                         $ratio = $total_weight/$shipping_rates->min;
                                         $new->shipping_price = $shipping_rates->shipping_price*$ratio;
                                         $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
                                         $new->save;
                                     }
-                                }
-                                else{
-                                    $new->shipping_price = 0;
-                                    $new->save;
+                                    else{
+                                        $new->shipping_price = 0;
+                                        $new->save;
+                                    }
                                 }
 
                             }
