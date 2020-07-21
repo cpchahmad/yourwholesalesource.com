@@ -376,12 +376,23 @@ $(document).ready(function () {
         }
     });
     $('.option_btn_1').click(function () {
-        $('.option_2').show();
-        $('.option_btn_1').hide();
+        if($(this).prev().find('.options-preview').val() !== ''){
+            $('.option_2').show();
+            $('.option_btn_1').hide();
+        }
+        else{
+            alertify.error('The Option1 must have atleast one option value');
+        }
+
     });
     $('.option_btn_2').click(function () {
-        $('.option_3').show();
-        $('.option_btn_2').hide();
+        if($(this).prev().find('.options-preview').val() !== ''){
+            $('.option_3').show();
+            $('.option_btn_2').hide();
+        }
+        else{
+            alertify.error('The Option1 must have atleast one option value');
+        }
     });
     /*Fulfillment Control*/
     $('.fulfill_quantity').change(function () {

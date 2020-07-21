@@ -63,7 +63,7 @@
                                             <h5>Option 1</h5>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Size">
+                                                    <input type="text" class="form-control" value="Option 1">
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <input class="js-tags-options options-preview form-control" type="text"
@@ -82,7 +82,7 @@
                                                 <h5>Option 2</h5>
                                                 <div class="row">
                                                     <div class="col-sm-3">
-                                                        <input type="text" class="form-control" value="Color">
+                                                        <input type="text" class="form-control" value="Option 2">
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"
@@ -103,7 +103,7 @@
                                                 <h5>Option 3</h5>
                                                 <div class="row">
                                                     <div class="col-sm-3">
-                                                        <input type="text" class="form-control" value="Material">
+                                                        <input type="text" class="form-control" value="Option 3">
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"
@@ -166,13 +166,24 @@
                 }
             });
             $('.option_btn_1').click(function () {
-                $('.option_2').show();
-                $('.option_btn_1').hide();
+                if($(this).prev().find('.options-preview').val() !== ''){
+                    $('.option_2').show();
+                    $('.option_btn_1').hide();
+                }
+                else{
+                    alertify.error('The Option1 must have atleast one option value');
+                }
+
             });
             $('.option_btn_2').click(function () {
-                $('.option_3').show();
-                $('.option_btn_2').hide();
+                if($(this).prev().find('.options-preview').val() !== ''){
+                    $('.option_3').show();
+                    $('.option_btn_2').hide();
+                }
+                else{
+                    alertify.error('The Option1 must have atleast one option value');
+                }
             });
         });
     </script>
-    @endsection
+@endsection

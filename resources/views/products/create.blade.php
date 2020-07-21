@@ -160,7 +160,7 @@
                                         <h5>Option 1</h5>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control" value="Size">
+                                                <input type="text" class="form-control" value="Option1">
                                             </div>
                                             <div class="col-sm-9">
                                                 <input class="js-tags-options options-preview form-control" type="text"
@@ -179,7 +179,7 @@
                                             <h5>Option 2</h5>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Color">
+                                                    <input type="text" class="form-control" value="Option 2">
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <input class="js-tags-options options-preview form-control" type="text"
@@ -200,7 +200,7 @@
                                             <h5>Option 3</h5>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Material">
+                                                    <input type="text" class="form-control" value="Option 3">
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <input class="js-tags-options options-preview form-control" type="text"
