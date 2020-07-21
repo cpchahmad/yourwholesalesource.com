@@ -120,7 +120,7 @@
                             <span class="font-weight-bold">Order Status: </span>
 
                             @if($ticket->has_order->status == 'paid')
-                                <span class="badge badge-primary" style="float: right;font-size: medium"> {{$ticket->has_order->status}}</span>
+                                <span class="badge badge-warning" style="float: right;font-size: medium"> Unfulfilled </span>
                             @elseif($ticket->has_order->status == 'unfulfilled')
                                 <span class="badge badge-warning" style="font-size: small"> {{$ticket->has_order->status}}</span>
                             @elseif($ticket->has_order->status == 'partially-shipped')
