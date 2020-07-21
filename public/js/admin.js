@@ -336,6 +336,8 @@ $(document).ready(function () {
                 $('.option_3').hide();
                 $('.option_btn_2').hide();
                 $('.option_btn_1').show();
+                $('.variants_table').hide();
+                $("tbody").empty();
 
             }
             if(option2 === ''){
