@@ -71,10 +71,13 @@ class CustomOrderController extends Controller
         });
 
         $customers = Customer::where('user_id',Auth::id())->get();
+        $setting = AdminSetting::all()->first();
+
         return view('non_shopify_users.orders.create')->with([
             'products' => $products->get(),
             'customers' => $customers,
             'countries' => Country::all(),
+            'setting' => $setting
         ]);
     }
 
@@ -415,6 +418,9 @@ class CustomOrderController extends Controller
                     $first_name = $name[0];
                     if(array_key_exists(1,$name)){
                         $last_name = $name[1];
+                    }
+                    else{
+                        $last_name = '';
                     }
                     $address1 = $data[0]->address1;
                     $address2 = $data[0]->address2;
