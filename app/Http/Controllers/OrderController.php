@@ -242,7 +242,7 @@ class OrderController extends Controller
                                     $new->shipping_price = $shipping_rates->shipping_price;
                                     $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
                                     $new->cost_to_pay =  $new->cost_to_pay + $shipping_rates->shipping_price;
-                                    $new->save;
+                                    $new->save();
                                 }
                                 else{
                                     if($shipping_rates->min > 0){
@@ -251,18 +251,18 @@ class OrderController extends Controller
                                         $new->shipping_price = $shipping_price;
                                         $new->total_price =  $new->total_price + $shipping_price;
                                         $new->cost_to_pay =  $new->cost_to_pay + $shipping_price;
-                                        $new->save;
+                                        $new->save()();
                                     }
                                     else{
                                         $new->shipping_price = 0;
-                                        $new->save;
+                                        $new->save();
                                     }
                                 }
 
                             }
                             else{
                                 $new->shipping_price = 0;
-                                $new->save;
+                                $new->save();
                             }
                         }
 
@@ -273,7 +273,6 @@ class OrderController extends Controller
                         $order_log->status = "Newly Synced";
                         $order_log->retailer_order_id = $new->id;
                         $order_log->save();
-                        dd($new);
                     }
                 }
             }
