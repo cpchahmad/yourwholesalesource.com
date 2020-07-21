@@ -162,7 +162,6 @@ class OrderController extends Controller
                         if(isset($order->shipping_address)){
                             $new->shipping_address = json_encode($order->shipping_address,true);
                         }
-
                         if(isset($order->billing_address)){
                             $new->billing_address = json_encode($order->billing_address,true);
                         }
@@ -173,11 +172,9 @@ class OrderController extends Controller
                         if(count($local_shop->has_user) > 0){
                             $new->user_id = $local_shop->has_user[0]->id;
                         }
-
                         $new->fulfilled_by = 'fantasy';
                         $new->sync_status = 1;
                         $new->save();
-
                         $cost_to_pay = 0;
 
                         foreach ($order->line_items as $item){
@@ -226,7 +223,7 @@ class OrderController extends Controller
                         if(isset($order->shipping_address)){
                             $total_weight = 0;
                             $country = $order->shipping_address->country;
-                            foreach ($new->line_items as $index => $v){
+                            foreach ($new->line_items as $v){
                                 if($v->linked_product != null){
                                     $total_weight = $total_weight + ( $v->linked_product->weight *  $v->quantity);
                                 }
@@ -276,6 +273,7 @@ class OrderController extends Controller
                         $order_log->status = "Newly Synced";
                         $order_log->retailer_order_id = $new->id;
                         $order_log->save();
+                        dd($new);
                     }
                 }
             }
