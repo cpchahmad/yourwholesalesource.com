@@ -45,8 +45,12 @@
                                 </td>
                                 <td>
                                     @if($store->has_manager != null)
-                                        <img class="rounded img-avatar" @if($store->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$store->has_manager->profile}}" @endif alt="">
-                                        <span style="margin-left: 10px">{{$store->has_manager->name}}</span>
+                                        <a href="{{route('sales-managers.view',$store->has_manager->id)}}">
+
+                                        <img class="img-avatar-rounded" @if($store->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$store->has_manager->profile}}" @endif alt="">
+                                        <span style="margin: auto 0px auto 5px;">{{$store->has_manager->name}}</span>
+                                        </a>
+
                                     @else
                                         Manager Deleted
                                     @endif

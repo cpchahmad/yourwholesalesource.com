@@ -80,8 +80,11 @@
                                         </td>
                                         <td class="d-flex">
                                             @if($item->has_manager != null)
-                                                <img class="rounded img-avatar" @if($item->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$item->has_manager->profile}}" @endif alt="">
-                                                <span style="margin-left: 10px">{{$item->has_manager->name}}</span>
+                                                <a href="{{route('sales-managers.view',$item->has_manager->id)}}">
+
+                                                <img class="img-avatar-rounded" @if($item->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$item->has_manager->profile}}" @endif alt="">
+                                                <span style="margin: auto 0px auto 5px;">{{$item->has_manager->name}}</span>
+                                                </a>
                                             @else
                                                 Manager Deleted
                                             @endif

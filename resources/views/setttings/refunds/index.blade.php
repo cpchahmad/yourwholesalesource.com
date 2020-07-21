@@ -113,8 +113,11 @@
                                         </td>
                                         <td class="d-flex">
                                             @if($refund->has_manager != null)
-                                                <img class="rounded img-avatar" @if($refund->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$refund->has_manager->profile}}" @endif alt="">
-                                                <span style="margin-left: 10px">{{$refund->has_manager->name}}</span>
+                                                <a href="{{route('sales-managers.view',$refund->has_manager->id)}}">
+                                                    <img class="img-avatar-rounded" @if($refund->has_manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$refund->has_manager->profile}}" @endif alt="">
+                                                    <span style="margin: auto 0px auto 5px;">{{$refund->has_manager->name}}</span>
+                                                </a>
+
                                             @else
                                                 Manager Deleted
                                             @endif
