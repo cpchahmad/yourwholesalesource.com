@@ -329,7 +329,7 @@ $(document).ready(function () {
         onRemoveTag:function(){
             var option1 = $('input[type="text"][name="option1"]').val();
             var option2 = $('input[type="text"][name="option2"]').val();
-            if(option1 !== ''){
+            if(option1 === ''){
                 $('input[type="text"][name="option2"]').val('');
                 $('input[type="text"][name="option3"]').val('');
                 $('.option_2').hide();
@@ -338,7 +338,7 @@ $(document).ready(function () {
                 $('.option_btn_1').show();
 
             }
-            if(option2 !== ''){
+            if(option2 === ''){
                 $('input[type="text"][name="option3"]').val('');
                 $('.option_3').hide();
                 $('.option_btn_2').show();
