@@ -494,8 +494,10 @@
                                                         @if($order->pay_by == 'Paypal')
                                                             <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
 
-                                                        @else
+                                                        @elseif($order->pay_by == 'Wallet')
+                                                            <p> Cost-Payment Captured via Wallet by {{$order->has_payment->name}} </p>
 
+                                                        @else
                                                             <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
                                                         @endif
                                                     </div>
