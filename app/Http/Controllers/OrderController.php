@@ -240,7 +240,6 @@ class OrderController extends Controller
 
                             $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
                             $shipping_rates =  $shipping_rates->first();
-                            dd($shipping_rates);
                             if($shipping_rates != null){
                                 if($shipping_rates->type == 'flat'){
                                     $new->shipping_price = $shipping_rates->shipping_price;

@@ -177,7 +177,7 @@ class OrdersCreateJob implements ShouldQueue
                     }
                     $zoneQuery = Zone::query();
                     $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-                        $q->where('name','LIKE',$country);
+                        $q->where('name','LIKE','%'.$country.'%');
                     });
                     $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
