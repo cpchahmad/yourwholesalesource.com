@@ -231,6 +231,7 @@ class OrderController extends Controller
                                     $total_weight = $total_weight + ( $v->linked_product->weight *  $v->quantity);
                                 }
                             }
+                            dd($total_weight);
                             $zoneQuery = Zone::query();
                             $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                                 $q->where('name','LIKE','%'.$country.'%');
