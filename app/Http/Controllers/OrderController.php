@@ -251,7 +251,7 @@ class OrderController extends Controller
                                         $new->shipping_price = $shipping_price;
                                         $new->total_price =  $new->total_price + $shipping_price;
                                         $new->cost_to_pay =  $new->cost_to_pay + $shipping_price;
-                                        $new->save()();
+                                        $new->save();
                                     }
                                     else{
                                         $new->shipping_price = 0;
