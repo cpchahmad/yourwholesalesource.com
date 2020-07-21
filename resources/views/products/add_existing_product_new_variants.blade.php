@@ -181,7 +181,7 @@
                     $('.option_btn_2').hide();
                 }
                 else{
-                    alertify.error('The Option1 must have atleast one option value');
+                    alertify.error('The Option2 must have atleast one option value');
                 }
             });
         });

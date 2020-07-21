@@ -326,6 +326,26 @@ $(document).ready(function () {
         width: '100%',
         defaultText: 'Add tag',
         removeWithBackspace: true,
+        onRemoveTag:function(){
+            var option1 = $('input[type="text"][name="option1"]').val();
+            var option2 = $('input[type="text"][name="option2"]').val();
+            if(option1 !== ''){
+                $('input[type="text"][name="option2"]').val('');
+                $('input[type="text"][name="option3"]').val('');
+                $('.option_2').hide();
+                $('.option_3').hide();
+                $('.option_btn_2').hide();
+                $('.option_btn_1').show();
+
+            }
+            if(option2 !== ''){
+                $('input[type="text"][name="option3"]').val('');
+                $('.option_3').hide();
+                $('.option_btn_2').show();
+
+
+            }
+        },
         onChange: function(){
             var price = $('input[type="text"][name="price"]').val();
             var cost = $('input[type="text"][name="cost"]').val();
@@ -391,7 +411,7 @@ $(document).ready(function () {
             $('.option_btn_2').hide();
         }
         else{
-            alertify.error('The Option1 must have atleast one option value');
+            alertify.error('The Option2 must have atleast one option value');
         }
     });
     /*Fulfillment Control*/
