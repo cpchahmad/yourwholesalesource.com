@@ -526,13 +526,16 @@ class CustomOrderController extends Controller
                         if($shipping_rates->type == 'flat'){
                             $new->shipping_price = $shipping_rates->shipping_price;
                             $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                            $new->cost_to_pay =  $new->cost_to_pay + $shipping_rates->shipping_price;
                             $new->save;
                         }
                         else{
                             if($shipping_rates->min > 0){
                                 $ratio = $total_weight/$shipping_rates->min;
-                                $new->shipping_price = $shipping_rates->shipping_price*$ratio;
-                                $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                                $shipping_price =  $shipping_rates->shipping_price*$ratio;
+                                $new->shipping_price = $shipping_price;
+                                $new->total_price =  $new->total_price + $shipping_price;
+                                $new->cost_to_pay =  $new->cost_to_pay + $shipping_price;
                                 $new->save;
                             }
                             else{
