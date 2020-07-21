@@ -65,18 +65,39 @@ class ZoneController extends Controller
        $country = $request->input('country');
        $product = Product::where('shopify_id',$request->input('product_id'))->first();
        if($product != null){
+           $total_weight = $product->weight;
+
            $zoneQuery = Zone::query();
          $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-             $q->where('name',$country);
+             $q->where('name','LIKE','%'.$country.'%');
          });
         $zones = $zoneQuery->get();
-           $message = null;
+        $message = null;
         if(count($zones) > 0){
             foreach ($zones as $zone) {
                 if($zone->has_rate != null){
                     if (count($zone->has_rate) > 0) {
                         if($zone->has_rate[0]->shipping_price > 0){
-                            $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
+                            if($zone->has_rate[0]->type == 'flat'){
+                                $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
+
+                            }
+                            elseif ($zone->has_rate[0]->type == 'weight'){
+                                if($zone->has_rate[0]->min > 0){
+                                    $ratio = $total_weight/$zone->has_rate[0]->min;
+                                    $new_shipping_price = '$'.number_format($zone->has_rate[0]->shipping_price*$ratio,2);
+                                    $message = ' <prp_up> ' . $new_shipping_price . '</prp_up>';
+
+                                }
+                                else{
+                                $message = ' <prp_up> Free Shipping</prp_up>';
+
+                                }
+                            }
+                            else{
+                                $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
+
+                            }
 
                         }
                         else{
