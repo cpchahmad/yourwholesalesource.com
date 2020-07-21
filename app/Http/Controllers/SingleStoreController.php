@@ -481,8 +481,8 @@ class SingleStoreController extends Controller
 
         foreach ($shipping_rates as $shipping_rate){
             if($shipping_rate->min > 0){
-                if($shipping_rates->type == 'flat'){
-                    $shipping_rate->shipping_price = $shipping_rates->shipping_price;
+                if($shipping_rate->type == 'flat'){
+
                 }
                 else{
                     $ratio = $total_weight/$shipping_rate->min;
