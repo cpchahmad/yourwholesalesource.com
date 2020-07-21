@@ -235,7 +235,6 @@ class SingleStoreController extends Controller
                     if($shipping_rates->min > 0){
                         $ratio = $total_weight/$shipping_rates->min;
                         $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price*$ratio,2);;
-
                     }
                     else{
                         $product->new_shipping_price = 'Free Shipping';
@@ -471,8 +470,6 @@ class SingleStoreController extends Controller
         $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
         $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
-//        $shipping_rates->whereRaw('min <='.$total_weight);
-//        $shipping_rates->whereRaw('max >='.$total_weight);
 
         $shipping_rates =  $shipping_rates->get();
 
@@ -509,6 +506,9 @@ class SingleStoreController extends Controller
         if($request->has('search')){
             $refunds->where('order_name','LIKE','%'.$request->input('search').'%');
         }
+        $refunds->whereHas('has_order',function (){
+
+        });
         $orders = RetailerOrder::where('shop_id',$shop->id)->where('paid',1)->get();
         return view('single-store.orders.refunds')->with([
             'refunds' =>  $refunds->orderBy('created_at')->paginate(20),
@@ -522,10 +522,16 @@ class SingleStoreController extends Controller
     {
         $shop = $this->helper->getLocalShop();
         $refund = Refund::find($request->id);
-        return view('single-store.orders.view-refund')->with([
-            'shop' => $shop,
-            'ticket' => $refund,
-        ]);
+        if($refund->has_order != null) {
+            return view('single-store.orders.view-refund')->with([
+                'shop' => $shop,
+                'ticket' => $refund,
+            ]);
+        }
+        else{
+            return redirect()->route('store.refunds')->with('No Refund Found!');
+
+        }
     }
     public function show_notification($id){
         $notification = Notification::find($id);

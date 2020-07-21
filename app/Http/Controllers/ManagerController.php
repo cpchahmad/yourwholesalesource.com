@@ -1007,6 +1007,10 @@ class ManagerController extends Controller
             }
         }
 
+        $tickets->whereHas('has_order',function (){
+
+        });
+
 
         $tickets = $tickets->paginate(30);
         return view('sales_managers.refunds.index')->with([
@@ -1017,13 +1021,19 @@ class ManagerController extends Controller
             'priority' =>$request->input('priority'),
         ]);
     }
-    public function view_refund(Request $request){
+    public function view_refund(Request $request)
+    {
         $manager = User::find(Auth::id());
         $ticket = Refund::find($request->id);
-        return view('sales_managers.refunds.view')->with([
-            'manager' => $manager,
-            'ticket' => $ticket,
-        ]);
+        if($ticket->has_order != null){
+            return view('sales_managers.refunds.view')->with([
+                'manager' => $manager,
+                'ticket' => $ticket,
+            ]);
+        }
+        else{
+            return redirect()->route('sales_managers.refunds')->with('No Refund Found!');
+        }
     }
 
 

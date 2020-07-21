@@ -485,6 +485,10 @@ class DefaultSettingsController extends Controller
                 $tickets->where('priority', '=', $request->input('priority'));
             }
         }
+        $tickets->whereHas('has_order',function (){
+
+        });
+
         $tickets = $tickets->paginate(30);
         return view('setttings.refunds.index')->with([
             'tickets' => $tickets,
@@ -497,10 +501,16 @@ class DefaultSettingsController extends Controller
     public function view_refund(Request $request){
         $manager = User::find(Auth::id());
         $ticket = Refund::find($request->id);
-        return view('setttings.refunds.view')->with([
-            'manager' => $manager,
-            'ticket' => $ticket,
-        ]);
+        if($ticket->has_order != null){
+            return view('setttings.refunds.view')->with([
+                'manager' => $manager,
+                'ticket' => $ticket,
+            ]);
+        }
+        else{
+            return redirect()->route('refunds.index')->with('No Refund Found!');
+        }
+
     }
 
     public function assign_manager(Request $request,$id){

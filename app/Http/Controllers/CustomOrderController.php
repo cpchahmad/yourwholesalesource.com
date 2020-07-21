@@ -97,10 +97,7 @@ class CustomOrderController extends Controller
             });
             $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-//            dd($total_weight);
             $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
-//            $shipping_rates->whereRaw('min <='.$total_weight);
-//            $shipping_rates->whereRaw('max >='.$total_weight);
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
                 if($shipping_rates->min > 0){
@@ -913,6 +910,9 @@ class CustomOrderController extends Controller
         if($request->has('search')){
             $refunds->where('order_name','LIKE','%'.$request->input('search').'%');
         }
+        $refunds->whereHas('has_order',function (){
+
+        });
         $orders = RetailerOrder::where('user_id',$user->id)->where('paid',1)->get();
         return view('non_shopify_users.orders.refunds')->with([
             'refunds' =>  $refunds->orderBy('created_at')->paginate(20),
@@ -925,10 +925,17 @@ class CustomOrderController extends Controller
     public function refund(Request $request){
         $user = User::find(Auth::id());
         $refund = Refund::find($request->id);
-        return view('non_shopify_users.orders.view-refund')->with([
-            'user' => $user,
-            'ticket' => $refund,
-        ]);
+        if($refund->has_order != null){
+            return view('non_shopify_users.orders.view-refund')->with([
+                'user' => $user,
+                'ticket' => $refund,
+            ]);
+        }
+        else{
+            return redirect()->route('users.refunds')->with('No Refund Found!');
+
+        }
+
     }
 
     public function show_notification($id){
