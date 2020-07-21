@@ -651,14 +651,14 @@ class CustomOrderController extends Controller
             }
 
         }
-        return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+        return redirect()->route('users.files.view',$request->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
     }
 
     public function bulk_import_order_wallet(Request $request){
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->has_wallet == null) {
-                return redirect()->back()->with('error','Wallet Does not Exist!');
+                return redirect()->route('users.files.view',$request->id)->with('error','Wallet Does not Exist!');
             } else {
                 $wallet = $user->has_wallet;
             }
@@ -667,14 +667,14 @@ class CustomOrderController extends Controller
             $shop = $this->helper->getLocalShop();
             if (count($shop->has_user) > 0) {
                 if ($shop->has_user[0]->has_wallet == null) {
-                    return redirect()->back()->with('error','Wallet Does not Exist!');
+                    return redirect()->route('users.files.view',$request->id)->with('error','Wallet Does not Exist!');
 
                 } else {
                     $wallet = $shop->has_user[0]->has_wallet;
                 }
 
             } else {
-                return redirect()->back()->with('error','Wallet Does not Exist!');
+                return redirect()->route('users.files.view',$request->id)->with('error','Wallet Does not Exist!');
 
             }
         }
@@ -732,10 +732,10 @@ class CustomOrderController extends Controller
             $wallet_log->message = 'An Amount '.number_format($order_total,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
             $wallet_log->save();
             $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($order_total,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
-            return redirect()->back()->with('success','Order Cost Deducted From Wallet Successfully!');
+            return redirect()->route('users.files.view',$request->id)->with('success','Order Cost Deducted From Wallet Successfully!');
         }
         else{
-            return redirect()->back()->with('error','Wallet Doesnot Have Required Amount!');
+            return redirect()->route('users.files.view',$request->id)->with('error','Wallet Doesnot Have Required Amount!');
         }
 
 
@@ -807,7 +807,7 @@ class CustomOrderController extends Controller
                 return redirect($response['paypal_link']);
             }
             catch (\Exception $e){
-                return redirect()->back()->with('error','System Process Failure');
+                return redirect()->route('users.files.view',$request->id)->with('error','System Process Failure');
             }
 
         }
