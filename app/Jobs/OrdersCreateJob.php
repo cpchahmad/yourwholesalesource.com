@@ -177,20 +177,25 @@ class OrdersCreateJob implements ShouldQueue
                     }
                     $zoneQuery = Zone::query();
                     $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-                        $q->where('name',$country);
+                        $q->where('name','LIKE',$country);
                     });
                     $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-                    $shipping_rates = ShippingRate::where('type','weight')->whereIn('zone_id',$zoneQuery)->newQuery();
-//                    $shipping_rates->whereRaw('min <='.$total_weight);
-//                    $shipping_rates->whereRaw('max >='.$total_weight);
+                    $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
                     $shipping_rates =  $shipping_rates->first();
                     if($shipping_rates != null){
                         if($shipping_rates->min > 0){
-                            $ratio = $total_weight/$shipping_rates->min;
-                            $new->shipping_price = $shipping_rates->shipping_price*$ratio;
-                            $new->total_price =  $order->total_price + $shipping_rates->shipping_price;
-                            $new->save;
+                            if($shipping_rates->type == 'flat'){
+                                $new->shipping_price = $shipping_rates->shipping_price;
+                                $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                                $new->save;
+                            }
+                            else{
+                                $ratio = $total_weight/$shipping_rates->min;
+                                $new->shipping_price = $shipping_rates->shipping_price*$ratio;
+                                $new->total_price =  $new->total_price + $shipping_rates->shipping_price;
+                                $new->save;
+                            }
                         }
                         else{
                             $new->shipping_price = 0;

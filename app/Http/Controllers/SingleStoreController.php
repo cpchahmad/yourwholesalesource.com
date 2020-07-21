@@ -164,6 +164,7 @@ class SingleStoreController extends Controller
         ]);
 
     }
+
     public function wefullfill_products(Request $request){
 
         $country = $this->ip_info($this->getRealIpAddr(),'Country');
@@ -232,9 +233,16 @@ class SingleStoreController extends Controller
             $shipping_rates =  $shipping_rates->first();
             if($shipping_rates != null){
                 if($shipping_rates->shipping_price > 0){
+
                     if($shipping_rates->min > 0){
-                        $ratio = $total_weight/$shipping_rates->min;
-                        $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price*$ratio,2);;
+                        if($shipping_rates->type == 'flat'){
+                            $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
+                        }
+                        else{
+                            $ratio = $total_weight/$shipping_rates->min;
+                            $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price*$ratio,2);
+                        }
+
                     }
                     else{
                         $product->new_shipping_price = 'Free Shipping';
@@ -445,13 +453,11 @@ class SingleStoreController extends Controller
 
     public function calculate_shipping(Request $request){
 
-        $total_weight = 0;
         if($request->has('country')){
             $country = $request->input('country');
         }
         else{
             $country = "United States";
-//            $country = "Afghanistan";
         }
 
         $product = Product::find($request->input('product'));
@@ -475,8 +481,14 @@ class SingleStoreController extends Controller
 
         foreach ($shipping_rates as $shipping_rate){
             if($shipping_rate->min > 0){
-                $ratio = $total_weight/$shipping_rate->min;
-                $shipping_rate->shipping_price =  $shipping_rate->shipping_price*$ratio;
+                if($shipping_rates->type == 'flat'){
+                    $shipping_rate->shipping_price = $shipping_rates->shipping_price;
+                }
+                else{
+                    $ratio = $total_weight/$shipping_rate->min;
+                    $shipping_rate->shipping_price =  $shipping_rate->shipping_price*$ratio;
+                }
+
             }
             else{
                 $ratio = 0;
