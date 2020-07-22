@@ -511,7 +511,7 @@ $(document).ready(function () {
             });
 
         } else {
-            // window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
+            window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
         }
     }
 
@@ -523,7 +523,7 @@ $(document).ready(function () {
             url: '/variant/'+$(this).data('variant')+'/change/image/'+$(this).data('image')+'?type='+$(this).data('type'),
             type: 'GET',
             success:function (response) {
-                if(response.message == 'success'){
+                if(response.message === 'success'){
                     current.removeClass('bg-info');
                     current.addClass('bg-success');
                     current.text('Updated');
