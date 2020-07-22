@@ -615,11 +615,21 @@ class AdminOrderController extends Controller
                 $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
 
             }
-            return view('orders.bulk-fulfillment')->with([
-                'orders' => $orders,
-                'total_quantity' => $total_quantity,
-                'fulfillable_quantity' => $fulfillable_quantity
-            ]);
+            if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                return view('orders.bulk-fulfillment')->with([
+                    'orders' => $orders,
+                    'total_quantity' => $total_quantity,
+                    'fulfillable_quantity' => $fulfillable_quantity
+                ]);
+            }
+            else{
+                return view('sales_managers.orders.bulk-fulfillment')->with([
+                    'orders' => $orders,
+                    'total_quantity' => $total_quantity,
+                    'fulfillable_quantity' => $fulfillable_quantity
+                ]);
+            }
+
 
         }
         else{

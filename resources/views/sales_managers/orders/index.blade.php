@@ -42,6 +42,12 @@
                                 <thead>
                                 <tr>
 
+                                    <th class="text-center" style="width: 70px;">
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" class="custom-control-input check-order-all" id="check-all" name="check-all">
+                                            <label class="custom-control-label" for="check-all"></label>
+                                        </div>
+                                    </th>
                                     <th>Name</th>
                                     <th>Shop / User</th>
                                     <th>Source</th>
@@ -56,6 +62,12 @@
                                 @foreach($orders as $index => $order)
 
                                     <tr>
+                                        <td class="text-center">
+                                            <div class="custom-control custom-checkbox d-inline-block">
+                                                <input type="checkbox" class="custom-control-input check-order" id="row_{{$index}}" name="check_order[]" value="{{$order->id}}">
+                                                <label class="custom-control-label" for="row_{{$index}}"></label>
+                                            </div>
+                                        </td>
 
                                         <td class="font-w600"><a href="{{route('sales_managers.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>
@@ -146,5 +158,8 @@
         </div>
     </div>
 
-
+    <form action="{{route('app.orders.bulk.fulfillment')}}" id="bulk-fullfillment" method="post">
+        @csrf
+        <input type="hidden" name="orders" class="">
+    </form>
 @endsection
