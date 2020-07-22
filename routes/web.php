@@ -283,6 +283,10 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::get('cancel/order/{id}', 'RefundController@cancel_order')->name('app.order.cancel');
         Route::get('cancel/refund/order/{id}', 'RefundController@refund_cancel_order')->name('app.refund_cancel_order');
 
+        Route::post('/orders/bulk-fulfillments', 'AdminOrderController@show_bulk_fulfillments')->name('app.orders.bulk.fulfillment');
+
+
+
 
     });
 });

@@ -22,21 +22,15 @@
         </div>
     </div>
     <div class="content">
-        <div class="row mb2">
+        <div class="row" style="margin-bottom: 20px">
             <div class="col-md-12">
-                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right"> Download CSV </button>
-            </div>
-        </div>
-        @if($order->status == "shipped")
-            <div class="row mb2">
-                <div class="col-md-12">
-                    <button  onclick="window.location.href='{{route('admin.order.mark_as_delivered',$order->id)}}'" class="btn btn-sm btn-success"  style="float: right"> Mark as Delivered </button>
-                </div>
-            </div>
-        @endif
-        <div class="row mb2" style="margin-bottom: 10px">
-            <div class="col-md-12 text-right">
-                <button class="btn btn-danger" onclick="window.location.href='{{route('app.refund_cancel_order',$order->id)}}'">Cancel and Refund Order</button>
+                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right;margin-right: 10px"> Download CSV </button>
+                @if($order->status == "shipped")
+                    <button  onclick="window.location.href='{{route('admin.order.mark_as_delivered',$order->id)}}'" class="btn btn-sm btn-success"  style="margin-right: 10px;float: right"> Mark as Delivered </button>
+                @endif
+                @if($order->paid != 3)
+                    <button class="btn btn-sm btn-danger" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('app.refund_cancel_order',$order->id)}}'">Cancel and Refund Order</button>
+                @endif
             </div>
         </div>
 

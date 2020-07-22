@@ -36,12 +36,20 @@
         <div class="row" >
             <div class="col-md-12">
                 <div class="block">
+                    <div class="block-header bulk-div" style="display: none">
+                        <button class="btn btn-outline-secondary btn-sm bulk-fulfill-btn">Fulfill Orders</button>
+                    </div>
                     <div class="block-content">
                         @if (count($orders) > 0)
-                            <table class="table table-hover table-borderless table-striped table-vcenter">
+                            <table class="table js-table-checkable table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-
+                                    <th class="text-center" style="width: 70px;">
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" class="custom-control-input check-order-all" id="check-all" name="check-all">
+                                            <label class="custom-control-label" for="check-all"></label>
+                                        </div>
+                                    </th>
                                     <th>Name</th>
                                     <th>Shop / User</th>
                                     <th>Source</th>
@@ -57,6 +65,12 @@
                                     <tbody class="">
                                     <tr>
 
+                                        <td class="text-center">
+                                            <div class="custom-control custom-checkbox d-inline-block">
+                                                <input type="checkbox" class="custom-control-input check-order" id="row_{{$index}}" name="check_order[]" value="{{$order->id}}">
+                                                <label class="custom-control-label" for="row_{{$index}}"></label>
+                                            </div>
+                                        </td>
                                         <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>
                                             @if($order->custom == 0)
@@ -143,6 +157,11 @@
             </div>
         </div>
     </div>
+
+    <form action="{{route('app.orders.bulk.fulfillment')}}" id="bulk-fullfillment" method="post">
+        @csrf
+        <input type="hidden" name="orders" class="">
+    </form>
 
 
 @endsection

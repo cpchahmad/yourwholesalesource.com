@@ -598,4 +598,23 @@ class AdminOrderController extends Controller
         ]);
     }
 
+    public function show_bulk_fulfillments(Request $request){
+        $orders_array = explode(',',$request->input('orders'));
+        if(count($orders_array) > 0)
+        {
+
+            $orders = RetailerOrder::whereIn('id',$orders_array)->newQuery();
+            $orders->whereHas('line_items',function($q){
+                $q->where('fulfillable_quantity','>',0);
+            });
+            return view('orders.bulk-fulfillment')->with([
+                'orders' => $orders->get(),
+            ]);
+
+        }
+        else{
+           return redirect()->back();
+        }
+    }
+
 }

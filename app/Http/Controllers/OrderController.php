@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\AdminSetting;
 use App\Customer;
+use App\FulfillmentLineItem;
+use App\OrderFulfillment;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\RetailerOrder;
@@ -266,6 +268,58 @@ class OrderController extends Controller
                             }
                         }
 
+                        if(count($order->fulfillments) > 0){
+                            foreach ($order->fulfillments as $fulfillment){
+                                if($fulfillment->status != 'cancelled'){
+                                    foreach ($fulfillment->line_items as $item){
+                                        $line_item = RetailerOrderLineItem::where('retailer_product_variant_id',$item->id)->first();
+                                        if($line_item != null){
+                                            if($item->fulfillable_quantity == 0){
+                                                $line_item->fulfillment_status = 'fulfilled';
+                                                $line_item->fulfillable_quantity = 0;
+                                                $line_item->save();
+                                            }
+                                            else{
+                                                $line_item->fulfillment_status = 'partially-fulfilled';
+                                                $line_item->fulfillable_quantity = $line_item->fulfillable_quantity - $item->fulfillable_quantity;
+                                                $line_item->save();
+                                            }
+                                        }
+                                    }
+                                    $new_fulfillment = new OrderFulfillment();
+                                    $new_fulfillment->fulfillment_shopify_id = $fulfillment->id;
+                                    $new_fulfillment->name = $fulfillment->name;
+                                    $new_fulfillment->retailer_order_id = $new->id;
+                                    $new_fulfillment->status = 'fulfilled';
+                                    $new_fulfillment->save();
+
+                                    $order_log = new OrderLog();
+                                    $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
+                                    $order_log->status = "Fulfillment";
+                                    $order_log->retailer_order_id = $new->id;
+                                    $order_log->save();
+                                    foreach ($fulfillment->line_items as $item){
+                                        $line_item = RetailerOrderLineItem::where('retailer_product_variant_id',$item->id)->first();
+                                        if($line_item != null){
+                                            $fulfillment_line_item = new FulfillmentLineItem();
+                                            if($item->fulfillable_quantity == 0){
+                                                $fulfillment_line_item->fulfilled_quantity =$line_item->quantity;
+                                            }
+                                            else{
+                                                $fulfillment_line_item->fulfilled_quantity =$item->fulfillable_quantity;
+                                            }
+                                            $fulfillment_line_item->order_fulfillment_id = $new_fulfillment->id;
+                                            $fulfillment_line_item->order_line_item_id = $line_item->id;
+                                            $fulfillment_line_item->save();
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
+                        $new->status = $new->getStatus($new);
+                        $new->save();
 
                         /*Maintaining Log*/
                         $order_log =  new OrderLog();

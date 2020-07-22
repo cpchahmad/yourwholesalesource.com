@@ -22,116 +22,106 @@
         </div>
     </div>
     <div class="content">
-        <div class="row mb2">
+        <div class="row" style="margin-bottom: 20px">
             <div class="col-md-12">
-                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right"> Download CSV </button>
-            </div>
-        </div>
-        @if($order->status == "delivered")
-            <div class="row mb2">
-                <div class="col-md-12">
-                    <button  onclick="window.location.href='{{route('admin.order.complete',$order->id)}}'" class="btn btn-sm btn-success"  style="float: right"> Mark as Completed </button>
-                </div>
-            </div>
-        @endif
-        @if($order->paid == 0)
-            <div class="row mb2" style="margin-bottom: 10px">
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-danger" onclick="window.location.href='{{route('app.order.cancel',$order->id)}}'">Cancel Order</button>
-                </div>
-            </div>
-        @endif
-        @if($order->paid == 1)
-            <div class="row mb2" style="margin-bottom: 10px">
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-primary" data-target="#create_refund_modal" data-toggle="modal">Generate Refund</button>
-                </div>
-            </div>
-            <div class="modal fade" id="create_refund_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
-                    <div class="modal-content">
-                        <div class="block block-themed block-transparent mb-0">
-                            <div class="block-header bg-primary-dark">
-                                <h3 class="block-title">Generate Refund</h3>
-                                <div class="block-options">
-                                    <button type="button" class="btn-block-option">
-                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                    </button>
+                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right;margin-right: 10px"> Download CSV </button>
+                @if($order->status == "delivered")
+                    <button  onclick="window.location.href='{{route('admin.order.complete',$order->id)}}'" class="btn btn-sm btn-success"  style="float: right;margin-right: 10px"> Mark as Completed </button>
+                @endif
+                @if($order->paid == 0 && $order->status != 'cancelled')
+                    <button class="btn btn-sm btn-danger" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('app.order.cancel',$order->id)}}'">Cancel Order</button>
+                @endif
+                @if($order->paid == 1)
+                    <button class="btn btn-sm btn-primary" style="float: right;margin-right: 10px" data-target="#create_refund_modal" data-toggle="modal">Generate Refund</button>
+                    <div class="modal fade" id="create_refund_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+                            <div class="modal-content">
+                                <div class="block block-themed block-transparent mb-0">
+                                    <div class="block-header bg-primary-dark">
+                                        <h3 class="block-title">Generate Refund</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option">
+                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <form action="{{route('refund.create')}}" method="post"  enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="source" value="non-shopify-user">
+                                        <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
+                                        <input type="hidden" name="user_id" value="{{$user->id}}">
+                                        <input type="hidden" name="type" value="user-ticket">
+
+                                        <div class="block-content font-size-sm">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="form-material">
+                                                        <label for="material-error">Refund Title</label>
+                                                        <input required class="form-control" type="text"  name="title"
+                                                               placeholder="Enter Title here">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="form-material">
+                                                        <label for="material-error">Order</label>
+                                                        <select name="order_id" class="form-control" required>
+                                                            <option value="{{$order->id}}">{{$order->name}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="form-material">
+                                                        <label for="material-error">Priority</label>
+                                                        <select name="priority" class="form-control" required>
+                                                            <option value="low">Low</option>
+                                                            <option value="medium">Medium</option>
+                                                            <option value="high">High</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="form-material">
+                                                        <label for="material-error">Attachments </label>
+                                                        <input type="file" name="attachments[]" class="form-control" multiple>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="form-material">
+                                                        <label for="material-error">Reason</label>
+                                                        <textarea required class="js-summernote" name="message"
+                                                                  placeholder="Please Enter Description here !"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="block-content block-content-full text-right border-top">
+
+                                            <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <form action="{{route('refund.create')}}" method="post"  enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="source" value="non-shopify-user">
-                                <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
-                                <input type="hidden" name="user_id" value="{{$user->id}}">
-                                <input type="hidden" name="type" value="user-ticket">
-
-                                <div class="block-content font-size-sm">
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Refund Title</label>
-                                                <input required class="form-control" type="text"  name="title"
-                                                       placeholder="Enter Title here">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Order</label>
-                                                <select name="order_id" class="form-control" required>
-                                                    <option value="{{$order->id}}">{{$order->name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Priority</label>
-                                                <select name="priority" class="form-control" required>
-                                                    <option value="low">Low</option>
-                                                    <option value="medium">Medium</option>
-                                                    <option value="high">High</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Attachments </label>
-                                                <input type="file" name="attachments[]" class="form-control" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Reason</label>
-                                                <textarea required class="js-summernote" name="message"
-                                                          placeholder="Please Enter Description here !"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="block-content block-content-full text-right border-top">
-
-                                    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
-                                </div>
-                            </form>
                         </div>
                     </div>
-                </div>
+                @endif
+
             </div>
-        @endif
+        </div>
+
         <div class="row">
             <div class="col-md-9">
                 <div class="block">

@@ -262,6 +262,7 @@ class RefundController extends Controller
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
             $this->notify->generate('Order','Order Cancelled',$order->name.' has been cancelled',$order);
+            return redirect()->back()->with('success','Order Cancelled Successfully!');
 
         }
         else{
