@@ -437,7 +437,7 @@ $(document).ready(function () {
         else{
             $('.atleast-one-item').hide();
             $('.fulfill_items_btn').attr('disabled',false);
-            $('.bulk_fulfill_items_btn').attr('disabled',true);
+            $('.bulk_fulfill_items_btn').attr('disabled',false);
 
         }
 
