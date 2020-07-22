@@ -110,7 +110,7 @@ class OrderController extends Controller
     }
     public function getOrders(){
         $shop = $this->helper->getShop();
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json',['status'=>'any']);
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json','',['status'=>'any']);
         if(!$response->errors){
             dd($response);
 
