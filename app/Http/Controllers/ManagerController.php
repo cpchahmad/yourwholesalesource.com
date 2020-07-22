@@ -329,7 +329,7 @@ class ManagerController extends Controller
 
     public function index(Request $request){
         $manager = User::find(Auth::id());
-        $orders  = RetailerOrder::whereIn('paid',[1,2])->newQuery();
+        $orders  = RetailerOrder::query();
         $users_array = $manager->has_users()->pluck('id')->toArray();
         $shop_array = $manager->has_sales_stores()->pluck('id')->toArray();
         $orders->WhereIn('user_id',$users_array);
@@ -338,7 +338,7 @@ class ManagerController extends Controller
             $orders->where('name','LIKE','%'.$request->input('search').'%');
 
         }
-        $orders = $orders->orderBy('created_at','DESC')->paginate(30);
+        $orders = $orders->whereIn('paid',[1,2])->orderBy('created_at','DESC')->paginate(30);
 //        dd($orders);
         return view('sales_managers.orders.index')->with([
             'orders' => $orders,
