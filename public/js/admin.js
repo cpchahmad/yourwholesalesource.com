@@ -511,7 +511,7 @@ $(document).ready(function () {
             });
 
         } else {
-            // window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
+            window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
         }
     }
 
