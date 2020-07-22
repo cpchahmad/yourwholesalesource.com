@@ -141,6 +141,8 @@ class AdminMaintainerController extends Controller
             ]
         ];
         $response = $admin_store->api()->rest('POST', '/admin/api/2019-10/draft_orders.json', $orderData);
+        $location_response = $admin_store->api()->rest('GET', '/admin/locations.json');
+
 
         if (!$response->errors) {
             $draft_order = $response->body->draft_order;
@@ -149,6 +151,39 @@ class AdminMaintainerController extends Controller
                 $admin_order = $admin_order_response->body->draft_order;
                 $order->admin_shopify_id = $admin_order->order_id;
                 $order->save();
+                /*Fulfillments*/
+                if(count($order->fulfillments) > 0){
+                    foreach ($order->fulfillments as $fulfillment){
+                        if(!$location_response->errors){
+                            $data = [
+                                "fulfillment" => [
+                                    "location_id" => $location_response->body->locations[0]->id,
+                                    "tracking_number" => null,
+                                    "line_items" => [
+
+                                    ]
+                                ]
+                            ];
+                            foreach ($fulfillment->line_items as $line_item){
+                                if($line_item->linked_line_item != null){
+                                    array_push($data['fulfillment']['line_items'], [
+                                        "id" => $line_item->linked_line_item->retailer_product_variant_id,
+                                        "quantity" => $line_item->fulfilled_quantity,
+                                    ]);
+                                }
+                            }
+                            if(count($data['fulfillment']['line_items']) > 0){
+                                $response = $admin_store->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
+                                if(!$response->errors){
+                                    $fulfillment->admin_fulfillment_shopify_id = $response->body->fulfillment->id;
+                                    $fulfillment->save();
+                                }
+                            }
+
+                        }
+                    }
+                }
+
                 return 1;
             } else {
                 return 2;
