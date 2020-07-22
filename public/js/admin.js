@@ -431,10 +431,14 @@ $(document).ready(function () {
         if(total_fulfillable === 0) {
             $('.atleast-one-item').show();
             $('.fulfill_items_btn').attr('disabled',true);
+            $('.bulk_fulfill_items_btn').attr('disabled',true);
+
         }
         else{
             $('.atleast-one-item').hide();
             $('.fulfill_items_btn').attr('disabled',false);
+            $('.bulk_fulfill_items_btn').attr('disabled',true);
+
         }
 
     });
@@ -452,6 +456,60 @@ $(document).ready(function () {
             $('.fulfill_items_btn').attr('disabled',false);
         }
     });
+
+    /*Bulk Fulfillment*/
+    $('.bulk_fulfill_items_btn').click(function () {
+        var total_fulfillable = 0;
+        $('.fulfill_quantity').each(function () {
+            total_fulfillable = total_fulfillable + parseInt($(this).val()) ;
+        });
+        if(total_fulfillable > 0) {
+            $('.pre-loader').css('display','flex');
+            if($('.bulk-forms').find('.fulfilment_process_form').length > 0){
+                let forms = new Array();
+                $('.bulk-forms').find('.fulfilment_process_form').each(function () {
+                  if(parseInt($(this).find('.fulfill_quantity').val()) > 0){
+                        forms.push({
+                            'data' : $(this).serialize(),
+                            'url' : $(this).attr('action'),
+                            'method' : $(this).attr('method'),
+                        });
+                    }
+
+                });
+                ajaxCall(forms);
+            }
+        }
+        else{
+            $('.atleast-one-item').hide();
+            $('.fulfill_items_btn').attr('disabled',false);
+        }
+    });
+    function BulkAjaxCall(toAdd) {
+        if (toAdd.length) {
+            var request = toAdd.shift();
+            var data = request.data;
+            var url = request.url;
+            var type = request.method;
+
+            $.ajax({
+                url: url,
+                type:type,
+                data: data,
+                success: function(response) {
+                    ajaxCall(toAdd);
+                },
+                error:function () {
+                    ajaxCall(toAdd);
+                }
+            });
+
+        } else {
+            window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
+        }
+    }
+
+
     /*Select Photos From Existing*/
     $('.choose-variant-image').click(function () {
         var current = $(this);

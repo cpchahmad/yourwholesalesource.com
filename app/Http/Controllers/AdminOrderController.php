@@ -602,13 +602,23 @@ class AdminOrderController extends Controller
         $orders_array = explode(',',$request->input('orders'));
         if(count($orders_array) > 0)
         {
-
             $orders = RetailerOrder::whereIn('id',$orders_array)->newQuery();
+
             $orders->whereHas('line_items',function($q){
                 $q->where('fulfillable_quantity','>',0);
             });
+            $orders= $orders->get();
+            $total_quantity = 0;
+            $fulfillable_quantity = 0;
+            foreach ($orders as $order){
+                $total_quantity = $total_quantity + $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('quantity');
+                $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
+
+            }
             return view('orders.bulk-fulfillment')->with([
-                'orders' => $orders->get(),
+                'orders' => $orders,
+                'total_quantity' => $total_quantity,
+                'fulfillable_quantity' => $fulfillable_quantity
             ]);
 
         }

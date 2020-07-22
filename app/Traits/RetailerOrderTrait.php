@@ -29,4 +29,5 @@ trait RetailerOrderTrait
         return $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
     }
 
+
 }

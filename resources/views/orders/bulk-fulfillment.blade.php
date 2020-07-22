@@ -1,37 +1,16 @@
 @extends('layout.index')
 @section('content')
 
-@foreach($orders as $order)
-<div class="bg-body-light">
-    <div class="content content-full pt-2 pb-2">
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-            <h1 class="flex-sm-fill h4 my-2">
-                {{$order->name}}'s Fulfillment
-            </h1>
-            <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-alt">
-                    <li class="breadcrumb-item">Dashboard</li>
-                    <li class="breadcrumb-item" aria-current="page">
-                        All Orders
-                    </li>
-                    <li class="breadcrumb-item" aria-current="page">
-                        {{$order->name}}
-                    </li>
-                    <li class="breadcrumb-item" aria-current="page">
-                        <a class="link-fx active" href=""> Fulfillment</a>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-</div>
+
+
 <div class="content">
-    <div class="row">
-        <div class="col-md-8">
+    <div class="row bulk-forms">
+        @foreach($orders as $order)
+        <div class="col-md-12">
             <div class="block">
                 <div class="block-header block-header-default">
                     <h3 class="block-title">
-                       Quantity to Fulfill
+                        {{$order->name}}'s Fulfillment
                     </h3>
                 </div>
                 <div class="block-content">
@@ -47,7 +26,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <form id="fulfilment_process_form" action="{{route('admin.order.fulfillment.process',$order->id)}}" method="post">
+                        <form class="fulfilment_process_form" action="{{route('admin.order.fulfillment.process',$order->id)}}" method="post">
                             @csrf
                             @foreach($order->line_items as $item)
                             @if($item->fulfilled_by != 'store' && $item->fulfillable_quantity > 0)
@@ -90,61 +69,32 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            @if($order->shipping_address != null)
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">
-                            Shipping Address
-                        </h3>
-
-                    </div>
-                    @php
-                        $shipping = json_decode($order->shipping_address);
-                    @endphp
-                    <div class="block-content">
-                        @if($shipping != null)
-                            <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
-                                @if($order->custom == 0)
-                                <br> {{$shipping->company}}
-                                @endif
-                                <br> {{$shipping->address1}}
-                                <br> {{$shipping->address2}}
-                                <br> {{$shipping->city}}
-                                <br> {{$shipping->province}} {{$shipping->zip}}
-                                <br> {{$shipping->country}}
-                                @if($order->custom == 0)
-                                <br> {{$shipping->phone}}
-                                    @endif
-                            </p>
-                            @else
-                            <p style="font-size: 14px"> No Shipping Address
-                            </p>
-                        @endif
-                    </div>
-                </div>
-            @endif
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">
-                            Summary
-                        </h3>
-                    </div>
-                    <div class="block-content">
-                        <p>Fulfilling From WeFullFill Logistics Office</p>
-                        <p class="font-weight-bold"><span class="fulfillable_quantity_drop badge badge-pill badge-dark" data-total="{{$order->total_fulfillable($order)}}" style="font-size: 13px">{{$order->total_fulfillable($order)}} of {{$order->total_fulfillable($order)}} </span> Mark as Fulfilled</p>
-                        <hr>
-                        <div class="row mb2">
-                            <div class="col-md-12">
-                                <button class="btn fulfill_items_btn btn-block btn-primary"> Fulfill Items</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+        @endforeach
+        <div class="col-md-8">
         </div>
+        <div class="col-md-4">
+            <div class="block">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">
+                        Summary
+                    </h3>
+                </div>
+           <div class="block-content">
+                    <p>Fulfilling From WeFullFill Logistics Office</p>
+                    <p class="font-weight-bold"><span class="fulfillable_quantity_drop badge badge-pill badge-dark" data-total="{{$fulfillable_quantity}}" style="font-size: 13px">{{$fulfillable_quantity}} of {{$fulfillable_quantity}} </span> Mark as Fulfilled</p>
+                    <hr>
+                    <div class="row mb2">
+                        <div class="col-md-12">
+                            <button class="btn bulk_fulfill_items_btn btn-block btn-primary" data-redirect="{{route('admin.orders')}}"> Fulfill Items</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-    @endforeach
+
 
 @endsection
