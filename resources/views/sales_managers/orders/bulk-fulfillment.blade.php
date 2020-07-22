@@ -3,7 +3,7 @@
     <div class="content">
         <div class="row bulk-forms">
             @foreach($orders as $order)
-                <form class="fulfilment_process_form col-md-12" action="{{route('admin.order.fulfillment.process',$order->id)}}" method="post">
+                <form class="fulfilment_process_form col-md-12" action="{{route('sales_managers.order.fulfillment.process',$order->id)}}" method="post">
                     <div class="block">
                             <div class="block-header block-header-default">
                                 <h3 class="block-title">
