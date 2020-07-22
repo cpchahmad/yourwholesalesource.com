@@ -331,6 +331,9 @@ class OrderController extends Controller
                 }
             }
         }
+        else{
+            dd($response);
+        }
         return redirect()->route('store.orders')->with('success','Orders Synced Successfully');
     }
 
