@@ -175,6 +175,7 @@ class AdminMaintainerController extends Controller
 
                             if(count($data['fulfillment']['line_items']) > 0){
                                 $response = $admin_store->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
+                                dd($response);
                                     $fulfillment->admin_fulfillment_shopify_id = $response->body->fulfillment->id;
                                     $fulfillment->save();
                             }
