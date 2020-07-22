@@ -94,5 +94,8 @@
         </div>
     </div>
 
-
+    <div class="pre-loader">
+        <div class="loader">
+        </div>
+    </div>
 @endsection
