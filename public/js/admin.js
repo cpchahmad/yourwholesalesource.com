@@ -465,14 +465,22 @@ $(document).ready(function () {
         });
         if(total_fulfillable > 0) {
             $('.pre-loader').css('display','flex');
-            if($('.bulk-forms').find('.fulfilment_process_form').length > 0){
+            if($('.fulfilment_process_form').length > 0){
                 let forms = new Array();
-                $('.bulk-forms').find('.fulfilment_process_form').each(function () {
+              $('.fulfilment_process_form').each(function () {
+                    var total_fulfillable_form = 0;
+                  $(this).find('.fulfill_quantity').each(function () {
+                        total_fulfillable_form = total_fulfillable_form + parseInt($(this).val()) ;
+                    });
+
+                  if(total_fulfillable_form > 0){
                         forms.push({
                             'data' : $(this).serialize(),
                             'url' : $(this).attr('action'),
                             'method' : $(this).attr('method'),
                         });
+                    }
+
                 });
                 console.log(forms);
                 BulkAjaxCall(forms);
@@ -503,7 +511,7 @@ $(document).ready(function () {
             });
 
         } else {
-            window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
+            // window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
         }
     }
 
