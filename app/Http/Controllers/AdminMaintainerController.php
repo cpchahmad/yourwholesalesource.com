@@ -174,7 +174,7 @@ class AdminMaintainerController extends Controller
                             }
                             sleep(10);
                             if(count($data['fulfillment']['line_items']) > 0){
-                                $response = $admin_store->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
+                                $response = $admin_store->api()->rest('POST', '/admin/api/2020-04/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
                                 if(!$response->errors){
                                     $fulfillment->admin_fulfillment_shopify_id = $response->body->fulfillment->id;
                                     $fulfillment->save();
