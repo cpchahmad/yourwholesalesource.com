@@ -468,18 +468,11 @@ $(document).ready(function () {
             if($('.bulk-forms').find('.fulfilment_process_form').length > 0){
                 let forms = new Array();
                 $('.bulk-forms').find('.fulfilment_process_form').each(function () {
-                    var total_fulfillable = 0;
-                    $(this).find('.fulfill_quantity').each(function () {
-                        total_fulfillable = total_fulfillable + parseInt($(this).val()) ;
-                    });
-                  if(total_fulfillable > 0){
                         forms.push({
                             'data' : $(this).serialize(),
                             'url' : $(this).attr('action'),
                             'method' : $(this).attr('method'),
                         });
-                    }
-
                 });
                 console.log(forms);
                 BulkAjaxCall(forms);
