@@ -495,15 +495,15 @@ $(document).ready(function () {
                 type:type,
                 data: data,
                 success: function(response) {
-                    ajaxCall(toAdd);
+                    BulkAjaxCall(toAdd);
                 },
                 error:function () {
-                    ajaxCall(toAdd);
+                    BulkAjaxCall(toAdd);
                 }
             });
 
         } else {
-            // window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
+            window.location.href = $('.bulk_fulfill_items_btn').attr('data-redirect');
         }
     }
 
