@@ -423,7 +423,7 @@ $(document).ready(function () {
             alertify.error('Please provide correct quantity of item!');
         }
         var total_fulfillable = 0;
-        $('.fulfill_quantity').each(function () {
+        $('body').find('.fulfill_quantity').each(function () {
             total_fulfillable = total_fulfillable + parseInt($(this).val()) ;
         });
         $('.fulfillable_quantity_drop').empty();
