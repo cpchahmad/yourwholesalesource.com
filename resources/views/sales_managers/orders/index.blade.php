@@ -36,6 +36,9 @@
         <div class="row" >
             <div class="col-md-12">
                 <div class="block">
+                    <div class="block-header bulk-div" style="display: none">
+                        <button class="btn btn-outline-secondary btn-sm bulk-fulfill-btn">Fulfill Orders</button>
+                    </div>
                     <div class="block-content">
                         @if (count($orders) > 0)
                             <table class="table table-hover table-borderless table-striped table-vcenter">
