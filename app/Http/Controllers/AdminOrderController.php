@@ -14,6 +14,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use function foo\func;
 
@@ -615,7 +616,7 @@ class AdminOrderController extends Controller
                 $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
 
             }
-            if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+            if(!Auth::check()){
                 return view('orders.bulk-fulfillment')->with([
                     'orders' => $orders,
                     'total_quantity' => $total_quantity,
