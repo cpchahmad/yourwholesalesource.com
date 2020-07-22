@@ -152,38 +152,7 @@ class AdminMaintainerController extends Controller
                 $order->admin_shopify_id = $admin_order->order_id;
                 $order->save();
                 /*Fulfillments*/
-                if(count($order->fulfillments) > 0){
-                    foreach ($order->fulfillments as $fulfillment){
-                        if(!$location_response->errors){
-                            $data = [
-                                "fulfillment" => [
-                                    "location_id" => $location_response->body->locations[0]->id,
-                                    "tracking_number" => null,
-                                    "line_items" => [
-
-                                    ]
-                                ]
-                            ];
-                            foreach ($fulfillment->line_items as $line_item){
-                                if($line_item->linked_line_item != null){
-                                    array_push($data['fulfillment']['line_items'], [
-                                        "id" => $line_item->linked_line_item->retailer_product_variant_id,
-                                        "quantity" => $line_item->fulfilled_quantity,
-                                    ]);
-                                }
-                            }
-                            sleep(10);
-                            if(count($data['fulfillment']['line_items']) > 0){
-                                $response = $admin_store->api()->rest('POST', '/admin/api/2020-04/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
-                                if(!$response->errors){
-                                    $fulfillment->admin_fulfillment_shopify_id = $response->body->fulfillment->id;
-                                    $fulfillment->save();
-                                }
-                            }
-
-                        }
-                    }
-                }
+                $this->already_fulfillment($order, $location_response, $admin_store);
 
                 return 1;
             } else {
@@ -288,6 +257,47 @@ class AdminMaintainerController extends Controller
         $admin_shop = $this->helper->getAdminShop();
         $response = $admin_shop->api()->rest('PUT', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $fulfillment->admin_fulfillment_shopify_id . '.json', $data);
 
+    }
+
+    /**
+     * @param RetailerOrder $order
+     * @param $location_response
+     * @param $admin_store
+     */
+    public function already_fulfillment(RetailerOrder $order, $location_response, $admin_store): void
+    {
+        if (count($order->fulfillments) > 0) {
+            foreach ($order->fulfillments as $fulfillment) {
+                if (!$location_response->errors) {
+                    $data = [
+                        "fulfillment" => [
+                            "location_id" => $location_response->body->locations[0]->id,
+                            "tracking_number" => null,
+                            "line_items" => [
+
+                            ]
+                        ]
+                    ];
+                    foreach ($fulfillment->line_items as $line_item) {
+                        if ($line_item->linked_line_item != null) {
+                            array_push($data['fulfillment']['line_items'], [
+                                "id" => $line_item->linked_line_item->retailer_product_variant_id,
+                                "quantity" => $line_item->fulfilled_quantity,
+                            ]);
+                        }
+                    }
+                    sleep(10);
+                    if (count($data['fulfillment']['line_items']) > 0) {
+                        $response = $admin_store->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
+                        if (!$response->errors) {
+                            $fulfillment->admin_fulfillment_shopify_id = $response->body->fulfillment->id;
+                            $fulfillment->save();
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
 }
