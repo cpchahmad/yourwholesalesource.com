@@ -122,7 +122,14 @@ class PaypalController extends Controller
             $new_transaction->save();
 
             $retailer_order->paid = 1;
-            $retailer_order->status = 'Paid';
+            if(count($retailer_order->fulfillments) > 0){
+                $retailer_order->status = $retailer_order->getStatus($retailer_order);
+
+            }
+            else{
+                $retailer_order->status = 'Paid';
+            }
+
             $retailer_order->pay_by = 'Paypal';
             $retailer_order->save();
 
