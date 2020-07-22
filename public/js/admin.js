@@ -481,7 +481,7 @@ $(document).ready(function () {
                     }
 
                 });
-                ajaxCall(forms);
+                BulkAjaxCall(forms);
             }
         }
         else{
