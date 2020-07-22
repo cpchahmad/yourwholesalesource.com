@@ -289,6 +289,10 @@ return [
         [
             'topic' => 'customers/create',
             'address' => 'https://phpstack-362288-1193299.cloudwaysapps.com/webhook/customers-create'
+        ],
+        [
+            'topic' => 'fulfillments/create',
+            'address' => 'https://phpstack-362288-1193299.cloudwaysapps.com/webhook/fulfillments-create'
         ]
 
 
