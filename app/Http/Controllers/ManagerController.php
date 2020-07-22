@@ -338,7 +338,7 @@ class ManagerController extends Controller
             $orders->where('name','LIKE','%'.$request->input('search').'%');
 
         }
-        $orders = $orders->whereIn('paid',[1,2])->orderBy('created_at','DESC')->paginate(30);
+        $orders = $orders->where('paid','!=',0)->orderBy('created_at','DESC')->paginate(30);
 //        dd($orders);
         return view('sales_managers.orders.index')->with([
             'orders' => $orders,
