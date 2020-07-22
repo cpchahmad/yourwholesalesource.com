@@ -83,7 +83,7 @@
                         <hr>
                         <div class="row mb2">
                             <div class="col-md-12">
-                                <button class="btn bulk_fulfill_items_btn btn-block btn-primary" data-redirect="{{route('admin.orders')}}"> Fulfill Items</button>
+                                <button class="btn bulk_fulfill_items_btn btn-block btn-primary" data-redirect="{{route('sales_managers.orders')}}"> Fulfill Items</button>
                             </div>
                         </div>
 
