@@ -172,6 +172,7 @@ class AdminMaintainerController extends Controller
                                     ]);
                                 }
                             }
+                            dd($data);
                             if(count($data['fulfillment']['line_items']) > 0){
                                 $response = $admin_store->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments.json', $data);
                                 if(!$response->errors){
