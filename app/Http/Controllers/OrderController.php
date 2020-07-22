@@ -110,10 +110,9 @@ class OrderController extends Controller
     }
     public function getOrders(){
         $shop = $this->helper->getShop();
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json');
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json?status=any');
         if(!$response->errors){
             $orders = $response->body->orders;
-            dd($orders);
             foreach ($orders as $index =>$order){
                 $product_ids = [];
                 $variant_ids  = [];
