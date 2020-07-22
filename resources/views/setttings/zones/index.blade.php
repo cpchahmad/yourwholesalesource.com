@@ -165,7 +165,7 @@
                                                                 <div class="col-sm-6">
                                                                     <div class="form-material">
                                                                         <label for="material-error">Price</label>
-                                                                        <input required class="form-control" type="number" name="shipping_price">
+                                                                        <input required class="form-control" step="any" type="number" name="shipping_price">
 
                                                                     </div>
                                                                 </div>
@@ -286,7 +286,7 @@
                                                                         <div class="col-sm-6">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Price</label>
-                                                                                <input required class="form-control" type="number" name="shipping_price" value="{{$rate->shipping_price}}">
+                                                                                <input required class="form-control" type="number" step="any" name="shipping_price" value="{{$rate->shipping_price}}">
 
                                                                             </div>
                                                                         </div>
