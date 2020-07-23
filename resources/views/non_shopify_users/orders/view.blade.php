@@ -457,7 +457,7 @@
                                                     @endif
                                                 @endif
                                             </td>
-                                            <td style="width: 30%">
+                                            <td style="width: 60%">
                                                 {{$item->linked_line_item->name}}
                                             </td>
                                             <td>{{number_format($item->linked_line_item->cost,2)}}  X {{$item->fulfilled_quantity}}  {{$order->currency}}</td>
