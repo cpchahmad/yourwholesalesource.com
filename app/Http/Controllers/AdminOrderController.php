@@ -640,9 +640,11 @@ class AdminOrderController extends Controller
 
     public function GetWebhooks(Request $request){
         $shop = $this->helper->getAdminShop();
-        $location_response = $shop->api()->rest('GET','/admin/webhooks.json');
-        dd($location_response);
-
+        $response = $shop->api()->rest('GET','admin/orders/2397097721989/fulfillments.json');
+        $data = $response->body->fulfillments[0];
+        dd($data);
+        $webhook = new AdminWebhookController();
+        $webhook->set_fulfillments($data);
     }
 
 }
