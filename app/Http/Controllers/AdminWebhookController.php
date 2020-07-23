@@ -147,7 +147,7 @@ class AdminWebhookController extends Controller
             if ($line_item != null) {
                 $fulfillment_line_item = new FulfillmentLineItem();
                 if ($item->fulfillable_quantity == 0) {
-                    $fulfillment_line_item->fulfilled_quantity = $line_item->quantity;
+                    $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - $item->fulfillable_quantity;
                 } else {
                     $fulfillment_line_item->fulfilled_quantity = $item->fulfillable_quantity;
                 }
