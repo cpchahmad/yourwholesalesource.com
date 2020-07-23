@@ -90,8 +90,6 @@ class AdminWebhookController extends Controller
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
 
 
-
-
                         }
                     }
                 }
@@ -115,7 +113,7 @@ class AdminWebhookController extends Controller
                     $line_item->save();
                 } else {
                     $line_item->fulfillment_status = 'partially-fulfilled';
-                    $line_item->fulfillable_quantity = $line_item->fulfillable_quantity - $item->fulfillable_quantity;
+                    $line_item->fulfillable_quantity = $item->fulfillable_quantity;
                     $line_item->save();
                 }
             }
@@ -144,11 +142,7 @@ class AdminWebhookController extends Controller
             $line_item = RetailerOrderLineItem::where('sku', $item->sku)->where('retailer_order_id', $retailer_order->id)->first();
             if ($line_item != null) {
                 $fulfillment_line_item = new FulfillmentLineItem();
-                if ($item->fulfillable_quantity == 0) {
-                    $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - $item->fulfillable_quantity;
-                } else {
-                    $fulfillment_line_item->fulfilled_quantity = $item->fulfillable_quantity;
-                }
+                $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - $item->fulfillable_quantity;
                 $fulfillment_line_item->order_fulfillment_id = $new_fulfillment->id;
                 $fulfillment_line_item->order_line_item_id = $line_item->id;
                 $fulfillment_line_item->save();
