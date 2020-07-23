@@ -178,11 +178,14 @@ class AdminWebhookController extends Controller
                     $count++;
                 }
             }
-            if ($count == $fulfillment_count) {
-                $retailer_order->status = 'shipped';
-            } else {
-                $retailer_order->status = 'partially-shipped';
+            if($retailer_order->status->status == 'fulfilled'){
+                if ($count == $fulfillment_count) {
+                    $retailer_order->status = 'shipped';
+                } else {
+                    $retailer_order->status = 'partially-shipped';
+                }
             }
+
             $retailer_order->save();
             $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details added successfully!', $retailer_order);
         }
