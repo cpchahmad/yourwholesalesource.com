@@ -382,7 +382,7 @@
                                 <span class="badge badge-primary" style="float: right;font-size: medium"> {{$fulfillment->status}}</span>
                             </div>
                             <div class="block-content">
-                                @if($order->status == "shipped")
+                                @if($fulfillment->tracking_number != null)
                                     <p style="font-size: 12px"> Tracking Number : {{$fulfillment->tracking_number}} <br>
                                         Tracking Url : {{$fulfillment->tracking_url}} <br>
                                         Tracking Notes : {{$fulfillment->tracking_notes}} <br>
