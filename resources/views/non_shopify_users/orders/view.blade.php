@@ -285,14 +285,8 @@
                                     @if($item->fulfilled_by == 'store')
                                         <tr>
                                             <td>
-                                                @if($item->linked_variant != null)
-                                                    <img class="img-avatar"
-                                                         @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                         @else src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @endif alt="">
-                                                @else
-                                                    <img class="img-avatar img-avatar-variant"
-                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                @endif
+                                                <img class="img-avatar img-avatar-variant"
+                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                             </td>
                                             <td>
                                                 {{$item->name}}
