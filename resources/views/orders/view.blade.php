@@ -170,6 +170,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="12" class="text-right">
+                                    @dd($order->getStatus($order))
                                     @if($order->getStatus($order) == "unfulfilled")
                                         <button class="btn btn-primary" onclick="window.location.href='{{route('admin.order.fulfillment',$order->id)}}'"> Mark as Fulfilled </button>
                                     @endif
