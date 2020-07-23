@@ -47,7 +47,7 @@ class AdminWebhookController extends Controller
                 if ($shop != null) {
                     $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                     if (!$location_response->errors) {
-                        $data = [
+                        $fulfill_data = [
                             "fulfillment" => [
                                 "location_id" => $location_response->body->locations[0]->id,
                                 "tracking_number" => null,
@@ -58,24 +58,24 @@ class AdminWebhookController extends Controller
                             ]
                         ];
                         if (count($data->tracking_numbers) > 0) {
-                            $data['fulfillment']['tracking_number'] = $data->tracking_numbers[0];
+                            $fulfill_data['fulfillment']['tracking_number'] = $data->tracking_numbers[0];
                         }
                         if (count($data->tracking_urls) > 0) {
-                            $data['fulfillment']['tracking_url'] = $data->tracking_urls[0];
+                            $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_urls[0];
                         }
 
                         foreach ($data->line_items as $line_item) {
                             $item = RetailerOrderLineItem::where('sku', $line_item->sku)->where('retailer_order_id',$retailer_order->id)->first();
                             $fulfill_quantity =$item->fulfillable_quantity -  $line_item->fulfillable_quantity;
                             if ($item != null) {
-                                array_push($data['fulfillment']['line_items'], [
+                                array_push($fulfill_data['fulfillment']['line_items'], [
                                     "id" => $item->retailer_product_variant_id,
                                     "quantity" => $fulfill_quantity,
                                 ]);
                             }
 
                         }
-                        $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$data);
+                        $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
 
                             /*Order Fullfillment Record*/
