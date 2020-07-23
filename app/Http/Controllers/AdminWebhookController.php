@@ -102,11 +102,11 @@ class AdminWebhookController extends Controller
     }
 
     /**
-     * @param array $data
+     * @param  $data
      * @param $retailer_order
      * @return array
      */
-    public function set_line_item_fullfill_status(array $data, $retailer_order): array
+    public function set_line_item_fullfill_status($data, $retailer_order): array
     {
         foreach ($data->line_items as $item) {
             $line_item = RetailerOrderLineItem::where('sku', $item->sku)->where('retailer_order_id', $retailer_order->id)->first();
