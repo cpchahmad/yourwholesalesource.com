@@ -66,8 +66,8 @@ class AdminWebhookController extends Controller
 
                         foreach ($data->line_items as $line_item) {
                             $item = RetailerOrderLineItem::where('sku', $line_item->sku)->where('retailer_order_id',$retailer_order->id)->first();
-                            $fulfill_quantity =$item->fulfillable_quantity -  $line_item->fulfillable_quantity;
                             if ($item != null) {
+                                $fulfill_quantity =$item->fulfillable_quantity -  $line_item->fulfillable_quantity;
                                 array_push($fulfill_data['fulfillment']['line_items'], [
                                     "id" => $item->retailer_product_variant_id,
                                     "quantity" => $fulfill_quantity,
