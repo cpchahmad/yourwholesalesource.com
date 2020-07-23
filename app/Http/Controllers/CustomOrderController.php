@@ -436,6 +436,7 @@ class CustomOrderController extends Controller
                     $country = $data[0]->country;
                     $phone = $data[0]->phone;
                     $email = $data[0]->email;
+                    $province = $data[0]->province;
 
                     if($new_user){
                         $customer = new Customer();
@@ -454,9 +455,11 @@ class CustomOrderController extends Controller
                         "address1"=>$address1,
                         "address2"=>$first_name,
                         "city"=>$city,
-                        "province" => "",
+                        "province" => $province,
                         "zip"=>$postcode,
                         "country"=>$country,
+                        "phone" => $phone
+
                     ];
 
 

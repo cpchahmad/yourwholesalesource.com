@@ -623,7 +623,7 @@
                                     <br> {{$shipping->country}}
                                     @if(isset($shipping->phone))
                                     <br>{{$shipping->phone}}
-                                        @endif
+                                    @endif
 
                                 </p>
                             @endif

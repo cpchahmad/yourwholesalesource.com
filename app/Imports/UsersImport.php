@@ -35,7 +35,7 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
 
     public function model(array $row)
     {
-        if (!isset($row['Order Id']) || !isset($row['Name']) || !isset($row['Contact phone']) || !isset($row['Postcode']) || !isset($row['Country']) || !isset($row['Sku']) || !isset($row['Quantity'])) {
+        if (!isset($row['Order Id']) || !isset($row['Name']) || !isset($row['Contact phone']) || !isset($row['Postcode']) || !isset($row['Country']) || !isset($row['Sku']) || !isset($row['Quantity']) || !isset($row['Province'])) {
             return null;
         }
         return new UserFileTemp([
@@ -46,6 +46,7 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
             'address1' => $row['Address'],
             'address2' => $row['Address2'],
             'city' => $row['City'],
+            'province' => $row['Province'],
             'postcode' => $row['Postcode'],
             'country' => $row['Country'],
             'phone' => $row['Contact phone'],
