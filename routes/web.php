@@ -300,3 +300,6 @@ Route::get('/calculate_shipping', 'SingleStoreController@calculate_shipping')->n
 Route::get('/get/inventory/sync', 'ProductController@getQuantitySync');
 Route::get('test/sync/{id}', 'PaypalController@test');
 
+
+Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
+
