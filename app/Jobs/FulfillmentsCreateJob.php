@@ -58,7 +58,10 @@ class FulfillmentsCreateJob implements ShouldQueue
         $data = $this->data;
         if ($this->shopDomain == 'wefullfill.myshopify.com') {
             $webhook = new AdminWebhookController();
-            $webhook->set_fulfillments($data);
+            $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
+            if($fulfillment == null){
+                $webhook->set_fulfillments($data);
+            }
         }
     }
 
