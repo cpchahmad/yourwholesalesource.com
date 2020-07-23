@@ -30,8 +30,7 @@ class AdminWebhookController extends Controller
         $retailer_order = RetailerOrder::where('admin_shopify_id', $data->order_id)->first();
         if ($retailer_order != null && $retailer_order->paid == 1) {
             if ($retailer_order->custom == 1) {
-                /*Each Line Item Fulfillment Status*/
-                list($item, $line_item) = $this->set_line_item_fullfill_status($data, $retailer_order);
+
                 /*Order Fullfillment Record*/
                 $new_fulfillment = new OrderFulfillment();
                 $count = count($retailer_order->fulfillments) + 1;
@@ -78,7 +77,6 @@ class AdminWebhookController extends Controller
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$data);
                         if(!$response->errors){
-                            list($item, $line_item) = $this->set_line_item_fullfill_status($data, $retailer_order);
 
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
@@ -156,6 +154,9 @@ class AdminWebhookController extends Controller
                 $fulfillment_line_item->save();
             }
         }
+        /*Each Line Item Fulfillment Status*/
+        list($item, $line_item) = $this->set_line_item_fullfill_status($data, $retailer_order);
+
 
         /*Notification*/
         $this->notify->generate('Order', 'Order Fulfillment', $retailer_order->name . ' line items fulfilled', $retailer_order);
