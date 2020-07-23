@@ -173,7 +173,7 @@ class AdminWebhookController extends Controller
                     $count++;
                 }
             }
-            if($retailer_order->status->status == 'fulfilled'){
+            if($retailer_order->status == 'fulfilled'){
                 if ($count == $fulfillment_count) {
                     $retailer_order->status = 'shipped';
                 } else {
