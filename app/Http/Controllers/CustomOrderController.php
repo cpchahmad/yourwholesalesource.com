@@ -424,7 +424,12 @@ class CustomOrderController extends Controller
                     $name = explode(' ',$data[0]->name);
                     $first_name = $name[0];
                     if(array_key_exists(1,$name)){
-                        $last_name = $name[1];
+                        $last_name = '';
+                        foreach ($name as $key => $n){
+                            if($key != 0){
+                                $last_name = $last_name.' '.$n;
+                            }
+                        }
                     }
                     else{
                         $last_name = '';
@@ -453,7 +458,7 @@ class CustomOrderController extends Controller
                         "first_name"=>$first_name,
                         "last_name"=>$last_name,
                         "address1"=>$address1,
-                        "address2"=>$first_name,
+                        "address2"=>$address2,
                         "city"=>$city,
                         "province" => $province,
                         "zip"=>$postcode,
