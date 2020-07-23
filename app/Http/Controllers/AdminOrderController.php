@@ -642,7 +642,6 @@ class AdminOrderController extends Controller
         $shop = $this->helper->getAdminShop();
         $response = $shop->api()->rest('GET','admin/orders/2397097721989/fulfillments.json');
         $data = $response->body->fulfillments[0];
-        dd($data);
         $webhook = new AdminWebhookController();
         $webhook->set_fulfillments($data);
     }
