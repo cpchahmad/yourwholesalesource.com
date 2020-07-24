@@ -1,9 +1,9 @@
 <table class="table js-table-sections table-hover table-borderless table-striped table-vcenter">
     <thead>
     <tr>
+        <th>Order Name/th>
         <th>Order ID</th>
-        <th>Order Shopify ID</th>
-        <th>Quantity</th>
+        <th>Line Item Quantity</th>
         <th>Order Date</th>
         <th>Order Cost</th>
         <th>Order Status</th>
@@ -37,7 +37,7 @@
     @endphp
         <tr>
             <td class="font-w600">{{ $order->name }}</td>
-            <td class="font-w600">{{ $order->admin_shopify_id }}</td>
+            <td class="font-w600">{{ $order->id }}</td>
             <td>{{$order->line_items->sum('quantity')}}</td>
             <td>
                 {{date_create($order->shopify_created_at)->format('D m, Y h:i a') }}
@@ -47,7 +47,7 @@
 
             </td>
             <td>
-                @if($order->status == 'paid')
+                @if($order->status == 'Paid')
                     <span class="badge badge-primary" style="float: right;font-size: medium"> Unfulfilled</span>
 
                 @elseif($order->status == 'unfulfilled')
