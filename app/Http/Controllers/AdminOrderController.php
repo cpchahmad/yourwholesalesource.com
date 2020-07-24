@@ -638,12 +638,19 @@ class AdminOrderController extends Controller
         }
     }
 
+    public function show_import_data(){
+        $order = RetailerOrder::whereIn('status',['Paid','unfulfilled'])->where('paid',1)->count();
+        return view('orders.all_fulfillments')->with([
+            'count' => $order
+        ]);
+    }
+
     public function GetWebhooks(Request $request){
         $shop = $this->helper->getAdminShop();
-        $response = $shop->api()->rest('GET','admin/orders/2397328998533/fulfillments.json');
-        $data = $response->body->fulfillments[0];
-        $webhook = new AdminWebhookController();
-        $webhook->set_fulfillments($data);
+//        $response = $shop->api()->rest('GET','admin/orders/2397328998533/fulfillments.json');
+//        $data = $response->body->fulfillments[0];
+//        $webhook = new AdminWebhookController();
+//        $webhook->set_fulfillments($data);
     }
 
 }
