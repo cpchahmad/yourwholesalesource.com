@@ -28,7 +28,7 @@
                 @if($order->status == "shipped")
                     <button  onclick="window.location.href='{{route('admin.order.mark_as_delivered',$order->id)}}'" class="btn btn-sm btn-success"  style="margin-right: 10px;float: right"> Mark as Delivered </button>
                 @endif
-                @if($order->paid != 3)
+                @if($order->paid != 2)
                     <button class="btn btn-sm btn-danger" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('app.refund_cancel_order',$order->id)}}'">Cancel and Refund Order</button>
                 @endif
             </div>
@@ -171,7 +171,7 @@
                             <tr>
                                 <td colspan="12" class="text-right">
 
-                                    @if($order->getStatus($order) == "unfulfilled")
+                                    @if($order->getStatus($order) == "unfulfilled" && in_array($order->paid,[1]))
                                         <button class="btn btn-primary" onclick="window.location.href='{{route('admin.order.fulfillment',$order->id)}}'"> Mark as Fulfilled </button>
                                     @endif
                                 </td>
