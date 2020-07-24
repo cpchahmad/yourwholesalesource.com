@@ -174,6 +174,39 @@ class RetailerProductController extends Controller
                     }
 
                 }
+
+
+                /*Default Variant Update*/
+                if ($request->input('request_type') == 'default-variant-update') {
+
+                    $product->price = $request->input('price');
+                    $product->quantity = $request->input('quantity');
+                    $product->barcode = $request->input('barcode');
+                    $product->save();
+
+                    if($product->toShopify == 1){
+                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+                        if(!$response->errors){
+                            $shopifyVariants = $response->body->product->variants;
+                            $variant_id = $shopifyVariants[0]->id;
+                            $i = [
+                                'variant' => [
+                                    'price' =>$product->price,
+                                    'sku' =>  $product->sku,
+                                    'grams' => $product->weight * 1000,
+                                    'weight' => $product->weight,
+                                    'weight_unit' => 'kg',
+                                    'barcode' => $product->barcode,
+
+                                ]
+                            ];
+                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                        }
+                    }
+
+                }
+
+
                 /*Product Basic Update Shopify and Database*/
                 if ($request->input('request_type') == 'basic-info') {
                     $product->title = $request->title;
