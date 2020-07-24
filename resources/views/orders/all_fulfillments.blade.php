@@ -44,7 +44,8 @@
                                         <button class="btn btn-sm btn-primary"> Export</button>
                                     </td>
                                     <td>
-                                        <input type="file" class="form-control" accept="text/csv" name="import-tracking" id="import-tracking">
+
+                                        <input style="padding: 4px;" type="file" class="form-control" accept="text/csv" name="import-tracking" id="import-tracking">
 
                                     </td>
                                 </tr>
