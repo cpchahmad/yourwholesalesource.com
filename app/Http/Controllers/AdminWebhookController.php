@@ -185,4 +185,62 @@ class AdminWebhookController extends Controller
             $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details added successfully!', $retailer_order);
         }
     }
+
+    public function unset_fulfillments($data){
+        $retailer_order = RetailerOrder::where('admin_shopify_id', $data->order_id)->first();
+        $fulfillment = OrderFulfillment::where('retailer_order_id',$retailer_order->id)->where('admin_fulfillment_shopify_id',$data->id)->first();
+
+        if ($retailer_order != null && $retailer_order->paid == 1 && $fulfillment != null) {
+            if ($retailer_order->custom == 1) {
+                $this->cancellation_fulfillment_process($fulfillment,$retailer_order);
+            }
+            else{
+                $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
+                if($shop != null) {
+                    $response = $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $fulfillment->fulfillment_shopify_id . '/cancel.json');
+                    if (!$response->errors) {
+                        $this->cancellation_fulfillment_process($fulfillment, $retailer_order);
+                    }
+                }
+
+            }
+        }
+    }
+
+    /**
+     * @param $fulfillment
+     * @param $order
+     */
+    public function cancellation_fulfillment_process($fulfillment, $order): void
+    {
+        foreach ($fulfillment->line_items as $item) {
+            if ($item->linked_line_item != null) {
+                $item->linked_line_item->fulfillable_quantity = $item->linked_line_item->fulfillable_quantity + $item->fulfilled_quantity;
+                $item->linked_line_item->save();
+                if ($item->linked_line_item->fulfillable_quantity < $item->linked_line_item->quantity) {
+                    $item->linked_line_item->fulfillment_status = "partially-fulfilled";
+                } else if ($item->linked_line_item->fulfillable_quantity == $item->linked_line_item->quantity) {
+                    $item->linked_line_item->fulfillment_status = null;
+                }
+                $item->linked_line_item->save();
+            }
+            $item->delete();
+        }
+        $order_log = new OrderLog();
+        $order_log->message = "A fulfillment named " . $fulfillment->name . " has been cancelled successfully on " . now()->format('d M, Y h:i a');
+
+        $this->notify->generate('Order','Order Fulfillment Cancellation',$order->name.' line items fulfillment cancelled',$order);
+
+        $fulfillment->delete();
+        $order->status = $order->getStatus($order);
+        $order->save();
+
+        /*Maintaining Log*/
+
+        $order_log->status = "Fulfillment Cancelled";
+        $order_log->retailer_order_id = $order->id;
+        $order_log->save();
+
+    }
+
 }
