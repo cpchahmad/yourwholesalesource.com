@@ -56,7 +56,7 @@ class FulfillmentsUpdateJob implements ShouldQueue
                     $webhook->unset_fulfillments($data);
                 }
                 if($data->status == 'success'){
-
+                    $webhook->set_tracking_details($data);
                 }
             }
         }
