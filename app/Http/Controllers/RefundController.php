@@ -318,9 +318,7 @@ class RefundController extends Controller
             $order_log->status = "refunded";
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
-
             $this->notify->generate('Order','Order Cancelled and Refund',$order->name.' has been cancelled and refunded',$order);
-
 
             return redirect()->back()->with('success','Order Refunded Successfully!');
         }

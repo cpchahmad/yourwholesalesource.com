@@ -298,7 +298,12 @@ return [
         [
             'topic' => 'fulfillments/update',
             'address' => 'https://phpstack-362288-1193299.cloudwaysapps.com/webhook/fulfillments-update'
+        ],
+        [
+            'topic' => 'orders/cancelled',
+            'address' => 'https://phpstack-362288-1193299.cloudwaysapps.com/webhook/orders-cancelled'
         ]
+
 
 
 
