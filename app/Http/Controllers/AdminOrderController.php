@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrdersExport;
 use App\FulfillmentLineItem;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -643,6 +644,11 @@ class AdminOrderController extends Controller
         return view('orders.all_fulfillments')->with([
             'count' => $order
         ]);
+    }
+    public function download_orders(){
+        $orders = RetailerOrder::whereIn('status',['Paid','unfulfilled'])->where('paid',1)->get();
+        return Excel::download(new OrdersExport($orders), now()->format('m-d-y').' Unfulfillment Orders'.'.csv');
+
     }
 
     public function GetWebhooks(Request $request){

@@ -41,7 +41,7 @@
 
                                     <td class="font-w600">{{$count}} Orders</td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary"> Export</button>
+                                        <button class="btn btn-sm btn-primary" onclick="window.location.href='{{route('orders.bulk.tracking.download')}}'"> Export</button>
                                     </td>
                                     <td>
 
