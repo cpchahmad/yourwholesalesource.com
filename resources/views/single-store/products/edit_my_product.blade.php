@@ -122,15 +122,6 @@
                                 @foreach($product->has_images()->orderBy('position')->get() as $image)
                                     <div class="col-md-4 mb2 preview-image animated fadeIn" >
                                         <div class="options-container fx-img-zoom-in fx-opt-slide-right">
-{{--                                            <div class="image-holder" style="background-image:  @if(count($product->has_images) > 0)--}}
-{{--                                            @if($image->isV == 0)--}}
-{{--                                                url({{asset('images')}}/{{$image->image}})--}}
-{{--                                            @else url({{asset('images/variants')}}/{{$image->image}})--}}
-{{--                                            @endif--}}
-{{--                                            @else--}}
-{{--                                                url(https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg)--}}
-{{--                                            @endif">--}}
-{{--                                            </div>--}}
                                             @if($product->import_from_shopify == 1)
                                                 <img class="img-fluid options-item" src="{{$image->image}}" alt="">
                                             @else
@@ -244,7 +235,7 @@
                                             </td>
                                             <td><input type="text" class="form-control" readonly value="{{$v->cost}}" placeholder="$0.00"></td>
                                             <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
-                                            <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
+                                            <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
                                             <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
                                             </td>
 
