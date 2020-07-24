@@ -185,8 +185,6 @@
                                         <tr>
                                             <td class="variant_title">
                                                 @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-
-
                                             </td>
                                             <td class="text-center">
                                                 <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
@@ -259,7 +257,6 @@
                                             <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
                                         </td>
                                         <td><input type="text" class="form-control" readonly value="{{$product->cost}}" placeholder="$0.00"></td>
-                                        <td class="drop-shipping text-center">N/A</td>
                                         <td><input type="text" class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
                                         <td><input type="text" readonly class="form-control" name="sku" value="{{$product->sku}}"></td>
                                         <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder="">
