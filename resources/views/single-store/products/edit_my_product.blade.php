@@ -53,16 +53,16 @@
                                         <img class="img-fluid" src="{{$images[0]->image}}" alt="">
                                     </a>
                                 @else
-                                @if($images[0]->isV == 0)
-                                    <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
-                                        <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
-                                    </a>
-                                @else
-                                    <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
-                                        <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
-                                    </a>
-                                @endif
+                                    @if($images[0]->isV == 0)
+                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
+                                            <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
+                                        </a>
+                                    @else
+                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
+                                            <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
+                                        </a>
                                     @endif
+                                @endif
                             @endif
                         </div>
                     </div>
@@ -125,11 +125,11 @@
                                             @if($product->import_from_shopify == 1)
                                                 <img class="img-fluid options-item" src="{{$image->image}}" alt="">
                                             @else
-                                            @if($image->isV == 0)
-                                                <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
-                                            @else
-                                                <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                            @endif
+                                                @if($image->isV == 0)
+                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                @else
+                                                    <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                @endif
                                             @endif
                                             <div class="options-overlay bg-black-75">
                                                 <div class="options-overlay-content">
@@ -243,6 +243,31 @@
                                         </tbody>
                                     </form>
                                 @endforeach
+                            @else
+                                <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="request_type" value="single-variant-update">
+                                    <input type="hidden" name="variant_id" value="{{$v->id}}">
+                                    <tbody class="">
+                                    <tr>
+                                        <td class="variant_title">
+                                            Default
+                                        </td>
+                                        <td class="text-center">
+                                            <img class="img-avatar " style="border: 1px solid whitesmoke" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
+                                        </td>
+                                        <td><input type="text" class="form-control" readonly value="{{$product->cost}}" placeholder="$0.00"></td>
+                                        <td class="drop-shipping text-center">N/A</td>
+                                        <td><input type="text" class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
+                                        <td><input type="text" readonly class="form-control" name="sku" value="{{$product->sku}}"></td>
+                                        <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder="">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </form>
                             @endif
                         </table>
                         <div class="form-image-src" style="display: none">
