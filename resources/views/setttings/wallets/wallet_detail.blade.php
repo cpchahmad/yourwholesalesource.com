@@ -179,7 +179,7 @@
                                                     <td>
                                                     <td class="text-right">
                                                         @if($req->status == 0)
-                                                            <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Request</button>
+                                                            <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('admin.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Request</button>
                                                         @endif
                                                     </td>
 
