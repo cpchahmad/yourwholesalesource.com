@@ -300,5 +300,26 @@ class AdminWebhookController extends Controller
         $order_log->status = "Tracking Details Updated";
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
+
+        if (count($data->tracking_numbers) > 0) {
+            $count = 0;
+            $fulfillment_count = count($retailer_order->fulfillments);
+            foreach ($retailer_order->fulfillments as $f) {
+                if ($f->tracking_number != null) {
+                    $count++;
+                }
+            }
+            if($retailer_order->status == 'fulfilled'){
+                if ($count == $fulfillment_count) {
+                    $retailer_order->status = 'shipped';
+                } else {
+                    $retailer_order->status = 'partially-shipped';
+                }
+            }
+
+            $retailer_order->save();
+            $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details updated successfully!', $retailer_order);
+        }
+
     }
 }
