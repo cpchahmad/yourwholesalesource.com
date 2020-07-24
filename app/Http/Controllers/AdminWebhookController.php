@@ -243,4 +243,62 @@ class AdminWebhookController extends Controller
 
     }
 
+    public function set_tracking_details($data)
+    {
+        $retailer_order = RetailerOrder::where('admin_shopify_id', $data->order_id)->first();
+        $fulfillment = OrderFulfillment::where('retailer_order_id', $retailer_order->id)->where('admin_fulfillment_shopify_id', $data->id)->first();
+        if ($retailer_order != null && $retailer_order->paid == 1 && $fulfillment != null) {
+            if ($retailer_order->custom == 1) {
+                $this->tracking_process($data, $fulfillment, $retailer_order);
+            }
+            else{
+                $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
+                if ($shop != null) {
+                    if ($fulfillment != null) {
+                        $tracking = [
+                            "fulfillment" => [
+                                "tracking_number" => null,
+                                "tracking_url" => null,
+                            ]
+                        ];
+                        if (count($data->tracking_numbers) > 0) {
+                            $tracking['fulfillment']['tracking_number'] = $data->tracking_numbers[0];
+                        }
+                        if (count($data->tracking_urls) > 0) {
+                            $tracking['fulfillment']['tracking_url'] = $data->tracking_urls[0];
+                        }
+                        $response = $shop->api()->rest('PUT', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $fulfillment->fulfillment_shopify_id . '.json', $tracking);
+
+                        if (!$response->errors) {
+                            $this->tracking_process($data, $fulfillment, $retailer_order);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param $data
+     * @param $fulfillment
+     * @param $retailer_order
+     */
+    public function tracking_process($data, $fulfillment, $retailer_order): void
+    {
+        if (count($data->tracking_numbers) > 0) {
+            $fulfillment->tracking_number = $data->tracking_numbers[0];
+        }
+        if (count($data->tracking_urls) > 0) {
+            $fulfillment->tracking_url = $data->tracking_urls[0];
+        }
+        $fulfillment->save();
+
+        /*Maintaining Log*/
+        $order_log = new OrderLog();
+        $order_log->message = "Tracking detailed Updated To Fulfillment named " . $fulfillment->name . "  successfully on " . now()->format('d M, Y h:i a');
+        $order_log->status = "Tracking Details Updated";
+        $order_log->retailer_order_id = $retailer_order->id;
+        $order_log->save();
+    }
 }
