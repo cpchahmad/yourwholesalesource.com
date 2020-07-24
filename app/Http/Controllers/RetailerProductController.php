@@ -434,7 +434,12 @@ class RetailerProductController extends Controller
                 $variant_id = $shopifyVariants[0]->id;
                 $i = [
                     'variant' => [
-                        'price' =>$price
+                        'price' =>$price,
+                        'sku' =>  $product->sku,
+                        'grams' => $product->weight * 1000,
+                        'weight' => $product->weight,
+                        'weight_unit' => 'kg',
+                        'barcode' => $product->barcode,
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
