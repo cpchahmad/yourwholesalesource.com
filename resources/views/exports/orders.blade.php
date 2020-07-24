@@ -38,7 +38,6 @@
         <tr>
             <td class="font-w600">{{ $order->name }}</td>
             <td class="font-w600">{{ $order->admin_shopify_id }}</td>
-            <td class="font-w600">{{ $item->sku }}</td>
             <td>{{$order->line_items->sum('quantity')}}</td>
             <td>
                 {{date_create($order->shopify_created_at)->format('D m, Y h:i a') }}
