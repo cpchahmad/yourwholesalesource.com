@@ -246,8 +246,7 @@
                             @else
                                 <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
                                     @csrf
-                                    <input type="hidden" name="request_type" value="single-variant-update">
-                                    <input type="hidden" name="variant_id" value="{{$v->id}}">
+                                    <input type="hidden" name="request_type" value="default-variant-update">
                                     <tbody class="">
                                     <tr>
                                         <td class="variant_title">
