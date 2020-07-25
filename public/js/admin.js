@@ -930,11 +930,11 @@ $(document).ready(function () {
     $('.check-order').change(function () {
         if($(this).is(':checked')){
             $('.bulk-div').show();
-            unset_bulk_array()
+            unset_bulk_array();
             set_bulk_array();
         }
         else{
-            unset_bulk_array()
+            unset_bulk_array();
             set_bulk_array();
             if($('.check-order:checked').length === 0){
                 $('.bulk-div').hide();
@@ -957,6 +957,35 @@ $(document).ready(function () {
     }
     $('.bulk-fulfill-btn').click(function () {
         $('#bulk-fullfillment').submit();
+    });
+
+    $('body').on('change','#import-tracking',function () {
+        Swal.fire({
+            title: ' Are you sure?',
+            html:'<p>You want to add tracking details in all pending orders</p>',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Add it!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Processing!',
+                    'All Pending Orders are under processed. Please wait on this page. Dont Refresh the page!',
+                    'success'
+                );
+                setTimeout(function () {
+                    Swal.close();
+                    $('.pre-loader').css('display','flex');
+                    $('#import-tracking').closest('form').submit();
+                },2000);
+
+            }
+            else{
+               $('#import-tracking').val('');
+            }
+        });
     });
 
 });

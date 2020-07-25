@@ -1,7 +1,7 @@
 <table class="table js-table-sections table-hover table-borderless table-striped table-vcenter">
     <thead>
     <tr>
-        <th>Order Name/th>
+        <th>Order Name</th>
         <th>Order ID</th>
         <th>Line Item Quantity</th>
         <th>Order Date</th>

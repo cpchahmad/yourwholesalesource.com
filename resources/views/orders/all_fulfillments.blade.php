@@ -44,8 +44,11 @@
                                         <button class="btn btn-sm btn-primary" onclick="window.location.href='{{route('orders.bulk.tracking.download')}}'"> Export</button>
                                     </td>
                                     <td>
+                                        <form action="{{route('orders.bulk.tracking.import')}}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <input style="padding: 4px;" type="file" class="form-control" accept="text/csv" name="import_tracking" id="import-tracking">
+                                        </form>
 
-                                        <input style="padding: 4px;" type="file" class="form-control" accept="text/csv" name="import-tracking" id="import-tracking">
 
                                     </td>
                                 </tr>

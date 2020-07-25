@@ -116,6 +116,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('orders/bulk-tracking/', 'AdminOrderController@show_import_data')->name('orders.bulk.tracking');
     Route::get('orders/bulk-tracking/download', 'AdminOrderController@download_orders')->name('orders.bulk.tracking.download');
+    Route::post('orders/bulk-tracking/import', 'AdminOrderController@import_bulk_tracking')->name('orders.bulk.tracking.import');
 
 
 

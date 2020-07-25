@@ -53,6 +53,6 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
             'email' => $row['Email'],
             'user_id' => $this->user_id,
             'file_id' => $this->file_id,
-        ]);;
+        ]);
     }
 }
