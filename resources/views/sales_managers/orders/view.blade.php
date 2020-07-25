@@ -310,7 +310,6 @@
                                     </thead>
                                     <tbody>
                                     @foreach($fulfillment->line_items as $item)
-
                                         <tr>
                                             <td>
                                                 @if($item->linked_line_item != null)
@@ -369,9 +368,18 @@
                                                 @endif
                                             </td>
                                             <td style="width: 60%">
+                                                @if($item->linked_line_item != null)
                                                 {{$item->linked_line_item->name}}
+                                                @else
+                                                    {{$item->name}}
+                                                @endif
                                             </td>
-                                            <td>{{number_format($item->linked_line_item->cost,2)}}  X {{$item->fulfilled_quantity}}  {{$order->currency}}</td>
+                                            <td> @if($item->linked_line_item != null)
+                                                {{number_format($item->linked_line_item->cost,2)}}  X {{$item->fulfilled_quantity}}  {{$order->currency}}
+                                                @else
+                                                    {{number_format($item->cost,2)}}  X {{$item->fulfilled_quantity}}  {{$order->currency}}
+                                                @endif
+                                            </td>
 
                                         </tr>
                                     @endforeach
