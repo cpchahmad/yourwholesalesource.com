@@ -759,7 +759,7 @@ class AdminOrderController extends Controller
 
         $fulfillment->tracking_number = $data->tracking_number;
         $fulfillment->tracking_url = $data->tracking_url;
-        $fulfillment->trackin_notes = $data->tracking_notes;
+        $fulfillment->tracking_notes = $data->tracking_notes;
         $fulfillment->tracking_company = $data->tracking_company;
         $fulfillment->save();
 
