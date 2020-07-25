@@ -672,11 +672,13 @@ class AdminOrderController extends Controller
                         if($retailer_order->admin_shopify_id != null){
                             $this->admin_fulfillment_tracking_process($retailer_order, $d, $fulfillment);
                         }
-                    } else {
+                    }
+                    else
+                        {
                         $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
-                        $shopify_fulfillment = null;
                         if ($shop != null) {
                             $location_response = $shop->api()->rest('GET', '/admin/locations.json');
+                            dd($location_response);
                             if (!$location_response->errors) {
                                 $fulfill_data = [
                                     "fulfillment" => [
@@ -713,8 +715,6 @@ class AdminOrderController extends Controller
                                     }
                                 }
                             }
-
-
                         }
                     }
                 }
