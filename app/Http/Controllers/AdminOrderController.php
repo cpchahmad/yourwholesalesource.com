@@ -692,7 +692,6 @@ class AdminOrderController extends Controller
                                     ]
                                 ];
                                 foreach ($retailer_order->line_items as $index => $item) {
-                                    ;
                                     if ($item->fulfillable_quantity > 0) {
                                         array_push($fulfill_data['fulfillment']['line_items'], [
                                             "id" => $item->retailer_product_variant_id,
@@ -701,7 +700,6 @@ class AdminOrderController extends Controller
                                     }
                                 }
                                 $response = $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments.json', $fulfill_data);
-                                dd($response);
                                 if (!$response->errors) {
                                     $fulfillment = new OrderFulfillment();
                                     $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
