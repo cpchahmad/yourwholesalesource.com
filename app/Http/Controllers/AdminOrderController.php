@@ -707,9 +707,9 @@ class AdminOrderController extends Controller
                                     $fulfillment->retailer_order_id = $retailer_order->id;
                                     $fulfillment->status = 'fulfilled';
                                     $fulfillment->save();
-                                    $this->fulfillment_tracking_process($fulfillment, $retailer_order, $data);
+                                    $this->fulfillment_tracking_process($fulfillment, $retailer_order, $d);
                                     if($retailer_order->admin_shopify_id != null){
-                                        $this->admin_fulfillment_tracking_process($retailer_order, $data, $fulfillment);
+                                        $this->admin_fulfillment_tracking_process($retailer_order, $d, $fulfillment);
                                     }
                                 }
                             }
