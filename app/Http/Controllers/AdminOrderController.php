@@ -668,9 +668,9 @@ class AdminOrderController extends Controller
                         $fulfillment->save();
 
                         /*Maintaining Log*/
-                        $this->fulfillment_tracking_process($fulfillment, $retailer_order, $data);
+                        $this->fulfillment_tracking_process($fulfillment, $retailer_order, $d);
                         if($retailer_order->admin_shopify_id != null){
-                            $this->admin_fulfillment_tracking_process($retailer_order, $data, $fulfillment);
+                            $this->admin_fulfillment_tracking_process($retailer_order, $d, $fulfillment);
                         }
                     } else {
                         $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
@@ -681,9 +681,9 @@ class AdminOrderController extends Controller
                                 $fulfill_data = [
                                     "fulfillment" => [
                                         "location_id" => $location_response->body->locations[0]->id,
-                                        "tracking_number" => $data->tracking_number,
-                                        "tracking_company" => $data->tracking_company,
-                                        "tracking_url" => $data->tracking_url,
+                                        "tracking_number" => $d->tracking_number,
+                                        "tracking_company" => $d->tracking_company,
+                                        "tracking_url" => $d->tracking_url,
                                         "line_items" => [
 
                                         ]
