@@ -669,7 +669,9 @@ class AdminOrderController extends Controller
 
                         /*Maintaining Log*/
                         $this->fulfillment_tracking_process($fulfillment, $retailer_order, $data);
-                        $this->admin_fulfillment_tracking_process($retailer_order, $data, $fulfillment);
+                        if($retailer_order->admin_shopify_id != null){
+                            $this->admin_fulfillment_tracking_process($retailer_order, $data, $fulfillment);
+                        }
                     } else {
                         $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                         $shopify_fulfillment = null;
@@ -706,9 +708,9 @@ class AdminOrderController extends Controller
                                     $fulfillment->status = 'fulfilled';
                                     $fulfillment->save();
                                     $this->fulfillment_tracking_process($fulfillment, $retailer_order, $data);
-                                    $this->admin_fulfillment_tracking_process($retailer_order, $data, $fulfillment);
-
-
+                                    if($retailer_order->admin_shopify_id != null){
+                                        $this->admin_fulfillment_tracking_process($retailer_order, $data, $fulfillment);
+                                    }
                                 }
                             }
 
