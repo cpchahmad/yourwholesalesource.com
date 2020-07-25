@@ -717,6 +717,8 @@ class AdminOrderController extends Controller
                     }
                 }
             }
+            return redirect()->route('admin.orders')->with('success', 'Related Orders Fulfillments Process Successfully!');
+
         } else {
             return redirect()->back()->with('error', 'No File Found!');
         }
