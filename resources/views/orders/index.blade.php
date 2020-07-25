@@ -35,6 +35,56 @@
 
         <div class="row" >
             <div class="col-md-12">
+                <div class="bg-white p-3 push">
+                    <!-- Navigation -->
+                    <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
+                        <ul class="nav-main nav-main-horizontal nav-main-hover">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'unfulfilled') active @endif" href="?status=unfulfilled">
+                                    <i class="nav-main-link-icon fa fa-flag-checkered"></i>
+                                    <span class="nav-main-link-name">Unfulfilled</span>
+                                    <span class="nav-main-link-badge badge badge-pill badge-warning">{{$all_orders->whereIN('status',['Paid','unfulfilled'])->count()}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'fulfilled') active @endif " href="?status=fulfilled">
+                                    <i class="nav-main-link-icon fa fa-star"></i>
+                                    <span class="nav-main-link-name">Fulfilled</span>
+                                    <span class="nav-main-link-badge badge badge-pill badge-success">{{$all_orders->whereIN('status',['fulfilled'])->count()}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'shipped') active @endif " href="?status=shipped">
+                                    <i class="nav-main-link-icon fa fa-truck"></i>
+                                    <span class="nav-main-link-name">Shipped</span>
+                                    <span class="nav-main-link-badge badge badge-pill" style="background: orange;color: white;">{{$all_orders->whereIN('status',['shipped'])->count()}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'delivered') active @endif " href="?status=delivered">
+                                    <i class="nav-main-link-icon fa fa-home"></i>
+                                    <span class="nav-main-link-name">Delivered</span>
+                                    <span class="nav-main-link-badge badge badge-pill" style="background: deeppink;color: white;">{{$all_orders->whereIN('status',['delivered'])->count()}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'completed') active @endif " href="?status=completed">
+                                    <i class="nav-main-link-icon fa fa-check-circle"></i>
+                                    <span class="nav-main-link-name">Completed</span>
+                                    <span class="nav-main-link-badge badge badge-pill " style="background: darkslategray;color: white;">{{$all_orders->whereIN('status',['completed'])->count()}}</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'cancelled') active @endif " href="?status=cancelled">
+                                    <i class="nav-main-link-icon fa fa-times-circle"></i>
+                                    <span class="nav-main-link-name">Cancelled</span>
+                                    <span class="nav-main-link-badge badge badge-pill badge-danger" >{{$all_orders->whereIN('status',['cancelled'])->count()}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END Navigation -->
+                </div>
                 <div class="block">
                     <div class="block-header bulk-div" style="display: none">
                         <button class="btn btn-outline-secondary btn-sm bulk-fulfill-btn">Fulfill Orders</button>

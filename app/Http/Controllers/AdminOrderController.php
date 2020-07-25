@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\AdminFile;
@@ -47,11 +48,24 @@ class AdminOrderController extends Controller
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
 
         }
+        if($request->has('status')){
+            if($request->input('status') == 'unfulfilled'){
+                $orders->whereIN('status', ['Paid','unfulfilled']);
+            }
+            else
+            {
+                $orders->where('status', $request->input('status'));
+            }
+
+        }
+        $all_orders = RetailerOrder::whereIn('paid', [1, 2])->get();
         $orders = $orders->orderBy('created_at', 'DESC')->paginate(30);
 
         return view('orders.index')->with([
+            'all_orders' => $all_orders,
             'orders' => $orders,
-            'search' => $request->input('search')
+            'search' => $request->input('search'),
+            'status' => $request->input('status')
         ]);
     }
 
@@ -674,7 +688,7 @@ class AdminOrderController extends Controller
                         }
                     }
                     else
-                        {
+                    {
                         $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                         if ($shop != null) {
                             $location_response = $shop->api()->rest('GET', '/admin/locations.json');
