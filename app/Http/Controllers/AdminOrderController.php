@@ -678,7 +678,7 @@ class AdminOrderController extends Controller
                         $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                         if ($shop != null) {
                             $location_response = $shop->api()->rest('GET', '/admin/locations.json');
-                            dd($location_response);
+
                             if (!$location_response->errors) {
                                 $fulfill_data = [
                                     "fulfillment" => [
@@ -701,7 +701,7 @@ class AdminOrderController extends Controller
                                     }
                                 }
                                 $response = $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments.json', $fulfill_data);
-
+                                dd($response);
                                 if (!$response->errors) {
                                     $fulfillment = new OrderFulfillment();
                                     $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
