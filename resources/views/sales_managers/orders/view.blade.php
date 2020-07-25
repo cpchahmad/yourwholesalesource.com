@@ -313,54 +313,59 @@
 
                                         <tr>
                                             <td>
-                                                @if($order->custom == 0)
-                                                    @if($item->linked_line_item->linked_variant != null)
-                                                        <img class="img-avatar"
-                                                             @if($item->linked_line_item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else @if($item->linked_line_item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_line_item->linked_variant->has_image->image}}" @endif @endif alt="">
-                                                    @else
-                                                        @if($item->linked_line_item->linked_product != null)
-                                                            @if(count($item->linked_line_item->linked_product->has_images)>0)
-                                                                @if($item->linked_line_item->linked_product->has_images[0]->isV == 1)
-                                                                    <img class="img-avatar img-avatar-variant"
-                                                                         src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_product->has_images[0]->image}}">
+                                                @if($item->linked_line_item != null)
+                                                    @if($order->custom == 0)
+                                                        @if($item->linked_line_item->linked_variant != null)
+                                                            <img class="img-avatar"
+                                                                 @if($item->linked_line_item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else @if($item->linked_line_item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_line_item->linked_variant->has_image->image}}" @endif @endif alt="">
+                                                        @else
+                                                            @if($item->linked_line_item->linked_product != null)
+                                                                @if(count($item->linked_line_item->linked_product->has_images)>0)
+                                                                    @if($item->linked_line_item->linked_product->has_images[0]->isV == 1)
+                                                                        <img class="img-avatar img-avatar-variant"
+                                                                             src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_product->has_images[0]->image}}">
+                                                                    @else
+                                                                        <img class="img-avatar img-avatar-variant"
+                                                                             src="{{asset('images')}}/{{$item->linked_line_item->linked_product->has_images[0]->image}}">
+                                                                    @endif
                                                                 @else
                                                                     <img class="img-avatar img-avatar-variant"
-                                                                         src="{{asset('images')}}/{{$item->linked_line_item->linked_product->has_images[0]->image}}">
+                                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                                 @endif
                                                             @else
                                                                 <img class="img-avatar img-avatar-variant"
                                                                      src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                             @endif
+                                                        @endif
+                                                    @else
+                                                        @if($item->linked_line_item->linked_real_variant != null)
+                                                            <img class="img-avatar"
+                                                                 @if($item->linked_line_item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else @if($item->linked_line_item->linked_real_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_real_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_line_item->linked_real_variant->has_image->image}}" @endif @endif alt="">
                                                         @else
-                                                            <img class="img-avatar img-avatar-variant"
-                                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                            @if($item->linked_line_item->linked_real_product != null)
+                                                                @if(count($item->linked_line_item->linked_real_product->has_images)>0)
+                                                                    @if($item->linked_line_item->linked_real_product->has_images[0]->isV == 1)
+                                                                        <img class="img-avatar img-avatar-variant"
+                                                                             src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_real_product->has_images[0]->image}}">
+                                                                    @else
+                                                                        <img class="img-avatar img-avatar-variant"
+                                                                             src="{{asset('images')}}/{{$item->linked_line_item->linked_real_product->has_images[0]->image}}">
+                                                                    @endif
+                                                                @else
+                                                                    <img class="img-avatar img-avatar-variant"
+                                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                                @endif
+                                                            @else
+                                                                <img class="img-avatar img-avatar-variant"
+                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 @else
-                                                    @if($item->linked_line_item->linked_real_variant != null)
-                                                        <img class="img-avatar"
-                                                             @if($item->linked_line_item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else @if($item->linked_line_item->linked_real_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_real_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_line_item->linked_real_variant->has_image->image}}" @endif @endif alt="">
-                                                    @else
-                                                        @if($item->linked_line_item->linked_real_product != null)
-                                                            @if(count($item->linked_line_item->linked_real_product->has_images)>0)
-                                                                @if($item->linked_line_item->linked_real_product->has_images[0]->isV == 1)
-                                                                    <img class="img-avatar img-avatar-variant"
-                                                                         src="{{asset('images/variants')}}/{{$item->linked_line_item->linked_real_product->has_images[0]->image}}">
-                                                                @else
-                                                                    <img class="img-avatar img-avatar-variant"
-                                                                         src="{{asset('images')}}/{{$item->linked_line_item->linked_real_product->has_images[0]->image}}">
-                                                                @endif
-                                                            @else
-                                                                <img class="img-avatar img-avatar-variant"
-                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                            @endif
-                                                        @else
-                                                            <img class="img-avatar img-avatar-variant"
-                                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                        @endif
-                                                    @endif
+                                                    <img class="img-avatar img-avatar-variant"
+                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                 @endif
                                             </td>
                                             <td style="width: 60%">
