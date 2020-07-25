@@ -745,7 +745,7 @@ class AdminOrderController extends Controller
                 $fulfillment_line_item = new FulfillmentLineItem();
                 $fulfillment_line_item->fulfilled_quantity = $item->fulfillable_quantity;
                 $fulfillment_line_item->order_fulfillment_id = $fulfillment->id;
-                $fulfillment_line_item->order_line_item_id = $item;
+                $fulfillment_line_item->order_line_item_id = $item->id;
                 $fulfillment_line_item->save();
 
                 $item->fulfillable_quantity = 0;
