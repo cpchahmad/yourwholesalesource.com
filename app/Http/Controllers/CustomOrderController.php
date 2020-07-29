@@ -315,7 +315,7 @@ class CustomOrderController extends Controller
 
             }
             else{
-                $productQuery->orWhere('processing_time','LIKE','%'.$request->input('tag').'%');
+                $productQuery->orWhere('processing_time','=','24 Hours');
             }
         }
         if($request->has('filter')){
