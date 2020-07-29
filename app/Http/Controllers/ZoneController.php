@@ -72,6 +72,7 @@ class ZoneController extends Controller
              $q->where('name','LIKE','%'.$country.'%');
          });
         $zones = $zoneQuery->get();
+        dd($zones);
         $message = null;
         if(count($zones) > 0){
             foreach ($zones as $zone) {
@@ -97,11 +98,11 @@ class ZoneController extends Controller
                             else{
                                 $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
                             }
-                            break;
                         }
                         else{
                             $message = '<prp_up> Free Shipping </prp_up>';
                         }
+
                         if($product->processing_time != null){
                             $message_3 = '<prp_up>'.$product->processing_time.'</prp_up>';
                         }
