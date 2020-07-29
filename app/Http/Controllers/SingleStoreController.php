@@ -203,7 +203,7 @@ class SingleStoreController extends Controller
                 $products = $productQuery->paginate(12);
             }
             else if($request->input('tag') == 'new-arrival'){
-                $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
+                $productQuery->orWhere('processing_time','LIKE','%'.$request->input('tag').'%');
 
             }
             else{
