@@ -82,7 +82,7 @@
         <div class="row mb-2" style="padding: 0 14px;">
             <div class="col-md-4 p-0">
                 <a href="{{route('users.product.wefulfill')}}?tag=24-hours-dispatch">
-                    <div class="block pointer m-0" style="background-color:#8b8b8c;">
+                    <div class="block pointer m-0" style="background-color:dodgerblue;">
 
                         <div class="block-content p-3 text-center">
                             <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="https://image.flaticon.com/icons/svg/46/46016.svg" alt="" style="margin-right: 10px"> 24 Hours Dispatch</p>
@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-4 p-0 ">
                 <a href="{{route('users.product.wefulfill')}}?tag=best-seller">
-                    <div class="block pointer m-0" style="background-color:#8b8b8c;">
+                    <div class="block pointer m-0" style="background-color:forestgreen;">
 
 
                         <div class="block-content p-3 text-center">
@@ -105,7 +105,7 @@
 
             <div class="col-md-4 p-0 " >
                 <a href="{{route('users.product.wefulfill')}}?tag=new-arrival">
-                    <div class="block pointer m-0" style="background-color:#8b8b8c;">
+                    <div class="block pointer m-0" style="background-color:greenyellow;">
 
 
                         <div class="block-content p-3 text-center">
