@@ -72,9 +72,9 @@
                             </td>
 
                             <td style="vertical-align: middle">
+                                Starting From.
                                 @if(count($product->hasVariants) > 0)
-                                  Min.  ${{ number_format($product->hasVariants->min('price'), 2) }}
-
+                                    ${{ number_format($product->hasVariants->min('price'), 2) }}
                                 @else
                                 ${{ number_format($product->price, 2) }}
                                     @endif
