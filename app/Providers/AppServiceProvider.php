@@ -65,10 +65,12 @@ class AppServiceProvider extends ServiceProvider
               }
             }
             $notifications = $query->where('read','=',0)->orderBy('created_at','DESC')->paginate(10);
+            $notifications_count = $query->where('read','=',0)->orderBy('created_at','DESC')->count();
 
             $view->with([
                 'balance' => $balance,
-                'notifications' => $notifications
+                'notifications' => $notifications,
+                'notifications_count' =>$notifications_count
             ]);
 
         });
