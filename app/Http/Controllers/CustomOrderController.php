@@ -315,7 +315,8 @@ class CustomOrderController extends Controller
 
             }
             else{
-                $productQuery->orWhere('processing_time','=','24 Hours');
+                $products = $productQuery->where('processing_time', '24 Hours')->paginate(12);
+
             }
         }
         if($request->has('filter')){
