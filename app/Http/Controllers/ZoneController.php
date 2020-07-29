@@ -72,13 +72,14 @@ class ZoneController extends Controller
              $q->where('name','LIKE','%'.$country.'%');
          });
         $zones = $zoneQuery->get();
-        dd($zones);
-        $message = null;
+             $message = null;
         if(count($zones) > 0){
             foreach ($zones as $zone) {
                 if($zone->has_rate != null){
                     if (count($zone->has_rate) > 0) {
+
                         if($zone->has_rate[0]->shipping_price > 0){
+                            dd($zone->has_rate[0]->type);
                             if($zone->has_rate[0]->type == 'flat'){
                                 $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
 
