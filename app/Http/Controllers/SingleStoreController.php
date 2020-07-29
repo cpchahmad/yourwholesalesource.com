@@ -203,11 +203,12 @@ class SingleStoreController extends Controller
                 $products = $productQuery->paginate(12);
             }
             else if($request->input('tag') == 'new-arrival'){
-                $productQuery->orWhere('processing_time','LIKE','%'.$request->input('tag').'%');
+                $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
 
             }
             else{
-                $productQuery->orWhere('tags','LIKE','%'.$request->input('tag').'%');
+                $productQuery->orWhere('processing_time','LIKE','%'.$request->input('tag').'%');
+
             }
         }
         if($request->has('filter')){
