@@ -72,7 +72,13 @@
                             </td>
 
                             <td style="vertical-align: middle">
+                                @if(count($product->hasVariants) > 0)
+                                  Min.  ${{ number_format($product->hasVariants->min('price'), 2) }}
+
+                                @else
                                 ${{ number_format($product->price, 2) }}
+                                    @endif
+
                             </td>
                             <td style="vertical-align: middle">{{ $product->quantity }}</td>
                             <td style="vertical-align: middle">
