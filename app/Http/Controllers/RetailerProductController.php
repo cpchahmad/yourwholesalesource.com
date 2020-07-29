@@ -438,13 +438,20 @@ class RetailerProductController extends Controller
                 $published = false;
             }
 
+            if($product->type != null){
+                $product_type = $product->type;
+            }
+            else{
+                $product_type = 'WeFullFill';
+            }
+
             $productdata = [
                 "product" => [
                     "title" => $product->title,
                     "body_html" => $product->description,
                     "vendor" => $product->vendor,
                     "tags" => $tags,
-                    "product_type" => $product->type,
+                    "product_type" => $product_type,
                     "variants" => $variants_array,
                     "options" => $options_array,
                     "images" => $images_array,
