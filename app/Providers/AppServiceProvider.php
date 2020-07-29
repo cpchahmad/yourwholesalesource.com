@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
                   $balance = 0;
               }
             }
-            $notifications = $query->where('read','=',0)->orderBy('created_at','DESC')->get();
+            $notifications = $query->where('read','=',0)->orderBy('created_at','DESC')->paginate(10);
 
             $view->with([
                 'balance' => $balance,
