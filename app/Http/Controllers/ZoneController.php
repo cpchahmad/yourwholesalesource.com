@@ -96,9 +96,8 @@ class ZoneController extends Controller
                             }
                             else{
                                 $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
-
                             }
-
+                            break;
                         }
                         else{
                             $message = '<prp_up> Free Shipping </prp_up>';
