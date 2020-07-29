@@ -79,12 +79,11 @@ class ZoneController extends Controller
                     if (count($zone->has_rate) > 0) {
 
                         if($zone->has_rate[0]->shipping_price > 0){
-                            dd($zone->has_rate[0]->type);
                             if($zone->has_rate[0]->type == 'flat'){
                                 $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
 
                             }
-                            elseif ($zone->has_rate[0]->type == 'weight'){
+                            else{
                                 if($zone->has_rate[0]->min > 0){
                                     $ratio = $total_weight/$zone->has_rate[0]->min;
                                     $new_shipping_price = '$'.number_format($zone->has_rate[0]->shipping_price*$ratio,2);
@@ -95,9 +94,6 @@ class ZoneController extends Controller
                                 $message = ' <prp_up> Free Shipping</prp_up>';
 
                                 }
-                            }
-                            else{
-                                $message = ' <prp_up> $' . number_format($zone->has_rate[0]->shipping_price, 2) . '</prp_up>';
                             }
                         }
                         else{
