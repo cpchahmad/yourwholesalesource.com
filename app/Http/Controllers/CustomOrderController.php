@@ -298,7 +298,25 @@ class CustomOrderController extends Controller
             $productQuery->where('title','LIKE','%'.$request->input('search').'%')->orWhere('tags','LIKE','%'.$request->input('search').'%');
         }
         if($request->has('tag')){
-            $productQuery->orWhere('tags','LIKE','%'.$request->input('tag').'%');
+            if($request->input('tag') == 'best-seller'){
+                $productQuery = Product::join('retailer_order_line_items',function($join) {
+                    $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')
+                        ->join('retailer_orders',function($o) {
+                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
+                                ->whereIn('paid',[1,2]);
+                        });
+                })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                    ->groupBy('products.id')
+                    ->orderBy('sold','DESC');
+                $products = $productQuery->paginate(12);
+            }
+            else if($request->input('tag') == 'new-arrival'){
+                $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
+
+            }
+            else{
+                $productQuery->orWhere('tags','LIKE','%'.$request->input('tag').'%');
+            }
         }
         if($request->has('filter')){
             if($request->input('filter') == 'most-order'){
