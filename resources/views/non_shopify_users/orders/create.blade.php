@@ -138,6 +138,13 @@
                                             <input type="text" required class="form-control" name="phone"
                                                    value=""  placeholder="" >
                                         </div>
+
+                                        <div class="col-md-12 mb2">
+                                            <label>Order Date</label>
+                                            <input type="date" required class="form-control" name="order_date"
+                                                   value=""  placeholder="" >
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

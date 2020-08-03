@@ -196,9 +196,16 @@ class CustomOrderController extends Controller
         $new->user_id = Auth::id();
         $new->fulfilled_by = 'fantasy';
         $new->sync_status = 1;
+
+        $new->shopify_created_at = date_create($request->input('order_date'))->format('Y-m-d h:i:s');
+        $new->shopify_updated_at =date_create($request->input('order_date'))->format('Y-m-d h:i:s');
+
         $new->save();
+
         $cost_to_pay = 0;
         $total_weight = 0;
+
+
 
         foreach ($request->input('line_items') as $index =>  $item){
             $variant = ProductVariant::find($item);
@@ -427,6 +434,10 @@ class CustomOrderController extends Controller
                     $new->total_tax = '0';
                     $new->currency = 'USD';
                     $new->total_discounts = '0';
+
+                    $new->shopify_created_at =$data[0]->created_at;
+                    $new->shopify_updated_at =$data[0]->created_at;
+
 
                     $new_user = false;
                     foreach ($data as $item){

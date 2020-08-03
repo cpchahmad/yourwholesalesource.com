@@ -504,7 +504,7 @@
                                                         <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} {{$order->currency}}</h3>
                                                         <div class="block-options">
                                                             <div class="timeline-event-time block-options-item font-size-sm font-w600">
-                                                                {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}
+{{--                                                                {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}--}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -513,7 +513,7 @@
                                                             <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
 
                                                         @elseif($order->pay_by == 'Wallet')
-                                                            <p> Cost-Payment Captured On Wallet  by {{$order->has_payment->name}} </p>
+                                                            <p> Cost-Payment Captured By WeFullFill Wallet  {{--by {{$order->has_payment->name}}--}} </p>
 
                                                         @else
                                                             <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>

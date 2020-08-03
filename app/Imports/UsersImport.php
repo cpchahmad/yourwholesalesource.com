@@ -35,7 +35,7 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
 
     public function model(array $row)
     {
-        if (!isset($row['Order Id']) || !isset($row['Name']) || !isset($row['Contact phone']) || !isset($row['Postcode']) || !isset($row['Country']) || !isset($row['Sku']) || !isset($row['Quantity']) || !isset($row['Province'])) {
+        if (!isset($row['Order Id']) || !isset($row['Name']) || !isset($row['Contact phone']) || !isset($row['Postcode']) || !isset($row['Country']) || !isset($row['Sku']) || !isset($row['Quantity']) || !isset($row['Province']) || !isset($row['Order date'])) {
             return null;
         }
         return new UserFileTemp([
@@ -53,6 +53,7 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
             'email' => $row['Email'],
             'user_id' => $this->user_id,
             'file_id' => $this->file_id,
+            'created_at' => date_create($row['Order date'])->format('Y-m-d h:i:s')
         ]);
     }
 }
