@@ -924,7 +924,7 @@ class ManagerController extends Controller
             'wallet' => $wallet
         ]);
     }
-    public function approved_bank_statement($id){
+    public function approved_bank_statement($id,Request $request){
         $req = WalletRequest::find($id);
         if($req->status == 0){
             $related_wallet = Wallet::find($req->wallet_id);
@@ -939,6 +939,8 @@ class ManagerController extends Controller
                 $wallet_log->status = "Bank Transfer Approved";
                 $wallet_log->amount = $req->amount;
                 $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved By Your Manager At ' . now()->format('d M, Y h:i a'). ' By Manager';
+                $wallet_log->timestamps = false;
+                $wallet_log->created_at = date_create($request->input('date'))->format('Y-m-d H:i:s');
                 $wallet_log->save();
 
                 $ml = new ManagerLog();

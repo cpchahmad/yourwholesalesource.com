@@ -68,6 +68,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row mb2">
@@ -179,12 +180,47 @@
                                                     <td>
                                                     <td class="text-right">
                                                         @if($req->status == 0)
-                                                            <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('admin.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Request</button>
+                                                            <button class="btn btn-sm btn-success <!--approve-bank-transfer-button-->" data-toggle="modal" data-target="#bank_approve_modal{{$req->id}}" {{--data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD" --}} > Approve Request</button>
+
                                                         @endif
                                                     </td>
 
                                                 </tr>
                                                 </tbody>
+                                                <div class="modal fade" id="bank_approve_modal{{$req->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="block block-themed block-transparent mb-0">
+                                                                <div class="block-header bg-primary-dark">
+                                                                    <h3 class="block-title">Approve Top-up</h3>
+                                                                    <div class="block-options">
+                                                                        <button type="button" class="btn-block-option">
+                                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <form action="{{route('admin.wallets.approve.request',$req->id)}}" method="get">
+                                                                    <div class="block-content font-size-sm">
+                                                                        <div class="form-group">
+                                                                            <div class="col-sm-12">
+                                                                                <div class="form-material">
+                                                                                    <label for="material-error">Approved Date</label>
+                                                                                    <input required class="form-control" type="date"  name="date"
+                                                                                           value="" >
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="block-content block-content-full text-right border-top">
+                                                                        <button type="submit" class="btn btn-sm btn-primary" >Approved</button>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
                                             @endforeach
                                         </table>
@@ -258,11 +294,45 @@
                                                     </td>
                                                     <td class="text-right">
                                                         @if($req->status == 0)
-                                                            <button class="btn btn-sm btn-success approve-bank-transfer-button" data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD"> Approve Request</button>
+                                                            <button class="btn btn-sm btn-success <!--approve-bank-transfer-button-->" data-toggle="modal" data-target="#bank_approve_modal{{$req->id}}" {{--data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD" --}} > Approve Request</button>
                                                         @endif
                                                     </td>
                                                 </tr>
                                                 </tbody>
+                                                <div class="modal fade" id="bank_approve_modal{{$req->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="block block-themed block-transparent mb-0">
+                                                                <div class="block-header bg-primary-dark">
+                                                                    <h3 class="block-title">Approve Top-up</h3>
+                                                                    <div class="block-options">
+                                                                        <button type="button" class="btn-block-option">
+                                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <form action="{{route('admin.wallets.approve.request',$req->id)}}" method="get">
+                                                                    <div class="block-content font-size-sm">
+                                                                        <div class="form-group">
+                                                                            <div class="col-sm-12">
+                                                                                <div class="form-material">
+                                                                                    <label for="material-error">Approved Date</label>
+                                                                                    <input required class="form-control" type="date"  name="date"
+                                                                                           value="" >
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="block-content block-content-full text-right border-top">
+                                                                        <button type="submit" class="btn btn-sm btn-primary" >Approved</button>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
                                             @endforeach
                                         </table>
