@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\UserFileTemp;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -54,8 +56,10 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
             'user_id' => $this->user_id,
             'file_id' => $this->file_id,
         ]);
-        $usertemp->timestamps = false;
-        $usertemp->created_at = date_create($row['Order date'])->format('Y-m-d h:i:s');
+//        $usertemp->timestamps = false;
+        $time = strtotime($row['Order date']);
+        $newformat = date('Y-d-m H:i:s',$time);
+        $usertemp->created_at =  $newformat;
         $usertemp->save();
 
         return $usertemp;

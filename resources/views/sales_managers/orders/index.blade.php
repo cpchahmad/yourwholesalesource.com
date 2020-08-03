@@ -92,7 +92,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{date_create($order->shopify_created_at)->format('D m, Y h:i a') }}
+                                            {{date_create($order->shopify_created_at)->format('d m, Y h:i a') }}
+
                                         </td>
 
                                         <td>
