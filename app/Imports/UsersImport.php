@@ -38,7 +38,7 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
         if (!isset($row['Order Id']) || !isset($row['Name']) || !isset($row['Contact phone']) || !isset($row['Postcode']) || !isset($row['Country']) || !isset($row['Sku']) || !isset($row['Quantity']) || !isset($row['Province']) || !isset($row['Order date'])) {
             return null;
         }
-        return new UserFileTemp([
+       $usertemp =  new UserFileTemp([
             'order_number' => $row['Order Id'],
             'quantity' => $row['Quantity'],
             'sku' => $row['Sku'],
@@ -53,7 +53,11 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
             'email' => $row['Email'],
             'user_id' => $this->user_id,
             'file_id' => $this->file_id,
-            'created_at' => date_create($row['Order date'])->format('Y-m-d h:i:s')
         ]);
+        $usertemp->timestamps = false;
+        $usertemp->created_at = date_create($row['Order date'])->format('Y-m-d h:i:s');
+        $usertemp->save();
+
+        return $usertemp;
     }
 }
