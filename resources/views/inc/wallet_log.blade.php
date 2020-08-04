@@ -41,7 +41,7 @@
                             </div>
                         @elseif($log->status == "Top-up through Refund")
                             <div class="timeline-event-icon bg-danger">
-                                <i class="fa fa-funnel-dollar"></i>
+                                <i class="fa fa-money-bill"></i>
                             </div>
                         @elseif($log->status == "Completed")
                         <div class="timeline-event-icon" style="background: darkslategray">
