@@ -159,12 +159,12 @@ class WalletController extends Controller
                 $wallet_log->wallet_id =$related_wallet->id;
                 $wallet_log->status = "Bank Transfer Approved";
                 $wallet_log->amount = $req->amount;
-                $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . now()->format('d M, Y h:i a'). ' By Administration';
+                $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . date_create($request->input('date'))->format('d M, Y h:i a') . ' By Administration';
                 $wallet_log->timestamps = false;
                 $wallet_log->created_at = date_create($request->input('date'))->format('Y-m-d H:i:s');
                 $wallet_log->save();
 
-                $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . now()->format('d M, Y h:i a'). ' By Administration',$related_wallet);
+                $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . date_create($request->input('date'))->format('d M, Y h:i a') . ' By Administration',$related_wallet);
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }
             else{
