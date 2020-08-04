@@ -39,7 +39,7 @@
                             <div class="timeline-event-icon bg-success">
                                 <i class="fab fa-paypal"></i>
                             </div>
-                        @elseif($log->status == "Top-up Through Refund")
+                        @elseif($log->status == "Top-up through Refund")
                             <div class="timeline-event-icon bg-danger">
                                 <i class="fa fa-funnel-dollar"></i>
                             </div>
