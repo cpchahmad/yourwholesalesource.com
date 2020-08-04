@@ -8,7 +8,7 @@
             </div>
             <div class="block-content">
                 <ul class="timeline timeline-alt">
-                    @foreach($wallet->logs()->orderBy('created_at','DESC')->get() as $log)
+                    @foreach($wallet->logs()->orderBy('id','DESC')->get() as $log)
                     <li class="timeline-event">
                         @if($log->status == "CREATED")
                         <div class="timeline-event-icon bg-warning">
@@ -34,8 +34,13 @@
                         <div class="timeline-event-icon bg-amethyst">
                             <i class="fa fa-credit-card" aria-hidden="true"></i>
                         </div>
+
                         @elseif($log->status == "Top-up By Paypal")
                             <div class="timeline-event-icon bg-success">
+                                <i class="fab fa-paypal"></i>
+                            </div>
+                        @elseif($log->status == "Top-up Through Refund")
+                            <div class="timeline-event-icon bg-danger">
                                 <i class="fab fa-paypal"></i>
                             </div>
                         @elseif($log->status == "Completed")
