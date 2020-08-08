@@ -200,7 +200,7 @@
 
                     </ul>
                     <div class="p-2 border-top">
-                        <a class="btn btn-sm btn-light btn-block text-center" href="{{route('store.notifications')}}">
+                        <a class="btn btn-sm btn-light btn-block text-center" href="{{route('users.notifications')}}">
                             <i class="fa fa-fw fa-arrow-down mr-1"></i> See All
                         </a>
                     </div>
