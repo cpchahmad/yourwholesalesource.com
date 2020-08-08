@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('*', function ($view)
         {
-
+            $query = Notification::where('read',0)->newQuery();
 
             if (Auth::check()) {
                 $user = Auth::user();
@@ -64,8 +64,8 @@ class AppServiceProvider extends ServiceProvider
                   $balance = 0;
               }
             }
-            $notifications = Notification::where('read',0)->orderBy('created_at','DESC')->paginate(10);
-            $notifications_count = Notification::where('read',0)->orderBy('created_at','DESC')->count();
+            $notifications = $query->orderBy('created_at','DESC')->paginate(10);
+            $notifications_count = $query->orderBy('created_at','DESC')->count();
 
             $view->with([
                 'balance' => $balance,
