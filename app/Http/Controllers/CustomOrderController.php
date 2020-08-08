@@ -1037,7 +1037,7 @@ class CustomOrderController extends Controller
             });
         }
         $notifications = $query->orderBy('read','ASC')->paginate(30);
-        return view('single-store.notifications.index')->with([
+        return view('non_shopify_users.notifications.index')->with([
             'notifications' => $notifications
         ]);
 
