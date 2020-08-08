@@ -29,6 +29,8 @@
                                         <th>Title</th>
                                         <th>Notification</th>
                                         <th>Status</th>
+                                        <th>Time</th>
+
                                     </tr>
                                     </thead>
                                     <tbody class="">
@@ -48,6 +50,8 @@
                                                     <span class="badge badge-danger">read</span>
                                                 @endif
                                             </td>
+                                            <td>{{$notification->created_at->diffForHumans()}}</td>
+
                                         </tr>
                                     @endforeach
                                     </tbody>
