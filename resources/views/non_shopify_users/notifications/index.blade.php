@@ -37,7 +37,7 @@
                                     @foreach($notifications as $index => $notification)
                                         <tr>
                                             <td class="font-w600">{{ $notification->sub_type }}</td>
-                                            <td>
+                                            <td style="width: 50%">
                                                 <a href="{{route('users.notification',$notification->id)}}">
                                                     {{$notification->message}}
                                                 </a>
