@@ -1036,7 +1036,8 @@ class CustomOrderController extends Controller
                 $q->where('email',$user->email);
             });
         }
-        $notifications = $query->orderBy('read','ASC')->paginate(30);
+        $notifications = $query->orderBy('created_at','DESC')->paginate(30);
+
         return view('non_shopify_users.notifications.index')->with([
             'notifications' => $notifications
         ]);

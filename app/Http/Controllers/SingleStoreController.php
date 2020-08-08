@@ -618,7 +618,7 @@ class SingleStoreController extends Controller
             }
 
         }
-        $notifications = $query->orderBy('read','ASC')->paginate(30);
+        $notifications = $query->orderBy('created_at','DESC')->paginate(30);
         return view('single-store.notifications.index')->with([
             'notifications' => $notifications
         ]);
