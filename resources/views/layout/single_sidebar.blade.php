@@ -114,6 +114,13 @@
             </a>
         </li>
 
+        <li class="nav-main-item">
+            <a class="nav-main-link" href="{{route('store.notifications')}}">
+                <i class="nav-main-link-icon fa fa-sticky-note"></i>
+                <span class="nav-main-link-name">Notifications</span>
+            </a>
+        </li>
+
 
         <li class="nav-main-item">
             <a class="nav-main-link" href="{{route('store.help-center')}}">
@@ -223,7 +230,7 @@
 
                     </ul>
                     <div class="p-2 border-top">
-                        <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
+                        <a class="btn btn-sm btn-light btn-block text-center" href="{{route('store.notifications')}}">
                             <i class="fa fa-fw fa-arrow-down mr-1"></i> See All
                         </a>
                     </div>

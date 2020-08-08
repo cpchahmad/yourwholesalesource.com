@@ -1027,6 +1027,21 @@ class CustomOrderController extends Controller
 
         }
     }
+    public function notifications()
+    {
+        $query = Notification::query();
+        if (Auth::check()) {
+            $user = Auth::user();
+            $query->whereHas('to_users',function ($q) use ($user){
+                $q->where('email',$user->email);
+            });
+        }
+        $notifications = $query->orderBy('read','ASC')->paginate(30);
+        return view('single-store.notifications.index')->with([
+            'notifications' => $notifications
+        ]);
+
+    }
     function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
         $output = NULL;
         if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
