@@ -26,7 +26,7 @@
                                             <td class="text-right" style="vertical-align: middle">
                                                 <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
                                                    type="button" data-toggle="tooltip" title=""
-                                                   data-original-title="Remove Store">De-assosiate</a>
+                                                   data-original-title="Remove Store"><i class="fa fa-trash"></i></a>
 
                                             </td>
                                         </tr>
