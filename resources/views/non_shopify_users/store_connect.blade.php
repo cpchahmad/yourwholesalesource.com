@@ -25,9 +25,10 @@
                             <form method="POST" action="{{ route('authenticate') }}">
                                 {{ csrf_field() }}
                                 <div class="form-material">
+                                    <label for="shop">Store Domain</label>
                                     <input id="shop" name="shop" class="form-control" type="text" autofocus="autofocus" placeholder="example.myshopify.com">
                                     <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-                                    <label for="shop">Store Domain</label>
+
                                 </div>
 
                                 <button class="btn btn-primary" type="submit">Connect </button>
