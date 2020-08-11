@@ -11,7 +11,7 @@
                     <div class="col-md-12">
                         <div class="block">
                             <div class="block-header">
-                                <h3 class="block-title">List of stores attached</h3>
+                                <h3 class="block-title">List of stores attached <a href="{{route('users.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a></h3>
                             </div>
                             <div class="block-content ">
                                 <table class="js-table-sections table table-hover">

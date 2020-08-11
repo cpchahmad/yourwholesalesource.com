@@ -40,9 +40,8 @@
                             </td>
                             <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
                             <td class="text-right" style="vertical-align: middle">
-                                <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger"
-                                   type="button" data-toggle="tooltip" title=""
-                                   data-original-title="Remove Store"><i class="fa fa-times"></i></a>
+                                <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
+                                   title="Remove Store" ><i class="fa fa-trash"></i></a>
 
                             </td>
                         </tr>
