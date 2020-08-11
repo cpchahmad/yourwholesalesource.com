@@ -3,29 +3,37 @@
     <div class="content content-narrow">
         <div class="row mb2">
             <div class="col-md-4">
-                <h3 class="font-w700">Store Association </h3>
+                <h3 class="font-w700">Settings </h3>
             </div>
             <div class="col-md-8">
                 <div class="block">
                     <div class="block-content">
                         @if($associated_user != null)
-                        <form class="form-horizontal push-5-t">
-                            <div class="form-group">
-                                <label class="col-xs-12" for="register1-username">Username</label>
-                                <div class="col-xs-12">
-                                    <input class="form-control" readonly value="{{$associated_user->name}}" type="text" id="register1-username" name="register1-username" placeholder="Enter your username..">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="block">
+                                        <div class="block-header">
+                                            <h3 class="block-title">Associated Account</h3>
+                                        </div>
+                                        <div class="block-content ">
+                                            <div class="form-group">
+                                                <label class="col-xs-12" for="register1-username">Username</label>
+                                                <div class="col-xs-12">
+                                                    <input class="form-control" readonly value="{{$associated_user->name}}" type="text" id="register1-username" name="register1-username" placeholder="Enter your username..">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-xs-12" for="register1-email">Email</label>
+                                                <div class="col-xs-12">
+                                                    <input class="form-control" readonly value="{{$associated_user->email}}" type="email" id="register1-email" name="register1-email" placeholder="Enter your email..">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-
-                            <div class="form-group">
-                                <label class="col-xs-12" for="register1-email">Email</label>
-                                <div class="col-xs-12">
-                                    <input class="form-control" readonly value="{{$associated_user->email}}" type="email" id="register1-email" name="register1-email" placeholder="Enter your email..">
-                                </div>
-                            </div>
-                        </form>
-                            @else
+                        @else
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="block">
