@@ -1150,8 +1150,11 @@ class ProductController extends Controller
 
 
          $data = [
-             'id' =>35737686704261,
-             "tracked"=> true
+             "inventory_item" => [
+                 'id' =>35737686704261,
+                 "tracked"=> true
+             ]
+
          ];
        $resp =   $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/35737686704261.json',$data);
 
