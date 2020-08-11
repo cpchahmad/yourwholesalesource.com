@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
                   $balance = 0;
               }
             }
-            $notifications = $query->orderBy('created_at','DESC')->paginate(10);
+            $notifications = $query->orderBy('created_at','DESC')->paginate(5);
             $notifications_count = $query->orderBy('created_at','DESC')->count();
 
             $view->with([
