@@ -44,7 +44,6 @@
                 <table class="js-table-sections table-borderless table table-hover">
                     <thead>
                     <tr>
-
                         <th>Title</th>
                         <th>Domain</th>
                         <th></th>
