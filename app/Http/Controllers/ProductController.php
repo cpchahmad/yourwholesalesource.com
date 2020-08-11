@@ -1148,6 +1148,12 @@ class ProductController extends Controller
 
         $shop = $this->helper->getAdminShop();
 
+        $data = [
+            'location_id' =>44247580805,
+            'inventory_item_id' => 35737686704261
+        ];
+         $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json',$data);
+
 
         $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
         dd($RESPONSE);
