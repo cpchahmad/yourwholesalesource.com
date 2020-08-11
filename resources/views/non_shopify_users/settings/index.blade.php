@@ -18,13 +18,9 @@
                                     <tbody>
                                     @foreach($associated_user->has_shops as $index => $shop)
                                         <tr>
-
-                                            <td class="font-w600" style="vertical-align: middle">
-                                                {{explode('.',$shop->shopify_domain)[0]}}
-                                            </td>
                                             <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
                                             <td class="text-right" style="vertical-align: middle">
-                                                <a href="{{url('/shop/install?shop='.$shop->shopify_domain)}}" class="btn btn-sm btn-success"><i class="fa fa-sync-alt"></i></a>
+                                                <a href="{{url('/shop/install?shop='.$shop->shopify_domain)}}" class="btn btn-sm btn-success">Switch View</a>
 
                                                 <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
                                                     title="Remove Store" ><i class="fa fa-trash"></i></a>
