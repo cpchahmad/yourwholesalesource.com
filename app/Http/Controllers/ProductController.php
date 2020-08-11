@@ -1161,7 +1161,8 @@ class ProductController extends Controller
                             'inventory_management' => 'shopify',
                         ]
                     ];
-                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/product/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
+                  dd($RESPONSE);
                 }
 
             }
@@ -1174,7 +1175,8 @@ class ProductController extends Controller
                             'inventory_management' => 'shopify',
                         ]
                     ];
-                    $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                    $RESPONSE =   $shop->api()->rest('PUT', '/admin/api/2019-10/product/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
+                    dd($RESPONSE);
                 }
 
             }
