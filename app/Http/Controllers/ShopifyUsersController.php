@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
+use App\Shop;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 
 class ShopifyUsersController extends Controller
 {
@@ -137,5 +143,80 @@ class ShopifyUsersController extends Controller
         return view('non_shopify_users.stores')->with([
             'shops' => $shops
         ]);
+    }
+
+    public function setting(){
+
+        $associated_user = Auth::user();
+        return view('non_shopify_users.settings.index')->with([
+            'associated_user' =>$associated_user,
+            'countries' => Country::all()
+        ]);
+    }
+
+    public function save_personal_info(Request $request){
+        $user = User::find($request->input('user_id'));
+        if($user != null){
+            $user->name =  $request->input('name');
+            $user->save();
+            if($request->hasFile('profile')){
+                $file = $request->file('profile');
+                $name = Str::slug($file->getClientOriginalName());
+                $profile = date("mmYhisa_") . $name;
+                $file->move(public_path() . '/managers-profiles/', $profile);
+                $user->profile = $profile;
+                $user->save();
+            }
+            return redirect()->back()->with('success','Personal Information Updated Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','User Not Found!');
+        }
+    }
+    public function save_address(Request $request){
+        $user = User::find($request->input('user_id'));
+        if($user != null){
+            $user->address =  $request->input('address');
+            $user->address2 =  $request->input('address2');
+            $user->city =  $request->input('city');
+            $user->state =  $request->input('state');
+            $user->zip =  $request->input('zip');
+            $user->country =  $request->input('country');
+            $user->save();
+            return redirect()->back()->with('success','Address Updated Successfully!');
+
+        }
+        else{
+            return redirect()->back()->with('error','Manager Not Found!');
+        }
+    }
+
+    public function change_password(Request $request){
+        $manager = User::find($request->input('user_id'));
+        if($manager != null){
+            $array_to_check = [
+                'email' => $manager->email,
+                'password' =>$request->input('current_password')
+            ];
+            if(Auth::validate($array_to_check)){
+                if($request->input('new_password') == $request->input('new_password_again')){
+                    $manager->password = Hash::make($request->input('new_password'));
+                    $manager->save();
+
+                    return redirect()->back()->with('success','Password Changed Successfully!');
+
+                }
+                else{
+                    return redirect()->back()->with('error','New Password Mismatched!');
+                }
+            }
+            else{
+                return redirect()->back()->with('error','Current Password is Invalid!');
+            }
+
+        }
+        else{
+            return redirect()->back()->with('error','User Not Found!');
+        }
     }
 }

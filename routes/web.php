@@ -130,7 +130,9 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::post('/user/authenticate','SingleStoreController@authenticate')->name('store.user.authenticate');
         Route::post('/user/store/association','SingleStoreController@associate')->name('store.user.associate');
         Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard');
-        Route::get('/setting','SingleStoreController@setting')->name('store.index');
+        Route::get('/settings','SingleStoreController@setting')->name('store.index');
+        Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
+        Route::post('/settings/personal/address','SingleStoreController@save_address')->name('store.save_address');
         Route::get('/products/wefullfill','SingleStoreController@wefullfill_products')->name('store.product.wefulfill');
         Route::get('/products/wefullfill/{id}','SingleStoreController@view_fantasy_product')->name('store.product.wefulfill.show');
         Route::get('/my_products/wefullfill/{id}','SingleStoreController@view_my_product')->name('store.my_product.wefulfill.show');
@@ -179,6 +181,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::prefix('users')->group(function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
             Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
+            Route::get('/settings','ShopifyUsersController@setting')->name('users.settings');
+            Route::post('/settings/personal','ShopifyUsersController@save_personal_info')->name('users.save_personal_info');
+            Route::post('/settings/personal/address','ShopifyUsersController@save_address')->name('users.save_address');
+            Route::post('/settings/change/password','ShopifyUsersController@change_password')->name('users.change.password');
+
             Route::get('/stores','ShopifyUsersController@stores')->name('users.stores');
             Route::get('/custom-orders','CustomOrderController@index')->name('users.custom.orders');
             Route::get('/custom-orders/create','CustomOrderController@show_create_form')->name('users.custom.orders.create');

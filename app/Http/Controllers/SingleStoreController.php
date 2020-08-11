@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 use function foo\func;
 
@@ -320,9 +322,49 @@ class SingleStoreController extends Controller
         }
         return view('single-store.index')->with([
             'shop'=>$shop,
-            'associated_user' =>$associated_user
+            'associated_user' =>$associated_user,
+            'countries' => Country::all()
         ]);
     }
+
+    public function save_personal_info(Request $request){
+        $user = User::find($request->input('user_id'));
+        if($user != null){
+            $user->name =  $request->input('name');
+            $user->save();
+            if($request->hasFile('profile')){
+                $file = $request->file('profile');
+                $name = Str::slug($file->getClientOriginalName());
+                $profile = date("mmYhisa_") . $name;
+                $file->move(public_path() . '/managers-profiles/', $profile);
+                $user->profile = $profile;
+                $user->save();
+            }
+            return redirect()->back()->with('success','Personal Information Updated Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','User Not Found!');
+        }
+    }
+    public function save_address(Request $request){
+        $user = User::find($request->input('user_id'));
+        if($user != null){
+            $user->address =  $request->input('address');
+            $user->address2 =  $request->input('address2');
+            $user->city =  $request->input('city');
+            $user->state =  $request->input('state');
+            $user->zip =  $request->input('zip');
+            $user->country =  $request->input('country');
+            $user->save();
+            return redirect()->back()->with('success','Address Updated Successfully!');
+
+        }
+        else{
+            return redirect()->back()->with('error','Manager Not Found!');
+        }
+    }
+
+
     public function authenticate(Request $request){
         if(Auth::validate($request->except('_token'))){
             $authenticate = true;

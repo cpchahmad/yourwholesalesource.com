@@ -1,136 +1,138 @@
 <nav id="sidebar" aria-label="Main Navigation">
-<div class="content-header bg-white-5">
-    <a class="font-w600 text-dual" href="index.html">
-        <i class="fa fa-circle-notch text-primary"></i>
-        <span class="smini-hide">
+    <div class="content-header bg-white-5">
+        <a class="font-w600 text-dual" href="index.html">
+            <i class="fa fa-circle-notch text-primary"></i>
+            <span class="smini-hide">
                             <span class="font-w700 font-size-h5">WeFullFill</span>
                         </span>
-    </a>
-    <div>
-        <a class="d-lg-none btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
-            <i class="fa fa-fw fa-times"></i>
         </a>
+        <div>
+            <a class="d-lg-none btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                <i class="fa fa-fw fa-times"></i>
+            </a>
+        </div>
     </div>
-</div>
 
-<div class="content-side content-side-full">
-    <ul class="nav-main">
-        <li class="nav-main-item">
-            <a class="nav-main-link active" href="{{route('store.dashboard')}}">
-                <i class="nav-main-link-icon si si-speedometer"></i>
-                <span class="nav-main-link-name">Dashboard</span>
-            </a>
-        </li>
-        <li class="nav-main-item open">
-            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon si si-layers"></i>
-                <span class="nav-main-link-name">Products</span>
-            </a>
-            <ul class="nav-main-submenu">
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">By WeFullfill</span>
-                    </a>
-                </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.import_list')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">Import List</span>
-                    </a>
-                </li>
+    <div class="content-side content-side-full">
+        <ul class="nav-main">
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('store.dashboard')}}">
+                    <i class="nav-main-link-icon si si-speedometer"></i>
+                    <span class="nav-main-link-name">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-main-item open">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-layers"></i>
+                    <span class="nav-main-link-name">Products</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">By WeFullfill</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.import_list')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Import List</span>
+                        </a>
+                    </li>
 
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.my_products')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">My Products</span>
-                    </a>
-                </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.my_products')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">My Products</span>
+                        </a>
+                    </li>
 
-            </ul>
-        </li>
-        <li class="nav-main-item">
-            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                <i class="nav-main-link-icon si si-bag"></i>
-                <span class="nav-main-link-name">Orders</span>
-            </a>
-            <ul class="nav-main-submenu open">
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.orders')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">My Orders</span>
-                    </a>
-                </li>
-
-
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.payments')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">Payment History</span>
-                    </a>
-                </li>
-
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.tracking')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">Tracking Info</span>
-                    </a>
-                </li>
-                <li class="nav-main-item">
-                    <a class="nav-main-link" href="{{route('store.refunds')}}">
-                        <i class="nav-main-link-icon si si-bag"></i>
-                        <span class="nav-main-link-name">Refunds</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-
-        <li class="nav-main-item">
-            <a class="nav-main-link" href="{{route('store.customers')}}">
-                <i class="nav-main-link-icon si si-user"></i>
-                <span class="nav-main-link-name">Customer</span>
-            </a>
-        </li>
-
-{{--        <li class="nav-main-item">--}}
-{{--            <a class="nav-main-link" href="{{route('store.index')}}">--}}
-{{--                <i class="nav-main-link-icon si si-wrench"></i>--}}
-{{--                <span class="nav-main-link-name">Settings</span>--}}
-{{--            </a>--}}
-{{--        </li>--}}
-
-        <li class="nav-main-item">
-            <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
-                <i class="nav-main-link-icon si si-wallet"></i>
-                <span class="nav-main-link-name">Wallet</span>
-            </a>
-        </li>
-
-        <li class="nav-main-item">
-            <a class="nav-main-link"  href="{{route('store.wishlist')}}">
-                <i class="nav-main-link-icon fa fa-heart"></i>
-                <span class="nav-main-link-name">Wishlist</span>
-            </a>
-        </li>
-
-        <li class="nav-main-item">
-            <a class="nav-main-link" href="{{route('store.notifications')}}">
-                <i class="nav-main-link-icon fa fa-sticky-note"></i>
-                <span class="nav-main-link-name">Notifications</span>
-            </a>
-        </li>
+                </ul>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon si si-bag"></i>
+                    <span class="nav-main-link-name">Orders</span>
+                </a>
+                <ul class="nav-main-submenu open">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.orders')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">My Orders</span>
+                        </a>
+                    </li>
 
 
-        <li class="nav-main-item">
-            <a class="nav-main-link" href="{{route('store.help-center')}}">
-                <i class="nav-main-link-icon fa fa-hands-helping"></i>
-                <span class="nav-main-link-name">Help Center</span>
-            </a>
-        </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.payments')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Payment History</span>
+                        </a>
+                    </li>
 
-    </ul>
-</div>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.tracking')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Tracking Info</span>
+                        </a>
+                    </li>
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.refunds')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Refunds</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('store.customers')}}">
+                    <i class="nav-main-link-icon si si-user"></i>
+                    <span class="nav-main-link-name">Customer</span>
+                </a>
+            </li>
+
+
+
+            <li class="nav-main-item">
+                <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
+                    <i class="nav-main-link-icon si si-wallet"></i>
+                    <span class="nav-main-link-name">Wallet</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link"  href="{{route('store.wishlist')}}">
+                    <i class="nav-main-link-icon fa fa-heart"></i>
+                    <span class="nav-main-link-name">Wishlist</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('store.notifications')}}">
+                    <i class="nav-main-link-icon fa fa-sticky-note"></i>
+                    <span class="nav-main-link-name">Notifications</span>
+                </a>
+            </li>
+
+
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('store.help-center')}}">
+                    <i class="nav-main-link-icon fa fa-hands-helping"></i>
+                    <span class="nav-main-link-name">Help Center</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('store.index')}}">
+                    <i class="nav-main-link-icon si si-wrench"></i>
+                    <span class="nav-main-link-name">Settings</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
 </nav>
 
 <header id="page-header">
@@ -152,6 +154,13 @@
            else{
                $manager = null;
            }
+
+         if(count($shop->has_user) > 0){
+            $associated_user =   $shop->has_user[0];
+        }
+        else{
+            $associated_user = null;
+        }
 
         @endphp
         <!-- User Dropdown -->
@@ -240,26 +249,29 @@
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
-                    <span class="d-none d-sm-inline-block ml-1">Adam</span>
+                    @if($associated_user != null)
+                        <img class="rounded" @if($associated_user->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$associated_user->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                    @else
+                        <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
+                    @endif
+                    <span class="d-none d-sm-inline-block ml-1">{{explode('.',$shop->shopify_domain)[0]}}</span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
                     <div class="p-3 text-center bg-primary">
+                        @if($associated_user != null)
+                            <img class="img-avatar img-avatar48 img-avatar-thumb" @if($associated_user->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$associated_user->profile}}" @endif  alt="">
+
+                        @else
                         <img class="img-avatar img-avatar48 img-avatar-thumb" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="">
+                        @endif
                     </div>
                     <div class="p-2">
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_profile.html">
-                            <span>Profile</span>
-                            <span>
-                                            <span class="badge badge-pill badge-success">1</span>
-                                            <i class="si si-user ml-1"></i>
-                                        </span>
+
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('store.index')}}">
+                            <span>Settings</span>
+                            <i class="si si-settings"></i>
                         </a>
-{{--                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">--}}
-{{--                            <span>Settings</span>--}}
-{{--                            <i class="si si-settings"></i>--}}
-{{--                        </a>--}}
                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="/logout">
                             <span>Log Out</span>
                             <i class="si si-logout ml-1"></i>
