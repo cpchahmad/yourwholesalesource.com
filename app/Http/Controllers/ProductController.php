@@ -1153,7 +1153,6 @@ class ProductController extends Controller
             'inventory_item_id' => 35737686704261
         ];
        $res =   $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json',$data);
-        dd($res);
 
         $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
         dd($RESPONSE);
