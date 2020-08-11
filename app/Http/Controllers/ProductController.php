@@ -252,23 +252,23 @@ class ProductController extends Controller
                     $product->save();
 
                     if (count($product->hasVariants) == 0) {
-                       $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-                       if(!$response->errors){
-                           $shopifyVariants = $response->body->product->variants;
-                           $variant_id = $shopifyVariants[0]->id;
-                           $i = [
-                               'variant' => [
-                                   'price' =>$product->price,
-                                   'sku' =>  $product->sku,
-                                   'grams' => $product->weight * 1000,
-                                   'weight' => $product->weight,
-                                   'weight_unit' => 'kg',
-                                   'barcode' => $product->barcode,
+                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+                        if(!$response->errors){
+                            $shopifyVariants = $response->body->product->variants;
+                            $variant_id = $shopifyVariants[0]->id;
+                            $i = [
+                                'variant' => [
+                                    'price' =>$product->price,
+                                    'sku' =>  $product->sku,
+                                    'grams' => $product->weight * 1000,
+                                    'weight' => $product->weight,
+                                    'weight_unit' => 'kg',
+                                    'barcode' => $product->barcode,
 
-                               ]
-                           ];
-                           $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                       }
+                                ]
+                            ];
+                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                        }
 
                     }
 
@@ -1147,40 +1147,45 @@ class ProductController extends Controller
     public function getQuantitySync(){
 
         $shop = $this->helper->getAdminShop();
-        $products = Product::whereNotNull('shopify_id')->get();
-        foreach ($products as $product){
-            if(count($product->hasVariants) == 0){
-                $response =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
 
-                if(!$response->errors){
-                    $shopifyVariants = $response->body->product->variants;
-                    $variant_id = $shopifyVariants[0]->id;
-                    $i = [
-                        'variant' => [
-                            'inventory_quantity' => $product->quantity,
-                            'inventory_management' => 'shopify',
-                        ]
-                    ];
-                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
-                  dd($RESPONSE);
-                }
 
-            }
-            else{
-                foreach ($product->hasVariants as $variant){
-                    $variant_id = $variant->shopify_id;
-                    $i = [
-                        'variant' => [
-                            'inventory_quantity' => $variant->quantity,
-                            'inventory_management' => 'shopify',
-                        ]
-                    ];
-                    $RESPONSE =   $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
-                    dd($RESPONSE);
-                }
+        $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
+        dd($RESPONSE);
 
-            }
-        }
+//        $products = Product::whereNotNull('shopify_id')->get();
+//        foreach ($products as $product){
+//            if(count($product->hasVariants) == 0){
+//                $response =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
+//
+//                if(!$response->errors){
+//                    $shopifyVariants = $response->body->product->variants;
+//                    $variant_id = $shopifyVariants[0]->id;
+//                    $i = [
+//                        'variant' => [
+//                            'inventory_quantity' => $product->quantity,
+//                            'inventory_management' => 'shopify',
+//                        ]
+//                    ];
+//                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
+//                  dd($RESPONSE);
+//                }
+//
+//            }
+//            else{
+//                foreach ($product->hasVariants as $variant){
+//                    $variant_id = $variant->shopify_id;
+//                    $i = [
+//                        'variant' => [
+//                            'inventory_quantity' => $variant->quantity,
+//                            'inventory_management' => 'shopify',
+//                        ]
+//                    ];
+//                    $RESPONSE =   $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
+//                    dd($RESPONSE);
+//                }
+//
+//            }
+//        }
     }
 
 
