@@ -11,7 +11,7 @@
                     <div class="col-md-12">
                         <div class="block">
                             <div class="block-header">
-                                <h3 class="block-title">List of stores <a href="{{route('system.store.connect')}}" class="btn btn-primary btn-sm" style="float: right"> Add Store</a> <a href="{{route('users.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a></h3>
+                                <h3 class="block-title">List of stores <a href="{{route('system.store.connect')}}" class="btn btn-success btn-sm" style="float: right;margin-right: 5px"> Add Store</a> <a href="{{route('users.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a></h3>
                             </div>
                             <div class="block-content ">
                                 <table class="js-table-sections table table-hover">
