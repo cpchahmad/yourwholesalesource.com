@@ -1148,6 +1148,13 @@ class ProductController extends Controller
 
         $shop = $this->helper->getAdminShop();
 
+
+         $data = [
+             'id' =>35737686704261,
+             "tracked"=> true
+         ];
+       $resp =   $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/35737686704261.json',$data);
+
         $data = [
             'location_id' =>44247580805,
             'inventory_item_id' => 35737686704261,
@@ -1157,7 +1164,7 @@ class ProductController extends Controller
 
         $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
 
-        dd($RESPONSE,$res);
+        dd($RESPONSE,$res,$resp);
 
 //        $products = Product::whereNotNull('shopify_id')->get();
 //        foreach ($products as $product){
