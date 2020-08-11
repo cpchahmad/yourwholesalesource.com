@@ -143,6 +143,10 @@
                                     <span class="h5">
                                         <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
                                     </span>
+                                @elseif(count($product->quantity) > 0)
+                                    <span class="h5">
+                                        <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->quantity}} Available  </small>
+                                    </span>
                                 @else
                                     <span class="h5">
                                 <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>

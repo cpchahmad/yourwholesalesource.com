@@ -20,7 +20,7 @@
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Products</a>
                         </li>
-                        <li class="breadcrumb-item">                    {{ \Illuminate\Support\Str::limit($product->title,20,'...') }}
+                        <li class="breadcrumb-item">{{ \Illuminate\Support\Str::limit($product->title,20,'...') }}
                         </li>
                     </ol>
                 </nav>
@@ -134,6 +134,10 @@
                                 @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
                                     <span class="h5">
                                         <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                                    </span>
+                                @elseif(count($product->quantity) > 0)
+                                    <span class="h5">
+                                        <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->quantity}} Available  </small>
                                     </span>
                                 @else
                                     <span class="h5">

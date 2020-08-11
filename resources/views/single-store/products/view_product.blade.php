@@ -101,10 +101,10 @@
                         @if(count($product->has_platforms) > 0)
                             <div class="tags" style="margin-top: 5px">
 
-                                    <h4 style="margin-bottom: 5px">Warned Platforms</h4>
-                                    @foreach($product->has_platforms as $cat)
-                                        <span class="badge badge-primary">{{$cat->name}}</span>
-                                    @endforeach
+                                <h4 style="margin-bottom: 5px">Warned Platforms</h4>
+                                @foreach($product->has_platforms as $cat)
+                                    <span class="badge badge-primary">{{$cat->name}}</span>
+                                @endforeach
 
                             </div>
                             <hr>
@@ -136,7 +136,7 @@
                                     <span class="badge badge-info">{{$tag}}</span>
                                 @endforeach
                             </div>
-                        @endif
+                    @endif
                     <!-- END Images -->
                     </div>
                     <div class="col-sm-6">
@@ -152,6 +152,10 @@
                                 @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
                                     <span class="h5">
                                         <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
+                                    </span>
+                                @elseif(count($product->quantity) > 0)
+                                    <span class="h5">
+                                        <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->quantity}} Available  </small>
                                     </span>
                                 @else
                                     <span class="h5">
