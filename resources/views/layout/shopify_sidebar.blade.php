@@ -173,15 +173,15 @@
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-none d-sm-inline-block ml-1">Switch Store</span>
+                    <span class="d-none d-sm-inline-block ml-1">Switch to Store</span>
                 </button>
-                <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown2">
+                <div class="dropdown-menu dropdown-menu-left p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown2">
                     <div class="p-2">
                         @foreach(auth()->user()->has_shops as $shop)
                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{url('/shop/install?shop='.$shop->shopify_domain)}}">
                             <span>{{explode('.',$shop->shopify_domain)[0]}}</span>
                         </a>
-                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>
