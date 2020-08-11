@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+
+    $('body').on('change','#change-view-store',function () {
+
+        if($(this).val() != ''){
+            window.location.href = $(this).val();
+        }
+
+    });
+
     $('body').on('click','.calculate_shipping_btn',function () {
         var button = $(this);
         $.ajax({

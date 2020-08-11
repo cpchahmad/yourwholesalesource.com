@@ -162,6 +162,14 @@
 
             </div>
             <!-- User Dropdown -->
+            <div class="d-inline-block mr-3">
+                <select name="change-view" id="change-view-store" class="form-control">
+                    <option value="">Switch Store</option>
+                    @foreach(auth()->user()->has_shops as $shop)
+                        <option value="/shop/install?shop={{$shop->shopify_domain}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell"></i>

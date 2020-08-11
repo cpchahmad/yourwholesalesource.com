@@ -131,6 +131,8 @@
                 </a>
             </li>
 
+
+
         </ul>
     </div>
 </nav>
@@ -200,6 +202,16 @@
                 <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
 
             </div>
+            @if(\Illuminate\Support\Facades\Auth::check())
+            <div class="d-inline-block mr-3">
+                <a class="nav-main-link" href="{{route('users.index')}}">
+                    <i class="nav-main-link-icon fa fa-sync"></i>
+                    <span class="nav-main-link-name">Switch To User View</span>
+                </a>
+
+            </div>
+            @endif
+
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell"></i>
