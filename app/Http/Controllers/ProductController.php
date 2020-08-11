@@ -1156,6 +1156,7 @@ class ProductController extends Controller
 
         $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
 
+        dd($RESPONSE);
 
 //        $products = Product::whereNotNull('shopify_id')->get();
 //        foreach ($products as $product){
