@@ -105,9 +105,12 @@ class InventoryController extends Controller
 
     public function single_inventory_sync(){
         $shop = $this->helper->getAdminShop();
-        $product = Product::find('52');
+        $product = Product::whereNotNull('inventory_item_id');
+        foreach ($product as $p){
+            $this->process_connect($p, $shop);
+        }
 
-        $this->process_connect($product, $shop);
+
     }
 
     /**
@@ -116,22 +119,22 @@ class InventoryController extends Controller
      */
     public function process_connect($product, $shop): void
     {
-        /*Track Enable*/
-        $data = [
-            "inventory_item" => [
-                'id' => $product->inventory_item_id,
-                "tracked" => true
-            ]
-
-        ];
-        $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
-        /*Connect to Wefullfill*/
-        $data = [
-            'location_id' => 46023344261,
-            'inventory_item_id' => $product->inventory_item_id,
-            'relocate_if_necessary' => true
-        ];
-        $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+//        /*Track Enable*/
+//        $data = [
+//            "inventory_item" => [
+//                'id' => $product->inventory_item_id,
+//                "tracked" => true
+//            ]
+//
+//        ];
+//        $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+//        /*Connect to Wefullfill*/
+//        $data = [
+//            'location_id' => 46023344261,
+//            'inventory_item_id' => $product->inventory_item_id,
+//            'relocate_if_necessary' => true
+//        ];
+//        $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
         /*Set Quantity*/
 
         $data = [
@@ -142,6 +145,6 @@ class InventoryController extends Controller
         ];
 
         $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
-        dd($res);
+//        dd($res);
     }
 }
