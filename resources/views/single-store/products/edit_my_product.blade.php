@@ -257,7 +257,7 @@
                                             <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
                                         </td>
                                         <td><input type="text" class="form-control" readonly value="{{$product->cost}}" placeholder="$0.00"></td>
-                                        <td><input type="text" class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
+                                        <td><input type="text" readonly class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
                                         <td><input type="text" readonly class="form-control" name="sku" value="{{$product->sku}}"></td>
                                         <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder="">
                                         </td>
