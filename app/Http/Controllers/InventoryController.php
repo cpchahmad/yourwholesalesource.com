@@ -58,8 +58,8 @@ class InventoryController extends Controller
            $products = Product::all();
            $json = [];
            foreach ($products as $product){
-               if(count($products->hasVariants) > 0){
-                   foreach ($products->hasVariants as $variant){
+               if(count($product->hasVariants) > 0){
+                   foreach ($product->hasVariants as $variant){
                        $json[$variant->sku] = $variant->quantity;
                    }
                }
