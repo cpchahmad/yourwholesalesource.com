@@ -14,6 +14,7 @@ use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Maatwebsite\Excel\Facades\Excel;
 use OhMyBrew\ShopifyApp\Models\Shop;
 
@@ -273,8 +274,8 @@ class ProductController extends Controller
                                 ]
                             ];
                             $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                            $job = new AppChangeQuantitySku($product);
-                            $this->dispatch($job);
+                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+
                         }
 
                     }
@@ -1160,8 +1161,7 @@ class ProductController extends Controller
     public function product_notification(Request $request,$id){
         $product = Product::find($id);
         $this->notify->generate('Product','Product Update',$product->title.' Information Updated',$product);
-        $job = new AppChangeQuantitySku($product);
-        $this->dispatch($job);
+        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
     }
 
 
