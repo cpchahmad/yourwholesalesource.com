@@ -74,33 +74,33 @@ class InventoryController extends Controller
     }
 
     public function inventory_connect(){
-        $this->single_inventory_sync();
-//        $shop = $this->helper->getAdminShop();
-//
-//        $products = Product::whereNotNull('shopify_id')->get();
-//        foreach ($products as $product){
-//
-//            $response =   $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
-//            if(!$response->errors){
-//                $shopifyVariants = $response->body->product->variants;
-//                if(count($product->hasVariants) == 0){
-//                    $product->inventory_item_id = $shopifyVariants[0]->inventory_item_id;
-//                    $product->save();
-//                    $this->process_connect($product, $shop);
-//                }
-//                else{
-//                    foreach ($product->hasVariants as $index => $variant){
-//                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-//                        $variant->save();
-//                        $this->process_connect($variant, $shop);
-//                    }
-//
-//                }
-//            }
-//            sleep(2);
-//
-//
-//        }
+//        $this->single_inventory_sync();
+        $shop = $this->helper->getAdminShop();
+
+        $products = Product::whereNotNull('shopify_id')->get();
+        foreach ($products as $product){
+
+            $response =   $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
+            if(!$response->errors){
+                $shopifyVariants = $response->body->product->variants;
+                if(count($product->hasVariants) == 0){
+                    $product->inventory_item_id = $shopifyVariants[0]->inventory_item_id;
+                    $product->save();
+                    $this->process_connect($product, $shop);
+                }
+                else{
+                    foreach ($product->hasVariants as $index => $variant){
+                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $variant->save();
+                        $this->process_connect($variant, $shop);
+                    }
+
+                }
+            }
+            sleep(2);
+
+
+        }
     }
 
     public function single_inventory_sync(){
@@ -120,22 +120,22 @@ class InventoryController extends Controller
      */
     public function process_connect($product, $shop): void
     {
-//        /*Track Enable*/
-//        $data = [
-//            "inventory_item" => [
-//                'id' => $product->inventory_item_id,
-//                "tracked" => true
-//            ]
-//
-//        ];
-//        $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
-//        /*Connect to Wefullfill*/
-//        $data = [
-//            'location_id' => 46023344261,
-//            'inventory_item_id' => $product->inventory_item_id,
-//            'relocate_if_necessary' => true
-//        ];
-//        $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+        /*Track Enable*/
+        $data = [
+            "inventory_item" => [
+                'id' => $product->inventory_item_id,
+                "tracked" => true
+            ]
+
+        ];
+        $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+        /*Connect to Wefullfill*/
+        $data = [
+            'location_id' => 46023344261,
+            'inventory_item_id' => $product->inventory_item_id,
+            'relocate_if_necessary' => true
+        ];
+        $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
         /*Set Quantity*/
 
         $data = [
