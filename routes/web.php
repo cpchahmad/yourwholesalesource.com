@@ -309,7 +309,7 @@ Route::get('/get_selected_variants', 'CustomOrderController@get_selected_variant
 Route::get('/calculate_shipping', 'SingleStoreController@calculate_shipping')->name('calculate_shipping');
 
 
-Route::get('/get/inventory/sync', 'ProductController@getQuantitySync');
+
 Route::get('test/sync/{id}', 'PaypalController@test');
 
 
@@ -317,5 +317,7 @@ Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
 
 Route::get('create/service', 'InventoryController@create_service');
 Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
+
+Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 
 

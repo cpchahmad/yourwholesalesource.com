@@ -38,39 +38,94 @@ class InventoryController extends Controller
 
     public function FetchQuantity(Request $request){
         if($request->has('sku')){
-           $variant = ProductVariant::where('sku',$request->input('sku'))->first();
-           if($variant != null){
-               return response()->json([
-                   $request->input('sku') => $variant->quantity
-               ]);
-           }
-           else{
-               $product = Product::where('sku',$request->input('sku'))->first();
-               if($product != null){
-                   return response()->json([
-                       $request->input('sku') => $product->quantity
-                   ]);
-               }
-           }
+            $variant = ProductVariant::where('sku',$request->input('sku'))->first();
+            if($variant != null){
+                return response()->json([
+                    $request->input('sku') => $variant->quantity
+                ]);
+            }
+            else{
+                $product = Product::where('sku',$request->input('sku'))->first();
+                if($product != null){
+                    return response()->json([
+                        $request->input('sku') => $product->quantity
+                    ]);
+                }
+            }
 
         }
         else{
-           $products = Product::all();
-           $json = [];
-           foreach ($products as $product){
-               if(count($product->hasVariants) > 0){
-                   foreach ($product->hasVariants as $variant){
-                       $json[$variant->sku] = $variant->quantity;
-                   }
-               }
-               else{
-                   $json[$product->sku] = $product->quantity;
+            $products = Product::all();
+            $json = [];
+            foreach ($products as $product){
+                if(count($product->hasVariants) > 0){
+                    foreach ($product->hasVariants as $variant){
+                        $json[$variant->sku] = $variant->quantity;
+                    }
+                }
+                else{
+                    $json[$product->sku] = $product->quantity;
 
-               }
-           }
+                }
+            }
 
         }
         return response()->json($json);
     }
 
+    public function inventory_connect(){
+        $shop = $this->helper->getAdminShop();
+
+        $products = Product::whereNotNull('shopify_id')->get();
+        foreach ($products as $product){
+            $response =   $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
+            $shopifyVariants = $response->body->product->variants;
+            if(count($product->hasVariants) == 0){
+                $product->inventory_item_id = $shopifyVariants[0]->inventory_item_id;
+                $product->save();
+                $this->process_connect($product, $shop);
+            }
+            else{
+                foreach ($product->hasVariants as $index => $variant){
+                    $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                    $variant->save();
+                    $this->process_connect($variant, $shop);
+                }
+
+            }
+
+        }
+    }
+
+    /**
+     * @param $product
+     * @param $shop
+     */
+    public function process_connect($product, $shop): void
+    {
+        /*Track Enable*/
+        $data = [
+            "inventory_item" => [
+                'id' => $product->inventory_item_id,
+                "tracked" => true
+            ]
+
+        ];
+        $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+        /*Connect to Wefullfill*/
+        $data = [
+            'location_id' => 46023344261,
+            'inventory_item_id' => $product->inventory_item_id,
+        ];
+        $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+        /*Set Quantity*/
+
+        $data = [
+            'location_id' => 46023344261,
+            'inventory_item_id' => $product->inventory_item_id,
+            'available' => $product->quantity
+        ];
+
+        $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
+    }
 }
