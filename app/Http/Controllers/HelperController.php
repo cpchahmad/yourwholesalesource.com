@@ -84,6 +84,7 @@ class HelperController extends Controller
            return 'Please Enter Password for Reset';
         }
     }
+
     public function SuperAdminCreate()
     {
         if (!User::where('email', 'super_admin@wefullfill.com')->exists()) {
