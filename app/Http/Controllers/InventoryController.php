@@ -135,6 +135,6 @@ class InventoryController extends Controller
         ];
 
         $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
-        dd($res);
+
     }
 }
