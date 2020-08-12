@@ -105,8 +105,8 @@ class InventoryController extends Controller
 
     public function single_inventory_sync(){
         $shop = $this->helper->getAdminShop();
-        $product = Product::find('84');
-        dd($product);
+        $product = Product::find('86');
+
         $this->process_connect($product, $shop);
     }
 
