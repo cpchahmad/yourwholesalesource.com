@@ -137,10 +137,11 @@ class InventoryController extends Controller
         $data = [
             'location_id' => 46023344261,
             'inventory_item_id' => $product->inventory_item_id,
-            'available' => $product->quantity
+            'available' => $product->quantity,
+            'relocate_if_necessary' => true
         ];
 
         $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
-dd($res);
+        dd($res);
     }
 }
