@@ -79,20 +79,26 @@ class InventoryController extends Controller
         $products = Product::whereNotNull('shopify_id')->get();
         foreach ($products as $product){
             $response =   $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
-            $shopifyVariants = $response->body->product->variants;
-            if(count($product->hasVariants) == 0){
-                $product->inventory_item_id = $shopifyVariants[0]->inventory_item_id;
-                $product->save();
-                $this->process_connect($product, $shop);
+            if(!$response->errors){
+                $shopifyVariants = $response->body->product->variants;
+                if(count($product->hasVariants) == 0){
+                    $product->inventory_item_id = $shopifyVariants[0]->inventory_item_id;
+                    $product->save();
+                    $this->process_connect($product, $shop);
+                }
+                else{
+                    foreach ($product->hasVariants as $index => $variant){
+                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $variant->save();
+                        $this->process_connect($variant, $shop);
+                    }
+
+                }
             }
             else{
-                foreach ($product->hasVariants as $index => $variant){
-                    $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                    $variant->save();
-                    $this->process_connect($variant, $shop);
-                }
-
+                dd($response);
             }
+
 
         }
     }
