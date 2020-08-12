@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AdditionalTab;
 use App\Category;
+use App\Console\Commands\AppChangeQuantitySku;
 use App\Exports\ProductsExport;
 use App\Image;
 use App\Product;
@@ -227,6 +228,9 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
+
+
+
                 }
                 /*Product Basic Update Shopify and Database*/
                 if ($request->input('type') == 'basic-info') {
@@ -269,6 +273,8 @@ class ProductController extends Controller
                                 ]
                             ];
                             $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                            $job = new AppChangeQuantitySku($product);
+                            $this->dispatch($job);
                         }
 
                     }
@@ -1154,6 +1160,8 @@ class ProductController extends Controller
     public function product_notification(Request $request,$id){
         $product = Product::find($id);
         $this->notify->generate('Product','Product Update',$product->title.' Information Updated',$product);
+        $job = new AppChangeQuantitySku($product);
+        $this->dispatch($job);
     }
 
 
