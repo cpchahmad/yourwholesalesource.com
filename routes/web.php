@@ -315,9 +315,9 @@ Route::get('test/sync/{id}', 'PaypalController@test');
 
 Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
 
-Route::get('create/service', 'InventoryController@create_service');
 Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
 
-Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
+//Route::get('create/service', 'InventoryController@create_service');
+//Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 
 

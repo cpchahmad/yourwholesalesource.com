@@ -267,7 +267,9 @@
                                                 </form>
                                             @endforeach
                                             @else
-
+                                            <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="request_type" value="default-variant-update">
                                             <tr>
                                                 <td class="variant_title">
                                                     Default
@@ -287,6 +289,7 @@
                                                 </td>
 
                                             </tr>
+                                            </form>
 
                                         @endif
                                     </table>

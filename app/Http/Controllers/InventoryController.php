@@ -44,43 +44,6 @@ class InventoryController extends Controller
 
     }
 
-    public function FetchQuantity(Request $request){
-        if($request->has('sku')){
-            $variant = ProductVariant::where('sku',$request->input('sku'))->first();
-            if($variant != null){
-                return response()->json([
-                    $request->input('sku') => $variant->quantity
-                ]);
-            }
-            else{
-                $product = Product::where('sku',$request->input('sku'))->first();
-                if($product != null){
-                    return response()->json([
-                        $request->input('sku') => $product->quantity
-                    ]);
-                }
-            }
-
-        }
-        else{
-            $products = Product::all();
-            $json = [];
-            foreach ($products as $product){
-                if(count($product->hasVariants) > 0){
-                    foreach ($product->hasVariants as $variant){
-                        $json[$variant->sku] = $variant->quantity;
-                    }
-                }
-                else{
-                    $json[$product->sku] = $product->quantity;
-
-                }
-            }
-
-        }
-        return response()->json($json);
-    }
-
     public function inventory_connect(){
 //        $this->single_inventory_sync();
         $shop = $this->helper->getAdminShop();
@@ -155,6 +118,43 @@ class InventoryController extends Controller
 
         $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
 //        dd($res);
+    }
+
+    public function FetchQuantity(Request $request){
+        if($request->has('sku')){
+            $variant = ProductVariant::where('sku',$request->input('sku'))->first();
+            if($variant != null){
+                return response()->json([
+                    $request->input('sku') => $variant->quantity
+                ]);
+            }
+            else{
+                $product = Product::where('sku',$request->input('sku'))->first();
+                if($product != null){
+                    return response()->json([
+                        $request->input('sku') => $product->quantity
+                    ]);
+                }
+            }
+
+        }
+        else{
+            $products = Product::all();
+            $json = [];
+            foreach ($products as $product){
+                if(count($product->hasVariants) > 0){
+                    foreach ($product->hasVariants as $variant){
+                        $json[$variant->sku] = $variant->quantity;
+                    }
+                }
+                else{
+                    $json[$product->sku] = $product->quantity;
+
+                }
+            }
+
+        }
+        return response()->json($json);
     }
 }
 

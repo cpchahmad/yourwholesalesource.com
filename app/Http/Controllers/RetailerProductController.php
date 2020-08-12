@@ -148,8 +148,6 @@ class RetailerProductController extends Controller
                 if ($request->input('request_type') == 'single-variant-update') {
                     $variant = RetailerProductVariant::find($request->variant_id);
                     $variant->price = $request->input('price');
-//                    $variant->quantity = $request->input('quantity');
-//                    $variant->sku = $request->input('sku');
                     $variant->barcode = $request->input('barcode');
                     $variant->product_id = $id;
                     $variant->save();
@@ -158,7 +156,6 @@ class RetailerProductController extends Controller
                         $productdata = [
                             "variant" => [
                                 'title' => $variant->title,
-//                                'sku' => $variant->sku,
                                 'option1' => $variant->option1,
                                 'option2' => $variant->option2,
                                 'option3' => $variant->option3,
@@ -192,7 +189,6 @@ class RetailerProductController extends Controller
                             $i = [
                                 'variant' => [
                                     'price' =>$product->price,
-//                                    'sku' =>  $product->sku,
                                     'grams' => $product->weight * 1000,
                                     'weight' => $product->weight,
                                     'weight_unit' => 'kg',
