@@ -31,8 +31,16 @@ class InventoryController extends Controller
             ]
         ];
 
+
         $shop = $this->helper->getShop();
-        $resp =  $shop->api()->rest('POST', '/admin/api/2020-04/fulfillment_services.json',$data);
+        if($shop->location != null){
+            $resp =  $shop->api()->rest('POST', '/admin/api/2020-04/fulfillment_services.json',$data);
+            if(!$resp->errors){
+                $data = $resp->body->fulfillment_service;
+                $shop->location_id =$data->location_id;
+                $shop->save();
+            }
+        }
 
     }
 
@@ -149,3 +157,4 @@ class InventoryController extends Controller
 //        dd($res);
     }
 }
+

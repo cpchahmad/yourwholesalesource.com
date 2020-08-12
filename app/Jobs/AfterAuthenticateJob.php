@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Controllers\InventoryController;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -34,6 +35,12 @@ class AfterAuthenticateJob implements ShouldQueue
     {
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
+
+        if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
+            $new = new InventoryController();
+            $new->create_service();
+        }
+
         if($user != null && !in_array($user->email,['super_admin@wefullfill.com']) && !in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
             if(!in_array($currentShop->id,$user->has_shops->pluck('id')->toArray())){
                 $user->has_shops()->attach([$currentShop->id]);

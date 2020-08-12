@@ -148,8 +148,8 @@ class RetailerProductController extends Controller
                 if ($request->input('request_type') == 'single-variant-update') {
                     $variant = RetailerProductVariant::find($request->variant_id);
                     $variant->price = $request->input('price');
-                    $variant->quantity = $request->input('quantity');
-                    $variant->sku = $request->input('sku');
+//                    $variant->quantity = $request->input('quantity');
+//                    $variant->sku = $request->input('sku');
                     $variant->barcode = $request->input('barcode');
                     $variant->product_id = $id;
                     $variant->save();
@@ -158,7 +158,7 @@ class RetailerProductController extends Controller
                         $productdata = [
                             "variant" => [
                                 'title' => $variant->title,
-                                'sku' => $variant->sku,
+//                                'sku' => $variant->sku,
                                 'option1' => $variant->option1,
                                 'option2' => $variant->option2,
                                 'option3' => $variant->option3,
@@ -192,7 +192,7 @@ class RetailerProductController extends Controller
                             $i = [
                                 'variant' => [
                                     'price' =>$product->price,
-                                    'sku' =>  $product->sku,
+//                                    'sku' =>  $product->sku,
                                     'grams' => $product->weight * 1000,
                                     'weight' => $product->weight,
                                     'weight_unit' => 'kg',
@@ -384,6 +384,7 @@ class RetailerProductController extends Controller
             'source' => $request->input('source'),
         ]);
     }
+
     public function edit_my_product($id){
         $product = RetailerProduct::find($id);
         $shop= $this->helper->getLocalShop();
@@ -472,6 +473,7 @@ class RetailerProductController extends Controller
             $shopifyVariants = $response->body->product->variants;
             if(count($product->hasVariants) == 0){
                 $variant_id = $shopifyVariants[0]->id;
+                $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
                 $i = [
                     'variant' => [
                         'price' =>$price,
@@ -480,12 +482,16 @@ class RetailerProductController extends Controller
                         'weight' => $product->weight,
                         'weight_unit' => 'kg',
                         'barcode' => $product->barcode,
+                        "fulfillment_service" => "wefullfill",
+                        'inventory_quantity' => $product->quantity,
+                        'inventory_management' => 'wefullfill',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
             }
             foreach ($product->hasVariants as $index => $v){
                 $v->shopify_id = $shopifyVariants[$index]->id;
+                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                 $v->save();
             }
             if(count($shopifyImages) == count($product->has_images)){
@@ -522,8 +528,9 @@ class RetailerProductController extends Controller
                 'option1' => $varaint->option1,
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
-//                'inventory_quantity' => $varaint->quantity,
-//                'inventory_management' => 'shopify',
+                'inventory_quantity' => $varaint->quantity,
+                "fulfillment_service" => "wefullfill",
+                'inventory_management' => 'wefullfill',
                 'grams' => $product->weight * 1000,
                 'weight' => $product->weight,
                 'weight_unit' => 'kg',
@@ -534,6 +541,7 @@ class RetailerProductController extends Controller
         }
         return $variants_array;
     }
+
     public function options_template_array($product){
         $options_array = [];
         if (count($product->option1($product)) > 0) {
