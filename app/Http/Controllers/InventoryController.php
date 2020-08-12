@@ -78,7 +78,8 @@ class InventoryController extends Controller
 
         $products = Product::whereNotNull('shopify_id')->get();
         foreach ($products as $product){
-                        $response =   $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
+
+            $response =   $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
             if(!$response->errors){
                 $shopifyVariants = $response->body->product->variants;
                 if(count($product->hasVariants) == 0){
@@ -95,10 +96,7 @@ class InventoryController extends Controller
 
                 }
             }
-            else{
-                dd($response);
-            }
-            sleep(3);
+            sleep(2);
 
 
         }
