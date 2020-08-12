@@ -105,7 +105,7 @@ class InventoryController extends Controller
 
     public function single_inventory_sync(){
         $shop = $this->helper->getAdminShop();
-        $product = Product::whereNotNull('inventory_item_id');
+        $product = Product::whereNotNull('inventory_item_id')->get();
         foreach ($product as $p){
             $this->process_connect($p, $shop);
         }
@@ -141,7 +141,7 @@ class InventoryController extends Controller
             'location_id' => 46023344261,
             'inventory_item_id' => $product->inventory_item_id,
             'available' => $product->quantity,
-            'relocate_if_necessary' => true
+
         ];
 
         $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
