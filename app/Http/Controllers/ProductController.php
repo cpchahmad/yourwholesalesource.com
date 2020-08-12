@@ -1151,62 +1151,63 @@ class ProductController extends Controller
     public function getQuantitySync(){
 
         $shop = $this->helper->getAdminShop();
-
-
-         $data = [
-             "inventory_item" => [
-                 'id' =>35737686704261,
-                 "tracked"=> true
-             ]
-
-         ];
-       $resp =   $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/35737686704261.json',$data);
-
-        $data = [
-            'location_id' =>44247580805,
-            'inventory_item_id' => 35737686704261,
-             "available"=> 42
-        ];
-       $res =   $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json',$data);
-
-        $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
-
-        dd($RESPONSE,$res,$resp);
-
-//        $products = Product::whereNotNull('shopify_id')->get();
-//        foreach ($products as $product){
-//            if(count($product->hasVariants) == 0){
-//                $response =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
 //
-//                if(!$response->errors){
-//                    $shopifyVariants = $response->body->product->variants;
-//                    $variant_id = $shopifyVariants[0]->id;
-//                    $i = [
-//                        'variant' => [
-//                            'inventory_quantity' => $product->quantity,
-//                            'inventory_management' => 'shopify',
-//                        ]
-//                    ];
-//                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
-//                  dd($RESPONSE);
-//                }
 //
-//            }
-//            else{
-//                foreach ($product->hasVariants as $variant){
-//                    $variant_id = $variant->shopify_id;
-//                    $i = [
-//                        'variant' => [
-//                            'inventory_quantity' => $variant->quantity,
-//                            'inventory_management' => 'shopify',
-//                        ]
-//                    ];
-//                    $RESPONSE =   $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
-//                    dd($RESPONSE);
-//                }
+//         $data = [
+//             "inventory_item" => [
+//                 'id' =>35737686704261,
+//                 "tracked"=> true
+//             ]
 //
-//            }
-//        }
+//         ];
+//       $resp =   $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/35737686704261.json',$data);
+//
+//        $data = [
+//            'location_id' =>44247580805,
+//            'inventory_item_id' => 35737686704261,
+//             "available"=> 42
+//        ];
+//       $res =   $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json',$data);
+//
+//        $RESPONSE =  $shop->api()->rest('GET', '/admin/api/2020-07/inventory_levels.json?inventory_item_ids=35737686704261');
+//
+//        dd($RESPONSE,$res,$resp);
+
+        $products = Product::whereNotNull('shopify_id')->get();
+        foreach ($products as $product){
+            if(count($product->hasVariants) == 0){
+                $response =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $product->shopify_id .'.json');
+
+                if(!$response->errors){
+                    $shopifyVariants = $response->body->product->variants;
+                    $variant_id = $shopifyVariants[0]->id;
+                    $i = [
+                        'variant' => [
+                            'inventory_quantity' => $product->quantity,
+                            'inventory_management' => 'wefullfill',
+                        ]
+                    ];
+                  $RESPONSE =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
+                    dd($RESPONSE);
+
+                }
+
+            }
+            else{
+                foreach ($product->hasVariants as $variant){
+                    $variant_id = $variant->shopify_id;
+                    $i = [
+                        'variant' => [
+                            'inventory_quantity' => $variant->quantity,
+                            'inventory_management' => 'wefullfill',
+                        ]
+                    ];
+                    $RESPONSE =   $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/' . $variant_id .'.json', $i);
+                    dd($RESPONSE);
+                }
+
+            }
+        }
     }
 
 
