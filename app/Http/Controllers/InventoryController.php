@@ -33,7 +33,7 @@ class InventoryController extends Controller
 
 
         $shop = $this->helper->getShop();
-        if($shop->location != null){
+        if($shop->location == null){
             $resp =  $shop->api()->rest('POST', '/admin/api/2020-04/fulfillment_services.json',$data);
             if(!$resp->errors){
                 $data = $resp->body->fulfillment_service;
