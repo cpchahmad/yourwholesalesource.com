@@ -703,13 +703,38 @@ class ProductController extends Controller
                         'grams' => $product->weight * 1000,
                         'weight' => $product->weight,
                         'weight_unit' => 'kg',
-                        "fulfillment_service" => "wefullfill",
+//                        "fulfillment_service" => "wefullfill",
                         'barcode' => $product->barcode,
-                        'inventory_quantity' => $product->quantity,
-                        'inventory_management' => 'wefullfill',
+//                        'inventory_quantity' => $product->quantity,
+//                        'inventory_management' => 'wefullfill',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                $data = [
+                    "inventory_item" => [
+                        'id' => $product->inventory_item_id,
+                        "tracked" => true
+                    ]
+
+                ];
+                $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+                /*Connect to Wefullfill*/
+                $data = [
+                    'location_id' => 46023344261,
+                    'inventory_item_id' => $product->inventory_item_id,
+                    'relocate_if_necessary' => true
+                ];
+                $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+                /*Set Quantity*/
+
+                $data = [
+                    'location_id' => 46023344261,
+                    'inventory_item_id' => $product->inventory_item_id,
+                    'available' => $product->quantity,
+
+                ];
+
+                $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
             }
             foreach ($product->hasVariants as $index => $v){
                 $v->shopify_id = $shopifyVariants[$index]->id;
