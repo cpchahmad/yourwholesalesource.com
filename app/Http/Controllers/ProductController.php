@@ -697,6 +697,8 @@ class ProductController extends Controller
                         'weight' => $product->weight,
                         'weight_unit' => 'kg',
                         'barcode' => $product->barcode,
+                        'inventory_quantity' => $product->quantity,
+                        'inventory_management' => 'wefullfill',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
@@ -773,7 +775,7 @@ class ProductController extends Controller
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
                 'inventory_quantity' => $varaint->quantity,
-                'inventory_management' => 'shopify',
+                'inventory_management' => 'wefullfill',
                 'grams' => $product->weight * 1000,
                 'weight' => $product->weight,
                 'weight_unit' => 'kg',
