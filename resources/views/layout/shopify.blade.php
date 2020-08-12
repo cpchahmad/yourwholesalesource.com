@@ -11,7 +11,7 @@
                 <div class="alert alert-info alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button>
                     <strong>You dont have connected any store yet. For store connection <a href="{{route('system.store.connect')}}">click here</a>.</strong>
-                </div>w
+                </div>
             @endif
         @endif
         @yield('content')
