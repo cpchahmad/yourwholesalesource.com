@@ -98,6 +98,7 @@
                             @endif
                         </div>
                         <hr>
+                        @if(isset($product->has_platforms))
                         @if(count($product->has_platforms) > 0)
                             <div class="tags" style="margin-top: 5px">
 
@@ -108,6 +109,7 @@
 
                             </div>
                             <hr>
+                        @endif
                         @endif
                         @if(count($product->has_categories) > 0)
                             <div class="tags" style="margin-top: 5px">
