@@ -677,7 +677,7 @@ class ProductController extends Controller
             ];
 
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
-            dd($response);
+        //    dd($response);
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
             $price = $product->price;
@@ -696,9 +696,10 @@ class ProductController extends Controller
                         'grams' => $product->weight * 1000,
                         'weight' => $product->weight,
                         'weight_unit' => 'kg',
+                        "fulfillment_service" => "wefullfill",
                         'barcode' => $product->barcode,
                         'inventory_quantity' => $product->quantity,
-                        'inventory_management' => 'Wefullfill',
+                        'inventory_management' => 'wefullfill',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
@@ -775,7 +776,8 @@ class ProductController extends Controller
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
                 'inventory_quantity' => $varaint->quantity,
-                'inventory_management' => 'Wefullfill',
+                "fulfillment_service" => "wefullfill",
+                'inventory_management' => 'wefullfill',
                 'grams' => $product->weight * 1000,
                 'weight' => $product->weight,
                 'weight_unit' => 'kg',
