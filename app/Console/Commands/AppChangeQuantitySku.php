@@ -44,7 +44,7 @@ class AppChangeQuantitySku extends Command
     {
         $product_id = $this->argument('product_id');
         if($product_id != null){
-            $product = Product::find();
+            $product = Product::find($product_id);
             if($product != null){
                 foreach ($product->has_retailer_products as $retailer_product){
                     if(count($retailer_product->hasVariants) > 0){
