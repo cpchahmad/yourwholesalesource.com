@@ -100,7 +100,7 @@ class OrderController extends Controller
             $order_log->save();
             $this->admin->sync_order_to_admin_store($order);
 
-            $this->inventory->OrderQuantityUpdate($order,'new');
+//            $this->inventory->OrderQuantityUpdate($order,'new');
 
             return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
         }

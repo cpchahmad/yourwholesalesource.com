@@ -279,7 +279,7 @@ class WalletController extends Controller
 
 
                 $this->admin->sync_order_to_admin_store($retailer_order);
-                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+//                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
                 return redirect()->back()->with('success','Order Cost Deducted From Wallet Successfully!');
             }
