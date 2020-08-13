@@ -20,6 +20,7 @@ class RefundController extends Controller
 
     private $helper;
     private $notify;
+    private $inventory;
 
     /**
      * RefundController constructor.
@@ -29,6 +30,7 @@ class RefundController extends Controller
     {
         $this->helper = new HelperController();
         $this->notify = new NotificationController();
+        $this->inventory = new InventoryController();
     }
 
     public function create_refund(Request $request){
@@ -160,6 +162,7 @@ class RefundController extends Controller
         $tl->save();
 
         $this->notify->generate('Refund','Order Refund',$order->name.' Refund Approved',$refund);
+        $this->inventory->OrderQuantityUpdate($order,'refund');
         return redirect()->back()->with('success','Order Refunded Successfully!');
 
 
@@ -262,6 +265,7 @@ class RefundController extends Controller
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
             $this->notify->generate('Order','Order Cancelled',$order->name.' has been cancelled',$order);
+            $this->inventory->OrderQuantityUpdate($order,'refund');
             return redirect()->back()->with('success','Order Cancelled Successfully!');
 
         }
@@ -319,6 +323,7 @@ class RefundController extends Controller
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
             $this->notify->generate('Order','Order Cancelled and Refund',$order->name.' has been cancelled and refunded',$order);
+            $this->inventory->OrderQuantityUpdate($order,'refund');
 
             return redirect()->back()->with('success','Order Refunded Successfully!');
         }

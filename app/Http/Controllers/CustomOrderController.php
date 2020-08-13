@@ -39,6 +39,7 @@ class CustomOrderController extends Controller
 {
     private $admin;
     private $notify;
+    private $inventory;
 
     /**
      * CustomOrderController constructor.
@@ -48,6 +49,7 @@ class CustomOrderController extends Controller
     {
         $this->admin = new AdminMaintainerController();
         $this->notify = new NotificationController();
+        $this->inventory = new InventoryController();
     }
 
     public function index(Request $request){
@@ -396,6 +398,7 @@ class CustomOrderController extends Controller
             'filter' => $request->input('filter')
         ]);
     }
+
     public function view_fantasy_product($id){
         $product = Product::find($id);
         return view('non_shopify_users.product.view_product')->with([
@@ -703,6 +706,7 @@ class CustomOrderController extends Controller
                 $order_log->retailer_order_id = $order->id;
                 $order_log->save();
                 $this->admin->sync_order_to_admin_store($order);
+                $this->inventory->OrderQuantityUpdate($order,'new');
             }
 
         }
@@ -778,6 +782,7 @@ class CustomOrderController extends Controller
 
 
                 $this->admin->sync_order_to_admin_store($retailer_order);
+                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             }
             /*Maintaining Wallet Log*/
             $wallet_log = new WalletLog();
@@ -910,7 +915,7 @@ class CustomOrderController extends Controller
                 $order_log->retailer_order_id = $retailer_order->id;
                 $order_log->save();
                 $this->admin->sync_order_to_admin_store($retailer_order);
-
+                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             }
             return redirect()->route('users.files.view',$request->id)->with('success','Bulk Payment Processed Successfully!');
 
