@@ -21,6 +21,7 @@ class OrderController extends Controller
 {
     private $helper;
     private $admin;
+    private $inventory;
 
     /**
      * OrderController constructor.
@@ -30,6 +31,8 @@ class OrderController extends Controller
     {
         $this->helper = new HelperController();
         $this->admin = new AdminMaintainerController();
+        $this->inventory = new InventoryController();
+
     }
 
     public function index(Request $request){
@@ -61,6 +64,7 @@ class OrderController extends Controller
         }
     }
 
+    /*Updated Inventory*/
     public function proceed_payment(Request $request){
         $order = RetailerOrder::find($request->input('order_id'));
         $settings = AdminSetting::all()->first();
@@ -95,6 +99,9 @@ class OrderController extends Controller
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
             $this->admin->sync_order_to_admin_store($order);
+
+            $this->inventory->OrderQuantityUpdate($order,'new');
+
             return redirect()->back()->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
         }
         else{
@@ -116,6 +123,7 @@ class OrderController extends Controller
         $r->delete();
         return redirect()->back()->with('success','Order Deleted Successfully!');
     }
+
     public function getOrders(){
         $shop = $this->helper->getShop();
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json',['status'=>'any']);

@@ -21,6 +21,7 @@ class WalletController extends Controller
     private $helper;
     private $admin;
     private $notify;
+    private $inventory;
 
     /**
      * WalletController constructor.
@@ -30,6 +31,7 @@ class WalletController extends Controller
         $this->helper = new HelperController();
         $this->admin = new AdminMaintainerController();
         $this->notify = new NotificationController();
+        $this->inventory = new InventoryController();
     }
 
     public function user_wallet_view()
@@ -275,6 +277,7 @@ class WalletController extends Controller
 
 
                 $this->admin->sync_order_to_admin_store($retailer_order);
+                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
                 return redirect()->back()->with('success','Order Cost Deducted From Wallet Successfully!');
             }

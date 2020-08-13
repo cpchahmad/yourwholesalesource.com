@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\ProductVariant;
+use App\RetailerOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class InventoryController extends Controller
 {
@@ -156,5 +158,39 @@ class InventoryController extends Controller
         }
         return response()->json($json);
     }
+
+
+    public function OrderQuantityUpdate(RetailerOrder $order, $type){
+
+            foreach ($order->line_items as $item){
+                $variant = ProductVariant::where('sku',$item->sku)->first();
+                if($variant != null){
+                    if($type == 'new') {
+                        $variant->quantity = $variant->quantity - $item->quantity;
+                    }
+                    else{
+                        $variant->quantity = $variant->quantity + $item->quantity;
+
+                    }
+                    $variant->save();
+                    Artisan::call('app:sku-quantity-change',['product_id'=> $variant->product_id]);
+                }
+                else{
+                    $product = Product::where('sku',$item->sku)->first();
+                    if($product != null){
+                        if($type == 'new') {
+                            $product->quantity = $product->quantity - $item->quantity;
+                        }
+                        else{
+                            $product->quantity = $product->quantity + $item->quantity;
+
+                        }
+                        $product->save();
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                    }
+                }
+            }
+        }
+
 }
 
