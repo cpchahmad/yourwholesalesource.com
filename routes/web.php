@@ -149,7 +149,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/orders', 'OrderController@index')->name('store.orders');
         Route::get('/order/delete/{id}', 'OrderController@delete')->name('store.order.delete');
         Route::get('/order/view/{id}', 'OrderController@view_order')->name('store.order.view');
-        Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
+
         Route::get('/customers', 'SingleStoreController@customers')->name('store.customers');
         Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
         Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');
@@ -264,6 +264,7 @@ Route::group(['middleware' => ['auth']], function () {
 /*Common Routes*/
 Route::group(['middleware' => ['check_user_or_shop']], function () {
     Route::prefix('app')->group(function () {
+        Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
         Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
 
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
