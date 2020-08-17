@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdminSetting;
 use App\Customer;
 use App\DefaultInfo;
+use App\Exports\CustomersExport;
 use App\Product;
 use App\Refund;
 use App\Shop;
@@ -18,6 +19,7 @@ use App\WishlistStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DefaultSettingsController extends Controller
 {
@@ -437,6 +439,14 @@ class DefaultSettingsController extends Controller
             'wallet' => $wallet
         ]);
     }
+
+    public function download_customer($id)
+    {
+        $customers = Customer::where('shop_id',$id)->orWhere('user_id',$id)->get();
+        return Excel::download(new CustomersExport($customers), now()->format('m-d-y') . ' Customers' . '.csv');
+
+    }
+
     public function customer_view($id){
         $customer = Customer::find($id);
         return view('setttings.customers.view')->with([

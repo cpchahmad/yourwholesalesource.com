@@ -268,6 +268,7 @@
                                         <th>Total Orders</th>
                                         <th>Total Spends</th>
                                         <th style="text-align: right">
+                                            <a class="btn btn-primary btn-sm" target="_blank" href="{{route('customers.download',$user->id)}}"><i class="fa fa-download"></i> Export Customers</a>
                                         </th>
                                     </tr>
                                     </thead>

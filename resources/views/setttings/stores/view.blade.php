@@ -291,16 +291,25 @@
                                                      @endif alt="" class="img-avatar">
                                             </td>
                                             <td>
-                                                <a href="{{route('product.view',$product->linked_product_id)}}">{{$product->title}}</a>
+                                                @if($product->linked_product_id != null)
+                                                    <a href="{{route('product.view',$product->linked_product_id)}}">{{$product->title}}</a>
+                                                    @else
+                                                {{$product->title}}
+                                                @endif
+
                                             </td>
 
                                             <td>${{number_format($product->price,2)}}</td>
                                             <td><span class="mb2 font-size-sm" style="color: grey">@if($product->fulfilled_by == "Fantasy") WeFulfill @else {{$product->fulfilled_by}} @endif</span></td>
                                             <td class="">
                                                 <div class="btn-group">
+                                                    @if($product->linked_product_id != null)
                                                     <a href="{{route('product.view',$product->linked_product_id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Product"><i class="fa fa-eye"></i></a>
+                                                    @endif
+
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -328,6 +337,7 @@
                                         <th>Total Orders</th>
                                         <th>Total Spends</th>
                                         <th style="text-align: right">
+                                            <a class="btn btn-primary btn-sm" target="_blank" href="{{route('customers.download',$store->id)}}"><i class="fa fa-download"></i> Export Customers</a>
                                         </th>
                                     </tr>
                                     </thead>
@@ -343,7 +353,7 @@
                                                 {{count($customer->has_orders)}}
                                             </td>
                                             <td>
-                                                {{number_format($customer->total_spent,2)}} USD
+                                                {{number_format($customer->has_orders->sum('cost_to_pay'),2)}} USD
                                             </td>
                                             <td class="text-right">
                                                 <div class="btn-group">
