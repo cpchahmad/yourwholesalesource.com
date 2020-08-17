@@ -47,6 +47,25 @@
     @include('layout.single_sidebar')
     <main id="main-container">
         @include('flash_message.message')
+
+        @php
+
+            use App\Shop;
+            $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+            $shop = Shop::where('shopify_domain',$current_shop->shopify_domain)->first();
+
+        @endphp
+
+
+        @if(auth()->check())
+            @if(count($shop->has_users) == 0)
+                <div class="alert alert-info alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>To Initiate Your WeFullFill Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
+                </div>
+            @endif
+        @endif
+
         @yield('content')
     </main>
 

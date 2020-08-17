@@ -125,16 +125,25 @@ class WalletController extends Controller
 
     }
 
-    public function index(){
+    public function index(Request $request){
         $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
-        $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->get();
+        $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->newQuery();
+
+        if($request->has('search')){
+            $users->WhereHas('has_shops',function ($q) use ($request){
+                $q->where('shopify_domain','LIKE','%'.$request->input('search').'%');
+            });
+        }
+
+        $users = $users->paginate(30);
         foreach ($users as $user){
             if ($user->has_wallet == null) {
                $this->wallet_create($user->id);
             }
         }
         return view('setttings.wallets.index')->with([
-            'users' => $users
+            'users' => $users,
+            'search' => $request->input('search')
         ]);
     }
 

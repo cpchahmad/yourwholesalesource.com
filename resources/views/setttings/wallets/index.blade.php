@@ -11,7 +11,7 @@
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Dashboard</a>
                         </li>
-                        <li class="breadcrumb-item">    Wallets</li>
+                        <li class="breadcrumb-item">Wallets</li>
                     </ol>
                 </nav>
             </div>
@@ -19,6 +19,20 @@
     </div>
     <div  class="form-horizontal push-30">
     <div class="content">
+
+        <form class="js-form-icon-search push" action="" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search by Store and Email" value="@isset($search) {{$search}} @endif" name="search" required >
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <a class="btn btn-danger" href="{{route('admin.wallets')}}"> <i class="fa fa-times"></i> Clear </a>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
                 <div class="block">
@@ -30,7 +44,7 @@
 
                                     <th>Title</th>
                                     <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Shops</th>
                                     <th>Wallet Number</th>
                                     <th>Available</th>
                                     <th>Requested</th>
@@ -47,11 +61,20 @@
                                         <td>
                                            {{$user->email}}
                                         </td>
+{{--                                        <td>--}}
+{{--                                            @if($user->hasRole('non-shopify-users'))--}}
+{{--                                                <span class="badge badge-success">Shopify User</span>--}}
+{{--                                            @else--}}
+{{--                                                <span class="badge badge-warning">Manager</span>--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
                                         <td>
-                                            @if($user->hasRole('non-shopify-users'))
-                                                <span class="badge badge-success">Shopify User</span>
-                                            @else
-                                                <span class="badge badge-warning">Manager</span>
+                                            @if(count($user->has_shops) > 0)
+                                                @foreach($user->has_shops as $shop)
+                                                    <span class="badge badge-success">{{explode('.',$shop->shopify_domain)[0]}}</span>
+                                                    @endforeach
+                                                @else
+                                                <span class="badge badge-primary">No Shop Attached</span>
                                             @endif
                                         </td>
                                         <td>
