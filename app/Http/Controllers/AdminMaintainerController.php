@@ -31,11 +31,22 @@ class AdminMaintainerController extends Controller
                         "variant_id" => $item->linked_real_variant->shopify_id,
                         "quantity" => $item->quantity,
                     ]);
-                } else {
+                } else if($item->linked_real_product != null) {
+                    $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products/' . $item->shopify_product_id . '.json');
+                    if (!$response->errors) {
+                        $shopifyVariants = $response->body->product->variants;
+                        $variant_id = $shopifyVariants[0]->id;
+                        array_push($line_items, [
+                            "variant_id" => $variant_id,
+                            "quantity" => $item->quantity,
+                        ]);
+                    }
+                }
+                else{
                     array_push($line_items, [
                         "title" => $item->name,
                         "price" => $item->cost,
-                        "quantity" => $item->qunatity,
+                        "quantity" => $item->quantity,
                     ]);
                 }
             }
@@ -69,7 +80,7 @@ class AdminMaintainerController extends Controller
                     array_push($line_items, [
                         "title" => $item->name,
                         "price" => $item->cost,
-                        "quantity" => $item->qunatity,
+                        "quantity" => $item->quantity,
                     ]);
 
                 }
@@ -140,11 +151,13 @@ class AdminMaintainerController extends Controller
                 "shipping_line" => $shipping_line,
             ]
         ];
+
         $response = $admin_store->api()->rest('POST', '/admin/api/2019-10/draft_orders.json', $orderData);
         $location_response = $admin_store->api()->rest('GET', 'admin/api/2020-04/locations.json');
 
 
         if (!$response->errors) {
+
             $draft_order = $response->body->draft_order;
             $admin_order_response = $admin_store->api()->rest('PUT', '/admin/api/2020-04/draft_orders/' . $draft_order->id . '/complete.json');
             if (!$admin_order_response->errors) {
