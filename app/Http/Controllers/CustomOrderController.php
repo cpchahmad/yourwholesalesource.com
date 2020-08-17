@@ -68,9 +68,9 @@ class CustomOrderController extends Controller
 
     public function show_create_form(){
         $products = Product::query();
-        $products->whereHas('hasVariants',function (){
-
-        });
+//        $products->whereHas('hasVariants',function (){
+//
+//        });
 
         $customers = Customer::where('user_id',Auth::id())->get();
         $setting = AdminSetting::all()->first();
@@ -150,11 +150,20 @@ class CustomOrderController extends Controller
     public function get_selected_variants(Request $request){
 
         $selectedVaraints = ProductVariant::whereIn('id',$request->input('variants'))->get();
+
+        $selectedSingleVariants = Product::where('id',$request->input('single_variants'))->get();
+
         $total_cost = 0;
         foreach ($selectedVaraints as $varaint){
             $total_cost = $total_cost + $varaint->price;
         }
+
+        foreach ($selectedSingleVariants as $varaint){
+            $total_cost = $total_cost + $varaint->price;
+        }
+
         $html = view('non_shopify_users.orders.selected-varaint-section')->with([
+            'single_variants' => $selectedSingleVariants,
             'variants' => $selectedVaraints,
             'total' => $total_cost
         ])->render();
@@ -230,6 +239,30 @@ class CustomOrderController extends Controller
                 $new_line->cost = $variant->price;
                 $cost_to_pay = $cost_to_pay + $variant->price * $request->input('quantity')[$index];
                 $total_weight = $total_weight + $variant->linked_product->weight;
+                $new_line->save();
+            }
+
+        }
+
+        foreach ($request->input('single_variant_line_items') as $index =>  $item){
+            $variant = Product::find($item);
+            if($variant != null){
+                $new_line = new RetailerOrderLineItem();
+                $new_line->retailer_order_id = $new->id;
+                $new_line->shopify_product_id = $variant->shopify_id;
+
+                $new_line->title = $variant->title;
+                $new_line->quantity = $request->input('single_quantity')[$index];
+                $new_line->sku = $variant->sku;
+                $new_line->vendor = $variant->vendor;
+                $new_line->price = $variant->price;
+                $new_line->requires_shipping = 'true';
+                $new_line->name = $variant->title;
+                $new_line->fulfillable_quantity = $request->input('single_quantity')[$index];
+                $new_line->fulfilled_by = 'Fantasy';
+                $new_line->cost = $variant->price;
+                $cost_to_pay = $cost_to_pay + $variant->price * $request->input('single_quantity')[$index];
+                $total_weight = $total_weight + $variant->weight;
                 $new_line->save();
             }
 
@@ -429,6 +462,10 @@ class CustomOrderController extends Controller
                         $atleast_one_varaint = true;
                         break;
                     }
+                    if(Product::where('sku',$item->sku)->exists()){
+                        $atleast_one_varaint = true;
+                        break;
+                    }
                 }
                 if($atleast_one_varaint){
                     $new = new RetailerOrder();
@@ -538,6 +575,35 @@ class CustomOrderController extends Controller
                             $new_line->cost = $variant->price;
                             $cost_to_pay = $cost_to_pay + $variant->price * $item->quantity;;
                             $total_weight = $total_weight + $variant->linked_product->weight;
+                            $new_line->save();
+                        }
+
+                    }
+
+                    foreach ($data as $item){
+                        $variant = Product::where('sku',$item->sku)->first();
+                        if($variant != null){
+
+                            $item->status = 1;
+                            $item->order_id = $new->id;
+                            $item->save();
+
+                            $new_line = new RetailerOrderLineItem();
+                            $new_line->retailer_order_id = $new->id;
+                            $new_line->shopify_product_id = $variant->shopify_id;
+
+                            $new_line->title = $variant->title;
+                            $new_line->quantity = $item->quantity;
+                            $new_line->sku = $variant->sku;
+                            $new_line->vendor = $variant->vendor;
+                            $new_line->price = $variant->price;
+                            $new_line->requires_shipping = 'true';
+                            $new_line->name = $variant->title;
+                            $new_line->fulfillable_quantity =$item->quantity;
+                            $new_line->fulfilled_by = 'Fantasy';
+                            $new_line->cost = $variant->price;
+                            $cost_to_pay = $cost_to_pay + $variant->price * $item->quantity;;
+                            $total_weight = $total_weight + $variant->weight;
                             $new_line->save();
                         }
 

@@ -141,6 +141,9 @@ $(document).ready(function () {
         });
         $('.total-cost-badge').empty();
         $('.total-cost-badge').append(price.toFixed(2) + ' USD');
+
+        $('.total-final-badge').empty();
+        $('.total-final-badge').append(price.toFixed(2) + ' USD');
     }
 
 

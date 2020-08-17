@@ -25,6 +25,40 @@
                 </td>
             </tr>
         @endforeach
+
+        @foreach($single_variants as $product)
+            <input type="hidden" name="single_variant_line_items[]" class="single_line_items_ids" value="{{$product->id}}">
+            <tr>
+                <td class="text-center">
+                    @if(count($product->has_images) > 0)
+                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                            @if($index == 0)
+                                @if($image->isV == 0)
+                                    <img class="img-avatar"  src="{{asset('images')}}/{{$image->image}}">
+                                @else   <img class="img-avatar"  src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                @endif
+                            @endif
+                        @endforeach
+                    @else
+                        <img class="img-avatar" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                    @endif
+                </td>
+                <td class="font-w600" style="vertical-align: middle">
+                    {{ $product->title }}
+                </td>
+
+                <td style="vertical-align: middle">
+                    ${{ number_format($product->price, 2) }}
+                </td>
+                <td style="vertical-align: middle">
+                    X
+                </td>
+                <td style="width: 15%"><input type="number" name="single_quantity[]" min="1" class="form-control line-item-quantity" data-price="{{$product->price}}" value="1"></td>
+                <td style="vertical-align: middle;text-align: center">
+                    <i class="delete-row fa fa-times"></i>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 </div>
