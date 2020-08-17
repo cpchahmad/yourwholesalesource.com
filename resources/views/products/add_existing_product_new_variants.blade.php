@@ -6,6 +6,7 @@
     <input type="text" name="price" value="{{$product->price}}" style="display: none">
     <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
     <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
+
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -34,9 +35,25 @@
                     <div class="col-sm-6">
                     </div>
                     <div class="col-sm-6 text-right">
-                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-light btn-square ">Back to Editing</a>
+                        <div class="content submit-div">
+                            <div class="row ">
+                                <div class="col-sm-12 text-right">
+                                    <a href="{{ route('product.edit',$product->id) }}" class="btn btn-light btn-square ">Back to Editing</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content submit-div" style="display: none">
+                            <div class="row ">
+                                <div class="col-sm-12 text-right">
+
+                                    <a href="{{ route('product.edit',$product->id) }}" class="btn btn-default btn-square ">Discard</a>
+                                    <button class="btn btn-primary btn-square">Save</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="block">
@@ -142,18 +159,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="content submit-div" style="display: none">
-                    <div class="row ">
-                        <div class="col-sm-12 text-right">
-                            <hr>
-                            <a href="{{ route('product.edit',$product->id) }}" class="btn btn-default btn-square ">Discard</a>
-                            <button class="btn btn-primary btn-square">Save</button>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </form>
     </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
