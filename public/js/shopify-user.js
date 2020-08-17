@@ -314,7 +314,8 @@ $(document).ready(function () {
                     yAxes: [{
                         display: true,
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            stepSize: 1
                         },
                         scaleLabel: {
                             display: true,
