@@ -57,13 +57,11 @@
         @endphp
 
 
-        @if(auth()->check())
-            @if(count($shop->has_user) == 0)
-                <div class="alert alert-info alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>To Initiate Your WeFullFill Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
-                </div>
-            @endif
+        @if(count($shop->has_user) == 0)
+            <div class="alert alert-info alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>To Initiate Your WeFullFill Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
+            </div>
         @endif
 
         @yield('content')
