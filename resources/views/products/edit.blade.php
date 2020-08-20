@@ -597,9 +597,7 @@
                             <input type="hidden" name="type" value="marketing_video_update">
                             <div class="block-content pt-0" >
                                 <div class="form-group">
-                                    <div class="col-xs-12">
                                         <input type="text" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
-                                    </div>
                                 </div>
                             </div>
                         </form>
