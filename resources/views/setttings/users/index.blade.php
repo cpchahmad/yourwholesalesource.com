@@ -19,6 +19,17 @@
         </div>
     </div>
     <div class="content">
+        <form class="js-form-icon-search push" action="" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Search by name" value="{{$search}}" name="search">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <a class="btn btn-danger" href="{{route('users.index')}}"> <i class="fa fa-times"></i> Clear </a>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="block">
             <div class="block-content">
                 @if (count($users) > 0)

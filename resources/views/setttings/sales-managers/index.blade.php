@@ -26,6 +26,17 @@
                     <a class="btn btn-sm btn-primary text-white" href="{{route('sales-managers.create.form')}}">Add New Manager</a>
                 </div>
             </div>
+            <form class="js-form-icon-search push" action="" method="get">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Search by name" value="{{$search}}" name="search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                            <a class="btn btn-danger" href="{{route('sales-managers.index')}}"> <i class="fa fa-times"></i> Clear </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-12">

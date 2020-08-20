@@ -68,10 +68,17 @@ class DefaultSettingsController extends Controller
         $info->save();
         return redirect()->back()->with('success', 'Updated Sucessfully');
     }
-    public function show_sales_managers(){
-        $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
+    public function show_sales_managers(Request $request){
+        $sales_managers = User::role('sales-manager')->newQuery();
+        if($request->has('search')){
+            $sales_managers->where('name','LIKE','%'.$request->input('search').'%');
+            $sales_managers->orWhere('email','LIKE','%'.$request->input('search').'%');
+        }
+
+       $sales_managers = $sales_managers->orderBy('created_at','DESC')->get();
         return view('setttings.sales-managers.index')->with([
-            'sales_managers' => $sales_managers
+            'sales_managers' => $sales_managers,
+            'search' => $request->input('search')
         ]);
     }
     public function show_sales_manager_create(){
@@ -416,10 +423,14 @@ class DefaultSettingsController extends Controller
         $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         $stores= Shop::query();
         $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
+        if($request->has('search')){
+            $stores->where('shopify_domain','LIKE','%'.$request->input('search').'%');
+        }
         $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
         return view('setttings.stores.index')->with([
             'stores'=>$stores,
-            'managers' => $sales_managers
+            'managers' => $sales_managers,
+            'search' => $request->input('search'),
         ]);
     }
 
@@ -470,11 +481,17 @@ class DefaultSettingsController extends Controller
     public function users(Request $request){
         $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         $users = User::role('non-shopify-users')->newQuery();
+
         $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+        if($request->has('search')){
+            $users->where('name','LIKE','%'.$request->input('search').'%');
+            $users->orWhere('email','LIKE','%'.$request->input('search').'%');
+        }
         $users = $users->orderBy('created_at','DESC')->paginate(30);
         return view('setttings.users.index')->with([
             'users'=>$users,
-            'managers' => $sales_managers
+            'managers' => $sales_managers,
+            'search' => $request->input('search'),
         ]);
     }
 
