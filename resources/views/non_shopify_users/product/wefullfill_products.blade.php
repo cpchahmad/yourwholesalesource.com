@@ -5,6 +5,9 @@
         .marketing_video iframe{
             width: 100%;
         }
+        .push-20 a{
+            margin: 3px;
+        }
     </style>
 
     <div class="bg-body-light">
