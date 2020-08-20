@@ -559,6 +559,7 @@ class AdminOrderController extends Controller
                                     ->where('retailer_orders.paid','>=',1);
                             });
                     });
+
             })
             ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
             ->groupBy('shops.id')
@@ -571,6 +572,7 @@ class AdminOrderController extends Controller
                 ->where('retailer_orders.paid','>=',1)
                 ->where('retailer_orders.custom','=',1)
                 ->join('retailer_order_line_items',function($j){
+
                     $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
                 });
         })
