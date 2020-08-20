@@ -52,9 +52,9 @@
                                     <th></th>
                                 </tr>
                                 </thead>
-
+                                <tbody class="">
                                 @foreach($users as $index => $user)
-                                    <tbody class="">
+
                                     <tr>
 
                                         <td class="font-w600">{{ $user->name }}</td>
@@ -97,9 +97,10 @@
                                                data-original-title="View Wallet"><i class="fa fa-eye"></i></a>
                                         </td>
                                     </tr>
-                                    </tbody>
+
 
                                 @endforeach
+                                </tbody>
                             </table>
                         @else
                             <p>No Wallets Found</p>
