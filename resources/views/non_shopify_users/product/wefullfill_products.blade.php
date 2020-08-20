@@ -1,6 +1,12 @@
 @extends('layout.shopify')
 @section('content')
 
+    <style>
+        .marketing_video iframe{
+            width: 100%;
+        }
+    </style>
+
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -211,7 +217,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="block-content font-size-sm">
+                                        <div class="block-content font-size-sm marketing_video">
                                             {!! $product->marketing_video !!}
                                         </div>
 

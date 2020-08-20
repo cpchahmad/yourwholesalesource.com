@@ -598,7 +598,7 @@
                             <div class="block-content pt-0" >
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                  <textarea class="js-summernote" name="marketing_video">{{$product->marketing_video}}</textarea>
+                                        <input type="text" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
                                     </div>
                                 </div>
                             </div>
