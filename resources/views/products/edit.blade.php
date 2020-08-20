@@ -589,6 +589,25 @@
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
+                                Marketing Video
+                            </div>
+                        </div>
+                        <form action="{{route('product.update',$product->id)}}" method="post">
+                            @csrf
+                            <input type="hidden" name="type" value="marketing_video_update">
+                            <div class="block-content pt-0" >
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                  <textarea class="js-summernote" name="marketing_video">{{$product->marketing_video}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">
                                 Product Category
                             </div>
                         </div>

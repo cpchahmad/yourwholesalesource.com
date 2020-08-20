@@ -366,6 +366,11 @@ class ProductController extends Controller
 
                 }
 
+                if($request->input('type') == 'marketing_video_update'){
+                    $product->marketing_video = $request->input('marketing_video');
+                    $product->save();
+                }
+
                 if($request->input('type') == 'status_update'){
                     $this->product_status_change($request, $product, $shop);
                 }

@@ -211,7 +211,7 @@
                                         </div>
 
                                         <div class="block-content font-size-sm">
-
+                                            {!! $product->marketing_video !!}
                                         </div>
 
                                     </div>
