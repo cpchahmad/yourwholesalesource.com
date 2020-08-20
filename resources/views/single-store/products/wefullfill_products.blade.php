@@ -158,6 +158,7 @@
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
                                         <div class="push-20">
+
                                             <a class="btn btn-sm btn-primary" href="{{route('store.product.wefulfill.show',$product->id)}}">View</a>
                                             @if($product->marketing_video != null)
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</button>
