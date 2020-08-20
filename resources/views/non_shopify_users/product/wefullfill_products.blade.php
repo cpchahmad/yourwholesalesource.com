@@ -166,7 +166,7 @@
                                         <div class="push-20">
                                             <a class="btn btn-sm btn-primary" href="{{route('users.product.wefulfill.show',$product->id)}}">View</a>
                                             @if($product->marketing_video != null)
-                                                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</button>
+                                                <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</a>
                                             @endif
                                         </div>
                                     </div>
