@@ -569,12 +569,11 @@ class AdminOrderController extends Controller
 
         $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) {
             $o->on('retailer_orders.user_id', '=', 'users.id')
-                ->where('retailer_orders.paid','>=',1)
-                ->where('retailer_orders.custom','=',1)
                 ->join('retailer_order_line_items',function($j){
                     $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
                 });
-        })
+        }) ->where('retailer_orders.paid','>=',1)
+            ->where('retailer_orders.custom','=',1)
             ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
             ->groupBy('users.id')
             ->orderBy('sold', 'DESC')
