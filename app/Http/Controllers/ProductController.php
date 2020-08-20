@@ -517,6 +517,7 @@ class ProductController extends Controller
         $product->barcode = $request->barcode;
         $product->fulfilled_by = $request->input('fulfilled-by');
         $product->status =  $request->input('status');
+        $product->marketing_video =  $request->input('marketing_video');
         $product->processing_time = $request->input('processing_time');
 
         if ($request->variants) {

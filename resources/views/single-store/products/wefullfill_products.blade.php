@@ -84,7 +84,7 @@
                 <a href="{{route('store.product.wefulfill')}}?tag=24-hours-dispatch">
                     <div class="block pointer m-0" style="background-color:#94a5ff;">
 
-                    <div class="block-content p-3 text-center">
+                        <div class="block-content p-3 text-center">
                             <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="https://image.flaticon.com/icons/svg/46/46016.svg" alt="" style="margin-right: 10px"> 24 Hours Dispatch</p>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="block pointer m-0" style="background-color:#83ff83;">
 
 
-                    <div class="block-content p-3 text-center">
+                        <div class="block-content p-3 text-center">
                             <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="https://img.icons8.com/all/500/best-seller.png" alt=""> Best Sellers</p>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                     <div class="block pointer m-0" style="background-color:#edfb79;">
 
 
-                    <div class="block-content p-3 text-center">
+                        <div class="block-content p-3 text-center">
                             <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" src="https://cdn.onlinewebfonts.com/svg/img_463666.png" alt=""> New Arrivals </p>
                         </div>
                     </div>
@@ -159,6 +159,9 @@
                                     <div class="options-overlay-content">
                                         <div class="push-20">
                                             <a class="btn btn-sm btn-primary" href="{{route('store.product.wefulfill.show',$product->id)}}">View</a>
+                                            @if($product->marketing_video != null)
+                                                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</button>
+                                            @endif
 
                                             @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
                                                 <a class="btn btn-sm btn-success" href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}">
@@ -201,6 +204,29 @@
                             </div>
                         </div>
                     </div>
+                    @if($product->marketing_video != null)
+                        <div class="modal fade" id="video_modal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-popout" role="document">
+                                <div class="modal-content">
+                                    <div class="block block-themed block-transparent mb-0">
+                                        <div class="block-header bg-primary-dark">
+                                            <h3 class="block-title">{{ucfirst($product->title)}} Video</h3>
+                                            <div class="block-options">
+                                                <button type="button" class="btn-block-option">
+                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="block-content font-size-sm">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             @else
                 <div class="col-md-12">

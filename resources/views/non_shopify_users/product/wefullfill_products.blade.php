@@ -159,6 +159,9 @@
                                     <div class="options-overlay-content">
                                         <div class="push-20">
                                             <a class="btn btn-sm btn-primary" href="{{route('users.product.wefulfill.show',$product->id)}}">View</a>
+                                            @if($product->marketing_video != null)
+                                                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -193,6 +196,29 @@
                             </div>
                         </div>
                     </div>
+                    @if($product->marketing_video != null)
+                        <div class="modal fade" id="video_modal{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-popout" role="document">
+                                <div class="modal-content">
+                                    <div class="block block-themed block-transparent mb-0">
+                                        <div class="block-header bg-primary-dark">
+                                            <h3 class="block-title">{{ucfirst($product->title)}} Video</h3>
+                                            <div class="block-options">
+                                                <button type="button" class="btn-block-option">
+                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="block-content font-size-sm">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             @else
                 <div class="col-md-12">

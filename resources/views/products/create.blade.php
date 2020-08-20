@@ -278,6 +278,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">
+                              Marketing Video
+                            </div>
+                        </div>
+                        <div class="block-content pt-0" >
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                  <textarea class="js-summernote" name="marketing_video"
+                                           >Embedded Youtube Code to Marketing Video</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
