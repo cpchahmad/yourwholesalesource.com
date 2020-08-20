@@ -124,7 +124,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                            {{$product->title}}
+                                                <a href="{{route('product.view',$product->id)}}">{{$product->title}}</a>
                                         </td>
                                         <td class="d-none d-sm-table-cell text-center">
                                             {{$product->sold}}
@@ -172,7 +172,7 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                            {{$product->title}}
+                                                <a href="{{route('product.view',$product->id)}}">{{$product->title}}</a>
                                         </td>
                                         <td class="d-none d-sm-table-cell text-center">
                                             {{$product->sold}}
@@ -211,7 +211,8 @@
                                 @foreach($top_stores as $store)
                                     <tr>
                                         <td class="font-w600">
-                                            {{explode('.',$store->shopify_domain)[0]}}
+                                            <a href="{{route('stores.view',$store->id)}}"> {{explode('.',$store->shopify_domain)[0]}} </a>
+
                                         </td>
                                         <td class="d-none d-sm-table-cell text-center">
                                             {{$store->sold}}
@@ -252,10 +253,10 @@
                                 @foreach($top_users as $user)
                                     <tr>
                                         <td class="font-w600">
-                                            {{$user->name}} {{$user->last_name}}
+                                            <a href="{{route('users.view',$user->id)}}"> {{$user->name}} {{$user->last_name}}</a>
                                         </td>
                                         <td class="font-w600">
-                                            {{$user->email}}
+                                            <a href="{{route('users.view',$user->id)}}">  {{$user->email}} </a>
                                         </td>
                                         <td class="d-none d-sm-table-cell text-center">
                                             {{$user->sold}}
