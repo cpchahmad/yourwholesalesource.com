@@ -572,7 +572,6 @@ class AdminOrderController extends Controller
                 ->where('retailer_orders.paid','>=',1)
                 ->where('retailer_orders.custom','=',1)
                 ->join('retailer_order_line_items',function($j){
-
                     $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
                 });
         })

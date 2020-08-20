@@ -248,6 +248,7 @@
                                 </thead>
                                 <tbody>
 
+                                @dd($top_users)
                                 @foreach($top_users as $user)
                                     <tr>
                                         <td class="font-w600">
