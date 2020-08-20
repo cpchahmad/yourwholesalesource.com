@@ -202,7 +202,7 @@
                                 <thead>
                                 <tr class="text-uppercase">
                                     <th class="font-w700">Store</th>
-                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Orders</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Item Solds</th>
                                     <th class="font-w700 text-center" style="width: 60px;">Sales</th>
                                 </tr>
                                 </thead>
@@ -242,7 +242,7 @@
                                 <tr class="text-uppercase">
                                     <th class="font-w700">User</th>
                                     <th class="font-w700">Email</th>
-                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Orders</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Item Solds</th>
                                     <th class="font-w700 text-center" style="width: 60px;">Sales</th>
                                 </tr>
                                 </thead>
