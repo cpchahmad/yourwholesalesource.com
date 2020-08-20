@@ -566,22 +566,33 @@ class AdminOrderController extends Controller
             ->get()
             ->take(10);
 
-        $top_users = User::role('non-shopify-users')->join('retailer_products', function ($join) {
-            $join->on('retailer_products.user_id', '=', 'users.id')
-                ->join('retailer_order_line_items', function ($j) {
-                    $j->join('products', function ($p) {
-                        $p->on('retailer_order_line_items.shopify_product_id', '=', 'products.shopify_id');
-                    });
-                    $j->join('retailer_orders', function ($o) {
-                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                            ->whereIn('paid', [1, 2]);
-                    });
-                });
-        })->select('users.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+        $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) {
+            $o->on('retailer_orders.user_id', '=', 'users.id')
+                ->join('retailer_order_line_items',function($j){
+                    $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
+                })->whereIn('paid', [1, 2]);
+        })->select('users.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_orders.cost) as selling_cost'))
             ->groupBy('users.id')
             ->orderBy('sold', 'DESC')
             ->get()
             ->take(10);
+
+//        $top_users = User::role('non-shopify-users')->join('retailer_products', function ($join) {
+//            $join->on('retailer_products.user_id', '=', 'users.id')
+//                ->join('retailer_order_line_items', function ($j) {
+//                    $j->join('products', function ($p) {
+//                        $p->on('retailer_order_line_items.shopify_product_id', '=', 'products.shopify_id');
+//                    });
+//                    $j->join('retailer_orders', function ($o) {
+//                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+//                            ->whereIn('paid', [1, 2]);
+//                    });
+//                });
+//        })->select('users.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+//            ->groupBy('users.id')
+//            ->orderBy('sold', 'DESC')
+//            ->get()
+//            ->take(10);
 
 //        dd($top_products);
 
