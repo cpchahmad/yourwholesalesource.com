@@ -570,7 +570,7 @@ class AdminOrderController extends Controller
             $o->on('retailer_orders.user_id', '=', 'users.id')
                 ->join('retailer_order_line_items',function($j){
                     $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
-                })->whereIn('paid', [1, 2]);
+                })->where('paid','=',1)->orwhere('paid','=',2);
         })->select('users.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
             ->groupBy('users.id')
             ->orderBy('sold', 'DESC')
