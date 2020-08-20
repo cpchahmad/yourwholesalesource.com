@@ -100,74 +100,74 @@
                         </div>
                     </div>
                     @if(count($product->hasVariants) == 0)
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">Pricing</h3>
-                        </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="pricing">
-                            <div class="block-content">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group row">
-                                            <div class="col-md-6 push-10">
-                                                <label>Price</label>
-                                                <input type="text" class="form-control" name="price"
-                                                       value="{{$product->price}}"  placeholder="$ 0.00" required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Cost Per Item</label>
-                                                <input type="text" class="form-control" name="cost"
-                                                       value="{{$product->cost}}"  placeholder="$ 0.00">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="col-xs-12 ">
-                                                <label>Quantity</label>
-                                                <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="col-xs-12 ">
-                                                <label>Weight</label>
-                                                <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <div class="col-xs-12 ">
-                                                <label>SKU</label>
-                                                <input type="text" class="form-control" name="sku" value="{{$product->sku}}" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-
-                                            <div class="col-xs-12 ">
-                                                <label>Barcode</label>
-                                                <input type="text" class="form-control" value="{{$product->barcode}}" name="barcode">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                        <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">Pricing</h3>
                             </div>
-                        </form>
-                    </div>
+                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="type" value="pricing">
+                                <div class="block-content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 push-10">
+                                                    <label>Price</label>
+                                                    <input type="text" class="form-control" name="price"
+                                                           value="{{$product->price}}"  placeholder="$ 0.00" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Cost Per Item</label>
+                                                    <input type="text" class="form-control" name="cost"
+                                                           value="{{$product->cost}}"  placeholder="$ 0.00">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-12 ">
+                                                    <label>Quantity</label>
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-12 ">
+                                                    <label>Weight</label>
+                                                    <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-12 ">
+                                                    <label>SKU</label>
+                                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+
+                                                <div class="col-xs-12 ">
+                                                    <label>Barcode</label>
+                                                    <input type="text" class="form-control" value="{{$product->barcode}}" name="barcode">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
                     @endif
                     @if($product->variants == 1)
                         <div class="block">
@@ -200,7 +200,7 @@
                                                 <tbody class="js-table-sections-header">
                                                 <tr>
                                                     <td class="variant_title">
-                                                       @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
+                                                        @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
                                                     </td>
                                                     <td class="text-center">
                                                         <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
@@ -597,7 +597,7 @@
                             <input type="hidden" name="type" value="marketing_video_update">
                             <div class="block-content pt-0" >
                                 <div class="form-group">
-                                        <input type="text" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
+                                    <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
                                 </div>
                             </div>
                         </form>
@@ -764,18 +764,18 @@
                     </div>
                 </div>
             </div>
-{{--            <div class="row">--}}
-{{--                <div class="col-md-8">--}}
-{{--                   --}}
+            {{--            <div class="row">--}}
+            {{--                <div class="col-md-8">--}}
+            {{--                   --}}
 
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-8">--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
+            {{--            <div class="row">--}}
+            {{--                <div class="col-md-8">--}}
 
-{{--                 --}}
-{{--                </div>--}}
-{{--            </div>--}}
+            {{--                 --}}
+            {{--                </div>--}}
+            {{--            </div>--}}
             <div class="content" style="margin-bottom: 10px">
                 <div class="row ">
                     <div class="col-sm-12 text-right">
