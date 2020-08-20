@@ -90,10 +90,7 @@
                                         <td>
                                             <span class="badge badge-success">Active</span>
                                         </td>
-                                         <td>
 
-
-                                        </td>
                                         <td class="text-center">
                                             <a href="{{route('admin.wallets.detail',$user->has_wallet->id)}}"
                                                class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
