@@ -41,33 +41,23 @@
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
-
                                     <th>Title</th>
                                     <th>Email</th>
                                     <th>Shops</th>
                                     <th>Wallet Number</th>
                                     <th>Available</th>
                                     <th>Requested</th>
-                                    <th>Status</th>
+
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="">
                                 @foreach($users as $index => $user)
-
                                     <tr>
-
                                         <td class="font-w600">{{ $user->name }}</td>
                                         <td>
                                            {{$user->email}}
                                         </td>
-{{--                                        <td>--}}
-{{--                                            @if($user->hasRole('non-shopify-users'))--}}
-{{--                                                <span class="badge badge-success">Shopify User</span>--}}
-{{--                                            @else--}}
-{{--                                                <span class="badge badge-warning">Manager</span>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
                                         <td>
                                             @if(count($user->has_shops) > 0)
                                                 @foreach($user->has_shops as $shop)
@@ -85,10 +75,6 @@
                                         </td>
                                         <td>
                                             {{number_format($user->has_wallet->pending,2)}}
-                                        </td>
-
-                                        <td>
-                                            <span class="badge badge-success">Active</span>
                                         </td>
 
                                         <td class="text-center">
