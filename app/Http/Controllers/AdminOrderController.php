@@ -576,7 +576,7 @@ class AdminOrderController extends Controller
                     $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
                 });
         })
-            ->select('users.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
+            ->select('users.*', DB::raw('COUNT(retailer_orders.*) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
             ->groupBy('users.id')
             ->orderBy('sold', 'DESC')
             ->get()
