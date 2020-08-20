@@ -569,7 +569,7 @@ class AdminOrderController extends Controller
         $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) {
             $o->on('retailer_orders.user_id', '=', 'users.id')
                 ->where('retailer_orders.paid','=',1)
-                ->Orwhere('retailer_orders.paid','=',2)
+             /*   ->where('retailer_orders.paid','=',2)*/
                 ->join('retailer_order_line_items',function($j){
                     $j->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
                 });
