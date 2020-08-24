@@ -108,7 +108,7 @@ class AdminOrderController extends Controller
                     if ($shop != null) {
                         $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                         if (!$location_response->errors) {
-                            dd($location_response);
+
                             foreach ($location_response->body->locations as $location){
                                if($location->name == "WeFullFill"){
                                    $data = [
@@ -134,7 +134,7 @@ class AdminOrderController extends Controller
                             }
                             $response = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json', $data);
                             if ($response->errors) {
-                                dd($response);
+
                                 return redirect()->back()->with('error', 'Cant Fulfill Items of Order in Related Store!');
 
                             } else {
