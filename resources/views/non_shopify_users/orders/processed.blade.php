@@ -286,7 +286,7 @@
             </div>
         </div>
     </div>
-    @if($order->paid == 0)
+
         <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
             <div class="modal-dialog modal-dialog-popout" role="document">
                 <div class="modal-content">
@@ -359,7 +359,6 @@
                 </div>
             </div>
         </div>
-    @endif
 
 
 
