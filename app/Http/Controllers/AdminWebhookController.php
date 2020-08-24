@@ -49,16 +49,20 @@ class AdminWebhookController extends Controller
                 if ($shop != null) {
                     $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                     if (!$location_response->errors) {
-                        $fulfill_data = [
-                            "fulfillment" => [
-                                "location_id" => $location_response->body->locations[0]->id,
-                                "tracking_number" => null,
-                                "tracking_url" => null,
-                                "line_items" => [
+                        foreach ($location_response->body->locations as $location){
+                            if($location->name == "WeFullFill"){
+                                $fulfill_data = [
+                                    "fulfillment" => [
+                                        "location_id" => $location->id,
+                                        "tracking_number" => null,
+                                        "line_items" => [
 
-                                ]
-                            ]
-                        ];
+                                        ]
+                                    ]
+                                ];
+                            }
+                        }
+
                         if (count($data->tracking_numbers) > 0) {
                             $fulfill_data['fulfillment']['tracking_number'] = $data->tracking_numbers[0];
                         }

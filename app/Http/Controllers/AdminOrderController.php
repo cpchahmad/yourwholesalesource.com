@@ -109,15 +109,20 @@ class AdminOrderController extends Controller
                         $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                         if (!$location_response->errors) {
                             dd($location_response);
-                            $data = [
-                                "fulfillment" => [
-                                    "location_id" => $location_response->body->locations[0]->id,
-                                    "tracking_number" => null,
-                                    "line_items" => [
+                            foreach ($location_response->body->locations as $location){
+                               if($location->name == "WeFullFill"){
+                                   $data = [
+                                       "fulfillment" => [
+                                           "location_id" => $location->id,
+                                           "tracking_number" => null,
+                                           "line_items" => [
 
-                                    ]
-                                ]
-                            ];
+                                           ]
+                                       ]
+                                   ];
+                               }
+                            }
+
                             foreach ($request->input('item_id') as $index => $item) {
                                 $line_item = RetailerOrderLineItem::find($item);
                                 if ($line_item != null && $fulfillable_quantities[$index] > 0) {

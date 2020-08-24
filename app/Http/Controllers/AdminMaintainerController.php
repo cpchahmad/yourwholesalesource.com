@@ -188,15 +188,20 @@ class AdminMaintainerController extends Controller
         $admin_order_response = $admin_shop->api()->rest('GET', '/admin/orders/'.$order->admin_shopify_id.'.json');
 
         if (!$location_response->errors && !$admin_order_response->errors) {
-            $data = [
-                "fulfillment" => [
-                    "location_id" => $location_response->body->locations[0]->id,
-                    "tracking_number" => null,
-                    "line_items" => [
+            foreach ($location_response->body->locations as $location){
+                if($location->name == "WeFullFill"){
+                    $data = [
+                        "fulfillment" => [
+                            "location_id" => $location->id,
+                            "tracking_number" => null,
+                            "line_items" => [
 
-                    ]
-                ]
-            ];
+                            ]
+                        ]
+                    ];
+                }
+            }
+
             $admin_variants = $admin_order_response->body->order->line_items;
 
             foreach ($request->input('item_id') as $index => $item) {
@@ -282,15 +287,19 @@ class AdminMaintainerController extends Controller
         if (count($order->fulfillments) > 0) {
             foreach ($order->fulfillments as $fulfillment) {
                 if (!$location_response->errors) {
-                    $data = [
-                        "fulfillment" => [
-                            "location_id" => 44247580805,
-                            "tracking_number" => null,
-                            "line_items" => [
+                    foreach ($location_response->body->locations as $location){
+                        if($location->name == "WeFullFill"){
+                            $data = [
+                                "fulfillment" => [
+                                    "location_id" => $location->id,
+                                    "tracking_number" => null,
+                                    "line_items" => [
 
-                            ]
-                        ]
-                    ];
+                                    ]
+                                ]
+                            ];
+                        }
+                    }
                     foreach ($fulfillment->line_items as $line_item) {
                         if ($line_item->linked_line_item != null) {
                             array_push($data['fulfillment']['line_items'], [
