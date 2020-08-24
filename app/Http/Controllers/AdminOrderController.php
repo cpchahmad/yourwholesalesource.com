@@ -108,6 +108,7 @@ class AdminOrderController extends Controller
                     if ($shop != null) {
                         $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                         if (!$location_response->errors) {
+                            dd($location_response);
                             $data = [
                                 "fulfillment" => [
                                     "location_id" => $location_response->body->locations[0]->id,
