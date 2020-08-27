@@ -20,7 +20,7 @@ class RolePermissionController extends Controller
            }
            else{
                if($user->hasRole('non-shopify-users')){
-                   return redirect()->route('users.dashboard');
+                   return redirect()->route('users.dashboard',['ftl' => '1']);
                }
                else if($user->hasRole('sales-manager')){
                    return redirect()->route('managers.dashboard');

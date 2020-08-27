@@ -8,6 +8,7 @@ use App\DefaultInfo;
 use App\Image;
 use App\Product;
 use App\ProductVariant;
+use App\Questionaire;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
@@ -113,4 +114,115 @@ class HelperController extends Controller
         DB::table('retailer_product_user')->truncate();
 
     }
+
+    public function QuestionnaireCheck(Request $request){
+        if($request->has('shop')){
+            $shop = \App\Shop::find($request->input('shop'));
+            if($shop != null){
+
+                if(count($shop->has_user) > 0){
+                    $array = $shop->has_user->pluck('id')->toArray();
+                    $filled_questionnaire = Questionaire::whereIn('user_id',$array)->first();
+                    if($filled_questionnaire == null){
+                        $questionnaire = Questionaire::where('shop_id',$shop->id)->first();
+                        if($questionnaire == null){
+                            return response()->json([
+                                'popup' => 'yes'
+                            ]);
+                        }
+                        else{
+                            return response()->json([
+                                'popup' => 'no'
+                            ]);
+                        }
+
+                    }
+                    else{
+                        return response()->json([
+                            'popup' => 'no'
+                        ]);
+                    }
+                }
+                else{
+                    $filled_questionnaire = Questionaire::where('shop_id',$shop->id)->first();
+                    if($filled_questionnaire == null){
+                        return response()->json([
+                            'popup' => 'yes'
+                        ]);
+                    }
+                    else{
+                        return response()->json([
+                            'popup' => 'no'
+                        ]);
+                    }
+                }
+            }
+            else{
+                return response()->json([
+                    'popup' => 'no'
+                ]);
+            }
+        }
+        elseif($request->has('user')){
+            $user = User::find($request->input('user'));
+            if($user != null){
+                if(count($user->has_shops) > 0){
+                    $array = $user->has_shops->pluck('id')->toArray();
+                    $filled_questionnaire = Questionaire::whereIn('shop_id',$array)->first();
+                    if($filled_questionnaire == null){
+                        return response()->json([
+                            'popup' => 'yes'
+                        ]);
+                    }
+                    else{
+                        return response()->json([
+                            'popup' => 'no'
+                        ]);
+                    }
+                }
+                else{
+                    $filled_questionnaire = Questionaire::where('user_id',$user->id)->first();
+                    if($filled_questionnaire == null){
+                        return response()->json([
+                            'popup' => 'yes'
+                        ]);
+                    }
+                    else{
+                        return response()->json([
+                            'popup' => 'no'
+                        ]);
+                    }
+                }
+            }
+            else{
+                return response()->json([
+                    'popup' => 'no'
+                ]);
+            }
+        }
+    }
+
+    public function SaveQuestionnaire(Request $request){
+        $q = new Questionaire();
+        $q->gender =  $request->input('gender');
+        $q->dob =  $request->input('dob');
+        $q->new_to_business =  $request->input('new_to_business');
+        $q->countries =  implode(',',$request->input('countries'));
+        $q->product_ranges =  implode(',',$request->input('product_ranges'));
+        $q->delivery_time =  $request->input('delivery_time');
+        $q->concerns =  implode(',',$request->input('concerns'));
+        if($request->has('shop_id')){
+            $q->shop_id =  $request->input('shop_id');
+        }
+        if($request->has('user_id')){
+            $q->user_id =  $request->input('user_id');
+        }
+        $q->save();
+        return redirect()->back()->with('success','Questionnaire Submitted ! Thanks for your time !');
+
+
+
+
+    }
+
 }

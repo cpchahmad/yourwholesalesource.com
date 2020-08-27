@@ -300,6 +300,7 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 
         Route::post('/orders/bulk-fulfillments', 'AdminOrderController@show_bulk_fulfillments')->name('app.orders.bulk.fulfillment');
 
+        Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
 
 
 
@@ -311,14 +312,13 @@ Route::get('/search/products', 'CustomOrderController@find_products')->name('fin
 Route::get('/get_selected_variants', 'CustomOrderController@get_selected_variants')->name('get_selected_variants');
 Route::get('/calculate_shipping', 'SingleStoreController@calculate_shipping')->name('calculate_shipping');
 
-
-
 Route::get('test/sync/{id}', 'PaypalController@test');
 
-
 Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
-
 Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
+
+Route::get('check/questionnaire', 'HelperController@QuestionnaireCheck')->name('app.questionaire.check');
+
 
 //Route::get('create/service', 'InventoryController@create_service');
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');

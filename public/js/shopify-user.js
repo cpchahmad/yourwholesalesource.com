@@ -1,6 +1,27 @@
 $(document).ready(function () {
 
 
+    /*Popup Code*/
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var c = url.searchParams.get("ftl");
+    if(c !== null){
+        $.ajax({
+            url:$('#questionnaire_modal').data('route'),
+            type: 'GET',
+            data:{
+                user : $('#questionnaire_modal').data('user'),
+            },
+            success:function (response) {
+                if(response.popup === 'yes'){
+                    $('#questionnaire_modal').modal();
+                }
+            }
+
+        });
+    }
+
+
     $('body').on('change','#change-view-store',function () {
 
         if($(this).val() != ''){
