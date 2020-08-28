@@ -542,7 +542,115 @@
                 <div class="tab-pane" id="settings" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
-                            <p class="text-center"> Coming Soon ... </p>
+                            @if(count($store->has_user) > 0)
+                                @php
+                                    $associated_user = $store->has_user[0];
+                                @endphp
+
+                            @else
+                                @php
+                                    $associated_user = null;
+                                @endphp
+                            @endif
+                            @if($associated_user != null)
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="block">
+                                            <div class="block-header">
+                                                <h3 class="block-title">List of stores attached</h3>
+                                            </div>
+                                            @if(count($associated_user->has_shops) > 0)
+                                                <div class="block-content ">
+                                                    <table class="js-table-sections table table-hover">
+                                                        <tbody>
+                                                        @foreach($associated_user->has_shops as $index => $shop)
+                                                            <tr>
+
+                                                                <td class="font-w600" style="vertical-align: middle">
+                                                                    {{explode('.',$shop->shopify_domain)[0]}}
+                                                                </td>
+                                                                <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @else
+                                                <div class="block-content ">
+                                                    <p> No Stores Attached </p>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <div class="block">
+                                            <div class="block-header">
+                                                <h3 class="block-title">Account Details</h3>
+                                            </div>
+                                            <div class="block-content">
+
+                                                <input type="hidden" name="user_id" value="{{$associated_user->id}}">
+                                                <div class="image-profile text-center mb2">
+                                                    <img class="image-drop img-avatar200"
+                                                         @if($associated_user->profile == null) src="{{asset('assets/media/avatars/avatar0.jpg')}}" @else
+                                                         src="{{asset('managers-profiles')}}/{{$associated_user->profile}}"
+                                                         @endif
+                                                         alt="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Email</label>
+                                                    <input disabled type="text"  class="form-control" value="{{$associated_user->email}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Username</label>
+                                                    <input disabled type="text" required name="name" class="form-control" value="{{$associated_user->name}}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="block">
+                                            <div class="block-header">
+                                                <h3 class="block-title">Address Information</h3>
+                                            </div>
+                                            <div class="block-content">
+                                                <input type="hidden" name="user_id" value="{{$associated_user->id}}">
+                                                <div class="form-group">
+                                                    <label for="">Street Address</label>
+                                                    <input type="text" disabled  name="address" class="form-control" value="{{$associated_user->address}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Address 2</label>
+                                                    <input type="text" disabled  name="address2" class="form-control" value="{{$associated_user->address2}}">
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-4">
+                                                        <label for="">City</label>
+                                                        <input type="text" disabled  name="city" class="form-control" value="{{$associated_user->city}}">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="">State</label>
+                                                        <input type="text" disabled  name="state" class="form-control" value="{{$associated_user->state}}">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="">Zip</label>
+                                                        <input type="text" disabled  name="zip" class="form-control" value="{{$associated_user->zip}}">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Country</label>
+                                                    <select name="country" disabled class="form-control">
+                                                        <option  value="{{$associated_user->country}}">{{$associated_user->country}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            @else
+                                <p> No Settings Found! </p>
+                            @endif
+
                         </div>
                     </div>
                 </div>
