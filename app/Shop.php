@@ -30,4 +30,7 @@ class Shop extends Model
     public function has_payments(){
         return $this->hasMany( OrderTransaction::class,'shop_id');
     }
+    public function has_questionnaire(){
+        return $this->hasOne(Questionaire::class,'shop_id');
+    }
 }

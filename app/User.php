@@ -44,6 +44,9 @@ class User extends Authenticatable
     public function has_shops(){
         return $this->belongsToMany(Shop::class,'user_shop','user_id','shop_id');
     }
+    public function has_stores(){
+        return $this->belongsToMany(\App\Shop::class,'user_shop','user_id','shop_id');
+    }
     public function has_imported(){
         return $this->belongsToMany('App\Product','retailer_product_user','user_id','product_id');
     }
@@ -85,5 +88,8 @@ class User extends Authenticatable
     }
     public function has_reviews(){
         return $this->hasMany(ManagerReview::class,'manager_id');
+    }
+    public function has_questionnaire(){
+        return $this->hasOne(Questionaire::class,'user_id');
     }
 }

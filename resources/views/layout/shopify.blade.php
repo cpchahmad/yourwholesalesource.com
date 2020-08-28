@@ -89,7 +89,7 @@ $countries = \App\Country::all();
                                         <select class="form-control js-select2" style="width: 100%;" data-placeholder="Choose multiple" name="countries[]" required  multiple="">
                                             <option></option>
                                             @foreach($countries as $country)
-                                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                                <option value="{{$country->name}}">{{$country->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

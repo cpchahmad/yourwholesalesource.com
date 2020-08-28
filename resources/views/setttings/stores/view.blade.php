@@ -43,10 +43,75 @@
                     <a class="nav-link" href="#wallet">Wallet</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#questionnaire">Questionnaire</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#settings">Settings</a>
                 </li>
             </ul>
             <div class="block-content tab-content">
+                <div class="tab-pane" id="questionnaire" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            @if ($store->has_questionnaire != null)
+                                <h5>Q1. Gender?</h5>
+                                <p> {{$store->has_questionnaire->gender}}</p>
+                                <h5>Q2. Date Of Birth?</h5>
+                                <p> {{date_create($store->has_questionnaire->dob)->format('d M, Y')}}<p>
+                                <h5>Q3. Are you new to business or you have your online Online store already?</h5>
+                                <p> {{$store->has_questionnaire->new_to_business}}</p>
+                                <h5>Q4. What is your target product ranges?</h5>
+                                <p> {{$store->has_questionnaire->product_ranges}}</p>
+                                <h5>Q5. Which of the countries you would like to sell to?</h5>
+                                <p> {{$store->has_questionnaire->countries}}</p>
+                                <h5>Q6. What is your delivery time request for your orders to be delivered?</h5>
+                                <p> {{$store->has_questionnaire->delivery_time}}</p>
+                                <h5>Q6. What is your most concern in our drop shipping service?</h5>
+                                <p> {{$store->has_questionnaire->concerns}}</p>
+                            @elseif(count($store->has_user) > 0)
+                                @php
+                                    $check = false;
+                                @endphp
+
+                                @foreach($store->has_user as $user)
+                                    @if ($user->has_questionnaire != null)
+
+                                        <h5>Q1. Gender?</h5>
+                                        <p> {{$user->has_questionnaire->gender}}</p>
+                                        <h5>Q2. Date Of Birth?</h5>
+                                        <p> {{date_create($user->has_questionnaire->dob)->format('d M, Y')}}<p>
+                                        <h5>Q3. Are you new to business or you have your online Online store already?</h5>
+                                        <p> {{$user->has_questionnaire->new_to_business}}</p>
+                                        <h5>Q4. What is your target product ranges?</h5>
+                                        <p> {{$user->has_questionnaire->product_ranges}}</p>
+                                        <h5>Q5. Which of the countries you would like to sell to?</h5>
+                                        <p> {{$user->has_questionnaire->countries}}</p>
+                                        <h5>Q6. What is your delivery time request for your orders to be delivered?</h5>
+                                        <p> {{$user->has_questionnaire->delivery_time}}</p>
+                                        <h5>Q6. What is your most concern in our drop shipping service?</h5>
+                                        <p> {{$user->has_questionnaire->concerns}}</p>
+
+                                        @php
+                                            $check = false;
+   break;
+                                        @endphp
+                                    @endif
+                                    @if ($user->has_questionnaire == null)
+                                        @php
+                                            $check = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if($check == true)
+                                    <p class="text-center"> No Questionnaire Filled Yet!</p>
+
+                                @endif
+                            @else
+                                <p class="text-center"> No Questionnaire Filled Yet!</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div class="tab-pane active" id="orders" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
@@ -293,8 +358,8 @@
                                             <td>
                                                 @if($product->linked_product_id != null)
                                                     <a href="{{route('product.view',$product->linked_product_id)}}">{{$product->title}}</a>
-                                                    @else
-                                                {{$product->title}}
+                                                @else
+                                                    {{$product->title}}
                                                 @endif
 
                                             </td>
@@ -304,9 +369,9 @@
                                             <td class="">
                                                 <div class="btn-group">
                                                     @if($product->linked_product_id != null)
-                                                    <a href="{{route('product.view',$product->linked_product_id)}}"
-                                                       class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
-                                                       data-original-title="View Product"><i class="fa fa-eye"></i></a>
+                                                        <a href="{{route('product.view',$product->linked_product_id)}}"
+                                                           class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                           data-original-title="View Product"><i class="fa fa-eye"></i></a>
                                                     @endif
 
 
@@ -474,15 +539,15 @@
 
                 </div>
 
-            <div class="tab-pane" id="settings" role="tabpanel">
-                <div class="block">
-                    <div class="block-content">
-                        <p class="text-center"> Coming Soon ... </p>
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            <p class="text-center"> Coming Soon ... </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 @endsection

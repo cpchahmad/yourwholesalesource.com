@@ -5,7 +5,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                   {{$user->name}}
+                    {{$user->name}}
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -40,10 +40,74 @@
                     <a class="nav-link" href="#wallet">Wallet</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#questionnaire">Questionnaire</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#settings">Settings</a>
                 </li>
             </ul>
             <div class="block-content tab-content">
+                <div class="tab-pane" id="questionnaire" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            @if ($user->has_questionnaire != null)
+                                <h5>Q1. Gender?</h5>
+                                <p> {{$user->has_questionnaire->gender}}</p>
+                                <h5>Q2. Date Of Birth?</h5>
+                                <p> {{date_create($user->has_questionnaire->dob)->format('d M, Y')}}<p>
+                                <h5>Q3. Are you new to business or you have your online Online store already?</h5>
+                                <p> {{$user->has_questionnaire->new_to_business}}</p>
+                                <h5>Q4. What is your target product ranges?</h5>
+                                <p> {{$user->has_questionnaire->product_ranges}}</p>
+                                <h5>Q5. Which of the countries you would like to sell to?</h5>
+                                <p> {{$user->has_questionnaire->countries}}</p>
+                                <h5>Q6. What is your delivery time request for your orders to be delivered?</h5>
+                                <p> {{$user->has_questionnaire->delivery_time}}</p>
+                                <h5>Q6. What is your most concern in our drop shipping service?</h5>
+                                <p> {{$user->has_questionnaire->concerns}}</p>
+                            @elseif(count($user->has_shops) > 0)
+                                @php
+                                    $check = false;
+                                @endphp
+
+                                @foreach($user->has_stores as $store)
+                                    @if ($store->has_questionnaire != null)
+                                        <h5>Q1. Gender?</h5>
+                                        <p> {{$store->has_questionnaire->gender}}</p>
+                                        <h5>Q2. Date Of Birth?</h5>
+                                        <p> {{date_create($store->has_questionnaire->dob)->format('d M, Y')}}<p>
+                                        <h5>Q3. Are you new to business or you have your online Online store already?</h5>
+                                        <p> {{$store->has_questionnaire->new_to_business}}</p>
+                                        <h5>Q4. What is your target product ranges?</h5>
+                                        <p> {{$store->has_questionnaire->product_ranges}}</p>
+                                        <h5>Q5. Which of the countries you would like to sell to?</h5>
+                                        <p> {{$store->has_questionnaire->countries}}</p>
+                                        <h5>Q6. What is your delivery time request for your orders to be delivered?</h5>
+                                        <p> {{$store->has_questionnaire->delivery_time}}</p>
+                                        <h5>Q6. What is your most concern in our drop shipping service?</h5>
+                                        <p> {{$store->has_questionnaire->concerns}}</p>
+                                        @php
+                                            $check = false;
+                                            break;
+                                        @endphp
+
+                                    @endif
+                                    @if ($store->has_questionnaire == null)
+                                        @php
+                                            $check = true;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                @if($check == true)
+                                    <p class="text-center"> No Questionnaire Filled Yet!</p>
+
+                                @endif
+                            @else
+                                <p class="text-center"> No Questionnaire Filled Yet!</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
                 <div class="tab-pane active" id="orders" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
@@ -405,15 +469,15 @@
 
                 </div>
 
-            <div class="tab-pane" id="settings" role="tabpanel">
-                <div class="block">
-                    <div class="block-content">
-                        <p class="text-center"> Coming Soon ... </p>
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            <p class="text-center"> Coming Soon ... </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 @endsection
