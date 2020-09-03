@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     /*Order Bulk Pay*/
     /*BULK ORDER PAY*/
-    $('.check-order-all').change(function () {
+    $('.check-order-all-user').change(function () {
         unset_bulk_array();
         set_bulk_array();
 
@@ -15,7 +15,7 @@ $(document).ready(function () {
         }
 
     });
-    $('.check-order').change(function () {
+    $('.check-order-user').change(function () {
         if($(this).is(':checked')){
             $('.bulk-div').show();
             unset_bulk_array();
@@ -24,7 +24,7 @@ $(document).ready(function () {
         else{
             unset_bulk_array();
             set_bulk_array();
-            if($('.check-order:checked').length === 0){
+            if($('.check-order-user:checked').length === 0){
                 $('.bulk-div').hide();
             }
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
     function set_bulk_array() {
         var values = [];
-        $('.check-order:checked').each(function () {
+        $('.check-order-user:checked').each(function () {
             values.push($(this).val());
         });
         // $('#bulk-fullfillment').find('input:hidden[name=orders]').val(values);
