@@ -37,6 +37,12 @@
         <div class="row" >
             <div class="col-md-12">
                 <div class="block">
+                    <div class="block-header bulk-div" style="display: none">
+                        <button class="btn btn-primary btn-sm bulk-credit-btn">Pay With Credit Card</button>
+                        <button class="btn btn-success btn-sm bulk-paypal-btn">Pay With Paypal</button>
+                        <button class="btn btn-secondary btn-sm bulk-wallet-btn">Pay With Wallet</button>
+
+                    </div>
                     <div class="block-content">
                         @if (count($orders) > 0)
                             <table class="table table-hover js-table-checkable table-borderless table-striped table-vcenter">
