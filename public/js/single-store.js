@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     /*BULK ORDER PAY*/
     $('.check-order-all').change(function () {
-        unset_bulk_array()
+        unset_bulk_array();
         set_bulk_array();
 
         if($(this).is(':checked')){

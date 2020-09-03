@@ -211,7 +211,7 @@
 
 
 
-<script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections','masked-inputs','select2']); });</script>
+<script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections','masked-inputs','select2','table-tools-checkable']); });</script>
 
 <div class="pre-loader">
     <div class="loader">
