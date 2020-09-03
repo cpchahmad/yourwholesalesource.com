@@ -1,5 +1,48 @@
 $(document).ready(function () {
 
+
+    /*BULK ORDER PAY*/
+    $('.check-order-all').change(function () {
+        unset_bulk_array()
+        set_bulk_array();
+
+        if($(this).is(':checked')){
+            $('.bulk-div').show();
+        }
+        else{
+            $('.bulk-div').hide();
+
+        }
+
+    });
+    $('.check-order').change(function () {
+        if($(this).is(':checked')){
+            $('.bulk-div').show();
+            unset_bulk_array();
+            set_bulk_array();
+        }
+        else{
+            unset_bulk_array();
+            set_bulk_array();
+            if($('.check-order:checked').length === 0){
+                $('.bulk-div').hide();
+            }
+
+        }
+
+    });
+    function set_bulk_array() {
+        var values = [];
+        $('.check-order:checked').each(function () {
+            values.push($(this).val());
+        });
+        // $('#bulk-fullfillment').find('input:hidden[name=orders]').val(values);
+
+    }
+    function unset_bulk_array() {
+        // $('#bulk-fullfillment').find('input:hidden[name=orders]').val('');
+
+    }
     /*Popup Code*/
 
     var url_string = window.location.href;
