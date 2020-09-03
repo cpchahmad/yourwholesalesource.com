@@ -380,8 +380,8 @@ class CustomOrderController extends Controller
                     ->orderBy('sold','DESC');
                 $products = $productQuery->paginate(12);
             }
-            else if($request->input('tag') == 'new-arrival'){
-                $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
+            else if($request->input('tag') == 'winning-products'){
+                $products = $productQuery->where('tags','LIKE','%'.$request->input('tag').'%')->paginate(12);
 
             }
             else{

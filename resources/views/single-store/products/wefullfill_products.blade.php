@@ -88,6 +88,17 @@
         @endforeach
     </div>
     <div class="row mb-2" style="padding: 0 14px;">
+        <div class="col-md-4 p-0 " >
+            <a href="{{route('store.product.wefulfill')}}?tag=winning-products">
+                <div class="block pointer m-0" style="background-color:#edfb79;">
+
+
+                    <div class="block-content p-3 text-center">
+                        <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" src="{{asset('winning.png')}}" alt=""> Winning Products </p>
+                    </div>
+                </div>
+            </a>
+        </div>
         <div class="col-md-4 p-0">
             <a href="{{route('store.product.wefulfill')}}?tag=24-hours-dispatch">
                 <div class="block pointer m-0" style="background-color:#94a5ff;">
@@ -104,24 +115,14 @@
 
 
                     <div class="block-content p-3 text-center">
-                        <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="https://img.icons8.com/all/500/best-seller.png" alt=""> Best Sellers</p>
+                        <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="{{asset('best.png')}}" alt=""> Best Sellers</p>
                     </div>
                 </div>
             </a>
         </div>
 
 
-        <div class="col-md-4 p-0 " >
-            <a href="{{route('store.product.wefulfill')}}?tag=new-arrival">
-                <div class="block pointer m-0" style="background-color:#edfb79;">
 
-
-                    <div class="block-content p-3 text-center">
-                        <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" src="https://cdn.onlinewebfonts.com/svg/img_463666.png" alt=""> New Arrivals </p>
-                    </div>
-                </div>
-            </a>
-        </div>
     </div>
     <div class="row mb-2">
         <div class="col-md-6 text-right">
