@@ -44,11 +44,22 @@
             </div>
             <div class="col-md-12">
                 <div class="block">
+                    <div class="block-header bulk-div" style="display: none">
+                        <div class="btn-group">
+                            <button class="btn btn-outline-secondary btn-sm bulk-wallet-btn">Pay With Wallet</button>
+                        </div>
+                    </div>
                     <div class="block-content">
                         @if (count($orders) > 0)
                             <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
+                                    <th class="text-center" style="width: 70px;">
+                                        <div class="custom-control custom-checkbox d-inline-block">
+                                            <input type="checkbox" class="custom-control-input check-order-all" id="check-all" name="check-all">
+                                            <label class="custom-control-label" for="check-all"></label>
+                                        </div>
+                                    </th>
 
                                     <th>Name</th>
                                     <th>Order Date</th>
@@ -65,6 +76,18 @@
                                 @foreach($orders as $index => $order)
                                     <tbody class="">
                                     <tr>
+                                        @if($order->paid == 0)
+                                            <td class="text-center">
+                                                <div class="custom-control custom-checkbox d-inline-block">
+                                                    <input type="checkbox" class="custom-control-input check-order" id="row_{{$index}}" name="check_order[]" value="{{$order->id}}">
+                                                    <label class="custom-control-label" for="row_{{$index}}"></label>
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td class="text-center">
+
+                                            </td>
+                                        @endif
 
                                         <td class="font-w600"><a href="{{route('users.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td>

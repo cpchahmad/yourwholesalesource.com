@@ -41,8 +41,6 @@
                         <div class="btn-group">
                             <button class="btn btn-outline-secondary btn-sm bulk-wallet-btn">Pay With Wallet</button>
                         </div>
-
-
                     </div>
                     <div class="block-content">
                         @if (count($orders) > 0)
