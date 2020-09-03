@@ -83,10 +83,7 @@
                                         </td>
                                             @else
                                             <td class="text-center">
-                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                    <input type="checkbox" class="custom-control-input check-order" disabled id="row_{{$index}}" name="check_order[]" value="{{$order->id}}">
-                                                    <label class="custom-control-label" for="row_{{$index}}"></label>
-                                                </div>
+
                                             </td>
                                         @endif
 
