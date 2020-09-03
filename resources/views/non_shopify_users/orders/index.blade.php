@@ -51,7 +51,7 @@
                     </div>
                     <div class="block-content">
                         @if (count($orders) > 0)
-                            <table class="table table-hover table-borderless table-striped table-vcenter">
+                            <table class="table js-table-checkable table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
                                     <th class="text-center" style="width: 70px;">
