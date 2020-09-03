@@ -56,7 +56,7 @@
                                             {{date_create($order->shopify_created_at)->format('d m, Y h:i a') }}
                                         </td>
                                         <td>
-                                            {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
+                                            {{number_format($order->cost_to_pay,2)}} USD
 
                                         </td>
                                         <td>
@@ -151,7 +151,7 @@
                                                         <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                                     @endif
                                                 </td>
-                                                <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
+                                                <td>{{number_format($item->cost,2)}}  X {{$item->quantity}} USD</td>
                                                 <td>
                                                     @if($item->fulfillment_status == null)
                                                         <span class="badge badge-warning"> Unfulfilled</span>
@@ -226,7 +226,7 @@
                                     @if($orders->where('paid',0)->count() > 0)
                                         <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
                                         <button class="btn btn-success paypal-pay-button" data-href="{{route('users.orders.bulk.paypal',$file->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}" data-pay=" {{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('users.orders.bulk.wallet',$file->id)}}" data-pay="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('users.orders.bulk.wallet',$file->id)}}" data-pay="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
                                     @endif
                                 </td>
                             </tr>

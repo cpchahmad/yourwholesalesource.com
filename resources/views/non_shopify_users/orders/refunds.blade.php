@@ -56,7 +56,7 @@
 
                                             <td class="font-w600"><a href="{{route('users.order.view',$refund->has_order->id)}}">{{ $refund->title }}</a></td>
                                             <td>
-                                                {{number_format($refund->has_order->cost_to_pay,2)}} {{$refund->has_order->currency}}
+                                                {{number_format($refund->has_order->cost_to_pay,2)}} USD
 
                                             </td>
                                             <td>

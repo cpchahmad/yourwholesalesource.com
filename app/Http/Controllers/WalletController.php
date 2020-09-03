@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\NewWallet;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\PaypalWalletTransaction;
@@ -13,6 +14,7 @@ use App\WalletLog;
 use App\WalletRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class WalletController extends Controller
@@ -40,6 +42,13 @@ class WalletController extends Controller
             $user = Auth::user();
             if ($user->has_wallet == null) {
                 $wallet = $this->wallet_create(Auth::id());
+                try{
+                    Mail::to($user->email)->send(new NewWallet($user));
+
+                }catch (\Exception $e){
+
+                }
+
             } else {
                 $wallet = $user->has_wallet;
             }
@@ -52,6 +61,13 @@ class WalletController extends Controller
             if (count($shop->has_user) > 0) {
                 if ($shop->has_user[0]->has_wallet == null) {
                     $wallet = $this->wallet_create($shop->has_user[0]->id);
+                    try{
+                        Mail::to($shop->has_user[0]->email)->send(new NewWallet($shop->has_user[0]));
+
+                    }catch (\Exception $e){
+
+                    }
+
                 } else {
                     $wallet = $shop->has_user[0]->has_wallet;
                 }
@@ -139,6 +155,13 @@ class WalletController extends Controller
         foreach ($users as $user){
             if ($user->has_wallet == null) {
                $this->wallet_create($user->id);
+               try{
+                   Mail::to($user->email)->send(new NewWallet($user));
+
+               }catch (\Exception $e){
+
+               }
+
             }
         }
         return view('setttings.wallets.index')->with([

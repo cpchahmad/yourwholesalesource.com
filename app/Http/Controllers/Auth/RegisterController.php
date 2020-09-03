@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\WalletController;
+use App\Mail\NewUser;
+use App\Mail\NewWallet;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -73,6 +76,16 @@ class RegisterController extends Controller
         $user->assignRole('non-shopify-users');
         $wallet = new WalletController();
         $wallet->wallet_create($user->id);
+        try{
+            Mail::to($user->email)->send(new NewUser($user));
+            Mail::to($user->email)->send(new NewWallet($user));
+
+        }
+        catch (\Exception $e){
+
+
+        }
+
         return  $user;
     }
 }

@@ -6,6 +6,8 @@ use App\AdditionalTab;
 use App\Category;
 use App\DefaultInfo;
 use App\Image;
+use App\Mail\NewUser;
+use App\Mail\NewWallet;
 use App\Product;
 use App\ProductVariant;
 use App\Questionaire;
@@ -21,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use OhMyBrew\ShopifyApp\Models\Shop;
 use OhMyBrew\ShopifyApp\ShopifyApp;
 use Spatie\Permission\Models\Role;
@@ -42,7 +45,7 @@ class HelperController extends Controller
         return $shop;
     }
     public  function getSpecificShop($id){
-      return Shop::find($id);
+        return Shop::find($id);
     }
 
     public  function getSpecificLocalShop($id){
@@ -82,7 +85,7 @@ class HelperController extends Controller
             }
         }
         else{
-           return 'Please Enter Password for Reset';
+            return 'Please Enter Password for Reset';
         }
     }
 
@@ -219,10 +222,48 @@ class HelperController extends Controller
         }
         $q->save();
         return redirect()->back()->with('success','Questionnaire Submitted ! Thanks for your time !');
+    }
+
+    public function testEmail(){
+        $user = User::all()->first();
+        Mail::to('fazalkhann66@gmail.com')->send(new NewWallet($user));
+    }
 
 
+    public function test(){
+        $shop = $this->getSpecificShop('4');
+//        $res = $shop->api()->rest('GET','/admin/orders/2647280091233.json');
+//        dd($res);
 
+        $response = $shop->api()->rest('GET', '/admin/orders/count.json',['status' => 'any']);
+        if(!$response->errors) {
+            $count = $response->body->count;
+            $iterations = ceil($count / 50);
+            $next = '';
 
+            for ($i = 1; $i <= $iterations; $i++) {
+                if ($i == 1) {
+                    $product_response = $shop->api()->rest('GET', '/admin/orders.json',['status'=>'any']);
+                } else {
+                    $product_response = $shop->api()->rest('GET', '/admin/orders.json', ['page_info' => $next],['status'=>'any']);
+                }
+
+                dd($product_response);
+                if(!$product_response->errors) {
+
+                    if($product_response->link != null){
+                        $next = $product_response->link->next;
+                    }
+
+                    $orders = $product_response->body->orders;
+                    foreach ($orders as $order){
+                     $response = $shop->api()->rest('DELETE', '/admin/orders/'.$order->id.'.json');
+                    dd($response);
+                    }
+                }
+
+            }
+        }
     }
 
 }

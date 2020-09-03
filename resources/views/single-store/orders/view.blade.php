@@ -237,8 +237,8 @@
                                             @endif
                                         </td>
 
-                                        <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  {{$order->currency}}</td>
-                                        <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
+                                        <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
+                                        <td>{{$item->price}} X {{$item->quantity}}  USD </td>
                                         <td>
                                             @if($item->fulfillment_status == null)
                                                 <span class="badge badge-warning"> Unfulfilled</span>
@@ -294,7 +294,7 @@
                                                 <span class="badge badge-danger"> Store</span>
                                             </td>
 
-                                            <td>{{$item->price}} X {{$item->quantity}}  {{$order->currency}} </td>
+                                            <td>{{$item->price}} X {{$item->quantity}}  USD </td>
 
                                         </tr>
                                     @endif
@@ -322,7 +322,7 @@
                                     Subtotal ({{count($order->line_items)}} items)
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} {{$order->currency}}
+                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
                                 </td>
                             </tr>
                             <tr>
@@ -330,7 +330,7 @@
                                     Shipping Price
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->shipping_price,2)}} {{$order->currency}}
+                                    {{number_format($order->shipping_price,2)}} USD
                                 </td>
                             </tr>
 
@@ -339,7 +339,7 @@
                                     Total Cost @if($order->paid == 0) to Pay @endif
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
+                                    {{number_format($order->cost_to_pay,2)}} USD
                                 </td>
                             </tr>
                             <tr>
@@ -348,9 +348,9 @@
                                     @if($order->paid == 0)
                                         <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
 
-                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} {{$order->currency}}" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                        <button class="btn btn-success paypal-pay-button" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
 
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} {{$order->currency}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
                                     @endif
                                 </td>
@@ -462,9 +462,9 @@
                                                 @endif
                                             </td>
                                             <td> @if($item->linked_line_item != null)
-                                                    {{number_format($item->linked_line_item->cost,2)}}  X {{$item->fulfilled_quantity}}  {{$order->currency}}
+                                                    {{number_format($item->linked_line_item->cost,2)}}  X {{$item->fulfilled_quantity}}  USD
                                                 @else
-                                                    {{number_format($item->cost,2)}}  X {{$item->fulfilled_quantity}}  {{$order->currency}}
+                                                    {{number_format($item->cost,2)}}  X {{$item->fulfilled_quantity}}  USD
                                                 @endif
                                             </td>
 
@@ -501,7 +501,7 @@
                                                 </div>
                                                 <div class="timeline-event-block block js-appear-enabled animated fadeIn" data-toggle="appear">
                                                     <div class="block-header block-header-default">
-                                                        <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} {{$order->currency}}</h3>
+                                                        <h3 class="block-title">{{number_format($order->has_payment->amount,2)}} USD</h3>
                                                         <div class="block-options">
                                                             <div class="timeline-event-time block-options-item font-size-sm font-w600">
 {{--                                                                {{date_create($order->has_payment->created_at)->format('d M, Y h:i a')}}--}}

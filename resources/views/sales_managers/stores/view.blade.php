@@ -80,7 +80,7 @@
                                             </td>
 
                                             <td>
-                                                {{number_format($order->cost_to_pay,2)}} {{$order->currency}}
+                                                {{number_format($order->cost_to_pay,2)}} USD
                                             </td>
 
                                             <td>

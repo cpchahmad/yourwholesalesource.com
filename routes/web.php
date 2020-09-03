@@ -318,7 +318,9 @@ Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
 Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
 
 Route::get('check/questionnaire', 'HelperController@QuestionnaireCheck')->name('app.questionaire.check');
+Route::get('test/emails', 'HelperController@testEmail');
 
+//Route::get('fetch-order', 'HelperController@test');
 
 //Route::get('create/service', 'InventoryController@create_service');
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');

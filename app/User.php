@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Mail\SendResetPasswordEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Mail;
 use OhMyBrew\ShopifyApp\Models\Shop;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -91,5 +93,10 @@ class User extends Authenticatable
     }
     public function has_questionnaire(){
         return $this->hasOne(Questionaire::class,'user_id');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to(request()->email)->send(new SendResetPasswordEmail($token,$this));
     }
 }
