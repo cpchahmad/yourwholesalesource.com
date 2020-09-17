@@ -29,7 +29,6 @@
             </tr>
             @endforeach
         </tbody>
-
     </table>
 @else
     <p class="text-center">No shipping price available for this country!</p>
