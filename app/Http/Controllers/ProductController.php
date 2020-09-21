@@ -281,14 +281,11 @@ class ProductController extends Controller
 
                 if ($request->input('type') == 'fulfilled') {
                     $product->fulfilled_by = $request->input('fulfilled-by');
-                    $product->save();
-                }
-
-
-                if($request->input('sortBy')){
                     $product->sortBy = $request->input('sortBy');
                     $product->save();
                 }
+
+
 
                 if ($request->input('type') == 'category') {
                     if ($request->category) {

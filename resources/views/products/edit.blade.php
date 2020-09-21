@@ -563,14 +563,15 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
+
+                    <form action="{{route('product.update',$product->id)}}" method="post">
+                        @csrf
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
                                 Mark as Fulfilled
                             </div>
                         </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
                             <input type="hidden" name="type" value="fulfilled">
                             <div class="block-content" >
                                 <div class="form-group">
@@ -584,9 +585,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
-
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
@@ -594,8 +593,6 @@
                             </div>
                         </div>
                         <div class="block-content pt-0" >
-                            <form action="{{route('product.update',$product->id)}}" method="post">
-                                @csrf
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" required class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  @if($product->sortBy == 'Best Seller') checked @endif>
@@ -606,10 +603,10 @@
                                     <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
                                 </div>
                             </div>
-                            </form>
+
                         </div>
                     </div>
-
+                    </form>
 
                     <div class="block">
                         <div class="block-header">
