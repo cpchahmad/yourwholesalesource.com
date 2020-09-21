@@ -43,27 +43,28 @@ class SingleStoreController extends Controller
         $this->helper = new HelperController();
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $shop = $this->helper->getLocalShop();
 
         if ($request->has('date-range')) {
-            $date_range = explode('-',$request->input('date-range'));
+            $date_range = explode('-', $request->input('date-range'));
             $start_date = $date_range[0];
             $end_date = $date_range[1];
             $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
             $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
 
-            $orders = RetailerOrder::whereIN('paid',[1,2])->where('shop_id',$shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
-            $sales = RetailerOrder::whereIN('paid',[1,2])->where('shop_id',$shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
-            $products = RetailerProduct::where('shop_id',$shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
-            $profit = RetailerOrder::whereIN('paid',[1])->where('shop_id',$shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $products = RetailerProduct::where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
 
 
             $ordersQ = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id',$shop->id)
-                ->whereIn('paid',[1,2])
+                ->where('shop_id', $shop->id)
+                ->whereIn('paid', [1, 2])
                 ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
                 ->groupBy('date')
                 ->get();
@@ -71,49 +72,45 @@ class SingleStoreController extends Controller
 
             $ordersQP = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id',$shop->id)
-                ->whereIn('paid',[1])
+                ->where('shop_id', $shop->id)
+                ->whereIn('paid', [1])
                 ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
                 ->groupBy('date')
                 ->get();
 
             $productQ = DB::table('retailer_products')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                ->where('shop_id',$shop->id)
+                ->where('shop_id', $shop->id)
                 ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
                 ->groupBy('date')
                 ->get();
-
-
-
 
 
         } else {
 
-            $orders = RetailerOrder::whereIN('paid',[1,2])->where('shop_id',$shop->id)->count();
-            $sales = RetailerOrder::whereIN('paid',[1,2])->where('shop_id',$shop->id)->sum('cost_to_pay');
-            $products = RetailerProduct::where('shop_id',$shop->id)->count();
-            $profit = RetailerOrder::whereIN('paid',[1])->where('shop_id',$shop->id)->sum('cost_to_pay');
+            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->count();
+            $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->sum('cost_to_pay');
+            $products = RetailerProduct::where('shop_id', $shop->id)->count();
+            $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
 
             $ordersQ = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id',$shop->id)
-                ->whereIn('paid',[1,2])
+                ->where('shop_id', $shop->id)
+                ->whereIn('paid', [1, 2])
                 ->groupBy('date')
                 ->get();
 
 
             $ordersQP = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id',$shop->id)
-                ->whereIn('paid',[1])
-
+                ->where('shop_id', $shop->id)
+                ->whereIn('paid', [1])
                 ->groupBy('date')
                 ->get();
 
             $productQ = DB::table('retailer_products')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                ->where('shop_id',$shop->id)
+                ->where('shop_id', $shop->id)
                 ->groupBy('date')
                 ->get();
 
@@ -131,29 +128,28 @@ class SingleStoreController extends Controller
         $graph_four_order_values = $productQ->pluck('total')->toArray();
 
 
-        $top_products =  Product::join('retailer_products',function($join) use ($shop){
-            $join->on('products.id','=','retailer_products.linked_product_id')
-                ->where('retailer_products.shop_id' ,'=',$shop->id)
-                ->join('retailer_order_line_items',function ($j){
-                    $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
-                        ->join('retailer_orders',function($o){
-                            $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
-                                ->whereIn('paid',[1,2]);
+        $top_products = Product::join('retailer_products', function ($join) use ($shop) {
+            $join->on('products.id', '=', 'retailer_products.linked_product_id')
+                ->where('retailer_products.shop_id', '=', $shop->id)
+                ->join('retailer_order_line_items', function ($j) {
+                    $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                        ->join('retailer_orders', function ($o) {
+                            $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                ->whereIn('paid', [1, 2]);
                         });
                 });
-        })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+        })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
             ->groupBy('products.id')
-            ->orderBy('sold','DESC')
+            ->orderBy('sold', 'DESC')
             ->get()
             ->take(10);
-
 
 
         return view('single-store.dashboard')->with([
             'date_range' => $request->input('date-range'),
             'orders' => $orders,
             'profit' => $profit,
-            'sales' =>$sales,
+            'sales' => $sales,
             'products' => $products,
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
@@ -167,57 +163,54 @@ class SingleStoreController extends Controller
 
     }
 
-    public function wefullfill_products(Request $request){
+    public function wefullfill_products(Request $request)
+    {
 
-        $country = $this->ip_info($this->getRealIpAddr(),'Country');
+        $country = $this->ip_info($this->getRealIpAddr(), 'Country');
         $categories = Category::all();
-        $productQuery = Product::where('status',1)->newQuery();
+        $productQuery = Product::where('status', 1)->newQuery();
 
-        $productQuery->where('global',0)->whereHas('has_preferences',function ($q){
-            return $q->where('shopify_domain','=',$this->helper->getLocalShop()->shopify_domain);
+        $productQuery->where('global', 0)->whereHas('has_preferences', function ($q) {
+            return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
         });
 
-        $productQuery->orwhere('global',1);
+        $productQuery->orwhere('global', 1);
 
-        if($request->has('category')){
-            $productQuery->whereHas('has_categories',function($q) use ($request){
-                return $q->where('title','LIKE','%'.$request->input('category').'%');
+        if ($request->has('category')) {
+            $productQuery->whereHas('has_categories', function ($q) use ($request) {
+                return $q->where('title', 'LIKE', '%' . $request->input('category') . '%');
             });
         }
-        if($request->has('search')){
-            $productQuery->where('title','LIKE','%'.$request->input('search').'%')->orWhere('tags','LIKE','%'.$request->input('search').'%');
+        if ($request->has('search')) {
+            $productQuery->where('title', 'LIKE', '%' . $request->input('search') . '%')->orWhere('tags', 'LIKE', '%' . $request->input('search') . '%');
         }
-        if($request->has('tag')){
-            if($request->input('tag') == 'best-seller'){
-                $productQuery =  Product::join('retailer_products',function($join) {
-                    $join->on('retailer_products.linked_product_id', '=', 'products.id')
-                        ->join('retailer_order_line_items', function ($join) {
-                            $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
-                                ->join('retailer_orders', function ($o) {
-                                    $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                                        ->whereIn('paid', [1, 2]);
-                                });
-                        });
-                })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-                    ->groupBy('products.id')
-                    ->orderBy('sold','DESC');
-
-                $products = $productQuery->paginate(12);
-            }
-            else if($request->input('tag') == 'winning-products'){
-                $products = $productQuery->where('tags','LIKE','%'.$request->input('tag').'%')->paginate(12);
-
-            }
-            else{
+        if ($request->has('tag')) {
+            if ($request->input('tag') == 'best-seller') {
+                $products = $productQuery->where('sortBy', 'Best Seller')->paginate(12);
+//                $productQuery =  Product::join('retailer_products',function($join) {
+//                    $join->on('retailer_products.linked_product_id', '=', 'products.id')
+//                        ->join('retailer_order_line_items', function ($join) {
+//                            $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+//                                ->join('retailer_orders', function ($o) {
+//                                    $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+//                                        ->whereIn('paid', [1, 2]);
+//                                });
+//                        });
+//                })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+//                    ->groupBy('products.id')
+//                    ->orderBy('sold','DESC');
+//                $products = $productQuery->paginate(12);
+            } else if ($request->input('tag') == 'winning-products') {
+//                $products = $productQuery->where('tags','LIKE','%'.$request->input('tag').'%')->paginate(12);
+                $products = $productQuery->where('sortBy', 'Winning Product')->paginate(12);
+            } else {
                 $products = $productQuery->where('processing_time', '24 Hours')->paginate(12);
-
-
             }
         }
-        if($request->has('filter')){
-            if($request->input('filter') == 'most-order'){
+        if ($request->has('filter')) {
+            if ($request->input('filter') == 'most-order') {
 
-                $productQuery =  Product::join('retailer_products',function($join) {
+                $productQuery = Product::join('retailer_products', function ($join) {
                     $join->on('retailer_products.linked_product_id', '=', 'products.id')
                         ->join('retailer_order_line_items', function ($join) {
                             $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
@@ -226,113 +219,111 @@ class SingleStoreController extends Controller
                                         ->whereIn('paid', [1, 2]);
                                 });
                         });
-                })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
                     ->groupBy('products.id')
-                    ->orderBy('sold','DESC');
+                    ->orderBy('sold', 'DESC');
 
                 $products = $productQuery->paginate(12);
 
-            }
-            elseif($request->input('filter') == 'most-imported'){
-                $products =   $productQuery->withCount(['has_imported'])->orderBy('has_imported_count', 'DESC')->paginate(12);
-            }
-            elseif($request->input('filter') == 'new-arrival'){
+            } elseif ($request->input('filter') == 'most-imported') {
+                $products = $productQuery->withCount(['has_imported'])->orderBy('has_imported_count', 'DESC')->paginate(12);
+            } elseif ($request->input('filter') == 'new-arrival') {
                 $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
 
             }
-        }
-        else{
+        } else {
             $products = $productQuery->paginate(12);
         }
 
 
-
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $total_weight = $product->weight;
             $zoneQuery = Zone::query();
-            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-                $q->where('name','LIKE','%'.$country.'%');
+            $zoneQuery->whereHas('has_countries', function ($q) use ($country) {
+                $q->where('name', 'LIKE', '%' . $country . '%');
             });
             $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-            $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
-            $shipping_rates =  $shipping_rates->first();
-            if($shipping_rates != null){
-                if($shipping_rates->shipping_price > 0){
-                    if($shipping_rates->type == 'flat'){
-                        $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price,2);
-                    }
-                    else{
-                        if($shipping_rates->min > 0){
-                            $ratio = $total_weight/$shipping_rates->min;
-                            $product->new_shipping_price = '$'.number_format($shipping_rates->shipping_price*$ratio,2);
-                        }
-                        else{
+            $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
+            $shipping_rates = $shipping_rates->first();
+            if ($shipping_rates != null) {
+                if ($shipping_rates->shipping_price > 0) {
+                    if ($shipping_rates->type == 'flat') {
+                        $product->new_shipping_price = '$' . number_format($shipping_rates->shipping_price, 2);
+                    } else {
+                        if ($shipping_rates->min > 0) {
+                            $ratio = $total_weight / $shipping_rates->min;
+                            $product->new_shipping_price = '$' . number_format($shipping_rates->shipping_price * $ratio, 2);
+                        } else {
                             $product->new_shipping_price = 'Free Shipping';
                         }
                     }
-                }
-                else{
+                } else {
                     $product->new_shipping_price = 'Free Shipping';
                 }
-            }
-            else{
+            } else {
                 $product->new_shipping_price = 'Free Shipping';
 
             }
 
         }
 
-        $shop= $this->helper->getLocalShop();
+        $shop = $this->helper->getLocalShop();
         return view('single-store.products.wefullfill_products')->with([
             'categories' => $categories,
             'products' => $products,
             'shop' => $shop,
-            'search' =>$request->input('search'),
+            'search' => $request->input('search'),
             'filter' => $request->input('filter')
 
         ]);
     }
-    public function view_fantasy_product($id){
+
+    public function view_fantasy_product($id)
+    {
         $product = Product::find($id);
-        $shop= $this->helper->getLocalShop();
+        $shop = $this->helper->getLocalShop();
         return view('single-store.products.view_product')->with([
             'product' => $product,
             'shop' => $shop
         ]);
     }
-    public function view_my_product($id){
+
+    public function view_my_product($id)
+    {
         $product = RetailerProduct::find($id);
-        $shop= $this->helper->getLocalShop();
+        $shop = $this->helper->getLocalShop();
         return view('single-store.products.view_product')->with([
             'product' => $product,
             'shop' => $shop
         ]);
     }
-    public function setting(){
+
+    public function setting()
+    {
         /*Ossiset Shop Model*/
-        $shop =  ShopifyApp::shop();
+        $shop = ShopifyApp::shop();
         /*Local Shop Model!*/
-        $shop= Shop::find($shop->id);
-        if(count($shop->has_user) > 0){
-            $associated_user =   $shop->has_user[0];
-        }
-        else{
+        $shop = Shop::find($shop->id);
+        if (count($shop->has_user) > 0) {
+            $associated_user = $shop->has_user[0];
+        } else {
             $associated_user = null;
         }
         return view('single-store.index')->with([
-            'shop'=>$shop,
-            'associated_user' =>$associated_user,
+            'shop' => $shop,
+            'associated_user' => $associated_user,
             'countries' => Country::all()
         ]);
     }
 
-    public function save_personal_info(Request $request){
+    public function save_personal_info(Request $request)
+    {
         $user = User::find($request->input('user_id'));
-        if($user != null){
-            $user->name =  $request->input('name');
+        if ($user != null) {
+            $user->name = $request->input('name');
             $user->save();
-            if($request->hasFile('profile')){
+            if ($request->hasFile('profile')) {
                 $file = $request->file('profile');
                 $name = Str::slug($file->getClientOriginalName());
                 $profile = date("mmYhisa_") . $name;
@@ -340,100 +331,103 @@ class SingleStoreController extends Controller
                 $user->profile = $profile;
                 $user->save();
             }
-            return redirect()->back()->with('success','Personal Information Updated Successfully!');
-        }
-        else{
-            return redirect()->back()->with('error','User Not Found!');
+            return redirect()->back()->with('success', 'Personal Information Updated Successfully!');
+        } else {
+            return redirect()->back()->with('error', 'User Not Found!');
         }
     }
-    public function save_address(Request $request){
+
+    public function save_address(Request $request)
+    {
         $user = User::find($request->input('user_id'));
-        if($user != null){
-            $user->address =  $request->input('address');
-            $user->address2 =  $request->input('address2');
-            $user->city =  $request->input('city');
-            $user->state =  $request->input('state');
-            $user->zip =  $request->input('zip');
-            $user->country =  $request->input('country');
+        if ($user != null) {
+            $user->address = $request->input('address');
+            $user->address2 = $request->input('address2');
+            $user->city = $request->input('city');
+            $user->state = $request->input('state');
+            $user->zip = $request->input('zip');
+            $user->country = $request->input('country');
             $user->save();
-            return redirect()->back()->with('success','Address Updated Successfully!');
+            return redirect()->back()->with('success', 'Address Updated Successfully!');
 
-        }
-        else{
-            return redirect()->back()->with('error','Manager Not Found!');
+        } else {
+            return redirect()->back()->with('error', 'Manager Not Found!');
         }
     }
 
 
-    public function authenticate(Request $request){
-        if(Auth::validate($request->except('_token'))){
+    public function authenticate(Request $request)
+    {
+        if (Auth::validate($request->except('_token'))) {
             $authenticate = true;
-        }
-        else{
+        } else {
             $authenticate = false;
         }
         return response()->json([
             'authenticate' => $authenticate
         ]);
     }
-    public function associate(Request $request){
-        $user =  User::where('email',$request->input('email'))->first();
-        $shop = Shop::where('shopify_domain',$request->input('store'))->first();
-        if($user != null && $shop !=null){
-            if(!in_array($shop->id,$user->has_shops->pluck('id')->toArray())){
+
+    public function associate(Request $request)
+    {
+        $user = User::where('email', $request->input('email'))->first();
+        $shop = Shop::where('shopify_domain', $request->input('store'))->first();
+        if ($user != null && $shop != null) {
+            if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
                 return response()->json([
                     'status' => 'assigned'
                 ]);
-            }
-            else{
+            } else {
                 return response()->json([
                     'status' => 'already-assigned'
                 ]);
             }
-        }
-        else{
+        } else {
             return response()->json([
                 'status' => 'error'
             ]);
         }
     }
-    public function de_associate(Request $request){
+
+    public function de_associate(Request $request)
+    {
         $shop = Shop::find($request->id);
-        $user =  Auth::user();
+        $user = Auth::user();
         $user->has_shops()->detach([$shop->id]);
-        return redirect()->back()->with('success','Store Removed Successfully!');
+        return redirect()->back()->with('success', 'Store Removed Successfully!');
     }
 
 
-    public function customers(Request $request){
-        $customersQ  =Customer::where('shop_id',$this->helper->getShop()->id)->newQuery();
+    public function customers(Request $request)
+    {
+        $customersQ = Customer::where('shop_id', $this->helper->getShop()->id)->newQuery();
         $customers = $customersQ->paginate(30);
         return view('single-store.customers.index')->with([
             'customers' => $customers,
         ]);
     }
 
-    public function customer_view($id){
+    public function customer_view($id)
+    {
         $customer = Customer::find($id);
         return view('single-store.customers.view')->with([
             'customer' => $customer,
         ]);
     }
 
-    public function getCustomers(){
-        $shop =  $this->helper->getShop();
+    public function getCustomers()
+    {
+        $shop = $this->helper->getShop();
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/customers.json');
-        if($response->errors){
+        if ($response->errors) {
             return redirect()->back();
-        }
-        else{
+        } else {
             $customers = $response->body->customers;
-            foreach ($customers as $index => $customer){
-                if (Customer::where('customer_shopify_id',$customer->id)->exists()){
-                    $new_customer = Customer::where('customer_shopify_id',$customer->id)->first();
-                }
-                else{
+            foreach ($customers as $index => $customer) {
+                if (Customer::where('customer_shopify_id', $customer->id)->exists()) {
+                    $new_customer = Customer::where('customer_shopify_id', $customer->id)->first();
+                } else {
                     $new_customer = new Customer();
                 }
                 $new_customer->customer_shopify_id = $customer->id;
@@ -444,39 +438,43 @@ class SingleStoreController extends Controller
                 $new_customer->total_spent = $customer->total_spent;
                 $new_customer->shop_id = $shop->id;
                 $local_shop = $this->helper->getLocalShop();
-                if(count($local_shop->has_user) > 0){
+                if (count($local_shop->has_user) > 0) {
                     $new_customer->user_id = $local_shop->has_user[0]->id;
                 }
                 $new_customer->save();
             }
-            return redirect()->back()->with('success','Customers Synced Successfully!');
+            return redirect()->back()->with('success', 'Customers Synced Successfully!');
         }
 
     }
-    public function payment_history(Request $request){
+
+    public function payment_history(Request $request)
+    {
         $shop = $this->helper->getLocalShop();
-        $payments = OrderTransaction::where('shop_id',$shop->id)->newQuery();
+        $payments = OrderTransaction::where('shop_id', $shop->id)->newQuery();
         return view('single-store.orders.payment_history')->with([
-            'payments' =>  $payments->orderBy('created_at')->paginate(20),
+            'payments' => $payments->orderBy('created_at')->paginate(20),
         ]);
     }
 
-    public function tracking_info(Request $request){
+    public function tracking_info(Request $request)
+    {
         $shop = $this->helper->getLocalShop();
-        $orders = RetailerOrder::where('shop_id',$shop->id)->newQuery();
-        if($request->has('search')){
-            $orders->where('name','LIKE','%'.$request->input('search').'%');
+        $orders = RetailerOrder::where('shop_id', $shop->id)->newQuery();
+        if ($request->has('search')) {
+            $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
         }
         return view('single-store.orders.tracking_info')->with([
-            'orders' =>  $orders->orderBy('created_at')->paginate(20),
-            'search' =>$request->input('search')
+            'orders' => $orders->orderBy('created_at')->paginate(20),
+            'search' => $request->input('search')
 
         ]);
     }
 
-    public function helpcenter(Request $request){
+    public function helpcenter(Request $request)
+    {
         $shop = $this->helper->getLocalShop();
-        $tickets = Ticket::where('shop_id',$shop->id)->where('source','store')->newQuery();
+        $tickets = Ticket::where('shop_id', $shop->id)->where('source', 'store')->newQuery();
         $tickets = $tickets->paginate(30);
 
         return view('single-store.help-center.index')->with([
@@ -486,10 +484,11 @@ class SingleStoreController extends Controller
         ]);
     }
 
-    public function wishlist(Request $request){
+    public function wishlist(Request $request)
+    {
         $shop = $this->helper->getLocalShop();
-        $wishlist = Wishlist::where('shop_id',$shop->id)->newQuery();
-        $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
+        $wishlist = Wishlist::where('shop_id', $shop->id)->newQuery();
+        $wishlist = $wishlist->orderBy('created_at', 'DESC')->paginate(30);
 
         return view('single-store.wishlist.index')->with([
             'shop' => $shop,
@@ -497,7 +496,9 @@ class SingleStoreController extends Controller
             'countries' => Country::all(),
         ]);
     }
-    public function view_wishlist(Request $request){
+
+    public function view_wishlist(Request $request)
+    {
         $shops = $this->helper->getLocalShop();
         $wishlist = Wishlist::find($request->id);
         return view('single-store.wishlist.view')->with([
@@ -506,7 +507,8 @@ class SingleStoreController extends Controller
         ]);
     }
 
-    public function view_ticket(Request $request){
+    public function view_ticket(Request $request)
+    {
         $shop = $this->helper->getLocalShop();
         $ticket = Ticket::find($request->id);
         return view('single-store.help-center.view')->with([
@@ -515,48 +517,45 @@ class SingleStoreController extends Controller
         ]);
     }
 
-    public function calculate_shipping(Request $request){
+    public function calculate_shipping(Request $request)
+    {
 
-        if($request->has('country')){
+        if ($request->has('country')) {
             $country = $request->input('country');
-        }
-        else{
+        } else {
             $country = "United States";
         }
 
         $product = Product::find($request->input('product'));
-        if($product != null){
+        if ($product != null) {
             $total_weight = $product->weight;
-        }
-        else{
+        } else {
             $total_weight = 0;
         }
 
 
         $zoneQuery = Zone::query();
-        $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-            $q->where('name','LIKE','%'.$country.'%');
+        $zoneQuery->whereHas('has_countries', function ($q) use ($country) {
+            $q->where('name', 'LIKE', '%' . $country . '%');
         });
         $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-        $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+        $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
 
-        $shipping_rates =  $shipping_rates->get();
+        $shipping_rates = $shipping_rates->get();
 
-        foreach ($shipping_rates as $shipping_rate){
-            if($shipping_rate->min > 0){
-                if($shipping_rate->type == 'flat'){
+        foreach ($shipping_rates as $shipping_rate) {
+            if ($shipping_rate->min > 0) {
+                if ($shipping_rate->type == 'flat') {
 
+                } else {
+                    $ratio = $total_weight / $shipping_rate->min;
+                    $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
                 }
-                else{
-                    $ratio = $total_weight/$shipping_rate->min;
-                    $shipping_rate->shipping_price =  $shipping_rate->shipping_price*$ratio;
-                }
 
-            }
-            else{
+            } else {
                 $ratio = 0;
-                $shipping_rate->shipping_price =  $shipping_rate->shipping_price*$ratio;
+                $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
             }
 
         }
@@ -564,8 +563,8 @@ class SingleStoreController extends Controller
         $html = view('inc.calculate_shipping')->with([
             'countries' => Country::all(),
             'selected' => $country,
-            'rates' =>$shipping_rates,
-            'product'=>$request->input('product')
+            'rates' => $shipping_rates,
+            'product' => $request->input('product')
         ])->render();
 
         return response()->json([
@@ -578,19 +577,19 @@ class SingleStoreController extends Controller
     public function refunds(Request $request)
     {
         $shop = $this->helper->getLocalShop();
-        $refunds = Refund::where('shop_id',$shop->id)->newQuery();
-        if($request->has('search')){
-            $refunds->where('order_name','LIKE','%'.$request->input('search').'%');
+        $refunds = Refund::where('shop_id', $shop->id)->newQuery();
+        if ($request->has('search')) {
+            $refunds->where('order_name', 'LIKE', '%' . $request->input('search') . '%');
         }
-        $refunds->whereHas('has_order',function (){
+        $refunds->whereHas('has_order', function () {
 
         });
-        $orders = RetailerOrder::where('shop_id',$shop->id)->where('paid',1)->get();
+        $orders = RetailerOrder::where('shop_id', $shop->id)->where('paid', 1)->get();
         return view('single-store.orders.refunds')->with([
-            'refunds' =>  $refunds->orderBy('created_at')->paginate(20),
-            'search' =>$request->input('search'),
+            'refunds' => $refunds->orderBy('created_at')->paginate(20),
+            'search' => $request->input('search'),
             'shop' => $shop,
-            'orders' =>$orders
+            'orders' => $orders
         ]);
     }
 
@@ -598,42 +597,38 @@ class SingleStoreController extends Controller
     {
         $shop = $this->helper->getLocalShop();
         $refund = Refund::find($request->id);
-        if($refund->has_order != null) {
+        if ($refund->has_order != null) {
             return view('single-store.orders.view-refund')->with([
                 'shop' => $shop,
                 'ticket' => $refund,
             ]);
-        }
-        else{
+        } else {
             return redirect()->route('store.refunds')->with('No Refund Found!');
 
         }
     }
-    public function show_notification($id){
+
+    public function show_notification($id)
+    {
         $notification = Notification::find($id);
-        if($notification != null){
+        if ($notification != null) {
             $notification->read = 1;
             $notification->save();
-            if($notification->type == 'Product'){
-                return redirect()->route('store.product.wefulfill.show',$notification->type_id);
-            }
-            elseif ($notification->type == 'Order'){
-                return redirect()->route('store.order.view',$notification->type_id);
+            if ($notification->type == 'Product') {
+                return redirect()->route('store.product.wefulfill.show', $notification->type_id);
+            } elseif ($notification->type == 'Order') {
+                return redirect()->route('store.order.view', $notification->type_id);
 
-            }
-            elseif ($notification->type == 'Refund'){
-                return redirect()->route('store.refund',$notification->type_id);
+            } elseif ($notification->type == 'Refund') {
+                return redirect()->route('store.refund', $notification->type_id);
 
-            }
-            elseif ($notification->type == 'Wish-list'){
-                return redirect()->route('store.wishlist.view',$notification->type_id);
+            } elseif ($notification->type == 'Wish-list') {
+                return redirect()->route('store.wishlist.view', $notification->type_id);
 
-            }
-            elseif ($notification->type == 'Ticket'){
-                return redirect()->route('help-center.store.ticket.view',$notification->type_id);
+            } elseif ($notification->type == 'Ticket') {
+                return redirect()->route('help-center.store.ticket.view', $notification->type_id);
 
-            }
-            elseif ($notification->type == 'Wallet'){
+            } elseif ($notification->type == 'Wallet') {
                 return redirect()->route('store.user.wallet.show');
 
             }
@@ -660,14 +655,15 @@ class SingleStoreController extends Controller
             }
 
         }
-        $notifications = $query->orderBy('created_at','DESC')->paginate(30);
+        $notifications = $query->orderBy('created_at', 'DESC')->paginate(30);
         return view('single-store.notifications.index')->with([
             'notifications' => $notifications
         ]);
 
     }
 
-    function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
+    function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE)
+    {
         $output = NULL;
         if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
             $ip = $_SERVER["REMOTE_ADDR"];
@@ -678,8 +674,8 @@ class SingleStoreController extends Controller
                     $ip = $_SERVER['HTTP_CLIENT_IP'];
             }
         }
-        $purpose    = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
-        $support    = array("country", "countrycode", "state", "region", "city", "location", "address");
+        $purpose = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
+        $support = array("country", "countrycode", "state", "region", "city", "location", "address");
         $continents = array(
             "AF" => "Africa",
             "AN" => "Antarctica",
@@ -695,11 +691,11 @@ class SingleStoreController extends Controller
                 switch ($purpose) {
                     case "location":
                         $output = array(
-                            "city"           => @$ipdat->geoplugin_city,
-                            "state"          => @$ipdat->geoplugin_regionName,
-                            "country"        => @$ipdat->geoplugin_countryName,
-                            "country_code"   => @$ipdat->geoplugin_countryCode,
-                            "continent"      => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
+                            "city" => @$ipdat->geoplugin_city,
+                            "state" => @$ipdat->geoplugin_regionName,
+                            "country" => @$ipdat->geoplugin_countryName,
+                            "country_code" => @$ipdat->geoplugin_countryCode,
+                            "continent" => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
                             "continent_code" => @$ipdat->geoplugin_continentCode
                         );
                         break;
@@ -731,11 +727,13 @@ class SingleStoreController extends Controller
         }
         return $output;
     }
-    function getRealIpAddr(){
-        if ( !empty($_SERVER['HTTP_CLIENT_IP']) ) {
+
+    function getRealIpAddr()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             // Check IP from internet.
             $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) ) {
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             // Check IP is passed from proxy.
             $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
         } else {
