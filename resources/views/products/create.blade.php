@@ -307,7 +307,7 @@
                         </div>
                         <div class="block-content pt-0" >
                             <div class="form-group">
-                                <input type="text" class="form-control" name="marketing_video" placeholder="Embedded Youtube Code to Marketing Video">
+                                <textarea class="form-control" name="marketing_video" placeholder="Embedded Youtube Code to Marketing Video"></textarea>
                             </div>
                         </div>
                     </div>
