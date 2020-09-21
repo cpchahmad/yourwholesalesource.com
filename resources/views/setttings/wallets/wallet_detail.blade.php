@@ -218,8 +218,6 @@
                                                                                        value="{{ $req->cheque_title }}" >
                                                                             </div>
                                                                         </div>
-
-
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Amount</label>
