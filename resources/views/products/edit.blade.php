@@ -596,7 +596,6 @@
                         <div class="block-content pt-0" >
                             <form action="{{route('product.update',$product->id)}}" method="post">
                                 @csrf
-                                <input type="hidden" name="type" value="fulfilled">
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" required class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  @if($product->sortBy == 'Best Seller') checked @endif>
