@@ -35,6 +35,11 @@
                             <i class="fa fa-credit-card" aria-hidden="true"></i>
                         </div>
 
+                        @elseif($log->status == "Admin Edit Wallet Payment")
+                            <div class="timeline-event-icon bg-amethyst">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </div>
+
                         @elseif($log->status == "Top-up By Paypal")
                             <div class="timeline-event-icon bg-success">
                                 <i class="fab fa-paypal"></i>

@@ -186,7 +186,17 @@ class WalletController extends Controller
             $wallet->amount = $request->input('amount');
             $wallet->save();
 
-            return redirect()->back()->with('success', 'Wallet Request Updated successfully');
+            // maintain logs..
+
+            $get_wallet = Wallet::find($wallet->wallet_id);
+            $wallet_log = new WalletLog();
+            $wallet_log->wallet_id =$wallet->wallet_id;
+            $wallet_log->status = "Admin Edit Wallet Payment";
+            $wallet_log->amount = $request->input('amount');
+            $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD edit Against Wallet ' . $get_wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Administration';
+            $wallet_log->save();
+
+        return redirect()->back()->with('success', 'Wallet Request Updated successfully');
     }
 
     public function approved_bank_statement($id,Request $request){
