@@ -229,7 +229,7 @@
 
                                                                     </div>
                                                                     <div class="block-content block-content-full text-right border-top">
-                                                                        <button type="submit" class="btn btn-sm btn-primary" >Edit</button>
+                                                                        <button type="submit" class="btn btn-sm btn-primary" >Edit Wallet Request</button>
                                                                     </div>
                                                                 </form>
 
@@ -392,7 +392,7 @@
 
                                                                     </div>
                                                                     <div class="block-content block-content-full text-right border-top">
-                                                                        <button type="submit" class="btn btn-sm btn-primary" >Approved</button>
+                                                                        <button type="submit" class="btn btn-sm btn-primary" >Edit Wallet Request</button>
                                                                     </div>
                                                                 </form>
 
