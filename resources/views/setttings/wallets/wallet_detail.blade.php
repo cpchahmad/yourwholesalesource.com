@@ -204,17 +204,34 @@
                                                                 <form action="{{route('admin.wallets.approve.request',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
-                                                                            <div class="col-sm-12">
                                                                                 <div class="form-material">
-                                                                                    <label for="material-error">Approved Date</label>
-                                                                                    <input required class="form-control" type="date"  name="date"
-                                                                                           value="" >
+                                                                                    <label for="material-error">Cheque</label>
+                                                                                    <input required class="form-control" type="text"  name="cheque"
+                                                                                           value="{{ $req->cheque    }}" >
                                                                                 </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Company/Sender Name</label>
+                                                                                <input required class="form-control" type="text"  name="sender_name"
+                                                                                       value="{{ $req->cheque_title }}" >
                                                                             </div>
                                                                         </div>
+
+
+                                                                        <div class="form-group">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Amount</label>
+                                                                                <input required class="form-control" type="text"  name="amount"
+                                                                                       value="{{ $req->amount }}" >
+                                                                            </div>
+                                                                        </div>
+
+
                                                                     </div>
                                                                     <div class="block-content block-content-full text-right border-top">
-                                                                        <button type="submit" class="btn btn-sm btn-primary" >Approved</button>
+                                                                        <button type="submit" class="btn btn-sm btn-primary" >Edit</button>
                                                                     </div>
                                                                 </form>
 
@@ -350,14 +367,31 @@
                                                                 <form action="{{route('admin.wallets.approve.request',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
-                                                                            <div class="col-sm-12">
-                                                                                <div class="form-material">
-                                                                                    <label for="material-error">Approved Date</label>
-                                                                                    <input required class="form-control" type="date"  name="date"
-                                                                                           value="" >
-                                                                                </div>
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Alibaba Order Number</label>
+                                                                                <input required class="form-control" type="text"  name="alibaba_order_number"
+                                                                                       value="{{ $req->cheque }}" >
                                                                             </div>
                                                                         </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Company/Sender Name</label>
+                                                                                <input required class="form-control" type="text"  name="sender_name"
+                                                                                       value="{{ $req->cheque_title }}" >
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="form-group">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Amount</label>
+                                                                                <input required class="form-control" type="text"  name="amount"
+                                                                                       value="{{ $req->amount }}" >
+                                                                            </div>
+                                                                        </div>
+
+
                                                                     </div>
                                                                     <div class="block-content block-content-full text-right border-top">
                                                                         <button type="submit" class="btn btn-sm btn-primary" >Approved</button>
