@@ -201,7 +201,7 @@
                                                                         </button>
                                                                     </div>
                                                                 </div>
-                                                                <form action="{{route('admin.wallets.approve.request',$req->id)}}" method="get">
+                                                                <form action="{{route('admin.wallets.edit',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
                                                                                 <div class="form-material">
@@ -214,7 +214,7 @@
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>
-                                                                                <input required class="form-control" type="text"  name="sender_name"
+                                                                                <input required class="form-control" type="text"  name="cheque_title"
                                                                                        value="{{ $req->cheque_title }}" >
                                                                             </div>
                                                                         </div>
@@ -362,12 +362,12 @@
                                                                         </button>
                                                                     </div>
                                                                 </div>
-                                                                <form action="{{route('admin.wallets.approve.request',$req->id)}}" method="get">
+                                                                <form action="{{route('admin.wallets.edit',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Alibaba Order Number</label>
-                                                                                <input required class="form-control" type="text"  name="alibaba_order_number"
+                                                                                <input required class="form-control" type="text"  name="cheque"
                                                                                        value="{{ $req->cheque }}" >
                                                                             </div>
                                                                         </div>
@@ -375,7 +375,7 @@
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>
-                                                                                <input required class="form-control" type="text"  name="sender_name"
+                                                                                <input required class="form-control" type="text"  name="cheque_title"
                                                                                        value="{{ $req->cheque_title }}" >
                                                                             </div>
                                                                         </div>

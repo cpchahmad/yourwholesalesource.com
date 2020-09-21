@@ -179,6 +179,16 @@ class WalletController extends Controller
         ]);
     }
 
+    public function EditWalletDetails($id, Request $request){
+            $wallet = WalletRequest::find($id);
+            $wallet->cheque_title = $request->input('cheque_title');
+            $wallet->cheque = $request->input('cheque');
+            $wallet->amount = $request->input('amount');
+            $wallet->save();
+
+            return redirect()->back()->with('success', 'Wallet Request Updated successfully');
+    }
+
     public function approved_bank_statement($id,Request $request){
         $req = WalletRequest::find($id);
         if($req->status == 0){
