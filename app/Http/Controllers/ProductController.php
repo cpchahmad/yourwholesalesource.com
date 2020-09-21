@@ -524,6 +524,7 @@ class ProductController extends Controller
         $product->status =  $request->input('status');
         $product->marketing_video =  $request->input('marketing_video');
         $product->processing_time = $request->input('processing_time');
+        $product->sortBy = $request->input('sortBy');
 
         if ($request->variants) {
             $product->variants = $request->variants;
