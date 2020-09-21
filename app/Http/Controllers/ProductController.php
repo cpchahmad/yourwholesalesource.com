@@ -229,9 +229,6 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
-
-
-
                 }
                 /*Product Basic Update Shopify and Database*/
                 if ($request->input('type') == 'basic-info') {
@@ -285,7 +282,12 @@ class ProductController extends Controller
                 if ($request->input('type') == 'fulfilled') {
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->save();
+                }
 
+
+                if($request->input('sortBy')){
+                    $product->sortBy = $request->input('sortBy');
+                    $product->save();
                 }
 
                 if ($request->input('type') == 'category') {
