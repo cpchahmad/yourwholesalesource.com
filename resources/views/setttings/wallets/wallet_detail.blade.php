@@ -222,7 +222,7 @@
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Amount</label>
                                                                                 <input required class="form-control" type="text"  name="amount"
-                                                                                       value="{{ number_format($req->amount, 2) }}" >
+                                                                                       value="{{ $req->amount }}" >
                                                                             </div>
                                                                         </div>
 
@@ -385,7 +385,7 @@
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Amount</label>
                                                                                 <input required class="form-control" type="text"  name="amount"
-                                                                                       value="{{ number_format($req->amount, 2) }}" >
+                                                                                       value="{{ $req->amount }}" >
                                                                             </div>
                                                                         </div>
 
