@@ -13,7 +13,7 @@ class AddSortByToProducts extends Migration
      */
     public function up()
     {
-        Schema::table('Products', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->text('sortBy')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddSortByToProducts extends Migration
      */
     public function down()
     {
-        Schema::table('Products', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             //
         });
     }
