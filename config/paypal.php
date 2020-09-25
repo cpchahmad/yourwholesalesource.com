@@ -14,14 +14,11 @@ return [
         'app_id'      => 'APP-80W284485P519543T', // Used for testing Adaptive Payments API in sandbox mode
     ],
     'live' => [
-        'client_id'         => env('PAYPAL_LIVE_CLIENT_ID', ''),
-        'client_secret'     => env('PAYPAL_LIVE_CLIENT_SECRET', ''),
-        'app_id'            => '',
-//        'username'    => env('PAYPAL_LIVE_API_USERNAME', ''),
-//        'password'    => env('PAYPAL_LIVE_API_PASSWORD', ''),
-        'secret'      => env('PAYPAL_LIVE_CLIENT_SECRET', ''),
+        'username'    => env('PAYPAL_LIVE_API_USERNAME', ''),
+        'password'    => env('PAYPAL_LIVE_API_PASSWORD', ''),
+        'secret'      => env('PAYPAL_LIVE_API_SECRET', ''),
         'certificate' => env('PAYPAL_LIVE_API_CERTIFICATE', ''),
-//        'app_id'      => '', // Used for Adaptive Payments API
+        'app_id'      => '', // Used for Adaptive Payments API
     ],
 
     'payment_action' => 'Sale', // Can only be 'Sale', 'Authorization' or 'Order'
