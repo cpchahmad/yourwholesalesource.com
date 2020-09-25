@@ -90,10 +90,10 @@ class AdminMaintainerController extends Controller
         }
 
         if ($order->email == null) {
-            $email = 'admin@wefullfill.com';
+            $email = 'dispatched@wefullfill.com';
         } else {
 //            $email = $order->email;
-            $email = 'admin@wefullfill.com';
+            $email = 'dispatched@wefullfill.com';
         }
         if ($order->billing_address != null) {
             $billing_address = json_decode($order->billing_address);
