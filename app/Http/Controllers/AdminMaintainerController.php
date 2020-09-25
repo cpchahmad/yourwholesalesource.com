@@ -90,7 +90,7 @@ class AdminMaintainerController extends Controller
         }
 
         if ($order->email == null) {
-            $email = 'super_admin@wefullfill.com';
+            $email = 'admin@wefullfill.com';
         } else {
             $email = $order->email;
         }
@@ -149,6 +149,8 @@ class AdminMaintainerController extends Controller
                 "shipping_address" => $shipping,
                 "billing_address" => $billing,
                 "shipping_line" => $shipping_line,
+                "send_receipt" => false,
+                "send_fulfillment_receipt" => false
             ]
         ];
 
@@ -157,9 +159,8 @@ class AdminMaintainerController extends Controller
 
 
         if (!$response->errors) {
-
             $draft_order = $response->body->draft_order;
-            $admin_order_response = $admin_store->api()->rest('PUT', '/admin/api/2020-04/draft_orders/' . $draft_order->id . '/complete.json');
+            $admin_order_response = $admin_store->api()->rest('PUT', '/admin/api/2020-04/draft_orders/' . $draft_order->id . '/complete.json?send_receipt=false&send_fulfillment_receipt=false');
             if (!$admin_order_response->errors) {
                 $admin_order = $admin_order_response->body->draft_order;
                 $order->admin_shopify_id = $admin_order->order_id;
