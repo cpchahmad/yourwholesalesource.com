@@ -19,8 +19,8 @@ return [
         'app_id'            => '',
 //        'username'    => env('PAYPAL_LIVE_API_USERNAME', ''),
 //        'password'    => env('PAYPAL_LIVE_API_PASSWORD', ''),
-//        'secret'      => env('PAYPAL_LIVE_API_SECRET', ''),
-//        'certificate' => env('PAYPAL_LIVE_API_CERTIFICATE', ''),
+        'secret'      => env('PAYPAL_LIVE_CLIENT_SECRET', ''),
+        'certificate' => env('PAYPAL_LIVE_API_CERTIFICATE', ''),
 //        'app_id'      => '', // Used for Adaptive Payments API
     ],
 
