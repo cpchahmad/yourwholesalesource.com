@@ -71,10 +71,8 @@ class PaypalController extends Controller
          $provider = new ExpressCheckout;
          try {
              $response = $provider->setExpressCheckout($data);
-
              $retailer_order->paypal_token = $response['TOKEN'];
              $retailer_order->save();
-
              return redirect($response['paypal_link']);
          }
          catch (\Exception $e){
