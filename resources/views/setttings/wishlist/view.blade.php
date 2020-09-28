@@ -36,7 +36,6 @@
                           <div class="wishlist_description">
                                 {!! $wishlist->description !!}
                           </div>
-
                                 <style>
                                     .wishlist_description img {
                                         max-width: 150px;
