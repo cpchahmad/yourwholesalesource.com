@@ -33,15 +33,20 @@
                                 <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
                                 <hr>
                             @endif
-                          <div>
+                          <div class="wishlist_description">
                                 {!! $wishlist->description !!}
                           </div>
+
+                                <style>
+                                    .wishlist_description image {
+                                        max-width: 150px;
+                                    }
+                                    </style>
                             <div class="attachments">
                                 @foreach($wishlist->has_attachments as $a)
                                     <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">
                                 @endforeach
                             </div>
-
                             <hr>
                             <div class="text-right p-2">
                                 @if(in_array($wishlist->status_id,[1,4]))
