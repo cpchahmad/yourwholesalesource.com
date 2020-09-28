@@ -29,15 +29,13 @@
                     </div>
                     <div class="block-content">
                         <div class="p-2">
-
                             @if($wishlist->reference != null)
                                 <a target="_blank" href="{{$wishlist->reference}}">Reference Link Preview</a>
                                 <hr>
                             @endif
-                            <p>
+                          <div>
                                 {!! $wishlist->description !!}
-                            </p>
-
+                          </div>
                             <div class="attachments">
                                 @foreach($wishlist->has_attachments as $a)
                                     <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">
@@ -227,7 +225,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
