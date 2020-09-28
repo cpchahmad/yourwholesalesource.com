@@ -38,7 +38,7 @@
                           </div>
 
                                 <style>
-                                    .wishlist_description image {
+                                    .wishlist_description img {
                                         max-width: 150px;
                                     }
                                     </style>
