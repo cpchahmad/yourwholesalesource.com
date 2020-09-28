@@ -1,5 +1,10 @@
 @extends('layout.index')
 @section('content')
+    <style>
+        .wishlist_description img {
+            max-width: 150px;
+        }
+    </style>
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -36,11 +41,6 @@
                           <div class="wishlist_description">
                                 {!! $wishlist->description !!}
                           </div>
-                                <style>
-                                    .wishlist_description img {
-                                        max-width: 150px;
-                                    }
-                                    </style>
                             <div class="attachments">
                                 @foreach($wishlist->has_attachments as $a)
                                     <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">
