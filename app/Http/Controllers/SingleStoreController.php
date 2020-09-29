@@ -499,7 +499,7 @@ class SingleStoreController extends Controller
 
     public function view_wishlist(Request $request)
     {
-        $shops = $this->helper->getLocalShop();
+        $shop = $this->helper->getLocalShop();
         $wishlist = Wishlist::find($request->id);
         return view('single-store.wishlist.view')->with([
             'shop' => $shop,
