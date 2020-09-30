@@ -467,10 +467,18 @@ $(document).ready(function () {
         })
 
     });
+
+    $('#paypal_pay_trigger').on('shown.bs.modal', function (e) {
+        var $this= $('.paypal-pay-button');
+        var html = '<div class="text-center"> <p>Subtotal: '+ $this.data('subtotal')+' USD<br>WeFullFill Paypal Fee ('+$this.data('percentage')+'%): '+ $this.data('fee')+' USD <br>Total Cost : '+ $this.data('pay')+'</p>  </div><p> A amount of '+ $this.data('pay') +' will be deducted through your Paypal Account</p>';
+        $('#paypal_pay_trigger').find('.block-content ').html(html);
+    });
+
     /*Paypal Order Payment Button JS*/
     $('body').on('click','.paypal-pay-button',function () {
         var button = $(this);
-        alert(button);
+        $('#paypal_pay_trigger').modal('show');
+
         // Swal.fire({
         //     title: ' Are you sure?',
         //     html:'<div class="text-center"> <p>Subtotal: '+ $(this).data('subtotal')+' USD<br>WeFullFill Paypal Fee ('+$(this).data('percentage')+'%): '+ $(this).data('fee')+' USD <br>Total Cost : '+ $(this).data('pay')+'</p>  </div><p> A amount of '+ $(this).data('pay') +' will be deducted through your Paypal Account</p>',
