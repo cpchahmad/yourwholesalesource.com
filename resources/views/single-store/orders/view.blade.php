@@ -371,7 +371,7 @@
 
                                                         </div>
                                                         <div class="block-content block-content-full text-center border-top">
-                                                           <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                                                           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
