@@ -365,6 +365,10 @@
                                                             </div>
                                                             <p> A amount of  {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
 
+                                                            <div class="paypal">
+                                                                <div id="paypal-button-container"></div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="block-content block-content-full text-center border-top">
                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
@@ -754,7 +758,7 @@
     @endif
 
 
-    <div id="paypal-button-container"></div>
+
 
     <script src="https://www.paypal.com/sdk/js?client-id=AbGfhNUONjVXpq31ZwVYR0z1iFDnvjTs0G5Avw2gMETBIf0Fx0lxCX4Yagl1armtEKsqIrM1Xtuq2vce&currency=USD"></script>
     <script>
