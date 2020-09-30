@@ -732,4 +732,32 @@
     @endif
 
 
+    <div id="paypal-button-container"></div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AbGfhNUONjVXpq31ZwVYR0z1iFDnvjTs0G5Avw2gMETBIf0Fx0lxCX4Yagl1armtEKsqIrM1Xtuq2vce&currency=USD"></script>
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '0.01'
+                        }
+                    }]
+                });
+            },
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show a success message to the buyer
+                    console.log(details);
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+
 @endsection
