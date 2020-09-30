@@ -108,8 +108,11 @@ class PaypalController extends Controller
 
     public function paypal_payment_success(Request $request)
     {
-        dd($request);
         $retailer_order = RetailerOrder::find($request->id);
+        $response = $request->input('response');
+        $response = json_decode($response)(json_encode(json_decode($response)));
+        dd($request, $response, $response->payer);
+
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($request->token);
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING']) && $retailer_order  != null && $retailer_order->paid == 0)
