@@ -287,25 +287,25 @@ $(document).ready(function () {
     });
     /*Paypal Order Payment Button JS*/
     $('body').on('click','.paypal-pay-button',function () {
-        var button = $(this);
-        Swal.fire({
-            title: ' Are you sure?',
-            html:'<div class="text-center"> <p>Subtotal: '+ $(this).data('subtotal')+' USD<br>WeFullFill Paypal Fee ('+$(this).data('percentage')+'%): '+ $(this).data('fee')+' USD <br>Total Cost : '+ $(this).data('pay')+'</p>  </div><p> A amount of '+ $(this).data('pay') +' will be deducted through your Paypal Account</p>',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Pay'
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire(
-                    'Processing!',
-                    'You will be redirected to paypal in seconds!',
-                    'success'
-                );
-                window.location.href = button.data('href');
-            }
-        });
+        // var button = $(this);
+        // Swal.fire({
+        //     title: ' Are you sure?',
+        //     html:'<div class="text-center"> <p>Subtotal: '+ $(this).data('subtotal')+' USD<br>WeFullFill Paypal Fee ('+$(this).data('percentage')+'%): '+ $(this).data('fee')+' USD <br>Total Cost : '+ $(this).data('pay')+'</p>  </div><p> A amount of '+ $(this).data('pay') +' will be deducted through your Paypal Account</p>',
+        //     icon: 'warning',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Pay'
+        // }).then((result) => {
+        //     if (result.value) {
+        //         Swal.fire(
+        //             'Processing!',
+        //             'You will be redirected to paypal in seconds!',
+        //             'success'
+        //         );
+        //         window.location.href = button.data('href');
+        //     }
+        // });
 
 
     });
