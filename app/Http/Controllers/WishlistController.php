@@ -14,6 +14,7 @@ use App\User;
 use App\WarnedPlatform;
 use App\Wishlist;
 use App\WishlistAttachment;
+use App\WishlistCountry;
 use App\WishlistThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -719,9 +720,14 @@ class WishlistController extends Controller
 
     public function delete_wishlist($id){
         Wishlist::find($id)->delete();
-        $attachments = WishlistAttachment::where('wishlist_id', $id)->get();
-        if($attachments){
+        if(WishlistAttachment::where('wishlist_id', $id)->count() >= 1){
             WishlistAttachment::where('wishlist_id', $id)->delete();
+        }
+        if(WishlistCountry::where('wishlist_id', $id)->count() >= 1){
+            WishlistCountry::where('wishlist_id', $id)->delete();
+        }
+        if(WishlistThread::where('wishlist_id', $id)->count() >= 1){
+            WishlistThread::where('wishlist_id', $id)->delete();
         }
         return redirect()->back()->with('success', 'Wishlist deleted successfully');
     }
