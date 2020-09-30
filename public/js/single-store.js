@@ -476,8 +476,8 @@ $(document).ready(function () {
 
     /*Paypal Order Payment Button JS*/
     $('body').on('click','.paypal-pay-button',function () {
-        var button = $(this);
-        $('#paypal_pay_trigger').modal('show');
+        // var button = $(this);
+        // $('#paypal_pay_trigger').modal('show');
 
         // Swal.fire({
         //     title: ' Are you sure?',
