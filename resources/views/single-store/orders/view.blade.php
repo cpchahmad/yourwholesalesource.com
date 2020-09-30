@@ -355,8 +355,8 @@
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="block block-rounded block-themed block-transparent mb-0">
-                                                        <div class="block-content font-size-sm text-center">
-                                                            <h1>Are your sure?</h1>
+                                                        <div class="block-content cst_content_wrapper font-size-sm text-center">
+                                                            <h2>Are your sure?</h2>
                                                             <div class="text-center"> <p>
                                                                     Subtotal: {{number_format($order->cost_to_pay,2)}} USD
                                                                     <br>
@@ -365,7 +365,7 @@
                                                             </div>
                                                             <p> A amount of  {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
 
-                                                            <div class="paypal">
+                                                            <div class="paypal_btn_trigger">
                                                                 <div id="paypal-button-container"></div>
                                                             </div>
 
@@ -757,30 +757,28 @@
         </div>
     @endif
 
+    @if($order->paid == 0)
     <script src="https://www.paypal.com/sdk/js?client-id=AbGfhNUONjVXpq31ZwVYR0z1iFDnvjTs0G5Avw2gMETBIf0Fx0lxCX4Yagl1armtEKsqIrM1Xtuq2vce&currency=USD"></script>
     <script>
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({
 
-            // Set up the transaction
+        paypal.Buttons({
             createOrder: function(data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '0.01'
+                            value: '{{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}}'
                         }
                     }]
                 });
             },
-            // Finalize the transaction
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    // Show a success message to the buyer
                     console.log(details);
                     alert('Transaction completed by ' + details.payer.name.given_name + '!');
                 });
             }
         }).render('#paypal-button-container');
     </script>
+    @endif
 
 @endsection

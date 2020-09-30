@@ -277,3 +277,13 @@ div.tagsinput span.tag a {
     height: 50px !important;
     border-radius: 50%;
 }
+
+.paypal_btn_trigger {
+    max-width: 200px;
+    margin: auto;
+}
+
+
+.cst_content_wrapper p {
+    font-size: 18px;
+}
