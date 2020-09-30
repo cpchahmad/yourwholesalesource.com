@@ -111,18 +111,16 @@ class PaypalController extends Controller
         $retailer_order = RetailerOrder::find($request->id);
         $response = $request->input('response');
         $response = json_decode(json_encode(json_decode($response)));
-        dd($request, $response, $response->payer);
+//        dd($request, $response, $response->payer);
 
-        $provider = new ExpressCheckout;
-        $response = $provider->getExpressCheckoutDetails($request->token);
-        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING']) && $retailer_order  != null && $retailer_order->paid == 0)
+        if ($response->status == 'COMPLETED')
         {
-            $retailer_order->paypal_payer_id =$request->PayerID;
+            $retailer_order->paypal_payer_id =$response->payer->payer_id;
             $new_transaction = new OrderTransaction();
-            $new_transaction->amount =  $response['AMT'];
-            $new_transaction->name = $response['FIRSTNAME'].' '.$response['LASTNAME'];
+            $new_transaction->amount =  $response->purchase_units[0]->amount->value;
+            $new_transaction->name = $response->payer->name->given_name.' '.$response->payer->name->surname;
             $new_transaction->retailer_order_id = $retailer_order->id;
-            $new_transaction->paypal_payment_id = $request->PayerID;
+            $new_transaction->paypal_payment_id = $response->id;
             $new_transaction->user_id = $retailer_order->user_id;
             $new_transaction->shop_id = $retailer_order->shop_id;
             $new_transaction->save();
