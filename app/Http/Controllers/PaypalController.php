@@ -110,7 +110,7 @@ class PaypalController extends Controller
     {
         $retailer_order = RetailerOrder::find($request->id);
         $response = $request->input('response');
-        $response = json_decode($response)(json_encode(json_decode($response)));
+        $response = json_decode(json_encode(json_decode($response)));
         dd($request, $response, $response->payer);
 
         $provider = new ExpressCheckout;
