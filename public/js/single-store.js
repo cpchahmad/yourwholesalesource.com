@@ -470,27 +470,49 @@ $(document).ready(function () {
     /*Paypal Order Payment Button JS*/
     $('body').on('click','.paypal-pay-button',function () {
         var button = $(this);
-        Swal.fire({
-            title: ' Are you sure?',
-            html:'<div class="text-center"> <p>Subtotal: '+ $(this).data('subtotal')+' USD<br>WeFullFill Paypal Fee ('+$(this).data('percentage')+'%): '+ $(this).data('fee')+' USD <br>Total Cost : '+ $(this).data('pay')+'</p>  </div><p> A amount of '+ $(this).data('pay') +' will be deducted through your Paypal Account</p>',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Pay'
-        }).then((result) => {
-            if (result.value) {
-                Swal.fire(
-                    'Processing!',
-                    'You will be redirected to paypal in seconds!',
-                    'success'
-                );
-                window.location.href = button.data('href');
-            }
-        });
-
-
+        alert(button);
+        // Swal.fire({
+        //     title: ' Are you sure?',
+        //     html:'<div class="text-center"> <p>Subtotal: '+ $(this).data('subtotal')+' USD<br>WeFullFill Paypal Fee ('+$(this).data('percentage')+'%): '+ $(this).data('fee')+' USD <br>Total Cost : '+ $(this).data('pay')+'</p>  </div><p> A amount of '+ $(this).data('pay') +' will be deducted through your Paypal Account</p>',
+        //     icon: 'warning',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Pay'
+        // }).then((result) => {
+        //     console.log();
+        //     if (result.value) {
+        //         Swal.fire(
+        //             'Processing!',
+        //             'You will be redirected to paypal in seconds!',
+        //             'success'
+        //         );
+        //         window.location.href = button.data('href');
+        //     }
+        // });
     });
+
+
+    function PaypalCalc(price){
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: price
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    console.log(details);
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                });
+            }
+        }).render('#paypal-button-container');
+    }
 
     /*Wallet Order Payment Button JS*/
     $('body').on('click','.wallet-pay-button',function () {
