@@ -757,9 +757,6 @@
         </div>
     @endif
 
-
-
-
     <script src="https://www.paypal.com/sdk/js?client-id=AbGfhNUONjVXpq31ZwVYR0z1iFDnvjTs0G5Avw2gMETBIf0Fx0lxCX4Yagl1armtEKsqIrM1Xtuq2vce&currency=USD"></script>
     <script>
         // Render the PayPal button into #paypal-button-container
