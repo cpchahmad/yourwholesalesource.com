@@ -378,6 +378,15 @@
                                             </div>
                                         </div>
 
+
+                                        <div class="ajax_paypal_form_submit" style="display: none;">
+                                                <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id" value="{{ $order->id }}">
+                                                    <textarea name="response"></textarea>
+                                                </form>
+                                        </div>
+
                                     @endif
                                 </td>
                             </tr>
@@ -774,7 +783,8 @@
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     console.log(details);
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    $('.ajax_paypal_form_submit').find('textarea').val(details);
+                    $('.ajax_paypal_form_submit form').submit();
                 });
             }
         }).render('#paypal-button-container');

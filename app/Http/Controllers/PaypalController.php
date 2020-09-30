@@ -104,9 +104,11 @@ class PaypalController extends Controller
       }
     }
     /*Updated Inventory*/
+
+
     public function paypal_payment_success(Request $request)
     {
-
+        dd($request);
         $retailer_order = RetailerOrder::find($request->id);
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($request->token);
@@ -121,7 +123,6 @@ class PaypalController extends Controller
             $new_transaction->user_id = $retailer_order->user_id;
             $new_transaction->shop_id = $retailer_order->shop_id;
             $new_transaction->save();
-
             $retailer_order->paid = 1;
             if(count($retailer_order->fulfillments) > 0){
                 $retailer_order->status = $retailer_order->getStatus($retailer_order);
@@ -154,6 +155,54 @@ class PaypalController extends Controller
         else{
             return redirect()->route('store.orders')->with('error','Order Not Found!');
         }
+
+
+//        $retailer_order = RetailerOrder::find($request->id);
+//        $provider = new ExpressCheckout;
+//        $response = $provider->getExpressCheckoutDetails($request->token);
+//        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING']) && $retailer_order  != null && $retailer_order->paid == 0)
+//        {
+//            $retailer_order->paypal_payer_id =$request->PayerID;
+//            $new_transaction = new OrderTransaction();
+//            $new_transaction->amount =  $response['AMT'];
+//            $new_transaction->name = $response['FIRSTNAME'].' '.$response['LASTNAME'];
+//            $new_transaction->retailer_order_id = $retailer_order->id;
+//            $new_transaction->paypal_payment_id = $request->PayerID;
+//            $new_transaction->user_id = $retailer_order->user_id;
+//            $new_transaction->shop_id = $retailer_order->shop_id;
+//            $new_transaction->save();
+//            $retailer_order->paid = 1;
+//            if(count($retailer_order->fulfillments) > 0){
+//                $retailer_order->status = $retailer_order->getStatus($retailer_order);
+//
+//            }
+//            else{
+//                $retailer_order->status = 'Paid';
+//            }
+//
+//            $retailer_order->pay_by = 'Paypal';
+//            $retailer_order->save();
+//
+//            /*Maintaining Log*/
+//            $order_log =  new OrderLog();
+//            $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill through PAYPAL on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+//            $order_log->status = "paid";
+//            $order_log->retailer_order_id = $retailer_order->id;
+//            $order_log->save();
+//            $this->admin->sync_order_to_admin_store($retailer_order);
+////            $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+//
+//            if($retailer_order->custom == 0){
+//                return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+//            }
+//            else{
+//                return redirect()->route('users.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+//
+//            }
+//        }
+//        else{
+//            return redirect()->route('store.orders')->with('error','Order Not Found!');
+//        }
 
     }
 
