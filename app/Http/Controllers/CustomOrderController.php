@@ -1061,6 +1061,11 @@ class CustomOrderController extends Controller
         ]);
     }
 
+    public function delete_wishlist($id){
+        Wishlist::find($id)->delete();
+        return redirect()->back();
+    }
+
     public function refunds(Request $request){
         $user = User::find(Auth::id());
         $refunds = Refund::where('user_id',$user->id)->newQuery();

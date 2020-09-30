@@ -290,6 +290,8 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/wishlist/completed', 'WishlistController@completed_wishlist')->name('wishlist.completed');
         Route::post('/wishlist/completed/map_product', 'WishlistController@map_product')->name('wishlist.completed.map_product');
         Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
+        Route::get('/wishlist/{id}/delete','WishlistController@delete_wishlist')->name('wishlist.delete');
+
 
         Route::post('/ticket/review', 'TicketController@post_review')->name('ticket.post_review');
         /*Refund*/

@@ -92,7 +92,7 @@
                                                     <a href="{{route('users.wishlist.view',$item->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
-                                                    <a href=""
+                                                    <a href="{{ route('wishlist.delete', $item->id) }}"
                                                        class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="Delete Wishlist"><i class="fa fa-times"></i></a>
                                                 </div>
