@@ -719,6 +719,10 @@ class WishlistController extends Controller
 
     public function delete_wishlist($id){
         Wishlist::find($id)->delete();
-        return redirect()->back();
+        $attachments = WishlistAttachment::where('wishlist_id', $id)->get();
+        if($attachments){
+            WishlistAttachment::where('wishlist_id', $id)->delete();
+        }
+        return redirect()->back()->with('success', 'Wishlist deleted successfully');
     }
 }
