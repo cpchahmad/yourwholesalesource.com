@@ -767,7 +767,9 @@
     @endif
 
     @if($order->paid == 0)
-    <script src="https://www.paypal.com/sdk/js?client-id=AbGfhNUONjVXpq31ZwVYR0z1iFDnvjTs0G5Avw2gMETBIf0Fx0lxCX4Yagl1armtEKsqIrM1Xtuq2vce&currency=USD"></script>
+        <script
+            src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">
+        </script>
     <script>
 
         paypal.Buttons({
