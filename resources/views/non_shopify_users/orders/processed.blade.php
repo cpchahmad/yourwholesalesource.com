@@ -320,7 +320,7 @@
                                                     return actions.order.create({
                                                         purchase_units: [{
                                                             amount: {
-                                                                value: '{{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}}'
+                                                                value: "{{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}"
                                                             }
                                                         }]
                                                     });
