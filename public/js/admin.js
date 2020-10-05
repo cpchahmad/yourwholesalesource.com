@@ -1003,6 +1003,7 @@ $(document).ready(function () {
                     if(data.payment == 'paypal'){
                         $('#paypal_pay_trigger').html(data.popup);
                         $('.ajax_paypal_form_submit').html(data.form);
+                        triggerPaypal(data.cost);
                         $('#paypal_pay_trigger').modal('show');
                     }else{
                         window.location.href = data.redirect_url;
@@ -1018,4 +1019,25 @@ $(document).ready(function () {
     });
 });
 
+
+function triggerPaypal(price){
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: price
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                console.log(details);
+                $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
+                $('.ajax_paypal_form_submit form').submit();
+            });
+        }
+    }).render('#paypal-button-container');
+}
 
