@@ -42,8 +42,7 @@ class AdminWebhookController extends Controller
                 $new_fulfillment->save();
 
                 $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
-            }
-            else {
+            } else {
                 $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                 $shopify_fulfillment = null;
                 if ($shop != null) {
@@ -79,11 +78,9 @@ class AdminWebhookController extends Controller
                                     "quantity" => $fulfill_quantity,
                                 ]);
                             }
-
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
-
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
                             $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
@@ -91,11 +88,9 @@ class AdminWebhookController extends Controller
                             $new_fulfillment->retailer_order_id = $retailer_order->id;
                             $new_fulfillment->status = 'fulfilled';
                             $new_fulfillment->save();
-
                             /*Order Log*/
+                            $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
-
-
                         }
                     }
                 }
@@ -119,7 +114,7 @@ class AdminWebhookController extends Controller
                     $line_item->save();
                 } else {
                     $line_item->fulfillment_status = 'partially-fulfilled';
-                    $line_item->fulfillable_quantity = $item->fulfillable_quantity;
+                    $line_item->fulfillable_quantity = $item->fulfillable_quantityset_fulfillments;
                     $line_item->save();
                 }
             }
@@ -387,4 +382,16 @@ class AdminWebhookController extends Controller
         }
     }
 
+    public function CompleteFullFillment($orderFullfillment)
+    {
+        $order = RetailerOrder::where('id', $orderFullfillment->retailer_order_id)->first();
+        if ($orderFullfillment->fulfillment_shopify_id) {
+            $shop = $this->helper->getSpecificShop($order->shop_id);
+            $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
+        }
+        if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
+            $admin_shop = $this->helper->getAdminShop();
+            $admin_shop->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $orderFullfillment->admin_fulfillment_shopify_id . '/complete.json');
+        }
+    }
 }
