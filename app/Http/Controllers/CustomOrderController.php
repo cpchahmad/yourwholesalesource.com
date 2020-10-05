@@ -1043,6 +1043,8 @@ class CustomOrderController extends Controller
                 $this->admin->sync_order_to_admin_store($retailer_order);
 //                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             }
+
+            dd('aa');
             return redirect()->route('users.files.view', $id)->with('success', 'Bulk Payment Processed Successfully!');
 
 //        } else {
