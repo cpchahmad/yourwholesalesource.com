@@ -317,7 +317,7 @@ class CustomOrderController extends Controller
             $response = [
                 'status' => 'success',
                 'redirect_url' => route('users.order.view',$new->id),
-                'payment-option' => $request->input('payment-option')
+                'payment' => $request->input('payment-option')
             ];
 //            return redirect()->route('users.order.view',$new->id)->with('success','Custom Order Created Successfully');
         }
@@ -327,7 +327,7 @@ class CustomOrderController extends Controller
                 'status' => 'success',
                 'html' => 'html',
                 'redirect_url' => route('users.order.view',$new->id),
-                'payment-option' => $request->input('payment-option')
+                'payment' => $request->input('payment-option')
             ];
         }
         else{
@@ -335,7 +335,7 @@ class CustomOrderController extends Controller
             $response = [
                 'status' => 'success',
                 'redirect_url' => route('store.order.wallet.pay',$new->id),
-                'payment-option' => $request->input('payment-option')
+                'payment' => $request->input('payment-option')
             ];
         }
 

@@ -1000,7 +1000,7 @@ $(document).ready(function () {
             data : $form.serialize(),
             success: function (data) {
                 if(data.status == 'success'){
-                    if(data.payment-option == 'paypal'){
+                    if(data.payment == 'paypal'){
                         alert('payapl');
                     }else{
                         window.location.href = data.redirect_url;
