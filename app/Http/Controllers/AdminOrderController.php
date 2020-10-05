@@ -74,12 +74,11 @@ class AdminOrderController extends Controller
     public function view_order($id)
     {
         $order = RetailerOrder::find($id);
-        $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
-        $shop = $this->helper->getSpecificShop($order->shop_id);
+//        $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
+//        $shop = $this->helper->getSpecificShop($order->shop_id);
 
-        $response = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $fullfillment->fulfillment_shopify_id . '/complete.json');
+//        $response = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $fullfillment->fulfillment_shopify_id . '/complete.json');
 
-        dd($order, $fullfillment, $shop, $response);
 
         if ($order != null) {
             return view('orders.view')->with([
@@ -384,7 +383,6 @@ class AdminOrderController extends Controller
         }
         $fulfillment->retailer_order_id = $order->id;
         $fulfillment->status = 'fulfilled';
-
         $fulfillment->save();
 
         /*Maintaining Log*/
@@ -675,7 +673,6 @@ class AdminOrderController extends Controller
     {
         $orders = RetailerOrder::whereIn('status', ['Paid', 'unfulfilled'])->where('paid', 1)->get();
         return Excel::download(new OrdersExport($orders), now()->format('m-d-y') . ' Unfulfillment Orders' . '.csv');
-
     }
 
 
