@@ -76,7 +76,10 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::find($id);
         $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
         $shop = $this->helper->getSpecificShop($order->shop_id);
-        dd($order, $fullfillment, $shop);
+
+        $response = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $fullfillment->fulfillment_shopify_id . '/complete.json');
+
+        dd($order, $fullfillment, $shop, $response);
 
         if ($order != null) {
             return view('orders.view')->with([
