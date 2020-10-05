@@ -990,6 +990,30 @@ $(document).ready(function () {
         });
     });
 
+
+    $('#custom_order_form').submit(function (e) {
+        e.preventDefault();
+        var $form = $(this);
+        $.ajax({
+            url : $form.attr('action'),
+            type : $form.attr('method'),
+            data : $form.serialize(),
+            success: function (data) {
+                if(data.status == 'success'){
+                    if(data.payment-option == 'paypal'){
+                        alert('payapl');
+                    }else{
+                        window.location.href = data.redirect_url;
+                    }
+                }else{
+                    alert('something went wrong.');
+                }
+            },
+            error: function () {
+                alert('something went wrong');
+            }
+        });
+    });
 });
 
 
