@@ -50,12 +50,10 @@ class AdminOrderController extends Controller
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
 
         }
-        if($request->has('status')){
-            if($request->input('status') == 'unfulfilled'){
-                $orders->whereIN('status', ['Paid','unfulfilled']);
-            }
-            else
-            {
+        if ($request->has('status')) {
+            if ($request->input('status') == 'unfulfilled') {
+                $orders->whereIN('status', ['Paid', 'unfulfilled']);
+            } else {
                 $orders->where('status', $request->input('status'));
             }
 
@@ -114,17 +112,17 @@ class AdminOrderController extends Controller
                     if ($shop != null) {
                         $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                         if (!$location_response->errors) {
-                            foreach ($location_response->body->locations as $location){
-                               if($location->name == "WeFullFill"){
-                                   $data = [
-                                       "fulfillment" => [
-                                           "location_id" => $location->id,
-                                           "tracking_number" => null,
-                                           "line_items" => [
-                                           ]
-                                       ]
-                                   ];
-                               }
+                            foreach ($location_response->body->locations as $location) {
+                                if ($location->name == "WeFullFill") {
+                                    $data = [
+                                        "fulfillment" => [
+                                            "location_id" => $location->id,
+                                            "tracking_number" => null,
+                                            "line_items" => [
+                                            ]
+                                        ]
+                                    ];
+                                }
                             }
 
                             foreach ($request->input('item_id') as $index => $item) {
@@ -196,7 +194,6 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::find($request->id);
         if ($order != null) {
             if ($order->paid == 1) {
-                dd($request);
                 $fulfillments = $request->input('fulfillment');
                 $tracking_numbers = $request->input('tracking_number');
                 $tracking_urls = $request->input('tracking_url');
@@ -222,6 +219,7 @@ class AdminOrderController extends Controller
                                     $current->tracking_url = $tracking_urls[$index];
                                     $current->tracking_notes = $tracking_notes[$index];
                                     $current->save();
+                                    $this->CompleteFullFillment($current);
 
                                     /*Maintaining Log*/
                                     $order_log = new OrderLog();
@@ -531,7 +529,7 @@ class AdminOrderController extends Controller
             $join->on('retailer_order_line_items.shopify_product_id', '=', 'products.shopify_id')
                 ->join('retailer_orders', function ($o) {
                     $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                        ->where('retailer_orders.paid','>=',1);
+                        ->where('retailer_orders.paid', '>=', 1);
                 });
         })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
             ->groupBy('products.id')
@@ -545,7 +543,7 @@ class AdminOrderController extends Controller
                     $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
                         ->join('retailer_orders', function ($o) {
                             $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                                ->where('retailer_orders.paid','>=',1);
+                                ->where('retailer_orders.paid', '>=', 1);
                         });
                 });
         })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
@@ -564,7 +562,7 @@ class AdminOrderController extends Controller
                         $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
                             ->join('retailer_orders', function ($o) {
                                 $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                                    ->where('retailer_orders.paid','>=',1);
+                                    ->where('retailer_orders.paid', '>=', 1);
                             });
                     });
 
@@ -577,8 +575,8 @@ class AdminOrderController extends Controller
 
         $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) {
             $o->on('retailer_orders.user_id', '=', 'users.id');
-        }) ->where('retailer_orders.paid','>=',1)
-            ->where('retailer_orders.custom','=',1)
+        })->where('retailer_orders.paid', '>=', 1)
+            ->where('retailer_orders.custom', '=', 1)
             ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
             ->groupBy('users.id')
             ->orderBy('sold', 'DESC')
@@ -677,7 +675,6 @@ class AdminOrderController extends Controller
     }
 
 
-
     public function import_bulk_tracking(Request $request)
     {
         if ($request->hasFile('import_tracking')) {
@@ -705,12 +702,10 @@ class AdminOrderController extends Controller
 
                         /*Maintaining Log*/
                         $this->fulfillment_tracking_process($fulfillment, $retailer_order, $d);
-                        if($retailer_order->admin_shopify_id != null){
+                        if ($retailer_order->admin_shopify_id != null) {
                             $this->admin_fulfillment_tracking_process($retailer_order, $d, $fulfillment);
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                         if ($shop != null) {
                             $location_response = $shop->api()->rest('GET', '/admin/locations.json');
@@ -745,7 +740,7 @@ class AdminOrderController extends Controller
                                     $fulfillment->status = 'fulfilled';
                                     $fulfillment->save();
                                     $this->fulfillment_tracking_process($fulfillment, $retailer_order, $d);
-                                    if($retailer_order->admin_shopify_id != null){
+                                    if ($retailer_order->admin_shopify_id != null) {
                                         $this->admin_fulfillment_tracking_process($retailer_order, $d, $fulfillment);
                                     }
                                 }
@@ -857,6 +852,19 @@ class AdminOrderController extends Controller
 //        $data = $response->body->fulfillments[0];
 //        $webhook = new AdminWebhookController();
 //        $webhook->set_fulfillments($data);
+    }
+
+    public function CompleteFullFillment($orderFullfillment)
+    {
+        $order = RetailerOrder::where('id', $orderFullfillment->retailer_order_id)->first();
+        if ($orderFullfillment->fulfillment_shopify_id) {
+            $shop = $this->helper->getSpecificShop($order->shop_id);
+            $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
+        }
+        if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
+            $admin_shop = $this->helper->getAdminShop();
+            $admin_shop->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $orderFullfillment->admin_fulfillment_shopify_id . '/complete.json');
+        }
     }
 }
 
