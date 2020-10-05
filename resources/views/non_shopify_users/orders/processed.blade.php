@@ -327,7 +327,6 @@
                                                 },
                                                 onApprove: function (data, actions) {
                                                     return actions.order.capture().then(function (details) {
-                                                        console.log(details);
                                                         $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
                                                         $('.ajax_paypal_form_submit form').submit();
                                                     });
