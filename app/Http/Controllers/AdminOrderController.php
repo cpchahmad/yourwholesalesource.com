@@ -196,6 +196,7 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::find($request->id);
         if ($order != null) {
             if ($order->paid == 1) {
+                dd($request);
                 $fulfillments = $request->input('fulfillment');
                 $tracking_numbers = $request->input('tracking_number');
                 $tracking_urls = $request->input('tracking_url');
