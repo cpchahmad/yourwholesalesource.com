@@ -377,8 +377,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <div class="ajax_paypal_form_submit" style="display: none;">
                                                 <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
                                                     {{ csrf_field() }}

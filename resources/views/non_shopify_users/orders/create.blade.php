@@ -229,4 +229,8 @@
         </div>
     </div>
 
+
+    <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true"></div>
+    <div class="ajax_paypal_form_submit" style="display: none;"></div>
+
 @endsection

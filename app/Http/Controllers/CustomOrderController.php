@@ -324,7 +324,11 @@ class CustomOrderController extends Controller
 //            return redirect()->route('store.order.paypal.pay',$new->id);
             $response = [
                 'status' => 'success',
-                'html' => 'html',
+                'popup' => view('non_shopify_users.orders.inc_popup')->with([
+                    'order' => $new,
+                    'settings' => AdminSetting::all()->first()
+                ])->render(),
+                'form' => view('non_shopify_users.orders.inc_form')->with('order', $new)->render(),
                 'redirect_url' => route('users.order.view',$new->id),
                 'payment' => $request->input('payment-option')
             ];
