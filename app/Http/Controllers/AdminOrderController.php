@@ -220,7 +220,6 @@ class AdminOrderController extends Controller
                                     $current->tracking_notes = $tracking_notes[$index];
                                     $current->save();
                                     $this->CompleteFullFillment($current);
-
                                     /*Maintaining Log*/
                                     $order_log = new OrderLog();
                                     $order_log->message = "Tracking detailed added to fulfillment named " . $current->name . "  successfully on " . now()->format('d M, Y h:i a');
@@ -253,7 +252,6 @@ class AdminOrderController extends Controller
                                 $this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
                                 $this->CompleteFullFillment($current);
                             }
-
                             /*Maintaining Log*/
                             $order_log = new OrderLog();
                             $order_log->message = "Tracking detailed added to fulfillment named " . $current->name . "  successfully on " . now()->format('d M, Y h:i a');
@@ -261,7 +259,6 @@ class AdminOrderController extends Controller
                             $order_log->retailer_order_id = $order->id;
                             $order_log->save();
                         }
-
                     }
                 }
                 $count = 0;
@@ -276,16 +273,12 @@ class AdminOrderController extends Controller
                 } else {
                     $order->status = 'partially-shipped';
                 }
-
                 $order->save();
                 $this->notify->generate('Order', 'Order Tracking Details', $order->name . ' tracking details added successfully!', $order);
-
-
                 return redirect()->back()->with('success', 'Tracking Details Added To Fulfillment Successfully!');
             } else {
                 return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
-
         } else {
             return redirect()->route('admin.order')->with('error', 'Order Not Found To Add Tracking In Fulfillment');
 
