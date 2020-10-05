@@ -75,7 +75,8 @@ class AdminOrderController extends Controller
     {
         $order = RetailerOrder::find($id);
         $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
-        dd($order, $fullfillment);
+        $shop = $this->helper->getSpecificShop($order->shop_id);
+        dd($order, $fullfillment, $shop);
 
         if ($order != null) {
             return view('orders.view')->with([
