@@ -756,7 +756,10 @@
 
 
     @if($order->paid == 0)
-        <script src="https://paypal.com/sdk/js?client-id=AYBspYjc3-lkOn3rwcH379qiOADHLIGgxCTcm2etDRGLoKYN-EZWwKk7mzr2bmANJ1ACRgggkZqmKSJt"></script>
+
+
+        <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+
 
 {{--        <script--}}
 {{--            src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">--}}
