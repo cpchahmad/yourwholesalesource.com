@@ -313,6 +313,8 @@ class CustomOrderController extends Controller
         $order_log->retailer_order_id = $new->id;
         $order_log->save();
 
+        $settings =  AdminSetting::all()->first();
+
         if($request->input('payment-option') == 'draft'){
             $response = [
                 'status' => 'success',
@@ -326,9 +328,10 @@ class CustomOrderController extends Controller
                 'status' => 'success',
                 'popup' => view('non_shopify_users.orders.inc_popup')->with([
                     'order' => $new,
-                    'settings' => AdminSetting::all()->first()
+                    'settings' => $settings
                 ])->render(),
                 'form' => view('non_shopify_users.orders.inc_form')->with('order', $new)->render(),
+                'cost' =>  number_format($new->cost_to_pay+($new->cost_to_pay*$settings->paypal_percentage/100),2),
                 'redirect_url' => route('users.order.view',$new->id),
                 'payment' => $request->input('payment-option')
             ];

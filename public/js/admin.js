@@ -1001,7 +1001,9 @@ $(document).ready(function () {
             success: function (data) {
                 if(data.status == 'success'){
                     if(data.payment == 'paypal'){
-                        alert('payapl');
+                        $('#paypal_pay_trigger').html(data.popup);
+                        $('.ajax_paypal_form_submit').html(data.form);
+                        $('#paypal_pay_trigger').modal('show');
                     }else{
                         window.location.href = data.redirect_url;
                     }
