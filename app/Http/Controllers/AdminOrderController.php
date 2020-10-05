@@ -74,6 +74,8 @@ class AdminOrderController extends Controller
     public function view_order($id)
     {
         $order = RetailerOrder::find($id);
+        dd($order);
+
         if ($order != null) {
             return view('orders.view')->with([
                 'order' => $order
