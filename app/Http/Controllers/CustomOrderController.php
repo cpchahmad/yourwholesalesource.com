@@ -320,8 +320,7 @@ class CustomOrderController extends Controller
                 'payment' => $request->input('payment-option')
             ];
 //            return redirect()->route('users.order.view',$new->id)->with('success','Custom Order Created Successfully');
-        }
-        elseif($request->input('payment-option') == 'paypal'){
+        } elseif($request->input('payment-option') == 'paypal'){
 //            return redirect()->route('store.order.paypal.pay',$new->id);
             $response = [
                 'status' => 'success',
@@ -329,8 +328,7 @@ class CustomOrderController extends Controller
                 'redirect_url' => route('users.order.view',$new->id),
                 'payment' => $request->input('payment-option')
             ];
-        }
-        else{
+        } else{
 //            return redirect()->route('store.order.wallet.pay',$new->id);
             $response = [
                 'status' => 'success',
