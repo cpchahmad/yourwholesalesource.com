@@ -251,6 +251,7 @@ class AdminOrderController extends Controller
                                     ]
                                 ];
                                 $this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
+                                $this->CompleteFullFillment($current);
                             }
 
                             /*Maintaining Log*/
