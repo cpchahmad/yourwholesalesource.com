@@ -81,17 +81,18 @@ class ProductController extends Controller
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
 
-        $users = User::role('non-shopify-users')->newQuery();
-        $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
-        $users = $users->orderBy('created_at','DESC')->get();
+        $users = User::role('non-shopify-users')
+                ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                ->orderBy('created_at','DESC')
+                ->get();
 
-        dd($users);
 
         return view('products.edit')->with([
             'categories' => $categories,
             'platforms' => $platforms,
             'product' => $product,
-            'shops' => $shops
+            'shops' => $shops,
+            'non-shopify-users' => $users,
         ]);
     }
 

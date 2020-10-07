@@ -778,6 +778,10 @@
                                                 <option @if(in_array($shop->id,$product->has_preferences->pluck('id')->toArray())) selected @endif
                                                 value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
                                             @endforeach
+
+                                            @foreach($non-shopify-users as $user)
+                                                <option value="{{$user->id}}">{{ $user->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
