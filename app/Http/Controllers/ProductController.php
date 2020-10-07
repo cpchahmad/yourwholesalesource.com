@@ -98,7 +98,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->non_shopify_users);
 
         $product = Product::find($id);
         $shop =$this->helper->getShop();
@@ -500,6 +499,7 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'shop-preferences'){
+                    dd('yes');
                     $product->global = $request->input('global');
                     $product->save();
                     if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
