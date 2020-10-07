@@ -279,11 +279,11 @@
                                                       placeholder="Please Enter Message here !"></textarea>
                                         </div>
                                     </div>
+                                    <div class="custom-control custom-checkbox d-inline-block">
+                                        <input type="checkbox" name="show_flag" value="" class="custom-control-input category_checkbox" id="flag">
+                                        <label class="custom-control-label" for="flag">Show comment to user?</label>
+                                    </div>
                                     <div class="form-group">
-                                        <div class="form-material">
-                                            <input type="checkbox" name="show_flag" class="form-control">
-                                            <label for="material-error">Show comments to user? </label>
-                                        </div>
                                         <div class="form-material">
                                             <label for="material-error">Attachments </label>
                                             <input type="file" name="attachments[]" class="form-control" multiple>
