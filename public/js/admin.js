@@ -632,6 +632,7 @@ $(document).ready(function () {
     $('body').on('change','.preference-check',function () {
         console.log($(this).val());
         if($(this).val() === '0'){
+            console.log($(this).parents('.form-group').next());
             $(this).parents('.form-group').next().show();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
         }
