@@ -624,7 +624,10 @@ class AdminOrderController extends Controller
             'top_products_stores' => $top_products_stores,
             'top_products_users' => $top_products_users,
             'top_stores' => $top_stores,
-            'top_users' => $top_users
+            'top_users' => $top_users,
+            'wishlist_request_count' => $wishlist_request_count,
+            'wallet_request_count' => $wallet_request_count,
+            'refund_request_count' => $refund_request_count,
         ]);
     }
 
