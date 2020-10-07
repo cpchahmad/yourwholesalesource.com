@@ -165,14 +165,21 @@
             <div class="d-inline-block mr-3">
                 <a href="/wallets">
                     Wallet Requests
-                    <span class="badge badge-primary" style="font-size: 13px"> {{$wallet_request_count}} </span>
+                    <span class="badge badge-success" style="font-size: 13px"> {{$wallet_request_count}} </span>
                 </a>
             </div>
 
             <div class="d-inline-block mr-3">
                 <a href="/refunds?priority=&status=1">
                     Refund Requests
-                    <span class="badge badge-primary" style="font-size: 13px"> {{$refund_request_count}} </span>
+                    <span class="badge badge-warning" style="font-size: 13px"> {{$refund_request_count}} </span>
+                </a>
+            </div>
+
+            <div class="d-inline-block mr-3">
+                <a href="/tickets?priority=&status=1">
+                    Ticket Requests
+                    <span class="badge badge-dark" style="font-size: 13px"> {{$tickets_request_count}} </span>
                 </a>
             </div>
 

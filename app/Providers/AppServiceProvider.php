@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Notification;
 use App\Refund;
 use App\Shop;
+use App\TicketStatus;
 use App\WalletRequest;
 use App\WishlistStatus;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
             $wishlist_request_count = WishlistStatus::where('name', 'open')->count();
             $wallet_request_count = WalletRequest::where('status', 1)->count();
             $refund_request_count = Refund::where('status', 'New')->count();
+            $tickets_request_count = TicketStatus::where('status', 'New')->count();
 
 
             $view->with([
@@ -82,6 +84,7 @@ class AppServiceProvider extends ServiceProvider
                 'wishlist_request_count' => $wishlist_request_count,
                 'wallet_request_count' => $wallet_request_count,
                 'refund_request_count' => $refund_request_count,
+                'tickets_request_count' => $tickets_request_count,
             ]);
 
         });
