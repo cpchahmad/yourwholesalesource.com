@@ -238,7 +238,7 @@
                         <div class="block">
                             <div class="block-header">
                                 @if($thread->source == 'manager')
-                                    <h5 class="block-title">{{$thread->has_manager->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                                    <h5 class="block-title">{{$thread->has_manager->name}} @if($thread->show) <span class="badge badge-warning ml-2" style="float: right;font-size: small"> Hidden </span> @endif <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @elseif($thread->source == 'store')
                                     <h5 class="block-title">{{explode('.',$wishlist->has_store->shopify_domain)[0]}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @else
@@ -278,6 +278,10 @@
                                             <textarea required class="js-summernote" name="reply"
                                                       placeholder="Please Enter Message here !"></textarea>
                                         </div>
+                                    </div>
+                                    <div class="custom-control custom-checkbox  d-inline-block mb-2">
+                                        <input type="checkbox" name="show_flag" class="custom-control-input" id="flag">
+                                        <label class="custom-control-label" for="flag">Hide comment to user?</label>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-material">
