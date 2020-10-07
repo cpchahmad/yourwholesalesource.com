@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Notification;
 use App\Refund;
 use App\Shop;
+use App\Ticket;
 use App\TicketStatus;
 use App\WalletRequest;
+use App\Wishlist;
 use App\WishlistStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
@@ -71,10 +73,10 @@ class AppServiceProvider extends ServiceProvider
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
             $notifications_count = $query->orderBy('created_at','DESC')->count();
 
-            $wishlist_request_count = WishlistStatus::where('name', 'open')->count();
+            $wishlist_request_count = Wishlist::where('status_id', 1)->count();
             $wallet_request_count = WalletRequest::where('status', 1)->count();
             $refund_request_count = Refund::where('status', 'New')->count();
-            $tickets_request_count = TicketStatus::where('status', 'New')->count();
+            $tickets_request_count = Ticket::where('status_id', 1)->count();
 
 
             $view->with([
