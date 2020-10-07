@@ -12,6 +12,7 @@ use App\ProductVariant;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
+use App\User;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -79,6 +80,13 @@ class ProductController extends Controller
         $product = Product::find($id);
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
+
+        $users = User::role('non-shopify-users')->newQuery();
+        $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+        $users = $users->orderBy('created_at','DESC')->get();
+
+        dd($users);
+
         return view('products.edit')->with([
             'categories' => $categories,
             'platforms' => $platforms,
