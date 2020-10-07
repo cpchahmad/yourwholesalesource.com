@@ -229,10 +229,9 @@ class SingleStoreController extends Controller
                 $products = $productQuery->withCount(['has_imported'])->orderBy('has_imported_count', 'DESC')->paginate(12);
             } elseif ($request->input('filter') == 'new-arrival') {
                 $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
-
             }
         } else {
-            $products = $productQuery->paginate(12);
+            $products = $productQuery->orderBy('updated_at', 'DESC')->paginate(12);
         }
 
 

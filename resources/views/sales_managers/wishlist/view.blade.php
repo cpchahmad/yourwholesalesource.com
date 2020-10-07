@@ -281,7 +281,7 @@
                                     </div>
                                     <div class="custom-control custom-checkbox  d-inline-block mb-2">
                                         <input type="checkbox" name="show_flag" class="custom-control-input" id="flag">
-                                        <label class="custom-control-label" for="flag">Hide comment to user?</label>
+                                        <label class="custom-control-label" for="flag">Hide comment for user?</label>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-material">
