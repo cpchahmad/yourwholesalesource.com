@@ -210,7 +210,7 @@ $(document).ready(function () {
     $('.submit_all').click(function () {
         $('.pre-loader').css('display','flex');
         if($('#forms-div').find('form').length > 0){
-            let forms = new Array();
+            let forms = [];
             $('#forms-div').find('form').each(function () {
                 if($(this).hasClass('product-images-form')){
                     $(this).submit();
@@ -466,7 +466,7 @@ $(document).ready(function () {
         if(total_fulfillable > 0) {
             $('.pre-loader').css('display','flex');
             if($('.fulfilment_process_form').length > 0){
-                let forms = new Array();
+                let forms = [];
               $('.fulfilment_process_form').each(function () {
                     var total_fulfillable_form = 0;
                   $(this).find('.fulfill_quantity').each(function () {
@@ -632,6 +632,7 @@ $(document).ready(function () {
     $('body').on('change','.preference-check',function () {
         console.log($(this).val());
         if($(this).val() === '0'){
+            console.log(12);
             $(this).parents('.form-group').next().show();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
         }
@@ -640,6 +641,7 @@ $(document).ready(function () {
             $(this).parents('.form-group').next().next().find('.non-shopify-user-preference').attr('required',true);
         }
         else {
+            console.log(134);
             $(this).parents('.form-group').next().hide();
             $(this).parents('.form-group').next().next().hide();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',false);
