@@ -768,8 +768,8 @@
                                         <label class="custom-control-label" for="prefer-store">Selected Stores</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input preference-check" id="prefer-non-shopify-user" name="global" value="2" >
-                                        <label class="custom-control-label" for="prefer-store">Non Shopify Users</label>
+                                        <input type="radio" required class="custom-control-input preference-check" id="prefer-non-shopify-user" name="global" value="2"  @if($product->global == 2) checked="" @endif>
+                                        <label class="custom-control-label" for="prefer-non-shopify-user">Non Shopify Users</label>
                                     </div>
                                 </div>
                                 <div class="form-group" @if($product->global == 1) style="display: none" @endif>
