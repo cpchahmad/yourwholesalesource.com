@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use App\Notification;
+use App\Refund;
 use App\Shop;
+use App\WalletRequest;
+use App\WishlistStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -67,10 +70,18 @@ class AppServiceProvider extends ServiceProvider
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
             $notifications_count = $query->orderBy('created_at','DESC')->count();
 
+            $wishlist_request_count = WishlistStatus::where('name', 'open')->count();
+            $wallet_request_count = WalletRequest::where('status', 1)->count();
+            $refund_request_count = Refund::where('status', 'New')->count();
+
+
             $view->with([
                 'balance' => $balance,
                 'notifications' => $notifications,
-                'notifications_count' =>$notifications_count
+                'notifications_count' =>$notifications_count,
+                'wishlist_request_count' => $wishlist_request_count,
+                'wallet_request_count' => $wallet_request_count,
+                'refund_request_count' => $refund_request_count,
             ]);
 
         });
