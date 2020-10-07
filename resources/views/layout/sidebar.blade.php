@@ -155,26 +155,46 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="d-inline-block mr-3">
-                <a href="/wishlists?status=1">
-                    Wishlist Requests:
-                    <span class="badge badge-primary" style="font-size: 13px"> {{$wishlist_request_count}} </span>
-                </a>
+
+
+            <div class="dropdown d-inline-block ml-2">
+                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="si si-bell"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                    <div class="p-2 bg-primary text-center">
+                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
+                    </div>
+                    <ul class="nav-items mb-0">
+                        <li class="d-inline-block mr-3">
+                            <a href="/wishlists?status=1">
+                                Wishlist Requests:
+                                <span class="badge badge-primary" style="font-size: 13px"> {{$wishlist_request_count}} </span>
+                            </a>
+                        </li>
+
+                        <li class="d-inline-block mr-3">
+                            <a href="/wallets">
+                                Wallet Requests:
+                                <span class="badge badge-primary" style="font-size: 13px"> {{$wallet_request_count}} </span>
+                            </a>
+                        </li>
+
+                        <li class="d-inline-block mr-3">
+                            <a href="/refunds?priority=&status=1">
+                                Refund Requests:
+                                <span class="badge badge-primary" style="font-size: 13px"> {{$refund_request_count}} </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="p-2 border-top">
+                        <a class="btn btn-sm btn-light btn-block text-center" href="{{route('store.notifications')}}">
+                            <i class="fa fa-fw fa-arrow-down mr-1"></i> See All
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <div class="d-inline-block mr-3">
-                <a href="/wallets">
-                    Wallet Requests:
-                    <span class="badge badge-primary" style="font-size: 13px"> {{$wallet_request_count}} </span>
-                </a>
-            </div>
-
-            <div class="d-inline-block mr-3">
-                <a href="/refunds?priority=&status=1">
-                    Refund Requests:
-                    <span class="badge badge-primary" style="font-size: 13px"> {{$refund_request_count}} </span>
-                </a>
-            </div>
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
