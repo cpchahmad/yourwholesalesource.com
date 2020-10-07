@@ -280,7 +280,7 @@
                                         </div>
                                     </div>
                                     <div class="custom-control d-inline-block mb-2">
-                                        <input type="checkbox" name="show_flag" value="" class="custom-control-input category_checkbox" id="flag">
+                                        <input type="checkbox" name="show_flag" class="custom-control-input category_checkbox" id="flag">
                                         <label class="custom-control-label" for="flag">Show comment to user?</label>
                                     </div>
                                     <div class="form-group">
