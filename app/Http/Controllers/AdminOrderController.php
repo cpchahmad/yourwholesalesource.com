@@ -10,6 +10,7 @@ use App\Exports\CustomersExport;
 use App\Exports\OrdersExport;
 use App\FulfillmentLineItem;
 use App\Imports\BulkTrackingImport;
+use App\Notification;
 use App\OrderFulfillment;
 use App\OrderLog;
 use App\Product;
@@ -19,6 +20,7 @@ use App\RetailerProduct;
 use App\Shop;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Auth;
@@ -346,9 +348,9 @@ class AdminOrderController extends Controller
      * @param $fulfillable_quantities
      * @param $order
      * @param $response
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function set_fulfilments(Request $request, $id, $fulfillable_quantities, $order, $response): \Illuminate\Http\RedirectResponse
+    public function set_fulfilments(Request $request, $id, $fulfillable_quantities, $order, $response): RedirectResponse
     {
         foreach ($request->input('item_id') as $index => $item) {
             $line_item = RetailerOrderLineItem::find($item);
@@ -405,9 +407,9 @@ class AdminOrderController extends Controller
     /**
      * @param $fulfillment
      * @param $order
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function unset_fullfilment($fulfillment, $order): \Illuminate\Http\RedirectResponse
+    public function unset_fullfilment($fulfillment, $order): RedirectResponse
     {
         foreach ($fulfillment->line_items as $item) {
             if ($item->linked_line_item != null) {
@@ -595,6 +597,9 @@ class AdminOrderController extends Controller
 //            ->take(10);
 
 //        dd($top_products);
+
+
+
 
 
         return view('welcome')->with([

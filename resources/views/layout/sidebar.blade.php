@@ -155,6 +155,21 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
+            <div class="d-inline-block mr-3">
+                Wishlist Requests:
+                <span class="badge badge-primary" style="font-size: 13px"> 23 </span>
+            </div>
+
+            <div class="d-inline-block mr-3">
+                Wallet Requests:
+                <span class="badge badge-primary" style="font-size: 13px"> 23 </span>
+            </div>
+
+            <div class="d-inline-block mr-3">
+                Refund Requests:
+                <span class="badge badge-primary" style="font-size: 13px"> 23 </span>
+            </div>
+
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">

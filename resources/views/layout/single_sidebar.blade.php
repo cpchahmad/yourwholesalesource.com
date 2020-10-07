@@ -200,7 +200,6 @@
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3">
                 <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
-
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
             <div class="d-inline-block mr-3">
