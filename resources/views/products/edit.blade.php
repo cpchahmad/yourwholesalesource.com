@@ -773,7 +773,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" >
+                                <div class="form-group">
                                     <div class="form-material">
                                         <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
                                         <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
