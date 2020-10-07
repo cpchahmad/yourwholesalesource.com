@@ -155,28 +155,28 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="d-inline-block mr-3 badge badge-primary">
+            <div class="d-inline-block mr-3 badge badge-primary text-white">
                 <a href="/wishlists?status=1">
                     Wishlist Requests
                     <span class="" style="font-size: 13px"> {{$wishlist_request_count}} </span>
                 </a>
             </div>
 
-            <div class="d-inline-block mr-3 badge badge-success">
+            <div class="d-inline-block mr-3 badge badge-success text-white">
                 <a href="/wallets">
                     Wallet Requests
                     <span class="" style="font-size: 13px"> {{$wallet_request_count}} </span>
                 </a>
             </div>
 
-            <div class="d-inline-block mr-3 badge badge-warning">
+            <div class="d-inline-block mr-3 badge badge-warning text-white">
                 <a href="/refunds?priority=&status=1">
                     Refund Requests
                     <span class="" style="font-size: 13px"> {{$refund_request_count}} </span>
                 </a>
             </div>
 
-            <div class="d-inline-block mr-3 badge badge-dark">
+            <div class="d-inline-block mr-3 badge badge-dark text-white">
                 <a href="/tickets?priority=&status=1">
                     Ticket Requests
                     <span class="" style="font-size: 13px"> {{$tickets_request_count}} </span>
