@@ -782,7 +782,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-material">
+                                    <div class="form-material mt-2">
                                         <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
                                         <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
                                             <option></option>
