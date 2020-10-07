@@ -98,7 +98,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        dd(234);
         dd($request->all());
 
         $product = Product::find($id);
