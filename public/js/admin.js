@@ -632,7 +632,7 @@ $(document).ready(function () {
     $('body').on('change','.preference-check',function () {
         console.log($(this).val());
         if($(this).val() === '0'){
-            $(this).parents('.form-group').next().show();
+            $('.sp').show();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
         }
         if($(this).val() === '2'){
@@ -640,7 +640,7 @@ $(document).ready(function () {
             $(this).parents('.form-group').next().next().find('.non-shopify-user-preference').attr('required',true);
         }
         else {
-            $(this).parents('.form-group').next().hide();
+            $('.sp').hide();
             $(this).parents('.form-group').next().next().hide();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',false);
             $(this).parents('.form-group').next().next().find('.non-shopify-user-preference').attr('required',false);
