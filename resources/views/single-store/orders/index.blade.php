@@ -156,5 +156,10 @@
         </div>
     </div>
 
+    <form action="{{route('store.orders.bulk.payment')}}" id="bulk-payment" method="post">
+        @csrf
+        <input type="hidden" name="orders" class="">
+    </form>
+
 
 @endsection

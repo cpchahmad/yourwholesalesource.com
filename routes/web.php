@@ -166,6 +166,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/notifications', 'SingleStoreController@notifications')->name('store.notifications');
 
 
+        Route::post('/orders/bulk-payment', 'OrderController@show_bulk_payments')->name('store.orders.bulk.payment');
 
 
     });

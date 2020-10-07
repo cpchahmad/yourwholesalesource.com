@@ -349,4 +349,10 @@ class OrderController extends Controller
         return redirect()->route('store.orders')->with('success','Orders Synced Successfully');
     }
 
+    public function show_bulk_payments(Request $request) {
+        $orders_array = explode(',', $request->input('orders'));
+
+        dd($orders_array);
+    }
+
 }

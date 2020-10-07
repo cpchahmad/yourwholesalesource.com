@@ -15,6 +15,7 @@ $(document).ready(function () {
         }
 
     });
+
     $('.check-order').change(function () {
         if($(this).is(':checked')){
             $('.bulk-div').show();
@@ -36,13 +37,19 @@ $(document).ready(function () {
         $('.check-order:checked').each(function () {
             values.push($(this).val());
         });
-        // $('#bulk-fullfillment').find('input:hidden[name=orders]').val(values);
+         $('#bulk-payment').find('input:hidden[name=orders]').val(values);
 
     }
     function unset_bulk_array() {
-        // $('#bulk-fullfillment').find('input:hidden[name=orders]').val('');
+         $('#bulk-payment').find('input:hidden[name=orders]').val('');
 
     }
+
+    $('.bulk-wallet-btn').click(function () {
+        $('#bulk-payment').submit();
+    });
+
+
     /*Popup Code*/
 
     var url_string = window.location.href;
