@@ -779,7 +779,7 @@
                                                 value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
                                             @endforeach
 
-                                            @foreach($non-shopify-users as $user)
+                                            @foreach($non_shopify_users as $user)
                                                 <option value="{{$user->id}}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>

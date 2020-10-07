@@ -92,7 +92,7 @@ class ProductController extends Controller
             'platforms' => $platforms,
             'product' => $product,
             'shops' => $shops,
-            'non-shopify-users' => $users,
+            'non_shopify_users' => $users,
         ]);
     }
 
