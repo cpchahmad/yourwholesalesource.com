@@ -156,18 +156,24 @@
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3">
-                Wishlist Requests:
-                <span class="badge badge-primary" style="font-size: 13px"> 23 </span>
+                <a href="">
+                    Wishlist Requests:
+                    <span class="badge badge-primary" style="font-size: 13px"> $wishlist_request_count </span>
+                </a>
             </div>
 
             <div class="d-inline-block mr-3">
-                Wallet Requests:
-                <span class="badge badge-primary" style="font-size: 13px"> 23 </span>
+                <a href="">
+                    Wallet Requests:
+                    <span class="badge badge-primary" style="font-size: 13px"> $wallet_request_count </span>
+                </a>
             </div>
 
             <div class="d-inline-block mr-3">
-                Refund Requests:
-                <span class="badge badge-primary" style="font-size: 13px"> 23 </span>
+                <a href="">
+                    Refund Requests:
+                    <span class="badge badge-primary" style="font-size: 13px"> $refund_request_count </span>
+                </a>
             </div>
 
             <div class="dropdown d-inline-block ml-2">

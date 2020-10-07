@@ -14,11 +14,14 @@ use App\Notification;
 use App\OrderFulfillment;
 use App\OrderLog;
 use App\Product;
+use App\Refund;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\Shop;
 use App\User;
+use App\WalletRequest;
+use App\WishlistStatus;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -598,6 +601,9 @@ class AdminOrderController extends Controller
 
 //        dd($top_products);
 
+        $wishlist_request_count = WishlistStatus::where('name', 'open')->count();
+        $wallet_request_count = WalletRequest::where('status', 1)->count();
+        $refund_request_count = Refund::where('status', 'New')->count();
 
 
 
