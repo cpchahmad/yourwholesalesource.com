@@ -238,7 +238,7 @@
                         <div class="block">
                             <div class="block-header">
                                 @if($thread->source == 'manager')
-                                    <h5 class="block-title">{{$thread->has_manager->name}} @if(!($thread->show)) <span class="badge badge-info " style="float: right;font-size: small"> Hidden </span> @endif <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                                    <h5 class="block-title">{{$thread->has_manager->name}} @if($thread->show) <span class="badge badge-warning ml-2" style="float: right;font-size: small"> Hidden </span> @endif <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @elseif($thread->source == 'store')
                                     <h5 class="block-title">{{explode('.',$wishlist->has_store->shopify_domain)[0]}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @else
