@@ -30,6 +30,11 @@ class Product extends Model
     public function has_preferences(){
         return $this->belongsToMany('App\Shop','product_shop','product_id','shop_id');
     }
+
+    public function has_non_shopify_user_preferences(){
+        return $this->belongsToMany('App\User','product_user','product_id','user_id');
+    }
+
     public function has_retailer_products(){
         return $this->hasMany(RetailerProduct::class,'linked_product_id');
     }

@@ -505,6 +505,9 @@ class ProductController extends Controller
                     if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
                         $product->has_preferences()->sync($request->input('shops'));
                     }
+                    if($request->input('global') == 0 && $request->has('non_shopify_users') && count($request->input('non_shopify_users')) > 0){
+                        $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
+                    }
 
                 }
             }
