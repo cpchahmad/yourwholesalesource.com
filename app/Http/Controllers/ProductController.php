@@ -499,7 +499,6 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'shop-preferences'){
-                    dd('yes');
                     $product->global = $request->input('global');
                     $product->save();
                     if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
