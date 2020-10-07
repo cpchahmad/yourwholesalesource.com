@@ -281,6 +281,10 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="form-material">
+                                            <input type="checkbox" name="show_flag" class="form-control">
+                                            <label for="material-error">Show comments to user? </label>
+                                        </div>
+                                        <div class="form-material">
                                             <label for="material-error">Attachments </label>
                                             <input type="file" name="attachments[]" class="form-control" multiple>
                                         </div>
