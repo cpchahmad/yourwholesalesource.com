@@ -83,7 +83,7 @@ class WishlistController extends Controller
     }
 
     public function create_wishlist_thread(Request $request){
-        dd($request->all());
+
         $manager = User::find($request->input('manager_id'));
         $wish = Wishlist::find($request->input('wishlist_id'));
         if($manager != null && $wish != null){
@@ -94,6 +94,11 @@ class WishlistController extends Controller
             $thread->user_id = $request->input('user_id');
             $thread->shop_id = $request->input('shop_id');
             $thread->wishlist_id = $request->input('wishlist_id');
+
+            if(isset($request->show_flag)) {
+                $thread->show = true;
+            }
+
             $thread->save();
 
             $wish->updated_at = now();
