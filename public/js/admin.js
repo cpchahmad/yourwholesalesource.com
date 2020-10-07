@@ -630,24 +630,13 @@ $(document).ready(function () {
     });
 
     $('body').on('change','.preference-check',function () {
-        console.log($(this).val());
         if($(this).val() === '0'){
             $(this).parents('.form-group').next().show();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
-            $(this).parents('.form-group').next().next().hide();
-            $(this).parents('.form-group').next().next().find('.non-shopify-user-preference').attr('required',false);
         }
-        else if($(this).val() === '2'){
-            $(this).parents('.form-group').next().next().show();
-            $(this).parents('.form-group').next().next().find('.non-shopify-user-preference').attr('required',true);
+        else{
             $(this).parents('.form-group').next().hide();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',false);
-        }
-        else {
-            $(this).parents('.form-group').next().hide();
-            $(this).parents('.form-group').next().next().hide();
-            $(this).parents('.form-group').next().find('.shop-preference').attr('required',false);
-            $(this).parents('.form-group').next().next().find('.non-shopify-user-preference').attr('required',false);
         }
     });
 

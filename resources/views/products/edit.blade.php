@@ -767,10 +767,6 @@
                                         <input type="radio" required class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if($product->global == 0) checked="" @endif>
                                         <label class="custom-control-label" for="prefer-store">Selected Stores</label>
                                     </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input preference-check" id="prefer-non-shopify-user" name="global" value="2">
-                                        <label class="custom-control-label" for="prefer-non-shopify-user">Non Shopify Users</label>
-                                    </div>
                                 </div>
 
                                 <div class="form-group" @if($product->global == 1) style="display: none" @endif>
@@ -785,11 +781,9 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
 
-                                <div class="form-group" @if($product->global == 1) style="display: none" @endif>
                                     <div class="form-material">
-                                        <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
+                                        <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
                                         <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
                                             <option></option>
                                             @foreach($non_shopify_users as $user)
