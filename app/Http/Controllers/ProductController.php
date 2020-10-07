@@ -98,8 +98,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd(234);
-        dd($request->all());
+        dd($request->non_shopify_users);
 
         $product = Product::find($id);
         $shop =$this->helper->getShop();

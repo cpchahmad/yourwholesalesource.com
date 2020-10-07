@@ -784,7 +784,7 @@
 
                                     <div class="form-material">
                                         <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
-                                        <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
+                                        <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
                                             <option></option>
                                             @foreach($non_shopify_users as $user)
                                                 <option value="{{$user->id}}">{{ $user->name }}</option>
