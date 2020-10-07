@@ -126,7 +126,7 @@
                 @if(count($wishlist->has_thread) > 0)
                     <h5> Thread </h5>
                     @foreach($wishlist->has_thread as $thread)
-                        @if($thread->show)
+                        @if(!($thread->show))
                             <div class="block">
                                 <div class="block-header">
                                     @if($thread->source == 'manager')
