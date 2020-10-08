@@ -243,8 +243,6 @@ class WebhookController extends Controller
                 $order_log->save();
 
             }
-
         }
-        dd($all);
     }
 }
