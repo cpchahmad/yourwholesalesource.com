@@ -86,7 +86,15 @@ class WebhookController extends Controller
                 $cost_to_pay = 0;
 
                 foreach ($order->line_items as $item) {
-                    $new_line = new RetailerOrderLineItem();
+                    $new_line = RetailerOrderLineItem::where([
+                        'retailer_order_id' => $new->id,
+                        'retailer_product_variant_id' => $item->id,
+                        'shopify_variant_id' => $item->variant_id
+                    ])->first();
+                    if($new_line === null) {
+                        $new_line = new RetailerOrderLineItem();
+                    }
+
                     $new_line->retailer_order_id = $new->id;
                     $new_line->retailer_product_variant_id = $item->id;
                     $new_line->shopify_product_id = $item->product_id;
