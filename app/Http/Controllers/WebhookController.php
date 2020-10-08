@@ -19,70 +19,13 @@ class WebhookController extends Controller
 {
     public function createOrder($order, $shop)
     {
-
-
         $product_ids = [];
         $variant_ids = [];
-        $all = [];
         foreach ($order->line_items as $item) {
             array_push($variant_ids, $item->variant_id);
             array_push($product_ids, $item->product_id);
         }
-
-        $new = RetailerOrder::where('shopify_order_id', $order->id)->first();
-        $cost_to_pay = 0;
-
-
-        foreach ($order->line_items as $item) {
-            $new_line = new RetailerOrderLineItem();
-            $new_line->retailer_order_id = $new->id;
-            $new_line->retailer_product_variant_id = $item->id;
-            $new_line->shopify_product_id = $item->product_id;
-            $new_line->shopify_variant_id = $item->variant_id;
-            $new_line->title = $item->title;
-            $new_line->quantity = $item->quantity;
-            $new_line->sku = $item->sku;
-            $new_line->variant_title = $item->variant_title;
-            $new_line->title = $item->title;
-            $new_line->vendor = $item->vendor;
-            $new_line->price = $item->price;
-            $new_line->requires_shipping = $item->requires_shipping;
-            $new_line->taxable = $item->taxable;
-            $new_line->name = $item->name;
-            $new_line->properties = json_encode($item->properties, true);
-            $new_line->fulfillable_quantity = $item->fulfillable_quantity;
-            $new_line->fulfillment_status = $item->fulfillment_status;
-
-            $retailer_product = RetailerProduct::where('shopify_id', $item->product_id)->first();
-
-            if ($retailer_product != null) {
-                $new_line->fulfilled_by = $retailer_product->fulfilled_by;
-            } else {
-                $new_line->fulfilled_by = 'store';
-            }
-
-            if($retailer_product != null) {
-                $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
-                if ($related_variant != null) {
-                    $new_line->cost = $related_variant->cost;
-                    $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
-                } else {
-                    $new_line->cost = $retailer_product->cost;
-                    $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
-                }
-            }
-
-            $new_line->save();
-        }
-
-
-        $new->cost_to_pay = $cost_to_pay;
-        $new->save();
-
-dd('aass');
-
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
-
             if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
                 $new = new RetailerOrder();
                 $new->shopify_order_id = $order->id;
@@ -142,7 +85,6 @@ dd('aass');
 
                 $cost_to_pay = 0;
 
-
                 foreach ($order->line_items as $item) {
                     $new_line = new RetailerOrderLineItem();
                     $new_line->retailer_order_id = $new->id;
@@ -170,14 +112,17 @@ dd('aass');
                         $new_line->fulfilled_by = 'store';
                     }
 
-                    $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
-                    if ($related_variant != null) {
-                        $new_line->cost = $related_variant->cost;
-                        $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
-                    } else {
-                        $new_line->cost = $retailer_product->cost;
-                        $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
+                    if($retailer_product != null) {
+                        $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
+                        if ($related_variant != null) {
+                            $new_line->cost = $related_variant->cost;
+                            $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
+                        } else {
+                            $new_line->cost = $retailer_product->cost;
+                            $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
+                        }
                     }
+
                     $new_line->save();
                 }
 
