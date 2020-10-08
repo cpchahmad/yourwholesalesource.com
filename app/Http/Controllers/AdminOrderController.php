@@ -81,8 +81,8 @@ class AdminOrderController extends Controller
         $shop = $this->helper->getSpecificShop($order->shop_id);
         $response = $shop->api()->rest('GET', '/admin/orders/2835425722519.json');
 
-        $webhook = new WebhookController();
-        $webhook->createOrder($response->body->order, "capsule-wireless.myshopify.com");
+//        $webhook = new WebhookController();
+//        $webhook->createOrder($response->body->order, "capsule-wireless.myshopify.com");
 
         if ($order != null) {
             return view('orders.view')->with([
