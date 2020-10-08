@@ -88,12 +88,15 @@ class WebhookController extends Controller
                 foreach ($order->line_items as $item) {
                     $new_line = RetailerOrderLineItem::where([
                         'retailer_order_id' => $new->id,
-                        'retailer_product_variant_id' => $item->id,
-                        'shopify_variant_id' => $item->variant_id
+                        'shopify_variant_id' => $item->variant_id,
+                        'shopify_product_id' => $item->product_id
                     ])->first();
+
                     if($new_line === null) {
                         $new_line = new RetailerOrderLineItem();
                     }
+
+                    array_push($all, $new_line);
 
                     $new_line->retailer_order_id = $new->id;
                     $new_line->retailer_product_variant_id = $item->id;
@@ -240,5 +243,6 @@ class WebhookController extends Controller
 
             }
         }
+        dd($all);
     }
 }
