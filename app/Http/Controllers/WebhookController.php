@@ -27,62 +27,6 @@ class WebhookController extends Controller
             array_push($product_ids, $item->product_id);
         }
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
-
-            $cost_to_pay = 0;
-
-            $new = RetailerOrder::where('shopify_order_id', $order->id)->first();
-            foreach ($order->line_items as $item) {
-                $new_line = RetailerOrderLineItem::where([
-                    'retailer_order_id' => $new->id,
-                    'shopify_variant_id' => $item->variant_id,
-                    'shopify_product_id' => $item->product_id
-                ])->first();
-
-                if($new_line === null) {
-                    $new_line = new RetailerOrderLineItem();
-                }
-
-                array_push($all, $new_line);
-
-                $new_line->retailer_order_id = $new->id;
-                $new_line->retailer_product_variant_id = $item->id;
-                $new_line->shopify_product_id = $item->product_id;
-                $new_line->shopify_variant_id = $item->variant_id;
-                $new_line->title = $item->title;
-                $new_line->quantity = $item->quantity;
-                $new_line->sku = $item->sku;
-                $new_line->variant_title = $item->variant_title;
-                $new_line->title = $item->title;
-                $new_line->vendor = $item->vendor;
-                $new_line->price = $item->price;
-                $new_line->requires_shipping = $item->requires_shipping;
-                $new_line->taxable = $item->taxable;
-                $new_line->name = $item->name;
-                $new_line->properties = json_encode($item->properties, true);
-                $new_line->fulfillable_quantity = $item->fulfillable_quantity;
-                $new_line->fulfillment_status = $item->fulfillment_status;
-
-                $retailer_product = RetailerProduct::where('shopify_id', $item->product_id)->first();
-                if ($retailer_product != null) {
-                    $new_line->fulfilled_by = $retailer_product->fulfilled_by;
-                } else {
-                    $new_line->fulfilled_by = 'store';
-                }
-
-                if($retailer_product != null) {
-                    $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
-                    if ($related_variant != null) {
-                        $new_line->cost = $related_variant->cost;
-                        $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
-                    } else {
-                        $new_line->cost = $retailer_product->cost;
-                        $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
-                    }
-                }
-
-                $new_line->save();
-            }
-dd('');
             if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
                 $new = new RetailerOrder();
                 $new->shopify_order_id = $order->id;
