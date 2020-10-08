@@ -53,6 +53,7 @@ class WebhookController extends Controller
             $new_line->fulfillment_status = $item->fulfillment_status;
 
             $retailer_product = RetailerProduct::where('shopify_id', $item->product_id)->first();
+
             if ($retailer_product != null) {
                 $new_line->fulfilled_by = $retailer_product->fulfilled_by;
             } else {
@@ -60,6 +61,9 @@ class WebhookController extends Controller
             }
 
             $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
+
+            print_r($related_variant, $retailer_product);
+
             if ($related_variant != null) {
                 $new_line->cost = $related_variant->cost;
                 $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
@@ -73,7 +77,7 @@ class WebhookController extends Controller
         $new->cost_to_pay = $cost_to_pay;
         $new->save();
 
-        dd("done");
+//        dd("done");
 
 
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
