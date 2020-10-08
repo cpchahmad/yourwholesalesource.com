@@ -20,9 +20,8 @@ class WebhookController extends Controller
     public function createOrder($order, $shop)
     {
 
-        $shop = Shop::where('shopify_domain', $shop)->first();
 
-        dd(123);
+        dd($shop);
         $product_ids = [];
         $variant_ids = [];
         foreach ($order->line_items as $item) {
