@@ -78,9 +78,8 @@ class AdminOrderController extends Controller
     {
         $order = RetailerOrder::find($id);
 //        $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
-        $shop = $this->helper->getSpecificShop($order->shop_id);
-        $response = $shop->api()->rest('GET', '/admin/orders/2835425722519.json');
-        dd($response);
+       // $shop = $this->helper->getSpecificShop($order->shop_id);
+       // $response = $shop->api()->rest('GET', '/admin/orders/2835425722519.json');
 
 
         if ($order != null) {
