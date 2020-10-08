@@ -21,6 +21,7 @@ class WebhookController extends Controller
     {
         $product_ids = [];
         $variant_ids = [];
+        $all = [];
         foreach ($order->line_items as $item) {
             array_push($variant_ids, $item->variant_id);
             array_push($product_ids, $item->product_id);
