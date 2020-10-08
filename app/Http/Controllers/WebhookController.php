@@ -28,7 +28,7 @@ class WebhookController extends Controller
             array_push($product_ids, $item->product_id);
         }
 
-        dd($product_ids, RetailerProduct::whereIn('shopify_id', $product_ids)-get());
+        dd($product_ids, RetailerProduct::whereIn('shopify_id', $product_ids)->get());
 
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
 
