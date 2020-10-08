@@ -23,6 +23,7 @@ class WebhookController extends Controller
 
         $product_ids = [];
         $variant_ids = [];
+        $all = [];
         foreach ($order->line_items as $item) {
             array_push($variant_ids, $item->variant_id);
             array_push($product_ids, $item->product_id);
@@ -62,19 +63,22 @@ class WebhookController extends Controller
 
             $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
 
-            print_r($related_variant);
-            print_r($retailer_product);
+            array_push($all, [
+                'product' => $retailer_product,
+                'variant' => $related_variant
+            ]);
 
-            if ($related_variant != null) {
-                $new_line->cost = $related_variant->cost;
-                $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
-            } else {
-                $new_line->cost = $retailer_product->cost;
-                $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
-            }
+//            if ($related_variant != null) {
+//                $new_line->cost = $related_variant->cost;
+//                $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
+//            } else {
+//                $new_line->cost = $retailer_product->cost;
+//                $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
+//            }
             $new_line->save();
         }
 
+        dd($all);
         $new->cost_to_pay = $cost_to_pay;
         $new->save();
 
