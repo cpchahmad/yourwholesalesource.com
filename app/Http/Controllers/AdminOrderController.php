@@ -78,12 +78,6 @@ class AdminOrderController extends Controller
     {
         $order = RetailerOrder::find($id);
 //        $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
-        $shop = $this->helper->getSpecificShop($order->shop_id);
-        $response = $shop->api()->rest('GET', '/admin/orders/2835425722519.json');
-
-        $webhook = new WebhookController();
-        $webhook->createOrder($response->body->order, "capsule-wireless.myshopify.com");
-
         if ($order != null) {
             return view('orders.view')->with([
                 'order' => $order
