@@ -91,6 +91,7 @@
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($item->linked_variant != null)
+                                                    <p>asdf</p>
                                                     <img class="img-avatar"
                                                          @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                          @else @if($item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
@@ -113,6 +114,7 @@
                                                              src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                     @endif
                                                 @endif
+
                                             @else
                                                 @if($item->linked_real_variant != null)
                                                     <img class="img-avatar"
@@ -139,6 +141,8 @@
                                                 @endif
                                             @endif
                                         </td>
+
+
                                         <td style="width: 30%">
                                             {{$item->name}}
 
