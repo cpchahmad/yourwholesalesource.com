@@ -62,7 +62,8 @@ class WebhookController extends Controller
 
             $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
 
-            print_r($related_variant, $retailer_product);
+            print_r($related_variant);
+            print_r($retailer_product);
 
             if ($related_variant != null) {
                 $new_line->cost = $related_variant->cost;
