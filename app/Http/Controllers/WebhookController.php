@@ -28,8 +28,10 @@ class WebhookController extends Controller
             array_push($product_ids, $item->product_id);
         }
 
-        dd($product_ids);
+        dd($product_ids, RetailerProduct::whereIn('shopify_id', $product_ids)-get());
+
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
+
             if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
                 $new = new RetailerOrder();
                 $new->shopify_order_id = $order->id;
@@ -88,6 +90,7 @@ class WebhookController extends Controller
                 $new->save();
 
                 $cost_to_pay = 0;
+
 
                 foreach ($order->line_items as $item) {
                     $new_line = new RetailerOrderLineItem();
