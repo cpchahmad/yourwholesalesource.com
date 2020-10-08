@@ -61,29 +61,25 @@ class WebhookController extends Controller
                 $new_line->fulfilled_by = 'store';
             }
 
-            $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
+            if($retailer_product != null) {
+                $related_variant = RetailerProductVariant::where('shopify_id', $item->variant_id)->first();
+                if ($related_variant != null) {
+                    $new_line->cost = $related_variant->cost;
+                    $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
+                } else {
+                    $new_line->cost = $retailer_product->cost;
+                    $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
+                }
+            }
 
-            array_push($all, [
-                'product' => $retailer_product,
-                'variant' => $related_variant
-            ]);
-
-//            if ($related_variant != null) {
-//                $new_line->cost = $related_variant->cost;
-//                $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
-//            } else {
-//                $new_line->cost = $retailer_product->cost;
-//                $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
-//            }
             $new_line->save();
         }
 
-        dd($all);
+
         $new->cost_to_pay = $cost_to_pay;
         $new->save();
 
-//        dd("done");
-
+dd('aass');
 
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
 
