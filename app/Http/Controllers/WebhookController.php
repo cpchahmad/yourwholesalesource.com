@@ -21,7 +21,7 @@ class WebhookController extends Controller
     {
 
 
-        dd($shop);
+        dd($order);
         $product_ids = [];
         $variant_ids = [];
         foreach ($order->line_items as $item) {
