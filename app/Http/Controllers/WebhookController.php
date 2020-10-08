@@ -28,7 +28,7 @@ class WebhookController extends Controller
             array_push($product_ids, $item->product_id);
         }
 
-        dd($product_ids, RetailerProduct::whereIn('shopify_id', $product_ids)->get());
+       // dd($product_ids, RetailerProduct::whereIn('shopify_id', $product_ids)->get());
 
         if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
 
@@ -87,12 +87,13 @@ class WebhookController extends Controller
 
                 $new->fulfilled_by = 'fantasy';
                 $new->sync_status = 1;
-                $new->save();
+                //$new->save();
 
                 $cost_to_pay = 0;
 
 
                 foreach ($order->line_items as $item) {
+                    dd($order->line_items);
                     $new_line = new RetailerOrderLineItem();
                     $new_line->retailer_order_id = $new->id;
                     $new_line->retailer_product_variant_id = $item->id;
