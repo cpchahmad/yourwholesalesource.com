@@ -97,6 +97,7 @@ class WebhookController extends Controller
                         $new_line = new RetailerOrderLineItem();
                     }
 
+                    array_push($all, $new_line);
 
                     $new_line->retailer_order_id = $new->id;
                     $new_line->retailer_product_variant_id = $item->id;
