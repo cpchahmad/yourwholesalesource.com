@@ -95,11 +95,9 @@
                                                     <img class="img-avatar"
                                                          @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                          @else @if($item->linked_variant->has_image->isV == 1)
-                                                                    @if({{$item->linked_variant->has_image->image}})
-                                                                    @else
-                                                                    @endif
-                                                                    src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}"
-                                                               @else src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
+                                                                src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}"
+                                                               @else
+                                                                src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
                                                                @endif
                                                          @endif alt="">
                                                 @else
