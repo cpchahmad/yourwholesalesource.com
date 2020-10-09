@@ -131,7 +131,6 @@ class OrdersCreateJob implements ShouldQueue
                 $cost_to_pay = 0;
 
                 foreach ($order->line_items as $item){
-
                     $new_line = new RetailerOrderLineItem();
                     $new_line->retailer_order_id = $new->id;
                     $new_line->retailer_product_variant_id = $item->id;
@@ -159,18 +158,15 @@ class OrdersCreateJob implements ShouldQueue
                         $new_line->fulfilled_by = 'store';
                     }
 
-                    if($retailer_product != null) {
-                        $related_variant =  RetailerProductVariant::where('shopify_id',$item->variant_id)->first();
-                        if($related_variant != null){
-                            $new_line->cost = $related_variant->cost;
-                            $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
-                        }
-                        else{
-                            $new_line->cost = $retailer_product->cost;
-                            $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
-                        }
+                    $related_variant =  RetailerProductVariant::where('shopify_id',$item->variant_id)->first();
+                    if($related_variant != null){
+                        $new_line->cost = $related_variant->cost;
+                        $cost_to_pay = $cost_to_pay + $related_variant->cost * $item->quantity;
                     }
-
+                    else{
+                        $new_line->cost = $retailer_product->cost;
+                        $cost_to_pay = $cost_to_pay + $retailer_product->cost * $item->quantity;
+                    }
                     $new_line->save();
                 }
 
