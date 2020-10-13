@@ -365,7 +365,7 @@ class OrderController extends Controller
                 $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by', ['Fantasy', 'AliExpress'])->sum('fulfillable_quantity');
             }
 
-            return view('single-store.orders.bulk-fulfillment')->with([
+            return view('single-store.orders.bulk-payment')->with([
                 'orders' => $orders,
                 'total_quantity' => $total_quantity,
                 'fulfillable_quantity' => $fulfillable_quantity
