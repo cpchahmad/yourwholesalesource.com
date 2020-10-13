@@ -5,7 +5,7 @@
             @foreach($orders as $order)
                 <form class="col-md-12"  method="post">
                     @csrf
-                    <input type="hidden" value="{{ $order->id }}" name="order_ids">
+                    <input type="hidden" value="{{ $order->id }}" name="order_ids[]">
 
                     <div class="block">
                         <div class="block-header block-header-default">
