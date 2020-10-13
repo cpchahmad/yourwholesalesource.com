@@ -8,34 +8,36 @@
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
                                 {{$order->name}}
-                                @if($order->paid == '0')
-                                    <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
-                                @elseif($order->paid == '1')
-                                    <span class="badge badge-success" style="font-size: small"> Paid </span>
-                                @elseif($order->paid == '2')
-                                    <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
-                                @endif
-
-                                @if($order->status == 'Paid')
-                                    <span class="badge badge-warning" style="font-size: small"> Unfulfilled</span>
-                                @elseif($order->status == 'unfulfilled')
-                                    <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
-                                @elseif($order->status == 'partially-shipped')
-                                    <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
-                                @elseif($order->status == 'shipped')
-                                    <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
-                                @elseif($order->status == 'delivered')
-                                    <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
-                                @elseif($order->status == 'completed')
-                                    <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
-                                @elseif($order->status == 'new')
-                                    <span class="badge badge-warning" style="font-size: small"> Draft </span>
-                                @elseif($order->status == 'cancelled')
-                                    <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
-                                @else
-                                    <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
-                                @endif
                             </h3>
+
+                            @if($order->paid == '0')
+                                <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
+                            @elseif($order->paid == '1')
+                                <span class="badge badge-success" style="font-size: small"> Paid </span>
+                            @elseif($order->paid == '2')
+                                <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
+                            @endif
+
+                            @if($order->status == 'Paid')
+                                <span class="badge badge-warning" style="font-size: small"> Unfulfilled</span>
+                            @elseif($order->status == 'unfulfilled')
+                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
+                            @elseif($order->status == 'partially-shipped')
+                                <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
+                            @elseif($order->status == 'shipped')
+                                <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
+                            @elseif($order->status == 'delivered')
+                                <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
+                            @elseif($order->status == 'completed')
+                                <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
+                            @elseif($order->status == 'new')
+                                <span class="badge badge-warning" style="font-size: small"> Draft </span>
+                            @elseif($order->status == 'cancelled')
+                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
+                            @else
+                                <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
+                            @endif
+
                         </div>
                         <div class="block-content">
                             <table class="table table-hover table-borderless table-striped table-vcenter">
@@ -143,9 +145,7 @@
                     </div>
                 </form>
             @endforeach
-            <div class="col-md-8">
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
@@ -153,14 +153,48 @@
                         </h3>
                     </div>
                     <div class="block-content">
-                        <p>Fulfilling From WeFullFill Logistics Office</p>
-                        <p class="font-weight-bold"><span class="fulfillable_quantity_drop badge badge-pill badge-dark" data-total="{{$fulfillable_quantity}}" style="font-size: 13px">{{$fulfillable_quantity}} of {{$fulfillable_quantity}} </span> Mark as Fulfilled</p>
-                        <hr>
-                        <div class="row mb2">
-                            <div class="col-md-12">
-                                <button class="btn bulk_fulfill_items_btn btn-block btn-primary" data-redirect="{{route('admin.orders')}}"> Fulfill Items</button>
-                            </div>
-                        </div>
+                        <table class="table table-borderless table-vcenter">
+                            <thead>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Subtotal ({{count($order->line_items)}} items)
+                                </td>
+                                <td align="right">
+                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Shipping Price
+                                </td>
+                                <td align="right">
+                                    {{number_format($order->shipping_price,2)}} USD
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Total Cost @if($order->paid == 0) to Pay @endif
+                                </td>
+                                <td align="right">
+                                    {{number_format($order->cost_to_pay,2)}} USD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td align="right">
+                                    @if($order->paid == 0)
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                    @endif
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+
+                        </table>
 
                     </div>
                 </div>
