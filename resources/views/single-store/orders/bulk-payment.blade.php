@@ -112,27 +112,35 @@
                                                 $shipping = json_decode($order->shipping_address)
                                             @endphp
                                             <td>
-                                                <p style="font-size: 14px">{{$billing->first_name}} {{$billing->last_name}} <br> {{$billing->company}}
-                                                    <br> {{$billing->address1}}
-                                                    <br> {{$billing->address2}}
-                                                    <br> {{$billing->city}}
-                                                    <br> {{$billing->province}} {{$billing->zip}}
-                                                    <br> {{$billing->country}}
-                                                    <br> {{$billing->phone}}
-                                                </p>
+                                                @if(!(is_null($billing)))
+                                                    <p style="font-size: 14px">{{$billing->first_name}} {{$billing->last_name}} <br> {{$billing->company}}
+                                                        <br> {{$billing->address1}}
+                                                        <br> {{$billing->address2}}
+                                                        <br> {{$billing->city}}
+                                                        <br> {{$billing->province}} {{$billing->zip}}
+                                                        <br> {{$billing->country}}
+                                                        <br> {{$billing->phone}}
+                                                    </p>
+                                                @else
+                                                    <p>Not Provided!</p>
+                                                @endif
                                             </td>
                                             <td>
-                                                <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
-                                                    <br> {{$shipping->company}}
-                                                    <br> {{$shipping->address1}}
-                                                    <br> {{$shipping->address2}}
-                                                    <br> {{$shipping->city}}
-                                                    <br> {{$shipping->province}} {{$shipping->zip}}
-                                                    <br> {{$shipping->country}}
-                                                    @if(isset($shipping->phone))
-                                                        <br>{{$shipping->phone}}
-                                                    @endif
-                                                </p>
+                                                @if(!(is_null($billing)))
+                                                    <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
+                                                        <br> {{$shipping->company}}
+                                                        <br> {{$shipping->address1}}
+                                                        <br> {{$shipping->address2}}
+                                                        <br> {{$shipping->city}}
+                                                        <br> {{$shipping->province}} {{$shipping->zip}}
+                                                        <br> {{$shipping->country}}
+                                                        @if(isset($shipping->phone))
+                                                            <br>{{$shipping->phone}}
+                                                        @endif
+                                                    </p>
+                                                @else
+                                                    <p>Not Provided!</p>
+                                                @endif
                                             </td>
 
                                         </tr>
