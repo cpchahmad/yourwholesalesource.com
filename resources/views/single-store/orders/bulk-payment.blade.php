@@ -198,7 +198,7 @@
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
                                 <button class="btn btn-success paypal-pay-button"
                                         data-toggle="modal" data-target="#paypal_pay_trigger"
-                                        data-href="{{route('users.orders.bulk.paypal',$file->id)}}"
+                                        data-href="{{route('users.orders.bulk.paypal',12)}}"
                                         data-percentage="{{$settings->paypal_percentage}}"
                                         data-fee="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}"
                                         data-subtotal="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}"
@@ -334,10 +334,10 @@
     </div>
 
     <div class="ajax_paypal_form_submit" style="display: none;">
-        <form action="{{ route('users.orders.bulk.paypal', $file->id) }}"
+        <form action="{{ route('users.orders.bulk.paypal', 2) }}"
               method="POST">
             {{ csrf_field() }}
-            <input type="hidden" name="id" value="{{ $file->id }}">
+            <input type="hidden" name="id" value="{{ 2 }}">
             <textarea name="response"></textarea>
         </form>
     </div>
