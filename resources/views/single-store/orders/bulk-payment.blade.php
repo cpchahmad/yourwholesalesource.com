@@ -3,7 +3,7 @@
     <div class="content">
         <div class="row bulk-forms">
             @foreach($orders as $order)
-                <form class="col-md-12" action="{{route('store.order.wallet.pay.bulk')}}" method="post">
+                <form class="col-md-12"  method="post">
                     @csrf
                     <input type="hidden" value="{{ $order->id }}" name="order_ids">
 
@@ -186,7 +186,7 @@
                             <tr>
                                 <td></td>
                                 <td align="right">
-                                        <button class="btn btn-success wallet-pay-button" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay.bulk')}}" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
                                 </td>
                             </tr>
 
