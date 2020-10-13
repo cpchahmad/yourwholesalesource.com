@@ -159,7 +159,7 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    Subtotal ({{$line_items}} items)
+                                    Subtotal ({{$line_items_count}} items)
                                 </td>
                                 <td align="right">
                                     {{number_format($cost_to_pay - $shipping_price,2)}} USD
