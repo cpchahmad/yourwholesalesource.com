@@ -3,7 +3,10 @@
     <div class="content">
         <div class="row bulk-forms">
             @foreach($orders as $order)
-                <form class="fulfilment_process_form col-md-12" action="{{route('admin.order.fulfillment.process',$order->id)}}" method="post">
+                <form class="col-md-12" action="{{route('store.order.wallet.pay.bulk')}}" method="post">
+                    @csrf
+                    <input type="hidden" value="{{ $order->id }}" name="order_ids">
+
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
@@ -37,7 +40,6 @@
                             @else
                                 <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
                             @endif
-
                         </div>
                         <div class="block-content">
                             <table class="table table-hover table-borderless table-striped table-vcenter">
@@ -143,9 +145,8 @@
                             </table>
                         </div>
                     </div>
-                </form>
             @endforeach
-            <div class="col-md-12">
+                    <div class="col-md-12">
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
@@ -159,7 +160,7 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    Subtotal ({{$line_items_count}} items)
+                                    Subtotal
                                 </td>
                                 <td align="right">
                                     {{number_format($cost_to_pay - $shipping_price,2)}} USD
@@ -185,7 +186,7 @@
                             <tr>
                                 <td></td>
                                 <td align="right">
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
                                 </td>
                             </tr>
 
@@ -197,9 +198,10 @@
                     </div>
                 </div>
             </div>
-
+                </form>
         </div>
     </div>
+
 
 
 @endsection

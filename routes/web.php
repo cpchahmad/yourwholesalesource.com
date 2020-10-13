@@ -268,6 +268,7 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
         Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
         Route::get('/pay-through-wallet/{id}', 'WalletController@order_payment_by_wallet')->name('store.order.wallet.pay');
+        Route::post('/pay-bulk-through-wallet', 'WalletController@order_bulk_payment_by_wallet')->name('store.order.wallet.pay.bulk');
         Route::get('/pay-through-paypal/{id}', 'PaypalController@paypal_order_payment')->name('store.order.paypal.pay');
         Route::get('/pay-through-paypal/{id}/cancel', 'PaypalController@paypal_payment_cancel')->name('store.order.paypal.pay.cancel');
         Route::any('/pay-through-paypal/{id}/success', 'PaypalController@paypal_payment_success')->name('store.order.paypal.pay.success');

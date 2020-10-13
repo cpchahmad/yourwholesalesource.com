@@ -344,6 +344,10 @@ class WalletController extends Controller
         }
     }
 
+    public function order_bulk_payment_by_wallet(Request $request) {
+        dd($request->all());
+    }
+
     public function paypal_topup_payment(Request $request)
     {
         $wallet = Wallet::find($request->id);

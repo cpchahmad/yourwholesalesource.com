@@ -358,14 +358,12 @@ class OrderController extends Controller
                 $q->where('fulfillable_quantity', '>', 0);
             });
             $orders = $orders->get();
-            $line_items_count = 0;
             $shipping_price = $orders->sum('shipping_price');
             $cost_to_pay = $orders->sum('cost_to_pay');
 
 
             return view('single-store.orders.bulk-payment')->with([
                 'orders' => $orders,
-                'line_items_count' => $line_items_count,
                 'shipping_price' => $shipping_price,
                 'cost_to_pay' => $cost_to_pay,
             ]);
