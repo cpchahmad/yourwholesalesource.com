@@ -159,7 +159,7 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    Subtotal ({{count($line_items)}} items)
+                                    Subtotal ({{$line_items}} items)
                                 </td>
                                 <td align="right">
                                     {{number_format($cost_to_pay - $shipping_price,2)}} USD
@@ -185,7 +185,7 @@
                             <tr>
                                 <td></td>
                                 <td align="right">
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button cl$ass="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
                                 </td>
                             </tr>
 
