@@ -257,7 +257,6 @@
 
 
                         </table>
-
                     </div>
                 </div>
                 @if($order->checkStoreItem($order) > 0)
@@ -302,7 +301,6 @@
                                 </tbody>
 
                             </table>
-
                         </div>
                     </div>
                 @endif

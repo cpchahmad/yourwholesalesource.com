@@ -7,26 +7,52 @@
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
-                                {{$order->name}}'s Fulfillment
+                                {{$order->name}}
+                                @if($order->paid == '0')
+                                    <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
+                                @elseif($order->paid == '1')
+                                    <span class="badge badge-success" style="font-size: small"> Paid </span>
+                                @elseif($order->paid == '2')
+                                    <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
+                                @endif
+
+                                @if($order->status == 'Paid')
+                                    <span class="badge badge-warning" style="font-size: small"> Unfulfilled</span>
+                                @elseif($order->status == 'unfulfilled')
+                                    <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
+                                @elseif($order->status == 'partially-shipped')
+                                    <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
+                                @elseif($order->status == 'shipped')
+                                    <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
+                                @elseif($order->status == 'delivered')
+                                    <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
+                                @elseif($order->status == 'completed')
+                                    <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
+                                @elseif($order->status == 'new')
+                                    <span class="badge badge-warning" style="font-size: small"> Draft </span>
+                                @elseif($order->status == 'cancelled')
+                                    <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
+                                @else
+                                    <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
+                                @endif
                             </h3>
                         </div>
                         <div class="block-content">
-                            <p class="atleast-one-item alert alert-warning" style="display: none"> <i class="fa fa-exclamation-circle"></i> You need to fulfill at least 1 item.</p>
-                            <table class="table table-borderless table-striped table-vcenter">
+                            <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Items</th>
-                                    <th>Price</th>
-                                    <th style="width: 25%">Quantity</th>
+                                    <th style="width: 10%">Name</th>
+                                    <th>Fulfilled By</th>
+                                    <th>Cost</th>
+                                    <th>Price X Quantity</th>
+                                    <th>Status</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-
-                                @csrf
                                 @foreach($order->line_items as $item)
-                                    @if($item->fulfilled_by != 'store' && $item->fulfillable_quantity > 0)
+                                    @if($item->fulfilled_by != 'store')
                                         <tr>
                                             <td>
                                                 @if($order->custom == 0)
@@ -80,21 +106,29 @@
                                                 @endif
                                             </td>
                                             <td style="width: 30%">
-                                                <p>{{$item->name}} <br> <span class="text-muted">SKU : {{$item->sku}}</span></p>
+                                                {{$item->name}}
+
                                             </td>
-                                            <td>  {{number_format($item->cost,2)}} USD</td>
                                             <td>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <input type="hidden" name="item_id[]" value="{{$item->id}}">
-                                                        <input type="number" class="form-control fulfill_quantity" min="0" max="{{$item->fulfillable_quantity}}" name="item_fulfill_quantity[]" value="{{$item->fulfillable_quantity}}">
-                                                        <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    of {{$item->fulfillable_quantity}}
-                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                @if($item->fulfilled_by == 'store')
+                                                    <span class="badge badge-danger"> Store</span>
+                                                @elseif ($item->fulfilled_by == 'Fantasy')
+                                                    <span class="badge badge-success"> WeFullFill </span>
+                                                @else
+                                                    <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                                @endif
+                                            </td>
+
+                                            <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
+                                            <td>{{$item->price}} X {{$item->quantity}}  USD </td>
+                                            <td>
+                                                @if($item->fulfillment_status == null)
+                                                    <span class="badge badge-warning"> Unfulfilled</span>
+                                                @elseif($item->fulfillment_status == 'partially-fulfilled')
+                                                    <span class="badge badge-danger"> Partially Fulfilled</span>
+                                                @else
+                                                    <span class="badge badge-success"> Fulfilled</span>
+                                                @endif
                                             </td>
 
                                         </tr>
@@ -103,8 +137,8 @@
 
                                 </tbody>
 
-                            </table>
 
+                            </table>
                         </div>
                     </div>
                 </form>
