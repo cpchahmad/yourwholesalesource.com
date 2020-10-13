@@ -202,71 +202,73 @@
                                         <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-popout" role="document">
                                                 <div class="modal-content">
-                                                    <div class="block block-themed block-transparent mb-0">
-                                                        <div class="block-header bg-primary-dark text-left">
-                                                            <h3 class="block-title">Payment for Orders</h3>
-                                                            <div class="block-options">
-                                                                <button type="button" class="btn-block-option">
-                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                                </button>
+                                                    <form action="{{ route('store.order.proceed.bulk.payment') }}" method="POST" class="bulk-card-form">
+                                                        @csrf
+                                                        <div class="block block-themed block-transparent mb-0">
+                                                            <div class="block-header bg-primary-dark text-left">
+                                                                <h3 class="block-title">Payment for Orders</h3>
+                                                                <div class="block-options">
+                                                                    <button type="button" class="btn-block-option">
+                                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
+
+
+                                                                <div class="block-content font-size-sm">
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-12 text-left">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Card Name</label>
+                                                                                <input  class="form-control" type="text" required=""  name="card_name"
+                                                                                        placeholder="Enter Card Title here">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-12 text-left">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Card Number</label>
+                                                                                <input type="text" required=""  name="card_number"  class="form-control js-card js-masked-enabled"
+                                                                                       placeholder="9999-9999-9999-9999">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-12 text-left">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Amount to Pay</label>
+                                                                                <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay,2)}} USD"  name="amount"
+                                                                                        placeholder="Enter 14 Digit Card Number here">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-12 text-left">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
+                                                                                <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                                                        placeholder="Enter 14 Digit Card Number here">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-12 text-left">
+                                                                            <div class="form-material">
+                                                                                <label for="material-error">Total Cost</label>
+                                                                                <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay+$cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                                                        placeholder="Enter 14 Digit Card Number here">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="block-content block-content-full text-right border-top">
+                                                                    <button type="button" class="btn btn-success bulk-card-btn">Proceed Payment</button>
+                                                                </div>
                                                         </div>
-                                                        <form action="{{ route('store.order.proceed.bulk.payment') }}" method="POST" class="bulk-card-form">
-                                                            @csrf
-                                                            <div class="block-content font-size-sm">
-                                                                <div class="form-group">
-                                                                    <div class="col-sm-12 text-left">
-                                                                        <div class="form-material">
-                                                                            <label for="material-error">Card Name</label>
-                                                                            <input  class="form-control" type="text" required=""  name="card_name"
-                                                                                    placeholder="Enter Card Title here">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="col-sm-12 text-left">
-                                                                        <div class="form-material">
-                                                                            <label for="material-error">Card Number</label>
-                                                                            <input type="text" required=""  name="card_number"  class="form-control js-card js-masked-enabled"
-                                                                                   placeholder="9999-9999-9999-9999">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="col-sm-12 text-left">
-                                                                        <div class="form-material">
-                                                                            <label for="material-error">Amount to Pay</label>
-                                                                            <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay,2)}} USD"  name="amount"
-                                                                                    placeholder="Enter 14 Digit Card Number here">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="col-sm-12 text-left">
-                                                                        <div class="form-material">
-                                                                            <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
-                                                                            <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
-                                                                                    placeholder="Enter 14 Digit Card Number here">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <div class="col-sm-12 text-left">
-                                                                        <div class="form-material">
-                                                                            <label for="material-error">Total Cost</label>
-                                                                            <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay+$cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
-                                                                                    placeholder="Enter 14 Digit Card Number here">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="block-content block-content-full text-right border-top">
-                                                                <button type="button" class="btn btn-success bulk-card-btn">Proceed Payment</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
