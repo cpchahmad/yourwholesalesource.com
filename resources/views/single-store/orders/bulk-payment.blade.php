@@ -263,7 +263,7 @@
                                                             </div>
 
                                                             <div class="block-content block-content-full text-right border-top">
-                                                                <button type="button" class="btn btn-success bulk-card-btn" >Proceed Payment</button>
+                                                                <button type="button" class="btn btn-success bulk-card-btn">Proceed Payment</button>
                                                             </div>
                                                         </form>
                                                     </div>
