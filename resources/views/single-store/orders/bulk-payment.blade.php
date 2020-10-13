@@ -266,6 +266,7 @@
                                         <label for="material-error">Card Name</label>
                                         <input  class="form-control" type="text" required=""  name="card_name"
                                                 placeholder="Enter Card Title here">
+                                        <input type="hidden" name="order_ids" value="{{ $orders }}">
                                     </div>
                                 </div>
                             </div>
