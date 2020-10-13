@@ -575,6 +575,10 @@ $(document).ready(function () {
         });
     });
 
+    $('body').on('click', '.bulk-card-btn', function () {
+        $('bulk-card-form').submit();
+    });
+
     $('body').on('click','.calculate_shipping_btn',function () {
         var button = $(this);
         $.ajax({
