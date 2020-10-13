@@ -381,7 +381,44 @@ class OrderController extends Controller
         $orders = json_decode($request->order_ids);
 
         foreach ($orders as $order) {
-            dd($order->id);
+            $settings = AdminSetting::all()->first();
+            if ($order != null && $order->paid == 0) {
+                $last_four = substr($request->input('card_number'), 0, 3);
+                $new_transaction = new OrderTransaction();
+                $new_transaction->note = $request->input('note');
+                $new_transaction->amount = $order->cost_to_pay + ($order->cost_to_pay * $settings->payment_charge_percentage / 100);
+                $new_transaction->name = $request->input('card_name');
+                $new_transaction->card_last_four = $last_four;
+                $new_transaction->retailer_order_id = $order->id;
+                $new_transaction->user_id = $order->user_id;
+                $new_transaction->shop_id = $order->shop_id;
+                $new_transaction->save();
+
+                $order->paid = 1;
+                if (count($order->fulfillments) > 0) {
+                    $order->status = $order->getStatus($order);
+
+                } else {
+                    $order->status = 'Paid';
+                }
+
+                $order->save();
+
+                /*Maintaining Log*/
+                $order_log = new OrderLog();
+                $order_log->message = "An amount of " . $new_transaction->amount . " USD paid to WeFullFill on " . date_create($new_transaction->created_at)->format('d M, Y h:i a') . " for further process";
+                $order_log->status = "paid";
+                $order_log->retailer_order_id = $order->id;
+                $order_log->save();
+                $this->admin->sync_order_to_admin_store($order);
+
+//            $this->inventory->OrderQuantityUpdate($order,'new');
+
+                return redirect(route('store.orders'))->with('success', 'Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+            }
+            else {
+                return redirect()->back();
+            }
         }
     }
 
