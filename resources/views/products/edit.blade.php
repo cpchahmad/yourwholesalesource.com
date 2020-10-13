@@ -760,11 +760,11 @@
                             <div class="block-content">
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if($product->global == 1) checked="" @endif>
+                                        <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if($product->global == 1) checked="" @endif>
                                         <label class="custom-control-label " for="prefer-global">Global</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if($product->global == 0) checked="" @endif>
+                                        <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if($product->global == 0) checked="" @endif>
                                         <label class="custom-control-label" for="prefer-store">Selected Stores</label>
                                     </div>
                                 </div>
