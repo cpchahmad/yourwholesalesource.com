@@ -358,7 +358,7 @@ class OrderController extends Controller
                 $q->where('fulfillable_quantity', '>', 0);
             });
             $orders = $orders->get();
-            $line_items = $orders->line_items->count();
+            $line_items = 0;
             $shipping_price = $orders->sum('shipping_price');
             $cost_to_pay = $orders->sum('cost_to_pay');
 
