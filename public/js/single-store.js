@@ -576,6 +576,7 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.bulk-card-btn', function () {
+        console.log(234);
         $('bulk-card-form').submit();
     });
 
