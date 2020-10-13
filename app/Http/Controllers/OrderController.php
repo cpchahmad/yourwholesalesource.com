@@ -395,9 +395,10 @@ class OrderController extends Controller
                 $new_transaction->save();
 
                 $order->paid = 1;
+                dd($order->fulfillments);
+
                 if (count($order->fulfillments) > 0) {
                     $order->status = $order->getStatus($order);
-
                 } else {
                     $order->status = 'Paid';
                 }
