@@ -38,12 +38,12 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $shop = $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
-        $webhook = new WebhookController();
-        foreach ($response->body->orders as $order) {
-            $webhook->createOrder($order, $this->helper->getLocalShop()->shopify_domain);
-        }
-        dd('done..');
+//        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
+//        $webhook = new WebhookController();
+//        foreach ($response->body->orders as $order) {
+//            $webhook->createOrder($order, $this->helper->getLocalShop()->shopify_domain);
+//        }
+//        dd('done..');
 
         $orders = RetailerOrder::where('shop_id', $this->helper->getShop()->id)->where('custom', 0)->newQuery();
         if ($request->has('search')) {
