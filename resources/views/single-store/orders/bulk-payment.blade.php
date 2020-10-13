@@ -202,7 +202,7 @@
                                         <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-popout" role="document">
                                                 <div class="modal-content">
-                                                    <form action="{{ route('store.order.proceed.bulk.payment') }}" method="POST" class="bulk-card-form">
+                                                    <form  method="POST" class="bulk-card-submit">
                                                         @csrf
                                                         <div class="block block-themed block-transparent mb-0">
                                                             <div class="block-header bg-primary-dark text-left">
