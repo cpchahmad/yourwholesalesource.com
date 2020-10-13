@@ -423,7 +423,6 @@ class WalletController extends Controller
                     $this->admin->sync_order_to_admin_store($retailer_order);
 //                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
-                    return redirect(route('store.orders'))->with('success','Order Cost Deducted From Wallet Successfully!');
                 }
                 else{
                     return redirect(route('store.orders'))->with('error','Wallet Doesnot Have Required Amount!');
@@ -433,6 +432,8 @@ class WalletController extends Controller
                 return redirect(route('store.orders'))->with('error','Order Cost Already Paid!');
             }
         }
+        return redirect(route('store.orders'))->with('success','Order Cost Deducted From Wallet Successfully!');
+
     }
 
     public function paypal_topup_payment(Request $request)
