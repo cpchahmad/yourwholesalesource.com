@@ -378,7 +378,8 @@ class OrderController extends Controller
     }
 
     public function proceed_bulk_payment(Request $request) {
-        $orders = $request->order_ids;
+        $orders = json_decode($request->order_ids);
+        dd($orders);
         foreach ($orders as $order) {
             dd($order->id);
         }
