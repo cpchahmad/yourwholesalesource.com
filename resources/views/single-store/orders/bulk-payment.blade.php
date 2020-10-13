@@ -198,13 +198,15 @@
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
                                     <button type="button" class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
 
+                                    @if($order->paid == 0)
                                         <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-popout" role="document">
-                                                <form class="modal-content bulk-card-submit" method="POST">
+                                                <div class="modal-content">
+                                                    <form action="#" method="POST">
                                                         @csrf
                                                         <div class="block block-themed block-transparent mb-0">
                                                             <div class="block-header bg-primary-dark text-left">
-                                                                <h3 class="block-title">Payment</h3>
+                                                                <h3 class="block-title">Payment for Orders</h3>
                                                                 <div class="block-options">
                                                                     <button type="button" class="btn-block-option">
                                                                         <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
@@ -266,9 +268,11 @@
                                                                 <button type="button" class="btn btn-success bulk-card-btn">Proceed Payment</button>
                                                             </div>
                                                         </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
+                                    @endif
 
 
                                     <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
