@@ -211,7 +211,7 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <form action="{{route('store.order.proceed.bulk.payment')}}" method="post" class="text-left bulk-card-form">
+                                                        <form action="{{ route('store.order.proceed.bulk.payment') }}" method="POST" class="bulk-card-form">
                                                             @csrf
                                                             <div class="block-content font-size-sm">
                                                                 <div class="form-group">
