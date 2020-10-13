@@ -159,10 +159,10 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    Subtotal ({{count($order->line_items)}} items)
+                                    Subtotal ({{count($line_items)}} items)
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
+                                    {{number_format($cost_to_pay - $shipping_price,2)}} USD
                                 </td>
                             </tr>
                             <tr>
@@ -170,7 +170,7 @@
                                     Shipping Price
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->shipping_price,2)}} USD
+                                    {{number_format($shipping_price,2)}} USD
                                 </td>
                             </tr>
 
@@ -179,7 +179,7 @@
                                     Total Cost @if($order->paid == 0) to Pay @endif
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay,2)}} USD
+                                    {{number_format($cost_to_pay,2)}} USD
                                 </td>
                             </tr>
                             <tr>

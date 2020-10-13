@@ -358,17 +358,16 @@ class OrderController extends Controller
                 $q->where('fulfillable_quantity', '>', 0);
             });
             $orders = $orders->get();
-            $total_quantity = 0;
-            $fulfillable_quantity = 0;
-            foreach ($orders as $order) {
-                $total_quantity = $total_quantity + $order->line_items->whereIn('fulfilled_by', ['Fantasy', 'AliExpress'])->sum('quantity');
-                $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by', ['Fantasy', 'AliExpress'])->sum('fulfillable_quantity');
-            }
+            $line_items = $orders->sum(line_items);
+            $shipping_price = $orders->sum(shipping_price);
+            $cost_to_pay = $orders->sum(cost_to_pay);
+
 
             return view('single-store.orders.bulk-payment')->with([
                 'orders' => $orders,
-                'total_quantity' => $total_quantity,
-                'fulfillable_quantity' => $fulfillable_quantity
+                'line_items' => $line_items,
+                'shipping_price' => $shipping_price,
+                'cost_to_pay' => $cost_to_pay,
             ]);
 
         }
