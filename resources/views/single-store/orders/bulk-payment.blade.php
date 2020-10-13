@@ -1,12 +1,11 @@
 @extends('layout.single')
 @section('content')
     <div class="content">
-        <div class="row bulk-forms">
+        <form class="row bulk-forms bulk-payment-form" method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
+            @csrf
             @foreach($orders as $order)
-                <form class="col-md-12 bulk-payment-form"  method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
-                    @csrf
+                <div  class="col-md-12">
                     <input type="hidden" value="{{ $order->id }}" name="order_ids[]">
-
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
@@ -153,95 +152,95 @@
                             </table>
                         </div>
                     </div>
+                </div>
             @endforeach
-                    <div class="col-md-12">
-                <div class="block">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">
-                            Summary
-                        </h3>
-                    </div>
-                    <div class="block-content">
-                        <table class="table table-borderless table-vcenter">
-                            <thead>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    Subtotal
-                                </td>
-                                <td align="right">
-                                    {{number_format($cost_to_pay - $shipping_price,2)}} USD
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Shipping Price
-                                </td>
-                                <td align="right">
-                                    {{number_format($shipping_price,2)}} USD
-                                </td>
-                            </tr>
+                <div class="col-md-12">
+            <div class="block">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">
+                        Summary
+                    </h3>
+                </div>
+                <div class="block-content">
+                    <table class="table table-borderless table-vcenter">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                Subtotal
+                            </td>
+                            <td align="right">
+                                {{number_format($cost_to_pay - $shipping_price,2)}} USD
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Shipping Price
+                            </td>
+                            <td align="right">
+                                {{number_format($shipping_price,2)}} USD
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>
-                                    Total Cost  to Pay
-                                </td>
-                                <td align="right">
-                                    {{number_format($cost_to_pay,2)}} USD
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td align="right">
-                                    <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
-                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
-                                    <button type="button" class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                        <tr>
+                            <td>
+                                Total Cost  to Pay
+                            </td>
+                            <td align="right">
+                                {{number_format($cost_to_pay,2)}} USD
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td align="right">
+                                <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
+                                <button type="button" class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
 
-                                    <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="block block-rounded block-themed block-transparent mb-0">
-                                                    <div class="block-content cst_content_wrapper font-size-sm text-center">
-                                                        <h2>Are your sure?</h2>
-                                                        <div class="text-center"> <p>
-                                                                Subtotal: {{number_format($order->cost_to_pay,2)}} USD
-                                                                <br>
-                                                                WeFullFill Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}} USD
-                                                                <br>Total Cost : {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD</p>
-                                                        </div>
-                                                        <p> A amount of  {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
-
-                                                        <div class="paypal_btn_trigger">
-                                                            <div id="paypal-button-container"></div>
-                                                        </div>
-
+                                <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="block block-rounded block-themed block-transparent mb-0">
+                                                <div class="block-content cst_content_wrapper font-size-sm text-center">
+                                                    <h2>Are your sure?</h2>
+                                                    <div class="text-center"> <p>
+                                                            Subtotal: {{number_format($order->cost_to_pay,2)}} USD
+                                                            <br>
+                                                            WeFullFill Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}} USD
+                                                            <br>Total Cost : {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD</p>
                                                     </div>
-                                                    <div class="block-content block-content-full text-center border-top">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                                    <p> A amount of  {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
+
+                                                    <div class="paypal_btn_trigger">
+                                                        <div id="paypal-button-container"></div>
                                                     </div>
+
+                                                </div>
+                                                <div class="block-content block-content-full text-center border-top">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ajax_paypal_form_submit" style="display: none;">
-                                        <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="id" value="{{ $order->id }}">
-                                            <textarea name="response"></textarea>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                                <div class="ajax_paypal_form_submit" style="display: none;">
+                                    <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="id" value="{{ $order->id }}">
+                                        <textarea name="response"></textarea>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
 
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
 
-                    </div>
                 </div>
             </div>
-                </form>
         </div>
+        </form>
     </div>
 
     <div class="modal fade" id="payment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
