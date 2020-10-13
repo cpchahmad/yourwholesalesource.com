@@ -186,7 +186,7 @@
                             <tr>
                                 <td></td>
                                 <td align="right">
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay.bulk')}}" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button type="button" class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay.bulk')}}" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
                                 </td>
                             </tr>
 
