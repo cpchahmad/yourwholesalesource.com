@@ -552,6 +552,28 @@ $(document).ready(function () {
         });
     });
 
+    $('body').on('click','.bulk-wallet-pay-button',function () {
+        var button = $(this);
+        Swal.fire({
+            title: ' Are you sure?',
+            html:'<p> A amount of '+ $(this).data('pay') +' will be deducted through your wallet </p>',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Pay'
+        }).then((result) => {
+            $('.bulk-payment-form').submit();
+            if (result.value) {
+                Swal.fire(
+                    'Processing!',
+                    'Payment Processing Please Wait!',
+                    'success'
+                );
+            }
+        });
+    });
+
     $('body').on('click','.calculate_shipping_btn',function () {
         var button = $(this);
         $.ajax({
