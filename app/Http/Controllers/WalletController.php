@@ -345,7 +345,94 @@ class WalletController extends Controller
     }
 
     public function order_bulk_payment_by_wallet(Request $request) {
-        dd($request->all());
+        foreach ($request->order_ids as $id) {
+
+            $retailer_order = RetailerOrder::find($id);
+            if($retailer_order->paid == 0){
+                if (Auth::check()) {
+                    $user = Auth::user();
+                    if ($user->has_wallet == null) {
+                        return redirect()->back()->with('error','Wallet Does not Exist!');
+                    } else {
+                        $wallet = $user->has_wallet;
+                    }
+
+                } else {
+                    $shop = $this->helper->getLocalShop();
+                    if (count($shop->has_user) > 0) {
+                        if ($shop->has_user[0]->has_wallet == null) {
+                            return redirect()->back()->with('error','Wallet Does not Exist!');
+
+                        } else {
+                            $wallet = $shop->has_user[0]->has_wallet;
+                        }
+
+                    } else {
+                        return redirect()->back()->with('error','Wallet Does not Exist!');
+
+                    }
+                }
+                if($wallet->available >= $retailer_order->cost_to_pay){
+                    /*Wallet Deduction*/
+                    $wallet->available =   $wallet->available -  $retailer_order->cost_to_pay;
+                    $wallet->used =  $wallet->used + $retailer_order->cost_to_pay;
+                    $wallet->save();
+                    /*Maintaining Wallet Log*/
+                    $wallet_log = new WalletLog();
+                    $wallet_log->wallet_id =$wallet->id;
+                    $wallet_log->status = "Order Payment";
+                    $wallet_log->amount = $retailer_order->cost_to_pay;
+                    $wallet_log->message = 'An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
+                    $wallet_log->save();
+                    $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+
+                    /*Order Processing*/
+                    $new_transaction = new OrderTransaction();
+                    $new_transaction->amount =  $retailer_order->cost_to_pay;
+                    if($retailer_order->custom == 0){
+                        $new_transaction->name = $retailer_order->has_store->shopify_domain;
+                    }
+                    else{
+                        $new_transaction->name = Auth::user()->email;
+                    }
+
+                    $new_transaction->retailer_order_id = $retailer_order->id;
+                    $new_transaction->user_id = $retailer_order->user_id;
+                    $new_transaction->shop_id = $retailer_order->shop_id;
+                    $new_transaction->save();
+                    /*Changing Order Status*/
+                    $retailer_order->paid = 1;
+                    if(count($retailer_order->fulfillments) > 0){
+                        $retailer_order->status = $retailer_order->getStatus($retailer_order);
+
+                    }
+                    else{
+                        $retailer_order->status = 'Paid';
+                    }
+                    $retailer_order->pay_by = 'Wallet';
+                    $retailer_order->save();
+
+                    /*Maintaining Log*/
+                    $order_log =  new OrderLog();
+                    $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill through Wallet on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+                    $order_log->status = "paid";
+                    $order_log->retailer_order_id = $retailer_order->id;
+                    $order_log->save();
+
+
+                    $this->admin->sync_order_to_admin_store($retailer_order);
+//                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+
+                    return redirect(route('store.orders'))->with('success','Order Cost Deducted From Wallet Successfully!');
+                }
+                else{
+                    return redirect()->back()->with('error','Wallet Doesnot Have Required Amount!');
+                }
+            }
+            else{
+                return redirect()->back()->with('error','Order Cost Already Paid!');
+            }
+        }
     }
 
     public function paypal_topup_payment(Request $request)
