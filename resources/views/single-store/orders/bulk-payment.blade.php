@@ -204,7 +204,7 @@
                                                         @csrf
                                                         <div class="block block-themed block-transparent mb-0">
                                                             <div class="block-header bg-primary-dark text-left">
-                                                                <h3 class="block-title">Payment for Orders</h3>
+                                                                <h3 class="block-title">Payment</h3>
                                                                 <div class="block-options">
                                                                     <button type="button" class="btn-block-option">
                                                                         <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
