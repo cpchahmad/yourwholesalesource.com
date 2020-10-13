@@ -12,34 +12,6 @@
                             <h3 class="block-title">
                                 {{$order->name}}
                             </h3>
-
-                            @if($order->paid == '0')
-                                <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
-                            @elseif($order->paid == '1')
-                                <span class="badge badge-success" style="font-size: small"> Paid </span>
-                            @elseif($order->paid == '2')
-                                <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
-                            @endif
-
-                            @if($order->status == 'Paid')
-                                <span class="badge badge-warning" style="font-size: small"> Unfulfilled</span>
-                            @elseif($order->status == 'unfulfilled')
-                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'partially-shipped')
-                                <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'shipped')
-                                <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'delivered')
-                                <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'completed')
-                                <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'new')
-                                <span class="badge badge-warning" style="font-size: small"> Draft </span>
-                            @elseif($order->status == 'cancelled')
-                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
-                            @else
-                                <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
-                            @endif
                         </div>
                         <div class="block-content">
                             <table class="table table-hover table-borderless table-striped table-vcenter">
@@ -51,7 +23,8 @@
                                     <th>Cost</th>
                                     <th>Price X Quantity</th>
                                     <th>Status</th>
-
+                                    <th>Billing Address</th>
+                                    <th>Shipping Address</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -133,6 +106,33 @@
                                                 @else
                                                     <span class="badge badge-success"> Fulfilled</span>
                                                 @endif
+                                            </td>
+                                            @php
+                                                $billing = json_decode($order->billing_address);
+                                                $shipping = json_decode($order->shipping_address)
+                                            @endphp
+                                            <td>
+                                                <p style="font-size: 14px">{{$billing->first_name}} {{$billing->last_name}} <br> {{$billing->company}}
+                                                    <br> {{$billing->address1}}
+                                                    <br> {{$billing->address2}}
+                                                    <br> {{$billing->city}}
+                                                    <br> {{$billing->province}} {{$billing->zip}}
+                                                    <br> {{$billing->country}}
+                                                    <br> {{$billing->phone}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
+                                                    <br> {{$shipping->company}}
+                                                    <br> {{$shipping->address1}}
+                                                    <br> {{$shipping->address2}}
+                                                    <br> {{$shipping->city}}
+                                                    <br> {{$shipping->province}} {{$shipping->zip}}
+                                                    <br> {{$shipping->country}}
+                                                    @if(isset($shipping->phone))
+                                                        <br>{{$shipping->phone}}
+                                                    @endif
+                                                </p>
                                             </td>
 
                                         </tr>
