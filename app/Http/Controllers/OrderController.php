@@ -37,9 +37,9 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $shop = $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
-        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
-        dd($response);
+//        $shop = $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+//        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+//        dd($response);
 
         $orders = RetailerOrder::where('shop_id', $this->helper->getShop()->id)->where('custom', 0)->newQuery();
         if ($request->has('search')) {
