@@ -416,12 +416,14 @@ class OrderController extends Controller
 
 //            $this->inventory->OrderQuantityUpdate($order,'new');
 
-                return redirect(route('store.orders'))->with('success', 'Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
             }
             else {
                 return redirect()->back();
             }
+
         }
+        return redirect(route('store.orders'))->with('success', 'Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
+
     }
 
 }
