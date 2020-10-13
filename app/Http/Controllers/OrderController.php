@@ -15,6 +15,7 @@ use App\RetailerProductVariant;
 use App\ShippingRate;
 use App\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function Psy\sh;
 
 class OrderController extends Controller
@@ -350,8 +351,30 @@ class OrderController extends Controller
     public function show_bulk_payments(Request $request)
     {
         $orders_array = explode(',', $request->input('orders'));
+        if (count($orders_array) > 0) {
+            $orders = RetailerOrder::whereIn('id', $orders_array)->newQuery();
 
-        dd($orders_array);
+            $orders->whereHas('line_items', function ($q) {
+                $q->where('fulfillable_quantity', '>', 0);
+            });
+            $orders = $orders->get();
+            $total_quantity = 0;
+            $fulfillable_quantity = 0;
+            foreach ($orders as $order) {
+                $total_quantity = $total_quantity + $order->line_items->whereIn('fulfilled_by', ['Fantasy', 'AliExpress'])->sum('quantity');
+                $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by', ['Fantasy', 'AliExpress'])->sum('fulfillable_quantity');
+            }
+
+            return view('single-store.orders.bulk-fulfillment')->with([
+                'orders' => $orders,
+                'total_quantity' => $total_quantity,
+                'fulfillable_quantity' => $fulfillable_quantity
+            ]);
+
+        }
+        else {
+            return redirect()->back();
+        }
     }
 
 }
