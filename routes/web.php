@@ -121,14 +121,10 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('customers/{id}/download', 'DefaultSettingsController@download_customer')->name('customers.download');
 
-
-
-
 });
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {
     Route::get('/import/{id}/to-store','RetailerProductController@import_to_shopify')->name('retailer.import_to_shopify');
-
     Route::prefix('store')->group(function () {
         Route::post('/user/authenticate','SingleStoreController@authenticate')->name('store.user.authenticate');
         Route::post('/user/store/association','SingleStoreController@associate')->name('store.user.associate');

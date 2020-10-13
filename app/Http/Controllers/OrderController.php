@@ -36,13 +36,15 @@ class OrderController extends Controller
     }
 
     public function index(Request $request){
+        $shop = $this->helper->getLocalShop();
+        $orders = $shop->api()->rest('GET', '/admin/orders.json');
+        dd($orders);
+
         $orders  = RetailerOrder::where('shop_id',$this->helper->getShop()->id)->where('custom',0)->newQuery();
         if($request->has('search')){
             $orders->where('name','LIKE','%'.$request->input('search').'%');
-
         }
         $orders = $orders->orderBy('created_at','DESC')->paginate(30);
-
         return view('single-store.orders.index')->with([
             'orders' => $orders,
             'search' => $request->input('search')
