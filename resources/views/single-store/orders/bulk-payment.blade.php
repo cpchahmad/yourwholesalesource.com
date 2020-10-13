@@ -203,7 +203,7 @@
                                             <div class="modal-dialog modal-dialog-popout" role="document">
                                                 <div class="modal-content">
                                                     <div class="block block-themed block-transparent mb-0">
-                                                        <div class="block-header bg-primary-dark">
+                                                        <div class="block-header bg-primary-dark text-left">
                                                             <h3 class="block-title">Payment for Order <{{$order->name}}></h3>
                                                             <div class="block-options">
                                                                 <button type="button" class="btn-block-option">
@@ -211,9 +211,8 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <form action="{{route('store.order.proceed.payment')}}" method="post">
+                                                        <form action="{{route('store.order.proceed.bulk.payment')}}" method="post" class="text-left">
                                                             @csrf
-                                                            <input type="hidden" name="order_id" value="{{$order->id}}">
                                                             <div class="block-content font-size-sm">
                                                                 <div class="form-group">
                                                                     <div class="col-sm-12">
@@ -237,7 +236,7 @@
                                                                     <div class="col-sm-12">
                                                                         <div class="form-material">
                                                                             <label for="material-error">Amount to Pay</label>
-                                                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay,2)}} USD"  name="amount"
+                                                                            <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay,2)}} USD"  name="amount"
                                                                                     placeholder="Enter 14 Digit Card Number here">
                                                                         </div>
                                                                     </div>
@@ -246,7 +245,7 @@
                                                                     <div class="col-sm-12">
                                                                         <div class="form-material">
                                                                             <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
-                                                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                                            <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
                                                                                     placeholder="Enter 14 Digit Card Number here">
                                                                         </div>
                                                                     </div>
@@ -255,7 +254,7 @@
                                                                     <div class="col-sm-12">
                                                                         <div class="form-material">
                                                                             <label for="material-error">Total Cost</label>
-                                                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay+$order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
+                                                                            <input  class="form-control" type="text" readonly value="{{number_format($cost_to_pay+$cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
                                                                                     placeholder="Enter 14 Digit Card Number here">
                                                                         </div>
                                                                     </div>

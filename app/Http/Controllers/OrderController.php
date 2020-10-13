@@ -377,4 +377,8 @@ class OrderController extends Controller
         }
     }
 
+    public function proceed_bulk_payment(Request $request) {
+        dd($request->all());
+    }
+
 }
