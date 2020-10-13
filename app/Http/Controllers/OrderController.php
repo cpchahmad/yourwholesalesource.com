@@ -360,12 +360,15 @@ class OrderController extends Controller
             $orders = $orders->get();
             $shipping_price = $orders->sum('shipping_price');
             $cost_to_pay = $orders->sum('cost_to_pay');
+            $settings = AdminSetting::all()->first();
+
 
 
             return view('single-store.orders.bulk-payment')->with([
                 'orders' => $orders,
                 'shipping_price' => $shipping_price,
                 'cost_to_pay' => $cost_to_pay,
+                'settings' => $settings
             ]);
 
         }
