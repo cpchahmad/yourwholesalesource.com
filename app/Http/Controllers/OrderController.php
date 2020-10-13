@@ -380,7 +380,9 @@ class OrderController extends Controller
     public function proceed_bulk_payment(Request $request) {
         $orders = json_decode($request->order_ids);
 
-        foreach ($orders as $order) {
+        foreach ($orders as $o) {
+            $order = RetailerOrder::find($o->id);
+
             $settings = AdminSetting::all()->first();
             if ($order != null && $order->paid == 0) {
                 $last_four = substr($request->input('card_number'), 0, 3);
@@ -395,7 +397,6 @@ class OrderController extends Controller
                 $new_transaction->save();
 
                 $order->paid = 1;
-                dd($order->fulfillments);
 
                 if (count($order->fulfillments) > 0) {
                     $order->status = $order->getStatus($order);
