@@ -361,14 +361,14 @@ class WalletController extends Controller
                     $shop = $this->helper->getLocalShop();
                     if (count($shop->has_user) > 0) {
                         if ($shop->has_user[0]->has_wallet == null) {
-                            return redirect()->back()->with('error','Wallet Does not Exist!');
+                            return redirect(route('store.orders'))->with('error','Wallet Does not Exist!');
 
                         } else {
                             $wallet = $shop->has_user[0]->has_wallet;
                         }
 
                     } else {
-                        return redirect()->back()->with('error','Wallet Does not Exist!');
+                        return redirect(route('store.orders'))->with('error','Wallet Does not Exist!');
 
                     }
                 }
@@ -426,11 +426,11 @@ class WalletController extends Controller
                     return redirect(route('store.orders'))->with('success','Order Cost Deducted From Wallet Successfully!');
                 }
                 else{
-                    return redirect()->back()->with('error','Wallet Doesnot Have Required Amount!');
+                    return redirect(route('store.orders'))->with('error','Wallet Doesnot Have Required Amount!');
                 }
             }
             else{
-                return redirect()->back()->with('error','Order Cost Already Paid!');
+                return redirect(route('store.orders'))->with('error','Order Cost Already Paid!');
             }
         }
     }
