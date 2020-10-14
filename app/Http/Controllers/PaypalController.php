@@ -6,7 +6,9 @@ use App\AdminSetting;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\RetailerOrder;
+use App\UserFile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PaypalController extends Controller
@@ -208,5 +210,84 @@ class PaypalController extends Controller
     public function test($id){
         $order = RetailerOrder::find($id);
         $this->admin->sync_order_to_admin_store($order);
+    }
+
+    public function paypal_bulk_order_payment(Request $request) {
+        dd($request->order_ids);
+        $orders = json_decode($request->order_ids);
+        $setting = AdminSetting::all()->first();
+
+            $items = [];
+            $order_total = 0;
+            foreach ($orders as $order) {
+                $retailer_order = RetailerOrder::find($order->id);
+
+                $order_total = $order_total + $retailer_order->cost_to_pay;
+
+                /*adding order-lime-items for paying through paypal*/
+                foreach ($retailer_order->line_items as $item) {
+                    array_push($items, [
+                        'name' => $item->title . ' - ' . $item->variant_title,
+                        'price' => $item->cost,
+                        'qty' => $item->quantity
+                    ]);
+                }
+                if ($retailer_order->shipping_price != null) {
+                    array_push($items, [
+                        'name' => $retailer_order->name . ' Shipping Price',
+                        'price' => $retailer_order->shipping_price,
+                        'qty' => 1
+                    ]);
+                }
+                if ($setting != null) {
+                    if ($setting->payment_charge_percentage != null) {
+                        $order_total = $order_total + (number_format($retailer_order->cost_to_pay * $setting->paypal_percentage / 100, 2));
+                        array_push($items, [
+                            'name' => 'WeFullFill Charges(' . $setting->paypal_percentage . '%)',
+                            'price' => number_format($retailer_order->cost_to_pay * $setting->paypal_percentage / 100, 2),
+                            'qty' => 1
+                        ]);
+                    }
+                }
+            }
+
+
+            $data = [];
+            $data['items'] = $items;
+            $data['invoice_id'] = 'WeFullFill-Import-Bulk-Pay' . rand(1, 1000);
+            $data['invoice_description'] = "WeFullFill-Import-Bulk-Pay-Invoice-" . rand(1, 1000);;
+            $data['return_url'] = route('users.orders.bulk.paypal.success', $new_file->id);
+            $data['cancel_url'] = route('users.orders.bulk.paypal.cancel', $new_file->id);
+            $data['total'] = $order_total;
+
+            $response = $request->input('response');
+            $response = json_decode(json_encode(json_decode($response)));
+            if ($response->status == 'COMPLETED') {
+                foreach ($orders as $order) {
+                    $retailer_order = RetailerOrder::find($order->id);
+
+                    $retailer_order->paypal_token = $response->id;
+                    $retailer_order->save();
+                }
+                $this->bulk_import_order_paypal_success($request->id, $response);
+            } else {
+                return redirect()->route('users.files.view', $request->id)->with('error', 'Payment Failed');
+            }
+//            $provider = new ExpressCheckout;
+//            try {
+//
+//                $response = $provider->setExpressCheckout($data);
+//
+//                foreach ($custom_orders as $retailer_order){
+//                    $retailer_order->paypal_token  = $response['TOKEN'];
+//                    $retailer_order->save();
+//                }
+//
+//                return redirect($response['paypal_link']);
+//            }
+//            catch (\Exception $e){
+//                return redirect()->route('users.files.view',$request->id)->with('error','System Process Failure');
+//            }
+
     }
 }

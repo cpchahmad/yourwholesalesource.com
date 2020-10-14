@@ -197,12 +197,7 @@
                                 <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
                                 <button type="button" class="btn btn-success paypal-pay-button"
-                                        data-toggle="modal" data-target="#paypal_pay_trigger"
-                                        data-href="{{route('users.orders.bulk.paypal',12)}}"
-                                        data-percentage="{{$settings->paypal_percentage}}"
-                                        data-fee="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}"
-                                        data-subtotal="{{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}"
-                                        data-pay="{{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}} USD">
+                                        data-toggle="modal" data-target="#paypal_pay_trigger">
                                     <i class="fab fa-paypal"></i> Paypal Pay
                                 </button>
                             </td>
@@ -334,10 +329,10 @@
     </div>
 
     <div class="ajax_paypal_form_submit" style="display: none;">
-        <form action="{{ route('users.orders.bulk.paypal', 2) }}"
+        <form action="{{ route('store.order.paypal.bulk.pay') }}"
               method="POST">
             {{ csrf_field() }}
-            <input type="hidden" name="id" value="{{ 2 }}">
+            <input type="hidden" name="order_ids" value="{{ $orders }}">
             <textarea name="response"></textarea>
         </form>
     </div>
