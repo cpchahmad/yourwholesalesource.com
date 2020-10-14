@@ -214,6 +214,8 @@ class PaypalController extends Controller
 
     public function paypal_bulk_order_payment(Request $request) {
         dd($request->order_ids);
+
+
         $orders = json_decode($request->order_ids);
         $setting = AdminSetting::all()->first();
 
@@ -252,14 +254,6 @@ class PaypalController extends Controller
             }
 
 
-            $data = [];
-            $data['items'] = $items;
-            $data['invoice_id'] = 'WeFullFill-Import-Bulk-Pay' . rand(1, 1000);
-            $data['invoice_description'] = "WeFullFill-Import-Bulk-Pay-Invoice-" . rand(1, 1000);;
-            $data['return_url'] = route('users.orders.bulk.paypal.success', $new_file->id);
-            $data['cancel_url'] = route('users.orders.bulk.paypal.cancel', $new_file->id);
-            $data['total'] = $order_total;
-
             $response = $request->input('response');
             $response = json_decode(json_encode(json_decode($response)));
             if ($response->status == 'COMPLETED') {
@@ -269,25 +263,46 @@ class PaypalController extends Controller
                     $retailer_order->paypal_token = $response->id;
                     $retailer_order->save();
                 }
-                $this->bulk_import_order_paypal_success($request->id, $response);
+                $this->bulk_import_order_paypal_success($request->order_ids, $response);
             } else {
-                return redirect()->route('users.files.view', $request->id)->with('error', 'Payment Failed');
+                return redirect()->route('store.orders')->with('error', 'Payment Failed');
             }
-//            $provider = new ExpressCheckout;
-//            try {
-//
-//                $response = $provider->setExpressCheckout($data);
-//
-//                foreach ($custom_orders as $retailer_order){
-//                    $retailer_order->paypal_token  = $response['TOKEN'];
-//                    $retailer_order->save();
-//                }
-//
-//                return redirect($response['paypal_link']);
-//            }
-//            catch (\Exception $e){
-//                return redirect()->route('users.files.view',$request->id)->with('error','System Process Failure');
-//            }
+
+    }
+
+    public function bulk_import_order_paypal_success($id, $response)
+    {
+        $orders = json_decode($id);
+
+
+        foreach ($orders as $order) {
+            $retailer_order = RetailerOrder::find($order->id);
+
+            $retailer_order->paypal_payer_id = $response->payer->payer_id;
+            $new_transaction = new OrderTransaction();
+            $new_transaction->amount = $response->purchase_units[0]->amount->value;
+            $new_transaction->name = $response->payer->name->given_name.' '.$response->payer->name->surname;
+            $new_transaction->retailer_order_id = $retailer_order->id;
+            $new_transaction->paypal_payment_id = $response->payer->payer_id;
+            $new_transaction->user_id = $retailer_order->user_id;
+            $new_transaction->shop_id = $retailer_order->shop_id;
+            $new_transaction->save();
+
+            $retailer_order->paid = 1;
+            $retailer_order->status = 'Paid';
+            $retailer_order->pay_by = 'Paypal';
+            $retailer_order->save();
+
+            /*Maintaining Log*/
+            $order_log = new OrderLog();
+            $order_log->message = "An amount of " . $new_transaction->amount . " USD used to WeFullFill through BULK PAYPAL PAYMENT of " . $response->purchase_units[0]->amount->value . " USD on " . date_create($new_transaction->created_at)->format('d M, Y h:i a') . " for further process";
+            $order_log->status = "paid";
+            $order_log->retailer_order_id = $retailer_order->id;
+            $order_log->save();
+            $this->admin->sync_order_to_admin_store($retailer_order);
+        }
+        return redirect()->route('store.orders')->with('success', 'Bulk Payment Processed Successfully!');
+
 
     }
 }
