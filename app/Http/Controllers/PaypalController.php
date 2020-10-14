@@ -263,7 +263,8 @@ class PaypalController extends Controller
                     $retailer_order->save();
                 }
                 $this->bulk_import_order_paypal_success($request->order_ids, $response);
-                dd(324);
+                return redirect(route('store.orders'))->with('success', 'Bulk Payment Processed Successfully!');
+
             } else {
                 return redirect(route('store.orders'))->with('error', 'Payment Failed');
             }
