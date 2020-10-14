@@ -300,6 +300,7 @@ class PaypalController extends Controller
             $this->admin->sync_order_to_admin_store($retailer_order);
         }
 
+        dd('test');
 
         return redirect(route('store.orders'))->with('success', 'Bulk Payment Processed Successfully!');
 
