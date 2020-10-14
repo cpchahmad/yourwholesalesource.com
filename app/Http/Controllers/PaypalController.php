@@ -264,7 +264,7 @@ class PaypalController extends Controller
                 }
                 $this->bulk_import_order_paypal_success($request->order_ids, $response);
             } else {
-                return redirect()->route('store.orders')->with('error', 'Payment Failed');
+                return redirect(route('store.orders'))->with('error', 'Payment Failed');
             }
 
     }
@@ -272,7 +272,6 @@ class PaypalController extends Controller
     public function bulk_import_order_paypal_success($id, $response)
     {
         $orders = json_decode($id);
-
 
         foreach ($orders as $order) {
             $retailer_order = RetailerOrder::find($order->id);
@@ -300,7 +299,9 @@ class PaypalController extends Controller
             $order_log->save();
             $this->admin->sync_order_to_admin_store($retailer_order);
         }
-        return redirect()->route('store.orders')->with('success', 'Bulk Payment Processed Successfully!');
+
+
+        return redirect(route('store.orders'))->with('success', 'Bulk Payment Processed Successfully!');
 
 
     }
