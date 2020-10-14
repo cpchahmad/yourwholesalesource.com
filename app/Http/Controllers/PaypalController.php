@@ -263,6 +263,7 @@ class PaypalController extends Controller
                     $retailer_order->save();
                 }
                 $this->bulk_import_order_paypal_success($request->order_ids, $response);
+                dd(324);
             } else {
                 return redirect(route('store.orders'))->with('error', 'Payment Failed');
             }
@@ -300,7 +301,6 @@ class PaypalController extends Controller
             $this->admin->sync_order_to_admin_store($retailer_order);
         }
 
-        dd('test');
 
         return redirect(route('store.orders'))->with('success', 'Bulk Payment Processed Successfully!');
 
