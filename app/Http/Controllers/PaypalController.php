@@ -214,8 +214,6 @@ class PaypalController extends Controller
 
     public function paypal_bulk_order_payment(Request $request) {
 
-        dd($request->all());
-
         $orders = json_decode($request->order_ids);
         $setting = AdminSetting::all()->first();
 
