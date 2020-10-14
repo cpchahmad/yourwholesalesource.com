@@ -213,8 +213,6 @@ class PaypalController extends Controller
     }
 
     public function paypal_bulk_order_payment(Request $request) {
-        dd($request->order_ids);
-
 
         $orders = json_decode($request->order_ids);
         $setting = AdminSetting::all()->first();
@@ -223,6 +221,8 @@ class PaypalController extends Controller
             $order_total = 0;
             foreach ($orders as $order) {
                 $retailer_order = RetailerOrder::find($order->id);
+
+                dd($retailer_order);
 
                 $order_total = $order_total + $retailer_order->cost_to_pay;
 
