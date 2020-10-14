@@ -822,4 +822,10 @@
         </div>
     </div>
 
+{{--    <script>--}}
+{{--        $('.settings label').click(function() {--}}
+{{--            --}}
+{{--        }--}}
+{{--    </script>--}}
+
 @endsection
