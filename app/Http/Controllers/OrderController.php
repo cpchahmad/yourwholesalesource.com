@@ -397,13 +397,7 @@ class OrderController extends Controller
                 $new_transaction->save();
 
                 $order->paid = 1;
-
-                if (count($order->fulfillments) > 0) {
-                    $order->status = $order->getStatus($order);
-                } else {
-                    $order->status = 'Paid';
-                }
-
+                $order->status = 'Paid';
                 $order->save();
 
                 /*Maintaining Log*/
@@ -414,11 +408,6 @@ class OrderController extends Controller
                 $order_log->save();
                 $this->admin->sync_order_to_admin_store($order);
 
-//            $this->inventory->OrderQuantityUpdate($order,'new');
-
-            }
-            else {
-                return redirect()->back();
             }
 
         }
