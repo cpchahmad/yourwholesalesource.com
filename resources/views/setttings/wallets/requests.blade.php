@@ -84,6 +84,8 @@
                                                    data-original-title="View Wallet"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
+                                        @else
+                                            <p>no</p>
                                         @endif
                                     @endforeach
                                     </tbody>
