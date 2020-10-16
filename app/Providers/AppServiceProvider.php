@@ -70,6 +70,8 @@ class AppServiceProvider extends ServiceProvider
               else{
                   $balance = 0;
               }
+
+                $manager = User::find(Auth::id());
             }
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
             $notifications_count = $query->orderBy('created_at','DESC')->count();
@@ -85,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
             $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->count();
 
             // Manager Wallet Count Calculation
-            $manager = User::find(Auth::id());
+
             $users  = $manager->has_users;
 
             $manager_wallet_request_count = 0;
