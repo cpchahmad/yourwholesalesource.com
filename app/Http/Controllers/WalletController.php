@@ -151,6 +151,7 @@ class WalletController extends Controller
             });
         }
 
+
         $users = $users->paginate(30);
         foreach ($users as $user){
             if ($user->has_wallet == null) {
@@ -168,6 +169,39 @@ class WalletController extends Controller
             'users' => $users,
             'search' => $request->input('search')
         ]);
+    }
+
+    public function walletRequest(Request $request){
+        $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
+        $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->newQuery();
+
+
+        foreach ($users as $user) {
+            if($user->has_wallet !== null) {
+                echo "yes". "<br>";
+            }
+            else {
+                echo "No". "<br>";
+            }
+        }
+
+//        $users = $users->paginate(30);
+//        foreach ($users as $user){
+//            if ($user->has_wallet == null) {
+//                $this->wallet_create($user->id);
+//                try{
+//                    Mail::to($user->email)->send(new NewWallet($user));
+//
+//                }catch (\Exception $e){
+//
+//                }
+//
+//            }
+//        }
+//        return view('setttings.wallets.index')->with([
+//            'users' => $users,
+//            'search' => $request->input('search')
+//        ]);
     }
 
     public function wallet_details(Request $request,$id){
