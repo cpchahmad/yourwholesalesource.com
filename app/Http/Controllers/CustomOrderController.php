@@ -384,6 +384,11 @@ class CustomOrderController extends Controller
 
         $categories = Category::all();
         $productQuery = Product::where('status', 1)->newQuery();
+
+        $productQuery->where('global', 0)->whereHas('has_non_shopify_user_preferences', function ($q) {
+            return $q->where('user_id', '=', Auth::user()->id);
+        });
+
         if ($request->has('category')) {
             $productQuery->whereHas('has_categories', function ($q) use ($request) {
                 return $q->where('title', 'LIKE', '%' . $request->input('category') . '%');
@@ -1136,6 +1141,7 @@ class CustomOrderController extends Controller
         }
 
     }
+
 
     public function show_notification($id)
     {
