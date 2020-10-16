@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('layout.manager')
 @section('content')
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
