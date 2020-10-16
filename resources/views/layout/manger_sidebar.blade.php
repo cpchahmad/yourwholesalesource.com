@@ -112,7 +112,7 @@
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3 badge badge-primary text-white">
-                <a href="/wishlists?status=1" class="text-white">
+                <a href="/managers/wishlist?status=1" class="text-white">
                     Wishlist Requests
                     <span class="" style="font-size: 13px"> {{$wishlist_request_count}} </span>
                 </a>
