@@ -7,6 +7,7 @@ use App\Refund;
 use App\Shop;
 use App\Ticket;
 use App\TicketStatus;
+use App\User;
 use App\WalletRequest;
 use App\Wishlist;
 use App\WishlistStatus;
@@ -80,9 +81,18 @@ class AppServiceProvider extends ServiceProvider
 
             $manager_wishlist_request_count = Wishlist::where('manager_id' ,Auth::id())->where('status_id', 1)->count();
 //            $manager_wallet_request_count = WalletRequest::where('manager_id' ,Auth::id())->where('status', 0)->count();
-            $manager_wallet_request_count = 0;
             $manager_refund_request_count = Refund::where('manager_id',Auth::id())->where('status', 'New')->count();
             $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->count();
+
+            // Manager Wallet Count Calculation
+            $manager = User::find(Auth::id());
+            $users  = $manager->has_users;
+            $manager_wallet_request_count = 0;
+            foreach ($users as $user) {
+                if($user->has_wallet->where('status', 0)->exists()){
+                    $manager_wallet_request_count++;
+                }
+            }
 
 
             $view->with([
