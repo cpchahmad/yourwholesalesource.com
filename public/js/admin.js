@@ -959,8 +959,7 @@ $(document).ready(function () {
 
     }
     $('.bulk-fulfill-btn').click(function () {
-        console.log($('#bulk-fullfillment').find('input:hidden[name=orders]').val());
-       // $('#bulk-fullfillment').submit();
+       $('#bulk-fullfillment').submit();
     });
 
     $('body').on('change','#import-tracking',function () {
