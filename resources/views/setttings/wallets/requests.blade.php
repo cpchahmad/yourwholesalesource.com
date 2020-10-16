@@ -32,6 +32,8 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
+                                        <th>Wallet Holder Name</th>
+                                        <th>Wallet ID</th>
                                         <th>Company/Sender Title</th>
                                         <th>Alibaba Order Number </th>
                                         <th>Amount</th>
@@ -45,7 +47,12 @@
                                     @foreach($wallets as $wallet)
                                             @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
                                                 <tr>
-
+                                                    <td>
+                                                        {{ $req->user_id }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $req->id }}
+                                                    </td>
                                                     <td>
                                                         {{$req->cheque_title}}
                                                     </td>
@@ -191,6 +198,8 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
+                                        <th>Wallet Holder Name</th>
+                                        <th>Wallet ID</th>
                                         <th>Company/Sender Title</th>
                                         <th>Alibaba Order Number </th>
                                         <th>Amount</th>
@@ -204,7 +213,12 @@
                                         @foreach($wallets as $wallet)
                                                 @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
                                                     <tr>
-
+                                                    <td>
+                                                        {{ $req->user_id }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $req->id }}
+                                                    </td>
                                                     <td>
                                                         {{$req->cheque_title}}
                                                     </td>
