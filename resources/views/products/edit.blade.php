@@ -174,13 +174,15 @@
                             <div class="block-header d-inline-flex" style="width: 100%" >
                                 <h3 class="block-title">
                                     Variant
+                                </h3>
 
+                                <div class="text-left d-inline-block">
                                     <div class="custom-control custom-checkbox d-inline-block">
                                         <input type="checkbox" name="variants" class="custom-control-input" id="val-terms" checked value="1">
                                         <label class="custom-control-label" for="val-terms">This product has multiple options, like
                                             different sizes or colors</label>
                                     </div>
-                                </h3>
+                                </div>
 
 
                                 <div class="text-right d-inline-block">
