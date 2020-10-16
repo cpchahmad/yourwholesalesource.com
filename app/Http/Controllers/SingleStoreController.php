@@ -178,6 +178,8 @@ class SingleStoreController extends Controller
             return $q->where('user_id', '=', Auth::user()->id);
         });
 
+        dd($productQuery->get());
+
         $productQuery->orwhere('global', 1);
 
         if ($request->has('category')) {
