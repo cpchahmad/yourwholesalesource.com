@@ -87,6 +87,8 @@ class AppServiceProvider extends ServiceProvider
             // Manager Wallet Count Calculation
             $manager = User::find(Auth::id());
             $users  = $manager->has_users;
+
+            dd($users->count());
             $manager_wallet_request_count = 0;
             foreach ($users as $user) {
                 if($user->has_wallet->requests()->where('status', 0)->exists()){
