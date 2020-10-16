@@ -630,6 +630,8 @@ class AdminOrderController extends Controller
                 $q->where('fulfillable_quantity', '>', 0);
             });
             $orders = $orders->get();
+
+            dd($orders);
             $total_quantity = 0;
             $fulfillable_quantity = 0;
             foreach ($orders as $order) {
@@ -638,7 +640,6 @@ class AdminOrderController extends Controller
 
             }
 
-            dd($orders);
             if (!Auth::check()) {
                 return view('orders.bulk-fulfillment')->with([
                     'orders' => $orders,
