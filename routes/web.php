@@ -247,7 +247,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/settings/personal/address','ManagerController@save_address')->name('sales_managers.save_address');
             Route::post('/change/password','ManagerController@change_password')->name('sales_managers.change_password');
             Route::get('/wallets', 'ManagerController@wallet_index')->name('sales_managers.wallets');
-            Route::get('/managers/wallets-requests', 'ManagerController@wallet_request')->name('sales_managers.wallets.requests');
+            Route::get('/wallets-requests', 'ManagerController@wallet_request')->name('sales_managers.wallets.requests');
             Route::get('/wallets/{id}', 'ManagerController@wallet_details')->name('sales_managers.wallets.detail');
             Route::get('/wallet/request/approve/{id}', 'ManagerController@approved_bank_statement')->name('sales_managers.wallets.approve.request');
             Route::post('/wallet/top-up', 'ManagerController@topup_wallet_by_admin')->name('sales_managers.user.wallet.topup');
