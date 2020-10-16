@@ -175,42 +175,13 @@ class WalletController extends Controller
         $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
         $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->newQuery();
 
-        $new = $users->join('wallet_requests', function ($join) {
-            $join->on('wallet_requests.user_id', '=', 'users.id')
-                ->where('wallet_requests.status', '=', '0');
-        })
-        ->select('users.*')
-        ->groupBy('users.id')
-        ->get();
 
-        dd($new);
+        $users = $users->paginate(30);
 
-        foreach ($users as $user) {
-            if($user->has_wallet !== null) {
-                echo "yes". "<br>";
-            }
-            else {
-                echo "No". "<br>";
-            }
-        }
-
-//        $users = $users->paginate(30);
-//        foreach ($users as $user){
-//            if ($user->has_wallet == null) {
-//                $this->wallet_create($user->id);
-//                try{
-//                    Mail::to($user->email)->send(new NewWallet($user));
-//
-//                }catch (\Exception $e){
-//
-//                }
-//
-//            }
-//        }
-//        return view('setttings.wallets.index')->with([
-//            'users' => $users,
-//            'search' => $request->input('search')
-//        ]);
+        return view('setttings.wallets.requests')->with([
+            'users' => $users,
+            'search' => $request->input('search')
+        ]);
     }
 
     public function wallet_details(Request $request,$id){

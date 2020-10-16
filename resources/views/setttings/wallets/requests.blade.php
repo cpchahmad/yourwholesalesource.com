@@ -53,7 +53,8 @@
                                     </thead>
                                     <tbody class="">
                                     @foreach($users as $index => $user)
-                                        <tr>
+                                        @if($user->has_wallet->requests()->where('status','0')->exists())
+                                            <tr>
                                             <td class="font-w600">{{ $user->name }}</td>
                                             <td>
                                                 {{$user->email}}
@@ -83,6 +84,7 @@
                                                    data-original-title="View Wallet"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>
