@@ -366,7 +366,7 @@ class OrderController extends Controller
 
 
 
-            return view('single-store.orders.bulk-payment')->with([
+            return view('single-store.orders.bulk-pyment')->with([
                 'orders' => $orders,
                 'shipping_price' => $shipping_price,
                 'cost_to_pay' => $cost_to_pay,
