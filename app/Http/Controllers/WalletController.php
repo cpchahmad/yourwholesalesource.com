@@ -175,7 +175,7 @@ class WalletController extends Controller
         $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
         $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->newQuery();
 
-
+        dd('234');
         foreach ($users as $user) {
             if($user->has_wallet !== null) {
                 echo "yes". "<br>";
