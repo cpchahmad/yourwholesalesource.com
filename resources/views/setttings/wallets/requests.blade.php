@@ -30,7 +30,7 @@
                 </ul>
 
             </div>
-            <div class="block-content tab-content">
+            <div class="block-content tab-content px-0">
                 <div class="row tab-pane active" id="bank" role="tabpanel">
                     <div class="col-md-12">
                         <div class="block">
