@@ -174,6 +174,10 @@ class SingleStoreController extends Controller
             return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
         });
 
+        $productQuery->where('global', 0)->whereHas('has_non_shopify_user_preferences', function ($q) {
+            return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
+        });
+
         $productQuery->orwhere('global', 1);
 
         if ($request->has('category')) {
