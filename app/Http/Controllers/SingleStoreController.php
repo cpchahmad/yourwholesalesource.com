@@ -170,9 +170,9 @@ class SingleStoreController extends Controller
         $categories = Category::all();
         $productQuery = Product::where('status', 1)->newQuery();
 
-        $productQuery->where('global', 0)->whereHas('has_preferences', function ($q) {
-            return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
-        });
+//        $productQuery->where('global', 0)->whereHas('has_preferences', function ($q) {
+//            return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
+//        });
 
         $productQuery->where('global', 0)->whereHas('has_non_shopify_user_preferences', function ($q) {
             return $q->where('id', '=', Auth::user()->id);
