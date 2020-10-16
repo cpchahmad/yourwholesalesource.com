@@ -74,7 +74,7 @@ class AppServiceProvider extends ServiceProvider
             $notifications_count = $query->orderBy('created_at','DESC')->count();
 
             $wishlist_request_count = Wishlist::where('status_id', 1)->count();
-            $wallet_request_count = WalletRequest::where('status', 1)->count();
+            $wallet_request_count = WalletRequest::where('status', 0)->count();
             $refund_request_count = Refund::where('status', 'New')->count();
             $tickets_request_count = Ticket::where('status_id', 1)->count();
 
