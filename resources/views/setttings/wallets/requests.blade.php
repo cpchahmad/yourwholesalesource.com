@@ -48,10 +48,10 @@
                                             @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
                                                 <tr>
                                                     <td>
-                                                        {{ $req->user_id }}
+                                                        {{ $req->user }}
                                                     </td>
                                                     <td>
-                                                        {{ $req->id }}
+                                                        {{ $req->wallet_token }}
                                                     </td>
                                                     <td>
                                                         {{$req->cheque_title}}
@@ -214,10 +214,10 @@
                                                 @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
                                                     <tr>
                                                     <td>
-                                                        {{ $req->user_id }}
+                                                        {{ $req->user }}
                                                     </td>
                                                     <td>
-                                                        {{ $req->id }}
+                                                        {{ $req->wallet_token }}
                                                     </td>
                                                     <td>
                                                         {{$req->cheque_title}}
