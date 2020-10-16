@@ -951,7 +951,6 @@ $(document).ready(function () {
             values.push($(this).val());
         });
 
-        console.log(values);
         $('#bulk-fullfillment').find('input:hidden[name=orders]').val(values);
 
     }
@@ -960,7 +959,8 @@ $(document).ready(function () {
 
     }
     $('.bulk-fulfill-btn').click(function () {
-        $('#bulk-fullfillment').submit();
+        console.log($('#bulk-fullfillment').find('input:hidden[name=orders]').val());
+       // $('#bulk-fullfillment').submit();
     });
 
     $('body').on('change','#import-tracking',function () {
