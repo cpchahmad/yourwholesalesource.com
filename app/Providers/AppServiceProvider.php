@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view)
         {
             $query = Notification::where('read',0)->newQuery();
-            $manager = null;
             if (Auth::check()) {
                 $user = Auth::user();
                 if ($user->has_wallet == null) {
@@ -40,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 $query->whereHas('to_users',function ($q) use ($user){
                     $q->where('email',$user->email);
                 });
-                $manager = User::find(Auth::id());
+
             }
             else {
               $auth_shop =  ShopifyApp::shop();
@@ -85,18 +84,20 @@ class AppServiceProvider extends ServiceProvider
             $manager_refund_request_count = Refund::where('manager_id',Auth::id())->where('status', 'New')->count();
             $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->count();
 
-            // Manager Wallet Count Calculation
-
-            $users  = $manager->has_users;
+//            // Manager Wallet Count Calculation
+//            $manager = User::find(Auth::id());
+//            $users  = $manager->has_users;
+//
+//            $manager_wallet_request_count = 0;
+//            foreach ($users as $user) {
+//                if($user->has_wallet->requests()->where('status', 0)->exists()){
+//                    $manager_wallet_request_count += $user->has_wallet->requests()->where('status', 0)->count();
+//                }
+//            }
+//
+//            dd($manager_wallet_request_count);
 
             $manager_wallet_request_count = 0;
-            foreach ($users as $user) {
-                if($user->has_wallet->requests()->where('status', 0)->exists()){
-                    $manager_wallet_request_count += $user->has_wallet->requests()->where('status', 0)->count();
-                }
-            }
-
-            dd($manager_wallet_request_count);
 
             $view->with([
                 'balance' => $balance,
