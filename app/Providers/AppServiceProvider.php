@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view)
         {
             $query = Notification::where('read',0)->newQuery();
-
+            $manager = null;
             if (Auth::check()) {
                 $user = Auth::user();
                 if ($user->has_wallet == null) {
