@@ -78,6 +78,10 @@ class AppServiceProvider extends ServiceProvider
             $refund_request_count = Refund::where('status', 'New')->count();
             $tickets_request_count = Ticket::where('status_id', 1)->count();
 
+            $manager_wishlist_request_count = Wishlist::where(['manager_id',Auth::id(), 'status_id', 1])->count();
+            $manager_refund_request_count = Refund::where(['manager_id',Auth::id(), 'status', 'New'])->count();
+            $manager_tickets_request_count = Ticket::where(['manager_id',Auth::id(), 'status_id', 1])->count();
+
 
             $view->with([
                 'balance' => $balance,
@@ -87,6 +91,9 @@ class AppServiceProvider extends ServiceProvider
                 'wallet_request_count' => $wallet_request_count,
                 'refund_request_count' => $refund_request_count,
                 'tickets_request_count' => $tickets_request_count,
+                'manager_wishlist_request_count' => $manager_wishlist_request_count,
+                'manager_refund_request_count' => $manager_refund_request_count,
+                'manager_tickets_request_count' => $manager_tickets_request_count,
             ]);
 
         });

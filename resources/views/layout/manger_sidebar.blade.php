@@ -114,7 +114,7 @@
             <div class="d-inline-block mr-3 badge badge-primary text-white">
                 <a href="/managers/wishlist?status=1" class="text-white">
                     Wishlist Requests
-                    <span class="" style="font-size: 13px"> {{$wishlist_request_count}} </span>
+                    <span class="" style="font-size: 13px"> {{$manager_wishlist_request_count}} </span>
                 </a>
             </div>
 
@@ -126,16 +126,16 @@
             </div>
 
             <div class="d-inline-block mr-3 badge badge-warning text-white">
-                <a href="/refunds?priority=&status=1" class="text-white">
+                <a href="/manager/refunds?priority=&status=1" class="text-white">
                     Refund Requests
-                    <span class="" style="font-size: 13px"> {{$refund_request_count}} </span>
+                    <span class="" style="font-size: 13px"> {{$manager_refund_request_count}} </span>
                 </a>
             </div>
 
             <div class="d-inline-block mr-3 badge badge-dark text-white">
-                <a href="/tickets?priority=&status=1" class="text-white">
+                <a href="/manager/tickets?priority=&status=1" class="text-white">
                     Ticket Requests
-                    <span class="" style="font-size: 13px"> {{$tickets_request_count}} </span>
+                    <span class="" style="font-size: 13px"> {{$manager_tickets_request_count}} </span>
                 </a>
             </div>
 
