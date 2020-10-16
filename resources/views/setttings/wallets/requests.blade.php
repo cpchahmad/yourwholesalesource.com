@@ -26,7 +26,6 @@
                             <div class="block-header">
                                 <div class="block-title">
                                     Bank Transfer Top-up Requests
-                                    <span style="float: right" ><i class="fa fa-info-circle" title="This ID used for wallet-to-wallet transferred"></i>WALLET ID {{$wallet->wallet_token}}</span>
                                 </div>
                             </div>
                             <div class="block-content">
@@ -186,8 +185,6 @@
                             <div class="block-header">
                                 <div class="block-title">
                                     AliBaba Top-up Requests
-                                    <span style="float: right" ><i class="fa fa-info-circle" title="This ID used for wallet-to-wallet transferred"></i>WALLET ID {{$wallet->wallet_token}}</span>
-
                                 </div>
                             </div>
                             <div class="block-content">
