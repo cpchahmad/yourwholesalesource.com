@@ -175,7 +175,7 @@ class SingleStoreController extends Controller
 //        });
 
         $productQuery->where('global', 0)->whereHas('has_non_shopify_user_preferences', function ($q) {
-            return $q->where('id', '=', Auth::user()->id);
+            return $q->where('user_id', '=', Auth::user()->id);
         });
 
         $productQuery->orwhere('global', 1);
