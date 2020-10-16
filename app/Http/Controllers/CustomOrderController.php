@@ -389,6 +389,9 @@ class CustomOrderController extends Controller
             return $q->where('user_id', '=', Auth::user()->id);
         });
 
+        $productQuery->orwhere('global', 1);
+
+
         if ($request->has('category')) {
             $productQuery->whereHas('has_categories', function ($q) use ($request) {
                 return $q->where('title', 'LIKE', '%' . $request->input('category') . '%');
