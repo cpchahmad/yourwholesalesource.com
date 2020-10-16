@@ -351,8 +351,6 @@ class OrderController extends Controller
     public function show_bulk_payments(Request $request)
     {
         $orders_array = explode(',', $request->input('orders'));
-
-        dd($orders_array);
         if (count($orders_array) > 0) {
             $orders = RetailerOrder::whereIn('id', $orders_array)->newQuery();
 
@@ -366,7 +364,7 @@ class OrderController extends Controller
 
 
 
-            return view('single-store.orders.bulk-pyment')->with([
+            return view('single-store.orders.bulk-payment')->with([
                 'orders' => $orders,
                 'shipping_price' => $shipping_price,
                 'cost_to_pay' => $cost_to_pay,
