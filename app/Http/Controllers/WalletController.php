@@ -172,15 +172,12 @@ class WalletController extends Controller
     }
 
     public function walletRequest(Request $request){
-        $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
-        $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->newQuery();
+        $wallets = Wallet::request()->where('status', 0)->count();
 
-
-        $users = $users->paginate(30);
+        dd($wallets);
 
         return view('setttings.wallets.requests')->with([
-            'users' => $users,
-            'search' => $request->input('search')
+
         ]);
     }
 
