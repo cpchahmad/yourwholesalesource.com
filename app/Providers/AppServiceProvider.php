@@ -89,7 +89,7 @@ class AppServiceProvider extends ServiceProvider
             $users  = $manager->has_users;
             $manager_wallet_request_count = 0;
             foreach ($users as $user) {
-                if($user->has_wallet->where('status', 0)->exists()){
+                if($user->has_wallet->requests()->where('status', 0)->exists()){
                     $manager_wallet_request_count++;
                 }
             }
