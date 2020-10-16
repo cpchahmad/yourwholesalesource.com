@@ -53,7 +53,7 @@
                                     </thead>
                                     <tbody class="">
                                     @foreach($users as $index => $user)
-                                        @if($user->has_wallet->requests()->where('status','0')->exists())
+                                        @if($user->has_wallet->requests()->where('status', 0)->exists())
                                             <tr>
                                             <td class="font-w600">{{ $user->name }}</td>
                                             <td>
