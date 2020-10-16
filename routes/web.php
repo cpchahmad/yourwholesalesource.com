@@ -147,7 +147,6 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/orders', 'OrderController@index')->name('store.orders');
         Route::get('/order/delete/{id}', 'OrderController@delete')->name('store.order.delete');
         Route::get('/order/view/{id}', 'OrderController@view_order')->name('store.order.view');
-
         Route::get('/customers', 'SingleStoreController@customers')->name('store.customers');
         Route::get('/customers/{id}', 'SingleStoreController@customer_view')->name('store.customer.view');
         Route::get('/getCustomers', 'SingleStoreController@getCustomers')->name('store.sync.customers');
@@ -248,6 +247,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/settings/personal/address','ManagerController@save_address')->name('sales_managers.save_address');
             Route::post('/change/password','ManagerController@change_password')->name('sales_managers.change_password');
             Route::get('/wallets', 'ManagerController@wallet_index')->name('sales_managers.wallets');
+            Route::get('/managers/wallets-requests', 'ManagerController@wallet_request')->name('sales_managers.wallets.requests');
             Route::get('/wallets/{id}', 'ManagerController@wallet_details')->name('sales_managers.wallets.detail');
             Route::get('/wallet/request/approve/{id}', 'ManagerController@approved_bank_statement')->name('sales_managers.wallets.approve.request');
             Route::post('/wallet/top-up', 'ManagerController@topup_wallet_by_admin')->name('sales_managers.user.wallet.topup');

@@ -927,6 +927,25 @@ class ManagerController extends Controller
             'users' => $users
         ]);
     }
+
+    public function wallet_request() {
+        $wallets = [];
+
+        $manager = User::find(Auth::id());
+        $users  = $manager->has_users;
+
+
+        foreach ($users as $user) {
+            if($user->has_wallet->requests()->where('status', 0)->exists()){
+                array_push($wallets, $user->has_wallet);
+            }
+        }
+
+
+        return view('sales_managers.wallets.requests')->with([
+            'wallets' => $wallets
+        ]);
+    }
     public function wallet_details(Request $request,$id){
         $wallet = Wallet::find($id);
         $user = User::find($wallet->user_id);
