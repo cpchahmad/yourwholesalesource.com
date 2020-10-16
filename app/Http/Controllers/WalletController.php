@@ -172,10 +172,13 @@ class WalletController extends Controller
     }
 
     public function walletRequest(Request $request){
+
+        $wallets = Wallet::requests()->where('status', 0)->get();
+        dd($wallets);
         $wallets = [];
 
         foreach (Wallet::all() as $wallet) {
-            if($wallet->request()->where('status', 0)->count() > 0) {
+            if($wallet->requests()->where('status', 0)->count() > 0) {
                 array_push($wallets, $wallet);
             }
         }
