@@ -29,31 +29,31 @@
                                 </div>
                             </div>
                             <div class="block-content">
-                                @foreach($wallets as $wallet)
-                                    @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)
-                                        <table class="table table-hover table-borderless table-striped table-vcenter">
-                                            <thead>
-                                            <tr>
-                                                <th>Bank</th>
-                                                <th>Cheque</th>
-                                                <th>Company/Sender Title</th>
-                                                <th>Amount</th>
-                                                <th>Bank Proof Copy</th>
-                                                <th>Status</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-
+                                <table class="table table-hover table-borderless table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th>Company/Sender Title</th>
+                                        <th>Alibaba Order Number </th>
+                                        <th>Amount</th>
+                                        <th>Bank Proof Copy</th>
+                                        <th>Notes</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="">
+                                    @foreach($wallets as $wallet)
+                                        @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)
                                             @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
-                                                <tbody class="">
                                                 <tr>
-                                                    <td class="font-w600">{{ $req->bank_name }}</td>
-                                                    <td>
-                                                        {{$req->cheque}}
-                                                    </td>
+
                                                     <td>
                                                         {{$req->cheque_title}}
                                                     </td>
+                                                    <td>
+                                                        {{$req->cheque}}
+                                                    </td>
+
                                                     <td>
                                                         {{number_format($req->amount,2)}} USD
                                                     </td>
@@ -66,6 +66,13 @@
                                                             No Proof Provided
                                                         @endif
                                                     </td>
+                                                    <td>
+                                                        @if($req->notes != null)
+                                                            {{$req->notes}}
+                                                        @else
+                                                            No Notes
+                                                        @endif
+                                                    </td>
 
                                                     <td>
                                                         @if($req->status == 0)
@@ -74,18 +81,13 @@
                                                             <span class="badge badge-success">Approved</span>
                                                         @endif
                                                     </td>
-                                                    <td>
                                                     <td class="text-right">
-
                                                         @if($req->status == 0)
                                                             <button type="button" data-toggle="modal" data-target="#edit_bank_approve_modal{{$req->id}}" class="btn btn-sm btn-primary">Edit</button>
                                                             <button class="btn btn-sm btn-success <!--approve-bank-transfer-button-->" data-toggle="modal" data-target="#bank_approve_modal{{$req->id}}" {{--data-route="{{route('sales_managers.wallets.approve.request',$req->id)}}" data-wallet="{{$wallet->wallet_token}}" data-amount="{{number_format($req->amount,2)}} USD" --}} > Approve</button>
                                                         @endif
-
                                                     </td>
-
                                                 </tr>
-                                                </tbody>
                                                 <div class="modal fade" id="edit_bank_approve_modal{{$req->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                                         <div class="modal-content">
@@ -102,9 +104,9 @@
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
                                                                             <div class="form-material">
-                                                                                <label for="material-error">Cheque</label>
+                                                                                <label for="material-error">Alibaba Order Number</label>
                                                                                 <input required class="form-control" type="text"  name="cheque"
-                                                                                       value="{{ $req->cheque    }}" >
+                                                                                       value="{{ $req->cheque }}" >
                                                                             </div>
                                                                         </div>
 
@@ -115,6 +117,8 @@
                                                                                        value="{{ $req->cheque_title }}" >
                                                                             </div>
                                                                         </div>
+
+
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Amount</label>
@@ -167,15 +171,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             @endforeach
-                                        </table>
-                                    @else
-                                        <p>No  Bank Transfer Requests Found</p>
-                                    @endif
-                                @endforeach
+                                        @else
+                                            <p>No AliBaba Top-up Requests Found</p>
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
