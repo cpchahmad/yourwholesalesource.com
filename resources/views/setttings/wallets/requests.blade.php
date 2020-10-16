@@ -19,8 +19,18 @@
     </div>
     <div  class="form-horizontal push-30">
         <div class="content">
+            <div class="block">
+                <ul class="nav nav-tabs nav-justified nav-tabs-block " data-toggle="tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#bank">Bank Transfer Top-up Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#alibaba"> AliBaba Top-up Requests</a>
+                    </li>
+                </ul>
 
-                <div class="row">
+            </div>
+                <div class="row" id="bank">
                     <div class="col-md-12">
                         <div class="block">
                             <div class="block-header">
@@ -188,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="alibaba">
                     <div class="col-md-12">
                         <div class="block">
                             <div class="block-header">
