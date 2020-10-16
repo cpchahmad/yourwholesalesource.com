@@ -31,7 +31,7 @@
 
             </div>
             <div class="block-content tab-content">
-                <div class="row tab-pane" id="bank" role="tabpanel">
+                <div class="row tab-pane active" id="bank" role="tabpanel">
                     <div class="col-md-12">
                         <div class="block">
                             <div class="block-header">
