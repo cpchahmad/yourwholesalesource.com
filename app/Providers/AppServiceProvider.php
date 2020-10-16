@@ -40,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
                 $query->whereHas('to_users',function ($q) use ($user){
                     $q->where('email',$user->email);
                 });
+                $manager = User::find(Auth::id());
             }
             else {
               $auth_shop =  ShopifyApp::shop();
@@ -70,8 +71,6 @@ class AppServiceProvider extends ServiceProvider
               else{
                   $balance = 0;
               }
-
-                $manager = User::find(Auth::id());
             }
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
             $notifications_count = $query->orderBy('created_at','DESC')->count();
