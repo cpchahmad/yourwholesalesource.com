@@ -79,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
             $tickets_request_count = Ticket::where('status_id', 1)->count();
 
             $manager_wishlist_request_count = Wishlist::where('manager_id' ,Auth::id())->where('status_id', 1)->count();
+            $manager_wallet_request_count = WalletRequest::where('manager_id' ,Auth::id())->where('status', 0)->count();
             $manager_refund_request_count = Refund::where('manager_id',Auth::id())->where('status', 'New')->count();
             $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->count();
 
@@ -94,6 +95,7 @@ class AppServiceProvider extends ServiceProvider
                 'manager_wishlist_request_count' => $manager_wishlist_request_count,
                 'manager_refund_request_count' => $manager_refund_request_count,
                 'manager_tickets_request_count' => $manager_tickets_request_count,
+                'manager_wallet_request_count' => $manager_wallet_request_count,
             ]);
 
         });

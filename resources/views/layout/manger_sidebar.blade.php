@@ -121,7 +121,7 @@
             <div class="d-inline-block mr-3 badge badge-success text-white">
                 <a href="/wallets-requests" class="text-white">
                     Wallet Requests
-                    <span class="" style="font-size: 13px"> {{$wallet_request_count}} </span>
+                    <span class="" style="font-size: 13px"> {{$manager_wallet_request_count}} </span>
                 </a>
             </div>
 
