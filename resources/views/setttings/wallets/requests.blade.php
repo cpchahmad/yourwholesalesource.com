@@ -40,7 +40,7 @@
                                         <th>Bank Proof Copy</th>
                                         <th>Notes</th>
                                         <th>Status</th>
-                                        <th></th>
+                                        <th style="width: 150px !important;"></th>
                                     </tr>
                                     </thead>
                                     <tbody class="">
@@ -206,7 +206,7 @@
                                         <th>Bank Proof Copy</th>
                                         <th>Notes</th>
                                         <th>Status</th>
-                                        <th></th>
+                                        <th style="width: 150px !important;"></th>
                                     </tr>
                                     </thead>
                                     <tbody class="">
