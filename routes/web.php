@@ -103,7 +103,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/orders/{id}/mark-as-delivered','AdminOrderController@mark_as_delivered')->name('admin.order.mark_as_delivered');
     /*Admin Wallet Routes*/
     Route::get('/wallets', 'WalletController@index')->name('admin.wallets');
-    Route::get('/wallets/requests', 'WalletController@walletRequest')->name('admin.wallets.requests');
+    Route::get('/wallets-requests', 'WalletController@walletRequest')->name('admin.wallets.requests');
     Route::get('/wallets/{id}', 'WalletController@wallet_details')->name('admin.wallets.detail');
     Route::get('/wallet/request/approve/{id}', 'WalletController@approved_bank_statement')->name('admin.wallets.approve.request');
     Route::get('/wallet/request/{id}/edit', 'WalletController@EditWalletDetails')->name('admin.wallets.edit');
