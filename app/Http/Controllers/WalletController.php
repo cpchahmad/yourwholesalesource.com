@@ -181,10 +181,9 @@ class WalletController extends Controller
             }
         }
 
-        dd($wallets);
 
         return view('setttings.wallets.requests')->with([
-
+            'wallets' => $wallets
         ]);
     }
 
