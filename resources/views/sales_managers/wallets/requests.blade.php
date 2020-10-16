@@ -40,6 +40,7 @@
                                 </div>
                             </div>
                             <div class="block-content">
+                                @if(count($wallet) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
@@ -194,6 +195,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                @else
+                                    <p>No Requests..</p>
+                                @endif
                             </div>
 
                         </div>
@@ -208,6 +212,7 @@
                                 </div>
                             </div>
                             <div class="block-content">
+                                @if(count($wallet) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
@@ -362,6 +367,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                @else
+                                    <p>No Requests..</p>
+                                @endif
                             </div>
                         </div>
                     </div>
