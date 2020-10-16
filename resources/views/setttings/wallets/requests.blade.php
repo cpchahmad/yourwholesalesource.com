@@ -51,7 +51,7 @@
                                                         {{ $req->user }}
                                                     </td>
                                                     <td>
-                                                        {{ $req->wallet_token }}
+                                                        {{ $req->token }}
                                                     </td>
                                                     <td>
                                                         {{$req->cheque_title}}
@@ -217,7 +217,7 @@
                                                         {{ $req->user }}
                                                     </td>
                                                     <td>
-                                                        {{ $req->wallet_token }}
+                                                        {{ $req->token }}
                                                     </td>
                                                     <td>
                                                         {{$req->cheque_title}}

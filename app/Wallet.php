@@ -22,9 +22,6 @@ class Wallet extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function getUserAttribute() {
-        $user = User::find($this->user_id);
-        return $user->name;
-    }
+
 
 }
