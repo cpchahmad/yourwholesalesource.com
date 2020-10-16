@@ -626,12 +626,13 @@ class AdminOrderController extends Controller
         if (count($orders_array) > 0) {
             $orders = RetailerOrder::whereIn('id', $orders_array)->newQuery();
 
+            dd($orders->get());
+
             $orders->whereHas('line_items', function ($q) {
                 $q->where('fulfillable_quantity', '>', 0);
             });
             $orders = $orders->get();
 
-            dd($orders);
             $total_quantity = 0;
             $fulfillable_quantity = 0;
             foreach ($orders as $order) {
