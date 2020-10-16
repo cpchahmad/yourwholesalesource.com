@@ -188,21 +188,20 @@
                                 </div>
                             </div>
                             <div class="block-content">
+                                <table class="table table-hover table-borderless table-striped table-vcenter">
+                                    <thead>
+                                    <tr>
+                                        <th>Company/Sender Title</th>
+                                        <th>Alibaba Order Number </th>
+                                        <th>Amount</th>
+                                        <th>Bank Proof Copy</th>
+                                        <th>Notes</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
                                 @foreach($wallets as $wallet)
                                     @if (count($wallet->requests()->where('type','alibaba')->get()) > 0)
-                                        <table class="table table-hover table-borderless table-striped table-vcenter">
-                                            <thead>
-                                            <tr>
-                                                <th>Company/Sender Title</th>
-                                                <th>Alibaba Order Number </th>
-                                                <th>Amount</th>
-                                                <th>Bank Proof Copy</th>
-                                                <th>Notes</th>
-                                                <th>Status</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-
                                             @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
                                                 <tbody class="">
                                                 <tr>
