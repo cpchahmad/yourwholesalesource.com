@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="block-content">
-                                @if(count($wallet) > 0)
+                                @if(count($wallets) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
@@ -212,7 +212,7 @@
                                 </div>
                             </div>
                             <div class="block-content">
-                                @if(count($wallet) > 0)
+                                @if(count($wallets) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
