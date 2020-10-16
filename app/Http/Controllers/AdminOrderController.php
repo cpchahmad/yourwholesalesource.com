@@ -623,7 +623,6 @@ class AdminOrderController extends Controller
     public function show_bulk_fulfillments(Request $request)
     {
         $orders_array = explode(',', $request->input('orders'));
-        dd($orders_array);
         if (count($orders_array) > 0) {
             $orders = RetailerOrder::whereIn('id', $orders_array)->newQuery();
 
@@ -638,6 +637,8 @@ class AdminOrderController extends Controller
                 $fulfillable_quantity = $fulfillable_quantity + $order->line_items->whereIn('fulfilled_by', ['Fantasy', 'AliExpress'])->sum('fulfillable_quantity');
 
             }
+
+            dd($orders);
             if (!Auth::check()) {
                 return view('orders.bulk-fulfillment')->with([
                     'orders' => $orders,
