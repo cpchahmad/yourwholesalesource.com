@@ -623,7 +623,7 @@ class AdminOrderController extends Controller
     public function show_bulk_fulfillments(Request $request)
     {
         $orders_array = explode(',', $request->input('orders'));
-        dd(123);
+        dd($orders_array);
         if (count($orders_array) > 0) {
             $orders = RetailerOrder::whereIn('id', $orders_array)->newQuery();
 
