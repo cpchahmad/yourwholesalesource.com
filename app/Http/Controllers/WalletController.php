@@ -173,8 +173,6 @@ class WalletController extends Controller
 
     public function walletRequest(Request $request){
 
-        $wallets = Wallet::requests()->where('status', 0)->get();
-        dd($wallets);
         $wallets = [];
 
         foreach (Wallet::all() as $wallet) {
