@@ -175,9 +175,9 @@ class WalletController extends Controller
         $admins = User::whereIn('email',['admin@wefullfill.com','super_admin@wefullfill.com'])->pluck('id')->toArray();
         $users  = User::role('non-shopify-users')->whereNotIn('id',$admins)->orderBy('created_at','DESC')->newQuery();
 
-        $users->join('wallet_request', function ($join) {
-            $join->on('wallet_request.user_id', '=', 'users.id')
-                ->where('wallet_request.status', '=', '0');
+        $users->join('wallet_requests', function ($join) {
+            $join->on('wallet_requests.user_id', '=', 'users.id')
+                ->where('wallet_requests.status', '=', '0');
         })
         ->select('users.*')
         ->groupBy('users.id' )
