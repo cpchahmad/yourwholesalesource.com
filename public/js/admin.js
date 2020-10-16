@@ -950,6 +950,8 @@ $(document).ready(function () {
         $('.check-order:checked').each(function () {
             values.push($(this).val());
         });
+
+        console.log(values);
         $('#bulk-fullfillment').find('input:hidden[name=orders]').val(values);
 
     }
