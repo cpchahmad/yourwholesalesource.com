@@ -43,7 +43,6 @@
                                     </thead>
                                     <tbody class="">
                                     @foreach($wallets as $wallet)
-                                        @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)
                                             @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
                                                 <tr>
 
@@ -172,9 +171,6 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                                        @else
-                                            <p>No AliBaba Top-up Requests Found</p>
-                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -206,7 +202,6 @@
                                     </thead>
                                     <tbody class="">
                                         @foreach($wallets as $wallet)
-                                            @if (count($wallet->requests()->where('type','alibaba')->get()) > 0)
                                                 @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
                                                     <tr>
 
@@ -335,9 +330,6 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                            @else
-                                                <p>No AliBaba Top-up Requests Found</p>
-                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
