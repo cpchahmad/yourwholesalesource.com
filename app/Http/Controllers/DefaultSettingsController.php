@@ -455,13 +455,6 @@ class DefaultSettingsController extends Controller
         $users = $users->orderBy('created_at','DESC')->paginate(30);
 
 
-//        // Stores
-//        $stores= Shop::query();
-//        $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
-//        if($request->has('shop_search')){
-//            $stores->where('shopify_domain','LIKE','%'.$request->input('shop_search').'%');
-//        }
-//        $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
 
         return view('setttings.users.new-index')->with([
             'users'=>$users,

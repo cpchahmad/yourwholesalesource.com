@@ -784,13 +784,24 @@ class ManagerController extends Controller
         return redirect()->back()->with('success', 'Order Fulfillment Cancelled Successfully');
     }
 
+//    public function stores(Request $request){
+//        $manager= User::find(Auth::id());
+//        $stores = $manager->has_sales_stores;
+//        return view('sales_managers.stores.index')->with([
+//            'stores'=>$stores
+//        ]);
+//    }
+
     public function stores(Request $request){
         $manager= User::find(Auth::id());
-        $stores = $manager->has_sales_stores;
-        return view('sales_managers.stores.index')->with([
-            'stores'=>$stores
+        $users = $manager->has_users;
+
+        return view('sales_managers.users.index')->with([
+            'users'=>$users,
         ]);
     }
+
+
     public function store(Request $request){
         $store = Shop::find($request->id);
         if (count($store->has_user) > 0) {
