@@ -3,10 +3,11 @@ $(document).ready(function () {
     $('#example-radio-best-seller').change(function() {
 
         if ($(this).is(':checked')){
-            console.log(234);
+            console.log($(this));
             $(this).prop("checked", false);
         }
         else {
+            console.log($(this));
             $(this).prop("checked", true);
 
         }
