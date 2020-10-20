@@ -441,9 +441,11 @@ class DefaultSettingsController extends Controller
         // Non-shopify
         $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         $users = User::role('non-shopify-users')->newQuery();
+        $stores= Shop::query();
+
         $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
         if($request->has('user_search')){
-            $users->has_shops()->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
+            $users = $stores->where('shopify_domain','LIKE','%'.$request->input('shop_search').'%')->has_user();
             $users->orWhere('name','LIKE','%'.$request->input('user_search').'%');
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
         }
