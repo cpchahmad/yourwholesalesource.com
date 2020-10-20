@@ -90,11 +90,6 @@
                 @else
                     <p class="text-center"> No User Available</p>
                 @endif
-                    <div class="row">
-                        <div class="col-md-12 text-center" style="font-size: 17px">
-                            {!! $users->links() !!}
-                        </div>
-                    </div>
             </div>
         </div>
     </div>
