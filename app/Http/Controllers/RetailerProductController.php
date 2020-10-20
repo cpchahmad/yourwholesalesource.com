@@ -545,6 +545,7 @@ class RetailerProductController extends Controller
     }
 
     public function variants_template_array($product){
+        dd($product->weight);
         $variants_array = [];
         foreach ($product->hasVariants as $index => $varaint) {
             array_push($variants_array, [
