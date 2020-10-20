@@ -798,6 +798,8 @@ class ManagerController extends Controller
 
 
         if($request->has('user_search')){
+            $users = $manager->has_users;
+
 
             $users->where('name','LIKE','%'.$request->input('user_search').'%');
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
