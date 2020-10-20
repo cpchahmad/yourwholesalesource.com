@@ -809,6 +809,7 @@ class ManagerController extends Controller
 
         return view('sales_managers.users.new-index')->with([
             'users'=>$users,
+            'user_search' => $request->input('user_search'),
         ]);
     }
 
