@@ -794,23 +794,13 @@ class ManagerController extends Controller
 
     public function stores(Request $request){
         $manager= User::find(Auth::id());
-        $users = $manager->where('sale_manager_id', Auth::id())->newQuery();
+        $users = $manager->has_users()->newQuery();
 
 
-        if($request->has('user_search')){
-
-            $users->whereHas('has_shops', function($q) use ($request){
-                $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
-            });
-            $users->orWhere('name','LIKE','%'.$request->input('user_search').'%');
-            $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
-            dd(12,$users->get());
-        }
         $users = $users->paginate(30);
 
         return view('sales_managers.users.new-index')->with([
             'users'=>$users,
-            'user_search' => $request->input('user_search'),
         ]);
     }
 
