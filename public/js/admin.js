@@ -2,7 +2,12 @@ $(document).ready(function () {
 
     $('#example-radio-best-seller').click(function() {
         console.log(234);
-        $(this).not(':checked').prop("checked", true);
+        if( $(this).prop("checked", true)) {
+            $(this).prop("checked", false);
+        }
+        else if( $(this).prop("checked", false)) {
+            $(this).prop("checked", true);
+        }
     });
 
     $('#example-radio-winning-product').click(function() {
