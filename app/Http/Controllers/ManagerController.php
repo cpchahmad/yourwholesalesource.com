@@ -794,7 +794,7 @@ class ManagerController extends Controller
 
     public function stores(Request $request){
         $manager= User::find(Auth::id());
-        $users = $manager->has_users()->get();
+        $users = $manager->has_users;
 
         if($request->has('user_search')){
             $users->whereHas('has_shops', function($q) use ($request){
@@ -804,7 +804,7 @@ class ManagerController extends Controller
             $users->orWhere('name','LIKE','%'.$request->input('user_search').'%');
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
         }
-        $users = $users->orderBy('created_at','DESC')->paginate(30);
+        $users = $users->paginate(30);
 
         return view('sales_managers.users.new-index')->with([
             'users'=>$users,
