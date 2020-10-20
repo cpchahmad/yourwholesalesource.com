@@ -798,6 +798,8 @@ class ManagerController extends Controller
 
 
         if($request->has('user_search')){
+            $x = User::where('sale_manager_id', Auth::id)->get();
+            dd($x);
             $u = User::where('sale_manager_id', Auth::id())->where('name','LIKE','%'.$request->input('user_search').'%')->orWhere('email','LIKE','%'.$request->input('user_search').'%')->get();
 
             dd(2,$u);
