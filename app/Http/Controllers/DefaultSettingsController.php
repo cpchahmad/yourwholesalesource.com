@@ -419,19 +419,51 @@ class DefaultSettingsController extends Controller
             'products' => Product::all(),
         ]);
     }
+//    public function stores(Request $request){
+//        $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
+//        $stores= Shop::query();
+//        $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
+//        if($request->has('search')){
+//            $stores->where('shopify_domain','LIKE','%'.$request->input('search').'%');
+//        }
+//        $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
+//        return view('setttings.stores.index')->with([
+//            'stores'=>$stores,
+//            'managers' => $sales_managers,
+//            'search' => $request->input('search'),
+//        ]);
+//
+//
+//    }
+
     public function stores(Request $request){
+
+        // Non-shopify
         $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
-        $stores= Shop::query();
-        $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
-        if($request->has('search')){
-            $stores->where('shopify_domain','LIKE','%'.$request->input('search').'%');
+        $users = User::role('non-shopify-users')->newQuery();
+        $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+        if($request->has('user_search')){
+            $users->where('name','LIKE','%'.$request->input('user_search').'%');
+            $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
         }
-        $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
-        return view('setttings.stores.index')->with([
-            'stores'=>$stores,
+        $users = $users->orderBy('created_at','DESC')->paginate(30);
+
+
+//        // Stores
+//        $stores= Shop::query();
+//        $stores = $stores->whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com']);
+//        if($request->has('shop_search')){
+//            $stores->where('shopify_domain','LIKE','%'.$request->input('shop_search').'%');
+//        }
+//        $stores =  $stores->orderBy('created_at','DESC')->paginate(30);
+
+        return view('setttings.users.new-index')->with([
+            'users'=>$users,
             'managers' => $sales_managers,
-            'search' => $request->input('search'),
+            'user_search' => $request->input('user_search'),
         ]);
+
+
     }
 
     public function store(Request $request){
