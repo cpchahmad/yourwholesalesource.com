@@ -798,7 +798,7 @@ class ManagerController extends Controller
 
 
         if($request->has('user_search')){
-            $users = $users->get();
+            dd($users->get());
             $users->whereHas('has_shops', function($q) use ($request){
                 $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
             });
