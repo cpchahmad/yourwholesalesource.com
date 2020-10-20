@@ -1,21 +1,24 @@
 $(document).ready(function () {
 
-    $('#example-radio-best-seller').change(function() {
 
-        if ($(this).is(':checked')){
-            console.log("checked");
-            $(this).prop("checked", false);
+    var radioState;
+
+    $('#example-radio-best-seller').on('click', function(e) {
+        if (radioState === this) {
+            this.checked = false;
+            radioState = null;
+        } else {
+            radioState = this;
         }
-        else {
-            console.log("uncheck");
-            $(this).prop("checked", true);
-
-        }
-
     });
 
-    $('#example-radio-winning-product').click(function() {
-        $(this).not(':checked').prop("checked", true);
+    $('#example-radio-winning-product').on('click', function(e) {
+        if (radioState === this) {
+            this.checked = false;
+            radioState = null;
+        } else {
+            radioState = this;
+        }
     });
 
     /*Admin Module - Rate Type Selection*/
