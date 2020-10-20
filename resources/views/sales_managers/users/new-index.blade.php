@@ -11,7 +11,7 @@
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx active" href="">Non Shopify Users</a>
+                            <a class="link-fx active" href="">Users</a>
                         </li>
                     </ol>
                 </nav>

@@ -796,7 +796,7 @@ class ManagerController extends Controller
         $manager= User::find(Auth::id());
         $users = $manager->has_users;
 
-        return view('sales_managers.users.index')->with([
+        return view('sales_managers.users.new-index')->with([
             'users'=>$users,
         ]);
     }
