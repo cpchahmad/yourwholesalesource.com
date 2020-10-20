@@ -24,15 +24,20 @@
                     $bank =0;
                     $ali =0;
                     foreach($wallets as $wallet) {
-                        if($wallet->requests()->where('type','bank transfer')->count() > 0) {
-                            $bank++;
+                        foreach($wallet->requests()->where('type','bank transfer')->get() as $req) {
+                            if($req->status == 0) {
+                                 $bank++;
+                            }
                         }
-
-                        if($wallet->requests()->where('type','alibaba')->count() > 0) {
-                            $ali++;
-                        }
-
                     }
+                    foreach($wallets as $wallet) {
+                        foreach($wallet->requests()->where('type','alibaba')->get() as $req) {
+                            if($req->status == 0) {
+                                 $ali++;
+                            }
+                        }
+                    }
+
                 @endphp
                 <ul class="nav nav-tabs nav-justified nav-tabs-block " data-toggle="tabs" role="tablist">
                     <li class="nav-item">
