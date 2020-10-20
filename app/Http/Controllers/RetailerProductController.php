@@ -545,7 +545,15 @@ class RetailerProductController extends Controller
     }
 
     public function variants_template_array($product){
-        dd($product->weight);
+        if(is_null($product->weight)) {
+            $weight = 0.0;
+        }
+        else {
+            $weight = $product->weight;
+        }
+
+        dd($weight);
+
         $variants_array = [];
         foreach ($product->hasVariants as $index => $varaint) {
             array_push($variants_array, [
@@ -557,8 +565,8 @@ class RetailerProductController extends Controller
                 'inventory_quantity' => $varaint->quantity,
                 "fulfillment_service" => "wefullfill",
                 'inventory_management' => 'wefullfill',
-                'grams' => $product->weight * 1000,
-                'weight' => $product->weight,
+                'grams' => $weight * 1000,
+                'weight' => $weight,
                 'weight_unit' => 'kg',
                 'barcode' => $varaint->barcode,
                 'price' => $varaint->price,
