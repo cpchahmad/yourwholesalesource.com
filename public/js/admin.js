@@ -1,5 +1,14 @@
 $(document).ready(function () {
 
+    $('#example-radio-best-seller').click(function() {
+        console.log(234);
+        $(this).not(':checked').prop("checked", true);
+    });
+
+    $('#example-radio-winning-product').click(function() {
+        $(this).not(':checked').prop("checked", true);
+    });
+
     /*Admin Module - Rate Type Selection*/
     $('body').on('change','.rate_type_select',function () {
         if ($(this).val() !== 'flat') {

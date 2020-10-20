@@ -833,17 +833,6 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#example-radio-best-seller').click(function() {
-                console.log(234);
-                $(this).not(':checked').prop("checked", true);
-            });
 
-            $('#example-radio-winning-product').click(function() {
-                $(this).not(':checked').prop("checked", true);
-            });
-        });
-    </script>
 
 @endsection
