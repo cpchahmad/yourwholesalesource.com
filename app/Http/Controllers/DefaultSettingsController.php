@@ -449,7 +449,6 @@ class DefaultSettingsController extends Controller
             foreach($stores as $store) {
                 $users = $store->has_user;
             }
-            dd($users);
             $users->orWhere('name','LIKE','%'.$request->input('user_search').'%');
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
         }
