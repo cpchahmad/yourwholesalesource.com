@@ -404,7 +404,6 @@ class RetailerProductController extends Controller
             $options_array = $this->options_template_array($product,$options_array);
             /*Product Images*/
 
-            dd($variants_array);
 
             foreach ($product->has_images as $index => $image) {
                 if ($image->isV == 0) {
