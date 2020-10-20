@@ -60,15 +60,15 @@
             <li class="nav-main-item">
                 <a class="nav-main-link active"  href="{{route('sales_managers.stores')}}">
                     <i class="nav-main-link-icon fa fa-store"></i>
-                    <span class="nav-main-link-name">Stores</span>
+                    <span class="nav-main-link-name">Users</span>
                 </a>
             </li>
-            <li class="nav-main-item">
-                <a class="nav-main-link active"  href="{{route('sales_managers.users')}}">
-                    <i class="nav-main-link-icon fa fa-users"></i>
-                    <span class="nav-main-link-name">Non Shopify Users</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link active"  href="{{route('sales_managers.users')}}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-users"></i>--}}
+{{--                    <span class="nav-main-link-name">Non Shopify Users</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
 
             <li class="nav-main-item">
