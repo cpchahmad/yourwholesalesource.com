@@ -796,6 +796,8 @@ class ManagerController extends Controller
         $manager= User::find(Auth::id());
         $users = $manager->has_users;
 
+        dd($users);
+
         if($request->has('user_search')){
             $users->whereHas('has_shops', function($q) use ($request){
                 $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
