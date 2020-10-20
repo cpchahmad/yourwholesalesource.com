@@ -794,9 +794,8 @@ class ManagerController extends Controller
 
     public function stores(Request $request){
         $manager= User::find(Auth::id());
-        $users = $manager->has_users()->get();
+        $users = $manager->has_users();
 
-        dd($users);
 
         if($request->has('user_search')){
             $users->whereHas('has_shops', function($q) use ($request){
