@@ -1,13 +1,12 @@
 $(document).ready(function () {
 
-    $('#example-radio-best-seller').click(function() {
-        console.log(234);
-        if( $(this).prop("checked", true)) {
+    $('#example-radio-best-seller').chnage(function() {
+
+        if ($(this).is(':checked')){
+            console.log(234);
             $(this).prop("checked", false);
         }
-        else if( $(this).prop("checked", false)) {
-            $(this).prop("checked", true);
-        }
+
     });
 
     $('#example-radio-winning-product').click(function() {
