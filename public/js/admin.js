@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#example-radio-best-seller').chnage(function() {
+    $('#example-radio-best-seller').change(function() {
 
         if ($(this).is(':checked')){
             console.log(234);
