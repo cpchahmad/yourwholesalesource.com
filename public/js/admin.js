@@ -6,6 +6,10 @@ $(document).ready(function () {
             console.log(234);
             $(this).prop("checked", false);
         }
+        else {
+            $(this).prop("checked", true);
+
+        }
 
     });
 
