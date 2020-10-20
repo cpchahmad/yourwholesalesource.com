@@ -798,19 +798,14 @@ class ManagerController extends Controller
 
 
         if($request->has('user_search')){
-            $manager->has_users()->whereHas('has_shops', function($q) use ($request){
-                $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
-            });
-            $manager->has_users()->where('name','LIKE','%'.$request->input('user_search').'%');
-            $manager->has_users()->orWhere('email','LIKE','%'.$request->input('user_search').'%');
+//            $users->whereHas('has_shops', function($q) use ($request){
+//                $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
+//            });
+            $users->where('name','LIKE','%'.$request->input('user_search').'%');
+            dd($users->get(),23);
+            $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
 
-            $users = $manager->has_users()->paginate(30);
-
-            return view('sales_managers.users.new-index')->with([
-                'users'=>$users,
-                'user_search' => $request->input('user_search'),
-            ]);
-
+            dd(12,$users->get());
         }
         $users = $users->paginate(30);
 
