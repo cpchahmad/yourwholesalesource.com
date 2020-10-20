@@ -39,6 +39,7 @@
 
                             <th>Title</th>
                             <th>Email</th>
+                            <th>Stores</th>
                             <th>Manager</th>
                             <th>Files</th>
                             <th>Orders</th>
@@ -53,6 +54,16 @@
                                 <td class="font-w600"><a href="{{route('users.view',$user->id)}}">{{$user->name}}</a></td>
                                 <td>
                                     <span class="badge badge-primary">{{$user->email}}</span>
+                                </td>
+                                <td>
+                                    @if($user->has_shops()->count() > 0)
+                                        @foreach($user->has_shops()->get() as $store)
+                                            <span class="badge badge-primary">
+                                                {{$store->shopify_domain}}
+                                            </span>
+                                        @endforeach
+                                    @endif
+
                                 </td>
                                 <td>
                                     @if($user->has_manager != null)
