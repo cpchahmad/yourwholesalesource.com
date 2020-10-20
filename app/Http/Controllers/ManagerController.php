@@ -802,9 +802,9 @@ class ManagerController extends Controller
             $users->whereHas('has_shops', function($q) use ($request){
                 $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
             });
-
-            $users->where('name','LIKE','%'.$request->input('user_search').'%');
-            $users->where('email','LIKE','%'.$request->input('user_search').'%');
+            dd($users->get());
+            $users->orWhere('name','LIKE','%'.$request->input('user_search').'%');
+            $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
 
             dd(12,$users->get());
         }
