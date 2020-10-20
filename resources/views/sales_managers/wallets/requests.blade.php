@@ -20,12 +20,26 @@
     <div  class="form-horizontal push-30">
         <div class="content">
             <div class="block">
+                @php
+                    $bank =0;
+                    $ali =0;
+                    foreach($wallets as $wallet) {
+                        if($wallet->request()->where('type','bank transfer')->exits()) {
+                            $bank++;
+                        }
+
+                        if($wallet->request()->where('type','alibaba')->exits()) {
+                            $ali++;
+                        }
+
+                    }
+                @endphp
                 <ul class="nav nav-tabs nav-justified nav-tabs-block " data-toggle="tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#bank">Bank Transfer Top-up Requests</a>
+                        <a class="nav-link active" href="#bank">Bank Transfer Top-up Requests ({{ $bank }})</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#alibaba"> AliBaba Top-up Requests</a>
+                        <a class="nav-link " href="#alibaba"> AliBaba Top-up Requests ({{ $ali }})</a>
                     </li>
                 </ul>
 
