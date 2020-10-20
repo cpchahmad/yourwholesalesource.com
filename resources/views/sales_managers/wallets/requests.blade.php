@@ -24,11 +24,11 @@
                     $bank =0;
                     $ali =0;
                     foreach($wallets as $wallet) {
-                        if($wallet->request()->where('type','bank transfer')->exits()) {
+                        if($wallet->requests()->where('type','bank transfer')->exits()) {
                             $bank++;
                         }
 
-                        if($wallet->request()->where('type','alibaba')->exits()) {
+                        if($wallet->requests()->where('type','alibaba')->exits()) {
                             $ali++;
                         }
 
