@@ -404,6 +404,8 @@ class RetailerProductController extends Controller
             $options_array = $this->options_template_array($product,$options_array);
             /*Product Images*/
 
+            dd($variants_array);
+
             foreach ($product->has_images as $index => $image) {
                 if ($image->isV == 0) {
                     $src = asset('images') . '/' . $image->image;
@@ -458,7 +460,6 @@ class RetailerProductController extends Controller
 
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
 
-            dd($response);
 
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
