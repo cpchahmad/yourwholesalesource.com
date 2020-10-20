@@ -800,16 +800,13 @@ class ManagerController extends Controller
         if($request->has('user_search')){
             $u = User::where('sale_manager_id', Auth::id())->newQuery();
 
-            dd($u->get());
-            $u->whereHas('has_shops', function($q) use ($request){
+            $x = $u->whereHas('has_shops', function($q) use ($request){
                 $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
-            });
-
-            $u->orWhere('name','LIKE','%'.$request->input('user_search').'%');
-            dd(45,$u->get());
-
-            $u->orWhere('email','LIKE','%'.$request->input('user_search').'%');
-            dd(12,$u->get());
+            })
+            ->orWhere('name','LIKE','%'.$request->input('user_search').'%')
+            ->orWhere('email','LIKE','%'.$request->input('user_search').'%')
+            ->get();
+            dd(34,$x);
         }
         $users = $users->paginate(30);
 
