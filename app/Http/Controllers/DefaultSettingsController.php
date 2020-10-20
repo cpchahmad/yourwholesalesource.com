@@ -445,7 +445,7 @@ class DefaultSettingsController extends Controller
 
         $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
         if($request->has('user_search')){
-            $users = $stores->where('shopify_domain','LIKE','%'.$request->input('shop_search').'%')->has_user();
+            $users = $stores->where('shopify_domain','LIKE','%'.$request->input('user_search').'%')->has_user();
             $users->orWhere('name','LIKE','%'.$request->input('user_search').'%');
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
         }
