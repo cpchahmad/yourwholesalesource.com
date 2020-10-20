@@ -798,12 +798,12 @@ class ManagerController extends Controller
 
 
         if($request->has('user_search')){
-
-            $users->whereHas('has_shops', function($q) use ($request){
+            $u = [];
+            $manager->has_users()->whereHas('has_shops', function($q) use ($request){
                 $q->where('shopify_domain','LIKE','%'.$request->input('user_search').'%');
             });
-            $users->where('name','LIKE','%'.$request->input('user_search').'%');
-            dd($users->get(),23);
+            $manager->has_users()->where('name','LIKE','%'.$request->input('user_search').'%');
+            dd($manager->has_users()->get(),23);
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
 
             dd(12,$users->get());
