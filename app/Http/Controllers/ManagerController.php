@@ -805,6 +805,8 @@ class ManagerController extends Controller
             });
 
             $u->orWhere('name','LIKE','%'.$request->input('user_search').'%');
+            dd(45,$u->get());
+
             $u->orWhere('email','LIKE','%'.$request->input('user_search').'%');
             dd(12,$u->get());
         }
