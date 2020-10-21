@@ -98,7 +98,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -176,6 +175,39 @@ class ProductController extends Controller
                     }
                     return redirect()->route('product.edit', $product->id);
                 }
+                /*old Option Update Shopify and Database*/
+                if ($request->input('type') == 'old-option-update') {
+                    $variants_array = [];
+                    foreach ($product->hasVariants as $v) {
+                        if ($request->input('old-options1')) {
+                            dd($request->input('old-options1'));
+                            $v->option2 = $request->input('value');
+                            $v->title = $v->title . $request->input('value') . '/';
+                            array_push($variants_array,[
+                                'id' => $v->shopify_id,
+                                'option2' =>  $request->input('value')
+                            ]);
+                        }
+                        if ($request->input('option') == 'option3') {
+                            $v->option3 = $request->input('value');
+                            $v->title = $v->title . $request->input('value');
+                            array_push($variants_array,[
+                                'id' => $v->shopify_id,
+                                'option3' =>  $request->input('value')
+                            ]);
+                        }
+                        $v->save();
+                    }
+                    $productdata = [
+                        "product" => [
+                            "options" => $this->options_update_template_array($product),
+                            "variants" => $variants_array,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    return redirect()->back();
+                }
+
                 /*new Option Add Shopify and Database*/
                 if ($request->input('type') == 'new-option-add') {
                     $variants_array = [];

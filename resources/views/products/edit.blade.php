@@ -333,6 +333,7 @@
                                                                     <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="old-options1" value="" class="old-option-1">
+                                                                        <input type="hidden" name="type" value="old-option-update">
                                                                     </form>
 {{--                                                                @foreach($product->option1($product) as $a)--}}
 
