@@ -429,17 +429,11 @@ $(document).ready(function () {
             }
         },
         onChange: function(){
-            var price = $('input[type="text"][name="price"]').val();
-            var cost = $('input[type="text"][name="cost"]').val();
-            var sku = $('input[type="text"][name="sku"]').val();
-            var quantity = $('input[type="text"][name="quantity"]').val();
             var option1 = $('input[type="text"][name="option1"]').val();
             console.log(option1);
-            var option2 = $('input[type="text"][name="option2"]').val();
-            var option3 = $('input[type="text"][name="option3"]').val();
-            var substr1 = option1.split(',');
-            var substr2 = option2.split(',');
-            var substr3 = option3.split(',');
+            // var substr1 = option1.split(',');
+            // var substr2 = option2.split(',');
+            // var substr3 = option3.split(',');
         },
         delimiter: [',']
     });
