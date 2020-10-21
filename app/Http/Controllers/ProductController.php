@@ -178,11 +178,12 @@ class ProductController extends Controller
                 /*old Option Update Shopify and Database*/
                 if ($request->input('type') == 'old-option-update') {
 
-                    dd(3, $request->all());
                     $product->variants = 1;
                     $product->save();
                     $this->ProductVariants($request, $product->id);
-                    $variants_array =  $this->variants_template_array($product);
+
+                    return redirect()->route('product.edit', $product->id);
+
                 }
 
                 /*new Option Add Shopify and Database*/
@@ -615,30 +616,6 @@ class ProductController extends Controller
         }
     }
 
-    public function addProductVariant($data, $id) {
-        for ($i = 0; $i < count($data->variant_title); $i++) {
-            $options = explode('/', $data->variant_title[$i]);
-            $variants = new  ProductVariant();
-            if (!empty($options[0])) {
-                $variants->option1 = $options[0];
-            }
-            if (!empty($options[1])) {
-                $variants->option2 = $options[1];
-            }
-            if (!empty($options[2])) {
-                $variants->option3 = $options[2];
-            }
-            $variants->title = $data->variant_title[$i];
-            $variants->price = $data->variant_price[$i];
-            $variants->compare_price = $data->variant_comparePrice[$i];
-            $variants->quantity = $data->variant_quantity[$i];
-            $variants->cost = $data->variant_cost[$i];
-            $variants->sku = $data->variant_sku[$i];
-            $variants->barcode = $data->variant_barcode[$i];
-            $variants->product_id = $id;
-            $variants->save();
-        }
-    }
 
     public function delete($id)
     {
