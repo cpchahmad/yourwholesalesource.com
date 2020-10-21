@@ -324,7 +324,7 @@
                                                     <div class="col-md-12" style="margin-bottom: 10px">
                                                         <div class="row">
                                                             <div class="col-md-3">
-                                                                <input type="text" class="form-control option-1-update-btn" value="Option1">
+                                                                <input type="text" class="form-control" value="Option1">
                                                             </div>
                                                             <div class="col-md-9">
                                                                 @foreach($product->option1($product) as $a)
@@ -333,7 +333,9 @@
                                                                         <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>
                                                                     </span>
                                                                 @endforeach
-                                                                    <input class="js-tags-options-update form-control" type="text"
+                                                                    <button  type="button" class="show-add-more-option-btn btn btn-primary">Update</button>
+
+                                                                    <input class="js-tags-options1-update form-control d-none" type="text"
                                                                     id="product-meta-keywords" name="option1[]" value="" data-role="tagsinput">
 {{--                                                                    <button  type="button" class="variant-selected-options-update-save btn btn-primary">Save</button>--}}
 {{--                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">--}}
