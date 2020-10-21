@@ -324,24 +324,23 @@
                                                     <div class="col-md-12" style="margin-bottom: 10px">
                                                         <div class="row">
                                                             <div class="col-md-3">
-                                                                <input type="text" class="form-control" readonly value="Option1">
+                                                                <input type="text" class="form-control option-1-update-btn" value="Option1">
                                                             </div>
                                                             <div class="col-md-9">
+                                                                @foreach($product->option1($product) as $a)
+                                                                    <span class="badge badge-info">
+                                                                        <span >{{$a}}</span>
+                                                                        <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>
+                                                                    </span>
+                                                                @endforeach
                                                                     <input class="js-tags-options-update form-control" type="text"
-                                                                    id="product-meta-keywords" name="option1[]" value="{{implode(',', $product->option1($product))}}" data-role="tagsinput">
-                                                                    <button  type="button" class="variant-selected-options-update-save btn btn-primary">Save</button>
-                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
-                                                                        @csrf
-                                                                        <input type="hidden" name="old-options1" value="" class="old-option-1">
-                                                                        <input type="hidden" name="type" value="old-option-update">
-                                                                    </form>
-{{--                                                                @foreach($product->option1($product) as $a)--}}
-
-{{--                                                                    <span class="badge badge-info">--}}
-{{--                                                                        <span >{{$a}}</span>--}}
-{{--                                                                        <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>--}}
-{{--                                                                    </span>--}}
-{{--                                                                @endforeach--}}
+                                                                    id="product-meta-keywords" name="option1[]" value="" data-role="tagsinput">
+{{--                                                                    <button  type="button" class="variant-selected-options-update-save btn btn-primary">Save</button>--}}
+{{--                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">--}}
+{{--                                                                        @csrf--}}
+{{--                                                                        <input type="hidden" name="old-options1" value="" class="old-option-1">--}}
+{{--                                                                        <input type="hidden" name="type" value="old-option-update">--}}
+{{--                                                                    </form>--}}
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top:10px ">

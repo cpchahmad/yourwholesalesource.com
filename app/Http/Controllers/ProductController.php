@@ -177,35 +177,19 @@ class ProductController extends Controller
                 }
                 /*old Option Update Shopify and Database*/
                 if ($request->input('type') == 'old-option-update') {
-                    $variants_array = [];
-                    foreach ($product->hasVariants as $v) {
-                        if ($request->input('old-options1')) {
-                            dd($request->input('old-options1'));
-                            $v->option2 = $request->input('value');
-                            $v->title = $v->title . $request->input('value') . '/';
-                            array_push($variants_array,[
-                                'id' => $v->shopify_id,
-                                'option2' =>  $request->input('value')
-                            ]);
-                        }
-                        if ($request->input('option') == 'option3') {
-                            $v->option3 = $request->input('value');
-                            $v->title = $v->title . $request->input('value');
-                            array_push($variants_array,[
-                                'id' => $v->shopify_id,
-                                'option3' =>  $request->input('value')
-                            ]);
-                        }
-                        $v->save();
+                    if ($request->input('old-options1')) {
+
+                        $product->variants = 1;
+                        $product->save();
+                        $this->ProductVariants($request, $product->id);
+                        $variants_array =  $this->variants_template_array($product);
+
                     }
-                    $productdata = [
-                        "product" => [
-                            "options" => $this->options_update_template_array($product),
-                            "variants" => $variants_array,
-                        ]
-                    ];
-                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                    return redirect()->back();
+
+
+
+
+
                 }
 
                 /*new Option Add Shopify and Database*/
@@ -614,6 +598,31 @@ class ProductController extends Controller
 
     public function ProductVariants($data, $id)
     {
+        for ($i = 0; $i < count($data->variant_title); $i++) {
+            $options = explode('/', $data->variant_title[$i]);
+            $variants = new  ProductVariant();
+            if (!empty($options[0])) {
+                $variants->option1 = $options[0];
+            }
+            if (!empty($options[1])) {
+                $variants->option2 = $options[1];
+            }
+            if (!empty($options[2])) {
+                $variants->option3 = $options[2];
+            }
+            $variants->title = $data->variant_title[$i];
+            $variants->price = $data->variant_price[$i];
+            $variants->compare_price = $data->variant_comparePrice[$i];
+            $variants->quantity = $data->variant_quantity[$i];
+            $variants->cost = $data->variant_cost[$i];
+            $variants->sku = $data->variant_sku[$i];
+            $variants->barcode = $data->variant_barcode[$i];
+            $variants->product_id = $id;
+            $variants->save();
+        }
+    }
+
+    public function addProductVariant($data, $id) {
         for ($i = 0; $i < count($data->variant_title); $i++) {
             $options = explode('/', $data->variant_title[$i]);
             $variants = new  ProductVariant();
