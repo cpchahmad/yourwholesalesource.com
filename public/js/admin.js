@@ -436,14 +436,10 @@ $(document).ready(function () {
         defaultText: 'Add more tags',
         removeWithBackspace: true,
         onRemoveTag:function(){
-            var option1 = $('input[type="text"][name="option1"]').val();
-            var option2 = $('input[type="text"][name="option2"]').val();
+            var option1 = $('input[type="text"][name="option1-update"]').val();
             if(option1 === ''){
-                $('input[type="text"][name="option2"]').val('');
-                $('input[type="text"][name="option3"]').val('');
                 $('.variants_table').hide();
                 $(".option-1-table-body").empty();
-
             }
         },
         onChange: function(){
