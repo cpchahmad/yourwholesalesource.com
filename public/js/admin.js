@@ -159,7 +159,8 @@ $(document).ready(function () {
 
     /*Admin Module - Save Options of Variants JS*/
     $('body').on('click', '.variant-selected-options-update-save', function() {
-        var option1 = $(".js-tags-options-update").tagsinput('items');
+        var option1 = $(".js-tags-options-update").val();
+        console.log(324);
         console.log(option1);
     });
     $('body').on('click','.variant-options-update-save',function () {
