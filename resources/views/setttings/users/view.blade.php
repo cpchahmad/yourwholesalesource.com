@@ -379,7 +379,8 @@
                     <div class="block">
                         <div class="block-content">
                             @if($user->has_stores()->count() > 0)
-                                    @if(count($user->has_stores()->has_products()) > 0)
+                                @foreach($user->has_stores()->get() as $store)
+                                    @if(count($store->has_products) > 0)
                                         <table class="table table-hover table-borderless table-striped table-vcenter">
                                             <thead>
                                             <tr>
@@ -392,7 +393,7 @@
                                             </tr>
                                             </thead>
                                             <tbody class="">
-                                            @foreach($store->has_products()->has_products()->orderBy('created_at','DESC')->get() as $index => $product)
+                                            @foreach($store->has_products()->orderBy('created_at','DESC')->get() as $index => $product)
                                                 <tr>
                                                     <td>
                                                         <img @if(count($product->has_images) > 0)
@@ -438,6 +439,7 @@
                                     @else
                                         <p class="text-center"> No Product Found !</p>
                                     @endif
+                                @endforeach
                             @else
                                 <p class="text-center"> No Store Found !</p>
                             @endif
