@@ -73,8 +73,10 @@
                                 <td>
                                     @php
                                         $products_count = 0;
+
+
                                     @endphp
-                                    {{$product_count}}
+                                    {{$products_count}}
                                 </td>
                                 <td>
                                     {{count($user->has_orders)}}
