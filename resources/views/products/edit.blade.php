@@ -341,7 +341,7 @@
 
                                                                     <button  type="button" class="show-add-more-option-btn btn btn-primary">Update</button>
 
-                                                                    <input class="js-tags-options1-update form-control mt-2" type="text" style="display: none !important;"
+                                                                    <input class="js-tags-options1-update form-control mt-2 d-none" type="text"
                                                                     id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
                                                                     <div class="variants_table" style="display: none;">
                                                                         <hr>
