@@ -343,11 +343,14 @@
                                                                     <input class="js-tags-options1-update form-control mt-3" type="text"
                                                                     id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
 
-                                                                    <div class="variants_table" style="display: none;">
+                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="type" value="old-option-update">
+                                                                        <div class="variants_table" style="display: none;">
                                                                         <hr>
                                                                         <h3 class="block-title">
                                                                             Preview
-                                                                            <button type="button" class="update-option-1-btn btn btn-primary">Update this option</button>
+                                                                                <button type="button" class="update-option-1-btn btn btn-primary float-right">Update this option</button>
                                                                         </h3>
                                                                         <br>
                                                                         <div class="form-group">
@@ -370,6 +373,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    </form>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top:10px ">

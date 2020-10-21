@@ -98,6 +98,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -185,11 +186,6 @@ class ProductController extends Controller
                         $variants_array =  $this->variants_template_array($product);
 
                     }
-
-
-
-
-
                 }
 
                 /*new Option Add Shopify and Database*/

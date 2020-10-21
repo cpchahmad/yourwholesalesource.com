@@ -169,10 +169,8 @@ $(document).ready(function () {
     // });
 
     $('body').on('click', '.update-option-1-btn', function() {
-        // var option1 = $(".js-tags-options-update").val();
-        // $('.old-option-1').val(option1);
-        // //  var option1Array = option1.split(',');
-        // $('.old-option1-update-form').submit();
+
+        $('.old-option1-update-form').submit();
 
 
     });
@@ -462,7 +460,7 @@ $(document).ready(function () {
             var title = '';
             jQuery.each(substr1, function (index1, item1) {
                 title = item1;
-                $('tbody').append('   <tr>\n' +
+                $('.option-1-table-body').append('   <tr>\n' +
                     '                                                    <td class="variant_title">' + title + '<input type="hidden" name="variant_title[]" value="' + title + '"></td>\n' +
                     '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
                     '                                                    </td>\n' +
