@@ -98,7 +98,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -179,6 +178,8 @@ class ProductController extends Controller
                 /*old Option Update Shopify and Database*/
                 if ($request->input('type') == 'old-option-update') {
                     if ($request->input('old-options1')) {
+
+                        dd(3, $request->all());
 
                         $product->variants = 1;
                         $product->save();

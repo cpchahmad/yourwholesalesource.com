@@ -333,6 +333,7 @@
                                                                         <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>
                                                                     </span>
                                                                 @endforeach
+                                                                    <br>
 
                                                                     <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
                                                                     <input type="text" name="price" value="{{$product->price}}" style="display: none">
