@@ -66,8 +66,8 @@
                                         $products_count = 0;
                                         if($user->has_stores()->count() > 0) {
                                           foreach($user->has_stores()->get() as $store){
-                                                if($store->has_imported !== null) {
-                                                    $products_count += $store->has_imported()->count();
+                                                if($store->has_products !== null) {
+                                                    $products_count += $store->has_products()->count();
                                                 }
                                           }
                                         }
