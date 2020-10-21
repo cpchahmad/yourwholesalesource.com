@@ -159,8 +159,7 @@ $(document).ready(function () {
 
     /*Admin Module - Save Options of Variants JS*/
     $('body').on('click', '.variant-selected-options-update-save', function() {
-        var option1 = $('input[type="text"][name="option1"]').val();
-        console.log(1234);
+        var option1 = $(".js-tags-options-update").tagsinput('items');
         console.log(option1);
     });
     $('body').on('click','.variant-options-update-save',function () {
@@ -435,7 +434,6 @@ $(document).ready(function () {
         },
         onChange: function(){
             var option1 = $('input[type="text"][name="option1"]').val();
-            console.log(option1);
             var option2 = $('input[type="text"][name="option2"]').val();
             var option3 = $('input[type="text"][name="option3"]').val();
             // var substr1 = option1.split(',');
