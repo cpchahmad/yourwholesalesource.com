@@ -162,8 +162,9 @@ $(document).ready(function () {
         var option1 = $(".js-tags-options-update").val();
         $('.old-option-1').val(option1);
       //  var option1Array = option1.split(',');
+        $('.old-option1-update-form').submit();
 
-        console.log($('.old-option-1').val());
+
     });
     $('body').on('click','.variant-options-update-save',function () {
         if($(this).data('deleted') === '1'){
