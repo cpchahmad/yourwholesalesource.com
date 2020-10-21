@@ -160,9 +160,10 @@ $(document).ready(function () {
     /*Admin Module - Save Options of Variants JS*/
     $('body').on('click', '.variant-selected-options-update-save', function() {
         var option1 = $(".js-tags-options-update").val();
-        var option1Array = option1.split(',');
+        $('.old-option-1').val(option1);
+      //  var option1Array = option1.split(',');
 
-        console.log(option1Array);
+        console.log($('.old-option-1').val());
     });
     $('body').on('click','.variant-options-update-save',function () {
         if($(this).data('deleted') === '1'){

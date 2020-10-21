@@ -329,9 +329,11 @@
                                                             <div class="col-md-9">
                                                                     <input class="js-tags-options-update form-control" type="text"
                                                                     id="product-meta-keywords" name="option1[]" value="{{implode(',', $product->option1($product))}}" data-role="tagsinput">
-
                                                                     <button  type="button" class="variant-selected-options-update-save btn btn-primary">Save</button>
-
+                                                                    <form class="old-option-update-form" action="{{route('product.update',$product->id)}}" method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="old-options1[]" value="" class="old-option-1">
+                                                                    </form>
 {{--                                                                @foreach($product->option1($product) as $a)--}}
 
 {{--                                                                    <span class="badge badge-info">--}}
