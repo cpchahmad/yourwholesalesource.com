@@ -182,6 +182,21 @@ class ProductController extends Controller
                     $product->save();
                     $this->ProductVariants($request, $product->id);
 
+                    $variants_array =  $this->variants_template_array($product);
+
+                    $productdata = [
+                        "product" => [
+                            "options" => $this->options_update_template_array($product),
+                            "variants" => $variants_array,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $shopifyVariants = $resp->body->product->variants;
+                    foreach ($product->hasVariants as $index => $v){
+                        $v->shopify_id = $shopifyVariants[$index]->id;
+                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $v->save();
+                    }
                     return redirect()->route('product.edit', $product->id);
 
                 }
