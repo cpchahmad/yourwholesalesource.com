@@ -168,8 +168,7 @@ $(document).ready(function () {
     //
     // });
 
-    $('body').on('click', '.show-add-more-option-btn', function() {
-        $('.js-tags-options1-update').show();
+    $('body').on('click', '.update-option-1-btn', function() {
         // var option1 = $(".js-tags-options-update").val();
         // $('.old-option-1').val(option1);
         // //  var option1Array = option1.split(',');
@@ -445,7 +444,7 @@ $(document).ready(function () {
                 $('input[type="text"][name="option2"]').val('');
                 $('input[type="text"][name="option3"]').val('');
                 $('.variants_table').hide();
-                $("tbody").empty();
+                $(".option-1-table-body").empty();
 
             }
         },
@@ -459,7 +458,7 @@ $(document).ready(function () {
             var substr1 = option1.split(',');
             console.log(substr1);
             $('.variants_table').show();
-            $("tbody").empty();
+            $(".option-1-table-body").empty();
             var title = '';
             jQuery.each(substr1, function (index1, item1) {
                 title = item1;
