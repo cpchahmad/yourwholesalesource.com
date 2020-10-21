@@ -432,14 +432,13 @@
                                                             </td>
                                                         </tr>
                                                     @endforeach
+                                            @endif
                                         @endforeach
-                                        </tbody>
-                                    </table>
-                                    @else
-                                        <p class="text-center"> No Products Found !</p>
-                                    @endif
-
-
+                                    </tbody>
+                                </table>
+                            @else
+                                <p class="text-center"> No Products Found !</p>
+                            @endif
                         </div>
                     </div>
                 </div>
