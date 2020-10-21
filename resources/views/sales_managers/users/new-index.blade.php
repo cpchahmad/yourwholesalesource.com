@@ -84,8 +84,7 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
-                                        <a class="btn btn-primary btn-xs btn-sm text-white" data-toggle="modal" data-target="#assign_manager_{{$user->id}}" type="button" title="Assign Sales Manager">  <i class="fa fa-user"></i></a>
-                                        <a class="btn btn-xs btn-sm btn-success" type="button" href="{{route('users.view',$user->id)}}" title="View User">
+                                        <a class="btn btn-xs btn-sm btn-success" type="button" href="{{route('sales_managers.users.view',$user->id)}}" title="View User">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
