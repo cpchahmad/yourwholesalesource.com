@@ -328,7 +328,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <input class="js-tags-options-update form-control" type="text"
-                                                                       id="product-meta-keywords" name="option1" value="{{implode(', ', $product->option1($product))}}">
+                                                                       id="product-meta-keywords" name="option1" value="{{implode(',', $product->option1($product))}}">
 
 {{--                                                                @foreach($product->option1($product) as $a)--}}
 
