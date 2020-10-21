@@ -158,6 +158,11 @@ $(document).ready(function () {
     });
 
     /*Admin Module - Save Options of Variants JS*/
+    $('body').on('click', '.variant-selected-options-update-save', function() {
+        var option1 = $('input[type="text"][name="option1"]').val();
+        console.log(1234);
+        console.log(option1);
+    });
     $('body').on('click','.variant-options-update-save',function () {
         if($(this).data('deleted') === '1'){
             $(this).next().trigger('click');
