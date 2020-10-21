@@ -307,7 +307,7 @@
                             </div>
                         </div>
                         <div class="modal fade" id="edit_options" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-popout" role="document">
+                            <div class="modal-dialog modal-dialog-popout modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="block block-themed block-transparent mb-0">
                                         <div class="block-header bg-primary-dark">
@@ -339,10 +339,11 @@
                                                                     <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
                                                                     <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
 
-                                                                    <button  type="button" class="show-add-more-option-btn btn btn-primary">Update</button>
+{{--                                                                    <button  type="button" class="show-add-more-option-btn btn btn-primary">Update</button>--}}
 
-                                                                    <input class="js-tags-options1-update form-control mt-2 d-none" type="text"
+                                                                    <input class="js-tags-options1-update form-control mt-2" type="text"
                                                                     id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
+
                                                                     <div class="variants_table" style="display: none;">
                                                                         <hr>
                                                                         <h3 class="block-title">Preview</h3>

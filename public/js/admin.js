@@ -436,7 +436,7 @@ $(document).ready(function () {
     $('.js-tags-options1-update').tagsInput({
         height: '36px',
         width: '100%',
-        defaultText: 'Add tag',
+        defaultText: 'Add more tags',
         removeWithBackspace: true,
         onRemoveTag:function(){
             var option1 = $('input[type="text"][name="option1"]').val();
