@@ -177,16 +177,12 @@ class ProductController extends Controller
                 }
                 /*old Option Update Shopify and Database*/
                 if ($request->input('type') == 'old-option-update') {
-                    if ($request->input('old-options1')) {
 
-                        dd(3, $request->all());
-
-                        $product->variants = 1;
-                        $product->save();
-                        $this->ProductVariants($request, $product->id);
-                        $variants_array =  $this->variants_template_array($product);
-
-                    }
+                    dd(3, $request->all());
+                    $product->variants = 1;
+                    $product->save();
+                    $this->ProductVariants($request, $product->id);
+                    $variants_array =  $this->variants_template_array($product);
                 }
 
                 /*new Option Add Shopify and Database*/
