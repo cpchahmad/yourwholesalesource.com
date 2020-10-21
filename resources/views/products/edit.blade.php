@@ -327,17 +327,14 @@
                                                                 <input type="text" class="form-control" readonly value="Option1">
                                                             </div>
                                                             <div class="col-md-9">
-                                                                <input class="js-tags-options form-control" type="text"
-                                                                       id="product-meta-keywords" name="option1" value="
                                                                 @foreach($product->option1($product) as $a)
-                                                                    {{ $a }}
-                                                                @endforeach
-                                                                ">
-
+                                                                    <input class="js-tags-options form-control" type="text"
+                                                                           id="product-meta-keywords" name="option1" value="{{$a}}">
 {{--                                                                    <span class="badge badge-info">--}}
 {{--                                                                        <span >{{$a}}</span>--}}
 {{--                                                                        <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>--}}
 {{--                                                                    </span>--}}
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top:10px ">
