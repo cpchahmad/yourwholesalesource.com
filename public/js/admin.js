@@ -433,7 +433,7 @@ $(document).ready(function () {
         delimiter: [',']
     });
 
-    $('.js-tags-options-update').tagsInput({
+    $('.js-tags-options1-update').tagsInput({
         height: '36px',
         width: '100%',
         defaultText: 'Add tag',
@@ -444,18 +444,35 @@ $(document).ready(function () {
             if(option1 === ''){
                 $('input[type="text"][name="option2"]').val('');
                 $('input[type="text"][name="option3"]').val('');
-            }
-            if(option2 === ''){
-                $('input[type="text"][name="option3"]').val('');
+                $('.variants_table').hide();
+                $("tbody").empty();
+
             }
         },
         onChange: function(){
-            var option1 = $('input[type="text"][name="option1"]').val();
-            var option2 = $('input[type="text"][name="option2"]').val();
-            var option3 = $('input[type="text"][name="option3"]').val();
-            // var substr1 = option1.split(',');
-            // var substr2 = option2.split(',');
-            // var substr3 = option3.split(',');
+            var price = $('input[type="text"][name="price"]').val();
+            var cost = $('input[type="text"][name="cost"]').val();
+            var sku = $('input[type="text"][name="sku"]').val();
+            var quantity = $('input[type="text"][name="quantity"]').val();
+            var option1 = $('input[type="text"][name="option1-update"]').val();
+            console.log()
+            var substr1 = option1.split(',');
+            console.log(substr1);
+            $('.variants_table').show();
+            $("tbody").empty();
+            var title = '';
+            jQuery.each(substr1, function (index1, item1) {
+                title = item1;
+                $('tbody').append('   <tr>\n' +
+                    '                                                    <td class="variant_title">' + title + '<input type="hidden" name="variant_title[]" value="' + title + '"></td>\n' +
+                    '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
+                    '                                                    </td>\n' +
+                    '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
+                    '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
+                    '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
+                    '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
+                    '                                                </tr>');
+            });
         },
         delimiter: [',']
     });

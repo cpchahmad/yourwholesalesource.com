@@ -333,16 +333,40 @@
                                                                         <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>
                                                                     </span>
                                                                 @endforeach
+
+                                                                    <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
+                                                                    <input type="text" name="price" value="{{$product->price}}" style="display: none">
+                                                                    <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
+                                                                    <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
+
                                                                     <button  type="button" class="show-add-more-option-btn btn btn-primary">Update</button>
 
-                                                                    <input class="js-tags-options1-update form-control" type="text" style="display: none !important;"
-                                                                    id="product-meta-keywords" name="option1[]" value="" data-role="tagsinput">
-{{--                                                                    <button  type="button" class="variant-selected-options-update-save btn btn-primary">Save</button>--}}
-{{--                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">--}}
-{{--                                                                        @csrf--}}
-{{--                                                                        <input type="hidden" name="old-options1" value="" class="old-option-1">--}}
-{{--                                                                        <input type="hidden" name="type" value="old-option-update">--}}
-{{--                                                                    </form>--}}
+                                                                    <input class="js-tags-options1-update form-control mt-2" type="text" style="display: none !important;"
+                                                                    id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
+                                                                    <div class="variants_table" style="display: none;">
+                                                                        <hr>
+                                                                        <h3 class="block-title">Preview</h3>
+                                                                        <br>
+                                                                        <div class="form-group">
+                                                                            <div class="col-xs-12 push-10">
+                                                                                <table class="table table-hover">
+                                                                                    <thead>
+                                                                                    <tr>
+                                                                                        <th style="width: 20%;">Title</th>
+                                                                                        <th style="width: 15%;">Price</th>
+                                                                                        <th style="width: 17%;">Cost</th>
+                                                                                        <th style="width: 10%;">Quantity</th>
+                                                                                        <th style="width: 20%;">SKU</th>
+                                                                                        <th style="width: 20%;">Barcode</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top:10px ">
