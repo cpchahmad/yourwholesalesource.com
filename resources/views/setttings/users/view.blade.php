@@ -34,6 +34,9 @@
                     <a class="nav-link" href="#customers">Customers</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#payments">Payments</a>
                 </li>
                 <li class="nav-item">
@@ -372,6 +375,80 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="products" role="tabpanel">
+                    <div class="block">
+                        <div class="block-content">
+                            @if($user->has_stores()->count() > 0)
+                                @foreach($user->has_stores()->get() as $store)
+                                    @if(count($store->has_products) > 0)
+                                        <table class="table table-hover table-borderless table-striped table-vcenter">
+                                            <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Title</th>
+                                                <th>Price</th>
+                                                <th>Fulfilled By</th>
+                                                <th style="text-align: right">
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="">
+                                            @foreach($store->has_products()->orderBy('created_at','DESC')->get() as $index => $product)
+                                                <tr>
+                                                    <td>
+                                                        <img @if(count($product->has_images) > 0)
+                                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                             @if($index == 0)
+                                                             @if($image->isV == 0)
+                                                             src="{{asset('images')}}/{{$image->image}}"
+                                                             @else src="{{asset('images/variants')}}/{{$image->image}}"
+                                                             @endif
+                                                             @endif
+                                                             @endforeach
+                                                             @else
+                                                             s="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                             @endif alt="" class="img-avatar">
+                                                    </td>
+                                                    <td>
+                                                        @if($product->linked_product_id != null)
+                                                            <a href="{{route('product.view',$product->linked_product_id)}}">{{$product->title}}</a>
+                                                        @else
+                                                            {{$product->title}}
+                                                        @endif
+
+                                                    </td>
+
+                                                    <td>${{number_format($product->price,2)}}</td>
+                                                    <td><span class="mb2 font-size-sm" style="color: grey">@if($product->fulfilled_by == "Fantasy") WeFulfill @else {{$product->fulfilled_by}} @endif</span></td>
+                                                    <td class="">
+                                                        <div class="btn-group">
+                                                            @if($product->linked_product_id != null)
+                                                                <a href="{{route('product.view',$product->linked_product_id)}}"
+                                                                   class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                                   data-original-title="View Product"><i class="fa fa-eye"></i></a>
+                                                            @endif
+
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    @else
+                                        <p class="text-center"> No Product Found !</p>
+                                    @endif
+                                @endforeach
+                            @else
+                                <p class="text-center"> No Product Found !</p>
+                            @endif
+
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="tab-pane" id="payments" role="tabpanel">
                     <div class="block">
                         <div class="block-content">
