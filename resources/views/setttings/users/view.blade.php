@@ -386,8 +386,7 @@
                                         <th>Title</th>
                                         <th>Price</th>
                                         <th>Fulfilled By</th>
-                                        <th style="text-align: right">
-                                        </th>
+                                        <th style="text-align: right"></th>
                                     </tr>
                                     </thead>
                                     <tbody class="">
@@ -433,15 +432,11 @@
                                                             </td>
                                                         </tr>
                                                     @endforeach
-                                                    </tbody>
-
-                                                </table>
-                                            @else
-                                                <p class="text-center"> No Product Found !</p>
-                                            @endif
                                         @endforeach
+                                        </tbody>
+                                    </table>
                                     @else
-                                        <p class="text-center"> No Store Found !</p>
+                                        <p class="text-center"> No Products Found !</p>
                                     @endif
 
 
