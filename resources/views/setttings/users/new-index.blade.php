@@ -43,6 +43,7 @@
                             <th>Manager</th>
                             <th>Products</th>
                             <th>Orders</th>
+                            <th>Outcome</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -86,7 +87,9 @@
                                 </td>
                                 <td>
                                     {{count($user->has_orders)}}
-
+                                </td>
+                                <td>
+                                    ${{number_format($user->has_orders->sum('total_price'), 0)}}
                                 </td>
 
                                 <td class="text-right">
