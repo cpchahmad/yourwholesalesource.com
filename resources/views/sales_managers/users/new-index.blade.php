@@ -30,9 +30,9 @@
                             <th>Email</th>
                             <th>Stores</th>
                             <th>Manager</th>
-                            <th>Files</th>
+                            <th>Products</th>
                             <th>Orders</th>
-                            <th>Tickets</th>
+                            <th>Outcome</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -46,13 +46,10 @@
                                 </td>
                                 <td>
                                     @if($user->has_shops()->count() > 0)
-                                        @foreach($user->has_shops()->get() as $store)
-                                            <span class="badge badge-primary">
-                                                {{$store->shopify_domain}}
-                                            </span>
-                                        @endforeach
+                                        <span class="badge badge-success">Shopify User</span>
+                                    @else
+                                        <span class="badge badge-info">Non-Shopify User</span>
                                     @endif
-
                                 </td>
                                 <td>
                                     @if($user->has_manager != null)
@@ -65,15 +62,25 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{count($user->has_files)}}
+                                    @php
+                                        $products_count = 0;
+                                        if($user->has_stores()->count() > 0) {
+                                          foreach($user->has_stores()->get() as $store){
+                                                if($store->has_imported !== null) {
+                                                    $products_count += $store->has_imported()->count();
+                                                }
+                                          }
+                                        }
+
+                                    @endphp
+                                    {{$products_count}}
                                 </td>
                                 <td>
                                     {{count($user->has_orders)}}
 
                                 </td>
                                 <td>
-                                    {{count($user->has_tickets)}}
-
+                                    $ {{number_format($user->has_orders()->where('paid', 1)->sum('total_price'), 0)}}
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
