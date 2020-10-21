@@ -73,10 +73,16 @@
                                 <td>
                                     @php
                                         $products_count = 0;
-
+                                        if($user->has_shops()->count() > 0) {
+                                          foreach($user->has_shops()->get() as $store){
+                                                if($store->has_imported !== null) {
+                                                    $products_count += count($store->has_imported);
+                                                }
+                                          }
+                                        }
 
                                     @endphp
-                                    {{$products_count}}
+                                    {{$product_count}}
                                 </td>
                                 <td>
                                     {{count($user->has_orders)}}
