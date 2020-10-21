@@ -41,9 +41,8 @@
                             <th>Email</th>
                             <th>Stores</th>
                             <th>Manager</th>
-                            <th>Files</th>
+                            <th>Products</th>
                             <th>Orders</th>
-                            <th>Tickets</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -58,9 +57,8 @@
                                     @if($user->has_shops()->count() > 0)
                                         <span class="badge badge-success">Shopify User</span>
                                     @else
-                                        <span class="badge badge-primary">Non-Shopify User</span>
+                                        <span class="badge badge-info">Non-Shopify User</span>
                                     @endif
-
                                 </td>
                                 <td>
                                     @if($user->has_manager != null)
@@ -73,16 +71,22 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{count($user->has_files)}}
+                                    @php
+                                        $products_count = 0;
+                                        if($user->has_shops()->count() > 0) {
+                                          foreach($user->has_shops()->get() as $store){
+                                                $products_count += count($store->has_imported);
+                                          }
+                                        }
+
+                                    @endphp
+                                    {{$product_count}}
                                 </td>
                                 <td>
                                     {{count($user->has_orders)}}
 
                                 </td>
-                                <td>
-                                    {{count($user->has_tickets)}}
 
-                                </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
                                         <a class="btn btn-primary btn-xs btn-sm text-white" data-toggle="modal" data-target="#assign_manager_{{$user->id}}" type="button" title="Assign Sales Manager">  <i class="fa fa-user"></i></a>
