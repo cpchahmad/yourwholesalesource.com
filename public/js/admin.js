@@ -412,6 +412,39 @@ $(document).ready(function () {
         delimiter: [',']
     });
 
+    $('.js-tags-options-update').tagsInput({
+        height: '36px',
+        width: '100%',
+        defaultText: 'Add tag',
+        removeWithBackspace: true,
+        onRemoveTag:function(){
+            var option1 = $('input[type="text"][name="option1"]').val();
+            var option2 = $('input[type="text"][name="option2"]').val();
+            if(option1 === ''){
+                $('input[type="text"][name="option2"]').val('');
+                $('input[type="text"][name="option3"]').val('');
+            }
+            if(option2 === ''){
+                $('input[type="text"][name="option3"]').val('');
+            }
+        },
+        onChange: function(){
+            var price = $('input[type="text"][name="price"]').val();
+            var cost = $('input[type="text"][name="cost"]').val();
+            var sku = $('input[type="text"][name="sku"]').val();
+            var quantity = $('input[type="text"][name="quantity"]').val();
+            var option1 = $('input[type="text"][name="option1"]').val();
+            console.log(option1);
+            var option2 = $('input[type="text"][name="option2"]').val();
+            var option3 = $('input[type="text"][name="option3"]').val();
+            var substr1 = option1.split(',');
+            var substr2 = option2.split(',');
+            var substr3 = option3.split(',');
+        },
+        delimiter: [',']
+    });
+
+
     $('input[type="checkbox"][name="variants"]').click(function () {
         if ($(this).prop("checked") == true) {
             $('.variant_options').show();

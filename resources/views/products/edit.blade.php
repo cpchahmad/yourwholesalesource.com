@@ -328,7 +328,7 @@
                                                             </div>
                                                             <div class="col-md-9">
                                                                 @foreach($product->option1($product) as $a)
-                                                                    <input class="js-tags-options form-control" type="text"
+                                                                    <input class="js-tags-options-update form-control" type="text"
                                                                            id="product-meta-keywords" name="option1" value="{{$a}}">
 {{--                                                                    <span class="badge badge-info">--}}
 {{--                                                                        <span >{{$a}}</span>--}}
