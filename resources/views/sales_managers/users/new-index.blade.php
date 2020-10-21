@@ -80,7 +80,7 @@
 
                                 </td>
                                 <td>
-                                    $ {{number_format($user->has_orders()->where('paid', 1)->sum('total_price'), 0)}}
+                                    $ {{number_format($user->has_orders()->where('paid', 1)->sum('cost_to_pay'), 0)}}
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
