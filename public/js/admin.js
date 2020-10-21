@@ -158,15 +158,15 @@ $(document).ready(function () {
     });
 
     /*Admin Module - Save Options of Variants JS*/
-    $('body').on('click', '.variant-selected-options-update-save', function() {
-
-        var option1 = $(".js-tags-options-update").val();
-        $('.old-option-1').val(option1);
-      //  var option1Array = option1.split(',');
-        $('.old-option1-update-form').submit();
-
-
-    });
+    // $('body').on('click', '.variant-selected-options-update-save', function() {
+    //
+    //     var option1 = $(".js-tags-options-update").val();
+    //     $('.old-option-1').val(option1);
+    //   //  var option1Array = option1.split(',');
+    //     $('.old-option1-update-form').submit();
+    //
+    //
+    // });
 
     $('body').on('click', '.show-add-more-option-btn', function() {
         $('.js-tags-options1-update').show();

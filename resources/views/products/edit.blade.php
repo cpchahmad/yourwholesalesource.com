@@ -335,7 +335,7 @@
                                                                 @endforeach
                                                                     <button  type="button" class="show-add-more-option-btn btn btn-primary">Update</button>
 
-                                                                    <input class="js-tags-options1-update form-control d-none" type="text"
+                                                                    <input class="js-tags-options1-update form-control" type="text" style="display: none !important;"
                                                                     id="product-meta-keywords" name="option1[]" value="" data-role="tagsinput">
 {{--                                                                    <button  type="button" class="variant-selected-options-update-save btn btn-primary">Save</button>--}}
 {{--                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">--}}
