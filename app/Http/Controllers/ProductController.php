@@ -635,31 +635,31 @@ class ProductController extends Controller
             if(ProductVariant::where('title', $data->variant_title[$i])->where('product_id', $id)->exists())
             {
                 $variants = ProductVariant::where('title', $data->variant_title[$i])->where('product_id', $id)->first();
+                $variants->delete();
             }
             else {
                 $variants = new ProductVariant();
-            }
+                $options = explode('/', $data->variant_title[$i]);
 
-            $options = explode('/', $data->variant_title[$i]);
-
-            if (!empty($options[0])) {
-                $variants->option1 = $options[0];
+                if (!empty($options[0])) {
+                    $variants->option1 = $options[0];
+                }
+                if (!empty($options[1])) {
+                    $variants->option2 = $options[1];
+                }
+                if (!empty($options[2])) {
+                    $variants->option3 = $options[2];
+                }
+                $variants->title = $data->variant_title[$i];
+                $variants->price = $data->variant_price[$i];
+                $variants->compare_price = $data->variant_comparePrice[$i];
+                $variants->quantity = $data->variant_quantity[$i];
+                $variants->cost = $data->variant_cost[$i];
+                $variants->sku = $data->variant_sku[$i];
+                $variants->barcode = $data->variant_barcode[$i];
+                $variants->product_id = $id;
+                $variants->save();
             }
-            if (!empty($options[1])) {
-                $variants->option2 = $options[1];
-            }
-            if (!empty($options[2])) {
-                $variants->option3 = $options[2];
-            }
-            $variants->title = $data->variant_title[$i];
-            $variants->price = $data->variant_price[$i];
-            $variants->compare_price = $data->variant_comparePrice[$i];
-            $variants->quantity = $data->variant_quantity[$i];
-            $variants->cost = $data->variant_cost[$i];
-            $variants->sku = $data->variant_sku[$i];
-            $variants->barcode = $data->variant_barcode[$i];
-            $variants->product_id = $id;
-            $variants->save();
         }
     }
 
