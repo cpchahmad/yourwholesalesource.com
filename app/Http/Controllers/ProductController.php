@@ -915,6 +915,7 @@ class ProductController extends Controller
 
     public function variants_template_array($product){
         $variants_array = [];
+        dd($product->hasVariants()->get());
         foreach ($product->hasVariants as $index => $varaint) {
             array_push($variants_array, [
                 'title' => $varaint->title,
