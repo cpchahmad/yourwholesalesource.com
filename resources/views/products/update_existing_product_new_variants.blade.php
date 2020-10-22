@@ -29,7 +29,7 @@
     <div class="form-horizontal push-30">
         <form action="{{route('product.update',$product->id)}}" method="post">
             @csrf
-            <input type="hidden" name="type" value="existing-product-new-variants">
+            <input type="hidden" name="type" value="existing-product-update-variants">
             <div class="content">
                 <div class="row mb2">
                     <div class="col-sm-6">
@@ -42,10 +42,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="content submit-div" style="display: none">
+                        <div class="content submit-div">
                             <div class="row ">
                                 <div class="col-sm-12 text-right">
-
                                     <a href="{{ route('product.edit',$product->id) }}" class="btn btn-default btn-square ">Discard</a>
                                     <button class="btn btn-primary btn-square">Save</button>
                                 </div>
@@ -90,13 +89,12 @@
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"
-                                                               id="product-meta-keywords" name="option1" value="{{ implode(',', $product->option2($product)) }}">
+                                                               id="product-meta-keywords" name="option2" value="{{ implode(',', $product->option2($product)) }}">
                                                     </div>
                                                 </div>
                                             </div>
-                                                <button type="button" class="btn btn-light btn-square option_btn_2 mt-2">Add another option</button>
-
-                                            @else
+                                            <button type="button" class="btn btn-light btn-square option_btn_2 mt-2">Add another option</button>
+                                        @else
                                             <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">Add another option</button>
                                         @endif
 
@@ -109,7 +107,7 @@
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"
-                                                               id="product-meta-keywords" name="option1" value="{{ implode(',', $product->option3($product)) }}">
+                                                               id="product-meta-keywords" name="option3" value="{{ implode(',', $product->option3($product)) }}">
                                                     </div>
                                                 </div>
                                             </div>
