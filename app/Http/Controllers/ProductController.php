@@ -236,7 +236,7 @@ class ProductController extends Controller
 
                     $option3_array_unique = array_unique($option3_array);
 
-                    if($option3_array_unique != '') {
+                    if($option3_array_unique[0] != '') {
                         $temp = [];
                         foreach ($option3_array_unique as $a) {
                             array_push($temp, $a);
