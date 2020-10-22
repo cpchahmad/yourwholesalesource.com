@@ -187,7 +187,7 @@
 
                                 <div class="text-right d-inline-block">
 {{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
-                                    <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Options</a>
+                                    <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Variants</a>
                                 </div>
                             </div>
                             <div class="block-content" style="padding-top: 0 !important;">

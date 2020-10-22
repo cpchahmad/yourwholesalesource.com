@@ -37,14 +37,14 @@
                     <div class="col-sm-6 text-right">
                         <div class="content submit-div">
                             <div class="row ">
-                                <div class="col-sm-12 text-right">
+                                <div class="col-sm-12 text-right pr-0">
                                     <a href="{{ route('product.edit',$product->id) }}" class="btn btn-light btn-square ">Back to Editing</a>
                                 </div>
                             </div>
                         </div>
                         <div class="content submit-div" style="display: none">
                             <div class="row ">
-                                <div class="col-sm-12 text-right">
+                                <div class="col-sm-12 text-right pr-0">
 
                                     <a href="{{ route('product.edit',$product->id) }}" class="btn btn-default btn-square ">Discard</a>
                                     <button class="btn btn-primary btn-square">Save</button>
