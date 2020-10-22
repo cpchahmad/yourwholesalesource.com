@@ -182,7 +182,6 @@ class ProductController extends Controller
                     $product->save();
                     $this->ProductVariantsUpdate($request, $product->id, $product);
 
-                    dd($product->hasVariants()->get());
 
                     $variants_array = [];
                     foreach ($product->hasVariants as $index => $varaint) {
@@ -204,21 +203,57 @@ class ProductController extends Controller
                         ]);
                     }
 
+                    $options_array = [];
+                    if (count($product->option1($product)) > 0) {
+                        $temp = [];
+                        foreach ($product->option1($product) as $a) {
+                            array_push($temp, $a);
+                        }
+                        array_push($options_array, [
+                            'name' => 'Option1',
+                            'position' => '1',
+                            'values' => $temp,
+                        ]);
+                    }
+                    if (count($product->option2($product)) > 0) {
+                        $temp = [];
+                        foreach ($product->option2($product) as $a) {
+                            array_push($temp, $a);
+                        }
+                        array_push($options_array, [
+                            'name' => 'Option2',
+                            'position' => '2',
+                            'values' => $temp,
+                        ]);
+                    }
+                    if (count($product->option3($product)) > 0) {
+                        $temp = [];
+                        foreach ($product->option3($product) as $a) {
+                            array_push($temp, $a);
+                        }
+                        array_push($options_array, [
+                            'name' => 'Option3',
+                            'position' => '3',
+                            'values' => $temp,
+                        ]);
+                    }
 
                     $productdata = [
                         "product" => [
-                            "options" => $this->options_update_template_array($product),
+                            "options" => $options_array,
                             "variants" => $variants_array,
                         ]
                     ];
-                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                    $shopifyVariants = $resp->body->product->variants;
-                    foreach ($product->hasVariants as $index => $v){
-                        $v->shopify_id = $shopifyVariants[$index]->id;
-                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                        $v->save();
-                    }
-                    return redirect()->route('product.edit', $product->id);
+
+
+//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+//                    $shopifyVariants = $resp->body->product->variants;
+//                    foreach ($product->hasVariants as $index => $v){
+//                        $v->shopify_id = $shopifyVariants[$index]->id;
+//                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+//                        $v->save();
+//                    }
+//                    return redirect()->route('product.edit', $product->id);
                 }
                 /*old Option Update Shopify and Database*/
                 if ($request->input('type') == 'old-option-update') {
