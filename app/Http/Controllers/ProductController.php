@@ -231,7 +231,7 @@ class ProductController extends Controller
 
                     $option3_array = [];
                     foreach ($variants_array as $index => $v) {
-                        array_push($option2_array, $v['option3']);
+                        array_push($option3_array, $v['option3']);
                     }
 
                     $option3_array_unique = array_unique($option3_array);
