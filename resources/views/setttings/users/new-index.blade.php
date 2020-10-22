@@ -30,7 +30,7 @@
                 </div>
             </div>
         </form>
-        <div class="col-md-12">
+        <div class="col-md-12 px-0">
             <div class="bg-white p-3 push">
                 <!-- Navigation -->
                 <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
