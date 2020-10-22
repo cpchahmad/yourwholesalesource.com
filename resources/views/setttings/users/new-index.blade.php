@@ -30,28 +30,32 @@
                 </div>
             </div>
         </form>
+        <div class="col-md-12">
+            <div class="bg-white p-3 push">
+                <!-- Navigation -->
+                <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
+                    <ul class="nav-main nav-main-horizontal nav-main-hover">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link @if($status == 'shopify') active @endif " href="?status=shopify">
+                                <i class="nav-main-link-icon si si-home"></i>
+                                <span class="nav-main-link-name">Shopify Users</span>
+                                <span class="nav-main-link-badge badge badge-pill badge-warning">{{$users->has('has_shops')->count()}}</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link @if($status == 'non_shopify') active @endif " href="?status=non_shopify">
+                                <i class="nav-main-link-icon si si-users"></i>
+                                <span class="nav-main-link-name">Non-Shopify Users</span>
+                                <span class="nav-main-link-badge badge badge-pill badge-warning">{{$users->doesnthave('has_shops')->count()}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Navigation -->
+            </div>
+        </div>
         <div class="block">
             <div class="block-content">
-                <div class="bg-white p-3 push">
-                    <!-- Navigation -->
-                    <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
-                        <ul class="nav-main nav-main-horizontal nav-main-hover">
-                            <li class="nav-main-item">
-                                <a class="nav-main-link @if($status == 'shopify') active @endif " href="?status=shopify">
-                                    <i class="nav-main-link-icon fa fa-check-circle"></i>
-                                    <span class="nav-main-link-name">Shopify Users</span>
-                                </a>
-                            </li>
-                            <li class="nav-main-item">
-                                <a class="nav-main-link @if($status == 'non_shopify') active @endif " href="?status=non_shopify">
-                                    <i class="nav-main-link-icon fa fa-times-circle"></i>
-                                    <span class="nav-main-link-name">Non-Shopify Users</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- END Navigation -->
-                </div>
                 @if (count($users) > 0)
                     <table class="table table-hover table-borderless table-striped table-vcenter">
                         <thead>
