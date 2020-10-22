@@ -39,14 +39,12 @@
                             <a class="nav-main-link @if($status == 'shopify') active @endif " href="?status=shopify">
                                 <i class="nav-main-link-icon si si-home"></i>
                                 <span class="nav-main-link-name">Shopify Users</span>
-                                <span class="nav-main-link-badge badge badge-pill badge-warning">{{count($users->has('has_shops'))}}</span>
                             </a>
                         </li>
                         <li class="nav-main-item">
                             <a class="nav-main-link @if($status == 'non_shopify') active @endif " href="?status=non_shopify">
                                 <i class="nav-main-link-icon si si-users"></i>
                                 <span class="nav-main-link-name">Non-Shopify Users</span>
-                                <span class="nav-main-link-badge badge badge-pill badge-warning">{{count($users->doesnthave('has_shops'))}}</span>
                             </a>
                         </li>
                     </ul>
