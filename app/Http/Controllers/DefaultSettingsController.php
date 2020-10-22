@@ -451,10 +451,10 @@ class DefaultSettingsController extends Controller
         }
         if($request->has('status')) {
             if($request->input('status') == 'shopify') {
-                $users->has('user_shop');
+                $users->has('user_shops');
             }
             else {
-                $users->doesnthave('user_shop');
+                $users->doesnthave('user_shops');
             }
         }
         $users = $users->orderBy('created_at','DESC')->paginate(30);
