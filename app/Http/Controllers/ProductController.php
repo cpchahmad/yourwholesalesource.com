@@ -634,7 +634,7 @@ class ProductController extends Controller
         for ($i = 0; $i < count($data->variant_title); $i++) {
             if(ProductVariant::where('title', $data->variant_title[$i])->where('product_id', $id)->exists())
             {
-                $variants = ProductVariant::where('title', $data->variant_title[$i], 'product_id', $id)->first();
+                $variants = ProductVariant::where('title', $data->variant_title[$i])->where('product_id', $id)->first();
             }
             else {
                 $variants = new  ProductVariant();
