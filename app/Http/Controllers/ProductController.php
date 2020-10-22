@@ -180,28 +180,10 @@ class ProductController extends Controller
 
                     $product->variants = 1;
                     $product->save();
-                    $this->ProductVariantsUpdate($request, $product->id, $product);
+                    $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
 
 
-                    $variants_array = [];
-                    foreach ($product->hasVariants as $index => $varaint) {
-                        array_push($variants_array, [
-                            'title' => $varaint->title,
-                            'sku' => $varaint->sku,
-                            'option1' => $varaint->option1,
-                            'option2' => $varaint->option2,
-                            'option3' => $varaint->option3,
-                            'inventory_quantity' => $varaint->quantity,
-                            "fulfillment_service" => "wefullfill",
-                            'inventory_management' => 'wefullfill',
-                            'grams' => $product->weight * 1000,
-                            'weight' => $product->weight,
-                            'weight_unit' => 'kg',
-                            'barcode' => $varaint->barcode,
-                            'price' => $varaint->price,
-                            'cost' => $varaint->cost,
-                        ]);
-                    }
+
 
                     $productdata['product']['variants'] = $variants_array;
 
@@ -719,13 +701,11 @@ class ProductController extends Controller
 
     public function ProductVariantsUpdate($data, $id, $product)
     {
-        $shop =$this->helper->getShop();
 
         foreach ($product->hasVariants as $v){
-            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' .$id. '/variants/' .$v->shopify_id. '.json');
             $v->delete();
-
         }
+        $variants_array = [];
 
         for ($i = 0; $i < count($data->variant_title); $i++) {
 
@@ -751,7 +731,29 @@ class ProductController extends Controller
             $variants->product_id = $id;
             $variants->save();
 
+
+            array_push($variants_array, [
+                'title' => $variants->title,
+                'sku' => $variants->sku,
+                'option1' => $variants->option1,
+                'option2' => $variants->option2,
+                'option3' => $variants->option3,
+                'inventory_quantity' => $variants->quantity,
+                "fulfillment_service" => "wefullfill",
+                'inventory_management' => 'wefullfill',
+                'grams' => $product->weight * 1000,
+                'weight' => $product->weight,
+                'weight_unit' => 'kg',
+                'barcode' => $variants->barcode,
+                'price' => $variants->price,
+                'cost' => $variants->cost,
+            ]);
+
+
         }
+
+        return $variants_array;
+
     }
 
 
