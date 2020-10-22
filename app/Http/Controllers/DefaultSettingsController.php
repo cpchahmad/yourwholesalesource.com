@@ -465,6 +465,7 @@ class DefaultSettingsController extends Controller
             'users'=>$users,
             'managers' => $sales_managers,
             'user_search' => $request->input('user_search'),
+            'status' => $request->input('status')
         ]);
 
 
