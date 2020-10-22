@@ -21,12 +21,13 @@ trait ProductVariantTrait {
         if(count($product->hasVariants) > 0){
             $array =  array_unique($product->hasVariants->pluck('option2')->toArray());
             if($array[0] == ""){
-                $array =[];
+
+                $array =[2];
             }
             return $array;
         }
         else{
-            return 2;
+            return [];
         }
     }
     public function option3($product){
