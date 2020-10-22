@@ -226,12 +226,13 @@ class ProductController extends Controller
                     ];
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                    $shopifyVariants = $resp;
-                    dd($product->hasVariants()->count());
-                    foreach ($product->hasVariants as $index => $v){
-                        $v->shopify_id = $shopifyVariants[$index]->id;
-                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                        $v->save();
+                    $shopifyVariants = $resp->body->product->variants;
+
+                    foreach ($variants_array as $index => $v){
+                        $variant = ProductVariant::find($v['id']);
+                        $variant->shopify_id = $shopifyVariants[$index]->id;
+                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $variant->save();
                     }
                     return redirect()->route('product.edit', $product->id);
                 }
