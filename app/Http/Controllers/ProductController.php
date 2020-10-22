@@ -177,26 +177,26 @@ class ProductController extends Controller
                 }
                 /*New Variants Option Update from Shopify and Database*/
                 if ($request->input('type') == 'existing-product-update-variants') {
-                    dd(2, $request->all());
 
                     $product->variants = $request->variants;
                     $product->save();
                     $this->ProductVariants($request, $product->id);
-                    $variants_array =  $this->variants_template_array($product);
 
-                    $productdata = [
-                        "product" => [
-                            "options" => $this->options_update_template_array($product),
-                            "variants" => $variants_array,
-                        ]
-                    ];
-                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                    $shopifyVariants = $resp->body->product->variants;
-                    foreach ($product->hasVariants as $index => $v){
-                        $v->shopify_id = $shopifyVariants[$index]->id;
-                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                        $v->save();
-                    }
+//                    $variants_array =  $this->variants_template_array($product);
+//
+//                    $productdata = [
+//                        "product" => [
+//                            "options" => $this->options_update_template_array($product),
+//                            "variants" => $variants_array,
+//                        ]
+//                    ];
+//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+//                    $shopifyVariants = $resp->body->product->variants;
+//                    foreach ($product->hasVariants as $index => $v){
+//                        $v->shopify_id = $shopifyVariants[$index]->id;
+//                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+//                        $v->save();
+//                    }
                     return redirect()->route('product.edit', $product->id);
                 }
                 /*old Option Update Shopify and Database*/
@@ -632,8 +632,16 @@ class ProductController extends Controller
     public function ProductVariants($data, $id)
     {
         for ($i = 0; $i < count($data->variant_title); $i++) {
+            if(ProductVariant::where('title', $data->variant_title[$i], 'product_id', $id)->exists())
+            {
+                $variants = ProductVariant::where('title', $data->variant_title[$i], 'product_id', $id);
+            }
+            else {
+                $variants = new  ProductVariant();
+            }
+
             $options = explode('/', $data->variant_title[$i]);
-            $variants = new  ProductVariant();
+
             if (!empty($options[0])) {
                 $variants->option1 = $options[0];
             }
