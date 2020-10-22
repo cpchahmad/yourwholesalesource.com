@@ -185,39 +185,85 @@ class ProductController extends Controller
                     sleep(3);
 
                     $options_array = [];
-                    if (count($product->option1($product)) > 0) {
-                        $temp = [];
-                        foreach ($product->option1($product) as $a) {
-                            array_push($temp, $a);
-                        }
-                        array_push($options_array, [
-                            'name' => 'Option1',
-                            'position' => '1',
-                            'values' => $temp,
-                        ]);
+
+                    $option1_array = [];
+                    foreach ($variants_array as $index => $v) {
+                        array_push($option1_array, $v['option1']);
                     }
-                    if (count($product->option2($product)) > 0) {
-                        $temp = [];
-                        foreach ($product->option2($product) as $a) {
-                            array_push($temp, $a);
-                        }
-                        array_push($options_array, [
-                            'name' => 'Option2',
-                            'position' => '2',
-                            'values' => $temp,
-                        ]);
+
+                    $option1_array_unique = array_unique($option1_array);
+
+                    $temp = [];
+                    foreach ($option1_array_unique as $a) {
+                        array_push($temp, $a);
                     }
-                    if (count($product->option3($product)) > 0) {
-                        $temp = [];
-                        foreach ($product->option3($product) as $a) {
-                            array_push($temp, $a);
-                        }
-                        array_push($options_array, [
-                            'name' => 'Option3',
-                            'position' => '3',
-                            'values' => $temp,
-                        ]);
+
+                    array_push($options_array, [
+                        'name' => 'Option1',
+                        'position' => '1',
+                        'values' => $temp,
+                    ]);
+
+                    $option2_array = [];
+                    foreach ($variants_array as $index => $v) {
+                        array_push($option2_array, $v['option2']);
                     }
+
+                    $option2_array_unique = array_unique($option1_array);
+
+                    $temp = [];
+                    foreach ($option2_array_unique as $a) {
+                        array_push($temp, $a);
+                    }
+
+                    array_push($options_array, [
+                        'name' => 'Option2',
+                        'position' => '2',
+                        'values' => $temp,
+                    ]);
+
+                    $option3_array = [];
+                    foreach ($variants_array as $index => $v) {
+                        array_push($option2_array, $v['option3']);
+                    }
+
+                    $option3_array_unique = array_unique($option3_array);
+
+                    $temp = [];
+                    foreach ($option3_array_unique as $a) {
+                        array_push($temp, $a);
+                    }
+
+                    array_push($options_array, [
+                        'name' => 'Option3',
+                        'position' => '3',
+                        'values' => $temp,
+                    ]);
+
+
+
+//                    if (count($product->option2($product)) > 0) {
+//                        $temp = [];
+//                        foreach ($product->option2($product) as $a) {
+//                            array_push($temp, $a);
+//                        }
+//                        array_push($options_array, [
+//                            'name' => 'Option2',
+//                            'position' => '2',
+//                            'values' => $temp,
+//                        ]);
+//                    }
+//                    if (count($product->option3($product)) > 0) {
+//                        $temp = [];
+//                        foreach ($product->option3($product) as $a) {
+//                            array_push($temp, $a);
+//                        }
+//                        array_push($options_array, [
+//                            'name' => 'Option3',
+//                            'position' => '3',
+//                            'values' => $temp,
+//                        ]);
+//                    }
 
                     $productdata = [
                         "product" => [
@@ -226,7 +272,6 @@ class ProductController extends Controller
                         ]
                     ];
 
-                    dd($productdata);
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                     $shopifyVariants = $resp->body->product->variants;
