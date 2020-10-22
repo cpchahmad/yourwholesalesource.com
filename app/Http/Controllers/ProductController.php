@@ -182,7 +182,27 @@ class ProductController extends Controller
                     $product->save();
                     $this->ProductVariantsUpdate($request, $product->id, $product);
 
-                    $variants_array =  $this->variants_template_array($product);
+                    dd($product->hasVariants()->get());
+
+                    $variants_array = [];
+                    foreach ($product->hasVariants as $index => $varaint) {
+                        array_push($variants_array, [
+                            'title' => $varaint->title,
+                            'sku' => $varaint->sku,
+                            'option1' => $varaint->option1,
+                            'option2' => $varaint->option2,
+                            'option3' => $varaint->option3,
+                            'inventory_quantity' => $varaint->quantity,
+                            "fulfillment_service" => "wefullfill",
+                            'inventory_management' => 'wefullfill',
+                            'grams' => $product->weight * 1000,
+                            'weight' => $product->weight,
+                            'weight_unit' => 'kg',
+                            'barcode' => $varaint->barcode,
+                            'price' => $varaint->price,
+                            'cost' => $varaint->cost,
+                        ]);
+                    }
 
 
                     $productdata = [
@@ -915,7 +935,6 @@ class ProductController extends Controller
 
     public function variants_template_array($product){
         $variants_array = [];
-        dd($product->hasVariants()->get());
         foreach ($product->hasVariants as $index => $varaint) {
             array_push($variants_array, [
                 'title' => $varaint->title,
