@@ -282,7 +282,6 @@ class ProductController extends Controller
 
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                    dd($resp);
                     $shopifyVariants = $resp->body->product->variants;
 
                     foreach ($variants_array as $index => $v){
