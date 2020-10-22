@@ -80,7 +80,15 @@
 
                                 </td>
                                 <td>
-                                    $ {{number_format($user->has_orders()->where('paid', 1)->sum('cost_to_pay'), 2)}}
+                                    @php
+                                        $sum =0;
+                                         if($user->has_orders()->where('paid', 1)->count() > 0) {
+                                             foreach($user->has_orders()->where('paid', 1)->get() as $order){
+                                                 $sum += $order->line_items()->sum('cost');
+                                             }
+                                         }
+                                    @endphp
+                                    $ {{number_format($sum, 2)}}
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-group mr-2 mb-2">
