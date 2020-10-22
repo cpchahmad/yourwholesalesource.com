@@ -17,11 +17,12 @@ class CheckShopUser
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
         if(ShopifyApp::shop() != null){
+            dd(321);
             return $next($request);
         }
         else{
+            dd('no');
             return redirect()->route('store.index');
         }
     }
