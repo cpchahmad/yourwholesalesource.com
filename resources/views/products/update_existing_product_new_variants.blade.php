@@ -89,7 +89,6 @@
                                             <button type="button" class="btn btn-light btn-square option_btn_2 mt-2">Add another option</button>
                                         @else
                                             <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">Add another option</button>
-                                            {{ count($product->option2($product)) }}
                                         @endif
 
                                         @if(count($product->option3($product))>0)
