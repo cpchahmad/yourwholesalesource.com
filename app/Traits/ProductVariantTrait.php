@@ -6,7 +6,7 @@ trait ProductVariantTrait {
 
     public function option1($product){
         if(count($product->hasVariants) > 0){
-            $product->hasVaiants()->refresh();
+            $product->hasVariants()->refresh();
             $array = array_unique($product->hasVariants->pluck('option1')->toArray());
             if($array[0] == ""){
                 $array =[];
@@ -20,7 +20,7 @@ trait ProductVariantTrait {
     }
     public function option2($product){
         if(count($product->hasVariants) > 0){
-            $product->hasVaiants()->refresh();
+            $product->hasVariants()->refresh();
 
             $array =  array_unique($product->hasVariants->pluck('option2')->toArray());
             if($array[0] == ""){
@@ -34,7 +34,7 @@ trait ProductVariantTrait {
     }
     public function option3($product){
         if(count($product->hasVariants) > 0){
-            $product->hasVaiants()->refresh();
+            $product->hasVariants()->refresh();
 
             $array =  array_unique($product->hasVariants->pluck('option3')->toArray());
             if($array[0] == ""){
