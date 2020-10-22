@@ -449,6 +449,14 @@ class DefaultSettingsController extends Controller
             $users->where('name','LIKE','%'.$request->input('user_search').'%');
             $users->orWhere('email','LIKE','%'.$request->input('user_search').'%');
         }
+        if($request->has('status')) {
+            if($request->input('status') == 'shopify') {
+                $users->has('user_shop');
+            }
+            else {
+                $users->doesnthave('user_shop');
+            }
+        }
         $users = $users->orderBy('created_at','DESC')->paginate(30);
 
 
