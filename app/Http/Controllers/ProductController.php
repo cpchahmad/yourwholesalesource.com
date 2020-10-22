@@ -193,16 +193,20 @@ class ProductController extends Controller
 
                     $option1_array_unique = array_unique($option1_array);
 
-                    $temp = [];
-                    foreach ($option1_array_unique as $a) {
-                        array_push($temp, $a);
+                    if($option1_array_unique[0] != '') {
+                        $temp = [];
+                        foreach ($option1_array_unique as $a) {
+                            array_push($temp, $a);
+                        }
+                        array_push($options_array, [
+                            'name' => 'Option1',
+                            'position' => '1',
+                            'values' => $temp,
+                        ]);
+
                     }
 
-                    array_push($options_array, [
-                        'name' => 'Option1',
-                        'position' => '1',
-                        'values' => $temp,
-                    ]);
+
 
                     $option2_array = [];
                     foreach ($variants_array as $index => $v) {
@@ -211,16 +215,19 @@ class ProductController extends Controller
 
                     $option2_array_unique = array_unique($option2_array);
 
-                    $temp = [];
-                    foreach ($option2_array_unique as $a) {
-                        array_push($temp, $a);
+                    if($option2_array_unique[0] != '') {
+                        $temp = [];
+                        foreach ($option2_array_unique as $a) {
+                            array_push($temp, $a);
+                        }
+
+                        array_push($options_array, [
+                            'name' => 'Option2',
+                            'position' => '2',
+                            'values' => $temp,
+                        ]);
                     }
 
-                    array_push($options_array, [
-                        'name' => 'Option2',
-                        'position' => '2',
-                        'values' => $temp,
-                    ]);
 
                     $option3_array = [];
                     foreach ($variants_array as $index => $v) {
@@ -229,17 +236,18 @@ class ProductController extends Controller
 
                     $option3_array_unique = array_unique($option3_array);
 
-                    $temp = [];
-                    foreach ($option3_array_unique as $a) {
-                        array_push($temp, $a);
+                    if($option3_array_unique != '') {
+                        $temp = [];
+                        foreach ($option3_array_unique as $a) {
+                            array_push($temp, $a);
+                        }
+
+                        array_push($options_array, [
+                            'name' => 'Option3',
+                            'position' => '3',
+                            'values' => $temp,
+                        ]);
                     }
-
-                    array_push($options_array, [
-                        'name' => 'Option3',
-                        'position' => '3',
-                        'values' => $temp,
-                    ]);
-
 
 
 //                    if (count($product->option2($product)) > 0) {
@@ -272,8 +280,10 @@ class ProductController extends Controller
                         ]
                     ];
 
+                    dd($productdata);
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    dd($resp);
                     $shopifyVariants = $resp->body->product->variants;
 
                     foreach ($variants_array as $index => $v){
