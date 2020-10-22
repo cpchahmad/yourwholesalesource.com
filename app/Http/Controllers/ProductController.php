@@ -178,7 +178,7 @@ class ProductController extends Controller
                 /*New Variants Option Update from Shopify and Database*/
                 if ($request->input('type') == 'existing-product-update-variants') {
 
-                    $product->variants = $request->variants;
+                    $product->variants = 1;
                     $product->save();
                     $this->ProductVariantsUpdate($request, $product->id, $product);
 
