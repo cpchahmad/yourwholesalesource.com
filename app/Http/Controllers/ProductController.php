@@ -182,6 +182,7 @@ class ProductController extends Controller
                     $product->save();
                     $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
 
+                    sleep(3);
 
                     $options_array = [];
                     if (count($product->option1($product)) > 0) {
