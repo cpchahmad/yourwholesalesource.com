@@ -663,6 +663,18 @@ class ProductController extends Controller
         }
     }
 
+    public function update_existing_product_new_variants(Request $request)
+    {
+        $product = Product::find($request->id);
+        if ($product->varaints !== 0) {
+            return view('products.update_existing_product_new_variants')->with([
+                'product' => $product
+            ]);
+        } else {
+            return redirect('/products');
+        }
+    }
+
     public function import_to_shopify(Request $request)
     {
         $product = Product::find($request->id);
