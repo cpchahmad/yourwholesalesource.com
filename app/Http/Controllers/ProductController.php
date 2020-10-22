@@ -713,8 +713,12 @@ class ProductController extends Controller
 
     public function ProductVariantsUpdate($data, $id, $product)
     {
+        $shop =$this->helper->getShop();
+
         foreach ($product->hasVariants as $v){
+            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' .$id. '/variants/' .$v->shopify_id. '.json');
             $v->delete();
+
         }
 
         for ($i = 0; $i < count($data->variant_title); $i++) {
