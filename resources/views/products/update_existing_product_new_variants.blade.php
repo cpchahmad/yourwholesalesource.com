@@ -61,36 +61,28 @@
                                 <h3 class="block-title">Variant</h3>
                             </div>
                             <div class="block-content">
-{{--                                <div class="form-group">--}}
-{{--                                    <div class="col-xs-12 push-10">--}}
-{{--                                        <div class="custom-control custom-checkbox d-inline-block">--}}
-{{--                                            <input type="checkbox" name="variants" class="custom-control-input" id="val-terms"  value="1">--}}
-{{--                                            <label class="custom-control-label" for="val-terms">This product has multiple options, like--}}
-{{--                                                different sizes or colors</label>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
                                 <div class="variant_options" style="">
                                     <hr>
                                     <h3 class="font-w300">Options</h3>
                                     <br>
                                     <div class="form-group">
-                                        <div class="col-xs-12 push-10">
-                                            <h5>Option 1</h5>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Option 1">
+                                        @if(count($product->option1($product))>0)
+                                            <div class="col-xs-12 push-10">
+                                                <h5>Option 1</h5>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" value="Option 1">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <input class="js-tags-options options-preview form-control" type="text"
+                                                               id="product-meta-keywords" name="option1" value="{{ $product->option1($product) }}">
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-9">
-                                                    <input class="js-tags-options options-preview form-control" type="text"
-                                                           id="product-meta-keywords" name="option1" value="">
-                                                </div>
+                                                <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">
+                                                    Add another option
+                                                </button>
                                             </div>
-                                            <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">
-                                                Add another option
-                                            </button>
-                                        </div>
+                                        @endif
                                     </div>
                                     <div class="option_2" style="display: none;">
                                         <hr>
