@@ -75,7 +75,7 @@
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"
-                                                               id="product-meta-keywords" name="option1" value="{{ $product->option1($product) }}">
+                                                               id="product-meta-keywords" name="option1" value="{{ implode(',', $product->option1($product)) }}">
                                                     </div>
                                                 </div>
                                                 <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">
