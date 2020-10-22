@@ -178,9 +178,9 @@ class ProductController extends Controller
                 /*New Variants Option Update from Shopify and Database*/
                 if ($request->input('type') == 'existing-product-update-variants') {
 
-                    $product->variants = 1;
+                    $product->variants = $request->variants;
                     $product->save();
-                    $this->ProductVariants($request, $product->id);
+                    $this->ProductVariantsUpdate($request, $product->id, $product);
 
 //                    $variants_array =  $this->variants_template_array($product);
 //
@@ -632,11 +632,36 @@ class ProductController extends Controller
     public function ProductVariants($data, $id)
     {
         for ($i = 0; $i < count($data->variant_title); $i++) {
-            if(ProductVariant::where('title', $data->variant_title[$i])->where('product_id', $id)->exists())
-            {
-                $variants = ProductVariant::where('title', $data->variant_title[$i])->where('product_id', $id)->first();
-                $variants->delete();
+            $options = explode('/', $data->variant_title[$i]);
+            $variants = new  ProductVariant();
+            if (!empty($options[0])) {
+                $variants->option1 = $options[0];
             }
+            if (!empty($options[1])) {
+                $variants->option2 = $options[1];
+            }
+            if (!empty($options[2])) {
+                $variants->option3 = $options[2];
+            }
+            $variants->title = $data->variant_title[$i];
+            $variants->price = $data->variant_price[$i];
+            $variants->compare_price = $data->variant_comparePrice[$i];
+            $variants->quantity = $data->variant_quantity[$i];
+            $variants->cost = $data->variant_cost[$i];
+            $variants->sku = $data->variant_sku[$i];
+            $variants->barcode = $data->variant_barcode[$i];
+            $variants->product_id = $id;
+            $variants->save();
+        }
+    }
+
+    public function ProductVariantsUpdate($data, $id, $product)
+    {
+        foreach ($product->hasVariants as $index => $v){
+            $v->delete();
+        }
+
+        for ($i = 0; $i < count($data->variant_title); $i++) {
 
             $variants = new ProductVariant();
             $options = explode('/', $data->variant_title[$i]);
