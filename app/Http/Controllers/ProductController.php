@@ -229,8 +229,7 @@ class ProductController extends Controller
                     $shopifyVariants = $resp->body->product->variants;
 
                     foreach ($variants_array as $index => $v){
-                        dd($v);
-                        $variant = 1;
+                        $variant = ProductVariant::where('title', $v['title'])->get();
                         $variant->shopify_id = $shopifyVariants[$index]->id;
                         $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                         $variant->save();
