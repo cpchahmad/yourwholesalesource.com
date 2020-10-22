@@ -183,12 +183,6 @@ class ProductController extends Controller
                     $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
 
 
-
-
-                    $productdata['product']['variants'] = $variants_array;
-
-                    dd($productdata);
-
                     $options_array = [];
                     if (count($product->option1($product)) > 0) {
                         $temp = [];
