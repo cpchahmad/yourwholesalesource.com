@@ -20,9 +20,9 @@ trait ProductVariantTrait {
     public function option2($product){
         if(count($product->hasVariants) > 0){
             $array =  array_unique($product->hasVariants->pluck('option2')->toArray());
+            dd($array);
             if($array[0] == ""){
-
-                $array =[2];
+                $array =[];
             }
             return $array;
         }
