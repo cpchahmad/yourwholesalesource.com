@@ -78,9 +78,38 @@
                                                                id="product-meta-keywords" name="option1" value="{{ implode(',', $product->option1($product)) }}">
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-light btn-square option_btn_1 mt-2">
-                                                    Add another option
-                                                </button>
+                                            </div>
+                                        @endif
+
+                                        @if(count($product->option2($product))>0)
+                                            <div class="col-xs-12 push-10">
+                                                <h5>Option 2</h5>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" value="Option 2">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <input class="js-tags-options options-preview form-control" type="text"
+                                                               id="product-meta-keywords" name="option1" value="{{ implode(',', $product->option2($product)) }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <button type="button" class="btn btn-light btn-square option_btn_2 mt-2">Add another option</button>
+                                        @endif
+
+                                        @if(count($product->option3($product))>0)
+                                            <div class="col-xs-12 push-10">
+                                                <h5>Option 3</h5>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" value="Option 3">
+                                                    </div>
+                                                    <div class="col-sm-9">
+                                                        <input class="js-tags-options options-preview form-control" type="text"
+                                                               id="product-meta-keywords" name="option1" value="{{ implode(',', $product->option3($product)) }}">
+                                                    </div>
+                                                </div>
                                             </div>
                                         @endif
                                     </div>
