@@ -203,6 +203,10 @@ class ProductController extends Controller
                         ]);
                     }
 
+                    $productdata['product']['variants'] = $variants_array;
+
+                    dd($productdata);
+
                     $options_array = [];
                     if (count($product->option1($product)) > 0) {
                         $temp = [];
