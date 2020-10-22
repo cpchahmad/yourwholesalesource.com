@@ -26,7 +26,7 @@ trait ProductVariantTrait {
             return $array;
         }
         else{
-            return [];
+            return 2;
         }
     }
     public function option3($product){
