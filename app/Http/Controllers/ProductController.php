@@ -182,9 +182,8 @@ class ProductController extends Controller
                     $product->save();
                     $this->ProductVariantsUpdate($request, $product->id, $product);
 
-                    $variants_array =  $this->variants_template_array($product);
+//                    $variants_array =  $this->variants_template_array($product);
 
-                    dd($variants_array);
 
 //                    $productdata = [
 //                        "product" => [
