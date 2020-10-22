@@ -209,7 +209,7 @@ class ProductController extends Controller
                         array_push($option2_array, $v['option2']);
                     }
 
-                    $option2_array_unique = array_unique($option1_array);
+                    $option2_array_unique = array_unique($option2_array);
 
                     $temp = [];
                     foreach ($option2_array_unique as $a) {
@@ -272,7 +272,6 @@ class ProductController extends Controller
                         ]
                     ];
 
-dd($productdata);
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                     $shopifyVariants = $resp->body->product->variants;
