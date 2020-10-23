@@ -52,8 +52,11 @@ class WishlistController extends Controller
             $wish->reference = $request->input('reference');
             $wish->status_id = '1';
             $wish->manager_id = $manager->id;
-            if($request->type == 'user-wishlist'){
-                $wish->user_id = Auth::id();
+            $user = null;
+            if($request->type == 'shopify-user-wishlist'){
+                $shop = $this->helper->getLocalShop();
+                $user = $shop->has_user()->first();
+                $wish->user_id = $user->id;
             }
             else{
                 $wish->shop_id = $request->input('shop_id');
