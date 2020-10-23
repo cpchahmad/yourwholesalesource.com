@@ -122,6 +122,14 @@
                 </a>
             </li>
 
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">
+                    <i class="nav-main-link-icon si si-support"></i>
+                    <span class="nav-main-link-name">Email Template</span>
+                </a>
+            </li>
+
+
         </ul>
     </div>
 </nav>

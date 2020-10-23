@@ -122,6 +122,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('orders/bulk-tracking/import', 'AdminOrderController@import_bulk_tracking')->name('orders.bulk.tracking.import');
 
     Route::get('customers/{id}/download', 'DefaultSettingsController@download_customer')->name('customers.download');
+    Route::get('/email/templates', 'EmailTemplateController@index')->name('admin.emails.index');
 
 });
 /*Single Store Routes*/
