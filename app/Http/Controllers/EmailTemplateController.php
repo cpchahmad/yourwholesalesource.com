@@ -13,7 +13,7 @@ class EmailTemplateController extends Controller
      */
     public function index()
     {
-        return view('settings.email.index');
+        return view('setttings.email.index');
     }
 
     /**
