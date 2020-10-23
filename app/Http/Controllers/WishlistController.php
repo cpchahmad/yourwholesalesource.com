@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Image;
+use App\Mail\OrderPlaceEmail;
 use App\ManagerLog;
 use App\Product;
 use App\ProductVariant;
@@ -18,6 +19,7 @@ use App\WishlistCountry;
 use App\WishlistThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Models\Shop;
 
@@ -39,6 +41,7 @@ class WishlistController extends Controller
     }
 
     public function create_wishlist(Request $request){
+        dd($request->all());
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
             $wish = new Wishlist();
@@ -58,6 +61,35 @@ class WishlistController extends Controller
 
             $wish->save();
             $wish->has_market()->attach($request->input('countries'));
+
+            /*Wishlist request email*/
+            $user = User::find($wish->user_id);
+            $manager_email = $manager->email;
+            if($user->has_manager()->count() > 0) {
+                $manager_email = $user->has_manager->email;
+            }
+            $manager_email = $user->has_manager->email;
+            $users_temp =['info@wefullfill.com',$manager_email];
+            $users = [];
+
+            foreach($users_temp as $key => $ut){
+                if($ut != null) {
+                    $ua = [];
+
+                    $ua['email'] = $ut;
+
+                    $ua['name'] = 'test';
+
+                    $users[$key] = (object)$ua;
+                }
+            }
+
+            try{
+                Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             if($request->hasFile('attachments')){
                 $files = $request->file('attachments');

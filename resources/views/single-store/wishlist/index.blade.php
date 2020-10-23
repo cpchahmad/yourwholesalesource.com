@@ -137,7 +137,7 @@
                             <form action="{{route('wishlist.create')}}" method="post"  enctype="multipart/form-data">
                                 @csrf
 
-                                <input type="hidden" name="manager_id" value="{{$shop->sale_manager_id}}">
+                                <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                                 <input type="hidden" name="shop_id" value="{{$shop->id}}">
                                 <input type="hidden" name="type" value="store-wishlist">
 
