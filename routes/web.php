@@ -123,6 +123,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('customers/{id}/download', 'DefaultSettingsController@download_customer')->name('customers.download');
     Route::get('/email/templates', 'EmailTemplateController@index')->name('admin.emails.index');
+    Route::get('/email/templates/{id}', 'EmailTemplateController@show')->name('admin.emails.show');
 
 });
 /*Single Store Routes*/

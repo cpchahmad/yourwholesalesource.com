@@ -39,7 +39,7 @@
                             <tbody>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        <a href=""> New user Registration Template</a>
+                                        <a href="{{ route('admin.emails.show', 1) }}">New user Registration Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -54,22 +54,19 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 1) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 1) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Shopify user Registration Template
+                                        <a href="{{ route('admin.emails.show', 2) }}">Shopify user Registration Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -84,22 +81,19 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 2) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 2) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Order Place Template
+                                        <a href="{{ route('admin.emails.show', 3) }}">Order Place Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -114,22 +108,19 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 3) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 3) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Order Status Template
+                                        <a href="{{ route('admin.emails.show', 4) }}">Order Status Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -144,22 +135,19 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 4) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 4) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Wishlist Request Template
+                                        <a href="{{ route('admin.emails.show', 5) }}">Wishlist Request Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -174,22 +162,19 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 5) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 5) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Wallet Request Template
+                                        <a href="{{ route('admin.emails.show', 6) }}">Wallet Request Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -204,22 +189,19 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 6) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 6) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Refund Request Template
+                                        <a href="{{ route('admin.emails.show', 7) }}">Refund Request Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
@@ -234,16 +216,13 @@
                                     <td class="text-right" style="vertical-align: middle">
 
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 7) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 7) }}"
                                                 type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
+                                                data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
                                         </div>
                                     </td>
                                 </tr>

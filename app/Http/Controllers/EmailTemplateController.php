@@ -45,7 +45,31 @@ class EmailTemplateController extends Controller
      */
     public function show($id)
     {
-        //
+        switch ($id) {
+            case "1":
+                return view('emails.new_user');
+                break;
+            case "2":
+                return view('emails.new_shopify_user');
+                break;
+            case "3":
+                return view('emails.order_place');
+                break;
+            case "4":
+                return view('emails.order_status');
+                break;
+            case "5":
+                return view('emails.wishlist_request');
+                break;
+            case "6":
+                return view('emails.wallet_request');
+                break;
+            case "7":
+                return view('emails.refund_request');
+                break;
+            default:
+                echo "Error";
+        }
     }
 
     /**
