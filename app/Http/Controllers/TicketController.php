@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TicketRefundRequst;
+use App\Mail\WishlistReqeustMail;
 use App\ManagerLog;
 use App\ManagerReview;
 use App\Ticket;
@@ -12,6 +14,7 @@ use App\TicketThread;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class TicketController extends Controller
@@ -48,11 +51,15 @@ class TicketController extends Controller
                 $ticket->category_id = $category->id;
             }
             $ticket->manager_id = $manager->id;
-            if($request->type == 'user-ticket'){
-                $ticket->user_id = Auth::id();
+            $user = null;
+
+            if($request->type == 'store-ticket'){
+                $shop = $this->helper->getLocalShop();
+                $user = $shop->has_user()->first();
+                $ticket->user_id = $user->id;
             }
             else{
-                $ticket->shop_id = $request->input('shop_id');
+                $ticket->user_id = Auth::id();
             }
 
             $ticket->save();
@@ -69,6 +76,33 @@ class TicketController extends Controller
                     $ta->save();
                 }
             }
+
+            /*Wishlist request email*/
+            $user = User::find($ticket->user_id);
+
+            $manager_email = $manager->email;
+            $users_temp =['info@wefullfill.com',$manager_email];
+            $users = [];
+
+            foreach($users_temp as $key => $ut){
+                if($ut != null) {
+                    $ua = [];
+
+                    $ua['email'] = $ut;
+
+                    $ua['name'] = 'test';
+
+                    $users[$key] = (object)$ua;
+                }
+            }
+
+            try{
+                Mail::to($users)->send(new TicketRefundRequst($user->email, $ticket));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
+
 
             /*Maintaining Log*/
             $tl = new TicketLog();
