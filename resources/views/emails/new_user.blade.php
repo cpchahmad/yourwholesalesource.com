@@ -11,7 +11,8 @@
     }
     .email-content
     {
-        max-width: 450px;
+        /*max-width: 450px;*/
+        width : 90%;
     }
     .email-content-detail
     {
