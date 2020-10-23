@@ -36,7 +36,7 @@ class WalletRequestMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Shopify user')->subject('There is a wallet request')->view('emails.wallet_request')->with([
+        return $this->from($this->sender,'Shopify user')->subject('There is a wallet request')->view('emails.wallet_reqeust')->with([
             'user' => $this->user,
             'wallet' => $this->wallet,
         ]);
