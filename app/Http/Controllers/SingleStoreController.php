@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Country;
 use App\Customer;
+use App\Mail\NewShopifyUserMail;
+use App\Mail\NewUser;
+use App\Mail\NewWallet;
 use App\Notification;
 use App\OrderTransaction;
 use App\Product;
@@ -26,6 +29,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 use function foo\func;
@@ -374,6 +378,13 @@ class SingleStoreController extends Controller
         if ($user != null && $shop != null) {
             if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
+                try{
+                    Mail::to($user->email)->send(new NewShopifyUserMail($user));
+                }
+                catch (\Exception $e){
+                    dd($e);
+                }
+
                 return response()->json([
                     'status' => 'assigned'
                 ]);
