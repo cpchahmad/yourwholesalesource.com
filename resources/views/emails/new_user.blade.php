@@ -48,6 +48,9 @@
             <div class="email-logo">
                 <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 50%">
             </div>
+            @isset($edit)
+                <h1>Edit</h1>
+            @endisset
             <div class="email-content-detail" style="margin: 50px 0;">
                 <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">Welcome to Wefullfill</h1>
 {{--                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Hey {{$user->name}}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks. </p>--}}

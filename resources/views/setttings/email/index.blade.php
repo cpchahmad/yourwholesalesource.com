@@ -57,7 +57,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 1) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 1) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 1) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
@@ -84,7 +84,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 2) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 2) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 2) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
@@ -111,7 +111,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 3) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 3) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 3) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
@@ -138,7 +138,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 4) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 4) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 4) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
@@ -165,7 +165,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 5) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 5) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 5) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
@@ -192,7 +192,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 6) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 6) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 6) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
@@ -219,7 +219,7 @@
                                             <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 7) }}" type="button"  title="View Template">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.show', 7) }}"
+                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 7) }}"
                                                 type="button" data-toggle="tooltip" title=""
                                                 data-original-title="Edit Tempalte"><i
                                                     class="fa fa-edit"></i></a>
