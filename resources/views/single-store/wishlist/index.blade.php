@@ -39,7 +39,6 @@
                         <div class="col-md-12 mb2">
                             <button style="float: right;margin-bottom: 10px" class="btn btn-sm btn-primary" data-target="#create_new_ticket" data-toggle="modal">Create New Wishlist</button>
                         </div>
-
                         <div class="col-md-12 mb2">
                             @if(count($wishlist) > 0)
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
