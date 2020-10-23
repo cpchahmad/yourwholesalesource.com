@@ -10,6 +10,8 @@ use App\Exports\CustomersExport;
 use App\Exports\OrdersExport;
 use App\FulfillmentLineItem;
 use App\Imports\BulkTrackingImport;
+use App\Mail\NewShopifyUserMail;
+use App\Mail\OrderStatusMail;
 use App\Notification;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -28,6 +30,7 @@ use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use function foo\func;
 
@@ -397,6 +400,14 @@ class AdminOrderController extends Controller
         }
         if ($order->admin_shopify_id != null) {
             $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+        }
+
+        $user = $order->has_user;
+        try{
+            Mail::to($user->email)->send(new OrderStatusMail($user, $order));
+        }
+        catch (\Exception $e){
+            dd($e);
         }
         $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
