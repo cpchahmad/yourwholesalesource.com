@@ -486,7 +486,9 @@ class SingleStoreController extends Controller
     public function wishlist(Request $request)
     {
         $shop = $this->helper->getLocalShop();
-        $wishlist = Wishlist::where('shop_id', $shop->id)->newQuery();
+        $user = $shop->has_user()->first();
+
+        $wishlist = Wishlist::where('user_id', $user->id)->newQuery();
         $wishlist = $wishlist->orderBy('created_at', 'DESC')->paginate(30);
 
         return view('single-store.wishlist.index')->with([
