@@ -47,10 +47,10 @@ class EmailTemplateController extends Controller
     {
         switch ($id) {
             case "1":
-                return view('emails.new_user');
+                return view('emails.new_user')->with('user', User::find(1));
                 break;
             case "2":
-                return view('emails.new_shopify_user');
+                return view('emails.new_shopify_user')->with('user', User::find(1));
                 break;
             case "3":
                 return view('emails.order_place');
