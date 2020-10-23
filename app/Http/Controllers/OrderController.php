@@ -106,7 +106,6 @@ class OrderController extends Controller
                 $manager_email = $user->has_manager->email;
             }
 
-            $manager_email = $user->has_manager->email;
             $users_temp =['info@wefullfill.com',$manager_email];
             $users = [];
 

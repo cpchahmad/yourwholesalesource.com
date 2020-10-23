@@ -21,7 +21,7 @@ class WishlistReqeustMail extends Mailable
     private $user = "info@wefullfill.com";
 
     private $sender;
-    private $retailerOrder;
+    private $wishlist;
 
     public function __construct($sender,Wishlist $wishlist)
     {

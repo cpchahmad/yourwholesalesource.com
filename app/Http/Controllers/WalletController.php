@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
 use App\Mail\OrderPlaceEmail;
+use App\Mail\WalletRequestMail;
+use App\Mail\WishlistReqeustMail;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\PaypalWalletTransaction;
@@ -123,6 +125,7 @@ class WalletController extends Controller
                $wallet_request->save();
 
            }
+
            $wallet_log = new WalletLog();
            $wallet_log->wallet_id = $request->input('wallet_id');
            $wallet_log->status = "Top-up Request Through Bank Transfer";
@@ -133,6 +136,34 @@ class WalletController extends Controller
            $wallet_log->save();
            $wallet->pending = $wallet->pending + $request->input('amount');
            $wallet->save();
+
+           /*Wishlist request email*/
+           $manager_email = null;
+           if($user->has_manager()->count() > 0) {
+               $manager_email = $user->has_manager->email;
+           }
+
+           $users_temp =['info@wefullfill.com',$manager_email];
+           $users = [];
+
+           foreach($users_temp as $key => $ut){
+               if($ut != null) {
+                   $ua = [];
+
+                   $ua['email'] = $ut;
+
+                   $ua['name'] = 'test';
+
+                   $users[$key] = (object)$ua;
+               }
+           }
+
+           try{
+               Mail::to($users)->send(new WalletRequestMail($user->email, $wallet));
+           }
+           catch (\Exception $e){
+               dd($e);
+           }
 
 
           return redirect()->back()->with('success', 'Your Top-up Request Submit Successfully to Administration. Please Wait For Approval!');
