@@ -201,7 +201,7 @@
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 7) }}">Refund Request Template</a>
+                                        <a href="{{ route('admin.emails.show', 7) }}">Ticket Request Template</a>
                                     </td>
                                     <td style="vertical-align: middle">
                                         {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
