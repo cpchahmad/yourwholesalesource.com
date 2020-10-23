@@ -189,36 +189,6 @@
                                 </tr>
                                 <tr>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        Wishlist Request Template
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button"  title="View Product">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Product"><i
-                                                    class="fa fa-edit"></i></a>
-                                            <a  class="btn btn-sm btn-danger"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Product"><i class="fa fa-times"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
                                         Wallet Request Template
                                     </td>
                                     <td style="vertical-align: middle">
