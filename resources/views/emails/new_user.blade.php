@@ -55,7 +55,7 @@
                     <div class="email-content-detail" style="margin: 50px 0;">
                         <input class="email-title " type="text" name="subject" style="margin: 0;margin-bottom: 30px;font-size: 34px; width: 100%" placeholder="Welcome to Wefullfill" value="Welcome to Wefullfill">
                         <br>
-                        <textarea type="text" class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53; width: 100%" name="body" placeholder="Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks." >Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks.</textarea>
+                        <textarea type="text" class="email-message-1" rows="5" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53; width: 100%" name="body" placeholder="Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks." >Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks.</textarea>
                         <br>
                         <a href="https://www.wefullfill.com/pages/help-center" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
                     </div>
