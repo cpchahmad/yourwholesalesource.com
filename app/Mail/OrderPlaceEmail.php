@@ -25,9 +25,9 @@ class OrderPlaceEmail extends Mailable
     private $sender;
     private $retailerOrder;
 
-    public function __construct(RetailerOrder $retailerOrder)
+    public function __construct($sender,RetailerOrder $retailerOrder)
     {
-        $this->sender = Auth::user()->email;
+        $this->sender = $sender;
         $this->retailerOrder = $retailerOrder;
     }
 
