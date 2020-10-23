@@ -318,7 +318,7 @@ class WalletController extends Controller
                 /*Order placing email*/
                 $user = User::find($retailer_order->user_id);
                 $manager_email = null;
-                if($user->has_manager != null) {
+                if($user->has_manager()->count() > 0) {
                     $manager_email = $user->has_manager->email;
                 }
                 $manager_email = $user->has_manager->email;
