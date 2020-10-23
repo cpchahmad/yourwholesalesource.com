@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Image;
 use App\Mail\OrderPlaceEmail;
+use App\Mail\WishlistReqeustMail;
 use App\ManagerLog;
 use App\Product;
 use App\ProductVariant;
@@ -41,7 +42,6 @@ class WishlistController extends Controller
     }
 
     public function create_wishlist(Request $request){
-        dd($request->all());
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
             $wish = new Wishlist();
@@ -65,10 +65,6 @@ class WishlistController extends Controller
             /*Wishlist request email*/
             $user = User::find($wish->user_id);
             $manager_email = $manager->email;
-            if($user->has_manager()->count() > 0) {
-                $manager_email = $user->has_manager->email;
-            }
-            $manager_email = $user->has_manager->email;
             $users_temp =['info@wefullfill.com',$manager_email];
             $users = [];
 
@@ -85,7 +81,7 @@ class WishlistController extends Controller
             }
 
             try{
-                Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
+                Mail::to($users)->send(new WishlistReqeustMail($user->email, $wish));
             }
             catch (\Exception $e){
                 dd($e);
