@@ -28,6 +28,8 @@ class TicketController extends Controller
     public function __construct()
     {
         $this->notify = new NotificationController();
+        $this->helper = new HelperController();
+
     }
 
     public function create_ticket(Request $request){
