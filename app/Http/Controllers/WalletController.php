@@ -318,9 +318,8 @@ class WalletController extends Controller
                 /*Order placing email*/
                 $user = User::find($retailer_order->user_id);
 
-                dd($user->email);
                 try{
-                    Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($sender_email, $retailer_order));
+                    Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($user->email, $retailer_order));
                 }
                 catch (\Exception $e){
                     dd($e);
