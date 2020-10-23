@@ -49,13 +49,18 @@
                 <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 50%">
             </div>
             @isset($edit)
-                <div class="email-content-detail" style="margin: 50px 0;">
-                    <input class="email-title " type="text" name="subject" style="margin: 0;margin-bottom: 30px;font-size: 34px;" placeholder="Welcome to Wefullfill" value="Welcome to Wefullfill">
-                    <br>
-                    <textarea type="text" class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" name="body" placeholder="Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks." >Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks.</textarea>
-                    <br>
-                    <a href="https://www.wefullfill.com/pages/help-center" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
-                </div>
+                <form action="{{ route('admin.emails.update', 1) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="email-content-detail" style="margin: 50px 0;">
+                        <input class="email-title " type="text" name="subject" style="margin: 0;margin-bottom: 30px;font-size: 34px;" placeholder="Welcome to Wefullfill" value="Welcome to Wefullfill">
+                        <br>
+                        <textarea type="text" class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" name="body" placeholder="Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks." >Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks.</textarea>
+                        <br>
+                        <a href="https://www.wefullfill.com/pages/help-center" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
+                    </div>
+                    <button type="submit" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Update</button>
+                </form>
             @else
                 <div class="email-content-detail" style="margin: 50px 0;">
                     <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">Welcome to Wefullfill</h1>
