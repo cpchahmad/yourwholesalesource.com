@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\AdminSetting;
+use App\Mail\OrderPlaceEmail;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\RetailerOrder;
+use App\User;
 use App\UserFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PaypalController extends Controller
@@ -137,6 +140,16 @@ class PaypalController extends Controller
 
             $retailer_order->pay_by = 'Paypal';
             $retailer_order->save();
+
+            /*Order placing email*/
+            $user = User::find($retailer_order->user_id);
+
+            try{
+                Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($user->email, $retailer_order));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             /*Maintaining Log*/
             $order_log =  new OrderLog();
