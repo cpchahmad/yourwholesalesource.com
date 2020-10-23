@@ -64,6 +64,7 @@ class WishlistController extends Controller
 
             /*Wishlist request email*/
             $user = User::find($wish->user_id);
+
             $manager_email = $manager->email;
             $users_temp =['info@wefullfill.com',$manager_email];
             $users = [];
