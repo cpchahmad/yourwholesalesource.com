@@ -473,7 +473,8 @@ class SingleStoreController extends Controller
     public function helpcenter(Request $request)
     {
         $shop = $this->helper->getLocalShop();
-        $tickets = Ticket::where('shop_id', $shop->id)->where('source', 'store')->newQuery();
+        $user = $shop->has_user()->first();
+        $tickets = Ticket::where('user_id', $user->id)->where('source', 'store')->newQuery();
         $tickets = $tickets->paginate(30);
 
         return view('single-store.help-center.index')->with([
