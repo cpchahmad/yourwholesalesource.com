@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\NewUser;
 use App\Mail\NewWallet;
+use App\Mail\OrderPlaceEmail;
 use App\OrderLog;
 use App\OrderTransaction;
 use App\PaypalWalletTransaction;
@@ -313,6 +315,16 @@ class WalletController extends Controller
                 $wallet_log->save();
                 $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
 
+                /*Order placing email*/
+                try{
+                    Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($user, $retailer_order));
+                    Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($user, $retailer_order));
+
+                }
+                catch (\Exception $e){
+
+
+                }
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
                 $new_transaction->amount =  $retailer_order->cost_to_pay;
