@@ -40,7 +40,7 @@
                                 @foreach($templates as $template)
                                     <tr>
                                         <td class="font-w600" style="vertical-align: middle">
-                                            <a href="{{ route('admin.emails.show', $template->id) }}">New user Registration Template</a>
+                                            <a href="{{ route('admin.emails.show', $template->id) }}">{{ $template->title }}</a>
                                         </td>
                                         <td style="vertical-align: middle">
                                             {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
