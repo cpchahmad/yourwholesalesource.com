@@ -110,7 +110,7 @@
                                 @if($thread->source == 'manager')
                                     <h5 class="block-title text-white">{{$thread->has_manager->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @elseif($thread->source == 'store')
-                                    <h5 class="block-title">{{explode('.',$ticket->has_store->shopify_domain)[0]}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                                    <h5 class="block-title">{{$ticket->has_user->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @else
                                     <h5 class="block-title">{{$ticket->has_user->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
 
@@ -212,7 +212,7 @@
                             <span class="font-weight-bold">#: </span> <span class="text-center">{{$ticket->id}}</span>
                             @if($ticket->source == 'store')
                                 <hr>
-                                <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{explode('.',$ticket->has_store->shopify_domain)[0]}}</span>
+                                <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{$ticket->has_user->name}}</span>
                                 <hr>
                                 <span class="font-weight-bold">Domain: </span> <span class="text-center">{{$ticket->email}}</span>
                                 <hr>
