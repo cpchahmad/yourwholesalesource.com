@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdminSetting;
 use App\Customer;
 use App\FulfillmentLineItem;
+use App\Mail\OrderPlaceEmail;
 use App\OrderFulfillment;
 use App\OrderLog;
 use App\OrderTransaction;
@@ -13,9 +14,11 @@ use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\ShippingRate;
+use App\User;
 use App\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use function Psy\sh;
 
 class OrderController extends Controller
@@ -95,6 +98,16 @@ class OrderController extends Controller
             }
 
             $order->save();
+
+            /*Order placing email*/
+            $user = User::find($order->user_id);
+
+            try{
+                Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($user->email, $order));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             /*Maintaining Log*/
             $order_log = new OrderLog();

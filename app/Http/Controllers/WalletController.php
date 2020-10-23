@@ -324,6 +324,7 @@ class WalletController extends Controller
                 catch (\Exception $e){
                     dd($e);
                 }
+
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
                 $new_transaction->amount =  $retailer_order->cost_to_pay;
