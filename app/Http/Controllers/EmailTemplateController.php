@@ -58,7 +58,7 @@ class EmailTemplateController extends Controller
                 return view('emails.new_shopify_user')->with('user', User::find(1));
                 break;
             case "3":
-                return view('emails.order_place')->with('user', User::find(1))->with('order', RetailerOrder::find(1));
+                return view('emails.order_place')->with('user', User::find(1))->with('retail_order', RetailerOrder::find(1));
                 break;
             case "4":
                 return view('emails.order_status')->with('user', User::find(1))->with('order', RetailerOrder::find(1));
