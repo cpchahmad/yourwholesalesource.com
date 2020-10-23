@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\RetailerOrder;
+use App\Ticket;
 use App\User;
+use App\Wallet;
+use App\Wishlist;
 use Illuminate\Http\Request;
 
 class EmailTemplateController extends Controller
@@ -54,19 +58,19 @@ class EmailTemplateController extends Controller
                 return view('emails.new_shopify_user')->with('user', User::find(1));
                 break;
             case "3":
-                return view('emails.order_place');
+                return view('emails.order_place')->with('user', User::find(1))->with('order', RetailerOrder::find(1));
                 break;
             case "4":
-                return view('emails.order_status');
+                return view('emails.order_status')->with('user', User::find(1))->with('order', RetailerOrder::find(1));
                 break;
             case "5":
-                return view('emails.wishlist_request');
+                return view('emails.wishlist_request')->with('wishlist', Wishlist::find(1));
                 break;
             case "6":
-                return view('emails.wallet_request');
+                return view('emails.wallet_request')->with('wallet', Wallet::find(1));
                 break;
             case "7":
-                return view('emails.refund_request');
+                return view('emails.refund_request')->with('ticket', Ticket::find(1));
                 break;
             default:
                 echo "Error";
