@@ -37,195 +37,35 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 1) }}">New user Registration Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
+                                @foreach($templates as $template)
+                                    <tr>
+                                        <td class="font-w600" style="vertical-align: middle">
+                                            <a href="{{ route('admin.emails.show', $template->id) }}">New user Registration Template</a>
+                                        </td>
+                                        <td style="vertical-align: middle">
+                                            {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
+                                            {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
+                                            {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
+                                            {{--                                        </div>--}}
+                                            <div class="custom-control custom-switch custom-control-success mb-1">
+                                                <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
+                                                <label class="custom-control-label">Draft</label>
+                                            </div>
+                                        </td>
+                                        <td class="text-right" style="vertical-align: middle">
 
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 1) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 1) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 2) }}">Shopify user Registration Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 2) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 2) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 3) }}">Order Place Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 3) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 3) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 4) }}">Order Status Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 4) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 4) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 5) }}">Wishlist Request Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 5) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 5) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 6) }}">Wallet Request Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 6) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 6) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-w600" style="vertical-align: middle">
-                                        <a href="{{ route('admin.emails.show', 7) }}">Ticket Request Template</a>
-                                    </td>
-                                    <td style="vertical-align: middle">
-                                        {{--                                        <div class="custom-control custom-switch custom-control-success mb-1">--}}
-                                        {{--                                            <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">--}}
-                                        {{--                                            <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="custom-control custom-switch custom-control-success mb-1">
-                                            <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">
-                                            <label class="custom-control-label">Draft</label>
-                                        </div>
-                                    </td>
-                                    <td class="text-right" style="vertical-align: middle">
-
-                                        <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', 7) }}" type="button"  title="View Template">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', 7) }}"
-                                                type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Edit Tempalte"><i
-                                                    class="fa fa-edit"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
+                                                <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', $template->id) }}" type="button"  title="View Template">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', $template->id) }}"
+                                                    type="button" data-toggle="tooltip" title=""
+                                                    data-original-title="Edit Tempalte"><i
+                                                        class="fa fa-edit"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

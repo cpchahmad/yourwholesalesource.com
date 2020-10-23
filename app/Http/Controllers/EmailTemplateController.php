@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EmailTemplate;
 use App\RetailerOrder;
 use App\Ticket;
 use App\User;
@@ -18,7 +19,7 @@ class EmailTemplateController extends Controller
      */
     public function index()
     {
-        return view('setttings.email.index');
+        return view('setttings.email.index')->with('templates', EmailTemplate::all());
     }
 
     /**
