@@ -51,7 +51,7 @@
             </div>
             <div class="email-content-detail" style="margin: 50px 0;">
                 <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">An Order is being placed on wefulfill</h1>
-                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Hey {{ $user }}, an order is being placed {{ $retail_order->name }} </p>
+                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Hey {{ $user->name }}, an order is being placed {{ $retail_order->name }} </p>
 
                 <a href="{{ route('store.order.view', $retail_order->id) }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>
             </div>
