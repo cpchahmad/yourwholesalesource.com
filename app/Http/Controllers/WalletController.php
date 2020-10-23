@@ -316,8 +316,9 @@ class WalletController extends Controller
                 $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
 
                 /*Order placing email*/
-                $sender_email = Auth::user()->email;
-                dd($sender_email);
+                $user = User::find($retailer_order->user_id);
+
+                dd($user->email);
                 try{
                     Mail::to('info@wefullfill.com')->send(new OrderPlaceEmail($sender_email, $retailer_order));
                 }
