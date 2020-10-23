@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="content">
-        @if($shop->has_manager != null)
+        @if($shop->has_user->has_manager != null)
             <form class="js-form-icon-search push" action="" method="get">
                 <div class="form-group">
                     <div class="input-group">
