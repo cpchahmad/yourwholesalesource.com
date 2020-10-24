@@ -378,12 +378,12 @@ class SingleStoreController extends Controller
         if ($user != null && $shop != null) {
             if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
-                try{
-                    Mail::to($user->email)->send(new NewShopifyUserMail($user));
-                }
-                catch (\Exception $e){
-                    dd($e);
-                }
+//                try{
+//                    Mail::to($user->email)->send(new NewShopifyUserMail($user));
+//                }
+//                catch (\Exception $e){
+//                    dd($e);
+//                }
 
                 return response()->json([
                     'status' => 'assigned'
