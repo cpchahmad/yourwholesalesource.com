@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\RetailerOrder;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -24,11 +25,13 @@ class OrderPlaceEmail extends Mailable
 
     private $sender;
     private $retailerOrder;
+    private $template;
 
     public function __construct($sender,RetailerOrder $retailerOrder)
     {
         $this->sender = $sender;
         $this->retailerOrder = $retailerOrder;
+        $this->template = EmailTemplate::find(3);
     }
 
     /**
@@ -39,8 +42,8 @@ class OrderPlaceEmail extends Mailable
     public function build()
     {
         return $this->from($this->sender,'Shopify user')->subject('Order is Placed')->view('emails.order_place')->with([
-            'user' => $this->user,
-            'retail_order' => $this->retailerOrder,
+            'template' => $this->template,
+            'order' => $this->retailerOrder,
         ]);
     }
 }

@@ -142,33 +142,33 @@ class PaypalController extends Controller
             $retailer_order->save();
 
             /*Order placing email*/
-//            $user = User::find($retailer_order->user_id);
-//            $manager_email = null;
-//            if($user->has_manager()->count() > 0) {
-//                $manager_email = $user->has_manager->email;
-//            }
-//            $manager_email = $user->has_manager->email;
-//            $users_temp =['info@wefullfill.com',$manager_email];
-//            $users = [];
-//
-//            foreach($users_temp as $key => $ut){
-//                if($ut != null) {
-//                    $ua = [];
-//
-//                    $ua['email'] = $ut;
-//
-//                    $ua['name'] = 'test';
-//
-//                    $users[$key] = (object)$ua;
-//                }
-//            }
-//
-//            try{
-//                Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
-//            }
-//            catch (\Exception $e){
-//                dd($e);
-//            }
+            $user = User::find($retailer_order->user_id);
+            $manager_email = null;
+            if($user->has_manager()->count() > 0) {
+                $manager_email = $user->has_manager->email;
+            }
+            $manager_email = $user->has_manager->email;
+            $users_temp =['info@wefullfill.com',$manager_email];
+            $users = [];
+
+            foreach($users_temp as $key => $ut){
+                if($ut != null) {
+                    $ua = [];
+
+                    $ua['email'] = $ut;
+
+                    $ua['name'] = 'test';
+
+                    $users[$key] = (object)$ua;
+                }
+            }
+
+            try{
+                Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             /*Maintaining Log*/
             $order_log =  new OrderLog();
