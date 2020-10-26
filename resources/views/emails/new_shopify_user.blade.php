@@ -43,23 +43,39 @@
     }
 </style>
 
-<div class="email-body" style="padding: 20px;max-width: 700px;margin: auto; font-family: DIN Next,sans-serif;">
-    <div class="email-contaner" style="border: 4px solid #7daa40;padding: 25px;">
-        <div class="email-content" style=" max-width: 450px;  margin: auto;  text-align: center; ">
+{{--<div class="email-body" style="padding: 20px;max-width: 700px;margin: auto; font-family: DIN Next,sans-serif;">--}}
+{{--    <div class="email-contaner" style="border: 4px solid #7daa40;padding: 25px;">--}}
+{{--        <div class="email-content" style=" max-width: 450px;  margin: auto;  text-align: center; ">--}}
+{{--            <div class="email-logo">--}}
+
+{{--                <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 50%">--}}
+
+{{--            </div>--}}
+{{--            <div class="email-content-detail" style="margin: 50px 0;">--}}
+{{--                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">Welcome to Wefullfill</h1>--}}
+{{--                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks. </p>--}}
+
+{{--                <a href="https://www.wefullfill.com/pages/help-center" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+
+<div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: DIN Next,sans-serif;">
+    <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
+        <div class="email-content" style="margin: auto;  text-align: center; ">
             <div class="email-logo">
-
-                <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 50%">
-
+                <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 35%">
             </div>
             <div class="email-content-detail" style="margin: 50px 0;">
-                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">Welcome to Wefullfill</h1>
-                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Hey {{ $user->name }}, Welcome to Wefullfill Family, here you enjoy handsfree dropshipping and other perks. </p>
-
+                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">{{ $template->subject }}</h1>
+                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >{{ $template->body }} </p>
                 <a href="https://www.wefullfill.com/pages/help-center" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
             </div>
         </div>
     </div>
 </div>
+
 <div class="email-footer" style=" padding: 25px 10px; color: white; ">
 
     <div class="email-footer-caption">
