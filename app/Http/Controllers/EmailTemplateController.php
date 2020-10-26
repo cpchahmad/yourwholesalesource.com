@@ -96,6 +96,8 @@ class EmailTemplateController extends Controller
     }
 
     public function changeStatus(Request $request) {
-        dd($request->all());
+        $template = EmailTemplate::find($request->template);
+        $template->status = $request->status;
+        $template->save();
     }
 }
