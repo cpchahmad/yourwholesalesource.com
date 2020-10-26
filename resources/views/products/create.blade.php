@@ -99,7 +99,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
                                             <label>Quantity</label>
-                                            <input type="text" class="form-control" name="quantity" placeholder="0" >
+                                            <input type="text" class="form-control" name="quantity" placeholder="0" required>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
                                             <label>Weight</label>
-                                            <input type="text" class="form-control" name="weight" placeholder="0.0Kg">
+                                            <input type="text" class="form-control" name="weight" placeholder="0.0Kg" required>
                                         </div>
                                     </div>
                                 </div>
