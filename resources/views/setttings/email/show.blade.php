@@ -66,7 +66,6 @@
                             <div class="email-logo">
                                 <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 50%">
                             </div>
-                            @isset($edit)
                                 <form action="{{ route('admin.emails.update', 1) }}" method="POST">
                                     @csrf
                                     @method('PUT')
@@ -86,7 +85,6 @@
 
                                     <a href="https://www.wefullfill.com/pages/help-center" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
                                 </div>
-                            @endisset
                         </div>
                     </div>
                 </div>
