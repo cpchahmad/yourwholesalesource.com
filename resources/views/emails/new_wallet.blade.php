@@ -11,8 +11,7 @@
     }
     .email-content
     {
-        /*max-width: 450px;*/
-        width : 90%;
+        max-width: 450px;
     }
     .email-content-detail
     {
@@ -42,7 +41,6 @@
         }
     }
 </style>
-
 <div class="email-body" style="padding: 20px;max-width: 700px;margin: auto; font-family: DIN Next,sans-serif;">
     <div class="email-contaner" style="border: 4px solid #7daa40;padding: 25px;">
         <div class="email-content" style=" max-width: 450px;  margin: auto;  text-align: center; ">

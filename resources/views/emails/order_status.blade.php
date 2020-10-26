@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to Wefullfill</title>
+    <title>Order Status</title>
 </head>
 <body style="margin: 0">
 <style>
