@@ -42,7 +42,6 @@ class WishlistController extends Controller
     }
 
     public function create_wishlist(Request $request){
-        dd($request->all());
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
             $wish = new Wishlist();
@@ -58,6 +57,7 @@ class WishlistController extends Controller
                 $shop = $this->helper->getLocalShop();
                 $user = $shop->has_user()->first();
                 $wish->user_id = $user->id;
+                $wish->shop_id = $request->input('shop_id');
             }
             else{
                 $wish->user_id = Auth::id();
