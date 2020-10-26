@@ -63,7 +63,7 @@ class EmailTemplateController extends Controller
      */
     public function edit($id)
     {
-        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('email', 1);
+        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('edit', 1);
     }
 
     /**
