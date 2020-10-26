@@ -151,6 +151,21 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Shopify Store <i class="fa fa-question-circle"  title="This is the name of the store you want to you want to request for your wishlist"> </i></label>
+                                                <select name="shop_id" id="" class="form-control">
+                                                    @foreach($user->has_stores()->get() as $store)
+                                                        <option value="{{ $store->id }}"> {{ $store->shopify_domain }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
