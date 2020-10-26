@@ -402,13 +402,14 @@ class AdminOrderController extends Controller
             $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
         }
 
-//        $user = $order->has_user;
-//        try{
-//            Mail::to($user->email)->send(new OrderStatusMail($user, $order));
-//        }
-//        catch (\Exception $e){
-//            dd($e);
-//        }
+        $user = $order->has_user;
+        try{
+            Mail::to($user->email)->send(new OrderStatusMail($user, $order));
+        }
+        catch (\Exception $e){
+            dd($e);
+        }
+
         $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
     }

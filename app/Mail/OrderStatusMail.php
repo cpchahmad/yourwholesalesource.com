@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\RetailerOrder;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -20,13 +21,14 @@ class OrderStatusMail extends Mailable
      */
     private $user;
     private $order;
+    private $template;
 
     private $sender = 'info@wefullfill.com';
     public function __construct(User $user, RetailerOrder $order)
     {
-
         $this->user = $user;
         $this->order = $order;
+        $this->template = EmailTemplate::find(4);
     }
 
     /**
@@ -37,7 +39,7 @@ class OrderStatusMail extends Mailable
     public function build()
     {
         return $this->from($this->sender,'Wefullfill')->subject('Order Status Updated')->view('emails.order_status')->with([
-            'user' => $this->user,
+            'template' => $this->template,
             'order' => $this->order,
         ]);
     }
