@@ -339,5 +339,5 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 
 Route::get('/test', function () {
-   return view('emails.order_status')->with('template', EmailTemplate::find(1))->with('order', RetailerOrder::find(1));
+   return view('emails.order_place')->with('template', EmailTemplate::find(1))->with('order', RetailerOrder::find(1));
 });
