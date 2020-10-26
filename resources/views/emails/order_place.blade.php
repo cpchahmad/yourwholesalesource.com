@@ -3,9 +3,6 @@
 <head>
     <head>
         <title>New order</title>
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{now()}}"/>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     </head>
 </head>
 <body style="margin: 0">
@@ -48,23 +45,6 @@
     }
 </style>
 
-{{--<div class="email-body" style="padding: 20px;max-width: 700px;margin: auto; font-family: DIN Next,sans-serif;">--}}
-{{--    <div class="email-contaner" style="border: 4px solid #7daa40;padding: 25px;">--}}
-{{--        <div class="email-content" style=" max-width: 450px;  margin: auto;  text-align: center; ">--}}
-{{--            <div class="email-logo">--}}
-
-{{--                <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 50%">--}}
-
-{{--            </div>--}}
-{{--            <div class="email-content-detail" style="margin: 50px 0;">--}}
-{{--                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">An Order is being placed on wefulfill</h1>--}}
-{{--                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Hey {{ $user->name }}, an order is being placed {{ $retail_order->name }} </p>--}}
-
-{{--                <a href="{{ route('store.order.view', $retail_order->id) }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 <div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: DIN Next,sans-serif;">
     <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
