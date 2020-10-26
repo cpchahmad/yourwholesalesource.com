@@ -407,7 +407,6 @@ class AdminOrderController extends Controller
             Mail::to($user->email)->send(new OrderStatusMail($user, $order));
         }
         catch (\Exception $e){
-            dd($e);
         }
 
         $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
