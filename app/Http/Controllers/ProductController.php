@@ -364,7 +364,13 @@ class ProductController extends Controller
                     $res = str_ireplace( array( '$', '"',
                         ',' , ';', '<', '>' ), ' ', $request->input('cost'));
 
-                    $variant->cost = trim($res);
+                    if($res = '')
+                    {
+                        $variant->cost = null;
+                    }
+                    else {
+                        $variant->cost = trim($res);
+                    }
                     $variant->product_id = $id;
                     $variant->save();
 
@@ -743,10 +749,18 @@ class ProductController extends Controller
             $variants->price = $data->variant_price[$i];
             $variants->compare_price = $data->variant_comparePrice[$i];
             $variants->quantity = $data->variant_quantity[$i];
+
             $res = str_ireplace( array( '$', '"',
                 ',' , ';', '<', '>' ), ' ', $data->variant_cost[$i]);
 
-            $variants->cost = trim($res);
+            if($res = '')
+            {
+                $variants->cost = null;
+            }
+            else {
+                $variants->cost = trim($res);
+            }
+
             $variants->sku = $data->variant_sku[$i];
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
@@ -783,7 +797,13 @@ class ProductController extends Controller
             $res = str_ireplace( array( '$', '"',
                 ',' , ';', '<', '>' ), ' ', $data->variant_cost[$i]);
 
-            $variants->cost = trim($res);
+            if($res = '')
+            {
+                $variants->cost = null;
+            }
+            else {
+                $variants->cost = trim($res);
+            }
             $variants->sku = $data->variant_sku[$i];
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
