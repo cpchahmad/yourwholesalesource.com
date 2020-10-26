@@ -361,7 +361,10 @@ class ProductController extends Controller
                     $variant->quantity = $request->input('quantity');
                     $variant->sku = $request->input('sku');
                     $variant->barcode = $request->input('barcode');
-                    $variant->cost = $request->input('cost');
+                    $res = str_ireplace( array( '$', '"',
+                        ',' , ';', '<', '>' ), ' ', $request->input('cost'));
+
+                    $variant->cost = trim($res);
                     $variant->product_id = $id;
                     $variant->save();
 
