@@ -102,7 +102,6 @@ class TicketController extends Controller
                 Mail::to($users)->send(new TicketRefundRequst($user->email, $ticket));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
 

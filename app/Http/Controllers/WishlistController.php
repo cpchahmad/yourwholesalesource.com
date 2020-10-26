@@ -88,7 +88,6 @@ class WishlistController extends Controller
                 Mail::to($users)->send(new WishlistReqeustMail($user->email, $wish));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
             if($request->hasFile('attachments')){

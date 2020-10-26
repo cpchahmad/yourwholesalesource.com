@@ -162,7 +162,6 @@ class WalletController extends Controller
                Mail::to($users)->send(new WalletRequestMail($user->email, $wallet));
            }
            catch (\Exception $e){
-               dd($e);
            }
 
 
@@ -372,7 +371,6 @@ class WalletController extends Controller
                     Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
                 }
                 catch (\Exception $e){
-                    dd($e);
                 }
 
                 /*Order Processing*/

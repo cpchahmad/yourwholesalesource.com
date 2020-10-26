@@ -167,7 +167,6 @@ class PaypalController extends Controller
                 Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
             /*Maintaining Log*/
