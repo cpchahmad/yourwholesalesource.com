@@ -78,7 +78,7 @@ class EmailTemplateController extends Controller
 //                echo "Error";
 //        }
 
-        return view('setttings.email.index')->with('template', EmailTemplate::find($id));
+        return view('setttings.email.show')->with('template', EmailTemplate::find($id));
 
     }
 
