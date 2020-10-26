@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\RetailerOrder;
 use App\Wishlist;
 use Illuminate\Bus\Queueable;
@@ -22,11 +23,13 @@ class WishlistReqeustMail extends Mailable
 
     private $sender;
     private $wishlist;
+    private $template;
 
     public function __construct($sender,Wishlist $wishlist)
     {
         $this->sender = $sender;
         $this->wishlist = $wishlist;
+        $this->template = EmailTemplate::find(5);
     }
 
     /**
@@ -37,7 +40,7 @@ class WishlistReqeustMail extends Mailable
     public function build()
     {
         return $this->from($this->sender,'Shopify user')->subject('There is a wishlist request')->view('emails.wishlist_request')->with([
-            'user' => $this->user,
+            'template' => $this->template,
             'wishlist' => $this->wishlist,
         ]);
     }

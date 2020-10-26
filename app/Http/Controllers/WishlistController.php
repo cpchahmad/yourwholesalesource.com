@@ -66,30 +66,30 @@ class WishlistController extends Controller
             $wish->has_market()->attach($request->input('countries'));
 
             /*Wishlist request email*/
-//            $user = User::find($wish->user_id);
-//
-//            $manager_email = $manager->email;
-//            $users_temp =['info@wefullfill.com',$manager_email];
-//            $users = [];
-//
-//            foreach($users_temp as $key => $ut){
-//                if($ut != null) {
-//                    $ua = [];
-//
-//                    $ua['email'] = $ut;
-//
-//                    $ua['name'] = 'test';
-//
-//                    $users[$key] = (object)$ua;
-//                }
-//            }
-//
-//            try{
-//                Mail::to($users)->send(new WishlistReqeustMail($user->email, $wish));
-//            }
-//            catch (\Exception $e){
-//                dd($e);
-//            }
+            $user = User::find($wish->user_id);
+
+            $manager_email = $manager->email;
+            $users_temp =['info@wefullfill.com',$manager_email];
+            $users = [];
+
+            foreach($users_temp as $key => $ut){
+                if($ut != null) {
+                    $ua = [];
+
+                    $ua['email'] = $ut;
+
+                    $ua['name'] = 'test';
+
+                    $users[$key] = (object)$ua;
+                }
+            }
+
+            try{
+                Mail::to($users)->send(new WishlistReqeustMail($user->email, $wish));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             if($request->hasFile('attachments')){
                 $files = $request->file('attachments');
