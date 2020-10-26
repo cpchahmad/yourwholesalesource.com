@@ -73,11 +73,11 @@
 
                             <td style="vertical-align: middle">
                                  From.
-{{--                                @if(count($product->hasVariants) > 0)--}}
-{{--                                    ${{ number_format($product->hasVariants->min('price'), 2) }}--}}
+                                @if(count($product->hasVariants) > 0)
+                                    ${{ number_format($product->hasVariants->min('price'), 2) }}
 {{--                                @else--}}
 {{--                                ${{ number_format($product->price, 2) }}--}}
-{{--                                    @endif--}}
+                                    @endif
 
                             </td>
                             <td style="vertical-align: middle">{{ $product->quantity }}</td>
