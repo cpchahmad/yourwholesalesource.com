@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Country;
 use App\Customer;
 use App\FulfillmentLineItem;
+use App\Mail\WalletApproveMail;
+use App\Mail\WishlistRejectMail;
 use App\ManagerLog;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -27,6 +29,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ManagerController extends Controller
@@ -993,6 +996,15 @@ class ManagerController extends Controller
                 $ml->manager_id = Auth::id();
                 $ml->save();
                 $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . date_create($request->input('date'))->format('d M, Y h:i a'). ' By Manager',$related_wallet);
+
+                $user = $related_wallet->owner;
+
+                try{
+                    Mail::to($user->email)->send(new WalletApproveMail($user, $related_wallet));
+                }
+                catch (\Exception $e){
+                    dd($e);
+                }
 
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }
