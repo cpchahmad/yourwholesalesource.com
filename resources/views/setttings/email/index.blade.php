@@ -45,7 +45,7 @@
                                         <td style="vertical-align: middle">
                                             <div class="custom-control custom-switch custom-control-success mb-1">
                                                 <input @if($template->status ==1)checked="" @endif data-route="{{route('admin.emails.status',$template->id)}}" data-template="{{ $template->id }}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input template-status-switch" id="status_template_{{ $template->id }}" name="example-sw-success2">
-                                                <label class="custom-control-label status-text" for="status_template_{{ $template->id }}">@if($template->status ==1) Published @else Draft @endif</label>
+                                                <label class="custom-control-label " for="status_template_{{ $template->id }}">@if($template->status ==1) Published @else Draft @endif</label>
                                             </div>
                                         </td>
                                         <td class="text-right" style="vertical-align: middle">
