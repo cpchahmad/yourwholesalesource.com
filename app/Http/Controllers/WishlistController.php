@@ -42,6 +42,7 @@ class WishlistController extends Controller
     }
 
     public function create_wishlist(Request $request){
+        dd($request->all());
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
             $wish = new Wishlist();
