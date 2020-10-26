@@ -47,10 +47,6 @@
                                                 <input @if($template->status ==1)checked="" @endif data-route="{{route('product.update',$template->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $template->id }}" name="example-sw-success2">
                                                 <label class="custom-control-label" for="status_product_{{ $template->id }}">@if($template->status ==1) Published @else Draft @endif</label>
                                             </div>
-{{--                                            <div class="custom-control custom-switch custom-control-success mb-1">--}}
-{{--                                                <input type="checkbox" class="custom-control-input status-switch"  name="example-sw-success2">--}}
-{{--                                                <label class="custom-control-label">Draft</label>--}}
-{{--                                            </div>--}}
                                         </td>
                                         <td class="text-right" style="vertical-align: middle">
 

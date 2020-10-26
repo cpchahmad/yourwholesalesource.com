@@ -75,7 +75,13 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        $template = EmailTemplate::find($id);
+        $template->subject = $request->subject;
+        $template->body = $request->body;
+        $template->save();
+
+        return redirect()->route('admin.emails.show',$template->id)->with('success','Email Template updated successfully!');
+
     }
 
     /**
