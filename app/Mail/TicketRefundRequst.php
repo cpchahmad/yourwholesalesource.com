@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\Ticket;
 use App\Wishlist;
 use Illuminate\Bus\Queueable;
@@ -22,11 +23,13 @@ class TicketRefundRequst extends Mailable
 
     private $sender;
     private $ticket;
+    private $template;
 
     public function __construct($sender,Ticket $ticket)
     {
         $this->sender = $sender;
         $this->ticket = $ticket;
+        $this->template = EmailTemplate::find(7);
     }
 
     /**
@@ -37,8 +40,8 @@ class TicketRefundRequst extends Mailable
     public function build()
     {
         return $this->from($this->sender,'Shopify user')->subject('There is a ticket request')->view('emails.refund_request')->with([
-            'user' => $this->user,
             'ticket' => $this->ticket,
+            'template' => $this->template
         ]);
     }
 }

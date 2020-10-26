@@ -79,31 +79,31 @@ class TicketController extends Controller
                 }
             }
 
-            /*Wishlist request email*/
-//            $user = User::find($ticket->user_id);
-//
-//            $manager_email = $manager->email;
-//            $users_temp =['info@wefullfill.com',$manager_email];
-//            $users = [];
-//
-//            foreach($users_temp as $key => $ut){
-//                if($ut != null) {
-//                    $ua = [];
-//
-//                    $ua['email'] = $ut;
-//
-//                    $ua['name'] = 'test';
-//
-//                    $users[$key] = (object)$ua;
-//                }
-//            }
-//
-//            try{
-//                Mail::to($users)->send(new TicketRefundRequst($user->email, $ticket));
-//            }
-//            catch (\Exception $e){
-//                dd($e);
-//            }
+            /*Ticket request email*/
+            $user = User::find($ticket->user_id);
+
+            $manager_email = $manager->email;
+            $users_temp =['info@wefullfill.com',$manager_email];
+            $users = [];
+
+            foreach($users_temp as $key => $ut){
+                if($ut != null) {
+                    $ua = [];
+
+                    $ua['email'] = $ut;
+
+                    $ua['name'] = 'test';
+
+                    $users[$key] = (object)$ua;
+                }
+            }
+
+            try{
+                Mail::to($users)->send(new TicketRefundRequst($user->email, $ticket));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
 
             /*Maintaining Log*/
