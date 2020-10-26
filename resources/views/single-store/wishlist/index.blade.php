@@ -48,6 +48,7 @@
                                         <th>Product</th>
                                         <th>Cost</th>
                                         <th>Sales</th>
+                                        <th>Store</th>
                                         <th style="width: 5%">Markets</th>
                                         <th>Status</th>
                                         <th>Approved Cost</th>
@@ -66,6 +67,9 @@
                                             </td>
                                             <td>
                                                 {{$item->monthly_sales}}
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-success">{{$item->has_store->shopify_domain }}</span>
                                             </td>
                                             <td>
                                                 @if(count($item->has_market) > 0)
