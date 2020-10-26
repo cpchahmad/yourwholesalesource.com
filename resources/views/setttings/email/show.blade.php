@@ -92,7 +92,7 @@
                                         <hr>
                                         <div class="order-details text-left">
                                             <div class="row">
-                                                <div class="col-md-9">
+                                                <div class="col-md-12">
                                                     <div class="block">
                                                         <div class="block-header block-header-default">
                                                             <h3 class="block-title">
