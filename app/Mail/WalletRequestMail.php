@@ -2,12 +2,14 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\Wallet;
 use App\Wishlist;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use PharIo\Manifest\Email;
 
 class WalletRequestMail extends Mailable
 {
@@ -22,11 +24,13 @@ class WalletRequestMail extends Mailable
 
     private $sender;
     private $wallet;
+    private $template;
 
     public function __construct($sender,Wallet $wallet)
     {
         $this->sender = $sender;
         $this->wallet = $wallet;
+        $this->template = EmailTemplate::find(6);
     }
 
     /**
@@ -37,7 +41,7 @@ class WalletRequestMail extends Mailable
     public function build()
     {
         return $this->from($this->sender,'Shopify user')->subject('There is a wallet request')->view('emails.wallet_reqeust')->with([
-            'user' => $this->user,
+            'template' => $this->template,
             'wallet' => $this->wallet,
         ]);
     }
