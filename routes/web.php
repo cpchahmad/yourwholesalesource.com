@@ -126,6 +126,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/email/templates/{id}', 'EmailTemplateController@show')->name('admin.emails.show');
     Route::get('/email/templates/edit/{id}', 'EmailTemplateController@edit')->name('admin.emails.edit');
     Route::put('/email/templates/update/{id}', 'EmailTemplateController@update')->name('admin.emails.update');
+    Route::post('/email/templates/{id}/status', 'EmailTemplateController@changeStatus')->name('admin.emails.status');
 
 });
 /*Single Store Routes*/

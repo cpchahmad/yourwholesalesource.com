@@ -94,4 +94,8 @@ class EmailTemplateController extends Controller
     {
         //
     }
+
+    public function changeStatus(Request $request) {
+        dd($request->all());
+    }
 }

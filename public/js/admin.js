@@ -330,7 +330,7 @@ $(document).ready(function () {
             }
         });
     });
-   /*Admin Module - Product STatus Change JS*/
+   /*Admin Module - Product Status Change JS*/
     $('body').on('change','.status-switch',function () {
         var status = '';
         if($(this).is(':checked')){
@@ -347,6 +347,27 @@ $(document).ready(function () {
             data:{
                 _token: $(this).data('csrf'),
                 type : 'status_update',
+                status : status
+            }
+        })
+    });
+
+    /*Admin Module - Email Template Status Change JS*/
+    $('body').on('change','.template-status-switch',function () {
+        var status = '';
+        if($(this).is(':checked')){
+            status = 1;
+            $('.status-text').text('Published')
+        }
+        else{
+            status = 0;
+            $('.status-text').text('Draft')
+        }
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data:{
+                _token: $(this).data('csrf'),
                 status : status
             }
         })
