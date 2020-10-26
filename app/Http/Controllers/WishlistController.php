@@ -7,6 +7,7 @@ use App\Image;
 use App\Mail\OrderPlaceEmail;
 use App\Mail\OrderStatusMail;
 use App\Mail\WishlistApproveMail;
+use App\Mail\WishlistRejectMail;
 use App\Mail\WishlistReqeustMail;
 use App\ManagerLog;
 use App\Product;
@@ -186,7 +187,6 @@ class WishlistController extends Controller
                 Mail::to($user->email)->send(new WishlistApproveMail($user, $wish));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
             $this->notify->generate('Wish-list','Wishlist Approved','Wishlist named '.$wish->product_name.' has been approved by your manager',$wish);
@@ -214,6 +214,14 @@ class WishlistController extends Controller
             $tl->manager_id = $manager->id;
             $tl->save();
             $this->notify->generate('Wish-list','Wishlist Rejected','Wishlist named '.$wish->product_name.' has been rejected by your manager',$wish);
+
+            $user = $wish->has_user;
+            try{
+                Mail::to($user->email)->send(new WishlistRejectMail($user, $wish));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             return redirect()->back()->with('success','Wishlist Rejected Successfully!');
 
