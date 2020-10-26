@@ -357,11 +357,11 @@ $(document).ready(function () {
         var status = '';
         if($(this).is(':checked')){
             status = 1;
-            $('.status-text').text('Published')
+            $(`.status-text_${$(this).data('template')}`).text('Published')
         }
         else{
             status = 0;
-            $('.status-text').text('Draft')
+            $(`.status-text_${$(this).data('template')}`).text('Draft')
         }
         $.ajax({
             url: $(this).data('route'),
