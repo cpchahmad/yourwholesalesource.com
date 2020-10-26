@@ -347,6 +347,7 @@ $(document).ready(function () {
             data:{
                 _token: $(this).data('csrf'),
                 type : 'status_update',
+                template : $(this).data('template'),
                 status : status
             }
         })
