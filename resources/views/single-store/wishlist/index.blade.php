@@ -69,7 +69,9 @@
                                                 {{$item->monthly_sales}}
                                             </td>
                                             <td>
-                                                <span class="badge badge-success">{{$item->has_store->shopify_domain }}</span>
+                                                @if($item->has_store)
+                                                    <span class="badge badge-success">{{ $item->has_store->shopify_domain  }}</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 @if(count($item->has_market) > 0)
