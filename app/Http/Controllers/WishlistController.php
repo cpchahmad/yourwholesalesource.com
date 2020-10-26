@@ -220,7 +220,6 @@ class WishlistController extends Controller
                 Mail::to($user->email)->send(new WishlistRejectMail($user, $wish));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
             return redirect()->back()->with('success','Wishlist Rejected Successfully!');
