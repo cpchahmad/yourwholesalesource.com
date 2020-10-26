@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,12 +19,13 @@ class NewUser extends Mailable
      * @return void
      */
     private $user;
+    private $template;
 
     private $sender = 'info@wefullfill.com';
     public function __construct(User $user)
     {
-
         $this->user = $user;
+        $this->template = EmailTemplate::find(1);
     }
 
     /**
@@ -34,7 +36,8 @@ class NewUser extends Mailable
     public function build()
     {
         return $this->from($this->sender,'Wefullfill')->subject('Welcome to Wefullfill')->view('emails.new_user')->with([
-            'user' => $this->user
+            'user' => $this->user,
+            'template' => $this->template,
         ]);
     }
 }
