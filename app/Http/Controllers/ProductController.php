@@ -16,7 +16,6 @@ use App\User;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use OhMyBrew\ShopifyApp\Models\Shop;
 
@@ -738,14 +737,13 @@ class ProductController extends Controller
                 $variants->option3 = $options[2];
             }
             $variants->title = $data->variant_title[$i];
-
-            $res = str_ireplace( array( '$', '"',
-                ',' , ';', '<', '>' ), ' ', $data->variant_price[$i]);
-
-            $variants->price = trim($res);
+            $variants->price = $data->variant_price[$i];
             $variants->compare_price = $data->variant_comparePrice[$i];
             $variants->quantity = $data->variant_quantity[$i];
-            $variants->cost = $data->variant_cost[$i];
+            $res = str_ireplace( array( '$', '"',
+                ',' , ';', '<', '>' ), ' ', $data->variant_cost[$i]);
+
+            $variants->cost = trim($res);
             $variants->sku = $data->variant_sku[$i];
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
