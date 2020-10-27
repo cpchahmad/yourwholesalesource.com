@@ -321,11 +321,11 @@ class WalletController extends Controller
                 $wallet->save();
                 $wallet_log = new WalletLog();
                 $wallet_log->wallet_id =$wallet->id;
-                $wallet_log->status = "Top-up By Admin";
+                $wallet_log->status = "Wallet Amount updated by Admin";
                 $wallet_log->amount = $request->input('amount');
-                $wallet_log->message = 'An Amount of'.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). 'is updated By Administration';
+                $wallet_log->message = 'An Amount of'.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' is updated By Administration';
                 $wallet_log->save();
-                $this->notify->generate('Wallet','Wallet Top-up By Admin','A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). 'is updated By Administration',$wallet);
+                $this->notify->generate('Wallet','Wallet Top-up By Admin','A Top-up of Amount '.number_format($request->input('amount'),2).' USD Added Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' is updated By Administration',$wallet);
 
                 return redirect()->back()->with('success','Wallet Amount Updated Successfully!');
             }
