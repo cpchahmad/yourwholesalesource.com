@@ -54,13 +54,13 @@
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
                                                                 <label for="material-error">Current Amount</label>
-                                                                <input class="form-control" type="number"  disabled
+                                                                <input class="form-control" type="text"  disabled
                                                                        value="{{number_format($wallet->available,2)}}" >
                                                             </div>
 
                                                             <div class="form-material mt-2">
                                                                 <label for="material-error">New Amount</label>
-                                                                <input required class="form-control" type="number"  name="amount"
+                                                                <input required class="form-control" type="text"  name="amount"
                                                                        value="{{number_format($wallet->available,2)}}" >
                                                             </div>
                                                         </div>
