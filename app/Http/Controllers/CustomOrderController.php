@@ -389,7 +389,7 @@ class CustomOrderController extends Controller
             return $q->where('user_id', '=', Auth::user()->id);
         });
 
-        $productQuery->orwhere('global', 1);
+        $productQuery->orWhere('global', 1)->where('status', 1);
 
 
         if ($request->has('category')) {
