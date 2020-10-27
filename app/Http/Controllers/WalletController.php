@@ -317,7 +317,7 @@ class WalletController extends Controller
         $wallet = Wallet::find($request->input('wallet_id'));
         if($wallet != null){
             if($request->input('amount') > 0){
-                $wallet->available =  $wallet->available + $request->input('amount');
+                $wallet->available = $request->input('amount');
                 $wallet->save();
                 $wallet_log = new WalletLog();
                 $wallet_log->wallet_id =$wallet->id;

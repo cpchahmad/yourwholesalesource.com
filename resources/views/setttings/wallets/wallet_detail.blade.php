@@ -61,7 +61,7 @@
                                                             <div class="form-material mt-2">
                                                                 <label for="material-error">New Amount</label>
                                                                 <input required class="form-control" type="text"  name="amount"
-                                                                       value="{{number_format($wallet->available,2)}}" >
+                                                                       value="" placeholder="Enter Wallet Amount">
                                                             </div>
                                                         </div>
                                                     </div>
