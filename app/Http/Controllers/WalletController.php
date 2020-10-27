@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
 use App\Mail\OrderPlaceEmail;
+use App\Mail\WalletApproveMail;
 use App\Mail\WalletRequestMail;
 use App\Mail\WishlistReqeustMail;
 use App\OrderLog;
@@ -268,6 +269,16 @@ class WalletController extends Controller
                 $wallet_log->save();
 
                 $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . date_create($request->input('date'))->format('d M, Y h:i a') . ' By Administration',$related_wallet);
+
+                $user = $related_wallet->owner;
+
+                try{
+                    Mail::to($user->email)->send(new WalletApproveMail($user, $related_wallet));
+                }
+                catch (\Exception $e){
+                    dd($e);
+                }
+
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }
             else{
