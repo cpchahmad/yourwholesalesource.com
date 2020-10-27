@@ -186,6 +186,8 @@ class WalletController extends Controller
 
 
         $users = $users->paginate(30);
+
+        dd($users);
         foreach ($users as $user){
             if ($user->has_wallet == null) {
                $this->wallet_create($user->id);
@@ -276,7 +278,6 @@ class WalletController extends Controller
                     Mail::to($user->email)->send(new WalletApproveMail($user, $related_wallet));
                 }
                 catch (\Exception $e){
-                    dd($e);
                 }
 
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
