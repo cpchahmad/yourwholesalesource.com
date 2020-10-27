@@ -8,6 +8,7 @@ use App\Customer;
 use App\Mail\NewShopifyUserMail;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
+use App\Mail\TopShopifyProuctMail;
 use App\Notification;
 use App\OrderTransaction;
 use App\Product;
@@ -378,8 +379,32 @@ class SingleStoreController extends Controller
         if ($user != null && $shop != null) {
             if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
+
+                // Sending Welcome Email
                 try{
                     Mail::to($user->email)->send(new NewShopifyUserMail($user));
+                }
+                catch (\Exception $e){
+                }
+
+                // Sending Top Product Recommendation Email
+                $top_products_stores = Product::join('retailer_products', function ($join) {
+                    $join->on('retailer_products.linked_product_id', '=', 'products.id')
+                        ->join('retailer_order_line_items', function ($join) {
+                            $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                                ->join('retailer_orders', function ($o) {
+                                    $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                        ->where('retailer_orders.paid', '>=', 1);
+                                });
+                        });
+                })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                    ->groupBy('products.id')
+                    ->orderBy('sold', 'DESC')
+                    ->get()
+                    ->take(5);
+
+                try{
+                    Mail::to($user->email)->send(new TopShopifyProuctMail($user, $top_products_stores));
                 }
                 catch (\Exception $e){
                     dd($e);
