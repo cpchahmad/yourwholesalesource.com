@@ -178,7 +178,7 @@ class SingleStoreController extends Controller
             return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
         });
 
-        $productQuery->orWhere('global', 1);
+        $productQuery->orWhere('global', 1)->where('status', 1);
 
         if ($request->has('category')) {
             $productQuery->whereHas('has_categories', function ($q) use ($request) {
