@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/wallet/request/approve/{id}', 'WalletController@approved_bank_statement')->name('admin.wallets.approve.request');
     Route::get('/wallet/request/{id}/edit', 'WalletController@EditWalletDetails')->name('admin.wallets.edit');
     Route::post('/wallet/top-up', 'WalletController@topup_wallet_by_admin')->name('admin.user.wallet.topup');
+    Route::post('/wallet/edit', 'WalletController@editWalletAmount')->name('admin.user.wallet.amount.edit');
 
     Route::get('/refunds','DefaultSettingsController@refunds')->name('refunds.index');
     Route::get('/refunds/{id}', 'DefaultSettingsController@view_refund')->name('refunds.view');

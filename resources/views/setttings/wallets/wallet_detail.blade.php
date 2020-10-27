@@ -33,6 +33,48 @@
                     <div class="row mb2">
                         <div class="col-md-8"></div>
                         <div class="col-md-4 ">
+                            <button class="btn btn-primary" style="float: right" data-toggle="modal" data-target="#edit_wallet_amount"> Edit Wallet Amount </button>
+                            <div class="modal fade" id="edit_wallet_amount" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-popout" role="document">
+                                    <div class="modal-content">
+                                        <div class="block block-themed block-transparent mb-0">
+                                            <div class="block-header bg-primary-dark">
+                                                <h3 class="block-title">Edit Wallet Amount</h3>
+                                                <div class="block-options">
+                                                    <button type="button" class="btn-block-option">
+                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <form action="{{route('admin.user.wallet.amount.edit')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
+                                                <div class="block-content font-size-sm">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-material">
+                                                                <label for="material-error">Current Amount</label>
+                                                                <input required class="form-control" type="number"  disabled
+                                                                       value="{{number_format($wallet->available,2)}}"   placeholder="Enter Cheque Amount here">
+                                                            </div>
+
+                                                            <div class="form-material">
+                                                                <label for="material-error">New Amount</label>
+                                                                <input required class="form-control" type="number"  name="amount"
+                                                                       value="{{number_format($wallet->available,2)}}"   placeholder="Enter Wallet Amount">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="block-content block-content-full text-right border-top">
+                                                    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button class="btn btn-primary" style="float: right" data-toggle="modal" data-target="#bank_transfer_modal"> Top-up Wallet </button>
                             <div class="modal fade" id="bank_transfer_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
@@ -68,7 +110,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row mb2">
