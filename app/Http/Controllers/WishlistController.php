@@ -7,6 +7,7 @@ use App\Image;
 use App\Mail\OrderPlaceEmail;
 use App\Mail\OrderStatusMail;
 use App\Mail\WishlistApproveMail;
+use App\Mail\WishlistComplateMail;
 use App\Mail\WishlistRejectMail;
 use App\Mail\WishlistReqeustMail;
 use App\ManagerLog;
@@ -338,6 +339,13 @@ class WishlistController extends Controller
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
                 $wish->save();
+
+                $user = $wish->has_user;
+                try{
+                    Mail::to($user->email)->send(new WishlistComplateMail($user, $wish));
+                }
+                catch (\Exception $e){
+                }
 
                 $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
 
