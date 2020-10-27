@@ -33,7 +33,7 @@
                     <div class="row mb2">
                         <div class="col-md-8"></div>
                         <div class="col-md-4 ">
-                            <button class="btn btn-primary" style="float: right" data-toggle="modal" data-target="#edit_wallet_amount"> Edit Wallet Amount </button>
+                            <button class="btn btn-primary ml-2" style="float: right" data-toggle="modal" data-target="#edit_wallet_amount"> Edit Wallet Amount </button>
                             <div class="modal fade" id="edit_wallet_amount" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
                                     <div class="modal-content">
