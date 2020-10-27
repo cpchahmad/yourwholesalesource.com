@@ -152,7 +152,6 @@ class TicketController extends Controller
                 Mail::to($user->email)->send(new TicketReplyMail($user, $ticket));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
             if($request->hasFile('attachments')){

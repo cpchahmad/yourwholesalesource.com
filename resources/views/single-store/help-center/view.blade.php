@@ -50,8 +50,8 @@
                                         <input type="hidden" value="{{$ticket->shop_id}}" name="shop_id">
                                         <input type="hidden" value="{{$ticket->manager_id}}" name="manager_id">
                                         <input type="hidden" id="rating-input" value="0" name="rating">
-                                        <input type="hidden" value="{{explode('.',$ticket->has_store->shopify_domain)[0]}}" name="name">
-                                        <input type="hidden" value="{{$ticket->has_store->shopify_domain}}" name="email">
+                                        <input type="hidden" value="{{$ticket->has_user->name}}" name="name">
+                                        <input type="hidden" value="{{$ticket->has_user->name}}" name="email">
 
                                         <div class="block-content font-size-sm">
                                             <div class="form-group">
@@ -179,7 +179,7 @@
                                 @if($thread->source == 'manager')
                                     <h5 class="block-title text-white">{{$thread->has_manager->name}} (Manager) <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @else
-                                    <h5 class="block-title">{{explode('.',$ticket->has_store->shopify_domain)[0]}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                                    <h5 class="block-title">{{$ticket->has_user->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                 @endif
                             </div>
                             <div class="block-content">
@@ -238,7 +238,7 @@
                         <div class="p-2 font-size-sm">
                             <span class="font-weight-bold">#: </span> <span class="text-center">{{$ticket->id}}</span>
                             <hr>
-                            <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{explode('.',$ticket->has_store->shopify_domain)[0]}}</span>
+                            <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{$ticket->has_user->name}}</span>
                             <hr>
                             <span class="font-weight-bold">Domain: </span> <span class="text-center">{{$ticket->email}}</span>
                             <hr>
