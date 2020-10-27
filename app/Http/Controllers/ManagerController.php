@@ -972,6 +972,7 @@ class ManagerController extends Controller
         ]);
     }
     public function approved_bank_statement($id,Request $request){
+        dd($request->all());
         $req = WalletRequest::find($id);
         if($req->status == 0){
             $related_wallet = Wallet::find($req->wallet_id);
