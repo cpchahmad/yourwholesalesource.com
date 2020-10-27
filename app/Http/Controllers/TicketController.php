@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TicketRefundRequst;
+use App\Mail\TicketReplyMail;
+use App\Mail\WalletApproveMail;
 use App\Mail\WishlistReqeustMail;
 use App\ManagerLog;
 use App\ManagerReview;
@@ -143,6 +145,15 @@ class TicketController extends Controller
             }
 
             $ticket->save();
+
+            $user = $ticket->has_user;
+
+            try{
+                Mail::to($user->email)->send(new TicketReplyMail($user, $ticket));
+            }
+            catch (\Exception $e){
+                dd($e);
+            }
 
             if($request->hasFile('attachments')){
                 $files = $request->file('attachments');
