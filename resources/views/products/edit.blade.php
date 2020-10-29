@@ -65,7 +65,7 @@
                                     @php
 
                                     @endphp
-                                    @foreach($product->has_images()->orderBy('LENGTH(position)', 'ASC')->orderBy('position', 'ASC')->get() as $image)
+                                    @foreach(DB::table('images')->where('product_id', $product->id)->orderBy('LENGTH(position)', 'ASC')->orderBy('position', 'ASC')->get() as $image)
                                         <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}" data-pos="{{$image->position}}">
                                             <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                 @if($image->isV == 0)
