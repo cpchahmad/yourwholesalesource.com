@@ -1425,7 +1425,6 @@ class ProductController extends Controller
                 }
                 return response()->json([
                     'message' => 'success',
-                    'images' => $product->has_images()->get()
                 ]);
             }else{
                 return response()->json([
