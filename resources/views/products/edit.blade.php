@@ -62,9 +62,7 @@
                         <div class="block-content">
                             @if(count($product->has_images) >0)
                                 <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
-                                    @php
 
-                                    @endphp
                                     @foreach(DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->get() as $image)
                                         <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}">
                                             <div class="options-container fx-img-zoom-in fx-opt-slide-right">
