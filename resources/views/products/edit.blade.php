@@ -66,7 +66,7 @@
                                         <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}">
                                             <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                 @if($image->isV == 0)
-                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="" data-pos="{{$image->position}}">
                                                 @else
                                                     <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                 @endif
