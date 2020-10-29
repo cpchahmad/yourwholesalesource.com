@@ -1396,6 +1396,7 @@ class ProductController extends Controller
 
     public function update_image_position(Request $request){
         $positions = $request->input('positions');
+        dd($positions);
         $product = $request->input('product');
         $images_array = [];
         $shop = $this->helper->getShop();
