@@ -62,7 +62,7 @@
                         <div class="block-content">
                             @if(count($product->has_images) >0)
                                 <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
-                                    @foreach($product->has_images()->orderBy('position')->get() as $image)
+                                    @foreach($product->has_images()->orderBy('position', 'ASC')->get() as $image)
                                         <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}" data-pos="{{$image->position}}">
                                             <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                 @if($image->isV == 0)
