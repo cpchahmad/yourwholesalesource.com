@@ -658,6 +658,7 @@ $(document).ready(function () {
                 },
                 success:function (response) {
                     if(response.message === 'success'){
+                        console.log(response.images);
                         alertify.success('Image Position Changed Successfully!');
                     }
                     else{

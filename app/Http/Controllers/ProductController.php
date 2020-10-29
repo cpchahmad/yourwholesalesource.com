@@ -1404,13 +1404,10 @@ class ProductController extends Controller
                 ->where('id',$position)->first();
             array_push($images_array, [
                 'id' => $image->shopify_id,
-                'real_pos' => $image->position,
-                'new_pos' => $position,
                 'position' => $index + 1,
             ]);
         }
 
-        dd($images_array);
         $related_product = Product::find($product);
         if($related_product != null){
             $data = [
@@ -1427,7 +1424,8 @@ class ProductController extends Controller
                     $image->save();
                 }
                 return response()->json([
-                    'message' => 'success'
+                    'message' => 'success',
+                    'images' => $product->has_images()->get()
                 ]);
             }else{
                 return response()->json([
