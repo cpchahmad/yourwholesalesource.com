@@ -1404,6 +1404,7 @@ class ProductController extends Controller
                 ->where('id',$position)->first();
             array_push($images_array, [
                 'id' => $image->shopify_id,
+                'pos' => $position,
                 'position' => $index + 1,
             ]);
         }
