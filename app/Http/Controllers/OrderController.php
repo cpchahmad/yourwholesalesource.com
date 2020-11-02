@@ -160,6 +160,10 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Order Deleted Successfully!');
     }
 
+    public function syncAllOrders() {
+        dd(234);
+    }
+
     public function getOrders()
     {
         $shop = $this->helper->getShop();

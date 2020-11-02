@@ -93,6 +93,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/stores/customers/{id}','DefaultSettingsController@customer_view')->name('customers.view');
     Route::get('/non-shopify-users','DefaultSettingsController@users')->name('users.index');
     Route::get('/non-shopify-users/{id}','DefaultSettingsController@user')->name('users.view');
+    Route::get('/sync-store-orders', 'OrderController@syncAllOrders')->name('store.all.sync.orders');
     Route::get('/ticket-category','DefaultSettingsController@view_ticket_categories')->name('ticket.category.index');
     Route::post('/ticket-category','DefaultSettingsController@create_ticket_categories')->name('ticket.category.create');
     Route::post('/ticket-category/{id}/update','DefaultSettingsController@update_ticket_categories')->name('ticket.category.update');
