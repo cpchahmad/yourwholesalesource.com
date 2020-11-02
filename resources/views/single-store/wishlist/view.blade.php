@@ -234,6 +234,10 @@
 
                                 @endif
                                 <hr>
+                                @php
+                                    dd($wishlist->has_store->has_imported->pluck('id')->toArray())
+                                @endphp
+
                                 @if(!in_array($wishlist->has_product->id,$wishlist->has_store->has_imported->pluck('id')->toArray()))
                                     <button onclick="window.location.href='{{ route('store.product.wefulfill.add-to-import-list',$wishlist->has_product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
                                 @else
