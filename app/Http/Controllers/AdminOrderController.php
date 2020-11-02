@@ -56,7 +56,7 @@ class AdminOrderController extends Controller
 
         $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
-        dd($response);
+        dd(123, $response);
 
     }
 
