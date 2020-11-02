@@ -52,9 +52,11 @@ class AdminOrderController extends Controller
     }
 
     public function testWebhook() {
-        $shop = $this->helper->getSpecificShop(71);
+        $shop = $this->helper->getSpecificShop(55);
 
         $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+
+        dd($response);
 
         $webhook_ids = [];
 
@@ -62,7 +64,18 @@ class AdminOrderController extends Controller
             array_push($webhook_ids, $webhook->id);
         }
 
-        dd(213, $webhook_ids);
+        foreach ($webhook_ids as $id) {
+            $data = [
+                "webhook" => [
+                    "address" => "d",
+                ]
+            ];
+            $response = $shop->api()->rest('PUT', '/admin/webhooks/'.$id.'.json');
+
+            if($response->errors) {
+                dd($response);
+            }
+        }
 
     }
 
