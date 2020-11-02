@@ -51,87 +51,7 @@ class AdminOrderController extends Controller
         $this->notify = new NotificationController();
     }
 
-    public function testWebhook() {
 
-        $shop = $this->helper->getSpecificShop(2);
-
-        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
-
-        dd($response);
-
-        $ids = [71,75,78,81];
-        for($i =0 ; $i < count($ids); $i++) {
-            $shop = $this->helper->getSpecificShop($ids[$i]);
-
-            $response = $shop->api()->rest('GET', '/admin/webhooks.json');
-
-            if($response->errors) {
-                continue;
-            }
-
-            $webhook_ids = [];
-            if(count($response->body->webhooks) > 0){
-                foreach ($response->body->webhooks as $webhook) {
-                    array_push($webhook_ids, $webhook->id);
-                }
-
-                foreach ($webhook_ids as $id) {
-                    $shop->api()->rest('DELETE', '/admin/webhooks/'.$id.'.json');
-                }
-            }
-
-            $data = [
-                "webhook" => [
-                    "topic" => "orders/create",
-                    "address" => "https://app.wefullfill.com/webhook/orders-create",
-                    "format" => "json"
-                ]
-            ];
-            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
-            $data = [];
-
-            $data = [
-                "webhook" => [
-                    "topic" => "customers/create",
-                    "address" => "https://app.wefullfill.com/webhook/customers-create",
-                    "format" => "json"
-                ]
-            ];
-            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
-            $data = [];
-
-            $data = [
-                "webhook" => [
-                    "topic" => "fulfillments/create",
-                    "address" => "https://app.wefullfill.com/webhook/fulfillments-create",
-                    "format" => "json"
-                ]
-            ];
-            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
-            $data = [];
-
-            $data = [
-                "webhook" => [
-                    "topic" => "fulfillments/update",
-                    "address" => "https://app.wefullfill.com/webhook/fulfillments-update",
-                    "format" => "json"
-                ]
-            ];
-            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
-            $data = [];
-
-            $data = [
-                "webhook" => [
-                    "topic" => "orders/cancelled",
-                    "address" => "https://app.wefullfill.com/webhook/orders-cancelled",
-                    "format" => "json"
-                ]
-            ];
-            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
-            $data = [];
-
-        }
-    }
 
     public function index(Request $request)
     {
@@ -957,6 +877,88 @@ class AdminOrderController extends Controller
         if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
             $admin_shop = $this->helper->getAdminShop();
             $admin_shop->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $orderFullfillment->admin_fulfillment_shopify_id . '/complete.json');
+        }
+    }
+
+    public function testWebhook() {
+
+        $shop = $this->helper->getSpecificShop(2);
+
+        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+
+        dd($response);
+
+        $ids = [71,75,78,81];
+        for($i =0 ; $i < count($ids); $i++) {
+            $shop = $this->helper->getSpecificShop($ids[$i]);
+
+            $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+
+            if($response->errors) {
+                continue;
+            }
+
+            $webhook_ids = [];
+            if(count($response->body->webhooks) > 0){
+                foreach ($response->body->webhooks as $webhook) {
+                    array_push($webhook_ids, $webhook->id);
+                }
+
+                foreach ($webhook_ids as $id) {
+                    $shop->api()->rest('DELETE', '/admin/webhooks/'.$id.'.json');
+                }
+            }
+
+            $data = [
+                "webhook" => [
+                    "topic" => "orders/create",
+                    "address" => "https://app.wefullfill.com/webhook/orders-create",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "customers/create",
+                    "address" => "https://app.wefullfill.com/webhook/customers-create",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "fulfillments/create",
+                    "address" => "https://app.wefullfill.com/webhook/fulfillments-create",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "fulfillments/update",
+                    "address" => "https://app.wefullfill.com/webhook/fulfillments-update",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "orders/cancelled",
+                    "address" => "https://app.wefullfill.com/webhook/orders-cancelled",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
         }
     }
 }
