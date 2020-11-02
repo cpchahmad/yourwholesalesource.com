@@ -66,9 +66,24 @@ class AdminOrderController extends Controller
                 $shop->api()->rest('DELETE', '/admin/webhooks/'.$id.'.json');
             }
         }
-        else {
-            dd(2134);
-        }
+
+        $data = [
+            "webhook" => [
+                [
+                    "topic" => "orders/create",
+                    "address" => "https://app.wefullfill.com/webhook/orders-create",
+                    "format" => "json"
+                ],
+                [
+                    "topic" => "customers/create",
+                    "address" => "https://app.wefullfill.com/webhook/customers-create",
+                    "format" => "json"
+                ]
+            ]
+        ];
+        $response = $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+
+        dd($response);
 
 
     }
