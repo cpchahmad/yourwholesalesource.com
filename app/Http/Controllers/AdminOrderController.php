@@ -51,6 +51,15 @@ class AdminOrderController extends Controller
         $this->notify = new NotificationController();
     }
 
+    public function testWebhook() {
+        $shop = $this->helper->getSpecificShop();
+
+        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+
+        dd($response);
+
+    }
+
     public function index(Request $request)
     {
         $orders = RetailerOrder::whereIn('paid', [1, 2])->newQuery();
