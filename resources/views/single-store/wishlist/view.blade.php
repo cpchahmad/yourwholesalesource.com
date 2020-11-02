@@ -132,7 +132,7 @@
                                     @if($thread->source == 'manager')
                                         <h5 class="block-title">{{$thread->has_manager->name}} (Manager) <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                     @else
-                                        <h5 class="block-title">{{explode('.',$wishlist->has_store->shopify_domain)[0]}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                                        <h5 class="block-title">{{ $wishlist->has_user->name }} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                     @endif
                                 </div>
                                 <div class="block-content">
@@ -300,7 +300,7 @@
                         <div class="p-2 font-size-sm">
                             <span class="font-weight-bold">#: </span> <span class="text-center">{{$wishlist->id}}</span>
                             <hr>
-                            <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{explode('.',$wishlist->has_store->shopify_domain)[0]}}</span>
+                            <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{ $wishlist->has_user->name }}</span>
                             <hr>
                             <span class="font-weight-bold">Cost: </span> {{number_format($wishlist->cost,2)}} USD
                             <hr>
