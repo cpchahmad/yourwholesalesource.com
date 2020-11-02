@@ -125,7 +125,7 @@
                                         <th>Status</th>
                                         <th style="text-align: right" class="pr-0">
                                             @if(count($user->has_stores) > 0)
-                                                <a href="{{route('store.all.sync.orders')}}"
+                                                <a href="{{route('store.all.sync.orders', $user->id)}}"
                                                    class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="Sync Orders"><i class="fa fa-sync"></i> Sync New Orders</a>
                                             @endif
