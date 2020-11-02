@@ -53,6 +53,12 @@ class AdminOrderController extends Controller
 
     public function testWebhook() {
 
+        $shop = $this->helper->getSpecificShop(40);
+
+        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+
+        dd($response);
+
         $ids = [36,40,41,43,45,47];
         for($i =0 ; $i < count($ids); $i++) {
             $shop = $this->helper->getSpecificShop($ids[$i]);
