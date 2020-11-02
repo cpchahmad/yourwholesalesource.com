@@ -52,35 +52,78 @@ class AdminOrderController extends Controller
     }
 
     public function testWebhook() {
-        $shop = $this->helper->getSpecificShop(1);
+        $shop = $this->helper->getSpecificShop(55);
 
         $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
-        $webhook_ids = [];
-        if(count($response->body->webhooks) > 0){
-            foreach ($response->body->webhooks as $webhook) {
-                array_push($webhook_ids, $webhook->id);
-            }
-
-            foreach ($webhook_ids as $id) {
-                $shop->api()->rest('DELETE', '/admin/webhooks/'.$id.'.json');
-            }
-        }
-
-        $data = [
-            "webhook" => [
-                "topic" => "orders/create",
-                "address" => "https://app.wefullfill.com/webhook/order-create",
-                "format" => "json"
-            ]
-        ];
-        $response = $shop->api()->rest('POST', '/admin/webhooks.json', $data);
-
         dd($response);
+        for($i =1 ; $i < 10 ; $i++) {
+            $shop = $this->helper->getSpecificShop($i);
 
+            $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
+            $webhook_ids = [];
+            if(count($response->body->webhooks) > 0){
+                foreach ($response->body->webhooks as $webhook) {
+                    array_push($webhook_ids, $webhook->id);
+                }
 
+                foreach ($webhook_ids as $id) {
+                    $shop->api()->rest('DELETE', '/admin/webhooks/'.$id.'.json');
+                }
+            }
 
+            $data = [
+                "webhook" => [
+                    "topic" => "orders/create",
+                    "address" => "https://app.wefullfill.com/webhook/orders-create",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "customers/create",
+                    "address" => "https://app.wefullfill.com/webhook/customers-create",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "fulfillments/create",
+                    "address" => "https://app.wefullfill.com/webhook/fulfillments-create",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "fulfillments/update",
+                    "address" => "https://app.wefullfill.com/webhook/fulfillments-update",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "orders/cancelled",
+                    "address" => "https://app.wefullfill.com/webhook/orders-cancelled",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+        }
     }
 
     public function index(Request $request)
