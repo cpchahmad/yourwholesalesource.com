@@ -56,7 +56,7 @@ class AdminOrderController extends Controller
 
         $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
-
+        dd($response);
         $webhook_ids = [];
         foreach ($response->body->webhooks as $webhook) {
             array_push($webhook_ids, $webhook->id);
