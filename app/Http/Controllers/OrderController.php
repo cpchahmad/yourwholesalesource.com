@@ -168,10 +168,13 @@ class OrderController extends Controller
         foreach ($shops as $s) {
             $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
-            dd($response);
+
             if (!$response->errors) {
                 $orders = $response->body->orders;
                 foreach ($orders as $index => $order) {
+
+                    $order = $orders[28];
+                    dd($order);
                     $product_ids = [];
                     $variant_ids = [];
                     foreach ($order->line_items as $item) {
@@ -208,7 +211,7 @@ class OrderController extends Controller
                                     $customer->email = $order->customer->email;
                                     $customer->total_spent = $order->customer->total_spent;
                                     $customer->shop_id = $shop->id;
-                                    $local_shop = $this->helper->getLocalShop();
+                                    $local_shop = $shop;
                                     if (count($local_shop->has_user) > 0) {
                                         $customer->user_id = $local_shop->has_user[0]->id;
                                     }
@@ -226,7 +229,7 @@ class OrderController extends Controller
 
                             $new->status = 'new';
                             $new->shop_id = $shop->id;
-                            $local_shop = $this->helper->getLocalShop();
+                            $local_shop = $shop;
                             if (count($local_shop->has_user) > 0) {
                                 $new->user_id = $local_shop->has_user[0]->id;
                             }
