@@ -123,11 +123,13 @@
                                         <th>Order Date</th>
                                         <th>Price</th>
                                         <th>Status</th>
-                                        <th></th>
                                         <th style="text-align: right">
-                                            <a href="{{route('store.sync.orders')}}"
-                                               class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="Sync Orders"><i class="fa fa-sync"></i> Sync New Orders</a></th>
+                                            @if(count($user->has_stores) > 0)
+                                                <a href="{{route('store.sync.orders')}}"
+                                                   class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="Sync Orders"><i class="fa fa-sync"></i> Sync New Orders</a>
+                                            @endif
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody class="">
