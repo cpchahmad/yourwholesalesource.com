@@ -69,23 +69,16 @@ class AdminOrderController extends Controller
 
         $data = [
             "webhook" => [
-                [
-                    "topic" => "orders/create",
-                    "address" => "https://app.wefullfill.com/webhook/orders-create",
-                    "format" => "json"
-                ],
-                [
-                    "topic" => "customers/create",
-                    "address" => "https://app.wefullfill.com/webhook/customers-create",
-                    "format" => "json"
-                ]
+                "topic" => "orders/create",
+                "address" => "https://app.wefullfill.com/webhook/order-create",
+                "format" => "json"
             ]
         ];
-
-        dd($data);
         $response = $shop->api()->rest('POST', '/admin/webhooks.json', $data);
 
         dd($response);
+
+
 
 
     }
