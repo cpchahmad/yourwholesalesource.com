@@ -52,13 +52,9 @@ class AdminOrderController extends Controller
     }
 
     public function testWebhook() {
-        $shop = $this->helper->getSpecificShop(1);
 
-        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
-        dd($response);
-
-        for($i =1 ; $i < 5 ; $i++) {
+        for($i =1 ; $i <= 10 ; $i++) {
             $shop = $this->helper->getSpecificShop($i);
 
             $response = $shop->api()->rest('GET', '/admin/webhooks.json');
