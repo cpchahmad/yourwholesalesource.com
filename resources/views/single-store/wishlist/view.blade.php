@@ -213,9 +213,7 @@
                                         <div class="push-20">
                                             <a class="btn btn-sm btn-primary" href="{{route('store.product.wefulfill.show',$wishlist->has_product->id)}}">View</a>
 
-                                            @php
-                                                dd(23);
-                                            @endphp
+                                            <h1>hello</h1>
 
                                             @if(!in_array($wishlist->has_product->id,$wishlist->has_store->has_imported->pluck('id')->toArray()))
                                                 <a class="btn btn-sm btn-success" href="{{route('store.product.wefulfill.add-to-import-list',$wishlist->has_product->id)}}">
