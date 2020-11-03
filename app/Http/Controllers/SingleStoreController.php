@@ -64,6 +64,7 @@ class SingleStoreController extends Controller
             $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
             $products = RetailerProduct::where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
 
 
             $ordersQ = DB::table('retailer_orders')
@@ -97,6 +98,7 @@ class SingleStoreController extends Controller
             $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->sum('cost_to_pay');
             $products = RetailerProduct::where('shop_id', $shop->id)->count();
             $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
+            $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
 
             $ordersQ = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
@@ -155,6 +157,7 @@ class SingleStoreController extends Controller
             'orders' => $orders,
             'profit' => $profit,
             'sales' => $sales,
+            'cost' => $cost,
             'products' => $products,
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
