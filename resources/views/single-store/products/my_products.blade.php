@@ -78,7 +78,7 @@
                                     <div class="tab-pane active" id="product_{{$product->id}}_products" role="tabpanel">
                                         <div class="block">
                                             <div class="options-container">
-                                                <a href="{{route('store.product.wefulfill.show',$product->id)}}">
+                                                <a href="{{route('store.my_product.wefulfill.show',$product->id)}}">
                                                     @if(count($product->has_images) > 0)
                                                         @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                             @if($index == 0)
