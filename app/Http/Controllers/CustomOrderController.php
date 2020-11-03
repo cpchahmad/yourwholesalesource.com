@@ -440,7 +440,7 @@ class CustomOrderController extends Controller
 
             }
         } else {
-            $products = $productQuery->paginate(12);
+            $products = $productQuery->orderBy('created_at','DESC')->paginate(12);
         }
 
         foreach ($products as $product) {
