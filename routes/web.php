@@ -134,12 +134,12 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
 });
 /*Single Store Routes*/
-Route::group(['middleware' => ['auth.shop', 'check_shop_user']], function () {
+Route::group(['middleware' => ['auth.shop']], function () {
     Route::get('/import/{id}/to-store','RetailerProductController@import_to_shopify')->name('retailer.import_to_shopify');
     Route::prefix('store')->group(function () {
         Route::post('/user/authenticate','SingleStoreController@authenticate')->name('store.user.authenticate');
         Route::post('/user/store/association','SingleStoreController@associate')->name('store.user.associate');
-        Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard');
+        Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard')->middleware(['check_shop_user']);
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
         Route::post('/settings/personal/address','SingleStoreController@save_address')->name('store.save_address');
