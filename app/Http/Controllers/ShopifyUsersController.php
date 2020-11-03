@@ -32,6 +32,7 @@ class ShopifyUsersController extends Controller
             $sales = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
             $refunds =  RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $profit = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+            $cost = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
 
 
             $ordersQ = DB::table('retailer_orders')
@@ -69,6 +70,7 @@ class ShopifyUsersController extends Controller
             $sales = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->sum('cost_to_pay');
             $refunds = RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->sum('cost_to_pay');
             $profit = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->sum('cost_to_pay');
+            $cost = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->sum('cost_to_pay');
 
             $ordersQ = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
@@ -126,6 +128,7 @@ class ShopifyUsersController extends Controller
             'orders' => $orders,
             'profit' => $profit,
             'sales' =>$sales,
+            'cost' =>$cost,
             'refunds' => $refunds,
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
