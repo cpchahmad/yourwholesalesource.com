@@ -212,7 +212,7 @@
         });
 
         $('.report-pdf-btn').click(function () {
-            var section = $('.pdf-section').html();
+            var section = $('.pdf-section');
             html2canvas(section).then(canvas => {
                 // Few necessary setting options
                 var imgWidth = 208;
