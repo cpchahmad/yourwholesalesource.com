@@ -213,13 +213,16 @@
 
         $('.report-pdf-btn').click(function () {
             var section = $('.pdf-section').html();
-            html2canvas(section, {
-               onrendered : function (canvas) {
-                   var img = canvas.toDataURL('image/png');
-                   var doc = new jsPDF();
-                   doc.addImage(img, 'JPEG', 20, 20);
-                   doc.save('test.pdf');
-               }
+            html2canvas(section).then(canvas => {
+                // Few necessary setting options
+                var imgWidth = 208;
+                var imgHeight = canvas.height * imgWidth / canvas.width;
+                const contentDataURL = canvas.toDataURL('image/png')
+                let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+                var position = 0;
+                pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+                //  pdf.save('new-file.pdf');
+                window.open(pdf.output('bloburl', { filename: 'new-file.pdf' }), '_blank');
             });
 
         });
