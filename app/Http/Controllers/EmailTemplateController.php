@@ -76,6 +76,7 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $template = EmailTemplate::find($id);
         $template->subject = $request->subject;
         $template->body = $request->body;

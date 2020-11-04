@@ -17,6 +17,8 @@
 
         .select2-selection__choice{
             background-color: #7daa40 !important;
+            border-radius: 0px;
+            border: 1px solid #7daa40 !important;
         }
         @media (max-width: 570px) {
             .email_btn
