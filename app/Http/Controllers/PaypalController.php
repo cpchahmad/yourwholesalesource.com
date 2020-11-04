@@ -139,6 +139,7 @@ class PaypalController extends Controller
             }
 
             $retailer_order->pay_by = 'Paypal';
+            $retailer_order->admin_shopify_name = $retailer_order->name;
             $retailer_order->save();
 
             /*Order placing email*/
@@ -322,6 +323,7 @@ class PaypalController extends Controller
             $retailer_order->paid = 1;
             $retailer_order->status = 'Paid';
             $retailer_order->pay_by = 'Paypal';
+            $retailer_order->admin_shopify_name = $retailer_order->name;
             $retailer_order->save();
 
             /*Maintaining Log*/
