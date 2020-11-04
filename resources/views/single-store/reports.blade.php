@@ -26,7 +26,7 @@
                     <i class="fa fa-calendar"></i>&nbsp;
                     <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
                 </div>
-                <button class="btn btn-primary filter_by_date" data-url="{{route('store.dashboard')}}" style="margin-left: 10px"> Filter </button>
+                <button class="btn btn-primary filter_by_date" data-url="{{route('store.reports')}}" style="margin-left: 10px"> Filter </button>
                 <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF </button>
             </div>
         </div>
