@@ -30,7 +30,7 @@
                 <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF</button>
             </div>
         </div>
-        <div class="row pdf-section">
+        <div class="row" id="pdfDownload">
             <div class="col-md-12">
                 <div class="text-center">
                     <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447" alt="No Image" class="" style="width: 50%; height: 50vh;">
@@ -212,8 +212,8 @@
         });
 
         $('.report-pdf-btn').click(function () {
-            var section = $('.pdf-section');
-            html2canvas(section).then(canvas => {
+            var data = document.getElementById('pdfDownload');
+            html2canvas(data).then(canvas => {
                 // Few necessary setting options
                 var imgWidth = 208;
                 var imgHeight = canvas.height * imgWidth / canvas.width;
