@@ -41,6 +41,64 @@
                 </div>
 
             </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Cost</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($cost,2)}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Products</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{$products}}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="block block-rounded block-link-pop">
+                        <div class="block-content block-content-full">
+                            <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="block block-rounded block-link-pop">
+                        <div class="block-content block-content-full">
+                            <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="block block-rounded">
@@ -91,66 +149,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
-                        <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Cost</div>
-                        <div class="font-size-h2 font-w400 text-dark">${{number_format($cost,2)}}</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
-                        <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Products</div>
-                        <div class="font-size-h2 font-w400 text-dark">{{$products}}</div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
-                        <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
-                    </div>
-                </a>
-            </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
