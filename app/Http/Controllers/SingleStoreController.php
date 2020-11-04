@@ -393,12 +393,12 @@ class SingleStoreController extends Controller
 
                 // Sending Top Product Recommendation Email
 
-                try{
-                    Mail::to($user->email)->send(new TopShopifyProuctMail($user));
-                }
-                catch (\Exception $e){
-                    dd($e);
-                }
+//                try{
+//                    Mail::to($user->email)->send(new TopShopifyProuctMail($user));
+//                }
+//                catch (\Exception $e){
+//                    dd($e);
+//                }
 
                 return response()->json([
                     'status' => 'assigned'
