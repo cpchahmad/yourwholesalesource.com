@@ -21,14 +21,9 @@
         margin: 50px 0;
     }
     .wrap {
-        padding-top: 5px;
         padding-left: 20px;
-        padding-left: 20px;
-        padding-top: 20px;
         background-color: #7daa40 !important;
         color: #ffffff !important;
-        align-content: space-between;
-        display: flex;
     }
 
     .wrap .right{
@@ -78,36 +73,36 @@
                 <div class="" style="width: 100%">
                     <div class="wrap">
                         <div class="left">
-                            <h3 style="color: #ffffff">Line Items</h3>
-                        </div>
-                        <div class="right">
-                            @if($order->paid == '0')
-                                <span class="" style="font-size: small"> Unpaid </span>
-                            @elseif($order->paid == '1')
-                                <span class="" style="font-size: small"> Paid </span>
-                            @elseif($order->paid == '2')
-                                <span class="" style="font-size: small;"> Refunded</span>
-                            @endif
+                            <h3 style="color: #ffffff; margin-right: 5px;">Line Items
+                                @if($order->paid == '0')
+                                    <span class="" style="font-size: small"> (Unpaid </span>
+                                @elseif($order->paid == '1')
+                                    <span class="" style="font-size: small"> (Paid </span>
+                                @elseif($order->paid == '2')
+                                    <span class="" style="font-size: small;"> (Refunded, </span>
+                                @endif
 
-                            @if($order->status == 'Paid')
-                                <span class="" style="font-size: small"> Unfulfilled</span>
-                            @elseif($order->status == 'unfulfilled')
-                                <span class="" style="font-size: small"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'partially-shipped')
-                                <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'shipped')
-                                <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'delivered')
-                                <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'completed')
-                                <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
-                            @elseif($order->status == 'new')
-                                <span class="" style="font-size: small"> Draft </span>
-                            @elseif($order->status == 'cancelled')
-                                <span class="" style="font-size: small"> {{ucfirst($order->status)}} </span>
-                            @else
-                                <span class="" style="font-size: small">  {{ucfirst($order->status)}} </span>
-                            @endif
+                                @if($order->status == 'Paid')
+                                    <span class="" style="font-size: small"> Unfulfilled)</span>
+                                @elseif($order->status == 'unfulfilled')
+                                    <span class="" style="font-size: small"> {{ucfirst($order->status)}})</span>
+                                @elseif($order->status == 'partially-shipped')
+                                    <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}})</span>
+                                @elseif($order->status == 'shipped')
+                                    <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}})</span>
+                                @elseif($order->status == 'delivered')
+                                    <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}})</span>
+                                @elseif($order->status == 'completed')
+                                    <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}})</span>
+                                @elseif($order->status == 'new')
+                                    <span class="" style="font-size: small"> Draft) </span>
+                                @elseif($order->status == 'cancelled')
+                                    <span class="" style="font-size: small"> {{ucfirst($order->status)}}) </span>
+                                @else
+                                    <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
+                                @endif
+
+                            </h3>
                         </div>
                     </div>
 
@@ -224,7 +219,7 @@
                                 <h3 class="" style="color: #ffffff !important;">Summary</h3>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="" style="text-align: right !important; float: right;">
                             <table class="table table-borderless table-vcenter">
                                 <thead>
                                 </thead>
