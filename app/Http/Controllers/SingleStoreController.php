@@ -788,6 +788,8 @@ class SingleStoreController extends Controller
     public function reports(Request $request) {
 
         $shop = $this->helper->getLocalShop();
+        $shop_user = Shop::find($shop->id);
+        $shop_user = $shop_user->has_user;
 
         if ($request->has('date-range')) {
             $date_range = explode('-', $request->input('date-range'));
@@ -903,7 +905,7 @@ class SingleStoreController extends Controller
             'graph_four_values' => $graph_four_order_values,
             'graph_four_labels' => $graph_four_order_dates,
             'top_products' => $top_products,
-            'shop' => $shop,
+            'shop' => $shop_user,
         ]);
 
     }
