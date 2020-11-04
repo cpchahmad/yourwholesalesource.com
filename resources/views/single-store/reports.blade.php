@@ -220,9 +220,14 @@
                 const contentDataURL = canvas.toDataURL('image/png')
                 let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
                 var position = 0;
-                pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+                pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
                 //  pdf.save('new-file.pdf');
                 window.open(pdf.output('bloburl', { filename: 'new-file.pdf' }), '_blank');
+
+                // var img = canvas.toDataURL('image/png');
+                // var doc = new jsPDF();
+                // doc.addImage(img, 'JPEG', 20, 20);
+                // doc.save('new-file.pdf');
             });
 
         });
