@@ -1424,8 +1424,8 @@
                                 <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >{{ $template->body }} </p>
                                 @if($template->id == '4' || $template->id == '3')
                                     <hr>
-
-                                    <div class="col-md-12 XXsnipcss_extracted_selector_selectionXX">
+                                    <div class="row">
+                                        <div class="col-md-12 XXsnipcss_extracted_selector_selectionXX">
                                         <div class="block">
                                             <div class="block-header block-header-default">
                                                 <h3 class="block-title">
@@ -1607,6 +1607,7 @@
                                                 </table>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 @endif
 
