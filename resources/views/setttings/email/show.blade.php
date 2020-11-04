@@ -273,7 +273,7 @@
                                             </div>
                                         @endif
 
-                                        @if($temlate->id == '13')
+                                        @if($template->id == '13')
                                             <select class="@error('type') is-invalid @enderror js-select2 form-control" name="type[]" style="width: 100%;" data-placeholder="Choose Role.." multiple>
                                                @foreach($products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->title }}</option>
