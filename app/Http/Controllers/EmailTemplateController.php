@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EmailTemplate;
+use App\Product;
 use App\RetailerOrder;
 use App\Ticket;
 use App\User;
@@ -63,7 +64,7 @@ class EmailTemplateController extends Controller
      */
     public function edit($id)
     {
-        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('edit', 1)->with('order', RetailerOrder::find(1));
+        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('edit', 1)->with('order', RetailerOrder::find(1))->with('products', Product::all());
     }
 
     /**

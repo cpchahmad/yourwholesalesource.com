@@ -273,6 +273,15 @@
                                             </div>
                                         @endif
 
+                                        @if($temlate->id == '13')
+                                            <select class="@error('type') is-invalid @enderror js-select2 form-control" name="type[]" style="width: 100%;" data-placeholder="Choose Role.." multiple>
+                                               @foreach($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->title }}</option>
+                                               @endforeach
+
+                                            </select>
+                                        @endif
+
                                         @if($template->id == '1' || $template->id == '2')
                                             <a class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
                                         @else
