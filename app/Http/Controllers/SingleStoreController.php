@@ -903,6 +903,7 @@ class SingleStoreController extends Controller
             'graph_four_values' => $graph_four_order_values,
             'graph_four_labels' => $graph_four_order_dates,
             'top_products' => $top_products,
+            'shop' => $shop,
         ]);
 
     }

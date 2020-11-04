@@ -14,7 +14,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                    Dashboard
+                    Reports
                 </h1>
             </div>
         </div>
@@ -27,10 +27,20 @@
                     <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
                 </div>
                 <button class="btn btn-primary filter_by_date" data-url="{{route('store.dashboard')}}" style="margin-left: 10px"> Filter </button>
-                <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px"> Download PDF </button>
+                <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF </button>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447" alt="No Image" class="img-fluid">
+                </div>
+                <div>
+                    Dear {{ $shop->email }},<br>
+                    Thank you for working with wefulfill, here below is your report from <span id="custom-date">beginning till now</span>
+                </div>
+
+            </div>
             <div class="col-6 col-md-3 col-lg-6 col-xl-3">
                 <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                     <div class="block-content block-content-full">
@@ -166,6 +176,7 @@
 
             function cb(start, end) {
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                $('#custom-date').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             }
             if($('#reportrange span').text() === ''){
                 $('#reportrange span').html('Select Date Range');
