@@ -83,39 +83,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <div class="block block-rounded block-link-pop">
+                        <div class="block-content block-content-full">
+                            <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="block block-rounded block-link-pop">
+                        <div class="block-content block-content-full">
+                            <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-three-store" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-four-store" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">Top Products</h3>
@@ -164,6 +148,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
