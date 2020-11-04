@@ -216,7 +216,7 @@
 
                     <div class="">
                         <div class="wrap">
-                            <div class="ledt">
+                            <div class="left">
                                 <h3 class="" style="color: #ffffff !important;">Summary</h3>
                             </div>
                         </div>
@@ -244,6 +244,7 @@
                         </div>
                     </div>
                 </div>
+                <hr>
                 <a href="{{ route('store.order.view', $order->id) }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>
             </div>
         </div>

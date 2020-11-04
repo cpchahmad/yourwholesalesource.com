@@ -475,7 +475,7 @@
 
                                         <div class="">
                                             <div class="wrap">
-                                                <div class="ledt">
+                                                <div class="left">
                                                     <h3 class="" style="color: #ffffff !important;">Summary</h3>
                                                 </div>
                                             </div>
@@ -503,6 +503,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
                                 @endif
 
                                 @if($template->id == '1' || $template->id == '2')
