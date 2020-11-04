@@ -285,13 +285,13 @@
                                             </div>
                                             <select class="@error('type') is-invalid @enderror js-select2 form-control" name="products[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Products.." multiple>
                                                @foreach($products as $product)
+                                                    @php
+                                                        $prods = json_decode($template->products);
+                                                    @endphp
                                                     <option value="{{ $product->id }}"
-                                                        @php
-                                                            $prods = json_decode($template->products);
-                                                            if(in_array($product->id, $prods)){
-                                                                echo "selected";
-                                                            }
-                                                        @endphp
+                                                        @if(in_array($product->id, $prods))
+                                                            selected
+                                                        @endif
                                                     >{{ $product->title }}</option>
                                                @endforeach
 
