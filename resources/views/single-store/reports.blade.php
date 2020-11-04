@@ -41,6 +41,57 @@
                 </div>
 
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block block-rounded">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Top Products</h3>
+                        </div>
+                        <div class="block-content ">
+                            @if(count($top_products) > 0)
+                                <table class="table table-striped table-hover table-borderless table-vcenter">
+                                    <thead>
+                                    <tr class="text-uppercase">
+                                        <th class="font-w700">Product</th>
+                                        <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                        <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach($top_products as $product)
+                                        <tr>
+                                            <td class="font-w600">
+                                                @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                    @if($index == 0)
+                                                        @if($image->isV == 0)
+                                                            <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                        @else
+                                                            <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                                {{$product->title}}
+                                            </td>
+                                            <td class="d-none d-sm-table-cell text-center">
+                                                {{$product->sold}}
+                                            </td>
+                                            <td class="">
+                                                ${{number_format($product->selling_cost,2)}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                    @else
+                                        <p  class="text-center"> No Top Users Found </p>
+                                    @endif
+                                </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-6 col-md-3 col-lg-6 col-xl-3">
                 <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                     <div class="block-content block-content-full">
@@ -82,73 +133,23 @@
                 </a>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-md-4">
-                <div class="col-md-12">
-                    <div class="block block-rounded block-link-pop">
-                        <div class="block-content block-content-full">
-                            <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="block block-rounded block-link-pop">
-                        <div class="block-content block-content-full">
-                            <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
-                        </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="block block-rounded">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Products</h3>
-                    </div>
-                    <div class="block-content ">
-                        @if(count($top_products) > 0)
-                            <table class="table table-striped table-hover table-borderless table-vcenter">
-                                <thead>
-                                <tr class="text-uppercase">
-                                    <th class="font-w700">Product</th>
-                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
-                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                @foreach($top_products as $product)
-                                    <tr>
-                                        <td class="font-w600">
-                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                @if($index == 0)
-                                                    @if($image->isV == 0)
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                    @else
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                            {{$product->title}}
-                                        </td>
-                                        <td class="d-none d-sm-table-cell text-center">
-                                            {{$product->sold}}
-                                        </td>
-                                        <td class="">
-                                            ${{number_format($product->selling_cost,2)}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-                                @else
-                                    <p  class="text-center"> No Top Users Found </p>
-                                @endif
-                            </table>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-
 
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -196,26 +197,26 @@
             }
         });
 
-        $('.report-pdf-btn').click(function () {
-            var data = document.getElementById('pdfDownload');
-            html2canvas(data).then(canvas => {
-                //  Few necessary setting options
-                var imgWidth = 208;
-                var imgHeight = canvas.height * imgWidth / canvas.width;
-                const contentDataURL = canvas.toDataURL('image/png')
-                let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-                var position = 0;
-                pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
-                //  pdf.save('new-file.pdf');
-                window.open(pdf.output('bloburl', { filename: 'new-file.pdf' }), '_blank');
-
-                // var img = canvas.toDataURL('image/png');
-                // var doc = new jsPDF();
-                // doc.addImage(img, 'JPEG', 20, 20);
-                // doc.save('new-file.pdf');
-            });
-
-        });
+        // $('.report-pdf-btn').click(function () {
+        //     var data = document.getElementById('pdfDownload');
+        //     html2canvas(data).then(canvas => {
+        //         //  Few necessary setting options
+        //         var imgWidth = 208;
+        //         var imgHeight = canvas.height * imgWidth / canvas.width;
+        //         const contentDataURL = canvas.toDataURL('image/png')
+        //         let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+        //         var position = 0;
+        //         pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+        //         //  pdf.save('new-file.pdf');
+        //         window.open(pdf.output('bloburl', { filename: 'new-file.pdf' }), '_blank');
+        //
+        //         // var img = canvas.toDataURL('image/png');
+        //         // var doc = new jsPDF();
+        //         // doc.addImage(img, 'JPEG', 20, 20);
+        //         // doc.save('new-file.pdf');
+        //     });
+        //
+        // });
 
         $('.report-pdf-btn').click(function () {
             var HTML_Width = $("#pdfDownload").width();
