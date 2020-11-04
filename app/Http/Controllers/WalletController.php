@@ -434,6 +434,7 @@ class WalletController extends Controller
                     $retailer_order->status = 'Paid';
                 }
                 $retailer_order->pay_by = 'Wallet';
+                $retailer_order->admin_shopify_name = $retailer_order->name;
                 $retailer_order->save();
 
                 /*Maintaining Log*/
@@ -524,6 +525,7 @@ class WalletController extends Controller
                         $retailer_order->status = 'Paid';
                     }
                     $retailer_order->pay_by = 'Wallet';
+                    $retailer_order->admin_shopify_name = $retailer_order->name;
                     $retailer_order->save();
 
                     /*Maintaining Log*/

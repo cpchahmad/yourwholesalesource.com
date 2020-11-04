@@ -166,7 +166,6 @@ class AdminMaintainerController extends Controller
             if (!$admin_order_response->errors) {
                 $admin_order = $admin_order_response->body->draft_order;
                 $order->admin_shopify_id = $admin_order->order_id;
-                $order->admin_shopify_name = $admin_order->name;
                 $order->save();
                 /*Fulfillments*/
                 $this->already_fulfillment($order, $location_response, $admin_store);
