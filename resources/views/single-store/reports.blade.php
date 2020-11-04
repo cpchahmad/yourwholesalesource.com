@@ -215,7 +215,7 @@
         $('.report-pdf-btn').click(function () {
             var data = document.getElementById('pdfDownload');
             html2canvas(data).then(canvas => {
-                Few necessary setting options
+                //  Few necessary setting options
                 var imgWidth = 208;
                 var imgHeight = canvas.height * imgWidth / canvas.width;
                 const contentDataURL = canvas.toDataURL('image/png')
