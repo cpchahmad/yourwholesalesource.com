@@ -222,7 +222,7 @@
                 const contentDataURL = canvas.toDataURL('image/png')
                 let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
                 var position = 0;
-                pdf.addImage(contentDataURL, 'JPEG', 25, 25, imgWidth, imgHeight);
+                pdf.addImage(contentDataURL, 'JPEG', 8, 8, imgWidth, imgHeight);
                 //  pdf.save('new-file.pdf');
                 window.open(pdf.output('bloburl', { filename: 'report.pdf' }), '_blank');
 
