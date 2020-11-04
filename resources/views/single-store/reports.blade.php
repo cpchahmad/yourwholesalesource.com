@@ -27,17 +27,17 @@
                     <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
                 </div>
                 <button class="btn btn-primary filter_by_date" data-url="{{route('store.reports')}}" style="margin-left: 10px"> Filter </button>
-                <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF </button>
+                <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF</button>
             </div>
         </div>
-        <div class="row">
+        <div class="row pdf-section">
             <div class="col-md-12">
                 <div class="text-center">
                     <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447" alt="No Image" class="" style="width: 50%; height: 50vh;">
                 </div>
-                <div>
-                    <h5>Dear {{ $shop }},<br>
-                        Thank you for working with wefulfill, here below is your report from <span id="custom-date">{{$date_range}}</span></h5>
+                <div class="mt-3">
+                    <h3>Dear {{ $shop }},<br>
+                        Thank you for working with wefulfill, here below is your report from <span id="custom-date">{{$date_range}}</span></h3>
                 </div>
 
             </div>
@@ -208,6 +208,23 @@
                 alertify.error('Please Select Range');
             }
         });
+
+        $('.report-pdf-btn').click(function () {
+            var printContents = $(`.pdf-section`).html();
+
+
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+
+        });
+
+
+
     </script>
 
     @endsection
