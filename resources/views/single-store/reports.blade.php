@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center">
-                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447" alt="No Image" class="img-fluid">
+                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447" alt="No Image" class="" style="width: 50%; height: 50vh;">
                 </div>
                 <div>
                     <h5>Dear {{ $shop->name }},<br>
