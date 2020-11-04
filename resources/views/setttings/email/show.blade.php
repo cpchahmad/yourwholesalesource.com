@@ -14,6 +14,10 @@
         {
             margin: 50px 0;
         }
+
+        .select2-selection__choice{
+            background-color: #7daa40 !important;
+        }
         @media (max-width: 570px) {
             .email_btn
             {
@@ -274,14 +278,16 @@
                                         @endif
 
                                         @if($template->id == '13')
-                                            <label for="">Select Products</label>
+                                            <div class="text-left">
+                                                <label for="" style="color: #7daa40 !important;">Select Products</label>
+                                            </div>
                                             <select class="@error('type') is-invalid @enderror js-select2 form-control" name="products[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Products.." multiple>
                                                @foreach($products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->title }}</option>
                                                @endforeach
 
                                             </select>
-                                            <br><br>
+                                            <br><br><br>
                                         @endif
 
                                         @if($template->id == '1' || $template->id == '2')
