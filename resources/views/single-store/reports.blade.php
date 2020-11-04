@@ -36,8 +36,8 @@
                     <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447" alt="No Image" class="img-fluid">
                 </div>
                 <div>
-                    Dear {{ $shop->email }},<br>
-                    Thank you for working with wefulfill, here below is your report from <span id="custom-date">beginning till now</span>
+                    <h5>Dear {{ $shop->id }},<br>
+                        Thank you for working with wefulfill, here below is your report from <span id="custom-date">{{$date_range}}</span></h5>
                 </div>
 
             </div>
