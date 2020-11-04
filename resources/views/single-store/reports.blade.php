@@ -27,10 +27,10 @@
                     <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
                 </div>
                 <button class="btn btn-primary filter_by_date" data-url="{{route('store.reports')}}" style="margin-left: 10px"> Filter </button>
-                <button class="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF</button>
+                <button class ="btn btn-danger report-pdf-btn"  style="margin-left: 10px">PDF</button>
             </div>
         </div>
-        <div id="pdfDownload">
+        <div id="pdfDownload" clsas="p-3">
             <div class="row">
                 <div class="col-md-12">
                     <div class="text-center">
@@ -222,7 +222,7 @@
                 const contentDataURL = canvas.toDataURL('image/png')
                 let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
                 var position = 0;
-                pdf.addImage(contentDataURL, 'JPEG', 8, 8, imgWidth, imgHeight);
+                pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
                 //  pdf.save('new-file.pdf');
                 window.open(pdf.output('bloburl', { filename: 'report.pdf' }), '_blank');
 
