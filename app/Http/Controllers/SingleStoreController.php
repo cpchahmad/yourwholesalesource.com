@@ -789,7 +789,8 @@ class SingleStoreController extends Controller
 
         $shop = $this->helper->getLocalShop();
         $shop_user = Shop::find($shop->id);
-        $shop_user = $shop_user->has_user;
+        $shop_user = $shop_user->has_user()->first();
+        $shop_user = $shop_user->name;
 
         if ($request->has('date-range')) {
             $date_range = explode('-', $request->input('date-range'));
