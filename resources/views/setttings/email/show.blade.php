@@ -16,6 +16,10 @@
     }
 
     .wrap {
+        padding-top: 5px;
+        padding-left: 20px;
+        padding-left: 20px;
+        padding-top: 20px;
         background-color: #7daa40 !important;
         color: #ffffff !important;
         align-content: space-between;
