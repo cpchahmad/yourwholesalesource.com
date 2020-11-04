@@ -1,4 +1,4 @@
-@extends('layout.single')
+@extends('layout.shopify')
 @section('content')
 
     <style>
