@@ -18,6 +18,8 @@
     .wrap {
         background-color: #7daa40 !important;
         color: #ffffff !important;
+        align-content: space-between;
+        display: flex;
     }
 
     .wrap .right{
@@ -332,7 +334,7 @@
                                     <div class="" style="width: 100%">
                                         <div class="wrap">
                                             <div class="left">
-                                                <h3>Line Items</h3>
+                                                <h3 style="color: #ffffff">Line Items</h3>
                                             </div>
                                             <div class="right">
                                                 @if($order->paid == '0')
@@ -474,8 +476,8 @@
 
                                         <div class="">
                                             <div class="wrap">
-                                                <div class="right">
-                                                    <h3 class="">Summary</h3>
+                                                <div class="ledt">
+                                                    <h3 class="" style="color: #ffffff !important;">Summary</h3>
                                                 </div>
                                             </div>
                                             <div class="">
@@ -484,29 +486,17 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td>
-                                                            Subtotal ({{count($order->line_items)}} items)
-                                                        </td>
-                                                        <td align="right">
-                                                            {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
-                                                        </td>
+                                                        <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
+                                                        <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>
-                                                            Shipping Price
-                                                        </td>
-                                                        <td align="right">
-                                                            {{number_format($order->shipping_price,2)}} USD
-                                                        </td>
+                                                        <td align="left">Shipping Price</td>
+                                                        <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td>
-                                                            Total Cost
-                                                        </td>
-                                                        <td align="right">
-                                                            {{number_format($order->cost_to_pay,2)}} USD
-                                                        </td>
+                                                        <td align="left">Total Cost</td>
+                                                        <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
                                                     </tr>
                                                     </tbody>
 
