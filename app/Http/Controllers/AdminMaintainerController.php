@@ -166,6 +166,11 @@ class AdminMaintainerController extends Controller
             if (!$admin_order_response->errors) {
                 $admin_order = $admin_order_response->body->draft_order;
                 $order->admin_shopify_id = $admin_order->order_id;
+
+                $res = $admin_store->api()->rest('GET', '/admin/api/2020-04/orders/' . $admin_order->order_id . '.json');
+                $temp_order = $res->body->order;
+                $order->admin_shopify_name = $temp_order->name;
+
                 $order->save();
                 /*Fulfillments*/
                 $this->already_fulfillment($order, $location_response, $admin_store);
