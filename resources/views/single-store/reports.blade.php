@@ -256,6 +256,7 @@
         // });
 
         $('.report-pdf-btn').click(function () {
+            console.log(324);
             var pdf = new jsPDF();
             pdf.addHTML($("#pdfDownload"), function() {
                 pdf.save('pageContent.pdf');
