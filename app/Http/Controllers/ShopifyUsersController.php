@@ -329,7 +329,7 @@ class ShopifyUsersController extends Controller
 
         $range = $request->input('date-range') ? $request->input('date-range') : 'beginning till now';
 
-        return view('non_shopify_users.index')->with([
+        return view('non_shopify_users.reports')->with([
             'date_range' => $range,
             'orders' => $orders,
             'profit' => $profit,
