@@ -890,9 +890,10 @@ class SingleStoreController extends Controller
             ->get()
             ->take(10);
 
+        $range = $request->input('date-range') ? $request->input('date-range') : 'beginning till now';
 
         return view('single-store.reports')->with([
-            'date_range' => $request->input('date-range'),
+            'date_range' => $range,
             'orders' => $orders,
             'profit' => $profit,
             'sales' => $sales,
