@@ -24,10 +24,10 @@ class TopShopifyProuctMail extends Mailable
     private $template;
 
     private $sender = 'info@wefullfill.com';
-    public function __construct(User $user, Product $top_products_stores)
+    public function __construct(User $user)
     {
         $this->user = $user;
-        $this->top_products_stores = $top_products_stores;
+        $this->top_products_stores = Product::all();
         $this->template = EmailTemplate::find(13);
     }
 

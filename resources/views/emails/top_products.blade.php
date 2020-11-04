@@ -21,6 +21,21 @@
     {
         margin: 50px 0;
     }
+
+    .wrap {
+        padding-left: 20px;
+        background-color: #7daa40 !important;
+        color: #ffffff !important;
+    }
+
+    .wrap .right{
+        text-align: right !important;
+    }
+
+    .wrap .left{
+        text-align: left !important;
+    }
+
     @media (max-width: 570px) {
         .email_btn
         {
@@ -57,50 +72,51 @@
                 <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">{{ $template->subject }}</h1>
                 <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >{{ $template->body }} </p>
                 <hr>
-                <div class="products-details text-left">
-                    <div class="block-content ">
-                        @if(count($top_products_stores) > 0)
-                            <table class="table table-striped table-hover table-borderless table-vcenter">
-                                <thead>
-                                <tr class="text-uppercase">
-                                    <th class="font-w700">Product</th>
-                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
-                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
-                                </tr>
-                                </thead>
-                                <tbody>
 
+                <div class="" style="width: 100%">
+                    <div class="wrap">
+                        <div class="left">
+                            <h3 style="color: #ffffff; margin-right: 5px;">Products</h3>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <table class="table table-borderless table-striped table-vcenter">
+                            <thead>
+                            <tr class="">
+                                <th class="">Products</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                                 @foreach($top_products_stores as $product)
+                                    @php
+                                        $prods = json_decode($template->products);
+                                    @endphp
+
+                                @if(in_array($product->id, $prods))
                                     <tr>
-                                        <td class="font-w600">
+                                        <td class="">
                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                 @if($index == 0)
                                                     @if($image->isV == 0)
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                        <img class="" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" style="width: 40px !important; height: auto;"alt="">
                                                     @else
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        <img class="" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="" style="width: 40px !important; height: auto;">
                                                     @endif
                                                 @endif
                                             @endforeach
                                             <a href="{{route('product.view',$product->id)}}">{{$product->title}}</a>
                                         </td>
-                                        <td class="d-none d-sm-table-cell text-center">
-                                            {{$product->sold}}
-                                        </td>
-                                        <td class="">
-                                            ${{number_format($product->selling_cost,2)}}
-                                        </td>
                                     </tr>
-                                @endforeach
-
-                                </tbody>
-                                @else
-                                    <p  class="text-center"> No Products Found </p>
                                 @endif
-                            </table>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <a href="{{ route('store.product.wefulfill') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Products</a>
+                <div>
+                    <a href="{{ route('store.product.wefulfill') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Products</a>
+                </div>
             </div>
         </div>
     </div>
