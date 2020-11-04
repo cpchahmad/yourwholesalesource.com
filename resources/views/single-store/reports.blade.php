@@ -213,11 +213,13 @@
 
         $('.report-pdf-btn').click(function () {
             var section = $('.pdf-section').html();
-            html2canvas(section).then(function(canvas) {
-                var img = canvas.toDataURL('image/png');
-                var doc = new jsPDF();
-                doc.addImage(img, 'JPEG', 20, 20);
-                doc.save('test.pdf');
+            html2canvas(section, {
+               onrendered : function (canvas) {
+                   var img = canvas.toDataURL('image/png');
+                   var doc = new jsPDF();
+                   doc.addImage(img, 'JPEG', 20, 20);
+                   doc.save('test.pdf');
+               }
             });
 
         });
