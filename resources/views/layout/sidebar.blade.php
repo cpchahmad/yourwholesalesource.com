@@ -128,8 +128,6 @@
                     <span class="nav-main-link-name">Email Template</span>
                 </a>
             </li>
-
-
         </ul>
     </div>
 </nav>

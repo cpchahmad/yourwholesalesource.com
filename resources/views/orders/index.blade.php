@@ -101,7 +101,7 @@
                                         </div>
                                     </th>
                                     <th>Name</th>
-                                    <th>WName</th>
+                                    <th>Wnumber</th>
                                     <th>Shop / User</th>
                                     <th>Source</th>
                                     <th>Order Date</th>
@@ -123,7 +123,7 @@
                                             </div>
                                         </td>
                                         <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
-                                        <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->admin_shopify_name }}</a></td>
+                                        <td class="font-w600"><a href="https://wefullfill.myshopify.com/admin/orders/{{ $admin_shopify_id }}">{{ $order->admin_shopify_name }}</a></td>
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($order->has_store != null)
