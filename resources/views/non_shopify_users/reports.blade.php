@@ -79,14 +79,14 @@
                 <div class="col-md-6">
                     <div class="block block-rounded block-link-pop">
                         <div class="block-content block-content-full">
-                            <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                            <canvas id="canvas-graph-one-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="block block-rounded block-link-pop">
                         <div class="block-content block-content-full">
-                            <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                            <canvas id="canvas-graph-two-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
                         </div>
                     </div>
                 </div>
@@ -95,14 +95,14 @@
                 <div class="col-md-6">
                     <div class="block block-rounded block-link-pop">
                         <div class="block-content block-content-full">
-                            <canvas id="canvas-graph-three-store" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
+                            <canvas id="canvas-graph-three-users" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="block block-rounded block-link-pop">
                         <div class="block-content block-content-full">
-                            <canvas id="canvas-graph-four-store" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
+                            <canvas id="canvas-graph-four-users" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
                         </div>
                     </div>
                 </div>
