@@ -242,7 +242,7 @@
             var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
             html2canvas($("#pdfDownload")[0]).then(function (canvas) {
                 var imgData = canvas.toDataURL("image/jpeg", 1.0);
-                var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                var pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
                 for (var i = 1; i <= totalPDFPages; i++) {
                     pdf.addPage(PDF_Width, PDF_Height);
