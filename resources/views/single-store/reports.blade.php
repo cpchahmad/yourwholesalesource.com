@@ -38,7 +38,7 @@
                     </div>
                     <div class="mt-3">
                         <h3>Dear {{ $shop }},<br>
-                            Thank you for working with wefulfill, here below is your report from <span id="custom-date">{{$date_range}}</span></h3>
+                            Thank you for working with wefulfill, here below is your report from <span id="custom-date">{{$date_range ?? 'beginning till now'}}</span></h3>
                     </div>
 
                 </div>
@@ -213,49 +213,45 @@
             }
         });
 
-        $('.report-pdf-btn').click(function () {
-            var data = document.getElementById('pdfDownload');
-            html2canvas(data).then(canvas => {
-                //  Few necessary setting options
-                var imgWidth = 208;
-                var imgHeight = canvas.height * imgWidth / canvas.width;
-                const contentDataURL = canvas.toDataURL('image/png')
-                let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-                var position = 0;
-                pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
-                //  pdf.save('new-file.pdf');
-                window.open(pdf.output('bloburl', { filename: 'new-file.pdf' }), '_blank');
-
-                // var img = canvas.toDataURL('image/png');
-                // var doc = new jsPDF();
-                // doc.addImage(img, 'JPEG', 20, 20);
-                // doc.save('new-file.pdf');
-            });
-
-        });
-
         // $('.report-pdf-btn').click(function () {
-        //     var HTML_Width = $("#pdfDownload").width();
-        //     var HTML_Height = $("#pdfDownload").height();
-        //     // alert(HTML_Width); // HTML_Height=3800; // HTML_Width=1349;
-        //     var top_left_margin = 15;
-        //     var PDF_Width = HTML_Width + (top_left_margin * 2);
-        //     var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 5);
-        //     var canvas_image_width = HTML_Width;
-        //     var canvas_image_height = HTML_Height;
-        //     var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-        //     html2canvas($("#pdfDownload")[0]).then(function (canvas) {
-        //         var imgData = canvas.toDataURL("image/jpeg", 1.0);
-        //         var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-        //         pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-        //         for (var i = 1; i <= totalPDFPages; i++) {
-        //             pdf.addPage(PDF_Width, PDF_Height);
-        //             pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 15), canvas_image_width, canvas_image_height);
-        //         }
-        //         pdf.save("calendar.pdf");
+        //     var data = document.getElementById('pdfDownload');
+        //     html2canvas(data).then(canvas => {
+        //         //  Few necessary setting options
+        //         var imgWidth = 208;
+        //         var imgHeight = canvas.height * imgWidth / canvas.width;
+        //         const contentDataURL = canvas.toDataURL('image/png')
+        //         let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+        //         var position = 0;
+        //         pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+        //         //  pdf.save('new-file.pdf');
+        //         window.open(pdf.output('bloburl', { filename: 'new-file.pdf' }), '_blank');
+        //
+        //
         //     });
         //
         // });
+
+        $('.report-pdf-btn').click(function () {
+            var HTML_Width = $("#pdfDownload").width();
+            var HTML_Height = $("#pdfDownload").height();
+            var top_left_margin = 25;
+            var PDF_Width = HTML_Width + (top_left_margin * 2);
+            var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 5);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+            var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+            html2canvas($("#pdfDownload")[0]).then(function (canvas) {
+                var imgData = canvas.toDataURL("image/jpeg", 1.0);
+                var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+                pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+                for (var i = 1; i <= totalPDFPages; i++) {
+                    pdf.addPage(PDF_Width, PDF_Height);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 15), canvas_image_width, canvas_image_height);
+                }
+                window.open(pdf.output('bloburl', { filename: 'report.pdf' }), '_blank');
+            });
+
+        });
 
         // $('.report-pdf-btn').click(function () {
         //     console.log(324);
