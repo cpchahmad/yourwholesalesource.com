@@ -53,7 +53,7 @@ class EmailTemplateController extends Controller
      */
     public function show($id)
     {
-        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('order', RetailerOrder::find(1));
+        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('order', RetailerOrder::find(1))->with('top_products_stores', \App\Product::all());
     }
 
     /**
