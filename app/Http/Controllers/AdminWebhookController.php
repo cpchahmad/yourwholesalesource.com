@@ -42,7 +42,8 @@ class AdminWebhookController extends Controller
                 $new_fulfillment->save();
 
                 $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
-            } else {
+            }
+            else {
                 $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                 $shopify_fulfillment = null;
                 if ($shop != null) {
