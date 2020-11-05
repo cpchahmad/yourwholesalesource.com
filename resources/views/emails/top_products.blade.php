@@ -26,6 +26,7 @@
         padding-left: 20px;
         background-color: #7daa40 !important;
         color: #ffffff !important;
+        padding: 1px 20px
     }
 
     .wrap .right{
@@ -83,7 +84,7 @@
                     <div class="">
                         <table class="table table-borderless table-striped table-vcenter">
                             <thead>
-                            <tr class="">
+                            <tr class="" style="text-align: right;">
                                 <th class="">Products</th>
                             </tr>
                             </thead>
@@ -99,9 +100,9 @@
                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                 @if($index == 0)
                                                     @if($image->isV == 0)
-                                                        <img class="" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" style="width: 40px !important; height: auto;"alt="">
+                                                        <img class=""  src="{{asset('images')}}/{{$image->image}}" style="width: 40px !important; height: auto; margin-right: 5px"alt="">
                                                     @else
-                                                        <img class="" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="" style="width: 40px !important; height: auto;">
+                                                        <img class=""  src="{{asset('images/variants')}}/{{$image->image}}" alt="" style="width: 40px !important; height: auto; margin-right: 5px">
                                                     @endif
                                                 @endif
                                             @endforeach
