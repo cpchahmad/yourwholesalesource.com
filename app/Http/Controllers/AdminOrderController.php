@@ -882,13 +882,13 @@ class AdminOrderController extends Controller
 
     public function testWebhook() {
 
-        $shop = $this->helper->getSpecificShop(55);
+//        $shop = $this->helper->getSpecificShop(55);
+//
+//        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+//
+//        dd(34, $response);
 
-        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
-
-        dd(34, $response);
-
-        $ids = [71,75,78,81];
+        $ids = [55,71];
         for($i =0 ; $i < count($ids); $i++) {
             $shop = $this->helper->getSpecificShop($ids[$i]);
 
@@ -953,6 +953,16 @@ class AdminOrderController extends Controller
                 "webhook" => [
                     "topic" => "orders/cancelled",
                     "address" => "https://app.wefullfill.com/webhook/orders-cancelled",
+                    "format" => "json"
+                ]
+            ];
+            $shop->api()->rest('POST', '/admin/webhooks.json', $data);
+            $data = [];
+
+            $data = [
+                "webhook" => [
+                    "topic" => "products/delete",
+                    "address" => "https://app.wefullfill.com/webhook/products-delete",
                     "format" => "json"
                 ]
             ];
