@@ -51,12 +51,11 @@ class ProductsDeleteJob implements ShouldQueue
      */
     public function handle()
     {
-        $product =  $this->data;
-        $id = $product->id;
+        $response = $this->data;
         $shop = Shop::where('shopify_domain', $this->shopDomain)->first();
-        $product = RetailerProduct::find($id);
+        $product = RetailerProduct::where('shopify_id', $response->id);
 
-        $variants = RetailerProductVariant::where('product_id', $id)->get();
+        $variants = RetailerProductVariant::where('product_id', $product->id)->get();
         foreach ($product->hasVariants as $variant) {
             $variant->delete();
         }
