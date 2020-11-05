@@ -304,6 +304,10 @@ return [
         [
             'topic' => 'orders/cancelled',
             'address' => 'https://app.wefullfill.com/webhook/orders-cancelled'
+        ],
+        [
+            "topic" => "products/delete",
+            "address" => "https://app.wefullfill.com/webhook/products-delete"
         ]
 
 
