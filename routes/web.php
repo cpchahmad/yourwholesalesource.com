@@ -342,4 +342,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 
 
-Route::get('/test', 'AdminOrderController@testWebhook');
+//Route::get('/test', 'AdminOrderController@testWebhook');
+Route::get('/test', function() {
+    return view('emails.order_place')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
+});
