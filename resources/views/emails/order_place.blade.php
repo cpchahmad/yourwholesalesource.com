@@ -182,7 +182,7 @@
                                             @endif
                                         </td>
 
-                                        <td style="width: 30%">
+                                        <td style="width: 30%; text-align: left !important;">
                                             {{$item->name}}
 
                                         </td>
@@ -221,26 +221,28 @@
                             </div>
                         </div>
                         <div class="" style="text-align: right !important;">
-                            <table class="table table-borderless table-vcenter">
-                                <thead>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
-                                    <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
-                                </tr>
-                                <tr>
-                                    <td align="left">Shipping Price</td>
-                                    <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
-                                </tr>
+                            <div class="" >
+                                <table class="table table-borderless table-vcenter">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
+                                        <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">Shipping Price</td>
+                                        <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
+                                    </tr>
 
-                                <tr>
-                                    <td align="left">Total Cost</td>
-                                    <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
-                                </tr>
-                                </tbody>
+                                    <tr>
+                                        <td align="left">Total Cost</td>
+                                        <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
+                                    </tr>
+                                    </tbody>
 
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
