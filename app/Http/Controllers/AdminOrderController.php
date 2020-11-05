@@ -882,11 +882,11 @@ class AdminOrderController extends Controller
 
     public function testWebhook() {
 
-        $shop = $this->helper->getSpecificShop(71);
-
-        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
-
-        dd(123, $response);
+//        $shop = $this->helper->getSpecificShop(71);
+//
+//        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+//
+//        dd(123, $response);
 
         $ids = [55,71];
         for($i =0 ; $i < count($ids); $i++) {
