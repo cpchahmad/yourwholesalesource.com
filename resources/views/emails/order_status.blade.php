@@ -25,6 +25,7 @@
         padding-left: 20px;
         background-color: #7daa40 !important;
         color: #ffffff !important;
+        padding: 1px 20px
     }
 
     .wrap .right{
@@ -74,7 +75,7 @@
                 <div class="" style="width: 100%">
                     <div class="wrap">
                         <div class="left">
-                            <h3 style="color: #ffffff; margin-right: 5px;">Line Items
+                            <h2 style="color: #ffffff; margin-right: 5px; margin-top: 7px; margin-bottom: 7px;">Line Items
                                 @if($order->paid == '0')
                                     <span class="" style="font-size: small"> (Unpaid </span>
                                 @elseif($order->paid == '1')
@@ -103,11 +104,11 @@
                                     <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
                                 @endif
 
-                            </h3>
+                            </h2>
                         </div>
                     </div>
 
-                    <div class="">
+                    <div class="" style="   padding: 14px;">
                         <table class="table table-borderless table-striped table-vcenter">
                             <thead>
                             <tr>
@@ -182,7 +183,7 @@
                                             @endif
                                         </td>
 
-                                        <td style="width: 30%">
+                                        <td style="width: 30%; text-align: left !important;">
                                             {{$item->name}}
 
                                         </td>
@@ -217,30 +218,32 @@
                     <div class="">
                         <div class="wrap">
                             <div class="left">
-                                <h3 class="" style="color: #ffffff !important;">Summary</h3>
+                                <h2 class="" style="color: #ffffff !important; margin-top: 7px; margin-bottom: 7px;">Summary</h2>
                             </div>
                         </div>
-                        <div class="" style="text-align: right !important;">
-                            <table class="table table-borderless table-vcenter">
-                                <thead>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
-                                    <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
-                                </tr>
-                                <tr>
-                                    <td align="left">Shipping Price</td>
-                                    <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
-                                </tr>
+                        <div class="" style="text-align: right !important; padding: 15px;">
+                            <div class="" >
+                                <table class="table table-borderless table-vcenter">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
+                                        <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">Shipping Price</td>
+                                        <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
+                                    </tr>
 
-                                <tr>
-                                    <td align="left">Total Cost</td>
-                                    <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
-                                </tr>
-                                </tbody>
+                                    <tr>
+                                        <td align="left">Total Cost</td>
+                                        <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
+                                    </tr>
+                                    </tbody>
 
-                            </table>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

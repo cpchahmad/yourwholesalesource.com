@@ -19,6 +19,7 @@
         padding-left: 20px;
         background-color: #7daa40 !important;
         color: #ffffff !important;
+        padding: 1px 20px
     }
 
     .wrap .right{
@@ -99,196 +100,177 @@
                                     <br>
                                     @if($template->id == '4' || $template->id == '3')
                                         <hr>
-                                        <div class="order-details text-left">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="block">
-                                                        <div class="block-header block-header-default">
-                                                            <h3 class="block-title">
-                                                                Line Items
-                                                            </h3>
-                                                            @if($order->paid == '0')
-                                                                <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
-                                                            @elseif($order->paid == '1')
-                                                                <span class="badge badge-success" style="font-size: small"> Paid </span>
-                                                            @elseif($order->paid == '2')
-                                                                <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
-                                                            @endif
+                                        <div class="" style="width: 100%">
+                                            <div class="wrap">
+                                                <div class="left">
+                                                    <h2 style="color: #ffffff; margin-right: 5px; margin-top: 7px; margin-bottom: 7px;">Line Items
+                                                        @if($order->paid == '0')
+                                                            <span class="" style="font-size: small"> (Unpaid </span>
+                                                        @elseif($order->paid == '1')
+                                                            <span class="" style="font-size: small"> (Paid </span>
+                                                        @elseif($order->paid == '2')
+                                                            <span class="" style="font-size: small;"> (Refunded, </span>
+                                                        @endif
 
-                                                            @if($order->status == 'Paid')
-                                                                <span class="badge badge-warning" style="font-size: small"> Unfulfilled</span>
-                                                            @elseif($order->status == 'unfulfilled')
-                                                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}}</span>
-                                                            @elseif($order->status == 'partially-shipped')
-                                                                <span class="badge " style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}}</span>
-                                                            @elseif($order->status == 'shipped')
-                                                                <span class="badge " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}}</span>
-                                                            @elseif($order->status == 'delivered')
-                                                                <span class="badge " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}}</span>
-                                                            @elseif($order->status == 'completed')
-                                                                <span class="badge " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}}</span>
-                                                            @elseif($order->status == 'new')
-                                                                <span class="badge badge-warning" style="font-size: small"> Draft </span>
-                                                            @elseif($order->status == 'cancelled')
-                                                                <span class="badge badge-warning" style="font-size: small"> {{ucfirst($order->status)}} </span>
-                                                            @else
-                                                                <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
-                                                            @endif
-                                                        </div>
-                                                        <div class="block-content">
+                                                        @if($order->status == 'Paid')
+                                                            <span class="" style="font-size: small"> Unfulfilled)</span>
+                                                        @elseif($order->status == 'unfulfilled')
+                                                            <span class="" style="font-size: small"> {{ucfirst($order->status)}})</span>
+                                                        @elseif($order->status == 'partially-shipped')
+                                                            <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}})</span>
+                                                        @elseif($order->status == 'shipped')
+                                                            <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}})</span>
+                                                        @elseif($order->status == 'delivered')
+                                                            <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}})</span>
+                                                        @elseif($order->status == 'completed')
+                                                            <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}})</span>
+                                                        @elseif($order->status == 'new')
+                                                            <span class="" style="font-size: small"> Draft) </span>
+                                                        @elseif($order->status == 'cancelled')
+                                                            <span class="" style="font-size: small"> {{ucfirst($order->status)}}) </span>
+                                                        @else
+                                                            <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
+                                                        @endif
 
-                                                            <table class="table table-borderless table-striped table-vcenter">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th style="width: 10%">Name</th>
-                                                                    <th>Fulfilled By</th>
-                                                                    <th>Cost</th>
-                                                                    <th>Price X Quantity</th>
-                                                                    <th>Status</th>
+                                                    </h2>
+                                                </div>
+                                            </div>
 
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                @foreach($order->line_items as $item)
-                                                                    @if($item->fulfilled_by != 'store')
-                                                                        <tr>
-                                                                            <td>
-                                                                                @if($order->custom == 0)
-                                                                                    @if($item->linked_variant != null)
-                                                                                        <img class="img-avatar"
-                                                                                             @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                                                             @else @if($item->linked_variant->has_image->isV == 1)
-                                                                                             src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}"
-                                                                                             @else
-                                                                                             src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
-                                                                                             @endif
-                                                                                             @endif alt="">
+                                            <div class="" style="   padding: 14px;">
+                                                <table class="table table-borderless table-striped table-vcenter">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>
+                                                        </th>
+                                                        <th style="width: 10%">Name</th>
+                                                        <th>Fulfilled By</th>
+                                                        <th>Cost</th>
+                                                        <th>Price X Quantity</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($order->line_items as $item)
+                                                        @if($item->fulfilled_by != 'store')
+                                                            <tr>
+                                                                <td>
+                                                                    @if($order->custom == 0)
+                                                                        @if($item->linked_variant != null)
+                                                                            <img class="" style="width: 40px !important; height: auto;"
+                                                                                 @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                                 @else @if($item->linked_variant->has_image->isV == 1)
+                                                                                 src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}"
+                                                                                 @else
+                                                                                 src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
+                                                                                 @endif
+                                                                                 @endif alt="">
+                                                                        @else
+                                                                            @if($item->linked_product != null)
+                                                                                @if(count($item->linked_product->has_images)>0)
+                                                                                    @if($item->linked_product->has_images[0]->isV == 1)
+                                                                                        <img class="" style="width: 40px !important; height: auto;"
+                                                                                             src="{{asset('images/variants')}}/{{$item->linked_product->has_images[0]->image}}">
                                                                                     @else
-                                                                                        @if($item->linked_product != null)
-                                                                                            @if(count($item->linked_product->has_images)>0)
-                                                                                                @if($item->linked_product->has_images[0]->isV == 1)
-                                                                                                    <img class="img-avatar img-avatar-variant"
-                                                                                                         src="{{asset('images/variants')}}/{{$item->linked_product->has_images[0]->image}}">
-                                                                                                @else
-                                                                                                    <img class="img-avatar img-avatar-variant"
-                                                                                                         src="{{asset('images')}}/{{$item->linked_product->has_images[0]->image}}">
-                                                                                                @endif
-                                                                                            @else
-                                                                                                <img class="img-avatar img-avatar-variant"
-                                                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                                                            @endif
-                                                                                        @else
-                                                                                            <img class="img-avatar img-avatar-variant"
-                                                                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                                                        @endif
+                                                                                        <img class="" style="width: 40px !important; height: auto;"
+                                                                                             src="{{asset('images')}}/{{$item->linked_product->has_images[0]->image}}">
                                                                                     @endif
-
                                                                                 @else
-                                                                                    @if($item->linked_real_variant != null)
-                                                                                        <img class="img-avatar"
-                                                                                             @if($item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                                                             @else @if($item->linked_real_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_real_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_real_variant->has_image->image}}" @endif @endif alt="">
+                                                                                    <img class="" style="width: 40px !important; height: auto;"
+                                                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                                                @endif
+                                                                            @else
+                                                                                <img class="" style="width: 40px !important; height: auto;"
+                                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                                            @endif
+                                                                        @endif
+
+                                                                    @else
+                                                                        @if($item->linked_real_variant != null)
+                                                                            <img class="" style="width: 40px !important; height: auto;"
+                                                                                 @if($item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                                 @else @if($item->linked_real_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_real_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_real_variant->has_image->image}}" @endif @endif alt="">
+                                                                        @else
+                                                                            @if($item->linked_real_product != null)
+                                                                                @if(count($item->linked_real_product->has_images)>0)
+                                                                                    @if($item->linked_real_product->has_images[0]->isV == 1)
+                                                                                        <img class="" style="width: 40px !important; height: auto;"
+                                                                                             src="{{asset('images/variants')}}/{{$item->linked_real_product->has_images[0]->image}}">
                                                                                     @else
-                                                                                        @if($item->linked_real_product != null)
-                                                                                            @if(count($item->linked_real_product->has_images)>0)
-                                                                                                @if($item->linked_real_product->has_images[0]->isV == 1)
-                                                                                                    <img class="img-avatar img-avatar-variant"
-                                                                                                         src="{{asset('images/variants')}}/{{$item->linked_real_product->has_images[0]->image}}">
-                                                                                                @else
-                                                                                                    <img class="img-avatar img-avatar-variant"
-                                                                                                         src="{{asset('images')}}/{{$item->linked_real_product->has_images[0]->image}}">
-                                                                                                @endif
-                                                                                            @else
-                                                                                                <img class="img-avatar img-avatar-variant"
-                                                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                                                            @endif
-                                                                                        @else
-                                                                                            <img class="img-avatar img-avatar-variant"
-                                                                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                                                                        @endif
+                                                                                        <img class="" style="width: 40px !important; height: auto;"
+                                                                                             src="{{asset('images')}}/{{$item->linked_real_product->has_images[0]->image}}">
                                                                                     @endif
-                                                                                @endif
-                                                                            </td>
-
-
-                                                                            <td style="width: 30%">
-                                                                                {{$item->name}}
-
-                                                                            </td>
-                                                                            <td>
-                                                                                @if($item->fulfilled_by == 'store')
-                                                                                    <span class="badge badge-danger"> Store</span>
-                                                                                @elseif ($item->fulfilled_by == 'Fantasy')
-                                                                                    <span class="badge badge-success"> WeFullFill </span>
                                                                                 @else
-                                                                                    <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
+                                                                                    <img class="" style="width: 40px !important; height: auto;"
+                                                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                                                 @endif
-                                                                            </td>
-
-                                                                            <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
-                                                                            <td>{{$item->price}} X {{$item->quantity}}  USD </td>
-                                                                            <td>
-                                                                                @if($item->fulfillment_status == null)
-                                                                                    <span class="badge badge-warning"> Unfulfilled</span>
-                                                                                @elseif($item->fulfillment_status == 'partially-fulfilled')
-                                                                                    <span class="badge badge-danger"> Partially Fulfilled</span>
-                                                                                @else
-                                                                                    <span class="badge badge-success"> Fulfilled</span>
-                                                                                @endif
-                                                                            </td>
-
-                                                                        </tr>
+                                                                            @else
+                                                                                <img class="" style="width: 40px !important; height: auto;"
+                                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                                            @endif
+                                                                        @endif
                                                                     @endif
-                                                                @endforeach
-                                                                </tbody>
+                                                                </td>
 
-                                                            </table>
-                                                        </div>
+                                                                <td style="width: 30%; text-align: left !important;">
+                                                                    {{$item->name}}
+
+                                                                </td>
+                                                                <td>
+                                                                    @if($item->fulfilled_by == 'store')
+                                                                        <span class=""> Store</span>
+                                                                    @elseif ($item->fulfilled_by == 'Fantasy')
+                                                                        <span class=""> WeFullFill </span>
+                                                                    @else
+                                                                        <span class=""> {{$item->fulfilled_by}} </span>
+                                                                    @endif
+                                                                </td>
+
+                                                                <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
+                                                                <td>{{$item->price}} X {{$item->quantity}}  USD </td>
+                                                                <td>
+                                                                    @if($item->fulfillment_status == null)
+                                                                        <span class=""> Unfulfilled</span>
+                                                                    @elseif($item->fulfillment_status == 'partially-fulfilled')
+                                                                        <span class=""> Partially Fulfilled</span>
+                                                                    @else
+                                                                        <span class=""> Fulfilled</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="wrap">
+                                                    <div class="left">
+                                                        <h2 class="" style="color: #ffffff !important; margin-top: 7px; margin-bottom: 7px;">Summary</h2>
                                                     </div>
-                                                    <div class="block">
-                                                        <div class="block-header block-header-default">
-                                                            <h3 class="block-title">
-                                                                Summary
-                                                            </h3>
-                                                        </div>
-                                                        <div class="block-content">
-                                                            <table class="table table-borderless table-vcenter">
-                                                                <thead>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        Subtotal ({{count($order->line_items)}} items)
-                                                                    </td>
-                                                                    <td align="right">
-                                                                        {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        Shipping Price
-                                                                    </td>
-                                                                    <td align="right">
-                                                                        {{number_format($order->shipping_price,2)}} USD
-                                                                    </td>
-                                                                </tr>
+                                                </div>
+                                                <div class="" style="text-align: right !important; padding: 15px;">
+                                                    <div class="" >
+                                                        <table class="table table-borderless table-vcenter">
+                                                            <thead>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
+                                                                <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left">Shipping Price</td>
+                                                                <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
+                                                            </tr>
 
-                                                                <tr>
-                                                                    <td>
-                                                                        Total Cost
-                                                                    </td>
-                                                                    <td align="right">
-                                                                        {{number_format($order->cost_to_pay,2)}} USD
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
+                                                            <tr>
+                                                                <td align="left">Total Cost</td>
+                                                                <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
+                                                            </tr>
+                                                            </tbody>
 
-
-                                                            </table>
-
-                                                        </div>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -333,40 +315,40 @@
                                     <div class="" style="width: 100%">
                                         <div class="wrap">
                                             <div class="left">
-                                                <h3 style="color: #ffffff; margin-right: 5px;">Line Items
-                                                        @if($order->paid == '0')
-                                                            <span class="" style="font-size: small"> (Unpaid </span>
-                                                        @elseif($order->paid == '1')
-                                                            <span class="" style="font-size: small"> (Paid </span>
-                                                        @elseif($order->paid == '2')
-                                                            <span class="" style="font-size: small;"> (Refunded, </span>
-                                                        @endif
+                                                <h2 style="color: #ffffff; margin-right: 5px; margin-top: 7px; margin-bottom: 7px;">Line Items
+                                                    @if($order->paid == '0')
+                                                        <span class="" style="font-size: small"> (Unpaid </span>
+                                                    @elseif($order->paid == '1')
+                                                        <span class="" style="font-size: small"> (Paid </span>
+                                                    @elseif($order->paid == '2')
+                                                        <span class="" style="font-size: small;"> (Refunded, </span>
+                                                    @endif
 
-                                                        @if($order->status == 'Paid')
-                                                            <span class="" style="font-size: small"> Unfulfilled)</span>
-                                                        @elseif($order->status == 'unfulfilled')
-                                                            <span class="" style="font-size: small"> {{ucfirst($order->status)}})</span>
-                                                        @elseif($order->status == 'partially-shipped')
-                                                            <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}})</span>
-                                                        @elseif($order->status == 'shipped')
-                                                            <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}})</span>
-                                                        @elseif($order->status == 'delivered')
-                                                            <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}})</span>
-                                                        @elseif($order->status == 'completed')
-                                                            <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}})</span>
-                                                        @elseif($order->status == 'new')
-                                                            <span class="" style="font-size: small"> Draft) </span>
-                                                        @elseif($order->status == 'cancelled')
-                                                            <span class="" style="font-size: small"> {{ucfirst($order->status)}}) </span>
-                                                        @else
-                                                            <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
-                                                        @endif
+                                                    @if($order->status == 'Paid')
+                                                        <span class="" style="font-size: small"> Unfulfilled)</span>
+                                                    @elseif($order->status == 'unfulfilled')
+                                                        <span class="" style="font-size: small"> {{ucfirst($order->status)}})</span>
+                                                    @elseif($order->status == 'partially-shipped')
+                                                        <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}})</span>
+                                                    @elseif($order->status == 'shipped')
+                                                        <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}})</span>
+                                                    @elseif($order->status == 'delivered')
+                                                        <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}})</span>
+                                                    @elseif($order->status == 'completed')
+                                                        <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}})</span>
+                                                    @elseif($order->status == 'new')
+                                                        <span class="" style="font-size: small"> Draft) </span>
+                                                    @elseif($order->status == 'cancelled')
+                                                        <span class="" style="font-size: small"> {{ucfirst($order->status)}}) </span>
+                                                    @else
+                                                        <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
+                                                    @endif
 
-                                                </h3>
+                                                </h2>
                                             </div>
                                         </div>
 
-                                        <div class="">
+                                        <div class="" style="   padding: 14px;">
                                             <table class="table table-borderless table-striped table-vcenter">
                                                 <thead>
                                                 <tr>
@@ -380,7 +362,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($order->line_items as $item)
+                                                @foreach($order->line_items as $item)
                                                     @if($item->fulfilled_by != 'store')
                                                         <tr>
                                                             <td>
@@ -441,7 +423,7 @@
                                                                 @endif
                                                             </td>
 
-                                                            <td style="width: 30%">
+                                                            <td style="width: 30%; text-align: left !important;">
                                                                 {{$item->name}}
 
                                                             </td>
@@ -476,30 +458,32 @@
                                         <div class="">
                                             <div class="wrap">
                                                 <div class="left">
-                                                    <h3 class="" style="color: #ffffff !important;">Summary</h3>
+                                                    <h2 class="" style="color: #ffffff !important; margin-top: 7px; margin-bottom: 7px;">Summary</h2>
                                                 </div>
                                             </div>
-                                            <div class="" style="text-align: right !important;">
-                                                <table class="table table-borderless table-vcenter">
-                                                    <thead>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
-                                                        <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="left">Shipping Price</td>
-                                                        <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
-                                                    </tr>
+                                            <div class="" style="text-align: right !important; padding: 15px;">
+                                                <div class="" >
+                                                    <table class="table table-borderless table-vcenter">
+                                                        <thead>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
+                                                            <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="left">Shipping Price</td>
+                                                            <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td align="left">Total Cost</td>
-                                                        <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
-                                                    </tr>
-                                                    </tbody>
+                                                        <tr>
+                                                            <td align="left">Total Cost</td>
+                                                            <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
+                                                        </tr>
+                                                        </tbody>
 
-                                                </table>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
