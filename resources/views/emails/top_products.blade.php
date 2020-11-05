@@ -41,18 +41,23 @@
         text-decoration: none;
         color: #7daa40 !important;
         font-size: 18px;
+        margin-left: 5px;
     }
 
     a.title:hover{
         text-decoration: none;
         color: #7daa40 !important;
         font-size: 18px;
+        margin-left: 5px;
+
     }
 
     a.title:active{
         text-decoration: none;
         color: #7daa40 !important;
         font-size: 18px;
+        margin-left: 5px;
+
     }
 
 
@@ -113,18 +118,18 @@
                                     @endphp
 
                                 @if(in_array($product->id, $prods))
-                                    <tr>
+                                    <tr style="text-align: left">
                                         <td class="">
                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                 @if($index == 0)
                                                     @if($image->isV == 0)
-                                                        <img class=""  src="{{asset('images')}}/{{$image->image}}" style="width: 40px !important; height: auto;"alt="">
+                                                        <img class=""  src="{{asset('images')}}/{{$image->image}}" style="width: 80px !important; height: auto;"alt="">
                                                     @else
-                                                        <img class=""  src="{{asset('images/variants')}}/{{$image->image}}" alt="" style="width: 40px !important; height: auto;">
+                                                        <img class=""  src="{{asset('images/variants')}}/{{$image->image}}" alt="" style="width: 80px !important; height: auto;">
                                                     @endif
                                                 @endif
                                             @endforeach
-                                            <a href="{{route('product.view',$product->id)}}" class="title">{{$product->title}}</a>
+                                            <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a>
                                         </td>
                                     </tr>
                                 @endif
