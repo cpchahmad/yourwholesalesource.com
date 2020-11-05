@@ -74,7 +74,7 @@
                 <div class="" style="width: 100%">
                     <div class="wrap">
                         <div class="left">
-                            <h2 style="color: #ffffff; margin-right: 5px;">Line Items
+                            <h2 style="color: #ffffff; margin-right: 5px; margin-top: 7px; margin-bottom: 7px;">Line Items
                                 @if($order->paid == '0')
                                     <span class="" style="font-size: small"> (Unpaid </span>
                                 @elseif($order->paid == '1')
@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="">
+                    <div class="" style="   padding: 14px;">
                         <table class="table table-borderless table-striped table-vcenter">
                             <thead>
                             <tr>
@@ -217,10 +217,10 @@
                     <div class="">
                         <div class="wrap">
                             <div class="left">
-                                <h2 class="" style="color: #ffffff !important;">Summary</h2>
+                                <h2 class="" style="color: #ffffff !important; margin-top: 7px; margin-bottom: 7px;">Summary</h2>
                             </div>
                         </div>
-                        <div class="" style="text-align: right !important;">
+                        <div class="" style="text-align: right !important; padding: 15px;">
                             <div class="" >
                                 <table class="table table-borderless table-vcenter">
                                     <thead>
