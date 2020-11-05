@@ -888,7 +888,7 @@ class AdminOrderController extends Controller
 //
 //        dd(123, $response);
 
-        $ids = [19,22,25,26,28,36,37,38,39,40];
+        $ids = [41,43,45,47,49,51,55,56,57,58,59,63];
         for($i =0 ; $i < count($ids); $i++) {
             $shop = $this->helper->getSpecificShop($ids[$i]);
 
@@ -970,6 +970,8 @@ class AdminOrderController extends Controller
             $data = [];
 
         }
+
+        dd(234);
     }
 }
 
