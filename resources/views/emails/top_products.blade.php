@@ -77,15 +77,15 @@
                 <div class="" style="width: 100%">
                     <div class="wrap">
                         <div class="left">
-                            <h3 style="color: #ffffff; margin-right: 5px;">Products</h3>
+                            <h3 style="color: #ffffff; margin-right: 5px;">Our Top Products</h3>
                         </div>
                     </div>
 
-                    <div class="">
+                    <div class="" style="padding: 15px;">
                         <table class="table table-borderless table-striped table-vcenter">
                             <thead>
-                            <tr class="" style="text-align: right;">
-                                <th class="">Products</th>
+                            <tr class="" style="text-align: left;">
+                                <th class="">Our Top Products</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -106,13 +106,15 @@
                                                     @endif
                                                 @endif
                                             @endforeach
-                                            <a href="{{route('product.view',$product->id)}}">{{$product->title}}</a>
+                                            <h5><a href="{{route('product.view',$product->id)}}">{{$product->title}}</a></h5>
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
                             </tbody>
                         </table>
+                        <br><br>
+                        <hr>
                     </div>
                 </div>
                 <div>
