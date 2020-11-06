@@ -698,11 +698,11 @@
                                     <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
                                         <thead>
                                         <tr>
-                                            <th style="vertical-align: top;width: 15%;">Title</th>
-                                            <th style="vertical-align: top;width: 15%;">Cost</th>
+                                            <th style="vertical-align: top;width: 10%;">Title</th>
+                                            <th style="vertical-align: top;width: 12%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th style="vertical-align: top;width: 13%;">Min Qty</th>
-                                            <th style="vertical-align: top;width: 13%;">Max Qty</th>
+                                            <th style="vertical-align: top;width: 17%;">Min Qty</th>
+                                            <th style="vertical-align: top;width: 17%;">Max Qty</th>
                                             <th style="vertical-align: top;width: 15%;">Type</th>
                                             <th style="vertical-align: top;width: 15%;">Price</th>
                                             <th class="" style="width: 10%;"></th>
