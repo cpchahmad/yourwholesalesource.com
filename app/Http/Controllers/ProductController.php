@@ -101,15 +101,15 @@ class ProductController extends Controller
         $variants = $request->variant_id;
 
         foreach ($variants as $variant) {
-            dd($request->input('min_qty'.$variant));
-            for($i=0; $i< count($request->min_qty.$variant); $i++) {
+
+            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
                 $item = new TieredPrice();
                 $item->product_variant_id = $variant;
                 $item->product_id = $id;
-                $item->min_qty = $request->min_qty.$variant[$i];
-                $item->max_qty = $request->max_qty.$variant[$i];
-                $item->type = $request->type.$variant;
-                $item->price = $request->price.$variant;
+                $item->min_qty = $request->input('min_qty'.$variant)[$i];
+                $item->max_qty = $request->input('max_qty'.$variant)[$i];
+                $item->type = $request->input('type'.$variant);
+                $item->price = $request->input('tiered_price'.$variant);
                 $item->save();
             }
         }
