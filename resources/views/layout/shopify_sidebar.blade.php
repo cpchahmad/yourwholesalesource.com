@@ -304,12 +304,3 @@
     </div>
 </header>
 
-<script>
-    $(document).ready(function() {
-        $('.shop-log-btn').click(function() {
-            console.log(234);
-            console.log($(this).find('.shop-domain-name').html());
-        });
-    });
-</script>
-
