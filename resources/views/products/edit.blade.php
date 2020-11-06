@@ -994,9 +994,6 @@
                                                 </tbody>
                                             @endif
                                         </table>
-                                        <div class="block-content text-right">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
                                     </form>
                                 @endif
                             </div>
