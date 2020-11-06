@@ -698,12 +698,12 @@
                                 <table class="table variants-div js-table-sections table-hover table-responsive">
                                     <thead>
                                         <tr>
-                                            <th style="vertical-align: top" >Title</th>
+                                            <th style="vertical-align: top; width: 20%" >Title</th>
                                             <th style="vertical-align: top" >Cost</th>
-                                            <th style="vertical-align: top" >SKU</th>
+                                            <th style="vertical-align: top; width: 20%" >SKU</th>
                                             <th style="vertical-align: top" >Min Qty</th>
                                             <th style="vertical-align: top" >Max Qty</th>
-                                            <th style="vertical-align: top" >Type</th>
+                                            <th style="vertical-align: top; width: 20%" >Type</th>
                                             <th style="vertical-align: top" >Price</th>
                                             <th class="w-25"></th>
                                         </tr>
@@ -734,6 +734,10 @@
                                                                 </select>
                                                             </td>
                                                             <td>
+                                                                <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary">Add</button>
                                                                 <button class="btn btn-sm btn-danger">Remove</button>
                                                             </td>
                                                         </tr>
