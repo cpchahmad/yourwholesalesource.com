@@ -722,7 +722,7 @@
                                                                 <input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}">
                                                             </td>
                                                             <td colspan="5">
-                                                                <div class="row">
+                                                                <div class="row mb-3">
                                                                     <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
                                                                     </div>
@@ -743,7 +743,7 @@
                                                                         <button class="btn btn-sm btn-danger">-</button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-3">
                                                                     <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
                                                                     </div>
