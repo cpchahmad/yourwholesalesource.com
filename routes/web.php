@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
     Route::any('/products/{id}/update','ProductController@update')->name('product.update');
-    Route::any('/products/{id}/add/tiered','ProductController@addTiered')->name('product.add.tiered');
+    Route::any('/products/{id}/add/tiered/price','ProductController@addTieredPrice')->name('product.add.tiered.price');
     Route::post('/products/save','ProductController@save')->name('product.save');
     Route::post('/products/variant/save','ProductController@variant')->name('product.variant');
     Route::get('/products/{id}/delete','ProductController@delete')->name('product.delete');
