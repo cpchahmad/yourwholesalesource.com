@@ -701,8 +701,8 @@
                                             <th style="vertical-align: top;width: 15%;">Title</th>
                                             <th style="vertical-align: top;width: 15%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th style="vertical-align: top;width: 10%;">Min Qty</th>
-                                            <th style="vertical-align: top;width: 10%;">Max Qty</th>
+                                            <th style="vertical-align: top;width: 13%;">Min Qty</th>
+                                            <th style="vertical-align: top;width: 13%;">Max Qty</th>
                                             <th style="vertical-align: top;width: 15%;">Type</th>
                                             <th style="vertical-align: top;width: 15%;">Price</th>
                                             <th class="" style="width: 10%;"></th>
@@ -727,22 +727,22 @@
                                                     <td colspan="5">
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty[]" value="1" placeholder="Minimum Quantity">
+                                                                <input  type="number" class="form-control" name="min_qty{{$v-id}}[]" value="1" placeholder="Minimum Quantity">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty[]" value="1" placeholder="Minimum Quantity">
+                                                                <input  type="number" class="form-control" name="mix_qty{{$v-id}}[]" value="1" placeholder="Minimum Quantity">
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select name="type[]" id="" class="form-control">
+                                                                <select name="type{{$v-id}}[]" id="" class="form-control">
                                                                     <option value="fixed">Fixed</option>
                                                                     <option value="discount">Discount</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
+                                                                <input  type="number" step="any" class="form-control" name="tiered_price{{$v-id}}[]"  placeholder="$0.0">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn">+</button>
+                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $v->id }}">+</button>
                                                                 <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
                                                             </div>
                                                         </div>
