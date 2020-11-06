@@ -100,7 +100,6 @@ class ProductController extends Controller
     public function addTieredPrice(Request $request, $id) {
         $variants = $request->variant_id;
 
-        dd($request->all());
         foreach ($variants as $variant) {
 
             for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
