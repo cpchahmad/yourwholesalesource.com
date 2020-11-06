@@ -704,22 +704,17 @@
                                     </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
-                                        @foreach($product->hasVariants as $index => $v)
-                                            <form action="{{route('product.update',$product->id)}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="type" value="single-variant-update">
-                                                <input type="hidden" name="variant_id" value="{{$v->id}}">
-                                                <tbody class="js-table-sections-header">
-                                                    <tr>
-                                                        <td class="variant_title">
-                                                            @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-                                                        </td>
-                                                        <td><input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
-                                                        <td><input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                    </tr>
-                                                </tbody>
-                                            </form>
-                                        @endforeach
+                                        <tbody class="js-table-sections-header">
+                                            @foreach($product->hasVariants as $index => $v)
+                                                        <tr>
+                                                            <td class="variant_title">
+                                                                @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
+                                                            </td>
+                                                            <td><input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                            <td><input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
+                                                        </tr>
+                                            @endforeach
+                                        </tbody>
                                     @endif
                                 </table>
                             @endif
