@@ -723,7 +723,25 @@
                                                             </td>
                                                             <td colspan="5">
                                                                 <div>
-                                                                    hello
+                                                                    <td>
+                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                    </td>
+                                                                    <td>
+                                                                        <select name="" id="" class="form-control">
+                                                                            <option value="fixed">Fixed</option>
+                                                                            <option value="discount">Discount</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-sm btn-primary">+</button>
+                                                                        <button class="btn btn-sm btn-danger">-</button>
+                                                                    </td>
                                                                 </div>
                                                             </td>
                                                         </tr>
