@@ -742,8 +742,8 @@
                                                                 <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button class="btn btn-sm btn-primary add-price-row-btn">+</button>
-                                                                <button class="btn btn-sm btn-danger remove-price-row-btn">-</button>
+                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn">+</button>
+                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -998,13 +998,6 @@
                 </div>
             </div>
 
-{{--            <div class="content p-0">--}}
-{{--                <div class="row ">--}}
-{{--                    <div class="col-sm-12">--}}
-{{--                       --}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="content" style="margin-bottom: 10px">
                 <div class="row ">
                     <div class="col-sm-12 text-right">

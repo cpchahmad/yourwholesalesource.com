@@ -96,7 +96,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function addTiered(Request $request, $id) {
+    public function addTieredPrice(Request $request, $id) {
         dd(123, $id, $request->all());
     }
 

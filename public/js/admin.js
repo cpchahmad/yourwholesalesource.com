@@ -20,8 +20,8 @@ $(document).ready(function () {
                     <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
                 </div>
                 <div class="col-md-2 btn-group btn-group-sm" role="group">
-                    <button class="btn btn-sm btn-primary add-price-row-btn">+</button>
-                    <button class="btn btn-sm btn-danger remove-price-row-btn">-</button>
+                    <button type="button" class="btn btn-sm btn-primary add-price-row-btn">+</button>
+                    <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
                 </div>
             </div>
         `);
@@ -329,11 +329,11 @@ $(document).ready(function () {
             });
 
         } else {
-            // $.ajax({
-            //     url: $('#notification').data('route'),
-            //     type:'GET',
-            // });
-            //  window.location.reload();
+            $.ajax({
+                url: $('#notification').data('route'),
+                type:'GET',
+            });
+             window.location.reload();
         }
     }
     /*Admin Module - Variant Image Change JS*/
