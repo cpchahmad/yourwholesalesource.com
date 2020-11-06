@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Product Tiered Price Feature
-    $(document).on('click', 'add-price-row-btn', function() {
+    $(document).on('click', '.add-price-row-btn', function() {
         $(this).parent().parent().parent().append(`
               <div class="row mb-3">
                 <div class="col-md-2">
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
     });
 
-    $(document).on('click', 'remove-price-row-btn', function() {
+    $(document).on('click', '.remove-price-row-btn', function() {
         $(this).parent().parent().empty();
     });
 
