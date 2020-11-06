@@ -698,14 +698,14 @@
                                 <table class="table variants-div js-table-sections table-hover table-responsive">
                                     <thead>
                                         <tr>
-                                            <th style="vertical-align: top; width: 20%" >Title</th>
-                                            <th style="vertical-align: top" >Cost</th>
-                                            <th style="vertical-align: top; width: 20%" >SKU</th>
-                                            <th style="vertical-align: top" >Min Qty</th>
-                                            <th style="vertical-align: top" >Max Qty</th>
-                                            <th style="vertical-align: top; width: 20%" >Type</th>
-                                            <th style="vertical-align: top" >Price</th>
-                                            <th class="w-25"></th>
+                                            <th style="vertical-align: top;width: 15%;">Title</th>
+                                            <th style="vertical-align: top;width: 15%;">Cost</th>
+                                            <th style="vertical-align: top;width: 15%;">SKU</th>
+                                            <th style="vertical-align: top;width: 10%;">Min Qty</th>
+                                            <th style="vertical-align: top;width: 10%;">Max Qty</th>
+                                            <th style="vertical-align: top;width: 15%;">Type</th>
+                                            <th style="vertical-align: top;width: 15%;">Price</th>
+                                            <th class="" style="width: 10%;"></th>
                                         </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
@@ -722,23 +722,27 @@
                                                                 <input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}">
                                                             </td>
                                                             <td>
-                                                                <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                            </td>
-                                                            <td>
-                                                                <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                            </td>
-                                                            <td>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="fixed">Fixed</option>
-                                                                    <option value="discount">Discount</option>
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
-                                                            </td>
-                                                            <td>
-                                                                <button class="btn btn-sm btn-primary">Add</button>
-                                                                <button class="btn btn-sm btn-danger">Remove</button>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                    </td>
+                                                                    <td>
+                                                                        <select name="" id="" class="form-control">
+                                                                            <option value="fixed">Fixed</option>
+                                                                            <option value="discount">Discount</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
+                                                                        <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-sm btn-primary">+</button>
+                                                                        <button class="btn btn-sm btn-danger">-</button>
+                                                                    </td>
+                                                                </tr>
                                                             </td>
                                                         </tr>
                                             @endforeach
