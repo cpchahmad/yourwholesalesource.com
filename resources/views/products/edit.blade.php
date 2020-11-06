@@ -711,6 +711,48 @@
                                         @if(count($product->hasVariants) > 0)
                                             <tbody>
                                             @foreach($product->hasVariants as $index => $v)
+                                                @if(count($v->has_tiered_prices) > 0)
+                                                    @foreach($v->has_tiered_prices as $item)
+                                                        <tr>
+                                                            <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
+                                                            <input type="hidden" name="type" value="tiered-pricing">
+
+                                                            <td class="variant_title">
+                                                                @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
+                                                            </td>
+                                                            <td>
+                                                                <input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00">
+                                                            </td>
+                                                            <td>
+                                                                <input disabled type="text" class="form-control"  value="{{$v->sku}}">
+                                                            </td>
+                                                            <td colspan="5">
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-2">
+                                                                        <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input  type="number" class="form-control" name="max_qty{{$v->id}}[]" value="{{ $item->max_qty }}">
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <select name="type{{$v->id}}[]" id="" class="form-control">
+                                                                            @if($item->type == 'fixed')
+                                                                                <option selected value="fixed">Fixed</option>
+                                                                                <option value="discount">Discount</option>
+                                                                            @else
+                                                                                <option value="fixed">Fixed</option>
+                                                                                <option selected value="discount">Discount</option>
+                                                                            @endif
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]" value="{{ $item->price }}"  placeholder="$0.0">
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                                 <tr>
                                                     <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
                                                     <input type="hidden" name="type" value="tiered-pricing">
