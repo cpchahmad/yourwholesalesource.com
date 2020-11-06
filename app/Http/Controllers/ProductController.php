@@ -96,16 +96,16 @@ class ProductController extends Controller
         ]);
     }
 
+    public function addTiered(Request $request, $id) {
+        dd(123, $id, $request->all());
+    }
+
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
             if ($request->has('type')) {
-
-                if($request->input('type') == 'tiered-pricing') {
-                    dd(234);
-                }
 
                 /*Variants Option Delete from Shopify and Database*/
                 if ($request->input('type') == 'variant-option-delete') {

@@ -935,7 +935,7 @@
                                     </div>
                                 @endif
                                 @if($product->variants == 1)
-                                    <form action="{{route('product.update',$product->id)}}" method="post">
+                                    <form action="{{route('product.add.tiered',$product->id)}}" method="post">
                                         @csrf
                                         <table class="table variants-div js-table-sections table-hover table-responsive">
                                             <thead>
@@ -994,6 +994,9 @@
                                                 </tbody>
                                             @endif
                                         </table>
+                                        <div class="block-content text-right">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
                                     </form>
                                 @endif
                             </div>
