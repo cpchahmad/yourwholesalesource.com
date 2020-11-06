@@ -738,7 +738,7 @@
                                                                     <div class="col-md-3">
                                                                         <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
                                                                     </div>
-                                                                    <div class="col-md-2 btn-group-vertical">
+                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                         <button class="btn btn-sm btn-primary">+</button>
                                                                         <button class="btn btn-sm btn-danger">-</button>
                                                                     </div>
@@ -759,11 +759,12 @@
                                                                     <div class="col-md-3">
                                                                         <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
                                                                     </div>
-                                                                    <div class="col-md-2 btn-group-vertical">
+                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                         <button class="btn btn-sm btn-primary">+</button>
                                                                         <button class="btn btn-sm btn-danger">-</button>
                                                                     </div>
                                                                 </div>
+
                                                             </td>
                                                         </tr>
                                             @endforeach
