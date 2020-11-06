@@ -935,60 +935,69 @@
                                     </div>
                                 @endif
                                 @if($product->variants == 1)
-                                    <table class="table variants-div js-table-sections table-hover table-responsive">
-                                        <thead>
-                                        <tr>
-                                            <th style="vertical-align: top;width: 15%;">Title</th>
-                                            <th style="vertical-align: top;width: 15%;">Cost</th>
-                                            <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th style="vertical-align: top;width: 10%;">Min Qty</th>
-                                            <th style="vertical-align: top;width: 10%;">Max Qty</th>
-                                            <th style="vertical-align: top;width: 15%;">Type</th>
-                                            <th style="vertical-align: top;width: 15%;">Price</th>
-                                            <th class="" style="width: 10%;"></th>
-                                        </tr>
-                                        </thead>
-                                        @if(count($product->hasVariants) > 0)
-                                            <tbody>
-                                            @foreach($product->hasVariants as $index => $v)
-                                                <tr>
-                                                    <td class="variant_title">
-                                                        @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00">
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}">
-                                                    </td>
-                                                    <td colspan="5">
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                    <form action="{{route('product.update',$product->id)}}" method="post">
+                                        @csrf
+                                        <table class="table variants-div js-table-sections table-hover table-responsive">
+                                            <thead>
+                                            <tr>
+                                                <th style="vertical-align: top;width: 15%;">Title</th>
+                                                <th style="vertical-align: top;width: 15%;">Cost</th>
+                                                <th style="vertical-align: top;width: 15%;">SKU</th>
+                                                <th style="vertical-align: top;width: 10%;">Min Qty</th>
+                                                <th style="vertical-align: top;width: 10%;">Max Qty</th>
+                                                <th style="vertical-align: top;width: 15%;">Type</th>
+                                                <th style="vertical-align: top;width: 15%;">Price</th>
+                                                <th class="" style="width: 10%;"></th>
+                                            </tr>
+                                            </thead>
+                                                @if(count($product->hasVariants) > 0)
+                                                <tbody>
+                                                @foreach($product->hasVariants as $index => $v)
+                                                    <tr>
+                                                        <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
+                                                        <input type="hidden" name="type" value="tiered-pricing">
+
+                                                        <td class="variant_title">
+                                                            @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
+                                                        </td>
+                                                        <td>
+                                                            <input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00">
+                                                        </td>
+                                                        <td>
+                                                            <input disabled type="text" class="form-control"  value="{{$v->sku}}">
+                                                        </td>
+                                                        <td colspan="5">
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-2">
+                                                                    <input  type="number" class="form-control" name="min_qty[]" value="1" placeholder="Minimum Quantity">
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <input  type="number" class="form-control" name="min_qty[]" value="1" placeholder="Minimum Quantity">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <select name="type[]" id="" class="form-control">
+                                                                        <option value="fixed">Fixed</option>
+                                                                        <option value="discount">Discount</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
+                                                                </div>
+                                                                <div class="col-md-2 btn-group btn-group-sm" role="group">
+                                                                    <button class="btn btn-sm btn-primary add-price-row-btn">+</button>
+                                                                    <button class="btn btn-sm btn-danger remove-price-row-btn">-</button>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="fixed">Fixed</option>
-                                                                    <option value="discount">Discount</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="$0.0">
-                                                            </div>
-                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button class="btn btn-sm btn-primary add-price-row-btn">+</button>
-                                                                <button class="btn btn-sm btn-danger remove-price-row-btn">-</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        @endif
-                                    </table>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            @endif
+                                        </table>
+                                        <div class="block-content text-right">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
                                 @endif
                             </div>
                         </div>

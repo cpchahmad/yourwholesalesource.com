@@ -660,6 +660,10 @@ class ProductController extends Controller
                     }
 
                 }
+
+                if($request->input('type') == 'tiered-pricing') {
+                    dd(234);
+                }
             }
         }
     }
