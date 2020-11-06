@@ -20,12 +20,15 @@ $(document).ready(function () {
                     <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="$0.0">
                 </div>
                 <div class="col-md-2 btn-group btn-group-sm" role="group">
-                    <button class="btn btn-sm btn-primary add-price-row-btn">+</button>
                     <button class="btn btn-sm btn-danger remove-price-row-btn">-</button>
                 </div>
             </div>
         `);
 
+    });
+
+    $('.remove-price-row-btn').click(function () {
+        $(this).parent().parent().empty();
     });
 
 
