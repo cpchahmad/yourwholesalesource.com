@@ -727,10 +727,10 @@
                                                     <td colspan="5">
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="1" placeholder="Minimum Quantity">
+                                                                <input  type="number" class="form-control" name="min_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="mix_qty{{$v->id}}[]" value="1" placeholder="Minimum Quantity">
+                                                                <input  type="number" class="form-control" name="mix_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <select name="type{{$v->id}}[]" id="" class="form-control">
