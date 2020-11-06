@@ -698,9 +698,13 @@
                                 <table class="table variants-div js-table-sections table-hover table-responsive">
                                     <thead>
                                         <tr>
-                                            <th style="vertical-align: top" class="w-25">Title</th>
-                                            <th style="vertical-align: top" class="w-25">Cost</th>
-                                            <th style="vertical-align: top" class="w-25">SKU</th>
+                                            <th style="vertical-align: top" >Title</th>
+                                            <th style="vertical-align: top" >Cost</th>
+                                            <th style="vertical-align: top" >SKU</th>
+                                            <th style="vertical-align: top" >Min Qty</th>
+                                            <th style="vertical-align: top" >Max Qty</th>
+                                            <th style="vertical-align: top" >Type</th>
+                                            <th style="vertical-align: top" >Price</th>
                                             <th class="w-25"></th>
                                         </tr>
                                     </thead>
@@ -718,185 +722,21 @@
                                                                 <input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}">
                                                             </td>
                                                             <td>
-                                                                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_options"> Add Tiered Pricing</button>
+                                                                <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                            </td>
+                                                            <td>
+                                                                <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                            </td>
+                                                            <td>
+                                                                <select name="" id="" class="form-control">
+                                                                    <option value="fixed">Fixed</option>
+                                                                    <option value="discount">Discount</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-danger">Remove</button>
                                                             </td>
                                                         </tr>
-                                                        <div class="modal fade" id="edit_options" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-popout modal-xl" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="block block-themed block-transparent mb-0">
-                                                                        <div class="block-header bg-primary-dark">
-                                                                            <h3 class="block-title">Edit Options</h3>
-                                                                            <div class="block-options">
-                                                                                <button type="button" class="btn-block-option">
-                                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="block-content" style="padding: 20px !important;">
-                                                                            <div class="row">
-                                                                                @if(count($product->option1($product))>0)
-                                                                                    <div class="col-md-12" style="margin-bottom: 10px">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-3">
-                                                                                                <input type="text" class="form-control" value="Option1">
-                                                                                            </div>
-                                                                                            <div class="col-md-9">
-                                                                                                @foreach($product->option1($product) as $a)
-                                                                                                    <span class="badge badge-info">
-                                                                        <span >{{$a}}</span>
-                                                                        <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>
-                                                                    </span>
-                                                                                                @endforeach
-                                                                                                <hr>
-
-                                                                                                <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
-                                                                                                <input type="text" name="price" value="{{$product->price}}" style="display: none">
-                                                                                                <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
-                                                                                                <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
-
-
-                                                                                                <input class="js-tags-options1-update form-control mt-3" type="text"
-                                                                                                       id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
-
-                                                                                                <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
-                                                                                                    @csrf
-                                                                                                    <input type="hidden" name="type" value="old-option-update">
-                                                                                                    <div class="variants_table" style="display: none;">
-                                                                                                        <hr>
-                                                                                                        <h3 class="block-title">
-                                                                                                            Preview
-                                                                                                            <button type="button" class="update-option-1-btn btn btn-primary float-right">Update this option</button>
-                                                                                                        </h3>
-                                                                                                        <br>
-                                                                                                        <div class="form-group">
-                                                                                                            <div class="col-xs-12 push-10">
-                                                                                                                <table class="table table-hover">
-                                                                                                                    <thead>
-                                                                                                                    <tr>
-                                                                                                                        <th style="width: 20%;">Title</th>
-                                                                                                                        <th style="width: 15%;">Price</th>
-                                                                                                                        <th style="width: 17%;">Cost</th>
-                                                                                                                        <th style="width: 10%;">Quantity</th>
-                                                                                                                        <th style="width: 20%;">SKU</th>
-                                                                                                                        <th style="width: 20%;">Barcode</th>
-                                                                                                                    </tr>
-                                                                                                                    </thead>
-                                                                                                                    <tbody class="option-1-table-body">
-
-                                                                                                                    </tbody>
-                                                                                                                </table>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </form>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="row" style="margin-top:10px ">
-                                                                                            @if(count($product->option2($product)) == 0)
-                                                                                                <div class="col-md-12 add-option-button">
-                                                                                                    <a class="btn btn-light add-option-div">Add Other Option</a>
-                                                                                                </div>
-                                                                                                <div class="div2 row col-md-12" style="display: none">
-                                                                                                    <div class="col-md-3">
-                                                                                                        <input type="text" class="form-control" readonly value="Option2">
-                                                                                                    </div>
-                                                                                                    <form class="new-option-add col-md-7" action="{{route('product.update',$product->id)}}" method="post">
-                                                                                                        @csrf
-                                                                                                        <input type="hidden" name="type" value="new-option-add">
-                                                                                                        <div class="">
-                                                                                                            <input type="hidden" name="option" value="option2">
-                                                                                                            <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">
-                                                                                                        </div>
-                                                                                                    </form>
-
-                                                                                                    <div class="col-md-2">
-                                                                                                        <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endif
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @endif
-                                                                                @if(count($product->option2($product))>0)
-                                                                                    <div class="col-md-12" style="margin-bottom: 10px">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-3">
-                                                                                                <input type="text" class="form-control" readonly value="Option2">
-                                                                                            </div>
-                                                                                            <div class="col-md-9">
-
-                                                                                                @foreach($product->option2($product) as $a)
-                                                                                                    <span class="badge badge-info">
-                                                                        <span>{{$a}}</span>
-                                                                        <a><i data-option="option2" class="remove-option fa fa-times" style="color: white"></i></a>
-                                                                    </span>
-                                                                                                @endforeach
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                        <div class="row" style="margin-top:10px ">
-                                                                                            @if(count($product->option3($product)) == 0)
-                                                                                                <div class="col-md-12 add-option-button" style="">
-                                                                                                    <a class="btn btn-light add-option-div">Add Other Option</a>
-                                                                                                </div>
-                                                                                                <div class="div2 row col-md-12" style="display: none">
-                                                                                                    <div class="col-md-3">
-                                                                                                        <input type="text" class="form-control" readonly value="Option3">
-                                                                                                    </div>
-                                                                                                    <form class="new-option-add col-md-7"  action="{{route('product.update',$product->id)}}" method="post">
-                                                                                                        @csrf
-                                                                                                        <input type="hidden" name="type" value="new-option-add">
-                                                                                                        <div class="">
-                                                                                                            <input type="hidden" name="option" value="option3">
-                                                                                                            <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">
-                                                                                                        </div>
-                                                                                                    </form>
-                                                                                                    <div class="col-md-2">
-                                                                                                        <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endif
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @endif
-                                                                                @if(count($product->option3($product))>0)
-                                                                                    <div class="col-md-12">
-                                                                                        <div class="row">
-                                                                                            <div class="col-md-3">
-                                                                                                <input type="text" class="form-control" readonly value="Option3">
-                                                                                            </div>
-                                                                                            <div class="col-md-9">
-                                                                                                @foreach($product->option3($product) as $a)
-                                                                                                    <span class="badge badge-info">
-                                                                        <span>{{$a}}</span>
-                                                                        <a><i data-option="option3" class="remove-option fa fa-times" style="color: white"></i></a>
-                                                                    </span>
-                                                                                                @endforeach
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                @endif
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="deleted-data">
-                                                                            <form id="variant-options-update" action="{{route('product.update',$product->id)}}" method="post">
-                                                                                @csrf
-                                                                                <input type="hidden" name="type" value="variant-option-delete">
-                                                                            </form>
-                                                                        </div>
-
-                                                                        <div class="block-content block-content-full text-right border-top">
-                                                                            <button data-option1="" data-option2="" data-option3="" data-deleted="0" class="variant-options-update-save btn btn-primary">Save</button>
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                                                                                Discard
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                             @endforeach
                                         </tbody>
                                     @endif
