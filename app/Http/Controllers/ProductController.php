@@ -98,6 +98,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd(123);
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
