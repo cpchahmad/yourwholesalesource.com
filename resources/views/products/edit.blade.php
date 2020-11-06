@@ -726,7 +726,7 @@
                                                     </td>
                                                     <td colspan="5">
                                                         @if(count($v->has_tiered_prices) > 0)
-                                                            @foreach($v->has->tiered_prices as $item)
+                                                            @foreach($v->has_tiered_prices as $item)
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">
