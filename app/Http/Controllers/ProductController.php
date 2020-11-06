@@ -99,20 +99,29 @@ class ProductController extends Controller
 
     public function addTieredPrice(Request $request, $id) {
         $variants = $request->variant_id;
+        $product = Product::find($id);
 
         foreach ($variants as $variant) {
-
             for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
                 $item = new TieredPrice();
                 $item->product_variant_id = $variant;
                 $item->product_id = $id;
                 $item->min_qty = $request->input('min_qty'.$variant)[$i];
-                $item->max_qty = $request->input('max_qty'.$variant)[$i];
+                if($request->input('max_qty'.$variant)[$i] == null) {
+                    $item->max_qty = $product->quantity;
+                }
+                else {
+                    $item->max_qty = $request->input('max_qty'.$variant)[$i];
+                }
                 $item->type = $request->input('type'.$variant)[$i];
                 $item->price = $request->input('tiered_price'.$variant)[$i];
                 $item->save();
             }
         }
+
+        return redirect()->back()->with('success', 'Tiered Prices Added Successfully!');
+
+
     }
 
     public function update(Request $request, $id)
