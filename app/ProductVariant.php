@@ -15,4 +15,7 @@ class ProductVariant extends Model
     public function linked_product(){
         return $this->belongsTo('App\Product', 'product_id');
     }
+    public function has_tiered_prices(){
+        return $this->hasMany(TieredPrice::class);
+    }
 }
