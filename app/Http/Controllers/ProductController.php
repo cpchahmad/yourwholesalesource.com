@@ -109,7 +109,7 @@ class ProductController extends Controller
                 $item->min_qty = $request->input('min_qty'.$variant)[$i];
                 $item->max_qty = $request->input('max_qty'.$variant)[$i];
                 $item->type = $request->input('type'.$variant)[$i];
-                $item->price = $request->input('tiered_pricec'.$variant)[$i];
+                $item->price = $request->input('tiered_price'.$variant)[$i];
                 $item->save();
             }
         }
