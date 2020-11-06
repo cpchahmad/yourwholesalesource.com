@@ -722,26 +722,26 @@
                                                                 <input disabled type="text" class="form-control" name="sku" value="{{$v->sku}}">
                                                             </td>
                                                             <td colspan="5">
-                                                                <div>
-                                                                    <td>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                                    </td>
-                                                                    <td>
+                                                                    </div>
+                                                                    <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                                    </td>
-                                                                    <td>
+                                                                    </div>
+                                                                    <div class="col-md-3">
                                                                         <select name="" id="" class="form-control">
                                                                             <option value="fixed">Fixed</option>
                                                                             <option value="discount">Discount</option>
                                                                         </select>
-                                                                    </td>
-                                                                    <td>
+                                                                    </div>
+                                                                    <div class="col-md-3">
                                                                         <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
-                                                                    </td>
-                                                                    <td>
+                                                                    </div>
+                                                                    <div class="col-md-2">
                                                                         <button class="btn btn-sm btn-primary">+</button>
                                                                         <button class="btn btn-sm btn-danger">-</button>
-                                                                    </td>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
