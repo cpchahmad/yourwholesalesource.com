@@ -12,6 +12,7 @@ use App\ProductVariant;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
+use App\TieredPrice;
 use App\User;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
@@ -97,7 +98,20 @@ class ProductController extends Controller
     }
 
     public function addTieredPrice(Request $request, $id) {
-        dd(123, $id, $request->all());
+        $variants = $request->variant_id;
+
+        foreach ($variants as $variant) {
+            for($i=0; $i< count($request->min_qty.$variant); $i++) {
+                $item = new TieredPrice();
+                $item->product_variant_id = $variant;
+                $item->product_id = $id;
+                $item->min_qty = $request->min_qty.$variant[$i];
+                $item->max_qty = $request->max_qty.$variant[$i];
+                $item->type = $request->type.$variant;
+                $item->price = $request->price.$variant;
+                $item->save();
+            }
+        }
     }
 
     public function update(Request $request, $id)
