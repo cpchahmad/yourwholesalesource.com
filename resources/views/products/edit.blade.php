@@ -705,7 +705,7 @@
                                         </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
-                                        <tbody class="js-table-sections-header">
+                                        <tbody>
                                             @foreach($product->hasVariants as $index => $v)
                                                         <tr>
                                                             <td class="variant_title">
@@ -720,74 +720,71 @@
                                                             <td>
                                                                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#add_pricing_modal{{$v->id}}"> Add Tiered Pricing</button>
                                                             </td>
-
-                                                            <div class="modal fade" id="add_pricing_modal{{$v->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-popout" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="block block-themed block-transparent mb-0">
-                                                                            <div class="block-header bg-primary-dark">
-                                                                                <h3 class="block-title">
-                                                                                    @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif Tiered Pricing
-                                                                                </h3>
-                                                                                <div class="block-options">
-                                                                                    <button type="button" class="btn-block-option">
-                                                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                                                    </button>
-                                                                                </div>
+                                                        </tr>
+                                                        <div class="modal fade" id="add_pricing_modal{{$v->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-popout" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="block block-themed block-transparent mb-0">
+                                                                        <div class="block-header bg-primary-dark">
+                                                                            <h3 class="block-title">
+                                                                                @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif Tiered Pricing
+                                                                            </h3>
+                                                                            <div class="block-options">
+                                                                                <button type="button" class="btn-block-option">
+                                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                                </button>
                                                                             </div>
-                                                                            <form action="{{route('product.update',$product->id)}}" method="post">
-                                                                                @csrf
-                                                                                <div class="block-content" style="padding: 20px !important;">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-12" style="margin-bottom: 10px">
-                                                                                            <table class="table variants-div js-table-sections table-hover table-responsive">
-                                                                                                <thead>
-                                                                                                <tr>
-                                                                                                    <th style="vertical-align: top" class="w-25">Min. Quantity</th>
-                                                                                                    <th style="vertical-align: top" class="w-25">Max. Quantity</th>
-                                                                                                    <th style="vertical-align: top" class="w-25">Type</th>
-                                                                                                    <th class="w-25"></th>
-                                                                                                </tr>
-                                                                                                </thead>
-                                                                                                <tbody>
-                                                                                                <tr>
-                                                                                                    <td>
-                                                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <select name="" id="">
-                                                                                                            <option value="fixed">Fixed</option>
-                                                                                                            <option value="discount">Discount</option>
-                                                                                                        </select>
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <button class="btn btn-sm btn-danger">Remove</button>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </div>
+                                                                        </div>
+                                                                        <form action="{{route('product.update',$product->id)}}" method="post">
+                                                                            @csrf
+                                                                            <div class="block-content" style="padding: 20px !important;">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12" style="margin-bottom: 10px">
+                                                                                        <table class="table variants-div js-table-sections table-hover table-responsive">
+                                                                                            <thead>
+                                                                                            <tr>
+                                                                                                <th style="vertical-align: top" class="w-25">Min. Quantity</th>
+                                                                                                <th style="vertical-align: top" class="w-25">Max. Quantity</th>
+                                                                                                <th style="vertical-align: top" class="w-25">Type</th>
+                                                                                                <th class="w-25"></th>
+                                                                                            </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <select name="" id="">
+                                                                                                        <option value="fixed">Fixed</option>
+                                                                                                        <option value="discount">Discount</option>
+                                                                                                    </select>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <button class="btn btn-sm btn-danger">Remove</button>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            </tbody>
+                                                                                        </table>
                                                                                     </div>
                                                                                 </div>
-                                                                            </form>
-                                                                            <div class="block-content block-content-full text-right border-top">
-                                                                                <button type="submit" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                                                                                    Discard
-                                                                                </button>
-                                                                                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                                                                                    Discard
-                                                                                </button>
                                                                             </div>
+                                                                        </form>
+                                                                        <div class="block-content block-content-full text-right border-top">
+                                                                            <button type="submit" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                                                                                Discard
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                                                                                Discard
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </tr>
-
-
+                                                        </div>
                                             @endforeach
                                         </tbody>
                                     @endif
