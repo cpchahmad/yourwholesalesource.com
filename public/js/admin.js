@@ -333,7 +333,7 @@ $(document).ready(function () {
                 url: $('#notification').data('route'),
                 type:'GET',
             });
-             window.location.reload();
+            // window.location.reload();
         }
     }
     /*Admin Module - Variant Image Change JS*/
