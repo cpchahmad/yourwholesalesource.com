@@ -102,6 +102,11 @@ class ProductController extends Controller
         $shop =$this->helper->getShop();
         if ($product != null) {
             if ($request->has('type')) {
+
+                if($request->input('type') == 'tiered-pricing') {
+                    dd(234);
+                }
+
                 /*Variants Option Delete from Shopify and Database*/
                 if ($request->input('type') == 'variant-option-delete') {
                     $deleted_variants = null;
@@ -661,9 +666,6 @@ class ProductController extends Controller
 
                 }
 
-                if($request->input('type') == 'tiered-pricing') {
-                    dd(234);
-                }
             }
         }
     }
