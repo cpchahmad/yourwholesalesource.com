@@ -738,7 +738,28 @@
                                                                     <div class="col-md-3">
                                                                         <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
                                                                     </div>
+                                                                    <div class="col-md-2 btn-group-vertical">
+                                                                        <button class="btn btn-sm btn-primary">+</button>
+                                                                        <button class="btn btn-sm btn-danger">-</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
                                                                     <div class="col-md-2">
+                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <input  type="number" class="form-control" name="min_qty" value="1" placeholder="Minimum Quantity">
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <select name="" id="" class="form-control">
+                                                                            <option value="fixed">Fixed</option>
+                                                                            <option value="discount">Discount</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input  type="number" step="any" class="form-control" name="tiered_price"  placeholder="0.0$">
+                                                                    </div>
+                                                                    <div class="col-md-2 btn-group-vertical">
                                                                         <button class="btn btn-sm btn-primary">+</button>
                                                                         <button class="btn btn-sm btn-danger">-</button>
                                                                     </div>
