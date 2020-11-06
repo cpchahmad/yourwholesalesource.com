@@ -17,8 +17,8 @@ class CreateTieredPricesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned()->nullable();
             $table->bigInteger('product_variant_id')->unsigned()->nullable();
-            $table->integer('min_aty')->unsigned()->nullable();
-            $table->integer('max_aty')->unsigned()->nullable();
+            $table->integer('min_qty')->unsigned()->nullable();
+            $table->integer('max_qty')->unsigned()->nullable();
             $table->string('type')->nullable();
             $table->string('price')->nullable();
             $table->timestamps();
