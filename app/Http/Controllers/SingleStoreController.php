@@ -897,6 +897,11 @@ class SingleStoreController extends Controller
     }
 
 
+    public function storeAuthenticate($shop) {
+        dd(123, $shop);
+    }
+
+
 
 
 }

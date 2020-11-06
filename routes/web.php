@@ -185,6 +185,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/choose/platform','RolePermissionController@selection')->name('system.selection');
 
     /*Store Connection*/
+    Route::get('/shop/login', 'SingleStoreController@storeAuthenticate');
     Route::get('/connect/store','RolePermissionController@store_connect')->name('system.store.connect');
     /*Non-Shopify and Shopify User Routes */
 
