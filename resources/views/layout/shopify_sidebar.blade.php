@@ -191,7 +191,8 @@
                             @csrf
                             @foreach(auth()->user()->has_shops as $shop)
                                 <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between" >
-                                    <input type="text" name="shop">{{$shop->shopify_domain}}</input>
+                                    <span>{{$shop->shopify_domain}}</span>
+                                    <input type="hidden" name="shop" value="{{$shop->shopify_domain}}">
                                 </button>
                             @endforeach
                         </form>
