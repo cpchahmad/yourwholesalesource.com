@@ -9,7 +9,7 @@ $(document).ready(function () {
                     <input  type="number" class="form-control" name="min_qty${id}[]">
                 </div>
                 <div class="col-md-2">
-                    <input  type="number" class="form-control" name="mix_qty${id}[]">
+                    <input  type="number" class="form-control" name="max_qty${id}[]">
                 </div>
                 <div class="col-md-3">
                     <select name="type${id}[]" id="" class="form-control">

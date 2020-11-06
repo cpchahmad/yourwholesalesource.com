@@ -730,7 +730,7 @@
                                                                 <input  type="number" class="form-control" name="min_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="mix_qty{{$v->id}}[]">
+                                                                <input  type="number" class="form-control" name="max_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <select name="type{{$v->id}}[]" id="" class="form-control">
