@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
+    /*Letting the non-shopify-user switch to store mode*/
     $('.shop-log-btn').click(function() {
         var shop = $(this).find('.shop-domain-name').html();
         $('.shop-domain-input').val(shop);
-        console.log($('.shop-domain-input').val());
         $('.shop-login-form').submit();
     });
 
