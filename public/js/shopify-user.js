@@ -1,8 +1,10 @@
 $(document).ready(function () {
 
     $('.shop-log-btn').click(function() {
-        console.log(234);
-        console.log($(this).find('.shop-domain-name').html());
+        var shop = $(this).find('.shop-domain-name').html();
+        $('.shop-domain-input').val(shop);
+        console.log($('.shop-domain-input').val());
+        $('.shop-login-form').submit();
     });
 
     /*Order Bulk Pay*/
