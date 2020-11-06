@@ -187,11 +187,14 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-left p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown2">
                     <div class="p-2">
-                        @foreach(auth()->user()->has_shops as $shop)
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{url('/shop/login?shop='.$shop->shopify_domain)}}">
-                                <span>{{explode('.',$shop->shopify_domain)[0]}}</span>
-                            </a>
-                        @endforeach
+                        <form method="POST" action="{{ route('authenticate') }}">
+                            @csrf
+                            @foreach(auth()->user()->has_shops as $shop)
+                                <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between" >
+                                    <input type="text" name="shop">{{$shop->shopify_domain}}</input>
+                                </button>
+                            @endforeach
+                        </form>
                     </div>
                 </div>
             </div>
