@@ -254,7 +254,7 @@
                                                         @php
                                                            $price = null;
                                                            $qty = (int) $item->quantity;
-                                                           if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty))
+                                                           if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
                                                                echo $var_price->min_qty;
                                                                echo $var_price->max_qty;
                                                                echo $qty;
