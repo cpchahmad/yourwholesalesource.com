@@ -35,6 +35,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.remove-price-row-from-db-btn', function() {
         var id = $(this).data('item');
+        var row = $(this).parent().parent();
 
         $.ajax({
             url: `/products/${id}/remove/tiered/price`,
@@ -42,8 +43,8 @@ $(document).ready(function () {
             success: function(res) {
                 var response = res.data;
                 if(response == 'success') {
-                    console.log($(this));
-                    $(this).parent().parent().empty();
+                    console.log(row);
+                    row.empty();
                 }
             }
         });
