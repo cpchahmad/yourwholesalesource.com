@@ -245,8 +245,8 @@
                                              $variant_sku = $item->linked_variant->sku;
                                              $real_variant = \App\ProductVariant::where('sku', $variant_sku)->first();
                                             @endphp
-                                            @if(count($item->real_variant->has_tiered_prices) > 0)
-                                                yes
+                                            @if(count($real_variant) > 0)
+                                                yes {{ $real_variant->id }}
                                             @else
                                                 no
                                             @endif
