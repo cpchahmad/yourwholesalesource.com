@@ -170,6 +170,10 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                                $total_discount = 0;
+                            @endphp
+
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
                                     <tr>
@@ -247,7 +251,6 @@
                                              if($variant) {
                                                  $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
                                              }
-                                             $total_discount = 0;
                                             @endphp
                                             @if($real_variant != null)
                                                 @if(count($real_variant->has_tiered_prices) > 0)
