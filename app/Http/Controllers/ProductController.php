@@ -107,7 +107,7 @@ class ProductController extends Controller
             }
 
 
-            foreach($request->input('min_qty'.$variant) as $i => $variant) {
+            foreach($request->input('min_qty'.$variant) as $i => $row) {
 
                 dump($i);
 
