@@ -166,6 +166,8 @@ class ProductController extends Controller
                 else {
                     $discount = (double) $request->input('tiered_price')[$i] / 100;
                     $item->price = $product->price - $discount;
+
+                    dd($discount, $item->price);
                 }
                 $item->save();
             }
