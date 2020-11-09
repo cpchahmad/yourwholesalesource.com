@@ -254,7 +254,7 @@
                                                         $var_price = $real_variant->has_tiered_prices()->first();
                                                         $price = null;
                                                         if($var_price->type == 'fixed') {
-                                                            $price = $item->price;
+                                                            $price = $real_variant->price;
                                                         }
                                                         else if($var_price->type == 'discount') {
                                                             $discount = (double) $var_price->price / 100;
