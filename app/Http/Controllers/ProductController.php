@@ -106,6 +106,7 @@ class ProductController extends Controller
                 TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
             }
 
+            dd($request->input('min_qty'.$variant));
             for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
 
                 if($request->input('min_qty'.$variant)[$i] != null) {
