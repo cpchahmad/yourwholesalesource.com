@@ -634,7 +634,7 @@
                                             <th style="vertical-align: top;width: 17%;">Min Qty</th>
                                             <th style="vertical-align: top;width: 17%;">Max Qty</th>
                                             <th style="vertical-align: top;width: 15%;">Type</th>
-                                            <th style="vertical-align: top;width: 15%;">Price</th>
+                                            <th style="vertical-align: top;width: 15%;">$/Discount</th>
                                             <th class="" style="width: 10%;"></th>
                                         </tr>
                                         </thead>
@@ -724,7 +724,7 @@
                                             <th style="vertical-align: top;width: 17%;">Min Qty</th>
                                             <th style="vertical-align: top;width: 17%;">Max Qty</th>
                                             <th style="vertical-align: top;width: 15%;">Type</th>
-                                            <th style="vertical-align: top;width: 15%;">Price</th>
+                                            <th style="vertical-align: top;width: 15%;">$/Discount</th>
                                             <th class="" style="width: 10%;"></th>
                                         </tr>
                                         </thead>

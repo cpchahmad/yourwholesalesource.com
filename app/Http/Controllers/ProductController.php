@@ -120,7 +120,13 @@ class ProductController extends Controller
                         $item->max_qty = $request->input('max_qty'.$variant)[$i];
                     }
                     $item->type = $request->input('type'.$variant)[$i];
-                    $item->price = $request->input('tiered_price'.$variant)[$i];
+                    if($request->input('type'.$variant)[$i] == 'fixed') {
+                        $item->price = $request->input('tiered_price'.$variant)[$i];
+                    }
+                    else {
+                        $discount = (double) $request->input('tiered_price'.$variant)[$i] / 100;
+                        $item->price = $product->price - $discount;
+                    }
                     $item->save();
                 }
 
@@ -153,7 +159,13 @@ class ProductController extends Controller
                     $item->max_qty = $request->input('max_qty')[$i];
                 }
                 $item->type = $request->input('type')[$i];
-                $item->price = $request->input('tiered_price')[$i];
+                if($request->input('type')[$i] == 'fixed') {
+                    $item->price = $request->input('tiered_price')[$i];
+                }
+                else {
+                    $discount = (double) $request->input('tiered_price')[$i] / 100;
+                    $item->price = $product->price - $discount;
+                }
                 $item->save();
             }
 
