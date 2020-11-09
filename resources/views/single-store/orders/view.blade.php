@@ -257,8 +257,8 @@
                                                             $price = $real_variant->price;
                                                         }
                                                         else if($var_price->type == 'discount') {
-                                                            $discount = (double) $var_price->price / 100;
-                                                            $price = $item->price * $discount;
+                                                            $discount = (double) $var_price->price;
+                                                            $price = $item->price - ($item->price * $discount / 100);
                                                         }
                                                     @endphp
                                                         {{ number_format($price, 2) }} USD
