@@ -254,6 +254,7 @@
                                                         $var_price = $real_variant->has_tiered_prices()->first();
                                                         $price = null;
                                                         if($item->quantity >= $var_price->min_qty && $item->qunatity <= $var_price->max_qty) {
+                                                            echo "yes";
                                                             if($var_price->type == 'fixed') {
                                                                 $price = $real_variant->price;
                                                                 $price = number_format($price, 2);
