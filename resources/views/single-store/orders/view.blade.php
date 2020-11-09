@@ -253,12 +253,12 @@
                                                     @php
                                                         $item = $real_variant->has_tiered_prices()->first()
                                                     @endphp
-                                                   {{ $item->price }}
+                                                   {{ number_format($item->price, 2) }}
                                                 @else
-                                                    Not
+                                                    No Discount
                                                 @endif
                                             @else
-                                                no
+                                                No Discount
                                             @endif
 
                                         </td>
