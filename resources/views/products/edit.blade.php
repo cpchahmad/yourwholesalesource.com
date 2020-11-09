@@ -656,13 +656,13 @@
                                                             @foreach($product->has_tiered_prices as $item)
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty{{$product->id}}[]" value="{{ $item->min_qty }}">
+                                                                        <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
                                                                     </div>
                                                                     <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="max_qty{{$product->id}}[]" value="{{ $item->max_qty }}">
+                                                                        <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">
                                                                     </div>
                                                                     <div class="col-md-3">
-                                                                        <select name="type{{$product->id}}[]" id="" class="form-control">
+                                                                        <select name="type[]" id="" class="form-control">
                                                                             @if($item->type == "fixed")
                                                                                 <option selected value="fixed">Fixed</option>
                                                                                 <option value="discount">Discount</option>
@@ -673,7 +673,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-md-3">
-                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$product->id}}[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
+                                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
                                                                     </div>
                                                                     <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                         <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
@@ -683,19 +683,19 @@
                                                         @endif
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty{{$product->id}}[]">
+                                                                <input  type="number" class="form-control" name="min_qty[]">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty{{$product->id}}[]">
+                                                                <input  type="number" class="form-control" name="max_qty[]">
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select name="type{{$product->id}}[]" id="" class="form-control">
+                                                                <select name="type[]" id="" class="form-control">
                                                                     <option value="fixed">Fixed</option>
                                                                     <option value="discount">Discount</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price{{$product->id}}[]"  placeholder="$0.0">
+                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                 <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $product->id }}">+</button>

@@ -140,21 +140,21 @@ class ProductController extends Controller
                 TieredPrice::where('product_id', $id)->delete();
             }
 
-            for($i=0; $i< count($request->input('min_qty'.$product)); $i++) {
+            for($i=0; $i< count($request->input('min_qty')); $i++) {
 
-                if($request->input('min_qty'.$product)[$i] != null) {
+                if($request->input('min_qty')[$i] != null) {
                     $item = new TieredPrice();
                     $item->product_variant_id = null;
                     $item->product_id = $id;
-                    $item->min_qty = $request->input('min_qty'.$product)[$i];
-                    if($request->input('max_qty'.$product)[$i] == null) {
+                    $item->min_qty = $request->input('min_qty')[$i];
+                    if($request->input('max_qty')[$i] == null) {
                         $item->max_qty = $product->quantity;
                     }
                     else {
-                        $item->max_qty = $request->input('max_qty'.$product)[$i];
+                        $item->max_qty = $request->input('max_qty')[$i];
                     }
-                    $item->type = $request->input('type'.$product)[$i];
-                    $item->price = $request->input('tiered_price'.$product)[$i];
+                    $item->type = $request->input('type')[$i];
+                    $item->price = $request->input('tiered_price')[$i];
                     $item->save();
                 }
 
