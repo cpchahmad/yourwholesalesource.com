@@ -274,7 +274,9 @@
                                                            }
                                                         @endphp
                                                         {{ ($price) }}
-
+                                                        @php
+                                                            echo $total_discount;
+                                                        @endphp
                                                     @endforeach
                                                 @else
                                                     No Discount
