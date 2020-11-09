@@ -249,7 +249,11 @@
                                              }
                                             @endphp
                                             @if($real_variant != null)
-                                                yes {{ $real_variant->id }}
+                                                @if(count($real_variant->has_tiered_prices) > 0)
+                                                   {{  $real_variant->has_tiered_prices->price }}
+                                                @else
+                                                    Not
+                                                @endif
                                             @else
                                                 no
                                             @endif
