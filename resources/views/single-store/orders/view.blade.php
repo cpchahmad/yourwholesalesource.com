@@ -256,7 +256,7 @@
                                                         if($item->quantity >= $var_price->min_qty && $item->qunatity <= $var_price->max_qty) {
                                                             echo $item->quantity;
                                                             if($var_price->type == 'fixed') {
-                                                                $price = $real_variant->price;
+                                                                $price = $var_price->price;
                                                                 $price = number_format($price, 2);
                                                             }
                                                             else if($var_price->type == 'discount') {
