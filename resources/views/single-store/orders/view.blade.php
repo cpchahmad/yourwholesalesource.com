@@ -259,13 +259,13 @@
                                                                if($var_price->type == 'fixed') {
                                                                    $price = $var_price->price;
                                                                    $price = number_format($price, 2);
-                                                                   $total_discount += $price;
+                                                                   $total_discount = $total_discount + $price;
                                                                }
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
                                                                    $price = $item->price - ($item->price * $discount / 100);
                                                                    $price = number_format($price, 2);
-                                                                   $total_discount += $price;
+                                                                   $total_discount = $total_discount + $price;
                                                                }
                                                            }
                                                            else {
@@ -273,6 +273,9 @@
                                                            }
                                                         @endphp
                                                         {{ ($price) }}
+                                                        @php
+                                                            echo $total_discount;
+                                                        @endphp
                                                     @endforeach
                                                 @else
                                                     No Discount
