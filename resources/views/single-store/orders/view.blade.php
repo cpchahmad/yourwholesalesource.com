@@ -365,7 +365,7 @@
                                     Subtotal ({{count($order->line_items)}} items)
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
+                                    {{number_format($order->cost_to_pay - $order->shipping_price - $total_discount,2)}} USD
                                 </td>
                             </tr>
                             <tr>
