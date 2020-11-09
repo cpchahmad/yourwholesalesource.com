@@ -122,6 +122,7 @@ class ProductController extends Controller
                     $item->type = $request->input('type'.$variant)[$i];
                     if($request->input('type'.$variant)[$i] == 'fixed') {
                         $item->price = $request->input('tiered_price'.$variant)[$i];
+                        dd($request->input('tiered_price'.$variant)[$i]);
                     }
                     else {
                         $variant = ProductVariant::find($variant);
