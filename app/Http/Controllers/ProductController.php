@@ -132,6 +132,40 @@ class ProductController extends Controller
 
     }
 
+    public function addTieredPriceForProductWithoutVariant(Request $request, $id) {
+        dd($request->all());
+        $product = Product::find($id);
+
+            if(TieredPrice::where('product_id', $id)->exists()) {
+                TieredPrice::where('product_id', $id)->delete();
+            }
+
+            for($i=0; $i< count($request->input('min_qty'.$product)); $i++) {
+
+                if($request->input('min_qty'.$product)[$i] != null) {
+                    $item = new TieredPrice();
+                    $item->product_variant_id = null;
+                    $item->product_id = $id;
+                    $item->min_qty = $request->input('min_qty'.$product)[$i];
+                    if($request->input('max_qty'.$product)[$i] == null) {
+                        $item->max_qty = $product->quantity;
+                    }
+                    else {
+                        $item->max_qty = $request->input('max_qty'.$product)[$i];
+                    }
+                    $item->type = $request->input('type'.$product)[$i];
+                    $item->price = $request->input('tiered_price'.$product)[$i];
+                    $item->save();
+                }
+
+            }
+
+
+        return redirect()->back()->with('success', 'Tiered Prices Added Successfully!');
+
+
+    }
+
     public function removeTieredPrice($id) {
         $item = TieredPrice::find($id);
         $item->delete();
