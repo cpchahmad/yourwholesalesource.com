@@ -163,7 +163,7 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
-                                <th>Tiered Discount</th>
+                                <th>Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
 
