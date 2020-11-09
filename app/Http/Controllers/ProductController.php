@@ -126,7 +126,6 @@ class ProductController extends Controller
                         $item->price = $request->input('tiered_price'.$variant)[$i];
                     }
                     else if($request->input('type'.$variant)[$i] == 'discount') {
-                        dd('yes');
                         $price = $request->input('tiered_price'.$variant)[$i];
 
                         $v = ProductVariant::find($variant);
@@ -170,7 +169,7 @@ class ProductController extends Controller
                 }
                 else {
                     $discount = (double) $request->input('tiered_price')[$i] / 100;
-                    $item->price = $product->cost - $discount;
+                    $item->price = $product->price - $discount;
                 }
                 $item->save();
             }
