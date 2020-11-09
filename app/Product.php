@@ -41,5 +41,8 @@ class Product extends Model
     public function has_imported(){
         return $this->belongsToMany('App\Shop','retailer_product_shop','product_id','shop_id');
     }
+    public function has_tiered_prices(){
+        return $this->hasMany(TieredPrice::class);
+    }
 
 }
