@@ -163,6 +163,7 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
+                                <th>Tiered Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
 
@@ -238,6 +239,14 @@
                                         </td>
 
                                         <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
+
+                                        <td>
+                                            @if(count($item->linked_real_variant->has_tiered_prices) > 0)
+                                                yes
+                                            @else
+                                                no
+                                        </td>
+
                                         <td>{{$item->price}} X {{$item->quantity}}  USD </td>
                                         <td>
                                             @if($item->fulfillment_status == null)

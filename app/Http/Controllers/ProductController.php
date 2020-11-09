@@ -128,7 +128,7 @@ class ProductController extends Controller
 
                         $variant = ProductVariant::find($variant);
                         $discount = (double) $price / 100;
-                        $item->price = $variant->price - $discount;
+                        $item->price = $variant->cost - $discount;
                     }
                     $item->save();
                 }
