@@ -247,13 +247,14 @@
                                              if($variant) {
                                                  $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
                                              }
+                                             $total_discount = 0;
                                             @endphp
                                             @if($real_variant != null)
                                                 @if(count($real_variant->has_tiered_prices) > 0)
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
                                                            $price = null;
-                                                           $total_discount = 0;
+
                                                            $qty = (int) $item->quantity;
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
                                                                if($var_price->type == 'fixed') {
@@ -273,9 +274,7 @@
                                                            }
                                                         @endphp
                                                         {{ ($price) }}
-                                                        @php
-                                                            echo $total_discount;
-                                                        @endphp
+
                                                     @endforeach
                                                 @else
                                                     No Discount
