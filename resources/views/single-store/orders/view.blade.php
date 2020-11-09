@@ -250,26 +250,27 @@
                                             @endphp
                                             @if($real_variant != null)
                                                 @if(count($real_variant->has_tiered_prices) > 0)
-                                                    @php
-                                                        $var_price = $real_variant->has_tiered_prices()->first();
-                                                        $price = null;
-                                                        if($item->quantity >= $var_price->min_qty && $item->qunatity <= $var_price->max_qty) {
-                                                            echo $item->quantity;
-                                                            if($var_price->type == 'fixed') {
-                                                                $price = $var_price->price;
-                                                                $price = number_format($price, 2);
-                                                            }
-                                                            else if($var_price->type == 'discount') {
-                                                                $discount = (double) $var_price->price;
-                                                                $price = $item->price - ($item->price * $discount / 100);
-                                                                $price = number_format($price, 2);
-                                                            }
-                                                        }
-                                                        else {
-                                                            $price = 'No Discount';
-                                                        }
-                                                    @endphp
+                                                    @foreach($real_variant->has_tiered_prices as $var_price)
+                                                        @php
+                                                           $price = null;
+                                                           if($item->quantity >= $var_price->min_qty && $item->qunatity <= $var_price->max_qty) {
+                                                               echo $item->quantity;
+                                                               if($var_price->type == 'fixed') {
+                                                                   $price = $var_price->price;
+                                                                   $price = number_format($price, 2);
+                                                               }
+                                                               else if($var_price->type == 'discount') {
+                                                                   $discount = (double) $var_price->price;
+                                                                   $price = $item->price - ($item->price * $discount / 100);
+                                                                   $price = number_format($price, 2);
+                                                               }
+                                                           }
+                                                           else {
+                                                               $price = 'No Discount';
+                                                           }
+                                                        @endphp
                                                         {{ ($price) }}
+                                                    @endforeach
                                                 @else
                                                     No Discount
                                                 @endif
