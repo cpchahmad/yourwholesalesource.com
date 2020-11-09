@@ -623,7 +623,7 @@
                         </div>
                         <div class="block-content">
                             @if(count($product->hasVariants) == 0)
-                                <form action="{{route('single.product.add.tiered.price,$product->id)}}" method="post">
+                                <form action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">
                                     @csrf
                                     <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
                                         <thead>
