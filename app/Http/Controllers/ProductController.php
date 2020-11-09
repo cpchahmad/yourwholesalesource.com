@@ -109,7 +109,7 @@ class ProductController extends Controller
 
             foreach($request->input('min_qty'.$variant) as $i => $variant) {
 
-                dump($request->input('min_qty'.$variant)[$i]);
+                dump($i);
 
                 if($request->input('min_qty'.$variant)[$i] != null) {
                     $item = new TieredPrice();
