@@ -258,7 +258,7 @@
                                                         }
                                                         else if($var_price->type == 'discount') {
                                                             $discount = (double) $var_price->price / 100;
-                                                            $price = $item->price - $discount;
+                                                            $price = $item->price * $discount;
                                                         }
                                                     @endphp
                                                         {{ $price }}
