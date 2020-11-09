@@ -245,7 +245,7 @@
                                              $variant = $item->linked_variant->first();
                                              $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
                                             @endphp
-                                            @if(count($real_variant) > 0)
+                                            @if($real_variant != null)
                                                 yes {{ $real_variant->id }}
                                             @else
                                                 no
