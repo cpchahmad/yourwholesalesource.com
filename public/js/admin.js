@@ -44,7 +44,7 @@ $(document).ready(function () {
                 var response = res.data;
                 if(response == 'success') {
                     console.log(row);
-                    row.empty();
+                    row.hide();
                 }
             }
         });
