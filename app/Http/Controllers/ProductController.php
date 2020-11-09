@@ -121,10 +121,11 @@ class ProductController extends Controller
                         $item->max_qty = $request->input('max_qty'.$variant)[$i];
                     }
                     $item->type = $request->input('type'.$variant)[$i];
+
                     if($request->input('type'.$variant)[$i] == 'fixed') {
                         $item->price = $request->input('tiered_price'.$variant)[$i];
                     }
-                    else {
+                    else if($request->input('type'.$variant)[$i] == 'discount') {
                         $price = $request->input('tiered_price'.$variant)[$i];
 
                         $variant = ProductVariant::find($variant);
