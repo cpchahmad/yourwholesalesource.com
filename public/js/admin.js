@@ -29,6 +29,34 @@ $(document).ready(function () {
 
     });
 
+    $(document).on('click', '.add-single-product-price-row-btn', function() {
+        var id = $(this).attr('id');
+        $(this).parent().parent().parent().append(`
+              <div class="row mb-3">
+                <div class="col-md-2">
+                    <input  type="number" class="form-control" name="min_qty[]">
+                </div>
+                <div class="col-md-2">
+                    <input  type="number" class="form-control" name="max_qty[]">
+                </div>
+                <div class="col-md-3">
+                    <select name="type[]" id="" class="form-control">
+                        <option value="fixed">Fixed</option>
+                        <option value="discount">Discount</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
+                </div>
+                <div class="col-md-2 btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn">+</button>
+                    <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
+                </div>
+            </div>
+        `);
+
+    });
+
     $(document).on('click', '.remove-price-row-btn', function() {
         $(this).parent().parent().empty();
     });

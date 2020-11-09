@@ -698,7 +698,7 @@
                                                                 <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $product->id }}">+</button>
+                                                                <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>
                                                                 <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
                                                             </div>
                                                         </div>
