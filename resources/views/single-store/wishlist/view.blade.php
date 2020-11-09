@@ -132,7 +132,7 @@
                                     @if($thread->source == 'manager')
                                         <h5 class="block-title">{{$thread->has_manager->name}} (Manager) <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                     @else
-{{--                                        <h5 class="block-title">{{ $wishlist->has_user->name }} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>--}}
+                                        <h5 class="block-title">{{ $wishlist->has_user->name }} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
                                     @endif
                                 </div>
                                 <div class="block-content">
