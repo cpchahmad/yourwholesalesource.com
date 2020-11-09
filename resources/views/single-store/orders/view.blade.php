@@ -245,6 +245,8 @@
                                                 yes
                                             @else
                                                 no
+                                            @endif
+
                                         </td>
 
                                         <td>{{$item->price}} X {{$item->quantity}}  USD </td>
