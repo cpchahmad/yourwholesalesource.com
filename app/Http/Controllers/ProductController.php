@@ -102,11 +102,11 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         foreach ($variants as $variant) {
-            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
+            if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
+                TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
+            }
 
-                if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
-                     TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
-                }
+            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
 
                 $item = new TieredPrice();
                 $item->product_variant_id = $variant;
