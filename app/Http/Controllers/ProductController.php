@@ -106,8 +106,8 @@ class ProductController extends Controller
                 TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
             }
 
-            dump($request->input('min_qty'.$variant));
-            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
+
+            foreach($request->input('min_qty'.$variant) as $i => $variant) {
 
                 if($request->input('min_qty'.$variant)[$i] != null) {
                     $item = new TieredPrice();
