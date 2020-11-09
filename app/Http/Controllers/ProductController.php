@@ -98,6 +98,8 @@ class ProductController extends Controller
     }
 
     public function addTieredPrice(Request $request, $id) {
+
+        dd($request->all());
         $variants = $request->variant_id;
         $product = Product::find($id);
 
@@ -127,6 +129,8 @@ class ProductController extends Controller
                         $variant = ProductVariant::find($variant);
                         $discount = (double) $request->input('tiered_price'.$variant)[$i] / 100;
                         $item->price = $variant->price - $discount;
+
+                        dd($discount, $item->price);
                     }
                     $item->save();
                 }
@@ -140,7 +144,6 @@ class ProductController extends Controller
     }
 
     public function addTieredPriceForProductWithoutVariant(Request $request, $id) {
-        dd($request->all());
         $product = Product::find($id);
 
         if(TieredPrice::where('product_id', $id)->exists()) {
@@ -167,8 +170,6 @@ class ProductController extends Controller
                 else {
                     $discount = (double) $request->input('tiered_price')[$i] / 100;
                     $item->price = $product->price - $discount;
-
-                    dd($discount, $item->price);
                 }
                 $item->save();
             }
