@@ -253,19 +253,19 @@
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
                                                            $price = null;
+                                                           $total_discount = 0;
                                                            $qty = (int) $item->quantity;
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
-                                                               echo $var_price->min_qty;
-                                                               echo $var_price->max_qty;
-                                                               echo $qty;
                                                                if($var_price->type == 'fixed') {
                                                                    $price = $var_price->price;
                                                                    $price = number_format($price, 2);
+                                                                   $total_discount += $price;
                                                                }
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
                                                                    $price = $item->price - ($item->price * $discount / 100);
                                                                    $price = number_format($price, 2);
+                                                                   $total_discount += $price;
                                                                }
                                                            }
                                                            else {
@@ -363,6 +363,9 @@
                             <tr>
                                 <td>
                                     Subtotal ({{count($order->line_items)}} items)
+                                </td>
+                                <td>
+                                    Total Discount {{$total_discount}}
                                 </td>
                                 <td align="right">
                                     {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
