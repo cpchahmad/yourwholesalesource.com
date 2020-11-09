@@ -721,11 +721,13 @@
                                             <th style="vertical-align: top;width: 10%;">Title</th>
                                             <th style="vertical-align: top;width: 12%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th style="vertical-align: top;width: 17%;">Min Qty</th>
-                                            <th style="vertical-align: top;width: 17%;">Max Qty</th>
-                                            <th style="vertical-align: top;width: 15%;">Type</th>
-                                            <th style="vertical-align: top;width: 15%;">$/Discount</th>
-                                            <th class="" style="width: 10%;"></th>
+                                            <th colspan="5">
+                                                <span style="vertical-align: top;">Min Qty</span>
+                                                <span style="vertical-align: top;">Max Qty</span>
+                                                <span style="vertical-align: top;">Type</span>
+                                                <span style="vertical-align: top;">$/Discount</span>
+                                                <span class="" style=""></span>
+                                            </th>
                                         </tr>
                                         </thead>
                                         @if(count($product->hasVariants) > 0)
