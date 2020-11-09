@@ -253,7 +253,7 @@
                                                     @php
                                                         $item = $real_variant->has_tiered_prices()->first()
                                                     @endphp
-                                                   {{  $item->price }}
+                                                   {{ $item->price }}
                                                 @else
                                                     Not
                                                 @endif
