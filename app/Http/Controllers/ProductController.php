@@ -108,6 +108,8 @@ class ProductController extends Controller
 
             for($i=0; $i< count($variants); $i++) {
 
+                dd($request->input('min_qty'.$variant));
+
                 if($request->input('min_qty'.$variant)[$i] != null) {
                     $item = new TieredPrice();
                     $item->product_variant_id = $variant;
