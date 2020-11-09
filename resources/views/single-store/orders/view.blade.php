@@ -250,7 +250,10 @@
                                             @endphp
                                             @if($real_variant != null)
                                                 @if(count($real_variant->has_tiered_prices) > 0)
-                                                   {{  $real_variant->has_tiered_prices->price }}
+                                                    @php
+                                                        $item = $real_variant->has_tiered_prices()->first()
+                                                    @endphp
+                                                   {{  $item->price }}
                                                 @else
                                                     Not
                                                 @endif
