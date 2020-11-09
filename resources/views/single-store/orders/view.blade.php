@@ -241,7 +241,11 @@
                                         <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
 
                                         <td>
-                                            @if(count($item->linked_real_variant->has_tiered_prices) > 0)
+                                            @php
+                                             $variant_sku = $item->linked_variant->sku;
+                                             $real_variant = \App\ProductVariant::where('sku', $variant_sku)->first();
+                                            @endphp
+                                            @if(count($item->real_variant->has_tiered_prices) > 0)
                                                 yes
                                             @else
                                                 no
