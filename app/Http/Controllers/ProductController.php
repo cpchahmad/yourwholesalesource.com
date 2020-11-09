@@ -133,8 +133,8 @@ class ProductController extends Controller
     }
 
     public function removeTieredPrice($id) {
-        $item = TieredPrice::find($id);
-        $item->delete();
+//        $item = TieredPrice::find($id);
+//        $item->delete();
 
         return response()->json(['data'=> 'success']);
     }

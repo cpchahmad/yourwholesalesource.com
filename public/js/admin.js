@@ -42,6 +42,7 @@ $(document).ready(function () {
             success: function(res) {
                 var response = res.data;
                 if(response == 'success') {
+                    console.log($(this).parent().parent());
                     $(this).parent().parent().empty();
                 }
             }
