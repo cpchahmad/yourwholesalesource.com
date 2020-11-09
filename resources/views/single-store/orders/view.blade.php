@@ -243,7 +243,10 @@
                                         <td>
                                             @php
                                              $variant = $item->linked_variant;
-                                             $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
+                                             $real_variant = null;
+                                             if($variant) {
+                                                 $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
+                                             }
                                             @endphp
                                             @if($real_variant != null)
                                                 yes {{ $real_variant->id }}
