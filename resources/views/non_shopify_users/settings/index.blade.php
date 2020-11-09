@@ -23,7 +23,7 @@
                                             <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
                                             <td class="text-right" style="vertical-align: middle">
                                                 <button type="button" class="btn btn-sm btn-success settings-shop-log-btn" >
-                                                    <input typ="hidden" class="shop-domain-name" value="{{$shop->shopify_domain}}">
+                                                    <input type="hidden" class="shop-domain-name" value="{{$shop->shopify_domain}}">
                                                     <input type="hidden" name="shop" value="" class="shop-domain-input">
                                                     Switch View
                                                 </button>
