@@ -140,6 +140,7 @@ class ProductController extends Controller
     }
 
     public function addTieredPriceForProductWithoutVariant(Request $request, $id) {
+        dd($request->all());
         $product = Product::find($id);
 
         if(TieredPrice::where('product_id', $id)->exists()) {
