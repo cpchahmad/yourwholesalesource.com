@@ -251,9 +251,17 @@
                                             @if($real_variant != null)
                                                 @if(count($real_variant->has_tiered_prices) > 0)
                                                     @php
-                                                        $item = $real_variant->has_tiered_prices()->first()
+                                                        $var_price = $real_variant->has_tiered_prices()->first();
+                                                        $price = null;
+                                                        if($var_price->type == 'fixed') {
+                                                            $price = $item->price;
+                                                        }
+                                                        else if($var_price->type == 'discount') {
+                                                            $discount = (double) $var_price->price / 100;
+                                                            $price = $item->cost - $discount;
+                                                        }
                                                     @endphp
-                                                   {{ number_format($item->price, 2) }}
+                                                        {{ $price }}
                                                 @else
                                                     No Discount
                                                 @endif
