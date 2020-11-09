@@ -261,7 +261,7 @@
                                                             $price = $item->price * $discount;
                                                         }
                                                     @endphp
-                                                        {{ $price }} USD
+                                                        {{ number_format($price, 2) }} USD
                                                 @else
                                                     No Discount
                                                 @endif
