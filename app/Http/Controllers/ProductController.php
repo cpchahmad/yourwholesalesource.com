@@ -124,13 +124,13 @@ class ProductController extends Controller
                         $item->price = $request->input('tiered_price'.$variant)[$i];
                     }
                     else {
-                        dd($request->input('tiered_price'.$variant)[$i]);
+                        $price = $request->input('tiered_price'.$variant)[$i];
 
                         $variant = ProductVariant::find($variant);
-                        $discount = $request->input('tiered_price'.$variant)[$i] / 100;
+                        $discount = (double) $price / 100;
                         $item->price = $variant->price - $discount;
 
-                        dd($request->input('tiered_price'.$variant)[$i] , $discount, $item->price);
+                        dd($price , $discount, $item->price);
                     }
                     $item->save();
                 }
