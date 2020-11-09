@@ -632,10 +632,10 @@
                                             <th style="vertical-align: top;width: 12%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
                                             <th colspan="5">
-                                                <span class="mr-4" style="vertical-align: top;">Min Qty</span>
+                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Max Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mr-4" style="vertical-align: top;">$/Discount</span>
+                                                <span class="mx-4" style="vertical-align: top;">$/Discount</span>
                                                 <span class="mr-4" style=""></span>
                                             </th>
                                         </tr>
@@ -724,10 +724,10 @@
                                             <th style="vertical-align: top;width: 12%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
                                             <th colspan="5">
-                                                <span class="mr-4" style="vertical-align: top;">Min Qty</span>
+                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Max Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mr-4" style="vertical-align: top;">$/Discount</span>
+                                                <span class="mx-4" style="vertical-align: top;">$/Discount</span>
                                                 <span class="mr-4" style=""></span>
                                             </th>
                                         </tr>
