@@ -253,10 +253,11 @@
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
                                                            $price = null;
-                                                           if($item->quantity >= $var_price->min_qty && $item->qunatity <= $var_price->max_qty) {
+                                                           $qty = (int) $item->quantity;
+                                                           if($qty >= $var_price->min_qty && $qty <= $var_price->max_qty) {
                                                                echo $var_price->min_qty;
                                                                echo $var_price->max_qty;
-                                                               echo $item->quantity;
+                                                               echo $qty;
                                                                if($var_price->type == 'fixed') {
                                                                    $price = $var_price->price;
                                                                    $price = number_format($price, 2);
