@@ -7,6 +7,12 @@ $(document).ready(function () {
         $('.shop-login-form').submit();
     });
 
+    $('.settings-shop-log-btn').click(function() {
+        var shop = $(this).find('.shop-domain-name').val();
+        $('.shop-domain-input').val(shop);
+        $('.shop-login-form').submit();
+    });
+
     /*Order Bulk Pay*/
     /*BULK ORDER PAY*/
     $('.check-order-all-user').change(function () {
