@@ -33,6 +33,21 @@ $(document).ready(function () {
         $(this).parent().parent().empty();
     });
 
+    $(document).on('click', '.remove-price-row-from-db-btn', function() {
+        var id = $(this).data('item');
+
+        $.ajax({
+            url: `/products/${id}/remove/tiered/price`,
+            type: 'GET',
+            success: function(res) {
+                var response = res.data;
+                if(response == 'success') {
+                    $(this).parent().parent().empty();
+                }
+            }
+        });
+    });
+
 
     // Product Tiered Price Feature End
     var radioState;
