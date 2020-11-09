@@ -782,7 +782,7 @@
                                                                 <input  type="number" class="form-control" name="max_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select name="type{{$v->id}}[]" id="" class="form-control type-selector">
+                                                                <select name="type{{$v->id}}[]" id="" class="form-control">
                                                                     <option value="fixed">Fixed</option>
                                                                     <option value="discount">Discount</option>
                                                                 </select>

@@ -78,15 +78,7 @@ $(document).ready(function () {
         });
     });
 
-    $('.type-selector').on('change', function (e) {
-        var optionSelected = $("option:selected", this);
-        var valueSelected = this.value;
 
-        console.log(optionSelected);
-        console.log(valueSelected);
-        $(this).parent().next().find('.tired_price').val(34);
-        console.log($(this).parent().next().find('.tired_price').val());
-    });
 
 
     // Product Tiered Price Feature End
