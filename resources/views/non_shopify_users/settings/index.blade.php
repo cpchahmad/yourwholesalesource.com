@@ -16,11 +16,18 @@
                             <div class="block-content ">
                                 <table class="js-table-sections table table-hover">
                                     <tbody>
-                                    @foreach($associated_user->has_shops as $index => $shop)
+                                    <form method="POST" action="{{ route('authenticate') }}" class="shop-login-form">
+                                        @csrf
+                                        @foreach($associated_user->has_shops as $index => $shop)
                                         <tr>
                                             <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
                                             <td class="text-right" style="vertical-align: middle">
-                                                <a href="{{url('/shop/install?shop='.$shop->shopify_domain)}}" class="btn btn-sm btn-success">Switch View</a>
+                                                <button type="button" class="btn btn-sm btn-success shop-log-btn" >
+                                                    <span class="shop-domain-name" style="opacity: 0">{{$shop->shopify_domain}}</span>
+                                                    <input type="hidden" name="shop" value="" class="shop-domain-input">
+                                                    Switch View
+                                                </button>
+{{--                                                <a href="{{url('/shop/install?shop='.$shop->shopify_domain)}}" class="">Switch View</a>--}}
 
                                                 <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
                                                     title="Remove Store" ><i class="fa fa-trash"></i></a>
@@ -28,6 +35,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    </form>
                                     </tbody>
                                 </table>
                             </div>
