@@ -617,201 +617,201 @@
                         </div>
                     </div>
                     {{--Tiered Pricing Section--}}
-                    <div class="block">
-                        <div class="block-header d-inline-flex" style="width: 100%" >
-                            <h3 class="block-title">Tiered Pricing</h3>
-                        </div>
-                        <div class="block-content">
-                            @if(count($product->hasVariants) == 0)
-                                <form action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">
-                                    @csrf
-                                    <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
-                                        <thead>
-                                        <tr>
-                                            <th style="vertical-align: top;width: 10%;">Title</th>
-                                            <th style="vertical-align: top;width: 12%;">Cost</th>
-                                            <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th colspan="5">
-                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>
-                                                <span class="mr-4" style="vertical-align: top;">Max Qty</span>
-                                                <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>
-                                                <span class="mr-4" style=""></span>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <input type="hidden" name="type" value="tiered-pricing">
+{{--                    <div class="block">--}}
+{{--                        <div class="block-header d-inline-flex" style="width: 100%" >--}}
+{{--                            <h3 class="block-title">Tiered Pricing</h3>--}}
+{{--                        </div>--}}
+{{--                        <div class="block-content">--}}
+{{--                            @if(count($product->hasVariants) == 0)--}}
+{{--                                <form action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr>--}}
+{{--                                            <th style="vertical-align: top;width: 10%;">Title</th>--}}
+{{--                                            <th style="vertical-align: top;width: 12%;">Cost</th>--}}
+{{--                                            <th style="vertical-align: top;width: 15%;">SKU</th>--}}
+{{--                                            <th colspan="5">--}}
+{{--                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>--}}
+{{--                                                <span class="mr-4" style="vertical-align: top;">Max Qty</span>--}}
+{{--                                                <span class="mr-4" style="vertical-align: top;">Type</span>--}}
+{{--                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>--}}
+{{--                                                <span class="mr-4" style=""></span>--}}
+{{--                                            </th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                            <tbody>--}}
+{{--                                                <tr>--}}
+{{--                                                    <input type="hidden" name="type" value="tiered-pricing">--}}
 
-                                                    <td class="variant_title">
-                                                        {{ $product->title }}
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control" name="cost" value="{{$product->cost}}" placeholder="$0.00">
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control"  value="{{$product->sku}}">
-                                                    </td>
-                                                    <td colspan="5">
-                                                        @if(count($product->has_tiered_prices) > 0)
-                                                            @foreach($product->has_tiered_prices as $item)
-                                                                <div class="row mb-3">
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <select name="type[]" id="" class="form-control">
-                                                                            @if($item->type == "fixed")
-                                                                                <option selected value="fixed">Fixed</option>
-                                                                                <option value="discount">Discount</option>
-                                                                            @else
-                                                                                <option value="fixed">Fixed</option>
-                                                                                <option selected value="discount">Discount</option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
-                                                                    </div>
-                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty[]">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty[]">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <select name="type[]" id="" class="form-control">
-                                                                    <option value="fixed">Fixed</option>
-                                                                    <option value="discount">Discount</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">
-                                                            </div>
-                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>
-                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+{{--                                                    <td class="variant_title">--}}
+{{--                                                        {{ $product->title }}--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <input disabled type="text" class="form-control" name="cost" value="{{$product->cost}}" placeholder="$0.00">--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <input disabled type="text" class="form-control"  value="{{$product->sku}}">--}}
+{{--                                                    </td>--}}
+{{--                                                    <td colspan="5">--}}
+{{--                                                        @if(count($product->has_tiered_prices) > 0)--}}
+{{--                                                            @foreach($product->has_tiered_prices as $item)--}}
+{{--                                                                <div class="row mb-3">--}}
+{{--                                                                    <div class="col-md-2">--}}
+{{--                                                                        <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-2">--}}
+{{--                                                                        <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-3">--}}
+{{--                                                                        <select name="type[]" id="" class="form-control">--}}
+{{--                                                                            @if($item->type == "fixed")--}}
+{{--                                                                                <option selected value="fixed">Fixed</option>--}}
+{{--                                                                                <option value="discount">Discount</option>--}}
+{{--                                                                            @else--}}
+{{--                                                                                <option value="fixed">Fixed</option>--}}
+{{--                                                                                <option selected value="discount">Discount</option>--}}
+{{--                                                                            @endif--}}
+{{--                                                                        </select>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-3">--}}
+{{--                                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">--}}
+{{--                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        @endif--}}
+{{--                                                        <div class="row mb-3">--}}
+{{--                                                            <div class="col-md-2">--}}
+{{--                                                                <input  type="number" class="form-control" name="min_qty[]">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-2">--}}
+{{--                                                                <input  type="number" class="form-control" name="max_qty[]">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-3">--}}
+{{--                                                                <select name="type[]" id="" class="form-control">--}}
+{{--                                                                    <option value="fixed">Fixed</option>--}}
+{{--                                                                    <option value="discount">Discount</option>--}}
+{{--                                                                </select>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-3">--}}
+{{--                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="$0.0">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">--}}
+{{--                                                                <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>--}}
+{{--                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </td>--}}
+{{--                                                </tr>--}}
+{{--                                            </tbody>--}}
 
-                                    </table>
+{{--                                    </table>--}}
 {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
 {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
 {{--                                    </div>--}}
-                                </form>
-                            @endif
-                            @if($product->variants == 1)
-                                <form action="{{route('product.add.tiered.price',$product->id)}}" method="post">
-                                    @csrf
-                                    <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
-                                        <thead>
-                                        <tr>
-                                            <th style="vertical-align: top;width: 10%;">Title</th>
-                                            <th style="vertical-align: top;width: 12%;">Cost</th>
-                                            <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th colspan="5">
-                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>
-                                                <span class="mr-4" style="vertical-align: top;">Max Qty</span>
-                                                <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>
-                                                <span class="mr-4" style=""></span>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        @if(count($product->hasVariants) > 0)
-                                            <tbody>
-                                            @foreach($product->hasVariants as $index => $v)
-                                                <tr>
-                                                    <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
-                                                    <input type="hidden" name="type" value="tiered-pricing">
+{{--                                </form>--}}
+{{--                            @endif--}}
+{{--                            @if($product->variants == 1)--}}
+{{--                                <form action="{{route('product.add.tiered.price',$product->id)}}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr>--}}
+{{--                                            <th style="vertical-align: top;width: 10%;">Title</th>--}}
+{{--                                            <th style="vertical-align: top;width: 12%;">Cost</th>--}}
+{{--                                            <th style="vertical-align: top;width: 15%;">SKU</th>--}}
+{{--                                            <th colspan="5">--}}
+{{--                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>--}}
+{{--                                                <span class="mr-4" style="vertical-align: top;">Max Qty</span>--}}
+{{--                                                <span class="mr-4" style="vertical-align: top;">Type</span>--}}
+{{--                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>--}}
+{{--                                                <span class="mr-4" style=""></span>--}}
+{{--                                            </th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        @if(count($product->hasVariants) > 0)--}}
+{{--                                            <tbody>--}}
+{{--                                            @foreach($product->hasVariants as $index => $v)--}}
+{{--                                                <tr>--}}
+{{--                                                    <input type="hidden" name="variant_id[]" value="{{ $v->id }}">--}}
+{{--                                                    <input type="hidden" name="type" value="tiered-pricing">--}}
 
-                                                    <td class="variant_title">
-                                                        @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00">
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control"  value="{{$v->sku}}">
-                                                    </td>
-                                                    <td colspan="5">
-                                                        @if(count($v->has_tiered_prices) > 0)
-                                                            @foreach($v->has_tiered_prices as $item)
-                                                                <div class="row mb-3">
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="max_qty{{$v->id}}[]" value="{{ $item->max_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <select name="type{{$v->id}}[]" id="" class="form-control">
-                                                                            @if($item->type == "fixed")
-                                                                                <option selected value="fixed">Fixed</option>
-                                                                                <option value="discount">Discount</option>
-                                                                            @else
-                                                                                <option value="fixed">Fixed</option>
-                                                                                <option selected value="discount">Discount</option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
-                                                                    </div>
-                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty{{$v->id}}[]">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty{{$v->id}}[]">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <select name="type{{$v->id}}[]" id="" class="form-control">
-                                                                    <option value="fixed">Fixed</option>
-                                                                    <option value="discount">Discount</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control tired_price" name="tiered_price{{$v->id}}[]"  placeholder="$0.0">
-                                                            </div>
-                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $v->id }}">+</button>
-                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        @endif
-                                    </table>
+{{--                                                    <td class="variant_title">--}}
+{{--                                                        @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00">--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        <input disabled type="text" class="form-control"  value="{{$v->sku}}">--}}
+{{--                                                    </td>--}}
+{{--                                                    <td colspan="5">--}}
+{{--                                                        @if(count($v->has_tiered_prices) > 0)--}}
+{{--                                                            @foreach($v->has_tiered_prices as $item)--}}
+{{--                                                                <div class="row mb-3">--}}
+{{--                                                                    <div class="col-md-2">--}}
+{{--                                                                        <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-2">--}}
+{{--                                                                        <input  type="number" class="form-control" name="max_qty{{$v->id}}[]" value="{{ $item->max_qty }}">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-3">--}}
+{{--                                                                        <select name="type{{$v->id}}[]" id="" class="form-control">--}}
+{{--                                                                            @if($item->type == "fixed")--}}
+{{--                                                                                <option selected value="fixed">Fixed</option>--}}
+{{--                                                                                <option value="discount">Discount</option>--}}
+{{--                                                                            @else--}}
+{{--                                                                                <option value="fixed">Fixed</option>--}}
+{{--                                                                                <option selected value="discount">Discount</option>--}}
+{{--                                                                            @endif--}}
+{{--                                                                        </select>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-3">--}}
+{{--                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">--}}
+{{--                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        @endif--}}
+{{--                                                        <div class="row mb-3">--}}
+{{--                                                            <div class="col-md-2">--}}
+{{--                                                                <input  type="number" class="form-control" name="min_qty{{$v->id}}[]">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-2">--}}
+{{--                                                                <input  type="number" class="form-control" name="max_qty{{$v->id}}[]">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-3">--}}
+{{--                                                                <select name="type{{$v->id}}[]" id="" class="form-control">--}}
+{{--                                                                    <option value="fixed">Fixed</option>--}}
+{{--                                                                    <option value="discount">Discount</option>--}}
+{{--                                                                </select>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-3">--}}
+{{--                                                                <input  type="number" step="any" class="form-control tired_price" name="tiered_price{{$v->id}}[]"  placeholder="$0.0">--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">--}}
+{{--                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $v->id }}">+</button>--}}
+{{--                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </td>--}}
+{{--                                                </tr>--}}
+{{--                                            @endforeach--}}
+{{--                                            </tbody>--}}
+{{--                                        @endif--}}
+{{--                                    </table>--}}
 {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
 {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
 {{--                                    </div>--}}
-                                </form>
-                            @endif
-                        </div>
-                    </div>
+{{--                                </form>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     {{--Tiered Pricing Section End--}}
                 </div>
                 <div class="col-sm-4">
