@@ -253,15 +253,22 @@
                                                     @php
                                                         $var_price = $real_variant->has_tiered_prices()->first();
                                                         $price = null;
-                                                        if($var_price->type == 'fixed') {
-                                                            $price = $real_variant->price;
+                                                        if($item->quantity >= $var_price->min_qty && $item->qunatity <= $var_price->max_qty) {
+                                                            if($var_price->type == 'fixed') {
+                                                                $price = $real_variant->price;
+                                                                $price = number_format($price, 2);
+                                                            }
+                                                            else if($var_price->type == 'discount') {
+                                                                $discount = (double) $var_price->price;
+                                                                $price = $item->price - ($item->price * $discount / 100);
+                                                                $price = number_format($price, 2);
+                                                            }
                                                         }
-                                                        else if($var_price->type == 'discount') {
-                                                            $discount = (double) $var_price->price;
-                                                            $price = $item->price - ($item->price * $discount / 100);
+                                                        else {
+                                                            $price = 'No Discount';
                                                         }
                                                     @endphp
-                                                        {{ number_format($price, 2) }} USD
+                                                        {{ ($price) }}
                                                 @else
                                                     No Discount
                                                 @endif
