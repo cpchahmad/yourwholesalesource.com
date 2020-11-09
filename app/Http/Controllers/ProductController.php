@@ -133,33 +133,31 @@ class ProductController extends Controller
     }
 
     public function addTieredPriceForProductWithoutVariant(Request $request, $id) {
-        dd($request->all());
         $product = Product::find($id);
 
-            if(TieredPrice::where('product_id', $id)->exists()) {
-                TieredPrice::where('product_id', $id)->delete();
-            }
+        if(TieredPrice::where('product_id', $id)->exists()) {
+            TieredPrice::where('product_id', $id)->delete();
+        }
 
-            for($i=0; $i< count($request->input('min_qty')); $i++) {
+        for($i=0; $i< count($request->input('min_qty')); $i++) {
 
-                if($request->input('min_qty')[$i] != null) {
-                    $item = new TieredPrice();
-                    $item->product_variant_id = null;
-                    $item->product_id = $id;
-                    $item->min_qty = $request->input('min_qty')[$i];
-                    if($request->input('max_qty')[$i] == null) {
-                        $item->max_qty = $product->quantity;
-                    }
-                    else {
-                        $item->max_qty = $request->input('max_qty')[$i];
-                    }
-                    $item->type = $request->input('type')[$i];
-                    $item->price = $request->input('tiered_price')[$i];
-                    $item->save();
+            if($request->input('min_qty')[$i] != null) {
+                $item = new TieredPrice();
+                $item->product_variant_id = null;
+                $item->product_id = $id;
+                $item->min_qty = $request->input('min_qty')[$i];
+                if($request->input('max_qty')[$i] == null) {
+                    $item->max_qty = $product->quantity;
                 }
-
+                else {
+                    $item->max_qty = $request->input('max_qty')[$i];
+                }
+                $item->type = $request->input('type')[$i];
+                $item->price = $request->input('tiered_price')[$i];
+                $item->save();
             }
 
+        }
 
         return redirect()->back()->with('success', 'Tiered Prices Added Successfully!');
 
