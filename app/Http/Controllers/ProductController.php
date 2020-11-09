@@ -107,34 +107,34 @@ class ProductController extends Controller
             }
 
             dump($request->input('min_qty'.$variant));
-//            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
-//
-//                if($request->input('min_qty'.$variant)[$i] != null) {
-//                    $item = new TieredPrice();
-//                    $item->product_variant_id = $variant;
-//                    $item->product_id = $id;
-//                    $item->min_qty = $request->input('min_qty'.$variant)[$i];
-//                    if($request->input('max_qty'.$variant)[$i] == null) {
-//                        $item->max_qty = $product->quantity;
-//                    }
-//                    else {
-//                        $item->max_qty = $request->input('max_qty'.$variant)[$i];
-//                    }
-//                    $item->type = $request->input('type'.$variant)[$i];
-//                    if($request->input('type'.$variant)[$i] == 'fixed') {
-//                        $item->price = $request->input('tiered_price'.$variant)[$i];
-//                    }
-//                    else {
-//                        $price = $request->input('tiered_price'.$variant)[$i];
-//
-//                        $variant = ProductVariant::find($variant);
-//                        $discount = (double) $price / 100;
-//                        $item->price = $variant->cost - $discount;
-//                    }
-//                    $item->save();
-//                }
-//
-//            }
+            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
+
+                if($request->input('min_qty'.$variant)[$i] != null) {
+                    $item = new TieredPrice();
+                    $item->product_variant_id = $variant;
+                    $item->product_id = $id;
+                    $item->min_qty = $request->input('min_qty'.$variant)[$i];
+                    if($request->input('max_qty'.$variant)[$i] == null) {
+                        $item->max_qty = $product->quantity;
+                    }
+                    else {
+                        $item->max_qty = $request->input('max_qty'.$variant)[$i];
+                    }
+                    $item->type = $request->input('type'.$variant)[$i];
+                    if($request->input('type'.$variant)[$i] == 'fixed') {
+                        $item->price = $request->input('tiered_price'.$variant)[$i];
+                    }
+                    else {
+                        $price = $request->input('tiered_price'.$variant)[$i];
+
+                        $variant = ProductVariant::find($variant);
+                        $discount = (double) $price / 100;
+                        $item->price = $variant->cost - $discount;
+                    }
+                    $item->save();
+                }
+
+            }
         }
 
         return redirect()->back()->with('success', 'Tiered Prices Added Successfully!');
