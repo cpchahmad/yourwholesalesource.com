@@ -746,7 +746,7 @@
                                                                         </select>
                                                                     </div>
                                                                     <div class="col-md-3">
-                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]"  value="{{ $item->min_qty }}" placeholder="$0.0">
+                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
                                                                     </div>
                                                                     <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                         <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
