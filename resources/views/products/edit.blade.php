@@ -635,7 +635,7 @@
                                                 <span class="mr-3" style="vertical-align: top;">Min Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Max Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mx-4" style="vertical-align: top;">$/Discount</span>
+                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>
                                                 <span class="mr-4" style=""></span>
                                             </th>
                                         </tr>
@@ -727,7 +727,7 @@
                                                 <span class="mr-3" style="vertical-align: top;">Min Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Max Qty</span>
                                                 <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mx-4" style="vertical-align: top;">$/Discount</span>
+                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>
                                                 <span class="mr-4" style=""></span>
                                             </th>
                                         </tr>
