@@ -98,6 +98,7 @@ class ProductController extends Controller
     }
 
     public function addTieredPrice(Request $request, $id) {
+        dd($request->all());
         $variants = $request->variant_id;
         $product = Product::find($id);
 
