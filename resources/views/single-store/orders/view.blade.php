@@ -286,7 +286,7 @@
                                                                $price = '';
                                                            }
                                                         @endphp
-                                                        {{ ($price) }}
+                                                        {{ $shop->id }} {{ ($price) }}
                                                     @endforeach
                                                 @else
                                                     <span></span>

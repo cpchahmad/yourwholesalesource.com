@@ -37,7 +37,6 @@ class DefaultSettingsController extends Controller
         $platforms = WarnedPlatform::all();
         $admin_settings = AdminSetting::all()->first();
         $shops = \OhMyBrew\ShopifyApp\Models\Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
-        $shop = $this->helper->getLocalShop();
 
 
         $users = User::role('non-shopify-users')
@@ -51,7 +50,6 @@ class DefaultSettingsController extends Controller
             'settings' =>$admin_settings,
             'shops' => $shops,
             'non_shopify_users' => $users,
-            'shop' => $shop,
         ]);
     }
 
