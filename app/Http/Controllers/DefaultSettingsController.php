@@ -604,9 +604,10 @@ class DefaultSettingsController extends Controller
         else{
            return redirect()->back()->with('error','Manager Not Found!');
         }
+    }
 
-
-
+    public function save_tiered_pricing_preferences(Request $request) {
+        dd($request->all());
     }
 
 }
