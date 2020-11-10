@@ -165,7 +165,7 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
-                                <th>Discount</th>
+                                <th>Discount {{ $user->id }}</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
 
