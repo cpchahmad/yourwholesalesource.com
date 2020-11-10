@@ -165,7 +165,7 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
-                                <th>Discount {{ $user->id }}</th>
+                                <th>Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
 
@@ -283,16 +283,16 @@
                                                                 }
                                                             }
                                                             else {
-                                                                $price = 'adsf';
+                                                                $price = '';
                                                             }
                                                         @endphp
                                                         {{ ($price) }}
                                                     @endforeach
                                                 @else
-                                                    <span>Ero</span>
+                                                    <span></span>
                                                 @endif
                                             @else
-                                                <span>Eroror</span>
+                                                <span></span>
                                             @endif
 
                                         </td>
