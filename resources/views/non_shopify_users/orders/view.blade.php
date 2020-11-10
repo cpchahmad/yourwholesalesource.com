@@ -280,12 +280,14 @@
                                                                     $price = $var_price->price;
                                                                     $price = number_format($price, 2);
                                                                     $total_discount = $total_discount + $price;
+                                                                    $price = $price . " USD";
                                                                 }
                                                                 else if($var_price->type == 'discount') {
                                                                     $discount = (double) $var_price->price;
                                                                     $price = $item->price - ($item->price * $discount / 100);
                                                                     $price = number_format($price, 2);
                                                                     $total_discount = $total_discount + $price;
+                                                                    $price = $price . " USD";
                                                                 }
                                                             }
                                                             else {
