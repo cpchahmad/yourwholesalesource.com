@@ -28,11 +28,19 @@ class DefaultSettingsController extends Controller
         $info = DefaultInfo::get()->first();
         $platforms = WarnedPlatform::all();
         $admin_settings = AdminSetting::all()->first();
+        $shops = \OhMyBrew\ShopifyApp\Models\Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
+
+        $users = User::role('non-shopify-users')
+            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+            ->orderBy('created_at','DESC')
+            ->get();
 
         return view('setttings.default.index')->with([
             'info' => $info,
             'platforms' =>$platforms,
-            'settings' =>$admin_settings
+            'settings' =>$admin_settings,
+            'shops' => $shops,
+            'non_shopify_users' => $users,
         ]);
     }
 
