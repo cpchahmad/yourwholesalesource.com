@@ -287,7 +287,7 @@
                                                            else {
                                                                $price_check = false;
                                                            }
-                                                           if(! $price_check) { $price = 'No Discount'; }
+                                                           if(! $price_check) { $price = ''; }
                                                         @endphp
                                                          {{ ($price) }}
                                                     @endforeach
