@@ -227,7 +227,7 @@
                     <div class="block-header">
                         <h3 class="block-title">Preferences</h3>
                     </div>
-                    <form action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="" method="post">
                         @csrf
                         <input type="hidden" name="type" value="shop-preferences">
                         <div class="block-content">
