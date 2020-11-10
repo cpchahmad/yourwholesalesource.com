@@ -283,16 +283,16 @@
                                                                 }
                                                             }
                                                             else {
-                                                                $price = '';
+                                                                $price = 'adsf';
                                                             }
                                                         @endphp
                                                         {{ ($price) }}
                                                     @endforeach
                                                 @else
-                                                    <span></span>
+                                                    <span>Ero</span>
                                                 @endif
                                             @else
-                                                <span></span>
+                                                <span>Eroror</span>
                                             @endif
 
                                         </td>
