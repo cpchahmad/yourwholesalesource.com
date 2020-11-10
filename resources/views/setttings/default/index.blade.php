@@ -237,7 +237,7 @@
                                     <label class="custom-control-label " for="prefer-global">Global</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="2"  @if(\App\TieredPricingPrefrences::first()->global == 2) checked="" @endif>
+                                    <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if(\App\TieredPricingPrefrences::first()->global == 0) checked="" @endif>
                                     <label class="custom-control-label" for="prefer-store">Selected Stores / Users</label>
                                 </div>
                             </div>
