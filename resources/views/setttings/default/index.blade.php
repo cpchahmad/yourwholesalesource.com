@@ -248,7 +248,14 @@
                                         <option></option>
 
                                         @foreach($shops as $shop)
-                                            <option value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
+                                            <option
+                                                @php
+                                                    $stores = \App\TieredPricingPrefrences::first()->stores_id;
+                                                    $store_array= json_decode($stores);
+                                                    if(in_array($shop->id, $store_array))
+                                                        echo "selected";
+                                                @endphp
+                                                value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
                                         @endforeach
                                     </select>
                                 </div>
