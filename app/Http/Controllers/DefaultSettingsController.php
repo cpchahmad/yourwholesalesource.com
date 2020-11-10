@@ -12,6 +12,7 @@ use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
 use App\TicketStatus;
+use App\TieredPricingPrefrences;
 use App\User;
 use App\WarnedPlatform;
 use App\Wishlist;
@@ -607,7 +608,23 @@ class DefaultSettingsController extends Controller
     }
 
     public function save_tiered_pricing_preferences(Request $request) {
-        dd($request->all());
+        $preferences = TieredPricingPrefrences::first();
+        if($request->global == 1) {
+            $preferences->global = 1;
+        }
+        else {
+            $preferences->global = 0;
+            if($request->shops) {
+                $preferences->stores_id = json_encode($request->shops);
+            }
+            if($request->non_shopify_users) {
+                $preferences->users_id = json_encode($request->non_shopify_users);
+            }
+        }
+
+        $preferences->save();
+
+        return redirect()->back()->with('success', 'Tiered Pricing Preferences Saved Successfully!');
     }
 
 }
