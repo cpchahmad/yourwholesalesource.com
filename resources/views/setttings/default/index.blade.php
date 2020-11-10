@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-9 text-right">
+                                <div class="col-md-12 text-right">
                                     <button class="btn btn-sm btn-primary" type="submit">Save</button>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-9 text-right">
+                                <div class="col-md-12 text-right">
                                     <button class="btn btn-sm btn-primary" type="submit">Save</button>
                                 </div>
                             </div>
