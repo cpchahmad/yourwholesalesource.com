@@ -237,12 +237,12 @@
                                     <label class="custom-control-label " for="prefer-global">Global</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="2"  @if($product->global == 2) checked="" @endif>
+                                    <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="2"  @if(\App\TieredPricingPrefrences::first()->global->global == 2) checked="" @endif>
                                     <label class="custom-control-label" for="prefer-store">Selected Stores / Users</label>
                                 </div>
                             </div>
 
-                            <div class="form-group" @if($product->global == 1) style="display: none" @endif>
+                            <div class="form-group" @if(\App\TieredPricingPrefrences::first()->global->global == 1) style="display: none" @endif>
                                 <div class="form-material">
                                     <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
                                     <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
