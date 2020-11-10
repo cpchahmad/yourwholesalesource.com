@@ -277,13 +277,13 @@
                                                                }
                                                            }
                                                            else {
-                                                               $price = 'No Discount';
+                                                               $price = 'No Discountss';
                                                            }
                                                         @endphp
                                                         {{ ($price) }}
                                                     @endforeach
                                                 @else
-                                                    No Discount
+                                                    No Disco
                                                 @endif
                                             @else
                                                 No Dis
