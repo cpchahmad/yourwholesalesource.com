@@ -248,6 +248,12 @@
                                             @php
                                              $variant = $item->linked_variant;
                                              $real_variant = null;
+                                             $is_applied = false;
+                                             $stores = \App\TieredPricingPrefrences::first()->stores_id;
+                                             $store_array= json_decode($stores);
+                                             if(in_array($shop->id, $store_array))
+                                                $is_applied = true;
+
                                              if($variant) {
                                                  $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
                                              }
@@ -256,7 +262,7 @@
                                                  $real_variant = \App\Product::where('title', $retailer_product->title)->first();
                                              }
                                             @endphp
-                                            @if($real_variant != null)
+                                            @if($real_variant != null && $is_applied)
                                                 @if(count($real_variant->has_tiered_prices) > 0)
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
