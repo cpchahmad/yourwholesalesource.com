@@ -227,7 +227,7 @@
                     <div class="block-header">
                         <h3 class="block-title">Tiered Pricing</h3>
                     </div>
-                    <div class="block-content block-content-narrow">
+                    <div class="block-content block-content-narrow pb-3">
                         <div class="form-material">
                             <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
                             <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
