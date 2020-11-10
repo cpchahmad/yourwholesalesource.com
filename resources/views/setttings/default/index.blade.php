@@ -263,10 +263,10 @@
                                         @endforeach
                                     </select>
                                 </div>
+                            </div>
 
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
+                            <div class="text-right mt-3">
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </form>
