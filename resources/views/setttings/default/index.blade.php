@@ -265,7 +265,14 @@
                                     <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
                                         <option></option>
                                         @foreach($non_shopify_users as $user)
-                                            <option value="{{$user->id}}">{{ $user->name }}</option>
+                                            <option
+                                                @php
+                                                    $users = \App\TieredPricingPrefrences::first()->users_id;
+                                                    $users_array= json_decode($users);
+                                                    if(in_array($user->id, $users_array))
+                                                        echo "selected";
+                                                @endphp
+                                                value="{{$user->id}}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
