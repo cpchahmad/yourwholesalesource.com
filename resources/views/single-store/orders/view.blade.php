@@ -277,14 +277,16 @@
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
                                                                if($var_price->type == 'fixed') {
                                                                    $price = $var_price->price;
-                                                                   $price = number_format($price, 2) . 'USD';
+                                                                   $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
+                                                                   $price = $price . " USD";
                                                                }
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
                                                                    $price = $item->price - ($item->price * $discount / 100);
-                                                                   $price = number_format($price, 2) . 'USD';
+                                                                   $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
+                                                                   $price = $price . " USD";
                                                                }
                                                            }
                                                            else {
