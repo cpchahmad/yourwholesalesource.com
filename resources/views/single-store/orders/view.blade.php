@@ -266,7 +266,6 @@
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
                                                            $price = null;
-                                                           $price_check = false;
 
                                                            $qty = (int) $item->quantity;
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
@@ -274,28 +273,25 @@
                                                                    $price = $var_price->price;
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
-                                                                   $price_check = true;
                                                                }
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
                                                                    $price = $item->price - ($item->price * $discount / 100);
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
-                                                                   $price_check = true;
                                                                }
                                                            }
                                                            else {
-                                                               $price_check = false;
+                                                               $price = '';
                                                            }
-                                                           if(! $price_check) { $price = ''; }
                                                         @endphp
                                                          {{ ($price) }}
                                                     @endforeach
                                                 @else
-                                                    <span>No Discount</span>
+                                                    <span></span>
                                                 @endif
                                             @else
-                                                <span>No Discount</span>
+                                                <span></span>
                                             @endif
 
                                         </td>
