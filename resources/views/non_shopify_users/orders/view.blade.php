@@ -165,12 +165,19 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
+                                <th>Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
 
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                                $total_discount = 0;
+                                $users = \App\TieredPricingPrefrences::first()->users_id;
+                                $users_array= json_decode($users);
+                                if(in_array($user->id, $users_array)) { $is_applied = true; } else { $is_applied = false; }
+                            @endphp
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
                                     <tr>
@@ -240,6 +247,55 @@
                                         </td>
 
                                         <td>{{number_format($item->cost,2)}}  X {{$item->quantity}} USD</td>
+
+                                        <td>
+                                            @php
+                                                $variant = $item->linked_variant;
+                                                $real_variant = null;
+
+
+                                                if($variant) {
+                                                    $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
+                                                }
+                                                else{
+                                                    $retailer_product = $item->linked_product;
+                                                    $real_variant = \App\Product::where('title', $retailer_product->title)->first();
+                                                }
+                                            @endphp
+                                            @if($real_variant != null && $is_applied)
+                                                @if(count($real_variant->has_tiered_prices) > 0)
+                                                    @foreach($real_variant->has_tiered_prices as $var_price)
+                                                        @php
+                                                            $price = null;
+
+                                                            $qty = (int) $item->quantity;
+                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
+                                                                if($var_price->type == 'fixed') {
+                                                                    $price = $var_price->price;
+                                                                    $price = number_format($price, 2);
+                                                                    $total_discount = $total_discount + $price;
+                                                                }
+                                                                else if($var_price->type == 'discount') {
+                                                                    $discount = (double) $var_price->price;
+                                                                    $price = $item->price - ($item->price * $discount / 100);
+                                                                    $price = number_format($price, 2);
+                                                                    $total_discount = $total_discount + $price;
+                                                                }
+                                                            }
+                                                            else {
+                                                                $price = '';
+                                                            }
+                                                        @endphp
+                                                        {{ ($price) }}
+                                                    @endforeach
+                                                @else
+                                                    <span></span>
+                                                @endif
+                                            @else
+                                                <span></span>
+                                            @endif
+
+                                        </td>
                                         <td>{{$item->price}} X {{$item->quantity}}  USD </td>
                                         <td>
                                             @if($item->fulfillment_status == null)
