@@ -227,9 +227,8 @@
                     <div class="block-header">
                         <h3 class="block-title">Preferences</h3>
                     </div>
-                    <form action="" method="post">
+                    <form action="{{ route('save.tiered.pricing.preferences') }}" method="post">
                         @csrf
-                        <input type="hidden" name="type" value="shop-preferences">
                         <div class="block-content">
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
@@ -244,7 +243,7 @@
 
                             <div class="form-group" @if(\App\TieredPricingPrefrences::first()->global == 1) style="display: none" @endif>
                                 <div class="form-material">
-                                    <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
+                                    <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where tiered pricing should be applied."> </i></label>
                                     <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
                                         <option></option>
 
@@ -255,7 +254,7 @@
                                 </div>
 
                                 <div class="form-material mt-2">
-                                    <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
+                                    <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where tiered pricing should be applied."> </i></label>
                                     <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
                                         <option></option>
                                         @foreach($non_shopify_users as $user)
