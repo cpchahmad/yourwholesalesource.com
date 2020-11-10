@@ -180,7 +180,6 @@
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($item->linked_variant != null)
-                                                    hello new
                                                     <img class="img-avatar"
                                                          @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                          @else @if($item->linked_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}" @endif @endif alt="">
@@ -205,7 +204,6 @@
                                                 @endif
                                             @else
                                                 @if($item->linked_real_variant != null)
-                                                    hello real
                                                     <img class="img-avatar"
                                                          @if($item->linked_real_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                          @else @if($item->linked_real_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_real_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_real_variant->has_image->image}}" @endif @endif alt="">
@@ -252,6 +250,10 @@
                                              $real_variant = null;
                                              if($variant) {
                                                  $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
+                                             }
+                                             else{
+                                                 $retailer_product = $item->linked_product;
+                                                 $real_variant = \App\Product::where('title', $retailer_product->title)->first();
                                              }
                                             @endphp
                                             @if($real_variant != null)
