@@ -172,9 +172,15 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
-                                $stores = \App\TieredPricingPrefrences::first()->stores_id;
-                                $store_array= json_decode($stores);
-                                if(in_array($shop->id, $store_array)) { $is_applied = true; } else { $is_applied = false; }
+                                if(\App\TieredPricingPrefrences::first()->global == 1) {
+                                    $is_applied = true;
+                                }
+                                else {
+                                    $stores = \App\TieredPricingPrefrences::first()->stores_id;
+                                    $store_array= json_decode($stores);
+                                    if(in_array($shop->id, $store_array)) { $is_applied = true; } else { $is_applied = false; }
+                                }
+
                             @endphp
 
                             @foreach($order->line_items as $item)
