@@ -221,6 +221,77 @@
                         @endif
                     </div>
                 </div>
+
+                {{--Tiered Pricing applying section start--}}
+                <div class="block">
+                    <div class="block-header">
+                        <h3 class="block-title">Tiered Pricing</h3>
+                    </div>
+                    <div class="block-content block-content-narrow">
+                        @if(count($platforms) > 0)
+                            <table class="table table-hover table-striped table-borderless table-vcenter">
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($platforms as $index => $p)
+                                    <tr>
+                                        <td>{{$p->name}}</td>
+                                        <td class="btn-group" style="float: right">
+                                            <a class="btn btn-sm btn-warning text-white"
+                                               type="button" data-toggle="modal" data-target="#edit_platform_modal{{$index}}"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ route('delete_platform', $p->id) }}" class="btn btn-sm btn-danger"
+                                               type="button" data-toggle="tooltip" title=""
+                                               data-original-title="Delete Plateform"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="edit_platform_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-popout" role="document">
+                                            <div class="modal-content">
+                                                <div class="block block-themed block-transparent mb-0">
+                                                    <div class="block-header bg-primary-dark">
+                                                        <h3 class="block-title">Edit "{{$p->name}}"</h3>
+                                                        <div class="block-options">
+                                                            <button type="button" class="btn-block-option">
+                                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <form action="{{route('update_platform',$p->id)}}" method="post">
+                                                        @csrf
+                                                        <div class="block-content font-size-sm">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Title</label>
+                                                                        <input required class="form-control" type="text" id="name" name="name"
+                                                                               value="{{$p->name}}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="block-content block-content-full text-right border-top">
+                                                            <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p>No Platforms Available</p>
+                        @endif
+                    </div>
+                </div>
+                {{--Tiered Pricing applying section end--}}
             </div>
         </div>
     </div>
