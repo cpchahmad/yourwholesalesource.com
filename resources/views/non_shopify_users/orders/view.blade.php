@@ -250,7 +250,7 @@
 
                                         <td>
                                             @php
-                                                $variant = $item->linked_variant;
+                                                $variant = $item->linked_real_variant;
                                                 $real_variant = null;
 
 
@@ -258,7 +258,7 @@
                                                     $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
                                                 }
                                                 else{
-                                                    $retailer_product = $item->linked_product;
+                                                    $retailer_product = $item->linked_real_product;
                                                     $real_variant = \App\Product::where('title', $retailer_product->title)->first();
                                                 }
                                             @endphp
