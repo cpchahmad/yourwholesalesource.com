@@ -288,16 +288,16 @@
                                                                }
                                                            }
                                                            else {
-                                                               $price = '';
+                                                               $price = 'Eror';
                                                            }
                                                         @endphp
                                                          {{ ($price) }}
                                                     @endforeach
                                                 @else
-                                                    <span></span>
+                                                    <span>sdfdsad</span>
                                                 @endif
                                             @else
-                                                <span></span>
+                                                <span>no </span>
                                             @endif
 
                                         </td>
