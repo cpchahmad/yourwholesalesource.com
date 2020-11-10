@@ -163,7 +163,7 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
-                                <th>Discount {{ $shop->id }}</th>
+                                <th>Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
 
@@ -266,6 +266,7 @@
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
                                                            $price = null;
+                                                           $price_check = false;
 
                                                            $qty = (int) $item->quantity;
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
@@ -273,25 +274,28 @@
                                                                    $price = $var_price->price;
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
+                                                                   $price_check = true;
                                                                }
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
                                                                    $price = $item->price - ($item->price * $discount / 100);
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
+                                                                   $price_check = true;
                                                                }
                                                            }
                                                            else {
-                                                               $price = '';
+                                                               $price_check = false;
                                                            }
+                                                           if(! $price_check) { $price = 'No Discount'; }
                                                         @endphp
-                                                        {{ $shop->id }} {{ ($price) }}
+                                                         {{ ($price) }}
                                                     @endforeach
                                                 @else
-                                                    <span></span>
+                                                    <span>No Discount</span>
                                                 @endif
                                             @else
-                                                <span></span>
+                                                <span>No Discount</span>
                                             @endif
 
                                         </td>
