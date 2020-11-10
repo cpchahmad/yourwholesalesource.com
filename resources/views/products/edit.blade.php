@@ -736,11 +736,23 @@
                                             <th style="vertical-align: top;width: 12%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
                                             <th colspan="5">
-                                                <span class="mr-3" style="vertical-align: top;">Min Qty</span>
-                                                <span class="mr-4" style="vertical-align: top;">Max Qty</span>
-                                                <span class="mr-4" style="vertical-align: top;">Type</span>
-                                                <span class="mx-5" style="vertical-align: top;">$/Discount</span>
-                                                <span class="mr-4" style=""></span>
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <span style="vertical-align: top;">Min Qty</span>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span style="vertical-align: top;">Max Qty</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span style="vertical-align: top;">Type</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span style="vertical-align: top;">$/Discount</span>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <span style=""></span>
+                                                    </div>
+                                                </div>
                                             </th>
                                         </tr>
                                         </thead>
