@@ -32,6 +32,7 @@ class DefaultSettingsController extends Controller
 
         $users = User::role('non-shopify-users')
             ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+            ->doesntHave('has_stores')
             ->orderBy('created_at','DESC')
             ->get();
 
