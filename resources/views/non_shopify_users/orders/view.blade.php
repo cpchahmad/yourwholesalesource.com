@@ -278,13 +278,13 @@
                                                             if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
                                                                 if($var_price->type == 'fixed') {
                                                                     $price = $var_price->price;
-                                                                    $price = number_format($price, 2);
+                                                                    $price = number_format($price, 2) . 'USD';
                                                                     $total_discount = $total_discount + $price;
                                                                 }
                                                                 else if($var_price->type == 'discount') {
                                                                     $discount = (double) $var_price->price;
                                                                     $price = $item->price - ($item->price * $discount / 100);
-                                                                    $price = number_format($price, 2);
+                                                                    $price = number_format($price, 2) . 'USD';
                                                                     $total_discount = $total_discount + $price;
                                                                 }
                                                             }
