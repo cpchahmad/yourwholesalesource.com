@@ -286,7 +286,7 @@
                                                     No Discount
                                                 @endif
                                             @else
-                                                No Discount
+                                                No Dis
                                             @endif
 
                                         </td>
