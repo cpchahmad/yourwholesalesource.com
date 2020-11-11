@@ -845,7 +845,7 @@
                 </div>
                 <div class="col-sm-4">
 
-                    <form action="{{route('product.update',$product->id)}}" method="post">
+                    <div action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
                         <div class="block">
                             <div class="block-header">
@@ -887,29 +887,26 @@
 
                             </div>
 
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Marketing Video
+                                </div>
+                            </div>
+                            <div class="block-content pt-0">
+                                <input type="hidden" name="type" value="marketing_video_update">
+                                <div class="block-content pt-0" >
+                                    <div class="form-group">
+                                        <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group text-right">
-                                <button class="btn btn-primary" type="submit">Save</button>
+                                <button class="btn btn-primary mb-3 mr-3" type="submit">Save</button>
                             </div>
                         </div>
                     </form>
 
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Marketing Video
-                            </div>
-                        </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="marketing_video_update">
-                            <div class="block-content pt-0" >
-                                <div class="form-group">
-                                    <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
