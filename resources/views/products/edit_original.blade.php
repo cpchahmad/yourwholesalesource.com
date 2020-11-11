@@ -51,9 +51,6 @@
                                               placeholder="Please Enter Description here !">{{$product->description}}</textarea>
                                     </div>
                                 </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary" type="submit">Save</button>
-                                </div>
                             </div>
                         </form>
 
