@@ -176,6 +176,15 @@
 
                                 $line_item_count >= 2 ? $is_general_discount = true : $is_general_discount = false;
 
+                                if(\App\GeneralDiscountPreferences::first()->global == 1) {
+                                    $is_applied_for_general_dsiscount = true;
+                                }
+                                else {
+                                    $stores = \App\GeneralDiscountPreferences::first()->stores_id;
+                                    $store_array= json_decode($stores);
+                                    if(in_array($shop->id, $store_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
+                                }
+
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
                                     $is_applied = true;
                                 }
@@ -306,7 +315,7 @@
                                                 <span></span>
                                             @endif
 
-                                            @if($is_general_discount && $is_applied)
+                                            @if($is_general_discount && $is_applied_for_general_dsiscount)
                                                 {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                             @endif
 
