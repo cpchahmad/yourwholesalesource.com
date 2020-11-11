@@ -845,7 +845,7 @@
                 </div>
                 <div class="col-sm-4">
 
-                    <div action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
                         <div class="block">
                             <div class="block-header">
@@ -894,7 +894,7 @@
                             </div>
                             <div class="block-content pt-0">
                                 <input type="hidden" name="type" value="marketing_video_update">
-                                <div class="block-content pt-0" >
+                                <div class="block-content pt-0 px-0">
                                     <div class="form-group">
                                         <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
                                     </div>
@@ -1078,7 +1078,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="content" style="margin-bottom: 10px">
