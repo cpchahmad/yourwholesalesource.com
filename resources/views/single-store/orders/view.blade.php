@@ -172,7 +172,7 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
-                                $line_item_count = count(count($order->line_items));
+                                $line_item_count = count($order->line_items);
 
                                 $line_item_count >= 2 ? $is_general_discount = true : $is_general_discount = false;
 
