@@ -49,9 +49,11 @@
                                             <option
                                                 @php
                                                     $stores = \App\GeneralDiscountPreferences::first()->stores_id;
-                                                    $store_array= json_decode($stores);
-                                                    if(in_array($shop->id, $store_array))
-                                                        echo "selected";
+                                                    if($stores != null) {
+                                                        $store_array= json_decode($stores);
+                                                        if(in_array($shop->id, $store_array))
+                                                            echo "selected";
+                                                    }
                                                 @endphp
                                                 value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
                                         @endforeach
@@ -66,9 +68,11 @@
                                             <option
                                                 @php
                                                     $users = \App\GeneralDiscountPreferences::first()->users_id;
-                                                    $users_array= json_decode($users);
-                                                    if(in_array($user->id, $users_array))
-                                                        echo "selected";
+                                                    if($users != null) {
+                                                        $users_array= json_decode($users);
+                                                        if(in_array($user->id, $users_array))
+                                                            echo "selected";
+                                                    }
                                                 @endphp
                                                 value="{{$user->id}}">{{ $user->name }}</option>
                                         @endforeach
