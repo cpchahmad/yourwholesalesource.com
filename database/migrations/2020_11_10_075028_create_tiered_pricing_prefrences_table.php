@@ -18,6 +18,7 @@ class CreateTieredPricingPrefrencesTable extends Migration
             $table->integer('global')->default(1);
             $table->text('users_id')->nullable();
             $table->text('stores_id')->nullable();
+            $table->boolean('enabled')->default(1);
             $table->timestamps();
         });
     }
