@@ -865,9 +865,15 @@
                                         <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                                     </div>
                                 </div>
+
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
                             </div>
-
-
+                        </div>
+                    </form>
+                    <form action="{{route('product.update',$product->id)}}" method="post">
+                        <div class="block">
                             <div class="block-header">
                                 <div class="block-title">
                                     Sort By
@@ -884,29 +890,33 @@
                                         <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div class="block-header">
-                                <div class="block-title">
-                                    Marketing Video
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
                                 </div>
-                            </div>
-                            <div class="block-content pt-0">
-                                <input type="hidden" name="type" value="marketing_video_update">
-                                <div class="block-content pt-0 px-0">
-                                    <div class="form-group">
-                                        <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group text-right">
-                                <button class="btn btn-primary mb-3 mr-3" type="submit">Save</button>
                             </div>
                         </div>
                     </form>
 
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">
+                                Marketing Video
+                            </div>
+                        </div>
+                        <form action="{{route('product.update',$product->id)}}" method="post">
+                            @csrf
+                            <input type="hidden" name="type" value="marketing_video_update">
+                            <div class="block-content pt-0" >
+                                <div class="form-group">
+                                    <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
+                                </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
@@ -1078,7 +1088,7 @@
                             </div>
                         </form>
                     </div>
-                </form>
+                </div>
             </div>
 
             <div class="content" style="margin-bottom: 10px">
