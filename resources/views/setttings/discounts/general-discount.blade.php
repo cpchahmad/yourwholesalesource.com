@@ -30,7 +30,7 @@
                         <div class="block-content">
                             <div class="form-group">
                                 <label class="">Discount(%)</label>
-                                <input type="text" name="discount" placeholder="Enter the discount %, you wants to apply">
+                                <input type="text" class="form-control" name="discount" placeholder="Enter the discount %, you wants to apply">
                             </div>
 
                             <div class="form-group">
