@@ -29,6 +29,10 @@
                         @csrf
                         <div class="block-content">
                             <div class="form-group">
+                                <input type="text" name="discount" placeholder="Enter the discount %, you wants to apply">
+                            </div>
+
+                            <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if(\App\GeneralDiscountPreferences::first()->global == 1) checked="" @endif>
                                     <label class="custom-control-label " for="prefer-global">Global</label>

@@ -19,6 +19,7 @@ class CreateGeneralDiscountPreferencesTable extends Migration
             $table->text('users_id')->nullable();
             $table->text('stores_id')->nullable();
             $table->boolean('enabled')->default(1);
+            $table->double('discount_amount')->nullable();
             $table->timestamps();
         });
     }
