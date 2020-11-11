@@ -6,6 +6,7 @@ use App\AdminSetting;
 use App\Customer;
 use App\DefaultInfo;
 use App\Exports\CustomersExport;
+use App\GeneralDiscountPreferences;
 use App\Product;
 use App\Refund;
 use App\Shop;
@@ -636,7 +637,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function save_general_discount_preferences(Request $request) {
-        $preferences = TieredPricingPrefrences::first();
+        $preferences = GeneralDiscountPreferences::first();
         if($request->global == 1) {
             $preferences->global = 1;
         }
@@ -652,7 +653,7 @@ class DefaultSettingsController extends Controller
 
         $preferences->save();
 
-        return redirect()->back()->with('success', 'Tiered Pricing Preferences Saved Successfully!');
+        return redirect()->back()->with('success', 'General Discount Preferences Saved Successfully!');
     }
 
     public function getTieredPricingPreferences()
