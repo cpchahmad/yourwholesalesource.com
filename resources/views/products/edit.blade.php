@@ -879,6 +879,7 @@
                                     Sort By
                                 </div>
                             </div>
+                            <input type="hidden" name="type" value="fulfilled">
                             <div class="block-content pt-0" >
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">
