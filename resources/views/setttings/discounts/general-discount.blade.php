@@ -30,16 +30,16 @@
                         <div class="block-content">
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if(\App\TieredPricingPrefrences::first()->global == 1) checked="" @endif>
+                                    <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if(\App\GeneralDiscountPreferences::first()->global == 1) checked="" @endif>
                                     <label class="custom-control-label " for="prefer-global">Global</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if(\App\TieredPricingPrefrences::first()->global == 0) checked="" @endif>
+                                    <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if(\App\GeneralDiscountPreferences::first()->global == 0) checked="" @endif>
                                     <label class="custom-control-label" for="prefer-store">Selected Stores / Users</label>
                                 </div>
                             </div>
 
-                            <div class="form-group" @if(\App\TieredPricingPrefrences::first()->global == 1) style="display: none" @endif>
+                            <div class="form-group" @if(\App\GeneralDiscountPreferences::first()->global == 1) style="display: none" @endif>
                                 <div class="form-material">
                                     <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where tiered pricing should be applied."> </i></label>
                                     <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
@@ -48,7 +48,7 @@
                                         @foreach($shops as $shop)
                                             <option
                                                 @php
-                                                    $stores = \App\TieredPricingPrefrences::first()->stores_id;
+                                                    $stores = \App\GeneralDiscountPreferences::first()->stores_id;
                                                     $store_array= json_decode($stores);
                                                     if(in_array($shop->id, $store_array))
                                                         echo "selected";
@@ -65,7 +65,7 @@
                                         @foreach($non_shopify_users as $user)
                                             <option
                                                 @php
-                                                    $users = \App\TieredPricingPrefrences::first()->users_id;
+                                                    $users = \App\GeneralDiscountPreferences::first()->users_id;
                                                     $users_array= json_decode($users);
                                                     if(in_array($user->id, $users_array))
                                                         echo "selected";
