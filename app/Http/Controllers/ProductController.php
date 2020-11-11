@@ -738,6 +738,8 @@ class ProductController extends Controller
 
             }
         }
+
+        return redirect()->back()->with('success', 'Product Updated Successfully');
     }
 
     public function save(Request $request)
