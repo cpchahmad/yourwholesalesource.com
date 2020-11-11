@@ -172,6 +172,10 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
+                                $line_item_count = count(count($order->line_items));
+
+                                $line_item_count >= 2 ? $is_general_discount = true : $is_general_discount = false;
+
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
                                     $is_applied = true;
                                 }
@@ -267,7 +271,7 @@
                                                  $real_variant = \App\Product::where('title', $retailer_product->title)->first();
                                              }
                                             @endphp
-                                            @if($real_variant != null && $is_applied)
+                                            @if($real_variant != null && $is_applied && !($is_general_discount))
                                                 @if(count($real_variant->has_tiered_prices) > 0)
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
@@ -300,6 +304,10 @@
                                                 @endif
                                             @else
                                                 <span></span>
+                                            @endif
+
+                                            @if($is_general_discount)
+                                                <span>General Discount being applied</span>
                                             @endif
 
                                         </td>
