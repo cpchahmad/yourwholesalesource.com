@@ -635,4 +635,52 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'Tiered Pricing Preferences Saved Successfully!');
     }
 
+    public function save_general_discount_preferences(Request $request) {
+        $preferences = TieredPricingPrefrences::first();
+        if($request->global == 1) {
+            $preferences->global = 1;
+        }
+        else {
+            $preferences->global = 0;
+            if($request->shops) {
+                $preferences->stores_id = json_encode($request->shops);
+            }
+            if($request->non_shopify_users) {
+                $preferences->users_id = json_encode($request->non_shopify_users);
+            }
+        }
+
+        $preferences->save();
+
+        return redirect()->back()->with('success', 'Tiered Pricing Preferences Saved Successfully!');
+    }
+
+    public function getTieredPricingPreferences()
+    {
+        $shops = \OhMyBrew\ShopifyApp\Models\Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
+        $users = User::role('non-shopify-users')
+            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+            ->orderBy('created_at','DESC')
+            ->get();
+
+        return view('setttings.discounts.tiered')->with([
+            'shops' => $shops,
+            'non_shopify_users' => $users,
+        ]);
+    }
+
+    public function getGeneralDiscountPreferences()
+    {
+        $shops = \OhMyBrew\ShopifyApp\Models\Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
+        $users = User::role('non-shopify-users')
+            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+            ->orderBy('created_at','DESC')
+            ->get();
+
+        return view('setttings.discounts.general-discount')->with([
+            'shops' => $shops,
+            'non_shopify_users' => $users,
+        ]);
+    }
+
 }

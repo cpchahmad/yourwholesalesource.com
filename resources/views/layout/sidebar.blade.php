@@ -128,6 +128,35 @@
                     <span class="nav-main-link-name">Email Template</span>
                 </a>
             </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">
+                    <i class="nav-main-link-icon fa fa-envelope"></i>
+                    <span class="nav-main-link-name">Email Template</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon fa fa-dollar"></i>
+                    <span class="nav-main-link-name">Discounts</span>
+                </a>
+                <ul class="nav-main-submenu">
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('admin.tiered.pricing.preferences')}}">
+                            <i class="nav-main-link-icon fa fa-dollar"></i>
+                            <span class="nav-main-link-name">Tiered Pricing</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('admin.general.discount.preferences')}}">
+                            <i class="nav-main-link-icon fa fa-dollar"></i>
+                            <span class="nav-main-link-name">General Discounts</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
