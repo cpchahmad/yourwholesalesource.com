@@ -956,7 +956,7 @@
                                 </div>
                             </div>
                             <div class="form-group text-right">
-                                <button class="btn btn-primary">Save</button>
+                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                         <div class="block-footer" style="height: 15px">
@@ -998,7 +998,7 @@
                                 </div>
                             </div>
                             <div class="form-group text-right">
-                                <button class="btn btn-primary">Save</button>
+                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                     </div>
@@ -1095,10 +1095,11 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group text-right">
-                                        <button class="btn btn-primary">Save</button>
-                                    </div>
+
                                 </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                     </div>
