@@ -87,7 +87,7 @@
                                 <hr>
                             @endif
                             <div class="row">
-                                <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                                <form class="" class="w-100" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="type" value="existing-product-image-add">
                                     <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
@@ -99,7 +99,7 @@
                                     </div>
 
                                     <div class="form-group text-right">
-                                        <button class="btn btn-primary" type="submit">Save</button>
+                                        <button class="btn btn-primary mr-3" type="submit">Save</button>
                                     </div>
                                 </form>
                             </div>
