@@ -34,6 +34,7 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="">Preferences</label>
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if(\App\GeneralDiscountPreferences::first()->global == 1) checked="" @endif>
                                     <label class="custom-control-label " for="prefer-global">Global</label>

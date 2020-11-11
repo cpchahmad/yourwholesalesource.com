@@ -651,6 +651,8 @@ class DefaultSettingsController extends Controller
             }
         }
 
+        $preferences->discount_amount = $request->discount;
+
         $preferences->save();
 
         return redirect()->back()->with('success', 'General Discount Preferences Saved Successfully!');
