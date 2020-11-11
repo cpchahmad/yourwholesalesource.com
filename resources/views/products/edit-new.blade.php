@@ -51,6 +51,9 @@
                                               placeholder="Please Enter Description here !">{{$product->description}}</textarea>
                                     </div>
                                 </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </div>
                             </div>
                         </form>
 
@@ -84,7 +87,7 @@
                                 <hr>
                             @endif
                             <div class="row">
-                                <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                                <form class="w-100" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="type" value="existing-product-image-add">
                                     <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
@@ -95,7 +98,9 @@
                                         <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                     </div>
 
-
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-primary mr-3" type="submit">Save</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -202,6 +207,7 @@
                                         <th style="vertical-align: top">Quantity</th>
                                         <th style="vertical-align: top">SKU</th>
                                         <th style="vertical-align: top">Barcode</th>
+                                        <th style="vertical-align: top"></th>
                                     </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
@@ -261,9 +267,8 @@
                                                     <td><input type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
                                                     <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                                     <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
-                                                    </td>
-
+                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
+                                                    <td><button class="btn btn-primary" type="submit">Save</button></td>
                                                 </tr>
                                                 </tbody>
                                                 <tbody>
@@ -721,9 +726,9 @@
                                             </tbody>
 
                                     </table>
-{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-{{--                                    </div>--}}
+                                    <div class="block-content text-right pr-0 pt-0 pb-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
                                 </form>
                             @endif
                             @if($product->variants == 1)
@@ -829,9 +834,9 @@
                                             </tbody>
                                         @endif
                                     </table>
-{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-{{--                                    </div>--}}
+                                    <div class="block-content text-right pr-0 pt-0 pb-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
                                 </form>
                             @endif
                         </div>
@@ -842,12 +847,12 @@
 
                     <form action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Mark as Fulfilled
+                        <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Mark as Fulfilled
+                                </div>
                             </div>
-                        </div>
                             <input type="hidden" name="type" value="fulfilled">
                             <div class="block-content" >
                                 <div class="form-group">
@@ -860,28 +865,37 @@
                                         <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                                     </div>
                                 </div>
-                            </div>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Sort By
-                            </div>
-                        </div>
-                        <div class="block-content pt-0" >
-                            <div class="form-group">
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  >
-                                    <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                </div>
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" value="Winning Product" >
-                                    <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
-                                </div>
-                            </div>
 
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+                    <form action="{{route('product.update',$product->id)}}" method="post">
+                        <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Sort By
+                                </div>
+                            </div>
+                            <input type="hidden" name="type" value="fulfilled">
+                            <div class="block-content pt-0" >
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  >
+                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" value="Winning Product" >
+                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                    </div>
+                                </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
 
                     <div class="block">
@@ -896,6 +910,9 @@
                             <div class="block-content pt-0" >
                                 <div class="form-group">
                                     <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
+                                </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -938,6 +955,9 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary my-3 mr-3">Save</button>
+                            </div>
                         </form>
                         <div class="block-footer" style="height: 15px">
 
@@ -976,6 +996,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                     </div>
@@ -1023,6 +1046,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -1068,7 +1094,12 @@
                                             @endforeach
                                         </select>
                                     </div>
+
+
                                 </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                     </div>
