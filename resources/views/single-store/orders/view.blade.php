@@ -403,12 +403,13 @@
                                 </td>
                                 <td align="right">
                                     @php
-                                       if($is_general_discount)
+                                       if($is_general_discount) {
                                            $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
                                            $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
                                            $price = number_format($price, 2);
                                            $total_discount = $total_discount + $price;
-                                       @endphp
+                                       }
+
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
                                 </td>
