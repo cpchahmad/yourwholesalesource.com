@@ -955,6 +955,9 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary">Save</button>
+                            </div>
                         </form>
                         <div class="block-footer" style="height: 15px">
 
@@ -993,6 +996,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -1040,6 +1046,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary">Save</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -1084,6 +1093,10 @@
                                                 value="{{$user->id}}">{{ $user->name }}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
                             </div>
