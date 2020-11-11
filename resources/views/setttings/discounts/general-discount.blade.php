@@ -29,7 +29,7 @@
                         @csrf
                         <div class="block-content">
                             <div class="form-group">
-                                <label class="custom-control-label">Discount(%)</label>
+                                <label class="">Discount(%)</label>
                                 <input type="text" name="discount" placeholder="Enter the discount %, you wants to apply">
                             </div>
 
