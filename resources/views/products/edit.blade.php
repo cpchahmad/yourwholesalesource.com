@@ -207,6 +207,7 @@
                                         <th style="vertical-align: top">Quantity</th>
                                         <th style="vertical-align: top">SKU</th>
                                         <th style="vertical-align: top">Barcode</th>
+                                        <th style="vertical-align: top"></th>
                                     </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
@@ -292,12 +293,12 @@
                                                             <input type="text" class="form-control" name="option3" placeholder="$0.00" value="{{$v->option3}}">
                                                         @endif
                                                     </td>
+                                                    <td>
+                                                        <button class="btn btn-primary" type="submit">Save</button>
+                                                    </td>
 
                                                 </tr>
                                                 </tbody>
-                                                <div class="form-group text-right">
-                                                    <button class="btn btn-primary" type="submit">Save</button>
-                                                </div>
                                             </form>
                                         @endforeach
                                     @endif
