@@ -412,7 +412,7 @@
                                 </td>
                                 <td align="right">
                                     @php
-                                       if($is_general_discount) {
+                                       if($is_general_discount && $is_applied_for_general_dsiscount) {
                                            $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
                                            $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
                                            $price = number_format($price, 2);
