@@ -98,7 +98,9 @@
                                         <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                     </div>
 
-
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
