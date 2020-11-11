@@ -174,6 +174,20 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
+
+                                $line_item_count = count($order->line_items);
+
+                                $line_item_count >= 2 ? $is_general_discount = true : $is_general_discount = false;
+
+                                if(\App\GeneralDiscountPreferences::first()->global == 1) {
+                                    $is_applied_for_general_dsiscount = true;
+                                }
+                                else {
+                                    $users = \App\GeneralDiscountPreferences::first()->users_id;
+                                    $users_array= json_decode($users);
+                                    if(in_array($user->id, $users_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
+                                }
+
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
                                     $is_applied = true;
                                 }
@@ -268,7 +282,7 @@
                                                     $real_variant = \App\Product::where('title', $retailer_product->title)->first();
                                                 }
                                             @endphp
-                                            @if($real_variant != null && $is_applied)
+                                            @if($real_variant != null && $is_applied && !($is_general_discount))
                                                 @if(count($real_variant->has_tiered_prices) > 0)
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
@@ -301,6 +315,10 @@
                                                 @endif
                                             @else
                                                 <span></span>
+                                            @endif
+
+                                            @if($is_general_discount && $is_applied_for_general_dsiscount)
+                                                {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                             @endif
 
                                         </td>
@@ -396,6 +414,15 @@
                                     Total Discount
                                 </td>
                                 <td align="right">
+                                    @php
+                                        if($is_general_discount) {
+                                            $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
+                                            $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
+                                            $price = number_format($price, 2);
+                                            $total_discount = $total_discount + $price;
+                                            $total_discount = $order->cost_to_pay - $total_discount;
+                                        }
+                                    @endphp
                                     {{ number_format($total_discount,2) }} USD
                                 </td>
                             </tr>
