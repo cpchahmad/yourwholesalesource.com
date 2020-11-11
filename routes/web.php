@@ -137,7 +137,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::put('/email/templates/update/{id}', 'EmailTemplateController@update')->name('admin.emails.update');
     Route::post('/email/templates/{id}/status', 'EmailTemplateController@changeStatus')->name('admin.emails.status');
     Route::get('/tiered/pricing/preferences', 'DefaultSettingsController@getTieredPricingPreferences')->name('admin.tiered.pricing.preferences');
-    Route::get('/general/discounts/preferences', 'DefaultSettingsController@getGeneralDiscountPreferences')->name('admin.tiered.discount.preferences');
+    Route::get('/general/discounts/preferences', 'DefaultSettingsController@getGeneralDiscountPreferences')->name('admin.general.discount.preferences');
 
 });
 /*Single Store Routes*/
