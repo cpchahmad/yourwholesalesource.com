@@ -853,44 +853,44 @@
                                     Mark as Fulfilled
                                 </div>
                             </div>
-                                <input type="hidden" name="type" value="fulfilled">
-                                <div class="block-content" >
-                                    <div class="form-group">
-                                        <div class="custom-control custom-radio mb-1">
-                                            <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
-                                            <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                                        </div>
-                                        <div class="custom-control custom-radio mb-1">
-                                            <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
-                                            <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                                        </div>
+                            <input type="hidden" name="type" value="fulfilled">
+                            <div class="block-content" >
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
+                                        <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
+                                        <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                                     </div>
                                 </div>
-                        </div>
-
-                        <div class="block-header">
-                            <div class="block-title">
-                                Sort By
-                            </div>
-                        </div>
-                        <div class="block-content pt-0" >
-                            <div class="form-group">
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  >
-                                    <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                </div>
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" value="Winning Product" >
-                                    <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
-                                </div>
                             </div>
 
-                        </div>
 
-                        <div class="form-group">
-                            <button class="btn btn-primary" type="submit">Save</button>
-                        </div>
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Sort By
+                                </div>
+                            </div>
+                            <div class="block-content pt-0" >
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  >
+                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" value="Winning Product" >
+                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                    </div>
+                                </div>
 
+                            </div>
+
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary" type="submit">Save</button>
+                            </div>
+                        </div>
                     </form>
 
                     <div class="block">
