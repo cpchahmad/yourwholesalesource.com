@@ -267,9 +267,8 @@
                                                     <td><input type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
                                                     <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                                     <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
-                                                    </td>
-
+                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
+                                                    <td><button class="btn btn-primary" type="submit">Save</button></td>
                                                 </tr>
                                                 </tbody>
                                                 <tbody>
@@ -292,9 +291,6 @@
                                                         @if($v->option3 != null)
                                                             <input type="text" class="form-control" name="option3" placeholder="$0.00" value="{{$v->option3}}">
                                                         @endif
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-primary" type="submit">Save</button>
                                                     </td>
 
                                                 </tr>
