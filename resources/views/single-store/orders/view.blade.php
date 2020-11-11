@@ -287,7 +287,7 @@
                                                                }
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
-                                                                   $price = $item->price - ($item->price * $discount / 100);
+                                                                   $price = $item->cost - ($item->price * $discount / 100);
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
                                                                    $price = $price . " USD";
@@ -307,7 +307,7 @@
                                             @endif
 
                                             @if($is_general_discount)
-                                                <span>General Discount being applied</span>
+                                                Discount of {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                             @endif
 
                                         </td>
