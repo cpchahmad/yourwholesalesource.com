@@ -307,7 +307,7 @@
                                             @endif
 
                                             @if($is_general_discount)
-                                                Discount of {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
+                                                {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                             @endif
 
                                         </td>
