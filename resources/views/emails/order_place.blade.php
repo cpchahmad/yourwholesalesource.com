@@ -209,9 +209,9 @@
                                             @if($item->fulfillment_status == null)
                                                 <span class="custom-badge" style=""> Unfulfilled</span>
                                             @elseif($item->fulfillment_status == 'partially-fulfilled')
-                                                <span class="custom-badge"> Partially Fulfilled</span>
+                                                <span class="custom-badge" > Partially Fulfilled</span>
                                             @else
-                                                <span class="custom-badge"> Fulfilled</span>
+                                                <span class="custom-badge" style="background-color: #46c37b"> Fulfilled</span>
                                             @endif
                                         </td>
                                     </tr>
