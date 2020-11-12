@@ -27,6 +27,12 @@
         color: #ffffff !important;
         padding: 1px 20px
     }
+    .custom-badge {
+        background: #f3b760;
+        color: white;
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
 
     .wrap .right{
         text-align: right !important;
@@ -61,7 +67,7 @@
 </style>
 
 
-<div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: DIN Next,sans-serif;">
+<div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: cursive;">
     <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
         <div class="email-content" style="margin: auto;  text-align: center; ">
             <div class="email-logo">
@@ -77,31 +83,31 @@
                         <div class="left">
                             <h2 style="color: #ffffff; margin-right: 5px; margin-top: 7px; margin-bottom: 7px;">Line Items
                                 @if($order->paid == '0')
-                                    <span class="" style="font-size: small"> (Unpaid </span>
+                                    <span class="custom-badge" style="font-size: small; margin-right: 5px;"> Unpaid </span>
                                 @elseif($order->paid == '1')
-                                    <span class="" style="font-size: small"> (Paid </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px; background-color: #46c37b;"> Paid </span>
                                 @elseif($order->paid == '2')
-                                    <span class="" style="font-size: small;"> (Refunded, </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> Refunded </span>
                                 @endif
 
                                 @if($order->status == 'Paid')
-                                    <span class="" style="font-size: small"> Unfulfilled)</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> Unfulfilled</span>
                                 @elseif($order->status == 'unfulfilled')
-                                    <span class="" style="font-size: small"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'partially-shipped')
-                                    <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'shipped')
-                                    <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'delivered')
-                                    <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'completed')
-                                    <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'new')
-                                    <span class="" style="font-size: small"> Draft) </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> Draft </span>
                                 @elseif($order->status == 'cancelled')
-                                    <span class="" style="font-size: small"> {{ucfirst($order->status)}}) </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}} </span>
                                 @else
-                                    <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px; background-color: #46c37b;">  {{ucfirst($order->status)}} </span>
                                 @endif
 
                             </h2>
@@ -114,7 +120,7 @@
                             <tr>
                                 <th>
                                 </th>
-                                <th style="width: 10%">Name</th>
+                                <th style="width: 10%; text-align: left;">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
@@ -201,11 +207,11 @@
                                         <td>{{$item->price}} X {{$item->quantity}}  USD </td>
                                         <td>
                                             @if($item->fulfillment_status == null)
-                                                <span class=""> Unfulfilled</span>
+                                                <span class="custom-badge" style=""> Unfulfilled</span>
                                             @elseif($item->fulfillment_status == 'partially-fulfilled')
-                                                <span class=""> Partially Fulfilled</span>
+                                                <span class="custom-badge" > Partially Fulfilled</span>
                                             @else
-                                                <span class=""> Fulfilled</span>
+                                                <span class="custom-badge" style="background-color: #46c37b"> Fulfilled</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -221,28 +227,18 @@
                                 <h2 class="" style="color: #ffffff !important; margin-top: 7px; margin-bottom: 7px;">Summary</h2>
                             </div>
                         </div>
-                        <div class="" style="text-align: right !important; padding: 15px;">
-                            <div class="" >
-                                <table class="table table-borderless table-vcenter">
-                                    <thead>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
-                                        <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left">Shipping Price</td>
-                                        <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">Total Cost</td>
-                                        <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
-                                    </tr>
-                                    </tbody>
-
-                                </table>
+                        <div class="" style="padding: 15px;">
+                            <div class="" style="display: flex; justify-content: space-between" >
+                                <div>
+                                    <p align="left">Subtotal ({{count($order->line_items)}} items)</p>
+                                    <p align="left">Shipping Price</p>
+                                    <p align="left">Total Cost</p>
+                                </div>
+                                <div>
+                                    <p align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</p>
+                                    <p align="right">{{number_format($order->shipping_price,2)}} USD</p>
+                                    <p align="right">{{number_format($order->cost_to_pay,2)}} USD</p>
+                                </div>
                             </div>
                         </div>
                     </div>

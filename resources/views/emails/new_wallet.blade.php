@@ -41,7 +41,7 @@
         }
     }
 </style>
-<div class="email-body" style="padding: 20px;max-width: 700px;margin: auto; font-family: DIN Next,sans-serif;">
+<div class="email-body" style="padding: 20px;max-width: 700px;margin: auto; font-family: cursive;">
     <div class="email-contaner" style="border: 4px solid #7daa40;padding: 25px;">
         <div class="email-content" style=" max-width: 450px;  margin: auto;  text-align: center; ">
             <div class="email-logo">

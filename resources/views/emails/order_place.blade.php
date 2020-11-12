@@ -107,7 +107,7 @@
                                 @elseif($order->status == 'cancelled')
                                     <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}} </span>
                                 @else
-                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;">  {{ucfirst($order->status)}} </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px; background-color: #46c37b;">  {{ucfirst($order->status)}} </span>
                                 @endif
 
                             </h2>
