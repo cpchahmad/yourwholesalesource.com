@@ -30,6 +30,7 @@ class CategoryController extends Controller
         if(Category::where('ranking', $request->ranking)->exists()) {
             $temp_category = Category::where('ranking', $request->ranking)->first();
             $temp_category->ranking = $category->ranking;
+            $temp_category->save();
         }
         $category->ranking = $request->ranking;
         $category->save();
@@ -50,10 +51,10 @@ class CategoryController extends Controller
         if(Category::where('ranking', $request->ranking)->exists()) {
             $temp_category = Category::where('ranking', $request->ranking)->first();
             $temp_category->ranking = $category->ranking;
-
-            dd($temp_category->ranking, $category->ranking);
+            $temp_category->save();
         }
         $category->ranking = $request->ranking;
+
         $category->save();
         return redirect()->back()->with('success','Category updated successfully!');
     }
