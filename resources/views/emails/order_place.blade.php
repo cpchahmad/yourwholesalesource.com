@@ -230,14 +230,14 @@
                         <div class="" style=" padding: 15px;">
                             <div class="" style="display: flex; justify-content: space-between" >
                                 <div>
-                                    <span align="left">Subtotal ({{count($order->line_items)}} items)</span>
-                                    <span align="left">Shipping Price</span>
-                                    <span align="left">Total Cost</span>
+                                    <p align="left">Subtotal ({{count($order->line_items)}} items)</p>
+                                    <p align="left">Shipping Price</p>
+                                    <p align="left">Total Cost</p>
                                 </div>
                                 <div>
-                                    <span align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</span>
-                                    <span align="right">{{number_format($order->shipping_price,2)}} USD</span>
-                                    <span align="right">{{number_format($order->cost_to_pay,2)}} USD</span>
+                                    <p align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</p>
+                                    <p align="right">{{number_format($order->shipping_price,2)}} USD</p>
+                                    <p align="right">{{number_format($order->cost_to_pay,2)}} USD</p>
                                 </div>
                             </div>
                         </div>
