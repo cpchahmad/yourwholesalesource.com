@@ -297,6 +297,7 @@
                                                                else if($var_price->type == 'discount') {
                                                                    $discount = (double) $var_price->price;
                                                                    $price = $item->cost - ($item->price * $discount / 100);
+                                                                   $price = $price * $qty;
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
                                                                    $price = $price . " USD";
