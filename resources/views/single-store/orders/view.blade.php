@@ -289,6 +289,7 @@
                                                            $qty = (int) $item->quantity;
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
                                                                if($var_price->type == 'fixed') {
+                                                                   echo "23";
                                                                    $price = $var_price->price * $qty;
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
