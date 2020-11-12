@@ -5,7 +5,7 @@
         <title>New order</title>
     </head>
 </head>
-<body style="margin: 0">
+<body style="margin: 0; font-family: cursive;">
 <style>
     .email-body
     {
@@ -25,6 +25,13 @@
         background-color: #7daa40 !important;
         color: #ffffff !important;
         padding: 1px 20px
+    }
+
+    .custom-badge {
+        background: #f3b760;
+        color: white;
+        padding: 2px 5px;
+        border-radius: 5px;
     }
 
     .wrap .right{
@@ -200,11 +207,11 @@
                                         <td>{{$item->price}} X {{$item->quantity}}  USD </td>
                                         <td>
                                             @if($item->fulfillment_status == null)
-                                                <span class=""> Unfulfilled</span>
+                                                <span class="custom-badge" style=""> Unfulfilled</span>
                                             @elseif($item->fulfillment_status == 'partially-fulfilled')
-                                                <span class=""> Partially Fulfilled</span>
+                                                <span class="custom-badge"> Partially Fulfilled</span>
                                             @else
-                                                <span class=""> Fulfilled</span>
+                                                <span class="custom-badge"> Fulfilled</span>
                                             @endif
                                         </td>
                                     </tr>
@@ -220,28 +227,18 @@
                                 <h2 class="" style="color: #ffffff !important; margin-top: 7px; margin-bottom: 7px;">Summary</h2>
                             </div>
                         </div>
-                        <div class="" style="text-align: right !important; padding: 15px;">
-                            <div class="" >
-                                <table class="table table-borderless table-vcenter">
-                                    <thead>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td align="left">Subtotal ({{count($order->line_items)}} items)</td>
-                                        <td align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left">Shipping Price</td>
-                                        <td align="right">{{number_format($order->shipping_price,2)}} USD</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">Total Cost</td>
-                                        <td align="right">{{number_format($order->cost_to_pay,2)}} USD</td>
-                                    </tr>
-                                    </tbody>
-
-                                </table>
+                        <div class="" style=" padding: 15px;">
+                            <div class="" style="display: flex; justify-content: space-between" >
+                                <div>
+                                    <span align="left">Subtotal ({{count($order->line_items)}} items)</span>
+                                    <span align="left">Shipping Price</span>
+                                    <span align="left">Total Cost</span>
+                                </div>
+                                <div>
+                                    <span align="right">{{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD</span>
+                                    <span align="right">{{number_format($order->shipping_price,2)}} USD</span>
+                                    <span align="right">{{number_format($order->cost_to_pay,2)}} USD</span>
+                                </div>
                             </div>
                         </div>
                     </div>
