@@ -92,13 +92,13 @@
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($item->linked_variant != null)
+                                                    @php
+                                                        $full_path = asset('images/variants').'/'. $item->linked_variant->has_image->image;
+                                                        echo $full_path;
+                                                    @endphp
                                                     <img class="img-avatar"
                                                          @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                          @else @if($item->linked_variant->has_image->isV == 1)
-                                                                @php
-                                                                    $full_path = asset('images/variants').'/'. $item->linked_variant->has_image->image;
-                                                                    echo $full_path;
-                                                                @endphp
                                                                 src="{{asset('images/variants')}}/{{$item->linked_variant->has_image->image}}"
                                                                @else
                                                                 src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
