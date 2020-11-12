@@ -123,28 +123,28 @@
                         </tr>
                         </thead>
                         <?php $i = 1;?>
-                        @foreach($categories as $category)
-                            <div id="category-sortable" data-category="{{$category->id}}" data-route="{{route('product.update_image_position',$category->id)}}">
+                        <div id="category-sortable" data-category="{{$category->id}}" data-route="{{route('product.update_image_position',$category->id)}}">
+                            @foreach($categories as $category)
                                 <tbody class="js-table-sections-header preview-category" data-id="{{$category->id}}">
-                                <tr>
-                                    <td class="text-center">
-                                        <i class="fa fa-angle-right"></i>
-                                    </td>
-                                    <td class="font-w600"> @if($category->icon != null) <img class="img-avatar img-avatar48" src="{{asset('categories-icons')}}/{{$category->icon}}" alt="" data-ranking="{{ $category->ranking }}"> @endif {{ $category->ranking }} ) {{ $category->title }}</td>
-                                    <td>
-                                        <span class="label label-primary"></span>
-                                    </td>
-                                    <td class="hidden-xs btn-group">
+                                    <tr>
+                                        <td class="text-center">
+                                            <i class="fa fa-angle-right"></i>
+                                        </td>
+                                        <td class="font-w600"> @if($category->icon != null) <img class="img-avatar img-avatar48" src="{{asset('categories-icons')}}/{{$category->icon}}" alt="" data-ranking="{{ $category->ranking }}"> @endif {{ $category->ranking }} ) {{ $category->title }}</td>
+                                        <td>
+                                            <span class="label label-primary"></span>
+                                        </td>
+                                        <td class="hidden-xs btn-group">
 
-                                            <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                                    data-target="#modal-popin{{$category->id}}" title="Edit Category"><i
-                                                    class="fa fa-edit"></i></button>
-                                            <a href="{{ route('category.delete', $category->id) }}"
-                                               class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="Delete Category"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
-                                <div class="modal fade" id="modal-popin{{$category->id}}" tabindex="-1" role="dialog"
+                                                <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
+                                                        data-target="#modal-popin{{$category->id}}" title="Edit Category"><i
+                                                        class="fa fa-edit"></i></button>
+                                                <a href="{{ route('category.delete', $category->id) }}"
+                                                   class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="Delete Category"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="modal-popin{{$category->id}}" tabindex="-1" role="dialog"
                                      aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popin">
                                         <div class="modal-content">
@@ -246,8 +246,8 @@
                                     @endforeach
                                 @endif
                                 </tbody>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </table>
                 @else
                     <h3>no found</h3>
