@@ -123,7 +123,7 @@
                         </tr>
                         </thead>
                         <?php $i = 1;?>
-                        @foreach($categories->orderBy('ranking')->get() as $category)
+                        @foreach($categories as $category)
                             <tbody class="js-table-sections-header">
                             <tr>
                                 <td class="text-center">

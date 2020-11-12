@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $categories = Category::latest()->get();
+        $categories = Category::orderBy('ranking')->get();
         return view('setttings.category.create')->with([
             'categories' => $categories
         ]);
