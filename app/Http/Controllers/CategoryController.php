@@ -27,6 +27,10 @@ class CategoryController extends Controller
             $category = new Category();
         }
         $category->title = $request->cat_title;
+        if(Category::where('ranking', $request->ranking)->exists()) {
+            $temp_category = Category::where('ranking', $request->ranking)->first();
+            $temp_category->ranking = $category->ranking;
+        }
         $category->ranking = $request->ranking;
         $category->save();
         return redirect()->back()->with('success','Category created successfully!');
@@ -43,6 +47,10 @@ class CategoryController extends Controller
             $category->icon = $filename;
         }
         $category->title = $request->title;
+        if(Category::where('ranking', $request->ranking)->exists()) {
+            $temp_category = Category::where('ranking', $request->ranking)->first();
+            $temp_category->ranking = $category->ranking;
+        }
         $category->ranking = $request->ranking;
         $category->save();
         return redirect()->back()->with('success','Category updated successfully!');
