@@ -29,12 +29,8 @@ class CategoryController extends Controller
             $category = new Category();
         }
         $category->title = $request->cat_title;
-        if(Category::where('ranking', $request->ranking)->exists()) {
-            $temp_category = Category::where('ranking', $request->ranking)->first();
-            $temp_category->ranking = $category->ranking;
-            $temp_category->save();
-        }
-        $category->ranking = $request->ranking;
+        $highest_ranking = Category::max('ranking');
+        $category->ranking = $highest_ranking + 1;
         $category->save();
         return redirect()->back()->with('success','Category created successfully!');
     }

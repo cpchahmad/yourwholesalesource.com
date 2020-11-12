@@ -33,11 +33,6 @@
                                         <input class="form-control" type="text" id="cat" name="cat_title"
                                                placeholder="Enter Category Title here">
                                     </div>
-                                    <div class="form-material">
-                                        <label for="material-error">Ranking</label>
-                                        <input class="form-control" type="text" id="cat" name="ranking"
-                                               placeholder="Enter Category Ranking Here">
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
