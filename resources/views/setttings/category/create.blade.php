@@ -169,7 +169,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="">Ranking</label>
-                                                        <input type="text" class="form-control" name="title"
+                                                        <input type="text" class="form-control" name="ranking"
                                                                value="{{ $category->ranking }}">
                                                     </div>
                                                     <div class="form-group">
