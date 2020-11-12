@@ -129,7 +129,7 @@
                                         <td class="text-center">
                                             <i class="fa fa-angle-right"></i>
                                         </td>
-                                        <td class="font-w600"> @if($category->icon != null) <img class="img-avatar img-avatar48" src="{{asset('categories-icons')}}/{{$category->icon}}" alt="" data-ranking="{{ $category->ranking }}"> @endif {{ $category->ranking }} ) {{ $category->title }}</td>
+                                        <td class="font-w600"> @if($category->icon != null) <img class="img-avatar img-avatar48" src="{{asset('categories-icons')}}/{{$category->icon}}" alt="" data-ranking="{{ $category->ranking }}"> @endif {{ $category->title }}</td>
                                         <td>
                                             <span class="label label-primary"></span>
                                         </td>
