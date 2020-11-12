@@ -125,7 +125,7 @@
                         <?php $i = 1;?>
                         @foreach($categories as $category)
                             <div class="preview-category">
-                                <tbody class="js-table-sections-header " data-id="{{$category->id}}">
+                                <tbody class=" " data-id="{{$category->id}}">
                                     <tr>
                                         <td class="text-center">
                                             <i class="fa fa-angle-right"></i>
