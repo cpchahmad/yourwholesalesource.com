@@ -290,7 +290,6 @@
                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
                                                                if($var_price->type == 'fixed') {
                                                                    $price = $var_price->price * $qty;
-                                                                   echo $price;
                                                                    $price = number_format($price, 2);
                                                                    $total_discount = $total_discount + $price;
                                                                    $price = $price . " USD";
