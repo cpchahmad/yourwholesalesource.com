@@ -113,7 +113,7 @@
             <div class="block-content">
                 @if(count($categories) > 0)
                 @if ($categories)
-                    <table class="js-table-sections table table-hover table-borderless  table-vcenter" id="category-sortable" data-category="{{$category->id}}" data-rode="{{route('category.update_image_position',$category->id)}}">
+                    <table class="js-table-sections table table-hover table-borderless  table-vcenter">
                         <thead>
                         <tr>
                             <th style="width: 30px;"></th>
@@ -124,7 +124,6 @@
                         </thead>
                         <?php $i = 1;?>
                         @foreach($categories as $category)
-                            <div class="preview-category">
                                 <tbody class="js-table-sections-header " data-id="{{$category->id}}">
                                     <tr>
                                         <td class="text-center">
@@ -246,7 +245,6 @@
                                     @endforeach
                                 @endif
                                 </tbody>
-                            </div>
                         @endforeach
                     </table>
                 @else
