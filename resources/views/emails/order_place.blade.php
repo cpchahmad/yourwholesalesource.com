@@ -38,6 +38,10 @@
         text-align: right !important;
     }
 
+    tr:nth-child(even) {
+        background: #f1f1f1;
+    }
+
     .wrap .left{
         text-align: left !important;
     }
