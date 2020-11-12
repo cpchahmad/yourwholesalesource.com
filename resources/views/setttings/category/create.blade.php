@@ -123,7 +123,7 @@
                         </tr>
                         </thead>
                         <?php $i = 1;?>
-                        @foreach($categories as $category)
+                        @foreach($categories->orderBy('ranking')->get() as $category)
                             <tbody class="js-table-sections-header">
                             <tr>
                                 <td class="text-center">
@@ -166,6 +166,11 @@
                                                         <label for="">Title</label>
                                                         <input type="text" class="form-control" name="title"
                                                                value="{{ $category->title }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Ranking</label>
+                                                        <input type="text" class="form-control" name="title"
+                                                               value="{{ $category->ranking }}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="">Icon</label>
