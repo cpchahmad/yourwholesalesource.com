@@ -9,6 +9,10 @@
     {
         color:black;
     }
+
+    tr:nth-child(even) {
+        background: #f1f1f1;
+    }
     .email-content
     {
         /*max-width: 450px;*/
