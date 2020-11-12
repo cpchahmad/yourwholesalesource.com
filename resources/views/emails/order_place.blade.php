@@ -83,31 +83,31 @@
                         <div class="left">
                             <h2 style="color: #ffffff; margin-right: 5px; margin-top: 7px; margin-bottom: 7px;">Line Items
                                 @if($order->paid == '0')
-                                    <span class="" style="font-size: small"> (Unpaid </span>
+                                    <span class="custom-badge" style="font-size: small; margin-right: 5px;"> Unpaid </span>
                                 @elseif($order->paid == '1')
-                                    <span class="" style="font-size: small"> (Paid </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px; background-color: #46c37b;"> Paid </span>
                                 @elseif($order->paid == '2')
-                                    <span class="" style="font-size: small;"> (Refunded, </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> Refunded </span>
                                 @endif
 
                                 @if($order->status == 'Paid')
-                                    <span class="" style="font-size: small"> Unfulfilled)</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> Unfulfilled</span>
                                 @elseif($order->status == 'unfulfilled')
-                                    <span class="" style="font-size: small"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'partially-shipped')
-                                    <span class="" style="font-size: small;background: darkolivegreen;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'shipped')
-                                    <span class=" " style="font-size: small;background: orange;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'delivered')
-                                    <span class=" " style="font-size: small;background: deeppink;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'completed')
-                                    <span class=" " style="font-size: small;background: darkslategray;color: white;"> {{ucfirst($order->status)}})</span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}}</span>
                                 @elseif($order->status == 'new')
-                                    <span class="" style="font-size: small"> Draft) </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> Draft </span>
                                 @elseif($order->status == 'cancelled')
-                                    <span class="" style="font-size: small"> {{ucfirst($order->status)}}) </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;"> {{ucfirst($order->status)}} </span>
                                 @else
-                                    <span class="" style="font-size: small">  {{ucfirst($order->status)}}) </span>
+                                    <span  class="custom-badge" style="font-size: small; margin-right: 5px;">  {{ucfirst($order->status)}} </span>
                                 @endif
 
                             </h2>
@@ -120,7 +120,7 @@
                             <tr>
                                 <th>
                                 </th>
-                                <th style="width: 10%">Name</th>
+                                <th style="width: 10%; text-align: left;">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
