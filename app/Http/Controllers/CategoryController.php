@@ -7,6 +7,7 @@ use App\Image;
 use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use function foo\func;
 
 
 class CategoryController extends Controller
@@ -60,6 +61,15 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = Category::find($id);
+        $deleted_category_ranking = $category->ranking;
+
+        if(Category::max('ranking') != $deleted_category_ranking) {
+            $categories = Category::where('ranking', '>', $deleted_category_ranking)->get();
+            foreach ($categories as $c) {
+                $c->ranking = $c->ranking - 1;
+                $c->save();
+            }
+        }
         $category->delete();
         $subcategories = SubCategory::where('category_id', $id)->get();
         foreach ($subcategories as $subcategory) {
