@@ -27,6 +27,7 @@ class CategoryController extends Controller
             $category = new Category();
         }
         $category->title = $request->cat_title;
+        $category->ranking = $request->ranking;
         $category->save();
         return redirect()->back()->with('success','Category created successfully!');
     }
@@ -42,6 +43,7 @@ class CategoryController extends Controller
             $category->icon = $filename;
         }
         $category->title = $request->title;
+        $category->ranking = $request->ranking;
         $category->save();
         return redirect()->back()->with('success','Category updated successfully!');
     }
