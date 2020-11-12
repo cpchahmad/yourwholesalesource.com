@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Image;
+use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
 
@@ -96,5 +98,23 @@ class CategoryController extends Controller
         $category = SubCategory::find($id);
         $category->delete();
         return redirect()->back()->with('error','Deleted!');
+    }
+
+    public function update_image_position(Request $request){
+        $positions = $request->input('positions');
+        $categories = $request->input('category');
+        $images_array = [];
+
+
+        foreach ($positions as $index => $position){
+            $category = Category::where('id',$position)->first();
+            $category->ranking = $index + 1;
+            $category->save();
+        }
+
+        return response()->json([
+            'message' => 'success',
+        ]);
+
     }
 }

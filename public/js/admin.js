@@ -754,6 +754,36 @@ $(document).ready(function () {
     });
     // $( "#image-sortable" ).disableSelection();
 
+    $('#category-sortable').sortable({
+        update: function(event, ui) {
+            var orders = [];
+            $(this).find('.preview-category').each(function () {
+                orders.push($(this).data('id'));
+            });
+            console.log(orders);
+            $.ajax({
+                url: $('#category-sortable').data('route'),
+                method:'get',
+                data:{
+                    positions: orders,
+                    category: $('#category-sortable').data('category'),
+                },
+                success:function (response) {
+                    if(response.message === 'success'){
+                        alertify.success('Image Position Changed Successfully!');
+                    }
+                    else{
+                        alertify.error('Internal Server Error!');
+
+                    }
+                },
+                error:function(){
+                    alertify.error('Internal Server Error!');
+                }
+            });
+        }
+    });
+
     /* Approve Bank Transfer JS */
     $('body').on('click','.approve-bank-transfer-button',function () {
         var button = $(this);
