@@ -98,7 +98,8 @@
                                                              @php
                                                                  $path = asset('images/variants').'/'. $item->linked_variant->has_image->image;
                                                                  if(substr_count($path, "https") > 1) {
-                                                                     $path = explode("variants/",$path);
+                                                                     $path_array = explode("variants/",$path);
+                                                                     $path = $path_array[1];
                                                                  }
 
                                                              @endphp
