@@ -95,7 +95,7 @@
                             @endif
                         </div>
                         <hr>
-                        @if(count($product->has_platforms) > 0)
+                        @if($product->has_platform && count($product->has_platforms) > 0)
                             <div class="tags" style="margin-top: 5px">
 
                                 <h4 style="margin-bottom: 5px">Warned Platforms</h4>
