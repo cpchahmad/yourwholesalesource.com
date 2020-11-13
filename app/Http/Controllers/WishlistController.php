@@ -334,6 +334,8 @@ class WishlistController extends Controller
                 /*Create and Synced Product to Admin*/
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
+
+//                dump(123, $product->id);
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
                 $wish->status_id = 5;
                 $wish->related_product_id = $related_product_id;
@@ -472,7 +474,10 @@ class WishlistController extends Controller
                     $retailerProduct->barcode = $variant->barcode;
                     $retailerProduct->save();
                 }
+//                dump(456, $retailerProduct->linked_product_id);
+
                 $retailerProduct->linked_product_id = $linked_product_id;
+                $retailerProduct->save();
 
                 $retailerProductVariant->save();
 
