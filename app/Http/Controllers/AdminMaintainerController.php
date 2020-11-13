@@ -55,7 +55,7 @@ class AdminMaintainerController extends Controller
                 $retailer_product = $item->linked_product;
                 $retailer_variant = $item->linked_variant;
                 $admin_product = $retailer_product->linked_product;
-                if (count($admin_product->hasVariants) > 0) {
+                if ($admin_product && count($admin_product->hasVariants) > 0) {
                     $variant = $admin_product->hasVariants->where('option1', $retailer_variant->option1)
                         ->where('option2', $retailer_variant->option2)
                         ->where('option3', $retailer_variant->option3)->first();
