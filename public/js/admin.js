@@ -79,7 +79,9 @@ $(document).ready(function () {
     });
 
     $(document).on('change', '#bulk-min-qty', function() {
+        console.log(324);
        var bulk_min_qty = $(this).val();
+       console.log(bulk_min_qty);
        var min_qty_row = $('.min_qty_row');
        console.log(min_qty_row);
        min_qty_row.each(row => {
