@@ -887,7 +887,7 @@ class AdminOrderController extends Controller
 
 
 
-        $ids = [2,3,4,5,6,7,11,12,14,15,19,22,25,26,28];
+        $ids = [36,37,38,39,40,41,43,45,47,49,51];
         for($i =0 ; $i < count($ids); $i++) {
             $shop = $this->helper->getSpecificShop($ids[$i]);
 
