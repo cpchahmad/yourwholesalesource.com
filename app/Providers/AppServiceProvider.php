@@ -88,11 +88,13 @@ class AppServiceProvider extends ServiceProvider
             $notifications_count = $query->orderBy('created_at','DESC')->count();
 
             $wishlist_request_count = Wishlist::where('status_id', 1)->count();
+            $wishlist_accept_count = Wishlist::where('status_id', 3)->count();
             $wallet_request_count = WalletRequest::where('status', 0)->count();
             $refund_request_count = Refund::where('status', 'New')->count();
             $tickets_request_count = Ticket::where('status_id', 1)->count();
 
             $manager_wishlist_request_count = Wishlist::where('manager_id' ,Auth::id())->where('status_id', 1)->count();
+            $manager_wishlist_accept_count = Wishlist::where('manager_id' ,Auth::id())->where('status_id', 3)->count();
             $manager_refund_request_count = Refund::where('manager_id',Auth::id())->where('status', 'New')->count();
             $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->count();
 
@@ -102,10 +104,12 @@ class AppServiceProvider extends ServiceProvider
                 'notifications' => $notifications,
                 'notifications_count' =>$notifications_count,
                 'wishlist_request_count' => $wishlist_request_count,
+                'wishlist_accept_count' => $wishlist_accept_count,
                 'wallet_request_count' => $wallet_request_count,
                 'refund_request_count' => $refund_request_count,
                 'tickets_request_count' => $tickets_request_count,
                 'manager_wishlist_request_count' => $manager_wishlist_request_count,
+                'manager_wishlist_accept_count' => $manager_wishlist_accept_count,
                 'manager_refund_request_count' => $manager_refund_request_count,
                 'manager_tickets_request_count' => $manager_tickets_request_count,
                 'manager_wallet_request_count' => $manager_wallet_request_count,

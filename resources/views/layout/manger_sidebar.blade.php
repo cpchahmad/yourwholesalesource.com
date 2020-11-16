@@ -118,6 +118,13 @@
                 </a>
             </div>
 
+            <div class="d-inline-block mr-3 badge badge-primary text-white">
+                <a href="/managers/wishlist?status=3" class="text-white">
+                    Pending Accepted Wishlists
+                    <span class="" style="font-size: 13px"> {{$manager_wishlist_accept_count}} </span>
+                </a>
+            </div>
+
             <div class="d-inline-block mr-3 badge badge-success text-white">
                 <a href="/managers/wallets-requests" class="text-white">
                     Wallet Requests
