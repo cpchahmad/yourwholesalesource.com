@@ -722,7 +722,7 @@
                                                         @endif
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control min-qty-row" name="min_qty[]">
+                                                                <input  type="number" class="form-control" name="min_qty[]">
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <input  type="number" class="form-control" name="max_qty[]">
@@ -802,7 +802,7 @@
                                                             @foreach($v->has_tiered_prices as $item)
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">
+                                                                        <input  type="number" class="form-control min-qty-row" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="max_qty{{$v->id}}[]" value="{{ $item->max_qty }}">
