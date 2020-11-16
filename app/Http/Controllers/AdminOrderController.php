@@ -888,36 +888,36 @@ class AdminOrderController extends Controller
 
 
         $ids = [55,56,57,58,59,63,67,71,75,78,81,83,84,85,90,92];
-//        for($i =0 ; $i < count($ids); $i++) {
-//            $shop = $this->helper->getSpecificShop($ids[$i]);
-//
-//            $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
-//
-//            if($response->errors) {
-//                continue;
-//            }
-//
-//            $service_ids = [];
-//            if(count($response->body->fulfillment_services) > 0){
-//                foreach ($response->body->fulfillment_services as $service) {
-//                    array_push($service_ids, $service->id);
-//                }
-//
-//                foreach ($service_ids as $id) {
-//                    $data = [
-//                        'fulfillment_service' => [
-//                            'callback_url' => 'https://app.wefullfill.com',
-//                        ]
-//                    ];
-//
-//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2020-04/fulfillment_services/'.$id.'.json',$data);
-//
-//                    if($response->errors) {
-//                        dd($response);
-//                    }
-//                }
-//            }
-//        }
+        for($i =0 ; $i < count($ids); $i++) {
+            $shop = $this->helper->getSpecificShop($ids[$i]);
+
+            $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
+
+            if($response->errors) {
+                continue;
+            }
+
+            $service_ids = [];
+            if(count($response->body->fulfillment_services) > 0){
+                foreach ($response->body->fulfillment_services as $service) {
+                    array_push($service_ids, $service->id);
+                }
+
+                foreach ($service_ids as $id) {
+                    $data = [
+                        'fulfillment_service' => [
+                            'callback_url' => 'https://app.wefullfill.com',
+                        ]
+                    ];
+
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2020-04/fulfillment_services/'.$id.'.json',$data);
+
+                    if($response->errors) {
+                        dd($response);
+                    }
+                }
+            }
+        }
 
         dd(567);
     }
@@ -1019,9 +1019,12 @@ class AdminOrderController extends Controller
 
 
     public function manual_push_order($id) {
-        $order = RetailerOrder::find($id);
+        $retailer_order = RetailerOrder::find($id);
 
-        dd($order, 123);
+        $this->admin_maintainer->sync_order_to_admin_store($retailer_order);
+
+        return redirect()->back()->with('success','Order Synced to Wefulfill Successfully');
+
     }
 }
 
