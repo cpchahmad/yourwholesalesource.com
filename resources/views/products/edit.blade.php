@@ -190,6 +190,24 @@
 {{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
                                     <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Variants</a>
                                 </div>
+                                <hr>
+                                <div class="row mb-3">
+                                    <div class="col-md-2">
+                                        <label for="">Bulk Pricing</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="">Price</label>
+                                        <input id="bulk-price" type="number" class="form-control" >
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="">Cost</label>
+                                        <input id="bulk-cost" type="number" class="form-control" >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Weight</label>
+                                        <input  type="number" step="any" class="form-control"  placeholder="" id="bulk-weight">
+                                    </div>
+                                </div>
                             </div>
                             <div class="block-content" style="padding-top: 0 !important;">
                                 <table class="table variants-div js-table-sections table-hover table-responsive">
