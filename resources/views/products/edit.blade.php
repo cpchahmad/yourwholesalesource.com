@@ -618,10 +618,12 @@
                     </div>
                     {{--Tiered Pricing Section--}}
                     <div class="block">
-                        <div class="block-header d-inline-flex" style="width: 100%" >
+                        <div class="block-header d-block" style="width: 100%" >
                             <h3 class="block-title">Tiered Pricing</h3>
-                            <h5>Bulk Tiered Pricing</h5>
                             <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <label for="">Bulk Pricing</label>
+                                </div>
                                 <div class="col-md-2">
                                     <label for="">Min Qty</label>
                                     <input  type="number" class="form-control" >
