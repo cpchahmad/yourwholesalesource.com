@@ -620,28 +620,29 @@
                     <div class="block">
                         <div class="block-header d-block" style="width: 100%" >
                             <h3 class="block-title">Tiered Pricing</h3>
+                            <hr>
                             <div class="row mb-3">
                                 <div class="col-md-2">
                                     <label for="">Bulk Pricing</label>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">Min Qty</label>
-                                    <input  type="number" class="form-control" >
+                                    <input id="bulk-min-qty" type="number" class="form-control" >
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">Max Qty</label>
-                                    <input  type="number" class="form-control" >
+                                    <input id="bulk-max-iqty" type="number" class="form-control" >
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Type</label>
-                                    <select name="type[]" id="" class="form-control">
+                                    <select name="type[]" id="" class="form-control" id="bulk-type">
                                         <option value="fixed">Fixed</option>
                                         <option value="discount">Discount</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">$/Discount</label>
-                                    <input  type="number" step="any" class="form-control"  placeholder="">
+                                    <input  type="number" step="any" class="form-control"  placeholder="" id="bulk-price">
                                 </div>
                             </div>
                         </div>
@@ -694,7 +695,7 @@
                                                             @foreach($product->has_tiered_prices as $item)
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
+                                                                        <input  type="number" class="form-control min_qty_row" name="min_qty[]" value="{{ $item->min_qty }}">
                                                                     </div>
                                                                     <div class="col-md-2">
                                                                         <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">

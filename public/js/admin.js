@@ -78,10 +78,21 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('change', '#bulk-min-qty', function() {
+       var bulk_min_qty = $(this).val();
+       var min_qty_row = $('.min_qty_row');
+       min_qty_row.forEach(row => {
+           row.val(bulk_min_qty);
+       });
+    });
+
 
 
 
     // Product Tiered Price Feature End
+
+
+
     var radioState;
 
     $('#example-radio-best-seller').on('click', function(e) {
