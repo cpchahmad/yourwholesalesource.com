@@ -880,21 +880,52 @@ class AdminOrderController extends Controller
         }
     }
 
+    public function changeFulfillmentServiceUrl() {
+        $shop = $this->helper->getSpecificShop(1);
+        $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
+        dd(34, $response);
+
+
+
+        $ids = [67,71,75,78,81,83];
+        for($i =0 ; $i < count($ids); $i++) {
+            $shop = $this->helper->getSpecificShop($ids[$i]);
+
+            $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
+
+            if($response->errors) {
+                continue;
+            }
+
+            $service_ids = [];
+            if(count($response->body->fulfillment_services) > 0){
+                foreach ($response->body->fulfillment_services as $service) {
+                    array_push($service_ids, $service->id);
+                }
+
+                foreach ($service_ids as $id) {
+                    $data = [
+                        'fulfillment_service' => [
+                            'callback_url' => 'https://app.wefullfill.com',
+                        ]
+                    ];
+
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2020-04/fulfillment_services/'.$id.'.json',$data);
+                }
+            }
+        }
+
+        dd(123);
+    }
+
+
     public function testWebhook() {
 
-//        $shop = $this->helper->getSpecificShop(71);
-//
-//        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
-//
-//        dd(123, $response);
+        $shop = $this->helper->getSpecificShop(71);
 
+        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
-                $shop = $this->helper->getSpecificShop(71);
-                $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
-                dd(324, $response);
-
-
-
+        dd(123, $response);
 
         $ids = [67,71,75,78,81,83];
         for($i =0 ; $i < count($ids); $i++) {

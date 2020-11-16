@@ -25,7 +25,7 @@ class InventoryController extends Controller
         $data = [
             'fulfillment_service' => [
                 'name' => 'WeFullFill',
-                'callback_url' => env('APP_URL'),
+                'callback_url' => 'https://app.wefullfill.com',
                 "inventory_management"=> true,
                 "tracking_support"=>false,
                 "requires_shipping_method"=> false,
