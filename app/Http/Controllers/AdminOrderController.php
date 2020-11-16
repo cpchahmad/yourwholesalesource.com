@@ -881,9 +881,9 @@ class AdminOrderController extends Controller
     }
 
     public function changeFulfillmentServiceUrl() {
-//        $shop = $this->helper->getSpecificShop(1);
-//        $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
-//        dd(34, $response);
+        $shop = $this->helper->getSpecificShop(1);
+        $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
+        dd(34, $response);
 
 
 
