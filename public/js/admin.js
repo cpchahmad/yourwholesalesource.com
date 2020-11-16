@@ -111,6 +111,8 @@ $(document).ready(function () {
 
     // Bulk Tiered Pricing Feature End
 
+    // Bulk Variant Pricing & Cost Feature Start
+
     $(document).on('input', '#bulk-var-price', function() {
         var bulk_price = $(this).val();
         $('.var-price-row').each(function(){
@@ -124,6 +126,9 @@ $(document).ready(function () {
             $(this).val(bulk_cost);
         });
     });
+
+    // Bulk Variant Pricing & Cost Feature End
+
 
 
 
