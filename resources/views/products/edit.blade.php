@@ -635,7 +635,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Type</label>
-                                    <select name="type[]" id="" class="form-control" id="bulk-type">
+                                    <select name="type[]" class="form-control" id="bulk-type">
                                         <option value="fixed">Fixed</option>
                                         <option value="discount">Discount</option>
                                     </select>
