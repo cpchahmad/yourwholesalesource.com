@@ -722,7 +722,7 @@
                                                         @endif
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control min_qty_row" name="min_qty[]">
+                                                                <input  type="number" class="form-control min-qty-row" name="min_qty[]">
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <input  type="number" class="form-control" name="max_qty[]">

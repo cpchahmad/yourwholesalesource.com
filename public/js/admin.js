@@ -79,10 +79,8 @@ $(document).ready(function () {
     });
 
     $(document).on('input', '#bulk-min-qty', function() {
-        console.log(324);
        var bulk_min_qty = $(this).val();
-       console.log(bulk_min_qty);
-       var min_qty_row = $('.min_qty_row');
+       var min_qty_row = $('.min-qty-row');
        console.log(min_qty_row);
        min_qty_row.each(row => {
            row.val(bulk_min_qty);
