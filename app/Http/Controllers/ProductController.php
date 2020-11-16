@@ -6,10 +6,13 @@ use App\AdditionalTab;
 use App\Category;
 use App\Console\Commands\AppChangeQuantitySku;
 use App\Exports\ProductsExport;
+use App\Exports\ProductVariantExport;
+use App\Exports\RetailerOrderExport;
 use App\Image;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerImage;
+use App\RetailerOrder;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\TieredPrice;
@@ -1522,6 +1525,14 @@ class ProductController extends Controller
         $product = Product::find($id);
         $this->notify->generate('Product','Product Update',$product->title.' Information Updated',$product);
         Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+    }
+
+    public function download_sku($id)
+    {
+        $product = Product::find($id);
+        $variants = $product->hasVariants;
+        return Excel::download(new ProductVariantExport($variants), 'sku.csv');
+
     }
 
 
