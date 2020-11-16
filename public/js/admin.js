@@ -71,7 +71,6 @@ $(document).ready(function () {
             success: function(res) {
                 var response = res.data;
                 if(response == 'success') {
-                    console.log(row);
                     row.empty();
                 }
             }
@@ -85,24 +84,28 @@ $(document).ready(function () {
     $(document).on('input', '#bulk-min-qty', function() {
        var bulk_min_qty = $(this).val();
         $('.min-qty-row').each(function(){
-            console.log($(this));
             $(this).val(bulk_min_qty);
         });
     });
 
     $(document).on('input', '#bulk-max-qty', function() {
-        var bulk_min_qty = $(this).val();
+        var bulk_max_qty = $(this).val();
         $('.max-qty-row').each(function(){
-            console.log($(this));
-            $(this).val(bulk_min_qty);
+            $(this).val(bulk_max_qty);
+        });
+    });
+
+    $(document).on('change', '#bulk-type', function() {
+        var selected_option = $(this).children("option:selected").val();
+        $('.type-row').each(function(){
+            $(this).find(`option[value=${selected_option}]`).attr('selected',true);
         });
     });
 
     $(document).on('input', '#bulk-price', function() {
-        var bulk_min_qty = $(this).val();
+        var bulk_price = $(this).val();
         $('.price-row').each(function(){
-            console.log($(this));
-            $(this).val(bulk_min_qty);
+            $(this).val(bulk_price);
         });
     });
 
