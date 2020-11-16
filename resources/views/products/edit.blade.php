@@ -631,7 +631,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">Max Qty</label>
-                                    <input id="bulk-max-iqty" type="number" class="form-control" >
+                                    <input id="bulk-max-qty" type="number" class="form-control" >
                                 </div>
                                 <div class="col-md-3">
                                     <label for="">Type</label>

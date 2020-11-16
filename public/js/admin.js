@@ -78,7 +78,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('change', '#bulk-min-qty', function() {
+    $(document).on('input', '#bulk-min-qty', function() {
         console.log(324);
        var bulk_min_qty = $(this).val();
        console.log(bulk_min_qty);
