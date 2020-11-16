@@ -97,7 +97,9 @@ $(document).ready(function () {
 
     $(document).on('change', '#bulk-type', function() {
         var selected_option = $(this).children("option:selected").val();
+        console.log('value'+ selected_option);
         $('.type-row').each(function(){
+            console.log($(this));
             $(this).find(`option[value=${selected_option}]`).attr('selected',true);
         });
     });
