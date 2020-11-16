@@ -888,6 +888,14 @@ class AdminOrderController extends Controller
 //
 //        dd(123, $response);
 
+
+                $shop = $this->helper->getSpecificShop(71);
+                $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
+                dd(324, $response);
+
+
+
+
         $ids = [67,71,75,78,81,83];
         for($i =0 ; $i < count($ids); $i++) {
             $shop = $this->helper->getSpecificShop($ids[$i]);
