@@ -78,6 +78,10 @@ $(document).ready(function () {
         });
     });
 
+    // Product Tiered Price Feature End
+
+    // Bulk Tiered Pricing Feature Start
+
     $(document).on('input', '#bulk-min-qty', function() {
        var bulk_min_qty = $(this).val();
         $('.min-qty-row').each(function(){
@@ -86,10 +90,28 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('input', '#bulk-max-qty', function() {
+        var bulk_min_qty = $(this).val();
+        $('.max-qty-row').each(function(){
+            console.log($(this));
+            $(this).val(bulk_min_qty);
+        });
+    });
+
+    $(document).on('input', '#bulk-price', function() {
+        var bulk_min_qty = $(this).val();
+        $('.price-row').each(function(){
+            console.log($(this));
+            $(this).val(bulk_min_qty);
+        });
+    });
+
+    // Bulk Tiered Pricing Feature End
 
 
 
-    // Product Tiered Price Feature End
+
+
 
 
 

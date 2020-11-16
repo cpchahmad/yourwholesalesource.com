@@ -832,16 +832,16 @@
                                                                 <input  type="number" class="form-control min-qty-row" name="min_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty{{$v->id}}[]">
+                                                                <input  type="number" class="form-control max-qty-row" name="max_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select name="type{{$v->id}}[]" id="" class="form-control">
+                                                                <select name="type{{$v->id}}[]" id="" class="form-control type-row">
                                                                     <option value="fixed">Fixed</option>
                                                                     <option value="discount">Discount</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control tired_price" name="tiered_price{{$v->id}}[]"  placeholder="">
+                                                                <input  type="number" step="any" class="form-control tired_price price-row" name="tiered_price{{$v->id}}[]"  placeholder="">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                 <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $v->id }}">+</button>
