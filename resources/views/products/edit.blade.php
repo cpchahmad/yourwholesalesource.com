@@ -193,21 +193,17 @@
                             </div>
 
                             <hr>
-                            <div class="d-block row mb-3">
+                            <div class="ml-2 row mb-3">
                                 <div class="col-md-2">
                                     <label for="">Bulk Pricing</label>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">Price</label>
-                                    <input id="bulk-price" type="number" class="form-control" >
+                                    <input id="bulk-var-price" type="number" class="form-control" >
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">Cost</label>
-                                    <input id="bulk-cost" type="number" class="form-control" >
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Weight</label>
-                                    <input  type="number" step="any" class="form-control"  placeholder="" id="bulk-weight">
+                                    <input id="bulk-var-cost" type="number" class="form-control" >
                                 </div>
                             </div>
                             <div class="block-content" style="padding-top: 0 !important;">
@@ -274,10 +270,10 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
+                                                        <input type="text" class="form-control var-price-row" name="price" placeholder="$0.00" value="{{$v->price}}">
                                                     </td>
 
-                                                    <td><input type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control var-cost-row" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
                                                     <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                                     <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
                                                     <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">

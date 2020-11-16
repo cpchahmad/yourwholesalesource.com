@@ -111,6 +111,21 @@ $(document).ready(function () {
 
     // Bulk Tiered Pricing Feature End
 
+    $(document).on('input', '#bulk-var-price', function() {
+        var bulk_price = $(this).val();
+        $('.var-price-row').each(function(){
+            $(this).val(bulk_price);
+        });
+    });
+
+    $(document).on('input', '#bulk-var-cost', function() {
+        var bulk_cost = $(this).val();
+        $('.var-cost-row').each(function(){
+            $(this).val(bulk_cost);
+        });
+    });
+
+
 
 
 
