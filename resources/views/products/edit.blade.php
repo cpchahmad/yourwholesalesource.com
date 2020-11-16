@@ -172,6 +172,27 @@
                     @endif
                     @if($product->variants == 1)
                         <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">Weight</h3>
+                            </div>
+                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="type" value="pricing">
+                                <div class="block-content">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-12 ">
+                                                    <label>Weight</label>
+                                                    <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
                                 <h3 class="block-title">
                                     Variant
