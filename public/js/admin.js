@@ -80,8 +80,10 @@ $(document).ready(function () {
 
     $(document).on('input', '#bulk-min-qty', function() {
        var bulk_min_qty = $(this).val();
-       console.log(bulk_min_qty);
-       $(document).find('.min-qty-row').val(bulk_min_qty);
+        $(".min-qty-row").each(function(){
+            console.log($(this));
+            $(this).val(bulk_min_qty);
+        });
     });
 
 
