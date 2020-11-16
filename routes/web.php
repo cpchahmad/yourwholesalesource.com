@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
     Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
-    Route::get('/download/sku/csv','ProductController@download_sku')->name('product.download.sku.csv');
+    Route::get('/download/sku/csv/{id}','ProductController@download_sku')->name('product.download.sku.csv');
     Route::any('/products/{id}/update','ProductController@update')->name('product.update');
     Route::post('/products/{id}/add/tiered/price','ProductController@addTieredPrice')->name('product.add.tiered.price');
     Route::post('/single-product/{id}/add/tiered/price','ProductController@addTieredPriceForProductWithoutVariant')->name('single.product.add.tiered.price');
