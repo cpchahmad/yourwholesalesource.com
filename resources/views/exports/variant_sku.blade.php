@@ -18,9 +18,9 @@
                     No image Found
                 @else
                     @if($v->has_image->isV == 0)
-                        {{asset('images')}}/{{$v->has_image->image}}
+                        {{$v->has_image->image}}
                     @else
-                        {{asset('images/variants')}}/{{$v->has_image->image}}
+                        {{$v->has_image->image}}
                     @endif
                 @endif
             </td>
