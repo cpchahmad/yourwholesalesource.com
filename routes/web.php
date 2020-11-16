@@ -106,8 +106,10 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/ticket-category/{id}/delete','DefaultSettingsController@delete_ticket_categories')->name('ticket.category.delete');
     Route::get('/orders','AdminOrderController@index')->name('admin.orders');
     Route::get('/orders/view/{id}','AdminOrderController@view_order')->name('admin.order.view');
+    Route::get('/orders/view/{id}','AdminOrderController@view_order')->name('admin.order.view');
     Route::get('/orders/view/{id}/fulfillment','AdminOrderController@fulfill_order')->name('admin.order.fulfillment');
     Route::post('/orders/view/{id}/fulfillment/process','AdminOrderController@fulfillment_order')->name('admin.order.fulfillment.process');
+    Route::get('manual/push/order/to/wefulfill/{id}', 'AdminOrderController@manual_push_order')->name('admin.manual_push_to_wefulfill');
     Route::get('/orders/{id}/fulfillment/cancel/{fulfillment_id}','AdminOrderController@fulfillment_cancel_order')->name('admin.order.fulfillment.cancel');
     Route::post('/orders/{id}/fulfillment/tracking','AdminOrderController@fulfillment_add_tracking')->name('admin.order.fulfillment.tracking');
     Route::get('/orders/{id}/mark-as-delivered','AdminOrderController@mark_as_delivered')->name('admin.order.mark_as_delivered');

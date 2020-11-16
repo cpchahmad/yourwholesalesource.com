@@ -973,6 +973,13 @@ class AdminOrderController extends Controller
 
         dd(123);
     }
+
+
+    public function manual_push_order($id) {
+        $order = RetailerOrder::find($id);
+
+        dd($order, 123);
+    }
 }
 
 

@@ -32,6 +32,9 @@
                 @if($order->paid != 2)
                     <button class="btn btn-sm btn-danger" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('app.refund_cancel_order',$order->id)}}'">Cancel and Refund Order</button>
                 @endif
+                @if($order->admin_shopify_id == null &&  $order->admin_shopify_name == null)
+                    <button class="btn btn-sm btn-success" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.manual_push_to_wefulfill',$order->id)}}'">Sync to Wefulfill Store</button>
+                @endif
             </div>
         </div>
 
