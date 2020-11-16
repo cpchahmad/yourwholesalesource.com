@@ -195,7 +195,7 @@
                             <hr>
                             <div class="ml-2 row mb-3">
                                 <div class="col-md-2">
-                                    <label for="">Bulk Pricing</label>
+                                    <label for="">Bulk Pricing/Cost</label>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">Price</label>
