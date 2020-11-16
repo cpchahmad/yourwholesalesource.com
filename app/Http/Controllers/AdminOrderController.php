@@ -881,13 +881,13 @@ class AdminOrderController extends Controller
     }
 
     public function changeFulfillmentServiceUrl() {
-        $shop = $this->helper->getSpecificShop(1);
-        $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
-        dd(34, $response);
+//        $shop = $this->helper->getSpecificShop(1);
+//        $response = $shop->api()->rest('GET', '/admin/fulfillment_services.json');
+//        dd(34, $response);
 
 
 
-        $ids = [67,71,75,78,81,83];
+        $ids = [1];
         for($i =0 ; $i < count($ids); $i++) {
             $shop = $this->helper->getSpecificShop($ids[$i]);
 
@@ -911,6 +911,10 @@ class AdminOrderController extends Controller
                     ];
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2020-04/fulfillment_services/'.$id.'.json',$data);
+
+                    if($response->errors) {
+                        dd($response);
+                    }
                 }
             }
         }
