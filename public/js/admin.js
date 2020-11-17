@@ -910,6 +910,18 @@ $(document).ready(function () {
         }
     });
 
+    $('body').on('change','.preference-check-fixed',function () {
+        if($(this).val() === '0'){
+            $(this).parents('.form-group').next().show();
+            $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
+        }
+        else{
+            $(this).parents('.form-group').next().hide();
+            $(this).parents('.form-group').next().find('.shop-preference').attr('required',false);
+        }
+    });
+
+
     if(!$('body').find('.rating-stars').hasClass('disabled')){
         /* 1. Visualizing things on Hover - See next part for action on click */
         $('body').on('mouseover','#stars li',function(){
