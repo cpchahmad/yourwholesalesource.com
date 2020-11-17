@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('/charge/payment/save','DefaultSettingsController@save_percentage')->name('payment.charge.save');
     Route::post('/save/tiered/pricing/preferences','DefaultSettingsController@save_tiered_pricing_preferences')->name('save.tiered.pricing.preferences');
     Route::post('/save/general/discount/preferences','DefaultSettingsController@save_general_discount_preferences')->name('save.general.discount.preferences');
+    Route::post('/save/fixed/discount/preferences','DefaultSettingsController@save_fixed_discount_preferences')->name('save.fixed.discount.preferences');
     Route::any('/default/settings/{id}/update','DefaultSettingsController@update')->name('default_info.update');
     Route::post('/create/platform','DefaultSettingsController@create_platform')->name('create_platform');
     Route::post('/update/platform/{id}','DefaultSettingsController@update_platform')->name('update_platform');

@@ -7,6 +7,7 @@ use App\Customer;
 use App\DefaultInfo;
 use App\Exports\CustomersExport;
 use App\GeneralDiscountPreferences;
+use App\GeneralFixedPricePreferences;
 use App\Product;
 use App\Refund;
 use App\Shop;
@@ -652,11 +653,32 @@ class DefaultSettingsController extends Controller
         }
 
         $preferences->discount_amount = $request->discount;
-        $preferences->type = $request->type;
 
         $preferences->save();
 
         return redirect()->back()->with('success', 'General Discount Preferences Saved Successfully!');
+    }
+
+    public function save_fixed_discount_preferences(Request $request) {
+        $preferences = GeneralFixedPricePreferences::first();
+        if($request->global == 1) {
+            $preferences->global = 1;
+        }
+        else {
+            $preferences->global = 0;
+            if($request->shops) {
+                $preferences->stores_id = json_encode($request->shops);
+            }
+            if($request->non_shopify_users) {
+                $preferences->users_id = json_encode($request->non_shopify_users);
+            }
+        }
+
+        $preferences->fixed_amount = $request->discount;
+
+        $preferences->save();
+
+        return redirect()->back()->with('success', 'General Fixed Price Preferences Saved Successfully!');
     }
 
     public function getTieredPricingPreferences()
