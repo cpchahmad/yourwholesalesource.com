@@ -911,6 +911,7 @@ $(document).ready(function () {
     });
 
     $('body').on('change','.preference-check-fixed',function () {
+        console.log(34);
         if($(this).val() === '0'){
             $(this).parents('.form-group').next().show();
             $(this).parents('.form-group').next().find('.shop-preference').attr('required',true);
