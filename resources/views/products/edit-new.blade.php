@@ -648,7 +648,7 @@
                                                         <span style="vertical-align: top;">Type</span>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <span style="vertical-align: top;">$/Discount</span>
+                                                        <span style="vertical-align: top;">Fixed($)/Discount(%)</span>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <span style=""></span>

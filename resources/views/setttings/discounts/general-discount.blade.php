@@ -41,7 +41,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="">$/Discount</label>
+                                <label class="">Fixed($)/Discount(%)</label>
                                 <input type="text" class="form-control" name="discount" value="{{ \App\GeneralDiscountPreferences::first()->discount_amount }}" placeholder="Enter the discount %, you wants to apply">
                             </div>
 
