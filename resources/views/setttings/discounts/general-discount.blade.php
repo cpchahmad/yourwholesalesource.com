@@ -110,11 +110,11 @@
                                 <label class="">Preferences</label>
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" class="custom-control-input preference-fixed" id="prefer-global-fixed" name="global" value="1" @if(\App\GeneralFixedPricePreferences::first()->global == 1) checked="" @endif>
-                                    <label class="custom-control-label " for="prefer-global-fixed">Global</label>
+                                    <label class="custom-control-label" for="prefer-global-fixed">Global</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" class="custom-control-input preference-fixed" id="prefer-store-fixed" name="global" value="0"  @if(\App\GeneralFixedPricePreferences::first()->global == 0) checked="" @endif>
-                                    <label class="custom-control-label" for=prefer-store-fixed">Selected Stores / Users</label>
+                                    <label class="custom-control-label" for="prefer-store-fixed">Selected Stores / Users</label>
                                 </div>
                             </div>
 
