@@ -911,7 +911,7 @@ $(document).ready(function () {
         }
     });
 
-    $('body').on('change','.preference-check-fixed',function () {
+    $('body').on('change','.preference-fixed',function () {
         console.log(34);
         if($(this).val() === '0'){
             $(this).parents('.form-group').next().show();
