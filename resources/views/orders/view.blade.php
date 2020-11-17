@@ -251,7 +251,11 @@
                                             @endif
 
                                             @if($is_general_discount && $is_applied_for_general_dsiscount)
-                                                {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
+                                                @if(\App\GeneralDiscountPreferences::first()->type == 'discount')
+                                                    {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
+                                                @else
+                                                    {{ number_format(\App\GeneralDiscountPreferences::first()->discount_amount, 2) }} $ off on whole order
+                                                @endif
                                             @endif
 
                                         </td>
@@ -356,12 +360,17 @@
                                 <td align="right">
                                     @php
                                         if($is_general_discount && $is_applied_for_general_dsiscount) {
-                                            $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
-                                            $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
-                                            $price = number_format($price, 2);
-                                            $total_discount = $total_discount + $price;
-                                            $total_discount = $order->cost_to_pay - $total_discount;
-                                        }
+                                            if(\App\GeneralDiscountPreferences::first()->type == 'discount') {
+                                               $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
+                                               $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
+                                               $price = number_format($price, 2);
+                                               $total_discount = $total_discount + $price;
+                                               $total_discount = $order->cost_to_pay - $total_discount;
+                                            }
+                                            else{
+                                               $total_discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
+                                            }
+                                       }
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
                                 </td>

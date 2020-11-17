@@ -318,11 +318,9 @@
 
                                             @if($is_general_discount && $is_applied_for_general_dsiscount)
                                                 @if(\App\GeneralDiscountPreferences::first()->type == 'discount')
-                                                    1
                                                     {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                                 @else
-                                                    2
-                                                    {{ \App\GeneralDiscountPreferences::first()->discount_amount }} $ off on whole order
+                                                    {{ number_format(\App\GeneralDiscountPreferences::first()->discount_amount, 2) }} $ off on whole order
                                                 @endif
                                             @endif
 
