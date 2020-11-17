@@ -29,7 +29,19 @@
                         @csrf
                         <div class="block-content">
                             <div class="form-group">
-                                <label class="">Discount(%)</label>
+                                <label class="">Type</label>
+                                <select name="type" id="" class="form-control">
+                                    @if(\App\GeneralDiscountPreferences::first()->type == "fixed")
+                                        <option selected value="fixed">Fixed</option>
+                                        <option value="discount">Discount</option>
+                                    @else
+                                        <option value="fixed">Fixed</option>
+                                        <option selected value="discount">Discount</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="">$/Discount</label>
                                 <input type="text" class="form-control" name="discount" value="{{ \App\GeneralDiscountPreferences::first()->discount_amount }}" placeholder="Enter the discount %, you wants to apply">
                             </div>
 

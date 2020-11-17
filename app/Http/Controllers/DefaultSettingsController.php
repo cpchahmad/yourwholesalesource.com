@@ -652,6 +652,7 @@ class DefaultSettingsController extends Controller
         }
 
         $preferences->discount_amount = $request->discount;
+        $preferences->type = $request->type;
 
         $preferences->save();
 
