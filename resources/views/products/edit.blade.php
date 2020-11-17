@@ -173,7 +173,7 @@
                     @if($product->variants == 1)
                         <div class="block">
                             <div class="block-header">
-                                <h3 class="block-title">Product Weight</h3>
+                                <h3 class="block-title">Product Weight/Quantity</h3>
                             </div>
                             <form action="{{route('product.update',$product->id)}}" method="post">
                                 @csrf
@@ -185,6 +185,10 @@
                                                 <div class="col-xs-12">
                                                     <label>Weight</label>
                                                     <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                </div>
+                                                <div class="col-xs-12 ">
+                                                    <label>Quantity</label>
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
                                                 </div>
                                             </div>
                                         </div>
