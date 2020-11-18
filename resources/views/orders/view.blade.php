@@ -94,7 +94,7 @@
                                 $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
                                 $line_item_count = count($order->line_items);
 
-                                if($line_item_count >= 2){
+                                if($line_item_count >= 2 && (!$order->checkStoreItem($order) > 0)){
                                     $is_general_discount = true;
                                 }
                                 else {
