@@ -270,7 +270,8 @@
                                             @endif
 
                                             @if($is_general_discount && $is_applied_for_general_fixed)
-                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount, 2) }} $ off on whole order
+                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($item->quantity-1), 2) }} $ off on whole order
+
                                             @endif
 
                                         </td>
@@ -383,7 +384,8 @@
                                          }
 
                                         if($is_general_discount && $is_applied_for_general_fixed) {
-                                           $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount;
+                                            $qty = (integer) $item->quantity;
+                                           $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($qty -1);
                                         }
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
