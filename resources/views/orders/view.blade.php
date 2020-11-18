@@ -102,6 +102,11 @@
                                     $stores = \App\GeneralDiscountPreferences::first()->stores_id;
                                     $store_array= json_decode($stores);
                                     if(in_array($order->shop_id, $store_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
+
+                                    $users = \App\GeneralDiscountPreferences::first()->users_id;
+                                    $users_array= json_decode($users);
+                                    if(in_array($order->user_id, $users_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
+
                                 }
 
                                 if(\App\GeneralFixedPricePreferences::first()->global == 1) {
@@ -111,6 +116,10 @@
                                     $stores = \App\GeneralFixedPricePreferences::first()->stores_id;
                                     $store_array= json_decode($stores);
                                     if(in_array($order->shop_id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
+
+                                    $users = \App\GeneralFixedPricePreferences::first()->users_id;
+                                    $users_array= json_decode($users);
+                                    if(in_array($user->id, $users_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
                                 }
 
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
@@ -120,6 +129,10 @@
                                     $stores = \App\TieredPricingPrefrences::first()->stores_id;
                                     $store_array= json_decode($stores);
                                     if(in_array($order->shop_id, $store_array)) { $is_applied = true; } else { $is_applied = false; }
+
+                                    $users = \App\TieredPricingPrefrences::first()->users_id;
+                                    $users_array= json_decode($users);
+                                    if(in_array($user->id, $users_array)) { $is_applied = true; } else { $is_applied = false; }
                                 }
 
                             @endphp
