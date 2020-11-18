@@ -270,7 +270,7 @@
                                             @endif
 
                                             @if($is_general_discount && $is_applied_for_general_fixed)
-                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($line_items->sum(quantity) - 1), 2) }} $ off on whole order
+                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($order->line_items->sum(quantity) - 1), 2) }} $ off on whole order
 
                                             @endif
 
