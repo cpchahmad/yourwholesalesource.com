@@ -91,9 +91,15 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
+                                $n = 0;
                                 $line_item_count = count($order->line_items);
 
-                                $line_item_count >= 2 ? $is_general_discount = true : $is_general_discount = false;
+                                if($line_item_count >= 2){
+                                    $is_general_discount = true
+                                }
+                                else {
+                                    $is_general_discount = false;
+                                }
 
                                 if(\App\GeneralDiscountPreferences::first()->global == 1) {
                                     $is_applied_for_general_dsiscount = true;
@@ -270,8 +276,12 @@
                                             @endif
 
                                             @if($is_general_discount && $is_applied_for_general_fixed)
-                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($order->line_items->sum('quantity') - 1), 2) }} $ off on whole order
-
+                                                @php
+                                                    if(!($item->fulfilled_by == 'store')) {
+                                                        $n += $item->quantity;
+                                                    }
+                                                @endphp
+                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
                                             @endif
 
                                         </td>
@@ -384,8 +394,7 @@
                                          }
 
                                         if($is_general_discount && $is_applied_for_general_fixed) {
-                                            $qty = (integer) $item->quantity;
-                                           $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($order->line_items->sum('quantity') - 1);
+                                           $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
                                         }
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
