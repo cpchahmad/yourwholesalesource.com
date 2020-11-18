@@ -110,7 +110,7 @@
                                 else {
                                     $stores = \App\GeneralFixedPricePreferences::first()->stores_id;
                                     $store_array= json_decode($stores);
-                                    if(in_array($shop->id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
+                                    if(in_array($order->shop_id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
                                 }
 
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
