@@ -104,6 +104,15 @@
                                     if(in_array($order->shop_id, $store_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
                                 }
 
+                                if(\App\GeneralFixedPricePreferences::first()->global == 1) {
+                                    $is_applied_for_general_fixed = true;
+                                }
+                                else {
+                                    $stores = \App\GeneralFixedPricePreferences::first()->stores_id;
+                                    $store_array= json_decode($stores);
+                                    if(in_array($shop->id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
+                                }
+
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
                                     $is_applied = true;
                                 }
@@ -251,11 +260,11 @@
                                             @endif
 
                                             @if($is_general_discount && $is_applied_for_general_dsiscount)
-                                                @if(\App\GeneralDiscountPreferences::first()->type == 'discount')
                                                     {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
-                                                @else
-                                                    {{ number_format(\App\GeneralDiscountPreferences::first()->discount_amount, 2) }} $ off on whole order
-                                                @endif
+                                            @endif
+
+                                            @if($is_general_discount && $is_applied_for_general_fixed)
+                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount, 2) }} $ off on whole order
                                             @endif
 
                                         </td>
@@ -360,17 +369,16 @@
                                 <td align="right">
                                     @php
                                         if($is_general_discount && $is_applied_for_general_dsiscount) {
-                                            if(\App\GeneralDiscountPreferences::first()->type == 'discount') {
                                                $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
                                                $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
                                                $price = number_format($price, 2);
                                                $total_discount = $total_discount + $price;
                                                $total_discount = $order->cost_to_pay - $total_discount;
-                                            }
-                                            else{
-                                               $total_discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
-                                            }
-                                       }
+                                         }
+
+                                        if($is_general_discount && $is_applied_for_general_fixed) {
+                                           $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount;
+                                        }
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
                                 </td>
