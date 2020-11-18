@@ -91,7 +91,7 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
-                                $n = 0;
+                                $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
                                 $line_item_count = count($order->line_items);
 
                                 if($line_item_count >= 2){
@@ -276,11 +276,6 @@
                                             @endif
 
                                             @if($is_general_discount && $is_applied_for_general_fixed)
-                                                @php
-                                                    if(!($item->fulfilled_by == 'store')) {
-                                                        $n += $item->quantity;
-                                                    }
-                                                @endphp
                                                 {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
                                             @endif
 
