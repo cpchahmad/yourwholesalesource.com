@@ -192,9 +192,9 @@
                                     $is_applied_for_general_fixed = true;
                                 }
                                 else {
-                                    $stores = \App\GeneralFixedPricePreferences::first()->stores_id;
-                                    $store_array= json_decode($stores);
-                                    if(in_array($user->id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
+                                    $users = \App\GeneralFixedPricePreferences::first()->users_id;
+                                    $users_array= json_decode($users);
+                                    if(in_array($user->id, $users_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
                                 }
 
                                 if(\App\TieredPricingPrefrences::first()->global == 1) {
