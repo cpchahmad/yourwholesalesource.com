@@ -95,7 +95,7 @@
                                 $line_item_count = count($order->line_items);
 
                                 if($line_item_count >= 2){
-                                    $is_general_discount = true
+                                    $is_general_discount = true;
                                 }
                                 else {
                                     $is_general_discount = false;
