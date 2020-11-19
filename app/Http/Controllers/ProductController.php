@@ -54,8 +54,9 @@ class ProductController extends Controller
     {
         $productQ = Product::query();
         if($request->has('search')){
-            $productQ->where('title','LIKE','%'.$request->input('search').'%');
-            $productQ->orWhere('sku','LIKE','%'.$request->input('search').'%');
+            $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
+                $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
+            });
         }
         return view('products.all')->with([
             'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
