@@ -349,4 +349,8 @@ class ShopifyUsersController extends Controller
 
     }
 
+    public function showVideosSection() {
+        return view('videos.index');
+    }
+
 }

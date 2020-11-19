@@ -896,9 +896,8 @@ class SingleStoreController extends Controller
 
     }
 
-
-    public function storeAuthenticate() {
-        dd(123);
+    public function showVideosSection() {
+        return view('videos.index');
     }
 
 
