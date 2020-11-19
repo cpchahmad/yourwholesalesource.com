@@ -23,7 +23,7 @@
         <div class="row mb-3">
             <div class="col-sm-9">
                 <form action="" method="GET" class="d-flex">
-                    <input type="search" class="form-control d-inline-block" value="{{$search}}" name="search" placeholder="Search By Keyword">
+                    <input type="search" class="form-control d-inline-block" value="{{$search}}" name="search" placeholder="Search By Title, SKU..">
                     <input type="submit" value="Search" class="btn btn-primary btn-sm  d-inline-block" style="margin-left: 10px">
                 </form>
             </div>
