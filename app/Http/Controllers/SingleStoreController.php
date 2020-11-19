@@ -897,7 +897,7 @@ class SingleStoreController extends Controller
     }
 
     public function showVideosSection() {
-        return view('videos.index');
+        return view('videos.shopify');
     }
 
 

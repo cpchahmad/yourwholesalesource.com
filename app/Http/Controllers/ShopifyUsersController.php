@@ -350,7 +350,7 @@ class ShopifyUsersController extends Controller
     }
 
     public function showVideosSection() {
-        return view('videos.index');
+        return view('videos.non-shopify');
     }
 
 }
