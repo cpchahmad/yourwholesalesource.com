@@ -810,7 +810,7 @@ $(document).ready(function () {
     if($('body').find('#canvas-graph-three-store').length > 0){
         console.log('ok');
         var config = {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: JSON.parse($('#canvas-graph-three-store').attr('data-labels')),
                 datasets: [{
