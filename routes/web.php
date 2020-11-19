@@ -355,7 +355,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 
 
-Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
+//Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
 //Route::get('/test', function() {
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
@@ -366,5 +366,7 @@ Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
 //Route::get('/test3', function() {
 //    return view('emails.top_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
 //});
+
+Route::get('pages', 'AdminMaintainerController@getPages');
 
 

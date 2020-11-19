@@ -20,6 +20,13 @@ class AdminMaintainerController extends Controller
         $this->helper = new HelperController();
     }
 
+    public function getPages() {
+        $admin_store = $this->helper->getAdminShop();
+        $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/pages/json');
+
+        dd($response);
+    }
+
     public function sync_order_to_admin_store(RetailerOrder $order)
     {
         $admin_store = $this->helper->getAdminShop();
