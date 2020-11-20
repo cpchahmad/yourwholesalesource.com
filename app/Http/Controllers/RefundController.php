@@ -130,7 +130,7 @@ class RefundController extends Controller
             }
         }
 
-        $wallet->available = $wallet->available+(int)$order->cost_to_pay;
+        $wallet->available = $wallet->available+(double)$order->cost_to_pay;
         $wallet->save();
         /*Wallet Log*/
         $wallet_log = new WalletLog();
