@@ -744,7 +744,7 @@ class WishlistController extends Controller
 //        dd($productdata);
 
 
-        $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', [
+        $response = $shop->api()->rest('POST', '/admin/products.json', [
             "product"=> [
                 "title"=> "Burton Custom Freestyle 151",
                 "body_html"=> "<strong>Good snowboard!</strong>",
