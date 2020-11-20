@@ -679,7 +679,6 @@ class WishlistController extends Controller
         $prod = Product::where('title', $request->title)->first();
 
 
-
         /*Import to WeFullFill Store*/
         $variants_array = [];
         $options_array = [];
@@ -704,7 +703,6 @@ class WishlistController extends Controller
             ]);
         }
 
-        dd(78, $images_array);
 
         $shop = $this->helper->getAdminShop();
         /*Categories and Subcategories*/
