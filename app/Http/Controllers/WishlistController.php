@@ -661,6 +661,8 @@ class WishlistController extends Controller
         }
         $count_product_images = count($product->has_images);
 
+        dd(12, $count_product_images);
+
         $shopify_product = $response->body->product;
         foreach ($shopify_product->images as $index => $image) {
             $image = file_get_contents($image->src);
