@@ -643,8 +643,6 @@ class WishlistController extends Controller
             $this->ProductVariants($request, $product->id);
         }
 
-        dump($product->hasVariants);
-
         $product->global = $request->input('global');
         $product->save();
 
@@ -742,9 +740,6 @@ class WishlistController extends Controller
             ]
         ];
 
-        dump($productdata);
-
-
 
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
         $product_shopify_id = $response->body->product->id;
@@ -754,7 +749,6 @@ class WishlistController extends Controller
 
         $shopifyImages = $response->body->product->images;
         $shopifyVariants = $response->body->product->variants;
-        dd($shopifyVariants);
         if (count($product->hasVariants) == 0) {
             $variant_id = $shopifyVariants[0]->id;
             $i = [
