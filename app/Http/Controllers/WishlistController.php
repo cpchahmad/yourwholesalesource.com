@@ -623,7 +623,7 @@ class WishlistController extends Controller
         if ($request->variants) {
             $product->variants = $request->variants;
         }
-        $product->save();
+      //  $product->save();
         if ($request->category) {
             $product->has_categories()->attach($request->category);
         }
@@ -698,6 +698,9 @@ class WishlistController extends Controller
                 'src' => $src,
             ]);
         }
+
+        dd($images_array);
+
         $shop = $this->helper->getAdminShop();
         /*Categories and Subcategories*/
         $tags = $product->tags;
