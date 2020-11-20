@@ -672,7 +672,7 @@ class WishlistController extends Controller
         $shopify_product = $response->body->product;
         foreach ($shopify_product->images as $index => $image) {
             $image = file_get_contents($image->src);
-            $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . 'jpg';
+            $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . '.jpg';
             file_put_contents(public_path('images/' . $filename), $image);
             $image = new Image();
             $image->isV = 0;
@@ -740,7 +740,6 @@ class WishlistController extends Controller
             ]
         ];
 
-        dd($productdata);
 
 
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
