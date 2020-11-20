@@ -744,22 +744,7 @@ class WishlistController extends Controller
 //        dd($productdata);
 
 
-        $response = $shop->api()->rest('POST', '/admin/products.json', [
-            "product"=> [
-                "title"=> "Burton Custom Freestyle 151",
-                "body_html"=> "<strong>Good snowboard!</strong>",
-                "vendor"=> "Burton",
-                "product_type"=> "Snowboard",
-                "images"=> [
-                  [
-                      "src"=> "https://cdn.shopify.com/s/files/1/0370/7361/7029/products/2020111609383_1024x1024@2x.jpg?v=1605519536"
-                  ]
-                ]
-              ]
-        ]);
-
-
-            dd($response);
+        $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
         $product_shopify_id = $response->body->product->id;
         $product->shopify_id = $product_shopify_id;
         $price = $product->price;
