@@ -512,6 +512,7 @@ class WishlistController extends Controller
 
     public function ProductVariants($data, $id)
     {
+        dd($data);
         for ($i = 0; $i < count($data->variant_title); $i++) {
             $options = explode('/', $data->variant_title[$i]);
             $variants = new  ProductVariant();
