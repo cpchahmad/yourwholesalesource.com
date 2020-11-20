@@ -540,7 +540,10 @@ class WishlistController extends Controller
 
         $prod = Product::where('title', $product->title)->first();
 
+        dump($prod);
+
         $variants_array = [];
+        dd($prod->hasVariants);
         foreach ($prod->hasVariants as $index => $varaint) {
             array_push($variants_array, [
                 'title' => $varaint->title,
