@@ -539,9 +539,6 @@ class WishlistController extends Controller
     public function variants_template_array($product){
 
         $prod = Product::where('title', $product->title)->first();
-        $variant = ProductVariant::where('product_id', $prod->id)->get();
-
-        dump($variant);
 
         $variants_array = [];
         dd(2, $prod->hasVariants);
@@ -642,6 +639,8 @@ class WishlistController extends Controller
         if ($request->platforms) {
             $product->has_platforms()->attach($request->platforms);
         }
+        $product->save();
+
         if ($request->variants) {
             $this->ProductVariants($request, $product->id);
         }
