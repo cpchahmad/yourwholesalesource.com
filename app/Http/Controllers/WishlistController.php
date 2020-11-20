@@ -647,6 +647,7 @@ class WishlistController extends Controller
         if ($request->hasFile('images')) {
 
             foreach ($request->file('images') as $index => $image) {
+
                 $destinationPath = 'images/';
                 $filename = now()->format('YmdHi') . str_replace([' ', '(', ')'], '-', $image->getClientOriginalName());
                 $image->move($destinationPath, $filename);
@@ -675,7 +676,7 @@ class WishlistController extends Controller
             $image->save();
         }
 
-        dd(123,$product->has_images);
+        sleep(20);
 
 
 
@@ -689,7 +690,7 @@ class WishlistController extends Controller
         $options_array = $this->options_template_array($product, $options_array);
         /*Product Images*/
 
-        dd($product->has_images);
+        dd(456, $product->has_images);
 
         foreach ($product->has_images as $index => $image) {
             if ($image->isV == 0) {
