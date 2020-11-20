@@ -676,7 +676,7 @@ class WishlistController extends Controller
             $image->save();
         }
 
-        sleep(20);
+        $prod = Product::where('title', $request->title)->first();
 
 
 
@@ -690,22 +690,21 @@ class WishlistController extends Controller
         $options_array = $this->options_template_array($product, $options_array);
         /*Product Images*/
 
-        dd(456, $product->has_images);
 
-        foreach ($product->has_images as $index => $image) {
+        foreach ($prod->has_images as $index => $image) {
             if ($image->isV == 0) {
                 $src = asset('images') . '/' . $image->image;
             } else {
                 $src = asset('images/variants') . '/' . $image->image;
             }
             array_push($images_array, [
-                'alt' => $product->title . '_' . $index,
+                'alt' => $prod->title . '_' . $index,
                 'position' => $index + 1,
                 'src' => $src,
             ]);
         }
 
-        dd($images_array);
+        dd(78, $images_array);
 
         $shop = $this->helper->getAdminShop();
         /*Categories and Subcategories*/
