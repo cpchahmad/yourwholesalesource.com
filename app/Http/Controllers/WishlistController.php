@@ -549,7 +549,7 @@ class WishlistController extends Controller
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
                 'inventory_quantity' => $varaint->quantity,
-//                'inventory_management' => 'shopify',
+                'inventory_management' => 'shopify',
                 'grams' => $prod->weight * 1000,
                 'weight' => $prod->weight,
                 'weight_unit' => 'kg',
@@ -642,6 +642,8 @@ class WishlistController extends Controller
         if ($request->variants) {
             $this->ProductVariants($request, $product->id);
         }
+
+        dump($product->hasVariants);
 
         $product->global = $request->input('global');
         $product->save();
@@ -740,6 +742,8 @@ class WishlistController extends Controller
             ]
         ];
 
+        dump($productdata);
+
 
 
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
@@ -750,6 +754,7 @@ class WishlistController extends Controller
 
         $shopifyImages = $response->body->product->images;
         $shopifyVariants = $response->body->product->variants;
+        dd($shopifyVariants);
         if (count($product->hasVariants) == 0) {
             $variant_id = $shopifyVariants[0]->id;
             $i = [
