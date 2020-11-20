@@ -686,6 +686,8 @@ class WishlistController extends Controller
         $options_array = $this->options_template_array($product, $options_array);
         /*Product Images*/
 
+        dd($product->has_images);
+
         foreach ($product->has_images as $index => $image) {
             if ($image->isV == 0) {
                 $src = asset('images') . '/' . $image->image;
