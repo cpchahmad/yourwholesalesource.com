@@ -539,11 +539,12 @@ class WishlistController extends Controller
     public function variants_template_array($product){
 
         $prod = Product::where('title', $product->title)->first();
+        $variant = ProductVariant::where('product_id', $prod->id)->get();
 
-        dump($prod);
+        dump($variant);
 
         $variants_array = [];
-        dd($prod->hasVariants);
+        dd(2, $prod->hasVariants);
         foreach ($prod->hasVariants as $index => $varaint) {
             array_push($variants_array, [
                 'title' => $varaint->title,
