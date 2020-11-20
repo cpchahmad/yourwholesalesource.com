@@ -541,7 +541,6 @@ class WishlistController extends Controller
         $prod = Product::where('title', $product->title)->first();
 
         $variants_array = [];
-        dd(2, $prod->hasVariants);
         foreach ($prod->hasVariants as $index => $varaint) {
             array_push($variants_array, [
                 'title' => $varaint->title,
@@ -564,7 +563,6 @@ class WishlistController extends Controller
 
     public function options_template_array($product){
         $prod = Product::where('title', $product->title)->first();
-
         $options_array = [];
         if (count($prod->option1($prod)) > 0) {
             $temp = [];
