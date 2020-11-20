@@ -537,6 +537,7 @@ class WishlistController extends Controller
     }
 
     public function variants_template_array($product){
+
         $variants_array = [];
         foreach ($product->hasVariants as $index => $varaint) {
             array_push($variants_array, [
@@ -684,9 +685,9 @@ class WishlistController extends Controller
         $options_array = [];
         $images_array = [];
         //converting variants into shopify api format
-        $variants_array = $this->variants_template_array($product, $variants_array);
+        $variants_array = $this->variants_template_array($prod, $variants_array);
         /*Product Options*/
-        $options_array = $this->options_template_array($product, $options_array);
+        $options_array = $this->options_template_array($prod, $options_array);
         /*Product Images*/
 
 
@@ -734,6 +735,8 @@ class WishlistController extends Controller
                 "published" => $published
             ]
         ];
+
+        dd($productdata);
 
 
         $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
