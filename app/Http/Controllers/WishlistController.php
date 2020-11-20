@@ -512,7 +512,6 @@ class WishlistController extends Controller
 
     public function ProductVariants($data, $id)
     {
-        dump($data);
         for ($i = 0; $i < count($data->variant_title); $i++) {
             $options = explode('/', $data->variant_title[$i]);
             $variants = new  ProductVariant();
@@ -549,7 +548,7 @@ class WishlistController extends Controller
                 'option1' => $varaint->option1,
                 'option2' => $varaint->option2,
                 'option3' => $varaint->option3,
-//                'inventory_quantity' => $varaint->quantity,
+                'inventory_quantity' => $varaint->quantity,
 //                'inventory_management' => 'shopify',
                 'grams' => $prod->weight * 1000,
                 'weight' => $prod->weight,
@@ -751,7 +750,6 @@ class WishlistController extends Controller
 
         $shopifyImages = $response->body->product->images;
         $shopifyVariants = $response->body->product->variants;
-        dd($shopifyVariants);
         if (count($product->hasVariants) == 0) {
             $variant_id = $shopifyVariants[0]->id;
             $i = [
