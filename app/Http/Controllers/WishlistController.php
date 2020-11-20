@@ -752,7 +752,7 @@ class WishlistController extends Controller
                 "product_type"=> "Snowboard",
                 "images"=> [
                   [
-                      "attachment"=> "https://cdn.shopify.com/s/files/1/0370/7361/7029/products/2020111609383_1024x1024@2x.jpg?v=1605519536"
+                      "src"=> "https://cdn.shopify.com/s/files/1/0370/7361/7029/products/2020111609383_1024x1024@2x.jpg?v=1605519536"
                   ]
                 ]
               ]
