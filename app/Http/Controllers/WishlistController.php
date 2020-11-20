@@ -646,11 +646,7 @@ class WishlistController extends Controller
 
         if ($request->hasFile('images')) {
 
-            dump('yes');
-
             foreach ($request->file('images') as $index => $image) {
-
-                dd($image);
                 $destinationPath = 'images/';
                 $filename = now()->format('YmdHi') . str_replace([' ', '(', ')'], '-', $image->getClientOriginalName());
                 $image->move($destinationPath, $filename);
@@ -665,7 +661,6 @@ class WishlistController extends Controller
         }
         $count_product_images = count($product->has_images);
 
-        dd(12, $count_product_images);
 
         $shopify_product = $response->body->product;
         foreach ($shopify_product->images as $index => $image) {
@@ -679,6 +674,8 @@ class WishlistController extends Controller
             $image->image = $filename;
             $image->save();
         }
+
+        dd(123,$product->has_images);
 
 
 
