@@ -169,7 +169,6 @@ class OrderController extends Controller
         foreach ($shops as $s) {
             $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
-            dd($shop->has_user);
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
