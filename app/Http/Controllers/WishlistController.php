@@ -345,8 +345,8 @@ class WishlistController extends Controller
                 // Storing variants images in Admin product variants
 
                 $related_product = RetailerProduct::find($related_product_id);
-                if (count($related_product->variants) > 0) {
-                    foreach ($related_product->variants as $index => $variant) {
+                if (count($related_product->hasVariants) > 0) {
+                    foreach ($related_product->hasVariants as $index => $variant) {
                         if ($variant->image_id != null) {
                             $image_linked = $related_product->has_images()->where('shopify_id', $variant->image_id)->first();
                             $product->hasVariants[$index]->image = $image_linked->id;
