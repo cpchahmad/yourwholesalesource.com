@@ -17,20 +17,21 @@
                 @php
                     if($v->has_image == null) {
                         $img = 'No Image Found';
-                        echo $img;
+
                     }
                     else {
                         if($v->has_image->isV == 0) {
                             $img=   $v->has_image->image;
-                            echo $img;
+
                         }
                         else {
                             $img=   $v->has_image->image;
-                            echo $img;
+
                         }
 
                     }
                 @endphp
+                {{ $img }}
             </td>
         </tr>
     @endforeach
