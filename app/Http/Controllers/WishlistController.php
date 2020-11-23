@@ -344,16 +344,16 @@ class WishlistController extends Controller
 
                 // Storing variants images in Admin product variants
 
-                $related_product = RetailerProduct::find($related_product_id);
-                if (count($related_product->hasVariants) > 0) {
-                    foreach ($related_product->hasVariants as $index => $variant) {
-                        if ($variant->image_id != null) {
-                            $image_linked = $related_product->has_images()->where('shopify_id', $variant->image_id)->first();
-                            $product->hasVariants[$index]->image = $image_linked->id;
-                            $product->hasVariants[$index]->save();
-                        }
-                    }
-                }
+//                $related_product = RetailerProduct::find($related_product_id);
+//                if (count($related_product->hasVariants) > 0) {
+//                    foreach ($related_product->hasVariants as $index => $variant) {
+//                        if ($variant->image_id != null) {
+//                            $image_linked = $related_product->has_images()->where('shopify_id', $variant->image_id)->first();
+//                            $product->hasVariants[$index]->image = $image_linked->id;
+//                            $product->hasVariants[$index]->save();
+//                        }
+//                    }
+//                }
 
                 $user = $wish->has_user;
                 try{
@@ -524,7 +524,7 @@ class WishlistController extends Controller
         return $response;
     }
 
-    public function ProductVariants($data, $id)
+    public function ProductVariants($admin_product, $shopify_product, $data, $id)
     {
         for ($i = 0; $i < count($data->variant_title); $i++) {
             $options = explode('/', $data->variant_title[$i]);
@@ -547,6 +547,17 @@ class WishlistController extends Controller
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
             $variants->save();
+
+            if (count($shopify_product->variants) > 0) {
+                foreach ($shopify_product->variants as $variant) {
+                    if ($variant->image_id != null) {
+                        $image_linked = $admin_product->has_images[$i]->shopify_id = $variant->image_id;
+                        $variants->image = $image_linked->id;
+                        $variants->save();
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -653,8 +664,25 @@ class WishlistController extends Controller
         }
         $product->save();
 
+        $count_product_images = count($product->has_images);
+
+
+        $shopify_product = $response->body->product;
+        foreach ($shopify_product->images as $index => $image) {
+            $image = file_get_contents($image->src);
+            $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . '.jpg';
+            file_put_contents(public_path('images/' . $filename), $image);
+            $image = new Image();
+            $image->isV = 0;
+            $image->position = $index + 1 + $count_product_images;
+            $image->product_id = $product->id;
+            $image->image = $filename;
+            $image->save();
+        }
+
+
         if ($request->variants) {
-            $this->ProductVariants($request, $product->id);
+            $this->ProductVariants($product, $shopify_product, $request, $product->id);
         }
 
         $product->global = $request->input('global');
@@ -680,21 +708,7 @@ class WishlistController extends Controller
             }
 
         }
-        $count_product_images = count($product->has_images);
 
-
-        $shopify_product = $response->body->product;
-        foreach ($shopify_product->images as $index => $image) {
-            $image = file_get_contents($image->src);
-            $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . '.jpg';
-            file_put_contents(public_path('images/' . $filename), $image);
-            $image = new Image();
-            $image->isV = 0;
-            $image->position = $index + 1 + $count_product_images;
-            $image->product_id = $product->id;
-            $image->image = $filename;
-            $image->save();
-        }
 
         $prod = Product::where('title', $request->title)->first();
 
