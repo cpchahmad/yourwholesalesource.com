@@ -1,8 +1,6 @@
 @extends('layout.single')
 @section('content')
-    @php
-        $n= 0;
-    @endphp
+
     <div class="content">
         <form class="row bulk-forms bulk-payment-form" method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
             @csrf
@@ -191,10 +189,20 @@
                                                 @endif
 
                                                 @if($is_general_discount && $is_applied_for_general_dsiscount)
+                                                    @php
+                                                        $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
+                                                        $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
+                                                        $price = number_format($price, 2);
+                                                        $total_discount = $total_discount + $price;
+                                                        $total_discount = $order->cost_to_pay - $total_discount;
+                                                    @endphp
                                                     {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                                 @endif
 
                                                 @if($is_general_discount && $is_applied_for_general_fixed)
+                                                    @php
+                                                        $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
+                                                    @endphp
                                                     {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
                                                 @endif
 
@@ -282,19 +290,6 @@
                                 Total Discount
                             </td>
                             <td align="right">
-                                @php
-                                    if($is_general_discount && $is_applied_for_general_dsiscount) {
-                                        $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
-                                        $price = $cost_to_pay - ($cost_to_pay * $discount / 100);
-                                        $price = number_format($price, 2);
-                                        $total_discount = $total_discount + $price;
-                                        $total_discount = $cost_to_pay - $total_discount;
-                                    }
-
-                                    if($is_general_discount && $is_applied_for_general_fixed) {
-                                        $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
-                                     }
-                                @endphp
                                 {{ number_format($total_discount,2) }} USD
                             </td>
                         </tr>
