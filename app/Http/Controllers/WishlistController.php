@@ -696,10 +696,6 @@ class WishlistController extends Controller
             $image->save();
         }
 
-
-
-        dd($product);
-
         $prod = Product::where('title', $request->title)->first();
 
 
