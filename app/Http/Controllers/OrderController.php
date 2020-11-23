@@ -181,7 +181,9 @@ class OrderController extends Controller
                         array_push($product_ids, $item->product_id);
                     }
                     if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
+                        dump(234);
                         if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
+                            dump(57);
                             $new = new RetailerOrder();
                             $new->shopify_order_id = $order->id;
                             $new->email = $order->email;
