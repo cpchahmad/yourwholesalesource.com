@@ -25,7 +25,7 @@
                             echo $img;
                         }
                         else {
-                            $img=  asset('images/variants') . $v->has_image->image;
+                            $img=  asset('images/variants');
                             echo $img;
                         }
 
