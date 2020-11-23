@@ -21,7 +21,7 @@
                     }
                     else {
                         if($v->has_image->isV == 0) {
-                            $img=  asset('images') . $v->has_image->image;
+                            $img=  asset('images');
                             echo $img;
                         }
                         else {
