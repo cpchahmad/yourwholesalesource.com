@@ -537,16 +537,13 @@ class WishlistController extends Controller
             $variants->product_id = $id;
             $variants->save();
 
-            if (count($shopify_product->variants) > 0) {
-                foreach ($shopify_product->variants as $variant) {
-                    if ($variant->image_id != null) {
-                        $image_linked = $admin_product->has_images[$i]->shopify_id = $variant->image_id;
-                        $variants->image = $image_linked->id;
-                        $variants->save();
-                        break;
-                    }
-                }
+
+            if ($shopify_product->variants[$i]->image_id != null) {
+                $image_linked = $admin_product->has_images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
+                $variants->image = $image_linked->id;
+                $variants->save();
             }
+
         }
     }
 
