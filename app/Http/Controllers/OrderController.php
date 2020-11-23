@@ -172,7 +172,6 @@ class OrderController extends Controller
 
 
             if (!$response->errors) {
-                dd($response);
                 $orders = $response->body->orders;
                 foreach ($orders as $index => $order) {
                     $product_ids = [];
@@ -211,7 +210,7 @@ class OrderController extends Controller
                                     $customer->email = $order->customer->email;
                                     $customer->total_spent = $order->customer->total_spent;
                                     $customer->shop_id = $shop->id;
-                                    $local_shop = $shop;
+                                    $local_shop = $s;
                                     dd($local_shop);
 
                                     if ($local_shop->has_user->count() > 0) {
