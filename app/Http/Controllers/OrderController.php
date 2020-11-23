@@ -624,6 +624,8 @@ class OrderController extends Controller
             $shipping_price = $orders->sum('shipping_price');
             $cost_to_pay = $orders->sum('cost_to_pay');
             $settings = AdminSetting::all()->first();
+            $shop = $this->helper->getLocalShop();
+
 
 
 
