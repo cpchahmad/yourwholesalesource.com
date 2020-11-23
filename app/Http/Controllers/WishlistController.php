@@ -336,24 +336,13 @@ class WishlistController extends Controller
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
 
+                dd(234);
+
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
                 $wish->status_id = 5;
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
                // $wish->save();
-
-                // Storing variants images in Admin product variants
-
-//                $related_product = RetailerProduct::find($related_product_id);
-//                if (count($related_product->hasVariants) > 0) {
-//                    foreach ($related_product->hasVariants as $index => $variant) {
-//                        if ($variant->image_id != null) {
-//                            $image_linked = $related_product->has_images()->where('shopify_id', $variant->image_id)->first();
-//                            $product->hasVariants[$index]->image = $image_linked->id;
-//                            $product->hasVariants[$index]->save();
-//                        }
-//                    }
-//                }
 
                 $user = $wish->has_user;
                 try{
