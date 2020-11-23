@@ -538,8 +538,7 @@ class WishlistController extends Controller
             $variants->save();
 
             if(count($shopify_product->variants) > 0) {
-                $array = json_decode($shopify_product->variants);
-                $array = array_reverse($array);
+                $array = array_reverse($shopify_product->variants);
                 if ($array[$i]->image_id != null) {
                     $images = Image::where('product_id', $admin_product->id)->get();
                     $images[$i]->shopify_id = $array[$i]->image_id;
