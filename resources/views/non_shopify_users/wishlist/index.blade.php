@@ -149,6 +149,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if($user->has_stores()->count() > 0)
+                                        @if($user->has_stores()->count() == 1)
+                                            @php
+                                                $store = $user->has_stores()->first()
+                                            @endphp
+                                            <input type="hidden" name="shop_id" value="{{ $store->id }}">
+                                        @else
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <div class="form-material">
+                                                        <label for="material-error">Shopify Store <i class="fa fa-question-circle"  title="This is the name of the store you want to you want to request for your wishlist"> </i></label>
+                                                        <select name="shop_id" id="" class="form-control">
+                                                            @foreach($user->has_stores()->get() as $store)
+                                                                <option value="{{ $store->id }}"> {{ $store->shopify_domain }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
