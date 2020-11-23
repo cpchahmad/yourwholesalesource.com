@@ -9,7 +9,7 @@
         }
     </style>
     <div class="block">
-        <li class="nav-item">--}}
+        <li class="nav-item">
             <a class="nav-link active">Login</a>
         </li>
 {{--        <ul class="nav nav-tabs nav-tabs-block nav-justified" data-toggle="tabs" role="tablist">--}}
