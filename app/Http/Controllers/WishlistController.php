@@ -336,8 +336,6 @@ class WishlistController extends Controller
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
 
-                dd(234);
-
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
                 $wish->status_id = 5;
                 $wish->related_product_id = $related_product_id;
@@ -537,13 +535,14 @@ class WishlistController extends Controller
             $variants->product_id = $id;
             $variants->save();
 
-
-            if ($shopify_product->variants[$i]->image_id != null) {
-                $images = Image::where('product_id', $admin_product->id)->get();
-                $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
-                $images[$i]->save();
-                $variants->image = $images[$i]->id;
-                $variants->save();
+            if(count($shopify_product->variants) > 0) {
+                if ($shopify_product->variants[$i]->image_id != null) {
+                    $images = Image::where('product_id', $admin_product->id)->get();
+                    $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
+                    $images[$i]->save();
+                    $variants->image = $images[$i]->id;
+                    $variants->save();
+                }
             }
 
         }
