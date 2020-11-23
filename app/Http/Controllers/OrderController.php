@@ -172,6 +172,7 @@ class OrderController extends Controller
 
 
             if (!$response->errors) {
+                dd($response);
                 $orders = $response->body->orders;
                 foreach ($orders as $index => $order) {
                     $product_ids = [];
