@@ -105,27 +105,29 @@
                 @if(count($wishlist->has_thread) > 0)
                     <h5> Thread </h5>
                     @foreach($wishlist->has_thread as $thread)
-                        <div class="block">
-                            <div class="block-header">
-                                @if($thread->source == 'manager')
-                                    <h5 class="block-title">{{$thread->has_manager->name}} (Manager) <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
-                                @else
-                                    <h5 class="block-title">{{$user->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                        @if(!($thread->show))
+                            <div class="block">
+                                <div class="block-header">
+                                    @if($thread->source == 'manager')
+                                        <h5 class="block-title">{{$thread->has_manager->name}} (Manager) <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
+                                    @else
+                                        <h5 class="block-title">{{$user->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>
 
-                                @endif
-                            </div>
-                            <div class="block-content">
-                                <div class="p-2">
-                                    {!! $thread->reply !!}
+                                    @endif
+                                </div>
+                                <div class="block-content">
+                                    <div class="p-2">
+                                        {!! $thread->reply !!}
 
-                                    <div class="attachments">
-                                        @foreach($thread->has_attachments as $a)
-                                            <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">
-                                        @endforeach
+                                        <div class="attachments">
+                                            @foreach($thread->has_attachments as $a)
+                                                <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 @endif
                 @if(!in_array($wishlist->status_id,[3,5]))
