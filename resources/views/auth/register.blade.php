@@ -10,7 +10,7 @@
     </style>
     <div class="block">
         <ul class="nav nav-tabs nav-tabs-block nav-justified" data-toggle="tabs" role="tablist">
-            <li class="nav-item text-right">
+            <li class="nav-item text-left">
                 <a class="nav-link active">Register</a>
             </li>
 {{--            <li class="nav-item">--}}
