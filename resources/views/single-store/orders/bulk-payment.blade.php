@@ -1,5 +1,8 @@
 @extends('layout.single')
 @section('content')
+    @php
+        $n= 0;
+    @endphp
     <div class="content">
         <form class="row bulk-forms bulk-payment-form" method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
             @csrf
@@ -272,6 +275,27 @@
                             </td>
                             <td align="right">
                                 {{number_format($cost_to_pay - $shipping_price,2)}} USD
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Total Discount
+                            </td>
+                            <td align="right">
+                                @php
+                                    if($is_general_discount && $is_applied_for_general_dsiscount) {
+                                        $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
+                                        $price = $cost_to_pay - ($cost_to_pay * $discount / 100);
+                                        $price = number_format($price, 2);
+                                        $total_discount = $total_discount + $price;
+                                        $total_discount = $cost_to_pay - $total_discount;
+                                    }
+
+                                    if($is_general_discount && $is_applied_for_general_fixed) {
+                                        $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
+                                     }
+                                @endphp
+                                {{ number_format($total_discount,2) }} USD
                             </td>
                         </tr>
                         <tr>
