@@ -21,11 +21,11 @@
                     }
                     else {
                         if($v->has_image->isV == 0) {
-                            $img=  asset('images');
+                            $img=   $v->has_image->image;
                             echo $img;
                         }
                         else {
-                            $img=  asset('images/variants');
+                            $img=   $v->has_image->image;
                             echo $img;
                         }
 
