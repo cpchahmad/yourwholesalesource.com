@@ -1533,7 +1533,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $variants = $product->hasVariants;
-        return Excel::download(new ProductVariantExport($variants), 'Variants SKU.csv');
+        return Excel::download(new ProductVariantExport($variants), 'Variants_SKU_list.csv');
 
     }
 
