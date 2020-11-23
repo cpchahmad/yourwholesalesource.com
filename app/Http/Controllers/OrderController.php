@@ -167,7 +167,7 @@ class OrderController extends Controller
 
 
         foreach ($shops as $s) {
-            $shop = $s;
+            $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
 
 
@@ -211,8 +211,6 @@ class OrderController extends Controller
                                     $customer->total_spent = $order->customer->total_spent;
                                     $customer->shop_id = $shop->id;
                                     $local_shop = $shop;
-                                    dd($local_shop);
-
                                     if ($local_shop->has_user->count() > 0) {
                                         $customer->user_id = $local_shop->has_user[0]->id;
                                     }
@@ -230,7 +228,8 @@ class OrderController extends Controller
 
                             $new->status = 'new';
                             $new->shop_id = $shop->id;
-                            $local_shop = $shop;
+                            $local_shop = $s;
+                            dd($local_shop);
                             if ($local_shop->has_user->count() > 0) {
                                 $new->user_id = $local_shop->has_user[0]->id;
                             }
