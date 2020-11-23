@@ -21,11 +21,11 @@
                     }
                     else {
                         if($v->has_image->isV == 0) {
-                            $img= (string) asset('images') .'/'. $v->has_image->image;
+                            $img= (string) asset('images') . $v->has_image->image;
                             echo $img;
                         }
                         else {
-                            $img= (string) asset('images/variants') .'/'. $v->has_image->image;
+                            $img= (string) asset('images/variants') . $v->has_image->image;
                             echo $img;
                         }
 
