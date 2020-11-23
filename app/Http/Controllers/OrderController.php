@@ -227,6 +227,7 @@ class OrderController extends Controller
                             $new->status = 'new';
                             $new->shop_id = $shop->id;
                             $local_shop = $shop;
+                            dd($local_shop);
                             if (count($local_shop->has_user) > 0) {
                                 $new->user_id = $local_shop->has_user[0]->id;
                             }
