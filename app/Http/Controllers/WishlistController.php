@@ -65,6 +65,7 @@ class WishlistController extends Controller
             }
             else{
                 $wish->user_id = Auth::id();
+                $wish->shop_id = $request->input('shop_id');
             }
 
             $wish->save();
