@@ -633,7 +633,8 @@ class OrderController extends Controller
                 'orders' => $orders,
                 'shipping_price' => $shipping_price,
                 'cost_to_pay' => $cost_to_pay,
-                'settings' => $settings
+                'settings' => $settings,
+                'shop' => $shop
             ]);
 
         }
