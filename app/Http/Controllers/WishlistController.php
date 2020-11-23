@@ -539,10 +539,11 @@ class WishlistController extends Controller
 
 
             if ($shopify_product->variants[$i]->image_id != null) {
-                dd($admin_product->has_images);
-                $admin_product->has_images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
-                $admin_product->has_images[$i]->save();
-                $variants->image = $admin_product->has_images[$i]->id;
+                $images = Image::where('product_id', $admin_product->id)->get();
+                dd($images);
+                $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
+                $images[$i]->save();
+                $variants->image = $images[$i]->id;
                 $variants->save();
             }
 
