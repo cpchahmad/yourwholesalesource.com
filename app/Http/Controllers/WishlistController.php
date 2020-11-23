@@ -546,11 +546,6 @@ class WishlistController extends Controller
             $variants->sku = $data->variant_sku[$i];
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
-            if ($variant->image_id != null) {
-                $image_linked = $retailerProduct->has_images()->where('shopify_id', $variant->image_id)->first();
-                $retailerProductVariant->image = $image_linked->id;
-            }
-
             $variants->save();
         }
     }
@@ -700,6 +695,10 @@ class WishlistController extends Controller
             $image->image = $filename;
             $image->save();
         }
+
+
+
+        dd($product);
 
         $prod = Product::where('title', $request->title)->first();
 
