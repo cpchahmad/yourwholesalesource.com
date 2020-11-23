@@ -19,9 +19,9 @@
                         $img = 'No Image Found';
                     else {
                         if($v->has_image->isV == 0)
-                            $img= asset('images').'/'.$v->has_image->image;
+                            $img= asset('images') .'/'. $v->has_image->image;
                         else
-                            $img= asset('images/variants').'/'.$v->has_image->image;
+                            $img= asset('images/variants') .'/'. $v->has_image->image;
                     }
                 @endphp
                 {{ $img }}
