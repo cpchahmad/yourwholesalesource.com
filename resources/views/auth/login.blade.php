@@ -9,14 +9,17 @@
         }
     </style>
     <div class="block">
-        <ul class="nav nav-tabs nav-tabs-block nav-justified" data-toggle="tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" href="#by_email">By Account</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#by_store">By Store</a>
-            </li>
-        </ul>
+        <li class="nav-item">--}}
+            <a class="nav-link active">Login</a>
+        </li>
+{{--        <ul class="nav nav-tabs nav-tabs-block nav-justified" data-toggle="tabs" role="tablist">--}}
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link active" href="#by_email">By Account</a>--}}
+{{--            </li>--}}
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="#by_store">By Store</a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
         <div class="block-content tab-content">
             <div class="tab-pane active" id="by_email" role="tabpanel">
                 <div class="py-3">
