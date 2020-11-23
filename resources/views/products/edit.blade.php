@@ -214,7 +214,7 @@
                                 <div class="text-right d-inline-block">
 {{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
                                     <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Variants</a>
-                                    <a href="{{route('product.download.sku.csv',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-danger">Download SKU List</a>
+                                    <a href="{{route('product.download.sku.csv',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-danger">Download SKU</a>
                                 </div>
                             </div>
 
