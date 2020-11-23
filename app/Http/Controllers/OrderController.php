@@ -170,7 +170,6 @@ class OrderController extends Controller
             $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
 
-            dd($response);
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
@@ -230,7 +229,7 @@ class OrderController extends Controller
                             $new->status = 'new';
                             $new->shop_id = $shop->id;
                             $local_shop = $shop;
-
+                            dd($local_shop);
                             if ($local_shop->has_user->count() > 0) {
                                 $new->user_id = $local_shop->has_user[0]->id;
                             }
