@@ -340,7 +340,20 @@ class WishlistController extends Controller
                 $wish->status_id = 5;
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
-                $wish->save();
+               // $wish->save();
+
+                // Storing variants images in Admin product variants
+
+                $related_product = RetailerProduct::find($related_product_id);
+                if (count($related_product->variants) > 0) {
+                    foreach ($related_product->variants as $index => $variant) {
+                        if ($variant->image_id != null) {
+                            $image_linked = $related_product->has_images()->where('shopify_id', $variant->image_id)->first();
+                            $product->hasVariants[$index]->image = $image_linked->id;
+                            $product->hasVariants[$index]->save();
+                        }
+                    }
+                }
 
                 $user = $wish->has_user;
                 try{
@@ -533,6 +546,11 @@ class WishlistController extends Controller
             $variants->sku = $data->variant_sku[$i];
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
+            if ($variant->image_id != null) {
+                $image_linked = $retailerProduct->has_images()->where('shopify_id', $variant->image_id)->first();
+                $retailerProductVariant->image = $image_linked->id;
+            }
+
             $variants->save();
         }
     }
@@ -682,6 +700,8 @@ class WishlistController extends Controller
             $image->image = $filename;
             $image->save();
         }
+
+
 
         dd($product);
 
