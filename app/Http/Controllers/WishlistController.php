@@ -504,7 +504,7 @@ class WishlistController extends Controller
                     ]
                 ];
                 $s = $this->helper->getSpecificShop($retailerProduct->shop_id);
-                $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant->id .'.json', $i);
+                $s->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant->id .'.json', $i);
             }
 
         }
