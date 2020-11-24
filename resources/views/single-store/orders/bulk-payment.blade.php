@@ -318,13 +318,13 @@
                                 Total Cost  to Pay
                             </td>
                             <td align="right">
-                                {{number_format($cost_to_pay,2)}} USD
+                                {{number_format($cost_to_pay  - $total_discount,2)}} USD
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td align="right">
-                                <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay  - $total_discount,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 {{--                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
                                 <button type="button" class="btn btn-success paypal-pay-button"
                                         data-toggle="modal" data-target="#paypal_pay_trigger">
@@ -427,19 +427,19 @@
                         class="block-content cst_content_wrapper font-size-sm text-center">
                         <h2>Are your sure?</h2>
                         <div class="text-center"><p>
-                                Subtotal: {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}
+                                Subtotal: {{number_format($orders->where('paid',0)->sum('cost_to_pay')  - $total_discount,2)}}
                                 USD
                                 <br>
                                 WeFullFill Paypal Fee
                                 ({{$settings->paypal_percentage}}
-                                %): {{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}
+                                %): {{number_format(($orders->where('paid',0)->sum('cost_to_pay')  - $total_discount)*$settings->paypal_percentage/100,2)}}
                                 USD
                                 <br>Total Cost
-                                : {{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}} USD
+                                : {{number_format(($orders->where('paid',0)->sum('cost_to_pay') - $total_discount)+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}} USD
                             </p>
                         </div>
                         <p> A amount
-                            of {{number_format($orders->where('paid',0)->sum('cost_to_pay')+$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}
+                            of {{number_format(($orders->where('paid',0)->sum('cost_to_pay')  - $total_discount) +$orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}
                             USD will be deducted through your Paypal Account</p>
 
                         <div class="paypal_btn_trigger">
