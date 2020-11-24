@@ -827,7 +827,7 @@ class WishlistController extends Controller
     public function registerCarrierService() {
         $shop = $this->helper->getAdminShop();
         $response = $shop->api()->rest('GET', '/admin/carrier_services.json');
-        dd($response);
+        dd(123, $response);
 
 
     }
