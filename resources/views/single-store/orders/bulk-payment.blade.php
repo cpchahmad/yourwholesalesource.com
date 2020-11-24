@@ -2,10 +2,8 @@
 @section('content')
 
     @php
-        $total_discount_for_general_discount = 0;
-        $total_discount_for_general_fixed = 0;
-        $total_discount_for_tiered_fixed = 0;
-        $total_discount_for_tiered_discount = 0;
+        $total_discount = 0;
+
     @endphp
     <div class="content">
         <form class="row bulk-forms bulk-payment-form" method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
@@ -36,7 +34,8 @@
                                 </thead>
                                 <tbody>
                                 @php
-
+                                    $fixed_applied = false;
+                                    $discount_applied = true;
                                     $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
                                     $line_item_count = count($order->line_items);
 
@@ -169,7 +168,7 @@
                                                                     if($var_price->type == 'fixed') {
                                                                         $price = $var_price->price * ($qty -1);
                                                                         $price = number_format($price, 2);
-                                                                        $total_discount_for_tired_fixed =  $price;
+                                                                        $total_discount = $total_discount + $price;
                                                                         $price = $price . " USD";
                                                                     }
                                                                     else if($var_price->type == 'discount') {
@@ -177,7 +176,7 @@
                                                                         $price = $item->cost - ($item->price * $discount / 100);
                                                                         $price = $price * ($qty -1);
                                                                         $price = number_format($price, 2);
-                                                                        $total_discount_for_tired_discount =  $price;
+                                                                        $total_discount = $total_discount + $price;
                                                                         $price = $price . " USD";
                                                                     }
                                                                 }
@@ -199,15 +198,21 @@
                                                         $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
                                                         $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
                                                         $price = number_format($price, 2);
-                                                        $total_discount_for_general_discount =  $price;
-                                                        $total_discount_for_general_discount = $order->cost_to_pay - $total_discount_for_general_discount;
+                                                        if(!$discount_applied) {
+                                                            $total_discount = $total_discount + $price;
+                                                            $total_discount = $order->cost_to_pay - $total_discount;
+                                                            $discount_applied = true;
+                                                        }
                                                     @endphp
                                                     {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                                 @endif
 
                                                 @if($is_general_discount && $is_applied_for_general_fixed)
                                                     @php
-                                                        $total_discount_for_general_fixed = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
+                                                        if(!$fixed_applied) {
+                                                           $total_discount += (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
+                                                           $fixed_applied = true;
+                                                        }
                                                     @endphp
                                                     {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
                                                 @endif
@@ -296,7 +301,7 @@
                                 Total Discount
                             </td>
                             <td align="right">
-                                {{ number_format($total_discount_for_general_discount + $total_discount_for_general_fixed + $total_discount_for_tiered_discount + $total_discount_for_tiered_fixed ,2) }} USD
+                                {{ number_format($total_discount,2) }} USD
                             </td>
                         </tr>
                         <tr>
