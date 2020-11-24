@@ -766,6 +766,8 @@ class WishlistController extends Controller
         $shopifyVariants = $response->body->product->variants;
         if (count($product->hasVariants) == 0) {
             $variant_id = $shopifyVariants[0]->id;
+            $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
+            $product->save();
             $i = [
                 'variant' => [
                     'price' => $price
@@ -775,6 +777,7 @@ class WishlistController extends Controller
         }
         foreach ($product->hasVariants as $index => $v) {
             $v->shopify_id = $shopifyVariants[$index]->id;
+            $v->inventory_item_id =$shopifyVariants[$index]->inventory_item_id;
             $v->save();
         }
         foreach ($product->has_platforms as $index => $platform) {
