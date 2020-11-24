@@ -495,7 +495,16 @@ class WishlistController extends Controller
                         $user->has_imported()->attach([$linked_product_id]);
                     }
                 }
+
+                $i = [
+                    'variant' => [
+                        "fulfillment_service" => "wefullfill",
+                        'inventory_management' => 'wefullfill',
+                    ]
+                ];
+                $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant->id .'.json', $i);
             }
+
         }
 
         return $retailerProduct->id;
