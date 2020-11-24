@@ -566,6 +566,15 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Pay'
         }).then((result) => {
+            if (result.value) {
+                $('.bulk-payment-form').submit();
+                Swal.fire(
+                    'Processing!',
+                    'Payment Processing Please Wait!',
+                    'success'
+                );
+                window.location.href = button.data('href');
+            }
 
             $('.bulk-payment-form').submit();
             // if (result.value) {
