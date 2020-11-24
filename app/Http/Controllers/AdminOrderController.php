@@ -117,6 +117,12 @@ class AdminOrderController extends Controller
                     if ($shop != null) {
                         $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                         if (!$location_response->errors) {
+
+                            $response = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '/fulfillment_orders.json');
+                            dd(456, $response);
+
+                            dump( $location_response);
+
                             foreach ($location_response->body->locations as $location) {
                                 if ($location->name == "WeFullFill") {
                                     $data = [
