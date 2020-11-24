@@ -562,6 +562,9 @@ class WishlistController extends Controller
                 'option3' => $varaint->option3,
 //                'inventory_quantity' => $varaint->quantity,
 //                'inventory_management' => 'shopify',
+                'inventory_quantity' => $varaint->quantity,
+                "fulfillment_service" => "wefullfill",
+//                'inventory_management' => 'wefullfill',
                 'grams' => $prod->weight * 1000,
                 'weight' => $prod->weight,
                 'weight_unit' => 'kg',
@@ -766,15 +769,44 @@ class WishlistController extends Controller
         $shopifyVariants = $response->body->product->variants;
         if (count($product->hasVariants) == 0) {
             $variant_id = $shopifyVariants[0]->id;
+            $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
+            $product->save();
             $i = [
                 'variant' => [
                     'price' => $price
                 ]
             ];
             $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id . '.json', $i);
+
+            $data = [
+                "inventory_item" => [
+                    'id' => $product->inventory_item_id,
+                    "tracked" => true
+                ]
+
+            ];
+            $resp = $shop->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+            /*Connect to Wefullfill*/
+            $data = [
+                'location_id' => 46023344261,
+                'inventory_item_id' => $product->inventory_item_id,
+                'relocate_if_necessary' => true
+            ];
+            $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+            /*Set Quantity*/
+
+            $data = [
+                'location_id' => 46023344261,
+                'inventory_item_id' => $product->inventory_item_id,
+                'available' => $product->quantity,
+
+            ];
+
+            $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
         }
         foreach ($product->hasVariants as $index => $v) {
             $v->shopify_id = $shopifyVariants[$index]->id;
+            $v->inventory_item_id =$shopifyVariants[$index]->inventory_item_id;
             $v->save();
         }
         foreach ($product->has_platforms as $index => $platform) {
