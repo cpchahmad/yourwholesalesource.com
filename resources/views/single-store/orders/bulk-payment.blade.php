@@ -1,6 +1,9 @@
 @extends('layout.single')
 @section('content')
 
+    @php
+        $total_discount = 0;
+    @endphp
     <div class="content">
         <form class="row bulk-forms bulk-payment-form" method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
             @csrf
@@ -30,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                 @php
-                                    $total_discount = 0;
+
                                     $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
                                     $line_item_count = count($order->line_items);
 
