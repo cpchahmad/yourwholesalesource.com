@@ -550,8 +550,10 @@ class WishlistController extends Controller
 
     public function variants_template_array($product){
 
+        $prod = Product::where('title', $product->title)->first();
+
         $variants_array = [];
-        foreach ($product->hasVariants as $index => $varaint) {
+        foreach ($prod->hasVariants as $index => $varaint) {
             array_push($variants_array, [
                 'title' => $varaint->title,
                 'sku' => $varaint->sku,
@@ -560,8 +562,8 @@ class WishlistController extends Controller
                 'option3' => $varaint->option3,
                 'inventory_quantity' => $varaint->quantity,
                 'inventory_management' => 'shopify',
-                'grams' => $product->weight * 1000,
-                'weight' => $product->weight,
+                'grams' => $prod->weight * 1000,
+                'weight' => $prod->weight,
                 'weight_unit' => 'kg',
                 'barcode' => $varaint->barcode,
                 'price' => $varaint->price,
@@ -572,10 +574,11 @@ class WishlistController extends Controller
     }
 
     public function options_template_array($product){
+        $prod = Product::where('title', $product->title)->first();
         $options_array = [];
-        if (count($product->option1($product)) > 0) {
+        if (count($prod->option1($prod)) > 0) {
             $temp = [];
-            foreach ($product->option1($product) as $a) {
+            foreach ($prod->option1($prod) as $a) {
                 array_push($temp, $a);
             }
             array_push($options_array, [
@@ -584,9 +587,9 @@ class WishlistController extends Controller
                 'values' => json_encode($temp),
             ]);
         }
-        if (count($product->option2($product)) > 0) {
+        if (count($prod->option2($prod)) > 0) {
             $temp = [];
-            foreach ($product->option2($product) as $a) {
+            foreach ($prod->option2($prod) as $a) {
                 array_push($temp, $a);
             }
             array_push($options_array, [
@@ -595,9 +598,9 @@ class WishlistController extends Controller
                 'values' => json_encode($temp),
             ]);
         }
-        if (count($product->option3($product)) > 0) {
+        if (count($prod->option3($prod)) > 0) {
             $temp = [];
-            foreach ($product->option3($product) as $a) {
+            foreach ($prod->option3($prod) as $a) {
                 array_push($temp, $a);
             }
             array_push($options_array, [
@@ -694,7 +697,7 @@ class WishlistController extends Controller
         }
 
 
-//        $prod = Product::where('title', $request->title)->first();
+        $prod = Product::where('title', $request->title)->first();
 
 
         /*Import to WeFullFill Store*/
@@ -708,7 +711,7 @@ class WishlistController extends Controller
         /*Product Images*/
 
 
-        foreach ($product->has_images as $index => $image) {
+        foreach ($prod->has_images as $index => $image) {
             if ($image->isV == 0) {
                 $src = asset('images') . '/' . $image->image;
             } else {
