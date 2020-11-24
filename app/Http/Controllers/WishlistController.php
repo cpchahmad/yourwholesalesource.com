@@ -343,6 +343,7 @@ class WishlistController extends Controller
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
                // $wish->save();
+                dd(213);
 
                 $user = $wish->has_user;
                 try{
