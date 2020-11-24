@@ -358,7 +358,8 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 
 
-Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
+//Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
+Route::get('/test', 'WishlistController@registerCarrierService');
 //Route::get('/test', function() {
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
