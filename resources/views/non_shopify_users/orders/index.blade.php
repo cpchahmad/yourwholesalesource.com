@@ -44,11 +44,11 @@
             </div>
             <div class="col-md-12">
                 <div class="block">
-                    <div class="block-header bulk-div" style="display: none">
-                        <div class="btn-group">
-                            <button class="btn btn-outline-secondary btn-sm bulk-wallet-btn">Pay With Wallet</button>
-                        </div>
-                    </div>
+{{--                    <div class="block-header bulk-div" style="display: none">--}}
+{{--                        <div class="btn-group">--}}
+{{--                            <button class="btn btn-outline-secondary btn-sm bulk-wallet-btn">Pay With Wallet</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="block-content">
                         @if (count($orders) > 0)
                             <table class="table js-table-checkable table-hover table-borderless table-striped table-vcenter">
