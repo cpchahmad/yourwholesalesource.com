@@ -204,7 +204,7 @@
 
                                                 @if($is_general_discount && $is_applied_for_general_fixed)
                                                     @php
-                                                        $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
+                                                        $total_discount += (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
                                                     @endphp
                                                     {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
                                                 @endif
