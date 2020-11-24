@@ -2,7 +2,10 @@
 @section('content')
 
     @php
-        $total_discount = 0;
+        $total_discount_for_general_discount = 0;
+        $total_discount_for_general_fixed = 0;
+        $total_discount_for_tiered_fixed = 0;
+        $total_discount_for_tiered_discount = 0;
     @endphp
     <div class="content">
         <form class="row bulk-forms bulk-payment-form" method="post" action="{{ route('store.order.wallet.pay.bulk') }}">
