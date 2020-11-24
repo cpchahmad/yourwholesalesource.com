@@ -567,6 +567,7 @@ $(document).ready(function () {
             confirmButtonText: 'Pay'
         }).then((result) => {
             if (result.value) {
+                console.log(123, value);
                 $('.bulk-payment-form').submit();
                 Swal.fire(
                     'Processing!',
