@@ -872,12 +872,12 @@ class WishlistController extends Controller
     public function test() {
         $shop = $this->helper->getSpecificShop(84);
 
-        $ids = [1988744740927];
+        $ids = [1718761553983,1966545109055,1760465453119];
 
         foreach ($ids as $id) {
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $id .'.json');
             $product = $response->body->product;
-//            dd($product);
+            dd($product);
             if (count($product->variants) > 0) {
                 foreach ($product->variants as $index => $variant) {
                     $i = [
