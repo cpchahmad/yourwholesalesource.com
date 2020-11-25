@@ -1025,7 +1025,6 @@ class ProductController extends Controller
 
 
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
-            dd($response);
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
             $price = $product->price;
@@ -1035,6 +1034,7 @@ class ProductController extends Controller
             $shopifyVariants = $response->body->product->variants;
 
             if(count($product->hasVariants) == 0){
+                dd(123, $product->hasVariants);
 
                 $variant_id = $shopifyVariants[0]->id;
                 $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
