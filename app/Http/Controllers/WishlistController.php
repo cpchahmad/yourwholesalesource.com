@@ -452,7 +452,7 @@ class WishlistController extends Controller
         /*Product Variants SYNC*/
 
         if (count($product->variants) > 0) {
-            dump('no');
+
             foreach ($product->variants as $index => $variant) {
                 $retailerProductVariant = new RetailerProductVariant();
                 $retailerProductVariant->shopify_id = $variant->id;
