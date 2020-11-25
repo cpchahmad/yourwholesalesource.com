@@ -405,7 +405,7 @@ class WishlistController extends Controller
 
     public function map_to_retailer_product(Wishlist $wishlist, $response, $product,$linked_product_id)
     {
-        dump('called');
+
         if (RetailerProduct::where('shopify_id', $product->id)->exists()) {
             $retailerProduct = RetailerProduct::where('shopify_id', $product->id)->first();
         } else {
@@ -869,9 +869,9 @@ class WishlistController extends Controller
         return redirect()->back()->with('success', 'Wishlist deleted successfully');
     }
 
-    public function registerCarrierService() {
-        $shop = $this->helper->getAdminShop();
-        $response = $shop->api()->rest('GET', '/admin/carrier_services.json');
+    public function test() {
+        $shop = $this->helper->getSpecificLocalShop(84);
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products.json');
         dd($response);
 
 
