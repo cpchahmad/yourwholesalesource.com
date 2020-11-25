@@ -342,7 +342,9 @@ class WishlistController extends Controller
                 $wish->status_id = 5;
                 $wish->related_product_id = $related_product_id;
                 $wish->updated_at = now();
-                $wish->save();
+               // $wish->save();
+
+                dd('findins');
 
                 $user = $wish->has_user;
                 try{
@@ -404,7 +406,7 @@ class WishlistController extends Controller
 
     public function map_to_retailer_product(Wishlist $wishlist, $response, $product,$linked_product_id)
     {
-        dump('called');
+        dd('called');
         if (RetailerProduct::where('shopify_id', $product->id)->exists()) {
             $retailerProduct = RetailerProduct::where('shopify_id', $product->id)->first();
         } else {
