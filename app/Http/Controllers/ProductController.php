@@ -1023,6 +1023,8 @@ class ProductController extends Controller
                 ]
             ];
 
+            dd($productdata);
+
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
             $product_shopify_id =  $response->body->product->id;
             $product->shopify_id = $product_shopify_id;
@@ -1033,7 +1035,7 @@ class ProductController extends Controller
             $shopifyVariants = $response->body->product->variants;
 
             if(count($product->hasVariants) == 0){
-                dump('ues');
+
                 $variant_id = $shopifyVariants[0]->id;
                 $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
                 $product->save();
