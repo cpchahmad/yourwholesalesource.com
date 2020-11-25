@@ -873,6 +873,7 @@ class WishlistController extends Controller
         $shop = $this->helper->getSpecificShop(84);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/1942232334399.json');
         $product = $response->body->product;
+        dd($product);
 
         if (count($product->variants) > 0) {
             foreach ($product->variants as $index => $variant) {
