@@ -534,6 +534,7 @@ class WishlistController extends Controller
 
                 ];
                 $resp = $s->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+                dump(123, $resp);
                 /*Connect to Wefullfill*/
                 $data = [
                     'location_id' => 46023344261,
@@ -541,6 +542,7 @@ class WishlistController extends Controller
                     'relocate_if_necessary' => true
                 ];
                 $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+                dump(456, $res);
                 /*Set Quantity*/
 
                 $data = [
