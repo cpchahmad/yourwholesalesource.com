@@ -1031,6 +1031,8 @@ class ProductController extends Controller
 
             $shopifyImages = $response->body->product->images;
             $shopifyVariants = $response->body->product->variants;
+            dd($response);
+
             if(count($product->hasVariants) == 0){
                 $variant_id = $shopifyVariants[0]->id;
                 $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
