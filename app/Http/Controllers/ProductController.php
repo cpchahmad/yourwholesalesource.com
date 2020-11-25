@@ -1034,10 +1034,10 @@ class ProductController extends Controller
             $shopifyVariants = $response->body->product->variants;
 
             if(count($product->hasVariants) == 0){
-                dump(123, $product->hasVariants);
 
                 $variant_id = $shopifyVariants[0]->id;
                 $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
+
                 $product->save();
                 $i = [
                     'variant' => [
@@ -1054,7 +1054,6 @@ class ProductController extends Controller
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
 
-                dd(321);
                 $data = [
                     "inventory_item" => [
                         'id' => $product->inventory_item_id,
