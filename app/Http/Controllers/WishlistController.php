@@ -510,9 +510,11 @@ class WishlistController extends Controller
         else {
             $shopifyVariants = $response->body->product->variants;
             if(count($product->hasVariants) == 0){
+                dump('yes');
 
                 $variant_id = $shopifyVariants[0]->id;
                 $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
+                dump($variant_id, $product->inventory_item_id);
 
                 $product->save();
                 $i = [
@@ -549,6 +551,8 @@ class WishlistController extends Controller
                 ];
 
                 $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
+
+                dd($res);
             }
 
         }
