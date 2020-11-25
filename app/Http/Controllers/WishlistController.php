@@ -517,9 +517,9 @@ class WishlistController extends Controller
 
         $variant_id = $shopifyVariants[0]->id;
         $retailerProduct->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
-        dump($variant_id, $product->inventory_item_id);
+        dump($variant_id, $retailerProduct->inventory_item_id);
 
-        $product->save();
+        $retailerProduct->save();
         $i = [
             'variant' => [
                 "fulfillment_service" => "wefullfill",
