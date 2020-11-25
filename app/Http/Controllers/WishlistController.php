@@ -508,12 +508,13 @@ class WishlistController extends Controller
 
         }
         else {
+            dump('bingo');
             $shopifyVariants = $response->body->product->variants;
-            if(count($product->hasVariants) == 0){
+            if(count($retailerProduct->hasVariants) == 0){
                 dump('yes');
 
                 $variant_id = $shopifyVariants[0]->id;
-                $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
+                $retailerProduct->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
                 dump($variant_id, $product->inventory_item_id);
 
                 $product->save();
@@ -528,17 +529,17 @@ class WishlistController extends Controller
 
                 $data = [
                     "inventory_item" => [
-                        'id' => $product->inventory_item_id,
+                        'id' => $retailerProduct->inventory_item_id,
                         "tracked" => true
                     ]
 
                 ];
-                $resp = $s->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $product->inventory_item_id . '.json', $data);
+                $resp = $s->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $retailerProduct->inventory_item_id . '.json', $data);
                 dump(123, $resp);
                 /*Connect to Wefullfill*/
                 $data = [
                     'location_id' => 46023344261,
-                    'inventory_item_id' => $product->inventory_item_id,
+                    'inventory_item_id' => $retailerProduct->inventory_item_id,
                     'relocate_if_necessary' => true
                 ];
                 $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
@@ -547,8 +548,8 @@ class WishlistController extends Controller
 
                 $data = [
                     'location_id' => 46023344261,
-                    'inventory_item_id' => $product->inventory_item_id,
-                    'available' => $product->quantity,
+                    'inventory_item_id' => $retailerProduct->inventory_item_id,
+                    'available' => $retailerProduct->quantity,
 
                 ];
 
