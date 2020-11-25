@@ -870,7 +870,7 @@ class WishlistController extends Controller
     }
 
     public function test() {
-        $shop = $this->helper->getSpecificLShop(84);
+        $shop = $this->helper->getSpecificShop(84);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/1942232334399.json');
         dd($response);
 
