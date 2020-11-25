@@ -872,8 +872,19 @@ class WishlistController extends Controller
     public function test() {
         $shop = $this->helper->getSpecificShop(84);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/1942232334399.json');
-        dd($response);
+        $product = $response->body->product;
 
-
+        if (count($product->variants) > 0) {
+            foreach ($product->variants as $index => $variant) {
+                $i = [
+                    'variant' => [
+                        "fulfillment_service" => "wefullfill",
+                        'inventory_management' => 'wefullfill',
+                    ]
+                ];
+                $response = $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant->id . '.json', $i);
+                if($response->errors){ dd($response); }
+            }
+        }
     }
 }
