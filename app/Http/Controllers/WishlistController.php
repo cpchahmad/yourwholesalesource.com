@@ -874,7 +874,7 @@ class WishlistController extends Controller
 
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/1986598076479.json');
         $product = $response->body->product;
-//        dd($product);
+        dd($product);
 
         if (count($product->variants) > 0) {
             foreach ($product->variants as $index => $variant) {
