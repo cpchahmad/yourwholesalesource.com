@@ -513,53 +513,52 @@ class WishlistController extends Controller
         }
 
         $shopifyVariants = $response->body->product->variants;
-        if(count($retailerProduct->hasVariants) == 0){
-            dump('yes');
 
-            $variant_id = $shopifyVariants[0]->id;
-            $retailerProduct->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
-            dump($variant_id, $product->inventory_item_id);
 
-            $product->save();
-            $i = [
-                'variant' => [
-                    "fulfillment_service" => "wefullfill",
-                    'inventory_management' => 'wefullfill',
-                ]
-            ];
-            $s = $this->helper->getSpecificShop($retailerProduct->shop_id);
-            $s->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+        $variant_id = $shopifyVariants[0]->id;
+        $retailerProduct->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
+        dump($variant_id, $product->inventory_item_id);
 
-            $data = [
-                "inventory_item" => [
-                    'id' => $retailerProduct->inventory_item_id,
-                    "tracked" => true
-                ]
+        $product->save();
+        $i = [
+            'variant' => [
+                "fulfillment_service" => "wefullfill",
+                'inventory_management' => 'wefullfill',
+            ]
+        ];
+        $s = $this->helper->getSpecificShop($retailerProduct->shop_id);
+        $s->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
 
-            ];
-            $resp = $s->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $retailerProduct->inventory_item_id . '.json', $data);
-            dump(123, $resp);
-            /*Connect to Wefullfill*/
-            $data = [
-                'location_id' => 46023344261,
-                'inventory_item_id' => $retailerProduct->inventory_item_id,
-                'relocate_if_necessary' => true
-            ];
-            $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
-            dump(456, $res);
-            /*Set Quantity*/
+        $data = [
+            "inventory_item" => [
+                'id' => $retailerProduct->inventory_item_id,
+                "tracked" => true
+            ]
 
-            $data = [
-                'location_id' => 46023344261,
-                'inventory_item_id' => $retailerProduct->inventory_item_id,
-                'available' => $retailerProduct->quantity,
+        ];
+        $resp = $s->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $retailerProduct->inventory_item_id . '.json', $data);
+        dump(123, $resp);
+        /*Connect to Wefullfill*/
+        $data = [
+            'location_id' => 46023344261,
+            'inventory_item_id' => $retailerProduct->inventory_item_id,
+            'relocate_if_necessary' => true
+        ];
+        $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
+        dump(456, $res);
+        /*Set Quantity*/
 
-            ];
+        $data = [
+            'location_id' => 46023344261,
+            'inventory_item_id' => $retailerProduct->inventory_item_id,
+            'available' => $retailerProduct->quantity,
 
-            $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
+        ];
 
-            dd($res);
-        }
+        $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
+
+        dd($res);
+
         return $retailerProduct->id;
     }
 
