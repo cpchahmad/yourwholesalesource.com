@@ -406,7 +406,7 @@ class WishlistController extends Controller
 
     public function map_to_retailer_product(Wishlist $wishlist, $response, $product,$linked_product_id)
     {
-        dd('called');
+        dump('called');
         if (RetailerProduct::where('shopify_id', $product->id)->exists()) {
             $retailerProduct = RetailerProduct::where('shopify_id', $product->id)->first();
         } else {
