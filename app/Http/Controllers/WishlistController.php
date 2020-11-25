@@ -344,7 +344,6 @@ class WishlistController extends Controller
                 $wish->updated_at = now();
                 $wish->save();
 
-
                 $user = $wish->has_user;
                 try{
                     Mail::to($user->email)->send(new WishlistComplateMail($user, $wish));
@@ -516,7 +515,6 @@ class WishlistController extends Controller
 //
 //        $variant_id = $shopifyVariants[0]->id;
 //        $retailerProduct->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
-//        dump($variant_id, $retailerProduct->inventory_item_id);
 //
 //        $retailerProduct->save();
 //        $i = [
@@ -536,7 +534,7 @@ class WishlistController extends Controller
 //
 //        ];
 //        $resp = $s->api()->rest('PUT', '/admin/api/2020-07/inventory_items/' . $retailerProduct->inventory_item_id . '.json', $data);
-//        dump(123, $resp);
+//
 //        /*Connect to Wefullfill*/
 //        $data = [
 //            'location_id' => 46023344261,
@@ -544,7 +542,7 @@ class WishlistController extends Controller
 //            'relocate_if_necessary' => true
 //        ];
 //        $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/connect.json', $data);
-//        dump(456, $res);
+//
 //        /*Set Quantity*/
 //
 //        $data = [
@@ -555,8 +553,8 @@ class WishlistController extends Controller
 //        ];
 //
 //        $res = $s->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
-//
-//        dd($res);
+
+
 
         return $retailerProduct->id;
     }
