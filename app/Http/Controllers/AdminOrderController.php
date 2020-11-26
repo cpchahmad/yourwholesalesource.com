@@ -479,7 +479,7 @@ class AdminOrderController extends Controller
         }
 
         $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
-        return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
+        return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Manually Successfully!');
     }
 
     /**
