@@ -144,7 +144,7 @@ class AdminOrderController extends Controller
                             if ($response->errors) {
                                 if(strpos($response->body->base[0], "is already fulfilled") !== false){
                                     $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json');
-                                    return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, $res);
+                                    return $this->set_fulfilments_for_already_fulfilled_order($request, $id, $fulfillable_quantities, $order, $res);
                                 }
                                 return redirect()->back()->with('error', 'Cant Fulfill Items of Order in Related Store!');
                             } else {
@@ -359,6 +359,68 @@ class AdminOrderController extends Controller
      * @return RedirectResponse
      */
     public function set_fulfilments(Request $request, $id, $fulfillable_quantities, $order, $response): RedirectResponse
+    {
+        foreach ($request->input('item_id') as $index => $item) {
+            $line_item = RetailerOrderLineItem::find($item);
+            if ($line_item != null && $fulfillable_quantities[$index] > 0) {
+                if ($fulfillable_quantities[$index] == $line_item->fulfillable_quantity) {
+                    $line_item->fulfillment_status = 'fulfilled';
+
+                } else if ($fulfillable_quantities[$index] < $line_item->fulfillable_quantity) {
+                    $line_item->fulfillment_status = 'partially-fulfilled';
+                }
+                $line_item->fulfillable_quantity = $line_item->fulfillable_quantity - $fulfillable_quantities[$index];
+            }
+            $line_item->save();
+        }
+        $order->status = $order->getStatus($order);
+        $order->save();
+
+        $fulfillment = new OrderFulfillment();
+        if ($order->custom == 0) {
+            $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
+            $fulfillment->name = $response->body->fulfillment->name;
+        } else {
+            $count = count($order->fulfillments) + 1;
+            $fulfillment->name = $order->name . '.F' . $count;
+        }
+        $fulfillment->retailer_order_id = $order->id;
+        $fulfillment->status = 'fulfilled';
+        $fulfillment->save();
+
+        /*Maintaining Log*/
+        $order_log = new OrderLog();
+        $order_log->message = "A fulfillment named " . $fulfillment->name . " has been processed successfully on " . date_create($fulfillment->created_at)->format('d M, Y h:i a');
+        $order_log->status = "Fulfillment";
+        $order_log->retailer_order_id = $order->id;
+        $order_log->save();
+
+        foreach ($request->input('item_id') as $index => $item) {
+            if ($fulfillable_quantities[$index] > 0) {
+                $fulfillment_line_item = new FulfillmentLineItem();
+                $fulfillment_line_item->fulfilled_quantity = $fulfillable_quantities[$index];
+                $fulfillment_line_item->order_fulfillment_id = $fulfillment->id;
+                $fulfillment_line_item->order_line_item_id = $item;
+                $fulfillment_line_item->save();
+
+            }
+        }
+        if ($order->admin_shopify_id != null) {
+            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+        }
+
+        $user = $order->has_user;
+        try{
+            Mail::to($user->email)->send(new OrderStatusMail($user, $order));
+        }
+        catch (\Exception $e){
+        }
+
+        $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
+        return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
+    }
+
+    public function set_fulfilments_for_already_fulfilled_order(Request $request, $id, $fulfillable_quantities, $order, $response): RedirectResponse
     {
         foreach ($request->input('item_id') as $index => $item) {
             $line_item = RetailerOrderLineItem::find($item);
