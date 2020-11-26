@@ -21,7 +21,7 @@ class NewUser extends Mailable
     private $user;
     private $template;
 
-    private $sender = 'yasir@tetralogicx.com';
+    private $sender = 'info@wefullfill.com';
     public function __construct(User $user)
     {
         $this->user = $user;

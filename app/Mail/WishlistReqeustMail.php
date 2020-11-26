@@ -39,7 +39,7 @@ class WishlistReqeustMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Shopify user')->subject('There is a wishlist request')->view('emails.wishlist_request')->with([
+        return $this->from($this->user,'Wefullfill')->subject('There is a wishlist request')->view('emails.wishlist_request')->with([
             'template' => $this->template,
             'wishlist' => $this->wishlist,
         ]);
