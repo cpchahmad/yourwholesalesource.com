@@ -131,6 +131,9 @@
             </div>
         </div>
         <div class="col-md-4">
+{{--            <div class="text-right">--}}
+{{--                <button class="btn btn-primary">Manual Fulfill <i class="fa fa-question-circle"  title="Only use this in case order is already fulfilled in user shop."> </i></button>--}}
+{{--            </div>--}}
             @if($order->shipping_address != null)
                 <div class="block">
                     <div class="block-header block-header-default">
