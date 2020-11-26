@@ -379,8 +379,8 @@ class AdminOrderController extends Controller
 
         $fulfillment = new OrderFulfillment();
         if ($order->custom == 0) {
-            $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
-            $fulfillment->name = $response->body->fulfillment->name;
+            $fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
+            $fulfillment->name = $response->body->fulfillments[0]->name;
         } else {
             $count = count($order->fulfillments) + 1;
             $fulfillment->name = $order->name . '.F' . $count;
