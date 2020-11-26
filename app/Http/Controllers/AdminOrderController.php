@@ -435,8 +435,10 @@ class AdminOrderController extends Controller
             }
             $line_item->save();
         }
-        $order->status = $order->getStatus($order);
+        $order->status = 'fulfilled';
         $order->save();
+
+        dd($order);
 
         $fulfillment = new OrderFulfillment();
         if ($order->custom == 0) {
