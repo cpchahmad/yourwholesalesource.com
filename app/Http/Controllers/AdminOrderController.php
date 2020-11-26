@@ -142,7 +142,13 @@ class AdminOrderController extends Controller
                             }
                             $response = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json', $data);
                             if ($response->errors) {
-                                dd($response->body->base[0]);
+
+                                if(strpos($response->body->base[0], "is already fulfilled") !== false){
+                                    dd('found');
+                                }
+                                else {
+                                    dd('not found');
+                                }
                                 $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json');
                                 dd($res);
                                 return redirect()->back()->with('error', 'Cant Fulfill Items of Order in Related Store!');
