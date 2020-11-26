@@ -10,8 +10,8 @@
     </style>
     <div class="block">
         <ul class="nav nav-tabs nav-tabs-block nav-justified" data-toggle="tabs" role="tablist">
-            <li class="nav-item text-center" style="font-size: 16px !important;">
-                <a class="nav-link active">Register</a>
+            <li class="nav-item text-center" >
+                <a class="nav-link active" style="font-size: 16px !important;">Register</a>
             </li>
 {{--            <li class="nav-item">--}}
 {{--                <a class="nav-link active" href="#by_email">By Account</a>--}}
