@@ -10,9 +10,11 @@ trait RetailerOrderTrait
         $quanity = $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('quantity');
         $fulfillable_quanity = $order->line_items->whereIn('fulfilled_by',['Fantasy','AliExpress'])->sum('fulfillable_quantity');
         if($fulfillable_quanity == 0){
+            dd('no issue');
             return 'fulfilled';
         }
         else if($fulfillable_quanity == $quanity || $fulfillable_quanity < $quanity){
+            dd('bug');
             return 'unfulfilled';
         }
 
