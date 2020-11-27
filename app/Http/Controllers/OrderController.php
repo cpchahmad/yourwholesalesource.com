@@ -125,7 +125,7 @@ class OrderController extends Controller
                 Mail::to($users)->send(new OrderPlaceEmail($user->email, $order));
             }
             catch (\Exception $e){
-                dd($e);
+
             }
 
             /*Maintaining Log*/
