@@ -350,7 +350,6 @@ class WishlistController extends Controller
                     Mail::to($user->email)->send(new WishlistComplateMail($user, $wish));
                 }
                 catch (\Exception $e){
-                    dd($e);
                 }
 
                 $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
