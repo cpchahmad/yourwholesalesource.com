@@ -35,6 +35,7 @@
                 @if($order->admin_shopify_id == null &&  $order->admin_shopify_name == null)
                     <button class="btn btn-sm btn-success" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.manual_push_to_wefulfill',$order->id)}}'">Sync to Wefulfill Store</button>
                 @endif
+                <button style="float: right;margin-bottom: 10px" class="btn btn-sm btn-primary" data-target="#create_new_ticket" data-toggle="modal">Create New Ticket</button>
             </div>
         </div>
 
@@ -772,6 +773,107 @@
             </div>
         </div>
     </div>
+
+
+    @php
+        $user = $shop->has_user()->first();
+        $categories = \App\TicketCategory::all();
+    @endphp
+    <div class="modal fade" id="create_new_ticket" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">New Ticket</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form action="{{route('help-center.ticket.create')}}" method="post"  enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="source" value="store">
+                        <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
+                        <input type="hidden" name="shop_id" value="{{$shop->id}}">
+                        <input type="hidden" name="type" value="store-ticket">
+
+                        <div class="block-content font-size-sm">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label for="material-error">Ticket Subject</label>
+                                        <input required class="form-control" type="text"  name="title"
+                                               placeholder="Enter Title here">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label for="material-error">Email</label>
+                                        <input required class="form-control" type="text"  name="email"
+                                               value="{{$shop->shopify_domain}}"  placeholder="Enter Email here">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label for="material-error">Priority</label>
+                                        <select name="priority" class="form-control" required>
+                                            <option value="low">Low</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="high">High</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label for="material-error">Ticket Category</label>
+                                        <select name="category" class="form-control" required>
+                                            <option value="default">Default</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label for="material-error">Attachments </label>
+                                        <input type="file" name="attachments[]" class="form-control" multiple>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label for="material-error">Message</label>
+                                        <textarea required class="js-summernote" name="message"
+                                                  placeholder="Please Enter Description here !"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="block-content block-content-full text-right border-top">
+
+                            <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 @endsection
