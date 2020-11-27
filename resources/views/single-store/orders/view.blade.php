@@ -31,7 +31,7 @@
                 @if($order->paid == 0 && $order->status != 'cancelled')
                 <button class="btn btn-danger" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('app.order.cancel',$order->id)}}'">Cancel Order</button>
                 @endif
-                <button style="float: right;margin-bottom: 10px" class="btn btn-sm btn-primary" data-target="#create_new_ticket" data-toggle="modal">Create New Ticket</button>
+                <button style="float: right;margin-bottom: 10px" class="btn btn-sm btn-primary mr-2" data-target="#create_new_ticket" data-toggle="modal">Create New Ticket</button>
                 @php
                     $user = $shop->has_user()->first();
                     $categories = \App\TicketCategory::all();

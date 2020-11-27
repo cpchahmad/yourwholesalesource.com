@@ -35,6 +35,7 @@ class TicketController extends Controller
     }
 
     public function create_ticket(Request $request){
+        dd($request->all());
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
             $ticket = new Ticket();
