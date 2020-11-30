@@ -898,6 +898,7 @@ class WishlistController extends Controller
     public function test() {
         $shop = $this->helper->getSpecificShop(55);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/5776150986907.json');
+
         $products = $response->body->product;
         dd($products);
 
