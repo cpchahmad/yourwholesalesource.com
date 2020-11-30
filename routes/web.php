@@ -360,9 +360,9 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 //Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
 //Route::get('/test', 'WishlistController@test');
-//Route::get('/test', function() {
-//    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
-//});
+Route::get('/test', function() {
+    return view('emails.order_place')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
+});
 //Route::get('/test2', function() {
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
@@ -374,8 +374,8 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    return view('emails.top_products_new')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
 //});
 
-Route::get('/test', 'OrderController@manuallyGetOrders');
-Route::get('/test2', 'WishlistController@test');
+//Route::get('/test', 'OrderController@manuallyGetOrders');
+//Route::get('/test2', 'WishlistController@test');
 
 
 Route::get('pages', 'AdminMaintainerController@getPages');
