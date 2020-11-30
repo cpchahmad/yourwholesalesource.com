@@ -868,40 +868,40 @@ class WishlistController extends Controller
         }
         return redirect()->back()->with('success', 'Wishlist deleted successfully');
     }
-    public function manuallyChangeInventoryManager() {
-        $shop = $this->helper->getSpecificShop(55);
-
-        $ids = [1718761553983,1966545109055,1760465453119];
-
-        foreach ($ids as $id) {
-            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $id .'.json');
-            $product = $response->body->product;
-            dd($product);
-            if (count($product->variants) > 0) {
-                foreach ($product->variants as $index => $variant) {
-                    $i = [
-                        'variant' => [
-                            "fulfillment_service" => "wefullfill",
-                            'inventory_management' => 'wefullfill',
-                        ]
-                    ];
-                    $response = $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant->id . '.json', $i);
-                    if ($response->errors) {
-                        dd($response);
-                    }
-                }
-            }
-        }
-    }
 
 
-    public function test() {
-        $shop = $this->helper->getSpecificShop(55);
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/5757029220507.json');
-
-        $products = $response->body->product;
-        dd($products);
-
-    }
+//    public function manuallyChangeInventoryManager() {
+//        $shop = $this->helper->getSpecificShop(55);
+//
+//        $ids = [1718761553983,1966545109055,1760465453119];
+//
+//        foreach ($ids as $id) {
+//            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'. $id .'.json');
+//            $product = $response->body->product;
+//            dd($product);
+//            if (count($product->variants) > 0) {
+//                foreach ($product->variants as $index => $variant) {
+//                    $i = [
+//                        'variant' => [
+//                            "fulfillment_service" => "wefullfill",
+//                            'inventory_management' => 'wefullfill',
+//                        ]
+//                    ];
+//                    $response = $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant->id . '.json', $i);
+//                    if ($response->errors) {
+//                        dd($response);
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    public function test() {
+//        $shop = $this->helper->getSpecificShop(55);
+//        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/5757029220507.json');
+//
+//        $products = $response->body->product;
+//        dd($products);
+//
+//    }
 
 }
