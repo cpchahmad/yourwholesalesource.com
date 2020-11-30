@@ -30,6 +30,56 @@
         text-align: left !important;
     }
 
+    .wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        /*justify-content: space-between;*/
+        width: 100%;
+    }
+
+    .product_div{
+        margin: 10px 0;
+        box-sizing: border-box;
+        padding: 10px;
+        width: 33.3%;
+    }
+
+    .product_div p{
+        text-align: left;
+    }
+
+    .product_price{
+        color: #ff0000db;
+        font-weight: bold;
+
+    }
+
+    .product_div .product_img{
+        width: 100%;
+        height: auto;
+    }
+
+    .inner{
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+        box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+    }
+
+    .product-btn{
+        width: 100%;
+        background-color: #1f6fb2;
+        color: white;
+        padding: 15px 0;
+        border-radius: 5px;
+        border: 1px solid #1f6fb2;
+        font-size: 16px;
+        display: block;
+        text-decoration: none;
+    }
+
     .select2-selection__choice{
         background-color: #7daa40 !important;
         border-radius: 0px;
@@ -512,9 +562,9 @@
                                                                 @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                                     @if($index == 0)
                                                                         @if($image->isV == 0)
-                                                                            <img class=""  src="{{asset('images')}}/{{$image->image}}" style="width: 80px !important; height: auto;"alt="">
+                                                                            <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
                                                                         @else
-                                                                            <img class=""  src="{{asset('images/variants')}}/{{$image->image}}" alt="" style="width: 80px !important; height: auto;">
+                                                                            <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
                                                                         @endif
                                                                     @endif
                                                                 @endforeach
