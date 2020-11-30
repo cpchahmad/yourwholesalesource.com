@@ -687,9 +687,8 @@ class OrderController extends Controller
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
         if (!$response->errors) {
             $orders = $response->body->orders;
-            dd($orders[15]);
             foreach ($orders as $index => $order) {
-                $order = $orders[17];
+                $order = $orders[15];
 
                 $product_ids = [];
                 $variant_ids = [];
