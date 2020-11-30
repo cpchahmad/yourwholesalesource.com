@@ -699,7 +699,6 @@ class OrderController extends Controller
                 $variant_ids = array(36677116428443);
                 $product_ids = array(5776107307163);
 
-                dd(23, $variant_ids, $product_ids);
 
                 if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
                     dd('yes');
