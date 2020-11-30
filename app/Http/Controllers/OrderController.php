@@ -695,7 +695,7 @@ class OrderController extends Controller
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
-                dd($product_ids);
+                dd($product_ids, $order);
                 if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
 
                     if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
