@@ -45,13 +45,11 @@ class OrderController extends Controller
 //        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 //        dd($response);
 
-
         $orders = RetailerOrder::where('shop_id', $this->helper->getShop()->id)->where('custom', 0)->newQuery();
         if ($request->has('search')) {
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
         }
         $orders = $orders->orderBy('created_at', 'DESC')->paginate(30);
-
         return view('single-store.orders.index')->with([
             'orders' => $orders,
             'search' => $request->input('search')
@@ -685,11 +683,11 @@ class OrderController extends Controller
 
     public function manuallyGetOrders()
     {
-        $shop = $this->helper->getSpecificShop(71);
+        $shop = $this->helper->getSpecificShop(55);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
         if (!$response->errors) {
             $orders = $response->body->orders;
-            dd($orders[1]);
+            dd($orders[25]);
             foreach ($orders as $index => $order) {
                 $product_ids = [];
                 $variant_ids = [];
