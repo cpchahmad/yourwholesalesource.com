@@ -375,6 +375,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 //});
 
 Route::get('/test', 'OrderController@manuallyGetOrders');
+Route::get('/test2', 'WishlistController@test');
 
 
 Route::get('pages', 'AdminMaintainerController@getPages');
