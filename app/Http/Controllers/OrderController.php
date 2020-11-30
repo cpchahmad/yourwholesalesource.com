@@ -173,7 +173,6 @@ class OrderController extends Controller
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
-                dd($orders);
                 foreach ($orders as $index => $order) {
                     $product_ids = [];
                     $variant_ids = [];
@@ -182,6 +181,7 @@ class OrderController extends Controller
                         array_push($product_ids, $item->product_id);
                     }
                     if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
+                        dd('yes');
                         if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
                             $new = new RetailerOrder();
                             $new->shopify_order_id = $order->id;
