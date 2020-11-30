@@ -696,6 +696,8 @@ class OrderController extends Controller
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
+                $variant_ids = array(36677116428443);
+                $product_ids = array(5776107307163);
 
                 dd(23, $variant_ids, $product_ids);
 
