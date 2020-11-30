@@ -690,13 +690,11 @@ class OrderController extends Controller
             foreach ($orders as $index => $order) {
                 $order = $orders[17];
 
-                dd($order);
-
                 $product_ids = [];
                 $variant_ids = [];
                 foreach ($order->line_items as $item) {
-                    $item->variant_id = 36677116428443;
-                    $item->product_id = 5776107307163;
+                    $item->variant_id = 36590028783771;
+                    $item->product_id = 5757029220507;
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
