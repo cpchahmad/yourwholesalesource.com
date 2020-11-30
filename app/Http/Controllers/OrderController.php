@@ -50,6 +50,8 @@ class OrderController extends Controller
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
         }
         $orders = $orders->orderBy('created_at', 'DESC')->paginate(30);
+
+        dd($orders);
         return view('single-store.orders.index')->with([
             'orders' => $orders,
             'search' => $request->input('search')
