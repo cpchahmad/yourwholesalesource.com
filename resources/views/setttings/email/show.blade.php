@@ -501,19 +501,14 @@
                                         </div>
 
                                         <div class="" style="padding: 15px;">
-                                            <table class="table table-borderless table-striped table-vcenter">
-                                                <thead>
-                                                <tr class="" style="text-align: left;"></tr>
-                                                </thead>
-                                                <tbody>
                                                 @foreach($top_products_stores as $product)
                                                     @php
                                                         $prods = json_decode($template->products);
                                                     @endphp
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            @if(in_array($product->id, $prods))
 
-                                                    @if(in_array($product->id, $prods))
-                                                        <tr style="text-align: left">
-                                                            <td class="">
                                                                 @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                                     @if($index == 0)
                                                                         @if($image->isV == 0)
@@ -523,18 +518,21 @@
                                                                         @endif
                                                                     @endif
                                                                 @endforeach
-                                                                <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endif
+                                                                    <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
+                                                                    <p class="product_price">From ${{ $product->price }}</p>
+                                                                    <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 @endforeach
-                                                </tbody>
-                                            </table>
-                                            <br><br>
-                                            <hr>
+
+
                                         </div>
                                     </div>
                                 @endif
+
+                                <br><br>
+                                <hr>
 
                                 @if($template->id == '1' || $template->id == '2')
                                     <a class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
