@@ -550,32 +550,31 @@
                                             </div>
                                         </div>
 
-                                        <div class="" style="padding: 15px;">
-                                                @foreach($top_products_stores as $product)
-                                                    @php
-                                                        $prods = json_decode($template->products);
-                                                    @endphp
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            @if(in_array($product->id, $prods))
-
-                                                                @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                                    @if($index == 0)
-                                                                        @if($image->isV == 0)
-                                                                            <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
-                                                                        @else
-                                                                            <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
-                                                                        @endif
+                                        <div class="wrapper">
+                                            @foreach($top_products_stores as $product)
+                                                @php
+                                                    $prods = json_decode($template->products);
+                                                @endphp
+                                                @if(in_array($product->id, $prods))
+                                                    <div class="product_div">
+                                                        <div class="inner">
+                                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                                @if($index == 0)
+                                                                    @if($image->isV == 0)
+                                                                        <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
+                                                                    @else
+                                                                        <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
                                                                     @endif
-                                                                @endforeach
-                                                                    <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
-                                                                    <p class="product_price">From ${{ $product->price }}</p>
-                                                                    <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
-                                                            @endif
+                                                                @endif
+                                                            @endforeach
+                                                            <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
+                                                            <p class="product_price">From ${{ $product->price }}</p>
+                                                            <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
                                                         </div>
-                                                    </div>
-                                                @endforeach
 
+                                                    </div>
+                                                @endif
+                                            @endforeach
 
                                         </div>
                                     </div>
