@@ -685,11 +685,11 @@ class OrderController extends Controller
 
     public function manuallyGetOrders()
     {
-        $shop = $this->helper->getSpecificShop(55);
+        $shop = $this->helper->getSpecificShop(71);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
         if (!$response->errors) {
             $orders = $response->body->orders;
-            dd($orders[16]);
+            dd($orders);
             foreach ($orders as $index => $order) {
                 $product_ids = [];
                 $variant_ids = [];
