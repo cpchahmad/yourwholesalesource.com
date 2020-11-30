@@ -181,7 +181,6 @@ class OrderController extends Controller
                         array_push($product_ids, $item->product_id);
                     }
                     if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
-                        dd('yes');
                         if (!RetailerOrder::where('shopify_order_id', $order->id)->exists()) {
                             $new = new RetailerOrder();
                             $new->shopify_order_id = $order->id;
@@ -382,9 +381,6 @@ class OrderController extends Controller
                             $order_log->retailer_order_id = $new->id;
                             $order_log->save();
                         }
-                    }
-                    else {
-                        dd('no');
                     }
 
                 }
