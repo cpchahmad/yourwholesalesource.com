@@ -693,11 +693,12 @@ class OrderController extends Controller
                 $product_ids = [];
                 $variant_ids = [];
                 foreach ($order->line_items as $item) {
+                    $item->variant_id = 36677116428443;
+                    $item->product_id = 5776107307163;
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
-                $variant_ids = array(36677116428443);
-                $product_ids = array(5776107307163);
+
 
 
                 if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
