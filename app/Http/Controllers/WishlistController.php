@@ -868,8 +868,7 @@ class WishlistController extends Controller
         }
         return redirect()->back()->with('success', 'Wishlist deleted successfully');
     }
-
-    public function test() {
+    public function manuallyChangeInventoryManager() {
         $shop = $this->helper->getSpecificShop(84);
 
         $ids = [1718761553983,1966545109055,1760465453119];
@@ -894,4 +893,14 @@ class WishlistController extends Controller
             }
         }
     }
+
+
+    public function test() {
+        $shop = $this->helper->getSpecificShop(63);
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json');
+        $orders = $response->body->orders;
+        dd($orders);
+
+    }
+
 }
