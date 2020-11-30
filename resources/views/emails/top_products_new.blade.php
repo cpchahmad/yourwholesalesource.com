@@ -68,7 +68,6 @@
         margin: 10px 0;
         box-sizing: border-box;
         padding: 10px;
-        border: 1px solid #ccc;
         width: 33.3%;
     }
 
@@ -77,12 +76,35 @@
     }
 
     .product_price{
-        color:
+        color: #ff0000db;
+        font-weight: bold;
+
     }
 
     .product_div .product_img{
         width: 100%;
         height: auto;
+    }
+
+    .inner{
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+        box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+    }
+
+    .product-btn{
+        width: 100%;
+        background-color: #1f6fb2;
+        color: white;
+        padding: 15px 0;
+        border-radius: 5px;
+        border: 1px solid #1f6fb2;
+        font-size: 16px;
+        display: block;
+        text-decoration: none;
     }
 
 
@@ -138,18 +160,21 @@
                         @endphp
                         @if(in_array($product->id, $prods))
                             <div class="product_div">
-                                @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                    @if($index == 0)
-                                        @if($image->isV == 0)
-                                            <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
-                                        @else
-                                            <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
+                                <div class="inner">
+                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                        @if($index == 0)
+                                            @if($image->isV == 0)
+                                                <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
+                                            @else
+                                                <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
+                                            @endif
                                         @endif
-                                    @endif
-                                @endforeach
-                                <hr>
-                                <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
-                                <p class="product_price">From ${{ $product->price }}</p>
+                                    @endforeach
+                                    <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
+                                    <p class="product_price">From ${{ $product->price }}</p>
+                                    <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
+                                </div>
+
                             </div>
                         @endif
                     @endforeach
