@@ -45,7 +45,6 @@ class OrderController extends Controller
 //        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 //        dd($response);
 
-        dd( $this->helper->getShop()->id);
 
         $orders = RetailerOrder::where('shop_id', $this->helper->getShop()->id)->where('custom', 0)->newQuery();
         if ($request->has('search')) {
@@ -53,7 +52,6 @@ class OrderController extends Controller
         }
         $orders = $orders->orderBy('created_at', 'DESC')->paginate(30);
 
-        dd($orders);
         return view('single-store.orders.index')->with([
             'orders' => $orders,
             'search' => $request->input('search')
