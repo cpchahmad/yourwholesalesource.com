@@ -687,15 +687,14 @@ class OrderController extends Controller
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
         if (!$response->errors) {
             $orders = $response->body->orders;
-            dd($orders[7]);
             foreach ($orders as $index => $order) {
-                $order = $orders[15];
+                $order = $orders[7];
 
                 $product_ids = [];
                 $variant_ids = [];
                 foreach ($order->line_items as $item) {
-                    $item->variant_id = 36677323554971;
-                    $item->product_id = 5776150986907;
+                    $item->variant_id = 36590028783771;
+                    $item->product_id = 5757029220507;
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
