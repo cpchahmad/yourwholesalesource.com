@@ -383,6 +383,9 @@ class OrderController extends Controller
                             $order_log->save();
                         }
                     }
+                    else {
+                        dump('no');
+                    }
 
                 }
             }
