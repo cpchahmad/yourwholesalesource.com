@@ -173,6 +173,7 @@ class OrderController extends Controller
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
+                dd($orders);
                 foreach ($orders as $index => $order) {
                     $product_ids = [];
                     $variant_ids = [];
@@ -395,9 +396,9 @@ class OrderController extends Controller
     {
         $shop = $this->helper->getShop();
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
+
         if (!$response->errors) {
             $orders = $response->body->orders;
-            dd($orders);
             foreach ($orders as $index => $order) {
                 $product_ids = [];
                 $variant_ids = [];
