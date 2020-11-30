@@ -687,14 +687,17 @@ class OrderController extends Controller
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
         if (!$response->errors) {
             $orders = $response->body->orders;
-            dd($orders[26]);
             foreach ($orders as $index => $order) {
+                $order = $orders[26];
+
                 $product_ids = [];
                 $variant_ids = [];
                 foreach ($order->line_items as $item) {
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
+
+                dd(23, $variant_ids, $product_ids);
 
                 if (RetailerProduct::whereIn('shopify_id', $product_ids)->exists()) {
                     dd('yes');
