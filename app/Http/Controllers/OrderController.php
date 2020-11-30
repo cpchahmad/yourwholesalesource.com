@@ -694,8 +694,8 @@ class OrderController extends Controller
                 $product_ids = [];
                 $variant_ids = [];
                 foreach ($order->line_items as $item) {
-                    $item->variant_id = 36590028783771;
-                    $item->product_id = 5757029220507;
+                    $item->variant_id = 36677323554971;
+                    $item->product_id = 5776150986907;
                     array_push($variant_ids, $item->variant_id);
                     array_push($product_ids, $item->product_id);
                 }
