@@ -690,6 +690,8 @@ class OrderController extends Controller
             foreach ($orders as $index => $order) {
                 $order = $orders[26];
 
+                dd($order);
+
                 $product_ids = [];
                 $variant_ids = [];
                 foreach ($order->line_items as $item) {
