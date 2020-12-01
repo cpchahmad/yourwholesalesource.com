@@ -38,13 +38,13 @@
                                     @if($log->user_id == 0)
                                         <span class="badge badge-success">WeFullFill(Admin)</span>
                                     @else
-                                        <span class="badge badge-success">{{ $log->user()->name }}</span>
+                                        <span class="badge badge-success">{{ $log->user->name }}</span>
                                     @endif
                                 </td>
                                 <td style="vertical-align: middle">
                                     @if($log->model_type == "App\Product")
                                         <a href="{{ route('product.view', $log->model_id) }}">
-                                            {{ $log->product()->title }}
+                                            {{ $log->product->title }}
                                         </a>
                                     @endif
                                 </td>
