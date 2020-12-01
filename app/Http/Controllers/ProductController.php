@@ -28,6 +28,7 @@ class ProductController extends Controller
 {
     private $helper;
     private $notify;
+    private $log;
 
     /**
      * ProductController constructor.
@@ -36,6 +37,7 @@ class ProductController extends Controller
     {
         $this->helper = new HelperController();
         $this->notify = new NotificationController();
+        $this->log = new ActivityLogController();
     }
 
     public function index()
@@ -810,6 +812,8 @@ class ProductController extends Controller
         if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
             $product->has_preferences()->attach($request->input('shops'));
         }
+
+        $this->log->store(0, 'App\Product', $product->id, 'Created');
 
         return redirect()->route('import_to_shopify',$product->id);
     }
