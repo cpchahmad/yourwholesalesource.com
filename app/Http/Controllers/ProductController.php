@@ -1144,7 +1144,7 @@ class ProductController extends Controller
                 }
             }
 
-            $this->log->store(0, 'Product', $product->id, 'Imported To Shopify');
+            $this->log->store(0, 'Product', $product->id, $product->title, 'Imported To Shopify');
             return redirect()->route('product.view',$product->id)->with('success','Product Generated and Push to Store Successfully!');
         }
     }
