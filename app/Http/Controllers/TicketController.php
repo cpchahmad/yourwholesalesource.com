@@ -215,6 +215,9 @@ class TicketController extends Controller
         $tl->ticket_id = $ticket->id;
         $tl->save();
 
+        $this->log->store(0, 'Ticket', $ticket->id, $ticket->title, 'Ticket Completed');
+
+
 
         return redirect()->back()->with('success','Ticket marked as completed successfully!');
     }
@@ -242,6 +245,8 @@ class TicketController extends Controller
             $ml->manager_id = $manager->id;
             $ml->save();
             $this->notify->generate('Ticket','Ticket Marked as Closed',$ticket->title.' has been closed by your manager',$ticket);
+
+            $this->log->store(0, 'Ticket', $ticket->id, $ticket->title, 'Ticket Closed');
 
             return redirect()->back()->with('success','Ticket marked as completed successfully!');
         }
