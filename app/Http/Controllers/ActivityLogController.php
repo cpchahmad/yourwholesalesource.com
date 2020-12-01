@@ -9,10 +9,10 @@ class ActivityLogController extends Controller
 {
     public function index(Request $request) {
 
-        if ($request->has('type_search') && $request->has('role_search')) {
-            $logs = ActivityLog::where('user_id', $request->input('role_search'))->where('type', 'LIKE', '%' . $request->input('type_search') . '%')->orderBy('updated_at', 'DESC')->paginate(20);
-        }
-        else if ($request->has('role_search')) {
+//        if ($request->has('type_search') && $request->has('role_search')) {
+//            $logs = ActivityLog::where('user_id', $request->input('role_search'))->where('type', 'LIKE', '%' . $request->input('type_search') . '%')->orderBy('updated_at', 'DESC')->paginate(20);
+//        }
+        if ($request->has('role_search')) {
             $logs = ActivityLog::whereHas('user', function($q) use ($request) {
                 return $q->where('name', 'LIKE', '%' . $request->input('type_search') . '%')->latest()->paginate(20);
             });
@@ -21,7 +21,6 @@ class ActivityLogController extends Controller
             $logs = ActivityLog::where('model_type', 'LIKE', '%' . $request->input('type_search') . '%')->latest()->paginate(20);
         }
         else {
-
             $logs = ActivityLog::latest()->paginate(30);
         }
 
