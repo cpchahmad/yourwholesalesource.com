@@ -2,6 +2,7 @@
 
 use App\Customer;
 use App\FulfillmentLineItem;
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\WebhookController;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -36,6 +37,9 @@ class OrdersCreateJob implements ShouldQueue
      * @var object
      */
     public $data;
+    private $log;
+
+
 
     /**
      * Create a new job instance.
@@ -49,6 +53,8 @@ class OrdersCreateJob implements ShouldQueue
     {
         $this->shopDomain = $shopDomain;
         $this->data = $data;
+        $this->log = new ActivityLogController();
+
     }
 
     /**
@@ -286,6 +292,8 @@ class OrdersCreateJob implements ShouldQueue
 
                 $new->status = $new->getStatus($new);
                 $new->save();
+
+                $this->log->store($new->user_id, 'Order', $new->id, '#'.$new->name, 'Order Created');
 
                 /*Maintaining Log*/
                 $order_log =  new OrderLog();
