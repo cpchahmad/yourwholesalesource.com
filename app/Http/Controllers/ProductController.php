@@ -231,6 +231,9 @@ class ProductController extends Controller
                     foreach ($deleted_variants as $deleted){
                         $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' .$product->shopify_id. '/variants/' .$deleted->shopify_id. '.json');
                     }
+
+                    $this->log->store(0, 'Product', $product->id, 'Variant Option Deleted');
+
                     return redirect()->back()->with('success','Selected Options and Related Variants Deleted Successfully');
                 }
                 /*New Variants Option Add from Shopify and Database*/
@@ -255,6 +258,9 @@ class ProductController extends Controller
                         $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                         $v->save();
                     }
+
+                    $this->log->store(0, 'Product', $product->id, 'New Variants Option Added');
+
                     return redirect()->route('product.edit', $product->id);
                 }
                 /*New Variants Option Update from Shopify and Database*/
@@ -331,30 +337,6 @@ class ProductController extends Controller
                         ]);
                     }
 
-
-//                    if (count($product->option2($product)) > 0) {
-//                        $temp = [];
-//                        foreach ($product->option2($product) as $a) {
-//                            array_push($temp, $a);
-//                        }
-//                        array_push($options_array, [
-//                            'name' => 'Option2',
-//                            'position' => '2',
-//                            'values' => $temp,
-//                        ]);
-//                    }
-//                    if (count($product->option3($product)) > 0) {
-//                        $temp = [];
-//                        foreach ($product->option3($product) as $a) {
-//                            array_push($temp, $a);
-//                        }
-//                        array_push($options_array, [
-//                            'name' => 'Option3',
-//                            'position' => '3',
-//                            'values' => $temp,
-//                        ]);
-//                    }
-
                     $productdata = [
                         "product" => [
                             "options" => $options_array,
@@ -372,6 +354,9 @@ class ProductController extends Controller
                         $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                         $variant->save();
                     }
+
+                    $this->log->store(0, 'Product', $product->id, 'New Variants Option Updated');
+
                     return redirect()->route('product.edit', $product->id);
                 }
                 /*old Option Update Shopify and Database*/
@@ -396,6 +381,9 @@ class ProductController extends Controller
                         $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                         $v->save();
                     }
+
+                    $this->log->store(0, 'Product', $product->id, 'Old Option Updated');
+
                     return redirect()->route('product.edit', $product->id);
 
                 }
@@ -428,6 +416,9 @@ class ProductController extends Controller
                             "variants" => $variants_array,
                         ]
                     ];
+
+                    $this->log->store(0, 'Product', $product->id, 'New Option Added');
+
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                     return redirect()->back();
                 }
@@ -472,6 +463,8 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
+                    $this->log->store(0, 'Product', $product->id, 'Variant Updated');
+
                 }
                 /*Product Basic Update Shopify and Database*/
                 if ($request->input('type') == 'basic-info') {
@@ -484,6 +477,8 @@ class ProductController extends Controller
                             "body_html" => $request->description,
                         ]
                     ];
+                    $this->log->store(0, 'Product', $product->id, 'Product Basic Information Updated');
+
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                 }
                 /*Pricing Update*/
@@ -513,6 +508,8 @@ class ProductController extends Controller
 
                                 ]
                             ];
+                            $this->log->store(0, 'Product', $product->id, 'Product Pricing Updated');
+
                             $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
                             Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
@@ -526,6 +523,8 @@ class ProductController extends Controller
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->sortBy = $request->input('sortBy');
                     $product->save();
+                    $this->log->store(0, 'Product', $product->id, 'Product Basic Information Updated');
+
                 }
 
 
@@ -554,6 +553,9 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+
+                    $this->log->store(0, 'Product', $product->id, 'Product Category Updated');
+
                 }
 
                 if ($request->input('type') == 'organization') {
@@ -569,6 +571,7 @@ class ProductController extends Controller
                         ]
                     ];
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $this->log->store(0, 'Product', $product->id, 'Product Vendor Updated');
 
                 }
 
@@ -600,6 +603,8 @@ class ProductController extends Controller
                                 "namespace"=> "platform"
                             ]
                         ];
+                        $this->log->store(0, 'Product', $product->id, 'Product Basic Information Updated');
+
                         $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     }
 
@@ -611,10 +616,14 @@ class ProductController extends Controller
                 if($request->input('type') == 'marketing_video_update'){
                     $product->marketing_video = $request->input('marketing_video');
                     $product->save();
+                    $this->log->store(0, 'Product', $product->id, 'Product Marketing Video Updated');
+
                 }
 
                 if($request->input('type') == 'status_update'){
                     $this->product_status_change($request, $product, $shop);
+                    $this->log->store(0, 'Product', $product->id, 'Product Status Updated');
+
                 }
 
                 if ($request->input('type') == 'variant-image-update') {
@@ -647,8 +656,11 @@ class ProductController extends Controller
                         else{
                             $image->shopify_id = $imageResponse->body->image->id;
                             $image->save();
+                            $this->log->store(0, 'Product', $product->id, 'Product Varinat Image Updated');
+
                             return redirect()->back();
                         }
+
 
                     }
 
@@ -658,6 +670,7 @@ class ProductController extends Controller
                     $image =  Image::find($request->input('file'));
                     $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
                     $image->delete();
+                    $this->log->store(0, 'Product', $product->id, 'Product Image Deleted');
 
                     return response()->json([
                         'success' => 'ok'
@@ -687,6 +700,8 @@ class ProductController extends Controller
                         }
                     }
                     $product->save();
+                    $this->log->store(0, 'Product', $product->id, 'Product Image Added');
+
                 }
 
                 if ($request->input('type') == 'add-additional-tab'){
@@ -708,6 +723,8 @@ class ProductController extends Controller
                     $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     $additional_tab->shopify_id = $resp->body->metafield->id;
                     $additional_tab->save();
+                    $this->log->store(0, 'Product', $product->id, 'Product Tab Added');
+
                     return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
 
@@ -727,6 +744,9 @@ class ProductController extends Controller
                             "namespace"=> "tabs"
                         ]
                     ];
+
+                    $this->log->store(0, 'Product', $product->id, 'Product Tab Updated');
+
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
                     return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
@@ -740,11 +760,9 @@ class ProductController extends Controller
                     if($request->input('global') == 0 && $request->has('non_shopify_users') && count($request->input('non_shopify_users')) > 0){
                         $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
                     }
+                    $this->log->store(0, 'Product', $product->id, 'Product Shop Preferences Updated');
 
                 }
-
-                $this->log->store(0, 'Product', $product->id, 'Updated');
-
 
             }
         }
