@@ -308,6 +308,8 @@ class AdminOrderController extends Controller
             if ($order->paid == 1) {
                 $order->status = 'delivered';
                 $order->save();
+                $this->log->store(0, 'Order', $order->id, $order->name, 'Order Marked As Delivered');
+
 
                 /*Maintaining Log*/
                 $order_log = new OrderLog();
@@ -336,6 +338,9 @@ class AdminOrderController extends Controller
             if ($order->paid == 1) {
                 $order->status = 'completed';
                 $order->save();
+
+                $this->log->store(0, 'Order', $order->id, $order->name, 'Order Marked As Completed');
+
 
                 $order_log = new OrderLog();
                 $order_log->message = "Order marked as completed successfully on " . now()->format('d M, Y h:i a');
