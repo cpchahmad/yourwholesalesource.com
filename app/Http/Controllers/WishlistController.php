@@ -42,6 +42,8 @@ class WishlistController extends Controller
     {
         $this->helper = new HelperController();
         $this->notify = new NotificationController();
+        $this->log = new ActivityLogController();
+
 
     }
 
@@ -192,6 +194,7 @@ class WishlistController extends Controller
             }
 
             $this->notify->generate('Wish-list','Wishlist Approved','Wishlist named '.$wish->product_name.' has been approved by your manager',$wish);
+            $this->log->store(0, 'Wishlist', $wish->id, 'Wishlist Approved');
 
 
             return redirect()->back()->with('success','Wishlist Approved Successfully!');
