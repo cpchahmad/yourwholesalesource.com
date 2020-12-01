@@ -55,10 +55,10 @@
                             </tr>
                         @endforeach
                         </tbody>
-                        <div class="d-flex justify-content-end">
-                            {{ $logs->links() }}
-                        </div>
                     </table>
+                    <div class="d-flex justify-content-end">
+                        {{ $logs->links() }}
+                    </div>
                 </div>
             </div>
         </div>
