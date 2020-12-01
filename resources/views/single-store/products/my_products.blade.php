@@ -119,9 +119,9 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="d-flex justify-content-end">
-                        {{ $products->links() }}
-                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    {{ $products->links() }}
                 </div>
             @else
                 <div class="block">
