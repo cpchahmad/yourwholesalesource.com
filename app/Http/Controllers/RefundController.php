@@ -316,6 +316,8 @@ class RefundController extends Controller
             $order->status = 'cancelled';
             $order->paid = 2;
             $order->save();
+            $this->log->store(0, 'Order', $order->id, $order->name, 'Order Cancelled & Refunded');
+
             /*Order Log*/
             $order_log =  new OrderLog();
             $order_log->message = "An amount of ".$order->cost_to_pay." USD refunded to Wallet on ".now()->format('d M, Y h:i a');

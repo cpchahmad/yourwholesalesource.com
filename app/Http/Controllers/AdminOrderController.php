@@ -421,7 +421,7 @@ class AdminOrderController extends Controller
         catch (\Exception $e){
         }
 
-        $this->log->store($order->user_id, 'Order', $order->id, $order->name, 'Order Line Items Fulfilled');
+        $this->log->store(0, 'Order', $order->id, $order->name, 'Order Line Items Fulfilled');
         $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
     }
@@ -519,6 +519,9 @@ class AdminOrderController extends Controller
         $fulfillment->delete();
         $order->status = $order->getStatus($order);
         $order->save();
+        $this->log->store(0, 'Order', $order->id, $order->name, 'Order Fulfillment Cancelled');
+
+
 
         /*Maintaining Log*/
 
