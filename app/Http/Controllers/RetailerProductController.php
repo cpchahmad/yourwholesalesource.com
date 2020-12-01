@@ -172,6 +172,8 @@ class RetailerProductController extends Controller
                                 'cost' => $variant->cost,
                             ]
                         ];
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+
                         $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
                     }
 
@@ -201,6 +203,8 @@ class RetailerProductController extends Controller
 
                                 ]
                             ];
+                            $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+
                             $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
                         }
                     }
@@ -224,6 +228,8 @@ class RetailerProductController extends Controller
                                 "tags" =>$request->tags,
                             ]
                         ];
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Basic Information Updated');
+
                         $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productdata);
                     }
                 }
@@ -237,6 +243,8 @@ class RetailerProductController extends Controller
                                 "body_html" => $request->description,
                             ]
                         ];
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Description Updated');
+
                         $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productdata);
                     }
                 }
@@ -270,6 +278,8 @@ class RetailerProductController extends Controller
 
                         }
                     }
+                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Image Updated');
+
                     return redirect()->back();
 
                 }
@@ -280,6 +290,8 @@ class RetailerProductController extends Controller
                         $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/' . $image->shopify_id . '.json');
                     }
                     $image->delete();
+                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Image Deleted');
+
 
                     return response()->json([
                         'success' => 'ok'
@@ -306,6 +318,8 @@ class RetailerProductController extends Controller
                                 $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
                                 $image->shopify_id = $imageResponse->body->image->id;
                                 $image->save();
+                                $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Image Added');
+
                             }
                         }
                     }

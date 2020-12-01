@@ -47,15 +47,7 @@
                                 </td>
 
                                 <td style="vertical-align: middle">
-                                    @if($log->model_type == "Product")
-                                        {{ $log->model_name }}
-                                    @endif
-                                    @if($log->model_type == "Wishlist")
-                                        {{ $log->model_name }}
-                                    @endif
-                                    @if($log->model_type == "Wallet")
-                                        {{ $log->model_name }}
-                                    @endif
+                                    {{ $log->model_name }}
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ $log->action }}
