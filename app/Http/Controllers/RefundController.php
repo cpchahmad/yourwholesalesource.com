@@ -266,6 +266,7 @@ class RefundController extends Controller
             $order_log->save();
             $this->notify->generate('Order','Order Cancelled',$order->name.' has been cancelled',$order);
             $this->inventory->OrderQuantityUpdate($order,'refund');
+            $this->log->store(0, 'Order', $order->id, $order->name, 'Order Cancelled');
             return redirect()->back()->with('success','Order Cancelled Successfully!');
 
         }
