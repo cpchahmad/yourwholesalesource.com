@@ -22,6 +22,7 @@ use Illuminate\Support\Str;
 class TicketController extends Controller
 {
     private $notify;
+    private $log;
 
     /**
      * TicketController constructor.
@@ -31,7 +32,7 @@ class TicketController extends Controller
     {
         $this->notify = new NotificationController();
         $this->helper = new HelperController();
-
+        $this->log = new ActivityLogController();
     }
 
     public function create_ticket(Request $request){
@@ -105,6 +106,9 @@ class TicketController extends Controller
             }
             catch (\Exception $e){
             }
+
+            $this->log->store($ticket->user_id, 'Ticket', $ticket->id, $ticket->title, 'Ticket Created');
+
 
 
             /*Maintaining Log*/
