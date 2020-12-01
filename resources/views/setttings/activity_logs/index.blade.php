@@ -48,27 +48,13 @@
 
                                 <td style="vertical-align: middle">
                                     @if($log->model_type == "Product")
-                                        @if($log->action == "Deleted")
-                                            {{ $log->model_id }}
-                                        @else
-                                            @if($log->product == null)
-                                                Product Deleted
-                                            @else
-                                            <a href="{{ route('product.view', $log->model_id) }}">
-                                                {{ $log->product->title }}
-                                            </a>
-                                            @endif
-                                        @endif
+                                        {{ $log->model_name }}
                                     @endif
                                     @if($log->model_type == "Wishlist")
-                                        <a href="{{route('wishlist.view',$log->model_id)}}">
-                                            {{ $log->wishlist->product_name }}
-                                        </a>
+                                        {{ $log->model_name }}
                                     @endif
                                     @if($log->model_type == "Wallet")
-                                        <a href="{{route('admin.wallets.detail',$log->model_id)}}">
-                                            {{ $log->wallet->owner->name }}
-                                        </a>
+                                        {{ $log->model_name }}
                                     @endif
                                 </td>
                                 <td style="vertical-align: middle">

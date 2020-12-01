@@ -168,7 +168,7 @@ class WalletController extends Controller
            catch (\Exception $e){
            }
 
-           $this->log->store($wallet->user_id, 'Wallet', $wallet->id, 'Top-up Request Submitted to Administration');
+           $this->log->store($wallet->user_id, 'Wallet', $wallet->id, $wallet->owner->name, 'Top-up Request Submitted to Administration');
 
           return redirect()->back()->with('success', 'Your Top-up Request Submit Successfully to Administration. Please Wait For Approval!');
        }
@@ -250,6 +250,11 @@ class WalletController extends Controller
             $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD edit Against Wallet ' . $get_wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Administration';
             $wallet_log->save();
 
+            $this->log->store(0, 'Wallet', $wallet->id, $wallet->owner->name,'Wallet Request Edited');
+
+
+
+
         return redirect()->back()->with('success', 'Wallet Request Updated successfully');
     }
 
@@ -281,6 +286,9 @@ class WalletController extends Controller
                 }
                 catch (\Exception $e){
                 }
+
+                $this->log->store(0, 'Wallet', $related_wallet->id, $related_wallet->owner->name,'Wallet Request Approved');
+
 
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
             }

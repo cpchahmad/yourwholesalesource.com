@@ -111,7 +111,7 @@ class WishlistController extends Controller
                     $wa->save();
                 }
             }
-            $this->log->store($wish->user_id, 'Wishlist', $wish->id, 'Wishlist Created');
+            $this->log->store($wish->user_id, 'Wishlist', $wish->id, $wish->product_name,  'Wishlist Created');
 
 
 
@@ -198,7 +198,7 @@ class WishlistController extends Controller
             }
 
             $this->notify->generate('Wish-list','Wishlist Approved','Wishlist named '.$wish->product_name.' has been approved by your manager',$wish);
-            $this->log->store(0, 'Wishlist', $wish->id, 'Wishlist Approved');
+            $this->log->store(0, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Approved');
 
 
             return redirect()->back()->with('success','Wishlist Approved Successfully!');
@@ -230,7 +230,7 @@ class WishlistController extends Controller
             }
             catch (\Exception $e){
             }
-            $this->log->store(0, 'Wishlist', $wish->id, 'Wishlist Rejected');
+            $this->log->store(0, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Rejected');
 
             return redirect()->back()->with('success','Wishlist Rejected Successfully!');
 
@@ -253,7 +253,7 @@ class WishlistController extends Controller
             $wish->save();
             $this->notify->generate('Wish-list','Wishlist Accepted','Wishlist named '.$wish->product_name.' has been accepted',$wish);
 
-            $this->log->store($wish->user_id, 'Wishlist', $wish->id, 'Wishlist Accepted');
+            $this->log->store($wish->user_id, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Accepted');
 
             return redirect()->back()->with('success','Wishlist Accepted Successfully!');
         }
@@ -368,11 +368,11 @@ class WishlistController extends Controller
 
 
                 if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
-                    $this->log->store(0, 'Wishlist', $wish->id, 'Wishlist Completed');
+                    $this->log->store(0, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Completed');
                     return redirect()->route('wishlist.index')->with('success','Wishlist Completed Successfully!');
                 }
                 else{
-                    $this->log->store($wish->manager_id, 'Wishlist', $wish->id, 'Wishlist Completed');
+                    $this->log->store($wish->manager_id, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Completed');
                     return redirect()->route('sales_managers.wishlist')->with('success','Wishlist Completed Successfully!');
                 }
 

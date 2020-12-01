@@ -17,7 +17,8 @@ class CreateActivityLogsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('model_type');
-            $table->string('model_id');
+            $table->unsignedBigInteger('model_id')->nullable();
+            $table->string('model_name')->nullable();
             $table->string('action');
             $table->text('notes')->nullable();
             $table->timestamps();
