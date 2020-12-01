@@ -83,7 +83,6 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(new TopShopifyProuctMail($user));
         }
         catch (\Exception $e){
-            dd($e);
         }
 
         return  $user;
