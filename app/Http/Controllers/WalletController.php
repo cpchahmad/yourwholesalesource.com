@@ -29,6 +29,7 @@ class WalletController extends Controller
     private $admin;
     private $notify;
     private $inventory;
+    private $log;
 
     /**
      * WalletController constructor.
@@ -39,6 +40,8 @@ class WalletController extends Controller
         $this->admin = new AdminMaintainerController();
         $this->notify = new NotificationController();
         $this->inventory = new InventoryController();
+        $this->log = new ActivityLogController();
+
     }
 
     public function user_wallet_view()

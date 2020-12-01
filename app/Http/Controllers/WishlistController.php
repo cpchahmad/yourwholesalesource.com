@@ -33,6 +33,7 @@ class WishlistController extends Controller
 
     private $helper;
     private $notify;
+    private $log;
 
     /**
      * WishlistController constructor.
