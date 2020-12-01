@@ -250,7 +250,7 @@ class WalletController extends Controller
             $wallet_log->message = 'A Top-up of Amount '.number_format($request->input('amount'),2).' USD edit Against Wallet ' . $get_wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a'). ' By Administration';
             $wallet_log->save();
 
-            $this->log->store(0, 'Wallet', $wallet->id, $wallet->owner()->name,'Wallet Request Edited');
+            $this->log->store(0, 'Wallet', $wallet->id, $wallet->user,'Wallet Request Edited');
 
 
 
