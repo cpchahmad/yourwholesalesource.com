@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="text-right">
+                    <div class="d-flex justify-content-end">
                         {{ $products->links() }}
                     </div>
                 </div>
