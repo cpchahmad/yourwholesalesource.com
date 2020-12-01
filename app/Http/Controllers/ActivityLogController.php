@@ -9,22 +9,27 @@ class ActivityLogController extends Controller
 {
     public function index(Request $request) {
 
-//        if ($request->has('type_search') && $request->has('role_search')) {
-//            $logs = ActivityLog::where('user_id', $request->input('role_search'))->where('type', 'LIKE', '%' . $request->input('type_search') . '%')->orderBy('updated_at', 'DESC')->paginate(20);
-//        }
-        if ($request->has('role_search')) {
+        if(($request->has('user_search') && $request->input('user_search') != '') && $request->has('type_search')) {
             $logs = ActivityLog::whereHas('user', function($q) use ($request) {
-                return $q->where('name', 'LIKE', '%' . $request->input('type_search') . '%')->latest()->paginate(20);
+                return $q->where('name', 'LIKE', '%' . $request->input('user_search') . '%');
+            })->where('model_type', $request->input('type_search') )->latest()->paginate(20);
+        }
+        else if (($request->has('user_search') && $request->input('user_search') != '')) {
+            $logs = ActivityLog::whereHas('user', function($q) use ($request) {
+                return $q->where('name', 'LIKE', '%' . $request->input('user_search') . '%');
             });
+
+            $logs = $logs->latest()->paginate(20);
         }
         else if ($request->has('type_search')) {
-            $logs = ActivityLog::where('model_type', 'LIKE', '%' . $request->input('type_search') . '%')->latest()->paginate(20);
+            $logs = ActivityLog::where('model_type', $request->input('type_search') )->latest()->paginate(20);
         }
         else {
             $logs = ActivityLog::latest()->paginate(30);
         }
 
-        return view('setttings.activity_logs.index')->with('logs', $logs)->with('search', $request->input('search'));
+
+        return view('setttings.activity_logs.index')->with('logs', $logs)->with('user_search', $request->input('user_search'))->with('type_search', $request->input('type_search'));
     }
     public function store($user_id, $model_type, $model_id, $model_name, $action, $notes = null) {
         $log = new ActivityLog();
