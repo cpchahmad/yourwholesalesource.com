@@ -165,7 +165,7 @@ class WalletController extends Controller
            catch (\Exception $e){
            }
 
-           $this->log->store($wallet->user_id, 'Wishlist', $wallet->id, 'Top-up Request Submitted to Administration');
+           $this->log->store($wallet->user_id, 'Wallet', $wallet->id, 'Top-up Request Submitted to Administration');
 
           return redirect()->back()->with('success', 'Your Top-up Request Submit Successfully to Administration. Please Wait For Approval!');
        }

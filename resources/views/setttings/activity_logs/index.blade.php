@@ -65,6 +65,11 @@
                                             {{ $log->wishlist->product_name }}
                                         </a>
                                     @endif
+                                    @if($log->model_type == "Wallet")
+                                        <a href="{{route('admin.wallets.detail',$log->model_id)}}">
+                                            {{ $log->wallet->owner->name }}
+                                        </a>
+                                    @endif
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ $log->action }}
