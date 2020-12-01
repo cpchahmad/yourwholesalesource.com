@@ -26,6 +26,8 @@ class OrderController extends Controller
     private $helper;
     private $admin;
     private $inventory;
+    private $log;
+
 
     /**
      * OrderController constructor.
@@ -36,7 +38,7 @@ class OrderController extends Controller
         $this->helper = new HelperController();
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
-
+        $this->log = new ActivityLogController();
     }
 
     public function index(Request $request)
@@ -137,6 +139,8 @@ class OrderController extends Controller
             $this->admin->sync_order_to_admin_store($order);
 
 //            $this->inventory->OrderQuantityUpdate($order,'new');
+            $this->log->store($order->user_id, 'Order', $order->id, '#'.$order->name, 'Order Payment Paid');
+
 
             return redirect()->back()->with('success', 'Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
         } else {
