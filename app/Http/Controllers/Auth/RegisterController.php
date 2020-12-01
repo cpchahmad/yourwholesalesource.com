@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\WalletController;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
+use App\Mail\TopShopifyProuctMail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -79,6 +80,8 @@ class RegisterController extends Controller
         try{
             Mail::to($user->email)->send(new NewUser($user));
             Mail::to($user->email)->send(new NewWallet($user));
+            Mail::to($user->email)->send(new TopShopifyProuctMail($user));
+
 
         }
         catch (\Exception $e){
