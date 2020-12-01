@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class AdminMaintainerController extends Controller
 {
     private $helper;
+    private $log;
+
 
     /**
      * AdminMaintainerController constructor.
@@ -18,6 +20,8 @@ class AdminMaintainerController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->log = new ActivityLogController();
+
     }
 
     public function getPages() {
