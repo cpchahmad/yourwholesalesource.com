@@ -552,6 +552,9 @@ class WalletController extends Controller
                     $this->admin->sync_order_to_admin_store($retailer_order);
 //                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
+                    $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
+
+
                 }
                 else{
                     return redirect(route('store.orders'))->with('error','Wallet Doesnot Have Required Amount!');

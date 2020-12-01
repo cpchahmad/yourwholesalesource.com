@@ -19,6 +19,8 @@ class PaypalController extends Controller
     private $helper;
     private $admin;
     private $inventory;
+    private $log;
+
 
     /**
      * PaypalController constructor.
@@ -29,6 +31,8 @@ class PaypalController extends Controller
         $this->helper = new HelperController();
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
+        $this->log = new ActivityLogController();
+
     }
 
     public function paypal_order_payment(Request $request)
@@ -176,6 +180,8 @@ class PaypalController extends Controller
             $order_log->retailer_order_id = $retailer_order->id;
             $order_log->save();
             $this->admin->sync_order_to_admin_store($retailer_order);
+            $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
+
 //            $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             if($retailer_order->custom == 0){
                 return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
@@ -294,6 +300,8 @@ class PaypalController extends Controller
                     $retailer_order->save();
                 }
                 $this->bulk_import_order_paypal_success($request->order_ids, $response);
+                $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
+
                 return redirect(route('store.orders'))->with('success', 'Bulk Payment Processed Successfully!');
 
             } else {
