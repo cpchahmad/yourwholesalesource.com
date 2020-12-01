@@ -51,9 +51,13 @@
                                         @if($log->action == "Deleted")
                                             {{ $log->model_id }}
                                         @else
+                                            @if($log->product == null)
+                                                Product Deleted
+                                            @else
                                             <a href="{{ route('product.view', $log->model_id) }}">
                                                 {{ $log->product->title }}
                                             </a>
+                                            @endif
                                         @endif
                                     @endif
                                     @if($log->model_type == "Wishlist")
