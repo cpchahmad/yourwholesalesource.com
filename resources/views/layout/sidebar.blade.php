@@ -129,6 +129,13 @@
                 </a>
             </li>
 
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('admin.activity.log.index') }}">
+                    <i class="nav-main-link-icon fa fa-tick"></i>
+                    <span class="nav-main-link-name">Activity Logs</span>
+                </a>
+            </li>
+
 {{--            <li class="nav-main-item">--}}
 {{--                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">--}}
 {{--                    <i class="nav-main-link-icon fa fa-envelope"></i>--}}

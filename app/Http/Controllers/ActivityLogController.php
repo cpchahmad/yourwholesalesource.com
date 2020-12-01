@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ActivityLogController extends Controller
 {
+    public function index() {
+        $logs = ActivityLog::paginate(15);
+
+        return view('settings.activity_logs.index')->with('logs', $logs);
+    }
     public function store($user_id, $model_type, $model_id, $action, $notes = null) {
         $log = new ActivityLog();
         $log->user_id = $user_id;

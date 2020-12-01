@@ -813,7 +813,7 @@ class ProductController extends Controller
             $product->has_preferences()->attach($request->input('shops'));
         }
 
-        $this->log->store(0, 'App\Product', $product->id, 'Created');
+        $this->log->store(0, 'App\Product', $product->id, 'created');
 
         return redirect()->route('import_to_shopify',$product->id);
     }
