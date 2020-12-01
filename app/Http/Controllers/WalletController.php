@@ -274,7 +274,7 @@ class WalletController extends Controller
                 $wallet_log->amount = $req->amount;
                 $wallet_log->message = 'A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . date_create($request->input('date'))->format('d M, Y h:i a') . ' By Administration';
                 $wallet_log->timestamps = false;
-                $wallet_log->created_at = date_create($request->input('date'))->format('Y-m-d H:i:s');
+                $wallet_log->created_at = date_create($request->input('date'))->format('Y-m- H:i:s');
                 $wallet_log->save();
 
                 $this->notify->generate('Wallet','Wallet Top-up Request Approved','A Top-up Request of Amount '.number_format($req->amount,2).' USD Through Bank Transfer Against Wallet ' . $related_wallet->wallet_token . ' Approved At ' . date_create($request->input('date'))->format('d M, Y h:i a') . ' By Administration',$related_wallet);
@@ -458,6 +458,9 @@ class WalletController extends Controller
 
                 $this->admin->sync_order_to_admin_store($retailer_order);
 //                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+
+                $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
+
 
                 return redirect()->back()->with('success','Order Cost Deducted From Wallet Successfully!');
             }

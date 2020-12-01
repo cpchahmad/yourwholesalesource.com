@@ -293,7 +293,7 @@ class OrdersCreateJob implements ShouldQueue
                 $new->status = $new->getStatus($new);
                 $new->save();
 
-                $this->log->store($new->user_id, 'Order', $new->id, '#'.$new->name, 'Order Created');
+                $this->log->store($new->user_id, 'Order', $new->id, $new->name, 'Order Created');
 
                 /*Maintaining Log*/
                 $order_log =  new OrderLog();
