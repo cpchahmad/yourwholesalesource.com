@@ -375,7 +375,7 @@ class RetailerProductController extends Controller
         if(count($shop->has_user) > 0){
             $shop->has_user[0]->has_imported()->detach([$product->linked_product_id]);
         }
-        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Deleted');
+        $this->log->store($shop->has_user[0], 'RetailerProduct', $product->id, $product->title, 'Product Deleted');
 
         $product->delete();
         return redirect()->back()->with('success', 'Product Deleted with Variants Successfully');
