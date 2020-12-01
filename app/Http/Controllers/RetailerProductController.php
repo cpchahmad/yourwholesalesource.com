@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 class RetailerProductController extends Controller
 {
     private $helper;
+    private $log;
 
     /**
      * RetailerProductController constructor.
@@ -20,6 +21,8 @@ class RetailerProductController extends Controller
     public function __construct()
     {
         $this->helper = new HelperController();
+        $this->log = new ActivityLogController();
+
     }
 
     public function add_to_import_list(Request $request){
@@ -123,6 +126,8 @@ class RetailerProductController extends Controller
                         $user->has_imported()->attach([$product->id]);
                     }
                 }
+
+                $this->log->store($retailerProduct->user_id, 'RetailerProduct', $retailerProduct->id, $retailerProduct->title, 'Product Added to Import List');
 
                 return redirect()->back()->with([
                     'success' => 'Product Added to Import List Successfully'
@@ -535,6 +540,7 @@ class RetailerProductController extends Controller
                     $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
                 }
             }
+            $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Imported To Shopify');
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
         else{
