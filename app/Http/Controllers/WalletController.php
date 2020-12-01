@@ -287,7 +287,7 @@ class WalletController extends Controller
                 catch (\Exception $e){
                 }
 
-                $this->log->store(0, 'Wallet', $related_wallet->id, $related_wallet->owner()->name,'Wallet Request Approved');
+                $this->log->store(0, 'Wallet', $related_wallet->id, $related_wallet->owner->name,'Wallet Request Approved');
 
 
                 return redirect()->back()->with('success','Top-up Request through Bank Transfer Approved Successfully!');
