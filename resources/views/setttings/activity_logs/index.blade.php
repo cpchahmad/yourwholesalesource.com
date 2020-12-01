@@ -46,7 +46,7 @@
                                         <a href="{{ route('product.view', $log->model_id) }}">
                                             {{ $log->product()->title }}
                                         </a>
-                                    @else
+                                    @endif
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ $log->action }}
