@@ -226,6 +226,7 @@ class WishlistController extends Controller
             }
             catch (\Exception $e){
             }
+            $this->log->store(0, 'Wishlist', $wish->id, 'Wishlist Rejected');
 
             return redirect()->back()->with('success','Wishlist Rejected Successfully!');
 

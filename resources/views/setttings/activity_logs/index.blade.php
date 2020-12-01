@@ -56,6 +56,11 @@
                                             </a>
                                         @endif
                                     @endif
+                                    @if($log->model_type == "Wishlist")
+                                        <a href="{{route('wishlist.view',$log->model_id)}}">
+                                            {{ $log->wishlist->product_name }}
+                                        </a>
+                                    @endif
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ $log->action }}

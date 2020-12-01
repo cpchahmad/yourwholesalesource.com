@@ -13,4 +13,8 @@ class ActivityLog extends Model
     public function product() {
         return $this->belongsTo(Product::class, 'model_id');
     }
+
+    public function wishlist() {
+        return $this->belongsTo(Wishlist::class, 'model_id');
+    }
 }
