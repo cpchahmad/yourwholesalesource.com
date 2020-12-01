@@ -39,6 +39,8 @@ class AdminOrderController extends Controller
     private $helper;
     private $admin_maintainer;
     private $notify;
+    private $log;
+
 
     /**
      * AdminOrderController constructor.
@@ -49,6 +51,8 @@ class AdminOrderController extends Controller
         $this->helper = new HelperController();
         $this->admin_maintainer = new AdminMaintainerController();
         $this->notify = new NotificationController();
+        $this->log = new ActivityLogController();
+
     }
 
 
@@ -417,6 +421,7 @@ class AdminOrderController extends Controller
         catch (\Exception $e){
         }
 
+        $this->log->store($order->user_id, 'Order', $order->id, $order->name, 'Order Line Items Fulfilled');
         $this->notify->generate('Order', 'Order Fulfillment', $order->name . ' line items fulfilled', $order);
         return redirect()->route('admin.order.view', $id)->with('success', 'Order Line Items Marked as Fulfilled Successfully!');
     }
