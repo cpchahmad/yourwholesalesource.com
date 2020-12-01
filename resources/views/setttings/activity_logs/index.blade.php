@@ -20,6 +20,25 @@
     </div>
 
     <div class="content">
+        <form class="js-form-icon-search push" action="" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="user_search" class="form-control" placeholder="Search By User Name" value="{{$search}}" name="search" >
+                    <select name="type_search" id="" class="form-control">
+                        <option value="product">Product</option>
+                        <option value="retailer_product">Retailer Product</option>
+                        <option value="order">Order</option>
+                        <option value="ticket">Ticket</option>
+                        <option value="wishlist">Wishlist</option>
+                        <option value="wallet">Wallet</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                        <a class="btn btn-danger" href="/admin/users/logs"> <i class="fa fa-times"></i> Clear </a>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="block">
             <div class="block-content">
                 <div class="table-responsive">
