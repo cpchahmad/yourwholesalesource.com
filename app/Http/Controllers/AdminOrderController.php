@@ -289,6 +289,7 @@ class AdminOrderController extends Controller
                     $order->status = 'partially-shipped';
                 }
                 $order->save();
+                $this->log->store(0, 'Order', $order->id, $order->name, 'Order Tracking Added');
                 $this->notify->generate('Order', 'Order Tracking Details', $order->name . ' tracking details added successfully!', $order);
                 return redirect()->back()->with('success', 'Tracking Details Added To Fulfillment Successfully!');
             } else {
