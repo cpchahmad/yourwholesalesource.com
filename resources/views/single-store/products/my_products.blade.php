@@ -119,6 +119,9 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="text-right">
+                        {{ $products->links() }}
+                    </div>
                 </div>
             @else
                 <div class="block">
