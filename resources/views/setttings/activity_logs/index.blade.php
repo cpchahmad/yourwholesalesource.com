@@ -27,6 +27,7 @@
                         <thead>
                         <tr>
                             <th>User</th>
+                            <th>Type</th>
                             <th>Item</th>
                             <th>Action</th>
                         </tr>
@@ -36,16 +37,24 @@
                             <tr>
                                 <td class="font-w600" style="vertical-align: middle">
                                     @if($log->user_id == 0)
-                                        <span class="badge badge-success">WeFullFill(Admin)</span>
+                                        WeFullFill(Admin)
                                     @else
-                                        <span class="badge badge-success">{{ $log->user->name }}</span>
+                                        {{ $log->user->name }}
                                     @endif
                                 </td>
+                                <td>
+                                    <span class="badge badge-success"> {{ $log->model_type }}</span>
+                                </td>
+
                                 <td style="vertical-align: middle">
-                                    @if($log->model_type == "App\Product")
-                                        <a href="{{ route('product.view', $log->model_id) }}">
-                                            {{ $log->product->title }}
-                                        </a>
+                                    @if($log->model_type == "Product")
+                                        @if($log->action == "Deleted")
+                                            {{ $log->model_id }}
+                                        @else
+                                            <a href="{{ route('product.view', $log->model_id) }}">
+                                                {{ $log->product->title }}
+                                            </a>
+                                        @endif
                                     @endif
                                 </td>
                                 <td style="vertical-align: middle">

@@ -743,6 +743,9 @@ class ProductController extends Controller
 
                 }
 
+                $this->log->store(0, 'Product', $product->id, 'Updated');
+
+
             }
         }
 
@@ -813,7 +816,7 @@ class ProductController extends Controller
             $product->has_preferences()->attach($request->input('shops'));
         }
 
-        $this->log->store(0, 'App\Product', $product->id, 'created');
+        $this->log->store(0, 'Product', $product->id, 'Created');
 
         return redirect()->route('import_to_shopify',$product->id);
     }
@@ -933,6 +936,9 @@ class ProductController extends Controller
         }
         $product->has_categories()->detach();
         $product->has_subcategories()->detach();
+
+        $this->log->store(0, 'Product', $product->title, 'Deleted');
+
 
         $product->delete();
         return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
@@ -1119,6 +1125,8 @@ class ProductController extends Controller
                     $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
                 }
             }
+
+            $this->log->store(0, 'Product', $product->id, 'Imported To Shopify');
             return redirect()->route('product.view',$product->id)->with('success','Product Generated and Push to Store Successfully!');
         }
     }
