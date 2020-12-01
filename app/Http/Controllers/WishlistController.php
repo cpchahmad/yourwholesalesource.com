@@ -110,6 +110,9 @@ class WishlistController extends Controller
                     $wa->save();
                 }
             }
+            $this->log->store($wish->user_id, 'Wishlist', $wish->id, 'Wishlist Created');
+
+
 
 
             return redirect()->back()->with('success','Wishlist created successfully!');
@@ -249,6 +252,8 @@ class WishlistController extends Controller
             $wish->save();
             $this->notify->generate('Wish-list','Wishlist Accepted','Wishlist named '.$wish->product_name.' has been accepted',$wish);
 
+            $this->log->store($wish->user_id, 'Wishlist', $wish->id, 'Wishlist Accepted');
+
             return redirect()->back()->with('success','Wishlist Accepted Successfully!');
         }
 
@@ -349,6 +354,8 @@ class WishlistController extends Controller
                 $wish->save();
 
 
+
+
                 $user = $wish->has_user;
                 try{
                     Mail::to($user->email)->send(new WishlistComplateMail($user, $wish));
@@ -360,10 +367,11 @@ class WishlistController extends Controller
 
 
                 if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                    $this->log->store(0, 'Wishlist', $wish->id, 'Wishlist Completed');
                     return redirect()->route('wishlist.index')->with('success','Wishlist Completed Successfully!');
-
                 }
                 else{
+                    $this->log->store($wish->manager_id, 'Wishlist', $wish->id, 'Wishlist Completed');
                     return redirect()->route('sales_managers.wishlist')->with('success','Wishlist Completed Successfully!');
                 }
 

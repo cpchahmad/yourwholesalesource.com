@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ActivityLogController extends Controller
 {
     public function index() {
-        $logs = ActivityLog::paginate(15);
+        $logs = ActivityLog::latest()->paginate(15);
 
         return view('setttings.activity_logs.index')->with('logs', $logs);
     }
