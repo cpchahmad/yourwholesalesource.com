@@ -166,16 +166,18 @@
                 </div>
                 <div style="
 
-                                width: 50%;">
+                     width: 100%;">
                     @foreach($new_products as $product)
                             <div style=" margin: 10px 0;
                             box-sizing: border-box;
                             padding: 10px;
+                            float: right;
+                            display: inline;
+                            width: 33%;
                             ">
                                 <div style="    padding: 15px;
                                                 border: 1px solid #ccc;
-                                                float: right;
-                                                display: inline;
+
                                                 border-radius: 5px;
                                                 -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
                                                 -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
