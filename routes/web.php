@@ -146,6 +146,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
 
 });
+
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {
     Route::get('/import/{id}/to-store','RetailerProductController@import_to_shopify')->name('retailer.import_to_shopify');
@@ -368,15 +369,15 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
 //
-//Route::get('/test3', function() {
-//    return view('emails.top_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
+//Route::get('/test2', function() {
+//    return view('emails.new_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
 //});
-//Route::get('/test', function() {
-//    return view('emails.top_products_new')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
-//});
+Route::get('/test', function() {
+    return view('emails.top_products_new')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
+});
 
-Route::get('/test', 'OrderController@manuallyGetOrders');
-Route::get('/test2', 'WishlistController@test');
+//Route::get('/test', 'OrderController@manuallyGetOrders');
+//Route::get('/test2', 'WishlistController@test');
 
 
 Route::get('pages', 'AdminMaintainerController@getPages');

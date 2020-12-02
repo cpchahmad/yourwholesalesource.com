@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Top Products</title>
+    <title>New Products</title>
 </head>
 <body style="margin: 0">
 <style>
@@ -163,11 +163,7 @@
                     </div>
                 </div>
                 <div class="wrapper">
-                    @foreach($top_products_stores as $product)
-                        @php
-                            $prods = json_decode($template->products);
-                        @endphp
-                        @if(in_array($product->id, $prods))
+                    @foreach($new_products as $product)
                             <div class="product_div">
                                 <div class="inner">
                                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
@@ -183,9 +179,7 @@
                                     <p class="product_price">From ${{ $product->price }}</p>
                                     <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
                                 </div>
-
                             </div>
-                        @endif
                     @endforeach
 
                 </div>

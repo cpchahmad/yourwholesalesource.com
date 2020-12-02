@@ -85,11 +85,21 @@
         border-radius: 0px;
         border: 1px solid #7daa40 !important;
     }
+
+    @media (max-width: 742px) {
+        .product_div {
+            width: 50%;
+        }
+    }
     @media (max-width: 570px) {
         .email_btn
         {
             padding:15px 30px !important;
             font-size:18px !important;
+        }
+
+        .product_div {
+            width: 100%;
         }
     }
     @media (max-width: 430px) {
