@@ -162,10 +162,7 @@
                 <hr>
 
                 <div class="" style="width: 100%">
-                    <div style=" padding-left: 20px;
-                                background-color: #7daa40 !important;
-                                color: #ffffff !important;
-                                padding: 1px 20px;">
+                    <div style=" padding-left: 20px; background-color: #7daa40 !important;color: #ffffff !important;padding: 1px 20px;">
                         <div style=" text-align: left !important;">
                             <h3 style="color: #ffffff; margin-right: 5px;">Our Top Products</h3>
                         </div>
