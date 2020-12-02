@@ -104,6 +104,13 @@
             text-decoration: none;
         }
 
+        .clear{
+            content: "";
+            display: table;
+            clear: both;
+
+        }
+
 
 
         @media (max-width: 742px) {
@@ -164,9 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="
-
-                     width: 100%;">
+                <div style="width: 100%;">
                     @foreach($new_products as $product)
                             <div style=" margin: 10px 0;
                             box-sizing: border-box;
@@ -208,9 +213,10 @@
                                 </div>
                             </div>
                     @endforeach
-
                 </div>
                 <br><br><br><br>
+                <hr>
+                <div class="clear"></div>
                 <div>
                     <a href="{{ route('store.product.wefulfill') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Products</a>
                 </div>
