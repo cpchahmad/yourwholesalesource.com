@@ -18,6 +18,13 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\NewProductCron::class
     ];
 
+
+    protected function scheduleTimezone()
+    {
+        return 'America/New_York';
+    }
+
+
     /**
      * Define the application's command schedule.
      *
@@ -29,7 +36,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $template = EmailTemplate::find(14);
-        $schedule->command('newproduct:cron')->dailyAt('08:50');
+
+        $schedule->command('newproduct:cron')->dailyAt('08:59');
     }
 
     /**
