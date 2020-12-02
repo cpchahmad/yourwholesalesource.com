@@ -542,6 +542,7 @@ class WishlistController extends Controller
     public function ProductVariants($admin_product, $shopify_product, $data, $id)
     {
         for ($i = 0; $i < count($data->variant_title); $i++) {
+            dump(count($data->variant_title));
             $options = explode('/', $data->variant_title[$i]);
             $variants = new  ProductVariant();
             if (!empty($options[0])) {
@@ -566,10 +567,12 @@ class WishlistController extends Controller
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
                     $images = Image::where('product_id', $admin_product->id)->get();
-                    $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
-                    $images[$i]->save();
-                    $variants->image = $images[$i]->id;
-                    $variants->save();
+                    if(isset($images[$i])) {
+                        $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
+                        $images[$i]->save();
+                        $variants->image = $images[$i]->id;
+                        $variants->save();
+                    }
                 }
             }
 
