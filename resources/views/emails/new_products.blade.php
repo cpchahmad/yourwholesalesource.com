@@ -171,7 +171,7 @@
                             <div style=" margin: 10px 0;
             box-sizing: border-box;
             padding: 10px;
-            width: 100%;">
+            width: 50%;">
                                 <div style="    padding: 15px;
                                                 border: 1px solid #ccc;
                                                 border-radius: 5px;
