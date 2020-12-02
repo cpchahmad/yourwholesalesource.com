@@ -370,9 +370,9 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
 //
-//Route::get('/test2', function() {
-//    return view('emails.new_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
-//});
+Route::get('/test2', function() {
+    return view('emails.new_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
+});
 Route::get('/test', function() {
     $date = \Carbon\Carbon::today()->subDays(7);
     $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();

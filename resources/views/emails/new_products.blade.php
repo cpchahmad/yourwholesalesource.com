@@ -58,7 +58,6 @@
         .wrapper{
             display: flex;
             flex-wrap: wrap;
-            /*justify-content: space-between;*/
             width: 100%;
         }
 
@@ -156,29 +155,51 @@
                 <hr>
 
                 <div class="" style="width: 100%">
-                    <div class="wrap">
-                        <div class="left">
+                    <div style=" padding-left: 20px;
+                                background-color: #7daa40 !important;
+                                color: #ffffff !important;
+                                padding: 1px 20px;">
+                        <div style=" text-align: left !important;">
                             <h3 style="color: #ffffff; margin-right: 5px;">Our Top Products</h3>
                         </div>
                     </div>
                 </div>
-                <div class="wrapper">
+                <div style="  display: flex;
+                                flex-wrap: wrap;
+                                width: 100%;">
                     @foreach($new_products as $product)
-                            <div class="product_div">
-                                <div class="inner">
+                            <div style=" margin: 10px 0;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 100%;">
+                                <div style="    padding: 15px;
+                                                border: 1px solid #ccc;
+                                                border-radius: 5px;
+                                                -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+                                                -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+                                                box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);">
                                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                         @if($index == 0)
                                             @if($image->isV == 0)
 
-                                                <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
+                                                <img style=" width: 100%;height: auto;"  src="{{asset('images')}}/{{$image->image}}">
                                             @else
-                                                <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
+                                                <img style=" width: 100%;height: auto;"  src="{{asset('images/variants')}}/{{$image->image}}">
                                             @endif
                                         @endif
                                     @endforeach
                                     <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
-                                    <p class="product_price">From ${{ $product->price }}</p>
-                                    <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
+                                    <p class=" color: #ff0000db;
+                                                font-weight: bold;">From ${{ $product->price }}</p>
+                                    <a href="{{route('store.product.wefulfill.show',$product->id)}}" style="  width: 100%;
+                                            background-color: #1f6fb2;
+                                            color: white;
+                                            padding: 15px 0;
+                                            border-radius: 5px;
+                                            border: 1px solid #1f6fb2;
+                                            font-size: 16px;
+                                            display: block;
+                                            text-decoration: none;">View Product</a>
                                 </div>
                             </div>
                     @endforeach
@@ -209,3 +230,5 @@
 
 </body>
 </html>
+
+
