@@ -53,7 +53,13 @@ class EmailTemplateController extends Controller
      */
     public function show($id)
     {
-        return view('setttings.email.show')->with('template', EmailTemplate::find($id))->with('order', RetailerOrder::find(1))->with('top_products_stores', \App\Product::all());
+        $date = \Carbon\Carbon::today()->subDays(7);
+        $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();
+
+        return view('setttings.email.show')->with('template', EmailTemplate::find($id))
+            ->with('order', RetailerOrder::find(1))
+            ->with('top_products_stores', \App\Product::all())
+            ->with('new_products', $new_products);
     }
 
     /**

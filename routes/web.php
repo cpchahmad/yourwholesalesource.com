@@ -137,7 +137,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
 
     Route::get('customers/{id}/download', 'DefaultSettingsController@download_customer')->name('customers.download');
     Route::get('/email/templates', 'EmailTemplateController@index')->name('admin.emails.index');
-    Route::get('/email/templates/{id}', 'EmailTemplateController@show')->name('admin.emails.show');
+
     Route::get('/email/templates/edit/{id}', 'EmailTemplateController@edit')->name('admin.emails.edit');
     Route::put('/email/templates/update/{id}', 'EmailTemplateController@update')->name('admin.emails.update');
     Route::post('/email/templates/{id}/status', 'EmailTemplateController@changeStatus')->name('admin.emails.status');
@@ -146,6 +146,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
 
 });
+
+Route::get('/email/templates/{id}', 'EmailTemplateController@show')->name('admin.emails.show');
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {
     Route::get('/import/{id}/to-store','RetailerProductController@import_to_shopify')->name('retailer.import_to_shopify');

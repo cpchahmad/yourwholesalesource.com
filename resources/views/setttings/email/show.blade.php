@@ -347,9 +347,13 @@
                                         <br><br><br>
                                     @endif
 
+                                    @if($template->id == '14')
+
+                                    @endif
+
                                     @if($template->id == '1' || $template->id == '2')
                                         <a class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
-                                    @elseif($template->id == '13')
+                                    @elseif($template->id == '13' ||$template->id == '14')
                                         <a class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Products</a>
                                     @else
                                         <a class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>
@@ -576,6 +580,37 @@
                                                 @endif
                                             @endforeach
 
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if($template->id == '14')
+                                    <div class="" style="width: 100%">
+                                        <div class="wrap">
+                                            <div class="left">
+                                                <h3 style="color: #ffffff; margin-right: 5px; padding-top: 5px;">New Products Template</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="wrapper">
+                                            @foreach($new_products as $product)
+                                                    <div class="product_div">
+                                                        <div class="inner">
+                                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                                @if($index == 0)
+                                                                    @if($image->isV == 0)
+                                                                        <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
+                                                                    @else
+                                                                        <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                            <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
+                                                            <p class="product_price">From ${{ $product->price }}</p>
+                                                            <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
+                                                        </div>
+                                                    </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 @endif
