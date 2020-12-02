@@ -542,7 +542,6 @@ class WishlistController extends Controller
     public function ProductVariants($admin_product, $shopify_product, $data, $id)
     {
         for ($i = 0; $i < count($data->variant_title); $i++) {
-            dump(count($data->variant_title));
             $options = explode('/', $data->variant_title[$i]);
             $variants = new  ProductVariant();
             if (!empty($options[0])) {
