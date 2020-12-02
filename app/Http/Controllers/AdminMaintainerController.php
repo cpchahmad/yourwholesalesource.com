@@ -63,6 +63,8 @@ class AdminMaintainerController extends Controller
             }
         } else {
             foreach ($order->line_items as $item) {
+                dd($item->linked_product, $item->linked_variant);
+
                 $retailer_product = $item->linked_product;
                 $retailer_variant = $item->linked_variant;
                 $admin_product = $retailer_product->linked_product;

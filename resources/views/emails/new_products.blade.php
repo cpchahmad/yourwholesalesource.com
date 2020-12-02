@@ -142,6 +142,7 @@
     </style>
 </head>
 <body style="margin: 0">
+
 <div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: cursive;">
     <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
         <div class="email-content" style="margin: auto;  text-align: center; ">
