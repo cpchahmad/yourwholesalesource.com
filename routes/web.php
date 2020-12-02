@@ -372,9 +372,9 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/test2', function() {
 //    return view('emails.new_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
 //});
-Route::get('/test', function() {
-    return view('emails.top_products_new')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
-});
+//Route::get('/test', function() {
+//    return view('emails.top_products_new')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
+//});
 
 //Route::get('/test', 'OrderController@manuallyGetOrders');
 //Route::get('/test2', 'WishlistController@test');
