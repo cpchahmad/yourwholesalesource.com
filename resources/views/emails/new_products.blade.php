@@ -165,7 +165,7 @@
                     </div>
                 </div>
                 <div style="
-                                flex-wrap: wrap;
+
                                 width: 50%;">
                     @foreach($new_products as $product)
                             <div style=" margin: 10px 0;
@@ -174,6 +174,7 @@
                             ">
                                 <div style="    padding: 15px;
                                                 border: 1px solid #ccc;
+                                                float: right;
                                                 border-radius: 5px;
                                                 -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
                                                 -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
