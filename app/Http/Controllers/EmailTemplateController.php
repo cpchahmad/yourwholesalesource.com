@@ -82,6 +82,7 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
 
         $template = EmailTemplate::find($id);
         $template->subject = $request->subject;
@@ -90,6 +91,8 @@ class EmailTemplateController extends Controller
         if($request->products) {
             $template->products = json_encode($request->products);
         }
+
+
 
         $template->save();
 

@@ -139,17 +139,14 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('customers/{id}/download', 'DefaultSettingsController@download_customer')->name('customers.download');
     Route::get('/email/templates', 'EmailTemplateController@index')->name('admin.emails.index');
     Route::get('/email/templates/{id}', 'EmailTemplateController@show')->name('admin.emails.show');
+    Route::get('/email/templates/edit/{id}', 'EmailTemplateController@edit')->name('admin.emails.edit');
+    Route::put('/email/templates/update/{id}', 'EmailTemplateController@update')->name('admin.emails.update');
     Route::post('/email/templates/{id}/status', 'EmailTemplateController@changeStatus')->name('admin.emails.status');
     Route::get('/tiered/pricing/preferences', 'DefaultSettingsController@getTieredPricingPreferences')->name('admin.tiered.pricing.preferences');
     Route::get('/general/discounts/preferences', 'DefaultSettingsController@getGeneralDiscountPreferences')->name('admin.general.discount.preferences');
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
 
 });
-Route::get('/email/templates/edit/{id}', 'EmailTemplateController@edit')->name('admin.emails.edit');
-Route::put('/email/templates/update/{id}', 'EmailTemplateController@update')->name('admin.emails.update');
-
-
-
 
 /*Single Store Routes*/
 Route::group(['middleware' => ['auth.shop']], function () {
