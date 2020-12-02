@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $template = EmailTemplate::find(14);
 
-        $schedule->command('newproduct:cron')->dailyAt('08:59');
+        $schedule->command('newproduct:cron')->dailyAt('09:03');
     }
 
     /**
