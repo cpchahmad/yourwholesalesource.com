@@ -12,6 +12,7 @@
 */
 
 use App\EmailTemplate;
+use App\Product;
 use App\RetailerOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -372,9 +373,12 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/test2', function() {
 //    return view('emails.new_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
 //});
-//Route::get('/test', function() {
-//    return view('emails.top_products_new')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
-//});
+Route::get('/test', function() {
+    $date = \Carbon\Carbon::today()->subDays(7);
+    $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();
+
+    return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
+});
 
 //Route::get('/test', 'OrderController@manuallyGetOrders');
 //Route::get('/test2', 'WishlistController@test');

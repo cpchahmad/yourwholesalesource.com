@@ -2,147 +2,146 @@
 <html>
 <head>
     <title>New Products</title>
-</head>
-<body style="margin: 0">
-<style>
-    .email-body
-    {
-        color:black;
-    }
-    .email-content
-    {
-        /*max-width: 450px;*/
-        width : 90%;
-    }
-    .email-content-detail
-    {
-        margin: 50px 0;
-    }
-
-    .wrap {
-        padding-left: 20px;
-        background-color: #7daa40 !important;
-        color: #ffffff !important;
-        padding: 1px 20px
-    }
-
-    .wrap .right{
-        text-align: right !important;
-    }
-
-    .wrap .left{
-        text-align: left !important;
-    }
-
-    a.title {
-        text-decoration: none;
-        color: #7daa40 !important;
-        font-size: 18px;
-        margin-left: 5px;
-    }
-
-    a.title:hover{
-        text-decoration: none;
-        color: #7daa40 !important;
-        font-size: 18px;
-        margin-left: 5px;
-
-    }
-
-    a.title:active{
-        text-decoration: none;
-        color: #7daa40 !important;
-        font-size: 18px;
-        margin-left: 5px;
-
-    }
-
-    .wrapper{
-        display: flex;
-        flex-wrap: wrap;
-        /*justify-content: space-between;*/
-        width: 100%;
-    }
-
-    .product_div{
-        margin: 10px 0;
-        box-sizing: border-box;
-        padding: 10px;
-        width: 33.3%;
-    }
-
-    .product_div p{
-        text-align: left;
-    }
-
-    .product_price{
-        color: #ff0000db;
-        font-weight: bold;
-
-    }
-
-    .product_div .product_img{
-        width: 100%;
-        height: auto;
-    }
-
-    .inner{
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
-        -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
-        box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
-    }
-
-    .product-btn{
-        width: 100%;
-        background-color: #1f6fb2;
-        color: white;
-        padding: 15px 0;
-        border-radius: 5px;
-        border: 1px solid #1f6fb2;
-        font-size: 16px;
-        display: block;
-        text-decoration: none;
-    }
-
-
-
-    @media (max-width: 742px) {
-        .product_div {
-            width: 50%;
-        }
-    }
-    @media (max-width: 570px) {
-        .email_btn
+    <style>
+        .email-body
         {
-            padding:15px 30px !important;
-            font-size:18px !important;
+            color:black;
+        }
+        .email-content
+        {
+            /*max-width: 450px;*/
+            width : 90%;
+        }
+        .email-content-detail
+        {
+            margin: 50px 0;
         }
 
-        .product_div {
+        .wrap {
+            padding-left: 20px;
+            background-color: #7daa40 !important;
+            color: #ffffff !important;
+            padding: 1px 20px;
+        }
+
+        .wrap .right{
+            text-align: right !important;
+        }
+
+        .wrap .left{
+            text-align: left !important;
+        }
+
+        a.title {
+            text-decoration: none;
+            color: #7daa40 !important;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+
+        a.title:hover{
+            text-decoration: none;
+            color: #7daa40 !important;
+            font-size: 18px;
+            margin-left: 5px;
+
+        }
+
+        a.title:active{
+            text-decoration: none;
+            color: #7daa40 !important;
+            font-size: 18px;
+            margin-left: 5px;
+
+        }
+
+        .wrapper{
+            display: flex;
+            flex-wrap: wrap;
+            /*justify-content: space-between;*/
             width: 100%;
         }
-    }
-    @media (max-width: 430px) {
-        .email_btn {
-            padding: 15px 20px !important;
-            font-size: 12px !important;
-        }
-    }
-    @media (max-width: 400px) {
-        .email_btn {
-            padding: 15px 10px !important;
-            font-size: 12px !important;
-        }
-        span
-        {
-            font-size:18px !important ;
-        }
-    }
-</style>
 
+        .product_div{
+            margin: 10px 0;
+            box-sizing: border-box;
+            padding: 10px;
+            width: 33.3%;
+        }
+
+        .product_div p{
+            text-align: left;
+        }
+
+        .product_price{
+            color: #ff0000db;
+            font-weight: bold;
+
+        }
+
+        .product_div .product_img{
+            width: 100%;
+            height: auto;
+        }
+
+        .inner{
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+            -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+            box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+        }
+
+        .product-btn{
+            width: 100%;
+            background-color: #1f6fb2;
+            color: white;
+            padding: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #1f6fb2;
+            font-size: 16px;
+            display: block;
+            text-decoration: none;
+        }
+
+
+
+        @media (max-width: 742px) {
+            .product_div {
+                width: 50%;
+            }
+        }
+        @media (max-width: 570px) {
+            .email_btn
+            {
+                padding:15px 30px !important;
+                font-size:18px !important;
+            }
+
+            .product_div {
+                width: 100%;
+            }
+        }
+        @media (max-width: 430px) {
+            .email_btn {
+                padding: 15px 20px !important;
+                font-size: 12px !important;
+            }
+        }
+        @media (max-width: 400px) {
+            .email_btn {
+                padding: 15px 10px !important;
+                font-size: 12px !important;
+            }
+            span
+            {
+                font-size:18px !important ;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0">
 <div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: cursive;">
     <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
         <div class="email-content" style="margin: auto;  text-align: center; ">
@@ -169,6 +168,7 @@
                                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                         @if($index == 0)
                                             @if($image->isV == 0)
+
                                                 <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
                                             @else
                                                 <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">

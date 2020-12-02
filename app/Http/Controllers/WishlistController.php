@@ -910,32 +910,14 @@ class WishlistController extends Controller
 //            }
 //        }
 //    }
-    public function test() {
-
-        $users_temp = User::role('non-shopify-users')
-            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-            ->pluck('email')
-            ->toArray();
-
-        $users = [];
-
-        foreach($users_temp as $key => $ut){
-            if($ut != null) {
-                $ua = [];
-                $ua['email'] = $ut;
-                $users[$key] = (object)$ua;
-            }
-        }
-
-        dd($users);
-
-
+//    public function test() {
+//
 //        $shop = $this->helper->getSpecificShop(55);
 //        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/5776107307163.json');
 //
 //        $products = $response->body->product;
 //        dd($products);
-
-    }
+//
+//    }
 
 }
