@@ -71,7 +71,7 @@ class NewProductCron extends Command
 //            }
 //        }
 
-        $users_temp =['yasirnaseer.0@gmail.com','farhanaliyt@gmail.com'];
+        $users_temp =['yasirnaseer.0@gmail.com'];
         $users = [];
 
         foreach($users_temp as $key => $ut){

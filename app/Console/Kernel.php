@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('newproduct:cron')->everyMinute();
+        $schedule->command('newproduct:cron')->weeklyOn(2, '8:00');
     }
 
     /**
