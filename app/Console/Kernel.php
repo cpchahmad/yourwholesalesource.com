@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $template = EmailTemplate::find(14);
-        $schedule->command('newproduct:cron')->everyMinute();
+        $schedule->command('newproduct:cron')->dailyAt('08:50');
     }
 
     /**
