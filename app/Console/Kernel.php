@@ -36,8 +36,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $template = EmailTemplate::find(14);
+        $day = (int) $template->day;
+        $time = $template->time;
 
-        $schedule->command('newproduct:cron')->dailyAt('09:03');
+        $schedule->command('newproduct:cron')->weeklyOn($day, $time);
     }
 
     /**

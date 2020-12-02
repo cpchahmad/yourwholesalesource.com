@@ -47,50 +47,50 @@ class NewProductCron extends Command
         $date = \Carbon\Carbon::today()->subDays(7);
         $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();
 
-//        $users_temp = User::role('non-shopify-users')
-//            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-//            ->pluck('email')
-//            ->toArray();
-//
-//        $users = [];
-//
-//        foreach($users_temp as $key => $ut){
-//            if($ut != null) {
-//                $ua = [];
-//                $ua['email'] = $ut;
-//                $users[$key] = (object)$ua;
-//            }
-//        }
-//
-//        if(count($new_products)>5)
-//        {
-//            try{
-//                Mail::to($users->email)->send(new TopShopifyProuctMail($user));
-//            }
-//            catch (\Exception $e){
-//            }
-//        }
+        $users_temp = User::role('non-shopify-users')
+            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+            ->pluck('email')
+            ->toArray();
 
-        $users_temp =['yasirnaseer.0@gmail.com'];
         $users = [];
 
         foreach($users_temp as $key => $ut){
             if($ut != null) {
                 $ua = [];
-
                 $ua['email'] = $ut;
-
-                $ua['name'] = 'test';
-
                 $users[$key] = (object)$ua;
             }
         }
 
-        try{
-            Mail::to($users)->send(new NewProductsMail($new_products));
+        if(count($new_products)>5)
+        {
+            try{
+                Mail::to($users)->send(new NewProductsMail($new_products));
+            }
+            catch (\Exception $e){
+            }
         }
-        catch (\Exception $e){
 
-        }
+//        $users_temp =['yasirnaseer.0@gmail.com'];
+//        $users = [];
+//
+//        foreach($users_temp as $key => $ut){
+//            if($ut != null) {
+//                $ua = [];
+//
+//                $ua['email'] = $ut;
+//
+//                $ua['name'] = 'test';
+//
+//                $users[$key] = (object)$ua;
+//            }
+//        }
+//
+//        try{
+//            Mail::to($users)->send(new NewProductsMail($new_products));
+//        }
+//        catch (\Exception $e){
+//
+//        }
     }
 }
