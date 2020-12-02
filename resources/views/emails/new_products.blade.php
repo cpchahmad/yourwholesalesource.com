@@ -177,14 +177,15 @@
                                                 border-radius: 5px;
                                                 -webkit-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
                                                 -moz-box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
-                                                box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);">
+                                                box-shadow: 4px 4px 5px 1px rgba(0,0,0,0.75);
+                                                text-align: center">
                                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                         @if($index == 0)
                                             @if($image->isV == 0)
 
-                                                <img style=" width: 100%;height: auto;"  src="{{asset('images')}}/{{$image->image}}">
+                                                <img style=" width: 70%;height: auto;"  src="{{asset('images')}}/{{$image->image}}">
                                             @else
-                                                <img style=" width: 100%;height: auto;"  src="{{asset('images/variants')}}/{{$image->image}}">
+                                                <img style=" width: 70%;height: auto;"  src="{{asset('images/variants')}}/{{$image->image}}">
                                             @endif
                                         @endif
                                     @endforeach
