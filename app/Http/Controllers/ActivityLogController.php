@@ -14,16 +14,18 @@ class ActivityLogController extends Controller
                 return $q->where('name', 'LIKE', '%' . $request->input('user_search') . '%');
             })->where('model_type', $request->input('type_search') )->latest()->paginate(20);
         }
+
         else if (($request->has('user_search') && $request->input('user_search') != '')) {
             $logs = ActivityLog::whereHas('user', function($q) use ($request) {
                 return $q->where('name', 'LIKE', '%' . $request->input('user_search') . '%');
             });
-
             $logs = $logs->latest()->paginate(20);
         }
+
         else if ($request->has('type_search')) {
             $logs = ActivityLog::where('model_type', $request->input('type_search') )->latest()->paginate(20);
         }
+        
         else {
             $logs = ActivityLog::latest()->paginate(30);
         }
