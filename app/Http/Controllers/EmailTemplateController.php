@@ -82,7 +82,6 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
 
         $template = EmailTemplate::find($id);
         $template->subject = $request->subject;
@@ -91,8 +90,12 @@ class EmailTemplateController extends Controller
         if($request->products) {
             $template->products = json_encode($request->products);
         }
-
-
+        if($request->day) {
+            $template->day = $request->day;
+        }
+        if($request->time) {
+            $template->time = $request->time;
+        }
 
         $template->save();
 
