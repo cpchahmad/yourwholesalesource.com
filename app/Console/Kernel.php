@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\NewProductCron;
+use App\EmailTemplate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,8 +28,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-
-        $schedule->command('newproduct:cron')->weeklyOn(2, '8:00');
+        $template = EmailTemplate::find(14);
+        $schedule->command('newproduct:cron')->dailyAt($template->time);
     }
 
     /**
