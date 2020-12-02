@@ -364,17 +364,17 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <select name="day" id="" class="form-control">
-                                                    <option value="1">Monday</option>
-                                                    <option value="2">Tuesday</option>
-                                                    <option value="3">Wednesday</option>
-                                                    <option value="4">Thursday</option>
-                                                    <option value="5">Friday</option>
-                                                    <option value="6">Saturday</option>
-                                                    <option value="7">Sunday</option>
+                                                    <option value="1" @if($template->day==1) selected @endif>Monday</option>
+                                                    <option value="2" @if($template->day==2) selected @endif>Tuesday</option>
+                                                    <option value="3" @if($template->day==3) selected @endif>Wednesday</option>
+                                                    <option value="4" @if($template->day==4) selected @endif>Thursday</option>
+                                                    <option value="5" @if($template->day==5) selected @endif>Friday</option>
+                                                    <option value="6" @if($template->day==6) selected @endif>Saturday</option>
+                                                    <option value="7" @if($template->day==7) selected @endif>Sunday</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="js-flatpickr form-control bg-white" value="12:00" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
+                                                <input type="text" class="js-flatpickr form-control bg-white" value="{{ $template->time }}" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
                                             </div>
                                         </div>
 
