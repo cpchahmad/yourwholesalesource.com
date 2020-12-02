@@ -391,7 +391,9 @@
                                                 }
                                                 else{
                                                     $retailer_product = $item->linked_real_product;
-                                                    $real_variant = \App\Product::where('title', $retailer_product->title)->first();
+                                                    if($retailer_product != null) {
+                                                        $real_variant = \App\Product::where('title', $retailer_product->title)->first();
+                                                    }
                                                 }
                                             @endphp
                                             @if($real_variant != null && $is_applied && !($is_general_discount))
