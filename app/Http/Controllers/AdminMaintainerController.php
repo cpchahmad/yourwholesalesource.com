@@ -78,7 +78,6 @@ class AdminMaintainerController extends Controller
                     }
                 } else {
                     $response = $admin_store->api()->rest('GET', '/admin/api/2019-10/products/' . $admin_product->shopify_id . '.json');
-                    dd($response);
                     if (!$response->errors) {
                         $shopifyVariants = $response->body->product->variants;
                         $variant_id = $shopifyVariants[0]->id;
