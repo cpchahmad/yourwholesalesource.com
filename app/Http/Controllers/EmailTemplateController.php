@@ -54,7 +54,7 @@ class EmailTemplateController extends Controller
     public function show($id)
     {
         $date = \Carbon\Carbon::today()->subDays(7);
-        $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();
+        $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
 
         return view('setttings.email.show')->with('template', EmailTemplate::find($id))
             ->with('order', RetailerOrder::find(1))

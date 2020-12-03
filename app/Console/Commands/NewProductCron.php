@@ -45,7 +45,7 @@ class NewProductCron extends Command
     public function handle()
     {
         $date = \Carbon\Carbon::today()->subDays(7);
-        $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();
+        $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
 
         $users_temp = User::role('non-shopify-users')
             ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
