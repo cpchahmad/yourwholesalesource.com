@@ -7,8 +7,6 @@ use App\OrderFulfillment;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-
 class AdminMaintainerController extends Controller
 {
     private $helper;
@@ -347,28 +345,5 @@ class AdminMaintainerController extends Controller
     }
 
 
-    public function sendGrid() {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.sendgrid.com/v3/contactdb/lists",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "Content-Type: application/json",
-                "Authorization: Bearer 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"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        dd($response);
-    }
 
 }
