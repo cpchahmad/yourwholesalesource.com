@@ -307,6 +307,7 @@ class AdminMaintainerController extends Controller
     public function already_fulfillment(RetailerOrder $order, $location_response, $admin_store): void
     {
         if (count($order->fulfillments) > 0) {
+            dd($order);
             foreach ($order->fulfillments as $fulfillment) {
                 if (!$location_response->errors) {
                     foreach ($location_response->body->locations as $location){
