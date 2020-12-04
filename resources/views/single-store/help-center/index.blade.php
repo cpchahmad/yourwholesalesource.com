@@ -168,6 +168,18 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
+                                                <label for="material-error">Order #</label>
+                                                <select name="order_id" class="form-control" >
+                                                    @foreach($orders as $order)
+                                                        <option value="{{ $order->id }}">{{ $order->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
                                                 <label for="material-error">Ticket Category</label>
                                                 <select name="category" class="form-control" required>
                                                     <option value="default">Default</option>
