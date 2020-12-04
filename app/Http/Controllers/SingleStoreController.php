@@ -499,11 +499,13 @@ class SingleStoreController extends Controller
         $shop = $this->helper->getLocalShop();
         $user = $shop->has_user()->first();
         $tickets = Ticket::where('user_id', $user->id)->where('source', 'store')->newQuery();
+        $orders = $shop->has_orders()->get();
         $tickets = $tickets->paginate(30);
 
         return view('single-store.help-center.index')->with([
             'shop' => $shop,
             'tickets' => $tickets,
+            'orders' => $orders,
             'categories' => TicketCategory::all(),
         ]);
     }
