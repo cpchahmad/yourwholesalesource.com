@@ -25,6 +25,11 @@
                     <div class="text-right mb2">
                         <button class="btn btn-success" onclick="window.location.href='{{route('help-center.ticket.marked_as_completed',$ticket->id)}}'"> Marked as Completed </button>
                     </div>
+                    @if($ticket->order_id !== null)
+                        <div class="text-right mb2">
+                            <button class="btn btn-primary" onclick="window.location.href='{{route('admin.order.view',$ticket->order_id)}}'">View Order</button>
+                        </div>
+                    @endif
                 @endif
                 @if(in_array($ticket->status_id,[5]))
                     <div class="text-right mb2">
