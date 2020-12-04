@@ -133,6 +133,7 @@
                                 <input type="hidden" name="shop_id" value="{{$shop->id}}">
                                 <input type="hidden" name="type" value="store-ticket">
 
+
                                 <div class="block-content font-size-sm">
                                     <div class="form-group">
                                         <div class="col-sm-12">

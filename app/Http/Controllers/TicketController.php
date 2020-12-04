@@ -44,6 +44,9 @@ class TicketController extends Controller
             $ticket->email = $request->input('email');
             $ticket->message = $request->input('message');
             $ticket->priority = $request->input('priority');
+            if($request->has('order_id')) {
+                $ticket->order_id = $request->input('order_id');
+            }
             $ticket->status = 'New';
             $ticket->status_id = '1';
             $ticket->source = $request->input('source');

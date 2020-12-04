@@ -54,6 +54,7 @@
                                     <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                                     <input type="hidden" name="shop_id" value="{{$shop->id}}">
                                     <input type="hidden" name="type" value="store-ticket">
+                                    <input type="hidden" name="order_id" value="{{ $order->id }}">
 
                                     <div class="block-content font-size-sm">
                                         <div class="form-group">
