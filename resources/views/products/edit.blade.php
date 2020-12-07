@@ -937,11 +937,11 @@
                         <div class="block-content pt-0" >
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
-                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  >
+                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
                                     <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" value="Winning Product" >
+                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
                                     <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
                                 </div>
                             </div>
