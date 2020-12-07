@@ -183,6 +183,10 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-xs-12">
+                                                    <label>Price</label>
+                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" required>
+                                                </div>
+                                                <div class="col-xs-12">
                                                     <label>Weight</label>
                                                     <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
                                                 </div>
