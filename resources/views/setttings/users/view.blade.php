@@ -57,7 +57,7 @@
                                 <h5>Q1. Gender?</h5>
                                 <p> {{$user->has_questionnaire->gender}}</p>
                                 <h5>Q2. Date Of Birth?</h5>
-                                <p> {{date_create($user->has_questionnaire->dob)->format('d M, Y')}}<p>
+{{--                                <p> {{date_create($user->has_questionnaire->dob)->format('d M, Y')}}<p>--}}
                                 <h5>Q3. Are you new to business or you have your online Online store already?</h5>
                                 <p> {{$user->has_questionnaire->new_to_business}}</p>
                                 <h5>Q4. What is your target product ranges?</h5>
