@@ -854,6 +854,7 @@ class WishlistController extends Controller
 //            }
 //        }
         foreach ($product->hasVariants as $index => $v) {
+            dump($v);
             if ($v->has_image != null) {
                 $i = [
                     'image' => [
