@@ -862,7 +862,7 @@ class WishlistController extends Controller
                         'variant_ids' => [$v->shopify_id]
                     ]
                 ];
-                $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
+                $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
                 dump($imagesResponse);
             }
         }
