@@ -688,15 +688,15 @@ dd(324);
 
 
         $shopify_product = $response->body->product;
-        foreach ($shopify_product->images as $index => $image) {
-            $image = file_get_contents($image->src);
+        foreach ($shopify_product->images as $index => $img) {
+            $image = file_get_contents($img->src);
             $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . '.jpg';
             file_put_contents(public_path('images/' . $filename), $image);
             $image = new Image();
             $image->isV = 0;
             $image->position = $index + 1 + $count_product_images;
             $image->product_id = $product->id;
-            $image->shopify_id = $product->id;
+            $image->shopify_id = $img->id;
             $image->image = $filename;
             $image->save();
         }
