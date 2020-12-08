@@ -580,6 +580,12 @@ class WishlistController extends Controller
 
         $variants_array = [];
         foreach ($prod->hasVariants as $index => $varaint) {
+            if($varaint->has_image !== null) {
+                $img_id = $varaint->has_image->shopify_id;
+            }
+            else{
+                $img_id = null;
+            }
             array_push($variants_array, [
                 'title' => $varaint->title,
                 'sku' => $varaint->sku,
@@ -597,6 +603,7 @@ class WishlistController extends Controller
                 'barcode' => $varaint->barcode,
                 'price' => $varaint->price,
                 'cost' => $varaint->cost,
+                'image_id' => $img_id,
             ]);
         }
         return $variants_array;
@@ -853,20 +860,20 @@ class WishlistController extends Controller
 //                $image->save();
 //            }
 //        }
-        foreach ($product->hasVariants as $index => $v) {
-            dump($v);
-            if ($v->has_image != null) {
-                $i = [
-                    'image' => [
-                        'id' => $v->has_image->shopify_id,
-                        'variant_ids' => [$v->shopify_id],
-                        'src' => $v->has_image->image
-                    ]
-                ];
-                $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
-                dump($imagesResponse);
-            }
-        }
+//        foreach ($product->hasVariants as $index => $v) {
+//            dump($v);
+//            if ($v->has_image != null) {
+//                $i = [
+//                    'image' => [
+//                        'id' => $v->has_image->shopify_id,
+//                        'variant_ids' => [$v->shopify_id],
+//                        'src' => $v->has_image->image
+//                    ]
+//                ];
+//                $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
+//                dump($imagesResponse);
+//            }
+//        }
         return $product;
     }
 
