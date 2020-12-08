@@ -563,7 +563,7 @@ dd(324);
             $variants->product_id = $id;
             $variants->save();
 
-            dump($shopify_product->variantts);
+            dump($shopify_product->variants);
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
                     $image_linked = $admin_product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
