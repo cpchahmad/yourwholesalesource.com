@@ -566,14 +566,12 @@ dd(324);
             dump($shopify_product->variants);
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
-                    $images = Image::where('product_id', $admin_product->id)->get();
-                    dd($images);
-                    if(isset($images[$i])) {
-                        $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
-                        $images[$i]->save();
-                        $variants->image = $images[$i]->id;
-                        $variants->save();
-                    }
+                    $image_linked = $admin_product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
+                    dd($image_linked);
+                    $image_linked->shopify_id = $shopify_product->variants[$i]->image_id;
+                    $image_linked->save();
+                    $variants->image = $image_linked->id;
+                    $variants->save();
                 }
             }
 
