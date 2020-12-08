@@ -847,12 +847,12 @@ class WishlistController extends Controller
             ];
             $resp = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/metafields.json', $productdata);
         }
-        if (count($shopifyImages) == count($product->has_images)) {
-            foreach ($product->has_images as $index => $image) {
-                $image->shopify_id = $shopifyImages[$index]->id;
-                $image->save();
-            }
-        }
+//        if (count($shopifyImages) == count($product->has_images)) {
+//            foreach ($product->has_images as $index => $image) {
+//                $image->shopify_id = $shopifyImages[$index]->id;
+//                $image->save();
+//            }
+//        }
         foreach ($product->hasVariants as $index => $v) {
             if ($v->has_image != null) {
                 $i = [
