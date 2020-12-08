@@ -696,6 +696,7 @@ dd(324);
             $image->isV = 0;
             $image->position = $index + 1 + $count_product_images;
             $image->product_id = $product->id;
+            $image->shopify_id = $product->id;
             $image->image = $filename;
             $image->save();
         }
