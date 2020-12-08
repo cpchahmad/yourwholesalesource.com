@@ -346,7 +346,7 @@ class WishlistController extends Controller
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
 
-
+dd(2134);
 
 
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
