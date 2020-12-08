@@ -1506,7 +1506,6 @@ class ProductController extends Controller
                 'message' => 'success'
             ]);
         } else {
-            dd($imagesResponse);
             return response()->json([
                 'message' => 'false'
             ]);

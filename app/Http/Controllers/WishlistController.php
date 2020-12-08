@@ -563,15 +563,14 @@ class WishlistController extends Controller
             $variants->product_id = $id;
             $variants->save();
 
+
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
-                    $images = Image::where('product_id', $admin_product->id)->get();
-                    if(isset($images[$i])) {
-                        $images[$i]->shopify_id = $shopify_product->variants[$i]->image_id;
-                        $images[$i]->save();
-                        $variants->image = $images[$i]->id;
-                        $variants->save();
-                    }
+                    $image_linked = $admin_product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
+                    $image_linked->shopify_id = $shopify_product->variants[$i]->image_id;
+                    $image_linked->save();
+                    $variants->image = $image_linked->id;
+                    $variants->save();
                 }
             }
 
@@ -832,6 +831,7 @@ class WishlistController extends Controller
 
             $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
         }
+
         foreach ($product->hasVariants as $index => $v) {
             $v->shopify_id = $shopifyVariants[$index]->id;
             $v->inventory_item_id =$shopifyVariants[$index]->inventory_item_id;
