@@ -345,8 +345,7 @@ class WishlistController extends Controller
                 /*Create and Synced Product to Admin*/
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
-
-dd(2134);
+dd(324);
 
 
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
@@ -564,11 +563,11 @@ dd(2134);
             $variants->product_id = $id;
             $variants->save();
 
-
-            dd($shopify_product->variants);
+            dump($shopify_product->variantts);
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
                     $image_linked = $admin_product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
+                    dd($image_linked);
                     $image_linked->shopify_id = $shopify_product->variants[$i]->image_id;
                     $image_linked->save();
                     $variants->image = $image_linked->id;
