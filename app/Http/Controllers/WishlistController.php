@@ -859,7 +859,8 @@ class WishlistController extends Controller
                 $i = [
                     'image' => [
                         'id' => $v->has_image->shopify_id,
-                        'variant_ids' => [$v->shopify_id]
+                        'variant_ids' => [$v->shopify_id],
+                        'src' => $v->has_image->image
                     ]
                 ];
                 $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
