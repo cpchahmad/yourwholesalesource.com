@@ -345,7 +345,7 @@ class WishlistController extends Controller
                 /*Create and Synced Product to Admin*/
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
-
+                dd(213);
 
 
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
@@ -862,6 +862,7 @@ class WishlistController extends Controller
                     ]
                 ];
                 $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
+                dump($imagesResponse);
             }
         }
         return $product;
