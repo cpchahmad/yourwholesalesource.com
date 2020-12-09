@@ -345,7 +345,7 @@ class WishlistController extends Controller
                 /*Create and Synced Product to Admin*/
                 $product =  $this->create_sync_product_to_admin($request, $response);
                 /*Import Product to requested store*/
-//                dd(213);
+                dd(213);
 
 
                 $related_product_id = $this->import_to_store($wish,$request->input('product_shopify_id'),$product->id);
@@ -580,6 +580,14 @@ class WishlistController extends Controller
 
         $variants_array = [];
         foreach ($prod->hasVariants as $index => $varaint) {
+
+            if ($varaint->has_image != null) {
+                $image_id = $varaint->has_image->shopify_id;
+            }
+            else {
+                $image_id = null;
+            }
+
             array_push($variants_array, [
                 'title' => $varaint->title,
                 'sku' => $varaint->sku,
@@ -597,6 +605,7 @@ class WishlistController extends Controller
                 'barcode' => $varaint->barcode,
                 'price' => $varaint->price,
                 'cost' => $varaint->cost,
+                'image_id' => $image_id,
             ]);
         }
         return $variants_array;
@@ -774,17 +783,18 @@ class WishlistController extends Controller
                 "title" => $product->title,
                 "body_html" => $product->description,
                 "vendor" => $product->vendor,
+                "images" => $images_array,
                 "tags" => $tags,
                 "product_type" => $product->type,
                 "variants" => $variants_array,
                 "options" => $options_array,
-                "images" => $images_array,
                 "published" => $published
             ]
         ];
 
 
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
+        dump($response);
         $product_shopify_id = $response->body->product->id;
         $product->shopify_id = $product_shopify_id;
         $price = $product->price;
@@ -853,19 +863,19 @@ class WishlistController extends Controller
 //                $image->save();
 //            }
 //        }
-        foreach ($product->hasVariants as $index => $v) {
+//        foreach ($product->hasVariants as $index => $v) {
 //            dump($v);
-            if ($v->has_image != null) {
-                $i = [
-                    'image' => [
-                        'variant_ids' => [$v->shopify_id],
-                        'src' => $v->has_image->image
-                    ]
-                ];
-                $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
+//            if ($v->has_image != null) {
+//                $i = [
+//                    'image' => [
+//                        'variant_ids' => [$v->shopify_id],
+//                        'src' => $v->has_image->image
+//                    ]
+//                ];
+//                $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
 //                dump($imagesResponse);
-            }
-        }
+//            }
+//        }
         return $product;
     }
 
