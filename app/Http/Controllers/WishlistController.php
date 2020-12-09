@@ -858,7 +858,7 @@ class WishlistController extends Controller
             $resp = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/metafields.json', $productdata);
         }
 
-        if (count($shopifyImages) == count($product->has_images)) {
+        if (count($shopifyImages) == count($prod->has_images)) {
             dump(123);
             foreach ($product->has_images as $index => $image) {
                 $image->shopify_id = $shopifyImages[$index]->id;
@@ -866,7 +866,7 @@ class WishlistController extends Controller
             }
         }
         else {
-            dump(1, count($shopifyImages), 2 , count($product->has_images) );
+            dump(1, count($shopifyImages), 2 , count($prod->has_images) );
         }
         foreach ($product->hasVariants as $index => $v) {
             dump($v);
