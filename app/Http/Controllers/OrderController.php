@@ -51,7 +51,7 @@ class OrderController extends Controller
         if ($request->has('search')) {
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
         }
-        $orders = $orders->orderBy('created_at', 'DESC')->paginate(30);
+        $orders = $orders->orderBy('name', 'DESC')->paginate(30);
         return view('single-store.orders.index')->with([
             'orders' => $orders,
             'search' => $request->input('search')
