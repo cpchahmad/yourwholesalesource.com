@@ -565,7 +565,7 @@ class WishlistController extends Controller
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
                     $image_linked = $admin_product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
-                    if($image_linked !== null) {
+                    if($image_linked != null) {
                         $variants->image = $image_linked->id;
                         $variants->save();
                     }
