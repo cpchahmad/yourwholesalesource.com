@@ -803,7 +803,8 @@ class WishlistController extends Controller
 
         $shopifyImages = $response->body->product->images;
         $shopifyVariants = $response->body->product->variants;
-        if (count($product->hasVariants) == 0) {
+
+        if (count($prod->hasVariants) == 0) {
             $variant_id = $shopifyVariants[0]->id;
             $product->inventory_item_id =$shopifyVariants[0]->inventory_item_id;
             $product->save();
@@ -841,12 +842,12 @@ class WishlistController extends Controller
             $res = $shop->api()->rest('POST', '/admin/api/2020-07/inventory_levels/set.json', $data);
         }
 
-        foreach ($product->hasVariants as $index => $v) {
+        foreach ($prod->hasVariants as $index => $v) {
             $v->shopify_id = $shopifyVariants[$index]->id;
             $v->inventory_item_id =$shopifyVariants[$index]->inventory_item_id;
             $v->save();
         }
-        foreach ($product->has_platforms as $index => $platform) {
+        foreach ($prod->has_platforms as $index => $platform) {
             $index = $index + 1;
             $productdata = [
                 "metafield" => [
