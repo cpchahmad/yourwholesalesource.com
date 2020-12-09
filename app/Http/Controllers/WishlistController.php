@@ -865,6 +865,9 @@ class WishlistController extends Controller
                 $image->save();
             }
         }
+        else {
+            dump(1, count($shopifyImages), 2 , count($product->has_images) );
+        }
         foreach ($product->hasVariants as $index => $v) {
             dump($v);
             if ($v->has_image != null) {
