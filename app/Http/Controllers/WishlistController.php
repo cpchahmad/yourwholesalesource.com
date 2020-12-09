@@ -859,16 +859,13 @@ class WishlistController extends Controller
         }
 
         if (count($shopifyImages) == count($prod->has_images)) {
-            dump(123);
-            foreach ($product->has_images as $index => $image) {
+            foreach ($prod->has_images as $index => $image) {
                 $image->shopify_id = $shopifyImages[$index]->id;
                 $image->save();
             }
         }
-        else {
-            dump(1, count($shopifyImages), 2 , count($prod->has_images) );
-        }
-        foreach ($product->hasVariants as $index => $v) {
+
+        foreach ($prod->hasVariants as $index => $v) {
             dump($v);
             if ($v->has_image != null) {
                 $i = [
