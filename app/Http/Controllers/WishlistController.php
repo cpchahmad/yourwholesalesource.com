@@ -195,7 +195,6 @@ class WishlistController extends Controller
                 Mail::to($user->email)->send(new WishlistApproveMail($user, $wish));
             }
             catch (\Exception $e){
-                dd($e);
             }
 
             $this->notify->generate('Wish-list','Wishlist Approved','Wishlist named '.$wish->product_name.' has been approved by your manager',$wish);
@@ -362,7 +361,6 @@ class WishlistController extends Controller
                     Mail::to($user->email)->send(new WishlistComplateMail($user, $wish));
                 }
                 catch (\Exception $e){
-                    dump($e);
                 }
 
                 $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
@@ -567,8 +565,10 @@ class WishlistController extends Controller
             if(count($shopify_product->variants) > 0) {
                 if ($shopify_product->variants[$i]->image_id != null) {
                     $image_linked = $admin_product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
-                    $variants->image = $image_linked->id;
-                    $variants->save();
+                    if($image_linked !== null) {
+                        $variants->image = $image_linked->id;
+                        $variants->save();
+                    }
                 }
             }
 
