@@ -605,7 +605,7 @@ class WishlistController extends Controller
                 'barcode' => $varaint->barcode,
                 'price' => $varaint->price,
                 'cost' => $varaint->cost,
-                'image_id' => $image_id,
+//                'image_id' => $image_id,
             ]);
         }
         return $variants_array;
@@ -792,11 +792,9 @@ class WishlistController extends Controller
             ]
         ];
 
-        dump($productdata);
 
 
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
-        dd($response);
         $product_shopify_id = $response->body->product->id;
         $product->shopify_id = $product_shopify_id;
         $price = $product->price;
@@ -859,25 +857,28 @@ class WishlistController extends Controller
             ];
             $resp = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/metafields.json', $productdata);
         }
-//        if (count($shopifyImages) == count($product->has_images)) {
-//            foreach ($product->has_images as $index => $image) {
-//                $image->shopify_id = $shopifyImages[$index]->id;
-//                $image->save();
-//            }
-//        }
-//        foreach ($product->hasVariants as $index => $v) {
-//            dump($v);
-//            if ($v->has_image != null) {
-//                $i = [
-//                    'image' => [
-//                        'variant_ids' => [$v->shopify_id],
+
+        if (count($shopifyImages) == count($product->has_images)) {
+            dump(123);
+            foreach ($product->has_images as $index => $image) {
+                $image->shopify_id = $shopifyImages[$index]->id;
+                $image->save();
+            }
+        }
+        foreach ($product->hasVariants as $index => $v) {
+            dump($v);
+            if ($v->has_image != null) {
+                $i = [
+                    'image' => [
+                        'id' => $v->has_image->shopify_id,
+                        'variant_ids' => [$v->shopify_id],
 //                        'src' => $v->has_image->image
-//                    ]
-//                ];
-//                $imagesResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product_shopify_id . '/images.json', $i);
-//                dump($imagesResponse);
-//            }
-//        }
+                    ]
+                ];
+                $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
+                dump($imagesResponse);
+            }
+        }
         return $product;
     }
 
