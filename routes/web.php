@@ -388,7 +388,7 @@ Route::get('/grid', 'AdminMaintainerController@sendGrid');
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
 Route::get('/testing', function() {
-    $orders = RetailerOrder::where('shop_id', 108)->orderBy('created_at', 'DESC')->get();
+    $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->get();
 
     dd($orders);
 });
