@@ -909,239 +909,238 @@
                     {{--Tiered Pricing Section End--}}
                 </div>
                 <div class="col-sm-4">
-
                     <form action="{{route('product.update',$product->id)}}" method="post">
-                        @csrf
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Mark as Fulfilled
-                            </div>
-                        </div>
-                            <input type="hidden" name="type" value="fulfilled">
-                            <div class="block-content" >
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
-                                        <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
-                                        <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                        <div>
+                            <div class="block">
+                                <div class="block-header">
+                                    <div class="block-title">
+                                        Mark as Fulfilled
                                     </div>
                                 </div>
-                            </div>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Sort By
-                            </div>
-                        </div>
-                        <div class="block-content pt-0" >
-                            <div class="form-group">
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
-                                    <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                </div>
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
-                                    <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    </form>
-
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Marketing Video
-                            </div>
-                        </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="marketing_video_update">
-                            <div class="block-content pt-0" >
-                                <div class="form-group">
-                                    <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Product Category
-                            </div>
-                        </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="category">
-                            <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">
-                                <div class="form-group product_category">
-                                    @foreach($categories as $category)
-                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
-                                        <div class="custom-control custom-checkbox d-inline-block">
-                                            <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox"
-                                                   @if(in_array($category->id,$product->category($product))) checked @endif
-                                                   id="rowcat_{{$category->title}}">
-                                            <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>
-                                        </div>
-
-                                        <div class="row product_sub_cat" style="display: none">
-                                            <div class="col-xs-12 col-xs-push-1">
-                                                @foreach($category->hasSub as $sub)
-                                                    <div class="custom-control custom-checkbox d-inline-block">
-                                                        <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox"
-                                                               @if(in_array($sub->id,$product->subcategory($product))) checked @endif
-                                                               id="rowsub_{{$sub->title}}">
-                                                        <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
-                                                    </div>
-                                                    <br>
-                                                @endforeach
+                                    <input type="hidden" name="type" value="fulfilled">
+                                    <div class="block-content" >
+                                        <div class="form-group">
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
+                                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
+                                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                                             </div>
                                         </div>
-                                        <br>
-                                    @endforeach
+                                    </div>
+                            </div>
+                            <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Sort By
                                 </div>
                             </div>
-                        </form>
-                        <div class="block-footer" style="height: 15px">
+                            <div class="block-content pt-0" >
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
+                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
+                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Marketing Video
+                                </div>
+                            </div>
+                            <div>
+
+                                <input type="hidden" name="type" value="marketing_video_update">
+                                <div class="block-content pt-0" >
+                                    <div class="form-group">
+                                        <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">Organization</h3>
-                        </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="organization">
-                            <div class="block-content">
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Product Type</label>
-                                        <input type="text" class="form-control" name="product_type"
-                                               value="{{$product->type}}"  placeholder="eg. Shirts" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Vendor</label>
-                                        <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
-                                               value="{{$product->vendor}}"   required>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <div class="form-material form-material-primary">
-                                            <h5>Tags</h5>
-                                            <br>
-                                            <input class="js-tags-input form-control" type="text"
-                                                   value="{{$product->tags}}"    id="product-meta-keywords" name="tags" required>
-                                        </div>
-                                    </div>
+                        <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Product Category
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">More Details</h3>
-                        </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="more-details">
-                            <div class="block-content">
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Processing Time</label>
-                                        <input type="text" class="form-control" name="processing_time" placeholder="eg. 7 working days" value="{{$product->processing_time}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Warned Platform</label>
-                                        <br>
-                                        @foreach($platforms as $platform)
+                            <div>
+                                <input type="hidden" name="type" value="category">
+                                <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">
+                                    <div class="form-group product_category">
+                                        @foreach($categories as $category)
+                                            <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                <input type="checkbox" name="platforms[]" value="{{$platform->id}}"
-                                                       @if(in_array($platform->id,$product->warned_platforms($product))) checked @endif
-                                                       class="custom-control-input" id="row_{{$platform->name}}">
-                                                <label class="custom-control-label" for="row_{{$platform->name}}">{{$platform->name}}</label>
+                                                <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox"
+                                                       @if(in_array($category->id,$product->category($product))) checked @endif
+                                                       id="rowcat_{{$category->title}}">
+                                                <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>
+                                            </div>
+
+                                            <div class="row product_sub_cat" style="display: none">
+                                                <div class="col-xs-12 col-xs-push-1">
+                                                    @foreach($category->hasSub as $sub)
+                                                        <div class="custom-control custom-checkbox d-inline-block">
+                                                            <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox"
+                                                                   @if(in_array($sub->id,$product->subcategory($product))) checked @endif
+                                                                   id="rowsub_{{$sub->title}}">
+                                                            <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
+                                                        </div>
+                                                        <br>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                             <br>
                                         @endforeach
                                     </div>
-                                    {{--                                        <input type="submit" value="save">--}}
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <label>Product Status</label>
-                                        <br>
-                                        <div class="custom-control custom-radio mb-1">
-                                            <input type="radio" class="custom-control-input" id="example-radio-customPublished" @if($product->status == 1) checked="" @endif name="status" value="1" checked="">
-                                            <label class="custom-control-label" for="example-radio-customPublished">Published</label>
-                                        </div>
-                                        <div class="custom-control custom-radio mb-1">
-                                            <input type="radio" class="custom-control-input" id="example-radio-customDraft" @if($product->status == 0) checked="" @endif name="status" value="0" >
-                                            <label class="custom-control-label" for="example-radio-customDraft">Draft</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">Preferences</h3>
+                            <div class="block-footer" style="height: 15px">
+
+                            </div>
                         </div>
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="shop-preferences">
-                            <div class="block-content">
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if($product->global == 1) checked="" @endif>
-                                        <label class="custom-control-label " for="prefer-global">Global</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if($product->global == 0) checked="" @endif>
-                                        <label class="custom-control-label" for="prefer-store">Selected Stores</label>
-                                    </div>
-                                </div>
+                        <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">Organization</h3>
+                            </div>
+                            <div>
 
-                                <div class="form-group" @if($product->global == 1) style="display: none" @endif>
-                                    <div class="form-material">
-                                        <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
-                                        <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
-                                            <option></option>
-
-                                            @foreach($shops as $shop)
-                                                <option @if(in_array($shop->id,$product->has_preferences->pluck('id')->toArray())) selected @endif
-                                                value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
-                                            @endforeach
-                                        </select>
+                                <input type="hidden" name="type" value="organization">
+                                <div class="block-content">
+                                    <div class="form-group">
+                                        <div class="col-xs-12 push-10">
+                                            <label>Product Type</label>
+                                            <input type="text" class="form-control" name="product_type"
+                                                   value="{{$product->type}}"  placeholder="eg. Shirts" required>
+                                        </div>
                                     </div>
-
-                                    <div class="form-material mt-2">
-                                        <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
-                                        <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
-                                            <option></option>
-                                            @foreach($non_shopify_users as $user)
-                                                <option @if(in_array($user->id,$product->has_non_shopify_user_preferences->pluck('id')->toArray())) selected @endif
-                                                value="{{$user->id}}">{{ $user->name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="form-group">
+                                        <div class="col-xs-12 push-10">
+                                            <label>Vendor</label>
+                                            <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
+                                                   value="{{$product->vendor}}"   required>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="form-material form-material-primary">
+                                                <h5>Tags</h5>
+                                                <br>
+                                                <input class="js-tags-input form-control" type="text"
+                                                       value="{{$product->tags}}"    id="product-meta-keywords" name="tags" required>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">More Details</h3>
+                            </div>
+                            <div>
+
+                                <input type="hidden" name="type" value="more-details">
+                                <div class="block-content">
+                                    <div class="form-group">
+                                        <div class="col-xs-12 push-10">
+                                            <label>Processing Time</label>
+                                            <input type="text" class="form-control" name="processing_time" placeholder="eg. 7 working days" value="{{$product->processing_time}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12 push-10">
+                                            <label>Warned Platform</label>
+                                            <br>
+                                            @foreach($platforms as $platform)
+                                                <div class="custom-control custom-checkbox d-inline-block">
+                                                    <input type="checkbox" name="platforms[]" value="{{$platform->id}}"
+                                                           @if(in_array($platform->id,$product->warned_platforms($product))) checked @endif
+                                                           class="custom-control-input" id="row_{{$platform->name}}">
+                                                    <label class="custom-control-label" for="row_{{$platform->name}}">{{$platform->name}}</label>
+                                                </div>
+                                                <br>
+                                            @endforeach
+                                        </div>
+                                        {{--                                        <input type="submit" value="save">--}}
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label>Product Status</label>
+                                            <br>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" class="custom-control-input" id="example-radio-customPublished" @if($product->status == 1) checked="" @endif name="status" value="1" checked="">
+                                                <label class="custom-control-label" for="example-radio-customPublished">Published</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" class="custom-control-input" id="example-radio-customDraft" @if($product->status == 0) checked="" @endif name="status" value="0" >
+                                                <label class="custom-control-label" for="example-radio-customDraft">Draft</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">Preferences</h3>
+                            </div>
+                            <div>
+
+                                <input type="hidden" name="type" value="shop-preferences">
+                                <div class="block-content">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if($product->global == 1) checked="" @endif>
+                                            <label class="custom-control-label " for="prefer-global">Global</label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if($product->global == 0) checked="" @endif>
+                                            <label class="custom-control-label" for="prefer-store">Selected Stores</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" @if($product->global == 1) style="display: none" @endif>
+                                        <div class="form-material">
+                                            <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
+                                            <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
+                                                <option></option>
+
+                                                @foreach($shops as $shop)
+                                                    <option @if(in_array($shop->id,$product->has_preferences->pluck('id')->toArray())) selected @endif
+                                                    value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-material mt-2">
+                                            <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
+                                            <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
+                                                <option></option>
+                                                @foreach($non_shopify_users as $user)
+                                                    <option @if(in_array($user->id,$product->has_non_shopify_user_preferences->pluck('id')->toArray())) selected @endif
+                                                    value="{{$user->id}}">{{ $user->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
