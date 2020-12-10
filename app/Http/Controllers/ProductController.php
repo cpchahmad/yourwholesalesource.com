@@ -772,12 +772,12 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->type);
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
             foreach($request->type as $type) {
 
-                /*Product Basic Update Shopify and Database*/
                 if ($type == 'basic-info') {
                     $product->title = $request->title;
                     $product->description = $request->description;
@@ -791,6 +791,34 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                }
+
+                if ($type == 'existing-product-image-add') {
+                    dd($request->hasFile('images'));
+                    if ($request->hasFile('images')) {
+                        foreach ($request->file('images') as $index => $image) {
+                            $destinationPath = 'images/';
+                            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+                            $image->move($destinationPath, $filename);
+                            $image = new Image();
+                            $image->isV = 0;
+                            $image->product_id = $product->id;
+                            $image->image = $filename;
+                            $image->position = count($product->has_images) + $index+1;
+                            $image->save();
+                            $imageData = [
+                                'image' => [
+                                    'src' =>  asset('images') . '/' . $image->image,
+                                ]
+                            ];
+                            $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
+                            $image->shopify_id = $imageResponse->body->image->id;
+                            $image->save();
+                        }
+                    }
+                    $product->save();
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
+
                 }
 
                 return redirect()->back()->with('success', 'Product Updated Successfully');
@@ -1263,32 +1291,7 @@ class ProductController extends Controller
 
                 }
 
-                if ($type == 'existing-product-image-add') {
-                    if ($request->hasFile('images')) {
-                        foreach ($request->file('images') as $index => $image) {
-                            $destinationPath = 'images/';
-                            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
-                            $image->move($destinationPath, $filename);
-                            $image = new Image();
-                            $image->isV = 0;
-                            $image->product_id = $product->id;
-                            $image->image = $filename;
-                            $image->position = count($product->has_images) + $index+1;
-                            $image->save();
-                            $imageData = [
-                                'image' => [
-                                    'src' =>  asset('images') . '/' . $image->image,
-                                ]
-                            ];
-                            $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
-                            $image->shopify_id = $imageResponse->body->image->id;
-                            $image->save();
-                        }
-                    }
-                    $product->save();
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
 
-                }
 
                 if ($type == 'add-additional-tab'){
 //                    dd($request);
