@@ -985,7 +985,6 @@ class ProductController extends Controller
 //                }
 
                 else if ($type == 'fulfilled') {
-                    $product = Product::find($id);
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->sortBy = $request->input('sortBy');
                     $product->save();
@@ -1380,7 +1379,6 @@ class ProductController extends Controller
 
                 else if ($type == 'tiered-pricing') {
                     $variants = $request->variant_id;
-                    $product = Product::find($id);
 
                     foreach ($variants as $variant) {
                         if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
