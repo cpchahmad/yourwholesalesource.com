@@ -954,12 +954,34 @@ class ProductController extends Controller
                     ];
                     $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
                     if($resp->errors){
-                        dd($resp);
                     }
-                    $additional_tab->shopify_id = $resp->body->metafield->id;
-                    $additional_tab->save();
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
+                    else{
+                        $additional_tab->shopify_id = $resp->body->metafield->id;
+                        $additional_tab->save();
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
+                    }
+                }
 
+                if ($type == 'edit-additional-tab'){
+//                    dd($request);
+                    $additional_tab = AdditionalTab::find($request->input('tab_id'));
+                    $additional_tab->title = $request->input('title');
+                    $additional_tab->description = $request->input('description');
+                    $additional_tab->product_id = $product->id;
+                    $additional_tab->save();
+
+                    $productdata = [
+                        "metafield" => [
+                            "key" => $additional_tab->title,
+                            "value"=> $additional_tab->description,
+                            "value_type"=> "string",
+                            "namespace"=> "tabs"
+                        ]
+                    ];
+
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
+
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
                 }
 
 //                return redirect()->back()->with('success', 'Product Updated Successfully');

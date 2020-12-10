@@ -590,11 +590,11 @@
                                                                                    value="{{$tab->title}}" placeholder=""  >
                                                                         </div>
                                                                         <div class="col-md-12">
-                                    <textarea class="js-summernote" name="tab-description"
-                                              placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
+                                                                            <textarea class="js-summernote" name="tab-description"
+                                                                                placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                                                            <button type="button" class="btn btn-primary">Save</button>
+                                                                            <button type="sumbit" class="btn btn-primary">Save</button>
                                                                         </div>
                                                                     </div>
 
