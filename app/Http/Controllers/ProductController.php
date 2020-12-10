@@ -892,46 +892,50 @@ class ProductController extends Controller
                 }
 
                 if ($type == 'single-variant-update') {
-                    $variant = ProductVariant::find($request->variant_id);
-                    $variant->title = $request->input('option1') . '/' . $request->input('option2') . '/' . $request->input('option3');
-                    $variant->option1 = $request->input('option1');
-                    $variant->option2 = $request->input('option2');
-                    $variant->option3 = $request->input('option3');
-                    $variant->price = $request->input('single-var-price');
-                    //$variant->compare_price = $request->input('compare_price');
-                    $variant->quantity = $request->input('single-var-quantity');
-                    $variant->sku = $request->input('single-var-sku');
-                    $variant->barcode = $request->input('single-var-barcode');
 
-                    if($request->input('single-var-cost') == null) {
-                        $variant->cost = null;
+                    foreach ($request->variant_id as $id) {
+                        $variant = ProductVariant::find($id);
+                        $variant->title = $request->input('option1') . '/' . $request->input('option2') . '/' . $request->input('option3');
+                        $variant->option1 = $request->input('option1');
+                        $variant->option2 = $request->input('option2');
+                        $variant->option3 = $request->input('option3');
+                        $variant->price = $request->input('single-var-price');
+                        //$variant->compare_price = $request->input('compare_price');
+                        $variant->quantity = $request->input('single-var-quantity');
+                        $variant->sku = $request->input('single-var-sku');
+                        $variant->barcode = $request->input('single-var-barcode');
+
+                        if($request->input('single-var-cost') == null) {
+                            $variant->cost = null;
+                        }
+                        else {
+                            $res = str_ireplace( array( '$', '"',
+                                ',' , ';', '<', '>' ), ' ', $request->input('cost'));
+                            $variant->cost = trim($res);
+                        }
+
+                        $variant->product_id = $id;
+                        $variant->save();
+
+                        $productdata = [
+                            "variant" => [
+                                'title' => $variant->title,
+                                'sku' => $variant->sku,
+                                'option1' => $variant->option1,
+                                'option2' => $variant->option2,
+                                'option3' => $variant->option3,
+                                'grams' => $product->weight * 1000,
+                                'weight' => $product->weight,
+                                'weight_unit' => 'kg',
+                                'barcode' => $variant->barcode,
+                                'price' => $variant->price,
+                                'cost' => $variant->cost,
+                            ]
+                        ];
+                        $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
                     }
-                    else {
-                        $res = str_ireplace( array( '$', '"',
-                            ',' , ';', '<', '>' ), ' ', $request->input('cost'));
-                        $variant->cost = trim($res);
-                    }
 
-                    $variant->product_id = $id;
-                    $variant->save();
-
-                    $productdata = [
-                        "variant" => [
-                            'title' => $variant->title,
-                            'sku' => $variant->sku,
-                            'option1' => $variant->option1,
-                            'option2' => $variant->option2,
-                            'option3' => $variant->option3,
-                            'grams' => $product->weight * 1000,
-                            'weight' => $product->weight,
-                            'weight_unit' => 'kg',
-                            'barcode' => $variant->barcode,
-                            'price' => $variant->price,
-                            'cost' => $variant->cost,
-                        ]
-                    ];
-                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
 
                 }
 
