@@ -303,10 +303,10 @@
                                                         <input type="text" class="form-control var-price-row" name="single-var-price" placeholder="$0.00" value="{{$v->price}}">
                                                     </td>
 
-                                                    <td><input type="text" class="form-control var-cost-row" name="single-var-cost" value="{{$v->cost}}" placeholder="$0.00"></td>
-                                                    <td><input type="text" class="form-control" value="{{$v->quantity}}" name="single-var-quantity" placeholder="0"></td>
-                                                    <td><input type="text" class="form-control" name="single-var-sku" value="{{$v->sku}}"></td>
-                                                    <td><input type="text" class="form-control" name="single-var-barcode" value="{{$v->barcode}}" placeholder="">
+                                                    <td><input type="text" class="form-control var-cost-row" name="single-var-cost-{{$v->id}}" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control" value="{{$v->quantity}}" name="single-var-quantity-{{$v->id}}" placeholder="0"></td>
+                                                    <td><input type="text" class="form-control" name="single-var-sku-{{$v->id}}" value="{{$v->sku}}"></td>
+                                                    <td><input type="text" class="form-control" name="single-var-barcode-{{$v->id}}" value="{{$v->barcode}}" placeholder="">
                                                     </td>
 
                                                 </tr>
@@ -317,19 +317,19 @@
                                                     <td style="vertical-align: middle"> @if($v->option1 != null) Option1: @endif</td>
                                                     <td>
                                                         @if($v->option1 != null)
-                                                            <input type="text" class="form-control" name="option1" placeholder="$0.00" value="{{$v->option1}}">
+                                                            <input type="text" class="form-control" name="option1-{{$v->id}}" placeholder="$0.00" value="{{$v->option1}}">
                                                         @endif
                                                     </td>
                                                     <td style="vertical-align: middle">@if($v->option2 != null) Option2: @endif</td>
                                                     <td>
                                                         @if($v->option2 != null)
-                                                            <input type="text" class="form-control" name="option2" placeholder="$0.00" value="{{$v->option2}}">
+                                                            <input type="text" class="form-control" name="option2-{{$v->id}}" placeholder="$0.00" value="{{$v->option2}}">
                                                         @endif
                                                     </td>
                                                     <td style="vertical-align: middle">@if($v->option3 != null) Option3: @endif</td>
                                                     <td>
                                                         @if($v->option3 != null)
-                                                            <input type="text" class="form-control" name="option3" placeholder="$0.00" value="{{$v->option3}}">
+                                                            <input type="text" class="form-control" name="option3-{{$v->id}}" placeholder="$0.00" value="{{$v->option3}}">
                                                         @endif
                                                     </td>
 
