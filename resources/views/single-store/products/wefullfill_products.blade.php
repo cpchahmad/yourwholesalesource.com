@@ -151,7 +151,7 @@
                         <div class="options-container">
                             <a href="{{route('store.product.wefulfill.show',$product->id)}}">
                                 @if(count($product->has_images) > 0)
-                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                    @foreach($product->has_images()->orderBy('position')->cursor() as $index => $image)
                                         @if($index == 0)
                                             @if($image->isV == 0)
                                                 <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">

@@ -382,7 +382,7 @@ class RetailerProductController extends Controller
     }
 
     public function my_products(Request $request){
-        $productQuery = RetailerProduct::where('toShopify',1)->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
+        $productQuery = RetailerProduct::with('has_images')->where('toShopify',1)->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
         if($request->has('search')){
             $productQuery->where('title','LIKE','%'.$request->input('search').'%');
         }
