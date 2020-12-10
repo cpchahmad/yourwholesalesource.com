@@ -778,8 +778,10 @@ class ProductController extends Controller
 
             foreach($request->type as $type) {
                 /*Product Basic Update Shopify and Database*/
-                dd($type);
+
                 if ($type == 'basic-info') {
+
+                    dd('yes');
                     dump('yes', $request->title);
                     $product->title = $request->title;
                     $product->description = $request->description;
