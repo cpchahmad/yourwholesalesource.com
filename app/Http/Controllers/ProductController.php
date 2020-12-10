@@ -777,7 +777,7 @@ class ProductController extends Controller
         $shop =$this->helper->getShop();
         if ($product != null) {
             foreach($request->type as $type) {
-                $type = $request->type[1];
+                $type = $request->type[2];
                 if ($type == 'basic-info') {
                     $product->title = $request->title;
                     $product->description = $request->description;
