@@ -896,7 +896,8 @@ class ProductController extends Controller
 
                     foreach ($request->variant_id as $id) {
                         $variant = ProductVariant::find($id);
-                        dd($request->input('option1-'.$id), $request->input('single-var-quantity-'.$id));
+
+                        dd($variant, $request->input('option1-'.$id), $request->input('single-var-quantity-'.$id));
                         $variant->title = $request->input('option1-'.$id) . '/' . $request->input('option2-'.$id) . '/' . $request->input('option3-'.$id);
                         $variant->option1 = $request->input('option1-'.$id);
                         $variant->option2 = $request->input('option2-'.$id);
