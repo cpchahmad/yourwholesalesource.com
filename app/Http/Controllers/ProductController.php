@@ -892,8 +892,11 @@ class ProductController extends Controller
 
                 else if ($type == 'single-variant-update') {
 
+                    dump($request->variant_id);
+
                     foreach ($request->variant_id as $id) {
                         $variant = ProductVariant::find($id);
+                        dd($request->input('option1-'.$id), $request->input('single-var-quantity-'.$id));
                         $variant->title = $request->input('option1-'.$id) . '/' . $request->input('option2-'.$id) . '/' . $request->input('option3-'.$id);
                         $variant->option1 = $request->input('option1-'.$id);
                         $variant->option2 = $request->input('option2-'.$id);
