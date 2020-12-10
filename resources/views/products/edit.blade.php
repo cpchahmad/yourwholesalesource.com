@@ -346,7 +346,7 @@
                                         <div id="varaint_image_form_{{$index}}" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="type[]" value="variant-image-update">
-                                            <input type="hidden" name="variant_id" value="{{$v->id}}">
+                                            <input type="hidden" name="var_id" value="{{$v->id}}">
                                             <input type="file" name="varaint_src" class="varaint_file_input" accept="image/*">
                                         </div>
                                     @endforeach
@@ -791,9 +791,9 @@
                                             </tbody>
 
                                     </table>
-{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-{{--                                    </div>--}}
+                                    <div class="block-content text-right pr-0 pt-0 pb-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
                                 </div>
                             @endif
                             @if($product->variants == 1)
@@ -899,9 +899,9 @@
                                             </tbody>
                                         @endif
                                     </table>
-{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-{{--                                    </div>--}}
+                                    <div class="block-content text-right pr-0 pt-0 pb-3">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
                                 </div>
                             @endif
                         </div>
