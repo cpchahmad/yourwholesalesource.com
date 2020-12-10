@@ -1060,8 +1060,11 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
 
                 }
-                /*Product Basic Update Shopify and Database*/
-                if ($request->input('type') == 'basic-info') {
+
+
+
+                if ($request->input('type') == 'basic-info-existing-product-image-add-pricing') {
+                    // basic info
                     $product->title = $request->title;
                     $product->description = $request->description;
                     $product->save();
@@ -1074,9 +1077,33 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                }
-                /*Pricing Update*/
-                if ($request->input('type') == 'pricing') {
+
+                    // existing-product-image-add
+                    if ($request->hasFile('images')) {
+                        foreach ($request->file('images') as $index => $image) {
+                            $destinationPath = 'images/';
+                            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+                            $image->move($destinationPath, $filename);
+                            $image = new Image();
+                            $image->isV = 0;
+                            $image->product_id = $product->id;
+                            $image->image = $filename;
+                            $image->position = count($product->has_images) + $index+1;
+                            $image->save();
+                            $imageData = [
+                                'image' => [
+                                    'src' =>  asset('images') . '/' . $image->image,
+                                ]
+                            ];
+                            $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
+                            $image->shopify_id = $imageResponse->body->image->id;
+                            $image->save();
+                        }
+                    }
+                    $product->save();
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
+
+                    // pricing
                     $product->price = $request->price;
                     $product->compare_price = $request->compare_price;
                     $product->cost = $request->cost;
@@ -1110,8 +1137,8 @@ class ProductController extends Controller
                         }
 
                     }
-
                 }
+
 
                 if ($request->input('type') == 'fulfilled-marketing_video_update-category-organization-more-details-shop-preferences') {
                     // fulfilled
@@ -1212,14 +1239,13 @@ class ProductController extends Controller
                         $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
                     }
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
-                }
 
-
-                if($request->input('type') == 'status_update'){
+                    // product status
                     $this->product_status_change($request, $product, $shop);
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Status Updated');
-
                 }
+
+
 
                 if ($request->input('type') == 'variant-image-update') {
 //                    dd($request);
@@ -1272,32 +1298,6 @@ class ProductController extends Controller
                     ]);
                 }
 
-                if ($request->input('type') == 'existing-product-image-add') {
-                    if ($request->hasFile('images')) {
-                        foreach ($request->file('images') as $index => $image) {
-                            $destinationPath = 'images/';
-                            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
-                            $image->move($destinationPath, $filename);
-                            $image = new Image();
-                            $image->isV = 0;
-                            $image->product_id = $product->id;
-                            $image->image = $filename;
-                            $image->position = count($product->has_images) + $index+1;
-                            $image->save();
-                            $imageData = [
-                                'image' => [
-                                    'src' =>  asset('images') . '/' . $image->image,
-                                ]
-                            ];
-                            $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
-                            $image->shopify_id = $imageResponse->body->image->id;
-                            $image->save();
-                        }
-                    }
-                    $product->save();
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
-
-                }
 
                 if ($request->input('type') == 'add-additional-tab'){
 //                    dd($request);

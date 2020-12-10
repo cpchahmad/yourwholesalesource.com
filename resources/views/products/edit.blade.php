@@ -27,12 +27,12 @@
         <div class="content edit-content" data-route="{{route('product.update', $product->id)}}">
             <div id="forms-div" class="row">
                 <div class="col-sm-8">
-                    <div class="block">
-                        <form action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type" value="basic-info">
+                    <form action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data" >
+                        @csrf
+                        <input type="hidden" name="type" value="basic-info-existing-product-image-add-pricing">
+                        <div class="block">
+    {{--                            <input type="hidden" name="type" value="basic-info">--}}
                             <div class="block-content block-content-full">
-
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <label for="product-name">Title</label>
@@ -52,62 +52,57 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
 
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">Images</h3>
                         </div>
-                        <div class="block-content">
-                            @if(count($product->has_images) >0)
-                                <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
+                        <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">Images</h3>
+                            </div>
+                            <div class="block-content">
+                                @if(count($product->has_images) >0)
+                                    <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
 
-                                    @foreach(DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->cursor() as $image)
-                                        <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}">
-                                            <div class="options-container fx-img-zoom-in fx-opt-slide-right">
-                                                @if($image->isV == 0)
-                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="" >
-                                                @else
-                                                    <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                @endif
-                                                <div class="options-overlay bg-black-75">
-                                                    <div class="options-overlay-content">
-                                                        <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
+                                        @foreach(DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->cursor() as $image)
+                                            <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}">
+                                                <div class="options-container fx-img-zoom-in fx-opt-slide-right">
+                                                    @if($image->isV == 0)
+                                                        <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="" >
+                                                    @else
+                                                        <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    @endif
+                                                    <div class="options-overlay bg-black-75">
+                                                        <div class="options-overlay-content">
+                                                            <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                    @endforeach
-                                </div>
-                                <hr>
-                            @endif
-                            <div class="row">
-                                <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="type" value="existing-product-image-add">
-                                    <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
-                                        <div class="dropzone dz-clickable">
-                                            <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
-                                            <div class="row preview-drop"></div>
-                                        </div>
-                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
+                                        @endforeach
                                     </div>
-
-
-                                </form>
+                                    <hr>
+                                @endif
+                                <div class="row">
+                                    <div class="product-images-m">
+    {{--                                    <input type="hidden" name="type" value="existing-product-image-add">--}}
+                                        <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
+                                            <div class="dropzone dz-clickable">
+                                                <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
+                                                <div class="row preview-drop"></div>
+                                            </div>
+                                            <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @if(count($product->hasVariants) == 0)
+                        @if(count($product->hasVariants) == 0)
                         <div class="block">
                             <div class="block-header">
                                 <h3 class="block-title">Pricing</h3>
                             </div>
-                            <form action="{{route('product.update',$product->id)}}" method="post">
-                                @csrf
-                                <input type="hidden" name="type" value="pricing">
+                            <div>
+{{--                                <input type="hidden" name="type" value="pricing">--}}
                                 <div class="block-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -164,42 +159,41 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     @endif
-                    @if($product->variants == 1)
-                        <div class="block">
-                            <div class="block-header">
-                                <h3 class="block-title">Product Weight/Quantity</h3>
-                            </div>
-                            <form action="{{route('product.update',$product->id)}}" method="post">
-                                @csrf
-                                <input type="hidden" name="type" value="pricing">
-                                <div class="block-content">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <div class="col-xs-12">
-                                                    <label>Price</label>
-                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" required>
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    <label>Weight</label>
-                                                    <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
-                                                </div>
-                                                <div class="col-xs-12 ">
-                                                    <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
+
+                        @if($product->variants == 1)
+                            <div class="block">
+                                <div class="block-header">
+                                    <h3 class="block-title">Product Weight/Quantity</h3>
+                                </div>
+                                <div>
+    {{--                                <input type="hidden" name="type" value="pricing">--}}
+                                    <div class="block-content">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <label>Price</label>
+                                                        <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" required>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <label>Weight</label>
+                                                        <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                    </div>
+                                                    <div class="col-xs-12 ">
+                                                        <label>Quantity</label>
+                                                        <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                    </form>
                         <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
                                 <h3 class="block-title">
@@ -954,7 +948,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="block">
                             <div class="block-header">
                                 <div class="block-title">
