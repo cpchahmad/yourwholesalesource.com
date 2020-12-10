@@ -936,7 +936,7 @@ class ProductController extends Controller
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
                     }
 
-
+                    return redirect()->back()->with('success', 'Product Updated Successfully');
                 }
 
 //                return redirect()->back()->with('success', 'Product Updated Successfully');
