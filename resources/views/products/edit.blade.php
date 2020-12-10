@@ -31,7 +31,7 @@
                     <div class="block">
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
-                            <input type="hidden" name="type" value="basic-info">
+                            <input type="hidden" name="type[]" value="basic-info">
                             <div class="block-content block-content-full">
 
                                 <div class="form-group">
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="type" value="existing-product-image-add">
+                                    <input type="hidden" name="type[]" value="existing-product-image-add">
                                     <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
                                         <div class="dropzone dz-clickable">
                                             <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
@@ -108,7 +108,7 @@
                             </div>
                             <div action="{{route('product.update',$product->id)}}" method="post">
                                 @csrf
-                                <input type="hidden" name="type" value="pricing">
+                                <input type="hidden" name="type[]" value="pricing">
                                 <div class="block-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -178,7 +178,7 @@
                             </div>
                             <div action="{{route('product.update',$product->id)}}" method="post">
                                 @csrf
-                                <input type="hidden" name="type" value="pricing">
+                                <input type="hidden" name="type[]" value="pricing">
                                 <div class="block-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -254,7 +254,7 @@
                                         @foreach($product->hasVariants as $index => $v)
                                             <div action="{{route('product.update',$product->id)}}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="type" value="single-variant-update">
+                                                <input type="hidden" name="type[]" value="single-variant-update">
                                                 <input type="hidden" name="variant_id" value="{{$v->id}}">
                                                 <tbody class="js-table-sections-header">
                                                 <tr>
@@ -346,7 +346,7 @@
                                     @foreach($product->hasVariants as $index => $v)
                                         <div id="varaint_image_form_{{$index}}" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="type" value="variant-image-update">
+                                            <input type="hidden" name="type[]" value="variant-image-update">
                                             <input type="hidden" name="variant_id" value="{{$v->id}}">
                                             <input type="file" name="varaint_src" class="varaint_file_input" accept="image/*">
                                         </div>
@@ -394,7 +394,7 @@
 
                                                                     <div class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
-                                                                        <input type="hidden" name="type" value="old-option-update">
+                                                                        <input type="hidden" name="type[]" value="old-option-update">
                                                                         <div class="variants_table" style="display: none;">
                                                                         <hr>
                                                                         <h3 class="block-title">
@@ -436,7 +436,7 @@
                                                                     </div>
                                                                     <div class="new-option-add col-md-7" action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
-                                                                        <input type="hidden" name="type" value="new-option-add">
+                                                                        <input type="hidden" name="type[]" value="new-option-add">
                                                                         <div class="">
                                                                             <input type="hidden" name="option" value="option2">
                                                                             <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">
@@ -479,7 +479,7 @@
                                                                     </div>
                                                                     <div class="new-option-add col-md-7"  action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
-                                                                        <input type="hidden" name="type" value="new-option-add">
+                                                                        <input type="hidden" name="type[]" value="new-option-add">
                                                                         <div class="">
                                                                             <input type="hidden" name="option" value="option3">
                                                                             <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">
@@ -515,7 +515,7 @@
                                         <div class="deleted-data">
                                             <div id="variant-options-update" action="{{route('product.update',$product->id)}}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="type" value="variant-option-delete">
+                                                <input type="hidden" name="type[]" value="variant-option-delete">
                                             </div>
                                         </div>
 
@@ -581,7 +581,7 @@
                                                             </div>
                                                             <div action="{{route('product.update',$product->id)}}" method="post">
                                                                 @csrf
-                                                                <input type="hidden" name="type" value="edit-additional-tab">
+                                                                <input type="hidden" name="type[]" value="edit-additional-tab">
                                                                 <input type="hidden" name="tab_id" value="{{$tab->id}}">
                                                                 <div class="block-content" style="padding: 20px !important;">
                                                                     <div class="row">
@@ -633,7 +633,7 @@
                                     </div>
                                     <div action="{{route('product.update',$product->id)}}" method="post">
                                         @csrf
-                                        <input type="hidden" name="type" value="add-additional-tab">
+                                        <input type="hidden" name="type[]" value="add-additional-tab">
                                         <div class="block-content" style="padding: 20px !important;">
                                             <div class="row">
                                                 <div class="col-md-12" style="margin-bottom: 10px">
@@ -725,7 +725,7 @@
                                         </thead>
                                             <tbody>
                                                 <tr>
-                                                    <input type="hidden" name="type" value="tiered-pricing">
+                                                    <input type="hidden" name="type[]" value="tiered-pricing">
 
                                                     <td class="variant_title">
                                                         {{ $product->title }}
@@ -832,7 +832,7 @@
                                             @foreach($product->hasVariants as $index => $v)
                                                 <tr>
                                                     <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
-                                                    <input type="hidden" name="type" value="tiered-pricing">
+                                                    <input type="hidden" name="type[]" value="tiered-pricing">
 
                                                     <td class="variant_title">
                                                         @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
@@ -919,7 +919,7 @@
                                 Mark as Fulfilled
                             </div>
                         </div>
-                            <input type="hidden" name="type" value="fulfilled">
+                            <input type="hidden" name="type[]" value="fulfilled">
                             <div class="block-content" >
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">
@@ -963,7 +963,7 @@
                         </div>
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
-                            <input type="hidden" name="type" value="marketing_video_update">
+                            <input type="hidden" name="type[]" value="marketing_video_update">
                             <div class="block-content pt-0" >
                                 <div class="form-group">
                                     <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
@@ -980,7 +980,7 @@
                         </div>
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
-                            <input type="hidden" name="type" value="category">
+                            <input type="hidden" name="type[]" value="category">
                             <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">
                                 <div class="form-group product_category">
                                     @foreach($categories as $category)
@@ -1020,7 +1020,7 @@
                         </div>
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
-                            <input type="hidden" name="type" value="organization">
+                            <input type="hidden" name="type[]" value="organization">
                             <div class="block-content">
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
@@ -1056,7 +1056,7 @@
                         </div>
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
-                            <input type="hidden" name="type" value="more-details">
+                            <input type="hidden" name="type[]" value="more-details">
                             <div class="block-content">
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
@@ -1103,7 +1103,7 @@
                         </div>
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
-                            <input type="hidden" name="type" value="shop-preferences">
+                            <input type="hidden" name="type[]" value="shop-preferences">
                             <div class="block-content">
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">

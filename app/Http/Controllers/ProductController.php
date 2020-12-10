@@ -772,13 +772,12 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        dd($request->type);
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
-            if ($request->has('type')) {
 
-                /*Variants Option Delete from Shopify and Database*/
+
                 if ($request->input('type') == 'variant-option-delete') {
                     $deleted_variants = null;
                     if ($request->has('delete_option1')) {
@@ -828,7 +827,6 @@ class ProductController extends Controller
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'Variant Option Deleted');
 
-                    return redirect()->back()->with('success','Selected Options and Related Variants Deleted Successfully');
                 }
                 /*New Variants Option Add from Shopify and Database*/
                 if ($request->input('type') == 'existing-product-new-variants') {
@@ -855,7 +853,6 @@ class ProductController extends Controller
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Added');
 
-                    return redirect()->route('product.edit', $product->id);
                 }
                 /*New Variants Option Update from Shopify and Database*/
                 if ($request->input('type') == 'existing-product-update-variants') {
@@ -951,7 +948,6 @@ class ProductController extends Controller
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
 
-                    return redirect()->route('product.edit', $product->id);
                 }
                 /*old Option Update Shopify and Database*/
                 if ($request->input('type') == 'old-option-update') {
@@ -978,7 +974,6 @@ class ProductController extends Controller
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'Old Option Updated');
 
-                    return redirect()->route('product.edit', $product->id);
 
                 }
 
@@ -1014,7 +1009,6 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Option Added');
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-                    return redirect()->back();
                 }
                 /*Single Variant Update Shopify and Database*/
                 if ($request->input('type') == 'single-variant-update') {
@@ -1252,7 +1246,6 @@ class ProductController extends Controller
                             $image->save();
                             $this->log->store(0, 'Product', $product->id, $product->title,'Product Varinat Image Updated');
 
-                            return redirect()->back();
                         }
 
 
@@ -1266,9 +1259,7 @@ class ProductController extends Controller
                     $image->delete();
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
 
-                    return response()->json([
-                        'success' => 'ok'
-                    ]);
+
                 }
 
                 if ($request->input('type') == 'existing-product-image-add') {
@@ -1319,7 +1310,6 @@ class ProductController extends Controller
                     $additional_tab->save();
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
 
-                    return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
 
                 if ($request->input('type') == 'edit-additional-tab'){
@@ -1342,7 +1332,6 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
 
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
-                    return redirect()->back()->with('success','Additional Tabs Added Successfully');
                 }
 
                 if ($request->input('type') == 'shop-preferences'){
@@ -1358,7 +1347,6 @@ class ProductController extends Controller
 
                 }
 
-            }
         }
 
         return redirect()->back()->with('success', 'Product Updated Successfully');
