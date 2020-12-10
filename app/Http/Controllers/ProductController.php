@@ -772,7 +772,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -936,7 +935,7 @@ class ProductController extends Controller
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
                     }
 
-                    return redirect()->back()->with('success', 'Product Updated Successfully');
+                    return redirect()->back()->with('success', 'Product Updated SSSuccessfully');
                 }
 
 //                return redirect()->back()->with('success', 'Product Updated Successfully');
