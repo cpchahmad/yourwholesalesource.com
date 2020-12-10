@@ -386,7 +386,7 @@
                                                                     <input class="js-tags-options1-update form-control mt-3" type="text"
                                                                     id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
 
-                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
+                                                                    <div class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="type" value="old-option-update">
                                                                         <div class="variants_table" style="display: none;">
@@ -416,7 +416,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    </form>
+                                                                    </div>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top:10px ">
@@ -625,7 +625,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <form action="{{route('product.update',$product->id)}}" method="post">
+                                    <div action="{{route('product.update',$product->id)}}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="add-additional-tab">
                                         <div class="block-content" style="padding: 20px !important;">
@@ -645,7 +645,7 @@
                                             </div>
 
                                         </div>
-                                    </form>
+                                    </div>
                                     <div class="block-content block-content-full text-right border-top">
 
                                         <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
