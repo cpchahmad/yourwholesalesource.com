@@ -1127,7 +1127,7 @@
                             </button>
                         </div>
                     </div>
-                    <div action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
                         <input type="hidden" name="type[]" value="add-additional-tab">
                         <div class="block-content" style="padding: 20px !important;">
@@ -1142,12 +1142,12 @@
                                           placeholder="Please Enter Description here !"></textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </div>
 
                         </div>
-                    </div>
+                    </form>
                     <div class="block-content block-content-full text-right border-top">
 
                         <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
