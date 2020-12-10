@@ -177,7 +177,7 @@ class ProductController extends Controller
         return response()->json(['data'=> 'success']);
     }
 
-    public function update(Request $request, $id)
+    public function update2(Request $request, $id)
     {
         $product = Product::find($id);
         $shop =$this->helper->getShop();
@@ -771,7 +771,7 @@ class ProductController extends Controller
     }
 
 
-    public function update2(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $shop =$this->helper->getShop();
@@ -1114,7 +1114,6 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'fulfilled-marketing_video_update-category-organization-more-details-shop-preferences') {
-                    dd(234);
                     // fulfilled
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->sortBy = $request->input('sortBy');
