@@ -250,10 +250,10 @@
                                     </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
+                                        <input type="hidden" name="type[]" value="single-variant-update">
                                         @foreach($product->hasVariants as $index => $v)
                                             <div action="{{route('product.update',$product->id)}}" method="post">
                                                 @csrf
-                                                <input type="hidden" name="type[]" value="single-variant-update">
                                                 <input type="hidden" name="variant_id[]" value="{{$v->id}}">
                                                 <tbody class="js-table-sections-header">
                                                 <tr>

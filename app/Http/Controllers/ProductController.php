@@ -938,7 +938,7 @@ class ProductController extends Controller
 
                 }
 
-                return redirect()->back()->with('success', 'Product Updated Successfully');
+//                return redirect()->back()->with('success', 'Product Updated Successfully');
 
 //                if ($type == 'variant-option-delete') {
 //                    $deleted_variants = null;
