@@ -935,7 +935,7 @@ class ProductController extends Controller
                     }
                 }
 
-                if ($type == 'add-additional-tab'){
+                else if ($type == 'add-additional-tab'){
 //                    dd($request);
                     $additional_tab = new AdditionalTab();
                     $additional_tab->title = $request->input('tab-title');
@@ -958,7 +958,7 @@ class ProductController extends Controller
 
                 }
 
-                return redirect()->back()->with('success', 'Product Updated Successfully');
+//                return redirect()->back()->with('success', 'Product Updated Successfully');
 
 //                if ($type == 'variant-option-delete') {
 //                    $deleted_variants = null;
