@@ -908,7 +908,7 @@ class ProductController extends Controller
                         }
                         else {
                             $res = str_ireplace( array( '$', '"',
-                                ',' , ';', '<', '>' ), ' ', $request->input('cost-').$id);
+                                ',' , ';', '<', '>' ), ' ', $request->input('single-var-cost-').$id);
                             $variant->cost = trim($res);
                         }
 
