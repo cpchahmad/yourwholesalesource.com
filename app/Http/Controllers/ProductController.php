@@ -1114,7 +1114,6 @@ class ProductController extends Controller
                 }
 
                 if ($request->input('type') == 'fulfilled-marketing_video_update-category-organization-more-details-shop-preferences') {
-                    dd(324);
                     // fulfilled
                     $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->sortBy = $request->input('sortBy');
