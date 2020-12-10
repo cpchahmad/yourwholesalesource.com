@@ -985,7 +985,8 @@ class ProductController extends Controller
 //                }
 
                 else if ($type == 'fulfilled') {
-                    //$product->fulfilled_by = $request->input('fulfilled-by');
+                    $product = Product::find($id);
+                    $product->fulfilled_by = $request->input('fulfilled-by');
                     $product->sortBy = $request->input('sortBy');
                     $product->save();
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
