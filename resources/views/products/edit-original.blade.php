@@ -51,9 +51,6 @@
                                               placeholder="Please Enter Description here !">{{$product->description}}</textarea>
                                     </div>
                                 </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary" type="submit">Save</button>
-                                </div>
                             </div>
                         </form>
 
@@ -66,7 +63,7 @@
                             @if(count($product->has_images) >0)
                                 <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
 
-                                    @foreach(DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->get() as $image)
+                                    @foreach(DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->cursor() as $image)
                                         <div class="col-lg-4 preview-image animated fadeIn" data-id="{{$image->id}}">
                                             <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                 @if($image->isV == 0)
@@ -87,7 +84,7 @@
                                 <hr>
                             @endif
                             <div class="row">
-                                <form class="w-100" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                                <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="type" value="existing-product-image-add">
                                     <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
@@ -98,9 +95,7 @@
                                         <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                     </div>
 
-                                    <div class="form-group text-right">
-                                        <button class="btn btn-primary mr-3" type="submit">Save</button>
-                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -177,6 +172,35 @@
                     @endif
                     @if($product->variants == 1)
                         <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">Product Weight/Quantity</h3>
+                            </div>
+                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                @csrf
+                                <input type="hidden" name="type" value="pricing">
+                                <div class="block-content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="col-xs-12">
+                                                    <label>Price</label>
+                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" required>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <label>Weight</label>
+                                                    <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                </div>
+                                                <div class="col-xs-12 ">
+                                                    <label>Quantity</label>
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
                                 <h3 class="block-title">
                                     Variant
@@ -194,6 +218,22 @@
                                 <div class="text-right d-inline-block">
 {{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
                                     <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Variants</a>
+                                    <a href="{{route('product.download.sku.csv',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-danger">Download SKU List</a>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="ml-2 row mb-3">
+                                <div class="col-md-2">
+                                    <label for="">Bulk Pricing/Cost</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="">Price</label>
+                                    <input id="bulk-var-price" type="number" class="form-control" >
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="">Cost</label>
+                                    <input id="bulk-var-cost" type="number" class="form-control" >
                                 </div>
                             </div>
                             <div class="block-content" style="padding-top: 0 !important;">
@@ -207,7 +247,6 @@
                                         <th style="vertical-align: top">Quantity</th>
                                         <th style="vertical-align: top">SKU</th>
                                         <th style="vertical-align: top">Barcode</th>
-                                        <th style="vertical-align: top"></th>
                                     </tr>
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
@@ -261,14 +300,15 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
+                                                        <input type="text" class="form-control var-price-row" name="price" placeholder="$0.00" value="{{$v->price}}">
                                                     </td>
 
-                                                    <td><input type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control var-cost-row" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
                                                     <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                                     <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
-                                                    <td><button class="btn btn-primary" type="submit">Save</button></td>
+                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
+                                                    </td>
+
                                                 </tr>
                                                 </tbody>
                                                 <tbody>
@@ -623,8 +663,33 @@
                     </div>
                     {{--Tiered Pricing Section--}}
                     <div class="block">
-                        <div class="block-header d-inline-flex" style="width: 100%" >
+                        <div class="block-header d-block" style="width: 100%" >
                             <h3 class="block-title">Tiered Pricing</h3>
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <label for="">Bulk Pricing</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="">Min Qty</label>
+                                    <input id="bulk-min-qty" type="number" class="form-control" >
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="">Max Qty</label>
+                                    <input id="bulk-max-qty" type="number" class="form-control" >
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Type</label>
+                                    <select name="type[]" class="form-control" id="bulk-type">
+                                        <option value="fixed">Fixed</option>
+                                        <option value="discount">Discount</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">$/Discount</label>
+                                    <input  type="number" step="any" class="form-control"  placeholder="" id="bulk-price">
+                                </div>
+                            </div>
                         </div>
                         <div class="block-content">
                             @if(count($product->hasVariants) == 0)
@@ -648,7 +713,7 @@
                                                         <span style="vertical-align: top;">Type</span>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <span style="vertical-align: top;">Fixed($)/Discount(%)</span>
+                                                        <span style="vertical-align: top;">$/Discount</span>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <span style=""></span>
@@ -726,9 +791,9 @@
                                             </tbody>
 
                                     </table>
-                                    <div class="block-content text-right pr-0 pt-0 pb-3">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
+{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
+{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
+{{--                                    </div>--}}
                                 </form>
                             @endif
                             @if($product->variants == 1)
@@ -809,19 +874,19 @@
                                                         @endif
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty{{$v->id}}[]">
+                                                                <input  type="number" class="form-control min-qty-row" name="min_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty{{$v->id}}[]">
+                                                                <input  type="number" class="form-control max-qty-row" name="max_qty{{$v->id}}[]">
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <select name="type{{$v->id}}[]" id="" class="form-control">
+                                                                <select name="type{{$v->id}}[]" id="" class="form-control type-row">
                                                                     <option value="fixed">Fixed</option>
                                                                     <option value="discount">Discount</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control tired_price" name="tiered_price{{$v->id}}[]"  placeholder="">
+                                                                <input  type="number" step="any" class="form-control tired_price price-row" name="tiered_price{{$v->id}}[]"  placeholder="">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
                                                                 <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $v->id }}">+</button>
@@ -834,9 +899,9 @@
                                             </tbody>
                                         @endif
                                     </table>
-                                    <div class="block-content text-right pr-0 pt-0 pb-3">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
+{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
+{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
+{{--                                    </div>--}}
                                 </form>
                             @endif
                         </div>
@@ -847,12 +912,12 @@
 
                     <form action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
-                        <div class="block">
-                            <div class="block-header">
-                                <div class="block-title">
-                                    Mark as Fulfilled
-                                </div>
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">
+                                Mark as Fulfilled
                             </div>
+                        </div>
                             <input type="hidden" name="type" value="fulfilled">
                             <div class="block-content" >
                                 <div class="form-group">
@@ -865,37 +930,28 @@
                                         <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                                     </div>
                                 </div>
+                            </div>
+                    </div>
+                    <div class="block">
+                        <div class="block-header">
+                            <div class="block-title">
+                                Sort By
+                            </div>
+                        </div>
+                        <div class="block-content pt-0" >
+                            <div class="form-group">
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
+                                    <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
+                                </div>
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
+                                    <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                </div>
+                            </div>
 
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary">Save</button>
-                                </div>
-                            </div>
                         </div>
-                    </form>
-                    <form action="{{route('product.update',$product->id)}}" method="post">
-                        <div class="block">
-                            <div class="block-header">
-                                <div class="block-title">
-                                    Sort By
-                                </div>
-                            </div>
-                            <input type="hidden" name="type" value="fulfilled">
-                            <div class="block-content pt-0" >
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" value="Best Seller"  >
-                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" value="Winning Product" >
-                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
-                                    </div>
-                                </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary">Save</button>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
                     </form>
 
                     <div class="block">
@@ -910,9 +966,6 @@
                             <div class="block-content pt-0" >
                                 <div class="form-group">
                                     <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
-                                </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary">Save</button>
                                 </div>
                             </div>
                         </form>
@@ -955,9 +1008,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="form-group text-right">
-                                <button class="btn btn-primary my-3 mr-3">Save</button>
-                            </div>
                         </form>
                         <div class="block-footer" style="height: 15px">
 
@@ -996,9 +1046,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group text-right">
-                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                     </div>
@@ -1046,9 +1093,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary">Save</button>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -1094,12 +1138,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-
-
                                 </div>
-                            </div>
-                            <div class="form-group text-right">
-                                <button class="btn btn-primary my-3 mr-3">Save</button>
                             </div>
                         </form>
                     </div>

@@ -94,10 +94,10 @@
                                     <a class="btn btn-xs btn-sm btn-success" type="button" href="{{ route('product.view', $product->id) }}" title="View Product">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning"
-                                       type="button" data-toggle="tooltip" title=""
-                                       data-original-title="Edit Product"><i
-                                            class="fa fa-edit"></i></a>
+{{--                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning"--}}
+{{--                                       type="button" data-toggle="tooltip" title=""--}}
+{{--                                       data-original-title="Edit Product"><i--}}
+{{--                                            class="fa fa-edit"></i></a>--}}
                                     <a href="{{ route('product.delete', $product->id) }}" class="btn btn-sm btn-danger"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Delete Product"><i class="fa fa-times"></i></a>
