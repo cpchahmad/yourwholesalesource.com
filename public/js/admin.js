@@ -433,11 +433,11 @@ $(document).ready(function () {
             });
 
         } else {
-            // $.ajax({
-            //     url: $('#notification').data('route'),
-            //     type:'GET',
-            // });
-            // window.location.reload();
+            $.ajax({
+                url: $('#notification').data('route'),
+                type:'GET',
+            });
+            window.location.reload();
         }
     }
     /*Admin Module - Variant Image Change JS*/
