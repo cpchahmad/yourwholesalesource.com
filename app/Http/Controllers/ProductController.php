@@ -858,6 +858,39 @@ class ProductController extends Controller
 
                 }
 
+                if ($type == 'pricing-for-variant') {
+                    $product->price = $request->price;
+                    $product->quantity = $request->quantity;
+                    $product->weight = $request->weight;
+                    $product->save();
+
+                    if (count($product->hasVariants) == 0) {
+                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+                        if(!$response->errors){
+                            $shopifyVariants = $response->body->product->variants;
+                            $variant_id = $shopifyVariants[0]->id;
+                            $i = [
+                                'variant' => [
+                                    'price' =>$product->price,
+                                    'sku' =>  $product->sku,
+                                    'grams' => $product->weight * 1000,
+                                    'weight' => $product->weight,
+                                    'weight_unit' => 'kg',
+                                    'barcode' => $product->barcode,
+
+                                ]
+                            ];
+                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
+
+                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+
+                        }
+
+                    }
+
+                }
+
                 return redirect()->back()->with('success', 'Product Updated Successfully');
 
                 if ($type == 'variant-option-delete') {

@@ -177,7 +177,7 @@
                             </div>
                             <div action="{{route('product.update',$product->id)}}" method="post">
                                 @csrf
-                                <input type="hidden" name="type[]" value="pricing">
+                                <input type="hidden" name="type[]" value="pricing-for-variant">
                                 <div class="block-content">
                                     <div class="row">
                                         <div class="col-sm-12">
