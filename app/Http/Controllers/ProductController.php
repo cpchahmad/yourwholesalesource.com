@@ -772,7 +772,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->type);
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
