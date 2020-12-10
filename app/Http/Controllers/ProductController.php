@@ -54,14 +54,14 @@ class ProductController extends Controller
 
     public function all(Request $request)
     {
-        $productQ = Product::query();
+        $productQ = Product::with(['has_images', 'hasVariants'])->query();
         if($request->has('search')){
             $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
                 $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
             });
         }
         return view('products.all')->with([
-            'products' => $productQ->with(['has_images', 'hasVariants'])->orderBy('created_at','DESC')->paginate(20),
+            'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
             'search' =>$request->input('search')
         ]);
     }
@@ -779,6 +779,7 @@ class ProductController extends Controller
             foreach($request->type as $type) {
                 /*Product Basic Update Shopify and Database*/
                 if ($type == 'basic-info') {
+                    dump('yes', $request->title);
                     $product->title = $request->title;
                     $product->description = $request->description;
                     $product->save();
