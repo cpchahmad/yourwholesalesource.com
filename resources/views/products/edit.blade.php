@@ -586,7 +586,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12" style="margin-bottom: 10px">
                                                                             <label for="product-name">Title</label>
-                                                                            <input class="form-control" type="text" id="" name="title"
+                                                                            <input class="form-control" type="text" id="" name="tab-title"
                                                                                    value="{{$tab->title}}" placeholder=""  >
                                                                         </div>
                                                                         <div class="col-md-12">
