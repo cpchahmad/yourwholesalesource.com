@@ -23,12 +23,13 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" method="post" data-enctype="multipart/form-data">
-        @csrf
-        <div class="content edit-content" >
+    <div data-action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" data-method="post" data-enctype="multipart/form-data">
+        <div class="content edit-content" data-route="{{route('product.update', $product->id)}}">
             <div id="forms-div" class="row">
                 <div class="col-sm-8">
                     <div class="block">
+                        <form action="{{route('product.update',$product->id)}}" method="post">
+                            @csrf
                             <input type="hidden" name="type" value="basic-info">
                             <div class="block-content block-content-full">
 
@@ -51,6 +52,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+
                     </div>
                     <div class="block">
                         <div class="block-header">
@@ -81,7 +84,7 @@
                                 <hr>
                             @endif
                             <div class="row">
-                                <div class="">
+                                <form class="product-images-form " action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="type" value="existing-product-image-add">
                                     <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
@@ -92,7 +95,8 @@
                                         <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                     </div>
 
-                                </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -101,8 +105,8 @@
                             <div class="block-header">
                                 <h3 class="block-title">Pricing</h3>
                             </div>
-                            <div action="{{route('product.update',$product->id)}}" method="post">
-
+                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                @csrf
                                 <input type="hidden" name="type" value="pricing">
                                 <div class="block-content">
                                     <div class="row">
@@ -163,7 +167,7 @@
 
 
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     @endif
                     @if($product->variants == 1)
@@ -171,8 +175,8 @@
                             <div class="block-header">
                                 <h3 class="block-title">Product Weight/Quantity</h3>
                             </div>
-                            <div action="{{route('product.update',$product->id)}}" method="post">
-
+                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                @csrf
                                 <input type="hidden" name="type" value="pricing">
                                 <div class="block-content">
                                     <div class="row">
@@ -194,7 +198,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
@@ -247,7 +251,8 @@
                                     </thead>
                                     @if(count($product->hasVariants) > 0)
                                         @foreach($product->hasVariants as $index => $v)
-                                            <div action="{{route('product.update',$product->id)}}" method="post">
+                                            <form action="{{route('product.update',$product->id)}}" method="post">
+                                                @csrf
                                                 <input type="hidden" name="type" value="single-variant-update">
                                                 <input type="hidden" name="variant_id" value="{{$v->id}}">
                                                 <tbody class="js-table-sections-header">
@@ -330,7 +335,7 @@
 
                                                 </tr>
                                                 </tbody>
-                                            </div>
+                                            </form>
                                         @endforeach
                                     @endif
                                 </table>
@@ -338,12 +343,12 @@
                             <div class="form-image-src" style="display: none">
                                 @if(count($product->hasVariants) > 0)
                                     @foreach($product->hasVariants as $index => $v)
-                                        <div id="varaint_image_form_{{$index}}" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                                        <form id="varaint_image_form_{{$index}}" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="type" value="variant-image-update">
                                             <input type="hidden" name="variant_id" value="{{$v->id}}">
                                             <input type="file" name="varaint_src" class="varaint_file_input" accept="image/*">
-                                        </div>
+                                        </form>
                                     @endforeach
                                 @endif
                             </div>
@@ -386,7 +391,7 @@
                                                                     <input class="js-tags-options1-update form-control mt-3" type="text"
                                                                     id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">
 
-                                                                    <div class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
+                                                                    <form class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="type" value="old-option-update">
                                                                         <div class="variants_table" style="display: none;">
@@ -416,7 +421,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    </div>
+                                                                    </form>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="margin-top:10px ">
@@ -428,14 +433,14 @@
                                                                     <div class="col-md-3">
                                                                         <input type="text" class="form-control" readonly value="Option2">
                                                                     </div>
-                                                                    <div class="new-option-add col-md-7" action="{{route('product.update',$product->id)}}" method="post">
+                                                                    <form class="new-option-add col-md-7" action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="type" value="new-option-add">
                                                                         <div class="">
                                                                             <input type="hidden" name="option" value="option2">
                                                                             <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">
                                                                         </div>
-                                                                    </div>
+                                                                    </form>
 
                                                                     <div class="col-md-2">
                                                                         <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>
@@ -471,14 +476,14 @@
                                                                     <div class="col-md-3">
                                                                         <input type="text" class="form-control" readonly value="Option3">
                                                                     </div>
-                                                                    <div class="new-option-add col-md-7"  action="{{route('product.update',$product->id)}}" method="post">
+                                                                    <form class="new-option-add col-md-7"  action="{{route('product.update',$product->id)}}" method="post">
                                                                         @csrf
                                                                         <input type="hidden" name="type" value="new-option-add">
                                                                         <div class="">
                                                                             <input type="hidden" name="option" value="option3">
                                                                             <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">
                                                                         </div>
-                                                                    </div>
+                                                                    </form>
                                                                     <div class="col-md-2">
                                                                         <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>
                                                                     </div>
@@ -507,10 +512,10 @@
                                             </div>
                                         </div>
                                         <div class="deleted-data">
-                                            <div id="variant-options-update" action="{{route('product.update',$product->id)}}" method="post">
+                                            <form id="variant-options-update" action="{{route('product.update',$product->id)}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="type" value="variant-option-delete">
-                                            </div>
+                                            </form>
                                         </div>
 
                                         <div class="block-content block-content-full text-right border-top">
@@ -573,7 +578,7 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div action="{{route('product.update',$product->id)}}" method="post">
+                                                            <form action="{{route('product.update',$product->id)}}" method="post">
                                                                 @csrf
                                                                 <input type="hidden" name="type" value="edit-additional-tab">
                                                                 <input type="hidden" name="tab_id" value="{{$tab->id}}">
@@ -594,7 +599,7 @@
                                                                     </div>
 
                                                                 </div>
-                                                            </div>
+                                                            </form>
                                                             <div class="block-content block-content-full text-right border-top">
 
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
@@ -625,7 +630,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div action="{{route('product.update',$product->id)}}" method="post">
+                                    <form action="{{route('product.update',$product->id)}}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="add-additional-tab">
                                         <div class="block-content" style="padding: 20px !important;">
@@ -645,7 +650,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </form>
                                     <div class="block-content block-content-full text-right border-top">
 
                                         <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
@@ -688,7 +693,7 @@
                         </div>
                         <div class="block-content">
                             @if(count($product->hasVariants) == 0)
-                                <div action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">
+                                <form action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">
                                     @csrf
                                     <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
                                         <thead>
@@ -789,10 +794,10 @@
 {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
 {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
 {{--                                    </div>--}}
-                                </div>
+                                </form>
                             @endif
                             @if($product->variants == 1)
-                                <div action="{{route('product.add.tiered.price',$product->id)}}" method="post">
+                                <form action="{{route('product.add.tiered.price',$product->id)}}" method="post">
                                     @csrf
                                     <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
                                         <thead>
@@ -897,13 +902,13 @@
 {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
 {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
 {{--                                    </div>--}}
-                                </div>
+                                </form>
                             @endif
                         </div>
                     </div>
                     {{--Tiered Pricing Section End--}}
                 </div>
-                <div class="col-sm-4">
+                <form action="{{route('product.update',$product->id)}}" method="post" class="col-sm-4">
 
                     <div action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
@@ -1137,20 +1142,20 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="content" style="margin-bottom: 10px">
                 <div class="row ">
                     <div class="col-sm-12 text-right">
                         <hr>
-                        <a class="btn btn-primary text-white btn-square " type="submit">Update</a>
+                        <a class="btn btn-primary text-white btn-square submit_all">Update</a>
                         <a href="{{ route('product.edit',$product->id) }}" class="btn btn-default btn-square">Discard</a>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 
 
 
