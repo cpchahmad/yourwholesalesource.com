@@ -590,7 +590,7 @@
                                                                                    value="{{$tab->title}}" placeholder=""  >
                                                                         </div>
                                                                         <div class="col-md-12">
-                                    <textarea class="js-summernote" name="description"
+                                    <textarea class="js-summernote" name="tab-description"
                                               placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
                                                                         </div>
                                                                         <div class="col-md-12">
@@ -641,7 +641,7 @@
                                                            value=""  placeholder="" >
                                                 </div>
                                                 <div class="col-md-12">
-                                <textarea class="js-summernote" name="description"
+                                <textarea class="js-summernote" name="tab-description"
                                           placeholder="Please Enter Description here !"></textarea>
                                                 </div>
                                                 <div class="col-md-12">
