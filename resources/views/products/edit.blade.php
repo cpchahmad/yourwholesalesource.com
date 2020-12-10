@@ -618,49 +618,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="modal fade" id="add_tabs_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-popout" role="document">
-                            <div class="modal-content">
-                                <div class="block block-themed block-transparent mb-0">
-                                    <div class="block-header bg-primary-dark">
-                                        <h3 class="block-title">Add Additional Tabs</h3>
-                                        <div class="block-options">
-                                            <button type="button" class="btn-block-option">
-                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div action="{{route('product.update',$product->id)}}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="type[]" value="add-additional-tab">
-                                        <div class="block-content" style="padding: 20px !important;">
-                                            <div class="row">
-                                                <div class="col-md-12" style="margin-bottom: 10px">
-                                                    <label for="product-name">Title</label>
-                                                    <input class="form-control" type="text" id="" name="tab-title"
-                                                           value=""  placeholder="" >
-                                                </div>
-                                                <div class="col-md-12">
-                                <textarea class="js-summernote" name="tab-description"
-                                          placeholder="Please Enter Description here !"></textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <button type="button" class="btn btn-primary">Save</button>
-                                                </div>
-                                            </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="block-content block-content-full text-right border-top">
-
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                                            Discard
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     {{--Tiered Pricing Section--}}
                     <div class="block">
                         <div class="block-header d-block" style="width: 100%" >
@@ -1156,6 +1114,50 @@
             </div>
         </div>
     </form>
+
+    <div class="modal fade" id="add_tabs_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-popout" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">Add Additional Tabs</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div action="{{route('product.update',$product->id)}}" method="post">
+                        @csrf
+                        <input type="hidden" name="type[]" value="add-additional-tab">
+                        <div class="block-content" style="padding: 20px !important;">
+                            <div class="row">
+                                <div class="col-md-12" style="margin-bottom: 10px">
+                                    <label for="product-name">Title</label>
+                                    <input class="form-control" type="text" id="" name="tab-title"
+                                           value=""  placeholder="" >
+                                </div>
+                                <div class="col-md-12">
+                                <textarea class="js-summernote" name="tab-description"
+                                          placeholder="Please Enter Description here !"></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                            Discard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
