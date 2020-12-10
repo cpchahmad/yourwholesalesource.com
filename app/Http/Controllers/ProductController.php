@@ -1076,7 +1076,18 @@ class ProductController extends Controller
                     }
 
                     $this->product_status_change($request, $product, $shop);
+                }
 
+                if ($type == 'shop-preferences'){
+                    $product->global = $request->input('global');
+                    $product->save();
+                    if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
+                        $product->has_preferences()->sync($request->input('shops'));
+                    }
+                    if($request->input('global') == 0 && $request->has('non_shopify_users') && count($request->input('non_shopify_users')) > 0){
+                        $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
+                    }
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
 
                 }
 
@@ -1389,18 +1400,7 @@ class ProductController extends Controller
 //
 
 //
-//                if ($type == 'shop-preferences'){
-//                    $product->global = $request->input('global');
-//                    $product->save();
-//                    if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
-//                        $product->has_preferences()->sync($request->input('shops'));
-//                    }
-//                    if($request->input('global') == 0 && $request->has('non_shopify_users') && count($request->input('non_shopify_users')) > 0){
-//                        $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
-//                    }
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
-//
-//                }
+
             }
         }
 
