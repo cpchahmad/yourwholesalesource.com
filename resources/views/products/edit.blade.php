@@ -38,7 +38,7 @@
                                     <div class="col-xs-12">
                                         <label for="product-name">Title</label>
                                         <input class="form-control" type="text" id="product-name" name="title"
-                                               value="{{$product->title}}"  placeholder="Short Sleeve Shirt" >
+                                               value="{{$product->title}}"  placeholder="Short Sleeve Shirt" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -93,7 +93,7 @@
                                             <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
                                             <div class="row preview-drop"></div>
                                         </div>
-                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
+                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
                                     </div>
 
 
@@ -116,7 +116,7 @@
                                                 <div class="col-md-6 push-10">
                                                     <label>Price</label>
                                                     <input type="text" class="form-control" name="price"
-                                                           value="{{$product->price}}"  placeholder="$ 0.00" >
+                                                           value="{{$product->price}}"  placeholder="$ 0.00" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Cost Per Item</label>
@@ -133,7 +133,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
                                                     <label>SKU</label>
-                                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}" >
+                                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,7 +185,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <label>Price</label>
-                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
+                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" required>
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <label>Weight</label>
@@ -193,7 +193,7 @@
                                                 </div>
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -520,7 +520,7 @@
                                         </div>
 
                                         <div class="block-content block-content-full text-right border-top">
-                                            <button data-option1="" data-option2="" data-option3="" data-deleted="0" class="variant-options-update-save btn btn-primary">Save</button>
+                                            <button type="button" data-option1="" data-option2="" data-option3="" data-deleted="0" class="variant-options-update-save btn btn-primary">Save</button>
                                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
                                                 Discard
                                             </button>
@@ -561,8 +561,8 @@
                                             <div class="tab-pane @if($index == 0) active @endif" role="tabpanel" id="tab{{$index}}">
                                                 <div class="row">
                                                     <div class="col-md-12 text-right">
-                                                        <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_tabs_modal{{$index}}"> Edit Tab</button>
-                                                        <button class="btn btn-sm btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>
+                                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_tabs_modal{{$index}}"> Edit Tab</button>
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>
                                                     </div>
                                                 </div>
                                                 <p>{!! $tab->description !!}</p>
@@ -588,14 +588,14 @@
                                                                         <div class="col-md-12" style="margin-bottom: 10px">
                                                                             <label for="product-name">Title</label>
                                                                             <input class="form-control" type="text" id="" name="title"
-                                                                                   value="{{$tab->title}}" placeholder=""  >
+                                                                                   value="{{$tab->title}}" placeholder=""  required>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                    <textarea class="js-summernote" name="description"
+                                    <textarea class="js-summernote" name="description" required
                                               placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                                                            <button class="btn btn-primary">Save</button>
+                                                                            <button type="button" class="btn btn-primary">Save</button>
                                                                         </div>
                                                                     </div>
 
@@ -639,14 +639,14 @@
                                                 <div class="col-md-12" style="margin-bottom: 10px">
                                                     <label for="product-name">Title</label>
                                                     <input class="form-control" type="text" id="" name="title"
-                                                           value=""  placeholder="" >
+                                                           value=""  placeholder="" required>
                                                 </div>
                                                 <div class="col-md-12">
-                                <textarea class="js-summernote" name="description"
+                                <textarea class="js-summernote" name="description" required
                                           placeholder="Please Enter Description here !"></textarea>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <button class="btn btn-primary">Save</button>
+                                                    <button type="button" class="btn btn-primary">Save</button>
                                                 </div>
                                             </div>
 
@@ -923,11 +923,11 @@
                             <div class="block-content" >
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio"  class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
+                                        <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
                                         <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
-                                        <input type="radio"  class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
+                                        <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
                                         <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
                                     </div>
                                 </div>
@@ -1026,14 +1026,14 @@
                                     <div class="col-xs-12 push-10">
                                         <label>Product Type</label>
                                         <input type="text" class="form-control" name="product_type"
-                                               value="{{$product->type}}"  placeholder="eg. Shirts" >
+                                               value="{{$product->type}}"  placeholder="eg. Shirts" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
                                         <label>Vendor</label>
                                         <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
-                                               value="{{$product->vendor}}"   >
+                                               value="{{$product->vendor}}"   required>
                                     </div>
                                 </div>
                                 <hr>
@@ -1043,7 +1043,7 @@
                                             <h5>Tags</h5>
                                             <br>
                                             <input class="js-tags-input form-control" type="text"
-                                                   value="{{$product->tags}}"    id="product-meta-keywords" name="tags" >
+                                                   value="{{$product->tags}}"    id="product-meta-keywords" name="tags" required>
                                         </div>
                                     </div>
                                 </div>
