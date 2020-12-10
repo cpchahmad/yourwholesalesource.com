@@ -392,11 +392,11 @@ $(document).ready(function () {
                     $(this).submit();
                 }
                 else{
-                    // forms.push({
-                    //     'data' : $(this).serialize(),
-                    //     'url' : $(this).attr('action'),
-                    //     'method' : $(this).attr('method'),
-                    // });
+                    forms.push({
+                        'data' : $(this).serialize(),
+                        'url' : $(this).attr('action'),
+                        'method' : $(this).attr('method'),
+                    });
                 }
 
             });
@@ -433,11 +433,11 @@ $(document).ready(function () {
             });
 
         } else {
-            $.ajax({
-                url: $('#notification').data('route'),
-                type:'GET',
-            });
-             window.location.reload();
+            // $.ajax({
+            //     url: $('#notification').data('route'),
+            //     type:'GET',
+            // });
+            //  window.location.reload();
         }
     }
     /*Admin Module - Variant Image Change JS*/
