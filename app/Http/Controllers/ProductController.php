@@ -936,28 +936,31 @@ class ProductController extends Controller
                     }
                 }
 
-//                else if ($type == 'add-additional-tab'){
-////                    dd($request);
-//                    $additional_tab = new AdditionalTab();
-//                    $additional_tab->title = $request->input('tab-title');
-//                    $additional_tab->description = $request->input('tab-description');
-//                    $additional_tab->product_id = $product->id;
-//                    $additional_tab->save();
-//
-//                    $productdata = [
-//                        "metafield" => [
-//                            "key" => $additional_tab->title,
-//                            "value"=> $additional_tab->description,
-//                            "value_type"=> "string",
-//                            "namespace"=> "tabs"
-//                        ]
-//                    ];
-//                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
-//                    $additional_tab->shopify_id = $resp->body->metafield->id;
-//                    $additional_tab->save();
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
-//
-//                }
+                else if ($type == 'add-additional-tab'){
+//                    dd($request);
+                    $additional_tab = new AdditionalTab();
+                    $additional_tab->title = $request->input('tab-title');
+                    $additional_tab->description = $request->input('tab-description');
+                    $additional_tab->product_id = $product->id;
+                    $additional_tab->save();
+
+                    $productdata = [
+                        "metafield" => [
+                            "key" => $additional_tab->title,
+                            "value"=> $additional_tab->description,
+                            "value_type"=> "string",
+                            "namespace"=> "tabs"
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
+                    if($resp->errors){
+                        dd($resp);
+                    }
+                    $additional_tab->shopify_id = $resp->body->metafield->id;
+                    $additional_tab->save();
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
+
+                }
 
 //                return redirect()->back()->with('success', 'Product Updated Successfully');
 
