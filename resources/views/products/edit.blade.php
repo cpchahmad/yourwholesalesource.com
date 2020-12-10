@@ -908,9 +908,9 @@
                     </div>
                     {{--Tiered Pricing Section End--}}
                 </div>
-                <form action="{{route('product.update',$product->id)}}" method="post" class="col-sm-4">
+                <div class="col-sm-4">
 
-                    <div action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
                     <div class="block">
                         <div class="block-header">
@@ -952,7 +952,7 @@
 
                         </div>
                     </div>
-                    </div>
+                    </form>
 
                     <div class="block">
                         <div class="block-header">
@@ -960,7 +960,7 @@
                                 Marketing Video
                             </div>
                         </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
+                        <form action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="type" value="marketing_video_update">
                             <div class="block-content pt-0" >
@@ -968,7 +968,7 @@
                                     <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
                                 </div>
                             </div>
-                        </div>
+                        </form>
 
                     </div>
                     <div class="block">
@@ -977,7 +977,7 @@
                                 Product Category
                             </div>
                         </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
+                        <form action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="type" value="category">
                             <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">
@@ -1008,7 +1008,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <div class="block-footer" style="height: 15px">
 
                         </div>
@@ -1017,7 +1017,7 @@
                         <div class="block-header">
                             <h3 class="block-title">Organization</h3>
                         </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
+                        <form action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="type" value="organization">
                             <div class="block-content">
@@ -1047,13 +1047,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="block">
                         <div class="block-header">
                             <h3 class="block-title">More Details</h3>
                         </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
+                        <form action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="type" value="more-details">
                             <div class="block-content">
@@ -1094,13 +1094,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="block">
                         <div class="block-header">
                             <h3 class="block-title">Preferences</h3>
                         </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
+                        <form action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="type" value="shop-preferences">
                             <div class="block-content">
@@ -1140,9 +1140,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
 
             <div class="content" style="margin-bottom: 10px">
