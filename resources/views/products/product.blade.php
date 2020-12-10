@@ -44,7 +44,7 @@
                         <div class="row js-gallery" >
                             <?php
                             if(count($product->has_images) > 0){
-                                $images = DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->get();
+                                $images = DB::table('images')->where('product_id', $product->id)->orderByRaw("CAST(position as UNSIGNED) ASC")->cursor();
                             }
                             else{
                                 $images = [];

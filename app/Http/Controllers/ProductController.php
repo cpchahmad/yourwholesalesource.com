@@ -68,7 +68,7 @@ class ProductController extends Controller
 
     public function view($id)
     {
-        $product = Product::find($id);
+        $product = Product::with(['has_images', 'hasVariants','has_platform','has_categories','has_subcategories'])->find($id);
         return view('products.product')->with([
             'product' => $product
         ]);
@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function Edit($id)
     {
         $categories = Category::latest()->get();
-        $product = Product::with(['has_images', 'hasVariants'])->find($id);
+        $product = Product::with(['has_images', 'hasVariants','has_platform','has_categories','has_subcategories'])->find($id);
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
 
