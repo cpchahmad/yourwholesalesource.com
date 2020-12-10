@@ -54,14 +54,14 @@ class ProductController extends Controller
 
     public function all(Request $request)
     {
-        $productQ = Product::with(['has_images', 'hasVariants'])->query();
+        $productQ = Product::query();
         if($request->has('search')){
             $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
                 $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
             });
         }
         return view('products.all')->with([
-            'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
+            'products' => $productQ->with(['has_images', 'hasVariants'])->orderBy('created_at','DESC')->paginate(20),
             'search' =>$request->input('search')
         ]);
     }
