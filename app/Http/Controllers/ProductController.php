@@ -984,6 +984,13 @@ class ProductController extends Controller
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
                 }
 
+                if ($type == 'fulfilled') {
+                    $product->fulfilled_by = $request->input('fulfilled-by');
+                    $product->sortBy = $request->input('sortBy');
+                    $product->save();
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
+                }
+
 //                return redirect()->back()->with('success', 'Product Updated Successfully');
 
 //                if ($type == 'variant-option-delete') {
