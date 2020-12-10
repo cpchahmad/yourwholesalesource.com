@@ -898,19 +898,20 @@ class ProductController extends Controller
                         $variant->option2 = $request->input('option2-'.$id);
                         $variant->option3 = $request->input('option3-'.$id);
                         $variant->price = $request->input('single-var-price-'.$id);
+                        $variant->cost = $request->input('single-var-cost-'.$id);
                         //$variant->compare_price = $request->input('compare_price');
                         $variant->quantity = $request->input('single-var-quantity-'.$id);
                         $variant->sku = $request->input('single-var-sku-'.$id);
                         $variant->barcode = $request->input('single-var-barcode-'.$id);
 
-                        if($request->input('single-var-cost-'.$id) == null) {
-                            $variant->cost = null;
-                        }
-                        else {
-                            $res = str_ireplace( array( '$', '"',
-                                ',' , ';', '<', '>' ), ' ', $request->input('single-var-cost-').$id);
-                            $variant->cost = trim($res);
-                        }
+//                        if($request->input('single-var-cost-'.$id) == null) {
+//                            $variant->cost = null;
+//                        }
+//                        else {
+//                            $res = str_ireplace( array( '$', '"',
+//                                ',' , ';', '<', '>' ), ' ', $request->input('single-var-cost-').$id);
+//                            $variant->cost = trim($res);
+//                        }
 
                         $variant->product_id = $product->id;
                         $variant->save();
