@@ -23,14 +23,13 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" method="post" data-enctype="multipart/form-data">
+    <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" method="POST" data-enctype="multipart/form-data">
         @csrf
-        <div class="content edit-content" data-route="{{route('product.update', $product->id)}}">
+        <div class="content">
             <div id="forms-div" class="row">
                 <div class="col-sm-8">
                     <div class="block">
-                        <div action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
+                        <div>
                             <input type="hidden" name="type[]" value="basic-info">
                             <div class="block-content block-content-full">
 
@@ -638,7 +637,7 @@
                                             <div class="row">
                                                 <div class="col-md-12" style="margin-bottom: 10px">
                                                     <label for="product-name">Title</label>
-                                                    <input class="form-control" type="text" id="" name="title"
+                                                    <input class="form-control" type="text" id="" name="tab-title"
                                                            value=""  placeholder="" >
                                                 </div>
                                                 <div class="col-md-12">
