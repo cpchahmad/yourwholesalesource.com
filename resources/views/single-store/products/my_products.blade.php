@@ -80,7 +80,7 @@
                                             <div class="options-container">
                                                 <a href="{{route('store.my_product.wefulfill.show',$product->id)}}">
                                                     @if(count($product->has_images) > 0)
-                                                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                        @foreach($product->has_images()->orderBy('position')->cursor() as $index => $image)
                                                             @if($index == 0)
                                                                 @if($product->import_from_shopify == 1)
                                                                     <img class="img-fluid options-item" src="{{$image->image}}">
