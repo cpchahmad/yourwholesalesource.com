@@ -991,6 +991,41 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
                 }
 
+                if($type == 'marketing_video_update'){
+                    $product->marketing_video = $request->input('marketing_video');
+                    $product->save();
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Marketing Video Updated');
+                }
+
+                if ($type == 'category') {
+                    if ($request->category) {
+                        $product->has_categories()->sync($request->category);
+                    }
+                    if ($request->sub_cat) {
+                        $product->has_subcategories()->sync($request->sub_cat);
+                    }
+                    $product->save();
+
+                    $tags = $product->tags;
+                    if(count($product->has_categories) > 0){
+                        $categories = implode(',',$product->has_categories->pluck('title')->toArray());
+                        $tags = $tags.','.$categories;
+                    }
+                    if(count($product->has_subcategories) > 0){
+                        $subcategories = implode(',',$product->has_subcategories->pluck('title')->toArray());
+                        $tags = $tags.','.$subcategories;
+                    }
+                    $productdata = [
+                        "product" => [
+                            "tags" => $tags,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Category Updated');
+
+                }
+
 //                return redirect()->back()->with('success', 'Product Updated Successfully');
 
 //                if ($type == 'variant-option-delete') {
@@ -1235,34 +1270,7 @@ class ProductController extends Controller
 //
 //                }
 //
-//                if ($type == 'category') {
-//                    if ($request->category) {
-//                        $product->has_categories()->sync($request->category);
-//                    }
-//                    if ($request->sub_cat) {
-//                        $product->has_subcategories()->sync($request->sub_cat);
-//                    }
-//                    $product->save();
-//
-//                    $tags = $product->tags;
-//                    if(count($product->has_categories) > 0){
-//                        $categories = implode(',',$product->has_categories->pluck('title')->toArray());
-//                        $tags = $tags.','.$categories;
-//                    }
-//                    if(count($product->has_subcategories) > 0){
-//                        $subcategories = implode(',',$product->has_subcategories->pluck('title')->toArray());
-//                        $tags = $tags.','.$subcategories;
-//                    }
-//                    $productdata = [
-//                        "product" => [
-//                            "tags" => $tags,
-//                        ]
-//                    ];
-//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-//
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Category Updated');
-//
-//                }
+
 //
 //                if ($type == 'organization') {
 //                    $product->type = $request->product_type;
