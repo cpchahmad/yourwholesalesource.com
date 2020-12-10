@@ -61,7 +61,7 @@ class ProductController extends Controller
             });
         }
         return view('products.all')->with([
-            'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
+            'products' => $productQ->with(['has_images', 'hasVariants'])->orderBy('created_at','DESC')->paginate(20),
             'search' =>$request->input('search')
         ]);
     }
