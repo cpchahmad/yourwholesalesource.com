@@ -254,7 +254,7 @@
                                             <div action="{{route('product.update',$product->id)}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="type[]" value="single-variant-update">
-                                                <input type="hidden" name="variant_id" value="{{$v->id}}">
+                                                <input type="hidden" name="variant_id[]" value="{{$v->id}}">
                                                 <tbody class="js-table-sections-header">
                                                 <tr>
                                                     <td class="variant_title">
@@ -300,13 +300,13 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control var-price-row" name="var-price" placeholder="$0.00" value="{{$v->price}}">
+                                                        <input type="text" class="form-control var-price-row" name="single-var-price" placeholder="$0.00" value="{{$v->price}}">
                                                     </td>
 
-                                                    <td><input type="text" class="form-control var-cost-row" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
-                                                    <td><input type="text" class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
-                                                    <td><input type="text" class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                    <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
+                                                    <td><input type="text" class="form-control var-cost-row" name="single-var-cost" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                    <td><input type="text" class="form-control" value="{{$v->quantity}}" name="single-var-quantity" placeholder="0"></td>
+                                                    <td><input type="text" class="form-control" name="single-var-sku" value="{{$v->sku}}"></td>
+                                                    <td><input type="text" class="form-control" name="single-var-barcode" value="{{$v->barcode}}" placeholder="">
                                                     </td>
 
                                                 </tr>
