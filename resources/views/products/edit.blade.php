@@ -38,7 +38,7 @@
                                     <div class="col-xs-12">
                                         <label for="product-name">Title</label>
                                         <input class="form-control" type="text" id="product-name" name="title"
-                                               value="{{$product->title}}"  placeholder="Short Sleeve Shirt" required>
+                                               value="{{$product->title}}"  placeholder="Short Sleeve Shirt" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -93,7 +93,7 @@
                                             <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
                                             <div class="row preview-drop"></div>
                                         </div>
-                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple required>
+                                        <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
                                     </div>
 
 
@@ -116,7 +116,7 @@
                                                 <div class="col-md-6 push-10">
                                                     <label>Price</label>
                                                     <input type="text" class="form-control" name="price"
-                                                           value="{{$product->price}}"  placeholder="$ 0.00" required>
+                                                           value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Cost Per Item</label>
@@ -133,7 +133,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
                                                     <label>SKU</label>
-                                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}" required>
+                                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}" >
                                                 </div>
                                             </div>
                                         </div>
@@ -185,7 +185,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <label>Price</label>
-                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" required>
+                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <label>Weight</label>
@@ -193,7 +193,7 @@
                                                 </div>
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" required>
+                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
                                                 </div>
                                             </div>
                                         </div>
@@ -588,10 +588,10 @@
                                                                         <div class="col-md-12" style="margin-bottom: 10px">
                                                                             <label for="product-name">Title</label>
                                                                             <input class="form-control" type="text" id="" name="title"
-                                                                                   value="{{$tab->title}}" placeholder=""  required>
+                                                                                   value="{{$tab->title}}" placeholder=""  >
                                                                         </div>
                                                                         <div class="col-md-12">
-                                    <textarea class="js-summernote" name="description" required
+                                    <textarea class="js-summernote" name="description"
                                               placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
                                                                         </div>
                                                                         <div class="col-md-12">
@@ -639,10 +639,10 @@
                                                 <div class="col-md-12" style="margin-bottom: 10px">
                                                     <label for="product-name">Title</label>
                                                     <input class="form-control" type="text" id="" name="title"
-                                                           value=""  placeholder="" required>
+                                                           value=""  placeholder="" >
                                                 </div>
                                                 <div class="col-md-12">
-                                <textarea class="js-summernote" name="description" required
+                                <textarea class="js-summernote" name="description"
                                           placeholder="Please Enter Description here !"></textarea>
                                                 </div>
                                                 <div class="col-md-12">
@@ -1026,14 +1026,14 @@
                                     <div class="col-xs-12 push-10">
                                         <label>Product Type</label>
                                         <input type="text" class="form-control" name="product_type"
-                                               value="{{$product->type}}"  placeholder="eg. Shirts" required>
+                                               value="{{$product->type}}"  placeholder="eg. Shirts" >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
                                         <label>Vendor</label>
                                         <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
-                                               value="{{$product->vendor}}"   required>
+                                               value="{{$product->vendor}}"   >
                                     </div>
                                 </div>
                                 <hr>
@@ -1043,7 +1043,7 @@
                                             <h5>Tags</h5>
                                             <br>
                                             <input class="js-tags-input form-control" type="text"
-                                                   value="{{$product->tags}}"    id="product-meta-keywords" name="tags" required>
+                                                   value="{{$product->tags}}"    id="product-meta-keywords" name="tags" >
                                         </div>
                                     </div>
                                 </div>
