@@ -1042,6 +1042,44 @@ class ProductController extends Controller
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Vendor Updated');
                 }
 
+                if ($type == 'more-details') {
+                    if($request->input('processing_time') != null){
+                        $product->processing_time = $request->input('processing_time');
+                    }
+                    if ($request->platforms) {
+                        $product->has_platforms()->sync($request->platforms);
+                    }
+                    $product->save();
+                    $metafields = [];
+
+                    $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json');
+                    if(count($resp->body->metafields) > 0){
+                        foreach ($resp->body->metafields as $m){
+                            if($m->namespace == 'platform'){
+                                $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
+                            }
+                        }
+                    }
+                    foreach ($product->has_platforms as $index => $platform){
+                        $index = $index+1;
+                        $productdata = [
+                            "metafield" => [
+                                "key" => "warned_platform".$index,
+                                "value"=> $platform->name,
+                                "value_type"=> "string",
+                                "namespace"=> "platform"
+                            ]
+                        ];
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
+
+                        $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
+                    }
+
+                    $this->product_status_change($request, $product, $shop);
+
+
+                }
+
 //                return redirect()->back()->with('success', 'Product Updated Successfully');
 
 //                if ($type == 'variant-option-delete') {
@@ -1290,50 +1328,8 @@ class ProductController extends Controller
 //
 
 //
-//                if ($type == 'more-details') {
-//                    if($request->input('processing_time') != null){
-//                        $product->processing_time = $request->input('processing_time');
-//                    }
-//                    if ($request->platforms) {
-//                        $product->has_platforms()->sync($request->platforms);
-//                    }
-//                    $product->save();
-//                    $metafields = [];
-//
-//                    $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json');
-//                    if(count($resp->body->metafields) > 0){
-//                        foreach ($resp->body->metafields as $m){
-//                            if($m->namespace == 'platform'){
-//                                $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
-//                            }
-//                        }
-//                    }
-//                    foreach ($product->has_platforms as $index => $platform){
-//                        $index = $index+1;
-//                        $productdata = [
-//                            "metafield" => [
-//                                "key" => "warned_platform".$index,
-//                                "value"=> $platform->name,
-//                                "value_type"=> "string",
-//                                "namespace"=> "platform"
-//                            ]
-//                        ];
-//                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
-//
-//                        $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
-//                    }
-//
-//                    $this->product_status_change($request, $product, $shop);
-//
-//
-//                }
-//
-//                if($type == 'marketing_video_update'){
-//                    $product->marketing_video = $request->input('marketing_video');
-//                    $product->save();
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Marketing Video Updated');
-//
-//                }
+
+
 //
 //                if($type == 'status_update'){
 //                    $this->product_status_change($request, $product, $shop);
@@ -1391,50 +1387,7 @@ class ProductController extends Controller
 //
 //
 //
-//                if ($type == 'add-additional-tab'){
-////                    dd($request);
-//                    $additional_tab = new AdditionalTab();
-//                    $additional_tab->title = $request->input('title');
-//                    $additional_tab->description = $request->input('description');
-//                    $additional_tab->product_id = $product->id;
-//                    $additional_tab->save();
-//
-//                    $productdata = [
-//                        "metafield" => [
-//                            "key" => $additional_tab->title,
-//                            "value"=> $additional_tab->description,
-//                            "value_type"=> "string",
-//                            "namespace"=> "tabs"
-//                        ]
-//                    ];
-//                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
-//                    $additional_tab->shopify_id = $resp->body->metafield->id;
-//                    $additional_tab->save();
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
-//
-//                }
-//
-//                if ($type == 'edit-additional-tab'){
-////                    dd($request);
-//                    $additional_tab = AdditionalTab::find($request->input('tab_id'));
-//                    $additional_tab->title = $request->input('title');
-//                    $additional_tab->description = $request->input('description');
-//                    $additional_tab->product_id = $product->id;
-//                    $additional_tab->save();
-//
-//                    $productdata = [
-//                        "metafield" => [
-//                            "key" => $additional_tab->title,
-//                            "value"=> $additional_tab->description,
-//                            "value_type"=> "string",
-//                            "namespace"=> "tabs"
-//                        ]
-//                    ];
-//
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
-//
-//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
-//                }
+
 //
 //                if ($type == 'shop-preferences'){
 //                    $product->global = $request->input('global');
