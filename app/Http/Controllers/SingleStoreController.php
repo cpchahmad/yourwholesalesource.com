@@ -177,7 +177,7 @@ class SingleStoreController extends Controller
 
         $country = $this->ip_info($this->getRealIpAddr(), 'Country');
         $categories = Category::all();
-        $productQuery = Product::where('status', 1)->newQuery();
+        $productQuery = Product::with('has_images', 'hasVariants','has_platforms','has_categories','has_subcategories')->where('status', 1)->newQuery();
 
         $productQuery->where('global', 0)->whereHas('has_preferences', function ($q) {
             return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
@@ -240,7 +240,7 @@ class SingleStoreController extends Controller
                 $products = $productQuery->orderBy('created_at', 'DESC')->paginate(12);
             }
         } else {
-            $products = $productQuery->orderBy('updated_at', 'DESC')->paginate(12);
+            $products = $productQuery->latest()->paginate(12);
         }
 
 
