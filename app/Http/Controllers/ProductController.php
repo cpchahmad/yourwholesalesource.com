@@ -772,6 +772,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -817,6 +818,43 @@ class ProductController extends Controller
                     }
                     $product->save();
                     $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
+
+                }
+
+                if ($type == 'pricing') {
+                    $product->price = $request->price;
+                    $product->compare_price = $request->compare_price;
+                    $product->cost = $request->cost;
+                    $product->quantity = $request->quantity;
+                    $product->weight = $request->weight;
+                    $product->sku = $request->sku;
+                    $product->barcode = $request->barcode;
+                    $product->save();
+
+                    if (count($product->hasVariants) == 0) {
+                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+                        if(!$response->errors){
+                            $shopifyVariants = $response->body->product->variants;
+                            $variant_id = $shopifyVariants[0]->id;
+                            $i = [
+                                'variant' => [
+                                    'price' =>$product->price,
+                                    'sku' =>  $product->sku,
+                                    'grams' => $product->weight * 1000,
+                                    'weight' => $product->weight,
+                                    'weight_unit' => 'kg',
+                                    'barcode' => $product->barcode,
+
+                                ]
+                            ];
+                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
+
+                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+
+                        }
+
+                    }
 
                 }
 
@@ -1099,43 +1137,8 @@ class ProductController extends Controller
 
                 }
 
-                /*Pricing Update*/
-                if ($type == 'pricing') {
-                    $product->price = $request->price;
-                    $product->compare_price = $request->compare_price;
-                    $product->cost = $request->cost;
-                    $product->quantity = $request->quantity;
-                    $product->weight = $request->weight;
-                    $product->sku = $request->sku;
-                    $product->barcode = $request->barcode;
-                    $product->save();
 
-                    if (count($product->hasVariants) == 0) {
-                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-                        if(!$response->errors){
-                            $shopifyVariants = $response->body->product->variants;
-                            $variant_id = $shopifyVariants[0]->id;
-                            $i = [
-                                'variant' => [
-                                    'price' =>$product->price,
-                                    'sku' =>  $product->sku,
-                                    'grams' => $product->weight * 1000,
-                                    'weight' => $product->weight,
-                                    'weight_unit' => 'kg',
-                                    'barcode' => $product->barcode,
 
-                                ]
-                            ];
-                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
-
-                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-
-                        }
-
-                    }
-
-                }
 
                 if ($type == 'fulfilled') {
                     $product->fulfilled_by = $request->input('fulfilled-by');

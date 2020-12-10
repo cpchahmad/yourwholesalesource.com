@@ -300,7 +300,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control var-price-row" name="price" placeholder="$0.00" value="{{$v->price}}">
+                                                        <input type="text" class="form-control var-price-row" name="var-price" placeholder="$0.00" value="{{$v->price}}">
                                                     </td>
 
                                                     <td><input type="text" class="form-control var-cost-row" name="cost" value="{{$v->cost}}" placeholder="$0.00"></td>
@@ -383,7 +383,7 @@
                                                                     <hr>
 
                                                                     <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
-                                                                    <input type="text" name="price" value="{{$product->price}}" style="display: none">
+                                                                    <input type="text" name="prod-price" value="{{$product->price}}" style="display: none">
                                                                     <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
                                                                     <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
 
