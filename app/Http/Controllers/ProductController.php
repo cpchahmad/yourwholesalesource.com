@@ -772,17 +772,13 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
-
             foreach($request->type as $type) {
 
                 /*Product Basic Update Shopify and Database*/
                 if ($type == 'basic-info') {
-
-                    dd('yes', $request->title);
                     $product->title = $request->title;
                     $product->description = $request->description;
                     $product->save();
