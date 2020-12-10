@@ -86,6 +86,7 @@ class ProductController extends Controller
     {
         $categories = Category::latest()->get();
         $product = Product::find($id);
+        $product = $product->with(['has_images', 'hasVariants']);
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
 
