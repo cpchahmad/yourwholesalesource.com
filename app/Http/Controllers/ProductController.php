@@ -781,7 +781,6 @@ class ProductController extends Controller
 
                 if ($type == 'basic-info') {
 
-                    dd('yes');
                     dump('yes', $request->title);
                     $product->title = $request->title;
                     $product->description = $request->description;
