@@ -909,7 +909,9 @@
                     {{--Tiered Pricing Section End--}}
                 </div>
                 <div class="col-sm-4">
-                    <form action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="{{route('product.update',$product->id)}}" method="post" >
+                        @csrf
+                        <input type="hidden" name="type" value="fulfilled-marketing_video_update-category-organization-more-details-shop-preferences">
                         <div>
                             <div class="block">
                                 <div class="block-header">
@@ -917,7 +919,7 @@
                                         Mark as Fulfilled
                                     </div>
                                 </div>
-                                    <input type="hidden" name="type" value="fulfilled">
+    {{--                                <input type="hidden" name="type" value="fulfilled">--}}
                                     <div class="block-content" >
                                         <div class="form-group">
                                             <div class="custom-control custom-radio mb-1">
@@ -932,25 +934,25 @@
                                     </div>
                             </div>
                             <div class="block">
-                            <div class="block-header">
-                                <div class="block-title">
-                                    Sort By
-                                </div>
-                            </div>
-                            <div class="block-content pt-0" >
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
-                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
-                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                <div class="block-header">
+                                    <div class="block-title">
+                                        Sort By
                                     </div>
                                 </div>
+                                <div class="block-content pt-0" >
+                                    <div class="form-group">
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
+                                            <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
+                                            <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                        </div>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
                         </div>
 
                         <div class="block">
@@ -961,7 +963,7 @@
                             </div>
                             <div>
 
-                                <input type="hidden" name="type" value="marketing_video_update">
+{{--                                <input type="hidden" name="type" value="marketing_video_update">--}}
                                 <div class="block-content pt-0" >
                                     <div class="form-group">
                                         <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
@@ -977,7 +979,7 @@
                                 </div>
                             </div>
                             <div>
-                                <input type="hidden" name="type" value="category">
+{{--                                <input type="hidden" name="type" value="category">--}}
                                 <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">
                                     <div class="form-group product_category">
                                         @foreach($categories as $category)
@@ -1017,7 +1019,7 @@
                             </div>
                             <div>
 
-                                <input type="hidden" name="type" value="organization">
+{{--                                <input type="hidden" name="type" value="organization">--}}
                                 <div class="block-content">
                                     <div class="form-group">
                                         <div class="col-xs-12 push-10">
@@ -1053,7 +1055,7 @@
                             </div>
                             <div>
 
-                                <input type="hidden" name="type" value="more-details">
+{{--                                <input type="hidden" name="type" value="more-details">--}}
                                 <div class="block-content">
                                     <div class="form-group">
                                         <div class="col-xs-12 push-10">
@@ -1100,7 +1102,7 @@
                             </div>
                             <div>
 
-                                <input type="hidden" name="type" value="shop-preferences">
+{{--                                <input type="hidden" name="type" value="shop-preferences">--}}
                                 <div class="block-content">
                                     <div class="form-group">
                                         <div class="custom-control custom-radio mb-1">
