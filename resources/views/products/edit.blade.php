@@ -1147,7 +1147,7 @@
 
 
     <div class="modal fade" id="add_product_images" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
+        <div class="modal-dialog modal-dialog-popout modal-lg" role="document">
             <div class="modal-content">
                 <div class="block block-themed block-transparent mb-0">
                     <div class="block-header bg-primary-dark">
@@ -1168,7 +1168,7 @@
                                 </div>
                                 <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
                             </div>
-                            <button type="submit" class="btn btn-default">
+                            <button type="button" class="btn btn-default save-img">
                                 Save
                             </button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">

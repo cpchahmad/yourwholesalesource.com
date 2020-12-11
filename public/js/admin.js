@@ -370,6 +370,12 @@ $(document).ready(function () {
     });
 
     /*Admin Module - Product Images Save JS*/
+    $('body').on('click', '.save-img', function() {
+        console.log(324);
+        $('.product-images-form').submit();
+    });
+
+
     $('body').on('submit','.product-images-form',function (e) {
         e.preventDefault();
         var formData = new FormData(this);
