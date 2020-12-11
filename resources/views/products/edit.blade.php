@@ -724,7 +724,7 @@
                                         </thead>
                                             <tbody>
                                                 <tr>
-                                                    <input type="hidden" name="type[]" value="tiered-pricing">
+                                                    <input type="hidden" name="type[]" value="single-variant-tiered-pricing">
 
                                                     <td class="variant_title">
                                                         {{ $product->title }}
