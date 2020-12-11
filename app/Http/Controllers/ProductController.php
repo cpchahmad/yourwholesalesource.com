@@ -772,7 +772,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -794,7 +793,6 @@ class ProductController extends Controller
                 }
 
                 else if ($type == 'existing-product-image-add') {
-                    dd($request->hasFile('images'));
                     if ($request->hasFile('images')) {
                         foreach ($request->file('images') as $index => $image) {
                             $destinationPath = 'images/';
