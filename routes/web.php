@@ -384,7 +384,7 @@ Route::get('/test', function() {
     return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
 });
 
-Route::get('/grid', 'AdminMaintainerController@sendGrid');
+Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
 
 //Route::get('/test', 'OrderController@manuallyGetOrders');
 //Route::get('/test2', 'WishlistController@test');
