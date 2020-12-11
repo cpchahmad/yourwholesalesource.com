@@ -345,5 +345,30 @@ class AdminMaintainerController extends Controller
     }
 
 
+    public function sendGrid() {
+        $request = new \HttpRequest();
+        $request->setUrl('https://api.sendgrid.com/v3/marketing/lists');
+        $request->setMethod(HTTP_METH_GET);
+
+        $request->setQueryData(array(
+            'page_size' => '100'
+        ));
+
+        $request->setHeaders(array(
+            'authorization' => 'Bearer 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'
+        ));
+
+        $request->setBody('{}');
+
+        try {
+            $response = $request->send();
+
+            echo $response->getBody();
+        } catch (HttpException $ex) {
+            echo $ex;
+        }
+    }
+
+
 
 }
