@@ -85,17 +85,16 @@ class RegisterController extends Controller
         catch (\Exception $e){
         }
 
+        // Sync To SendGrid WefullFill Members Contact List
         $contacts = [];
         array_push($contacts, [
             'email' => $user->email,
             'first_name' => $user->name,
         ]);
-
         $contacts_payload = [
             'list_ids' => ["33d743f3-a906-4512-83cd-001f7ba5ab33"],
             'contacts' => $contacts
         ];
-
         $payload = json_encode($contacts_payload);
 
         $curl = curl_init();
