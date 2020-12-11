@@ -58,6 +58,9 @@
                     <div class="block">
                         <div class="block-header">
                             <h3 class="block-title">Images</h3>
+                            <div class="text-right d-inline-block">
+                                <a style="margin-left: 10px;" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_product_images">Add More Images</a>
+                            </div>
                         </div>
                         <div class="block-content">
                             @if(count($product->has_images) >0)
@@ -81,11 +84,7 @@
 
                                     @endforeach
                                 </div>
-                                <hr>
                             @endif
-                            <div class="row">
-                                <a style="margin-left: 10px;" class="btn btn-sm btn-light" data-toggle="modal" data-target="#add_product_images">Add More Images</a>
-                            </div>
                         </div>
                     </div>
                     @if(count($product->hasVariants) == 0)
