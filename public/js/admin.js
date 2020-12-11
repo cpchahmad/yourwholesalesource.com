@@ -372,16 +372,15 @@ $(document).ready(function () {
     /*Admin Module - Product Images Save JS*/
     $('body').on('submit','.product-images-form',function (e) {
         e.preventDefault();
-        console.log(324);
         var formData = new FormData(this);
-        // $.ajax({
-        //     url : $(this).attr('action'),
-        //     type : $(this).attr('method'),
-        //     data : formData,
-        //     cache:false,
-        //     contentType: false,
-        //     processData: false,
-        // });
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+        });
     });
     /*Admin Module - Update Product  Save JS*/
     $('.submit_all').click(function () {
