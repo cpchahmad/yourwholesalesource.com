@@ -1262,8 +1262,9 @@ class ProductController extends Controller
                     }
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
+                    return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
-                }
+            }
         }
     }
 
