@@ -1159,7 +1159,7 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full text-right border-top">
-                        <form class=" " data-action="{{route('product.add.images',$product->id)}}" data-method="post" data-enctype="multipart/form">
+                        <form class=" " action="{{route('product.add.images',$product->id)}}" method="post" enctype="multipart/form">
                             @csrf
                             <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
                                 <div class="dropzone dz-clickable">
