@@ -1167,6 +1167,7 @@ class ProductController extends Controller
 
 
     public function updateExistingProductOldVariants(Request $request, $id) {
+        dd($request->all());
         $product = Product::find($id);
         $shop = $this->helper->getShop();
         if($product != null) {
