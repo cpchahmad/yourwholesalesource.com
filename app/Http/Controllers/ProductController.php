@@ -772,7 +772,6 @@ class ProductController extends Controller
 
     public function productAddImages(Request $request, $id) {
 
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if($product != null) {
@@ -799,6 +798,7 @@ class ProductController extends Controller
             }
             $product->save();
             $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
+            return redirect()->back()->with('success', 'Product Updated Successfully');
         }
     }
 
