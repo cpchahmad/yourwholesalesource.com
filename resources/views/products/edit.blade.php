@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" method="POST" data-enctype="multipart/form-data">
+    <form action="{{ route('product.update', $product->id) }}" class="form-horizontal push-30" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="content">
             <div id="forms-div" class="row">
