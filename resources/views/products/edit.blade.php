@@ -1159,7 +1159,7 @@
                         </div>
                     </div>
                     <div class="block-content block-content-full text-right border-top">
-                        <form class="product-images-form " data-action="{{route('product.add.images',$product->id)}}" data-method="post" data-enctype="multipart/form">
+                        <form class=" " data-action="{{route('product.add.images',$product->id)}}" data-method="post" data-enctype="multipart/form">
                             @csrf
                             <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
                                 <div class="dropzone dz-clickable">
@@ -1168,7 +1168,7 @@
                                 </div>
                                 <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
                             </div>
-                            <button type="button" class="btn btn-default save-img">
+                            <button type="submit" class="btn btn-default save-img">
                                 Save
                             </button>
                             <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
