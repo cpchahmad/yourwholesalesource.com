@@ -795,6 +795,7 @@ class ProductController extends Controller
                 else if ($type == 'existing-product-image-add') {
                     if ($request->hasFile('images')) {
                         foreach ($request->file('images') as $index => $image) {
+                            dd($image);
                             $destinationPath = 'images/';
                             $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                             $image->move($destinationPath, $filename);
