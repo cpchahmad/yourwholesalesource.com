@@ -1160,9 +1160,14 @@ class ProductController extends Controller
                     }
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Added');
+                    return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
                 }
+            return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
+
         }
+        return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
+
     }
 
 
@@ -1265,7 +1270,10 @@ class ProductController extends Controller
                     return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
             }
+            return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
         }
+        return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
+
     }
 
 
