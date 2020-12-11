@@ -59,10 +59,10 @@
                         <div class="block-header">
                             <h3 class="block-title">Images</h3>
                             <div class="text-right d-inline-block">
-                                <a style="margin-left: 10px;" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_product_images">Add More Images</a>
+                                <a style="margin-left: 10px;" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#add_product_images">Add More Images</a>
                             </div>
                         </div>
-                        <div class="block-content">
+                        <div class="block-content pb-4">
                             @if(count($product->has_images) >0)
                                 <div class="row editable" id="image-sortable" data-product="{{$product->id}}" data-route="{{route('product.update_image_position',$product->id)}}">
 
