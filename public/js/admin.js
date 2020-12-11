@@ -550,7 +550,6 @@ $(document).ready(function () {
             var price = $('input[type="text"][name="price"]').val();
             var cost = $('input[type="text"][name="cost"]').val();
             var sku = $('input[type="text"][name="sku"]').val();
-            var barcode = $('input[type="text"][name="barcode"]').val();
             var quantity = $('input[type="text"][name="quantity"]').val();
             var option1 = $('input[type="text"][name="option1"]').val();
             console.log(option1);
@@ -581,7 +580,7 @@ $(document).ready(function () {
                             '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
                             '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
                             '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
-                            '                                                    <td><input type="text" class="form-control" name="variant_barcode[]"  value="' +barcode+  '"></td>\n' +
+                            '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
                             '                                                </tr>');
                     });
                 });
@@ -606,7 +605,6 @@ $(document).ready(function () {
             var price = $('input[type="text"][name="price"]').val();
             var cost = $('input[type="text"][name="cost"]').val();
             var sku = $('input[type="text"][name="sku"]').val();
-            var barcode = $('input[type="text"][name="barcode"]').val();
             var quantity = $('input[type="text"][name="quantity"]').val();
             var option1 = $('input[type="text"][name="option1-update"]').val();
             console.log()
@@ -624,7 +622,7 @@ $(document).ready(function () {
                     '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
                     '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
                     '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
-                    '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" value="' +barcode+  '"></td>\n' +
+                    '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
                     '                                                </tr>');
             });
         },
