@@ -1091,7 +1091,46 @@ class ProductController extends Controller
 
                 }
 
-                // On Seperate Page
+                else if ($type == 'existing-product-image-delete') {
+                    $image =  Image::find($request->input('file'));
+                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
+                    $image->delete();
+                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
+                }
+
+
+                else if ($type == 'tiered-pricing') {
+                    $variants = $request->variant_id;
+
+                    foreach ($variants as $variant) {
+                        if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
+                            TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
+                        }
+                        for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
+
+                            if($request->input('min_qty'.$variant)[$i] != null) {
+                                $item = new TieredPrice();
+                                $item->product_variant_id = $variant;
+                                $item->product_id = $id;
+                                $item->min_qty = $request->input('min_qty'.$variant)[$i];
+                                if($request->input('max_qty'.$variant)[$i] == null) {
+                                    $item->max_qty = $product->quantity;
+                                }
+                                else {
+                                    $item->max_qty = $request->input('max_qty'.$variant)[$i];
+                                }
+                                $item->type = $request->input('type'.$variant)[$i];
+                                $item->price = $request->input('tiered_price'.$variant)[$i];
+                                $item->save();
+                            }
+
+                        }
+                    }
+                }
+
+
+
+                // Deleted
 //                else if ($type == 'variant-option-delete') {
 //                    $deleted_variants = null;
 //                    if ($request->has('delete_option1')) {
@@ -1143,127 +1182,8 @@ class ProductController extends Controller
 //
 //                }
 //
-//                else if ($type == 'existing-product-new-variants') {
-//                    if ($request->variants) {
-//                        $product->variants = $request->variants;
-//                    }
-//                    $product->save();
-//                    $this->ProductVariants($request, $product->id);
-//                    $variants_array =  $this->variants_template_array($product);
-//
-//                    $productdata = [
-//                        "product" => [
-//                            "options" => $this->options_update_template_array($product),
-//                            "variants" => $variants_array,
-//                        ]
-//                    ];
-//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-//                    $shopifyVariants = $resp->body->product->variants;
-//                    foreach ($product->hasVariants as $index => $v){
-//                        $v->shopify_id = $shopifyVariants[$index]->id;
-//                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-//                        $v->save();
-//                    }
-//
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Added');
-//
-//                }
-//
-//                else if ($type == 'existing-product-update-variants') {
-//
-//                    $product->variants = 1;
-//                    $product->save();
-//                    $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
-//
-//                    sleep(3);
-//
-//                    $options_array = [];
-//
-//                    $option1_array = [];
-//                    foreach ($variants_array as $index => $v) {
-//                        array_push($option1_array, $v['option1']);
-//                    }
-//
-//                    $option1_array_unique = array_unique($option1_array);
-//
-//                    if($option1_array_unique[0] != '') {
-//                        $temp = [];
-//                        foreach ($option1_array_unique as $a) {
-//                            array_push($temp, $a);
-//                        }
-//                        array_push($options_array, [
-//                            'name' => 'Option1',
-//                            'position' => '1',
-//                            'values' => $temp,
-//                        ]);
-//
-//                    }
-//
-//
-//
-//                    $option2_array = [];
-//                    foreach ($variants_array as $index => $v) {
-//                        array_push($option2_array, $v['option2']);
-//                    }
-//
-//                    $option2_array_unique = array_unique($option2_array);
-//
-//                    if($option2_array_unique[0] != '') {
-//                        $temp = [];
-//                        foreach ($option2_array_unique as $a) {
-//                            array_push($temp, $a);
-//                        }
-//
-//                        array_push($options_array, [
-//                            'name' => 'Option2',
-//                            'position' => '2',
-//                            'values' => $temp,
-//                        ]);
-//                    }
-//
-//
-//                    $option3_array = [];
-//                    foreach ($variants_array as $index => $v) {
-//                        array_push($option3_array, $v['option3']);
-//                    }
-//
-//                    $option3_array_unique = array_unique($option3_array);
-//
-//                    if($option3_array_unique[0] != '') {
-//                        $temp = [];
-//                        foreach ($option3_array_unique as $a) {
-//                            array_push($temp, $a);
-//                        }
-//
-//                        array_push($options_array, [
-//                            'name' => 'Option3',
-//                            'position' => '3',
-//                            'values' => $temp,
-//                        ]);
-//                    }
-//
-//                    $productdata = [
-//                        "product" => [
-//                            "options" => $options_array,
-//                            "variants" => $variants_array,
-//                        ]
-//                    ];
-//
-//
-//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
-//                    $shopifyVariants = $resp->body->product->variants;
-//
-//                    foreach ($variants_array as $index => $v){
-//                        $variant = ProductVariant::where('title', $v['title'])->first();
-//                        $variant->shopify_id = $shopifyVariants[$index]->id;
-//                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-//                        $variant->save();
-//                    }
-//
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
-//
-//                }
-//
+
+//                Deleted
 //                else if ($type == 'old-option-update') {
 //
 //                    $product->variants = 1;
@@ -1290,7 +1210,7 @@ class ProductController extends Controller
 //
 //
 //                }
-//
+//                Deleted
 //                else if ($type == 'new-option-add') {
 //                    $variants_array = [];
 //                    foreach ($product->hasVariants as $v) {
@@ -1323,13 +1243,13 @@ class ProductController extends Controller
 //
 //                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
 //                }
-//
+//                // Deleted
 //                else if($type == 'status_update'){
 //                    $this->product_status_change($request, $product, $shop);
 //                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Status Updated');
 //
 //                }
-//
+//                Deleted
 //                else if ($type == 'variant-image-update') {
 ////                    dd($request);
 //                    $variant = ProductVariant::find($request->var_id);
@@ -1368,48 +1288,148 @@ class ProductController extends Controller
 //                    }
 //
 //                }
-//
-//                else if ($type == 'existing-product-image-delete') {
-//                    $image =  Image::find($request->input('file'));
-//                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
-//                    $image->delete();
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
-//                }
 
-
-                else if ($type == 'tiered-pricing') {
-                    $variants = $request->variant_id;
-
-                    foreach ($variants as $variant) {
-                        if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
-                            TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
-                        }
-                        for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
-
-                            if($request->input('min_qty'.$variant)[$i] != null) {
-                                $item = new TieredPrice();
-                                $item->product_variant_id = $variant;
-                                $item->product_id = $id;
-                                $item->min_qty = $request->input('min_qty'.$variant)[$i];
-                                if($request->input('max_qty'.$variant)[$i] == null) {
-                                    $item->max_qty = $product->quantity;
-                                }
-                                else {
-                                    $item->max_qty = $request->input('max_qty'.$variant)[$i];
-                                }
-                                $item->type = $request->input('type'.$variant)[$i];
-                                $item->price = $request->input('tiered_price'.$variant)[$i];
-                                $item->save();
-                            }
-
-                        }
-                    }
-                }
             }
         }
 
         return redirect()->back()->with('success', 'Product Updated Successfully');
     }
+
+
+    public function updateExistingProductNewVariants(Request $request, $id) {
+        $product = Product::find($id);
+        $shop = $this->helper->getShop();
+        if($product != null) {
+            if ($request->type == 'existing-product-new-variants') {
+                    if ($request->variants) {
+                        $product->variants = $request->variants;
+                    }
+                    $product->save();
+                    $this->ProductVariants($request, $product->id);
+                    $variants_array =  $this->variants_template_array($product);
+
+                    $productdata = [
+                        "product" => [
+                            "options" => $this->options_update_template_array($product),
+                            "variants" => $variants_array,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $shopifyVariants = $resp->body->product->variants;
+                    foreach ($product->hasVariants as $index => $v){
+                        $v->shopify_id = $shopifyVariants[$index]->id;
+                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $v->save();
+                    }
+
+                    $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Added');
+
+                }
+        }
+    }
+
+
+    public function updateExistingProductOldVariants(Request $request, $id) {
+        $product = Product::find($id);
+        $shop = $this->helper->getShop();
+        if($product != null) {
+            if($request->type == 'existing-product-update-variants') {
+
+                    $product->variants = 1;
+                    $product->save();
+                    $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
+
+                    sleep(3);
+
+                    $options_array = [];
+
+                    $option1_array = [];
+                    foreach ($variants_array as $index => $v) {
+                        array_push($option1_array, $v['option1']);
+                    }
+
+                    $option1_array_unique = array_unique($option1_array);
+
+                    if($option1_array_unique[0] != '') {
+                        $temp = [];
+                        foreach ($option1_array_unique as $a) {
+                            array_push($temp, $a);
+                        }
+                        array_push($options_array, [
+                            'name' => 'Option1',
+                            'position' => '1',
+                            'values' => $temp,
+                        ]);
+
+                    }
+
+
+
+                    $option2_array = [];
+                    foreach ($variants_array as $index => $v) {
+                        array_push($option2_array, $v['option2']);
+                    }
+
+                    $option2_array_unique = array_unique($option2_array);
+
+                    if($option2_array_unique[0] != '') {
+                        $temp = [];
+                        foreach ($option2_array_unique as $a) {
+                            array_push($temp, $a);
+                        }
+
+                        array_push($options_array, [
+                            'name' => 'Option2',
+                            'position' => '2',
+                            'values' => $temp,
+                        ]);
+                    }
+
+
+                    $option3_array = [];
+                    foreach ($variants_array as $index => $v) {
+                        array_push($option3_array, $v['option3']);
+                    }
+
+                    $option3_array_unique = array_unique($option3_array);
+
+                    if($option3_array_unique[0] != '') {
+                        $temp = [];
+                        foreach ($option3_array_unique as $a) {
+                            array_push($temp, $a);
+                        }
+
+                        array_push($options_array, [
+                            'name' => 'Option3',
+                            'position' => '3',
+                            'values' => $temp,
+                        ]);
+                    }
+
+                    $productdata = [
+                        "product" => [
+                            "options" => $options_array,
+                            "variants" => $variants_array,
+                        ]
+                    ];
+
+
+                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
+                    $shopifyVariants = $resp->body->product->variants;
+
+                    foreach ($variants_array as $index => $v){
+                        $variant = ProductVariant::where('title', $v['title'])->first();
+                        $variant->shopify_id = $shopifyVariants[$index]->id;
+                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $variant->save();
+                    }
+
+                    $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
+
+                }
+        }
+    }
+
 
 
     public function update2(Request $request, $id)

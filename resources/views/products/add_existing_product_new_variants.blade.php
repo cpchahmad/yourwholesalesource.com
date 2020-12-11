@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-horizontal push-30">
-        <form action="{{route('product.update',$product->id)}}" method="post">
+        <form action="{{route('product.update.add.new.variants',$product->id)}}" method="post">
             @csrf
             <input type="hidden" name="type" value="existing-product-new-variants">
             <div class="content">
