@@ -791,9 +791,9 @@
                                             </tbody>
 
                                     </table>
-                                    <div class="block-content text-right pr-0 pt-0 pb-3">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
+{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
+{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
+{{--                                    </div>--}}
                                 </div>
                             @endif
                             @if($product->variants == 1)

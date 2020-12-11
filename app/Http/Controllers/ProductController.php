@@ -773,7 +773,6 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd($request->all());
         $product = Product::find($id);
         $shop =$this->helper->getShop();
         if ($product != null) {
@@ -1102,6 +1101,7 @@ class ProductController extends Controller
 
                 else if ($type == 'tiered-pricing') {
                     $variants = $request->variant_id;
+                    dd($variants);
 
                     foreach ($variants as $variant) {
                         if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
