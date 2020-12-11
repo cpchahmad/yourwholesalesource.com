@@ -6,6 +6,10 @@ namespace App\Http\Controllers;
 use App\OrderFulfillment;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
+use App\User;
+use http\Client;
+use http\Message\Body;
+use http\QueryString;
 use Illuminate\Http\Request;
 class AdminMaintainerController extends Controller
 {
@@ -345,27 +349,80 @@ class AdminMaintainerController extends Controller
     }
 
 
+    public function sendGrid2() {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.sendgrid.com/v3/marketing/lists?page_size=100",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "{}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer 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"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            dd(json_decode($response));
+        }
+    }
+
     public function sendGrid() {
-        $request = new \HttpRequest();
-        $request->setUrl('https://api.sendgrid.com/v3/marketing/lists');
-        $request->setMethod(HTTP_METH_GET);
 
-        $request->setQueryData(array(
-            'page_size' => '100'
+        $users = User::all();
+        $contacts = [];
+
+        foreach ($users as $user) {
+            array_push($contacts, [
+               'email' => $user->email,
+               'first_name' => $user->name,
+            ]);
+        }
+
+        $contacts_payload = [
+            'list_ids' => ["33d743f3-a906-4512-83cd-001f7ba5ab33"],
+            'contacts' => $contacts
+        ];
+
+        $payload = json_encode($contacts_payload);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.sendgrid.com/v3/marketing/contacts",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "PUT",
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer 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",
+                "content-type: application/json"
+            ),
         ));
 
-        $request->setHeaders(array(
-            'authorization' => 'Bearer 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'
-        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
-        $request->setBody('{}');
+        curl_close($curl);
 
-        try {
-            $response = $request->send();
-
-            echo $response->getBody();
-        } catch (HttpException $ex) {
-            echo $ex;
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            dd($response);
         }
     }
 
