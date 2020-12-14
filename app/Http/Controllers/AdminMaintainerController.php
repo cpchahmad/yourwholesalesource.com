@@ -66,7 +66,7 @@ class AdminMaintainerController extends Controller
                 }
             }
         } else {
-            foreach ($order->line_items as $item) {
+            foreach ($order->line_items()->where('fulfilled_by', 'fantasy')->get() as $item) {
 
                 $retailer_product = $item->linked_product;
                 $retailer_variant = $item->linked_variant;

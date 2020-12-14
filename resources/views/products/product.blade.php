@@ -185,7 +185,7 @@
                         <div class="block">
                             <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#ecom-product-comments">Varaints</a>
+                                    <a class="nav-link" href="#ecom-product-comments">Variants</a>
                                 </li>
                             </ul>
                             <div class="block-content tab-content">
