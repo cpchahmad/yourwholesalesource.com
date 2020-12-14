@@ -936,9 +936,9 @@ class ProductController extends Controller
                         ];
                         $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
-                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-
                     }
+                    Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+
                 }
 
                 else if ($type == 'add-additional-tab'){
