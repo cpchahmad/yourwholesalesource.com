@@ -140,7 +140,7 @@
                                                 }
                                             @endphp
 
-                                            @if($order->line_items()->count == $out_of_stock)
+                                            @if($order->line_items()->count() == $out_of_stock)
                                                 <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
                                             @elseif($out_of_stock == 0)
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
