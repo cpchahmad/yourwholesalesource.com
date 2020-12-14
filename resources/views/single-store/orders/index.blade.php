@@ -60,6 +60,7 @@
                                     <th>Cost</th>
                                     <th>Payment Status</th>
                                     <th>Status</th>
+                                    <th>Stock Status</th>
                                     <th style="text-align: right">
                                         <a href="{{route('store.sync.orders')}}"
                                              class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
@@ -127,6 +128,25 @@
                                                 <span class="badge badge-success" style="font-size: small">  {{ucfirst($order->status)}} </span>
                                             @endif
 
+                                        </td>
+                                        <td>
+                                            @php
+                                                $out_of_stock = 0;
+                                                foreach($order->line_items as $item) {
+                                                    if($item->linked_variant && $item->linked_variant->quantity == 0)
+                                                    {
+                                                        $out_of_stock++;
+                                                    }
+                                                }
+                                            @endphp
+
+                                            @if($order->line_items()->count == $out_of_stock)
+                                                <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
+                                            @elseif($out_of_stock == 0)
+                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>
+                                            @else
+                                                <span class="badge badge-warning" style="font-size: small"> Partial Out of Stock </span>
+                                            @endif
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
