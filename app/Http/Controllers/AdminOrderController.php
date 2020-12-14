@@ -1110,6 +1110,19 @@ class AdminOrderController extends Controller
         return redirect()->back()->with('success','Order Synced to Wefulfill Successfully');
 
     }
+
+    public function sendOrderStatusEmail($id) {
+        $order = RetailerOrder::find($id);
+        $user = $order->has_user;
+        try{
+            Mail::to($user->email)->send(new OrderStatusMail($user, $order));
+        }
+        catch (\Exception $e){
+            return redirect()->back()->with('error',"Order Status Email Cant be Send To User");
+        }
+
+        return redirect()->back()->with('success','Order Status Email Send to User Successfully');
+    }
 }
 
 

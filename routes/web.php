@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/products/{id}/add/new/variants','ProductController@updateExistingProductNewVariants')->name('product.update.add.new.variants');
     Route::any('/products/{id}/update/old/variants','ProductController@updateExistingProductOldVariants')->name('product.update.old.variants');
     Route::any('/products/{id}/delete/existing/image','ProductController@deleteExistingProductImage')->name('product.delete.existing.image');
+    Route::any('/orders/{id}/send/status/email','AdminOrderController@sendOrderStatusEmail')->name('admin.send.order.status.email');
     Route::any('/products/{id}/add/images','ProductController@productAddImages')->name('product.add.images');
     Route::post('/products/{id}/add/tiered/price','ProductController@addTieredPrice')->name('product.add.tiered.price');
     Route::post('/single-product/{id}/add/tiered/price','ProductController@addTieredPriceForProductWithoutVariant')->name('single.product.add.tiered.price');

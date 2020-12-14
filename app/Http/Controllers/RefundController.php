@@ -21,6 +21,7 @@ class RefundController extends Controller
     private $helper;
     private $notify;
     private $inventory;
+    private $log;
 
     /**
      * RefundController constructor.
@@ -31,6 +32,8 @@ class RefundController extends Controller
         $this->helper = new HelperController();
         $this->notify = new NotificationController();
         $this->inventory = new InventoryController();
+        $this->log = new ActivityLogController();
+
     }
 
     public function create_refund(Request $request){

@@ -35,6 +35,9 @@
                 @if($order->admin_shopify_id == null &&  $order->admin_shopify_name == null)
                     <button class="btn btn-sm btn-success" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.manual_push_to_wefulfill',$order->id)}}'">Sync to Wefulfill Store</button>
                 @endif
+                @if($order->status == 'Paid')
+                    <button class="btn btn-sm btn-info" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.send.order.status.email',$order->id)}}'">Send Order Status Email</button>
+                @endif
             </div>
         </div>
 
