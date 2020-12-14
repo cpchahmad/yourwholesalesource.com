@@ -425,7 +425,6 @@ class AdminOrderController extends Controller
             Mail::to($user->email)->send(new OrderStatusMail($user, $order));
         }
         catch (\Exception $e){
-            dd($e);
         }
 
         $this->log->store(0, 'Order', $order->id, $order->name, 'Order Line Items Fulfilled');
