@@ -83,7 +83,7 @@
                             <td style="vertical-align: middle">{{ $product->quantity }}</td>
                             <td style="vertical-align: middle">
                                 <div class="custom-control custom-switch custom-control-success mb-1">
-                                    <input @if($product->status ==1)checked="" @endif data-route="{{route('product.update',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">
+                                    <input @if($product->status ==1)checked="" @endif data-route="{{route('product.change.status',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">
                                     <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>
                                 </div>
 

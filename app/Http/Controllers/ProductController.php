@@ -802,6 +802,15 @@ class ProductController extends Controller
         }
     }
 
+    public function updateProductStatus(Request $request, $id) {
+        $product = Product::find($id);
+        $shop =$this->helper->getShop();
+
+        $this->product_status_change($request, $product, $shop);
+        $this->log->store(0, 'Product', $product->id, $product->title,'Product Status Updated');
+
+    }
+
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
