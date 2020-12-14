@@ -1093,12 +1093,12 @@ class ProductController extends Controller
 
                 }
 
-                else if ($type == 'existing-product-image-delete') {
-                    $image =  Image::find($request->input('file'));
-                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
-                    $image->delete();
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
-                }
+//                else if ($type == 'existing-product-image-delete') {
+//                    $image =  Image::find($request->input('file'));
+//                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
+//                    $image->delete();
+//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
+//                }
 
                 else if ($type == 'tiered-pricing') {
                     $variants = $request->variant_id;
@@ -1302,6 +1302,23 @@ class ProductController extends Controller
             return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
         }
         return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
+
+    }
+
+    public function deleteExistingProductImage(Request $request, $id) {
+        $product = Product::find($id);
+        $shop =$this->helper->getShop();
+
+        if($product != null) {
+            $image =  Image::find($request->input('file'));
+            $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
+            $image->delete();
+            $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
+
+            return response()->json([
+                'success' => 'ok'
+            ]);
+        }
 
     }
 
