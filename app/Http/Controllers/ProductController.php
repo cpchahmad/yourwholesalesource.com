@@ -983,7 +983,7 @@ class ProductController extends Controller
                             if(count($product->has_retailer_products) > 0) {
                                 $users_temp = [];
                                 foreach ($product->has_retailer_products as $retailer_product) {
-                                    array_merge($users_temp, User::where('id', $retailer_product->user_id)->pluck('email')->toArray);
+                                    array_merge($users_temp, User::where('id', $retailer_product->user_id)->pluck('email')->toArray());
                                 }
 
                                 dd($users_temp);
