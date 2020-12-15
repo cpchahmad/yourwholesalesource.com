@@ -581,7 +581,7 @@ class WishlistController extends Controller
 
 
         $variants_array = [];
-        foreach (ProductVariant::where('product_id', $prod->is)->get() as $index => $varaint) {
+        foreach (ProductVariant::where('product_id', $prod->id)->get() as $index => $varaint) {
 
             dump($index, $varaint);
 
