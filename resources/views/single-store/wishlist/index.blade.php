@@ -224,7 +224,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product"> </i></label>
+                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product (Hold Ctrl for selecting multiple images)"> </i></label>
                                                 <input type="file" name="attachments[]" class="form-control" multiple>
                                             </div>
                                         </div>

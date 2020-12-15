@@ -53,21 +53,23 @@ class ProductsDeleteJob implements ShouldQueue
     {
         $response = $this->data;
         $shop = Shop::where('shopify_domain', $this->shopDomain)->first();
-        $product = RetailerProduct::where('shopify_id', $response->id)->first();
+        $product = RetailerProduct::where('shopify_id', $response->id)->where('import_from_shopify', 0)->first();
 
-        foreach ($product->hasVariants as $variant) {
-            $variant->delete();
-        }
-        foreach ($product->has_images as $image){
-            $image->delete();
-        }
-        $product->has_categories()->detach();
-        $product->has_subcategories()->detach();
+        if($product != null) {
+            foreach ($product->hasVariants as $variant) {
+                $variant->delete();
+            }
+            foreach ($product->has_images as $image){
+                $image->delete();
+            }
+            $product->has_categories()->detach();
+            $product->has_subcategories()->detach();
 
-        $shop->has_imported()->detach([$product->linked_product_id]);
-        if(count($shop->has_user) > 0){
-            $shop->has_user[0]->has_imported()->detach([$product->linked_product_id]);
+            $shop->has_imported()->detach([$product->linked_product_id]);
+            if(count($shop->has_user) > 0){
+                $shop->has_user[0]->has_imported()->detach([$product->linked_product_id]);
+            }
+            $product->delete();
         }
-        $product->delete();
     }
 }
