@@ -1540,8 +1540,8 @@ class ProductController extends Controller
 //        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
 
         if(count($product->has_retailer_products) > 0) {
-            foreach ($product->has_retailer_products as $product) {
-                $users_temp = User::where('id', $product->user_id)->pluck('email')->toArray();
+            foreach ($product->has_retailer_products as $retailer_product) {
+                $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
             }
 
             if(count($users_temp)> 0) {
