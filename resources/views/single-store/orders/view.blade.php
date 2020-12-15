@@ -456,18 +456,15 @@
                                         </td>
                                         <td>
                                             @php
-                                                $out_of_stock = 0;
+                                                $out_of_stock = false;
                                                 if($item->linked_variant && $item->linked_variant->quantity == 0)
-                                                    $out_of_stock++;
+                                                    $out_of_stock = true;
                                             @endphp
 
-                                            @if($order->line_items()->count() == $out_of_stock)
+                                            @if($out_of_stock)
                                                 <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
-                                            @elseif($out_of_stock == 0)
-                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                             @else
-                                                <span class="badge badge-warning" style="font-size: small"> Partial Out of Stock </span>
-                                            @endif
+                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                         </td>
 
                                     </tr>
