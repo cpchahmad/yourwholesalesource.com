@@ -1507,21 +1507,24 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
-        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
-        $variants = ProductVariant::where('product_id', $id)->get();
-        foreach ($variants as $variant) {
-            $variant->delete();
-        }
-        foreach ($product->has_images as $image){
-            $image->delete();
-        }
-        $product->has_categories()->detach();
-        $product->has_subcategories()->detach();
+//        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+//        $variants = ProductVariant::where('product_id', $id)->get();
+//        foreach ($variants as $variant) {
+//            $variant->delete();
+//        }
+//        foreach ($product->has_images as $image){
+//            $image->delete();
+//        }
+//        $product->has_categories()->detach();
+//        $product->has_subcategories()->detach();
+//
+//        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+//
+//
+//        $product->delete();
 
-        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted, kindly remove this product from your store as well',$product);
 
-
-        $product->delete();
         return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
     }
 
