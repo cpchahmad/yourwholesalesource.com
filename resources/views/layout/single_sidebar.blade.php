@@ -226,7 +226,7 @@
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell"></i>
-                    <span class="badge badge-primary badge-pill">{{count($notifications)}}</span>
+                    <span class="badge badge-primary badge-pill">{{$notifications_count}}</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
                     <div class="p-2 bg-primary text-center">
