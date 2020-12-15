@@ -797,9 +797,6 @@ class WishlistController extends Controller
             ]
         ];
 
-        dd($productdata);
-
-
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
         $product_shopify_id = $response->body->product->id;
         $product->shopify_id = $product_shopify_id;
