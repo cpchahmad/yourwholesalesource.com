@@ -793,6 +793,8 @@ class WishlistController extends Controller
             ]
         ];
 
+        dd($productdata);
+
 
 
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
