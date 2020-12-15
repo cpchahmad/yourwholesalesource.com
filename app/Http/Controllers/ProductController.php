@@ -842,6 +842,10 @@ class ProductController extends Controller
                     $product->barcode = $request->barcode;
                     $product->save();
 
+                    if($product->quantity == 0) {
+                        $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
+                    }
+
                     if (count($product->hasVariants) == 0) {
                         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
                         if(!$response->errors){
@@ -1507,23 +1511,23 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
-//        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
-//        $variants = ProductVariant::where('product_id', $id)->get();
-//        foreach ($variants as $variant) {
-//            $variant->delete();
-//        }
-//        foreach ($product->has_images as $image){
-//            $image->delete();
-//        }
-//        $product->has_categories()->detach();
-//        $product->has_subcategories()->detach();
-//
-//        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
-//
-//
-//        $product->delete();
+        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+        $variants = ProductVariant::where('product_id', $id)->get();
+        foreach ($variants as $variant) {
+            $variant->delete();
+        }
+        foreach ($product->has_images as $image){
+            $image->delete();
+        }
+        $product->has_categories()->detach();
+        $product->has_subcategories()->detach();
 
-        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted, kindly remove this product from your store as well',$product);
+        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+
+
+        $product->delete();
+
+        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
 
         return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
     }
