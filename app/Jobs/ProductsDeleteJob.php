@@ -55,7 +55,7 @@ class ProductsDeleteJob implements ShouldQueue
         $shop = Shop::where('shopify_domain', $this->shopDomain)->first();
         $product = RetailerProduct::where('shopify_id', $response->id)->where('import_from_shopify', 0)->first();
 
-        if($product != null) {
+        if($product !== null) {
             foreach ($product->hasVariants as $variant) {
                 $variant->delete();
             }

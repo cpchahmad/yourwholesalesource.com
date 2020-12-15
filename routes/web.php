@@ -14,6 +14,7 @@
 use App\EmailTemplate;
 use App\Product;
 use App\RetailerOrder;
+use App\RetailerProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -397,6 +398,17 @@ Route::get('/testing', function() {
     $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->get();
 
     dd($orders);
+});
+
+Route::get('/del-product', function() {
+    $product = RetailerProduct::where('shopify_id', "5700175593636")->where('import_from_shopify', 0)->first();
+
+    if($product !== null) {
+        dd('yes');
+    }
+    else {
+        dd('no');
+    }
 });
 
 
