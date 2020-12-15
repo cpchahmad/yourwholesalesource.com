@@ -849,8 +849,9 @@ class ProductController extends Controller
                     if($product->quantity == 0) {
                         // Sending Notification Emails To all Concerned Retailer Stores
                         if(count($product->has_retailer_products) > 0) {
+                            $users_temp = [];
                             foreach ($product->has_retailer_products as $retailer_product) {
-                                $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                                array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
                             }
 
                             if(count($users_temp)> 0) {
@@ -911,8 +912,9 @@ class ProductController extends Controller
                     if($product->quantity == 0) {
                         // Sending Notification Emails To all Concerned Retailer Stores
                         if(count($product->has_retailer_products) > 0) {
+                            $users_temp = [];
                             foreach ($product->has_retailer_products as $retailer_product) {
-                                $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                                array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
                             }
 
                             if(count($users_temp)> 0) {
@@ -986,8 +988,6 @@ class ProductController extends Controller
                                     array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
                                 }
 
-                                dd($users_temp);
-
                                 if(count($users_temp)> 0) {
                                     $users = [];
                                     foreach($users_temp as $key => $ut){
@@ -1000,7 +1000,6 @@ class ProductController extends Controller
                                     }
 
                                     try{
-                                        dd($users);
                                         Mail::to($users)->send(new VariantStockOutMail($product));
                                     }
                                     catch (\Exception $e){
@@ -1623,8 +1622,9 @@ class ProductController extends Controller
 
         // Sending Notification Emails To all Concerned Retailer Stores
         if(count($product->has_retailer_products) > 0) {
+            $users_temp = [];
             foreach ($product->has_retailer_products as $retailer_product) {
-                $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
             }
 
             if(count($users_temp)> 0) {
