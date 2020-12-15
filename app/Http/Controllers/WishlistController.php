@@ -583,7 +583,6 @@ class WishlistController extends Controller
         $variants_array = [];
         foreach (ProductVariant::where('product_id', $prod->id)->get() as $index => $varaint) {
 
-            dump($index, $varaint);
 
             if ($varaint->has_image != null) {
                 $image_id = $varaint->has_image->shopify_id;
@@ -681,7 +680,8 @@ class WishlistController extends Controller
         if ($request->variants) {
             $product->variants = $request->variants;
         }
-      //  $product->save();
+
+        $product->save();
         if ($request->category) {
             $product->has_categories()->attach($request->category);
         }
@@ -800,9 +800,7 @@ class WishlistController extends Controller
         dd($productdata);
 
 
-
         $response = $shop->api()->rest('POST', '/admin/products.json', $productdata);
-        dd($response);
         $product_shopify_id = $response->body->product->id;
         $product->shopify_id = $product_shopify_id;
         $price = $product->price;
