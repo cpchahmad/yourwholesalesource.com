@@ -1000,6 +1000,7 @@ class ProductController extends Controller
                                         Mail::to($users)->send(new VariantStockOutMail($product));
                                     }
                                     catch (\Exception $e){
+                                        dd($e);
                                     }
                                 }
                             }
