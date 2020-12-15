@@ -981,11 +981,13 @@ class ProductController extends Controller
                         if($variant->quantity == 0) {
                             // Sending Notification Emails To all Concerned Retailer Stores
                             if(count($product->has_retailer_products) > 0) {
+                                dump('yes');
                                 foreach ($product->has_retailer_products as $retailer_product) {
                                     $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
                                 }
 
                                 if(count($users_temp)> 0) {
+                                    dump('yesyes');
                                     $users = [];
                                     foreach($users_temp as $key => $ut){
                                         if($ut != null) {
@@ -998,6 +1000,7 @@ class ProductController extends Controller
 
                                     try{
                                         Mail::to($users)->send(new VariantStockOutMail($product));
+                                        dump('nooo');
                                     }
                                     catch (\Exception $e){
                                         dd($e);
