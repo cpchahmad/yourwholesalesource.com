@@ -986,6 +986,8 @@ class ProductController extends Controller
                                     array_push($users_temp, User::where('id', $retailer_product->user_id)->pluck('email'));
                                 }
 
+                                dd($users_temp);
+
                                 if(count($users_temp)> 0) {
                                     $users = [];
                                     foreach($users_temp as $key => $ut){
