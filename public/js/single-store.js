@@ -1,7 +1,36 @@
 $(document).ready(function () {
 
 
+    /* Shopify Store Module - Dropzone Click JS */
+    $('body').on('click','.dropzone',function () {
+        $('.images-upload').trigger('click');
+    });
 
+    var storedFiles = [];
+    /* Shopify Store Module - Images UPLOAD JS */
+    $('body').on('change','.images-upload',function (e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+        filesArr.forEach(function (f) {
+
+            if (!f.type.match("image.*")) {
+                return;
+            }
+            storedFiles.push(f);
+            console.log(storedFiles);
+            $('.preview-drop').empty();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('.preview-drop').append(' <div class="col-lg-4 preview-image animated fadeIn">\n' +
+                    '            <div class="img-fluid options-item">\n' +
+                    '                <img class="img-fluid options-item" src="'+e.target.result+'" alt="">\n' +
+                    '            </div>\n' +
+                    '        </div>');
+
+            }
+            reader.readAsDataURL(f);
+        });
+    });
 
 
     /*BULK ORDER PAY*/
