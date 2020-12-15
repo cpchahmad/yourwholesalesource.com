@@ -1601,24 +1601,24 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
-//        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
-//        $variants = ProductVariant::where('product_id', $id)->get();
-//        foreach ($variants as $variant) {
-//            $variant->delete();
-//        }
-//        foreach ($product->has_images as $image){
-//            $image->delete();
-//        }
-//        $product->has_categories()->detach();
-//        $product->has_subcategories()->detach();
-//
-//        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
-//
-//
-//        $product->delete();
-//
-//        // Sending Notification To all Concerned Retailer Stores
-//        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
+        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+        $variants = ProductVariant::where('product_id', $id)->get();
+        foreach ($variants as $variant) {
+            $variant->delete();
+        }
+        foreach ($product->has_images as $image){
+            $image->delete();
+        }
+        $product->has_categories()->detach();
+        $product->has_subcategories()->detach();
+
+        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+
+
+        $product->delete();
+
+        // Sending Notification To all Concerned Retailer Stores
+        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
 
         // Sending Notification Emails To all Concerned Retailer Stores
         if(count($product->has_retailer_products) > 0) {
