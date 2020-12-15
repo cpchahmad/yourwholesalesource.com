@@ -579,10 +579,11 @@ class WishlistController extends Controller
 
         $prod = Product::where('title', $product->title)->first();
 
-        $variants_array = [];
-        foreach ($prod->hasVariants as $index => $varaint) {
 
-            dump($varaint);
+        $variants_array = [];
+        foreach (ProductVariant::where('product_id', $prod->is)->get() as $index => $varaint) {
+
+            dump($index, $varaint);
 
             if ($varaint->has_image != null) {
                 $image_id = $varaint->has_image->shopify_id;
