@@ -400,15 +400,5 @@ Route::get('/testing', function() {
     dd($orders);
 });
 
-Route::get('/del-product', function() {
-    $product = RetailerProduct::where('shopify_id', "5700175593636")->where('import_from_shopify', 1)->first();
-
-    if($product != null) {
-        dd('yes');
-    }
-    else {
-        dd('no');
-    }
-});
 
 

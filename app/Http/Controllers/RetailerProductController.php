@@ -356,7 +356,7 @@ class RetailerProductController extends Controller
     {
         $product = RetailerProduct::find($id);
         $shop = $this->helper->getShop();
-        if($product->toShopify == 1){
+        if($product->toShopify == 1 && $product->import_from_shopify == 0){
             $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
         }
 
