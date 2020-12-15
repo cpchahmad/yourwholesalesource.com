@@ -9,6 +9,7 @@ use App\Exports\ProductsExport;
 use App\Exports\ProductVariantExport;
 use App\Exports\RetailerOrderExport;
 use App\Image;
+use App\Mail\ProductDeleteMail;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerImage;
@@ -20,6 +21,7 @@ use App\User;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use OhMyBrew\ShopifyApp\Models\Shop;
 
@@ -1519,24 +1521,47 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
-        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
-        $variants = ProductVariant::where('product_id', $id)->get();
-        foreach ($variants as $variant) {
-            $variant->delete();
+//        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+//        $variants = ProductVariant::where('product_id', $id)->get();
+//        foreach ($variants as $variant) {
+//            $variant->delete();
+//        }
+//        foreach ($product->has_images as $image){
+//            $image->delete();
+//        }
+//        $product->has_categories()->detach();
+//        $product->has_subcategories()->detach();
+//
+//        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+//
+//
+//        $product->delete();
+//
+//        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
+
+        if(count($product->has_retailer_products) > 0) {
+            foreach ($product->has_retailer_products as $product) {
+                $users_temp = User::where('id', $product->user_id)->pluck('email')->toArray();
+            }
+
+            if(count($users_temp)> 0) {
+                $users = [];
+                foreach($users_temp as $key => $ut){
+                    if($ut != null) {
+                        $ua = [];
+                        $ua['email'] = $ut;
+                        $ua['name'] = 'test';
+                        $users[$key] = (object)$ua;
+                    }
+                }
+
+                try{
+                    Mail::to($users)->send(new ProductDeleteMail($product));
+                }
+                catch (\Exception $e){
+                }
+            }
         }
-        foreach ($product->has_images as $image){
-            $image->delete();
-        }
-        $product->has_categories()->detach();
-        $product->has_subcategories()->detach();
-
-        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
-
-
-        $product->delete();
-
-        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
-
         return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
     }
 
