@@ -403,7 +403,7 @@ Route::get('/testing', function() {
 Route::get('/del-product', function() {
     $product = RetailerProduct::where('shopify_id', "5700175593636")->where('import_from_shopify', 0)->first();
 
-    if($product !== null) {
+    if($product != null) {
         dd('yes');
     }
     else {
