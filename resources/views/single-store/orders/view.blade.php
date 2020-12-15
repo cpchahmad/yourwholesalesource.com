@@ -467,7 +467,6 @@
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                             @endif
                                         </td>
-
                                     </tr>
                                 @endif
                             @endforeach
