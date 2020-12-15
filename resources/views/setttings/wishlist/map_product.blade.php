@@ -274,7 +274,7 @@
                                                     </td>
                                                     <td><input type="text" class="form-control" name="variant_cost[]" value="{{$variant->price}}" placeholder="$0.00"></td>
                                                     <td><input type="text" class="form-control" name="variant_quantity[]" value="{{$variant->inventory_quantity}}" placeholder="0"></td>
-                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="{{$variant->sku}}"></td>
+                                                    <td><input type="text" required class="form-control" name="variant_sku[]" value="{{$variant->sku}}"></td>
                                                     <td><input type="text" class="form-control" name="variant_barcode[]" value="{{$variant->barcode}}" placeholder=""></td>
                                                 </tr>
                                                     @endforeach
