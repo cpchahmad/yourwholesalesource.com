@@ -85,7 +85,7 @@ class AppServiceProvider extends ServiceProvider
               }
             }
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
-            $notifications_count = $query->orderBy('created_at','DESC')->count();
+            $notifications_count = $query->count();
 
             $wishlist_request_count = Wishlist::where('status_id', 1)->count();
             $wishlist_accept_count = Wishlist::where('status_id', 3)->count();
