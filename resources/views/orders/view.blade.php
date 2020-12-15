@@ -210,8 +210,11 @@
 
 
                                         <td style="width: 30%">
-                                            {{$item->name}}
-
+                                            @if($item->linked_product != null && $item->linked_product->linked_product != null)
+                                                <a href="{{ route('product.view', $item->linked_product->linked_product->id) }}">{{$item->name}}</a>
+                                            @else
+                                                {{$item->name}}
+                                            @endif
                                         </td>
                                         <td>
                                             @if($item->fulfilled_by == 'store')
