@@ -11,6 +11,7 @@ use App\Exports\RetailerOrderExport;
 use App\Image;
 use App\Mail\ProductDeleteMail;
 use App\Mail\ProductStockOutMail;
+use App\Mail\VariantStockOutMail;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerImage;
@@ -978,6 +979,30 @@ class ProductController extends Controller
                         $variant->barcode = $request->input('single-var-barcode-'.$id);
 
                         if($variant->quantity == 0) {
+                            // Sending Emails To all Concerned Retailer Stores
+                            if(count($product->has_retailer_products) > 0) {
+                                foreach ($product->has_retailer_products as $retailer_product) {
+                                    $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                                }
+
+                                if(count($users_temp)> 0) {
+                                    $users = [];
+                                    foreach($users_temp as $key => $ut){
+                                        if($ut != null) {
+                                            $ua = [];
+                                            $ua['email'] = $ut;
+                                            $ua['name'] = 'test';
+                                            $users[$key] = (object)$ua;
+                                        }
+                                    }
+
+                                    try{
+                                        Mail::to($users)->send(new VariantStockOutMail($product));
+                                    }
+                                    catch (\Exception $e){
+                                    }
+                                }
+                            }
                             $this->notify->generate('Product','Variant Out Of Stock',$variant->title.' of ' . $product->title . ' is running out of stock, kindly update the stock on your store',$product);
                         }
 
