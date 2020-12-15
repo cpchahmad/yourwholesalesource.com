@@ -540,9 +540,7 @@ class WishlistController extends Controller
 
     public function ProductVariants($admin_product, $shopify_product, $data, $id)
     {
-        dump($data);
         for ($i = 0; $i < count($data->variant_title); $i++) {
-            dump($i, $data->variant_sku[$i]);
             $options = explode('/', $data->variant_title[$i]);
             $variants = new  ProductVariant();
             if (!empty($options[0])) {
@@ -583,6 +581,8 @@ class WishlistController extends Controller
 
         $variants_array = [];
         foreach ($prod->hasVariants as $index => $varaint) {
+
+            dump($varaint);
 
             if ($varaint->has_image != null) {
                 $image_id = $varaint->has_image->shopify_id;
@@ -746,6 +746,7 @@ class WishlistController extends Controller
         $images_array = [];
         //converting variants into shopify api format
         $variants_array = $this->variants_template_array($product, $variants_array);
+
         /*Product Options*/
         $options_array = $this->options_template_array($product, $options_array);
         /*Product Images*/
