@@ -879,6 +879,10 @@ class ProductController extends Controller
                     $product->weight = $request->weight;
                     $product->save();
 
+                    if($product->quantity == 0) {
+                        $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
+                    }
+
                     if (count($product->hasVariants) == 0) {
                         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
                         if(!$response->errors){
@@ -919,6 +923,10 @@ class ProductController extends Controller
                         $variant->quantity = $request->input('single-var-quantity-'.$id);
                         $variant->sku = $request->input('single-var-sku-'.$id);
                         $variant->barcode = $request->input('single-var-barcode-'.$id);
+
+                        if($variant->quantity == 0) {
+                            $this->notify->generate('Product','Variant Out Of Stock',$variant->title.' of ' . $product->title . ' is running out of stock, kindly update the stock on your store',$product);
+                        }
 
 //                        if($request->input('single-var-cost-'.$id) == null) {
 //                            $variant->cost = null;
