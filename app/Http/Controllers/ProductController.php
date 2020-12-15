@@ -10,6 +10,7 @@ use App\Exports\ProductVariantExport;
 use App\Exports\RetailerOrderExport;
 use App\Image;
 use App\Mail\ProductDeleteMail;
+use App\Mail\ProductStockOutMail;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerImage;
@@ -845,6 +846,31 @@ class ProductController extends Controller
                     $product->save();
 
                     if($product->quantity == 0) {
+                        // Sending Emails To all Concerned Retailer Stores
+                        if(count($product->has_retailer_products) > 0) {
+                            foreach ($product->has_retailer_products as $retailer_product) {
+                                $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                            }
+
+                            if(count($users_temp)> 0) {
+                                $users = [];
+                                foreach($users_temp as $key => $ut){
+                                    if($ut != null) {
+                                        $ua = [];
+                                        $ua['email'] = $ut;
+                                        $ua['name'] = 'test';
+                                        $users[$key] = (object)$ua;
+                                    }
+                                }
+
+                                try{
+                                    Mail::to($users)->send(new ProductStockOutMail($product));
+                                }
+                                catch (\Exception $e){
+                                }
+                            }
+                        }
+
                         $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                     }
 
@@ -882,6 +908,31 @@ class ProductController extends Controller
                     $product->save();
 
                     if($product->quantity == 0) {
+                        // Sending Emails To all Concerned Retailer Stores
+                        if(count($product->has_retailer_products) > 0) {
+                            foreach ($product->has_retailer_products as $retailer_product) {
+                                $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                            }
+
+                            if(count($users_temp)> 0) {
+                                $users = [];
+                                foreach($users_temp as $key => $ut){
+                                    if($ut != null) {
+                                        $ua = [];
+                                        $ua['email'] = $ut;
+                                        $ua['name'] = 'test';
+                                        $users[$key] = (object)$ua;
+                                    }
+                                }
+
+                                try{
+                                    Mail::to($users)->send(new ProductStockOutMail($product));
+                                }
+                                catch (\Exception $e){
+                                }
+                            }
+                        }
+
                         $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                     }
 
@@ -1521,24 +1572,26 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
-//        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
-//        $variants = ProductVariant::where('product_id', $id)->get();
-//        foreach ($variants as $variant) {
-//            $variant->delete();
-//        }
-//        foreach ($product->has_images as $image){
-//            $image->delete();
-//        }
-//        $product->has_categories()->detach();
-//        $product->has_subcategories()->detach();
-//
-//        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
-//
-//
-//        $product->delete();
-//
-//        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
+        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+        $variants = ProductVariant::where('product_id', $id)->get();
+        foreach ($variants as $variant) {
+            $variant->delete();
+        }
+        foreach ($product->has_images as $image){
+            $image->delete();
+        }
+        $product->has_categories()->detach();
+        $product->has_subcategories()->detach();
 
+        $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+
+
+        $product->delete();
+
+        // Sending Notification To all Concerned Retailer Stores
+        $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
+
+        // Sending Emails To all Concerned Retailer Stores
         if(count($product->has_retailer_products) > 0) {
             foreach ($product->has_retailer_products as $retailer_product) {
                 $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
