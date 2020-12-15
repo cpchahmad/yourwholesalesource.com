@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,12 +20,14 @@ class VariantStockOutMail extends Mailable
      */
 
     private $product;
+    private $template;
     private $sender = 'info@wefullfill.com';
 
 
     public function __construct(Product $product)
     {
         $this->product = $product;
+        $this->template = EmailTemplate::find(17);
     }
 
     /**
@@ -36,6 +39,7 @@ class VariantStockOutMail extends Mailable
     {
         return $this->from($this->sender,'Wefullfill')->subject('Products Variant Is Out Of Stock on Wefullfill')->view('emails.variant_stock')->with([
             'product' => $this->product,
+            'template' => $this->template,
         ]);
     }
 }

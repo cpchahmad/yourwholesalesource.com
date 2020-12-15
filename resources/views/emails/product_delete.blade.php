@@ -79,10 +79,28 @@
             </div>
 
             <div class="email-content-detail" style="margin: 50px 0;">
-                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">Product removed from Wefullfill</h1>
-                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Dear user, {{ $product->title }} is being removed from Wefullfill, kindly remove this product from your store as well.</p>
+                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">{{ $template->subject }}</h1>
+                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >{{ $template->body }} </p>
 
-                <a href="{{ route('store.my_product.wefulfill.show', $product->id) }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>
+                <div>
+                    @if(count($product->has_images) > 0)
+                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                            @if($index == 0)
+                                @if($image->isV == 0)
+                                    <img class="" style="width: 350px; height: auto; border: 1px solid whitesmoke" src="{{asset('images')}}/{{$image->image}}" >
+                                @else   <img class="" style="width: 350px; height: auto; border: 1px solid whitesmoke" src="{{asset('images/variants')}}/{{$image->image}}" alt="" >
+                                @endif
+                            @endif
+                        @endforeach
+                    @else
+                        <img class="" style="width: 350px; height: auto; border: 1px solid whitesmoke" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg" >
+                    @endif
+
+                    <h3 style="">{{ $product->title }}</h3>
+                </div>
+
+                <br><br><br>
+                <a href="{{ route('store.my_products') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>
             </div>
         </div>
     </div>

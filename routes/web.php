@@ -377,9 +377,9 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
 //
-//Route::get('/test2', function() {
-//    return view('emails.new_products')->with('top_products_stores', \App\Product::all())->with('template', EmailTemplate::find(13));
-//});
+Route::get('/test2', function() {
+    return view('emails.product_delete')->with('product', \App\Product::first())->with('template', EmailTemplate::find(15));
+});
 
 Route::get('/test', function() {
     $date = \Carbon\Carbon::today()->subDays(7);
@@ -388,17 +388,17 @@ Route::get('/test', function() {
     return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
 });
 
-Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
+//Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
 
 //Route::get('/test', 'OrderController@manuallyGetOrders');
 //Route::get('/test2', 'WishlistController@test');
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
-Route::get('/testing', function() {
-    $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->get();
-
-    dd($orders);
-});
+//Route::get('/testing', function() {
+//    $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->get();
+//
+//    dd($orders);
+//});
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,11 +20,13 @@ class ProductDeleteMail extends Mailable
      */
 
     private $product;
+    private $template;
     private $sender = 'info@wefullfill.com';
 
     public function __construct(Product $product)
     {
         $this->product = $product;
+        $this->template = EmailTemplate::find(15);
     }
 
     /**
@@ -35,6 +38,7 @@ class ProductDeleteMail extends Mailable
     {
         return $this->from($this->sender,'Wefullfill')->subject('Product Deleted on Wefullfill')->view('emails.product_delete')->with([
             'product' => $this->product,
+            'template' => $this->template
         ]);
     }
 }
