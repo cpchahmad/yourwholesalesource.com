@@ -981,8 +981,9 @@ class ProductController extends Controller
                         if($variant->quantity == 0) {
                             // Sending Notification Emails To all Concerned Retailer Stores
                             if(count($product->has_retailer_products) > 0) {
+                                $users_temp = [];
                                 foreach ($product->has_retailer_products as $retailer_product) {
-                                    $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
+                                    array_push($users_temp, User::where('id', $retailer_product->user_id)->pluck('email'));
                                 }
 
                                 if(count($users_temp)> 0) {
