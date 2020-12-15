@@ -178,7 +178,7 @@
                 @endif
                     <div class="row">
                         <div class="col-md-12 text-center" style="font-size: 17px">
-                            {!! $users->links() !!}
+                            {!! $users->appends(request()->input())->links() !!}
                         </div>
                     </div>
             </div>
