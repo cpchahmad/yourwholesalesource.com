@@ -847,7 +847,7 @@ class ProductController extends Controller
                     $product->save();
 
                     if($product->quantity == 0) {
-                        // Sending Emails To all Concerned Retailer Stores
+                        // Sending Notification Emails To all Concerned Retailer Stores
                         if(count($product->has_retailer_products) > 0) {
                             foreach ($product->has_retailer_products as $retailer_product) {
                                 $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
@@ -909,7 +909,7 @@ class ProductController extends Controller
                     $product->save();
 
                     if($product->quantity == 0) {
-                        // Sending Emails To all Concerned Retailer Stores
+                        // Sending Notification Emails To all Concerned Retailer Stores
                         if(count($product->has_retailer_products) > 0) {
                             foreach ($product->has_retailer_products as $retailer_product) {
                                 $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
@@ -979,7 +979,7 @@ class ProductController extends Controller
                         $variant->barcode = $request->input('single-var-barcode-'.$id);
 
                         if($variant->quantity == 0) {
-                            // Sending Emails To all Concerned Retailer Stores
+                            // Sending Notification Emails To all Concerned Retailer Stores
                             if(count($product->has_retailer_products) > 0) {
                                 foreach ($product->has_retailer_products as $retailer_product) {
                                     $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
@@ -1616,7 +1616,7 @@ class ProductController extends Controller
         // Sending Notification To all Concerned Retailer Stores
         $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
 
-        // Sending Emails To all Concerned Retailer Stores
+        // Sending Notification Emails To all Concerned Retailer Stores
         if(count($product->has_retailer_products) > 0) {
             foreach ($product->has_retailer_products as $retailer_product) {
                 $users_temp = User::where('id', $retailer_product->user_id)->pluck('email')->toArray();
@@ -1640,6 +1640,7 @@ class ProductController extends Controller
                 }
             }
         }
+
         return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
     }
 
