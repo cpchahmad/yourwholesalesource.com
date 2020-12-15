@@ -267,7 +267,7 @@
                                 <th>Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
-
+                                <th>Stock Status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -452,6 +452,21 @@
                                                 <span class="badge badge-danger"> Partially Fulfilled</span>
                                             @else
                                                 <span class="badge badge-success"> Fulfilled</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @php
+                                                $out_of_stock = 0;
+                                                if($item->linked_variant && $item->linked_variant->quantity == 0)
+                                                    $out_of_stock++;
+                                            @endphp
+
+                                            @if($order->line_items()->count() == $out_of_stock)
+                                                <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
+                                            @elseif($out_of_stock == 0)
+                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>
+                                            @else
+                                                <span class="badge badge-warning" style="font-size: small"> Partial Out of Stock </span>
                                             @endif
                                         </td>
 
