@@ -385,7 +385,9 @@ Route::get('/test2', function() {
 
 Route::get('/test', function() {
     $date = \Carbon\Carbon::today()->subDays(7);
-    $new_products = Product::where('created_at','>=',$date)->where('global', 1)->latest()->limit(6)->get();
+    $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
+
+    dd($new_products);
 
     return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
 });
@@ -396,13 +398,13 @@ Route::get('/test', function() {
 //Route::get('/test2', 'WishlistController@test');
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
-Route::get('/testing', function() {
-    $helper = new HelperController();
-    $shop = $helper->getSpecificShop(108);
-    $response = $shop->api()->rest('GET', '/admin/orders.json');
-
-    dd($response->body->orders[4]);
-});
+//Route::get('/testing', function() {
+//    $helper = new HelperController();
+//    $shop = $helper->getSpecificShop(108);
+//    $response = $shop->api()->rest('GET', '/admin/orders.json');
+//
+//    dd($response->body->orders[4]);
+//});
 
 
 
