@@ -3,9 +3,13 @@
 use App\Customer;
 use App\FulfillmentLineItem;
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\AdminMaintainerController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebhookController;
+use App\Mail\OrderPlaceEmail;
 use App\OrderFulfillment;
 use App\OrderLog;
+use App\OrderTransaction;
 use App\ProductVariant;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
@@ -13,12 +17,17 @@ use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\ShippingRate;
 use App\Shop;
+use App\User;
+use App\WalletLog;
+use App\WalletSetting;
 use App\Zone;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersCreateJob implements ShouldQueue
 {
@@ -54,6 +63,8 @@ class OrdersCreateJob implements ShouldQueue
         $this->shopDomain = $shopDomain;
         $this->data = $data;
         $this->log = new ActivityLogController();
+        $this->notify = new NotificationController();
+        $this->admin = new AdminMaintainerController();
 
     }
 
@@ -301,6 +312,101 @@ class OrdersCreateJob implements ShouldQueue
                 $order_log->status = "Newly Synced";
                 $order_log->retailer_order_id = $new->id;
                 $order_log->save();
+
+                /* Manual Order Payment in case user has enabled settings for it (START)*/
+                $settings = WalletSetting::where('user_id', $new->user_id)->first();
+
+                if($settings && $settings->enable) {
+                    if($new->paid == 0){
+
+                        $user = User::find($new->user_id);
+                        if ($user && $user->has_wallet !== null) {
+                            $wallet = $user->has_wallet;
+                        }
+
+                        if($wallet && $wallet->available >= $new->cost_to_pay){
+                            /*Wallet Deduction*/
+                            $wallet->available =   $wallet->available -  $new->cost_to_pay;
+                            $wallet->used =  $wallet->used + $new->cost_to_pay;
+                            $wallet->save();
+                            /*Maintaining Wallet Log*/
+                            $wallet_log = new WalletLog();
+                            $wallet_log->wallet_id =$wallet->id;
+                            $wallet_log->status = "Order Payment";
+                            $wallet_log->amount = $new->cost_to_pay;
+                            $wallet_log->message = 'An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
+                            $wallet_log->save();
+                            $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+
+                            /*Order placing email*/
+                            $user = User::find($new->user_id);
+                            $manager_email = null;
+                            if($user->has_manager()->count() > 0) {
+                                $manager_email = $user->has_manager->email;
+                            }
+                            $manager_email = $user->has_manager->email;
+                            $users_temp =['info@wefullfill.com',$manager_email];
+                            $users = [];
+
+                            foreach($users_temp as $key => $ut){
+                                if($ut != null) {
+                                    $ua = [];
+                                    $ua['email'] = $ut;
+                                    $users[$key] = (object)$ua;
+                                }
+                            }
+
+                            try{
+                                Mail::to($users)->send(new OrderPlaceEmail($user->email, $new));
+                            }
+                            catch (\Exception $e){
+                            }
+
+                            /*Order Processing*/
+                            $new_transaction = new OrderTransaction();
+                            $new_transaction->amount =  $new->cost_to_pay;
+                            if($new->custom == 0){
+                                $new_transaction->name = $new->has_store->shopify_domain;
+                            }
+                            else{
+                                $new_transaction->name = $user->email;
+                            }
+
+                            $new_transaction->retailer_order_id = $new->id;
+                            $new_transaction->user_id = $new->user_id;
+                            $new_transaction->shop_id = $new->shop_id;
+                            $new_transaction->save();
+                            /*Changing Order Status*/
+                            $new->paid = 1;
+                            if(count($new->fulfillments) > 0){
+                                $new->status = $new->getStatus($new);
+                            }
+                            else{
+                                $new->status = 'Paid';
+                            }
+                            $new->pay_by = 'Wallet';
+                            $new->save();
+
+                            /*Maintaining Log*/
+                            $order_log =  new OrderLog();
+                            $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill through Wallet on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+                            $order_log->status = "paid";
+                            $order_log->retailer_order_id = $new->id;
+                            $order_log->save();
+
+
+                            $this->admin->sync_order_to_admin_store($new);
+                            // $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+
+                            $this->log->store($new->user_id, 'Order', $new->id, $new->name, 'Order Payment Paid');
+                        }
+                        else{
+                            // Do Wallet Amount Notifications Here
+                        }
+                    }
+                }
+                /* Manual Order Payment in case user has enabled settings for it (END)*/
+
 
             }
         }
