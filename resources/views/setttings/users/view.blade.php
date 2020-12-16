@@ -184,8 +184,6 @@
                                                     }
                                                 @endphp
 
-                                                <span>{{ $out_of_stock }}</span>
-
                                                 @if($order->line_items->where('fulfilled_by', 'store')->count() > 0)
                                                     @if($order->line_items()->where('fulfilled_by', 'fantasy')->count() == $out_of_stock)
                                                         <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
