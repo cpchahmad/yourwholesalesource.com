@@ -139,7 +139,7 @@
                                                     if($item->linked_variant && $item->linked_variant->quantity == 0) {
                                                         $out_of_stock += 1;
                                                     }
-                                                    else if($item->linked_product && $item->linked_variant->quantity == 0){
+                                                    else if($item->linked_product && $item->linked_product->quantity == 0){
                                                         $out_of_stock += 1;
                                                     }
                                                 }
