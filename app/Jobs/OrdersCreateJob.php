@@ -340,11 +340,9 @@ class OrdersCreateJob implements ShouldQueue
                             $wallet_log->save();
 
 
-                            //$this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+                            // ISSUE 1 $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
 
-                            $temp = new WalletSetting();
-                            $temp->user_id = 9999;
-                            $temp->save();
+
 
 
                             /*Order placing email*/
@@ -386,9 +384,7 @@ class OrdersCreateJob implements ShouldQueue
                             $new_transaction->shop_id = $new->shop_id;
                             $new_transaction->save();
 
-                            $temp = new WalletSetting();
-                            $temp->user_id = 88888;
-                            $temp->save();
+
 
 
                             /*Changing Order Status*/
@@ -409,21 +405,20 @@ class OrdersCreateJob implements ShouldQueue
                             $order_log->retailer_order_id = $new->id;
                             $order_log->save();
 
+                            $this->log->store($new->user_id, 'Order', $new->id, $new->name, 'Order Payment Paid');
+
                             $temp = new WalletSetting();
-                            $temp->user_id = 5555;
+                            $temp->user_id = 787878;
                             $temp->save();
 
 
 
                             $this->admin->sync_order_to_admin_store($new);
 
-                            $temp = new WalletSetting();
-                            $temp->user_id = 787878;
-                            $temp->save();
+
 
                             // $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
-                            $this->log->store($new->user_id, 'Order', $new->id, $new->name, 'Order Payment Paid');
                         }
                         else{
                             // Do Wallet Amount Notifications Here
