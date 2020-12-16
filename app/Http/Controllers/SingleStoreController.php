@@ -314,6 +314,8 @@ class SingleStoreController extends Controller
         $shop = ShopifyApp::shop();
         /*Local Shop Model!*/
         $shop = Shop::find($shop->id);
+        $user = $shop->has_user->first();
+
         if (count($shop->has_user) > 0) {
             $associated_user = $shop->has_user[0];
         } else {
@@ -321,6 +323,7 @@ class SingleStoreController extends Controller
         }
         return view('single-store.index')->with([
             'shop' => $shop,
+            'user' => $user,
             'associated_user' => $associated_user,
             'countries' => Country::all()
         ]);
