@@ -22,6 +22,7 @@ use App\Ticket;
 use App\TicketCategory;
 use App\User;
 use App\Wishlist;
+use App\WishlistStatus;
 use App\Zone;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -558,6 +559,7 @@ class SingleStoreController extends Controller
         return view('single-store.wishlist.index')->with([
             'shop' => $shop,
             'wishlist' => $wishlist,
+            'statuses' => WishlistStatus::all(),
             'countries' => Country::all(),
         ]);
     }
