@@ -317,16 +317,8 @@ class OrdersCreateJob implements ShouldQueue
                 $settings = WalletSetting::where('user_id', $new->user_id)->first();
 
                 if($settings && $settings->enable) {
-                    $temp = new WalletSetting();
-                    $temp->user_id = 99999;
-                    $temp->save();
 
                     if($new->paid == 0){
-
-                        $temp = new WalletSetting();
-                        $temp->user_id = 88888;
-                        $temp->save();
-
 
                         $user = User::find($new->user_id);
                         if ($user && $user->has_wallet != null) {
@@ -334,10 +326,6 @@ class OrdersCreateJob implements ShouldQueue
                         }
 
                         if($wallet && $wallet->available >= $new->cost_to_pay){
-                            $temp = new WalletSetting();
-                            $temp->user_id = 55555;
-                            $temp->save();
-
 
                             /*Wallet Deduction*/
                             $wallet->available =   $wallet->available -  $new->cost_to_pay;
@@ -351,6 +339,10 @@ class OrdersCreateJob implements ShouldQueue
                             $wallet_log->message = 'An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
                             $wallet_log->save();
                             $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+
+                            $temp = new WalletSetting();
+                            $temp->user_id = 123443;
+                            $temp->save();
 
                             /*Order placing email*/
 //                            $user = User::find($new->user_id);
@@ -390,6 +382,10 @@ class OrdersCreateJob implements ShouldQueue
                             $new_transaction->user_id = $new->user_id;
                             $new_transaction->shop_id = $new->shop_id;
                             $new_transaction->save();
+
+                            $temp = new WalletSetting();
+                            $temp->user_id = 6767676;
+                            $temp->save();
                             /*Changing Order Status*/
                             $new->paid = 1;
                             if(count($new->fulfillments) > 0){
