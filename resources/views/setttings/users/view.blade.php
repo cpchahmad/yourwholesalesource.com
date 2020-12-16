@@ -175,7 +175,7 @@
                                             <td>
                                                 @php
                                                     $out_of_stock = 0;
-                                                    foreach($order->line_items as $item) {
+                                                    foreach($order->line_items->where('fulfilled_by', 'fantasy')->get() as $item) {
                                                         if($item->linked_variant == null)
                                                             $out_of_stock += 1;
 
