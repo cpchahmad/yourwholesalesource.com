@@ -338,11 +338,16 @@ class OrdersCreateJob implements ShouldQueue
                             $wallet_log->amount = $new->cost_to_pay;
                             $wallet_log->message = 'An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
                             $wallet_log->save();
-                            $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
-
                             $temp = new WalletSetting();
                             $temp->user_id = 123443;
                             $temp->save();
+
+                            $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+
+                            $temp = new WalletSetting();
+                            $temp->user_id = 9999;
+                            $temp->save();
+
 
                             /*Order placing email*/
 //                            $user = User::find($new->user_id);
@@ -383,9 +388,7 @@ class OrdersCreateJob implements ShouldQueue
                             $new_transaction->shop_id = $new->shop_id;
                             $new_transaction->save();
 
-                            $temp = new WalletSetting();
-                            $temp->user_id = 6767676;
-                            $temp->save();
+
                             /*Changing Order Status*/
                             $new->paid = 1;
                             if(count($new->fulfillments) > 0){
