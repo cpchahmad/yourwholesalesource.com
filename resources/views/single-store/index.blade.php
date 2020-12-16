@@ -89,8 +89,8 @@
                                     <h3 class="block-title">Auto Wallet Order Payment Setting</h3>
 
                                     <div class="custom-control custom-switch custom-control-success mb-1">
-                                        <input @if(auth()->user()->has_wallet_setting && auth()->user()->has_wallet_setting->enable)checked="" @endif data-route="{{route('store.save.wallet.settings',auth()->user()->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input wallet-switch" id="wallet_setting" name="example-sw-success2">
-                                        <label class="custom-control-label status-text" for="wallet_setting">@if(auth()->user()->has_wallet_setting && auth()->user()->has_wallet_setting->enable) Published @else Draft @endif</label>
+                                        <input @if(auth()->user()->has_wallet_setting()->count() > 0 && auth()->user()->has_wallet_setting->enable)checked="" @endif data-route="{{route('store.save.wallet.settings',auth()->user()->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input wallet-switch" id="wallet_setting" name="example-sw-success2">
+                                        <label class="custom-control-label status-text" for="wallet_setting">@if(auth()->user()->has_wallet_setting()->count() > 0 && auth()->user()->has_wallet_setting->enable) Published @else Draft @endif</label>
                                     </div>
                                 </div>
                             </div>
