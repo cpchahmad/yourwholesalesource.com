@@ -559,11 +559,13 @@ class SingleStoreController extends Controller
 //        }
         if($request->has('status')){
             if($request->input('status') != null){
-                $wishlist = Wishlist::where('user_id', $user->id)
-                        ->orWhere('shop_id', $shop->id)
-                        ->where('status_id','=',$request->input('status'))
+                $wishlist = Wishlist::where('status_id','=',$request->input('status'))
+//                        ->where('user_id', $user->id)
+//                        ->orWhere('shop_id', $shop->id)
                         ->orderBy('created_at','DESC')
                         ->paginate(30);
+
+                dd($wishlist);
             }
 
             return view('single-store.wishlist.index')->with([
