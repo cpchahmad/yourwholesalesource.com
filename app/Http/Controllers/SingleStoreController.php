@@ -553,17 +553,18 @@ class SingleStoreController extends Controller
         $shop = $this->helper->getLocalShop();
         $user = $shop->has_user()->first();
 
-        $wishlist = Wishlist::query();
 //        if($request->has('search')){
 //            $wishlist->where('product_name','LIKE','%'.$request->input('search').'%');
 //            $wishlist->orwhere('description','LIKE','%'.$request->input('search').'%');
 //        }
         if($request->has('status')){
             if($request->input('status') != null){
-                $wishlist->where('user_id', $user->id)->orWhere('shop_id', $shop->id)->where('status_id','=',$request->input('status'));
-                dd($wishlist->get());
+                $wishlist = Wishlist::where('user_id', $user->id)
+                        ->orWhere('shop_id', $shop->id)
+                        ->where('status_id','=',$request->input('status'))
+                        ->orderBy('created_at','DESC')
+                        ->paginate(30);
             }
-            $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
 
             return view('single-store.wishlist.index')->with([
                 'shop' => $shop,
@@ -574,7 +575,11 @@ class SingleStoreController extends Controller
             ]);
         }
 
-        $wishlist = $wishlist->where('user_id', $user->id)->orWhere('shop_id', $shop->id)->orderBy('created_at','DESC')->paginate(30);
+        $wishlist = Wishlist::where('user_id', $user->id)
+            ->orWhere('shop_id', $shop->id)
+            ->orderBy('created_at','DESC')
+            ->paginate(30);
+
         return view('single-store.wishlist.index')->with([
             'shop' => $shop,
             'wishlist' => $wishlist,
