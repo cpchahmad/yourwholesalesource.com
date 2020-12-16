@@ -28,7 +28,7 @@
                         <input type="search" class="form-control" placeholder="Search by name" value="" name="search">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                            <a class="btn btn-danger" href=""> <i class="fa fa-times"></i> Clear </a>
+                            <a class="btn btn-danger" href="/store/wishlist"> <i class="fa fa-times"></i> Clear </a>
                         </div>
                     </div>
                 </div>
