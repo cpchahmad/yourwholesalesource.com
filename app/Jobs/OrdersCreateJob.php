@@ -320,7 +320,7 @@ class OrdersCreateJob implements ShouldQueue
                     if($new->paid == 0){
 
                         $user = User::find($new->user_id);
-                        if ($user && $user->has_wallet !== null) {
+                        if ($user && $user->has_wallet != null) {
                             $wallet = $user->has_wallet;
                         }
 
@@ -339,28 +339,28 @@ class OrdersCreateJob implements ShouldQueue
                             $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
 
                             /*Order placing email*/
-                            $user = User::find($new->user_id);
-                            $manager_email = null;
-                            if($user->has_manager()->count() > 0) {
-                                $manager_email = $user->has_manager->email;
-                            }
-                            $manager_email = $user->has_manager->email;
-                            $users_temp =['info@wefullfill.com',$manager_email];
-                            $users = [];
-
-                            foreach($users_temp as $key => $ut){
-                                if($ut != null) {
-                                    $ua = [];
-                                    $ua['email'] = $ut;
-                                    $users[$key] = (object)$ua;
-                                }
-                            }
-
-                            try{
-                                Mail::to($users)->send(new OrderPlaceEmail($user->email, $new));
-                            }
-                            catch (\Exception $e){
-                            }
+//                            $user = User::find($new->user_id);
+//                            $manager_email = null;
+//                            if($user->has_manager()->count() > 0) {
+//                                $manager_email = $user->has_manager->email;
+//                            }
+//                            $manager_email = $user->has_manager->email;
+//                            $users_temp =['info@wefullfill.com',$manager_email];
+//                            $users = [];
+//
+//                            foreach($users_temp as $key => $ut){
+//                                if($ut != null) {
+//                                    $ua = [];
+//                                    $ua['email'] = $ut;
+//                                    $users[$key] = (object)$ua;
+//                                }
+//                            }
+//
+//                            try{
+//                                Mail::to($users)->send(new OrderPlaceEmail($user->email, $new));
+//                            }
+//                            catch (\Exception $e){
+//                            }
 
                             /*Order Processing*/
                             $new_transaction = new OrderTransaction();
