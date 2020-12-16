@@ -15,6 +15,7 @@ use App\EmailTemplate;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
+use App\Shop;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -395,9 +396,11 @@ Route::get('/test', function() {
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
 Route::get('/testing', function() {
-    $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->pluck('name')->toArray();
+    $shop = Shop::where('id', 108)->first();
 
-    dd($orders);
+    $response = $shop->api()->rest('GET', '/admin/orders.json');
+
+    dd($response);
 });
 
 
