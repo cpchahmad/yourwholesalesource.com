@@ -34,7 +34,7 @@
                 </div>
             </form>
 
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end pr-0">
                 <div class="col-md-6  mb2">
                     <form class="d-flex text-right" action="" method="get">
                         <select name="status" style="margin-left: 10px" class="form-control">

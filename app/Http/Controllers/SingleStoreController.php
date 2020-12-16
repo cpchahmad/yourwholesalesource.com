@@ -559,9 +559,10 @@ class SingleStoreController extends Controller
             $wishlist->orwhere('description','LIKE','%'.$request->input('search').'%');
         }
         if($request->has('status')){
+            dump(123);
             if($request->input('status') != null){
+                dump($request->input('status'));
                 $wishlist->where('status_id','=',$request->input('status'));
-
             }
         }
         $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
