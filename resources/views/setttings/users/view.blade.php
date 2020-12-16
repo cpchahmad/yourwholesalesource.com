@@ -446,13 +446,13 @@
                                                                      @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                                      @if($index == 0)
                                                                      @if($image->isV == 0)
-                                                                        @if(strpos($image->image, 'cdn.shopify.com') === true)
+                                                                        @if(strpos($image->image, 'cdn.shopify.com') == true)
                                                                             src="{{$image->image}}"
                                                                         @else
                                                                             src="{{asset('images')}}/{{$image->image}}"
                                                                         @endif
                                                                      @else
-                                                                         @if(strpos($image->image, 'cdn.shopify.com') === true)
+                                                                         @if(strpos($image->image, 'cdn.shopify.com') == true)
                                                                             src="{{$image->image}}"
                                                                          @else
                                                                             src="{{asset('images/variants')}}/{{$image->image}}"
