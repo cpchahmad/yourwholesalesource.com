@@ -554,10 +554,24 @@ class SingleStoreController extends Controller
         $user = $shop->has_user()->first();
 
 
-//        if($request->has('search')){
-//            $wishlist->where('product_name','LIKE','%'.$request->input('search').'%');
-//            $wishlist->orwhere('description','LIKE','%'.$request->input('search').'%');
-//        }
+        if($request->has('search')){
+            $wishlist = Wishlist::where('product_name','LIKE','%'.$request->input('search').'%')
+                ->orwhere('description','LIKE','%'.$request->input('search').'%')
+                ->where('user_id', $user->id)
+//                        ->orWhere('shop_id', $shop->id)
+                ->orderBy('created_at','DESC')
+                ->paginate(30);
+
+            return view('single-store.wishlist.index')->with([
+                'shop' => $shop,
+                'wishlist' => $wishlist,
+                'statuses' => WishlistStatus::all(),
+                'selected_status' =>$request->input('status'),
+                'countries' => Country::all(),
+            ]);
+
+        }
+
         if($request->has('status')){
             if($request->input('status') != null){
                 $wishlist = Wishlist::where('status_id','=',$request->input('status'))
