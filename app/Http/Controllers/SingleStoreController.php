@@ -570,7 +570,7 @@ class SingleStoreController extends Controller
 
             return view('single-store.wishlist.index')->with([
                 'shop' => $shop,
-//                'wishlist' => $wishlist,
+                'wishlist' => $wishlist,
                 'statuses' => WishlistStatus::all(),
                 'selected_status' =>$request->input('status'),
                 'countries' => Country::all(),
