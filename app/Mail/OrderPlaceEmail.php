@@ -21,7 +21,7 @@ class OrderPlaceEmail extends Mailable
      * @return void
      */
 
-    private $user = "cp.chahmad@gmail.com";
+    private $user = "order@wefullfill.com";
 
     private $sender;
     private $retailerOrder;
