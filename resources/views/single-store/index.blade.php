@@ -90,7 +90,7 @@
 
                                     <div class="custom-control custom-switch custom-control-success mb-1">
                                         <input @if($user->has_wallet_settings && $user->has_wallet_settings->enable)checked="" @endif data-route="{{route('store.save.wallet.settings',$user->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input wallet-switch" id="wallet_setting" name="example-sw-success2">
-                                        <label class="custom-control-label status-text" for="wallet_setting">@if($user->has_wallet_settings && $user->has_wallet_settings->enable) Published @else Draft @endif</label>
+                                        <label class="custom-control-label status-text" for="wallet_setting">@if($user->has_wallet_settings && $user->has_wallet_settings->enable) Enabled @else Disabled @endif</label>
                                     </div>
                                 </div>
                             </div>

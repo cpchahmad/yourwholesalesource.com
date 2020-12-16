@@ -169,7 +169,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
         Route::post('/settings/personal/address','SingleStoreController@save_address')->name('store.save_address');
-        Route::post('/wallet/settings','SingleStoreController@saveWalletSettings')->name('store.save.wallet.settings');
+        Route::post('/wallet/settings/{id}','SingleStoreController@saveWalletSettings')->name('store.save.wallet.settings');
         Route::get('/products/wefullfill','SingleStoreController@wefullfill_products')->name('store.product.wefulfill');
         Route::get('/products/wefullfill/{id}','SingleStoreController@view_fantasy_product')->name('store.product.wefulfill.show');
         Route::get('/my_products/wefullfill/{id}','SingleStoreController@view_my_product')->name('store.my_product.wefulfill.show');

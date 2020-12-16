@@ -985,6 +985,10 @@ class SingleStoreController extends Controller
         return view('videos.shopify');
     }
 
+    public function saveWalletSettings(Request $request, $id) {
+        dd($request->all(), $id);
+    }
+
 
 
 
