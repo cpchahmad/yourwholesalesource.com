@@ -12,6 +12,7 @@
 */
 
 use App\EmailTemplate;
+use App\Http\Controllers\HelperController;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
@@ -396,8 +397,8 @@ Route::get('/test', function() {
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
 Route::get('/testing', function() {
-    $shop = Shop::where('id', 108)->first();
-
+    $helper = new HelperController();
+    $shop = $helper->getSpecificShop(108);
     $response = $shop->api()->rest('GET', '/admin/orders.json');
 
     dd($response);
