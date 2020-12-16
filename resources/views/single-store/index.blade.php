@@ -56,32 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="block">
-                                <div class="block-header">
-                                    <h3 class="block-title">List of stores attached</h3>
-                                </div>
-                                <div class="block-content ">
-                                    <table class="js-table-sections table table-hover">
-                                        <tbody>
-                                        @foreach($associated_user->has_shops as $index => $shop)
-                                            <tr>
 
-                                                <td class="font-w600" style="vertical-align: middle">
-                                                    {{explode('.',$shop->shopify_domain)[0]}}
-                                                </td>
-                                                <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
-                                                {{--                                                <td class="text-right" style="vertical-align: middle">--}}
-                                                {{--                                                    <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger"--}}
-                                                {{--                                                       type="button" data-toggle="tooltip" title=""--}}
-                                                {{--                                                       data-original-title="Remove Store"><i class="fa fa-times"></i></a>--}}
-
-                                                {{--                                                </td>--}}
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
 
 
 {{--                            <div class="block">--}}
