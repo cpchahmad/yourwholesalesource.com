@@ -566,7 +566,6 @@ class SingleStoreController extends Controller
                         ->orderBy('created_at','DESC')
                         ->paginate(30);
 
-                dd($wishlist);
             }
 
             return view('single-store.wishlist.index')->with([
