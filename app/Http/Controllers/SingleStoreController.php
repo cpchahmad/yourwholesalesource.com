@@ -565,7 +565,6 @@ class SingleStoreController extends Controller
             }
         }
         $wishlist = $wishlist->orderBy('created_at','DESC')->paginate(30);
-        $wishlist = $wishlist->orderBy('created_at', 'DESC')->paginate(30);
 
         return view('single-store.wishlist.index')->with([
             'shop' => $shop,
