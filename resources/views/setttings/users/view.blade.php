@@ -189,6 +189,7 @@
                                                     @if($order->line_items()->count() == $out_of_stock)
                                                         <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
                                                     @elseif($out_of_stock == 0)
+                                                        <span>{{ $out_of_stock }}</span>
                                                         <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                                     @else
                                                         <span class="badge badge-warning" style="font-size: small"> Partial Out of Stock </span>
