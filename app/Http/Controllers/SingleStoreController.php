@@ -21,6 +21,7 @@ use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
 use App\User;
+use App\WalletSetting;
 use App\Wishlist;
 use App\WishlistStatus;
 use App\Zone;
@@ -986,7 +987,10 @@ class SingleStoreController extends Controller
     }
 
     public function saveWalletSettings(Request $request, $id) {
-        dd($request->all(), $id);
+        WalletSetting::updateOrCreate(
+            [ 'user_id' => $id ],
+            [ 'enable' => $request->status ]
+        );
     }
 
 
