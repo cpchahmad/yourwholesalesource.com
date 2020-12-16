@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
         $day = (int) $template->day;
         $time = $template->time;
 
-        $schedule->command('newproduct:cron')->weeklyOn($day, $time);
+        $schedule->command('newproduct:cron')->weeklyOn(3, '8:14');
     }
 
     /**
