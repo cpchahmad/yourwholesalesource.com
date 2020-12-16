@@ -196,6 +196,7 @@
                                                     @else
                                                         <span class="badge badge-warning" style="font-size: small"> Partial out of Stock </span>
                                                     @endif
+                                                @endif
                                             </td>
                                             <td class="text-right">
                                                 <div class="btn-group">
