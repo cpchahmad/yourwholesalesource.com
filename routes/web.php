@@ -401,7 +401,7 @@ Route::get('/testing', function() {
     $shop = $helper->getSpecificShop(108);
     $response = $shop->api()->rest('GET', '/admin/orders.json');
 
-    dd($response->body->orders);
+    dd($response->body->orders[9]);
 });
 
 
