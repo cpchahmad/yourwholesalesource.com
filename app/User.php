@@ -94,6 +94,9 @@ class User extends Authenticatable
     public function has_questionnaire(){
         return $this->hasOne(Questionaire::class,'user_id');
     }
+    public function has_wallet_setting(){
+        return $this->hasOne(WalletSetting::class, 'user_id');
+    }
 
     public function sendPasswordResetNotification($token)
     {

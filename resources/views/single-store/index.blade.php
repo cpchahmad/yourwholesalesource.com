@@ -58,35 +58,40 @@
 
                             <div class="block">
                                 <div class="block-header">
-                                    <h3 class="block-title">Account Details</h3>
+                                    <h3 class="block-title">List of stores attached</h3>
                                 </div>
-                                <div class="block-content">
-                                    <form action="{{route('store.save_personal_info')}}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="hidden" name="user_id" value="{{$associated_user->id}}">
-                                        <div class="image-profile text-center mb2">
-                                            <img class="image-drop img-avatar200"
-                                                 @if($associated_user->profile == null) src="{{asset('assets/media/avatars/avatar0.jpg')}}" @else
-                                                 src="{{asset('managers-profiles')}}/{{$associated_user->profile}}"
-                                                 @endif
-                                                 alt="">
-                                        </div>
-                                        <div class="image-profile text-center mb2">
-                                            <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Profile</a>
-                                            <input type="file" name="profile" class="manager-profile form-control" style="display: none">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Email</label>
-                                            <input disabled type="text"  class="form-control" value="{{$associated_user->email}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Username</label>
-                                            <input type="text" required name="name" class="form-control" value="{{$associated_user->name}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="submit" class="btn btn-primary" value="Save">
-                                        </div>
-                                    </form>
+                                <div class="block-content ">
+                                    <table class="js-table-sections table table-hover">
+                                        <tbody>
+                                        @foreach($associated_user->has_shops as $index => $shop)
+                                            <tr>
+
+                                                <td class="font-w600" style="vertical-align: middle">
+                                                    {{explode('.',$shop->shopify_domain)[0]}}
+                                                </td>
+                                                <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
+                                                {{--                                                <td class="text-right" style="vertical-align: middle">--}}
+                                                {{--                                                    <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger"--}}
+                                                {{--                                                       type="button" data-toggle="tooltip" title=""--}}
+                                                {{--                                                       data-original-title="Remove Store"><i class="fa fa-times"></i></a>--}}
+
+                                                {{--                                                </td>--}}
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="block">
+                                <div class="block-header d-flex justify-content-between">
+                                    <h3 class="block-title">Auto Wallet Order Payment Setting</h3>
+
+                                    <div class="custom-control custom-switch custom-control-success mb-1">
+                                        <input @if(auth()->user()->has_wallet_setting && auth()->user()->has_wallet_setting->enable)checked="" @endif data-route="{{route('store.save.wallet.settings',auth()->user()->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input wallet-switch" id="wallet_setting" name="example-sw-success2">
+                                        <label class="custom-control-label status-text" for="wallet_setting">@if(auth()->user()->has_wallet_setting && auth()->user()->has_wallet_setting->enable) Published @else Draft @endif</label>
+                                    </div>
                                 </div>
                             </div>
 

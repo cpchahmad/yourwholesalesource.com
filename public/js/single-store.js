@@ -1,6 +1,28 @@
 $(document).ready(function () {
 
 
+    // Wallet Setting Switch
+    $('body').on('change','.wallet-switch',function () {
+        var status = '';
+        if($(this).is(':checked')){
+            status = 1;
+            $('.status-text').text('Enabled')
+        }
+        else{
+            status = 0;
+            $('.status-text').text('Disabled')
+        }
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data:{
+                _token: $(this).data('csrf'),
+                status : status
+            }
+        })
+    });
+
+
     /* Shopify Store Module - Dropzone Click JS */
     $('body').on('click','.dropzone',function () {
         $('.images-upload').trigger('click');

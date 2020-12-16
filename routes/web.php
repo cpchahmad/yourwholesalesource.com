@@ -169,6 +169,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
         Route::post('/settings/personal/address','SingleStoreController@save_address')->name('store.save_address');
+        Route::post('/wallet/settings','SingleStoreController@saveWalletSettings')->name('store.save.wallet.settings');
         Route::get('/products/wefullfill','SingleStoreController@wefullfill_products')->name('store.product.wefulfill');
         Route::get('/products/wefullfill/{id}','SingleStoreController@view_fantasy_product')->name('store.product.wefulfill.show');
         Route::get('/my_products/wefullfill/{id}','SingleStoreController@view_my_product')->name('store.my_product.wefulfill.show');
@@ -379,18 +380,18 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
 //});
 //
-Route::get('/test2', function() {
-    return view('emails.product_delete')->with('product', \App\Product::first())->with('template', EmailTemplate::find(15));
-});
-
-Route::get('/test', function() {
-    $date = \Carbon\Carbon::today()->subDays(7);
-    $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
-
-    dd($new_products);
-
-    return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
-});
+//Route::get('/test2', function() {
+//    return view('emails.product_delete')->with('product', \App\Product::first())->with('template', EmailTemplate::find(15));
+//});
+//
+//Route::get('/test', function() {
+//    $date = \Carbon\Carbon::today()->subDays(7);
+//    $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
+//
+//    dd($new_products);
+//
+//    return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
+//});
 
 //Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
 
