@@ -178,7 +178,7 @@
                                                     foreach($order->line_items as $item) {
                                                         if($item->linked_variant && $item->linked_variant->quantity == 0)
                                                         {
-                                                            $out_of_stock++;
+                                                            $out_of_stock += 1;
                                                         }
                                                     }
                                                 @endphp
