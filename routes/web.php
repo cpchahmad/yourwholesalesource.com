@@ -395,7 +395,7 @@ Route::get('/test', function() {
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
 Route::get('/testing', function() {
-    $orders = RetailerOrder::where('shop_id', 117)->orderBy('name', 'DESC')->get();
+    $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->pluck('name')->toArray();
 
     dd($orders);
 });
