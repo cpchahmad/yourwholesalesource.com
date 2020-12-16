@@ -468,7 +468,7 @@
 
                                             @endphp
 
-                                            @if($out_of_stock || ($item->linked_variant == null && $item->product == null))
+                                            @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null))
                                                 <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
                                             @else
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
