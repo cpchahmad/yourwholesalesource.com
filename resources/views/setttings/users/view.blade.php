@@ -446,18 +446,19 @@
                                                                      @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                                      @if($index == 0)
                                                                      @if($image->isV == 0)
-                                                                        @if(strpos($image->image, 'cdn.shopify.com') === TRUE)
-                                                                            src="{{$image->image}}"
-                                                                        @else
-                                                                            src="{{asset('images')}}/{{$image->image}}"
-                                                                        @endif
+{{--                                                                        @if(strpos($image->image, 'cdn.shopify.com') === true)--}}
+{{--                                                                            src="{{$image->image}}"--}}
+{{--                                                                        @else--}}
+{{--                                                                            src="{{asset('images')}}/{{$image->image}}"--}}
+{{--                                                                        @endif--}}
                                                                      @else src="{{asset('images/variants')}}/{{$image->image}}"
                                                                      @endif
                                                                      @endif
                                                                      @endforeach
                                                                      @else
-                                                                     s="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                     src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                                      @endif alt="" class="img-avatar">
+                                                                     <span>{{ $image->image }}</span>
                                                             </td>
                                                             <td>
                                                                 @if($product->linked_product_id != null)
