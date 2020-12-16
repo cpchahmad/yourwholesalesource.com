@@ -302,11 +302,17 @@
                                         <td>
                                             @php
                                                 $out_of_stock = false;
-                                                if($item->linked_variant && $item->linked_variant->quantity == 0)
-                                                    $out_of_stock = true;
+                                                if($item->linked_variant) {
+                                                    if($item->linked_variant->quantity == 0)
+                                                        $out_of_stock = true;
+                                                }
+                                                elseif($item->linked_product){
+                                                    if($item->linked_product->quantity == 0)
+                                                        $out_of_stock = true;
+                                                }
                                             @endphp
 
-                                            @if($out_of_stock || $item->linked_variant == null)
+                                            @if($out_of_stock || ($item->linked_variant == null && $item->product == null))
                                                 <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
                                             @else
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
