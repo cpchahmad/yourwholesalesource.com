@@ -561,7 +561,7 @@ class SingleStoreController extends Controller
         if($request->has('status')){
             if($request->input('status') != null){
                 $wishlist = Wishlist::where('status_id','=',$request->input('status'))
-//                        ->where('user_id', $user->id)
+                        ->where('user_id', $user->id)
 //                        ->orWhere('shop_id', $shop->id)
                         ->orderBy('created_at','DESC')
                         ->paginate(30);
