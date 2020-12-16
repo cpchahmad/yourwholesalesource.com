@@ -394,11 +394,11 @@ Route::get('/test', function() {
 //Route::get('/test2', 'WishlistController@test');
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
-//Route::get('/testing', function() {
-//    $orders = RetailerOrder::where('shop_id', 108)->orderBy('name', 'DESC')->get();
-//
-//    dd($orders);
-//});
+Route::get('/testing', function() {
+    $orders = RetailerOrder::where('shop_id', 117)->orderBy('name', 'DESC')->get();
+
+    dd($orders);
+});
 
 
 
