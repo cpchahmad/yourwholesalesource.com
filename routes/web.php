@@ -412,7 +412,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 
 Route::get('/test', function() {
-    $users_temp = User::find(2)->pluck('email')->toArray();
+    $users_temp = User::where('id', 2)->pluck('email')->toArray();
 
     $users = [];
 
