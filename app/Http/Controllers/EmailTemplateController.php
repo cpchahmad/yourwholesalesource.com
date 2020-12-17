@@ -101,8 +101,6 @@ class EmailTemplateController extends Controller
         if($request->hasFile('banner')){
             $file = $request->file('banner');
 
-            dd($file);
-
             $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
             $attachement = date("mmYhisa_") . $name;
             $file->move(public_path() . '/ticket-attachments/', $attachement);

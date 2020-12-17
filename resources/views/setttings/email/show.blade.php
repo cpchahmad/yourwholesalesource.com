@@ -150,7 +150,7 @@
                             <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 35%">
                         </div>
                         @isset($edit)
-                            <form action="{{ route('admin.emails.update', $template->id) }}" method="POST">
+                            <form action="{{ route('admin.emails.update', $template->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="email-content-detail" style="margin: 50px 0;">
