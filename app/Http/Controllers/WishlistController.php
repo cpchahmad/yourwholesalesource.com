@@ -483,8 +483,16 @@ class WishlistController extends Controller
                 $retailerProductVariant->option1 = $variant->option1;
                 $retailerProductVariant->option2 = $variant->option2;
                 $retailerProductVariant->option3 = $variant->option3;
-                $retailerProductVariant->price = $wishlist->approved_price;
-                $retailerProductVariant->cost = $wishlist->approved_price;
+
+                if($admin_product) {
+                    $retailerProductVariant->price = $admin_product->price;
+                    $retailerProductVariant->cost = $admin_product->price;
+                }
+                else {
+                    $retailerProductVariant->price = $wishlist->approved_price;
+                    $retailerProductVariant->cost = $wishlist->approved_price;
+                }
+
                 $retailerProductVariant->quantity = $variant->inventory_quantity;
                 $retailerProductVariant->sku = $variant->sku;
                 $retailerProductVariant->barcode = $variant->barcode;
