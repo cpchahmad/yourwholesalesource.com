@@ -694,6 +694,10 @@
                                     </div>
                                 @endif
 
+                                @if($template->id == '18')
+                                    <img style="width: 100%;max-width: 250px; height: auto;" src="{{asset('email-banners')}}/{{$template->banner}}" alt="">
+                                @endif
+
                                 <br><br>
                                 <hr>
 
