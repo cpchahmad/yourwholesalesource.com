@@ -390,7 +390,7 @@
                                                 <input class="form-control form-control-lg" id="formFileLg" type="file" name="banner" required />
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" name="time" value="{{ $template->time }}" class="js-flatpickr form-control bg-white js-flatpickr-enabled flatpickr-input active" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true" readonly="readonly">
+                                                <input type="text" name="time" value="{{ $template->time }}" class="js-flatpickr form-control bg-white js-flatpickr-enabled flatpickr-input" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true" readonly="readonly">
                                             </div>
                                         </div>
 
