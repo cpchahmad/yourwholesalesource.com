@@ -424,14 +424,26 @@ class WishlistController extends Controller
             $retailerProduct = new RetailerProduct();
         }
 
+
+
+
         $retailerProduct->shopify_id = $product->id;
         $retailerProduct->title = $product->title;
         $retailerProduct->description = $product->body_html;
         $retailerProduct->type = $product->product_type;
         $retailerProduct->tags = $product->tags;
         $retailerProduct->vendor = $product->vendor;
-        $retailerProduct->price = $wishlist->approved_price;
-        $retailerProduct->cost = $wishlist->approved_price;
+        $admin_product = Product::find($linked_product_id);
+
+        if($admin_product) {
+            $retailerProduct->price = $admin_product->price;
+            $retailerProduct->cost = $admin_product->price;
+        }
+        else {
+            $retailerProduct->price = $wishlist->approved_price;
+            $retailerProduct->cost = $wishlist->approved_price;
+        }
+
 
         if (count($product->variants) > 0) {
             $retailerProduct->variants = 1;

@@ -1624,7 +1624,10 @@ class ProductController extends Controller
         if(count($product->has_retailer_products) > 0) {
             $users_temp = [];
             foreach ($product->has_retailer_products as $retailer_product) {
-                array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
+                $u = User::find($retailer_product->user_id);
+                if($u){
+                    array_push($users_temp, $u->email);
+                }
             }
 
             if(count($users_temp)> 0) {
