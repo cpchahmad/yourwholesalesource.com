@@ -387,7 +387,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input class="form-control form-control-lg" id="formFileLg" type="file" name="banner" />
+                                                <input class="form-control form-control-lg" id="formFileLg" type="file" name="banner" required />
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="text" class="js-flatpickr form-control bg-white" value="{{ $template->time }}" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
