@@ -343,7 +343,13 @@ class OrdersCreateJob implements ShouldQueue
                             $wallet_log->save();
 
 
-                            // ISSUE 1 $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+                            try{
+                                $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($new->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+                            }catch (\Exception $e) {
+                                $log = new ErrorLog();
+                                $log->message = $e->getMessage();
+                                $log->save();
+                            }
 
 
 
