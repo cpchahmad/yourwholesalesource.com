@@ -381,6 +381,24 @@
                                         <br><br><br>
                                     @endif
 
+                                    @if($template->id == '18')
+                                        <div class="text-left">
+                                            <label for="" style="color: #7daa40 !important;">Adjust Time</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="formFileLg" class="form-label">Select Banner</label>
+                                                <input class="form-control form-control-lg" id="formFileLg" type="file" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="js-flatpickr form-control bg-white" value="{{ $template->time }}" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
+                                            </div>
+                                        </div>
+
+                                        <br><br><br>
+                                    @endif
+
+
                                     @if($template->id == '1' || $template->id == '2')
                                         <a class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Help Center</a>
                                     @elseif($template->id == '13' ||$template->id == '14')
