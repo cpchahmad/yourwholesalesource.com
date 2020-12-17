@@ -425,7 +425,7 @@ Route::get('/test', function() {
     }
 
     try{
-        Mail::to($users)->later(now()->addMinutes(3), new NewsEmail());
+        Mail::to($users)->later(now()->addMinutes(10), new NewsEmail());
     }
     catch (\Exception $e){
     }
