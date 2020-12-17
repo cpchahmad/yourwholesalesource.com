@@ -98,6 +98,14 @@ class EmailTemplateController extends Controller
         if($request->time) {
             $template->time = $request->time;
         }
+        if($request->hasFile('banner')){
+            $file = $request->file('banner');
+
+            $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
+            $attachement = date("mmYhisa_") . $name;
+            $file->move(public_path() . '/ticket-attachments/', $attachement);
+            $template->banner = $attachement;
+        }
 
         $template->save();
 
