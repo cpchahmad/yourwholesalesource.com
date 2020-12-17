@@ -408,7 +408,7 @@ class OrdersCreateJob implements ShouldQueue
 
                                 $this->log->store($new->user_id, 'Order', $new->id, $new->name, 'Order Payment Paid');
 
-                                $this->dmin->sync_order_to_admin_store($new);
+                                $this->admin->sync_order_to_admin_store($new);
 
                                 // $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
