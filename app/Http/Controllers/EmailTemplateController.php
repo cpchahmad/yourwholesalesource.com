@@ -87,7 +87,7 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->time);
+
 
         $template = EmailTemplate::find($id);
         $template->subject = $request->subject;
@@ -120,23 +120,23 @@ class EmailTemplateController extends Controller
 //                ->pluck('email')
 //                ->toArray();
 
-            $users_temp = User::find(2)->pluck('email')->toArray();
-
-            $users = [];
-
-            foreach($users_temp as $key => $ut){
-                if($ut != null) {
-                    $ua = [];
-                    $ua['email'] = $ut;
-                    $users[$key] = (object)$ua;
-                }
-            }
-
-            try{
-                Mail::to($users)->later(now()->addMinutes(10), new NewsEmail());
-            }
-            catch (\Exception $e){
-            }
+//            $users_temp = User::find(2)->pluck('email')->toArray();
+//
+//            $users = [];
+//
+//            foreach($users_temp as $key => $ut){
+//                if($ut != null) {
+//                    $ua = [];
+//                    $ua['email'] = $ut;
+//                    $users[$key] = (object)$ua;
+//                }
+//            }
+//
+//            try{
+//                Mail::to($users)->later(now()->addMinutes(10), new NewsEmail());
+//            }
+//            catch (\Exception $e){
+//            }
 
         }
 

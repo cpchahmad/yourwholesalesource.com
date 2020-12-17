@@ -424,6 +424,8 @@ Route::get('/test', function() {
         }
     }
 
+    dd($users);
+
     try{
         Mail::to($users)->later(now()->addMinutes(2), new NewsEmail());
     }
