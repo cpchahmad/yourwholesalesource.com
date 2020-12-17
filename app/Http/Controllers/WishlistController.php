@@ -452,6 +452,7 @@ class WishlistController extends Controller
         $retailerProduct->fulfilled_by = 'Fantasy';
         $retailerProduct->toShopify = 1;
         $retailerProduct->shop_id = $wishlist->shop_id;
+        $retailerProduct->user_id = $wishlist->user_id;
         $retailerProduct->import_from_shopify = 1;
         $retailerProduct->save();
 
