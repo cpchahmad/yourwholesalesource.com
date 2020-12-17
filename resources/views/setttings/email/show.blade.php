@@ -383,12 +383,14 @@
 
                                     @if($template->id == '18')
                                         <div class="text-left">
-                                            <label for="" style="color: #7daa40 !important;">Adjust Time</label>
+                                            <label for="" style="color: #7daa40 !important;">Adjust Time and Select Banner</label>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label for="formFileLg" class="form-label">Select Banner</label>
-                                                <input class="form-control form-control-lg" id="formFileLg" type="file" />
+                                                <div class="input-group mb-3">
+                                                    <input type="file" class="form-control" id="inputGroupFile02">
+                                                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <input type="text" class="js-flatpickr form-control bg-white" value="{{ $template->time }}" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
