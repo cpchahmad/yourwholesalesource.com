@@ -415,7 +415,7 @@ class OrdersCreateJob implements ShouldQueue
 
                             }
                             else{
-                                $this->notify->generate('Wallet','Auto Wallet Order Payment Failure','Your Wallet amount is not enough for making payment for this order, kindly top-up your wallet',$wallet);
+                                $this->notify->generate('Wallet','Auto Wallet Order Payment Failure','Your Wallet amount is not enough for making payment for '. $new->name .' kindly top-up your wallet',$wallet);
                             }
                         }
                     }
