@@ -5,6 +5,7 @@ use App\ErrorLog;
 use App\FulfillmentLineItem;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdminMaintainerController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebhookController;
 use App\Mail\OrderPlaceEmail;
@@ -51,6 +52,7 @@ class OrdersCreateJob implements ShouldQueue
     private $log;
     private $notify;
     private $admin;
+    private $inventory;
 
 
 
@@ -69,6 +71,8 @@ class OrdersCreateJob implements ShouldQueue
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
         $this->admin = new AdminMaintainerController();
+        $this->inventory = new InventoryController();
+
 
     }
 
@@ -410,7 +414,7 @@ class OrdersCreateJob implements ShouldQueue
 
                                 $this->admin->sync_order_to_admin_store($new);
 
-                                // $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+                                $this->inventory->OrderQuantityUpdate($new,'new');
 
                             }
                             else{
