@@ -48,6 +48,8 @@ class OrdersCreateJob implements ShouldQueue
      */
     public $data;
     private $log;
+    private $notify;
+    private $admin;
 
 
 
