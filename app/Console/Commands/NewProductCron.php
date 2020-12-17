@@ -64,11 +64,11 @@ class NewProductCron extends Command
 
         if(count($new_products)>5)
         {
-            try{
-                Mail::to($users)->send(new NewProductsMail($new_products));
-            }
-            catch (\Exception $e){
-            }
+//            try{
+//                Mail::to($users)->send(new NewProductsMail($new_products));
+//            }
+//            catch (\Exception $e){
+//            }
         }
 
 //        $users_temp =['yasirnaseer.0@gmail.com'];
