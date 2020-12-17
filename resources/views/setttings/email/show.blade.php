@@ -386,22 +386,11 @@
                                             <label for="" style="color: #7daa40 !important;">Adjust Time and Select Banner</label>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <input class="form-control form-control-lg" id="formFileLg" type="file" name="banner" required />
                                             </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="js-flatpickr form-control bg-white" value="{{ $template->time }}" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select name="day" id="" class="form-control">
-                                                    <option value="1" @if($template->day==1) selected @endif>Monday</option>
-                                                    <option value="2" @if($template->day==2) selected @endif>Tuesday</option>
-                                                    <option value="3" @if($template->day==3) selected @endif>Wednesday</option>
-                                                    <option value="4" @if($template->day==4) selected @endif>Thursday</option>
-                                                    <option value="5" @if($template->day==5) selected @endif>Friday</option>
-                                                    <option value="6" @if($template->day==6) selected @endif>Saturday</option>
-                                                    <option value="7" @if($template->day==7) selected @endif>Sunday</option>
-                                                </select>
+                                            <div class="col-md-6">
+                                                <input type="text" name="time" value="{{ $template->time }}" class="js-flatpickr form-control bg-white js-flatpickr-enabled flatpickr-input active" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true" readonly="readonly">
                                             </div>
                                         </div>
 
