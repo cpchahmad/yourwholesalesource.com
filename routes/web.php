@@ -13,11 +13,14 @@
 
 use App\EmailTemplate;
 use App\Http\Controllers\HelperController;
+use App\Mail\NewsEmail;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
 use App\Shop;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 
@@ -407,5 +410,25 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    dd($response->body->orders[4]);
 //});
 
+
+Route::get('/test', function() {
+    $users_temp = User::find(2)->pluck('email')->toArray();
+
+    $users = [];
+
+    foreach($users_temp as $key => $ut){
+        if($ut != null) {
+            $ua = [];
+            $ua['email'] = $ut;
+            $users[$key] = (object)$ua;
+        }
+    }
+
+    try{
+        Mail::to($users)->later(now()->addMinutes(3), new NewsEmail());
+    }
+    catch (\Exception $e){
+    }
+});
 
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\EmailTemplate;
+use App\Mail\NewProductsMail;
+use App\Mail\NewsEmail;
 use App\Product;
 use App\RetailerOrder;
 use App\Ticket;
@@ -10,6 +12,7 @@ use App\User;
 use App\Wallet;
 use App\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PharIo\Manifest\Email;
 
 class EmailTemplateController extends Controller
@@ -108,6 +111,18 @@ class EmailTemplateController extends Controller
         }
 
         $template->save();
+
+        if($template->id == 18)
+        {
+//            $users_temp = User::role('non-shopify-users')
+//                ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+//                ->pluck('email')
+//                ->toArray();
+
+
+
+        }
+
 
         return redirect()->route('admin.emails.show',$template->id)->with('success','Email Template updated successfully!');
 
