@@ -387,10 +387,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="input-group mb-3">
-                                                    <input type="file" class="form-control" id="inputGroupFile02">
-                                                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                                                </div>
+                                                <input class="form-control form-control-lg" id="formFileLg" type="file" />
                                             </div>
                                             <div class="col-md-6">
                                                 <input type="text" class="js-flatpickr form-control bg-white" value="{{ $template->time }}" name="time" data-enable-time="true" data-no-calendar="true" data-date-format="H:i" data-time_24hr="true">
