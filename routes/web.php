@@ -412,23 +412,23 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 
 Route::get('/test', function() {
-//    $users_temp = User::find(2)->pluck('email')->toArray();
-//
-//    $users = [];
-//
-//    foreach($users_temp as $key => $ut){
-//        if($ut != null) {
-//            $ua = [];
-//            $ua['email'] = $ut;
-//            $users[$key] = (object)$ua;
-//        }
-//    }
-//
-//    try{
-//        Mail::to($users)->later(now()->addMinutes(10), new NewsEmail());
-//    }
-//    catch (\Exception $e){
-//    }
+    $users_temp = User::find(2)->pluck('email')->toArray();
+
+    $users = [];
+
+    foreach($users_temp as $key => $ut){
+        if($ut != null) {
+            $ua = [];
+            $ua['email'] = $ut;
+            $users[$key] = (object)$ua;
+        }
+    }
+
+    try{
+        Mail::to($users)->later(now()->addMinutes(2), new NewsEmail());
+    }
+    catch (\Exception $e){
+    }
 });
 
 
