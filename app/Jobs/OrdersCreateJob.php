@@ -331,7 +331,8 @@ class OrdersCreateJob implements ShouldQueue
                                 $wallet = $user->has_wallet;
                             }
 
-                            if($wallet && $wallet->available >= $new->cost_to_pay){
+//                            if($wallet && $wallet->available >= $new->cost_to_pay){
+                            if(false) {
 
                                 /*Wallet Deduction*/
                                 $wallet->available =   $wallet->available -  $new->cost_to_pay;
@@ -414,7 +415,7 @@ class OrdersCreateJob implements ShouldQueue
 
                             }
                             else{
-                                // Do Wallet Amount Notifications Here
+                                $this->notify->generate('Wallet','Auto Wallet Order Payment Failure','Your Wallet amount is not enough for making payment for this order, kindly top-up your wallet',$wallet);
                             }
                         }
                     }
