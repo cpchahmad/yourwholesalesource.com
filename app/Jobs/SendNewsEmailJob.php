@@ -58,5 +58,8 @@ class SendNewsEmailJob implements ShouldQueue
             catch (\Exception $e){
             }
         }
+
+        $this->campaign->status = 'Completed';
+        $this->campaign->save();
     }
 }

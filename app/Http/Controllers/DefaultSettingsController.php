@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AdminSetting;
+use App\Campaign;
 use App\Customer;
 use App\DefaultInfo;
 use App\Exports\CustomersExport;
@@ -707,6 +708,12 @@ class DefaultSettingsController extends Controller
             'shops' => $shops,
             'non_shopify_users' => $users,
         ]);
+    }
+
+    public function campaigns() {
+        $campaigns = Campaign::latest();
+
+        return view('setttings.campaigns.index')->with('campaigns', $campaigns);
     }
 
 }

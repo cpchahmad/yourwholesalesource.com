@@ -157,6 +157,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/tiered/pricing/preferences', 'DefaultSettingsController@getTieredPricingPreferences')->name('admin.tiered.pricing.preferences');
     Route::get('/general/discounts/preferences', 'DefaultSettingsController@getGeneralDiscountPreferences')->name('admin.general.discount.preferences');
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
+    Route::get('/campaigns', 'DefaultSettingsController@campaigns')->name('email.campaigns.index');
+    Route::get('/campaigns/{id}', 'DefaultSettingsController@getCampaign')->name('email.campaigns.show');
 
 });
 
