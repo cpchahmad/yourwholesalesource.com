@@ -113,31 +113,33 @@ class EmailTemplateController extends Controller
 
         $template->save();
 
-//        if($template->id == 18)
-//        {
+        if($template->id == 18)
+        {
 //            $users_temp = User::role('non-shopify-users')
 //                ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
 //                ->pluck('email')
 //                ->toArray();
-//
-//            $users_temp = User::find(2)->pluck('email')->toArray();
-//
-//            $users = [];
-//
-//            foreach($users_temp as $key => $ut){
-//                if($ut != null) {
-//                    $ua = [];
-//                    $ua['email'] = $ut;
-//                    $users[$key] = (object)$ua;
-//                }
-//            }
-//
+
+            $users_temp = User::where('id', 2)->pluck('email')->toArray();
+
+            $users = [];
+
+            foreach($users_temp as $key => $ut){
+                if($ut != null) {
+                    $ua = [];
+                    $ua['email'] = $ut;
+                    $users[$key] = (object)$ua;
+                }
+            }
+
+            dd($users);
+
 //            try{
 //                Mail::to($users)->later(now()->addMinutes(10), new NewsEmail());
 //            }
 //            catch (\Exception $e){
 //            }
-//        }
+        }
 
 
         return redirect()->route('admin.emails.show',$template->id)->with('success','Email Template updated successfully!');
