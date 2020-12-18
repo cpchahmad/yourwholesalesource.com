@@ -134,7 +134,7 @@ class EmailTemplateController extends Controller
             }
 
             try{
-                Mail::to($users)->later(Carbon::parse($template->time)->setTimezone('America/New_York'), new NewsEmail());
+                Mail::to($users)->later(Carbon::parse($template->time), new NewsEmail());
             }
             catch (\Exception $e){
             }
