@@ -96,10 +96,6 @@ class EmailTemplateController extends Controller
 
         if($template->id == 18)
         {
-            $this->validate($request, [
-                'campaign_name' => 'required|unique:campaigns'
-            ]);
-
             $campaign = new Campaign();
             $campaign->name = $request->campaign_name;
             $campaign->time = $template->time;
@@ -108,7 +104,6 @@ class EmailTemplateController extends Controller
             $campaign->save();
 
             dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($template->time));
-
         }
 
 
