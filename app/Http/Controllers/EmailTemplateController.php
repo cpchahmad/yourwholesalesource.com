@@ -121,7 +121,7 @@ class EmailTemplateController extends Controller
 //                ->pluck('email')
 //                ->toArray();
 
-            $users_temp =['yasirnaseer.0@gmail.com','70069618@student.uol.edu.pk'];
+            $users_temp =['70069618@student.uol.edu.pk','yasirnaseer.0@gmail.com'];
 
             $users = [];
 
@@ -137,7 +137,7 @@ class EmailTemplateController extends Controller
                try{
                     Mail::to($user)->later(Carbon::parse($template->time), new NewsEmail());
                }
-                    catch (\Exception $e){
+               catch (\Exception $e){
                }
            }
 
