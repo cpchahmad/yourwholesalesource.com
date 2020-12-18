@@ -713,8 +713,13 @@ class DefaultSettingsController extends Controller
     public function campaigns() {
         $campaigns = Campaign::orderBy('updated_at', 'DESC')->paginate(20);
 
-
         return view('setttings.campaigns.index')->with('campaigns', $campaigns);
+    }
+
+    public function getCampaign($id) {
+        $campaign = Campaign::find($id);
+
+        return view('setttings.campaigns.show')->with('campaign', $campaign);
     }
 
 }

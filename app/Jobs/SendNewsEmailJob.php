@@ -43,14 +43,14 @@ class SendNewsEmailJob implements ShouldQueue
         $users_temp = User::find(2);
 
 
-        foreach ($users_temp as $user) {
+//        foreach ($users_temp as $user) {
             try{
-                Mail::to($user->email)->send(new NewsEmail());
-                $user->attach($this->campaign->id);
+                Mail::to($users_temp->email)->send(new NewsEmail());
+                $users_temp->attach($this->campaign->id);
             }
             catch (\Exception $e){
             }
-        }
+//        }
 
         $this->campaign->status = 'Completed';
         $this->campaign->save();

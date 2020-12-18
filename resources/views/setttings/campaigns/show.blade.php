@@ -43,7 +43,7 @@
                                 @endforeach
                             </table>
                         @else
-                            <p>No Campaigns</p>
+                            <p>No Receivers Yet</p>
                         @endif
                     </div>
                 </div>
