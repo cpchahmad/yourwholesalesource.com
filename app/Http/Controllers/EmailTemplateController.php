@@ -116,12 +116,10 @@ class EmailTemplateController extends Controller
 
         if($template->id == 18)
         {
-//            $users_temp = User::role('non-shopify-users')
-//                ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-//                ->pluck('email')
-//                ->toArray();
-
-            $users_temp =['70069618@student.uol.edu.pk','yasirnaseer.0@gmail.com'];
+            $users_temp = User::role('non-shopify-users')
+                ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                ->pluck('email')
+                ->toArray();
 
             $users = [];
 

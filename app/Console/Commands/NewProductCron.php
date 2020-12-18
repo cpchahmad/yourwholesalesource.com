@@ -64,33 +64,15 @@ class NewProductCron extends Command
 
         if(count($new_products)>5)
         {
-//            try{
-//                Mail::to($users)->send(new NewProductsMail($new_products));
-//            }
-//            catch (\Exception $e){
-//            }
+            foreach ($users as $user) {
+                try{
+                    Mail::to($user)->send(new NewProductsMail($new_products));
+                }
+                catch (\Exception $e){
+                }
+            }
         }
 
-//        $users_temp =['yasirnaseer.0@gmail.com'];
-//        $users = [];
-//
-//        foreach($users_temp as $key => $ut){
-//            if($ut != null) {
-//                $ua = [];
-//
-//                $ua['email'] = $ut;
-//
-//                $ua['name'] = 'test';
-//
-//                $users[$key] = (object)$ua;
-//            }
-//        }
-//
-//        try{
-//            Mail::to($users)->send(new NewProductsMail($new_products));
-//        }
-//        catch (\Exception $e){
-//
-//        }
+
     }
 }

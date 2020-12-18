@@ -19,7 +19,7 @@ class WishlistReqeustMail extends Mailable
      *
      * @return void
      */
-    private $user = "order@wefullfill.com";
+    private $user = "info@wefullfill.com";
 
     private $sender;
     private $wishlist;
