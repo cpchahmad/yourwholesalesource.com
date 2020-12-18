@@ -41,15 +41,6 @@ class SendNewsEmailJob implements ShouldQueue
 
         $users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.edu.pk'];
 
-        $users = [];
-
-        foreach($users_temp as $key => $ut){
-            if($ut != null) {
-                $ua = [];
-                $ua['email'] = $ut;
-                $users[$key] = (object)$ua;
-            }
-        }
 
         foreach ($users_temp as $user) {
             try{
