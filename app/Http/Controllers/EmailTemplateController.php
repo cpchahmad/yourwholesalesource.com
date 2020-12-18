@@ -12,6 +12,7 @@ use App\User;
 use App\Wallet;
 use App\Wishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use PharIo\Manifest\Email;
 
@@ -133,7 +134,7 @@ class EmailTemplateController extends Controller
             }
 
             try{
-                Mail::to($users)->later(\Carbon\Carbon::parse($template->time), new NewsEmail());
+                Mail::to($users)->later(Carbon::parse($template->time), new NewsEmail());
             }
             catch (\Exception $e){
             }
