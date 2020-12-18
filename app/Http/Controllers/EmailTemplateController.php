@@ -105,7 +105,6 @@ class EmailTemplateController extends Controller
         }
         if($request->hasFile('banner')){
             $file = $request->file('banner');
-
             $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
             $attachement = date("mmYhisa_") . $name;
             $file->move(public_path() . '/ticket-attachments/', $attachement);
@@ -140,7 +139,6 @@ class EmailTemplateController extends Controller
            }
 
         }
-
 
         return redirect()->route('admin.emails.show',$template->id)->with('success','Email Template updated successfully!');
 
