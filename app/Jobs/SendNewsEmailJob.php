@@ -51,12 +51,12 @@ class SendNewsEmailJob implements ShouldQueue
             }
         }
 
-       foreach ($users_temp as $user) {
-           try{
+        foreach ($users_temp as $user) {
+            try{
                 Mail::to($user)->send(new NewsEmail());
-           }
-           catch (\Exception $e){
-           }
-       }
+            }
+            catch (\Exception $e){
+            }
+        }
     }
 }
