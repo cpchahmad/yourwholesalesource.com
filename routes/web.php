@@ -424,14 +424,12 @@ Route::get('/test', function() {
         }
     }
 
-    dd($users);
 
-
-//    try{
-//        Mail::to($users)->later(now()->addMinutes(2), new NewsEmail());
-//    }
-//    catch (\Exception $e){
-//    }
+    try{
+        Mail::to($users)->later(now()->addMinutes(2), new NewsEmail());
+    }
+    catch (\Exception $e){
+    }
 });
 
 
