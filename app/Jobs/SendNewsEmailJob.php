@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Campaign;
 use App\Mail\NewsEmail;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,12 +40,13 @@ class SendNewsEmailJob implements ShouldQueue
 //        ->pluck('email')
 //        ->toArray();
 
-        $users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.edu.pk'];
+        $users_temp = User::find(2);
 
 
         foreach ($users_temp as $user) {
             try{
-                Mail::to($user)->send(new NewsEmail());
+                Mail::to($user->email)->send(new NewsEmail());
+                $user->attach($this->campaign->id);
             }
             catch (\Exception $e){
             }

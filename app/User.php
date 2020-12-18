@@ -97,9 +97,14 @@ class User extends Authenticatable
     public function has_wallet_setting(){
         return $this->hasOne(WalletSetting::class);
     }
+    public function campaigns() {
+        return $this->belongsToMany(Campaign::class);
+    }
 
     public function sendPasswordResetNotification($token)
     {
         Mail::to(request()->email)->send(new SendResetPasswordEmail($token,$this));
     }
+
+
 }
