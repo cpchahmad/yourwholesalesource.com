@@ -711,7 +711,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function campaigns() {
-        $campaigns = Campaign::latest()->paginate(20);
+        $campaigns = Campaign::orderBy('updated_at', 'DESC')->paginate(20);
 
 
         return view('setttings.campaigns.index')->with('campaigns', $campaigns);
