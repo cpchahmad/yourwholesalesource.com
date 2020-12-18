@@ -133,13 +133,14 @@ class EmailTemplateController extends Controller
                 }
             }
 
-            dd($users_temp);
+           foreach ($users_temp as $user) {
+               try{
+                    Mail::to($user)->later(Carbon::parse($template->time), new NewsEmail());
+               }
+                    catch (\Exception $e){
+               }
+           }
 
-//            try{
-//                Mail::to($users)->later(Carbon::parse($template->time), new NewsEmail());
-//            }
-//            catch (\Exception $e){
-//            }
         }
 
 
