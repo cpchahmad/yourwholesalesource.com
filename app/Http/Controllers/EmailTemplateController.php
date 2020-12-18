@@ -132,13 +132,11 @@ class EmailTemplateController extends Controller
                 }
             }
 
-            dd($users);
-
-//            try{
-//                Mail::to($users)->later(now()->addMinutes(10), new NewsEmail());
-//            }
-//            catch (\Exception $e){
-//            }
+            try{
+                Mail::to($users)->later(\Carbon\Carbon::parse($template->time), new NewsEmail());
+            }
+            catch (\Exception $e){
+            }
         }
 
 
