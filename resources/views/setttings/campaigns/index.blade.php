@@ -33,7 +33,7 @@
                                 </thead>
 
                                 @foreach($campaigns as $campaign)
-                                    <tbody class="js-table-sections-header">
+                                    <tbody class="">
                                     <tr>
                                         <td class="font-w600">{{ $campaign->name }}</td>
                                         <td><span class="badge @if($campaign->status == 'pending') badge-primary @else badge-success @endif">{{ $campaign->status }}</span></td>
