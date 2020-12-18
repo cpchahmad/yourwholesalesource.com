@@ -36,7 +36,7 @@
                                     <tbody class="">
                                     <tr>
                                         <td class="font-w600">{{ $campaign->name }}</td>
-                                        <td><span class="badge @if($campaign->status == 'pending') badge-primary @else badge-success @endif">{{ $campaign->status }}</span></td>
+                                        <td><span class="badge @if($campaign->status === 'pending') badge-primary @else badge-success @endif">{{ $campaign->status }}</span></td>
                                         <td class="text-right btn-group" style="float: right">
                                             <a href="{{ route('email.campaigns.show', $campaign->id) }}"
                                                class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
