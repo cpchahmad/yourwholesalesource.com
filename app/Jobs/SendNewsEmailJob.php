@@ -39,7 +39,7 @@ class SendNewsEmailJob implements ShouldQueue
 //        ->pluck('email')
 //        ->toArray();
 
-        $users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.eu.pk'];
+        $users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.edu.pk'];
 
         $users = [];
 
