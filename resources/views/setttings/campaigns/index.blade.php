@@ -26,8 +26,8 @@
                             <table class="js-table-sections table table-hover table-borderless table-vcenter">
                                 <thead>
                                 <tr>
-                                    <th >Title</th>
-                                    <th style="width: 25%;">Status</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -36,10 +36,10 @@
                                     <tbody class="js-table-sections-header">
                                     <tr>
                                         <td class="font-w600">{{ $campaign->name }}</td>
-                                        <td><span class="badge">{{ $campaign->status }}</span></td>
+                                        <td><span class="badge @if($campaign->status == 'pending') badge-primary @else badge-success @endif">{{ $campaign->status }}</span></td>
                                         <td class="text-right btn-group" style="float: right">
                                             <a href="{{ route('email.campaigns.show', $campaign->id) }}"
-                                               class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                               class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
                                                data-original-title="View Campaign"><i class="fa fa-eye"></i></a>
                                         </td>
 
