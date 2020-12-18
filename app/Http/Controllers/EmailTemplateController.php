@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Campaign;
 use App\EmailTemplate;
+use App\Jobs\SendNewsEmailJob;
 use App\Mail\NewProductsMail;
 use App\Mail\NewsEmail;
 use App\Product;
@@ -91,6 +93,25 @@ class EmailTemplateController extends Controller
 
 
         $template = EmailTemplate::find($id);
+
+        if($template->id == 18)
+        {
+            $this->validate($request, [
+                'campaign_name' => 'required|unique:campaigns'
+            ]);
+
+            $campaign = new Campaign();
+            $campaign->name = $request->campaign_name;
+            $campaign->time = $template->time;
+            $campaign->status = 'pending';
+            $campaign->receiver_count = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->count();
+            $campaign->save();
+
+            dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($template->time));
+
+        }
+
+
         $template->subject = $request->subject;
         $template->body = $request->body;
 
@@ -113,32 +134,7 @@ class EmailTemplateController extends Controller
 
         $template->save();
 
-        if($template->id == 18)
-        {
-            $users_temp = User::role('non-shopify-users')
-                ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-                ->pluck('email')
-                ->toArray();
 
-            $users = [];
-
-            foreach($users_temp as $key => $ut){
-                if($ut != null) {
-                    $ua = [];
-                    $ua['email'] = $ut;
-                    $users[$key] = (object)$ua;
-                }
-            }
-
-           foreach ($users_temp as $user) {
-               try{
-                    Mail::to($user)->later(Carbon::parse($template->time), new NewsEmail());
-               }
-               catch (\Exception $e){
-               }
-           }
-
-        }
 
         return redirect()->route('admin.emails.show',$template->id)->with('success','Email Template updated successfully!');
 
