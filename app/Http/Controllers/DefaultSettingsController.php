@@ -711,7 +711,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function campaigns() {
-        $campaigns = Campaign::latest()->get();
+        $campaigns = Campaign::latest()->paginate(20);
 
 
         return view('setttings.campaigns.index')->with('campaigns', $campaigns);
