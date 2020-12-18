@@ -98,7 +98,7 @@ class EmailTemplateController extends Controller
         {
             $campaign = new Campaign();
             $campaign->name = $request->campaign_name;
-            $campaign->time = $template->time;
+            $campaign->time = $request->time;
             $campaign->status = 'pending';
             $campaign->receiver_count = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->count();
             $campaign->save();

@@ -383,11 +383,11 @@
 
                                     @if($template->id == '18')
                                         <div class="text-left">
-                                            <label for="" style="color: #7daa40 !important;">Adjust Time and Select Banner</label>
+                                            <label for="" style="color: #7daa40 !important;">Add Campaign</label>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input type="text" name="campaign_name" class="form-control" required>
+                                                <input type="text" name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
                                             </div>
                                             <div class="col-md-4">
                                                 <input class="form-control form-control-lg" id="formFileLg" type="file" name="banner" required />
