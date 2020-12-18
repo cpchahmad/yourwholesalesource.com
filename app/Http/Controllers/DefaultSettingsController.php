@@ -713,6 +713,8 @@ class DefaultSettingsController extends Controller
     public function campaigns() {
         $campaigns = Campaign::latest();
 
+        dd($campaigns);
+
         return view('setttings.campaigns.index')->with('campaigns', $campaigns);
     }
 
