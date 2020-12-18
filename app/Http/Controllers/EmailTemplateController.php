@@ -103,7 +103,7 @@ class EmailTemplateController extends Controller
             $campaign->receiver_count = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->count();
             $campaign->save();
 
-            dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($template->time));
+            dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($request->time));
         }
 
 
