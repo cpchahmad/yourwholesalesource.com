@@ -949,10 +949,13 @@ class AdminOrderController extends Controller
         $response = $shop->api()->rest('GET','admin/orders/'. 2911982059653 .'/fulfillments.json');
         $data = $response->body->fulfillments[0];
         $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
-
-        dd($data->id, $fulfillment);
         $webhook = new AdminWebhookController();
-        $webhook->set_fulfillments($data);
+
+        if($fulfillment == null){
+            $webhook->set_fulfillments($data);
+        }
+
+        dd('done');
     }
 
     public function CompleteFullFillment($orderFullfillment)
