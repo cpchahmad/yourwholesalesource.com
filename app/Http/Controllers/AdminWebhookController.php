@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ErrorLog;
 use App\FulfillmentLineItem;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -84,7 +85,6 @@ class AdminWebhookController extends Controller
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
-
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
                             $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
@@ -97,6 +97,11 @@ class AdminWebhookController extends Controller
                             $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
 
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+                        }
+                        else {
+                            $log = new ErrorLog();
+                            $log->message = "Fulfillment Error";
+                            $log->save();
                         }
                     }
                 }
