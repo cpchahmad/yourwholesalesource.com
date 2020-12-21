@@ -36,21 +36,17 @@ class SendNewsEmailJob implements ShouldQueue
      */
     public function handle()
     {
-//        $users_temp = User::role('non-shopify-users')
-//        ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-//        ->pluck('email')
-//        ->toArray();
-
-        $users_temp = User::find(2);
+        $users_temp = User::role('non-shopify-users')
+        ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+        ->pluck('email')
+        ->toArray();
 
 
-        //$users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.edu.pk'];
 
-
-//        foreach ($users_temp as $user) {
+        foreach ($users_temp as $user) {
             try{
-                Mail::to($users_temp->email)->send(new NewsEmail());
-                $result = $users_temp->campaigns()->where('campaign_id',$this->campaign->id)->first();
+                Mail::to($user->email)->send(new NewsEmail());
+                $result = $user->campaigns()->where('campaign_id',$this->campaign->id)->first();
                 $result->pivot->status = 'Completed';
                 $result->pivot->save();
 
@@ -62,8 +58,6 @@ class SendNewsEmailJob implements ShouldQueue
                 $log->message = $e->getMessage();
                 $log->save();
             }
-//        }
-
-
+        }
     }
 }

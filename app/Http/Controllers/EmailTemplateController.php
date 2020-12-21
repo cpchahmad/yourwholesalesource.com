@@ -100,11 +100,13 @@ class EmailTemplateController extends Controller
             $campaign->name = $request->campaign_name;
             $campaign->time = $request->time;
             $campaign->status = 'pending';
-            //$campaign->receiver_count = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->count();
             $campaign->save();
 
-            $user = User::find(2);
-            $user->campaigns()->attach($campaign->id);
+            $users_temp = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->get();
+
+            foreach ($users_temp as $user) {
+                $user->campaigns()->attach($campaign->id);
+            }
 
 
             dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($request->time));
