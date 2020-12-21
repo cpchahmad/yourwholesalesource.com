@@ -945,6 +945,7 @@ class AdminOrderController extends Controller
     {
         $shop = $this->helper->getAdminShop();
         $order = RetailerOrder::find(904);
+        dd($order);
 
         $response = $shop->api()->rest('GET','admin/orders/'. $order->shopify_id .'/fulfillments.json');
         dd($response);
