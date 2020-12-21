@@ -947,10 +947,12 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::find(904);
 
         $response = $shop->api()->rest('GET','admin/orders/'. 2911982059653 .'/fulfillments.json');
-        dd($response);
-//        $data = $response->body->fulfillments[0];
-//        $webhook = new AdminWebhookController();
-//        $webhook->set_fulfillments($data);
+        $data = $response->body->fulfillments[0];
+        $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
+
+        dd($data->id, $fulfillment);
+        $webhook = new AdminWebhookController();
+        $webhook->set_fulfillments($data);
     }
 
     public function CompleteFullFillment($orderFullfillment)
