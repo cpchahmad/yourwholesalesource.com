@@ -409,7 +409,7 @@ Route::get('/testing', function() {
     $shop = $helper->getSpecificShop(120);
     $response = $shop->api()->rest('GET', '/admin/orders.json');
 
-    dd($response->body->orders);
+    dd($response->body->orders[2]);
 });
 
 //Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
