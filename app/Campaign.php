@@ -9,6 +9,6 @@ class Campaign extends Model
     protected $fillable = ['name', 'status', 'time'];
 
     public function users() {
-        return $this->belongsToMany(User::class)->withPivot('status');
+        return $this->belongsToMany(User::class, 'campaigns_users')->withPivot('status');
     }
 }
