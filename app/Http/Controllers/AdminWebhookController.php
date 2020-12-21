@@ -48,10 +48,8 @@ class AdminWebhookController extends Controller
                 $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                 $shopify_fulfillment = null;
                 if ($shop != null) {
-                    dump('store');
                     $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                     if (!$location_response->errors) {
-                        dump('location');
 
                         foreach ($location_response->body->locations as $location){
                             if($location->name == "WeFullFill"){
@@ -85,7 +83,6 @@ class AdminWebhookController extends Controller
                             }
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
-                        dd($response);
                         if(!$response->errors){
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
@@ -98,7 +95,6 @@ class AdminWebhookController extends Controller
 
                             $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
 
-                            dump(213);
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                         }
                     }
@@ -141,7 +137,6 @@ class AdminWebhookController extends Controller
     public function after_fullfiment_process(OrderFulfillment $new_fulfillment, $retailer_order, $data): void
     {
 
-        dump(678);
 
         /*Order Log*/
         $order_log = new OrderLog();

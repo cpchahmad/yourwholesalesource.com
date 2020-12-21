@@ -944,14 +944,15 @@ class AdminOrderController extends Controller
     public function manualSyncfulfillment(Request $request)
     {
         $shop = $this->helper->getAdminShop();
-        $order = RetailerOrder::find(904);
+        $order = RetailerOrder::find(915);
 
-        $response = $shop->api()->rest('GET','admin/orders/'. 2911982059653 .'/fulfillments.json');
+        $response = $shop->api()->rest('GET','admin/orders/'. $order->admin_shopify_id .'/fulfillments.json');
         $data = $response->body->fulfillments[0];
         $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
         $webhook = new AdminWebhookController();
 
         if($fulfillment == null){
+            dd(123);
             $webhook->set_fulfillments($data);
         }
 
