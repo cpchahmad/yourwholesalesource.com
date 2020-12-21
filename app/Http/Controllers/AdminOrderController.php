@@ -952,7 +952,6 @@ class AdminOrderController extends Controller
         $webhook = new AdminWebhookController();
 
         if($fulfillment == null){
-            dd('yes');
             $webhook->set_fulfillments($data);
         }
 

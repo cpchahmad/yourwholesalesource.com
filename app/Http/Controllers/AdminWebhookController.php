@@ -44,6 +44,8 @@ class AdminWebhookController extends Controller
                 $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
             }
             else {
+                dump(111);
+
                 $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                 $shopify_fulfillment = null;
                 if ($shop != null) {
@@ -93,6 +95,7 @@ class AdminWebhookController extends Controller
 
                             $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
 
+                            dump(213);
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                         }
                     }
@@ -134,6 +137,9 @@ class AdminWebhookController extends Controller
      */
     public function after_fullfiment_process(OrderFulfillment $new_fulfillment, $retailer_order, $data): void
     {
+
+        dump(678);
+
         /*Order Log*/
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
