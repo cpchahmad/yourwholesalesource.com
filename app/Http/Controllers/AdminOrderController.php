@@ -146,7 +146,6 @@ class AdminOrderController extends Controller
                             }
 
                             $response = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json', $data);
-                            return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, $response);
 
                             if ($response->errors) {
                                 if(strpos($response->body->base[0], "already fulfilled") !== false){
@@ -392,8 +391,8 @@ class AdminOrderController extends Controller
 
         $fulfillment = new OrderFulfillment();
         if ($order->custom == 0) {
-//            $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
-//            $fulfillment->name = $response->body->fulfillment->name;
+            $fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
+            $fulfillment->name = $response->body->fulfillment->name;
         } else {
             $count = count($order->fulfillments) + 1;
             $fulfillment->name = $order->name . '.F' . $count;
