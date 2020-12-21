@@ -49,6 +49,7 @@ class AdminWebhookController extends Controller
                 $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
                 $shopify_fulfillment = null;
                 if ($shop != null) {
+                    dump('store');
                     $location_response = $shop->api()->rest('GET', '/admin/locations.json');
                     if (!$location_response->errors) {
                         foreach ($location_response->body->locations as $location){
