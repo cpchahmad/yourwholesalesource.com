@@ -325,9 +325,9 @@
                             <tr>
                                 <td colspan="12" class="text-right">
 
-                                    @if($order->getStatus($order) == "unfulfilled" && in_array($order->paid,[1]))
+{{--                                    @if($order->getStatus($order) == "unfulfilled" && in_array($order->paid,[1]))--}}
                                         <button class="btn btn-primary" onclick="window.location.href='{{route('admin.order.fulfillment',$order->id)}}'"> Mark as Fulfilled </button>
-                                    @endif
+{{--                                    @endif--}}
                                 </td>
                             </tr>
 
