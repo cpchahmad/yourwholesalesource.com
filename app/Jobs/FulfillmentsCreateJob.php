@@ -1,5 +1,6 @@
 <?php namespace App\Jobs;
 
+use App\ErrorLog;
 use App\FulfillmentLineItem;
 use App\Http\Controllers\AdminWebhookController;
 use App\Http\Controllers\HelperController;
@@ -55,13 +56,20 @@ class FulfillmentsCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        $data = $this->data;
-        if ($this->shopDomain == 'wefullfill.myshopify.com') {
-            $webhook = new AdminWebhookController();
-            $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
-            if($fulfillment == null){
-                $webhook->set_fulfillments($data);
+        try{
+            $data = $this->data;
+            if ($this->shopDomain == 'wefullfill.myshopify.com') {
+                $webhook = new AdminWebhookController();
+                $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
+                if($fulfillment == null){
+                    $webhook->set_fulfillments($data);
+                }
             }
+        }
+        catch(\Exception $e) {
+            $log = new ErrorLog();
+            $log->message = "Fulfillment exception: ". $e->getMessage();
+            $log->save();
         }
     }
 
