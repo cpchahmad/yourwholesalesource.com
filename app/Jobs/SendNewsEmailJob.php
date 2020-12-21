@@ -41,7 +41,7 @@ class SendNewsEmailJob implements ShouldQueue
 //        ->pluck('email')
 //        ->toArray();
 
-        $users_temp = User::find(2);
+        $users_temp = User::where('id', 2)->get();
 
         //$users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.edu.pk'];
 
