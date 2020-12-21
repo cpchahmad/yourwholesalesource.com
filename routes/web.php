@@ -412,6 +412,8 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    dd($response->body->orders[4]);
 //});
 
+Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
+
 
 
 
