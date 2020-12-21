@@ -41,26 +41,29 @@ class SendNewsEmailJob implements ShouldQueue
 //        ->pluck('email')
 //        ->toArray();
 
-        $users_temp = User::where('id', 2)->get();
+        $users_temp = User::find(2);
+
 
         //$users_temp = ['yasirnaseer.0@gmail.com', '70069618@student.uol.edu.pk'];
 
 
-        foreach ($users_temp as $user) {
+//        foreach ($users_temp as $user) {
             try{
-                Mail::to($user->email)->send(new NewsEmail());
-                $result = $user->campaigns()->where('campaign_id',$this->campaign->id)->first();
+                Mail::to($users_temp->email)->send(new NewsEmail());
+                $result = $users_temp->campaigns()->where('campaign_id',$this->campaign->id)->first();
                 $result = $result->pivot->status = 'completed';
                 $result->save();
+
+                $this->campaign->status = 'Completed';
+                $this->campaign->save();
             }
             catch (\Exception $e){
                 $log = new ErrorLog();
                 $log->message = $e->getMessage();
                 $log->save();
             }
-        }
+//        }
 
-        $this->campaign->status = 'Completed';
-        $this->campaign->save();
+
     }
 }
