@@ -51,8 +51,8 @@ class SendNewsEmailJob implements ShouldQueue
             try{
                 Mail::to($users_temp->email)->send(new NewsEmail());
                 $result = $users_temp->campaigns()->where('campaign_id',$this->campaign->id)->first();
-                $result->pivot->status = 'completed';
-                $result->save();
+                $result->pivot->status = 'Completed';
+                $result->pivot->save();
 
                 $this->campaign->status = 'Completed';
                 $this->campaign->save();
