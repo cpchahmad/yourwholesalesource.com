@@ -946,7 +946,7 @@ class AdminOrderController extends Controller
         $shop = $this->helper->getAdminShop();
         $order = RetailerOrder::find(904);
 
-        $response = $shop->api()->rest('GET','admin/orders/'. $order->shopify_order_id .'/fulfillments.json');
+        $response = $shop->api()->rest('GET','admin/orders/'. 2911982059653 .'/fulfillments.json');
         dd($response);
 //        $data = $response->body->fulfillments[0];
 //        $webhook = new AdminWebhookController();
