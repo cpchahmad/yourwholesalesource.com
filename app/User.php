@@ -98,7 +98,7 @@ class User extends Authenticatable
         return $this->hasOne(WalletSetting::class);
     }
     public function campaigns() {
-        return $this->belongsToMany(Campaign::class, 'campaigns_users');
+        return $this->belongsToMany(Campaign::class, 'campaigns_users')->withPivot('status');
     }
 
     public function sendPasswordResetNotification($token)
