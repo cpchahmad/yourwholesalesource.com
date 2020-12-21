@@ -37,7 +37,7 @@
                                     <tr>
                                         <td class="font-w600">{{ $user->name }}</td>
                                         <td class="font-w600">{{ $user->email }}</td>
-                                        <td><span class="badge @if($user->pivot->status === null) badge-primary @else badge-success @endif">{{ $campaign->users->pivot->status }}</span></td>
+{{--                                        <td><span class="badge @if($user->pivot->status === null) badge-primary @else badge-success @endif">{{ $campaign->users->pivot->status }}</span></td>--}}
                                     </tr>
                                     </tbody>
                                 @endforeach
