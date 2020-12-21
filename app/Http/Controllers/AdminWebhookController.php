@@ -83,7 +83,9 @@ class AdminWebhookController extends Controller
                             }
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                        dump(12, $response);
                         if(!$response->errors){
+                            dump(456);
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
                             $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
