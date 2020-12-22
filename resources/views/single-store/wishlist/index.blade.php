@@ -238,21 +238,21 @@
 
 
                                     <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product (Hold Ctrl for selecting multiple images)"> </i></label>
-                                                <input type="file" name="attachments[]" class="form-control" multiple>
-                                            </div>
-                                        </div>
-
-{{--                                        <div class="--}}{{--col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3--}}{{-- col-md-12" style="padding-bottom: 13px;">--}}
-{{--                                            <div class="dropzone dz-clickable">--}}
-{{--                                                <div class="dz-default dz-message"><span>Click here to upload images.</span></div>--}}
-{{--                                                <div class="row preview-drop"></div>--}}
+{{--                                        <div class="col-sm-12">--}}
+{{--                                            <div class="form-material">--}}
+{{--                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product (Hold Ctrl for selecting multiple images)"> </i></label>--}}
+{{--                                                <input type="file" name="attachments[]" class="form-control" multiple>--}}
 {{--                                            </div>--}}
-
-{{--                                            <input style="display: none" accept="image/*"  type="file"  name="images[]" class="push-30-t dz-hidden-input push-30 images-upload" multiple>--}}
 {{--                                        </div>--}}
+
+                                        <div class="col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3 col-md-12" style="padding-bottom: 13px;">
+                                            <div class="dropzone dz-clickable">
+                                                <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
+                                                <div class="row preview-drop"></div>
+                                            </div>
+
+                                            <input style="display: none" accept="image/*"  type="file"  name="attachments[]" class="push-30-t dz-hidden-input push-30 images-upload" multiple>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
