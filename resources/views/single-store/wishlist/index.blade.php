@@ -246,7 +246,7 @@
 {{--                                        </div>--}}
 
                                         <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
-                                            <div class="dropzone-wishlist dz-clickable">
+                                            <div class="dropzone dz-clickable">
                                                 <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
                                                 <div class="row preview-drop"></div>
                                             </div>
