@@ -336,8 +336,7 @@ class OrdersCreateJob implements ShouldQueue
                                 $wallet = $user->has_wallet;
                             }
 
-                            if(false) {
-//                                if($wallet && $wallet->available >= $new->cost_to_pay) {
+                            if($wallet && $wallet->available >= $new->cost_to_pay) {
 
                                 /*Wallet Deduction*/
                                 $wallet->available =   $wallet->available -  $new->cost_to_pay;
