@@ -25,6 +25,7 @@ $(document).ready(function () {
 
     /* Shopify Store Module - Dropzone Click JS */
     $('body').on('click','.dropzone',function () {
+        console.log(32);
         $('.images-upload').trigger('click');
     });
 
