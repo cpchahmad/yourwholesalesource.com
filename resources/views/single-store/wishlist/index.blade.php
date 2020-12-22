@@ -237,22 +237,7 @@
                                     </div>
 
 
-                                    <div class="form-group">
-{{--                                        <div class="col-sm-12">--}}
-{{--                                            <div class="form-material">--}}
-{{--                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product (Hold Ctrl for selecting multiple images)"> </i></label>--}}
-{{--                                                <input type="file" name="attachments[]" class="form-control" multiple>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
 
-                                        <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
-                                            <div class="dropzone dz-clickable">
-                                                <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
-                                                <div class="row preview-drop"></div>
-                                            </div>
-                                            <input style="display: none" type="file"  name="attachments[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
-                                        </div>
-                                    </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
@@ -261,6 +246,23 @@
                                                 <textarea required class="js-summernote" name="description"
                                                           placeholder="Please Enter Description here !"></textarea>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{--                                        <div class="col-sm-12">--}}
+                                        {{--                                            <div class="form-material">--}}
+                                        {{--                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product (Hold Ctrl for selecting multiple images)"> </i></label>--}}
+                                        {{--                                                <input type="file" name="attachments[]" class="form-control" multiple>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        </div>--}}
+
+                                        <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
+                                            <div class="dropzone dz-clickable">
+                                                <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
+                                                <div class="row preview-drop"></div>
+                                            </div>
+                                            <input style="display: none" type="file"  name="attachments[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
                                         </div>
                                     </div>
 
