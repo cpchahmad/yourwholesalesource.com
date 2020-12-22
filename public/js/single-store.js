@@ -30,7 +30,7 @@ $(document).ready(function () {
 
     var storedFiles = [];
     /* Shopify Store Module - Images UPLOAD JS */
-    $(document).on('change','.images-upload',function (e) {
+    $(document).on('input','.images-upload',function (e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
         console.log(filesArr);
