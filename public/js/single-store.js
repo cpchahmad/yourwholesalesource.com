@@ -24,20 +24,18 @@ $(document).ready(function () {
 
 
     /* Shopify Store Module - Dropzone Click JS */
-    $(document).on('click','.dropzone',function () {
+    $('body').on('click','.dropzone',function () {
         $('.images-upload').trigger('click');
     });
 
     var storedFiles = [];
     /* Shopify Store Module - Images UPLOAD JS */
-    $(document).on('change','.images-upload',function (e) {
+    $('body').on('change','.images-upload',function (e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
-        console.log(filesArr);
         filesArr.forEach(function (f) {
 
             if (!f.type.match("image.*")) {
-
                 return;
             }
             storedFiles.push(f);
