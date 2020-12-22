@@ -24,13 +24,13 @@ $(document).ready(function () {
 
 
     /* Shopify Store Module - Dropzone Click JS */
-    $('body').on('click','.dropzone',function () {
+    $(document).on('click','.dropzone-wishlist',function () {
         $('.images-upload').trigger('click');
     });
 
     var storedFiles = [];
     /* Shopify Store Module - Images UPLOAD JS */
-    $('body').on('change','.images-upload',function (e) {
+    $(document).on('change','.images-upload',function (e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
         console.log(filesArr);

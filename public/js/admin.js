@@ -215,7 +215,7 @@ $(document).ready(function () {
 
     var storedFiles = [];
     /* Admin Module - Images UPLOAD JS */
-    $(document).on('input','.images-upload',function (e) {
+    $('body').on('input','.images-upload',function (e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
         filesArr.forEach(function (f) {
