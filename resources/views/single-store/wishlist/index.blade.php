@@ -245,13 +245,12 @@
 {{--                                            </div>--}}
 {{--                                        </div>--}}
 
-                                        <div class="col-md-12 col-md-12" style="padding-bottom: 13px;">
+                                        <div class="col-md-12" style="padding-bottom: 13px;width: 682px">
                                             <div class="dropzone dz-clickable">
                                                 <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
                                                 <div class="row preview-drop"></div>
                                             </div>
-
-                                            <input style="display: none" accept="image/*"  type="file"  name="images[]" class="push-30-t dz-hidden-input push-30 images-upload" multiple>
+                                            <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
                                         </div>
                                     </div>
 

@@ -37,7 +37,7 @@ $(document).ready(function () {
         filesArr.forEach(function (f) {
 
             if (!f.type.match("image.*")) {
-                console.log(234);
+
                 return;
             }
             storedFiles.push(f);
