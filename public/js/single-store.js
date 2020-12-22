@@ -25,7 +25,6 @@ $(document).ready(function () {
 
     /* Shopify Store Module - Dropzone Click JS */
     $('body').on('click','.dropzone',function () {
-        console.log(32);
         $('.images-upload').trigger('click');
     });
 
@@ -34,9 +33,11 @@ $(document).ready(function () {
     $('body').on('change','.images-upload',function (e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
+        console.log(filesArr);
         filesArr.forEach(function (f) {
 
             if (!f.type.match("image.*")) {
+                console.log(234);
                 return;
             }
             storedFiles.push(f);
