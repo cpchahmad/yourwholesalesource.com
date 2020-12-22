@@ -9,6 +9,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\WebhookController;
 use App\Mail\OrderPlaceEmail;
+use App\Mail\WalletBalanceMail;
 use App\OrderFulfillment;
 use App\OrderLog;
 use App\OrderTransaction;
@@ -335,7 +336,8 @@ class OrdersCreateJob implements ShouldQueue
                                 $wallet = $user->has_wallet;
                             }
 
-                            if($wallet && $wallet->available >= $new->cost_to_pay){
+                            if(false) {
+//                                if($wallet && $wallet->available >= $new->cost_to_pay) {
 
                                 /*Wallet Deduction*/
                                 $wallet->available =   $wallet->available -  $new->cost_to_pay;
@@ -419,6 +421,13 @@ class OrdersCreateJob implements ShouldQueue
                             }
                             else{
                                 $this->notify->generate('Wallet','Auto Wallet Order Payment Failure','Your Wallet amount is not enough for making payment for '. $new->name .' kindly top-up your wallet',$wallet);
+
+                                $user = User::find($new->user_id);
+                                try{
+                                    Mail::to($user->email)->send(new WalletBalanceMail($wallet));
+                                }
+                                catch (\Exception $e){
+                                }
                             }
                         }
                     }
