@@ -24,8 +24,6 @@ $(document).ready(function () {
 
 
 
-
-
     /*BULK ORDER PAY*/
     $('.check-order-all').change(function () {
         unset_bulk_array();
