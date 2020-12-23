@@ -72,6 +72,7 @@
                                                     </div>
                                                     <form action="{{route('couriers.update',$courier->id)}}" method="post">
                                                         @csrf
+                                                        @method('PUT')
                                                         <input type="hidden" value="{{$courier->id}}" name="courier_id">
                                                         <div class="block-content font-size-sm">
                                                             <div class="form-group">
@@ -99,7 +100,7 @@
                                 @endforeach
                                 </table>
                         @else
-                            <p>No Shipping Zone Created</p>
+                            <p>No Courier Service Providers Created</p>
                         @endif
                     </div>
                 </div>
@@ -118,7 +119,7 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{route('couriers.create')}}" method="post">
+                    <form action="{{route('couriers.store')}}" method="post">
                         @csrf
                         <div class="block-content font-size-sm">
                             <div class="form-group">
