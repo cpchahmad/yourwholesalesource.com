@@ -36,7 +36,12 @@ class CourierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $courier = new Courier();
+        $courier->title =  $request->title;
+        $courier->url =  $request->url;
+        $courier->save();
+
+        return redirect()->back()->with('success', 'Courier Service Provider Added Successfully!');
     }
 
     /**
@@ -70,7 +75,11 @@ class CourierController extends Controller
      */
     public function update(Request $request, Courier $courier)
     {
-        //
+        $courier->title =  $request->title;
+        $courier->url =  $request->url;
+        $courier->save();
+
+        return redirect()->back()->with('success', 'Courier Service Provider Updated Successfully!');
     }
 
     /**
@@ -81,6 +90,9 @@ class CourierController extends Controller
      */
     public function destroy(Courier $courier)
     {
-        //
+        $courier->delete();
+
+        return redirect()->back()->with('success', 'Courier Service Provider Deleted Successfully!');
+
     }
 }
