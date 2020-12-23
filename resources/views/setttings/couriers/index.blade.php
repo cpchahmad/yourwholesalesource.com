@@ -53,7 +53,7 @@
                                                     data-target="#edit_courier_modal{{$index}}"><i
                                                     class="fa fa-edit"></i>
                                             </button>
-                                            <a href="{{ route('couriers.delete', $courier->id) }}"
+                                            <a href="{{ route('couriers.destroy', $courier->id) }}"
                                                class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                data-original-title="Delete Courier"><i class="fa fa-times"></i></a>
                                         </td>
