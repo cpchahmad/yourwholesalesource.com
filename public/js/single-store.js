@@ -588,7 +588,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 console.log(123, value);
-                //$('.bulk-payment-form').submit();
+                $('.bulk-payment-form').submit();
                 Swal.fire(
                     'Processing!',
                     'Payment Processing Please Wait!',
