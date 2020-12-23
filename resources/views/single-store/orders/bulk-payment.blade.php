@@ -324,7 +324,7 @@
                         <tr>
                             <td></td>
                             <td align="right">
-                                <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay  - $total_discount,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                <button type="button" class="btn btn-success bulk-wallet-pay-button" data-pay=" {{number_format($cost_to_pay  - $total_discount,2)}} USD" data-href="{{route('store.orders')}}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 {{--                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
                                 <button type="button" class="btn btn-success paypal-pay-button"
                                         data-toggle="modal" data-target="#paypal_pay_trigger">
