@@ -469,10 +469,11 @@
                             </div>
                             <div class="block-content">
                                 @if($fulfillment->tracking_number != null)
-                                    <p style="font-size: 12px"> Tracking Number : {{$fulfillment->tracking_number}} <br>
+                                    <p style="font-size: 12px">
+                                        Tracking Number : {{$fulfillment->tracking_number}} <br>
                                         Tracking Url : {{$fulfillment->tracking_url}} <br>
                                         Tracking Notes : {{$fulfillment->tracking_notes}} <br>
-                                        Courier Service : {{$fulfillment->courier->title }} ({{$fulfillment->courier->url }}) <br>
+
                                     </p>
                                 @endif
                                 <table class="table table-borderless table-striped table-vcenter">
@@ -623,7 +624,7 @@
                                                                     <td>
                                                                         <select name="courier_id[]" class="form-control" id="">
                                                                             @foreach($couriers as $courier)
-                                                                                <option value="{{ $courier->id }}"> {{ $courier->title }} (<span class="badge badge-success">{{ $courier->url }}</span>)</option>
+                                                                                <option value="{{ $courier->id }}"> {{ $courier->title }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </td>
