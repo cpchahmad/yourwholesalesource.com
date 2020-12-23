@@ -586,9 +586,9 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Pay'
         }).then((result) => {
-            console.log(3, result);
+
             if (result.value) {
-                console.log(123, value);
+
                 $('.bulk-payment-form').submit();
                 Swal.fire(
                     'Processing!',
