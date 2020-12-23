@@ -597,7 +597,7 @@ $(document).ready(function () {
                 window.location.href = button.data('href');
             }
 
-            $('.bulk-payment-form').submit();
+           // $('.bulk-payment-form').submit();
             // if (result.value) {
             //     Swal.fire(
             //         'Processing!',
