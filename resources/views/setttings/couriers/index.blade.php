@@ -41,9 +41,6 @@
                                 <tbody class="">
                                     @foreach($couriers as $index => $courier)
                                     <tr>
-                                        <td class="text-center">
-                                            <i class="fa fa-angle-right"></i>
-                                        </td>
                                         <td class="font-w600">{{ $courier->title }}</td>
                                         <td>
                                             <span class="badge badge-primary">{{$courier->url}}</span>
@@ -126,7 +123,10 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">Title</label>
-                                        <input required class="form-control" type="text" id="zone_title" name="title" placeholder="Enter courier service provider title..">
+                                        <input required class="form-control @error('title') is-invalid @enderror" type="text" id="zone_title" name="title" placeholder="Enter courier service provider title..">
+                                        @error('title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-material">
                                         <label for="material-error">URL</label>

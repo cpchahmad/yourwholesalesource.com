@@ -36,6 +36,9 @@ class CourierController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+           'title' => 'required|unique:couriers'
+        ]);
         $courier = new Courier();
         $courier->title =  $request->title;
         $courier->url =  $request->url;
@@ -75,6 +78,10 @@ class CourierController extends Controller
      */
     public function update(Request $request, Courier $courier)
     {
+        $this->validate($request, [
+            'title' => 'required|unique:couriers'
+        ]);
+
         $courier->title =  $request->title;
         $courier->url =  $request->url;
         $courier->save();
