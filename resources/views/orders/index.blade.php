@@ -201,7 +201,7 @@
                         @endif
                             <div class="row">
                                 <div class="col-md-12 text-center" style="font-size: 17px">
-                                    {!! $orders->links() !!}
+                                    {!! $orders->appends(request()->input())->links() !!}
                                 </div>
                             </div>
                     </div>
