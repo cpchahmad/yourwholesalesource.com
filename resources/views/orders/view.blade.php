@@ -620,7 +620,7 @@
                                                                 <tr>
                                                                     <td>Courier Service Provider</td>
                                                                     <td>
-                                                                        <select name="courier" class="form-control" id="">
+                                                                        <select name="courier_id[]" class="form-control" id="">
                                                                             @foreach($couriers as $courier)
                                                                                 <option value="{{ $courier->id }}"> {{ $courier->title }} (<span class="badge badge-success">{{ $courier->url }}</span>)</option>
                                                                             @endforeach

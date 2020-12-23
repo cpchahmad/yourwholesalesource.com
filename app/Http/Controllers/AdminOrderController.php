@@ -219,6 +219,8 @@ class AdminOrderController extends Controller
                 $tracking_numbers = $request->input('tracking_number');
                 $tracking_urls = $request->input('tracking_url');
                 $tracking_notes = $request->input('tracking_notes');
+                $courier_id = $request->input('courier_id');
+
                 if ($order->custom == 0) {
                     $shop = $this->helper->getSpecificShop($order->shop_id);
                     if ($shop != null) {
@@ -239,6 +241,7 @@ class AdminOrderController extends Controller
                                     $current->tracking_number = $tracking_numbers[$index];
                                     $current->tracking_url = $tracking_urls[$index];
                                     $current->tracking_notes = $tracking_notes[$index];
+                                    $current->courier_id = $courier_id[$index];
                                     $current->save();
                                     $this->CompleteFullFillment($current);
                                     /*Maintaining Log*/
@@ -261,6 +264,7 @@ class AdminOrderController extends Controller
                             $current->tracking_number = $tracking_numbers[$index];
                             $current->tracking_url = $tracking_urls[$index];
                             $current->tracking_notes = $tracking_notes[$index];
+                            $current->courier_id = $courier_id[$index];
                             $current->save();
 
                             if ($order->admin_shopify_id != null) {
