@@ -474,7 +474,7 @@ class WalletController extends Controller
     }
 
     public function order_bulk_payment_by_wallet(Request $request) {
-        dd($request->all());
+
         foreach ($request->order_ids as $id) {
 
             $retailer_order = RetailerOrder::find($id);
