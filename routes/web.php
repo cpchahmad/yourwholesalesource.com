@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/delete/platform/{id}','DefaultSettingsController@delete_platform')->name('delete_platform');
     Route::get('/zones','ZoneController@index')->name('zone.index');
     Route::post('/zones','ZoneController@create')->name('zone.create');
+    Route::resource('couriers', 'CourierController');
     Route::post('/zone/{id}/update','ZoneController@update')->name('zone.update');
     Route::any('/zone/{id}/delete','ZoneController@delete')->name('zone.delete');
     Route::post('/zone/rate/{id}','ZoneController@rate_create')->name('zone.rate.create');
