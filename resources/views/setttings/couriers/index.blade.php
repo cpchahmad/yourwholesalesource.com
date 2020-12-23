@@ -53,7 +53,7 @@
                                             <form method="POST" action="{{ route('couriers.destroy', $courier->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                                <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                         data-original-title="Delete Courier"><i class="fa fa-times"></i></button>
                                             </form>
                                         </td>
