@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\AdminFile;
 use App\AdminFileTemp;
+use App\Courier;
 use App\Customer;
 use App\Exports\CustomersExport;
 use App\Exports\OrdersExport;
@@ -86,10 +87,12 @@ class AdminOrderController extends Controller
     public function view_order($id)
     {
         $order = RetailerOrder::find($id);
+        $couriers = Courier::all();
 //        $fullfillment = OrderFulfillment::where('retailer_order_id', $id)->first();
         if ($order != null) {
             return view('orders.view')->with([
-                'order' => $order
+                'order' => $order,
+                'couriers' => $couriers
             ]);
         }
     }

@@ -598,25 +598,35 @@
 
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>Tracking Number <span style="color: red">*</span></td>
-                                                                <td>
-                                                                    <input type="text" required name="tracking_number[]" class="form-control" placeholder="#XXXXXX" >
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Tracking Url <span style="color: red">*</span></td>
-                                                                <td>
-                                                                    <input type="url" required name="tracking_url[]" class="form-control" placeholder="https://example/tracking/XXXXX">
-                                                                </td>
+                                                                <tr>
+                                                                    <td>Tracking Number <span style="color: red">*</span></td>
+                                                                    <td>
+                                                                        <input type="text" required name="tracking_number[]" class="form-control" placeholder="#XXXXXX" >
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tracking Url <span style="color: red">*</span></td>
+                                                                    <td>
+                                                                        <input type="url" required name="tracking_url[]" class="form-control" placeholder="https://example/tracking/XXXXX">
+                                                                    </td>
 
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Tracking Notes</td>
-                                                                <td>
-                                                                    <input type="text" name="tracking_notes[]" class="form-control" placeholder="Notes for this fulfillment">
-                                                                </td>
-                                                            </tr>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tracking Notes</td>
+                                                                    <td>
+                                                                        <input type="text" name="tracking_notes[]" class="form-control" placeholder="Notes for this fulfillment">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Courier Service Provider</td>
+                                                                    <td>
+                                                                        <select name="courier" class="form-control" id="">
+                                                                            @foreach($couriers as $courier)
+                                                                                <option value="{{ $courier->id }}"> {{ $courier->title }} (<span class="badge badge-success">{{ $courier-url }}</span>)</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </td>
+                                                                </tr>
                                                             </tbody>
 
                                                         </table>
