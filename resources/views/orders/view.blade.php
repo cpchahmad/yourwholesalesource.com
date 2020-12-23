@@ -622,7 +622,7 @@
                                                                     <td>
                                                                         <select name="courier" class="form-control" id="">
                                                                             @foreach($couriers as $courier)
-                                                                                <option value="{{ $courier->id }}"> {{ $courier->title }} (<span class="badge badge-success">{{ $courier-url }}</span>)</option>
+                                                                                <option value="{{ $courier->id }}"> {{ $courier->title }} (<span class="badge badge-success">{{ $courier->url }}</span>)</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </td>
