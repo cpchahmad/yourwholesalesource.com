@@ -79,7 +79,7 @@ class CourierController extends Controller
     public function update(Request $request, Courier $courier)
     {
         $this->validate($request, [
-            'title' => 'required|unique:couriers'
+            'title' => 'required|unique:couriers,title,'.$courier->id
         ]);
 
         $courier->title =  $request->title;
