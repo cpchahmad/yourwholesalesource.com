@@ -212,6 +212,7 @@ class AdminOrderController extends Controller
 
     public function fulfillment_add_tracking(Request $request)
     {
+        dd($request->all());
         $order = RetailerOrder::find($request->id);
         if ($order != null) {
             if ($order->paid == 1) {
