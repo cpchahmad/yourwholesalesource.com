@@ -50,12 +50,11 @@
                                                     data-target="#edit_courier_modal{{$index}}"><i
                                                     class="fa fa-edit"></i>
                                             </button>
-                                            <form method="POST" action="{{ route('couriers.destroy', $courier->id) }}"
-                                               class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="Delete Courier">
+                                            <form method="POST" action="{{ route('couriers.destroy', $courier->id) }}">
                                                 @csrf
                                                 @method('DELETE')
-                                                <i class="fa fa-times"></i>
+                                                <button class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                                        data-original-title="Delete Courier"><i class="fa fa-times"></i></button>
                                             </form>
                                         </td>
                                     </tr>
