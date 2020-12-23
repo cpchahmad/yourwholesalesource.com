@@ -587,16 +587,17 @@ $(document).ready(function () {
             confirmButtonText: 'Pay'
         }).then((result) => {
             if (result.value) {
+                console.log(123, value);
                 $('.bulk-payment-form').submit();
                 Swal.fire(
                     'Processing!',
                     'Payment Processing Please Wait!',
                     'success'
                 );
-                //window.location.href = button.data('href');
+                window.location.href = button.data('href');
             }
 
-           // $('.bulk-payment-form').submit();
+            $('.bulk-payment-form').submit();
             // if (result.value) {
             //     Swal.fire(
             //         'Processing!',
