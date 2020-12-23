@@ -212,7 +212,7 @@ class AdminOrderController extends Controller
 
     public function fulfillment_add_tracking(Request $request)
     {
-       ;
+
         $order = RetailerOrder::find($request->id);
         if ($order != null) {
             if ($order->paid == 1) {
@@ -221,8 +221,6 @@ class AdminOrderController extends Controller
                 $tracking_urls = $request->input('tracking_url');
                 $tracking_notes = $request->input('tracking_notes');
                 $courier_id = $request->input('courier_id');
-
-                dump($courier_id);
 
                 if ($order->custom == 0) {
                     $shop = $this->helper->getSpecificShop($order->shop_id);
@@ -246,8 +244,6 @@ class AdminOrderController extends Controller
                                     $current->tracking_notes = $tracking_notes[$index];
                                     $current->courier_id = $courier_id[$index];
                                     $current->save();
-
-                                    dump($current ,$courier_id[$index]);
                                     $this->CompleteFullFillment($current);
                                     /*Maintaining Log*/
                                     $order_log = new OrderLog();
@@ -271,8 +267,6 @@ class AdminOrderController extends Controller
                             $current->tracking_notes = $tracking_notes[$index];
                             $current->courier_id = $courier_id[$index];
                             $current->save();
-
-                            dump($current , $courier_id[$index]);
 
                             if ($order->admin_shopify_id != null) {
                                 $data = [
@@ -308,7 +302,6 @@ class AdminOrderController extends Controller
                 $order->save();
                 $this->log->store(0, 'Order', $order->id, $order->name, 'Order Tracking Added');
                 $this->notify->generate('Order', 'Order Tracking Details', $order->name . ' tracking details added successfully!', $order);
-                dd(231);
                 return redirect()->back()->with('success', 'Tracking Details Added To Fulfillment Successfully!');
             } else {
                 return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
