@@ -53,9 +53,9 @@
                                                     data-target="#edit_courier_modal{{$index}}"><i
                                                     class="fa fa-edit"></i>
                                             </button>
-                                            <a href="{{ route('zone.delete', $zone->id) }}"
+                                            <a href="{{ route('couriers.delete', $courier->id) }}"
                                                class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="Delete Zone"><i class="fa fa-times"></i></a>
+                                               data-original-title="Delete Courier"><i class="fa fa-times"></i></a>
                                         </td>
                                     </tr>
                                     <div class="modal fade" id="edit_courier_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
