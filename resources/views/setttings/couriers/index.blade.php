@@ -50,9 +50,13 @@
                                                     data-target="#edit_courier_modal{{$index}}"><i
                                                     class="fa fa-edit"></i>
                                             </button>
-                                            <a href="{{ route('couriers.destroy', $courier->id) }}"
+                                            <form method="POST" action="{{ route('couriers.destroy', $courier->id) }}"
                                                class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="Delete Courier"><i class="fa fa-times"></i></a>
+                                               data-original-title="Delete Courier">
+                                                @csrf
+                                                @method('DELETE')
+                                                <i class="fa fa-times"></i>
+                                            </form>
                                         </td>
                                     </tr>
                                     <div class="modal fade" id="edit_courier_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
@@ -76,7 +80,10 @@
                                                                 <div class="col-sm-12">
                                                                     <div class="form-material">
                                                                         <label for="material-error">Title</label>
-                                                                        <input required class="form-control" type="text" id="zone_title" value="{{$courier->title}}"   name="title" placeholder="Enter courier service provider title..">
+                                                                        <input required class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title" value="{{$courier->title}}"   name="title" placeholder="Enter courier service provider title..">
+                                                                        @error('title')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                        @enderror
                                                                     </div>
                                                                     <div class="form-material">
                                                                         <label for="material-error">URL</label>
