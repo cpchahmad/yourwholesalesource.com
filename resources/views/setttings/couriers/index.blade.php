@@ -34,9 +34,8 @@
                                 <thead>
                                 <tr>
                                     <th >Title</th>
-                                    <th style="width: 25%;">URL</th>
+                                    <th >URL</th>
                                     <th style="width: 25%;">Country</th>
-                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="">
