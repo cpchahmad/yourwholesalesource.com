@@ -15,7 +15,7 @@ class Zone extends Model
    public function has_rate(){
        return $this->hasMany('App\ShippingRate','zone_id');
    }
-   public function has_courier(){
+   public function courier(){
        return $this->belongsTo(Courier::class, 'zone_id');
    }
 }
