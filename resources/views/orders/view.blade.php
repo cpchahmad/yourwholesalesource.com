@@ -622,9 +622,8 @@
                                                                 <tr>
                                                                     <td>Courier Service Provider</td>
                                                                     <td>
-                                                                        <input type="text" name="courier_id[]" class="form-control"  value="{{ $order->courier_name }}">
                                                                         <select name="courier_id[]" class="form-control" id="">
-                                                                            <option selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
+                                                                            <option disabled selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
                                                                         </select>
                                                                     </td>
                                                                 </tr>
