@@ -21,9 +21,9 @@
         <div class="row mb2">
             <div class="col-sm-6">
             </div>
-            <div class="col-sm-6 text-right">
-                <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_courier">Create Courier Service Providers</button>
-            </div>
+{{--            <div class="col-sm-6 text-right">--}}
+{{--                <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_courier">Create Courier Service Providers</button>--}}
+{{--            </div>--}}
         </div>
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
@@ -35,6 +35,7 @@
                                 <tr>
                                     <th >Title</th>
                                     <th style="width: 25%;">URL</th>
+                                    <th style="width: 25%;">Country</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -45,18 +46,21 @@
                                         <td>
                                             <span class="badge badge-primary">{{$courier->url}}</span>
                                         </td>
-                                        <td class="text-right btn-group" style="float: right">
-                                            <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                                    data-target="#edit_courier_modal{{$index}}"><i
-                                                    class="fa fa-edit"></i>
-                                            </button>
-                                            <form method="POST" action="{{ route('couriers.destroy', $courier->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                                        data-original-title="Delete Courier"><i class="fa fa-times"></i></button>
-                                            </form>
+                                        <td>
+                                            <span class="badge badge-success">{{$courier->zone->name}}</span>
                                         </td>
+{{--                                        <td class="text-right btn-group" style="float: right">--}}
+{{--                                            <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"--}}
+{{--                                                    data-target="#edit_courier_modal{{$index}}"><i--}}
+{{--                                                    class="fa fa-edit"></i>--}}
+{{--                                            </button>--}}
+{{--                                            <form method="POST" action="{{ route('couriers.destroy', $courier->id) }}">--}}
+{{--                                                @csrf--}}
+{{--                                                @method('DELETE')--}}
+{{--                                                <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""--}}
+{{--                                                        data-original-title="Delete Courier"><i class="fa fa-times"></i></button>--}}
+{{--                                            </form>--}}
+{{--                                        </td>--}}
                                     </tr>
                                     <div class="modal fade" id="edit_courier_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout" role="document">
