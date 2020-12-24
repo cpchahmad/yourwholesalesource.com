@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="material-error">Title</label>
+                                        <label for="material-error">Courier Title</label>
                                         <input required class="form-control @error('title') is-invalid @enderror" type="text" id="zone_title" name="title" placeholder="Enter courier service provider title..">
                                         @error('title')
                                         <div class="invalid-feedback">{{ $message }}</div>

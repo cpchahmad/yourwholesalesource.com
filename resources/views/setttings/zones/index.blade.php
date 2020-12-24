@@ -202,6 +202,23 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group row ">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error ">Courier Title</label>
+                                                                        <input required class="form-control @error('title') is-invalid @enderror" type="text" id="zone_title" name="title" placeholder="Enter courier service provider title..">
+                                                                        @error('title')
+                                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error ">URL</label>
+                                                                        <input required class="form-control" type="url" id="zone_title" name="url" placeholder="Enter courier service provider URL..">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="block-content block-content-full text-right border-top">
