@@ -30,13 +30,7 @@ class ZoneController extends Controller
 
    }
     public function rate_create(Request $request){
-        $this->validate($request, [
-            'title' => 'required|unique:couriers'
-        ]);
-        $courier = new Courier();
-        $courier->title =  $request->title;
-        $courier->url =  $request->url;
-        $courier->save();
+
 
         ShippingRate::create($request->all());
 
@@ -63,6 +57,15 @@ class ZoneController extends Controller
 
     }
     public function rate_update(Request $request){
+        $this->validate($request, [
+            'title' => 'required|unique:couriers'
+        ]);
+        $courier = new Courier();
+        $courier->title =  $request->title;
+        $courier->url =  $request->url;
+        $courier->save();
+
+
         ShippingRate::find($request->id)->update($request->all());
         return redirect()->back()->with('success','Rate Successfully Updated!');
     }
