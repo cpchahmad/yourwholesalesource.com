@@ -327,7 +327,7 @@
                                                                         <div class="col-sm-6">
                                                                             <div class="form-material">
                                                                                 <label for="material-error ">Courier Title</label>
-                                                                                <input required class="form-control @error('title') is-invalid @enderror" type="text" id="zone_title" name="title" placeholder="Enter courier service provider title.." value="{{ $zone->courier->title }}">
+                                                                                <input required class="form-control @error('title') is-invalid @enderror" type="text" id="zone_title" name="title" placeholder="Enter courier service provider title.." value="{{ $zone->has_courier->title }}">
                                                                                 @error('title')
                                                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                                                 @enderror
@@ -336,7 +336,7 @@
                                                                         <div class="col-sm-6">
                                                                             <div class="form-material">
                                                                                 <label for="material-error ">URL</label>
-                                                                                <input required class="form-control" type="url" id="zone_title" name="url" placeholder="Enter courier service provider URL.." value="{{ $zone->courier->url }}">
+                                                                                <input required class="form-control" type="url" id="zone_title" name="url" placeholder="Enter courier service provider URL.." value="{{ $zone->has_courier->url }}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
