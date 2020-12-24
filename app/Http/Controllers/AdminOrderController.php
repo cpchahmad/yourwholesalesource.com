@@ -239,7 +239,6 @@ class AdminOrderController extends Controller
                                     $data['fulfillment']['tracking_company'] = $courier->title;
                                 }
 
-                                dd($data);
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
                                 if ($order->admin_shopify_id != null) {
@@ -284,6 +283,12 @@ class AdminOrderController extends Controller
                                         "tracking_url" => $tracking_urls[$index],
                                     ]
                                 ];
+
+                                if($courier_id[$index] !== null){
+                                    $courier = Courier::find($courier_id[$index]);
+                                    $data['fulfillment']['tracking_company'] = $courier->title;
+                                }
+
                                 $this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
                                 $this->CompleteFullFillment($current);
                             }
