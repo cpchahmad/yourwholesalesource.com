@@ -49,10 +49,11 @@ class RetailerOrder extends Model
                 $q->where('name','LIKE','%'.$country.'%');
             });
             $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier == null)
+                return 'no courier for this country';
 
-            $courier = $zoneQuery->courier->title;
-            return $courier;
-
+            return$zoneQuery->courier->title;
         }
+        return 'no courier for this country';
     }
 }
