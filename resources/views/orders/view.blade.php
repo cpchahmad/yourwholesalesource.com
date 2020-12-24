@@ -623,7 +623,7 @@
                                                                     <td>Courier Service Provider</td>
                                                                     <td>
                                                                         <select name="courier_id[]" class="form-control" id="">
-                                                                            <option disabled selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
+                                                                            <option selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
                                                                         </select>
                                                                     </td>
                                                                 </tr>
