@@ -14,7 +14,5 @@ class ShippingRate extends Model
        return $this->belongsTo(Zone::class,'zone_id');
    }
 
-   public function has_courier(){
-       return $this->belongsTo(Courier::class);
-   }
+
 }
