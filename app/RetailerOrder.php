@@ -37,4 +37,22 @@ class RetailerOrder extends Model
     public function imported(){
         return $this->hasOne('App\UserFileTemp','order_id');
     }
+
+    public function getCourierAttribute() {
+        if($this->shipping_address)
+        {
+            $shipping = json_decode($this->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+
+            $courier = $zoneQuery->courier->title;
+            return $courier;
+
+        }
+    }
 }
