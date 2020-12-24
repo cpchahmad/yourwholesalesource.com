@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Courier;
 use App\Product;
 use App\ShippingRate;
 use App\Zone;
@@ -29,7 +30,16 @@ class ZoneController extends Controller
 
    }
     public function rate_create(Request $request){
+        $this->validate($request, [
+            'title' => 'required|unique:couriers'
+        ]);
+        $courier = new Courier();
+        $courier->title =  $request->title;
+        $courier->url =  $request->url;
+        $courier->save();
+
         ShippingRate::create($request->all());
+
         return redirect()->back()->with('success','Rate Successfully Generated!');
     }
     public function update(Request $request){
