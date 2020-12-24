@@ -213,8 +213,6 @@ class AdminOrderController extends Controller
     public function fulfillment_add_tracking(Request $request)
     {
 
-        dd($request->all());
-
         $order = RetailerOrder::find($request->id);
         if ($order != null) {
             if ($order->paid == 1) {
@@ -244,7 +242,8 @@ class AdminOrderController extends Controller
                                     $current->tracking_number = $tracking_numbers[$index];
                                     $current->tracking_url = $tracking_urls[$index];
                                     $current->tracking_notes = $tracking_notes[$index];
-                                    $current->courier_id = $courier_id[$index];
+                                    if($courier_id[$index] !== null)
+                                        $current->courier_id = $courier_id[$index];
                                     $current->save();
                                     $this->CompleteFullFillment($current);
                                     /*Maintaining Log*/
@@ -267,7 +266,8 @@ class AdminOrderController extends Controller
                             $current->tracking_number = $tracking_numbers[$index];
                             $current->tracking_url = $tracking_urls[$index];
                             $current->tracking_notes = $tracking_notes[$index];
-                            $current->courier_id = $courier_id[$index];
+                            if($courier_id[$index] !== null)
+                                $current->courier_id = $courier_id[$index];
                             $current->save();
 
                             if ($order->admin_shopify_id != null) {

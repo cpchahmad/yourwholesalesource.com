@@ -470,6 +470,7 @@
                             <div class="block-content">
                                 @if($fulfillment->tracking_number != null)
                                     <p style="font-size: 12px">
+                                        Courier Service Provider : @if($fulfillment->courier ) {{ $fulfillment->courier->title }} @endif <br>
                                         Tracking Number : {{$fulfillment->tracking_number}} <br>
                                         Tracking Url : {{$fulfillment->tracking_url}} <br>
                                         Tracking Notes : {{$fulfillment->tracking_notes}} <br>
