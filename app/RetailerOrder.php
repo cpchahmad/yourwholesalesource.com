@@ -38,7 +38,7 @@ class RetailerOrder extends Model
         return $this->hasOne('App\UserFileTemp','order_id');
     }
 
-    public function getCourierAttribute() {
+    public function getCourierNameAttribute() {
         if($this->shipping_address)
         {
             $shipping = json_decode($this->shipping_address);
@@ -50,10 +50,29 @@ class RetailerOrder extends Model
             });
             $zoneQuery = $zoneQuery->first();
             if($zoneQuery->courier == null)
-                return 'no courier for this country';
+                return '';
 
             return$zoneQuery->courier->title;
         }
-        return 'no courier for this country';
+        return '';
+    }
+
+    public function getCourierIdAttribute() {
+        if($this->shipping_address)
+        {
+            $shipping = json_decode($this->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier == null)
+                return '';
+
+            return$zoneQuery->courier->id;
+        }
+        return '';
     }
 }

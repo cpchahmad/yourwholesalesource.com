@@ -622,13 +622,10 @@
                                                                 <tr>
                                                                     <td>Courier Service Provider</td>
                                                                     <td>
-                                                                        <input type="text" name="courier_id[]" class="form-control" placeholder="Notes for this fulfillment" value="{{ $order->courier }}">
-
-                                                                        {{--                                                                        <select name="courier_id[]" class="form-control" id="">--}}
-{{--                                                                            @foreach($couriers as $courier)--}}
-{{--                                                                                <option value="{{ $courier->id }}"> {{ $courier->title }}</option>--}}
-{{--                                                                            @endforeach--}}
-{{--                                                                        </select>--}}
+                                                                        <input type="text" name="courier_id[]" class="form-control"  value="{{ $order->courier_name }}">
+                                                                        <select name="courier_id[]" class="form-control" id="">
+                                                                            <option selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
+                                                                        </select>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
