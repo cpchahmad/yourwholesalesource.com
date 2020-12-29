@@ -1156,6 +1156,33 @@ class AdminOrderController extends Controller
 
         return redirect()->back()->with('success','Order Status Email Send to User Successfully');
     }
+
+    public function generateHash() {
+        $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
+        $order = RetailerOrder::first();
+
+        $timestamp = Carbon::now()->timestamp;
+        $data = [
+            "developerId"=>100375,
+            "timestamp"=>$timestamp,
+            "action"=>"do-create-order",
+            "platformOrderId"=>$order->shopify_order_id,
+            "shopName"=>"Wefullfill",
+            "buyerUserId"=>$order->user_id,
+            "phone1"=>$order->has_customer->phone,
+            "country"=>"China",
+            "street1"=>$order->has_customer->addresses,
+            "currencyId"=>"USD"
+        ];
+
+        dd(json_encode($data));
+
+        $string = '{"developerId":100375,"timestamp":1608819060,"action":"do-create-order","platformOrderId":"120","shopName":"rrr","buyerUserId":100001,"phone1":"0343423243","country":"China","street1":"some street","currencyId":"USD","paidTime":"2019-11-26 16:30:22","orderItemList":[{"title":"Item 1"}]}';
+
+        dd(hash_hmac('sha256', $string, $secret));
+    }
+
+
 }
 
 
