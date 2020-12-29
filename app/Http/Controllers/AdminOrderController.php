@@ -1299,7 +1299,7 @@ class AdminOrderController extends Controller
     }
 
     public function getFulfillmentFromErp() {
-        dd(123);
+
     }
 
 
