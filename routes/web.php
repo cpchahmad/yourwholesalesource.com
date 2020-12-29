@@ -160,7 +160,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
     Route::get('/campaigns', 'DefaultSettingsController@campaigns')->name('email.campaigns.index');
     Route::get('/campaigns/{id}', 'DefaultSettingsController@getCampaign')->name('email.campaigns.show');
-    Route::post('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
+    Route::get('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
 });
 
