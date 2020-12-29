@@ -301,21 +301,42 @@
                                         </td>
                                         <td>
                                             @php
-                                                $out_of_stock = false;
-                                                if($item->linked_variant) {
-                                                    if($item->linked_variant->quantity == 0)
-                                                        $out_of_stock = true;
+                                                if($order->custom == 0) {
+                                                    $out_of_stock = false;
+                                                    if($item->linked_variant) {
+                                                        if($item->linked_variant->quantity == 0)
+                                                            $out_of_stock = true;
+                                                    }
+                                                    elseif($item->linked_product){
+                                                        if($item->linked_product->quantity == 0)
+                                                            $out_of_stock = true;
+                                                    }
                                                 }
-                                                elseif($item->linked_product){
-                                                    if($item->linked_product->quantity == 0)
-                                                        $out_of_stock = true;
+                                                else {
+                                                    $out_of_stock = false;
+                                                    if($item->linked_real_variant) {
+                                                        if($item->linked_real_variant->quantity == 0)
+                                                            $out_of_stock = true;
+                                                    }
+                                                    elseif($item->linked_real_product){
+                                                        if($item->linked_real_product->quantity == 0)
+                                                            $out_of_stock = true;
+                                                    }
                                                 }
                                             @endphp
 
-                                            @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null))
-                                                <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
+                                            @if($order->custom == 0)
+                                                @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null))
+                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
+                                                @else
+                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>
+                                                @endif
                                             @else
-                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>
+                                                @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null))
+                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
+                                                @else
+                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>
+                                                @endif
                                             @endif
                                         </td>
 

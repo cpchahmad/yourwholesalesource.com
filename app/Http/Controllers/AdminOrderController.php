@@ -1159,9 +1159,102 @@ class AdminOrderController extends Controller
 
     public function generateHash() {
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
-        $order = RetailerOrder::first();
-
         $timestamp = Carbon::now()->timestamp;
+        $order = RetailerOrder::find(3);
+        $line_items = [];
+        $images = [];
+
+        if($order->custom == 0) {
+            foreach ($order->line_items as $index => $item) {
+                if($item->linked_variant != null) {
+                    if($item->linked_variant->has_image == null) {
+                        array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                    }
+                    else {
+                        if($item->linked_variant->has_image->isV == 1) {
+                            array_push($images, "https://app.wefullfill.com/images/variants/".$item->linked_variant->has_image->image);
+                        }
+                        else {
+                            array_push($images, "https://app.wefullfill.com/images/".$item->linked_variant->has_image->image);
+                        }
+                    }
+                }
+                else {
+                    if($item->linked_product != null) {
+                        if(count($item->linked_product->has_images)>0) {
+                            if($item->linked_product->has_images[0]->isV == 1) {
+                                array_push($images, "https://app.wefullfill.com/images/variants".$item->linked_product->has_images[0]->image);
+                            }
+                            else {
+                                array_push($images, "https://app.wefullfill.com/images/".$item->linked_product->has_images[0]->image);
+                            }
+                        }
+                        else {
+                            array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                        }
+                    }
+                    else {
+                        array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                    }
+                }
+
+
+                array_push($line_items, [
+                    "title" => $item->name,
+                    "platformSku" => is_null($item->linked_variant) ? $item->linked_product->sku : $item->linked_variant->sku,
+                    "quantity" => $item->quantity,
+                    "pictureUrl" => $images[$index]
+                ]);
+
+            }
+
+        }
+        else {
+            foreach ($order->line_items as $index =>  $item) {
+                if($item->linked_real_variant != null) {
+                    if($item->linked_real_variant->has_image == null) {
+                        array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                    }
+                    else {
+                        if($item->linked_real_variant->has_image->isV == 1) {
+                            array_push($images, "https://app.wefullfill.com/images/variants/".$item->linked_real_variant->has_image->image);
+                        }
+                        else {
+                            array_push($images, "https://app.wefullfill.com/images/".$item->linked_real_variant->has_image->image);
+                        }
+                    }
+                }
+                else {
+                    if($item->linked_real_product != null) {
+                        if(count($item->linked_real_product->has_images)>0) {
+                            if($item->linked_real_product->has_images[0]->isV == 1) {
+                                array_push($images, "https://app.wefullfill.com/images/variants".$item->linked_real_product->has_images[0]->image);
+                            }
+                            else {
+                                array_push($images, "https://app.wefullfill.com/images/".$item->linked_real_product->has_images[0]->image);
+                            }
+                        }
+                        else {
+                            array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                        }
+                    }
+                    else {
+                        array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                    }
+                }
+
+
+                array_push($line_items, [
+                    "title" => $item->name,
+                    "platformSku" => is_null($item->linked_real_variant) ? $item->linked_real_product->sku : $item->linked_real_variant->sku,
+                    "quantity" => $item->quantity,
+                    "pictureUrl" => $images[$index]
+                ]);
+
+            }
+        }
+
+
         $data = [
             "developerId"=>100375,
             "timestamp"=>$timestamp,
@@ -1169,17 +1262,40 @@ class AdminOrderController extends Controller
             "platformOrderId"=>$order->shopify_order_id,
             "shopName"=>"Wefullfill",
             "buyerUserId"=>$order->user_id,
-            "phone1"=>$order->has_customer->phone,
+            "phone1"=> is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone,
             "country"=>"China",
-            "street1"=>$order->has_customer->addresses,
-            "currencyId"=>"USD"
+            "street1"=> is_null($order->has_customer->addresses) ? "No Address" : $order->has_customer->addresses,
+            "currencyId"=>"USD",
+            "paidTime"=> $order->shopify_created_at,
+            "orderItemList" => $line_items
         ];
 
-        dd(json_encode($data));
+        $body = str_replace("\\", '', json_encode($data));
 
-        $string = '{"developerId":100375,"timestamp":1608819060,"action":"do-create-order","platformOrderId":"120","shopName":"rrr","buyerUserId":100001,"phone1":"0343423243","country":"China","street1":"some street","currencyId":"USD","paidTime":"2019-11-26 16:30:22","orderItemList":[{"title":"Item 1"}]}';
 
-        dd(hash_hmac('sha256', $string, $secret));
+        $signature = hash_hmac('sha256', $body, $secret);
+
+        $url = "http://openapi.mabangerp.com";
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $headers = array(
+            "Authorization: ". $signature,
+            "Content-Type: application/json",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $data = $body;
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        var_dump($resp);
     }
 
 
