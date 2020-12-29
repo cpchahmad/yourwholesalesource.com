@@ -1298,6 +1298,10 @@ class AdminOrderController extends Controller
         var_dump($resp);
     }
 
+    public function getFulfillmentFromErp() {
+        dd(123);
+    }
+
 
 }
 
