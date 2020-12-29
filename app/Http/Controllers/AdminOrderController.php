@@ -1295,7 +1295,7 @@ class AdminOrderController extends Controller
 
         $resp = curl_exec($curl);
         curl_close($curl);
-        var_dump($resp);
+        dd($resp);
     }
 
     public function getFulfillmentFromErp() {
