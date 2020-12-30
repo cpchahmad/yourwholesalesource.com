@@ -422,7 +422,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 Route::get('/hash', 'AdminOrderController@generateHash');
 
 
-Route::get('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
+Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
 
 
