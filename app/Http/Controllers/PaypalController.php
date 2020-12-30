@@ -158,7 +158,6 @@ class PaypalController extends Controller
             foreach($users_temp as $key => $ut){
                 if($ut != null) {
                     $ua = [];
-
                     $ua['email'] = $ut;
                     $users[$key] = (object)$ua;
                 }
@@ -335,6 +334,7 @@ class PaypalController extends Controller
             $order_log->status = "paid";
             $order_log->retailer_order_id = $retailer_order->id;
             $order_log->save();
+            $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             $this->admin->sync_order_to_admin_store($retailer_order);
         }
 
