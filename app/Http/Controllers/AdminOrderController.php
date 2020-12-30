@@ -1298,8 +1298,12 @@ class AdminOrderController extends Controller
         dd($resp);
     }
 
-    public function getFulfillmentFromErp() {
-
+    public function getFulfillmentFromErp(Request $request) {
+        $res = [
+          "code" => 0,
+          "message" => ""
+        ];
+        return json_encode($res);
     }
 
 
