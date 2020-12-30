@@ -160,9 +160,6 @@ class PaypalController extends Controller
                     $ua = [];
 
                     $ua['email'] = $ut;
-
-                    $ua['name'] = 'test';
-
                     $users[$key] = (object)$ua;
                 }
             }
@@ -182,7 +179,7 @@ class PaypalController extends Controller
             $this->admin->sync_order_to_admin_store($retailer_order);
             $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 
-//            $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+            $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             if($retailer_order->custom == 0){
                 return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
             }
