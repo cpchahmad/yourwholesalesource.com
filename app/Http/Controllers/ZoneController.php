@@ -59,7 +59,7 @@ class ZoneController extends Controller
     public function rate_update(Request $request){
 
         $this->validate($request, [
-            'title' => 'required|unique:couriers'
+            'title' => 'required'
         ]);
 
         if(Courier::where('zone_id', $request->zone_id)->exists()) {
