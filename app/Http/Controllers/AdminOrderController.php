@@ -1299,11 +1299,11 @@ class AdminOrderController extends Controller
     }
 
     public function getFulfillmentFromErp(Request $request) {
-        $res = [
-          "code" => 999,
-          "message" => "错误描述"
-        ];
-        return json_encode($res);
+//        $res = [
+//          "code" => 999,
+//          "message" => "错误描述"
+//        ];
+        return '{"code":999,"message":"错误描述"}';
     }
 
 
