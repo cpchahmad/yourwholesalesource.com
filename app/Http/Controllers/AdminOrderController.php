@@ -1300,6 +1300,7 @@ class AdminOrderController extends Controller
     }
 
     public function getFulfillmentFromErp(Request $request) {
+        dd(213);
         $order_id = $request->platformOrderId;
         $logistics_code = $request->logisticsCode;
         $track_number = $request->trackNumber;
