@@ -1336,11 +1336,9 @@ class AdminOrderController extends Controller
         }
 
 
+        response()->json(["code" => 999, "message" => "错误描述"]);
 
-//        $res = [
-//          "code" => 999,
-//          "message" => "错误描述"
-//        ];
+
 
     }
 
