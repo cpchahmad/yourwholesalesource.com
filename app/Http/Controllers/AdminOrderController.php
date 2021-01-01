@@ -1300,7 +1300,7 @@ class AdminOrderController extends Controller
     }
 
     public function getFulfillmentFromErp(Request $request) {
-        dd(213);
+
         $order_id = $request->platformOrderId;
         $logistics_code = $request->logisticsCode;
         $track_number = $request->trackNumber;
@@ -1336,10 +1336,7 @@ class AdminOrderController extends Controller
             response()->json(["code" => 999, "message" => "错误描述"]);
         }
 
-
         response()->json(["code" => 999, "message" => "错误描述"]);
-
-
 
     }
 
