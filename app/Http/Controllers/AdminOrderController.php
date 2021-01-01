@@ -7,6 +7,7 @@ use App\AdminFile;
 use App\AdminFileTemp;
 use App\Courier;
 use App\Customer;
+use App\ERPOrderFulfillment;
 use App\Exports\CustomersExport;
 use App\Exports\OrdersExport;
 use App\FulfillmentLineItem;
@@ -1299,11 +1300,48 @@ class AdminOrderController extends Controller
     }
 
     public function getFulfillmentFromErp(Request $request) {
+        $order_id = $request->platformOrderId;
+        $logistics_code = $request->logisticsCode;
+        $track_number = $request->trackNumber;
+        $logistics_name = $request->logisticsName;
+        $track_url = $request->trackUrl;
+        $item_list = $request->itemList;
+
+        $order = RetailerOrder::where('erp_order_id', $order_id)->first();
+        if($order) {
+            // Save fulfillment
+            $fulfillment = new ERPOrderFulfillment();
+            $fulfillment->retailer_order_id = $order->id;
+            $fulfillment->logistic_code = $logistics_code;
+            $fulfillment->track_number = $track_number;
+            $fulfillment->logistic_name = $logistics_name;
+            $fulfillment->track_url = $track_url;
+            $fulfillment->erp_order_id = $order_id;
+            $fulfillment->save();
+
+            $order->pushed_to_erp = 1;
+            $order->save();
+
+//            if($order->pushed_to_erp == null) {
+//                // Send Error Response
+//                response()->json(["code" => 999, "message" => "错误描述"]);
+//            }
+
+            // Send Success Response
+            response()->json(["code" => 0, "message" => ""]);
+        }
+        else {
+            // Send Error Response
+            response()->json(["code" => 999, "message" => "错误描述"]);
+        }
+
+
+
 //        $res = [
 //          "code" => 999,
 //          "message" => "错误描述"
 //        ];
-        return '{"code":999,"message":"错误描述"}';
+
     }
 
 
