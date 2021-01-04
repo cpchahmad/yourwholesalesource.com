@@ -162,6 +162,11 @@ class ShopifyUsersController extends Controller
         if($user != null){
             $user->name =  $request->input('name');
             $user->save();
+
+            $this->validate($request, [
+                'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            ]);
+
             if($request->hasFile('profile')){
                 $file = $request->file('profile');
                 $name = Str::slug($file->getClientOriginalName());

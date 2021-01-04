@@ -63,7 +63,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">Email</label>
-                                        <input disabled type="text"  class="form-control" value="{{$associated_user->email}}">
+                                        <input type="text" name="email"  class="form-control  @error('email') is-invalid @enderror" value="{{$associated_user->email}}">
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="">Username</label>

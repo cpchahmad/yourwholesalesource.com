@@ -38,8 +38,7 @@ class SendNewsEmailJob implements ShouldQueue
     {
         $users_temp = User::role('non-shopify-users')
         ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-        ->pluck('email')
-        ->toArray();
+        ->get();
 
 
 
