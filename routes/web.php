@@ -434,7 +434,7 @@ Route::get('/test', function() {
 Route::get('/hash', 'AdminOrderController@generateHash');
 
 
-Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
+Route::post('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
 
 

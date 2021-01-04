@@ -855,20 +855,12 @@ class ProductController extends Controller
                             }
 
                             if(count($users_temp)> 0) {
-                                $users = [];
-                                foreach($users_temp as $key => $ut){
-                                    if($ut != null) {
-                                        $ua = [];
-                                        $ua['email'] = $ut;
-                                        $ua['name'] = 'test';
-                                        $users[$key] = (object)$ua;
+                                foreach($users_temp as $key => $user){
+                                    try{
+                                        Mail::to($user)->send(new ProductStockOutMail($product));
                                     }
-                                }
-
-                                try{
-                                    Mail::to($users)->send(new ProductStockOutMail($product));
-                                }
-                                catch (\Exception $e){
+                                    catch (\Exception $e){
+                                    }
                                 }
                             }
                         }
@@ -919,19 +911,12 @@ class ProductController extends Controller
 
                             if(count($users_temp)> 0) {
                                 $users = [];
-                                foreach($users_temp as $key => $ut){
-                                    if($ut != null) {
-                                        $ua = [];
-                                        $ua['email'] = $ut;
-                                        $ua['name'] = 'test';
-                                        $users[$key] = (object)$ua;
+                                foreach($users_temp as $user){
+                                    try{
+                                        Mail::to($user)->send(new ProductStockOutMail($product));
                                     }
-                                }
-
-                                try{
-                                    Mail::to($users)->send(new ProductStockOutMail($product));
-                                }
-                                catch (\Exception $e){
+                                    catch (\Exception $e){
+                                    }
                                 }
                             }
                         }
