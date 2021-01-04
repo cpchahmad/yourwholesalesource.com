@@ -96,7 +96,6 @@ class EmailTemplateController extends Controller
 
         if($template->id == 18 || $template->id == 20)
         {
-            dd('12');
             $campaign = new Campaign();
             $campaign->name = $request->campaign_name;
             $campaign->time = $request->time;
@@ -104,11 +103,14 @@ class EmailTemplateController extends Controller
             $campaign->template_id = $template->id;
             $campaign->save();
 
-            $users_temp = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->get();
+//            $users_temp = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->get();
+//
+//            foreach ($users_temp as $user) {
+//                $user->campaigns()->attach($campaign->id);
+//            }
 
-            foreach ($users_temp as $user) {
-                $user->campaigns()->attach($campaign->id);
-            }
+            $user = User::find(2);
+            $user->campaigns()->attach($campaign->id);
         }
 
 
