@@ -80,7 +80,17 @@
                                     @endif
 
                             </td>
-                            <td style="vertical-align: middle">{{ $product->quantity }}</td>
+                            <td style="vertical-align: middle">
+                                @if($product->quantity > 0)
+                                    @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
+                                        {{$product->varaint_count($product)}}
+                                    @else
+                                       {{$product->quantity}}
+                                    @endif
+                                @else
+                                    {{$product->quantity}}
+                                @endif
+                            </td>
                             <td style="vertical-align: middle">
                                 <div class="custom-control custom-switch custom-control-success mb-1">
                                     <input @if($product->status ==1)checked="" @endif data-route="{{route('product.change.status',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">
