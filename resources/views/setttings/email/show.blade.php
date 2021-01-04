@@ -337,7 +337,7 @@
                                         </div>
                                     @endif
 
-                                    @if($template->id == '13')
+                                    @if($template->id == '13' || $template->id == '20')
                                         <div class="text-left">
                                             <label for="" style="color: #7daa40 !important;">Select Products</label>
                                         </div>
