@@ -45,7 +45,7 @@
                                                data-original-title="View Campaign"><i class="fa fa-eye"></i></a>
                                             <a href="{{ route('email.campaigns.submit', $campaign->id) }}"
                                                class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="View Campaign"><i class="fa fa-tick"></i></a>
+                                               data-original-title="View Campaign"><i class="fa fa-check"></i></a>
                                             <a href="{{ route('email.campaigns.delete', $campaign->id) }}"
                                                class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                data-original-title="Delete Campaign"><i class="fa fa-trash"></i></a>
