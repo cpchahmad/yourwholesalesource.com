@@ -380,10 +380,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <input type="text" name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
+                                                <input type="text" required name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" name="time" placeholder="Select Date/Time" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
+                                                <input type="text" required name="time" placeholder="Select Date/Time" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
                                             </div>
                                         </div>
                                         <br><br><br>

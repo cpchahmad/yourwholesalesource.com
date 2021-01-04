@@ -94,8 +94,9 @@ class EmailTemplateController extends Controller
 
         $template = EmailTemplate::find($id);
 
-        if($template->id == 18)
+        if($template->id == 18 || $template->id == 20)
         {
+            dd('12');
             $campaign = new Campaign();
             $campaign->name = $request->campaign_name;
             $campaign->time = $request->time;
