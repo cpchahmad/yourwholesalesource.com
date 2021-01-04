@@ -91,12 +91,12 @@ class AppServiceProvider extends ServiceProvider
             $wishlist_accept_count = Wishlist::where('status_id', 3)->count();
             $wallet_request_count = WalletRequest::where('status', 0)->count();
             $refund_request_count = Refund::where('status', 'New')->count();
-            $tickets_request_count = Ticket::where('status_id', 1)->count();
+            $tickets_request_count = Ticket::where('status_id', 1)->orWhere('status_id', 2)->count();
 
             $manager_wishlist_request_count = Wishlist::where('manager_id' ,Auth::id())->where('status_id', 1)->count();
             $manager_wishlist_accept_count = Wishlist::where('manager_id' ,Auth::id())->where('status_id', 3)->count();
             $manager_refund_request_count = Refund::where('manager_id',Auth::id())->where('status', 'New')->count();
-            $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->count();
+            $manager_tickets_request_count = Ticket::where('manager_id',Auth::id())->where('status_id', 1)->orWhere('status_id', 2)->count();
 
 
             $view->with([

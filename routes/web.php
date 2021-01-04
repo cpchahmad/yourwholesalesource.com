@@ -408,22 +408,22 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/test2', 'WishlistController@test');
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
-Route::get('/testing', function() {
-    $helper = new HelperController();
-    $shop = $helper->getSpecificShop(55);
-    $response = $shop->api()->rest('GET', '/admin/orders.json');
-
-    dd($response->body->orders);
-});
-
-Route::get('/test', function() {
-    $this->admin = new AdminMaintainerController();
-    $retailer_order = RetailerOrder::find(797);
-
-    $this->admin->sync_order_to_admin_store($retailer_order);
-
-
-});
+//Route::get('/testing', function() {
+//    $helper = new HelperController();
+//    $shop = $helper->getSpecificShop(55);
+//    $response = $shop->api()->rest('GET', '/admin/orders.json');
+//
+//    dd($response->body->orders);
+//});
+//
+//Route::get('/test', function() {
+//    $this->admin = new AdminMaintainerController();
+//    $retailer_order = RetailerOrder::find(797);
+//
+//    $this->admin->sync_order_to_admin_store($retailer_order);
+//
+//
+//});
 
 //Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
 
