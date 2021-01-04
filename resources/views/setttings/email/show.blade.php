@@ -337,7 +337,7 @@
                                         </div>
                                     @endif
 
-                                    @if($template->id == '13' || $template->id == '20')
+                                    @if($template->id == '13')
                                         <div class="text-left">
                                             <label for="" style="color: #7daa40 !important;">Select Products</label>
                                         </div>
@@ -354,6 +354,38 @@
                                            @endforeach
 
                                         </select>
+                                        <br><br><br>
+                                    @endif
+
+                                    @if($template->id == '20')
+                                        <div class="text-left">
+                                            <label for="" style="color: #7daa40 !important;">Select Products</label>
+                                        </div>
+                                        <select class="@error('type') is-invalid @enderror js-select2 form-control" name="products[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Products.." multiple>
+                                            @foreach($products as $product)
+                                                @php
+                                                    $prods = json_decode($template->products);
+                                                @endphp
+                                                <option value="{{ $product->id }}"
+                                                        @if(in_array($product->id, $prods))
+                                                        selected
+                                                    @endif
+                                                >{{ $product->title }}</option>
+                                            @endforeach
+
+                                        </select>
+
+                                        <div class="text-left">
+                                            <label for="" style="color: #7daa40 !important;">Add Campaign</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input type="text" name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="time" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
+                                            </div>
+                                        </div>
                                         <br><br><br>
                                     @endif
 
