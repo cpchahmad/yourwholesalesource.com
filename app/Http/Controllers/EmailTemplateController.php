@@ -109,7 +109,7 @@ class EmailTemplateController extends Controller
             }
 
 
-            dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($request->time));
+            //dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($request->time));
         }
 
 

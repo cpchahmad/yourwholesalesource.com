@@ -718,7 +718,20 @@ class DefaultSettingsController extends Controller
 
     public function getCampaign($id) {
         $campaign = Campaign::find($id);
+        return view('setttings.campaigns.show')->with('campaign', $campaign);
+    }
 
+
+    public function deleteCampaign($id) {
+        $campaign = Campaign::find($id);
+        $campaign->users()->delete();
+        $campaign->delete();
+        return redirect()->back()->with('success', 'Campaign Deleted Successfully!');
+    }
+
+
+    public function submitCampaign($id) {
+        $campaign = Campaign::find($id);
         return view('setttings.campaigns.show')->with('campaign', $campaign);
     }
 

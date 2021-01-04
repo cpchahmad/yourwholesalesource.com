@@ -161,6 +161,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
     Route::get('/campaigns', 'DefaultSettingsController@campaigns')->name('email.campaigns.index');
     Route::get('/campaigns/{id}', 'DefaultSettingsController@getCampaign')->name('email.campaigns.show');
+    Route::get('/campaigns/{id}/delete', 'DefaultSettingsController@deleteCampaign')->name('email.campaigns.delete');
+    Route::get('/campaigns/{id}/submit', 'DefaultSettingsController@submitCampaign')->name('email.campaigns.submit');
 
 });
 
