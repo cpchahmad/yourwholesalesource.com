@@ -1161,9 +1161,11 @@ class AdminOrderController extends Controller
     public function generateHash() {
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
-        $order = RetailerOrder::find(3);
+        $order = RetailerOrder::find(964);
         $line_items = [];
         $images = [];
+
+        dump($order);
 
         if($order->custom == 0) {
             foreach ($order->line_items as $index => $item) {
@@ -1260,8 +1262,8 @@ class AdminOrderController extends Controller
             "developerId"=>100375,
             "timestamp"=>$timestamp,
             "action"=>"do-create-order",
-            "platformOrderId"=>$order->shopify_order_id,
-            "shopName"=>"Wefullfill",
+            "platformOrderId"=>$order->name,
+            "shopName"=>"WEFULLFILL 自营",
             "buyerUserId"=>$order->user_id,
             "phone1"=> is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone,
             "country"=>"China",
@@ -1270,6 +1272,8 @@ class AdminOrderController extends Controller
             "paidTime"=> $order->shopify_created_at,
             "orderItemList" => $line_items
         ];
+
+        dd($data);
 
         $body = str_replace("\\", '', json_encode($data));
 
