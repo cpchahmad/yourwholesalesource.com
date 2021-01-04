@@ -278,10 +278,10 @@ class ManagerController extends Controller
         }
 
         if($request->has('status')){
-            if($request->input('status') != null){
+            if($request->has('more_status') && $request->input('more_status') != null)
+                $tickets->where('status_id','=',$request->input('status'))->orWhere('status_id', '=',  $request->input('more_status'));
+            elseif($request->input('status') != null)
                 $tickets->where('status_id','=',$request->input('status'));
-
-            }
         }
 
         if($request->has('priority')){
