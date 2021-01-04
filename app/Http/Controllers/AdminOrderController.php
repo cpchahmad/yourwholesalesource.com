@@ -1166,8 +1166,6 @@ class AdminOrderController extends Controller
         $line_items = [];
         $images = [];
 
-        dump($order);
-
         if($order->custom == 0) {
             foreach ($order->line_items as $index => $item) {
                 if($item->linked_variant != null) {
@@ -1274,7 +1272,7 @@ class AdminOrderController extends Controller
             "orderItemList" => $line_items
         ];
 
-        dd($data);
+
 
         $body = str_replace("\\", '', json_encode($data));
 
