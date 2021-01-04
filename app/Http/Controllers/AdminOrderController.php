@@ -1308,7 +1308,7 @@ class AdminOrderController extends Controller
         $track_url = $request->trackUrl;
         $item_list = $request->itemList;
 
-        dd($order_id);
+
 
         $order = RetailerOrder::where('erp_order_id', $order_id)->first();
         if($order_id !== null && $order) {
