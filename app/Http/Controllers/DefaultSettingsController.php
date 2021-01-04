@@ -724,7 +724,7 @@ class DefaultSettingsController extends Controller
 
     public function deleteCampaign($id) {
         $campaign = Campaign::find($id);
-        //$campaign->users()->delete();
+        $campaign->users()->detach();
         $campaign->delete();
         return redirect()->back()->with('success', 'Campaign Deleted Successfully!');
     }
@@ -732,7 +732,11 @@ class DefaultSettingsController extends Controller
 
     public function submitCampaign($id) {
         $campaign = Campaign::find($id);
-        return view('setttings.campaigns.show')->with('campaign', $campaign);
+        $campaign->status = 'Published';
+        $campaign->save();
+
+        dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($campaign->time));
+        return redirect()->back()->with('success', 'Campaign Published Successfully!');
     }
 
 }
