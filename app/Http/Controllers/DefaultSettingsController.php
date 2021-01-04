@@ -724,7 +724,7 @@ class DefaultSettingsController extends Controller
 
     public function deleteCampaign($id) {
         $campaign = Campaign::find($id);
-        $campaign->users()->delete();
+        //$campaign->users()->delete();
         $campaign->delete();
         return redirect()->back()->with('success', 'Campaign Deleted Successfully!');
     }
