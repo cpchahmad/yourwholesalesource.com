@@ -417,7 +417,7 @@ Route::get('/testing', function() {
 Route::get('/test', function() {
     $this->admin = new AdminMaintainerController();
     $retailer_order = RetailerOrder::find(797);
-    dd($retailer_order);
+
     $this->admin->sync_order_to_admin_store($retailer_order);
 
 
