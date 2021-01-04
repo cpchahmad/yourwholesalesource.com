@@ -376,14 +376,14 @@
                                         </select>
 
                                         <div class="text-left">
-                                            <label for="" style="color: #7daa40 !important;">Add Campaign</label>
+                                            <label for="" style="color: #7daa40 !important; margin-top: 10px;">Add Campaign</label>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <input type="text" name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" name="time" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
+                                                <input type="text" name="time" placeholder="Select Date/Time" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
                                             </div>
                                         </div>
                                         <br><br><br>
