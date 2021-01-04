@@ -9,6 +9,7 @@ use App\DefaultInfo;
 use App\Exports\CustomersExport;
 use App\GeneralDiscountPreferences;
 use App\GeneralFixedPricePreferences;
+use App\Jobs\SendNewsEmailJob;
 use App\Product;
 use App\Refund;
 use App\Shop;
