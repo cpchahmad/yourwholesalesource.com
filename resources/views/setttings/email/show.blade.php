@@ -636,6 +636,44 @@
                                     </div>
                                 @endif
 
+                                @if($template->id == '20')
+                                    <div class="" style="width: 100%">
+                                        <div class="wrap">
+                                            <div class="left">
+                                                <h3 style="color: #ffffff; margin-right: 5px;">Our Top Products</h3>
+                                            </div>
+                                        </div>
+
+                                        <div class="wrapper">
+                                            @foreach($top_products_stores as $product)
+                                                @php
+                                                    $prods = json_decode($template->products);
+                                                @endphp
+                                                @if(in_array($product->id, $prods))
+                                                    <div class="product_div">
+                                                        <div class="inner">
+                                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                                @if($index == 0)
+                                                                    @if($image->isV == 0)
+                                                                        <img class="product_img"  src="{{asset('images')}}/{{$image->image}}">
+                                                                    @else
+                                                                        <img class="product_img"  src="{{asset('images/variants')}}/{{$image->image}}">
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                            <p><a href="{{route('store.product.wefulfill.show',$product->id)}}" class="title">{{$product->title}}</a></p>
+                                                            <p class="product_price">From ${{ $product->price }}</p>
+                                                            <a href="{{route('store.product.wefulfill.show',$product->id)}}" class="product-btn">View Product</a>
+                                                        </div>
+
+                                                    </div>
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                @endif
+
                                 @if($template->id == '14')
                                     <div class="" style="width: 100%">
                                         <div class="wrap">
