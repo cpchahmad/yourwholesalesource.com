@@ -52,8 +52,8 @@
             </div>
 
             <div class="email-content-detail" style="margin: 50px 0;">
-                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">Wefullfill Wallet is running out of balance</h1>
-                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >Dear user, your wallet amount is running out of balance. your current balance is <strong>$ {{ number_format($wallet->available, 2) }}</strong>, therefore auto order placing feature is not applicable. kindly top-up the wallet in order to use this feature.</p>
+                <h1 class="email-title" style="margin: 0;margin-bottom: 30px;font-size: 34px;">{{ $template->subject }}</h1>
+                <p class="email-message-1" style=" margin: 0;margin-bottom: 30px;font-size: 20px;line-height: 1.53;" >{{ $template->body }}. Your current balance is <strong>$ {{ number_format($wallet->available, 2) }}</strong></p>
 
                 <a href="{{ route('store.user.wallet.show') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Details</a>
             </div>

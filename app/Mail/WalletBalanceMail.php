@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\EmailTemplate;
 use App\Wallet;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,13 +20,14 @@ class WalletBalanceMail extends Mailable
      */
 
     private $user = "info@wefullfill.com";
-
     private $wallet;
+    private $template;
 
 
     public function __construct(Wallet $wallet)
     {
         $this->wallet = $wallet;
+        $this->template = EmailTemplate::find(19);
     }
 
     /**
@@ -37,6 +39,7 @@ class WalletBalanceMail extends Mailable
     {
         return $this->from($this->user,'Wefullfill')->subject('Your Wallet is running out of Balance')->view('emails.wallet_balance')->with([
             'wallet' => $this->wallet,
+            'template' => $this->template
         ]);
     }
 }
