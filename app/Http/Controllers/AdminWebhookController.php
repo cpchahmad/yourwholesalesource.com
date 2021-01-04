@@ -100,7 +100,7 @@ class AdminWebhookController extends Controller
                         }
                         else {
                             $log = new ErrorLog();
-                            $log->message = "Fulfillment Error";
+                            $log->message = "Fulfillment Error: " . json_encode($response->errors);
                             $log->save();
                         }
                     }

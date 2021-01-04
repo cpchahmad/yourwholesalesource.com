@@ -54,9 +54,7 @@ class SendNewsEmailJob implements ShouldQueue
                 $this->campaign->save();
             }
             catch (\Exception $e){
-                $log = new ErrorLog();
-                $log->message = $e->getMessage();
-                $log->save();
+
             }
         }
     }

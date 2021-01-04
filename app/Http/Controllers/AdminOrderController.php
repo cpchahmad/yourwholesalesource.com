@@ -1261,7 +1261,7 @@ class AdminOrderController extends Controller
             "developerId"=>100375,
             "timestamp"=>$timestamp,
             "action"=>"do-create-order",
-            "platformOrderId"=>$order->name,
+            "platformOrderId"=>$order->shopify_order_id,
             "shopName"=>"WEFULLFILL OFFICIAL",
             "buyerUserId"=>$order->user_id,
             "phone1"=> is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone,
@@ -1319,7 +1319,7 @@ class AdminOrderController extends Controller
         $log->save();
 
 
-        $order = RetailerOrder::where('erp_order_id', $order_id)->first();
+        $order = RetailerOrder::where('shopify_order_id', $order_id)->first();
         if($order_id !== null && $order) {
             // Save fulfillment
             $fulfillment = new ERPOrderFulfillment();
@@ -1334,10 +1334,6 @@ class AdminOrderController extends Controller
             $order->pushed_to_erp = 1;
             $order->save();
 
-//            if($order->pushed_to_erp == null) {
-//                // Send Error Response
-//                response()->json(["code" => 999, "message" => "错误描述"]);
-//            }
 
             // Send Success Response
             return response()->json(["code" => 0, "message" => ""]);

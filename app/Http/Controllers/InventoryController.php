@@ -174,6 +174,7 @@ class InventoryController extends Controller
                         $variant->quantity = $variant->quantity + $item->quantity;
                     }
                     $variant->save();
+                    $variant->linked_product->save();
                     Artisan::call('app:sku-quantity-change',['product_id'=> $variant->product_id]);
                 }
                 else{
