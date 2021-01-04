@@ -386,11 +386,13 @@ class DefaultSettingsController extends Controller
         }
 
         if($request->has('status')){
+            dd($request->has('status'));
             if($request->input('status') != null){
                 $tickets->where('status_id','=',$request->input('status'));
 
             }
         }
+
         if($request->has('priority')){
             if($request->input('priority') != null) {
                 $tickets->where('priority', '=', $request->input('priority'));

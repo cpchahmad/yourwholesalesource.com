@@ -241,7 +241,7 @@
             </div>
 
             <div class="d-inline-block mr-3 badge badge-dark text-white">
-                <a href="/tickets?priority=&status=1" class="text-white">
+                <a href="/tickets?priority=&status=1&status=2" class="text-white">
                     Ticket Requests
                     <span class="" style="font-size: 13px"> {{$tickets_request_count}} </span>
                 </a>
