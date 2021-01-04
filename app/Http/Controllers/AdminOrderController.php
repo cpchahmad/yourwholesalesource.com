@@ -1308,8 +1308,10 @@ class AdminOrderController extends Controller
         $track_url = $request->trackUrl;
         $item_list = $request->itemList;
 
+        dump($order_id);
+
         $order = RetailerOrder::where('erp_order_id', $order_id)->first();
-        if($order) {
+        if($order_id !== null && $order) {
             // Save fulfillment
             $fulfillment = new ERPOrderFulfillment();
             $fulfillment->retailer_order_id = $order->id;
