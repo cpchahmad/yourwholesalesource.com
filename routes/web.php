@@ -12,6 +12,7 @@
 */
 
 use App\EmailTemplate;
+use App\Http\Controllers\AdminMaintainerController;
 use App\Http\Controllers\HelperController;
 use App\Mail\NewsEmail;
 use App\Product;
@@ -411,6 +412,15 @@ Route::get('/testing', function() {
     $response = $shop->api()->rest('GET', '/admin/orders.json');
 
     dd($response->body->orders);
+});
+
+Route::get('/test', function() {
+    $this->admin = new AdminMaintainerController();
+    $retailer_order = RetailerOrder::find(797);
+    dd($retailer_order);
+    $this->admin->sync_order_to_admin_store($retailer_order);
+
+
 });
 
 //Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
