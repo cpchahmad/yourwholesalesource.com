@@ -101,6 +101,7 @@ class EmailTemplateController extends Controller
             $campaign->name = $request->campaign_name;
             $campaign->time = $request->time;
             $campaign->status = 'pending';
+            $campaign->template_id = $template->id;
             $campaign->save();
 
             $users_temp = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->get();

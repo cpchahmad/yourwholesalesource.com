@@ -10,6 +10,7 @@ use App\Exports\CustomersExport;
 use App\GeneralDiscountPreferences;
 use App\GeneralFixedPricePreferences;
 use App\Jobs\SendNewsEmailJob;
+use App\Jobs\SendNewsProductEmailjob;
 use App\Product;
 use App\Refund;
 use App\Shop;
@@ -738,7 +739,11 @@ class DefaultSettingsController extends Controller
         $campaign->status = 'Published';
         $campaign->save();
 
-        dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($campaign->time));
+        if($campaign->template_id == '18')
+            dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($campaign->time));
+        elseif($campaign->template_id == '20')
+            dispatch(new SendNewsProductEmailjob($campaign))->delay(Carbon::parse($campaign->time));
+
         return redirect()->back()->with('success', 'Campaign Published Successfully!');
     }
 
