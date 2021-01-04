@@ -1262,7 +1262,7 @@ class AdminOrderController extends Controller
             "timestamp"=>$timestamp,
             "action"=>"do-create-order",
             "platformOrderId"=>$order->name,
-            "shopName"=>"WEFULLFILL 自营",
+            "shopName"=>"WEFULLFILL OFFICIAL",
             "buyerUserId"=>$order->user_id,
             "phone1"=> is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone,
             "country"=>"China",
@@ -1276,6 +1276,7 @@ class AdminOrderController extends Controller
 
         $body = str_replace("\\", '', json_encode($data));
 
+        dd($body);
 
         $signature = hash_hmac('sha256', $body, $secret);
 
