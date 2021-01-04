@@ -1329,11 +1329,11 @@ class AdminOrderController extends Controller
 //            }
 
             // Send Success Response
-            response()->json(["code" => 0, "message" => ""]);
+            return response()->json(["code" => 0, "message" => ""]);
         }
         else {
             // Send Error Response
-            response()->json(["code" => 999, "message" => "错误描述"]);
+            return response()->json(["code" => 999, "message" => "错误描述"]);
         }
 
     }
