@@ -8,6 +8,7 @@ use App\AdminFileTemp;
 use App\Courier;
 use App\Customer;
 use App\ERPOrderFulfillment;
+use App\ErrorLog;
 use App\Exports\CustomersExport;
 use App\Exports\OrdersExport;
 use App\FulfillmentLineItem;
@@ -1312,6 +1313,13 @@ class AdminOrderController extends Controller
         $track_url = $request->trackUrl;
         $item_list = $request->itemList;
 
+        $log = new ErrorLog();
+        $log->message = $order_id;
+        $log->save();
+
+        $log = new ErrorLog();
+        $log->message = "Testing";
+        $log->save();
 
 
         $order = RetailerOrder::where('erp_order_id', $order_id)->first();
