@@ -1276,8 +1276,6 @@ class AdminOrderController extends Controller
 
         $body = str_replace("\\", '', json_encode($data));
 
-        dd($body);
-
         $signature = hash_hmac('sha256', $body, $secret);
 
         $url = "http://openapi.mabangerp.com";
