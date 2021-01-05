@@ -101,6 +101,10 @@ class AdminWebhookController extends Controller
                         }
                         else {
 
+                            $log = new ErrorLog();
+                            $log->message = "Fulfillment Error Outer: " . json_encode($response->body);
+                            $log->save();
+
                             $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                             if(!$response->errors){
 
