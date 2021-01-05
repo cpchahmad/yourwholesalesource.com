@@ -117,6 +117,7 @@ class AdminWebhookController extends Controller
 
                                 $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                             }else {
+                                dd($response);
                                 $log = new ErrorLog();
                                 $log->message = "Fulfillment Error Inner: " . json_encode($response->body);
                                 $log->save();
