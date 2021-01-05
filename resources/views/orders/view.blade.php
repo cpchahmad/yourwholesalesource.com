@@ -37,6 +37,7 @@
                 @endif
                 @if($order->status == 'Paid')
                     <button class="btn btn-sm btn-info" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.send.order.status.email',$order->id)}}'">Send Order Status Email</button>
+                    <button class="btn btn-sm btn-warning" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('manually.sync.fulfillment',$order->id)}}'">Sync Order Fulfillment</button>
                 @endif
             </div>
         </div>

@@ -163,6 +163,8 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/campaigns/{id}', 'DefaultSettingsController@getCampaign')->name('email.campaigns.show');
     Route::get('/campaigns/{id}/delete', 'DefaultSettingsController@deleteCampaign')->name('email.campaigns.delete');
     Route::get('/campaigns/{id}/submit', 'DefaultSettingsController@submitCampaign')->name('email.campaigns.submit');
+    Route::get('/sync_manual/{id}', 'AdminOrderController@manualSyncfulfillment')->name('manually.sync.fulfillment');
+
 
 });
 
@@ -425,7 +427,6 @@ Route::get('/testing', function() {
 //
 //});
 
-Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
 
 //Route::get('/test', function() {
 //

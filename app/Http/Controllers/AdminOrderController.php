@@ -969,10 +969,10 @@ class AdminOrderController extends Controller
         }
     }
 
-    public function manualSyncfulfillment(Request $request)
+    public function manualSyncfulfillment(Request $request, $id)
     {
         $shop = $this->helper->getAdminShop();
-        $order = RetailerOrder::find(1077);
+        $order = RetailerOrder::find($id);
 
         $response = $shop->api()->rest('GET','admin/orders/'. $order->admin_shopify_id .'/fulfillments.json');
         $data = $response->body->fulfillments[0];
@@ -983,10 +983,10 @@ class AdminOrderController extends Controller
             $webhook->set_fulfillments($data);
         }
         else {
-            dd('not found');
+            return redirect()->back()->with('error', 'Order is not fulfilled in Wefullfill');
         }
 
-        dd('done');
+        return redirect()->back()->with('success', 'Order Fulfillment Synced Successfully!');
     }
 
     public function CompleteFullFillment($orderFullfillment)
