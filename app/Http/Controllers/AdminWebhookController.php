@@ -83,7 +83,7 @@ class AdminWebhookController extends Controller
                                 ]);
                             }
                         }
-                        $response = $shop->api()->rest('PUT','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                        $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
