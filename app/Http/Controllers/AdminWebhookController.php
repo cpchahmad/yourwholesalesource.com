@@ -106,14 +106,14 @@ class AdminWebhookController extends Controller
 
                                 /*Order Fullfillment Record*/
                                 $new_fulfillment = new OrderFulfillment();
-                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillmenta[0]->id;
-                                $new_fulfillment->name = $response->body->fulfillment[0]->name;
+                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
+                                $new_fulfillment->name = $response->body->fulfillments[0]->name;
                                 $new_fulfillment->retailer_order_id = $retailer_order->id;
                                 $new_fulfillment->status = 'fulfilled';
                                 $new_fulfillment->save();
                                 /*Order Log*/
 
-                                $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment[0]->id . '/complete.json');
+                                $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillments[0]->id . '/complete.json');
 
                                 $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                             }else {
