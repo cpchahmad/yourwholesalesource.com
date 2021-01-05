@@ -972,7 +972,7 @@ class AdminOrderController extends Controller
     public function manualSyncfulfillment(Request $request)
     {
         $shop = $this->helper->getAdminShop();
-        $order = RetailerOrder::find(1078);
+        $order = RetailerOrder::find(1077);
 
         $response = $shop->api()->rest('GET','admin/orders/'. $order->admin_shopify_id .'/fulfillments.json');
         $data = $response->body->fulfillments[0];
