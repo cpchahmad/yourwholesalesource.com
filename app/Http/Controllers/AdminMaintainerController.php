@@ -187,7 +187,7 @@ class AdminMaintainerController extends Controller
                 $temp_order = $res->body->order;
                 $order->admin_shopify_name = $temp_order->name;
 
-                $this->log->store($order->user_id, 'Order', $order->id, $order->name, 'Order Pushed to WeFullFill After Payment');
+                //$this->log->store($order->user_id, 'Order', $order->id, $order->name, 'Order Pushed to WeFullFill After Payment');
 
 
                 $order->save();
