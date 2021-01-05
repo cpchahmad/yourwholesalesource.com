@@ -408,13 +408,13 @@ Route::get('test/emails', 'HelperController@testEmail');
 //Route::get('/test2', 'WishlistController@test');
 //Route::get('pages', 'AdminMaintainerController@getPages');
 
-//Route::get('/testing', function() {
-//    $helper = new HelperController();
-//    $shop = $helper->getSpecificShop(55);
-//    $response = $shop->api()->rest('GET', '/admin/orders.json');
-//
-//    dd($response->body->orders);
-//});
+Route::get('/testing', function() {
+    $helper = new HelperController();
+    $shop = $helper->getSpecificShop(55);
+    $response = $shop->api()->rest('GET', '/admin/orders.json');
+
+    dd($response->body->orders);
+});
 //
 //Route::get('/test', function() {
 //    $this->admin = new AdminMaintainerController();

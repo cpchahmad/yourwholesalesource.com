@@ -62,6 +62,11 @@ class FulfillmentsCreateJob implements ShouldQueue
                 $webhook = new AdminWebhookController();
                 $fulfillment = OrderFulfillment::where('admin_fulfillment_shopify_id',$data->id)->first();
                 if($fulfillment == null){
+
+                    $log = new ErrorLog();
+                    $log->message = "Dummy test";
+                    $log->save();
+
                     $webhook->set_fulfillments($data);
                 }
             }
