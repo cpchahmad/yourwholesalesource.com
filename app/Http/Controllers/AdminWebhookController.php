@@ -101,7 +101,8 @@ class AdminWebhookController extends Controller
                         }
                         else {
 
-                            $response = $shop->api()->rest('PUT','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                            $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                            dd($response);
                             if(!$response->errors){
 
                                 /*Order Fullfillment Record*/
@@ -117,7 +118,7 @@ class AdminWebhookController extends Controller
 
                                 $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                             }else {
-                                dd($response);
+
                                 $log = new ErrorLog();
                                 $log->message = "Fulfillment Error Inner: " . json_encode($response->body);
                                 $log->save();
