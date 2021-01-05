@@ -425,7 +425,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 //
 //});
 
-//Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
+Route::get('sync_manual', 'AdminOrderController@manualSyncfulfillment');
 
 //Route::get('/test', function() {
 //
