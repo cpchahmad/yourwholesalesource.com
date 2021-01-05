@@ -57,9 +57,6 @@ class FulfillmentsUpdateJob implements ShouldQueue
                     $webhook->unset_fulfillments($data);
                 }
                 if($data->status == 'success'){
-                    $log = new ErrorLog();
-                    $log->message = "Dummy test 2";
-                    $log->save();
                     $webhook->set_tracking_details($data);
                 }
             }

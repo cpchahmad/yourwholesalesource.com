@@ -86,10 +86,6 @@ class AdminWebhookController extends Controller
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
 
-                            $log = new ErrorLog();
-                            $log->message = "check 2";
-                            $log->save();
-
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
                             $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
@@ -104,9 +100,28 @@ class AdminWebhookController extends Controller
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                         }
                         else {
-                            $log = new ErrorLog();
-                            $log->message = "Fulfillment Error: " . json_encode($response->body);
-                            $log->save();
+
+                            $response = $shop->api()->rest('PUT','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                            if(!$response->errors){
+
+                                /*Order Fullfillment Record*/
+                                $new_fulfillment = new OrderFulfillment();
+                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
+                                $new_fulfillment->name = $response->body->fulfillment->name;
+                                $new_fulfillment->retailer_order_id = $retailer_order->id;
+                                $new_fulfillment->status = 'fulfilled';
+                                $new_fulfillment->save();
+                                /*Order Log*/
+
+                                $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
+
+                                $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+                            }else {
+                                $log = new ErrorLog();
+                                $log->message = "Fulfillment Error Inner: " . json_encode($response->body);
+                                $log->save();
+                            }
+
                         }
                     }
                 }
@@ -148,7 +163,6 @@ class AdminWebhookController extends Controller
     public function after_fullfiment_process(OrderFulfillment $new_fulfillment, $retailer_order, $data): void
     {
 
-
         /*Order Log*/
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
@@ -156,9 +170,6 @@ class AdminWebhookController extends Controller
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
 
-        $log = new ErrorLog();
-        $log->message = "check 3";
-        $log->save();
 
         /*Fulfillment Line Item Relationship*/
         foreach ($data->line_items as $item) {
@@ -206,9 +217,6 @@ class AdminWebhookController extends Controller
 
             $retailer_order->save();
             $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details added successfully!', $retailer_order);
-            $log = new ErrorLog();
-            $log->message = "check 4";
-            $log->save();
         }
     }
 
