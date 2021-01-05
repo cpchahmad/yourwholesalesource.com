@@ -85,6 +85,11 @@ class AdminWebhookController extends Controller
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
+
+                            $log = new ErrorLog();
+                            $log->message = "check 2";
+                            $log->save();
+
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
                             $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
@@ -151,6 +156,10 @@ class AdminWebhookController extends Controller
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
 
+        $log = new ErrorLog();
+        $log->message = "check 3";
+        $log->save();
+
         /*Fulfillment Line Item Relationship*/
         foreach ($data->line_items as $item) {
             $line_item = RetailerOrderLineItem::where('sku', $item->sku)->where('retailer_order_id', $retailer_order->id)->first();
@@ -197,6 +206,9 @@ class AdminWebhookController extends Controller
 
             $retailer_order->save();
             $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details added successfully!', $retailer_order);
+            $log = new ErrorLog();
+            $log->message = "check 4";
+            $log->save();
         }
     }
 
