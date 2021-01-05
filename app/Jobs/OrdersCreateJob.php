@@ -262,7 +262,7 @@ class OrdersCreateJob implements ShouldQueue
 
 
                 if(count($order->fulfillments) > 0){
-                        foreach ($order->fulfillments as $fulfillment){
+                    foreach ($order->fulfillments as $fulfillment){
                             if($fulfillment->status != 'cancelled'){
                                 foreach ($fulfillment->line_items as $item){
                                     $line_item = RetailerOrderLineItem::where('retailer_product_variant_id',$item->id)->first();
@@ -309,7 +309,7 @@ class OrdersCreateJob implements ShouldQueue
 
                             }
                         }
-                    }
+                }
 
 
                 $new->status = $new->getStatus($new);
