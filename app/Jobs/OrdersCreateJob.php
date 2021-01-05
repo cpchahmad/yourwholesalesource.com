@@ -437,7 +437,7 @@ class OrdersCreateJob implements ShouldQueue
                 catch(\Exception $e) {
                     DB::rollBack();
                     $log = new ErrorLog();
-                    $log->message = $e->getMessage();
+                    $log->message = "Payment issue: " .$e->getMessage();
                     $log->save();
                 }
                 /* Manual Order Payment in case user has enabled settings for it (END)*/
