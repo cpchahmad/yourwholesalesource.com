@@ -759,9 +759,28 @@ class DefaultSettingsController extends Controller
         $campaign = Campaign::find($id);
         $template = EmailTemplate::find($campaign->template_id);
 
-        dd($campaign, $template, $request->all());
+        $campaign->name = $request->campaign_name;
+        $campaign->time = $request->time;
+        $campaign->save();
 
-        return view('setttings.campaigns.edit')->with('campaign', $campaign)->with('template', $template);
+        $template->subject = $request->subject;
+        $template->body = $request->body;
+
+
+        if($request->hasFile('banner')){
+            $file = $request->file('banner');
+            $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
+            $attachement = date("mmYhisa_") . $name;
+            $file->move(public_path() . '/ticket-attachments/', $attachement);
+            $template->banner = $attachement;
+        }
+
+        if($request->products) {
+            $template->products = json_encode($request->products);
+        }
+
+
+        return redirect()->back()->with('success', 'Campaign Upated Successfully!');
     }
 
 

@@ -41,7 +41,7 @@
 
                             <div class="form-group">
                                 <label for="">Campaign Time</label>
-                                <input type="text" required name="time" placeholder="{{ $campaign->time }}" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
+                                <input type="text" required name="time" value="{{ $campaign->time }}" placeholder="{{ $campaign->time }}" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
                             </div>
 
                             @if($template->banner !== null)
