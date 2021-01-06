@@ -90,8 +90,6 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
         $template = EmailTemplate::find($id);
 
         if($template->id == 18 || $template->id == 20)
@@ -103,14 +101,11 @@ class EmailTemplateController extends Controller
             $campaign->template_id = $template->id;
             $campaign->save();
 
-//            $users_temp = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->get();
-//
-//            foreach ($users_temp as $user) {
-//                $user->campaigns()->attach($campaign->id);
-//            }
+            $users_temp = User::role('non-shopify-users')->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])->get();
 
-            $user = User::find(2);
-            $user->campaigns()->attach($campaign->id);
+            foreach ($users_temp as $user) {
+                $user->campaigns()->attach($campaign->id);
+            }
         }
 
 
@@ -135,8 +130,6 @@ class EmailTemplateController extends Controller
         }
 
         $template->save();
-
-
 
         return redirect()->route('admin.emails.show',$template->id)->with('success','Email Template updated successfully!');
 
