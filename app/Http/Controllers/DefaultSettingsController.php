@@ -755,5 +755,15 @@ class DefaultSettingsController extends Controller
         return view('setttings.campaigns.edit')->with('campaign', $campaign)->with('template', $template);
     }
 
+    public function updateCampaign(Request $request, $id) {
+        $campaign = Campaign::find($id);
+        $template = EmailTemplate::find($campaign->template_id);
+
+        dd($campaign, $template, $request->all());
+
+        return view('setttings.campaigns.edit')->with('campaign', $campaign)->with('template', $template);
+    }
+
+
 
 }

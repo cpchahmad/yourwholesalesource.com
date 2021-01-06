@@ -30,6 +30,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="">Body</label>
+                                <textarea name="body" id="" cols="30" rows="10" class="form-control">{{ $template->body }}</textarea>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="">Campaign Name</label>
                                 <input type="text" name="campaign_name" class="form-control" value="{{ $campaign->name }}">
                             </div>
@@ -37,11 +42,6 @@
                             <div class="form-group">
                                 <label for="">Campaign Time</label>
                                 <input type="text" required name="time" placeholder="{{ $campaign->time }}" class="js-flatpickr form-control bg-white" id="example-flatpickr-datetime-24" name="example-flatpickr-datetime-24" data-enable-time="true" data-time_24hr="true">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Body</label>
-                                <textarea name="body" id="" cols="30" rows="10" class="form-control">{{ $template->body }}</textarea>
                             </div>
 
                             @if($template->banner !== null)
