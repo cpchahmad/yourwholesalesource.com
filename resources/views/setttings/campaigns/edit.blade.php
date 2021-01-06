@@ -4,7 +4,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                    {{ $campaign->title }}
+                    {{ $campaign->name }}
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -29,7 +29,7 @@
 
                         <div class="form-group">
                             <label for="">Campaign Name</label>
-                            <input type="text" name="campaign_name" class="form-control" value="{{ $campaign->title }}">
+                            <input type="text" name="campaign_name" class="form-control" value="{{ $campaign->name }}">
                         </div>
 
                         <div class="form-group">
@@ -42,19 +42,41 @@
                             <textarea name="body" id="" cols="30" rows="10" class="form-control">{{ $template->body }}</textarea>
                         </div>
 
-                        <div class="text-center">
-                            <img style="width: 50%; height: auto;" src="{{asset('ticket-attachments')}}/{{$template->banner}}" alt="">
-                        </div>
+                        @if($template->banner !== null)
+                            <div class="text-center">
+                                <img style="width: 50%; height: auto;" src="{{asset('ticket-attachments')}}/{{$template->banner}}" alt="">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="">Banner</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input name="banner" type="file" class="custom-file-input" id="inputGroupFile04">
-                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                            <div class="form-group">
+                                <label for="">Banner</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input name="banner" type="file" class="custom-file-input" id="inputGroupFile04">
+                                        <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+
+                        @if($template->products != null)
+                            <div class="text-left">
+                                <label for="" style="color: #7daa40 !important;">Edit Products</label>
+                            </div>
+                            @php $products = \App\Product::all(); @endphp
+                            <select class="@error('type') is-invalid @enderror js-select2 form-control" name="products[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Edit Products.." multiple>
+                                @foreach($products as $product)
+                                    @php
+                                        $prods = json_decode($template->products);
+                                    @endphp
+                                    <option value="{{ $product->id }}"
+                                            @if(in_array($product->id, $prods))
+                                            selected
+                                        @endif
+                                    >{{ $product->title }}</option>
+                                @endforeach
+
+                            </select>
+                        @endif
                     </div>
                 </div>
             </div>
