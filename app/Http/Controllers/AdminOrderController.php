@@ -1165,7 +1165,7 @@ class AdminOrderController extends Controller
     public function generateHash() {
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
-        $order = RetailerOrder::find(964);
+        $order = RetailerOrder::find(1157);
         $line_items = [];
         $images = [];
 
