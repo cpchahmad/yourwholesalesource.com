@@ -21,7 +21,7 @@
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
                 <div class="block">
-                    <form action="{{ route('email.campaigns.edit', $campaign->name) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('email.campaigns.update', $campaign->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="block-content">
                             <div class="form-group">
