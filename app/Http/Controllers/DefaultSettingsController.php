@@ -6,6 +6,7 @@ use App\AdminSetting;
 use App\Campaign;
 use App\Customer;
 use App\DefaultInfo;
+use App\EmailTemplate;
 use App\Exports\CustomersExport;
 use App\GeneralDiscountPreferences;
 use App\GeneralFixedPricePreferences;
@@ -746,5 +747,13 @@ class DefaultSettingsController extends Controller
 
         return redirect()->back()->with('success', 'Campaign Published Successfully!');
     }
+
+    public function editCampaign($id) {
+        $campaign = Campaign::find($id);
+        $template = EmailTemplate::find($campaign->template_id);
+
+        return view('setttings.campaigns.edit')->with('campaign', $campaign)->with('template', $template);
+    }
+
 
 }

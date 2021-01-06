@@ -756,7 +756,7 @@
                                     </div>
                                 @endif
 
-                                @if($template->id == '18')
+                                @if($template->id == '18' || $template->id == '20')
                                     <img style="width: 100%; height: auto;" src="{{asset('ticket-attachments')}}/{{$template->banner}}" alt="">
                                 @endif
 

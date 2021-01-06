@@ -42,7 +42,10 @@
                                         <td class="text-right btn-group" style="float: right">
                                             <a href="{{ route('email.campaigns.show', $campaign->id) }}"
                                                class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
-                                               data-original-title="View Campaign"><i class="fa fa-eye"></i></a>
+                                               data-original-title="View Campaign"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('email.campaigns.edit', $campaign->id) }}"
+                                               class="btn btn-sm btn-info" type="button" data-toggle="tooltip" title=""
+                                               data-original-title="Edit Campaign"><i class="fa fa-eye"></i></a>
                                             <a href="{{ route('email.campaigns.submit', $campaign->id) }}"
                                                class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                data-original-title="View Campaign"><i class="fa fa-check"></i></a>
