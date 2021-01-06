@@ -42,9 +42,12 @@
                             <textarea name="body" id="" cols="30" rows="10" class="form-control">{{ $template->body }}</textarea>
                         </div>
 
-                        <div>
-                            <img style="width: 100%; height: auto;" src="{{asset('ticket-attachments')}}/{{$template->banner}}" alt="">
+                        <div class="text-center">
+                            <img style="width: 50%; height: auto;" src="{{asset('ticket-attachments')}}/{{$template->banner}}" alt="">
+                        </div>
 
+                        <div class="form-group">
+                            <label for="">Banner</label>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input name="banner" type="file" class="custom-file-input" id="inputGroupFile04">
