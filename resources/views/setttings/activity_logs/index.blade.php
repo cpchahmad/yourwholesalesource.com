@@ -74,7 +74,7 @@
                                     {{ $log->action }}
                                 </td>
                                 <td style="vertical-align: middle">
-                                    {{ $log->created_at->toFormattedDateString() }}
+                                    {{ date_format($log->created_at ,"Y/m/d H:i:s") }}
                                 </td>
                             </tr>
                         @endforeach
