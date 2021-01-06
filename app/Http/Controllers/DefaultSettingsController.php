@@ -780,7 +780,7 @@ class DefaultSettingsController extends Controller
         }
 
 
-        return redirect()->back()->with('success', 'Campaign Upated Successfully!');
+        return redirect()->back()->with('success', 'Campaign Updated Successfully!');
     }
 
 
