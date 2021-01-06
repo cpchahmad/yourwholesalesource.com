@@ -50,6 +50,7 @@
                             <th>Type</th>
                             <th>Item</th>
                             <th>Action</th>
+                            <th>Time</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -71,6 +72,9 @@
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ $log->action }}
+                                </td>
+                                <td style="vertical-align: middle">
+                                    {{ $log->created_at->toFormattedDateString() }}
                                 </td>
                             </tr>
                         @endforeach
