@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\ErrorLog;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
 use App\Mail\OrderPlaceEmail;
@@ -454,6 +455,14 @@ class WalletController extends Controller
 
                 $this->admin->sync_order_to_admin_store($retailer_order);
                 $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+                try {
+                    $this->admin->push_to_mabang($retailer_order->id);
+                }
+                catch (\Exception $e) {
+                    $log = new ErrorLog();
+                    $log->message = "ERP order BUG from Wallet Single: ". $e->getMessage();
+                    $log->save();
+                }
 
                 $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 
@@ -548,6 +557,15 @@ class WalletController extends Controller
 
                     $this->admin->sync_order_to_admin_store($retailer_order);
                     $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+                    try {
+                        $this->admin->push_to_mabang($retailer_order->id);
+                    }
+                    catch (\Exception $e) {
+                        $log = new ErrorLog();
+                        $log->message = "ERP order BUG from Wallet Bulk: ". $e->getMessage();
+                        $log->save();
+                    }
+
 
                     $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 

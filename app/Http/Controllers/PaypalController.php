@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AdminSetting;
+use App\ErrorLog;
 use App\Mail\OrderPlaceEmail;
 use App\OrderLog;
 use App\OrderTransaction;
@@ -179,6 +180,17 @@ class PaypalController extends Controller
             $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 
             $this->inventory->OrderQuantityUpdate($retailer_order,'new');
+
+            try {
+                $this->admin->push_to_mabang($retailer_order->id);
+            }
+            catch (\Exception $e) {
+                $log = new ErrorLog();
+                $log->message = "ERP order BUG from Paypal Single: ". $e->getMessage();
+                $log->save();
+            }
+
+
             if($retailer_order->custom == 0){
                 return redirect()->route('store.order.view',$retailer_order->id)->with('success','Order Transaction Process Successfully And Will Managed By WeFullFill Administration!');
             }
@@ -336,6 +348,14 @@ class PaypalController extends Controller
             $order_log->save();
             $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             $this->admin->sync_order_to_admin_store($retailer_order);
+            try {
+                $this->admin->push_to_mabang($retailer_order->id);
+            }
+            catch (\Exception $e) {
+                $log = new ErrorLog();
+                $log->message = "ERP order BUG from Paypal Bulk: ". $e->getMessage();
+                $log->save();
+            }
         }
 
 

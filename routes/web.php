@@ -434,7 +434,7 @@ Route::get('/testing', function() {
 //
 //});
 
-Route::get('/hash', 'AdminOrderController@generateHash');
+Route::get('/push-to-mabang', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
 
 
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
