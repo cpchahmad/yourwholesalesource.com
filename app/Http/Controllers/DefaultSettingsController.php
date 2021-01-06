@@ -779,6 +779,7 @@ class DefaultSettingsController extends Controller
             $template->products = json_encode($request->products);
         }
 
+        $template->save();
 
         return redirect()->back()->with('success', 'Campaign Updated Successfully!');
     }
