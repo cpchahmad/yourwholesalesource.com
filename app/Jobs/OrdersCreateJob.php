@@ -419,6 +419,15 @@ class OrdersCreateJob implements ShouldQueue
 
                                 $this->inventory->OrderQuantityUpdate($new,'new');
 
+                                try {
+                                    $this->admin->push_to_mabang($new->id);
+                                }
+                                catch (\Exception $e) {
+                                    $log = new ErrorLog();
+                                    $log->message = "ERP order BUG from Auto Wallet Payment: ". $e->getMessage();
+                                    $log->save();
+                                }
+
                             }
                             else{
                                 $this->notify->generate('Wallet','Auto Wallet Order Payment Failure','Your Wallet amount is not enough for making payment for '. $new->name .' kindly top-up your wallet',$wallet);
