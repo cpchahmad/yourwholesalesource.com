@@ -153,21 +153,19 @@ class PaypalController extends Controller
                 $manager_email = $user->has_manager->email;
             }
             $users_temp =['info@wefullfill.com',$manager_email];
-            $users = [];
 
-            foreach($users_temp as $key => $ut){
-                if($ut != null) {
-                    $ua = [];
-                    $ua['email'] = $ut;
-                    $users[$key] = (object)$ua;
+
+            foreach($users_temp as $u){
+                if($u != null) {
+                    try{
+                        Mail::to($u)->send(new OrderPlaceEmail($u->email, $retailer_order));
+                    }
+                    catch (\Exception $e){
+                    }
                 }
             }
 
-            try{
-                Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
-            }
-            catch (\Exception $e){
-            }
+
 
             /*Maintaining Log*/
             $order_log =  new OrderLog();
