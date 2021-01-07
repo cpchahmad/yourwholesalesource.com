@@ -359,19 +359,17 @@ class AdminOrderController extends Controller
 
                                 $data = [
                                     "fulfillment" => [
-                                        "tracking_info" => [
-                                            "number" => $tracking_number,
-                                            "url" => $tracking_url,
-                                        ]
+                                        "tracking_number" => $tracking_number,
+                                        "tracking_url" => $tracking_url,
                                     ]
                                 ];
                                 if($courier_id !== null){
                                     $courier = Courier::find($courier_id);
-                                    $data['fulfillment']['tracking_info']['company'] = $courier->title;
+                                    $data['fulfillment']['tracking_company'] = $courier->title;
                                 }
 
 
-                                $response = $shop->api()->rest('POST', '/admin/fulfillments/' . $current->fulfillment_shopify_id . '/update_tracking.json', $data);
+                                $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
                                 dump($response);
                                 if ($order->admin_shopify_id != null) {
                                     $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
@@ -384,7 +382,6 @@ class AdminOrderController extends Controller
                         return redirect()->back()->with('error', 'Order Related Store Not Found');
                     }
                 } else {
-
                         $current = OrderFulfillment::find($fulfillment_id);
                         if ($current != null) {
                             $current->tracking_number = $tracking_number;
@@ -397,22 +394,18 @@ class AdminOrderController extends Controller
                             if ($order->admin_shopify_id != null) {
                                 $data = [
                                     "fulfillment" => [
-                                        "tracking_info" => [
-                                            "number" => $tracking_number,
-                                            "url" => $tracking_url,
-                                        ]
+                                        "tracking_number" => $tracking_number,
+                                        "tracking_url" => $tracking_url,
                                     ]
                                 ];
 
                                 if($courier_id !== null){
                                     $courier = Courier::find($courier_id);
-                                    $data['fulfillment']['tracking_info']['company'] = $courier->title;
+                                    $data['fulfillment']['tracking_company'] = $courier->title;
                                 }
-
 
                                 $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
                                 //$this->CompleteFullFillment($current);
-
                             }
                             /*Maintaining Log*/
                             $order_log = new OrderLog();
