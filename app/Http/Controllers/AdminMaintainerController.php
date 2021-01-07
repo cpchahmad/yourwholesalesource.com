@@ -307,7 +307,6 @@ class AdminMaintainerController extends Controller
     public function admin_order_fulfillment_edit_tracking(RetailerOrder $order,OrderFulfillment $fulfillment,$data){
         $admin_shop = $this->helper->getAdminShop();
         $response = $admin_shop->api()->rest('PUT', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $fulfillment->admin_fulfillment_shopify_id . '.json', $data);
-        dd($response);
     }
 
     /**

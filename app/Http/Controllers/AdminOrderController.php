@@ -368,14 +368,11 @@ class AdminOrderController extends Controller
                                     $data['fulfillment']['tracking_company'] = $courier->title;
                                 }
 
-
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
-                                dump($response);
+
                                 if ($order->admin_shopify_id != null) {
                                     $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
                                 }
-
-
                             }
 
                     } else {
