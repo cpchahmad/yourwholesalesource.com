@@ -371,7 +371,7 @@ class AdminOrderController extends Controller
                                 }
 
 
-                                $response = $shop->api()->rest('POST', '/admin/fulfillments/' . $current->fulfillment_shopify_id . '/update_tracking.json', $data);
+                                $response = $shop->api()->rest('PUT', '/admin/fulfillments/' . $current->fulfillment_shopify_id . '/update_tracking.json', $data);
                                 dump($response);
                                 if ($order->admin_shopify_id != null) {
                                     $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
