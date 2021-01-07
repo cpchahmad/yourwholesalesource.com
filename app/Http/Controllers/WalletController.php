@@ -407,9 +407,6 @@ class WalletController extends Controller
                     if($u != null) {
                         try{
                             Mail::to($u)->send(new OrderPlaceEmail($retailer_order));
-                            $log = new ErrorLog();
-                            $log->message = "Testing";
-                            $log->save();
                         }
                         catch (\Exception $e){
                         }

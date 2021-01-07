@@ -115,7 +115,7 @@
 
                             <div class="row">
                                 <div class="col-md-12 text-center" style="font-size: 17px">
-                                    {!! $wishlist->links() !!}
+                                    {!! $wishlist->appends(request()->input())->links() !!}
                                 </div>
                             </div>
 
