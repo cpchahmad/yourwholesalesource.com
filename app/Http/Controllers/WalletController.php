@@ -406,7 +406,7 @@ class WalletController extends Controller
                 foreach($users_temp as $u){
                     if($u != null) {
                         try{
-                            Mail::to($u)->send(new OrderPlaceEmail($u->email, $retailer_order));
+                            Mail::to($u)->send(new OrderPlaceEmail($retailer_order));
                             $log = new ErrorLog();
                             $log->message = "Testing";
                             $log->save();

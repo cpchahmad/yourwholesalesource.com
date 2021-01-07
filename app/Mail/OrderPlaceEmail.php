@@ -23,13 +23,12 @@ class OrderPlaceEmail extends Mailable
 
     private $user = "order@wefullfill.com";
 
-    private $sender;
+
     private $retailerOrder;
     private $template;
 
-    public function __construct($sender,RetailerOrder $retailerOrder)
+    public function __construct(RetailerOrder $retailerOrder)
     {
-        $this->sender = $sender;
         $this->retailerOrder = $retailerOrder;
         $this->template = EmailTemplate::find(3);
     }
