@@ -329,7 +329,108 @@ class AdminOrderController extends Controller
     }
 
     public function fulfillment_edit_tracking(Request $request, $id, $fulfillment_id) {
-        dd($request->all(), $id, $fulfillment_id);
+        $order = RetailerOrder::find($id);
+        if ($order != null) {
+            if ($order->paid == 1) {
+                $tracking_number = $request->input('tracking_number');
+                $tracking_url = $request->input('tracking_url');
+                $tracking_note = $request->input('tracking_notes');
+                $courier_id = $request->input('courier_id');
+
+                if ($order->custom == 0) {
+                    $shop = $this->helper->getSpecificShop($order->shop_id);
+                    if ($shop != null) {
+                            $current = OrderFulfillment::find($fulfillment_id);
+                            if ($current != null) {
+                                $current->tracking_number = $tracking_number;
+                                $current->tracking_url = $tracking_url;
+                                $current->tracking_notes = $tracking_note;
+                                if($courier_id !== null)
+                                    $current->courier_id = $courier_id;
+                                $current->save();
+
+                                //$this->CompleteFullFillment($current);
+                                /*Maintaining Log*/
+                                $order_log = new OrderLog();
+                                $order_log->message = "Tracking detailed of fulfillment named " . $current->name . "  updated successfully on " . now()->format('d M, Y h:i a');
+                                $order_log->status = "Tracking Details Updated";
+                                $order_log->retailer_order_id = $order->id;
+                                $order_log->save();
+
+                                $data = [
+                                    "fulfillment" => [
+                                        "tracking_info" => [
+                                            "number" => $tracking_number,
+                                            "url" => $tracking_url,
+                                        ]
+                                    ]
+                                ];
+                                if($courier_id !== null){
+                                    $courier = Courier::find($courier_id);
+                                    $data['fulfillment']['tracking_info']['company'] = $courier->title;
+                                }
+
+
+                                $response = $shop->api()->rest('POST', '/admin/fulfillments/' . $current->fulfillment_shopify_id . '/update_tracking.json', $data);
+                                if ($order->admin_shopify_id != null) {
+                                    $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
+                                }
+
+
+                            }
+
+                    } else {
+                        return redirect()->back()->with('error', 'Order Related Store Not Found');
+                    }
+                } else {
+                        $current = OrderFulfillment::find($fulfillment_id);
+                        if ($current != null) {
+                            $current->tracking_number = $tracking_number;
+                            $current->tracking_url = $tracking_url;
+                            $current->tracking_notes = $tracking_note;
+                            if($courier_id !== null)
+                                $current->courier_id = $courier_id;
+                            $current->save();
+
+                            if ($order->admin_shopify_id != null) {
+                                $data = [
+                                    "fulfillment" => [
+                                        "tracking_info" => [
+                                            "number" => $tracking_number,
+                                            "url" => $tracking_url,
+                                        ]
+                                    ]
+                                ];
+
+                                if($courier_id !== null){
+                                    $courier = Courier::find($courier_id);
+                                    $data['fulfillment']['tracking_info']['company'] = $courier->title;
+                                }
+
+                                $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
+                                //$this->CompleteFullFillment($current);
+                            }
+                            /*Maintaining Log*/
+                            $order_log = new OrderLog();
+                            $order_log->message = "Tracking detailed of fulfillment named " . $current->name . " updated successfully on " . now()->format('d M, Y h:i a');
+                            $order_log->status = "Tracking Details Updated";
+                            $order_log->retailer_order_id = $order->id;
+                            $order_log->save();
+                        }
+
+                }
+
+
+                $this->log->store(0, 'Order', $order->id, $order->name, 'Order Tracking Updated');
+                $this->notify->generate('Order', 'Order Tracking Details', $order->name . ' tracking details updated successfully!', $order);
+                return redirect()->back()->with('success', 'Tracking Details Updated Successfully!');
+            } else {
+                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+            }
+        } else {
+            return redirect()->route('admin.order')->with('error', 'Order Not Found To Edit Tracking In Fulfillment');
+
+        }
     }
 
     public function mark_as_delivered(Request $request)

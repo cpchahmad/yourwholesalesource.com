@@ -489,7 +489,7 @@
 
                                 <span class="badge badge-primary" style="float: right;font-size: medium"> {{$fulfillment->status}}</span>
                                 @if($fulfillment->tracking_number != null)
-                                    <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_tracking_modal{{$fulfillment->id}}"> Edit tracking </button>
+                                    <button class="btn btn-sm btn-info ml-2" data-toggle="modal" data-target="#edit_tracking_modal{{$fulfillment->id}}"> Edit tracking </button>
                                 @endif
                             </div>
                             <div class="block-content">
@@ -683,7 +683,7 @@
                                         <form action="{{route('admin.order.edit.fulfillment.tracking',['id'=>$order->id,'fulfillment_id'=>$fulfillment->id])}}" method="post">
                                             @csrf
                                             <div class="block-content">
-                                                <input type="hidden" name="fulfillment[]" value="{{$fulfillment->id}}">
+                                                <input type="hidden" name="fulfillment" value="{{$fulfillment->id}}">
                                                 <div class="block">
                                                     <div class="block-header block-header-default">
                                                         <h3 class="block-title">
@@ -699,26 +699,26 @@
                                                             <tr>
                                                                 <td>Tracking Number <span style="color: red">*</span></td>
                                                                 <td>
-                                                                    <input type="text" required name="tracking_number[]" class="form-control" placeholder="#XXXXXX" value="{{ $fulfillment->tracking_number }}" >
+                                                                    <input type="text" required name="tracking_number" class="form-control" placeholder="#XXXXXX" value="{{ $fulfillment->tracking_number }}" >
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Tracking Url <span style="color: red">*</span></td>
                                                                 <td>
-                                                                    <input type="url" required name="tracking_url[]" class="form-control" placeholder="https://example/tracking/XXXXX" value="{{ $fulfillment->tracking_url }}">
+                                                                    <input type="url" required name="tracking_url" class="form-control" placeholder="https://example/tracking/XXXXX" value="{{ $fulfillment->tracking_url }}">
                                                                 </td>
 
                                                             </tr>
                                                             <tr>
                                                                 <td>Tracking Notes</td>
                                                                 <td>
-                                                                    <input type="text" name="tracking_notes[]" class="form-control" placeholder="Notes for this fulfillment" value="{{ $fulfillment->tracking_notes }}">
+                                                                    <input type="text" name="tracking_notes" class="form-control" placeholder="Notes for this fulfillment" value="{{ $fulfillment->tracking_notes }}">
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Courier Service Provider</td>
                                                                 <td>
-                                                                    <select name="courier_id[]" class="form-control" id="">
+                                                                    <select name="courier_id" class="form-control" id="">
                                                                         <option selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
                                                                     </select>
                                                                 </td>
@@ -816,6 +816,10 @@
                                                             <i class="fa fa-ban"></i>
                                                         </div>
                                                     @elseif($log->status == "Tracking Details Added")
+                                                        <div class="timeline-event-icon bg-amethyst">
+                                                            <i class="fa fa-truck"></i>
+                                                        </div>
+                                                    @elseif($log->status == "Tracking Details Updated")
                                                         <div class="timeline-event-icon bg-amethyst">
                                                             <i class="fa fa-truck"></i>
                                                         </div>
