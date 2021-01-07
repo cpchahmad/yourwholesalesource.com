@@ -129,7 +129,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('manual/push/order/to/wefulfill/{id}', 'AdminOrderController@manual_push_order')->name('admin.manual_push_to_wefulfill');
     Route::get('/orders/{id}/fulfillment/cancel/{fulfillment_id}','AdminOrderController@fulfillment_cancel_order')->name('admin.order.fulfillment.cancel');
     Route::post('/orders/{id}/fulfillment/tracking','AdminOrderController@fulfillment_add_tracking')->name('admin.order.fulfillment.tracking');
-    Route::post('/orders/{id}/fulfillment/tracking/{id}','AdminOrderController@fulfillment_edit_tracking')->name('admin.order.edit.fulfillment.tracking');
+    Route::post('/orders/{id}/fulfillment/edit/tracking/{fulfillment_id}','AdminOrderController@fulfillment_edit_tracking')->name('admin.order.edit.fulfillment.tracking');
     Route::get('/orders/{id}/mark-as-delivered','AdminOrderController@mark_as_delivered')->name('admin.order.mark_as_delivered');
     /*Admin Wallet Routes*/
     Route::get('/wallets', 'WalletController@index')->name('admin.wallets');
