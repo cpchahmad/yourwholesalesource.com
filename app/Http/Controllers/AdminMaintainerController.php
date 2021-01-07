@@ -503,9 +503,9 @@ class AdminMaintainerController extends Controller
             "platformOrderId"=>$order->shopify_order_id,
             "shopName"=>"WEFULLFILL OFFICIAL",
             "buyerUserId"=>$order->user_id,
-            "phone1"=> is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone,
+            "phone1"=> is_null($order->has_customer) ? "No customer" : (is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone),
             "country"=>"China",
-            "street1"=> is_null($order->has_customer->addresses) ? "No Address" : $order->has_customer->addresses,
+            "street1"=> is_null($order->has_customer) ? "No customer" : (is_null($order->has_customer->addresses) ? "No Address" : $order->has_customer->addresses),
             "currencyId"=>"USD",
             "paidTime"=> $order->shopify_created_at,
             "orderItemList" => $line_items
