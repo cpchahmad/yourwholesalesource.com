@@ -683,7 +683,6 @@
                                         <form action="{{route('admin.order.edit.fulfillment.tracking',['id'=>$order->id,'fulfillment_id'=>$fulfillment->id])}}" method="post">
                                             @csrf
                                             <div class="block-content">
-                                                <input type="hidden" name="fulfillment" value="{{$fulfillment->id}}">
                                                 <div class="block">
                                                     <div class="block-header block-header-default">
                                                         <h3 class="block-title">
