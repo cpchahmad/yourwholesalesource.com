@@ -383,7 +383,7 @@ class AdminOrderController extends Controller
                         return redirect()->back()->with('error', 'Order Related Store Not Found');
                     }
                 } else {
-                    dump(32);
+
                         $current = OrderFulfillment::find($fulfillment_id);
                         if ($current != null) {
                             $current->tracking_number = $tracking_number;
@@ -408,12 +408,10 @@ class AdminOrderController extends Controller
                                     $data['fulfillment']['tracking_info']['company'] = $courier->title;
                                 }
 
-                                dump($data);
 
                                 $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
                                 //$this->CompleteFullFillment($current);
 
-                                dd(78);
                             }
                             /*Maintaining Log*/
                             $order_log = new OrderLog();
