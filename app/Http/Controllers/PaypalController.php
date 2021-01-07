@@ -152,7 +152,6 @@ class PaypalController extends Controller
             if($user->has_manager()->count() > 0) {
                 $manager_email = $user->has_manager->email;
             }
-            $manager_email = $user->has_manager->email;
             $users_temp =['info@wefullfill.com',$manager_email];
             $users = [];
 

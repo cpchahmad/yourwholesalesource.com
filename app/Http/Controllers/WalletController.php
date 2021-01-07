@@ -401,23 +401,22 @@ class WalletController extends Controller
                 if($user->has_manager()->count() > 0) {
                     $manager_email = $user->has_manager->email;
                 }
-                $manager_email = $user->has_manager->email;
                 $users_temp =['info@wefullfill.com',$manager_email];
-                $users = [];
 
-                foreach($users_temp as $key => $ut){
-                    if($ut != null) {
-                        $ua = [];
-                        $ua['email'] = $ut;
-                        $users[$key] = (object)$ua;
+                foreach($users_temp as $u){
+                    if($u != null) {
+                        try{
+                            Mail::to($u)->send(new OrderPlaceEmail($u->email, $retailer_order));
+                            $log = new ErrorLog();
+                            $log->message = "Testing";
+                            $log->save();
+                        }
+                        catch (\Exception $e){
+                        }
                     }
                 }
 
-                try{
-                    Mail::to($users)->send(new OrderPlaceEmail($user->email, $retailer_order));
-                }
-                catch (\Exception $e){
-                }
+
 
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
@@ -437,7 +436,6 @@ class WalletController extends Controller
                 $retailer_order->paid = 1;
                 if(count($retailer_order->fulfillments) > 0){
                     $retailer_order->status = $retailer_order->getStatus($retailer_order);
-
                 }
                 else{
                     $retailer_order->status = 'Paid';
