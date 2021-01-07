@@ -328,6 +328,10 @@ class AdminOrderController extends Controller
         }
     }
 
+    public function fulfillment_edit_tracking(Request $request, $id, $fulfillment_id) {
+        dd($request->all(), $id, $fulfillment_id);
+    }
+
     public function mark_as_delivered(Request $request)
     {
         $order = RetailerOrder::find($request->id);
