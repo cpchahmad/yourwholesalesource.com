@@ -110,6 +110,7 @@ class ProductController extends Controller
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
             'shop_search' =>$request->input('shop_search'),
+            'wihslist_shop_search' =>$request->input('wishlist_shop_search'),
             'categories' => $categories,
             'shops' => $shops,
         ]);
