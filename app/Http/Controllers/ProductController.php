@@ -93,6 +93,13 @@ class ProductController extends Controller
             });
         }
 
+        if($request->filled('wishlist_shop_search')) {
+
+            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
+                $q->where('shop_id',$request->input('shop_search'))->where('import_from_shopify', 1);
+            });
+        }
+
 
 
 

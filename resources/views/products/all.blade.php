@@ -62,6 +62,14 @@
                         @endforeach
                     </select>
 
+
+                    <select name="wishlist_shop_search" id="" class="form-control">
+                        <option value="" style="display: none">Wishlist Pushed From User</option>
+                        @foreach($shops as $shop)
+                            <option @if($wishlist_shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ $shop->shopify_domain }}</option>
+                        @endforeach
+                    </select>
+
                     <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
                 </form>
             </div>
