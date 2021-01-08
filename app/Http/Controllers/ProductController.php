@@ -70,7 +70,7 @@ class ProductController extends Controller
         }
 
         if($request->filled('parent_category') && !$request->filled('child_category')) {
-            dd(123);
+
             $productQ->orWhereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             });
@@ -78,7 +78,7 @@ class ProductController extends Controller
         }
 
         if($request->filled('parent_category') && $request->filled('child_category')) {
-            dd(76);
+
             $productQ->orWhereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'))
                     ->whereHas('hasSub', function($inner) use ($request) {
