@@ -124,8 +124,8 @@ class CategoryController extends Controller
 
     }
 
-    public function getSubCategories($id) {
-        $category = Category::find($id);
+    public function getSubCategories($title) {
+        $category = Category::where('title', $title)->first();
         $subcategories = $category->hasSub;
 
         return view('products.sub-categories')->with('sub_categories', $subcategories)->render();

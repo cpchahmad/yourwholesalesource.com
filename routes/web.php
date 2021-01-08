@@ -167,7 +167,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/campaigns/{id}/edit', 'DefaultSettingsController@editCampaign')->name('email.campaigns.edit');
     Route::post('/campaigns/{id}/update', 'DefaultSettingsController@updateCampaign')->name('email.campaigns.update');
     Route::get('/sync_manual/{id}', 'AdminOrderController@manualSyncfulfillment')->name('manually.sync.fulfillment');
-    Route::get('/category/{id}/get/sub-categories', 'CategoryController@getSubCategories');
+    Route::get('/category/{title}/get/sub-categories', 'CategoryController@getSubCategories');
 
 
 });
