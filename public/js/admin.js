@@ -3,6 +3,7 @@ $(document).ready(function () {
     // Category Filter
     $('.parent-category').change(function(){
         var id = $(this).val();
+        $('.sub-categories-section').html('Please Wait..');
 
         $.ajax({
             url: `/category/${id}/get/sub-categories`,
