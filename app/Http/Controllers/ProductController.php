@@ -18,6 +18,7 @@ use App\RetailerImage;
 use App\RetailerOrder;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
+use App\SubCategory;
 use App\TieredPrice;
 use App\User;
 use App\WarnedPlatform;
@@ -52,13 +53,14 @@ class ProductController extends Controller
         return view('products.create')->with([
             'categories' => $categories,
             'platforms' => $platforms,
-            'shops' => $shops
+            'shops' => $shops,
         ]);
     }
 
     public function all(Request $request)
     {
         $categories = Category::latest()->get();
+        $sub_categories = SubCategory::latest()->get();
 
         $productQ = Product::query();
         if($request->has('search')){
@@ -66,10 +68,26 @@ class ProductController extends Controller
                 $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
             });
         }
+
+        if($request->has('parent_category')) {
+            $productQ->orWhereHas('has_categories', function($q) use ($request){
+                $q->where('id',$request->input('parent_category'));
+            });
+
+            if($request->has('child_category')) {
+                $productQ->orWhereHas('hasSub', function($q) use ($request){
+                    $q->where('id',$request->input('child_category'));
+                });
+            }
+        }
         return view('products.all')->with([
             'products' => $productQ->with(['has_images', 'hasVariants'])->orderBy('created_at','DESC')->paginate(20),
             'search' =>$request->input('search'),
+            'parent_category' =>$request->input('parent_category'),
+            'child_category' =>$request->input('child_category'),
             'categories' => $categories,
+            'sub_categories' => $sub_categories
+
         ]);
     }
 

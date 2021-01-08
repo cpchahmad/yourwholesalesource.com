@@ -38,12 +38,19 @@
                     <select name="parent_category" id="" class="form-control parent-category">
                         <option value="" style="display: none">Category</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" >{{ $category->title }}</option>
+                            <option @if($parent_category == $category->id) selected @endif value="{{ $category->id }}" >{{ $category->title }}</option>
                         @endforeach
                     </select>
 
                     <div class="sub-categories-section">
-
+                        @if($child_category !== null)
+                            <select name="child_category" id="" class="form-control child-category">
+                                <option value="" style="display: none">Sub Categories</option>
+                                @foreach($sub_categories as $category)
+                                    <option @if($child_category == $category->id) selected @endif value="{{ $category->id }}" >{{ $category->title }}</option>
+                                @endforeach
+                            </select>
+                        @endif
                     </div>
 
 
