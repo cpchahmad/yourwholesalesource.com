@@ -81,7 +81,8 @@
                     </div>
 
                     <div class="col-md-2">
-                        <input type="submit" class="btn btn-primary w-100" value="Filter">
+                        <input type="submit" class="btn btn-primary " value="Filter">
+                        <a href="/products/all" class="btn btn-danger " >Clear</a>
                     </div>
                 </form>
             </div>
