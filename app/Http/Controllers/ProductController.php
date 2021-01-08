@@ -74,13 +74,6 @@ class ProductController extends Controller
                 $q->where('id',$request->input('parent_category'));
             });
 
-            if($request->has('child_category')) {
-                $productQ->orWhereHas('has_categories', function($q) use ($request){
-                    $q->whereHas('hasSub', function($inner) use ($request) {
-                       $inner->where('id', $request->input('child_category'));
-                    });
-                });
-            }
         }
         return view('products.all')->with([
             'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
