@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
+                        <input type="submit" class="btn btn-primary w-100" value="Filter">
                     </div>
                 </form>
             </div>
