@@ -83,7 +83,7 @@ class ProductController extends Controller
             }
         }
         return view('products.all')->with([
-            'products' => $productQ->with(['has_images', 'hasVariants'])->orderBy('created_at','DESC')->paginate(20),
+            'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
             'search' =>$request->input('search'),
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
