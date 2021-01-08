@@ -56,7 +56,7 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <select name="parent_category" id="" class="form-control parent-category">
                             <option value="" style="display: none">Category</option>
                             @foreach($categories as $category)
@@ -66,7 +66,7 @@
                     </div>
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="sub-categories-section">
                             @if($child_category !== null)
                                 @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
@@ -80,8 +80,9 @@
                         </div>
                     </div>
 
-
-                    <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
+                    <div class="col-md-2">
+                        <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
+                    </div>
                 </form>
             </div>
         </div>
