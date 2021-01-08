@@ -70,9 +70,10 @@ class ProductController extends Controller
         }
 
         if($request->has('parent_category')) {
-            $productQ->whereHas('has_categories', function($q) use ($request){
+            $productQ->orWhereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             });
+
         }
 
         return view('products.all')->with([
