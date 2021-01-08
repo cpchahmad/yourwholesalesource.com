@@ -33,15 +33,23 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-6  mb2">
+            <div class="col-md-12  mb2">
                 <form class="d-flex text-right" action="" method="get">
-                    <select name="category" id="" class="form-control">
+                    <select name="parent_category" id="" class="form-control">
                         <option value="" style="display: none">Category</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" >{{ $category->title }}</option>
                         @endforeach
                     </select>
+
+                    <div class="sub_categories">
+                        <select name="child_category" id="" class="form-control">
+                            <option value="" style="display: none">Category</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" >{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
 
 {{--                    <select name="status" style="margin-left: 10px" class="form-control">--}}
