@@ -55,12 +55,12 @@
                     </div>
 
 
-{{--                    <select name="status" style="margin-left: 10px" class="form-control">--}}
-{{--                        <option value="" style="display: none">Status</option>--}}
-{{--                        @foreach($statuses as $status)--}}
-{{--                            <option @if($selected_status == $status->id) selected @endif value="{{$status->id}}">{{$status->status}}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
+                    <select name="shop_search" id="" class="form-control">
+                        <option value="" style="display: none">Wishlist Assigned</option>
+                        @foreach($shops as $shop)
+                            <option @if($shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ $shop->shopify_domain }}</option>
+                        @endforeach
+                    </select>
 
                     <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
                 </form>

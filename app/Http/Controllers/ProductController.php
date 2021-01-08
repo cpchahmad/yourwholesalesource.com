@@ -60,6 +60,7 @@ class ProductController extends Controller
     public function all(Request $request)
     {
         $categories = Category::latest()->get();
+        $shops = Shop::latest()->get();
 
         $productQ = Product::query();
         if($request->has('search')){
@@ -69,7 +70,6 @@ class ProductController extends Controller
         }
 
         if($request->filled('parent_category') && !$request->filled('child_category')) {
-            dd(234);
             $productQ->orWhereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             });
@@ -86,6 +86,15 @@ class ProductController extends Controller
             });
         }
 
+        if($request->filled('shop_search')) {
+
+            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
+                $q->where('shop_id',$request->input('shop_search'));
+            });
+        }
+
+
+
 
 
         return view('products.all')->with([
@@ -93,6 +102,7 @@ class ProductController extends Controller
             'search' =>$request->input('search'),
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
+            'shop_search' =>$request->input('shop_search'),
             'categories' => $categories,
         ]);
     }
