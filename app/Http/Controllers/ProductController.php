@@ -79,7 +79,7 @@ class ProductController extends Controller
 
         if($request->filled('parent_category') && $request->filled('child_category')) {
 
-            $productQ->orWhereHas('has_categories', function($q) use ($request){
+            $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'))
                     ->whereHas('hasSub', function($inner) use ($request) {
                         $inner->where('title',$request->input('child_category'));
