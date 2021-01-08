@@ -44,10 +44,11 @@
 
                     <div class="sub-categories-section">
                         @if($child_category !== null)
+                            @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
                             <select name="child_category" id="" class="form-control child-category">
                                 <option value="" style="display: none">Sub Categories</option>
                                 @foreach($sub_categories as $category)
-                                    <option @if($child_category == $category->id) selected @endif value="{{ $category->id }}" >{{ $category->title }}</option>
+                                    <option @if($child_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
                                 @endforeach
                             </select>
                         @endif

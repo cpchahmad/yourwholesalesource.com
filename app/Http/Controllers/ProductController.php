@@ -60,7 +60,6 @@ class ProductController extends Controller
     public function all(Request $request)
     {
         $categories = Category::latest()->get();
-        $sub_categories = SubCategory::latest()->get();
 
         $productQ = Product::query();
         if($request->has('search')){
@@ -95,8 +94,6 @@ class ProductController extends Controller
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
             'categories' => $categories,
-            'sub_categories' => $sub_categories
-
         ]);
     }
 
