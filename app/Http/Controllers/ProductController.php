@@ -58,6 +58,8 @@ class ProductController extends Controller
 
     public function all(Request $request)
     {
+        $categories = Category::latest()->get();
+
         $productQ = Product::query();
         if($request->has('search')){
             $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
@@ -66,7 +68,8 @@ class ProductController extends Controller
         }
         return view('products.all')->with([
             'products' => $productQ->with(['has_images', 'hasVariants'])->orderBy('created_at','DESC')->paginate(20),
-            'search' =>$request->input('search')
+            'search' =>$request->input('search'),
+            'categories' => $categories,
         ]);
     }
 
