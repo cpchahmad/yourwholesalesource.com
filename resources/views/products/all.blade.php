@@ -38,7 +38,7 @@
                     <select name="parent_category" id="" class="form-control parent-category">
                         <option value="" style="display: none">Category</option>
                         @foreach($categories as $category)
-                            <option @if($parent_category == $category->id) selected @endif value="{{ $category->id }}" >{{ $category->title }}</option>
+                            <option @if($parent_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
                         @endforeach
                     </select>
 

@@ -71,8 +71,7 @@ class ProductController extends Controller
 
         if($request->has('parent_category')) {
             $productQ->whereHas('has_categories', function($q) use ($request){
-                dd($q);
-                $q->where('id',$request->input('parent_category'));
+                $q->where('title',$request->input('parent_category'));
             });
         }
 
