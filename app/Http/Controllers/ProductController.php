@@ -70,7 +70,7 @@ class ProductController extends Controller
         }
 
         if($request->filled('parent_category') && !$request->filled('child_category')) {
-
+            dd(234);
             $productQ->orWhereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             });
@@ -86,6 +86,8 @@ class ProductController extends Controller
                     });
             });
         }
+
+
 
         return view('products.all')->with([
             'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
