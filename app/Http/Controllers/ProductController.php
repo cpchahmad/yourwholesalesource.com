@@ -75,8 +75,10 @@ class ProductController extends Controller
             });
 
             if($request->has('child_category')) {
-                $productQ->orWhereHas('has_categories.hasSub', function($q) use ($request){
-                    $q->where('id',$request->input('child_category'));
+                $productQ->orWhereHas('has_categories', function($q) use ($request){
+                    $q->whereHas('hasSub', function($inner) use ($request) {
+                       $inner->where('id', $request->input('child_category'));
+                    });
                 });
             }
         }
