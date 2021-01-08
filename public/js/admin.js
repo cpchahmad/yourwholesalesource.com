@@ -1,5 +1,19 @@
 $(document).ready(function () {
 
+    // Category Filter
+    $('.parent-category').change(function(){
+        var id = $(this).val();
+
+        $.ajax({
+            url: `/category/${id}/get/sub-categories`,
+            type: 'GET',
+            success: function(res) {
+                $('.sub-categories-section').empty().html(res);
+            }
+        });
+    });
+
+
     // Product Tiered Price Feature
     $(document).on('click', '.add-price-row-btn', function() {
         var id = $(this).attr('id');

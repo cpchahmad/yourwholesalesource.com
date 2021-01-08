@@ -123,4 +123,11 @@ class CategoryController extends Controller
         ]);
 
     }
+
+    public function getSubCategories($id) {
+        $category = Category::find($id);
+        $subcategories = $category->hasSub;
+
+        return view('products.sub-categories')->with('sub_categories', $subcategories)->render();
+    }
 }
