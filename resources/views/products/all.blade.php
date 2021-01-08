@@ -58,7 +58,7 @@
                     <select name="shop_search" id="" class="form-control">
                         <option value="" style="display: none">Wishlist Assigned</option>
                         @foreach($shops as $shop)
-                            <option @if($shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ $shop->shopify_domain }}</option>
+                            <option @if($shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
                         @endforeach
                     </select>
 
@@ -66,7 +66,7 @@
                     <select name="wishlist_shop_search" id="" class="form-control">
                         <option value="" style="display: none">Wishlist Pushed From User</option>
                         @foreach($shops as $shop)
-                            <option @if($wishlist_shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ $shop->shopify_domain }}</option>
+                            <option @if($wishlist_shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
                         @endforeach
                     </select>
 
