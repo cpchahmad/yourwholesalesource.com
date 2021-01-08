@@ -36,9 +36,9 @@
             <div class="col-md-6"></div>
             <div class="col-md-6  mb2">
                 <form class="d-flex text-right" action="" method="get">
-                    <select name="priority" id="" class="form-control">
+                    <select name="category" id="" class="form-control">
+                        <option value="" style="display: none">Category</option>
                         @foreach($categories as $category)
-                            <option value="" style="display: none">Category</option>
                             <option value="{{ $category->id }}"  >{{ $category->name }}</option>
                         @endforeach
                     </select>
