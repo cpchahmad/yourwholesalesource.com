@@ -75,7 +75,6 @@ class ProductController extends Controller
             });
 
             if($request->filled('child_category')) {
-                dd("234");
                 $productQ->orWhereHas('has_categories.hasSub', function($q) use ($request){
                     $q->where('title',$request->input('child_category'));
                 });
