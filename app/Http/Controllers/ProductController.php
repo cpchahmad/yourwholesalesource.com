@@ -70,7 +70,7 @@ class ProductController extends Controller
         }
 
         if($request->has('parent_category')) {
-            $productQ->orWhereHas('has_categories', function($q) use ($request){
+            $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('id',$request->input('parent_category'));
             });
 
