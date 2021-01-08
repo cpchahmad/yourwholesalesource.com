@@ -104,6 +104,7 @@ class ProductController extends Controller
             'child_category' =>$request->input('child_category'),
             'shop_search' =>$request->input('shop_search'),
             'categories' => $categories,
+            'shops' => $shops,
         ]);
     }
 
