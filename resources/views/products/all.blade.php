@@ -34,41 +34,52 @@
 
         <div class="row">
             <div class="col-md-12  mb2">
-                <form class="d-flex text-right" action="" method="get">
-                    <select name="parent_category" id="" class="form-control parent-category">
-                        <option value="" style="display: none">Category</option>
-                        @foreach($categories as $category)
-                            <option @if($parent_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
-                        @endforeach
-                    </select>
+                <form class="row d-flex text-right" action="" method="get">
 
-                    <div class="sub-categories-section">
-                        @if($child_category !== null)
-                            @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
-                            <select name="child_category" id="" class="form-control child-category">
-                                <option value="" style="display: none">Sub Categories</option>
-                                @foreach($sub_categories as $category)
-                                    <option @if($child_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
-                                @endforeach
-                            </select>
-                        @endif
+                   <div class="col-md-3">
+                       <select name="shop_search" id="" class="form-control">
+                           <option value="" style="display: none">Wishlist Assigned</option>
+                           @foreach($shops as $shop)
+                               <option @if($shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
+                           @endforeach
+                       </select>
+                   </div>
+
+
+                    <div class="col-md-3">
+                        <select name="wishlist_shop_search" id="" class="form-control">
+                            <option value="" style="display: none">Wishlist Pushed From User</option>
+                            @foreach($shops as $shop)
+                                <option @if($wishlist_shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
 
-                    <select name="shop_search" id="" class="form-control">
-                        <option value="" style="display: none">Wishlist Assigned</option>
-                        @foreach($shops as $shop)
-                            <option @if($shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
-                        @endforeach
-                    </select>
+                    <div class="col-md-3">
+                        <select name="parent_category" id="" class="form-control parent-category">
+                            <option value="" style="display: none">Category</option>
+                            @foreach($categories as $category)
+                                <option @if($parent_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
 
-                    <select name="wishlist_shop_search" id="" class="form-control">
-                        <option value="" style="display: none">Wishlist Pushed From User</option>
-                        @foreach($shops as $shop)
-                            <option @if($wishlist_shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
-                        @endforeach
-                    </select>
+                    <div class="col-md-3">
+                        <div class="sub-categories-section">
+                            @if($child_category !== null)
+                                @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
+                                <select name="child_category" id="" class="form-control child-category">
+                                    <option value="" style="display: none">Sub Categories</option>
+                                    @foreach($sub_categories as $category)
+                                        <option @if($child_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                    </div>
+
 
                     <input type="submit" style="margin-left: 10px" class="btn btn-primary" value="Filter">
                 </form>
