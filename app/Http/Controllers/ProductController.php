@@ -89,8 +89,8 @@ class ProductController extends Controller
         if($request->filled('shop_search')) {
 
             $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
-                $q->whereHas('has_shop', function($q) use ($request) {
-                    $q->where('shopify_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
+                $q->whereHas('has_shop', function($inner) use ($request) {
+                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
                 });
             });
         }
@@ -98,7 +98,10 @@ class ProductController extends Controller
         if($request->filled('wishlist_shop_search')) {
 
             $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
-                $q->where('shop_id',$request->input('wishlist_shop_search'))->where('import_from_shopify', 1);
+                $q->whereHas('has_shop', function($inner) use ($request) {
+                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('wishlist_shop_search') . '%')
+                          ->where('import_from_shopify', 1);
+                });
             });
         }
 

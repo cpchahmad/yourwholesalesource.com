@@ -42,12 +42,7 @@
 
 
                     <div class="col-md-3">
-                        <select name="wishlist_shop_search" id="" class="form-control">
-                            <option value="" style="display: none">Wishlist Pushed From User</option>
-                            @foreach($shops as $shop)
-                                <option @if($wishlist_shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control" name="wishlist_shop_search" value="{{$wishlist_shop_search}}" placeholder="Search By Wishlist Pushed By User">
                     </div>
 
 
@@ -176,7 +171,7 @@
                     @endif
                     <div class="row">
                         <div class="col-md-12 text-center" style="font-size: 17px">
-                            {!! $products->links() !!}
+                            {!! $products->appends(request()->input())->links() !!}
                         </div>
                     </div>
             </div>
