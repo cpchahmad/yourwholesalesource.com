@@ -25,7 +25,7 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/loginEventServiceProvider';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
