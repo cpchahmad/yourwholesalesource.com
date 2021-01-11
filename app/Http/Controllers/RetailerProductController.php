@@ -631,4 +631,47 @@ class RetailerProductController extends Controller
         }
         return $options_array;
     }
+
+    public function syncWithAdminProduct($id) {
+        $retailerProduct = RetailerProduct::find($id);
+        $product = Product::where('linked_product_id', $retailerProduct->linked_product_id)->first();
+        $shop= $this->helper->getLocalShop();
+
+        if(count($product->hasVariants) > 0){
+            foreach ($product->hasVariants as $variant){
+                foreach ($retailerProduct->hasVariants as $retailer_variant) {
+                    if($variant->title !== $retailer_variant->title) {
+
+                        $retailerProduct->variants = $product->variants;
+                        $retailerProduct->save();
+
+
+                        $retailerProductVariant = new RetailerProductVariant();
+                        $retailerProductVariant->title = $variant->title;
+                        $retailerProductVariant->option1 = $variant->option1;
+                        $retailerProductVariant->option2 = $variant->option2;
+                        $retailerProductVariant->option3 = $variant->option3;
+                        $retailerProductVariant->price = $variant->price;
+                        $retailerProductVariant->cost = $variant->price;
+                        $retailerProductVariant->quantity = $variant->quantity;
+                        $retailerProductVariant->sku = $variant->sku;
+                        $retailerProductVariant->barcode = $variant->barcode;
+
+                        $retailerProductVariant->product_id = $retailerProduct->id;
+                        $retailerProductVariant->shop_id =  $retailerProduct->shop_id;
+                        $retailerProductVariant->user_id =  $retailerProduct->user_id;
+
+                        if($variant->has_image != null){
+                            $image_linked = $retailerProduct->has_images()->where('image',$variant->has_image->image)->first();
+                            $retailerProductVariant->image =$image_linked->id;
+                        }
+
+                        $retailerProductVariant->save();
+                    }
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Varaints Update Successfully!');
+    }
 }

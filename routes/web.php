@@ -195,6 +195,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/my_products','RetailerProductController@my_products')->name('store.my_products');
         Route::get('/my_products/{id}','RetailerProductController@edit_my_product')->name('store.my_product.edit');
         Route::get('/products/delete/{id}','RetailerProductController@delete')->name('store.product.delete');
+        Route::get('/products/sync/{id}','RetailerProductController@syncWithAdminProduct')->name('store.product.sync');
         Route::post('/import-list/{id}/update','RetailerProductController@update')->name('store.import_list.product.update');
         Route::get('/getOrders', 'OrderController@getOrders')->name('store.sync.orders');
         Route::get('/orders', 'OrderController@index')->name('store.orders');
