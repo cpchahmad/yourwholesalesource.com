@@ -721,9 +721,22 @@ class DefaultSettingsController extends Controller
         return view('setttings.campaigns.index')->with('campaigns', $campaigns);
     }
 
-    public function getCampaign($id) {
+    public function getCampaign(Request $request, $id) {
+
         $campaign = Campaign::find($id);
-        return view('setttings.campaigns.show')->with('campaign', $campaign);
+        $users = $campaign->users()->newQuery();
+
+        if($request->has('status')) {
+            if($request->input('status') == 'shopify') {
+                $users->has('has_shops');
+            }
+            else {
+                $users->doesnthave('has_shops');
+            }
+        }
+        $users = $users->orderBy('created_at','DESC')->paginate(30);
+
+        return view('setttings.campaigns.show')->with('campaign', $campaign)->with('users', $users)->with('status', $request->input('status'));
     }
 
 
@@ -771,7 +784,6 @@ class DefaultSettingsController extends Controller
 
         $template->subject = $request->subject;
         $template->body = $request->body;
-
 
         if($request->hasFile('banner')){
             $file = $request->file('banner');

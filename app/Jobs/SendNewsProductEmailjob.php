@@ -36,11 +36,7 @@ class SendNewsProductEmailjob implements ShouldQueue
      */
     public function handle()
     {
-        $users_temp = User::role('non-shopify-users')
-            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-            ->get();
-
-
+        $users_temp = $this->campaign->users();
 
         foreach ($users_temp as $user) {
             try{

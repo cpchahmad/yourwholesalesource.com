@@ -19,10 +19,33 @@
     </div>
     <div class="content">
         <div class="row" style="margin-top: 10px">
+            <div class="col-md-12 px-0">
+                <div class="bg-white p-3 push">
+                    <!-- Navigation -->
+                    <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
+                        <ul class="nav-main nav-main-horizontal nav-main-hover">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'shopify') active @endif " href="?status=shopify">
+                                    <i class="nav-main-link-icon si si-home"></i>
+                                    <span class="nav-main-link-name">Shopify Users</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if($status == 'non_shopify') active @endif " href="?status=non_shopify">
+                                    <i class="nav-main-link-icon si si-users"></i>
+                                    <span class="nav-main-link-name">Non-Shopify Users</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END Navigation -->
+                </div>
+            </div>
+
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-content">
-                        @if (count($campaign->users) > 0)
+                        @if (count($users) > 0)
                             <table class="js-table-sections table table-hover table-borderless table-vcenter">
                                 <thead>
                                 <tr>
@@ -33,7 +56,7 @@
                                 </tr>
                                 </thead>
 
-                                @foreach($campaign->users as $user)
+                                @foreach($users as $user)
                                     <tbody class="">
                                     <tr>
                                         <td class="font-w600">{{ $user->name }}</td>
@@ -48,6 +71,9 @@
                                     </tbody>
                                 @endforeach
                             </table>
+                            <div class="d-flex justify-content-end">
+                                {{ $users->appends(request()->input())->links() }}
+                            </div>
                         @else
                             <p>No Receivers Yet</p>
                         @endif
