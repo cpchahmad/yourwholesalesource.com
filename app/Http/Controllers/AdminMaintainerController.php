@@ -403,10 +403,10 @@ class AdminMaintainerController extends Controller
         }
     }
 
-    public function push_to_mabang() {
+    public function push_to_mabang($id) {
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
-        $order = RetailerOrder::find(1214);
+        $order = RetailerOrder::find($id);
         $line_items = [];
         $images = [];
 
@@ -526,11 +526,6 @@ class AdminMaintainerController extends Controller
         $data['email'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->email;
         $data['itemTotal'] = $order->cost_to_pay;
         $data['shippingCost'] = $order->shipping_price;
-
-        dd($data);
-
-
-
 
 
         $body = str_replace("\\", '', json_encode($data));
