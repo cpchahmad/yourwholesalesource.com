@@ -90,7 +90,7 @@ class ProductController extends Controller
 
             $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
                 $q->whereHas('has_shop', function($q) use ($request) {
-                    $q->where('shop_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
+                    $q->where('shopify_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
                 });
             });
         }
