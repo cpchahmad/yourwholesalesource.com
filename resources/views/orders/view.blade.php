@@ -635,7 +635,7 @@
                                                                 <tr>
                                                                     <td>Tracking Url <span style="color: red">*</span></td>
                                                                     <td>
-                                                                        <input type="url" required name="tracking_url[]" class="form-control" placeholder="https://example/tracking/XXXXX">
+                                                                        <input type="url" required name="tracking_url[]" class="form-control" placeholder="https://example/tracking/XXXXX" value="{{ $order->courier_url }}">
                                                                     </td>
 
                                                                 </tr>

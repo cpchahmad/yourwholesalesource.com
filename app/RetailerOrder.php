@@ -57,6 +57,25 @@ class RetailerOrder extends Model
         return '';
     }
 
+    public function getCourierUrlAttribute() {
+        if($this->shipping_address)
+        {
+            $shipping = json_decode($this->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier == null)
+                return '';
+
+            return$zoneQuery->courier->url;
+        }
+        return '';
+    }
+
     public function getCourierIdAttribute() {
         if($this->shipping_address)
         {
