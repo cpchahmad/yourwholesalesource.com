@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Mail\SendResetPasswordEmail;
+use App\Mail\SendVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -105,7 +106,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         Mail::to(request()->email)->send(new SendResetPasswordEmail($token,$this));
     }
-
-
 
 }
