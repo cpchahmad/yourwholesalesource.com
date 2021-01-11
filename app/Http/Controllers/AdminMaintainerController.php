@@ -406,7 +406,7 @@ class AdminMaintainerController extends Controller
     public function push_to_mabang($id) {
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
-        $order = RetailerOrder::find($id);
+        $order = RetailerOrder::find(1214);
         $line_items = [];
         $images = [];
 
@@ -500,6 +500,7 @@ class AdminMaintainerController extends Controller
             }
         }
 
+        $shipping = json_decode($order->shipping_address);
 
         $data = [
             "developerId"=>100375,
@@ -507,14 +508,29 @@ class AdminMaintainerController extends Controller
             "action"=>"do-create-order",
             "platformOrderId"=>$order->shopify_order_id,
             "shopName"=>"WEFULLFILL OFFICIAL",
-            "buyerUserId"=>$order->user_id,
-            "phone1"=> is_null($order->has_customer) ? "No customer" : (is_null($order->has_customer->phone) ? "No Phone" : $order->has_customer->phone),
-            "country"=>"China",
-            "street1"=> is_null($order->has_customer) ? "No customer" : (is_null($order->has_customer->addresses) ? "No Address" : $order->has_customer->addresses),
             "currencyId"=>"USD",
             "paidTime"=> $order->shopify_created_at,
             "orderItemList" => $line_items
         ];
+
+
+        $data['phone1'] =  isset($shipping->phone) ? $shipping->phone : 'No Phone';
+        $data['country'] = is_null($shipping->country) ? 'No country' : $shipping->country;
+        $data['street1'] = is_null($shipping->address1) ? 'No First Address' : $shipping->address1;
+        $data['street2'] = is_null($shipping->address2) ? 'No Second Address' : $shipping->address2;
+        $data['city'] = is_null($shipping->city) ? 'No City' : $shipping->city;
+        $data['province'] = is_null($shipping->province) ? 'No Province' : $shipping->province;
+        $data['postCode'] = is_null($shipping->zip) ? 'No Zip' : $shipping->zip;
+        $data['buyerUserId'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->id;
+        $data['buyerName'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->first_name. ' '.$order->has_customer->last_name;
+        $data['email'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->email;
+        $data['itemTotal'] = $order->cost_to_pay;
+        $data['shippingCost'] = $order->shipping_price;
+
+        dd($data);
+
+
+
 
 
         $body = str_replace("\\", '', json_encode($data));
