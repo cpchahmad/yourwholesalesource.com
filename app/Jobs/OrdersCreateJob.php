@@ -324,7 +324,7 @@ class OrdersCreateJob implements ShouldQueue
                 $order_log->retailer_order_id = $new->id;
                 $order_log->save();
 
-                /* Manual Order Payment in case user has enabled settings for it (START)*/
+                /* Auto Order Payment in case user has enabled settings for it (START)*/
                 $settings = WalletSetting::where('user_id', $new->user_id)->first();
 
                 DB::beginTransaction();
@@ -445,7 +445,7 @@ class OrdersCreateJob implements ShouldQueue
                     $log->message = "Payment issue: " .$e->getMessage();
                     $log->save();
                 }
-                /* Manual Order Payment in case user has enabled settings for it (END)*/
+                /* Auto Order Payment in case user has enabled settings for it (END)*/
 
 
             }
