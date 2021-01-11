@@ -1025,35 +1025,17 @@ class ProductController extends Controller
                                 }
 
                                 if(count($users_temp)> 0) {
-                                    $users = [];
-                                    foreach($users_temp as $key => $ut){
-                                        if($ut != null) {
-                                            $ua = [];
-                                            $ua['email'] = $ut;
-                                            $ua['name'] = 'test';
-                                            $users[$key] = (object)$ua;
+                                    foreach($users_temp as $ut){
+                                        try{
+                                            Mail::to($ut)->send(new VariantStockOutMail($product));
                                         }
-                                    }
-
-                                    try{
-                                        Mail::to($users)->send(new VariantStockOutMail($product));
-                                    }
-                                    catch (\Exception $e){
-                                        dd($e);
+                                        catch (\Exception $e){
+                                        }
                                     }
                                 }
                             }
                             $this->notify->generate('Product','Variant Out Of Stock',$variant->title.' of ' . $product->title . ' is running out of stock, kindly update the stock on your store',$product);
                         }
-
-//                        if($request->input('single-var-cost-'.$id) == null) {
-//                            $variant->cost = null;
-//                        }
-//                        else {
-//                            $res = str_ireplace( array( '$', '"',
-//                                ',' , ';', '<', '>' ), ' ', $request->input('single-var-cost-').$id);
-//                            $variant->cost = trim($res);
-//                        }
 
                         $variant->product_id = $product->id;
                         $variant->save();
@@ -1376,7 +1358,6 @@ class ProductController extends Controller
                     }
 
 
-
                     $option2_array = [];
                     foreach ($variants_array as $index => $v) {
                         array_push($option2_array, $v['option2']);
@@ -1435,6 +1416,9 @@ class ProductController extends Controller
                         $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                         $variant->save();
                     }
+
+                    // Sending Notification To all Concerned Retailer Stores
+                    $this->notify->generate('Product','Product Update','Variants of '.$product->title.' are updated',$product);
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
                     return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
@@ -1667,21 +1651,15 @@ class ProductController extends Controller
             }
 
             if(count($users_temp)> 0) {
-                $users = [];
                 foreach($users_temp as $key => $ut){
-                    if($ut != null) {
-                        $ua = [];
-                        $ua['email'] = $ut;
-                        $ua['name'] = 'test';
-                        $users[$key] = (object)$ua;
+                    try{
+                        Mail::to($ut)->send(new ProductDeleteMail($product));
+                    }
+                    catch (\Exception $e){
                     }
                 }
 
-                try{
-                    Mail::to($users)->send(new ProductDeleteMail($product));
-                }
-                catch (\Exception $e){
-                }
+
             }
         }
 
