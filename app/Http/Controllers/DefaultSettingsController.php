@@ -735,7 +735,9 @@ class DefaultSettingsController extends Controller
     }
 
     public function removeUserFromCampaign($id, $user_id) {
-        dd($id, $user_id);
+        $campaign = Campaign::find($id);
+        $campaign->users()->detach($user_id);
+        return redirect()->back()->with('success', 'User Removed From Campaign Successfully!');
     }
 
 
