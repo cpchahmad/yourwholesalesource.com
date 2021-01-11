@@ -54,7 +54,7 @@
                     <form method="POST" action="{{ route('verification.resend') }}" class=" form-horizontal push-30-t push-5">
                         @csrf
                         <div class="form-group">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12 px-0">
                                 <button class="btn btn-block btn-success" type="submit">Click here to request another</button>
                             </div>
                         </div>
