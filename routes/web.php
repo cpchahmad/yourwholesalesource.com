@@ -163,6 +163,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/campaigns', 'DefaultSettingsController@campaigns')->name('email.campaigns.index');
     Route::get('/campaigns/{id}', 'DefaultSettingsController@getCampaign')->name('email.campaigns.show');
     Route::get('/campaigns/{id}/delete', 'DefaultSettingsController@deleteCampaign')->name('email.campaigns.delete');
+    Route::get('/campaigns/{id}/remove/user/{user_id}', 'DefaultSettingsController@removeUserFromCampaign')->name('campaigns.remove.user');
     Route::get('/campaigns/{id}/submit', 'DefaultSettingsController@submitCampaign')->name('email.campaigns.submit');
     Route::get('/campaigns/{id}/edit', 'DefaultSettingsController@editCampaign')->name('email.campaigns.edit');
     Route::post('/campaigns/{id}/update', 'DefaultSettingsController@updateCampaign')->name('email.campaigns.update');

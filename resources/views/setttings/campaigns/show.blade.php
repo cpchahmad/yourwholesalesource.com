@@ -29,6 +29,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Status</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
 
@@ -38,6 +39,11 @@
                                         <td class="font-w600">{{ $user->name }}</td>
                                         <td class="font-w600">{{ $user->email }}</td>
                                         <td><span class="badge @if($user->pivot->status === null) badge-primary @else badge-success @endif">@if($user->pivot->status === null) Pending @else {{ $user->pivot->status }} @endif</span></td>
+                                        <td class="text-right btn-group" style="float: right">
+                                            <a href="{{ route('campaigns.remove.user', ['id' => $campaign->id, 'user_id' => $user->id]) }}"
+                                               class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                               data-original-title="Delete Campaign"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 @endforeach

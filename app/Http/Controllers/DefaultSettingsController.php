@@ -734,6 +734,10 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'Campaign Deleted Successfully!');
     }
 
+    public function removeUserFromCampaign($id, $user_id) {
+        dd($id, $user_id);
+    }
+
 
     public function submitCampaign($id) {
         $campaign = Campaign::find($id);
