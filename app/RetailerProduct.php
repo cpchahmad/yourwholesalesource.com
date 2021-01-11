@@ -24,4 +24,7 @@ class RetailerProduct extends Model
     public function linked_product(){
         return $this->belongsTo('App\Product','linked_product_id');
     }
+    public function has_shop() {
+        return $this->belongsTo('App\Shop', 'shop_id');
+    }
 }

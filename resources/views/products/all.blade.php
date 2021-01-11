@@ -37,12 +37,7 @@
                 <form class="row d-flex text-right" action="" method="get">
 
                    <div class="col-md-3">
-                       <select name="shop_search" id="" class="form-control">
-                           <option value="" style="display: none">Wishlist Assigned</option>
-                           @foreach($shops as $shop)
-                               <option @if($shop_search == $shop->shopify_domain) selected @endif value="{{ $shop->id }}" >{{ explode('.',$shop->shopify_domain)[0] }}</option>
-                           @endforeach
-                       </select>
+                       <input type="text" class="form-control" name="shop_search" value="{{$shop_search}}" placeholder="Search By Wishlist Assigned">
                    </div>
 
 
