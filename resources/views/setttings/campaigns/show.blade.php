@@ -19,7 +19,7 @@
     </div>
     <div class="content">
         <div class="row" style="margin-top: 10px">
-            <div class="col-md-12 px-0">
+            <div class="col-md-12">
                 <div class="bg-white p-3 push">
                     <!-- Navigation -->
                     <div id="horizontal-navigation-hover-normal" class="d-none d-lg-block mt-2 mt-lg-0">
@@ -51,6 +51,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Stores</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -61,6 +62,13 @@
                                     <tr>
                                         <td class="font-w600">{{ $user->name }}</td>
                                         <td class="font-w600">{{ $user->email }}</td>
+                                        <td>
+                                            @if($user->has_shops()->count() > 0)
+                                                <span class="badge badge-success">Shopify User</span>
+                                            @else
+                                                <span class="badge badge-info">Non-Shopify User</span>
+                                            @endif
+                                        </td>
                                         <td><span class="badge @if($user->pivot->status === null) badge-primary @else badge-success @endif">@if($user->pivot->status === null) Pending @else {{ $user->pivot->status }} @endif</span></td>
                                         <td class="text-right btn-group" style="float: right">
                                             <a href="{{ route('campaigns.remove.user', ['id' => $campaign->id, 'user_id' => $user->id]) }}"
