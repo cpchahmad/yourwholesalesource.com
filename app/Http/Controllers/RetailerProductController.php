@@ -636,7 +636,6 @@ class RetailerProductController extends Controller
         $retailerProduct = RetailerProduct::find($id);
         $product = $retailerProduct->linked_product;
 
-        dd($product);
         $shop= $this->helper->getLocalShop();
 
         if($retailerProduct && $product) {
