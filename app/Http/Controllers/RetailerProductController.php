@@ -634,7 +634,9 @@ class RetailerProductController extends Controller
 
     public function syncWithAdminProduct($id) {
         $retailerProduct = RetailerProduct::find($id);
-        $product = Product::where('linked_product_id', $retailerProduct->linked_product_id)->first();
+        $product = $retailerProduct->linked_product;
+
+        dd($product);
         $shop= $this->helper->getLocalShop();
 
         if($retailerProduct && $product) {
