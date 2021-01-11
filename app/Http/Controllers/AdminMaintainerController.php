@@ -403,7 +403,7 @@ class AdminMaintainerController extends Controller
         }
     }
 
-    public function push_to_mabang($id) {
+    public function push_to_mabang() {
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
         $order = RetailerOrder::find(1214);
