@@ -720,7 +720,7 @@ class RetailerProductController extends Controller
         $shop = $this->helper->getShop();
 
         if ($product) {
-            $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id)->frist();
+            $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id)->first();
             dump($retailerProduct);
 
             if ($retailerProduct) {
