@@ -173,7 +173,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('warehouses', 'WareHouseController@index')->name('warehouse.index');
     Route::post('warehouses/store', 'WareHouseController@store')->name('warehouse.store');
     Route::post('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
-    Route::get('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
+    Route::post('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
 });
 
