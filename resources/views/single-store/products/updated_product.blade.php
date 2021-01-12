@@ -32,9 +32,6 @@
         </div>
         <div class="block">
             <div class="block-content my_product_form_div">
-                <div class="block-header">
-                    <h3 class="block-title"> Basic Information</h3>
-                </div>
                 <div class="row mb2">
                     <?php
                     if(count($product->has_images) > 0){
@@ -67,11 +64,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                            <div class="form-group">
-                                <label>Title : {{ $product->title }}</label>
-                                <p>{{ $product->description }}</p>
-                            </div>
-
+                        <p class="lead">{!! $product->description  !!}</p>
                     </div>
                 </div>
                 <div class="row mb2">
