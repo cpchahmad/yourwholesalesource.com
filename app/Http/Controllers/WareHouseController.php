@@ -17,4 +17,23 @@ class WareHouseController extends Controller
             'countries' => $countries
         ]);
     }
+
+    public function store(Request $request) {
+        dd($request->all());
+        $this->validate($request, [
+           'title' => 'required',
+           'address' => 'required',
+           'zip' => 'required'
+        ]);
+
+        $warehouse = new WareHouse();
+        $warehouse->title = $request->title;
+        $warehouse->address = $request->address;
+        $warehouse->zip = $request->zip;
+        $warehouse->state = $request->state;
+        $warehouse->country_id = $request->country_id;
+        $warehouse->save();
+
+        return redirect()->back()->with('success', 'Warehouse Added Successfully!');
+    }
 }

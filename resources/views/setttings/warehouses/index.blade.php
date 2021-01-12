@@ -135,7 +135,7 @@
                                 @endforeach
                             </table>
                         @else
-                            <p>No Courier Service Providers Created</p>
+                            <p>No Warehouse Added</p>
                         @endif
                     </div>
                 </div>
