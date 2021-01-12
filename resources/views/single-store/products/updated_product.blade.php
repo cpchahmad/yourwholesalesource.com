@@ -83,10 +83,10 @@
                                 </tr>
                                 </thead>
                                 @if(count($product->hasVariants) > 0)
-                                    @foreach($product->hasVariants as $index => $v)
-                                            <input type="hidden" name="variant_id[]" value="{{$v->id}}">
-                                            <tbody class="">
+                                    <tbody class="">
+                                        @foreach($product->hasVariants as $index => $v)
                                             <tr>
+                                                <input type="text" name="title[]" value="{{ $v->title }}">
                                                 <td class="variant_title">
                                                     @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
                                                 </td>
@@ -142,9 +142,8 @@
                                                 </td>
 
                                             </tr>
-                                            </tbody>
-
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 @endif
                             </table>
                             <div class="col-md-12">
