@@ -99,67 +99,6 @@
                 </div>
                 <div class="row mb2">
                     <div class="block-header">
-                        <h3 class="block-title"> Description</h3>
-                    </div>
-                    <div class="col-md-12">
-                        <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="request_type" value="description">
-                            <textarea class="js-summernote" name="description"
-                                      placeholder="Please Enter Description here !">{{$product->description}}</textarea>
-
-                        </form>
-                    </div>
-                </div>
-                <div class="row mb2">
-                    <div class="block-header">
-                        <h3 class="block-title"> Images</h3>
-                    </div>
-                    <div class="col-md-12">
-                        @if(count($product->has_images) >0)
-                            <div class="row editable ">
-
-                                @foreach($product->has_images()->orderBy('position')->get() as $image)
-                                    <div class="col-md-4 mb2 preview-image animated fadeIn" >
-                                        <div class="options-container fx-img-zoom-in fx-opt-slide-right">
-                                            @if($product->import_from_shopify == 1)
-                                                <img class="img-fluid options-item" src="{{$image->image}}" alt="">
-                                            @else
-                                                @if($image->isV == 0)
-                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                @else
-                                                    <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                @endif
-                                            @endif
-                                            <div class="options-overlay bg-black-75">
-                                                <div class="options-overlay-content">
-                                                    <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('store.import_list.product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                            <hr>
-                        @endif
-                        <div class="row">
-                            <form class="product-images-form" action="{{route('store.import_list.product.update',$product->id)}}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="request_type" value="existing-product-image-add">
-                                <div class="col-md-12" style="padding-bottom: 13px;width: 1046px">
-                                    <div class="dropzone dz-clickable">
-                                        <div class="dz-default dz-message"><span>Click here to upload images.</span></div>
-                                        <div class="row preview-drop"></div>
-                                    </div>
-                                    <input style="display: none" type="file"  name="images[]" accept="image/*" class="push-30-t push-30 dz-clickable images-upload" multiple >
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb2">
-                    <div class="block-header">
                         <h3 class="block-title"> Variants</h3>
                     </div>
                     <div class="col-md-12">
