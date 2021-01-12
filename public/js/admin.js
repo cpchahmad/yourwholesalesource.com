@@ -240,7 +240,7 @@ $(document).ready(function () {
             }
             storedFiles.push(f);
             console.log(storedFiles);
-            $('.preview-drop').empty();
+            //$('.preview-drop').empty();
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.preview-drop').append(' <div class="col-lg-4 preview-image animated fadeIn">\n' +
