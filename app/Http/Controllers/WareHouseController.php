@@ -53,7 +53,13 @@ class WareHouseController extends Controller
         $warehouse->country_id = $request->country_id;
         $warehouse->save();
 
-        return redirect()->back()->with('success', 'Warehouse Added Successfully!');
+        return redirect()->back()->with('success', 'Warehouse Updated Successfully!');
+    }
 
+    public function delete($id) {
+        $warehouse = WareHouse::find($id);
+        $warehouse->delete();
+
+        return redirect()->back()->with('success', 'Warehouse Deleted Successfully!');
     }
 }
