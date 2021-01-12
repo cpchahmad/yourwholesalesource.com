@@ -1311,6 +1311,7 @@ class ProductController extends Controller
                         $v->save();
                     }
 
+                    $this->notify->generate('Product','Product Variant Added','New Variants are added to '.$product->title,$product);
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Added');
                     return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
@@ -1410,15 +1411,15 @@ class ProductController extends Controller
                     $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'.json',$productdata);
                     $shopifyVariants = $resp->body->product->variants;
 
-                    foreach ($variants_array as $index => $v){
-                        $variant = ProductVariant::where('title', $v['title'])->first();
-                        $variant->shopify_id = $shopifyVariants[$index]->id;
-                        $variant->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                        $variant->save();
+                    $product = Product::find($id);
+                    foreach ($product->hasVariants as $index => $v){
+                        $v->shopify_id = $shopifyVariants[$index]->id;
+                        $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $v->save();
                     }
 
                     // Sending Notification To all Concerned Retailer Stores
-                    $this->notify->generate('Product','Product Variant Added','Variants of '.$product->title.' are updated',$product);
+                    $this->notify->generate('Product','Product Variant Added','New Variants are added to '.$product->title,$product);
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
                     return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
