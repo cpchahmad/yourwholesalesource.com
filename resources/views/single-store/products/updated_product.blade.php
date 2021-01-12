@@ -25,11 +25,6 @@
     </div>
 
     <div class="content">
-        <div class="row mb2">
-            <div class="col-md-12">
-                <button style="float: right;padding: 4px 40px;" class="btn btn-success btn_save_my_product"> Save </button>
-            </div>
-        </div>
         <div class="block">
             <div class="block-content my_product_form_div">
                 <div class="row mb2">
