@@ -59,6 +59,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
+                        <h5>{{ $product->title }}</h5>
                         <p class="lead">{!! $product->description  !!}</p>
                     </div>
                 </div>
@@ -67,109 +68,88 @@
                         <h3 class="block-title"> Variants</h3>
                     </div>
                     <div class="col-md-12">
-                        <table class="table table-vcenter table-hover table-striped table-borderless table-responsive">
-                            <thead>
-                            <tr>
-                                <th style="vertical-align: top">Title</th>
-                                <th style="vertical-align: top">Image</th>
-                                <th style="vertical-align: top">Price</th>
-                                <th style="vertical-align: top">Cost</th>
-                                <th style="vertical-align: top">Quantity</th>
-                                <th style="vertical-align: top">SKU</th>
-                                <th style="vertical-align: top">Barcode</th>
-                            </tr>
-                            </thead>
-                            @if(count($product->hasVariants) > 0)
-                                @foreach($product->hasVariants as $index => $v)
-                                    <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="request_type" value="single-variant-update">
-                                        <input type="hidden" name="variant_id" value="{{$v->id}}">
-                                        <tbody class="">
-                                        <tr>
-                                            <td class="variant_title">
-                                                @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-                                            </td>
-                                            <td class="text-center">
-                                                <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
-                                                     @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                     @else @if($v->has_image->isV == 0) src="{{asset('images')}}/{{$v->has_image->image}}" @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
-                                                <div class="modal fade" id="select_image_modal{{ $v->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-popout" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="block block-themed block-transparent mb-0">
-                                                                <div class="block-header bg-primary-dark">
-                                                                    <h3 class="block-title">Select Image For Variant</h3>
-                                                                    <div class="block-options">
-                                                                        <button type="button" class="btn-block-option">
-                                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                                        </button>
+                        <form action="{{route('store.product.variant.update',$product->id)}}" method="post">
+                            @csrf
+                            <table class="table table-vcenter table-hover table-striped table-borderless table-responsive">
+                                <thead>
+                                <tr>
+                                    <th style="vertical-align: top">Title</th>
+                                    <th style="vertical-align: top">Image</th>
+                                    <th style="vertical-align: top">Price</th>
+                                    <th style="vertical-align: top">Cost</th>
+                                    <th style="vertical-align: top">Quantity</th>
+                                    <th style="vertical-align: top">SKU</th>
+                                    <th style="vertical-align: top">Barcode</th>
+                                </tr>
+                                </thead>
+                                @if(count($product->hasVariants) > 0)
+                                    @foreach($product->hasVariants as $index => $v)
+                                            <input type="hidden" name="variant_id[]" value="{{$v->id}}">
+                                            <tbody class="">
+                                            <tr>
+                                                <td class="variant_title">
+                                                    @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
+                                                         @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                         @else @if($v->has_image->isV == 0) src="{{asset('images')}}/{{$v->has_image->image}}" @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
+                                                    <div class="modal fade" id="select_image_modal{{ $v->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-popout" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="block block-themed block-transparent mb-0">
+                                                                    <div class="block-header bg-primary-dark">
+                                                                        <h3 class="block-title">Select Image For Variant</h3>
+                                                                        <div class="block-options">
+                                                                            <button type="button" class="btn-block-option">
+                                                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                            </button>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="block-content font-size-sm">
-                                                                    <div class="row">
-                                                                        @foreach($product->has_images as $image)
-                                                                            <div class="col-md-4">
-                                                                                @if($image->isV == 0)
-                                                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                                                @else
-                                                                                    <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                                                @endif
-                                                                                <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="retailer" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
-                                                                            </div>
-                                                                        @endforeach
+                                                                    <div class="block-content font-size-sm">
+                                                                        <div class="row">
+                                                                            @foreach($product->has_images as $image)
+                                                                                <div class="col-md-4">
+                                                                                    @if($image->isV == 0)
+                                                                                        <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                                                    @else
+                                                                                        <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                                                    @endif
+                                                                                    <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="retailer" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <p class="text-center font-weight-bold">OR</p>
+                                                                        <hr>
+                                                                        <a class="img-avatar-variant btn btn-sm btn-primary text-white mb2" data-form="#varaint_image_form_{{$index}}">Upload New Picture</a>
+
                                                                     </div>
-                                                                    <p class="text-center font-weight-bold">OR</p>
-                                                                    <hr>
-                                                                    <a class="img-avatar-variant btn btn-sm btn-primary text-white mb2" data-form="#varaint_image_form_{{$index}}">Upload New Picture</a>
+
+
 
                                                                 </div>
-
-
-
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
-                                            </td>
-                                            <td><input type="text" class="form-control" readonly value="{{$v->cost}}" placeholder="$0.00"></td>
-                                            <td><input type="text" readonly class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
-                                            <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                            <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
-                                            </td>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="price[]" placeholder="$0.00" value="{{$v->price}}">
+                                                </td>
+                                                <td><input type="text" class="form-control" readonly value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                <td><input type="text" readonly class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
+                                                <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
+                                                <td><input type="text" class="form-control" name="barcode[]" value="{{$v->barcode}}" placeholder="">
+                                                </td>
 
-                                        </tr>
-                                        </tbody>
-                                    </form>
-                                @endforeach
-                            @else
-                                <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="request_type" value="default-variant-update">
-                                    <tbody class="">
-                                    <tr>
-                                        <td class="variant_title">
-                                            Default
-                                        </td>
-                                        <td class="text-center">
-                                            <img class="img-avatar " style="border: 1px solid whitesmoke" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
-                                        </td>
-                                        <td><input type="text" class="form-control" readonly value="{{$product->cost}}" placeholder="$0.00"></td>
-                                        <td><input type="text" readonly class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
-                                        <td><input type="text" readonly class="form-control" name="sku" value="{{$product->sku}}"></td>
-                                        <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder="">
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </form>
-                            @endif
-                        </table>
+                                            </tr>
+                                            </tbody>
+
+                                    @endforeach
+                            </table>
+                            <div class="col-md-12">
+                                <button style="float: right;padding: 4px 40px;" class="btn btn-success" type="submit"> Save </button>
+                            </div>
+                        </form>
                         <div class="form-image-src" style="display: none">
                             @if(count($product->hasVariants) > 0)
                                 @foreach($product->hasVariants as $index => $v)
@@ -182,11 +162,6 @@
                                 @endforeach
                             @endif
                         </div>
-                    </div>
-                </div>
-                <div class="row mb2">
-                    <div class="col-md-12">
-                        <button style="float: right;padding: 4px 40px;" class="btn btn-success btn_save_my_product"> Save </button>
                     </div>
                 </div>
             </div>

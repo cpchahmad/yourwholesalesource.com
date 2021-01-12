@@ -711,6 +711,56 @@ class RetailerProductController extends Controller
         }
     }
 
+    public function updateProductVariants(Request $request, $id)
+    {
+
+        dd($request->all());
+        $product = Product::find($id);
+        $shop = $this->helper->getShop();
+
+        if ($product) {
+            $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id);
+
+            if ($retailerProduct) {
+
+                $retailerProduct->variants = $product->variants;
+                $retailerProduct->save();
+
+                $variant = RetailerProductVariant::find($request->variant_id);
+                $variant->price = $request->input('price');
+                $variant->barcode = $request->input('barcode');
+                $variant->product_id = $id;
+                $variant->save();
+
+                if ($product->toShopify == 1) {
+                    $productdata = [
+                        "variant" => [
+                            'title' => $variant->title,
+                            'option1' => $variant->option1,
+                            'option2' => $variant->option2,
+                            'option3' => $variant->option3,
+                            'grams' => $product->weight * 1000,
+                            'weight' => $product->weight,
+                            'weight_unit' => 'kg',
+                            'barcode' => $variant->barcode,
+                            'price' => $variant->price,
+                            'cost' => $variant->cost,
+                        ]
+                    ];
+                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+
+                    $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '/variants/' . $variant->shopify_id . '.json', $productdata);
+                } else {
+                    return redirect()->back()->with('error', 'Retailer Product Do not exists');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Admin Product Do not exists');
+            }
+
+
+        }
+    }
+
     public function options_update_template_array($product){
         $options_array = [];
         if (count($product->option1($product)) > 0) {
