@@ -298,6 +298,7 @@ class AdminWebhookController extends Controller
                             "fulfillment" => [
                                 "tracking_number" => null,
                                 "tracking_url" => null,
+                                "notify_customer" => false
                             ]
                         ];
                         if (count($data->tracking_numbers) > 0) {

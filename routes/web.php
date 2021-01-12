@@ -170,6 +170,10 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/sync_manual/{id}', 'AdminOrderController@manualSyncfulfillment')->name('manually.sync.fulfillment');
     Route::get('/category/{title}/get/sub-categories', 'CategoryController@getSubCategories');
 
+    Route::get('warehouses', 'WareHouseController@index')->name('warehouse.index');
+    Route::post('warehouses/store', 'WareHouseController@store')->name('warehouse.store');
+    Route::get('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
+    Route::get('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
 });
 
