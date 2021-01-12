@@ -67,34 +67,11 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="request_type" value="basic-info">
                             <div class="form-group">
-                                <label>Title</label>
-                                <input type="text" class="form-control" name="title" value="{{$product->title}}">
-                            </div>
-                            <div class="form-group">
-                                <label>Tags</label>
-                                <input class="js-tags-input form-control" type="text"
-                                       value="{{$product->tags}}"   name="tags" >
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Type</label>
-                                        <input type="text" class="form-control" name="type" value="{{$product->type}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Vendor</label>
-                                        <input type="text" class="form-control" name="vendor" value="{{$product->vendor}}">
-                                    </div>
-                                </div>
+                                <label>Title : {{ $product->title }}</label>
+                                <p>{{ $product->description }}</p>
                             </div>
 
-                        </form>
                     </div>
                 </div>
                 <div class="row mb2">
