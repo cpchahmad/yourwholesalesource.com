@@ -715,7 +715,7 @@ class RetailerProductController extends Controller
     public function updateProductVariants(Request $request, $id)
     {
 
-        dd($request->all());
+        dump($request->all());
         $product = Product::find($id);
         $shop = $this->helper->getShop();
 
