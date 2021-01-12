@@ -98,7 +98,8 @@
                                                                         <label for="material-error">Country*</label>
                                                                         <select name="country_id" id="" class="form-control">
                                                                            @foreach($countries as $country)
-                                                                                <option value="{{ $country->id  }}">{{ $country->name }}</option>
+                                                                                <option value="{{ $country->id  }}"
+                                                                                @if($country->id == $warehouse->country_id) selected @endif>{{ $country->name }}</option>
                                                                            @endforeach
                                                                         </select>
                                                                         @error('title')
