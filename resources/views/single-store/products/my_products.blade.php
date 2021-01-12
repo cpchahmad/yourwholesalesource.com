@@ -109,7 +109,7 @@
                                                     <button type="button"  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.my_product.wefulfill.show',$product->id)}}'" title="View Product"><i class="fa fa-eye"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.my_product.edit',$product->id)}}'" title="Edit Product"><i class="fa fa-pencil-alt"></i></button>
                                                     <button  class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
-{{--                                                    <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.sync',$product->id)}}'"  title="Sync"><i class="fa fa-sync"></i></button>--}}
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='{{route('store.product.sync',$product->id)}}'"  title="Sync"><i class="fa fa-sync"></i></button>
 
                                                 </div>
                                             </div>

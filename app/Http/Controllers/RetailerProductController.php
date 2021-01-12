@@ -635,8 +635,8 @@ class RetailerProductController extends Controller
     public function syncWithAdminProduct($id) {
         $retailerProduct = RetailerProduct::find($id);
         $product = $retailerProduct->linked_product;
+        $shop = $this->helper->getShop();
 
-        $shop= $this->helper->getLocalShop();
 
         if($retailerProduct && $product) {
             if(count($product->hasVariants) > 0){
@@ -669,12 +669,74 @@ class RetailerProductController extends Controller
                             }
 
                             $retailerProductVariant->save();
+
+                            $variants_array =  $this->variants_template_array($retailerProduct);
+
+                            dump($variants_array);
+
+                            $productdata = [
+                                "product" => [
+                                    "options" => $this->options_update_template_array($retailerProduct),
+                                    "variants" => $variants_array,
+                                ]
+                            ];
+
+                            dump($productdata);
+
+                            $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailerProduct->shopify_id.'.json',$productdata);
+                            dump($resp);
+                            $shopifyVariants = $resp->body->product->variants;
+                            foreach ($retailerProduct->hasVariants as $index => $v){
+                                $v->shopify_id = $shopifyVariants[$index]->id;
+                                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                                $v->save();
+                            }
+
                         }
                     }
                 }
             }
 
+            dd('done');
             return redirect()->back()->with('success', 'Varaints Update Successfully!');
         }
+    }
+
+    public function options_update_template_array($product){
+        $options_array = [];
+        if (count($product->option1($product)) > 0) {
+            $temp = [];
+            foreach ($product->option1($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option1',
+                'position' => '1',
+                'values' => $temp,
+            ]);
+        }
+        if (count($product->option2($product)) > 0) {
+            $temp = [];
+            foreach ($product->option2($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option2',
+                'position' => '2',
+                'values' => $temp,
+            ]);
+        }
+        if (count($product->option3($product)) > 0) {
+            $temp = [];
+            foreach ($product->option3($product) as $a) {
+                array_push($temp, $a);
+            }
+            array_push($options_array, [
+                'name' => 'Option3',
+                'position' => '3',
+                'values' => $temp,
+            ]);
+        }
+        return $options_array;
     }
 }
