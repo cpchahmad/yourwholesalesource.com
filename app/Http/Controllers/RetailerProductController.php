@@ -142,6 +142,15 @@ class RetailerProductController extends Controller
         }
     }
 
+    public function show_updated_product($id) {
+        $product = Product::find($id);
+        $shop= $this->helper->getLocalShop();
+        return view('single-store.products.updated_product')->with([
+            'product' => $product,
+            'shop' => $shop
+        ]);
+    }
+
     public function update(Request $request, $id)
     {
         $product = RetailerProduct::find($id);
