@@ -100,6 +100,7 @@
                                             <label class="custom-control-label" for="check-all"></label>
                                         </div>
                                     </th>
+                                    <th>WFnumber</th>
                                     <th>Name</th>
                                     <th>Wnumber</th>
                                     <th>Shop / User</th>
@@ -122,6 +123,7 @@
                                                 <label class="custom-control-label" for="row_{{$index}}"></label>
                                             </div>
                                         </td>
+                                        <td>{{ $order->id }}</td>
                                         <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td class="font-w600"><a href="https://wefullfill.myshopify.com/admin/orders/{{ $order->admin_shopify_id }}" target="_blank">{{ $order->admin_shopify_name }}</a></td>
                                         <td>
