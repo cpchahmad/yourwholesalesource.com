@@ -210,6 +210,9 @@
                             @else
                                 <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
                             @endif
+                            @if($product->variants_updation_check)
+                                <button disabled class="btn btn-danger btn-block mb2"><i class="fa fa-check-circle-o"></i>View New Variants</button>
+                            @endif
                             <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
                         </div>
                     </div>

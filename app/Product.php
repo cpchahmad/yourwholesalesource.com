@@ -45,5 +45,10 @@ class Product extends Model
     public function has_tiered_prices(){
         return $this->hasMany(TieredPrice::class);
     }
+    public function getVariantsUpdationCheckAttribute() {
+       if(Notification::where('type_id', $this->id)->where('type', 'Product')->where('sub_type', 'Product Variant Added')->exists())
+           return true;
+       return false;
+    }
 
 }

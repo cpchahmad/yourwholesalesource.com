@@ -1418,7 +1418,7 @@ class ProductController extends Controller
                     }
 
                     // Sending Notification To all Concerned Retailer Stores
-                    $this->notify->generate('Product','Product Update','Variants of '.$product->title.' are updated',$product);
+                    $this->notify->generate('Product','Product Variant Added','Variants of '.$product->title.' are updated',$product);
 
                     $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
                     return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
