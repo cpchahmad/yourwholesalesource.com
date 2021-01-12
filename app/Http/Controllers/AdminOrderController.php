@@ -1271,7 +1271,7 @@ class AdminOrderController extends Controller
         $item_list = $request->itemList;
 
 
-        $order = RetailerOrder::where('shopify_order_id', $order_id)->first();
+        $order = RetailerOrder::find('id', $order_id);
         if($order_id !== null && $order) {
             // Save fulfillment
             $fulfillment = new ERPOrderFulfillment();

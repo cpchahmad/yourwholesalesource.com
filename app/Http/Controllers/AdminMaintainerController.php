@@ -506,7 +506,7 @@ class AdminMaintainerController extends Controller
             "developerId"=>100375,
             "timestamp"=>$timestamp,
             "action"=>"do-create-order",
-            "platformOrderId"=>$order->shopify_order_id,
+            "platformOrderId"=>$order->id,
             "shopName"=>"WEFULLFILL OFFICIAL",
             "currencyId"=>"USD",
             "paidTime"=> $order->shopify_created_at,
