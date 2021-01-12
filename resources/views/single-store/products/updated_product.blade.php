@@ -86,7 +86,7 @@
                                     <tbody class="">
                                         @foreach($product->hasVariants as $index => $v)
                                             <tr>
-                                                <input type="text" name="title[]" value="{{ $v->title }}">
+                                                <input type="hidden" name="title[]" value="{{ $v->title }}">
                                                 <td class="variant_title">
                                                     @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
                                                 </td>
