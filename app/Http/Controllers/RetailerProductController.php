@@ -766,9 +766,9 @@ class RetailerProductController extends Controller
                         $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailerProduct->shopify_id.'.json',$productdata);
                         dump($resp);
                         $shopifyVariants = $resp->body->product->variants;
-                        foreach ($retailerProduct->hasVariants as $index => $v){
-                            $v->shopify_id = $shopifyVariants[$index]->id;
-                            $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        foreach ($retailerProduct->hasVariants as $i => $v){
+                            $v->shopify_id = $shopifyVariants[$i]->id;
+                            $v->inventory_item_id = $shopifyVariants[$i]->inventory_item_id;
                             $v->save();
                         }
                     }
