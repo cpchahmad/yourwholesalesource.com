@@ -80,21 +80,21 @@
                                                         <div class="block-content font-size-sm">
                                                             <div class="form-group">
                                                                 <div class="col-sm-12">
-                                                                    <div class="form-material">
+                                                                    <div class="form-group">
                                                                         <label for="material-error">Title*</label>
                                                                         <input required class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title" value="{{$warehouse->title}}" name="title" placeholder="Enter Warehouse title..">
                                                                         @error('title')
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
-                                                                    <div class="form-material">
+                                                                    <div class="form-group">
                                                                         <label for="material-error">Address*</label>
                                                                         <input required class="form-control  @error('address') is-invalid @enderror" type="text" id="zone_title" value="{{$warehouse->address}}"  name="address" placeholder="Enter Warehouse address..">
                                                                         @error('address')
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
-                                                                    <div class="form-material">
+                                                                    <div class="form-group">
                                                                         <label for="material-error">Country*</label>
                                                                         <select name="country_id" id="" class="form-control">
                                                                            @foreach($countries as $country)
@@ -105,14 +105,14 @@
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
-                                                                    <div class="form-material">
+                                                                    <div class="form-group">
                                                                         <label for="material-error">State</label>
                                                                         <input required class="form-control  @error('state') is-invalid @enderror" type="text" id="zone_title" value="{{$warehouse->state}}"   name="state" placeholder="Enter Warehouse State..">
                                                                         @error('state')
                                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                                         @enderror
                                                                     </div>
-                                                                    <div class="form-material">
+                                                                    <div class="form-group">
                                                                         <label for="material-error">Zip*</label>
                                                                         <input required class="form-control  @error('zip') is-invalid @enderror" type="text" id="zone_title" value="{{$warehouse->zip}}"   name="zip" placeholder="Enter courier service provider title..">
                                                                         @error('zip')
@@ -159,21 +159,21 @@
                         <div class="block-content font-size-sm">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <div class="form-material">
+                                    <div class="form-group">
                                         <label for="material-error">Title*</label>
                                         <input required class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title"  name="title" placeholder="Enter Warehouse title..">
                                         @error('title')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="form-material">
+                                    <div class="form-group">
                                         <label for="material-error">Address*</label>
                                         <input required class="form-control  @error('address') is-invalid @enderror" type="text" id="zone_title"   name="address" placeholder="Enter Warehouse address..">
                                         @error('address')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="form-material">
+                                    <div class="form-group">
                                         <label for="material-error">Country*</label>
                                         <select name="country_id" id="" class="form-control">
                                             @foreach($countries as $country)
@@ -184,14 +184,14 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="form-material">
+                                    <div class="form-group">
                                         <label for="material-error">State</label>
                                         <input required class="form-control  @error('state') is-invalid @enderror" type="text" id="zone_title"   name="state" placeholder="Enter Warehouse State..">
                                         @error('state')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="form-material">
+                                    <div class="form-group">
                                         <label for="material-error">Zip*</label>
                                         <input required class="form-control  @error('zip') is-invalid @enderror" type="text" id="zone_title"    name="zip" placeholder="Enter courier service provider title..">
                                         @error('zip')
