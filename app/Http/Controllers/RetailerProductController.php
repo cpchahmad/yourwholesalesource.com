@@ -722,6 +722,8 @@ class RetailerProductController extends Controller
         if ($product) {
             $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id);
 
+            dd($retailerProduct);
+
             if ($retailerProduct) {
                 $retailerProduct->variants = $product->variants;
                 $retailerProduct->save();
