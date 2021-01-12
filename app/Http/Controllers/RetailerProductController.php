@@ -753,7 +753,6 @@ class RetailerProductController extends Controller
                         $retailerProductVariant->save();
 
                         $variants_array =  $this->variants_template_array($retailerProduct);
-                        dump($variants_array);
 
                         $productdata = [
                             "product" => [
@@ -762,9 +761,7 @@ class RetailerProductController extends Controller
                             ]
                         ];
 
-                        dump($productdata);
                         $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailerProduct->shopify_id.'.json',$productdata);
-                        dump($resp);
                         $shopifyVariants = $resp->body->product->variants;
                         foreach ($retailerProduct->hasVariants as $i => $var){
                             $var->shopify_id = $shopifyVariants[$i]->id;
@@ -773,8 +770,6 @@ class RetailerProductController extends Controller
                         }
                     }
                 }
-
-                dd('done');
 
                 return redirect()->back()->with('success', 'Varaints Updated Successfully!');
             }
