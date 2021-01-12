@@ -727,10 +727,12 @@ class RetailerProductController extends Controller
                 $retailerProduct->variants = $product->variants;
                 $retailerProduct->save();
 
-                foreach ($request->title as $index => $title) {
-                    if(!RetailerProductVariant::where('product_id', $retailerProduct->id)->where('sku', $request->sku[$index])->exists()) {
+                foreach ($request->variant_id as $index => $v) {
+                    $real_variant = ProductVariant::find($v);
 
-                        dump($request->price[$index],$request->barcode[$index], $request->variant_id[$index] );
+                    if(!RetailerProductVariant::where('product_id', $retailerProduct->id)->where('option1', $real_variant->option1)->where('option2', $real_variant->option2)->where('option3', $real_variant->option3)->exists()) {
+
+                        dump($request->price[$index],$request->barcode[$index], $request->variant_id[$index], $request->title[$index] );
 
 //                        $retailerProductVariant = new RetailerProductVariant();
 //                        $retailerProductVariant->title = $title;
