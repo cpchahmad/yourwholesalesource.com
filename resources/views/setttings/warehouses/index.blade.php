@@ -97,7 +97,7 @@
                                                                     <div class="form-material">
                                                                         <label for="material-error">Country*</label>
                                                                         <select name="country_id" id="" class="form-control">
-                                                                           @foreach($coutries as $country)
+                                                                           @foreach($countries as $country)
                                                                                 <option value="{{ $country->id  }}">{{ $country->name }}</option>
                                                                            @endforeach
                                                                         </select>
@@ -176,7 +176,7 @@
                                     <div class="form-material">
                                         <label for="material-error">Country*</label>
                                         <select name="country_id" id="" class="form-control">
-                                            @foreach($coutries as $country)
+                                            @foreach($countries as $country)
                                                 <option value="{{ $country->id  }}">{{ $country->name }}</option>
                                             @endforeach
                                         </select>
