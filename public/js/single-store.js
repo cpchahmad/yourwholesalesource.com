@@ -237,7 +237,7 @@ $(document).ready(function () {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
         filesArr.forEach(function (f) {
-            $this.parent().find('.preview-drop').empty();
+            //$this.parent().find('.preview-drop').empty();
             var reader = new FileReader();
             reader.onload = function (e) {
                 $this.parent().find('.preview-drop').append(' <div class="col-lg-4 preview-image animated fadeIn">\n' +
