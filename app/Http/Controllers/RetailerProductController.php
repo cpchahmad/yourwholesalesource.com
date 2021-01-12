@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductVariant;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
@@ -714,7 +715,7 @@ class RetailerProductController extends Controller
     public function updateProductVariants(Request $request, $id)
     {
 
-        dd($request->all());
+        dump($request->all());
         $product = Product::find($id);
         $shop = $this->helper->getShop();
 
@@ -722,42 +723,56 @@ class RetailerProductController extends Controller
             $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id);
 
             if ($retailerProduct) {
-
                 $retailerProduct->variants = $product->variants;
                 $retailerProduct->save();
 
-                $variant = RetailerProductVariant::find($request->variant_id);
-                $variant->price = $request->input('price');
-                $variant->barcode = $request->input('barcode');
-                $variant->product_id = $id;
-                $variant->save();
+                foreach ($request->title as $index => $title) {
+                    if(!RetailerProductVariant::where('product_id', $retailerProduct->id)->where('title', $title)->exists()) {
 
-                if ($product->toShopify == 1) {
-                    $productdata = [
-                        "variant" => [
-                            'title' => $variant->title,
-                            'option1' => $variant->option1,
-                            'option2' => $variant->option2,
-                            'option3' => $variant->option3,
-                            'grams' => $product->weight * 1000,
-                            'weight' => $product->weight,
-                            'weight_unit' => 'kg',
-                            'barcode' => $variant->barcode,
-                            'price' => $variant->price,
-                            'cost' => $variant->cost,
-                        ]
-                    ];
-                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+                        dd($request->price[$index],$request->barcode[$index], $request->variant_id[$index] );
 
-                    $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '/variants/' . $variant->shopify_id . '.json', $productdata);
-                } else {
-                    return redirect()->back()->with('error', 'Retailer Product Do not exists');
+                        $retailerProductVariant = new RetailerProductVariant();
+                        $retailerProductVariant->title = $title;
+
+                        $options = explode('/', $title);
+
+                        if (!empty($options[0])) {
+                            $retailerProductVariant->option1 = $options[0];
+                        }
+                        if (!empty($options[1])) {
+                            $retailerProductVariant->option2 = $options[1];
+                        }
+                        if (!empty($options[2])) {
+                            $retailerProductVariant->option3 = $options[2];
+                        }
+
+                        $retailerProductVariant->price = $request->price[$index];
+                        $retailerProductVariant->cost = $request->price[$index];
+                        $retailerProductVariant->quantity = $request->quantity[$index];
+                        $retailerProductVariant->sku = $request->sku[$index];
+                        $retailerProductVariant->barcode = $request->barcode[$index];
+
+                        $retailerProductVariant->product_id = $retailerProduct->id;
+                        $retailerProductVariant->shop_id =  $retailerProduct->shop_id;
+                        $retailerProductVariant->user_id =  $retailerProduct->user_id;
+
+                        $real_variant = ProductVariant::find($request->variant_id[$index]);
+                        if($real_variant->has_image != null){
+                            $image_linked = $retailerProduct->has_images()->where('image',$real_variant->has_image->image)->first();
+                            $retailerProductVariant->image =$image_linked->id;
+                        }
+
+                        $retailerProductVariant->save();
+                    }
                 }
-            } else {
-                return redirect()->back()->with('error', 'Admin Product Do not exists');
+
             }
-
-
+            else {
+                return redirect()->back()->with('error', 'Retailer Product Do not exists');
+            }
+        }
+        else {
+            return redirect()->back()->with('error', 'Admin Product Do not exists');
         }
     }
 
