@@ -751,8 +751,30 @@ class RetailerProductController extends Controller
                         }
 
                         $retailerProductVariant->save();
+
+                        $variants_array =  $this->variants_template_array($retailerProduct);
+                        dump($variants_array);
+
+                        $productdata = [
+                            "product" => [
+                                "options" => $this->options_update_template_array($retailerProduct),
+                                "variants" => $variants_array,
+                            ]
+                        ];
+
+                        dump($productdata);
+                        $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailerProduct->shopify_id.'.json',$productdata);
+                        dump($resp);
+                        $shopifyVariants = $resp->body->product->variants;
+                        foreach ($retailerProduct->hasVariants as $index => $v){
+                            $v->shopify_id = $shopifyVariants[$index]->id;
+                            $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                            $v->save();
+                        }
                     }
                 }
+
+                dd('done');
 
                 return redirect()->back()->with('success', 'Varaints Updated Successfully!');
             }
