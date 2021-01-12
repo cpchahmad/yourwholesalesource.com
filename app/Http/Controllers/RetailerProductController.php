@@ -728,8 +728,7 @@ class RetailerProductController extends Controller
                 $retailerProduct->save();
 
                 foreach ($request->title as $index => $title) {
-                    dd(explode('/', $title)[0]);
-                    if(!RetailerProductVariant::where('product_id', $retailerProduct->id)->where('title', explode('/', $title)[0])->exists()) {
+                    if(!RetailerProductVariant::where('product_id', $retailerProduct->id)->where('sku', $request->sku[$index])->exists()) {
 
                         dump($request->price[$index],$request->barcode[$index], $request->variant_id[$index] );
 
@@ -767,6 +766,8 @@ class RetailerProductController extends Controller
 //                        $retailerProductVariant->save();
                     }
                 }
+
+                dd('done');
 
             }
             else {
