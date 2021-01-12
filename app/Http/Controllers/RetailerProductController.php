@@ -715,13 +715,11 @@ class RetailerProductController extends Controller
     public function updateProductVariants(Request $request, $id)
     {
 
-        dump($request->all());
         $product = Product::find($id);
         $shop = $this->helper->getShop();
 
         if ($product) {
             $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id)->first();
-            dump($retailerProduct);
 
             if ($retailerProduct) {
                 $retailerProduct->variants = $product->variants;
@@ -732,45 +730,31 @@ class RetailerProductController extends Controller
 
                     if(!RetailerProductVariant::where('product_id', $retailerProduct->id)->where('option1', $real_variant->option1)->where('option2', $real_variant->option2)->where('option3', $real_variant->option3)->exists()) {
 
-                        dump($request->price[$index],$request->barcode[$index], $request->variant_id[$index], $request->title[$index] );
+                        $retailerProductVariant = new RetailerProductVariant();
+                        $retailerProductVariant->title = $real_variant->title;
+                        $retailerProductVariant->option1 = $real_variant->option1;
+                        $retailerProductVariant->option2 = $real_variant->option2;
+                        $retailerProductVariant->option3 = $real_variant->option3;
+                        $retailerProductVariant->price = $request->price[$index];
+                        $retailerProductVariant->cost =  $real_variant->price;
+                        $retailerProductVariant->quantity = $real_variant->quantity;
+                        $retailerProductVariant->sku = $real_variant->sku;
+                        $retailerProductVariant->barcode = $request->barcode[$index];
 
-//                        $retailerProductVariant = new RetailerProductVariant();
-//                        $retailerProductVariant->title = $title;
-//
-//                        $options = explode('/', $title);
-//
-//                        if (!empty($options[0])) {
-//                            $retailerProductVariant->option1 = $options[0];
-//                        }
-//                        if (!empty($options[1])) {
-//                            $retailerProductVariant->option2 = $options[1];
-//                        }
-//                        if (!empty($options[2])) {
-//                            $retailerProductVariant->option3 = $options[2];
-//                        }
-//
-//                        $retailerProductVariant->price = $request->price[$index];
-//                        $retailerProductVariant->cost = $request->price[$index];
-//                        $retailerProductVariant->quantity = $request->quantity[$index];
-//                        $retailerProductVariant->sku = $request->sku[$index];
-//                        $retailerProductVariant->barcode = $request->barcode[$index];
-//
-//                        $retailerProductVariant->product_id = $retailerProduct->id;
-//                        $retailerProductVariant->shop_id =  $retailerProduct->shop_id;
-//                        $retailerProductVariant->user_id =  $retailerProduct->user_id;
-//
-//                        $real_variant = ProductVariant::find($request->variant_id[$index]);
-//                        if($real_variant->has_image != null){
-//                            $image_linked = $retailerProduct->has_images()->where('image',$real_variant->has_image->image)->first();
-//                            $retailerProductVariant->image =$image_linked->id;
-//                        }
-//
-//                        $retailerProductVariant->save();
+                        $retailerProductVariant->product_id = $retailerProduct->id;
+                        $retailerProductVariant->shop_id =  $retailerProduct->shop_id;
+                        $retailerProductVariant->user_id =  $retailerProduct->user_id;
+
+                        if($real_variant->has_image != null){
+                            $image_linked = $retailerProduct->has_images()->where('image',$real_variant->has_image->image)->first();
+                            $retailerProductVariant->image =$image_linked->id;
+                        }
+
+                        $retailerProductVariant->save();
                     }
                 }
 
-                dd('done');
-
+                return redirect()->back()->with('success', 'Varaints Updated Successfully!');
             }
             else {
                 return redirect()->back()->with('error', 'Retailer Product Do not exists');
