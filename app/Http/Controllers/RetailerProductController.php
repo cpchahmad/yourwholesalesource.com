@@ -720,8 +720,8 @@ class RetailerProductController extends Controller
         $shop = $this->helper->getShop();
 
         if ($product) {
-            $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id);
-
+            $retailerProduct = RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $product->id)->frist();
+            dump($retailerProduct);
 
             if ($retailerProduct) {
                 $retailerProduct->variants = $product->variants;
