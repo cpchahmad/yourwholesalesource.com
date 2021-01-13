@@ -2376,9 +2376,9 @@ class ProductController extends Controller
 
     }
 
-    public function import_to_woocommerce(Request $request)
+    public function import_to_woocommerce($id)
     {
-        $product = Product::find($request->id);
+        $product = Product::find($id);
         $woocommerce = $this->helper->getAdminShop();
 
         if ($product != null ) {
