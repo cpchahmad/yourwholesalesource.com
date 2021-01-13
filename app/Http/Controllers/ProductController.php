@@ -146,6 +146,8 @@ class ProductController extends Controller
         $product = Product::with(['has_images', 'hasVariants','has_platforms','has_categories','has_subcategories'])->find($id);
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
+        $tags = Tag::all();
+
 
         $users = User::role('non-shopify-users')
                 ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
@@ -159,6 +161,7 @@ class ProductController extends Controller
             'product' => $product,
             'shops' => $shops,
             'non_shopify_users' => $users,
+            'tags' => $tags
         ]);
     }
 
