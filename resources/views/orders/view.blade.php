@@ -717,7 +717,6 @@
                                                             <tr>
                                                                 <td>Courier Service Provider</td>
                                                                 <td>
-                                                                    {{ $order->courier_name }}
                                                                     <select name="courier_id" class="form-control" id="">
                                                                         <option selected value="{{ $order->courier_id }}"> {{ $order->courier_name }}</option>
                                                                     </select>
