@@ -43,12 +43,23 @@
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
                                         <div class="form-material form-material-primary">
-                                            <label>Description</label>
+                                            <label>Long Description</label>
                                         </div>
                                     </div>
                                     <div class="col-xs-12">
                                     <textarea class="js-summernote" name="description"
                                               placeholder="Please Enter Description here !">{{$product->description}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 push-10">
+                                        <div class="form-material form-material-primary">
+                                            <label>Short Description</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                    <textarea class="js-summernote" name="short_description"
+                                              placeholder="Please Enter Description here !">{{$product->short_description}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -150,9 +161,29 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Length(cm)</label>
+                                                <input type="text" class="form-control" name="length" value="{{$product->length}}" placeholder="0" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Width(cm)</label>
+                                                <input type="text" class="form-control" name="width" value="{{$product->width}}" placeholder="0" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Height(cm)</label>
+                                                <input type="text" class="form-control" name="height" value="{{$product->height}}" placeholder="0" >
+                                            </div>
+                                        </div>
+
+
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -181,6 +212,20 @@
                                                     <label>Quantity</label>
                                                     <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
                                                 </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-md-4">
+                                                        <label>Length(cm)</label>
+                                                        <input type="text" class="form-control" name="length" value="{{$product->length}}" placeholder="0" >
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Width(cm)</label>
+                                                        <input type="text" class="form-control" name="width" value="{{$product->width}}" placeholder="0" >
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Height(cm)</label>
+                                                        <input type="text" class="form-control" name="height" value="{{$product->height}}" placeholder="0" >
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +248,7 @@
 
 
                                 <div class="text-right d-inline-block">
-{{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
+                                    {{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
                                     <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Variants</a>
                                     <a href="{{route('product.download.sku.csv',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-danger">Download SKU List</a>
                                 </div>
@@ -327,194 +372,194 @@
                                     @endif
                                 </table>
                             </div>
-{{--                            <div class="form-image-src" style="display: none">--}}
-{{--                                @if(count($product->hasVariants) > 0)--}}
-{{--                                    @foreach($product->hasVariants as $index => $v)--}}
-{{--                                        <div id="varaint_image_form_{{$index}}" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">--}}
-{{--                                            @csrf--}}
-{{--                                            <input type="hidden" name="type[]" value="variant-image-update">--}}
-{{--                                            <input type="hidden" name="var_id" value="{{$v->id}}">--}}
-{{--                                            <input type="file" name="varaint_src" class="varaint_file_input" accept="image/*">--}}
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
+                            {{--                            <div class="form-image-src" style="display: none">--}}
+                            {{--                                @if(count($product->hasVariants) > 0)--}}
+                            {{--                                    @foreach($product->hasVariants as $index => $v)--}}
+                            {{--                                        <div id="varaint_image_form_{{$index}}" action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">--}}
+                            {{--                                            @csrf--}}
+                            {{--                                            <input type="hidden" name="type[]" value="variant-image-update">--}}
+                            {{--                                            <input type="hidden" name="var_id" value="{{$v->id}}">--}}
+                            {{--                                            <input type="file" name="varaint_src" class="varaint_file_input" accept="image/*">--}}
+                            {{--                                        </div>--}}
+                            {{--                                    @endforeach--}}
+                            {{--                                @endif--}}
+                            {{--                            </div>--}}
                         </div>
-{{--                        <div class="modal fade" id="edit_options" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">--}}
-{{--                            <div class="modal-dialog modal-dialog-popout modal-xl" role="document">--}}
-{{--                                <div class="modal-content">--}}
-{{--                                    <div class="block block-themed block-transparent mb-0">--}}
-{{--                                        <div class="block-header bg-primary-dark">--}}
-{{--                                            <h3 class="block-title">Edit Options</h3>--}}
-{{--                                            <div class="block-options">--}}
-{{--                                                <button type="button" class="btn-block-option">--}}
-{{--                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>--}}
-{{--                                                </button>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="block-content" style="padding: 20px !important;">--}}
-{{--                                            <div class="row">--}}
-{{--                                                @if(count($product->option1($product))>0)--}}
-{{--                                                    <div class="col-md-12" style="margin-bottom: 10px">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="col-md-3">--}}
-{{--                                                                <input type="text" class="form-control" value="Option1">--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="col-md-9">--}}
-{{--                                                                @foreach($product->option1($product) as $a)--}}
-{{--                                                                    <span class="badge badge-info">--}}
-{{--                                                                        <span >{{$a}}</span>--}}
-{{--                                                                        <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>--}}
-{{--                                                                    </span>--}}
-{{--                                                                @endforeach--}}
-{{--                                                                    <hr>--}}
+                        {{--                        <div class="modal fade" id="edit_options" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">--}}
+                        {{--                            <div class="modal-dialog modal-dialog-popout modal-xl" role="document">--}}
+                        {{--                                <div class="modal-content">--}}
+                        {{--                                    <div class="block block-themed block-transparent mb-0">--}}
+                        {{--                                        <div class="block-header bg-primary-dark">--}}
+                        {{--                                            <h3 class="block-title">Edit Options</h3>--}}
+                        {{--                                            <div class="block-options">--}}
+                        {{--                                                <button type="button" class="btn-block-option">--}}
+                        {{--                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>--}}
+                        {{--                                                </button>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                        <div class="block-content" style="padding: 20px !important;">--}}
+                        {{--                                            <div class="row">--}}
+                        {{--                                                @if(count($product->option1($product))>0)--}}
+                        {{--                                                    <div class="col-md-12" style="margin-bottom: 10px">--}}
+                        {{--                                                        <div class="row">--}}
+                        {{--                                                            <div class="col-md-3">--}}
+                        {{--                                                                <input type="text" class="form-control" value="Option1">--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="col-md-9">--}}
+                        {{--                                                                @foreach($product->option1($product) as $a)--}}
+                        {{--                                                                    <span class="badge badge-info">--}}
+                        {{--                                                                        <span >{{$a}}</span>--}}
+                        {{--                                                                        <a><i data-option="option1" class="remove-option fa fa-times" style="color: white"></i></a>--}}
+                        {{--                                                                    </span>--}}
+                        {{--                                                                @endforeach--}}
+                        {{--                                                                    <hr>--}}
 
-{{--                                                                    <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">--}}
-{{--                                                                    <input type="text" name="prod-price" value="{{$product->price}}" style="display: none">--}}
-{{--                                                                    <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">--}}
-{{--                                                                    <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">--}}
+                        {{--                                                                    <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">--}}
+                        {{--                                                                    <input type="text" name="prod-price" value="{{$product->price}}" style="display: none">--}}
+                        {{--                                                                    <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">--}}
+                        {{--                                                                    <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">--}}
 
 
-{{--                                                                    <input class="js-tags-options1-update form-control mt-3" type="text"--}}
-{{--                                                                    id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">--}}
+                        {{--                                                                    <input class="js-tags-options1-update form-control mt-3" type="text"--}}
+                        {{--                                                                    id="product-meta-keywords" name="option1-update" value="" data-role="tagsinput">--}}
 
-{{--                                                                    <div class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">--}}
-{{--                                                                        @csrf--}}
-{{--                                                                        <input type="hidden" name="type[]" value="old-option-update">--}}
-{{--                                                                        <div class="variants_table" style="display: none;">--}}
-{{--                                                                        <hr>--}}
-{{--                                                                        <h3 class="block-title">--}}
-{{--                                                                            Preview--}}
-{{--                                                                                <button type="button" class="update-option-1-btn btn btn-primary float-right">Update this option</button>--}}
-{{--                                                                        </h3>--}}
-{{--                                                                        <br>--}}
-{{--                                                                        <div class="form-group">--}}
-{{--                                                                            <div class="col-xs-12 push-10">--}}
-{{--                                                                                <table class="table table-hover">--}}
-{{--                                                                                    <thead>--}}
-{{--                                                                                    <tr>--}}
-{{--                                                                                        <th style="width: 20%;">Title</th>--}}
-{{--                                                                                        <th style="width: 15%;">Price</th>--}}
-{{--                                                                                        <th style="width: 17%;">Cost</th>--}}
-{{--                                                                                        <th style="width: 10%;">Quantity</th>--}}
-{{--                                                                                        <th style="width: 20%;">SKU</th>--}}
-{{--                                                                                        <th style="width: 20%;">Barcode</th>--}}
-{{--                                                                                    </tr>--}}
-{{--                                                                                    </thead>--}}
-{{--                                                                                    <tbody class="option-1-table-body">--}}
+                        {{--                                                                    <div class="old-option1-update-form" action="{{route('product.update',$product->id)}}" method="post">--}}
+                        {{--                                                                        @csrf--}}
+                        {{--                                                                        <input type="hidden" name="type[]" value="old-option-update">--}}
+                        {{--                                                                        <div class="variants_table" style="display: none;">--}}
+                        {{--                                                                        <hr>--}}
+                        {{--                                                                        <h3 class="block-title">--}}
+                        {{--                                                                            Preview--}}
+                        {{--                                                                                <button type="button" class="update-option-1-btn btn btn-primary float-right">Update this option</button>--}}
+                        {{--                                                                        </h3>--}}
+                        {{--                                                                        <br>--}}
+                        {{--                                                                        <div class="form-group">--}}
+                        {{--                                                                            <div class="col-xs-12 push-10">--}}
+                        {{--                                                                                <table class="table table-hover">--}}
+                        {{--                                                                                    <thead>--}}
+                        {{--                                                                                    <tr>--}}
+                        {{--                                                                                        <th style="width: 20%;">Title</th>--}}
+                        {{--                                                                                        <th style="width: 15%;">Price</th>--}}
+                        {{--                                                                                        <th style="width: 17%;">Cost</th>--}}
+                        {{--                                                                                        <th style="width: 10%;">Quantity</th>--}}
+                        {{--                                                                                        <th style="width: 20%;">SKU</th>--}}
+                        {{--                                                                                        <th style="width: 20%;">Barcode</th>--}}
+                        {{--                                                                                    </tr>--}}
+                        {{--                                                                                    </thead>--}}
+                        {{--                                                                                    <tbody class="option-1-table-body">--}}
 
-{{--                                                                                    </tbody>--}}
-{{--                                                                                </table>--}}
-{{--                                                                            </div>--}}
-{{--                                                                        </div>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="row" style="margin-top:10px ">--}}
-{{--                                                            @if(count($product->option2($product)) == 0)--}}
-{{--                                                                <div class="col-md-12 add-option-button">--}}
-{{--                                                                    <a class="btn btn-light add-option-div">Add Other Option</a>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="div2 row col-md-12" style="display: none">--}}
-{{--                                                                    <div class="col-md-3">--}}
-{{--                                                                        <input type="text" class="form-control" readonly value="Option2">--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="new-option-add col-md-7" action="{{route('product.update',$product->id)}}" method="post">--}}
-{{--                                                                        @csrf--}}
-{{--                                                                        <input type="hidden" name="type[]" value="new-option-add">--}}
-{{--                                                                        <div class="">--}}
-{{--                                                                            <input type="hidden" name="option" value="option2">--}}
-{{--                                                                            <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">--}}
-{{--                                                                        </div>--}}
-{{--                                                                    </div>--}}
+                        {{--                                                                                    </tbody>--}}
+                        {{--                                                                                </table>--}}
+                        {{--                                                                            </div>--}}
+                        {{--                                                                        </div>--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                        <div class="row" style="margin-top:10px ">--}}
+                        {{--                                                            @if(count($product->option2($product)) == 0)--}}
+                        {{--                                                                <div class="col-md-12 add-option-button">--}}
+                        {{--                                                                    <a class="btn btn-light add-option-div">Add Other Option</a>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="div2 row col-md-12" style="display: none">--}}
+                        {{--                                                                    <div class="col-md-3">--}}
+                        {{--                                                                        <input type="text" class="form-control" readonly value="Option2">--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                    <div class="new-option-add col-md-7" action="{{route('product.update',$product->id)}}" method="post">--}}
+                        {{--                                                                        @csrf--}}
+                        {{--                                                                        <input type="hidden" name="type[]" value="new-option-add">--}}
+                        {{--                                                                        <div class="">--}}
+                        {{--                                                                            <input type="hidden" name="option" value="option2">--}}
+                        {{--                                                                            <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">--}}
+                        {{--                                                                        </div>--}}
+                        {{--                                                                    </div>--}}
 
-{{--                                                                    <div class="col-md-2">--}}
-{{--                                                                        <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            @endif--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                @endif--}}
-{{--                                                @if(count($product->option2($product))>0)--}}
-{{--                                                    <div class="col-md-12" style="margin-bottom: 10px">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="col-md-3">--}}
-{{--                                                                <input type="text" class="form-control" readonly value="Option2">--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="col-md-9">--}}
+                        {{--                                                                    <div class="col-md-2">--}}
+                        {{--                                                                        <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            @endif--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                @endif--}}
+                        {{--                                                @if(count($product->option2($product))>0)--}}
+                        {{--                                                    <div class="col-md-12" style="margin-bottom: 10px">--}}
+                        {{--                                                        <div class="row">--}}
+                        {{--                                                            <div class="col-md-3">--}}
+                        {{--                                                                <input type="text" class="form-control" readonly value="Option2">--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="col-md-9">--}}
 
-{{--                                                                @foreach($product->option2($product) as $a)--}}
-{{--                                                                    <span class="badge badge-info">--}}
-{{--                                                                        <span>{{$a}}</span>--}}
-{{--                                                                        <a><i data-option="option2" class="remove-option fa fa-times" style="color: white"></i></a>--}}
-{{--                                                                    </span>--}}
-{{--                                                                @endforeach--}}
-{{--                                                            </div>--}}
+                        {{--                                                                @foreach($product->option2($product) as $a)--}}
+                        {{--                                                                    <span class="badge badge-info">--}}
+                        {{--                                                                        <span>{{$a}}</span>--}}
+                        {{--                                                                        <a><i data-option="option2" class="remove-option fa fa-times" style="color: white"></i></a>--}}
+                        {{--                                                                    </span>--}}
+                        {{--                                                                @endforeach--}}
+                        {{--                                                            </div>--}}
 
-{{--                                                        </div>--}}
-{{--                                                        <div class="row" style="margin-top:10px ">--}}
-{{--                                                            @if(count($product->option3($product)) == 0)--}}
-{{--                                                                <div class="col-md-12 add-option-button" style="">--}}
-{{--                                                                    <a class="btn btn-light add-option-div">Add Other Option</a>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="div2 row col-md-12" style="display: none">--}}
-{{--                                                                    <div class="col-md-3">--}}
-{{--                                                                        <input type="text" class="form-control" readonly value="Option3">--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="new-option-add col-md-7"  action="{{route('product.update',$product->id)}}" method="post">--}}
-{{--                                                                        @csrf--}}
-{{--                                                                        <input type="hidden" name="type[]" value="new-option-add">--}}
-{{--                                                                        <div class="">--}}
-{{--                                                                            <input type="hidden" name="option" value="option3">--}}
-{{--                                                                            <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">--}}
-{{--                                                                        </div>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-md-2">--}}
-{{--                                                                        <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            @endif--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                @endif--}}
-{{--                                                @if(count($product->option3($product))>0)--}}
-{{--                                                    <div class="col-md-12">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="col-md-3">--}}
-{{--                                                                <input type="text" class="form-control" readonly value="Option3">--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="col-md-9">--}}
-{{--                                                                @foreach($product->option3($product) as $a)--}}
-{{--                                                                    <span class="badge badge-info">--}}
-{{--                                                                        <span>{{$a}}</span>--}}
-{{--                                                                        <a><i data-option="option3" class="remove-option fa fa-times" style="color: white"></i></a>--}}
-{{--                                                                    </span>--}}
-{{--                                                                @endforeach--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                @endif--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="deleted-data">--}}
-{{--                                            <div id="variant-options-update" action="{{route('product.update',$product->id)}}" method="post">--}}
-{{--                                                @csrf--}}
-{{--                                                <input type="hidden" name="type[]" value="variant-option-delete">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                        <div class="row" style="margin-top:10px ">--}}
+                        {{--                                                            @if(count($product->option3($product)) == 0)--}}
+                        {{--                                                                <div class="col-md-12 add-option-button" style="">--}}
+                        {{--                                                                    <a class="btn btn-light add-option-div">Add Other Option</a>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="div2 row col-md-12" style="display: none">--}}
+                        {{--                                                                    <div class="col-md-3">--}}
+                        {{--                                                                        <input type="text" class="form-control" readonly value="Option3">--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                    <div class="new-option-add col-md-7"  action="{{route('product.update',$product->id)}}" method="post">--}}
+                        {{--                                                                        @csrf--}}
+                        {{--                                                                        <input type="hidden" name="type[]" value="new-option-add">--}}
+                        {{--                                                                        <div class="">--}}
+                        {{--                                                                            <input type="hidden" name="option" value="option3">--}}
+                        {{--                                                                            <input type="text" class="form-control option-value" name="value" value="" placeholder="Enter Only One Option Value">--}}
+                        {{--                                                                        </div>--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                    <div class="col-md-2">--}}
+                        {{--                                                                        <a class="btn btn-light delete-option-value"><i class="fa fa-times"></i></a>--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            @endif--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                @endif--}}
+                        {{--                                                @if(count($product->option3($product))>0)--}}
+                        {{--                                                    <div class="col-md-12">--}}
+                        {{--                                                        <div class="row">--}}
+                        {{--                                                            <div class="col-md-3">--}}
+                        {{--                                                                <input type="text" class="form-control" readonly value="Option3">--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="col-md-9">--}}
+                        {{--                                                                @foreach($product->option3($product) as $a)--}}
+                        {{--                                                                    <span class="badge badge-info">--}}
+                        {{--                                                                        <span>{{$a}}</span>--}}
+                        {{--                                                                        <a><i data-option="option3" class="remove-option fa fa-times" style="color: white"></i></a>--}}
+                        {{--                                                                    </span>--}}
+                        {{--                                                                @endforeach--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                @endif--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                        <div class="deleted-data">--}}
+                        {{--                                            <div id="variant-options-update" action="{{route('product.update',$product->id)}}" method="post">--}}
+                        {{--                                                @csrf--}}
+                        {{--                                                <input type="hidden" name="type[]" value="variant-option-delete">--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
 
-{{--                                        <div class="block-content block-content-full text-right border-top">--}}
-{{--                                            <button type="button" data-option1="" data-option2="" data-option3="" data-deleted="0" class="variant-options-update-save btn btn-primary">Save</button>--}}
-{{--                                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">--}}
-{{--                                                Discard--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                                        <div class="block-content block-content-full text-right border-top">--}}
+                        {{--                                            <button type="button" data-option1="" data-option2="" data-option3="" data-deleted="0" class="variant-options-update-save btn btn-primary">Save</button>--}}
+                        {{--                                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">--}}
+                        {{--                                                Discard--}}
+                        {{--                                            </button>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     @else
                         <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
@@ -578,7 +623,7 @@
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             <textarea class="js-summernote" name="tab-description"
-                                                                                placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
+                                                                                      placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             <button type="sumbit" class="btn btn-primary">Save</button>
@@ -629,7 +674,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                 <textarea class="js-summernote" name="tab-description"
-                                                    placeholder="Please Enter Description here !"></textarea>
+                                                          placeholder="Please Enter Description here !"></textarea>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -709,78 +754,78 @@
                                             </th>
                                         </tr>
                                         </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <input type="hidden" name="type[]" value="single-variant-tiered-pricing">
+                                        <tbody>
+                                        <tr>
+                                            <input type="hidden" name="type[]" value="single-variant-tiered-pricing">
 
-                                                    <td class="variant_title">
-                                                        {{ $product->title }}
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control" name="cost" value="{{$product->cost}}" placeholder="$0.00">
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control"  value="{{$product->sku}}">
-                                                    </td>
-                                                    <td colspan="5">
-                                                        @if(count($product->has_tiered_prices) > 0)
-                                                            @foreach($product->has_tiered_prices as $item)
-                                                                <div class="row mb-3">
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <select name="type[]" id="" class="form-control">
-                                                                            @if($item->type == "fixed")
-                                                                                <option selected value="fixed">Fixed</option>
-                                                                                <option value="discount">Discount</option>
-                                                                            @else
-                                                                                <option value="fixed">Fixed</option>
-                                                                                <option selected value="discount">Discount</option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
-                                                                    </div>
-                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
+                                            <td class="variant_title">
+                                                {{ $product->title }}
+                                            </td>
+                                            <td>
+                                                <input disabled type="text" class="form-control" name="cost" value="{{$product->cost}}" placeholder="$0.00">
+                                            </td>
+                                            <td>
+                                                <input disabled type="text" class="form-control"  value="{{$product->sku}}">
+                                            </td>
+                                            <td colspan="5">
+                                                @if(count($product->has_tiered_prices) > 0)
+                                                    @foreach($product->has_tiered_prices as $item)
                                                         <div class="row mb-3">
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty[]">
+                                                                <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty[]">
+                                                                <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <select name="type[]" id="" class="form-control">
-                                                                    <option value="fixed">Fixed</option>
-                                                                    <option value="discount">Discount</option>
+                                                                    @if($item->type == "fixed")
+                                                                        <option selected value="fixed">Fixed</option>
+                                                                        <option value="discount">Discount</option>
+                                                                    @else
+                                                                        <option value="fixed">Fixed</option>
+                                                                        <option selected value="discount">Discount</option>
+                                                                    @endif
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="">
+                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
                                                             </div>
                                                             <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>
-                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
+                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
                                                             </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                                    @endforeach
+                                                @endif
+                                                <div class="row mb-3">
+                                                    <div class="col-md-2">
+                                                        <input  type="number" class="form-control" name="min_qty[]">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="number" class="form-control" name="max_qty[]">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <select name="type[]" id="" class="form-control">
+                                                            <option value="fixed">Fixed</option>
+                                                            <option value="discount">Discount</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="">
+                                                    </div>
+                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
+                                                        <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>
+                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
 
                                     </table>
-{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-{{--                                    </div>--}}
+                                    {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
+                                    {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
+                                    {{--                                    </div>--}}
                                 </div>
                             @endif
                             @if($product->variants == 1)
@@ -886,9 +931,9 @@
                                             </tbody>
                                         @endif
                                     </table>
-{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-{{--                                    </div>--}}
+                                    {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
+                                    {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
+                                    {{--                                    </div>--}}
                                 </div>
                             @endif
                         </div>
@@ -899,12 +944,12 @@
 
                     <div action="{{route('product.update',$product->id)}}" method="post">
                         @csrf
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Mark as Fulfilled
+                        <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Mark as Fulfilled
+                                </div>
                             </div>
-                        </div>
                             <input type="hidden" name="type[]" value="fulfilled">
                             <div class="block-content" >
                                 <div class="form-group">
@@ -918,27 +963,27 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Sort By
-                            </div>
                         </div>
-                        <div class="block-content pt-0" >
-                            <div class="form-group">
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
-                                    <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                </div>
-                                <div class="custom-control custom-radio mb-1">
-                                    <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
-                                    <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                        <div class="block">
+                            <div class="block-header">
+                                <div class="block-title">
+                                    Sort By
                                 </div>
                             </div>
+                            <div class="block-content pt-0" >
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
+                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
+                                    </div>
+                                    <div class="custom-control custom-radio mb-1">
+                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
+                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <div class="block">
@@ -1026,10 +1071,17 @@
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary">
-                                            <h5>Tags</h5>
-                                            <br>
-                                            <input class="js-tags-input form-control" type="text"
-                                                   value="{{$product->tags}}"    id="product-meta-keywords" name="tags" >
+                                            <label>Tags</label>
+                                            <select style="border-radius: 0;" class="js-select2 form-control" id="example-select2-multiple" name="tags[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                                @foreach($tags as $tag)
+
+                                                    <option value="{{ $tag->id }}"
+                                                            @if(in_array($tag->id, $product->tags()->get()->pluck('id')->toArray()))
+                                                            selected
+                                                        @endif
+                                                    >{{ $tag->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -1179,7 +1231,4 @@
             </div>
         </div>
     </div>
-
-
-
 @endsection
