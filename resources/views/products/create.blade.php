@@ -47,11 +47,23 @@
                             <div class="form-group">
                                 <div class="col-xs-12 push-10">
                                     <div class="form-material form-material-primary">
-                                        <label>Description</label>
+                                        <label>Long Description</label>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <textarea class="js-summernote" name="description"
+                                              placeholder="Please Enter Description here !"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12 push-10">
+                                    <div class="form-material form-material-primary">
+                                        <label>Short Description</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <textarea class="js-summernote" name="short_description"
                                               placeholder="Please Enter Description here !"></textarea>
                                 </div>
                             </div>
@@ -76,21 +88,21 @@
                     </div>
                     <div class="block">
                         <div class="block-header">
-                            <h3 class="block-title">Pricing</h3>
+                            <h3 class="block-title">Pricing / Shipping / Inventory</h3>
                         </div>
                         <div class="block-content">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                            <label>Price</label>
-                                            <input type="text" class="form-control" name="price" placeholder="$ 0.00" required>
+                                        <label>Price</label>
+                                        <input type="text" class="form-control" name="price" placeholder="$ 0.00" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
-                                    <label>Cost Per Item</label>
-                                    <input type="text" class="form-control" name="cost"
-                                           placeholder="$ 0.00">
+                                        <label>Cost Per Item</label>
+                                        <input type="text" class="form-control" name="cost"
+                                               placeholder="$ 0.00">
                                     </div>
                                 </div>
                             </div>
@@ -131,8 +143,34 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="col-xs-12 ">
+                                            <label>Length(cm)</label>
+                                            <input type="text" class="form-control" name="length">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
 
+                                        <div class="col-xs-12 ">
+                                            <label>Width(cm)</label>
+                                            <input type="text" class="form-control" name="width">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
 
+                                        <div class="col-xs-12 ">
+                                            <label>Height(cm)</label>
+                                            <input type="text" class="form-control" name="height">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -160,7 +198,7 @@
                                         <h5>Option 1</h5>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control" value="Option1">
+                                                <input type="text" class="form-control" placeholder="Attribute Name" name="attribute1">
                                             </div>
                                             <div class="col-sm-9">
                                                 <input class="js-tags-options options-preview form-control" type="text"
@@ -179,7 +217,7 @@
                                             <h5>Option 2</h5>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Option 2">
+                                                    <input type="text" class="form-control" placeholder="Attribute Name" name="attribute2">
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <input class="js-tags-options options-preview form-control" type="text"
@@ -200,7 +238,7 @@
                                             <h5>Option 3</h5>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Option 3">
+                                                    <input type="text" class="form-control" placeholder="Attribute Name" name="attribute3">
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <input class="js-tags-options options-preview form-control" type="text"
@@ -267,14 +305,14 @@
                         </div>
                         <div class="block-content pt-0" >
                             <div class="form-group">
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
-                                <label class="custom-control-label" for="example-radio-customfulfilled">By WeFullFill</label>
-                            </div>
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
-                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                            </div>
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" required class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
+                                    <label class="custom-control-label" for="example-radio-customfulfilled">By WeFullFill</label>
+                                </div>
+                                <div class="custom-control custom-radio mb-1">
+                                    <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
+                                    <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -302,7 +340,7 @@
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
-                              Marketing Video
+                                Marketing Video
                             </div>
                         </div>
                         <div class="block-content pt-0" >
@@ -317,29 +355,29 @@
                                 <h3 class="block-title">Product Category</h3>
                             </div>
                         </div>
-                            <div class="block-content" style="height: 300px;overflow-y: auto;overflow-x: hidden;">
-                                <div class="form-group product_category">
-                                    @foreach($categories as $category)
-                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px;vertical-align: middle"><i class="fa fa-angle-right"></i></span>
-                                        <div class="custom-control custom-checkbox d-inline-block">
-                                            <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox" id="rowcat_{{$category->title}}">
-                                            <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>
+                        <div class="block-content" style="height: 300px;overflow-y: auto;overflow-x: hidden;">
+                            <div class="form-group product_category">
+                                @foreach($categories as $category)
+                                    <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px;vertical-align: middle"><i class="fa fa-angle-right"></i></span>
+                                    <div class="custom-control custom-checkbox d-inline-block">
+                                        <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox" id="rowcat_{{$category->title}}">
+                                        <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>
+                                    </div>
+                                    <div class="row product_sub_cat" style="display: none">
+                                        <div class="col-xs-12 col-xs-push-1">
+                                            @foreach($category->hasSub as $sub)
+                                                <div class="custom-control custom-checkbox d-inline-block">
+                                                    <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox" id="rowsub_{{$sub->title}}">
+                                                    <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
+                                                </div>
+                                                <br>
+                                            @endforeach
                                         </div>
-                                        <div class="row product_sub_cat" style="display: none">
-                                            <div class="col-xs-12 col-xs-push-1">
-                                                @foreach($category->hasSub as $sub)
-                                                    <div class="custom-control custom-checkbox d-inline-block">
-                                                        <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox" id="rowsub_{{$sub->title}}">
-                                                        <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
-                                                    </div>
-                                                    <br>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <br>
-                                    @endforeach
-                                </div>
+                                    </div>
+                                    <br>
+                                @endforeach
                             </div>
+                        </div>
                         <div class="block-footer" style="height: 15px"></div>
                     </div>
                     <div class="block">
@@ -364,8 +402,11 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-primary">
                                         <label>Tags</label>
-                                        <input class="js-tags-input form-control" type="text"
-                                               id="product-meta-keywords" name="tags" value="">
+                                        <select style="border-radius: 0;" class="js-select2 form-control" id="example-select2-multiple" name="tags[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                            @foreach($tags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -392,7 +433,7 @@
                                             <label class="custom-control-label" for="row_{{$platform->name}}">{{$platform->name}}</label>
                                         </div>
                                         <br>
-                                        @endforeach
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
