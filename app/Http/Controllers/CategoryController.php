@@ -130,15 +130,29 @@ class CategoryController extends Controller
 
     public function subsave(Request $request)
     {
-        foreach ($request->sub_title as $sub) {
-            if (!empty($sub)) {
-                $subcategory = new SubCategory();
-                $subcategory->title = $sub;
-                $subcategory->category_id = $request->category_id;
-                $subcategory->save();
+
+        DB::beginTransaction();
+        try{
+            foreach ($request->sub_title as $sub) {
+                if (!empty($sub)) {
+                    $subcategory = new SubCategory();
+                    $subcategory->title = $sub;
+                    $subcategory->category_id = $request->category_id;
+                    $subcategory->save();
+
+                    $woocommerce = $this->helper->getWooCommerceAdminShop();
+                    $response = $woocommerce->post('products/categories', ['name' => $subcategory->title, 'parent' => $subcategory->hasCategory->woocommerce_id]);
+                    $subcategory->woocommerce_id = $response->id;
+                    $subcategory->save();
+                }
             }
+            DB::commit();
+            return redirect()->back()->with('success','Sub Category created successfully!');
         }
-        return redirect()->back()->with('success','Sub Category created successfully!');
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function subupdate(Request $request, $id)
@@ -146,6 +160,7 @@ class CategoryController extends Controller
         $category = SubCategory::find($id);
         $category->title = $request->title;
         $category->save();
+
         return redirect()->back()->with('success','Sub Category updated successfully!');
     }
 
