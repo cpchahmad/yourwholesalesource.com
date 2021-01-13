@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
@@ -104,13 +105,21 @@ class TagController extends Controller
     {
         $tag = Tag::find($id);
 
-        $woocommerce = $this->helper->getWooCommerceAdminShop();
-        $woocommerce->delete('products/tags/'.$tag->woocommerce_id, ['force' => true]);
+        DB::beginTransaction();
+        try{
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $woocommerce->delete('products/tags/'.$tag->woocommerce_id, ['force' => true]);
 
-        $tag->products()->detach();
-        $tag->delete();
+            $tag->products()->detach();
+            $tag->delete();
 
-        return redirect()->back()->with('success', 'Tag deleted Successfully');
+            DB::commit();
+            return redirect()->back()->with('success', 'Tag deleted Successfully');
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }
 
