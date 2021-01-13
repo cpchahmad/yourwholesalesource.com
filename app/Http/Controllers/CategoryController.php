@@ -187,6 +187,7 @@ class CategoryController extends Controller
 
             $category->delete();
 
+            DB::commit();
             return redirect()->back()->with('success','Deleted!');
         }
         catch(\Exception $e) {
