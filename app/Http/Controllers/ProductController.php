@@ -1531,8 +1531,8 @@ class ProductController extends Controller
            'title' => 'required|unique:products'
         ]);
 
-        DB::beginTransaction();
-        try{
+//        DB::beginTransaction();
+//        try{
             if (Product::where('title', $request->title)->exists()) {
                 $product = Product::where('title', $request->title)->first();
             } else {
@@ -1609,11 +1609,11 @@ class ProductController extends Controller
 
             $this->log->store(0, 'Product', $product->id, $product->title,  'Created');
             $this->import_to_woocommerce($product->id);
-        }
-        catch(\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+//        }
+//        catch(\Exception $e) {
+//            DB::rollBack();
+//            return redirect()->back()->with('error', $e->getMessage());
+//        }
 
     }
 
@@ -2525,7 +2525,7 @@ class ProductController extends Controller
 
 
             $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
-            DB::commit();
+            //DB::commit();
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
         else{
