@@ -85,6 +85,8 @@ class CategoryController extends Controller
 
             $woocommerce = $this->helper->getWooCommerceAdminShop();
             $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+
+            DB::commit();
             return redirect()->back()->with('success','Category updated successfully!');
         }
         catch (\Exception $e) {
@@ -116,6 +118,8 @@ class CategoryController extends Controller
             foreach ($subcategories as $subcategory) {
                 $subcategory->delete();
             }
+
+            DB::commit();
             return redirect()->back()->with('error','Category Deleted!');
         }
         catch(\Exception $e) {
