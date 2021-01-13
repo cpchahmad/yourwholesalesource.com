@@ -48,6 +48,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('tags.create') }}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Tags</span>
+                        </a>
+                    </li>
 
                 </ul>
             </li>

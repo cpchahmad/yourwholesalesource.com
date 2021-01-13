@@ -56,4 +56,8 @@ class Product extends Model
        return false;
     }
 
+    public function tags() {
+        return $this->belongsToMany(Tags::class, 'product_tag');
+    }
+
 }

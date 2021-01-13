@@ -175,6 +175,11 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::post('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
     Route::post('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
+
+    // ROUTES ADDED AFTER WOOCOMMERCE INTEGRATION
+    Route::resource('tags', 'TagController');
+
+
 });
 
 /*Single Store Routes*/

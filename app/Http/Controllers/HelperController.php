@@ -19,6 +19,8 @@ use App\SubCategory;
 use App\User;
 use App\WarnedPlatform;
 use App\Zone;
+use Automattic\WooCommerce\Client;
+use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +38,10 @@ class HelperController extends Controller
     }
     public function getAdminShop(){
         return Shop::where('shopify_domain','wefullfill.myshopify.com')->first();
+    }
+
+    public function getWooCommerceAdminShop() {
+        return new Client(env('WOOCOMMERCE_ADMIN_SHOP'), env('WOOCOMMERCE_CONSUMMER_KEY'), env('WOOCOMMERCE_CONSUMMER_SECRET'), ['wp_api' => true, 'version' => 'wc/v3',]);
     }
     public function getLocalShop(){
         /*Ossiset Shop Model*/
