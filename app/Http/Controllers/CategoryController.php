@@ -7,11 +7,17 @@ use App\Image;
 use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use function foo\func;
 
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->helper = new HelperController();
+    }
+
     public function index()
     {
 
@@ -23,17 +29,35 @@ class CategoryController extends Controller
 
     public function save(Request $request)
     {
-//        dd($request);
-        if (Category::where('title', $request->cat_title)->exists()) {
-            $category = Category::where('title', $request->cat_title)->first();
-        } else {
-            $category = new Category();
+        DB::beginTransaction();
+        try {
+            if (Category::where('title', $request->cat_title)->exists()) {
+                $category = Category::where('title', $request->cat_title)->first();
+                $category->title = $request->cat_title;
+                $highest_ranking = Category::max('ranking');
+                $category->ranking = $highest_ranking + 1;
+                $category->save();
+
+                $woocommerce = $this->helper->getWooCommerceAdminShop();
+                $response = $woocommerce->post('products/categories', ['name' => $category->title]);
+
+            } else {
+                $category = new Category();
+                $category->title = $request->cat_title;
+                $highest_ranking = Category::max('ranking');
+                $category->ranking = $highest_ranking + 1;
+                $category->save();
+
+                $woocommerce = $this->helper->getWooCommerceAdminShop();
+                $response = $woocommerce->post('products/categories', ['name' => $category->title]);
+            }
+            DB::commit();
+            return redirect()->back()->with('success','Category saved successfully!');
         }
-        $category->title = $request->cat_title;
-        $highest_ranking = Category::max('ranking');
-        $category->ranking = $highest_ranking + 1;
-        $category->save();
-        return redirect()->back()->with('success','Category created successfully!');
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function update(Request $request, $id)
