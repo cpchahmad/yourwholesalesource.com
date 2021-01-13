@@ -56,6 +56,7 @@ class ProductController extends Controller
             'categories' => $categories,
             'platforms' => $platforms,
             'shops' => $shops,
+            'tags' => $tags
         ]);
     }
 
