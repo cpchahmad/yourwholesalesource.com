@@ -39,7 +39,7 @@ class CategoryController extends Controller
                 $category->save();
 
                 $woocommerce = $this->helper->getWooCommerceAdminShop();
-                $response = $woocommerce->post('products/categories', ['name' => $category->title]);
+                $response = $woocommerce->put('products/categories', ['name' => $category->title]);
 
             } else {
                 $category = new Category();
@@ -52,7 +52,7 @@ class CategoryController extends Controller
                 $response = $woocommerce->post('products/categories', ['name' => $category->title]);
             }
             DB::commit();
-            return redirect()->back()->with('success','Category saved successfully!');
+            return redirect()->back()->with('success','Category Saved successfully!');
         }
         catch(\Exception $e) {
             DB::rollBack();
