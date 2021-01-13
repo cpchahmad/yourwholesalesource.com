@@ -64,44 +64,64 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        if ($request->hasFile('icon')) {
-            $image =  $request->file('icon');
-            $destinationPath = 'categories-icons/';
-            $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
-            $image->move($destinationPath, $filename);
-            $category->icon = $filename;
-        }
-        $category->title = $request->title;
-        if(Category::where('ranking', $request->ranking)->exists()) {
-            $temp_category = Category::where('ranking', $request->ranking)->first();
-            $temp_category->ranking = $category->ranking;
-            $temp_category->save();
-        }
-        $category->ranking = $request->ranking;
+        DB::beginTransaction();
+        try{
+            $category = Category::find($id);
+            if ($request->hasFile('icon')) {
+                $image =  $request->file('icon');
+                $destinationPath = 'categories-icons/';
+                $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+                $image->move($destinationPath, $filename);
+                $category->icon = $filename;
+            }
+            $category->title = $request->title;
+            if(Category::where('ranking', $request->ranking)->exists()) {
+                $temp_category = Category::where('ranking', $request->ranking)->first();
+                $temp_category->ranking = $category->ranking;
+                $temp_category->save();
+            }
+            $category->ranking = $request->ranking;
+            $category->save();
 
-        $category->save();
-        return redirect()->back()->with('success','Category updated successfully!');
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+            return redirect()->back()->with('success','Category updated successfully!');
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function delete($id)
     {
-        $category = Category::find($id);
-        $deleted_category_ranking = $category->ranking;
+        DB::beginTransaction();
+        try{
+            $category = Category::find($id);
+            $deleted_category_ranking = $category->ranking;
 
-        if(Category::max('ranking') != $deleted_category_ranking) {
-            $categories = Category::where('ranking', '>', $deleted_category_ranking)->get();
-            foreach ($categories as $c) {
-                $c->ranking = $c->ranking - 1;
-                $c->save();
+            if(Category::max('ranking') != $deleted_category_ranking) {
+                $categories = Category::where('ranking', '>', $deleted_category_ranking)->get();
+                foreach ($categories as $c) {
+                    $c->ranking = $c->ranking - 1;
+                    $c->save();
+                }
             }
+
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
+
+            $category->delete();
+            $subcategories = SubCategory::where('category_id', $id)->get();
+            foreach ($subcategories as $subcategory) {
+                $subcategory->delete();
+            }
+            return redirect()->back()->with('error','Category Deleted!');
         }
-        $category->delete();
-        $subcategories = SubCategory::where('category_id', $id)->get();
-        foreach ($subcategories as $subcategory) {
-            $subcategory->delete();
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        return redirect()->back()->with('error','Category Deleted!');
     }
 
     public function subsave(Request $request)
