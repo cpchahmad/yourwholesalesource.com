@@ -42,6 +42,9 @@
                                     <label for="product-name">Title</label>
                                     <input class="form-control" type="text" id="product-name" name="title"
                                            placeholder="Short Sleeve Shirt" required>
+                                    @error('title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -130,6 +133,9 @@
                                         <div class="col-xs-12 ">
                                             <label>SKU</label>
                                             <input type="text" class="form-control" name="sku" required>
+                                            @error('sku')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
