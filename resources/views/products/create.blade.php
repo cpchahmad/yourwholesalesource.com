@@ -148,7 +148,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
                                             <label>Length(cm)</label>
-                                            <input type="text" class="form-control" name="length">
+                                            <input type="number" step="any" class="form-control" name="length">
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@
 
                                         <div class="col-xs-12 ">
                                             <label>Width(cm)</label>
-                                            <input type="text" class="form-control" name="width">
+                                            <input type="number" step="any" class="form-control" name="width">
                                         </div>
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@
 
                                         <div class="col-xs-12 ">
                                             <label>Height(cm)</label>
-                                            <input type="text" class="form-control" name="height">
+                                            <input type="number" step="any" class="form-control" name="height">
                                         </div>
                                     </div>
                                 </div>
