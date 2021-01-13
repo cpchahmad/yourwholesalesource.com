@@ -1451,7 +1451,7 @@ class ProductController extends Controller
 
     }
 
-    public function save(Request $request)
+    public function save_old(Request $request)
     {
         if (Product::where('title', $request->title)->exists()) {
             $product = Product::where('title', $request->title)->first();
@@ -1519,6 +1519,94 @@ class ProductController extends Controller
 
         return redirect()->route('import_to_shopify',$product->id);
     }
+
+    public function save(Request $request)
+    {
+
+        if (Product::where('title', $request->title)->exists()) {
+            $product = Product::where('title', $request->title)->first();
+        } else {
+            $product = new Product();
+        }
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->short_description = $request->short_description;
+        $product->slug = \Illuminate\Support\Str::slug($request->title, '-');
+        $product->price = $request->price;
+        $product->compare_price = $request->compare_price;
+        $product->cost = $request->cost;
+        $product->type = $request->product_type;
+        $product->vendor = $request->vendor;
+        //$product->tags = $request->tags;
+        $product->quantity = $request->quantity;
+        $product->weight = $request->weight;
+        $product->length = $request->length;
+        $product->width = $request->width;
+        $product->height = $request->height;
+        $product->sku = $request->sku;
+        $product->barcode = $request->barcode;
+        $product->attribute1 = $request->attribute1;
+        $product->attribute2 = $request->attribute2;
+        $product->attribute3 = $request->attribute3;
+        $product->fulfilled_by = $request->input('fulfilled-by');
+        $product->status =  $request->input('status');
+        $product->marketing_video =  $request->input('marketing_video');
+        $product->processing_time = $request->input('processing_time');
+        $product->sortBy = $request->input('sortBy');
+
+        if ($request->variants) {
+            $product->variants = $request->variants;
+        }
+        $product->save();
+        if ($request->category) {
+            $product->has_categories()->attach($request->category);
+        }
+        if ($request->sub_cat) {
+            $product->has_subcategories()->attach($request->sub_cat);
+        }
+        if ($request->platforms) {
+            $product->has_platforms()->attach($request->platforms);
+        }
+        if ($request->variants) {
+            $this->ProductVariants($request, $product->id);
+        }
+
+        if($request->tags) {
+            foreach ($request->tags as $tag) {
+                $product->tags()->attach($tag);
+            }
+        }
+
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $destinationPath = 'images/';
+                $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+                $image->move($destinationPath, $filename);
+                $image = new Image();
+                $image->isV = 0;
+                $image->product_id = $product->id;
+                $image->image = $filename;
+                $image->save();
+            }
+
+        }
+
+        $product->global = $request->input('global');
+        $product->save();
+
+        if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
+            $product->has_preferences()->attach($request->input('shops'));
+        }
+
+        $this->log->store(0, 'Product', $product->id, $product->title,  'Created');
+
+
+//$this->import_to_woocommerce($product->id);
+//        return redirect()->route('import_to_woocommerce',$product->id);
+        return redirect()->back()->with('success', 'Created');
+    }
+
 
     public function ProductVariants($data, $id)
     {
@@ -2280,6 +2368,165 @@ class ProductController extends Controller
         return Excel::download(new ProductVariantExport($variants), 'Variants_SKU_list.csv');
 
     }
+
+    public function import_to_woocommerce(Request $request)
+    {
+        $product = Product::find($request->id);
+        $woocommerce = $this->helper->getAdminShop();
+
+        if ($product != null ) {
+
+            /*Product Attributes*/
+            $attributes_array = $this->attributes_template_array($product);
+
+            /*Product Dimensions*/
+            $dimension_array = array(
+                'width' => $product->width,
+                'height' => $product->height,
+                'length' => $product->length
+            );
+
+            /*Product Images*/
+            $images_array = [];
+            foreach ($product->has_images as $index => $image) {
+//                if ($image->isV == 0) {
+//                    $src = asset('images') . '/' . $image->image;
+//                } else {
+//                    $src = asset('images/variants') . '/' . $image->image;
+//                }
+                $src = "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg";
+                array_push($images_array, [
+                    'alt' => $product->title . '_' . $index,
+                    'name' => $product->title . '_' . $index,
+                    'src' => $src,
+                ]);
+            }
+
+            /*Tags*/
+            $tags_array = [];
+            if($product->tags()->count() > 0) {
+                foreach ($product->tags()->get() as $tag) {
+                    array_push($tags_array, [
+                        'id' => $tag->woocommerce_id,
+                    ]);
+                }
+            }
+
+            /*Creating Categories on Woocommerce and getting there id's so that we can pass them to products array*/
+            $categories_array = [];
+            $categories_id_array = [];
+
+            if(count($product->has_categories) > 0){
+                $product_categories = $product->has_categories->pluck('title')->toArray();
+
+                foreach ($product_categories as $category) {
+                    array_push($categories_array, [
+                        'name' => $category,
+                    ]);
+                }
+
+                $categories_payload = [
+                    'create' => $categories_array
+                ];
+
+                $response = $woocommerce->post('products/categories/batch', $categories_payload);
+
+                foreach($response->create as $item) {
+                    array_push($categories_id_array, [
+                        'id' => $item->id,
+                    ]);
+                }
+            }
+
+            if($product->status == 1)
+                $published = 'publish';
+            else
+                $published = 'draft';
+
+
+            if($product->variants == 1)
+                $product_type = 'variable';
+            else
+                $product_type = 'simple';
+
+
+            $productdata = [
+                "name" => $product->title,
+                "description" => $product->description,
+                "short_description" => $product->short_description,
+                "slug" => $product->slug,
+                "tags" => $tags_array,
+                "type" => $product_type,
+                "attributes" => $attributes_array,
+                "images" => $images_array,
+                "published"=>  $published,
+                "sale_price" => $product->price,
+                "regular_price" => $product->cost,
+                "sku" => $product->sku,
+                "weight" => $product->weight,
+                "manage_stock" => true,
+                "stock_quantity" => $product->quantity,
+                "dimensions" => $dimension_array,
+                "categories" => $categories_id_array
+            ];
+
+            /*Creating Product On Woocommerce*/
+            $response = $woocommerce->post('products', $productdata);
+
+            $product_woocommerce_id =  $response->id;
+            $product->woocommerce_id = $product_woocommerce_id;
+            $product->to_woocommerce = 1;
+            $product->save();
+
+
+            $woocommerce_images = $response->images;
+
+            if (count($woocommerce_images) == count($product->has_images)) {
+                foreach ($product->has_images as $index => $image) {
+                    $image->woocommerce_id = $woocommerce_images[$index]->id;
+                    $image->save();
+                }
+            }
+
+            if($product->variants == 1) {
+                $variants_array =  $this->variants_template_array($product, $response->attributes);
+
+                $variantdata = [
+                    'create' => $variants_array
+                ];
+
+                /*Creating Product Variations On Woocommerce*/
+                $response = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
+
+                $woocommerce_variants = $response->create;
+                foreach ($product->hasVariants as $index => $v){
+                    $v->woocommerce_id = $woocommerce_variants[$index]->id;
+//                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                    $v->save();
+                }
+            }
+
+//            foreach ($product->hasVariants as $index => $v){
+//                if($v->has_image != null){
+//                    $i = [
+//                        'image' => [
+//                            'id' => $v->has_image->shopify_id,
+//                            'variant_ids' => [$v->shopify_id]
+//                        ]
+//                    ];
+//                    $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
+//                }
+//            }
+
+
+            $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
+            return redirect()->back()->with('success','Product Push to Store Successfully!');
+        }
+        else{
+            echo 'imported already';
+        }
+    }
+
 
 
 }
