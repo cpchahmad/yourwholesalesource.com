@@ -50,7 +50,8 @@ class RetailerOrder extends Model
             });
             $zoneQuery = $zoneQuery->first();
             if($zoneQuery->courier == null)
-                return '';
+                dd(324);
+
 
             return$zoneQuery->courier->title;
         }
