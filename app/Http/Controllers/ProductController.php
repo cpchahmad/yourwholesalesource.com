@@ -1577,7 +1577,6 @@ class ProductController extends Controller
             }
         }
 
-
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $destinationPath = 'images/';
@@ -1589,7 +1588,6 @@ class ProductController extends Controller
                 $image->image = $filename;
                 $image->save();
             }
-
         }
 
         $product->global = $request->input('global');

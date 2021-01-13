@@ -568,10 +568,10 @@ $(document).ready(function () {
             }
         },
         onChange: function(){
-            var price = $('input[type="text"][name="price"]').val();
-            var cost = $('input[type="text"][name="cost"]').val();
+            var price = $('input[type="number"][name="price"]').val();
+            var cost = $('input[type="number"][name="cost"]').val();
             var sku = $('input[type="text"][name="sku"]').val();
-            var quantity = $('input[type="text"][name="quantity"]').val();
+            var quantity = $('input[type="number"][name="quantity"]').val();
             var option1 = $('input[type="text"][name="option1"]').val();
             console.log(option1);
             var option2 = $('input[type="text"][name="option2"]').val();
