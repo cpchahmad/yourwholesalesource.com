@@ -39,7 +39,7 @@ class CategoryController extends Controller
                 $category->save();
 
                 $woocommerce = $this->helper->getWooCommerceAdminShop();
-                $response = $woocommerce->put('products/categories', ['name' => $category->title]);
+                $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
 
             } else {
                 $category = new Category();
@@ -50,6 +50,8 @@ class CategoryController extends Controller
 
                 $woocommerce = $this->helper->getWooCommerceAdminShop();
                 $response = $woocommerce->post('products/categories', ['name' => $category->title]);
+                $category->woocommerce_id = $response->id;
+                $category->save();
             }
             DB::commit();
             return redirect()->back()->with('success','Category Saved successfully!');
