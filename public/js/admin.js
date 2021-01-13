@@ -596,10 +596,10 @@ $(document).ready(function () {
 
                         $('tbody').append('   <tr>\n' +
                             '                                                    <td class="variant_title">' + title + '<input type="hidden" name="variant_title[]" value="' + title + '"></td>\n' +
-                            '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
+                            '                                                    <td><input type="number" step="any" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
                             '                                                    </td>\n' +
-                            '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
-                            '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
+                            '                                                    <td><input type="number" step="any" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
+                            '                                                    <td><input type="number" step="any" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
                             '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
                             '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
                             '                                                </tr>');

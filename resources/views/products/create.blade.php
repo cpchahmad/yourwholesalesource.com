@@ -95,13 +95,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Price</label>
-                                        <input type="text" class="form-control" name="price" placeholder="$ 0.00" required>
+                                        <input type="number" step="any" class="form-control" name="price" placeholder="$ 0.00" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Cost Per Item</label>
-                                        <input type="text" class="form-control" name="cost"
+                                        <input type="number" step="any" class="form-control" name="cost"
                                                placeholder="$ 0.00">
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
                                             <label>Quantity</label>
-                                            <input type="text" class="form-control" name="quantity" placeholder="0" required>
+                                            <input type="number" step="any" class="form-control" name="quantity" placeholder="0" required>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
                                             <label>Weight</label>
-                                            <input type="text" class="form-control" name="weight" placeholder="0.0Kg" required>
+                                            <input type="number" step="any" class="form-control" name="weight" placeholder="0.0Kg" required>
                                         </div>
                                     </div>
                                 </div>
@@ -402,7 +402,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-material form-material-primary">
                                         <label>Tags</label>
-                                        <select style="border-radius: 0;" class="js-select2 form-control" id="example-select2-multiple" name="tags[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                        <select style="border-radius: 0;" class="js-select2 form-control" id="example-select2-multiple" name="tags[]" style="width: 100%;" data-placeholder="Add Tags to the product.." multiple>
                                             @foreach($tags as $tag)
                                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                             @endforeach
