@@ -19,6 +19,7 @@ use App\RetailerOrder;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\SubCategory;
+use App\Tag;
 use App\TieredPrice;
 use App\User;
 use App\WarnedPlatform;
@@ -49,6 +50,7 @@ class ProductController extends Controller
     {
         $categories = Category::latest()->get();
         $platforms = WarnedPlatform::all();
+        $tags = Tag::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
         return view('products.create')->with([
             'categories' => $categories,
