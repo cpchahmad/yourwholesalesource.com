@@ -47,18 +47,26 @@ class TagController extends Controller
             'name' => 'required|unique:tags'
         ]);
 
-        $tag = new Tag();
-        $tag->name = $request->name;
-        $tag->save();
 
+        DB::beginTransaction();
+        try {
+            $tag = new Tag();
+            $tag->name = $request->name;
+            $tag->save();
 
-        $woocommerce = $this->helper->getWooCommerceAdminShop();
-        $response = $woocommerce->post('products/tags', ['name' => $tag->name]);
-        $tag->woocommerce_id = $response->id;
-        $tag->save();
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $response = $woocommerce->post('products/tags', ['name' => $tag->name]);
+            $tag->woocommerce_id = $response->id;
+            $tag->save();
 
+            DB::commit();
+            return redirect()->back()->with('success', 'Tag Created Successfully!');
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
 
-        return redirect()->back()->with('success', 'Tag Created Successfully!');
     }
 
     /**
