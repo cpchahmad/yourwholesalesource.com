@@ -361,6 +361,7 @@ class AdminOrderController extends Controller
                                     "fulfillment" => [
                                         "tracking_number" => $tracking_number,
                                         "tracking_url" => $tracking_url,
+                                        "notify_customer" => false
                                     ]
                                 ];
                                 if($courier_id !== null){
@@ -393,6 +394,7 @@ class AdminOrderController extends Controller
                                     "fulfillment" => [
                                         "tracking_number" => $tracking_number,
                                         "tracking_url" => $tracking_url,
+                                        "notify_customer" => false
                                     ]
                                 ];
 
