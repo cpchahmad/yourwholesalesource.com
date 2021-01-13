@@ -51,7 +51,7 @@ class TagController extends Controller
         $tag->save();
 
 
-        $woocommerce = $this->helper->getAdminShop();
+        $woocommerce = $this->helper->getWooCommerceAdminShopminShop();
         $response = $woocommerce->post('products/tags', ['name' => $tag->name]);
         $tag->woocommerce_id = $response->id;
         $tag->save();
@@ -104,7 +104,7 @@ class TagController extends Controller
     {
         $tag = Tag::find($id);
 
-        $woocommerce = $this->helper->getAdminShop();
+        $woocommerce = $this->helper->getWooCommerceAdminShopminShop();
         $woocommerce->delete('products/tags/'.$tag->woocommerce_id, ['force' => true]);
 
         $tag->products()->detach();
