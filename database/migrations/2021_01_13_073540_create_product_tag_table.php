@@ -13,7 +13,7 @@ class CreateProductTagTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_tag', function (Blueprint $table) {
+        Schema::create('product_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->unsignedBigInteger('tags_id')->nullable();
@@ -28,8 +28,6 @@ class CreateProductTagTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_tag', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('product_tag');
     }
 }
