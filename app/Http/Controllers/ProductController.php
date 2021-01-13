@@ -1608,7 +1608,7 @@ class ProductController extends Controller
             }
 
             $this->log->store(0, 'Product', $product->id, $product->title,  'Created');
-            $this->import_to_woocommerce($product->id);
+            return $this->import_to_woocommerce($product->id);
 //        }
 //        catch(\Exception $e) {
 //            DB::rollBack();
