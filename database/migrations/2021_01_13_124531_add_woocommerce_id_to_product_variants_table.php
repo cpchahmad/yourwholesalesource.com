@@ -14,7 +14,8 @@ class AddWoocommerceIdToProductVariantsTable extends Migration
     public function up()
     {
         Schema::table('product_variants', function (Blueprint $table) {
-            //
+            $table->text('woocommerce_id')->nullable();
+
         });
     }
 
@@ -26,7 +27,7 @@ class AddWoocommerceIdToProductVariantsTable extends Migration
     public function down()
     {
         Schema::table('product_variants', function (Blueprint $table) {
-            //
+            $table->dropColumn(['woocommerce_id']);
         });
     }
 }
