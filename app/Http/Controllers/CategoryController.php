@@ -120,7 +120,7 @@ class CategoryController extends Controller
             }
 
             DB::commit();
-            return redirect()->back()->with('error','Category Deleted!');
+            return redirect()->back()->with('success','Category Deleted!');
         }
         catch(\Exception $e) {
             DB::rollBack();
@@ -178,9 +178,21 @@ class CategoryController extends Controller
 
     public function subdelete($id)
     {
-        $category = SubCategory::find($id);
-        $category->delete();
-        return redirect()->back()->with('error','Deleted!');
+        DB::beginTransaction();
+        try{
+            $category = SubCategory::find($id);
+
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
+
+            $category->delete();
+
+            return redirect()->back()->with('success','Deleted!');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function update_image_position(Request $request){
