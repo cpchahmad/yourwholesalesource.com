@@ -157,11 +157,23 @@ class CategoryController extends Controller
 
     public function subupdate(Request $request, $id)
     {
-        $category = SubCategory::find($id);
-        $category->title = $request->title;
-        $category->save();
+        DB::beginTransaction();
+        try{
+            $category = SubCategory::find($id);
+            $category->title = $request->title;
+            $category->save();
 
-        return redirect()->back()->with('success','Sub Category updated successfully!');
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+
+            DB::commit();
+            return redirect()->back()->with('success','Sub Category updated successfully!');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
     }
 
     public function subdelete($id)
