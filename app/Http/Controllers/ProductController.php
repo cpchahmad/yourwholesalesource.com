@@ -2637,7 +2637,7 @@ class ProductController extends Controller
         }
 
         $variants_array = [];
-        foreach ($product->hasVariants->where('woocommerce_id', null)->get() as $index => $varaint) {
+        foreach ($product->hasVariants()->where('woocommerce_id', null)->get() as $index => $varaint) {
             $array_item = [];
             $array_item['attributes'] = [];
 
