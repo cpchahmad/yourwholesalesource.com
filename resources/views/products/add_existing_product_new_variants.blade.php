@@ -80,7 +80,7 @@
                                             <h5>Option 1</h5>
                                             <div class="row">
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" value="Option 1">
+                                                    <input type="text" class="form-control" placeholder="Attribute Name" name="attribute1">
                                                 </div>
                                                 <div class="col-sm-9">
                                                     <input class="js-tags-options options-preview form-control" type="text"
@@ -99,7 +99,7 @@
                                                 <h5>Option 2</h5>
                                                 <div class="row">
                                                     <div class="col-sm-3">
-                                                        <input type="text" class="form-control" value="Option 2">
+                                                        <input type="text" class="form-control" placeholder="Attribute Name" name="attribute2">
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"
@@ -120,7 +120,7 @@
                                                 <h5>Option 3</h5>
                                                 <div class="row">
                                                     <div class="col-sm-3">
-                                                        <input type="text" class="form-control" value="Option 3">
+                                                        <input type="text" class="form-control" placeholder="Attribute Name" name="attribute3">
                                                     </div>
                                                     <div class="col-sm-9">
                                                         <input class="js-tags-options options-preview form-control" type="text"

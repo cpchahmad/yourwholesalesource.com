@@ -1218,8 +1218,6 @@ class ProductController extends Controller
 
     public function updateExistingProductNewVariants(Request $request, $id) {
 
-        dd($request->all());
-
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
@@ -1238,7 +1236,6 @@ class ProductController extends Controller
 
                 $attributes_array = $this->attributes_template_array($product);
 
-                dd($attributes_array);
 
                 $productdata = [
                     "attributes" => $attributes_array,
