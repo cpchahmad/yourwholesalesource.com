@@ -1606,7 +1606,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         foreach ($product->hasVariants as $v){
             $res = $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
-            dump($res);
             $v->delete();
         }
 
