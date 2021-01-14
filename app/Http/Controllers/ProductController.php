@@ -1613,6 +1613,7 @@ class ProductController extends Controller
             $options = explode('/', $data->variant_title[$i]);
 
             if(!ProductVariant::where('product_id', $id)->where('option1', $options[0])->where('option2', $options[1])->where('option3', $options[2])->exists()) {
+                dump('yes');
                 $variants = new ProductVariant();
 
                 if (!empty($options[0])) {
