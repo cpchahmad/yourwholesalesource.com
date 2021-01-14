@@ -2277,7 +2277,7 @@ class ProductController extends Controller
 
     public function change_image($id,$image_id,Request $request){
         if($request->input('type') == 'product'){
-            $shop = $this->helper->getShop();
+            $shop = $this->helper->getWooCommerceAdminShop();
             $variant = ProductVariant::find($id);
             if($variant->linked_product != null) {
                 if ($variant->linked_product->shopify_id != null) {
@@ -2325,25 +2325,26 @@ class ProductController extends Controller
     public function shopify_image_selection($image_id, $image, $shop, $variant)
     {
         $variant_ids = [];
-        foreach ($image->has_variants as $v) {
-            array_push($variant_ids, $v->shopify_id);
-        }
-        array_push($variant_ids,$variant->shopify_id);
-        $i = [
+//        foreach ($image->has_variants as $v) {
+//            array_push($variant_ids, $v->woocommerce_id);
+//        }
+        array_push($variant_ids,$variant->woocommerce_id);
+        $data = [
             'image' => [
-                'id' => $image->shopify_id,
-                'variant_ids' => $variant_ids
+                'id' => $image->woocommerce_id,
             ]
         ];
-        $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
-        if (!$imagesResponse->errors) {
+
+//        $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
+        $imagesResponse = $shop->put('products/22/variations/'.$variant->woocommerce_id, $data);
+        dd($imagesResponse);
+        if ($imagesResponse->id) {
             $variant->image = $image_id;
             $variant->save();
             return response()->json([
                 'message' => 'success'
             ]);
         } else {
-            dd($imagesResponse);
             return response()->json([
                 'message' => 'false'
             ]);
