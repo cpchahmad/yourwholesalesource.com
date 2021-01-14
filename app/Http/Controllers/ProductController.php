@@ -705,191 +705,46 @@ class ProductController extends Controller
         $woocommerce = $this->helper->getWooCommerceAdminShop();
         $shop = $this->helper->getShop();
 
+        $this->validate($request, [
+            'sku' => 'required|unique:products',
+            'title' => 'required|unique:products'
+        ]);
 
-        if ($product != null) {
-            foreach($request->type as $type) {
-                if ($type == 'basic-info') {
-                    $product->title = $request->title;
-                    $product->description = $request->description;
-                    $product->short_description = $request->short_description;
-                    $product->save();
 
-                    $productdata = [
-                        "name" => $product->title,
-                        "description" => $product->description,
-                        "short_description" => $product->short_description,
-                    ];
+        DB::beginTransaction();
+        try{
+            if ($product != null) {
+                foreach($request->type as $type) {
+                    if ($type == 'basic-info') {
+                        $product->title = $request->title;
+                        $product->description = $request->description;
+                        $product->short_description = $request->short_description;
+                        $product->save();
 
-                    $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
-                }
+                        $productdata = [
+                            "name" => $product->title,
+                            "description" => $product->description,
+                            "short_description" => $product->short_description,
+                        ];
 
-                else if ($type == 'pricing') {
-                    $product->price = $request->price;
-                    $product->compare_price = $request->compare_price;
-                    $product->cost = $request->cost;
-                    $product->quantity = $request->quantity;
-                    $product->weight = $request->weight;
-                    $product->sku = $request->sku;
-                    $product->barcode = $request->barcode;
-                    $product->length = $request->length;
-                    $product->width = $request->width;
-                    $product->height = $request->height;
-                    $product->save();
-
-                    if($product->quantity == 0) {
-                        // Sending Notification Emails To all Concerned Retailer Stores
-                        if(count($product->has_retailer_products) > 0) {
-                            $users_temp = [];
-                            foreach ($product->has_retailer_products as $retailer_product) {
-                                array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
-                            }
-
-                            if(count($users_temp)> 0) {
-                                $users = [];
-                                foreach($users_temp as $user){
-                                    try{
-                                        Mail::to($user)->send(new ProductStockOutMail($product));
-                                    }
-                                    catch (\Exception $e){
-                                    }
-                                }
-                            }
-                        }
-
-                        $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
+                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
                     }
 
-                    Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                    else if ($type == 'pricing') {
+                        $product->price = $request->price;
+                        $product->compare_price = $request->compare_price;
+                        $product->cost = $request->cost;
+                        $product->quantity = $request->quantity;
+                        $product->weight = $request->weight;
+                        $product->sku = $request->sku;
+                        $product->barcode = $request->barcode;
+                        $product->length = $request->length;
+                        $product->width = $request->width;
+                        $product->height = $request->height;
+                        $product->save();
 
-
-//                    if (count($product->hasVariants) == 0) {
-//                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-//                        if(!$response->errors){
-//                            $shopifyVariants = $response->body->product->variants;
-//                            $variant_id = $shopifyVariants[0]->id;
-//                            $i = [
-//                                'variant' => [
-//                                    'price' =>$product->price,
-//                                    'sku' =>  $product->sku,
-//                                    'grams' => $product->weight * 1000,
-//                                    'weight' => $product->weight,
-//                                    'weight_unit' => 'kg',
-//                                    'barcode' => $product->barcode,
-//
-//                                ]
-//                            ];
-//                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
-//
-//                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-//                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-//
-//                        }
-//
-//                    }
-
-                }
-
-                else if ($type == 'pricing-for-variant') {
-                    $product->price = $request->price;
-                    $product->quantity = $request->quantity;
-                    $product->weight = $request->weight;
-                    $product->length = $request->length;
-                    $product->width = $request->width;
-                    $product->height = $request->height;
-                    $product->save();
-
-                    $dimension_array = array(
-                        "length" => $request->length,
-                        "width" => $request->width,
-                        "height" => $request->height
-                    );
-
-                    $productdata = [
-                        "sale_price" => $product->price,
-                        "regular_price" => $product->cost,
-                        "sku" => $product->sku,
-                        "weight" => $product->weight,
-                        "stock_quantity" => $product->quantity,
-                        "dimensions" => $dimension_array,
-                    ];
-
-                    $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
-
-                    if($product->quantity == 0) {
-                        // Sending Notification Emails To all Concerned Retailer Stores
-                        if(count($product->has_retailer_products) > 0) {
-                            $users_temp = [];
-                            foreach ($product->has_retailer_products as $retailer_product) {
-                                array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
-                            }
-
-                            if(count($users_temp)> 0) {
-                                $users = [];
-                                foreach($users_temp as $key => $ut){
-                                    if($ut != null) {
-                                        $ua = [];
-                                        $ua['email'] = $ut;
-                                        $ua['name'] = 'test';
-                                        $users[$key] = (object)$ua;
-                                    }
-                                }
-
-                                try{
-                                    Mail::to($users)->send(new ProductStockOutMail($product));
-                                }
-                                catch (\Exception $e){
-                                }
-                            }
-                        }
-
-                        $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
-                    }
-
-                    Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-
-
-//                    if (count($product->hasVariants) == 0) {
-//                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-//                        if(!$response->errors){
-//                            $shopifyVariants = $response->body->product->variants;
-//                            $variant_id = $shopifyVariants[0]->id;
-//                            $i = [
-//                                'variant' => [
-//                                    'price' =>$product->price,
-//                                    'sku' =>  $product->sku,
-//                                    'grams' => $product->weight * 1000,
-//                                    'weight' => $product->weight,
-//                                    'weight_unit' => 'kg',
-//                                    'barcode' => $product->barcode,
-//
-//                                ]
-//                            ];
-//                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
-//
-//                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-//                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-//
-//                        }
-//
-//                    }
-
-                }
-
-                else if ($type == 'single-variant-update') {
-                    foreach ($request->variant_id as $id) {
-                        $variant = ProductVariant::find($id);
-                        $variant->title = $request->input('option1-'.$id) . '/' . $request->input('option2-'.$id) . '/' . $request->input('option3-'.$id);
-                        $variant->option1 = $request->input('option1-'.$id);
-                        $variant->option2 = $request->input('option2-'.$id);
-                        $variant->option3 = $request->input('option3-'.$id);
-                        $variant->price = $request->input('single-var-price-'.$id);
-                        $variant->cost = $request->input('single-var-cost-'.$id);
-                        $variant->quantity = $request->input('single-var-quantity-'.$id);
-                        $variant->sku = $request->input('single-var-sku-'.$id);
-                        $variant->barcode = $request->input('single-var-barcode-'.$id);
-
-                        if($variant->quantity == 0) {
+                        if($product->quantity == 0) {
                             // Sending Notification Emails To all Concerned Retailer Stores
                             if(count($product->has_retailer_products) > 0) {
                                 $users_temp = [];
@@ -898,44 +753,196 @@ class ProductController extends Controller
                                 }
 
                                 if(count($users_temp)> 0) {
+                                    $users = [];
                                     foreach($users_temp as $user){
                                         try{
-                                            Mail::to($user)->send(new VariantStockOutMail($product));
+                                            Mail::to($user)->send(new ProductStockOutMail($product));
                                         }
                                         catch (\Exception $e){
                                         }
                                     }
                                 }
                             }
-                            $this->notify->generate('Product','Variant Out Of Stock',$variant->title.' of ' . $product->title . ' is running out of stock, kindly update the stock on your store',$product);
+
+                            $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                         }
 
-                        $variant->product_id = $product->id;
-                        $variant->save();
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+
+
+//                    if (count($product->hasVariants) == 0) {
+//                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+//                        if(!$response->errors){
+//                            $shopifyVariants = $response->body->product->variants;
+//                            $variant_id = $shopifyVariants[0]->id;
+//                            $i = [
+//                                'variant' => [
+//                                    'price' =>$product->price,
+//                                    'sku' =>  $product->sku,
+//                                    'grams' => $product->weight * 1000,
+//                                    'weight' => $product->weight,
+//                                    'weight_unit' => 'kg',
+//                                    'barcode' => $product->barcode,
+//
+//                                ]
+//                            ];
+//                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
+//
+//                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+//                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+//
+//                        }
+//
+//                    }
+
                     }
 
-                    $attributes_array = $this->attributes_template_array($product);
+                    else if ($type == 'pricing-for-variant') {
+                        $product->price = $request->price;
+                        $product->quantity = $request->quantity;
+                        $product->weight = $request->weight;
+                        $product->length = $request->length;
+                        $product->width = $request->width;
+                        $product->height = $request->height;
+                        $product->save();
 
-                    $productdata = [
-                        'attributes' => $attributes_array
-                    ];
+                        $dimension_array = array(
+                            "length" => $request->length,
+                            "width" => $request->width,
+                            "height" => $request->height
+                        );
 
-                    $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        $productdata = [
+                            "sale_price" => $product->price,
+                            "regular_price" => $product->cost,
+                            "sku" => $product->sku,
+                            "weight" => $product->weight,
+                            "stock_quantity" => $product->quantity,
+                            "dimensions" => $dimension_array,
+                        ];
 
-                    $variants_array =  $this->woocommerce_variants_template_array_for_updation($product, $response->attributes);
+                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
 
-                    $variantdata = [
-                        'update' => $variants_array
-                    ];
+                        if($product->quantity == 0) {
+                            // Sending Notification Emails To all Concerned Retailer Stores
+                            if(count($product->has_retailer_products) > 0) {
+                                $users_temp = [];
+                                foreach ($product->has_retailer_products as $retailer_product) {
+                                    array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
+                                }
+
+                                if(count($users_temp)> 0) {
+                                    $users = [];
+                                    foreach($users_temp as $key => $ut){
+                                        if($ut != null) {
+                                            $ua = [];
+                                            $ua['email'] = $ut;
+                                            $ua['name'] = 'test';
+                                            $users[$key] = (object)$ua;
+                                        }
+                                    }
+
+                                    try{
+                                        Mail::to($users)->send(new ProductStockOutMail($product));
+                                    }
+                                    catch (\Exception $e){
+                                    }
+                                }
+                            }
+
+                            $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
+                        }
+
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
 
-                    /*Updating Product Variations On Woocommerce*/
-                    $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
+//                    if (count($product->hasVariants) == 0) {
+//                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+//                        if(!$response->errors){
+//                            $shopifyVariants = $response->body->product->variants;
+//                            $variant_id = $shopifyVariants[0]->id;
+//                            $i = [
+//                                'variant' => [
+//                                    'price' =>$product->price,
+//                                    'sku' =>  $product->sku,
+//                                    'grams' => $product->weight * 1000,
+//                                    'weight' => $product->weight,
+//                                    'weight_unit' => 'kg',
+//                                    'barcode' => $product->barcode,
+//
+//                                ]
+//                            ];
+//                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
+//
+//                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+//                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+//
+//                        }
+//
+//                    }
 
-                    Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                    }
 
-                }
+                    else if ($type == 'single-variant-update') {
+                        foreach ($request->variant_id as $id) {
+                            $variant = ProductVariant::find($id);
+                            $variant->title = $request->input('option1-'.$id) . '/' . $request->input('option2-'.$id) . '/' . $request->input('option3-'.$id);
+                            $variant->option1 = $request->input('option1-'.$id);
+                            $variant->option2 = $request->input('option2-'.$id);
+                            $variant->option3 = $request->input('option3-'.$id);
+                            $variant->price = $request->input('single-var-price-'.$id);
+                            $variant->cost = $request->input('single-var-cost-'.$id);
+                            $variant->quantity = $request->input('single-var-quantity-'.$id);
+                            $variant->sku = $request->input('single-var-sku-'.$id);
+                            $variant->barcode = $request->input('single-var-barcode-'.$id);
+
+                            if($variant->quantity == 0) {
+                                // Sending Notification Emails To all Concerned Retailer Stores
+                                if(count($product->has_retailer_products) > 0) {
+                                    $users_temp = [];
+                                    foreach ($product->has_retailer_products as $retailer_product) {
+                                        array_push($users_temp, User::where('id', $retailer_product->user_id)->first()->email);
+                                    }
+
+                                    if(count($users_temp)> 0) {
+                                        foreach($users_temp as $user){
+                                            try{
+                                                Mail::to($user)->send(new VariantStockOutMail($product));
+                                            }
+                                            catch (\Exception $e){
+                                            }
+                                        }
+                                    }
+                                }
+                                $this->notify->generate('Product','Variant Out Of Stock',$variant->title.' of ' . $product->title . ' is running out of stock, kindly update the stock on your store',$product);
+                            }
+
+                            $variant->product_id = $product->id;
+                            $variant->save();
+                        }
+
+                        $attributes_array = $this->attributes_template_array($product);
+
+                        $productdata = [
+                            'attributes' => $attributes_array
+                        ];
+
+                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+
+                        $variants_array =  $this->woocommerce_variants_template_array_for_updation($product, $response->attributes);
+
+                        $variantdata = [
+                            'update' => $variants_array
+                        ];
+
+
+                        /*Updating Product Variations On Woocommerce*/
+                        $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
+
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+
+                    }
 
 //                else if ($type == 'add-additional-tab'){
 //                    $additional_tab = new AdditionalTab();
@@ -984,83 +991,83 @@ class ProductController extends Controller
 //                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
 //                }
 
-                else if ($type == 'fulfilled') {
-                    $product->fulfilled_by = $request->input('fulfilled-by');
-                    $product->sortBy = $request->input('sortBy');
-                    $product->save();
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
-                }
-
-                else if($type == 'marketing_video_update'){
-                    $product->marketing_video = $request->input('marketing_video');
-                    $product->save();
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Marketing Video Updated');
-                }
-
-                else if ($type == 'category') {
-                    if ($request->category) {
-                        $product->has_categories()->sync($request->category);
+                    else if ($type == 'fulfilled') {
+                        $product->fulfilled_by = $request->input('fulfilled-by');
+                        $product->sortBy = $request->input('sortBy');
+                        $product->save();
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
                     }
-                    if ($request->sub_cat) {
-                        $product->has_subcategories()->sync($request->sub_cat);
+
+                    else if($type == 'marketing_video_update'){
+                        $product->marketing_video = $request->input('marketing_video');
+                        $product->save();
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Marketing Video Updated');
                     }
-                    $product->save();
 
-                    /*Updating Categories on Woocommerce and getting there id's so that we can pass them to products array*/
-                    if(count($product->has_categories) > 0){
-                        $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
-                        $categories_id_array = [];
+                    else if ($type == 'category') {
+                        if ($request->category) {
+                            $product->has_categories()->sync($request->category);
+                        }
+                        if ($request->sub_cat) {
+                            $product->has_subcategories()->sync($request->sub_cat);
+                        }
+                        $product->save();
 
-                        foreach($product_categories as $item) {
-                            array_push($categories_id_array, [
-                                'id' => $item,
+                        /*Updating Categories on Woocommerce and getting there id's so that we can pass them to products array*/
+                        if(count($product->has_categories) > 0){
+                            $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
+                            $categories_id_array = [];
+
+                            foreach($product_categories as $item) {
+                                array_push($categories_id_array, [
+                                    'id' => $item,
+                                ]);
+                            }
+
+                            $productdata = [
+                                "categories" => $categories_id_array
+                            ];
+
+                            /*Updating Product On Woocommerce*/
+                            $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        }
+
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Category Updated');
+                    }
+
+                    else if ($type == 'organization') {
+                        $product->type = $request->product_type;
+                        $product->vendor = $request->vendor;
+
+                        if($request->tags)
+                            $product->tags()->sync($request->tags);
+
+                        $product->save();
+
+
+                        /*Updating Tags on Woocommerce */
+                        $tags_array = [];
+                        foreach ($product->tags()->get() as $tag) {
+                            array_push($tags_array, [
+                                'id' => $tag->woocommerce_id,
                             ]);
                         }
 
-                        $productdata = [
-                            "categories" => $categories_id_array
-                        ];
-
                         /*Updating Product On Woocommerce*/
-                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        $response = $woocommerce->put('products/'. $product->woocommerce_id, ["tags" => $tags_array]);
+
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Vendor Updated');
                     }
 
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Category Updated');
-                }
-
-                else if ($type == 'organization') {
-                    $product->type = $request->product_type;
-                    $product->vendor = $request->vendor;
-
-                    if($request->tags)
-                        $product->tags()->sync($request->tags);
-
-                    $product->save();
-
-
-                    /*Updating Tags on Woocommerce */
-                    $tags_array = [];
-                    foreach ($product->tags()->get() as $tag) {
-                        array_push($tags_array, [
-                            'id' => $tag->woocommerce_id,
-                        ]);
-                    }
-
-                    /*Updating Product On Woocommerce*/
-                    $response = $woocommerce->put('products/'. $product->woocommerce_id, ["tags" => $tags_array]);
-
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Vendor Updated');
-                }
-
-                else if ($type == 'more-details') {
-                    if($request->input('processing_time') != null){
-                        $product->processing_time = $request->input('processing_time');
-                    }
-                    if ($request->platforms) {
-                        $product->has_platforms()->sync($request->platforms);
-                    }
-                    $product->save();
-                    $metafields = [];
+                    else if ($type == 'more-details') {
+                        if($request->input('processing_time') != null){
+                            $product->processing_time = $request->input('processing_time');
+                        }
+                        if ($request->platforms) {
+                            $product->has_platforms()->sync($request->platforms);
+                        }
+                        $product->save();
+                        $metafields = [];
 
 //                    $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json');
 //                    if(count($resp->body->metafields) > 0){
@@ -1085,82 +1092,88 @@ class ProductController extends Controller
 //                        $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
 //                    }
 
-                    $this->product_status_change($request, $product);
-                }
-
-                else if ($type == 'shop-preferences'){
-                    $product->global = $request->input('global');
-                    $product->save();
-                    if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
-                        $product->has_preferences()->sync($request->input('shops'));
+                        $this->product_status_change($request, $product);
                     }
-                    if($request->input('global') == 0 && $request->has('non_shopify_users') && count($request->input('non_shopify_users')) > 0){
-                        $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
+
+                    else if ($type == 'shop-preferences'){
+                        $product->global = $request->input('global');
+                        $product->save();
+                        if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
+                            $product->has_preferences()->sync($request->input('shops'));
+                        }
+                        if($request->input('global') == 0 && $request->has('non_shopify_users') && count($request->input('non_shopify_users')) > 0){
+                            $product->has_non_shopify_user_preferences()->sync($request->input('non_shopify_users'));
+                        }
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
+
                     }
-                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
-
-                }
 
 
-                else if ($type == 'tiered-pricing') {
-                    $variants = $request->variant_id;
-                    if($variants != null) {
-                        foreach ($variants as $variant) {
-                            if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
-                                TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
-                            }
-                            for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
-
-                                if($request->input('min_qty'.$variant)[$i] != null) {
-                                    $item = new TieredPrice();
-                                    $item->product_variant_id = $variant;
-                                    $item->product_id = $id;
-                                    $item->min_qty = $request->input('min_qty'.$variant)[$i];
-                                    if($request->input('max_qty'.$variant)[$i] == null) {
-                                        $item->max_qty = $product->quantity;
-                                    }
-                                    else {
-                                        $item->max_qty = $request->input('max_qty'.$variant)[$i];
-                                    }
-                                    $item->type = $request->input('type'.$variant)[$i];
-                                    $item->price = $request->input('tiered_price'.$variant)[$i];
-                                    $item->save();
+                    else if ($type == 'tiered-pricing') {
+                        $variants = $request->variant_id;
+                        if($variants != null) {
+                            foreach ($variants as $variant) {
+                                if(TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->exists()) {
+                                    TieredPrice::where('product_variant_id', $variant)->where('product_id', $id)->delete();
                                 }
+                                for($i=0; $i< count($request->input('min_qty'.$variant)); $i++) {
 
+                                    if($request->input('min_qty'.$variant)[$i] != null) {
+                                        $item = new TieredPrice();
+                                        $item->product_variant_id = $variant;
+                                        $item->product_id = $id;
+                                        $item->min_qty = $request->input('min_qty'.$variant)[$i];
+                                        if($request->input('max_qty'.$variant)[$i] == null) {
+                                            $item->max_qty = $product->quantity;
+                                        }
+                                        else {
+                                            $item->max_qty = $request->input('max_qty'.$variant)[$i];
+                                        }
+                                        $item->type = $request->input('type'.$variant)[$i];
+                                        $item->price = $request->input('tiered_price'.$variant)[$i];
+                                        $item->save();
+                                    }
+
+                                }
                             }
                         }
                     }
-                }
 
-                else if($type == 'single-variant-tiered-pricing') {
-                    if(TieredPrice::where('product_id', $id)->exists()) {
-                        TieredPrice::where('product_id', $id)->delete();
-                    }
-
-                    for($i=0; $i< count($request->input('min_qty')); $i++) {
-
-                        if($request->input('min_qty')[$i] != null) {
-                            $item = new TieredPrice();
-                            $item->product_variant_id = null;
-                            $item->product_id = $id;
-                            $item->min_qty = $request->input('min_qty')[$i];
-                            if($request->input('max_qty')[$i] == null) {
-                                $item->max_qty = $product->quantity;
-                            }
-                            else {
-                                $item->max_qty = $request->input('max_qty')[$i];
-                            }
-                            $item->type = $request->input('type')[$i];
-                            $item->price = $request->input('tiered_price')[$i];
-                            $item->save();
+                    else if($type == 'single-variant-tiered-pricing') {
+                        if(TieredPrice::where('product_id', $id)->exists()) {
+                            TieredPrice::where('product_id', $id)->delete();
                         }
 
+                        for($i=0; $i< count($request->input('min_qty')); $i++) {
+
+                            if($request->input('min_qty')[$i] != null) {
+                                $item = new TieredPrice();
+                                $item->product_variant_id = null;
+                                $item->product_id = $id;
+                                $item->min_qty = $request->input('min_qty')[$i];
+                                if($request->input('max_qty')[$i] == null) {
+                                    $item->max_qty = $product->quantity;
+                                }
+                                else {
+                                    $item->max_qty = $request->input('max_qty')[$i];
+                                }
+                                $item->type = $request->input('type')[$i];
+                                $item->price = $request->input('tiered_price')[$i];
+                                $item->save();
+                            }
+
+                        }
                     }
                 }
             }
-        }
 
-        return redirect()->back()->with('success', 'Product Updated Successfully');
+            DB::commit();
+            return redirect()->back()->with('success', 'Product Updated Successfully');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 

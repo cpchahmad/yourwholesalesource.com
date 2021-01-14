@@ -112,12 +112,12 @@
                                             <div class="form-group row">
                                                 <div class="col-md-6 push-10">
                                                     <label>Price</label>
-                                                    <input type="text" class="form-control" name="price"
+                                                    <input type="number" step="any" class="form-control" name="price"
                                                            value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Cost Per Item</label>
-                                                    <input type="text" class="form-control" name="cost"
+                                                    <input type="number" step="any" class="form-control" name="cost"
                                                            value="{{$product->cost}}"  placeholder="$ 0.00">
 
                                                 </div>
@@ -130,7 +130,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
+                                                    <input type="number" step="any" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
                                                 </div>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12 ">
                                                     <label>Weight</label>
-                                                    <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                    <input type="number" step="any" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
                                                 </div>
                                             </div>
                                         </div>
@@ -166,19 +166,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Length(cm)</label>
-                                                <input type="text" class="form-control" name="length" value="{{$product->length}}" placeholder="0" >
+                                                <input type="number" step="any" class="form-control" name="length" value="{{$product->length}}" placeholder="0" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Width(cm)</label>
-                                                <input type="text" class="form-control" name="width" value="{{$product->width}}" placeholder="0" >
+                                                <input type="number" step="any" class="form-control" name="width" value="{{$product->width}}" placeholder="0" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Height(cm)</label>
-                                                <input type="text" class="form-control" name="height" value="{{$product->height}}" placeholder="0" >
+                                                <input type="number" step="any" class="form-control" name="height" value="{{$product->height}}" placeholder="0" >
                                             </div>
                                         </div>
 
@@ -202,28 +202,28 @@
                                             <div class="form-group">
                                                 <div class="col-xs-12">
                                                     <label>Price</label>
-                                                    <input type="text" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
+                                                    <input type="number" step="any" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <label>Weight</label>
-                                                    <input type="text" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
+                                                    <input type="number" step="any" class="form-control" value="{{$product->weight}}" name="weight" placeholder="0.0Kg">
                                                 </div>
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
-                                                    <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
+                                                    <input type="number" step="any" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
                                                 </div>
                                                 <div class="row mt-2">
                                                     <div class="col-md-4">
                                                         <label>Length(cm)</label>
-                                                        <input type="text" class="form-control" name="length" value="{{$product->length}}" placeholder="0" >
+                                                        <input type="number" step="any" class="form-control" name="length" value="{{$product->length}}" placeholder="0" >
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Width(cm)</label>
-                                                        <input type="text" class="form-control" name="width" value="{{$product->width}}" placeholder="0" >
+                                                        <input type="number" step="any" class="form-control" name="width" value="{{$product->width}}" placeholder="0" >
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label>Height(cm)</label>
-                                                        <input type="text" class="form-control" name="height" value="{{$product->height}}" placeholder="0" >
+                                                        <input type="number" step="any" class="form-control" name="height" value="{{$product->height}}" placeholder="0" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -332,11 +332,11 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control var-price-row" name="single-var-price-{{$v->id}}" placeholder="$0.00" value="{{$v->price}}">
+                                                        <input type="number" step="any" class="form-control var-price-row" name="single-var-price-{{$v->id}}" placeholder="$0.00" value="{{$v->price}}">
                                                     </td>
 
-                                                    <td><input type="text" class="form-control var-cost-row" name="single-var-cost-{{$v->id}}" value="{{$v->cost}}" placeholder="$0.00"></td>
-                                                    <td><input type="text" class="form-control" value="{{$v->quantity}}" name="single-var-quantity-{{$v->id}}" placeholder="0"></td>
+                                                    <td><input type="number" step="any" class="form-control var-cost-row" name="single-var-cost-{{$v->id}}" value="{{$v->cost}}" placeholder="$0.00"></td>
+                                                    <td><input type="number" step="any" class="form-control" value="{{$v->quantity}}" name="single-var-quantity-{{$v->id}}" placeholder="0"></td>
                                                     <td><input type="text" class="form-control" name="single-var-sku-{{$v->id}}" value="{{$v->sku}}"></td>
                                                     <td><input type="text" class="form-control" name="single-var-barcode-{{$v->id}}" value="{{$v->barcode}}" placeholder="">
                                                     </td>
