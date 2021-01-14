@@ -2754,7 +2754,7 @@ class ProductController extends Controller
             }
 
             if($varaint->has_image != null){
-                array_psuh($array_item['image'] , [
+                array_push($array_item['image'] , [
                     'id' => $varaint->has_image->woocommerce_id,
                 ]);
             }
@@ -2809,7 +2809,7 @@ class ProductController extends Controller
             }
 
             if($varaint->has_image != null){
-                array_psuh($array_item['image'] , [
+                array_push($array_item['image'] , [
                     'id' => $varaint->has_image->woocommerce_id,
                 ]);
             }
