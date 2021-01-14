@@ -2039,6 +2039,8 @@ class ProductController extends Controller
             "published"=>  $published,
         ];
 
+        dump($productdata);
+
         $woocommerce = $this->helper->getWooCommerceAdminShop();
         $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
         dd($response);
