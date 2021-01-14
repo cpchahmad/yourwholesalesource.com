@@ -623,10 +623,10 @@ $(document).ready(function () {
             }
         },
         onChange: function(){
-            var price = $('input[type="text"][name="price"]').val();
-            var cost = $('input[type="text"][name="cost"]').val();
+            var price = $('input[type="number"][name="price"]').val();
+            var cost = $('input[type="number"][name="cost"]').val();
             var sku = $('input[type="text"][name="sku"]').val();
-            var quantity = $('input[type="text"][name="quantity"]').val();
+            var quantity = $('input[type="number"][name="quantity"]').val();
             var option1 = $('input[type="text"][name="option1-update"]').val();
             console.log()
             var substr1 = option1.split(',');
@@ -638,10 +638,10 @@ $(document).ready(function () {
                 title = item1;
                 $('.option-1-table-body').append('   <tr>\n' +
                     '                                                    <td class="variant_title">' + title + '<input type="hidden" name="variant_title[]" value="' + title + '"></td>\n' +
-                    '                                                    <td><input type="text" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
+                    '                                                    <td><input type="number" step="any" class="form-control" name="variant_price[]" placeholder="$0.00" value="' + price + '">\n' +
                     '                                                    </td>\n' +
-                    '                                                    <td><input type="text" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
-                    '                                                    <td><input type="text" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
+                    '                                                    <td><input type="number" step="any" class="form-control" name="variant_cost[]" value="' + cost + '" placeholder="$0.00"></td>\n' +
+                    '                                                    <td><input type="number" step="any" class="form-control" name="variant_quantity[]" value="'+quantity+'" placeholder="0"></td>\n' +
                     '                                                    <td><input type="text" class="form-control" name="variant_sku[]" value="' +sku+  '"></td>\n' +
                     '                                                    <td><input type="text" class="form-control" name="variant_barcode[]" placeholder=""></td>\n' +
                     '                                                </tr>');
