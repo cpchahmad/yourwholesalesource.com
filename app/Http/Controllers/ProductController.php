@@ -1236,6 +1236,8 @@ class ProductController extends Controller
 
                 $attributes_array = $this->attributes_template_array($product);
 
+                dd($attributes_array);
+
                 $productdata = [
                     "attributes" => $attributes_array,
                     "type" => "variable"
