@@ -1606,6 +1606,8 @@ class ProductController extends Controller
             $v->delete();
         }
 
+        dump($product->hasVariants);
+
 
         for ($i = 0; $i < count($data->variant_title); $i++) {
 
