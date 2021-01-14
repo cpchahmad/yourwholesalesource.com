@@ -1337,6 +1337,9 @@ class ProductController extends Controller
 
                 $this->ProductVariantsUpdate($request, $product->id, $product);
 
+                sleep(5);
+
+
                 $attributes_array = $this->attributes_template_array($product);
 
                 $productdata = [
@@ -1609,7 +1612,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->hasVariants()->delete();
 
-            dd($product->hasVariants);
+            dump($product->hasVariants);
 
 
         for ($i = 0; $i < count($data->variant_title); $i++) {
