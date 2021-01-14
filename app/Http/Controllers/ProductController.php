@@ -1069,28 +1069,34 @@ class ProductController extends Controller
                         $product->save();
                         $metafields = [];
 
-//                    $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json');
-//                    if(count($resp->body->metafields) > 0){
-//                        foreach ($resp->body->metafields as $m){
-//                            if($m->namespace == 'platform'){
-//                                $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
+//                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+//                        if(count($resp->meta_data) > 0){
+//                            foreach ($resp->meta_data as $m){
+//                                if($m->namespace == 'platform'){
+//                                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
+//                                }
 //                            }
 //                        }
-//                    }
-//                    foreach ($product->has_platforms as $index => $platform){
-//                        $index = $index+1;
-//                        $productdata = [
-//                            "metafield" => [
-//                                "key" => "warned_platform".$index,
-//                                "value"=> $platform->name,
-//                                "value_type"=> "string",
-//                                "namespace"=> "platform"
-//                            ]
-//                        ];
-//                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
-//
-//                        $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
-//                    }
+
+                        $meta_data_array = [];
+                        foreach ($product->has_platforms as $index => $platform){
+                            $index = $index+1;
+                            array_push($meta_data_array,[
+                                "key" => "warned_platform".$index,
+                                "value"=> $platform->name,
+                                "value_type"=> "string",
+                            ]);
+                        }
+
+                        $productdata = [
+                            "meta_data" => $meta_data_array
+                        ];
+
+                        dump($productdata);
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
+
+                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                        dd($resp);
 
                         $this->product_status_change($request, $product);
                     }
