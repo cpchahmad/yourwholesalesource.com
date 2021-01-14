@@ -2282,7 +2282,7 @@ class ProductController extends Controller
             if($variant->linked_product != null) {
                 if ($variant->linked_product->woocommerce_id != null) {
                     $image = Image::find($image_id);
-                    return $this->shopify_image_selection($image_id, $image, $shop, $variant);
+                    return $this->woocommerce_image_selection($image_id, $image, $shop, $variant);
                 }
                 else{
                     return response()->json([
@@ -2326,6 +2326,34 @@ class ProductController extends Controller
     {
         $variant_ids = [];
         foreach ($image->has_variants as $v) {
+            array_push($variant_ids, $v->shopify_id);
+        }
+        array_push($variant_ids,$variant->shopify_id);
+        $i = [
+            'image' => [
+                'id' => $image->shopify_id,
+                'variant_ids' => $variant_ids
+            ]
+        ];
+        $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
+        if (!$imagesResponse->errors) {
+            $variant->image = $image_id;
+            $variant->save();
+            return response()->json([
+                'message' => 'success'
+            ]);
+        } else {
+            dd($imagesResponse);
+            return response()->json([
+                'message' => 'false'
+            ]);
+        }
+    }
+
+    public function woocommerce_image_selection($image_id, $image, $shop, $variant)
+    {
+        $variant_ids = [];
+        foreach ($image->has_variants as $v) {
             array_push($variant_ids, $v->woocommerce_id);
         }
         array_push($variant_ids,$variant->woocommerce_id);
@@ -2335,7 +2363,6 @@ class ProductController extends Controller
             ]
         ];
 
-//        $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
         $imagesResponse = $shop->put('products/'.$variant->linked_product->woocommerce_id.'/variations/'.$variant->woocommerce_id, $data);
         if ($imagesResponse->id) {
             $variant->image = $image_id;
@@ -2349,6 +2376,7 @@ class ProductController extends Controller
             ]);
         }
     }
+
 
     public function update_image_position(Request $request){
         $positions = $request->input('positions');
