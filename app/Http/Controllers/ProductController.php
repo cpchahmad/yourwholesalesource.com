@@ -1092,11 +1092,9 @@ class ProductController extends Controller
                             "meta_data" => $meta_data_array
                         ];
 
-                        dump($productdata);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
 
                         $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                        dd($resp);
 
                         $this->product_status_change($request, $product);
                     }
