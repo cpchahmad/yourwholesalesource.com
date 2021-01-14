@@ -1787,7 +1787,7 @@ class ProductController extends Controller
                     "variants" => $variants_array,
                     "options" => $options_array,
                     "images" => $images_array,
-                    "published"=>  $published
+                    "statusd"=>  $published
                 ]
             ];
 
@@ -2036,14 +2036,11 @@ class ProductController extends Controller
 
 
         $productdata = [
-            "published"=>  $published,
+            "status"=>  $published,
         ];
-
-        dump($productdata);
 
         $woocommerce = $this->helper->getWooCommerceAdminShop();
         $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
-        dd($response);
 
     }
 
