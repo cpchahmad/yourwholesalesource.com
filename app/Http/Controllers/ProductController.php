@@ -1347,7 +1347,8 @@ class ProductController extends Controller
                 /*Updating Product Attributes On Woocommerce*/
                 $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
 
-                $variants_array =  $this->woocommerce_variants_template_array_for_update_existing_function($product);
+
+                $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
 
                 $variantdata = [
                     'create' => $variants_array
@@ -1356,19 +1357,14 @@ class ProductController extends Controller
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
 
-
                 $woocommerce_variants = $response->create;
-                foreach ($product->hasVariants()->where('woocommerce_id', null)->get() as $index => $v){
+                foreach ($product->hasVariants as $index => $v){
                     $v->woocommerce_id = $woocommerce_variants[$index]->id;
-                    // $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                    //                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                     $v->save();
                 }
 
-                // Sending Notification To all Concerned Retailer Stores
-                $this->notify->generate('Product','Product Variant Added','New Variants are added to '.$product->title,$product);
-
                 $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
-
                 return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
             }
@@ -1594,48 +1590,46 @@ class ProductController extends Controller
 
     public function ProductVariantsUpdate($data, $id, $product)
     {
-        $woocommerce = $this->helper->getWooCommerceAdminShop();
+        $woocommerce = $this->helper->getAdminShop();
 
+        $product = Product::find($id);
+        foreach ($product->hasVariants as $v){
+            $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
+            $v->delete();
+        }
 
-//        foreach ($product->hasVariants as $v){
-//            $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
-//            $v->delete();
-//        }
-//
-//        dump($product->hasVariants);
-//        $variants_array = [];
+        dump($product->hasVariants);
+
 
         for ($i = 0; $i < count($data->variant_title); $i++) {
 
+            $variants = new ProductVariant();
             $options = explode('/', $data->variant_title[$i]);
 
-            if(!ProductVariant::where('product_id', $id)->where('title',$data->variant_title[$i])->exists()) {
-                $variants = new ProductVariant();
-
-                if (!empty($options[0])) {
-                    $variants->option1 = $options[0];
-                }
-                if (!empty($options[1])) {
-                    $variants->option2 = $options[1];
-                }
-                if (!empty($options[2])) {
-                    $variants->option3 = $options[2];
-                }
-                $variants->title = $data->variant_title[$i];
-                $variants->price = $data->variant_price[$i];
-                $variants->compare_price = $data->variant_comparePrice[$i];
-                $variants->quantity = $data->variant_quantity[$i];
-                if($data->variant_cost[$i] == null) {
-                    $variants->cost = null;
-                }
-                else {
-                    $variants->cost = $data->variant_cost[$i];
-                }
-                $variants->sku = $data->variant_sku[$i];
-                $variants->barcode = $data->variant_barcode[$i];
-                $variants->product_id = $id;
-                $variants->save();
+            if (!empty($options[0])) {
+                $variants->option1 = $options[0];
             }
+            if (!empty($options[1])) {
+                $variants->option2 = $options[1];
+            }
+            if (!empty($options[2])) {
+                $variants->option3 = $options[2];
+            }
+            $variants->title = $data->variant_title[$i];
+            $variants->price = $data->variant_price[$i];
+            $variants->compare_price = $data->variant_comparePrice[$i];
+            $variants->quantity = $data->variant_quantity[$i];
+            if($data->variant_cost[$i] == null) {
+                $variants->cost = null;
+            }
+            else {
+                $variants->cost = $data->variant_cost[$i];
+            }
+            $variants->sku = $data->variant_sku[$i];
+            $variants->barcode = $data->variant_barcode[$i];
+            $variants->product_id = $id;
+            $variants->save();
+
         }
     }
 
