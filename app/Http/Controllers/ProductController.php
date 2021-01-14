@@ -1334,7 +1334,8 @@ class ProductController extends Controller
                 $product->attribute3 = $request->attribute3;
                 $product->variants = 1;
                 $product->save();
-                $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
+
+                $this->ProductVariantsUpdate($request, $product->id, $product);
 
                 $attributes_array = $this->attributes_template_array($product);
 
@@ -1349,12 +1350,16 @@ class ProductController extends Controller
 
                 $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
 
+                dump($variants_array);
+
                 $variantdata = [
                     'create' => $variants_array
                 ];
 
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
+
+                dump($response);
 
                 $woocommerce_variants = $response->create;
                 foreach ($product->hasVariants as $index => $v){
@@ -1367,6 +1372,8 @@ class ProductController extends Controller
                 $this->notify->generate('Product','Product Variant Added','New Variants are added to '.$product->title,$product);
 
                 $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
+
+                dd(213);
                 return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
             }
@@ -1599,6 +1606,8 @@ class ProductController extends Controller
             $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
             $v->delete();
         }
+
+        dump($product->hasVariants);
         $variants_array = [];
 
         for ($i = 0; $i < count($data->variant_title); $i++) {

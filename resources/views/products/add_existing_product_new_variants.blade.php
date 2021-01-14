@@ -2,10 +2,10 @@
 @section('content')
 
 
-    <input type="text"  name="cost" value="{{$product->cost}}" style="display: none">
-    <input type="text" name="price" value="{{$product->price}}" style="display: none">
+    <input type="number"  name="cost" value="{{$product->cost}}" style="display: none">
+    <input type="number" name="price" value="{{$product->price}}" style="display: none">
     <input type="text"  name="sku" value="{{$product->sku}}" style="display: none">
-    <input type="text"  name="quantity" value="{{$product->quantity}}" style="display: none">
+    <input type="number"  name="quantity" value="{{$product->quantity}}" style="display: none">
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
