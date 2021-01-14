@@ -1362,8 +1362,7 @@ class ProductController extends Controller
                 dump($response);
 
                 $woocommerce_variants = $response->create;
-                $product = Product::find($id);
-                foreach ($product->hasVariants as $index => $v){
+                foreach ($product->hasVariants()->where('woocommerce_id', null)->get() as $index => $v){
                     $v->woocommerce_id = $woocommerce_variants[$index]->id;
                     // $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
                     $v->save();
