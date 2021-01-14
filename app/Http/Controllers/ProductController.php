@@ -2280,7 +2280,7 @@ class ProductController extends Controller
             $shop = $this->helper->getWooCommerceAdminShop();
             $variant = ProductVariant::find($id);
             if($variant->linked_product != null) {
-                if ($variant->linked_product->shopify_id != null) {
+                if ($variant->linked_product->woocommerce_id != null) {
                     $image = Image::find($image_id);
                     return $this->shopify_image_selection($image_id, $image, $shop, $variant);
                 }
