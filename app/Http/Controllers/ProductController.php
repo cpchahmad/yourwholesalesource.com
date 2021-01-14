@@ -1715,8 +1715,59 @@ class ProductController extends Controller
 
     }
 
-
     public function delete($id)
+    {
+        $product = Product::find($id);
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
+
+        DB::beginTransaction();
+        try{
+            $woocommerce->delete('products/'.$product->woocommerce_id, ['force' => true]);
+
+            $variants = ProductVariant::where('product_id', $id)->get();
+            foreach ($variants as $variant) {
+                $variant->delete();
+            }
+            foreach ($product->has_images as $image){
+                $image->delete();
+            }
+            $product->has_categories()->detach();
+            $product->has_subcategories()->detach();
+
+            $this->log->store(0, 'Product', $product->id, $product->title,'Deleted');
+
+
+            $product->delete();
+
+            // Sending Notification To all Concerned Retailer Stores
+            $this->notify->generate('Product','Product Delete',$product->title.' has been deleted from Wefullfill, kindly remove this product from your store as well',$product);
+
+            // Sending Notification Emails To all Concerned Retailer Stores
+            if(count($product->has_retailer_products) > 0) {
+                foreach ($product->has_retailer_products as $retailer_product) {
+                    $u = User::find($retailer_product->user_id);
+                    if($u){
+                        try{
+                            Mail::to($u)->send(new ProductDeleteMail($product));
+                        }
+                        catch (\Exception $e){
+                        }
+                    }
+                }
+
+            }
+
+            DB::commit();
+            return redirect()->back()->with('error', 'Product Deleted with Variants Successfully');
+        }
+        catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+
+    public function delete_old($id)
     {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
