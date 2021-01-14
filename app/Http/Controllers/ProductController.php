@@ -1606,7 +1606,8 @@ class ProductController extends Controller
             $v->delete();
         }
 
-            $product->hasVariants()->delete();
+        $product = Product::find($id);
+        $product->hasVariants()->delete();
 
             dd($product->hasVariants);
 
