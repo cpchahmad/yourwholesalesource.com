@@ -711,8 +711,8 @@ class ProductController extends Controller
         ]);
 
 
-//        DB::beginTransaction();
-//        try{
+        DB::beginTransaction();
+        try{
             if ($product != null) {
                 foreach($request->type as $type) {
                     if ($type == 'basic-info') {
@@ -1173,13 +1173,13 @@ class ProductController extends Controller
                 }
             }
 
-            //DB::commit();
+            DB::commit();
             return redirect()->back()->with('success', 'Product Updated Successfully');
-//        }
-//        catch(\Exception $e) {
-//            DB::rollBack();
-//            return redirect()->back()->with('error', $e->getMessage());
-//        }
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 
@@ -2700,11 +2700,11 @@ class ProductController extends Controller
                 ]);
             }
 
-            if($varaint->has_image != null){
-                array_push($array_item['image'] , [
-                    'id' => $varaint->has_image->woocommerce_id,
-                ]);
-            }
+//            if($varaint->has_image != null){
+//                array_push($array_item['image'] , [
+//                    'id' => $varaint->has_image->woocommerce_id,
+//                ]);
+//            }
             array_push($variants_array, $array_item);
 
         }
@@ -2753,19 +2753,17 @@ class ProductController extends Controller
                 ]);
             }
 
-            if($varaint->has_image != null){
-                array_push($array_item['image'] , [
-                    'id' => $varaint->has_image->woocommerce_id,
-                ]);
-            }
+//            if($varaint->has_image != null){
+//                array_push($array_item['image'] , [
+//                    'id' => $varaint->has_image->woocommerce_id,
+//                ]);
+//            }
             array_push($variants_array, $array_item);
 
         }
 
         return $variants_array;
     }
-
-
 
 
     public function woocommerce_variants_template_array_for_updation($product, $attributes){
@@ -2780,6 +2778,7 @@ class ProductController extends Controller
         foreach ($product->hasVariants as $index => $varaint) {
             $array_item = [];
             $array_item['attributes'] = [];
+            $array_item['image'] = [];
             $array_item['id'] = $varaint->woocommerce_id;
             $array_item['regular_price'] = $varaint->price;
             $array_item['sale_price'] = $varaint->cost;
@@ -2808,11 +2807,6 @@ class ProductController extends Controller
                 ]);
             }
 
-            if($varaint->has_image != null){
-                array_push($array_item['image'] , [
-                    'id' => $varaint->has_image->woocommerce_id,
-                ]);
-            }
             array_push($variants_array, $array_item);
 
         }
