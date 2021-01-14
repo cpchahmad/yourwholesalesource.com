@@ -1218,6 +1218,8 @@ class ProductController extends Controller
 
     public function updateExistingProductNewVariants(Request $request, $id) {
 
+        dd($request->all());
+
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
