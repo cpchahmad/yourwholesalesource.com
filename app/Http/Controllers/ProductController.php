@@ -1601,7 +1601,7 @@ class ProductController extends Controller
     {
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
-
+        $product = Product::find($id);
         foreach ($product->hasVariants as $v){
             $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
             $v->delete();
