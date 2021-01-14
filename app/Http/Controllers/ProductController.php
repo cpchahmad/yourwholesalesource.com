@@ -1348,7 +1348,7 @@ class ProductController extends Controller
                 $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
 
 
-                $variants_array =  $this->woocommerce_variants_template_array_for_new_variants($product, $response->attributes);
+                $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
 
                 dump($variants_array);
 
@@ -1601,49 +1601,47 @@ class ProductController extends Controller
     {
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
-//        foreach ($product->hasVariants as $v){
-//            $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
-//            $v->delete();
-//        }
+        $product = Product::find($id);
+        foreach ($product->hasVariants as $v){
+            $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
+            $v->delete();
+        }
 
-
+        dump($product->hasVariants);
         $variants_array = [];
 
         for ($i = 0; $i < count($data->variant_title); $i++) {
+
+            $variants = new ProductVariant();
             $options = explode('/', $data->variant_title[$i]);
 
-            if(!ProductVariant::where('product_id', $id)->where('option1', $options[0])->where('option2', $options[1])->where('option3', $options[2])->exists()) {
-                dump('yes');
-                $variants = new ProductVariant();
-
-                if (!empty($options[0])) {
-                    $variants->option1 = $options[0];
-                }
-                if (!empty($options[1])) {
-                    $variants->option2 = $options[1];
-                }
-                if (!empty($options[2])) {
-                    $variants->option3 = $options[2];
-                }
-                $variants->title = $data->variant_title[$i];
-                $variants->price = $data->variant_price[$i];
-                $variants->compare_price = $data->variant_comparePrice[$i];
-                $variants->quantity = $data->variant_quantity[$i];
-                if($data->variant_cost[$i] == null) {
-                    $variants->cost = null;
-                }
-                else {
-                    $variants->cost = $data->variant_cost[$i];
-                }
-                $variants->sku = $data->variant_sku[$i];
-                $variants->barcode = $data->variant_barcode[$i];
-                $variants->product_id = $id;
-                $variants->save();
+            if (!empty($options[0])) {
+                $variants->option1 = $options[0];
             }
+            if (!empty($options[1])) {
+                $variants->option2 = $options[1];
+            }
+            if (!empty($options[2])) {
+                $variants->option3 = $options[2];
+            }
+            $variants->title = $data->variant_title[$i];
+            $variants->price = $data->variant_price[$i];
+            $variants->compare_price = $data->variant_comparePrice[$i];
+            $variants->quantity = $data->variant_quantity[$i];
+            if($data->variant_cost[$i] == null) {
+                $variants->cost = null;
+            }
+            else {
+                $variants->cost = $data->variant_cost[$i];
+            }
+            $variants->sku = $data->variant_sku[$i];
+            $variants->barcode = $data->variant_barcode[$i];
+            $variants->product_id = $id;
+            $variants->save();
+
         }
 
         return $variants_array;
-
     }
 
     public function delete($id)
@@ -2627,60 +2625,6 @@ class ProductController extends Controller
 
         return $variants_array;
     }
-
-    public function woocommerce_variants_template_array_for_new_variants($product, $attributes){
-        $product = Product::find($product->id);
-
-        if(is_null($product->weight)) {
-            $weight = 0.0;
-        }
-        else {
-            $weight = $product->weight;
-        }
-
-        $variants_array = [];
-        foreach ($product->hasVariants->where('woocommerce_id', null)->get() as $index => $varaint) {
-            $array_item = [];
-            $array_item['attributes'] = [];
-
-            $array_item['regular_price'] = $varaint->price;
-            $array_item['sale_price'] = $varaint->cost;
-            $array_item['sku'] = $varaint->sku;
-            $array_item['stock_quantity'] = $varaint->quantity;
-            $array_item['weight'] = $weight;
-
-            if($varaint->option1 !== null) {
-                array_push($array_item['attributes'], [
-                    'option' => $varaint->option1,
-                    'name' => $product->attribute1,
-                ]);
-            }
-            if($varaint->option2 !== null) {
-                array_push($array_item['attributes'], [
-                    'option' => $varaint->option2,
-                    'name' => $product->attribute2,
-                ]);
-            }
-            if($varaint->option3 !== null) {
-                array_push($array_item['attributes'], [
-                    'option' => $varaint->option3,
-                    'name' => $product->attribute3,
-
-                ]);
-            }
-
-            if($varaint->has_image != null){
-                array_psuh($array_item['image'] , [
-                    'id' => $varaint->has_image->woocommerce_id,
-                ]);
-            }
-            array_push($variants_array, $array_item);
-
-        }
-
-        return $variants_array;
-    }
-
 
 
     public function woocommerce_variants_template_array_for_updation($product, $attributes){
