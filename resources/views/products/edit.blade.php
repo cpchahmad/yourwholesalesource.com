@@ -38,6 +38,9 @@
                                         <label for="product-name">Title</label>
                                         <input class="form-control" type="text" id="product-name" name="title"
                                                value="{{$product->title}}"  placeholder="Short Sleeve Shirt" >
+                                        @error('title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -149,6 +152,9 @@
                                                 <div class="col-xs-12 ">
                                                     <label>SKU</label>
                                                     <input type="text" class="form-control" name="sku" value="{{$product->sku}}" >
+                                                    @error('sku')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -211,6 +217,13 @@
                                                 <div class="col-xs-12 ">
                                                     <label>Quantity</label>
                                                     <input type="number" step="any" class="form-control" name="quantity" value="{{$product->quantity}}" placeholder="0" >
+                                                </div>
+                                                <div class="col-xs-12 ">
+                                                    <label>SKU</label>
+                                                    <input type="text" class="form-control" name="sku" value="{{$product->sku}}" >
+                                                    @error('sku')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                                 <div class="row mt-2">
                                                     <div class="col-md-4">

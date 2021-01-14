@@ -706,8 +706,8 @@ class ProductController extends Controller
         $shop = $this->helper->getShop();
 
         $this->validate($request, [
-            'sku' => 'required|unique:products',
-            'title' => 'required|unique:products'
+            'sku' => 'required|unique:products,sku,'.$product->id,
+            'title' => 'required|unique:products,title,'.$product->id
         ]);
 
 
