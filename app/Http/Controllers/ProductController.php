@@ -2325,9 +2325,9 @@ class ProductController extends Controller
     public function shopify_image_selection($image_id, $image, $shop, $variant)
     {
         $variant_ids = [];
-//        foreach ($image->has_variants as $v) {
-//            array_push($variant_ids, $v->woocommerce_id);
-//        }
+        foreach ($image->has_variants as $v) {
+            array_push($variant_ids, $v->woocommerce_id);
+        }
         array_push($variant_ids,$variant->woocommerce_id);
         $data = [
             'image' => [
