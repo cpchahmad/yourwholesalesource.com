@@ -1347,10 +1347,7 @@ class ProductController extends Controller
                 /*Updating Product Attributes On Woocommerce*/
                 $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
 
-
                 $variants_array =  $this->woocommerce_variants_template_array_for_update_existing_function($product);
-
-                dump($variants_array);
 
                 $variantdata = [
                     'create' => $variants_array
@@ -1359,7 +1356,6 @@ class ProductController extends Controller
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
 
-                dump($response);
 
                 $woocommerce_variants = $response->create;
                 foreach ($product->hasVariants()->where('woocommerce_id', null)->get() as $index => $v){
@@ -1373,7 +1369,6 @@ class ProductController extends Controller
 
                 $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
 
-                dd(213);
                 return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
 
             }
