@@ -1217,7 +1217,7 @@ class ProductController extends Controller
     }
 
 
-    public function updateExistingProductOldVariants(Request $request, $id) {
+    public function updateExistingProductOldVariantsOld(Request $request, $id) {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
         if($product != null) {
@@ -1323,6 +1323,59 @@ class ProductController extends Controller
         return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
 
     }
+
+    public function updateExistingProductOldVariants(Request $request, $id) {
+        $product = Product::find($id);
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
+        if($product != null) {
+            if($request->type == 'existing-product-update-variants') {
+                $product->attribute1 = $request->attribute1;
+                $product->attribute2 = $request->attribute2;
+                $product->attribute3 = $request->attribute3;
+                $product->variants = 1;
+                $product->save();
+                $variants_array = $this->ProductVariantsUpdate($request, $product->id, $product);
+
+                $attributes_array = $this->attributes_template_array($product);
+
+                $productdata = [
+                    "attributes" => $attributes_array,
+                    "type" => "variable"
+                ];
+
+                /*Updating Product Attributes On Woocommerce*/
+                $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+
+
+                $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
+
+                $variantdata = [
+                    'create' => $variants_array
+                ];
+
+                /*Creating Product Variations On Woocommerce*/
+                $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
+
+                $woocommerce_variants = $response->create;
+                foreach ($product->hasVariants as $index => $v){
+                    $v->woocommerce_id = $woocommerce_variants[$index]->id;
+                    // $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                    $v->save();
+                }
+
+                // Sending Notification To all Concerned Retailer Stores
+                $this->notify->generate('Product','Product Variant Added','New Variants are added to '.$product->title,$product);
+
+                $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Updated');
+                return redirect()->route('product.edit', $product->id)->with('success', 'Product Variants Updated Successfully');
+
+            }
+            return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
+        }
+        return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
+
+    }
+
 
     public function deleteExistingProductImage(Request $request, $id) {
         $product = Product::find($id);
@@ -1539,8 +1592,11 @@ class ProductController extends Controller
 
     public function ProductVariantsUpdate($data, $id, $product)
     {
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
+
 
         foreach ($product->hasVariants as $v){
+            $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
             $v->delete();
         }
         $variants_array = [];
@@ -1567,9 +1623,7 @@ class ProductController extends Controller
                 $variants->cost = null;
             }
             else {
-                $res = str_ireplace( array( '$', '"',
-                    ',' , ';', '<', '>' ), ' ', $data->variant_cost[$i]);
-                $variants->cost = trim($res);
+                $variants->cost = $data->variant_cost[$i];
             }
             $variants->sku = $data->variant_sku[$i];
             $variants->barcode = $data->variant_barcode[$i];
