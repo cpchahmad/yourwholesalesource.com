@@ -1219,7 +1219,7 @@ class ProductController extends Controller
     public function updateExistingProductNewVariants(Request $request, $id) {
 
         $product = Product::find($id);
-        $woocommerce = $this->helper->getAdminShop();
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
 
         if($product != null) {
             if ($request->type == 'existing-product-new-variants') {
