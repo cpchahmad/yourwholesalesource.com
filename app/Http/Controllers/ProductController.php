@@ -2337,7 +2337,6 @@ class ProductController extends Controller
 
 //        $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $variant->linked_product->shopify_id . '/images/' . $image->shopify_id . '.json', $i);
         $imagesResponse = $shop->put('products/'.$variant->linked_product->woocommerce_id.'/variations/'.$variant->woocommerce_id, $data);
-        dd($imagesResponse);
         if ($imagesResponse->id) {
             $variant->image = $image_id;
             $variant->save();
