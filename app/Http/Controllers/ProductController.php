@@ -711,8 +711,8 @@ class ProductController extends Controller
         ]);
 
 
-        DB::beginTransaction();
-        try{
+//        DB::beginTransaction();
+//        try{
             if ($product != null) {
                 foreach($request->type as $type) {
                     if ($type == 'basic-info') {
@@ -1173,13 +1173,13 @@ class ProductController extends Controller
                 }
             }
 
-            DB::commit();
+            //DB::commit();
             return redirect()->back()->with('success', 'Product Updated Successfully');
-        }
-        catch(\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+//        }
+//        catch(\Exception $e) {
+//            DB::rollBack();
+//            return redirect()->back()->with('error', $e->getMessage());
+//        }
     }
 
 
