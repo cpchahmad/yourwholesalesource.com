@@ -2567,7 +2567,7 @@ class ProductController extends Controller
 
                 foreach ($product_categories as $category) {
                     array_push($categories_array, [
-                        'id' => $category->woocommerce_id,
+                        'id' => $category,
                     ]);
                 }
             }
