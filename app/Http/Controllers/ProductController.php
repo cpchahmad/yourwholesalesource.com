@@ -109,10 +109,6 @@ class ProductController extends Controller
             });
         }
 
-
-
-
-
         return view('products.all')->with([
             'products' => $productQ->orderBy('created_at','DESC')->paginate(20),
             'search' =>$request->input('search'),
@@ -2508,6 +2504,20 @@ class ProductController extends Controller
                 }
             }
 
+            /*Platfroms*/
+            $meta_data_array = [];
+            if(count($product->has_platforms) > 0) {
+                foreach ($product->has_platforms as $index => $platform){
+                    $index = $index+1;
+                    array_push($meta_data_array,[
+                        "key" => "warned_platform",
+                        "value"=> $platform->name,
+                        "value_type"=> "string",
+                    ]);
+                }
+            }
+
+
 
             if($product->status == 1)
                 $published = 'publish';
@@ -2538,11 +2548,14 @@ class ProductController extends Controller
                 "manage_stock" => true,
                 "stock_quantity" => $product->quantity,
                 "dimensions" => $dimension_array,
-                "categories" => $categories_array
+                "categories" => $categories_array,
+                "meta_data" => $meta_data_array
             ];
 
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
+
+            dump($response);
 
             $product_woocommerce_id =  $response->id;
             $product->woocommerce_id = $product_woocommerce_id;
@@ -2592,6 +2605,8 @@ class ProductController extends Controller
 
             $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
             DB::commit();
+
+            dd(123);
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
         else{
