@@ -1465,7 +1465,7 @@ class ProductController extends Controller
     }
 
 
-    public function deleteExistingProductImage(Request $request, $id) {
+    public function deleteExistingProductImageOld(Request $request, $id) {
         $product = Product::find($id);
         $shop =$this->helper->getShop();
 
@@ -1474,6 +1474,57 @@ class ProductController extends Controller
             $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/'.$image->shopify_id.'.json');
             $image->delete();
             $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
+
+            return response()->json([
+                'success' => 'ok'
+            ]);
+        }
+
+    }
+
+    public function deleteExistingProductImage(Request $request, $id) {
+        $product = Product::find($id);
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
+
+        if($product != null) {
+            $image =  Image::find($request->input('file'));
+            $image->delete();
+            $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Deleted');
+
+            $images_array = [];
+            $product = Product::find($id);
+            foreach ($product->has_images as $index => $image) {
+                if ($image->isV == 0) {
+                    $src = asset('images') . '/' . $image->image;
+                }
+                else {
+                    $src = asset('images/variants') . '/' . $image->image;
+                }
+
+                array_push($images_array, [
+                    'alt' => $product->title . '_' . $index,
+                    'name' => $product->title . '_' . $index,
+                    'src' => $src,
+                ]);
+            }
+
+            $productdata = [
+                "images" => $images_array,
+            ];
+
+            /*Updating Product On Woocommerce*/
+            $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+
+            $woocommerce_images = $response->images;
+
+            if (count($woocommerce_images) == count($product->has_images)) {
+                foreach ($product->has_images as $index => $image) {
+                    $image->woocommerce_id = $woocommerce_images[$index]->id;
+                    $image->save();
+                }
+            }
+
+
 
             return response()->json([
                 'success' => 'ok'
