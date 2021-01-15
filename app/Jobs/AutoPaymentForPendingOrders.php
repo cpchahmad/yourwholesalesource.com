@@ -3,6 +3,10 @@
 namespace App\Jobs;
 
 use App\ErrorLog;
+use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\AdminMaintainerController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\NotificationController;
 use App\Mail\OrderPlaceEmail;
 use App\Mail\WalletBalanceMail;
 use App\OrderLog;
@@ -24,6 +28,11 @@ class AutoPaymentForPendingOrders implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $user_id;
+    private $log;
+    private $notify;
+    private $admin;
+    private $inventory;
+
     /**
      * Create a new job instance.
      *
@@ -32,6 +41,10 @@ class AutoPaymentForPendingOrders implements ShouldQueue
     public function __construct($user_id)
     {
         $this->user_id = $user_id;
+        $this->log = new ActivityLogController();
+        $this->notify = new NotificationController();
+        $this->admin = new AdminMaintainerController();
+        $this->inventory = new InventoryController();
     }
 
     /**
