@@ -253,11 +253,13 @@ class ProductController extends Controller
                     $image->save();
 
 
+                    $src = asset('images') . '/' . $image->image;
+
                     $images_array = [];
                     array_push($images_array, [
                         'alt' => $product->title . '_' . $index,
                         'name' => $product->title . '_' . $index,
-                        'src' => $image->image,
+                        'src' => $src,
                     ]);
                     $productdata = [
                         "images" => $images_array,
