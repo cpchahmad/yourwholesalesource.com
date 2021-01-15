@@ -1064,24 +1064,28 @@ class ProductController extends Controller
                             $product->has_platforms()->sync($request->platforms);
                         }
                         $product->save();
+
+                        dump($product->has_platforms);
                         $metafields = [];
 
-//                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
-//                        if(count($resp->meta_data) > 0){
+                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+                        if(count($resp->meta_data) > 0){
+                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => []]);
+
+                            dump($resp);
+
 //                            foreach ($resp->meta_data as $m){
-//                                if($m->namespace == 'platform'){
+//                                if($m->key == 'platform'){
 //                                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
 //                                }
 //                            }
-//                        }
+                        }
 
                         $meta_data_array = [];
                         foreach ($product->has_platforms as $index => $platform){
-                            $index = $index+1;
                             array_push($meta_data_array,[
-                                "key" => "warned_platform".$index,
+                                "key" => "warned_platform",
                                 "value"=> $platform->name,
-                                "value_type"=> "string",
                             ]);
                         }
 
