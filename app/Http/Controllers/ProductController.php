@@ -1073,7 +1073,6 @@ class ProductController extends Controller
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => []]);
 
                             dump($resp);
-
 //                            foreach ($resp->meta_data as $m){
 //                                if($m->key == 'platform'){
 //                                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
