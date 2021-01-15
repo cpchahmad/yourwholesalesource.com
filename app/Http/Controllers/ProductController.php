@@ -1077,7 +1077,7 @@ class ProductController extends Controller
                         if(count($product->has_platforms) > 0) {
                             $platforms = '';
                             foreach ($product->has_platforms as $index => $platform){
-                                $platforms = $platforms . $platform . ',';
+                                $platforms = $platforms . $platform->name . ',';
                             }
 
                             array_push($meta_data_array,[
