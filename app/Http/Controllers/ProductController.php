@@ -238,7 +238,7 @@ class ProductController extends Controller
     public function productAddImages(Request $request, $id) {
 
         $product = Product::find($id);
-        $shop =$this->helper->getShop();
+        $woocommerce =$this->helper->getWooCommerceAdminShop();
         if($product != null) {
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $index => $image) {
@@ -251,13 +251,21 @@ class ProductController extends Controller
                     $image->image = $filename;
                     $image->position = count($product->has_images) + $index+1;
                     $image->save();
-                    $imageData = [
-                        'image' => [
-                            'src' =>  asset('images') . '/' . $image->image,
-                        ]
+
+
+                    $images_array = [];
+                    array_push($images_array, [
+                        'alt' => $product->title . '_' . $index,
+                        'name' => $product->title . '_' . $index,
+                        'src' => $image->image,
+                    ]);
+                    $productdata = [
+                        "images" => $images_array,
                     ];
-                    $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
-                    $image->shopify_id = $imageResponse->body->image->id;
+
+                    /*Update Product Images On Woocommerce*/
+                    $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                    $image->woocommerce_id = $response->id;
                     $image->save();
                 }
             }
