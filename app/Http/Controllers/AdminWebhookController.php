@@ -10,6 +10,7 @@ use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\User;
 use App\WalletLog;
+use App\Zone;
 use Illuminate\Http\Request;
 
 class AdminWebhookController extends Controller
@@ -69,7 +70,26 @@ class AdminWebhookController extends Controller
                         if (count($data->tracking_numbers) > 0) {
                             $fulfill_data['fulfillment']['tracking_number'] = $data->tracking_numbers[0];
                         }
-                        if (count($data->tracking_urls) > 0) {
+
+                        if($retailer_order->shipping_address)
+                        {
+                            $shipping = json_decode($retailer_order->shipping_address);
+                            $country = $shipping->country;
+
+                            $zoneQuery = Zone::query();
+                            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                                $q->where('name','LIKE','%'.$country.'%');
+                            });
+                            $zoneQuery = $zoneQuery->first();
+                            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $zoneQuery->courier->url;
+                                $fulfill_data['fulfillment']['tracking_company'] = $zoneQuery->courier->title;
+                            }
+                            else if (count($data->tracking_urls) > 0) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_urls[0];
+                            }
+                        }
+                        else if (count($data->tracking_urls) > 0) {
                             $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_urls[0];
                         }
 
@@ -198,9 +218,30 @@ class AdminWebhookController extends Controller
         if (count($data->tracking_numbers) > 0) {
             $new_fulfillment->tracking_number = $data->tracking_numbers[0];
         }
-        if (count($data->tracking_urls) > 0) {
+
+        if($retailer_order->shipping_address)
+        {
+            $shipping = json_decode($retailer_order->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                $new_fulfillment->tracking_url = $zoneQuery->courier->url;
+                $new_fulfillment->courier_id = $zoneQuery->courier->id;
+            }
+            else if (count($data->tracking_urls) > 0) {
+                $new_fulfillment->tracking_url = $data->tracking_urls[0];
+            }
+        }
+        else if (count($data->tracking_urls) > 0) {
             $new_fulfillment->tracking_url = $data->tracking_urls[0];
         }
+
+
 
         $new_fulfillment->admin_fulfillment_shopify_id = $data->id;
         $new_fulfillment->save();
@@ -304,7 +345,26 @@ class AdminWebhookController extends Controller
                         if (count($data->tracking_numbers) > 0) {
                             $tracking['fulfillment']['tracking_number'] = $data->tracking_numbers[0];
                         }
-                        if (count($data->tracking_urls) > 0) {
+
+                        if($retailer_order->shipping_address)
+                        {
+                            $shipping = json_decode($retailer_order->shipping_address);
+                            $country = $shipping->country;
+
+                            $zoneQuery = Zone::query();
+                            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                                $q->where('name','LIKE','%'.$country.'%');
+                            });
+                            $zoneQuery = $zoneQuery->first();
+                            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $zoneQuery->courier->url;
+                                $fulfill_data['fulfillment']['tracking_company'] = $zoneQuery->courier->title;
+                            }
+                            else if (count($data->tracking_urls) > 0) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_urls[0];
+                            }
+                        }
+                        else if (count($data->tracking_urls) > 0) {
                             $tracking['fulfillment']['tracking_url'] = $data->tracking_urls[0];
                         }
                         $response = $shop->api()->rest('PUT', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $fulfillment->fulfillment_shopify_id . '.json', $tracking);
@@ -329,7 +389,25 @@ class AdminWebhookController extends Controller
         if (count($data->tracking_numbers) > 0) {
             $fulfillment->tracking_number = $data->tracking_numbers[0];
         }
-        if (count($data->tracking_urls) > 0) {
+        if($retailer_order->shipping_address)
+        {
+            $shipping = json_decode($retailer_order->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                $fulfillment->tracking_url = $zoneQuery->courier->url;
+                $fulfillment->courier_id = $zoneQuery->courier->id;
+            }
+            else if (count($data->tracking_urls) > 0) {
+                $fulfillment->tracking_url = $data->tracking_urls[0];
+            }
+        }
+        else if (count($data->tracking_urls) > 0) {
             $fulfillment->tracking_url = $data->tracking_urls[0];
         }
         $fulfillment->save();
