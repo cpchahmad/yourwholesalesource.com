@@ -251,25 +251,31 @@ class ProductController extends Controller
                     $image->image = $filename;
                     $image->position = count($product->has_images) + $index+1;
                     $image->save();
+                }
 
 
-                    $src = asset('images') . '/' . $image->image;
+                $images_array = [];
+                foreach ($product->has_images as $index => $image) {
+                    if ($image->isV == 0) {
+                        $src = asset('images') . '/' . $image->image;
+                    }
+                    else {
+                        $src = asset('images/variants') . '/' . $image->image;
+                    }
 
-                    $images_array = [];
                     array_push($images_array, [
                         'alt' => $product->title . '_' . $index,
                         'name' => $product->title . '_' . $index,
                         'src' => $src,
                     ]);
-                    $productdata = [
-                        "images" => $images_array,
-                    ];
-
-                    /*Update Product Images On Woocommerce*/
-                    $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                    $image->woocommerce_id = $response->id;
-                    $image->save();
                 }
+
+                $productdata = [
+                    "images" => $images_array,
+                ];
+
+                /*Updating Product On Woocommerce*/
+                $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
             }
             $product->save();
             $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
