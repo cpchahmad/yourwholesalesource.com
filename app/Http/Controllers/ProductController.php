@@ -696,8 +696,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-
-        dump($request->all());
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
         $shop = $this->helper->getShop();
@@ -1070,34 +1068,35 @@ class ProductController extends Controller
 
                         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
                         if(count($resp->meta_data) > 0){
-                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => []]);
-
+                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
                             dump($resp);
-//                            foreach ($resp->meta_data as $m){
-//                                if($m->key == 'platform'){
-//                                    $shop->api()->rest('DELETE', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$m->id.'.json');
-//                                }
-//                            }
                         }
 
                         $meta_data_array = [];
-                        foreach ($product->has_platforms as $index => $platform){
+
+                        if(count($product->has_platforms) > 0) {
+                            $platforms = '';
+                            foreach ($product->has_platforms as $index => $platform){
+                                $platforms = $platforms . $platform . ',';
+                            }
+
                             array_push($meta_data_array,[
                                 "key" => "warned_platform",
-                                "value"=> $platform->name,
+                                "value"=> $platforms,
                             ]);
+
+                            $productdata = [
+                                "meta_data" => $meta_data_array
+                            ];
+
+                            dump($meta_data_array);
+
+                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+
+                            dd($resp);
                         }
 
-                        $productdata = [
-                            "meta_data" => $meta_data_array
-                        ];
-
-                        dump($meta_data_array);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
-
-                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-
-                        dd($resp);
 
                         $this->product_status_change($request, $product);
                     }
