@@ -63,6 +63,10 @@ class AutoPaymentForPendingOrders implements ShouldQueue
 
                $orders = RetailerOrder::where('user_id', $this->user_id)->where('paid', 0)->get();
 
+               $log = new ErrorLog();
+               $log->message = count($orders);
+               $log->save();
+
                foreach ($orders as $new) {
                    if($new->paid == 0){
 
