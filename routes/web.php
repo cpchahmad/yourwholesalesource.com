@@ -451,11 +451,3 @@ Route::get('/push-to-mabang', 'AdminMaintainerController@push_to_mabang')->name(
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
 
-
-Route::get('test', function () {
-   $woocommerce = new HelperController();
-   $woocommerce = $woocommerce->getWooCommerceAdminShop();
-   $response = $woocommerce->get('products/categories');
-
-   dd($response);
-});
