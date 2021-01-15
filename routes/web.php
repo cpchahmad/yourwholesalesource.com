@@ -452,3 +452,10 @@ Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFro
 
 
 
+Route::get('test', function () {
+   $woocommerce = new HelperController();
+   $woocommerce = $woocommerce->getWooCommerceAdminShop();
+   $response = $woocommerce->get('products/categories');
+
+   dd($response);
+});
