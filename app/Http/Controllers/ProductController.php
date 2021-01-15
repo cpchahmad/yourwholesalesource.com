@@ -1088,9 +1088,12 @@ class ProductController extends Controller
                             "meta_data" => $meta_data_array
                         ];
 
+                        dump($meta_data_array);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
 
                         $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+
+                        dd($resp);
 
                         $this->product_status_change($request, $product);
                     }
@@ -2555,13 +2558,10 @@ class ProductController extends Controller
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
 
-            dump($response);
-
             $product_woocommerce_id =  $response->id;
             $product->woocommerce_id = $product_woocommerce_id;
             $product->to_woocommerce = 1;
             $product->save();
-
 
             $woocommerce_images = $response->images;
 
@@ -2606,7 +2606,6 @@ class ProductController extends Controller
             $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
             DB::commit();
 
-            dd(123);
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
         else{
