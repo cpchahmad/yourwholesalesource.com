@@ -255,6 +255,7 @@ class ProductController extends Controller
 
 
                 $images_array = [];
+                $product = Product::find($id);
                 foreach ($product->has_images as $index => $image) {
                     if ($image->isV == 0) {
                         $src = asset('images') . '/' . $image->image;
@@ -274,8 +275,20 @@ class ProductController extends Controller
                     "images" => $images_array,
                 ];
 
+                dump($productdata);
                 /*Updating Product On Woocommerce*/
                 $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                dd($response);
+
+                $woocommerce_images = $response->images;
+
+                if (count($woocommerce_images) == count($product->has_images)) {
+                    foreach ($product->has_images as $index => $image) {
+                        $image->woocommerce_id = $woocommerce_images[$index]->id;
+                        $image->save();
+                    }
+                }
+
             }
             $product->save();
             $this->log->store(0, 'Product', $product->id, $product->title,'Product Image Added');
