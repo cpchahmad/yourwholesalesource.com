@@ -1063,13 +1063,11 @@ class ProductController extends Controller
                         }
                         $product->save();
 
-                        dump($product->has_platforms);
                         $metafields = [];
 
                         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
                         if(count($resp->meta_data) > 0){
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-                            dump($resp);
                         }
 
                         $meta_data_array = [];
@@ -1089,11 +1087,7 @@ class ProductController extends Controller
                                 "meta_data" => $meta_data_array
                             ];
 
-                            dump($meta_data_array);
-
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-
-                            dd($resp);
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
