@@ -275,10 +275,8 @@ class ProductController extends Controller
                     "images" => $images_array,
                 ];
 
-                dump($productdata);
                 /*Updating Product On Woocommerce*/
                 $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                dd($response);
 
                 $woocommerce_images = $response->images;
 
