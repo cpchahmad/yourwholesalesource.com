@@ -1210,7 +1210,7 @@ class ProductController extends Controller
 
 
             dump($product->woocommerce_id);
-            $data = ['regular_price' => '49.54', 'meta_data' => 0, 'categories' => []];
+            $data = ['regular_price' => '89.54', 'meta_data' => null, 'categories' => []];
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $data);
             dump(13,$resp);
             $data = ['meta_data' => $updated_array];
