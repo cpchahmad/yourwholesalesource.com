@@ -61,7 +61,7 @@ class AutoPaymentForPendingOrders implements ShouldQueue
         try{
             if($settings && $settings->enable) {
 
-               $orders = RetailerOrder::where('user_id', $this->user_id)->where('paid', 0)->get();
+               $orders = RetailerOrder::where('user_id', $this->user_id)->where('paid', 0)->latest()->get();
 
                foreach ($orders as $new) {
                    if($new->paid == 0){

@@ -65,7 +65,8 @@ class AdminOrderController extends Controller
         $orders = RetailerOrder::whereIn('paid', [1, 2])->newQuery();
         if ($request->has('search')) {
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%')
-                   ->orWhere('id', 'LIKE', '%' . $request->input('search') . '%');
+                   ->orWhere('id', 'LIKE', '%' . $request->input('search') . '%')
+                   ->orWhere('admin_shopify_name', 'LIKE', '%' . $request->input('search') . '%');
         }
         if ($request->has('status')) {
             if ($request->input('status') == 'unfulfilled') {
