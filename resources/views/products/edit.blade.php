@@ -605,55 +605,11 @@
                                             <div class="tab-pane @if($index == 0) active @endif" role="tabpanel" id="tab{{$index}}">
                                                 <div class="row">
                                                     <div class="col-md-12 text-right">
-                                                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit_tabs_modal{{$index}}"> Edit Tab</button>
+                                                        <button type="button" class="btn btn-sm btn-info edit-tab-button" data-toggle="modal" data-id="{{ $tab->id }}" data-title="{{ $tab->title }}" data-descriptio="{{ $tab->description }}"> Edit Tab</button>
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>
                                                     </div>
                                                 </div>
                                                 <p>{!! $tab->description !!}</p>
-                                            </div>
-                                            <div class="modal fade" id="edit_tabs_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-popout" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="block block-themed block-transparent mb-0">
-                                                            <div class="block-header bg-primary-dark">
-                                                                <h3 class="block-title">Edit {{$tab->title}} tab</h3>
-                                                                <div class="block-options">
-                                                                    <button type="button" class="btn-block-option">
-                                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                            <div action="{{route('product.update',$product->id)}}" method="post">
-                                                                @csrf
-                                                                <input type="hidden" name="type[]" value="edit-additional-tab">
-                                                                <input type="hidden" name="tab_id" value="{{$tab->id}}">
-                                                                <div class="block-content" style="padding: 20px !important;">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12" style="margin-bottom: 10px">
-                                                                            <label for="product-name">Title</label>
-                                                                            <input class="form-control" type="text" id="" name="tab-title"
-                                                                                   value="{{$tab->title}}" placeholder=""  >
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <textarea class="js-summernote" name="tab-description"
-                                                                                      placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <button type="sumbit" class="btn btn-primary">Save</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="block-content block-content-full text-right border-top">
-
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                                                                    Discard
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         @endforeach
                                     </div>
@@ -1208,6 +1164,52 @@
             </div>
         </div>
     </form>
+
+    <div class="modal fade edit_tab_modal" id="edit_tabs_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-popout" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">Edit tab</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form action="{{route('product.update',$product->id)}}" method="post">
+                        @csrf
+                        <input type="hidden" name="type[]" value="edit-additional-tab">
+                        <input type="hidden" name="tab_id" class="tab-id" value="{{$tab->id}}">
+                        <div class="block-content" style="padding: 20px !important;">
+                            <div class="row">
+                                <div class="col-md-12" style="margin-bottom: 10px">
+                                    <label for="product-name">Title</label>
+                                    <input class="form-control" type="text" id="" name="tab-title"
+                                           value="{{$tab->title}}" placeholder=""  >
+                                </div>
+                                <div class="col-md-12">
+                                                                            <textarea class="js-summernote" name="tab-description"
+                                                                                      placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="sumbit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="block-content block-content-full text-right border-top">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                            Discard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="modal fade" id="add_product_images" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">

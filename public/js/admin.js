@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    $('.edit-tab-button').click(function () {
+        var id = $(this).data('id');
+        var title = $(this).data('title');
+        var description = $(this).data('description');
+
+        var modal = $('.edit_tab_modal');
+        modal.find('.tab-id').val(id);
+        modal.find('.tab-title').val(title);
+        modal.find('.tab-description').val(description);
+        modal.modal("show");
+    });
+
     // Category Filter
     $('.parent-category').change(function(){
         var id = $(this).val();
