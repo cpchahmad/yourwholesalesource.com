@@ -991,28 +991,35 @@ class ProductController extends Controller
                         $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
                         dump('tab', $resp);
                     }
-//
-//                else if ($type == 'edit-additional-tab'){
-//
-//                    $additional_tab = AdditionalTab::find($request->input('tab_id'));
-//                    $additional_tab->title = $request->input('title');
-//                    $additional_tab->description = $request->input('description');
-//                    $additional_tab->product_id = $product->id;
-//                    $additional_tab->save();
-//
-//                    $productdata = [
-//                        "metafield" => [
-//                            "key" => $additional_tab->title,
-//                            "value"=> $additional_tab->description,
-//                            "value_type"=> "string",
-//                            "namespace"=> "tabs"
-//                        ]
-//                    ];
-//
-//                    $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
-//
-//                    $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields/'.$additional_tab->shopify_id.'.json',$productdata);
-//                }
+
+                    else if ($type == 'edit-additional-tab'){
+                        $additional_tab = AdditionalTab::find($request->input('tab_id'));
+                        $additional_tab->title = $request->input('title');
+                        $additional_tab->description = $request->input('description');
+                        $additional_tab->product_id = $product->id;
+                        $additional_tab->save();
+
+                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+                        if(count($resp->meta_data) > 0){
+                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+
+                        }
+
+                        $meta_data_array = [];
+                        array_push($meta_data_array,[
+                            "key" => $additional_tab->title,
+                            "value"=> $additional_tab->description,
+                        ]);
+
+                        $productdata = [
+                            "meta_data" => $meta_data_array
+                        ];
+
+                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                        dump('tab update', $resp);
+
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
+                    }
 
                     else if ($type == 'fulfilled') {
                         $product->fulfilled_by = $request->input('fulfilled-by');
