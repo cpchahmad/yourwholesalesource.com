@@ -3013,9 +3013,7 @@ class ProductController extends Controller
             }
 
             if($varaint->has_image != null){
-                array_push($array_item['image'] , [
-                    'id' => $varaint->has_image->woocommerce_id,
-                ]);
+                $array_item['image']['id'] = $varaint->has_image->woocommerce_id;
             }
 
             array_push($variants_array, $array_item);
