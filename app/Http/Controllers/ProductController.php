@@ -2739,7 +2739,7 @@ class ProductController extends Controller
 
 
             $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
-            DB::commit();
+           // DB::commit();
 
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
