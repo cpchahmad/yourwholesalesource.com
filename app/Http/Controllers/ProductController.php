@@ -2825,6 +2825,7 @@ class ProductController extends Controller
             $array_item['sale_price'] = $varaint->cost;
             $array_item['sku'] = $varaint->sku;
             $array_item['stock_quantity'] = $varaint->quantity;
+            $array_item['manage_stock'] = true;
             $array_item['weight'] = $weight;
 
             if($varaint->option1 !== null) {
@@ -2932,6 +2933,7 @@ class ProductController extends Controller
             $array_item['sku'] = $varaint->sku;
             $array_item['barcode'] = $varaint->barcode;
             $array_item['stock_quantity'] = $varaint->quantity;
+            $array_item['manage_stock'] = true;
             $array_item['weight'] = $weight;
 
             if($varaint->option1 !== null) {
