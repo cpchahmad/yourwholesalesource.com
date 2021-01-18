@@ -577,18 +577,18 @@
                         <div class="block">
                             <div class="block-header d-inline-flex" style="width: 100%" >
                                 <h3 class="block-title">No Variant For This Products</h3>
-                                <div class="text-right d-inline-block" >
-                                    <a href="{{route('product.existing_product_new_variants',$product->id)}}">Add New Variants</a>
-                                </div>
+{{--                                <div class="text-right d-inline-block" >--}}
+{{--                                    <a href="{{route('product.existing_product_new_variants',$product->id)}}">Add New Variants</a>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                     @endif
                     <div class="block">
                         <div class="block-header d-inline-flex" style="width: 100%" >
                             <h3 class="block-title">Additional Tabs</h3>
-                            <div class="text-right d-inline-block">
-                                <a style="margin-left: 10px;" class="btn btn-sm btn-light" data-toggle="modal" data-target="#add_tabs_modal">Add Tab</a>
-                            </div>
+{{--                            <div class="text-right d-inline-block">--}}
+{{--                                <a style="margin-left: 10px;" class="btn btn-sm btn-light" data-toggle="modal" data-target="#add_tabs_modal">Add Tab</a>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="block-content">
                             @if(count($product->has_tabs) > 0)
@@ -603,12 +603,12 @@
                                     <div class="block-content tab-content">
                                         @foreach($product->has_tabs as $index => $tab)
                                             <div class="tab-pane @if($index == 0) active @endif" role="tabpanel" id="tab{{$index}}">
-                                                <div class="row">
-                                                    <div class="col-md-12 text-right">
-                                                        <button type="button" class="btn btn-sm btn-info edit-tab-button" data-toggle="modal" data-id="{{ $tab->id }}" data-title="{{ $tab->title }}" data-description="{{ $tab->description }}"> Edit Tab</button>
-                                                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>
-                                                    </div>
-                                                </div>
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-md-12 text-right">--}}
+{{--                                                        <button type="button" class="btn btn-sm btn-info edit-tab-button" data-toggle="modal" data-id="{{ $tab->id }}" data-title="{{ $tab->title }}" data-description="{{ $tab->description }}"> Edit Tab</button>--}}
+{{--                                                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
                                                 <p>{!! $tab->description !!}</p>
                                             </div>
                                         @endforeach
@@ -619,359 +619,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="modal fade" id="add_tabs_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-popout" role="document">
-                            <div class="modal-content">
-                                <div class="block block-themed block-transparent mb-0">
-                                    <div class="block-header bg-primary-dark">
-                                        <h3 class="block-title">Add Additional Tabs</h3>
-                                        <div class="block-options">
-                                            <button type="button" class="btn-block-option">
-                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div action="{{route('product.update',$product->id)}}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="type[]" value="add-additional-tab">
-                                        <div class="block-content" style="padding: 20px !important;">
-                                            <div class="row">
-                                                <div class="col-md-12" style="margin-bottom: 10px">
-                                                    <label for="product-name">Title</label>
-                                                    <input class="form-control" type="text" id="" name="tab-title"
-                                                           value=""  placeholder="" >
-                                                </div>
-                                                <div class="col-md-12">
-                                                <textarea class="form-control" name="tab-description"
-                                                          placeholder="Please Enter Description here !"></textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-primary">Save</button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="block-content block-content-full text-right border-top">
-
-                                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                                            Discard
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{--Tiered Pricing Section--}}
-                    <div class="block">
-                        <div class="block-header d-block" style="width: 100%" >
-                            <h3 class="block-title">Tiered Pricing</h3>
-                            <hr>
-                            <div class="row mb-3">
-                                <div class="col-md-2">
-                                    <label for="">Bulk Pricing</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="">Min Qty</label>
-                                    <input id="bulk-min-qty" type="number" class="form-control" >
-                                </div>
-                                <div class="col-md-2">
-                                    <label for="">Max Qty</label>
-                                    <input id="bulk-max-qty" type="number" class="form-control" >
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Type</label>
-                                    <select name="type[]" class="form-control" id="bulk-type">
-                                        <option value="fixed">Fixed</option>
-                                        <option value="discount">Discount</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">$/Discount</label>
-                                    <input  type="number" step="any" class="form-control"  placeholder="" id="bulk-price">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block-content">
-                            @if(count($product->hasVariants) == 0)
-                                <div action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">
-                                    @csrf
-                                    <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
-                                        <thead>
-                                        <tr>
-                                            <th style="vertical-align: top;width: 10%;">Title</th>
-                                            <th style="vertical-align: top;width: 12%;">Cost</th>
-                                            <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th colspan="5">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <span style="vertical-align: top;">Min Qty</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <span style="vertical-align: top;">Max Qty</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <span style="vertical-align: top;">Type</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <span style="vertical-align: top;">$/Discount</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <span style=""></span>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <input type="hidden" name="type[]" value="single-variant-tiered-pricing">
-
-                                            <td class="variant_title">
-                                                {{ $product->title }}
-                                            </td>
-                                            <td>
-                                                <input disabled type="text" class="form-control" name="cost" value="{{$product->cost}}" placeholder="$0.00">
-                                            </td>
-                                            <td>
-                                                <input disabled type="text" class="form-control"  value="{{$product->sku}}">
-                                            </td>
-                                            <td colspan="5">
-                                                @if(count($product->has_tiered_prices) > 0)
-                                                    @foreach($product->has_tiered_prices as $item)
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <select name="type[]" id="" class="form-control">
-                                                                    @if($item->type == "fixed")
-                                                                        <option selected value="fixed">Fixed</option>
-                                                                        <option value="discount">Discount</option>
-                                                                    @else
-                                                                        <option value="fixed">Fixed</option>
-                                                                        <option selected value="discount">Discount</option>
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
-                                                            </div>
-                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
-                                                <div class="row mb-3">
-                                                    <div class="col-md-2">
-                                                        <input  type="number" class="form-control" name="min_qty[]">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input  type="number" class="form-control" name="max_qty[]">
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <select name="type[]" id="" class="form-control">
-                                                            <option value="fixed">Fixed</option>
-                                                            <option value="discount">Discount</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="">
-                                                    </div>
-                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                        <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>
-                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-
-                                    </table>
-                                    {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-                                    {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-                                    {{--                                    </div>--}}
-                                </div>
-                            @endif
-                            @if($product->variants == 1)
-                                <div action="{{route('product.add.tiered.price',$product->id)}}" method="post">
-                                    @csrf
-                                    <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
-                                        <thead>
-                                        <tr>
-                                            <th style="vertical-align: top;width: 10%;">Title</th>
-                                            <th style="vertical-align: top;width: 12%;">Cost</th>
-                                            <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th colspan="5">
-                                                <div class="row">
-                                                    <div class="col-md-2">
-                                                        <span style="vertical-align: top;">Min Qty</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <span style="vertical-align: top;">Max Qty</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <span style="vertical-align: top;">Type</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <span style="vertical-align: top;">$/Discount</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <span style=""></span>
-                                                    </div>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        @if(count($product->hasVariants) > 0)
-                                            <tbody>
-                                            @foreach($product->hasVariants as $index => $v)
-                                                <tr>
-                                                    <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
-                                                    <input type="hidden" name="type[]" value="tiered-pricing">
-
-                                                    <td class="variant_title">
-                                                        @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control" name="cost" value="{{$v->cost}}" placeholder="$0.00">
-                                                    </td>
-                                                    <td>
-                                                        <input disabled type="text" class="form-control"  value="{{$v->sku}}">
-                                                    </td>
-                                                    <td colspan="5">
-                                                        @if(count($v->has_tiered_prices) > 0)
-                                                            @foreach($v->has_tiered_prices as $item)
-                                                                <div class="row mb-3">
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <input  type="number" class="form-control" name="max_qty{{$v->id}}[]" value="{{ $item->max_qty }}">
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <select name="type{{$v->id}}[]" id="" class="form-control">
-                                                                            @if($item->type == "fixed")
-                                                                                <option selected value="fixed">Fixed</option>
-                                                                                <option value="discount">Discount</option>
-                                                                            @else
-                                                                                <option value="fixed">Fixed</option>
-                                                                                <option selected value="discount">Discount</option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
-                                                                    </div>
-                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control min-qty-row" name="min_qty{{$v->id}}[]">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control max-qty-row" name="max_qty{{$v->id}}[]">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <select name="type{{$v->id}}[]" id="" class="form-control type-row">
-                                                                    <option value="fixed">Fixed</option>
-                                                                    <option value="discount">Discount</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control tired_price price-row" name="tiered_price{{$v->id}}[]"  placeholder="">
-                                                            </div>
-                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-primary add-price-row-btn" id="{{ $v->id }}">+</button>
-                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        @endif
-                                    </table>
-                                    {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-                                    {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-                                    {{--                                    </div>--}}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                    {{--Tiered Pricing Section End--}}
                 </div>
                 <div class="col-sm-4">
-
-                    <div action="{{route('product.update',$product->id)}}" method="post">
-                        @csrf
-                        <div class="block">
-                            <div class="block-header">
-                                <div class="block-title">
-                                    Mark as Fulfilled
-                                </div>
-                            </div>
-                            <input type="hidden" name="type[]" value="fulfilled">
-                            <div class="block-content" >
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
-                                        <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >
-                                        <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="block">
-                            <div class="block-header">
-                                <div class="block-title">
-                                    Sort By
-                                </div>
-                            </div>
-                            <div class="block-content pt-0" >
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="sortBy" @if($product->sortBy == 'Best Seller') checked @endif value="Best Seller"  >
-                                        <label class="custom-control-label" for="example-radio-best-seller">Best Seller</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input" id="example-radio-winning-product" name="sortBy" @if($product->sortBy == 'Winning Product') checked @endif value="Winning Product" >
-                                        <label class="custom-control-label" for="example-radio-winning-product">Winning Product</label>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="block">
-                        <div class="block-header">
-                            <div class="block-title">
-                                Marketing Video
-                            </div>
-                        </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type[]" value="marketing_video_update">
-                            <div class="block-content pt-0" >
-                                <div class="form-group">
-                                    <input  type="text" class="form-control" name="marketing_video" value="{{$product->marketing_video}}" placeholder="Embedded Youtube Code to Marketing Video">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                     <div class="block">
                         <div class="block-header">
                             <div class="block-title">
@@ -1022,21 +671,20 @@
                             @csrf
                             <input type="hidden" name="type[]" value="organization">
                             <div class="block-content">
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Product Type</label>
-                                        <input type="text" class="form-control" name="product_type"
-                                               value="{{$product->type}}"  placeholder="eg. Shirts" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Vendor</label>
-                                        <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"
-                                               value="{{$product->vendor}}"   >
-                                    </div>
-                                </div>
-                                <hr>
+{{--                                <div class="form-group">--}}
+{{--                                    <div class="col-xs-12 push-10">--}}
+{{--                                        <label>Product Type</label>--}}
+{{--                                        <input type="text" class="form-control" name="product_type"--}}
+{{--                                               value="{{$product->type}}"  placeholder="eg. Shirts" >--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <div class="col-xs-12 push-10">--}}
+{{--                                        <label>Vendor</label>--}}
+{{--                                        <input type="text" class="form-control" name="vendor" placeholder="eg. Nike"--}}
+{{--                                               value="{{$product->vendor}}"   >--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary">
@@ -1065,12 +713,12 @@
                             @csrf
                             <input type="hidden" name="type[]" value="more-details">
                             <div class="block-content">
-                                <div class="form-group">
-                                    <div class="col-xs-12 push-10">
-                                        <label>Processing Time</label>
-                                        <input type="text" class="form-control" name="processing_time" placeholder="eg. 7 working days" value="{{$product->processing_time}}">
-                                    </div>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <div class="col-xs-12 push-10">--}}
+{{--                                        <label>Processing Time</label>--}}
+{{--                                        <input type="text" class="form-control" name="processing_time" placeholder="eg. 7 working days" value="{{$product->processing_time}}">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <div class="col-xs-12 push-10">
                                         <label>Warned Platform</label>
@@ -1099,52 +747,6 @@
                                             <input type="radio" class="custom-control-input" id="example-radio-customDraft" @if($product->status == 0) checked="" @endif name="status" value="0" >
                                             <label class="custom-control-label" for="example-radio-customDraft">Draft</label>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="block">
-                        <div class="block-header">
-                            <h3 class="block-title">Preferences</h3>
-                        </div>
-                        <div action="{{route('product.update',$product->id)}}" method="post">
-                            @csrf
-                            <input type="hidden" name="type[]" value="shop-preferences">
-                            <div class="block-content">
-                                <div class="form-group">
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input preference-check" id="prefer-global" name="global" value="1" @if($product->global == 1) checked="" @endif>
-                                        <label class="custom-control-label " for="prefer-global">Global</label>
-                                    </div>
-                                    <div class="custom-control custom-radio mb-1">
-                                        <input type="radio" class="custom-control-input preference-check" id="prefer-store" name="global" value="0"  @if($product->global == 0) checked="" @endif>
-                                        <label class="custom-control-label" for="prefer-store">Selected Stores</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" @if($product->global == 1) style="display: none" @endif>
-                                    <div class="form-material">
-                                        <label for="material-error">Stores <i class="fa fa-question-circle"  title="Store where product you want to show."> </i></label>
-                                        <select class="form-control shop-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="shops[]"   multiple="">
-                                            <option></option>
-
-                                            @foreach($shops as $shop)
-                                                <option @if(in_array($shop->id,$product->has_preferences->pluck('id')->toArray())) selected @endif
-                                                value="{{$shop->id}}">{{explode('.',$shop->shopify_domain)[0]}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-material mt-2">
-                                        <label for="material-error">Non Shopify Users <i class="fa fa-question-circle"  title="Non-shopify stores where product you want to show."> </i></label>
-                                        <select class="form-control non-shopify-user-preference js-select2" style="width: 100%;" data-placeholder="Choose multiple markets.." name="non_shopify_users[]"   multiple="">
-                                            <option></option>
-                                            @foreach($non_shopify_users as $user)
-                                                <option @if(in_array($user->id,$product->has_non_shopify_user_preferences->pluck('id')->toArray())) selected @endif
-                                                value="{{$user->id}}">{{ $user->name }}</option>
-                                            @endforeach
-                                        </select>
                                     </div>
                                 </div>
                             </div>
