@@ -2783,15 +2783,21 @@ class ProductController extends Controller
             /*Tags*/
             if($product->tags) {
                 $tags = explode(',', $product->tags);
-                dumb($tags);
+                dd($tags);
                 foreach($tags as $tag) {
-                    $t = new Tag();
-                    $t->name = $tag;
-                    $t->save();
+                    if(Tag::where('name', $tag)->exists())
+                    {
+                        $t = Tag::where('name', $tag)->first();
+                    }
+                    else {
+                        $t = new Tag();
+                        $t->name = $tag;
+                        $t->save();
 
-                    $response = $woocommerce->post('products/tags', ['name' => $t->name]);
-                    $t->woocommerce_id = $response->id;
-                    $t->save();
+                        $response = $woocommerce->post('products/tags', ['name' => $t->name]);
+                        $t->woocommerce_id = $response->id;
+                        $t->save();
+                    }
 
                     $product->tags()->attach($t->id);
                 }
