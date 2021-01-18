@@ -1209,7 +1209,7 @@ class ProductController extends Controller
             }
 
 
-            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => []], ['force' => true]);
+            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => [], 'force' => true, 'price' => null]);
             dump(1,$resp);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => $updated_array]);
             dump(2,$resp);
