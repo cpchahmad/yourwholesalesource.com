@@ -1177,7 +1177,7 @@
                             </button>
                         </div>
                     </div>
-                    <form action="{{route('product.update',$product->id)}}" method="post">
+                    <form action="{{route('product.update.tab-details',$product->id)}}" method="post">
                         @csrf
                         <input type="hidden" name="type[]" value="edit-additional-tab">
                         <input type="hidden" name="tab_id" class="tab-id" value="{{$tab->id}}">

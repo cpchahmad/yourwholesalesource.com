@@ -992,36 +992,6 @@ class ProductController extends Controller
                         dump('tab', $resp);
                     }
 
-                    else if ($type == 'edit-additional-tab'){
-                        $additional_tab = AdditionalTab::find($request->input('tab_id'));
-                        $additional_tab->title = $request->input('tab-title');
-                        $additional_tab->description = $request->input('tab-description');
-                        $additional_tab->product_id = $product->id;
-                        $additional_tab->save();
-
-                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
-                        if(count($resp->meta_data) > 0){
-                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-                        }
-
-                        $meta_data_array = [];
-                        array_push($meta_data_array,[
-                            "key" => $additional_tab->title,
-                            "value"=> $additional_tab->description,
-                        ]);
-
-                        $productdata = [
-                            "meta_data" => $meta_data_array
-                        ];
-
-                        dd(123, $productdata);
-
-                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                        dump('tab update', $resp);
-
-                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
-                    }
-
                     else if ($type == 'fulfilled') {
                         $product->fulfilled_by = $request->input('fulfilled-by');
                         $product->sortBy = $request->input('sortBy');
@@ -1210,6 +1180,41 @@ class ProductController extends Controller
 //            DB::rollBack();
 //            return redirect()->back()->with('error', $e->getMessage());
 //        }
+    }
+
+    public function editTabDetails(Request $request, $id) {
+
+        dd($id, $request->all());
+        $product = Product::find($id);
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
+
+        $additional_tab = AdditionalTab::find($request->input('tab_id'));
+        $additional_tab->title = $request->input('tab-title');
+        $additional_tab->description = $request->input('tab-description');
+        $additional_tab->product_id = $product->id;
+        $additional_tab->save();
+
+        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+        if(count($resp->meta_data) > 0){
+            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+        }
+
+        $meta_data_array = [];
+        array_push($meta_data_array,[
+            "key" => $additional_tab->title,
+            "value"=> $additional_tab->description,
+        ]);
+
+        $productdata = [
+            "meta_data" => $meta_data_array
+        ];
+
+        dd(123, $productdata);
+
+        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+        dump('tab update', $resp);
+
+        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
     }
 
 
