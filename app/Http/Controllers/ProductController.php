@@ -3015,7 +3015,6 @@ class ProductController extends Controller
             }
 
             array_push($variants_array, $array_item);
-
         }
 
         return $variants_array;
