@@ -964,28 +964,34 @@ class ProductController extends Controller
 
                     }
 
-                else if ($type == 'add-additional-tab'){
-                    $additional_tab = new AdditionalTab();
-                    $additional_tab->title = $request->input('tab-title');
-                    $additional_tab->description = $request->input('tab-description');
-                    $additional_tab->product_id = $product->id;
-                    $additional_tab->save();
+                    else if ($type == 'add-additional-tab'){
+                        $additional_tab = new AdditionalTab();
+                        $additional_tab->title = $request->input('tab-title');
+                        $additional_tab->description = $request->input('tab-description');
+                        $additional_tab->product_id = $product->id;
+                        $additional_tab->save();
 
-                    $productdata = [
-                        "metafield" => [
+
+                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+                        if(count($resp->meta_data) > 0){
+                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+
+                        }
+
+                        $meta_data_array = [];
+                        array_push($meta_data_array,[
                             "key" => $additional_tab->title,
                             "value"=> $additional_tab->description,
-                        ]
-                    ];
-                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
-                    if($resp->errors){
+                        ]);
+
+                        $productdata = [
+                            "meta_data" => $meta_data_array
+                        ];
+
+                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+
+
                     }
-                    else{
-                        $additional_tab->shopify_id = $resp->body->metafield->id;
-                        $additional_tab->save();
-                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
-                    }
-                }
 //
 //                else if ($type == 'edit-additional-tab'){
 //
@@ -1091,7 +1097,7 @@ class ProductController extends Controller
                         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
                         if(count($resp->meta_data) > 0){
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-                            dump($resp);
+
                         }
 
                         $meta_data_array = [];
@@ -1113,7 +1119,6 @@ class ProductController extends Controller
                             ];
 
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                            dd($resp);
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
