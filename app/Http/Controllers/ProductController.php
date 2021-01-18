@@ -731,8 +731,8 @@ class ProductController extends Controller
         ]);
 
 
-//        DB::beginTransaction();
-//        try{
+        DB::beginTransaction();
+        try{
             if ($product != null) {
                 foreach($request->type as $type) {
                     if ($type == 'basic-info') {
@@ -972,11 +972,10 @@ class ProductController extends Controller
                         $additional_tab->save();
 
 
-                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
-                        if(count($resp->meta_data) > 0){
-                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-
-                        }
+//                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+//                        if(count($resp->meta_data) > 0){
+//                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+//                        }
 
                         $meta_data_array = [];
                         array_push($meta_data_array,[
@@ -989,7 +988,6 @@ class ProductController extends Controller
                         ];
 
                         $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                        dump('tab', $resp);
                     }
 
                     else if ($type == 'fulfilled') {
@@ -1081,7 +1079,6 @@ class ProductController extends Controller
                                 $platforms = $platforms . $platform->name . ',';
                             }
 
-
                             array_push($meta_data_array,[
                                 "key" => "warned_platform",
                                 "value"=> $platforms,
@@ -1092,7 +1089,6 @@ class ProductController extends Controller
                             ];
 
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                            dump('plat', $resp);
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
@@ -1112,8 +1108,6 @@ class ProductController extends Controller
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
 
                     }
-
-
                     else if ($type == 'tiered-pricing') {
                         $variants = $request->variant_id;
                         if($variants != null) {
@@ -1171,15 +1165,13 @@ class ProductController extends Controller
                     }
                 }
             }
-
-           // DB::commit();
-            dd(123);
+            DB::commit();
             return redirect()->back()->with('success', 'Product Updated Successfully');
-//        }
-//        catch(\Exception $e) {
-//            DB::rollBack();
-//            return redirect()->back()->with('error', $e->getMessage());
-//        }
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function editTabDetails(Request $request, $id) {
@@ -1208,14 +1200,11 @@ class ProductController extends Controller
                 }
             }
 
-
-            dump($product->woocommerce_id);
             $data = ['regular_price' => '89.54', 'meta_data' => (array) null, 'categories' => (array) null];
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $data);
-            dump(13,$resp);
+
             $data = ['meta_data' => $updated_array];
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $data);
-            dump(2,$resp);
         }
 
 
@@ -1225,8 +1214,6 @@ class ProductController extends Controller
         $additional_tab->save();
 
         $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
-
-        dd(21);
     }
 
 
