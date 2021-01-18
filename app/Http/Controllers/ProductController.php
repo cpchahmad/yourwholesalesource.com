@@ -731,8 +731,8 @@ class ProductController extends Controller
         ]);
 
 
-        DB::beginTransaction();
-        try{
+//        DB::beginTransaction();
+//        try{
             if ($product != null) {
                 foreach($request->type as $type) {
                     if ($type == 'basic-info') {
@@ -994,15 +994,14 @@ class ProductController extends Controller
 
                     else if ($type == 'edit-additional-tab'){
                         $additional_tab = AdditionalTab::find($request->input('tab_id'));
-                        $additional_tab->title = $request->input('title');
-                        $additional_tab->description = $request->input('description');
+                        $additional_tab->title = $request->input('tab_title');
+                        $additional_tab->description = $request->input('tab_description');
                         $additional_tab->product_id = $product->id;
                         $additional_tab->save();
 
                         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
                         if(count($resp->meta_data) > 0){
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-
                         }
 
                         $meta_data_array = [];
@@ -1201,14 +1200,14 @@ class ProductController extends Controller
                 }
             }
 
-            DB::commit();
+           // DB::commit();
             dd(123);
             return redirect()->back()->with('success', 'Product Updated Successfully');
-        }
-        catch(\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+//        }
+//        catch(\Exception $e) {
+//            DB::rollBack();
+//            return redirect()->back()->with('error', $e->getMessage());
+//        }
     }
 
 
