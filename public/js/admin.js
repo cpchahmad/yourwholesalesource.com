@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    $('.import-btn').click(function () {
+        $(this).text('Loading');
+
+    });
+
     $('.edit-tab-button').click(function () {
         var id = $(this).data('id');
         var title = $(this).data('title');
