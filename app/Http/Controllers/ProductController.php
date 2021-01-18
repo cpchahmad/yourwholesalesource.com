@@ -994,8 +994,8 @@ class ProductController extends Controller
 
                     else if ($type == 'edit-additional-tab'){
                         $additional_tab = AdditionalTab::find($request->input('tab_id'));
-                        $additional_tab->title = $request->input('tab_title');
-                        $additional_tab->description = $request->input('tab_description');
+                        $additional_tab->title = $request->input('tab-title');
+                        $additional_tab->description = $request->input('tab-description');
                         $additional_tab->product_id = $product->id;
                         $additional_tab->save();
 

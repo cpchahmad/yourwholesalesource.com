@@ -632,11 +632,11 @@
                                                                         <div class="col-md-12" style="margin-bottom: 10px">
                                                                             <label for="product-name">Title</label>
                                                                             <input class="form-control" type="text" id="" name="tab-title"
-                                                                                   value="{{$tab->tab_title}}" placeholder=""  >
+                                                                                   value="{{$tab->title}}" placeholder=""  >
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             <textarea class="js-summernote" name="tab-description"
-                                                                                      placeholder="Please Enter Description here !">{{$tab->tab_description}}</textarea>
+                                                                                      placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             <button type="sumbit" class="btn btn-primary">Save</button>
