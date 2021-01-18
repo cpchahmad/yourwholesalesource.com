@@ -192,8 +192,6 @@ class ProductController extends Controller
         }
 
         return redirect()->back()->with('success', 'Tiered Prices Added Successfully!');
-
-
     }
 
     public function addTieredPriceForProductWithoutVariant(Request $request, $id) {
@@ -966,30 +964,28 @@ class ProductController extends Controller
 
                     }
 
-//                else if ($type == 'add-additional-tab'){
-//                    $additional_tab = new AdditionalTab();
-//                    $additional_tab->title = $request->input('tab-title');
-//                    $additional_tab->description = $request->input('tab-description');
-//                    $additional_tab->product_id = $product->id;
-//                    $additional_tab->save();
-//
-//                    $productdata = [
-//                        "metafield" => [
-//                            "key" => $additional_tab->title,
-//                            "value"=> $additional_tab->description,
-//                            "value_type"=> "string",
-//                            "namespace"=> "tabs"
-//                        ]
-//                    ];
-//                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
-//                    if($resp->errors){
-//                    }
-//                    else{
-//                        $additional_tab->shopify_id = $resp->body->metafield->id;
-//                        $additional_tab->save();
-//                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
-//                    }
-//                }
+                else if ($type == 'add-additional-tab'){
+                    $additional_tab = new AdditionalTab();
+                    $additional_tab->title = $request->input('tab-title');
+                    $additional_tab->description = $request->input('tab-description');
+                    $additional_tab->product_id = $product->id;
+                    $additional_tab->save();
+
+                    $productdata = [
+                        "metafield" => [
+                            "key" => $additional_tab->title,
+                            "value"=> $additional_tab->description,
+                        ]
+                    ];
+                    $resp =  $shop->api()->rest('POST', '/admin/api/2019-10/products/'.$product->shopify_id.'/metafields.json',$productdata);
+                    if($resp->errors){
+                    }
+                    else{
+                        $additional_tab->shopify_id = $resp->body->metafield->id;
+                        $additional_tab->save();
+                        $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Added');
+                    }
+                }
 //
 //                else if ($type == 'edit-additional-tab'){
 //
@@ -1095,6 +1091,7 @@ class ProductController extends Controller
                         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
                         if(count($resp->meta_data) > 0){
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+                            dump($resp);
                         }
 
                         $meta_data_array = [];
@@ -1104,6 +1101,7 @@ class ProductController extends Controller
                             foreach ($product->has_platforms as $index => $platform){
                                 $platforms = $platforms . $platform->name . ',';
                             }
+
 
                             array_push($meta_data_array,[
                                 "key" => "warned_platform",
@@ -1115,6 +1113,7 @@ class ProductController extends Controller
                             ];
 
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                            dd($resp);
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
