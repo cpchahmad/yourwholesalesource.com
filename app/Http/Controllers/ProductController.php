@@ -1014,7 +1014,7 @@ class ProductController extends Controller
                             "meta_data" => $meta_data_array
                         ];
 
-                        dump($productdata);
+                        dump(123, $productdata);
 
                         $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
                         dump('tab update', $resp);
