@@ -2980,6 +2980,7 @@ class ProductController extends Controller
         foreach ($product->hasVariants as $index => $varaint) {
             $array_item = [];
             $array_item['attributes'] = [];
+            $array_item['image'] = [];
 
             $array_item['regular_price'] = $varaint->price;
             $array_item['sale_price'] = $varaint->cost;
@@ -3005,6 +3006,12 @@ class ProductController extends Controller
                     'option' => $varaint->option3,
                     'name' => $product->attribute3,
 
+                ]);
+            }
+
+            if($varaint->has_image != null){
+                array_psuh($array_item['image'] , [
+                    'id' => $varaint->has_image->woocommerce_id,
                 ]);
             }
 
