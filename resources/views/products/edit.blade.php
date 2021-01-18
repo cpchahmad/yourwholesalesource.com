@@ -605,7 +605,7 @@
                                             <div class="tab-pane @if($index == 0) active @endif" role="tabpanel" id="tab{{$index}}">
                                                 <div class="row">
                                                     <div class="col-md-12 text-right">
-                                                        <button type="button" class="btn btn-sm btn-info edit-tab-button" data-toggle="modal" data-id="{{ $tab->id }}" data-title="{{ $tab->title }}" data-descriptio="{{ $tab->description }}"> Edit Tab</button>
+                                                        <button type="button" class="btn btn-sm btn-info edit-tab-button" data-toggle="modal" data-id="{{ $tab->id }}" data-title="{{ $tab->title }}" data-description="{{ $tab->description }}"> Edit Tab</button>
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="window.location.href='{{route('product.tab.delete',$tab->id)}}'"> Delete Tab</button>
                                                     </div>
                                                 </div>
