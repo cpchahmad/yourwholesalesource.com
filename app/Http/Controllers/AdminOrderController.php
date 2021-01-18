@@ -1274,7 +1274,7 @@ class AdminOrderController extends Controller
         $item_list = $request->itemList;
 
 
-        $order = RetailerOrder::where('id', $order_id)->first();
+        $order = RetailerOrder::find($order_id);
         if($order_id !== null && $order) {
             // Save fulfillment
             $fulfillment = new ERPOrderFulfillment();
