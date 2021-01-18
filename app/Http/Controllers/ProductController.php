@@ -2882,6 +2882,8 @@ class ProductController extends Controller
             if($product->variants == 1) {
                 $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
 
+                dump($variants_array);
+
                 $variantdata = [
                     'create' => $variants_array
                 ];
@@ -2900,6 +2902,7 @@ class ProductController extends Controller
 
             $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
             DB::commit();
+            dd(2134);
 
             return redirect()->back()->with('success','Product Push to Store Successfully!');
         }
