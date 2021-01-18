@@ -2783,6 +2783,7 @@ class ProductController extends Controller
             /*Tags*/
             if($product->tags) {
                 $tags = explode(',', $product->tags);
+                dumb($tags);
                 foreach($tags as $tag) {
                     $t = new Tag();
                     $t->name = $tag;
