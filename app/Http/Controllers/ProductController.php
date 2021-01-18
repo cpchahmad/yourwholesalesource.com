@@ -2648,7 +2648,7 @@ class ProductController extends Controller
                 $product_sub_categories = $product->has_subcategories->pluck('woocommerce_id')->toArray();
                 foreach ($product_sub_categories as $category) {
                     array_push($categories_array, [
-                        'id' => $category->woocommerce_id,
+                        'id' => $category,
                     ]);
                 }
             }
