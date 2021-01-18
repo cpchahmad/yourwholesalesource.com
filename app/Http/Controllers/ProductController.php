@@ -1194,7 +1194,17 @@ class ProductController extends Controller
         $additional_tab->save();
 
         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+        $data = [];
         if(count($resp->meta_data) > 0){
+            $meta_data = $resp->meta_data;
+
+            foreach ($meta_data as $data) {
+                if($data->key == $request->input('tab-title')) {
+                    unset($data);
+                }
+            }
+
+            dd($meta_data);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
         }
 
