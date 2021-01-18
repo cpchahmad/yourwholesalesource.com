@@ -8,7 +8,7 @@ $(document).ready(function () {
         var modal = $('.edit_tab_modal');
         modal.find('.tab-id').val(id);
         modal.find('.tab-title').val(title);
-        modal.find('.tab-description').val(description);
+        modal.find('.tab-description').html(description);
         modal.modal("show");
     });
 
