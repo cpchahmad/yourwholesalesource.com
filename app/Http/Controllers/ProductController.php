@@ -1188,20 +1188,13 @@ class ProductController extends Controller
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
         $additional_tab = AdditionalTab::find($request->input('tab_id'));
-        $additional_tab->title = $request->input('tab-title');
-        $additional_tab->description = $request->input('tab-description');
-        $additional_tab->product_id = $product->id;
-        $additional_tab->save();
 
         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
-        $data = [];
         if(count($resp->meta_data) > 0){
             $meta_data = $resp->meta_data;
-
             foreach ($meta_data as $data) {
-                dd($data->key, $request->input('tab-title'));
-                if($data->key == $request->input('tab-title')) {
-                    dd('yes');
+                dd($data->key, $additional_tab->title);
+                if($data->key == $additional_tab->title) {
                     unset($data);
                 }
             }
@@ -1209,6 +1202,12 @@ class ProductController extends Controller
             dd($meta_data);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
         }
+
+
+        $additional_tab->title = $request->input('tab-title');
+        $additional_tab->description = $request->input('tab-description');
+        $additional_tab->product_id = $product->id;
+        $additional_tab->save();
 
         $meta_data_array = [];
         array_push($meta_data_array,[
