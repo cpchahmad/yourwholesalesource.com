@@ -162,6 +162,31 @@ class ProductController extends Controller
         ]);
     }
 
+    public function showImportPage($id) {
+        $categories = Category::latest()->get();
+        $product = Product::with(['has_images', 'hasVariants','has_platforms','has_categories','has_subcategories'])->find($id);
+        $platforms = WarnedPlatform::all();
+        $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
+        $tags = Tag::all();
+
+
+        $users = User::role('non-shopify-users')
+            ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+            ->orderBy('created_at','DESC')
+            ->get();
+
+
+        return view('products.edit')->with([
+            'categories' => $categories,
+            'platforms' => $platforms,
+            'product' => $product,
+            'shops' => $shops,
+            'non_shopify_users' => $users,
+            'tags' => $tags
+        ]);
+    }
+
+
     public function addTieredPrice(Request $request, $id) {
         $variants = $request->variant_id;
         $product = Product::find($id);
@@ -2541,9 +2566,9 @@ class ProductController extends Controller
 
             /*Product Dimensions*/
             $dimension_array = array(
-                'width' => $product->width,
-                'height' => $product->height,
-                'length' => $product->length
+                'width' => is_null($product->width) ? "0" : $product->width,
+                'height' => is_null($product->height) ? "0" : $product->height,
+                'length' => is_null($product->length) ? "0" : $product->length
             );
 
             /*Product Images*/

@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
     Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
+    Route::any('/products/{id}/import/to/woocommerce','ProductController@showImportPage')->name('product.import.page');
     Route::get('/download/sku/csv/{id}','ProductController@download_sku')->name('product.download.sku.csv');
     Route::any('/products/{id}/update','ProductController@update')->name('product.update');
     Route::any('/products/{id}/update/tab/details','ProductController@editTabDetails')->name('product.update.tab-details');
@@ -73,6 +74,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::get('/products/{id}/remove/tiered/price','ProductController@removeTieredPrice')->name('product.remove.tiered.price');
     Route::post('/products/save','ProductController@save')->name('product.save');
     Route::post('/products/variant/save','ProductController@variant')->name('product.variant');
+    Route::get('/products/{id}/delete','ProductController@delete')->name('product.delete');
     Route::get('/products/{id}/delete','ProductController@delete')->name('product.delete');
     Route::get('/products/{id}/images-position-update','ProductController@update_image_position')->name('product.update_image_position');
     Route::get('/products/{id}/categories-position-update','CategoryController@update_category_position')->name('category.update_image_position');
