@@ -1199,6 +1199,7 @@ class ProductController extends Controller
             $meta_data = $resp->meta_data;
 
             foreach ($meta_data as $data) {
+                dd($data->key, $request->input('tab-title'));
                 if($data->key == $request->input('tab-title')) {
                     dd('yes');
                     unset($data);
