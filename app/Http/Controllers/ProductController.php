@@ -1194,7 +1194,10 @@ class ProductController extends Controller
             $meta_data = $resp->meta_data;
             foreach ($meta_data as $data) {
                 if($data->key == $additional_tab->title) {
+                    dump($meta_data);
                     unset($data);
+
+                    dump($meta_data);
                 }
             }
 
