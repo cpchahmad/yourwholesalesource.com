@@ -159,9 +159,11 @@
                                     <a href="{{ route('product.delete', $product->id) }}" class="btn btn-sm btn-danger"
                                        type="button" data-toggle="tooltip" title=""
                                        data-original-title="Delete Product"><i class="fa fa-times"></i></a>
+                                    @if($product->to_woocommerce == 0)
                                     <a href="{{ route('product.import.page', $product->id) }}" class="btn btn-sm btn-info"
                                        type="button" data-toggle="tooltip" title=""
-                                       data-original-title="Import To Woocommerce">Import to Woocommerce</a>
+                                       data-original-title="Import To Woocommerce">Import</a>
+                                    @endif
                     </div>
                             </td>
                         </tr>
