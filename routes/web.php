@@ -19,6 +19,7 @@ use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
 use App\Shop;
+use App\Tag;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -454,3 +455,29 @@ Route::get('/push-to-mabang', 'AdminMaintainerController@push_to_mabang')->name(
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
 
+Route::get('test', function() {
+    $products = Product::all();
+    $woocommerce = new HelperController();
+    $woocommerce = $woocommerce->getWooCommerceAdminShop();
+    foreach ($products as $product) {
+        if($product->tags) {
+            $tags = explode(',', $product->tags);
+            foreach($tags as $tag) {
+                if(Tag::where('name', $tag)->exists())
+                {
+                    $t = Tag::where('name', $tag)->first();
+                }
+                else {
+                    $t = new Tag();
+                    $t->name = $tag;
+                    $t->save();
+
+                    $response = $woocommerce->post('products/tags', ['name' => $t->name]);
+                    $t->woocommerce_id = $response->id;
+                    $t->save();
+                }
+                $product->tags()->attach($t->id);
+            }
+        }
+    }
+});

@@ -2797,7 +2797,6 @@ class ProductController extends Controller
                         $t->woocommerce_id = $response->id;
                         $t->save();
                     }
-
                     $product->tags()->attach($t->id);
                 }
             }
