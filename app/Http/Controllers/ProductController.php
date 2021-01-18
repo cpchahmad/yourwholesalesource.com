@@ -989,8 +989,7 @@ class ProductController extends Controller
                         ];
 
                         $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-
-
+                        dump('tab', $resp);
                     }
 //
 //                else if ($type == 'edit-additional-tab'){
@@ -1092,16 +1091,12 @@ class ProductController extends Controller
                         }
                         $product->save();
 
-                        $metafields = [];
-
                         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
                         if(count($resp->meta_data) > 0){
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-
                         }
 
                         $meta_data_array = [];
-
                         if(count($product->has_platforms) > 0) {
                             $platforms = '';
                             foreach ($product->has_platforms as $index => $platform){
@@ -1119,6 +1114,7 @@ class ProductController extends Controller
                             ];
 
                             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                            dump('plat', $resp);
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
@@ -1199,6 +1195,7 @@ class ProductController extends Controller
             }
 
             DB::commit();
+            dd(123);
             return redirect()->back()->with('success', 'Product Updated Successfully');
         }
         catch(\Exception $e) {
