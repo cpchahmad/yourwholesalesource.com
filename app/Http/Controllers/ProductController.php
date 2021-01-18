@@ -176,7 +176,7 @@ class ProductController extends Controller
             ->get();
 
 
-        return view('products.edit')->with([
+        return view('products.import')->with([
             'categories' => $categories,
             'platforms' => $platforms,
             'product' => $product,
