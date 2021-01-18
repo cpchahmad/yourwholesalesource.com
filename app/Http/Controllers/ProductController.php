@@ -2783,7 +2783,6 @@ class ProductController extends Controller
             /*Tags*/
             if($product->tags) {
                 $tags = explode(',', $product->tags);
-                dd($tags);
                 foreach($tags as $tag) {
                     if(Tag::where('name', $tag)->exists())
                     {
