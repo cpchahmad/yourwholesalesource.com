@@ -1209,8 +1209,9 @@ class ProductController extends Controller
             }
 
 
+            dump($product->woocommerce_id);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => [], 'price' => '5']);
-            dump(1,$resp);
+            dump(13,$resp);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => $updated_array]);
             dump(2,$resp);
         }
