@@ -2781,27 +2781,6 @@ class ProductController extends Controller
             }
 
             /*Tags*/
-            if($product->tags) {
-                $tags = explode(',', $product->tags);
-                foreach($tags as $tag) {
-                    if(Tag::where('name', $tag)->exists())
-                    {
-                        $t = Tag::where('name', $tag)->first();
-                    }
-                    else {
-                        $t = new Tag();
-                        $t->name = $tag;
-                        $t->save();
-
-                        $response = $woocommerce->post('products/tags', ['name' => $t->name]);
-                        $t->woocommerce_id = $response->id;
-                        $t->save();
-                    }
-                    $product->tags()->attach($t->id);
-                }
-            }
-
-
             $tags_array = [];
             $product = Product::find($id);
             if($product->tags()->count() > 0) {
