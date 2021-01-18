@@ -1208,8 +1208,11 @@ class ProductController extends Controller
                 }
             }
 
+
+            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+            dump(1,$resp);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => $updated_array]);
-            dump($resp);
+            dump(2,$resp);
         }
 
 
