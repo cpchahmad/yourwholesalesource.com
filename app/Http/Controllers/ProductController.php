@@ -1208,8 +1208,8 @@ class ProductController extends Controller
                 }
             }
 
-            dd($updated_array);
-            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => $updated_array]);
+            dump($resp);
         }
 
 
@@ -1218,22 +1218,9 @@ class ProductController extends Controller
         $additional_tab->product_id = $product->id;
         $additional_tab->save();
 
-        $meta_data_array = [];
-        array_push($meta_data_array,[
-            "key" => $additional_tab->title,
-            "value"=> $additional_tab->description,
-        ]);
-
-        $productdata = [
-            "meta_data" => $meta_data_array
-        ];
-
-        dump(123, $productdata);
-
-        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-        dd('tab update', $resp);
-
         $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
+
+        dd(21);
     }
 
 
