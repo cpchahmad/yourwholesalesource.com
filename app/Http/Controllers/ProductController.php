@@ -186,6 +186,17 @@ class ProductController extends Controller
         ]);
     }
 
+    public function importToWoocommerce(Request $request, $id) {
+        $product = Product::find($id);
+
+        if($product != null) {
+            $shop = $this->helper->getShop();
+            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+
+            dd($response);
+        }
+    }
+
 
     public function addTieredPrice(Request $request, $id) {
         $variants = $request->variant_id;
