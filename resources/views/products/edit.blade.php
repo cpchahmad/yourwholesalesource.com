@@ -1170,7 +1170,7 @@
             <div class="modal-content">
                 <div class="block block-themed block-transparent mb-0">
                     <div class="block-header bg-primary-dark">
-                        <h3 class="block-title">Edit tab</h3>
+                        <h3 class="block-title">Edit tabs</h3>
                         <div class="block-options">
                             <button type="button" class="btn-block-option">
                                 <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
@@ -1186,11 +1186,11 @@
                                 <div class="col-md-12" style="margin-bottom: 10px">
                                     <label for="product-name">Title</label>
                                     <input class="form-control tab-title" type="text" id="" name="tab-title"
-                                           value="{{$tab->title}}" placeholder=""  >
+                                           value="" placeholder=""  >
                                 </div>
                                 <div class="col-md-12">
                                                                             <textarea class="js-summernote tab-description" name="tab-description"
-                                                                                      placeholder="Please Enter Description here !">{{$tab->description}}</textarea>
+                                                                                      placeholder="Please Enter Description here !"></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="sumbit" class="btn btn-primary">Save</button>
