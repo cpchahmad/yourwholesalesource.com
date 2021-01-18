@@ -72,9 +72,6 @@
                     <div class="block">
                         <div class="block-header">
                             <h3 class="block-title">Images</h3>
-                            <div class="text-right d-inline-block">
-                                <a style="margin-left: 10px;" class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#add_product_images">Add More Images</a>
-                            </div>
                         </div>
                         <div class="block-content pb-4">
                             @if(count($product->has_images) >0)
@@ -258,27 +255,24 @@
                                             different sizes or colors</label>
                                     </div>
                                 </div>
-
-
-                                <div class="text-right d-inline-block">
-                                    {{--                                    <a class="btn btn-sm btn-light" style="margin-left: 10px;" data-toggle="modal" data-target="#edit_options">Edit Options</a>--}}
-                                    <a href="{{route('product.existing_product_update_variants',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-light">Edit Variants</a>
-                                    <a href="{{route('product.download.sku.csv',$product->id)}}" style="margin-left: 10px;" class="btn btn-sm btn-danger">Download SKU List</a>
-                                </div>
                             </div>
 
                             <hr>
                             <div class="ml-2 row mb-3">
                                 <div class="col-md-2">
-                                    <label for="">Bulk Pricing/Cost</label>
+                                    <label for="">Attributes</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="">Price</label>
-                                    <input id="bulk-var-price" type="number" class="form-control" >
+                                    <label for="">Attribute 1</label>
+                                    <input id="" type="text" class="form-control" name="attribute1">
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="">Cost</label>
-                                    <input id="bulk-var-cost" type="number" class="form-control" >
+                                    <label for="">Attribute 2</label>
+                                    <input id="" type="text" class="form-control" name="attribute1">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="">Attribute 3</label>
+                                    <input id="" type="text" class="form-control" name="attribute1">
                                 </div>
                             </div>
                             <div class="block-content" style="padding-top: 0 !important;">
