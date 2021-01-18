@@ -1193,7 +1193,6 @@ class ProductController extends Controller
         if(count($resp->meta_data) > 0){
             $meta_data = $resp->meta_data;
             foreach ($meta_data as $data) {
-                dd($data->key, $additional_tab->title);
                 if($data->key == $additional_tab->title) {
                     unset($data);
                 }
