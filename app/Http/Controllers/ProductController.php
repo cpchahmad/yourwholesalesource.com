@@ -193,7 +193,21 @@ class ProductController extends Controller
             $shop = $this->helper->getShop();
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
 
-            dd($response);
+            $attributes = $response->body->product->options;
+            if (!empty($attributes[0])) {
+                $product->attribute1 = $attributes[0]->name;
+            }
+            if (!empty($attributes[1])) {
+                $product->attribute2 = $attributes[1]->name;
+            }
+            if (!empty($attributes[2])) {
+                $product->attribute3 = $attributes[2]->name;
+            }
+
+            $product->save();
+
+
+            dd($product);
         }
     }
 
