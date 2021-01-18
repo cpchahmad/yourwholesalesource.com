@@ -642,7 +642,7 @@
                                                            value=""  placeholder="" >
                                                 </div>
                                                 <div class="col-md-12">
-                                                <textarea class="js-summernote" name="tab-description"
+                                                <textarea class="form-control" name="tab-description"
                                                           placeholder="Please Enter Description here !"></textarea>
                                                 </div>
                                                 <div class="col-md-12">
@@ -1189,7 +1189,7 @@
                                            value="" placeholder=""  >
                                 </div>
                                 <div class="col-md-12">
-                                                                            <textarea class="js-summernote tab-description" name="tab-description"
+                                                                            <textarea class="tab-description form-control" name="tab-description"
                                                                                       placeholder="Please Enter Description here !"></textarea>
                                 </div>
                                 <div class="col-md-12">
