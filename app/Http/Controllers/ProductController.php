@@ -1192,16 +1192,23 @@ class ProductController extends Controller
         $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
         if(count($resp->meta_data) > 0){
             $meta_data = $resp->meta_data;
+            $updated_array = [];
             foreach ($meta_data as $data) {
                 if($data->key == $additional_tab->title) {
-                    dump($meta_data);
-                    unset($data);
-
-                    dump($meta_data);
+                    array_push($updated_array, [
+                       'key' =>  $request->input('tab-title'),
+                       'value' => $request->input('tab-description')
+                    ]);
+                }
+                else {
+                    array_push($updated_array, [
+                        'key' =>  $data->key,
+                        'value' => $data->value
+                    ]);
                 }
             }
 
-            dd($meta_data);
+            dd($updated_array);
             $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
         }
 
