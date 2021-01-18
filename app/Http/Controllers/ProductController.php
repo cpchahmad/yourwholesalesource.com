@@ -1200,6 +1200,7 @@ class ProductController extends Controller
 
             foreach ($meta_data as $data) {
                 if($data->key == $request->input('tab-title')) {
+                    dd('yes');
                     unset($data);
                 }
             }
