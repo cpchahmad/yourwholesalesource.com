@@ -59,8 +59,7 @@ Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
     Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
-    Route::get('/products/{id}/import/to/woocommerce','ProductController@showImportPage')->name('product.import.page');
-    Route::post('/products/{id}/import/to/woocommerce','ProductController@importToWoocommerce')->name('product.import.to.woocommerce');
+    Route::get('/products/{id}/import/to/woocommerce','ProductController@importToWoocommerce')->name('product.import.to.woocommerce');
     Route::get('/download/sku/csv/{id}','ProductController@download_sku')->name('product.download.sku.csv');
     Route::any('/products/{id}/update','ProductController@update')->name('product.update');
     Route::any('/products/{id}/update/tab/details','ProductController@editTabDetails')->name('product.update.tab-details');

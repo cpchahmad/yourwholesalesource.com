@@ -186,28 +186,37 @@ class ProductController extends Controller
         ]);
     }
 
-    public function importToWoocommerce(Request $request, $id) {
+    public function importToWoocommerce($id) {
         $product = Product::find($id);
 
         if($product != null) {
-            $shop = $this->helper->getShop();
-            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+           DB::beginTransaction();
+           try{
+               $shop = $this->helper->getShop();
+               $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
 
-            $attributes = $response->body->product->options;
-            if (!empty($attributes[0])) {
-                $product->attribute1 = $attributes[0]->name;
-            }
-            if (!empty($attributes[1])) {
-                $product->attribute2 = $attributes[1]->name;
-            }
-            if (!empty($attributes[2])) {
-                $product->attribute3 = $attributes[2]->name;
-            }
+               $attributes = $response->body->product->options;
+               if (!empty($attributes[0])) {
+                   $product->attribute1 = $attributes[0]->name;
+               }
+               if (!empty($attributes[1])) {
+                   $product->attribute2 = $attributes[1]->name;
+               }
+               if (!empty($attributes[2])) {
+                   $product->attribute3 = $attributes[2]->name;
+               }
 
-            $product->save();
+               $product->save();
 
-
-            dd($product);
+               return $this->import_to_woocommerce($product->id);
+           }
+           catch(\Exception $e) {
+               DB::rollBack();
+               return redirect()->back()->with('error', $e->getMessage());
+           }
+        }
+        else {
+            return redirect()->back()->with('error', 'Product Not Found');
         }
     }
 
@@ -2604,7 +2613,6 @@ class ProductController extends Controller
                 } else {
                     $src = asset('images/variants') . '/' . $image->image;
                 }
-//                $src = "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg";
                 array_push($images_array, [
                     'alt' => $product->title . '_' . $index,
                     'name' => $product->title . '_' . $index,
@@ -2647,16 +2655,17 @@ class ProductController extends Controller
 
             /*Platfroms*/
             $meta_data_array = [];
+            $platforms = null;
             if(count($product->has_platforms) > 0) {
                 foreach ($product->has_platforms as $index => $platform){
-                    $index = $index+1;
-                    array_push($meta_data_array,[
-                        "key" => "warned_platform",
-                        "value"=> $platform->name,
-                        "value_type"=> "string",
-                    ]);
+                    $platforms = $platforms . $platform->name . ',';
                 }
             }
+
+            array_push($meta_data_array,[
+                "key" => "warned_platform",
+                "value"=> $platforms,
+            ]);
 
 
 
@@ -2727,18 +2736,6 @@ class ProductController extends Controller
                     $v->save();
                 }
             }
-
-//            foreach ($product->hasVariants as $index => $v){
-//                if($v->has_image != null){
-//                    $i = [
-//                        'image' => [
-//                            'id' => $v->has_image->shopify_id,
-//                            'variant_ids' => [$v->shopify_id]
-//                        ]
-//                    ];
-//                    $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
-//                }
-//            }
 
 
             $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
