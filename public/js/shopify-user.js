@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    $('.custom-order-btn').click(function () {
+        console.log(324);
+        $(this).prop('disabled', true);
+    });
+
     /*Letting the non-shopify-user switch to store mode*/
     $('.shop-log-btn').click(function() {
         var shop = $(this).find('.shop-domain-name').html();

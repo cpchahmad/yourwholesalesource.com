@@ -189,7 +189,7 @@
 
                     <input id="variant_selection_check" type="hidden" name="variant_selection" value="0">
                     <div class="text-right">
-                        <button class="btn btn-primary"> Save </button>
+                        <button class="btn btn-primary custom-order-btn"> Save </button>
                     </div>
                 </div>
             </div>
