@@ -2967,7 +2967,7 @@ class ProductController extends Controller
         return $attributes_array;
     }
 
-    public function woocommerce_variants_template_array($product, $attributes){
+    public function woocommerce_variants_template_array($product){
         $product = Product::find($product->id);
 
         if(is_null($product->weight)) {

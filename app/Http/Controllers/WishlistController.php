@@ -1152,7 +1152,7 @@ class WishlistController extends Controller
         }
 
         if($product->variants == 1) {
-            $variants_array =  $this->woocommerce_helper->woocommerce_variants_template_array($product, $response->attributes);
+            $variants_array =  $this->woocommerce_helper->woocommerce_variants_template_array($product);
 
             $variantdata = [
                 'create' => $variants_array
