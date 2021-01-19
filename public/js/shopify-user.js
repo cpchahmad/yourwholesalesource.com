@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('.custom-order-btn').click(function () {
-        console.log(324);
+        $(this).text('Processing, Please Wait');
         $(this).prop('disabled', true);
     });
 
