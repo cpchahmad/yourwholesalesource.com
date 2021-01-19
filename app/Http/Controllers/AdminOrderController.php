@@ -1277,21 +1277,29 @@ class AdminOrderController extends Controller
 
         $order = RetailerOrder::find($order_id);
         if($order_id !== null && $order) {
-            // Save fulfillment
-            $fulfillment = new ERPOrderFulfillment();
-            $fulfillment->retailer_order_id = $order->id;
-            $fulfillment->logistic_code = $logistics_code;
-            $fulfillment->track_number = $track_number;
-            $fulfillment->logistic_name = $logistics_name;
-            $fulfillment->track_url = $track_url;
-            $fulfillment->erp_order_id = $order_id;
-            $fulfillment->line_items = json_encode($item_list);
-            $fulfillment->save();
 
-            $order->pushed_to_erp = 1;
-            $order->save();
+            try{
+                // Save fulfillment
+                $fulfillment = new ERPOrderFulfillment();
+                $fulfillment->retailer_order_id = $order->id;
+                $fulfillment->logistic_code = $logistics_code;
+                $fulfillment->track_number = $track_number;
+                $fulfillment->logistic_name = $logistics_name;
+                $fulfillment->track_url = $track_url;
+                $fulfillment->erp_order_id = $order_id;
+                $fulfillment->line_items = json_encode($item_list);
+                $fulfillment->save();
 
-            //$this->set_erp_order_fulfillment($fulfillment, $order);
+                $order->pushed_to_erp = 1;
+                $order->save();
+
+                $this->set_erp_order_fulfillment($fulfillment, $order);
+            }
+            catch(\Exception $e) {
+                $log = new ErrorLog();
+                $log->message = "Mabang Error: ". $e->getMessage();
+                $log->save();
+            }
 
 
             // Send Success Response
