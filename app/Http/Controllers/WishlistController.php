@@ -274,7 +274,7 @@ class WishlistController extends Controller
                         $categories = Category::latest()->get();
                         $platforms = WarnedPlatform::all();
                         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
-                        if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                        if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
                             return view('setttings.wishlist.map_product')->with([
                                 'product' => $response->body->product,
                                 'wishlist' => $wish,
