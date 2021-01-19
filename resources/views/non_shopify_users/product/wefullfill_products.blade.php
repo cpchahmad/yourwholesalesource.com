@@ -242,7 +242,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center" style="font-size: 17px">
-                {!! $products->links() !!}
+                {!! $products->appends(request()->input())->links() !!}
             </div>
         </div>
     </div>
