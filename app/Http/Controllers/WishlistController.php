@@ -16,6 +16,7 @@ use App\ProductVariant;
 use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
+use App\Tag;
 use App\User;
 use App\WarnedPlatform;
 use App\Wishlist;
@@ -24,6 +25,7 @@ use App\WishlistCountry;
 use App\WishlistThread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Models\Shop;
@@ -34,6 +36,7 @@ class WishlistController extends Controller
     private $helper;
     private $notify;
     private $log;
+    private $woocommerce_helper;
 
     /**
      * WishlistController constructor.
@@ -44,8 +47,7 @@ class WishlistController extends Controller
         $this->helper = new HelperController();
         $this->notify = new NotificationController();
         $this->log = new ActivityLogController();
-
-
+        $this->woocommerce_helper = new ProductController();
     }
 
     public function create_wishlist(Request $request){
@@ -354,8 +356,6 @@ class WishlistController extends Controller
                 $wish->save();
 
 
-
-
                 $user = $wish->has_user;
                 try{
                     Mail::to($user->email)->send(new WishlistComplateMail($user, $wish));
@@ -366,7 +366,7 @@ class WishlistController extends Controller
                 $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
 
 
-                if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
                     $this->log->store(0, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Completed');
                     return redirect()->route('wishlist.index')->with('success','Wishlist Completed Successfully!');
                 }
@@ -377,7 +377,7 @@ class WishlistController extends Controller
 
             }
             else{
-                if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+                if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
                     return redirect()->route('wishlist.index')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');
 
                 }
@@ -389,7 +389,7 @@ class WishlistController extends Controller
             }
         }
         else{
-            if($this->helper->getShop()->shopify_domain == 'wefullfill.myshopify.com'){
+            if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
                 return redirect()->route('wishlist.index')->with('errors','Wishlist Not Found!');
 
             }
@@ -679,7 +679,7 @@ class WishlistController extends Controller
      * @param $response
      * @return Product
      */
-    public function create_sync_product_to_admin(Request $request, $response): Product
+    public function create_sync_product_to_admin_old(Request $request, $response): Product
     {
         $product = new Product();
         $product->title = $request->title;
@@ -762,7 +762,9 @@ class WishlistController extends Controller
 
         $prod = Product::where('title', $request->title)->first();
 
-        /*Import to WeFullFill Store*/
+        $this->woocommerce_helper->import_to_woocommerce($prod->id);
+
+        /*Import to WeFullFill Woccommerce Store*/
         $variants_array = [];
         $options_array = [];
         $images_array = [];
@@ -902,6 +904,273 @@ class WishlistController extends Controller
                 $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product_shopify_id . '/images/' . $v->has_image->shopify_id . '.json', $i);
             }
         }
+        return $product;
+    }
+
+    public function create_sync_product_to_admin(Request $request, $response): Product
+    {
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->compare_price = $request->compare_price;
+        $product->cost = $request->cost;
+        $product->type = $request->product_type;
+        $product->vendor = $request->vendor;
+        $product->tags = $request->tags;
+        $product->quantity = $request->quantity;
+        $product->weight = $request->weight;
+        $product->sku = $request->sku;
+        $product->barcode = $request->barcode;
+        $product->fulfilled_by = $request->input('fulfilled-by');
+        $product->status = $request->input('status');
+        $product->processing_time = $request->input('processing_time');
+
+        $attributes = $response->body->product->options;
+        if (!empty($attributes[0])) {
+            $product->attribute1 = $attributes[0]->name;
+        }
+        if (!empty($attributes[1])) {
+            $product->attribute2 = $attributes[1]->name;
+        }
+        if (!empty($attributes[2])) {
+            $product->attribute3 = $attributes[2]->name;
+        }
+
+        $product->save();
+
+        if ($request->variants) {
+            $product->variants = $request->variants;
+        }
+
+        $product->save();
+        if ($request->category) {
+            $product->has_categories()->attach($request->category);
+        }
+        if ($request->sub_cat) {
+            $product->has_subcategories()->attach($request->sub_cat);
+        }
+        if ($request->platforms) {
+            $product->has_platforms()->attach($request->platforms);
+        }
+        $product->save();
+
+        if($request->tags) {
+            $tags = explode(',', $request->tags);
+
+            foreach($tags as $tag) {
+                if(Tag::where('name', $tag)->exists()) {
+                    $t = Tag::where('name', $tag)->first();
+                }
+                else{
+                    $t = new Tag();
+                    $t->name = $tag;
+                    $t->save();
+
+                    $woocommerce = $this->helper->getWooCommerceAdminShop();
+                    $res = $woocommerce->post('products/tags', ['name' => $tag->name]);
+                    $t->woocommerce_id = $res->id;
+                    $t->save();
+                }
+
+                $product->tags()->attach($t->id);
+            }
+
+        }
+
+        $count_product_images = count($product->has_images);
+
+
+        $shopify_product = $response->body->product;
+        foreach ($shopify_product->images as $index => $img) {
+            $image = file_get_contents($img->src);
+            $filename = now()->format('YmdHi') . $request->input('title') . rand(12321, 456546464) . '.jpg';
+            file_put_contents(public_path('images/' . $filename), $image);
+            $image = new Image();
+            $image->isV = 0;
+            $image->position = $index + 1 + $count_product_images;
+            $image->product_id = $product->id;
+            $image->shopify_id = $img->id;
+            $image->image = $filename;
+            $image->save();
+        }
+
+
+        if ($request->variants) {
+            $this->ProductVariants($product, $shopify_product, $request, $product->id);
+        }
+
+        $product->global = $request->input('global');
+        $product->save();
+
+        if($request->input('global') == 0 && $request->has('shops') && count($request->input('shops')) > 0){
+            $product->has_preferences()->attach($request->input('shops'));
+        }
+
+        if ($request->hasFile('images')) {
+
+            foreach ($request->file('images') as $index => $image) {
+
+                $destinationPath = 'images/';
+                $filename = now()->format('YmdHi') . str_replace([' ', '(', ')'], '-', $image->getClientOriginalName());
+                $image->move($destinationPath, $filename);
+                $image = new Image();
+                $image->isV = 0;
+                $image->product_id = $product->id;
+                $image->position = $index + 1;
+                $image->image = $filename;
+                $image->save();
+            }
+
+        }
+
+        $product = Product::where('title', $request->title)->first();
+
+        $woocommerce = $this->helper->getWooCommerceAdminShop();
+
+
+        /*Product Attributes*/
+        $attributes_array = $this->woocommerce_helper->attributes_template_array($product);
+
+        /*Product Dimensions*/
+        $dimension_array = array(
+            'width' => is_null($product->width) ? "0" : $product->width,
+            'height' => is_null($product->height) ? "0" : $product->height,
+            'length' => is_null($product->length) ? "0" : $product->length
+        );
+
+        /*Product Images*/
+        $images_array = [];
+        foreach ($product->has_images as $index => $image) {
+            if ($image->isV == 0) {
+                $src = asset('images') . '/' . $image->image;
+            } else {
+                $src = asset('images/variants') . '/' . $image->image;
+            }
+            array_push($images_array, [
+                'alt' => $product->title . '_' . $index,
+                'name' => $product->title . '_' . $index,
+                'src' => $src,
+            ]);
+        }
+
+        /*Tags*/
+        $tags_array = [];
+        if($product->tags()->count() > 0) {
+            foreach ($product->tags()->get() as $tag) {
+                array_push($tags_array, [
+                    'id' => $tag->woocommerce_id,
+                ]);
+            }
+        }
+
+        /*Categories*/
+        $categories_array = [];
+
+        if(count($product->has_categories) > 0){
+            $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
+
+            foreach ($product_categories as $category) {
+                array_push($categories_array, [
+                    'id' => $category,
+                ]);
+            }
+        }
+
+        /*SubCategories*/
+        if(count($product->has_subcategories) > 0) {
+            $product_sub_categories = $product->has_subcategories->pluck('woocommerce_id')->toArray();
+            foreach ($product_sub_categories as $category) {
+                array_push($categories_array, [
+                    'id' => $category,
+                ]);
+            }
+        }
+
+        /*Platfroms*/
+        $meta_data_array = [];
+        $platforms = null;
+        if(count($product->has_platforms) > 0) {
+            foreach ($product->has_platforms as $index => $platform){
+                $platforms = $platforms . $platform->name . ',';
+            }
+        }
+
+        array_push($meta_data_array,[
+            "key" => "warned_platform",
+            "value"=> $platforms,
+        ]);
+
+        if($product->status == 1)
+            $published = 'publish';
+        else
+            $published = 'draft';
+
+
+        if($product->variants == 1)
+            $product_type = 'variable';
+        else
+            $product_type = 'simple';
+
+
+        $productdata = [
+            "name" => $product->title,
+            "description" => $product->description,
+            "short_description" => $product->short_description,
+            "slug" => $product->slug,
+            "tags" => $tags_array,
+            "type" => $product_type,
+            "attributes" => $attributes_array,
+            "images" => $images_array,
+            "published"=>  $published,
+            "sale_price" => $product->price,
+            "regular_price" => $product->price,
+            "sku" => $product->sku,
+            "weight" => $product->weight,
+            "manage_stock" => true,
+            "stock_quantity" => $product->quantity,
+            "dimensions" => $dimension_array,
+            "categories" => $categories_array,
+            "meta_data" => $meta_data_array
+        ];
+
+        /*Creating Product On Woocommerce*/
+        $res = $woocommerce->post('products', $productdata);
+
+        $product_woocommerce_id =  $res->id;
+        $product->woocommerce_id = $product_woocommerce_id;
+        $product->to_woocommerce = 1;
+        $product->save();
+
+        $woocommerce_images = $res->images;
+
+        if (count($woocommerce_images) == count($product->has_images)) {
+            foreach ($product->has_images as $index => $image) {
+                $image->woocommerce_id = $woocommerce_images[$index]->id;
+                $image->save();
+            }
+        }
+
+        if($product->variants == 1) {
+            $variants_array =  $this->woocommerce_helper->woocommerce_variants_template_array($product, $response->attributes);
+
+            $variantdata = [
+                'create' => $variants_array
+            ];
+
+            /*Creating Product Variations On Woocommerce*/
+            $res = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
+
+            $woocommerce_variants = $res->create;
+            foreach ($product->hasVariants as $index => $v){
+                $v->woocommerce_id = $woocommerce_variants[$index]->id;
+//                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                $v->save();
+            }
+        }
+
+        $this->log->store(0, 'Product', $product->id, $product->title, 'Product Imported To Woocommerce');
+
         return $product;
     }
 
