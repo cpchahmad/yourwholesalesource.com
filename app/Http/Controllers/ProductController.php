@@ -192,8 +192,10 @@ class ProductController extends Controller
         if($product != null) {
            DB::beginTransaction();
            try{
-               $shop = $this->helper->getShop();
+               $shop = $this->helper->getAdminShop();
                $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
+
+               dd($response,12);
 
                $attributes = $response->body->product->options;
                if (!empty($attributes[0])) {
