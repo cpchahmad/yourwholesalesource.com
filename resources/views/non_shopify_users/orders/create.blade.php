@@ -75,7 +75,7 @@
                                                    value=""  placeholder="" required>
                                         </div>
                                         <div class="col-md-6 mb2">
-                                            <label>First Name</label>
+                                            <label>Last Name</label>
                                             <input type="text" class="form-control" name="c_last_name"
                                                    value=""  placeholder="" required>
                                         </div>
