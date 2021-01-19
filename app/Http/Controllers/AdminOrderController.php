@@ -1341,7 +1341,7 @@ class AdminOrderController extends Controller
                             }
                         }
 
-                        if (count($data->tracking_number) > 0) {
+                        if ($data->tracking_number) {
                             $fulfill_data['fulfillment']['tracking_number'] = $data->tracking_number;
                         }
 
@@ -1359,18 +1359,19 @@ class AdminOrderController extends Controller
                                 $fulfill_data['fulfillment']['tracking_url'] = $zoneQuery->courier->url;
                                 $fulfill_data['fulfillment']['tracking_company'] = $zoneQuery->courier->title;
                             }
-                            else if (count($data->tracking_urls) > 0) {
+                            else if ($data->tracking_url) {
                                 $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_url;
                             }
                         }
-                        else if (count($data->tracking_urls) > 0) {
+                        else if ($data->tracking_urls) {
                             $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_url;
                         }
 
-                        foreach ($data->line_items as $line_item) {
-                            $item = RetailerOrderLineItem::where('sku', $line_item->sku)->where('retailer_order_id',$retailer_order->id)->first();
+                        $line_items = json_decode($data->line_items);
+                        foreach ($line_items as $line_item) {
+                            $item = RetailerOrderLineItem::where('sku', $line_item->platformSku)->where('retailer_order_id',$retailer_order->id)->first();
                             if ($item != null) {
-                                $fulfill_quantity =$item->fulfillable_quantity -  $line_item->fulfillable_quantity;
+                                $fulfill_quantity =$item->fulfillable_quantity -  $line_item->quantity;
                                 array_push($fulfill_data['fulfillment']['line_items'], [
                                     "id" => $item->retailer_product_variant_id,
                                     "quantity" => $fulfill_quantity,
@@ -1428,6 +1429,109 @@ class AdminOrderController extends Controller
         }
     }
 
+    public function after_fullfiment_process(OrderFulfillment $new_fulfillment, $retailer_order, $data): void
+    {
+
+        /*Order Log*/
+        $order_log = new OrderLog();
+        $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
+        $order_log->status = "Fulfillment";
+        $order_log->retailer_order_id = $retailer_order->id;
+        $order_log->save();
+
+
+        /*Fulfillment Line Item Relationship*/
+        $line_items = json_decode($data->line_items);
+        foreach ($line_items as $item) {
+            $line_item = RetailerOrderLineItem::where('sku', $item->plaformSku)->where('retailer_order_id', $retailer_order->id)->first();
+            if ($line_item != null) {
+                $fulfillment_line_item = new FulfillmentLineItem();
+                $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - $item->quantity;
+                $fulfillment_line_item->order_fulfillment_id = $new_fulfillment->id;
+                $fulfillment_line_item->order_line_item_id = $line_item->id;
+                $fulfillment_line_item->save();
+            }
+        }
+        /*Each Line Item Fulfillment Status*/
+        list($item, $line_item) = $this->set_line_item_fullfill_status($data, $retailer_order);
+
+
+        /*Notification*/
+        $this->notify->generate('Order', 'Order Fulfillment', $retailer_order->name . ' line items fulfilled', $retailer_order);
+
+        /*If Fulfillment has Tracking Information*/
+        if ($data->tracking_number) {
+            $new_fulfillment->tracking_number = $data->tracking_number;
+        }
+
+        if($retailer_order->shipping_address)
+        {
+            $shipping = json_decode($retailer_order->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                $new_fulfillment->tracking_url = $zoneQuery->courier->url;
+                $new_fulfillment->courier_id = $zoneQuery->courier->id;
+            }
+            else if ($data->tracking_url) {
+                $new_fulfillment->tracking_url = $data->tracking_url;
+            }
+        }
+        else if ($data->tracking_url) {
+            $new_fulfillment->tracking_url = $data->tracking_url;
+        }
+
+
+
+        $new_fulfillment->admin_fulfillment_shopify_id = $data->erp_order_id;
+        $new_fulfillment->save();
+        if ($data->tracking_number) {
+            $count = 0;
+            $fulfillment_count = count($retailer_order->fulfillments);
+            foreach ($retailer_order->fulfillments as $f) {
+                if ($f->tracking_number != null) {
+                    $count++;
+                }
+            }
+            if($retailer_order->status == 'fulfilled'){
+                if ($count == $fulfillment_count) {
+                    $retailer_order->status = 'shipped';
+                } else {
+                    $retailer_order->status = 'partially-shipped';
+                }
+            }
+
+            $retailer_order->save();
+            $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details added successfully!', $retailer_order);
+        }
+    }
+
+    public function set_line_item_fullfill_status($data, $retailer_order): array
+    {
+        $line_items = json_decode($data->line_items);
+        foreach ($line_items as $item) {
+            $line_item = RetailerOrderLineItem::where('sku', $item->platformSku)->where('retailer_order_id', $retailer_order->id)->first();
+            if ($line_item != null) {
+                if ($item->fulfillable_quantity == 0) {
+                    $line_item->fulfillment_status = 'fulfilled';
+                    $line_item->fulfillable_quantity = 0;
+                    $line_item->save();
+                } else {
+                    $line_item->fulfillment_status = 'partially-fulfilled';
+                    $line_item->fulfillable_quantity = $item->quantity;
+                    $line_item->save();
+                }
+            }
+        }
+        $retailer_order->status = $retailer_order->getStatus($retailer_order);
+        $retailer_order->save();
+        return array($item, $line_item);
+    }
 
 }
 
