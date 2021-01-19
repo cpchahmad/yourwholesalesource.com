@@ -11,6 +11,10 @@ class RolePermissionController extends Controller
 //       if($user->email == 'admin@wefullfill.com'){
 //           return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
 //       }
+
+       if($user->hasRole('wordpress-admin')) {
+           return redirect('/');
+       }
        if ($user->email == 'super_admin@wefullfill.com'){
            return redirect('/shop/install?shop=wefullfill.myshopify.com');
        }
