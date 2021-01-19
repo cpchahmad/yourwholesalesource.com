@@ -1,6 +1,11 @@
 $(document).ready(function () {
 
 
+    $('.custom-order-btn').click(function () {
+        console.log(324);
+        $(this).prop('disabled', true);
+    });
+
     // Wallet Setting Switch
     $('body').on('change','.wallet-switch',function () {
         var status = '';
