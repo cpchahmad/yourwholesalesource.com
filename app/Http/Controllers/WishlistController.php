@@ -968,7 +968,7 @@ class WishlistController extends Controller
                     $t->save();
 
                     $woocommerce = $this->helper->getWooCommerceAdminShop();
-                    $res = $woocommerce->post('products/tags', ['name' => $tag->name]);
+                    $res = $woocommerce->post('products/tags', ['name' => $t->name]);
                     $t->woocommerce_id = $res->id;
                     $t->save();
                 }
