@@ -971,7 +971,6 @@ class WishlistController extends Controller
                     $t->woocommerce_id = $res->id;
                     $t->save();
                 }
-
                 $product->tags()->attach($t->id);
             }
 
@@ -1023,10 +1022,9 @@ class WishlistController extends Controller
 
         }
 
+
         $product = Product::where('title', $request->title)->first();
-
         $woocommerce = $this->helper->getWooCommerceAdminShop();
-
 
         /*Product Attributes*/
         $attributes_array = $this->woocommerce_helper->attributes_template_array($product);

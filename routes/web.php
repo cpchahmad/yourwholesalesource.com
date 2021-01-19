@@ -378,10 +378,6 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/orders/bulk-fulfillments', 'AdminOrderController@show_bulk_fulfillments')->name('app.orders.bulk.fulfillment');
 
         Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
-
-
-
-
     });
 });
 

@@ -27,6 +27,7 @@ use App\Shop;
 use App\User;
 use App\WalletRequest;
 use App\WishlistStatus;
+use App\Zone;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -1284,10 +1285,13 @@ class AdminOrderController extends Controller
             $fulfillment->logistic_name = $logistics_name;
             $fulfillment->track_url = $track_url;
             $fulfillment->erp_order_id = $order_id;
+            $fulfillment->line_items = json_encode($item_list);
             $fulfillment->save();
 
             $order->pushed_to_erp = 1;
             $order->save();
+
+            //$this->set_erp_order_fulfillment($fulfillment, $order);
 
 
             // Send Success Response
@@ -1298,6 +1302,130 @@ class AdminOrderController extends Controller
             return response()->json(["code" => 999, "message" => "错误描述"]);
         }
 
+    }
+
+    public function set_erp_order_fulfillment($data, $order) {
+        $retailer_order = RetailerOrder::find($order->id);
+        if ($retailer_order != null && $retailer_order->paid == 1) {
+            if ($retailer_order->custom == 1) {
+
+                /*Order Fullfillment Record*/
+                $new_fulfillment = new OrderFulfillment();
+                $count = count($retailer_order->fulfillments) + 1;
+                $new_fulfillment->name = $retailer_order->name . '.F' . $count;
+                $new_fulfillment->retailer_order_id = $retailer_order->id;
+                $new_fulfillment->status = 'fulfilled';
+                $new_fulfillment->save();
+
+                $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+            }
+            else {
+
+                $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
+                $shopify_fulfillment = null;
+                if ($shop != null) {
+                    $location_response = $shop->api()->rest('GET', '/admin/locations.json');
+                    if (!$location_response->errors) {
+
+                        foreach ($location_response->body->locations as $location){
+                            if($location->name == "WeFullFill"){
+                                $fulfill_data = [
+                                    "fulfillment" => [
+                                        "location_id" => $location->id,
+                                        "tracking_number" => null,
+                                        "line_items" => [
+
+                                        ]
+                                    ]
+                                ];
+                            }
+                        }
+
+                        if (count($data->tracking_number) > 0) {
+                            $fulfill_data['fulfillment']['tracking_number'] = $data->tracking_number;
+                        }
+
+                        if($retailer_order->shipping_address)
+                        {
+                            $shipping = json_decode($retailer_order->shipping_address);
+                            $country = $shipping->country;
+
+                            $zoneQuery = Zone::query();
+                            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                                $q->where('name','LIKE','%'.$country.'%');
+                            });
+                            $zoneQuery = $zoneQuery->first();
+                            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $zoneQuery->courier->url;
+                                $fulfill_data['fulfillment']['tracking_company'] = $zoneQuery->courier->title;
+                            }
+                            else if (count($data->tracking_urls) > 0) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_url;
+                            }
+                        }
+                        else if (count($data->tracking_urls) > 0) {
+                            $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_url;
+                        }
+
+                        foreach ($data->line_items as $line_item) {
+                            $item = RetailerOrderLineItem::where('sku', $line_item->sku)->where('retailer_order_id',$retailer_order->id)->first();
+                            if ($item != null) {
+                                $fulfill_quantity =$item->fulfillable_quantity -  $line_item->fulfillable_quantity;
+                                array_push($fulfill_data['fulfillment']['line_items'], [
+                                    "id" => $item->retailer_product_variant_id,
+                                    "quantity" => $fulfill_quantity,
+                                ]);
+                            }
+                        }
+                        $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                        if(!$response->errors){
+
+                            /*Order Fullfillment Record*/
+                            $new_fulfillment = new OrderFulfillment();
+                            $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
+                            $new_fulfillment->name = $response->body->fulfillment->name;
+                            $new_fulfillment->retailer_order_id = $retailer_order->id;
+                            $new_fulfillment->status = 'fulfilled';
+                            $new_fulfillment->save();
+                            /*Order Log*/
+
+                            $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
+
+                            $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+                        }
+                        else {
+
+                            $log = new ErrorLog();
+                            $log->message = "Fulfillment Error Outer: " . json_encode($response->body);
+                            $log->save();
+
+                            $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                            if(!$response->errors){
+
+                                /*Order Fullfillment Record*/
+                                $new_fulfillment = new OrderFulfillment();
+                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
+                                $new_fulfillment->name = $response->body->fulfillments[0]->name;
+                                $new_fulfillment->retailer_order_id = $retailer_order->id;
+                                $new_fulfillment->status = 'fulfilled';
+                                $new_fulfillment->save();
+                                /*Order Log*/
+
+                                $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillments[0]->id . '/complete.json');
+
+                                $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+                            }else {
+
+                                $log = new ErrorLog();
+                                $log->message = "Fulfillment Error Inner: " . json_encode($response->body);
+                                $log->save();
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
