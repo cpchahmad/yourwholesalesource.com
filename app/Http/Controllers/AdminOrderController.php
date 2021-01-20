@@ -1505,6 +1505,12 @@ class AdminOrderController extends Controller
 
     public function set_line_item_fullfill_status($data, $retailer_order): array
     {
+
+        $log = new ErrorLog();
+        $log->message = "success new";
+        $log->save();
+
+
         $line_items = json_decode($data->line_items);
         foreach ($line_items as $item) {
             $line_item = RetailerOrderLineItem::where('sku', $item->platformSku)->where('retailer_order_id', $retailer_order->id)->first();
