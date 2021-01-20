@@ -557,6 +557,10 @@ class AdminMaintainerController extends Controller
     }
 
     public function bulk_import_to_woocommerce() {
+        $products = Product::where('to_woocommerce', null)->pluck('id')->toArray();
+
+        dd($products);
+
         dispatch(new BulkImportJob());
     }
 
