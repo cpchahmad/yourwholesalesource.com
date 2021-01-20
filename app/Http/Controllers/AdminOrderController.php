@@ -1277,7 +1277,6 @@ class AdminOrderController extends Controller
         if($order_id !== null && $order) {
 
             try{
-                // Save fulfillment
                 $flag = true;
                 if(ERPOrderFulfillment::where('retailer_order_id', $order->id)->exists()) {
                     $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
