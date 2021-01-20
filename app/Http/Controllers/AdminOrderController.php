@@ -1405,7 +1405,7 @@ class AdminOrderController extends Controller
                         else {
 
                             $log = new ErrorLog();
-                            $log->message = "Fulfillment Error Outer: " . json_encode($response->body);
+                            $log->message = "Fulfillment Error Outer From Manbang: " . json_encode($response->body);
                             $log->save();
 
                             $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
