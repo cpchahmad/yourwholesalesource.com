@@ -1388,11 +1388,6 @@ class AdminOrderController extends Controller
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                         if(!$response->errors){
-
-                            $log = new ErrorLog();
-                            $log->message = "success 1";
-                            $log->save();
-
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
                             $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
@@ -1419,11 +1414,6 @@ class AdminOrderController extends Controller
 
     public function after_fullfiment_process(OrderFulfillment $new_fulfillment, $retailer_order, $data): void
     {
-
-        $log = new ErrorLog();
-        $log->message = "success two";
-        $log->save();
-
         /*Order Log*/
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
@@ -1505,12 +1495,6 @@ class AdminOrderController extends Controller
 
     public function set_line_item_fullfill_status($data, $retailer_order): array
     {
-
-        $log = new ErrorLog();
-        $log->message = "success new";
-        $log->save();
-
-
         $line_items = json_decode($data->line_items);
         foreach ($line_items as $item) {
             $line_item = RetailerOrderLineItem::where('sku', $item->platformSku)->where('retailer_order_id', $retailer_order->id)->first();
