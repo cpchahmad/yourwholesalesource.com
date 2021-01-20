@@ -1280,7 +1280,7 @@ class AdminOrderController extends Controller
                 $flag = true;
                 if(ERPOrderFulfillment::where('retailer_order_id', $order->id)->exists()) {
                     $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
-                    if($fulfillment->track_number == $track_number) {
+                    if($fulfillment->track_number != $track_number) {
                         $flag = false;
                     }
                 }
