@@ -1276,12 +1276,23 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::find($order_id);
         if($order_id !== null && $order) {
 
+            $log = new ErrorLog();
+            $log->message = "yesss";
+            $log->save();
+
             try{
                 $flag = true;
                 if(ERPOrderFulfillment::where('retailer_order_id', $order->id)->exists()) {
+                    $log = new ErrorLog();
+                    $log->message = "yesssvdfd";
+                    $log->save();
                     $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
                     if($fulfillment->track_number != $track_number) {
                         $flag = false;
+
+                        $log = new ErrorLog();
+                        $log->message = "yessstrtr";
+                        $log->save();
                     }
                 }
                 else {
