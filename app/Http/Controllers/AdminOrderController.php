@@ -1349,8 +1349,8 @@ class AdminOrderController extends Controller
                             }
                         }
 
-                        if ($data->tracking_number) {
-                            $fulfill_data['fulfillment']['tracking_number'] = $data->tracking_number;
+                        if ($data->track_number) {
+                            $fulfill_data['fulfillment']['tracking_number'] = $data->track_number;
                         }
 
                         if($retailer_order->shipping_address)
@@ -1367,12 +1367,12 @@ class AdminOrderController extends Controller
                                 $fulfill_data['fulfillment']['tracking_url'] = $zoneQuery->courier->url;
                                 $fulfill_data['fulfillment']['tracking_company'] = $zoneQuery->courier->title;
                             }
-                            else if ($data->tracking_url) {
-                                $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_url;
+                            else if ($data->track_url) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $data->track_url;
                             }
                         }
-                        else if ($data->tracking_urls) {
-                            $fulfill_data['fulfillment']['tracking_url'] = $data->tracking_url;
+                        else if ($data->track_url) {
+                            $fulfill_data['fulfillment']['tracking_url'] = $data->track_url;
                         }
 
                         $line_items = json_decode($data->line_items);
@@ -1426,7 +1426,7 @@ class AdminOrderController extends Controller
 
         /*Order Log*/
         $order_log = new OrderLog();
-        $order_log->message = "A fulfillment named this " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
+        $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
         $order_log->status = "Fulfillment";
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
@@ -1452,8 +1452,8 @@ class AdminOrderController extends Controller
         $this->notify->generate('Order', 'Order Fulfillment', $retailer_order->name . ' line items fulfilled', $retailer_order);
 
         /*If Fulfillment has Tracking Information*/
-        if ($data->tracking_number) {
-            $new_fulfillment->tracking_number = $data->tracking_number;
+        if ($data->track_number) {
+            $new_fulfillment->tracking_number = $data->track_number;
         }
 
         if($retailer_order->shipping_address)
@@ -1470,19 +1470,19 @@ class AdminOrderController extends Controller
                 $new_fulfillment->tracking_url = $zoneQuery->courier->url;
                 $new_fulfillment->courier_id = $zoneQuery->courier->id;
             }
-            else if ($data->tracking_url) {
-                $new_fulfillment->tracking_url = $data->tracking_url;
+            else if ($data->track_url) {
+                $new_fulfillment->tracking_url = $data->track_url;
             }
         }
-        else if ($data->tracking_url) {
-            $new_fulfillment->tracking_url = $data->tracking_url;
+        else if ($data->track_url) {
+            $new_fulfillment->tracking_url = $data->track_url;
         }
 
 
 
         $new_fulfillment->admin_fulfillment_shopify_id = $data->erp_order_id;
         $new_fulfillment->save();
-        if ($data->tracking_number) {
+        if ($data->track_number) {
             $count = 0;
             $fulfillment_count = count($retailer_order->fulfillments);
             foreach ($retailer_order->fulfillments as $f) {
