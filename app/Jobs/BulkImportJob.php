@@ -32,7 +32,7 @@ class BulkImportJob implements ShouldQueue
      */
     public function handle()
     {
-        $products = Product::where('to_woocommerce', 0)->limit(5)->pluck('id')->toArray();
+        $products = Product::where('to_woocommerce', null)->limit(2)->pluck('id')->toArray();
 
         foreach($products as $id) {
             $this->helper->importToWoocommerce($id);
