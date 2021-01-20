@@ -451,3 +451,5 @@ Route::get('/push-to-mabang', 'AdminMaintainerController@push_to_mabang')->name(
 
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
+Route::get('bulk', 'AdminMaintainerController@bulk_import_to_woocommerce');
+

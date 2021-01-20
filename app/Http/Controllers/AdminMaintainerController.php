@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Jobs\BulkImportJob;
 use App\OrderFulfillment;
+use App\Product;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\User;
@@ -552,6 +554,14 @@ class AdminMaintainerController extends Controller
         $resp = curl_exec($curl);
         curl_close($curl);
 
+    }
+
+    public function bulk_import_to_woocommerce() {
+
+        $products = Product::where('to_woocommerce', 0)->limit(5)->pluck('id')->toArray();
+
+        dd($products);
+        dispatch(new BulkImportJob());
     }
 
 

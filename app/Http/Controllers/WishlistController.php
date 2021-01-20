@@ -83,7 +83,7 @@ class WishlistController extends Controller
             $users_temp =['info@wefullfill.com',$manager_email];
             $users = [];
 
-            foreach($users_temp as $key => $ut){
+            foreach($users_temp as $ut){
                 if($ut != null) {
                     $ua = [];
 
@@ -115,13 +115,8 @@ class WishlistController extends Controller
             }
             $this->log->store($wish->user_id, 'Wishlist', $wish->id, $wish->product_name,  'Wishlist Created');
 
-
-
-
             return redirect()->back()->with('success','Wishlist created successfully!');
-
         }
-
         else{
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
