@@ -1266,7 +1266,6 @@ class AdminOrderController extends Controller
     }
 
     public function getFulfillmentFromErp(Request $request) {
-
         $order_id = $request->platformOrderId;
         $logistics_code = $request->logisticsCode;
         $track_number = $request->trackNumber;
@@ -1274,13 +1273,22 @@ class AdminOrderController extends Controller
         $track_url = $request->trackUrl;
         $item_list = $request->itemList;
 
-
         $order = RetailerOrder::find($order_id);
         if($order_id !== null && $order) {
 
             try{
                 // Save fulfillment
-                $fulfillment = new ERPOrderFulfillment();
+                $flag = true;
+                if(ERPOrderFulfillment::where('retailer_order_id', $order->id)->exists()) {
+                    $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
+                    if($fulfillment->track_number == $track_number) {
+                        $flag = false;
+                    }
+                }
+                else {
+                    $fulfillment = new ERPOrderFulfillment();
+                }
+
                 $fulfillment->retailer_order_id = $order->id;
                 $fulfillment->logistic_code = $logistics_code;
                 $fulfillment->track_number = $track_number;
@@ -1293,14 +1301,19 @@ class AdminOrderController extends Controller
                 $order->pushed_to_erp = 1;
                 $order->save();
 
-                $this->set_erp_order_fulfillment($fulfillment, $order);
+                if($flag) {
+                    $this->set_erp_order_fulfillment($fulfillment, $order);
+                }
+                else {
+                    $this->update_erp_order_fulfillemnt($fulfillment, $order);
+                }
+
             }
             catch(\Exception $e) {
                 $log = new ErrorLog();
                 $log->message = "Mabang Error: ". $e->getMessage();
                 $log->save();
             }
-
 
             // Send Success Response
             return response()->json(["code" => 0, "message" => ""]);
@@ -1311,6 +1324,119 @@ class AdminOrderController extends Controller
         }
 
     }
+
+    public function update_erp_order_fulfillemnt($data, $order) {
+        $retailer_order = RetailerOrder::find($order->id);
+        $fulfillment = OrderFulfillment::where('retailer_order_id', $retailer_order->id)->where('admin_fulfillment_shopify_id', $data->erp_order_id)->first();
+        if ($retailer_order != null && $retailer_order->paid == 1 && $fulfillment != null) {
+            if ($retailer_order->custom == 1) {
+                $this->tracking_process($data, $fulfillment, $retailer_order);
+            }
+            else{
+                $shop = $this->helper->getSpecificShop($retailer_order->shop_id);
+                if ($shop != null) {
+                    if ($fulfillment != null) {
+                        $tracking = [
+                            "fulfillment" => [
+                                "tracking_number" => null,
+                                "tracking_url" => null,
+                                "notify_customer" => false
+                            ]
+                        ];
+                        if ($data->track_number) {
+                            $tracking['fulfillment']['tracking_number'] = $data->track_number;
+                        }
+
+                        if($retailer_order->shipping_address)
+                        {
+                            $shipping = json_decode($retailer_order->shipping_address);
+                            $country = $shipping->country;
+
+                            $zoneQuery = Zone::query();
+                            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                                $q->where('name','LIKE','%'.$country.'%');
+                            });
+                            $zoneQuery = $zoneQuery->first();
+                            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $zoneQuery->courier->url;
+                                $fulfill_data['fulfillment']['tracking_company'] = $zoneQuery->courier->title;
+                            }
+                            else if ($data->track_url) {
+                                $fulfill_data['fulfillment']['tracking_url'] = $data->track_url;
+                            }
+                        }
+                        else if ($data->track_url) {
+                            $tracking['fulfillment']['tracking_url'] = $data->track_url;
+                        }
+                        $response = $shop->api()->rest('PUT', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $fulfillment->fulfillment_shopify_id . '.json', $tracking);
+
+                        if (!$response->errors) {
+                            $this->tracking_process($data, $fulfillment, $retailer_order);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    public function tracking_process($data, $fulfillment, $retailer_order): void
+    {
+        if ($data->track_number) {
+            $fulfillment->tracking_number = $data->track_number;
+        }
+        if($retailer_order->shipping_address)
+        {
+            $shipping = json_decode($retailer_order->shipping_address);
+            $country = $shipping->country;
+
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->first();
+            if($zoneQuery->courier != null && $zoneQuery->courier->url != null) {
+                $fulfillment->tracking_url = $zoneQuery->courier->url;
+                $fulfillment->courier_id = $zoneQuery->courier->id;
+            }
+            else if ($data->track_url) {
+                $fulfillment->tracking_url = $data->track_url;
+            }
+        }
+        else if ($data->track_url) {
+            $fulfillment->tracking_url = $data->track_url;
+        }
+        $fulfillment->save();
+
+        /*Maintaining Log*/
+        $order_log = new OrderLog();
+        $order_log->message = "Tracking detailed Updated To Fulfillment named " . $fulfillment->name . "  successfully on " . now()->format('d M, Y h:i a');
+        $order_log->status = "Tracking Details Updated";
+        $order_log->retailer_order_id = $retailer_order->id;
+        $order_log->save();
+
+        if ($data->track_number) {
+            $count = 0;
+            $fulfillment_count = count($retailer_order->fulfillments);
+            foreach ($retailer_order->fulfillments as $f) {
+                if ($f->tracking_number != null) {
+                    $count++;
+                }
+            }
+            if($retailer_order->status == 'fulfilled'){
+                if ($count == $fulfillment_count) {
+                    $retailer_order->status = 'shipped';
+                } else {
+                    $retailer_order->status = 'partially-shipped';
+                }
+            }
+
+            $retailer_order->save();
+            $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details updated successfully!', $retailer_order);
+        }
+
+    }
+
 
     public function set_erp_order_fulfillment($data, $order) {
         $retailer_order = RetailerOrder::find($order->id);
