@@ -1427,7 +1427,7 @@ class AdminOrderController extends Controller
         /*Fulfillment Line Item Relationship*/
         $line_items = json_decode($data->line_items);
         foreach ($line_items as $item) {
-            $line_item = RetailerOrderLineItem::where('sku', $item->plaformSku)->where('retailer_order_id', $retailer_order->id)->first();
+            $line_item = RetailerOrderLineItem::where('sku', $item->platformSku)->where('retailer_order_id', $retailer_order->id)->first();
             if ($line_item != null) {
                 $fulfillment_line_item = new FulfillmentLineItem();
                 $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - 0;
