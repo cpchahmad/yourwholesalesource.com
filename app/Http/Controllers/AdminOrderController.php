@@ -1379,7 +1379,7 @@ class AdminOrderController extends Controller
                         foreach ($line_items as $line_item) {
                             $item = RetailerOrderLineItem::where('sku', $line_item->platformSku)->where('retailer_order_id',$retailer_order->id)->first();
                             if ($item != null) {
-                                $fulfill_quantity =$item->fulfillable_quantity -  $line_item->quantity;
+                                $fulfill_quantity =$item->fulfillable_quantity -  0;
                                 array_push($fulfill_data['fulfillment']['line_items'], [
                                     "id" => $item->retailer_product_variant_id,
                                     "quantity" => $fulfill_quantity,
@@ -1403,33 +1403,9 @@ class AdminOrderController extends Controller
                             $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
                         }
                         else {
-
                             $log = new ErrorLog();
                             $log->message = "Fulfillment Error Outer From Manbang: " . json_encode($response->body);
                             $log->save();
-
-                            $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
-                            if(!$response->errors){
-
-                                /*Order Fullfillment Record*/
-                                $new_fulfillment = new OrderFulfillment();
-                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
-                                $new_fulfillment->name = $response->body->fulfillments[0]->name;
-                                $new_fulfillment->retailer_order_id = $retailer_order->id;
-                                $new_fulfillment->status = 'fulfilled';
-                                $new_fulfillment->save();
-                                /*Order Log*/
-
-                                $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillments[0]->id . '/complete.json');
-
-                                $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
-                            }else {
-
-                                $log = new ErrorLog();
-                                $log->message = "Fulfillment Error Inner: " . json_encode($response->body);
-                                $log->save();
-                            }
-
                         }
                     }
                 }
@@ -1454,7 +1430,7 @@ class AdminOrderController extends Controller
             $line_item = RetailerOrderLineItem::where('sku', $item->plaformSku)->where('retailer_order_id', $retailer_order->id)->first();
             if ($line_item != null) {
                 $fulfillment_line_item = new FulfillmentLineItem();
-                $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - $item->quantity;
+                $fulfillment_line_item->fulfilled_quantity = $line_item->fulfillable_quantity - 0;
                 $fulfillment_line_item->order_fulfillment_id = $new_fulfillment->id;
                 $fulfillment_line_item->order_line_item_id = $line_item->id;
                 $fulfillment_line_item->save();
@@ -1525,7 +1501,8 @@ class AdminOrderController extends Controller
         foreach ($line_items as $item) {
             $line_item = RetailerOrderLineItem::where('sku', $item->platformSku)->where('retailer_order_id', $retailer_order->id)->first();
             if ($line_item != null) {
-                if ($item->fulfillable_quantity == 0) {
+//                if ($item->fulfillable_quantity == 0) {
+                if (true) {
                     $line_item->fulfillment_status = 'fulfilled';
                     $line_item->fulfillable_quantity = 0;
                     $line_item->save();
