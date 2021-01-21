@@ -932,24 +932,14 @@
                                         <thead>
                                         <tr>
                                             <th style="vertical-align: top;width: 10%;">Title</th>
-                                            <th style="vertical-align: top;width: 12%;">Cost</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th colspan="5">
+                                            <th colspan="2">
                                                 <div class="row">
-                                                    <div class="col-md-2">
-                                                        <span style="vertical-align: top;">Min Qty</span>
+                                                    <div class="col-md-6">
+                                                        <span style="vertical-align: top;">Warehouse</span>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <span style="vertical-align: top;">Max Qty</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <span style="vertical-align: top;">Type</span>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <span style="vertical-align: top;">$/Discount</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <span style=""></span>
+                                                    <div class="col-md-6">
+                                                        <span style="vertical-align: top;">Quantity</span>
                                                     </div>
                                                 </div>
                                             </th>
@@ -963,12 +953,9 @@
                                                 {{ $product->title }}
                                             </td>
                                             <td>
-                                                <input disabled type="text" class="form-control" name="cost" value="{{$product->cost}}" placeholder="$0.00">
-                                            </td>
-                                            <td>
                                                 <input disabled type="text" class="form-control"  value="{{$product->sku}}">
                                             </td>
-                                            <td colspan="5">
+                                            <td colspan="2">
                                                 @if(count($product->has_tiered_prices) > 0)
                                                     @foreach($product->has_tiered_prices as $item)
                                                         <div class="row mb-3">
@@ -999,25 +986,15 @@
                                                     @endforeach
                                                 @endif
                                                 <div class="row mb-3">
-                                                    <div class="col-md-2">
-                                                        <input  type="number" class="form-control" name="min_qty[]">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <input  type="number" class="form-control" name="max_qty[]">
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <select name="type[]" id="" class="form-control">
-                                                            <option value="fixed">Fixed</option>
-                                                            <option value="discount">Discount</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <input  type="number" step="any" class="form-control" name="tiered_price[]"  placeholder="">
-                                                    </div>
-                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                        <button type="button" class="btn btn-sm btn-primary add-single-product-price-row-btn" id="{{ $product->id }}">+</button>
-                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-btn">-</button>
-                                                    </div>
+                                                   @foreach($warehouses as $warehouse)
+                                                        <div class="col-md-2">
+                                                            <input  type="text" class="form-control" value="{{ $warehouse->title }}">
+                                                            <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}"">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input  type="number" class="form-control" name="war_qty[]">
+                                                        </div>
+                                                   @endforeach
                                                 </div>
                                             </td>
                                         </tr>
