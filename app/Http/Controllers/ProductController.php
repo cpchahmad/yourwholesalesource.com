@@ -1738,7 +1738,7 @@ class ProductController extends Controller
             }
 
             if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
+                foreach ($request->file('images') as $i => $image) {
                     $destinationPath = 'images/';
                     $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                     $image->move($destinationPath, $filename);
@@ -1746,7 +1746,7 @@ class ProductController extends Controller
                     $image->isV = 0;
                     $image->product_id = $product->id;
                     $image->image = $filename;
-
+                    $image->position = $i+1;
                     $image->save();
                 }
             }
