@@ -2775,8 +2775,8 @@ class ProductController extends Controller
                     $src = asset('images/variants') . '/' . $image->image;
                 }
                 array_push($images_array, [
-                    'alt' => $product->title . '_' . $index+1,
-                    'name' => $product->title . '_' . $index+1,
+                    'alt' => $product->title . '_' . $index,
+                    'name' => $product->title . '_' . $index,
                     'src' => $src,
                 ]);
             }
