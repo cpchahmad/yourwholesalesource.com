@@ -373,9 +373,9 @@ class AdminOrderController extends Controller
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
 
-                                if ($order->admin_shopify_id != null) {
-                                    $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
-                                }
+//                                if ($order->admin_shopify_id != null) {
+//                                    $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
+//                                }
                             }
 
                     } else {
@@ -391,23 +391,23 @@ class AdminOrderController extends Controller
                                 $current->courier_id = $courier_id;
                             $current->save();
 
-                            if ($order->admin_shopify_id != null) {
-                                $data = [
-                                    "fulfillment" => [
-                                        "tracking_number" => $tracking_number,
-                                        "tracking_url" => $tracking_url,
-                                        "notify_customer" => false
-                                    ]
-                                ];
-
-                                if($courier_id !== null){
-                                    $courier = Courier::find($courier_id);
-                                    $data['fulfillment']['tracking_company'] = $courier->title;
-                                }
-
-                                $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
-                                //$this->CompleteFullFillment($current);
-                            }
+//                            if ($order->admin_shopify_id != null) {
+//                                $data = [
+//                                    "fulfillment" => [
+//                                        "tracking_number" => $tracking_number,
+//                                        "tracking_url" => $tracking_url,
+//                                        "notify_customer" => false
+//                                    ]
+//                                ];
+//
+//                                if($courier_id !== null){
+//                                    $courier = Courier::find($courier_id);
+//                                    $data['fulfillment']['tracking_company'] = $courier->title;
+//                                }
+//
+//                                $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
+//                                //$this->CompleteFullFillment($current);
+//                            }
                             /*Maintaining Log*/
                             $order_log = new OrderLog();
                             $order_log->message = "Tracking detailed of fulfillment named " . $current->name . " updated successfully on " . now()->format('d M, Y h:i a');
