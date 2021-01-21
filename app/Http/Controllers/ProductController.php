@@ -785,7 +785,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
-        $shop = $this->helper->getShop();
 
         $this->validate($request, [
             'sku' => 'required|unique:products,sku,'.$product->id,
