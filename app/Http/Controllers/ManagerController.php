@@ -498,13 +498,14 @@ class ManagerController extends Controller
                                     "fulfillment" => [
                                         "tracking_number"=> $tracking_numbers[$index],
                                         "tracking_url" =>$tracking_urls[$index],
+                                        "notify_customer" => false,
                                     ]
                                 ];
                                 $response = $shop->api()->rest('PUT','/admin/orders/'.$order->shopify_order_id.'/fulfillments/'.$current->fulfillment_shopify_id.'.json',$data);
-                                if($order->admin_shopify_id != null)
-                                {
-                                    $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
-                                }
+//                                if($order->admin_shopify_id != null)
+//                                {
+//                                    $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
+//                                }
                                 if(!$response->errors){
                                     $current->tracking_number = $tracking_numbers[$index];
                                     $current->tracking_url = $tracking_urls[$index];
@@ -548,9 +549,10 @@ class ManagerController extends Controller
                                     "fulfillment" => [
                                         "tracking_number" => $tracking_numbers[$index],
                                         "tracking_url" => $tracking_urls[$index],
+                                        "notify_customer" => false,
                                     ]
                                 ];
-                                $this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
+                                //$this->admin_maintainer->admin_order_fulfillment_add_tracking($order,$current,$data);
                             }
 
                             /*Maintaining Log*/
