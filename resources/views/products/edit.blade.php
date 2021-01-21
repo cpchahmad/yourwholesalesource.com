@@ -925,8 +925,8 @@
                         </div>
                         <div class="block-content">
                             @if(count($product->hasVariants) == 0)
-                                <div action="{{ route('single.product.add.tiered.price', $product->id) }}" method="post">
-                                    @csrf
+                                <div>
+
                                     <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
                                         <thead>
                                         <tr>
@@ -946,7 +946,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <input type="hidden" name="type[]" value="single-variant-tiered-pricing">
+                                            <input type="hidden" name="type[]" value="single-variant-warehouse-inventory">
 
                                             <td class="variant_title">
                                                 {{ $product->title }}
@@ -987,8 +987,8 @@
                                                 @foreach($warehouses as $warehouse)
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
-                                                            <input  type="text" class="form-control" value="{{ $warehouse->title }}">
-                                                            <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}"">
+                                                            <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
+                                                            <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <input  type="number" class="form-control" name="war_qty[]">
@@ -1000,9 +1000,9 @@
                                         </tbody>
 
                                     </table>
-                                    {{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
-                                    {{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
-                                    {{--                                    </div>--}}
+{{--                                    <div class="block-content text-right pr-0 pt-0 pb-3">--}}
+{{--                                        <button type="submit" class="btn btn-primary">Save</button>--}}
+{{--                                    </div>--}}
                                 </div>
                             @endif
                             @if($product->variants == 1)

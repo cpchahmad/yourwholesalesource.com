@@ -792,7 +792,15 @@ class ProductController extends Controller
             'title' => 'required|unique:products,title,'.$product->id
         ]);
 
+        foreach($request->type as $type) {
+            if ($type = "single-variant-warehouse-inventory") {
+                dd($request->all());
+            }
+        }
 
+
+
+        dd(23);
         DB::beginTransaction();
         try{
             if ($product != null) {
@@ -3117,6 +3125,14 @@ class ProductController extends Controller
         }
 
         return $variants_array;
+    }
+
+    public function add_warehouse_inventory_for_single_product(Request $request, $id) {
+        dd($request->all());
+    }
+
+    public function add_warehouse_inventory_for_variable_product(Request $request) {
+        dd($request->all());
     }
 
 }
