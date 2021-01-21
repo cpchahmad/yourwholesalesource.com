@@ -1059,6 +1059,9 @@
                                                     <td class="variant_title">
                                                         @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
                                                     </td>
+                                                    <td>
+                                                        <input disabled type="text" class="form-control"  value="{{$v->sku}}">
+                                                    </td>
                                                     <td colspan="5">
 {{--                                                        @if(count($v->has_tiered_prices) > 0)--}}
 {{--                                                            @foreach($v->has_tiered_prices as $item)--}}
@@ -1093,7 +1096,7 @@
                                                             @foreach($warehouses as $warehouse)
                                                                 <div class="col-md-6">
                                                                     <input  type="hidden" class="form-control" name="war_id{{$warehouse->id}}[]" value="{{ $warehouse->id }}">
-                                                                    <input  type="text" class="form-control" value="{{ $warehouse->name }}">
+                                                                    <input  type="text" class="form-control" value="{{ $warehouse->title }}">
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <input  type="number" step="any" class="form-control war-qty-row" name="war_qty{{$v->id}}[]">
