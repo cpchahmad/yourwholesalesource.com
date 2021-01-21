@@ -357,7 +357,7 @@ class ProductController extends Controller
 
     public function updateProductStatus(Request $request, $id) {
         $product = Product::find($id);
-        $shop =$this->helper->getShop();
+//        $shop =$this->helper->getShop();
 
         $this->product_status_change($request, $product);
         $this->log->store(0, 'Product', $product->id, $product->title,'Product Status Updated');
