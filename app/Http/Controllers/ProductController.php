@@ -1647,12 +1647,10 @@ class ProductController extends Controller
             $this->ProductVariants($request, $product->id);
         }
         if ($request->hasFile('images')) {
-//            $images = [];
             foreach ($request->file('images') as $image) {
                 $destinationPath = 'images/';
                 $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
                 $image->move($destinationPath, $filename);
-//                array_push($images, $filename);
                 $image = new Image();
                 $image->isV = 0;
                 $image->product_id = $product->id;
