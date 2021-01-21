@@ -22,6 +22,7 @@ use App\SubCategory;
 use App\Tag;
 use App\TieredPrice;
 use App\User;
+use App\WareHouse;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -144,6 +145,7 @@ class ProductController extends Controller
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
         $tags = Tag::all();
+        $warehouses = WareHouse::all();
 
 
         $users = User::role('non-shopify-users')
@@ -158,7 +160,8 @@ class ProductController extends Controller
             'product' => $product,
             'shops' => $shops,
             'non_shopify_users' => $users,
-            'tags' => $tags
+            'tags' => $tags,
+            'warehouses' => $warehouses,
         ]);
     }
 
