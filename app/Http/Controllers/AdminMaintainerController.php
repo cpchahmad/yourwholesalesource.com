@@ -557,7 +557,6 @@ class AdminMaintainerController extends Controller
     }
 
     public function bulk_import_to_woocommerce() {
-        dd(234);
         dispatch(new BulkImportJob());
     }
 
