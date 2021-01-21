@@ -786,6 +786,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
+        dd($request->all());
+
+
 
         $this->validate($request, [
             'sku' => 'required|unique:products,sku,'.$product->id,
@@ -1228,7 +1231,6 @@ class ProductController extends Controller
                     }
 
                     else if ($type = "single-variant-warehouse-inventory") {
-                        dd($request->all());
                         foreach ($request->war_id as $counter => $warhouse_id) {
                             if(WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->exists()){
                                 $inventory = WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->first();
