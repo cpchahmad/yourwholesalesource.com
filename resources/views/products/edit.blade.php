@@ -915,7 +915,7 @@
                             <h3 class="block-title">Warehouses</h3>
                             <hr>
                             <div class="row mb-3">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="">Bulk Quantity</label>
                                 </div>
                                 <div class="col-md-4">
@@ -986,11 +986,11 @@
                                                 @endif
                                                 @foreach($warehouses as $warehouse)
                                                     <div class="row mb-3">
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-6">
                                                             <input  type="text" class="form-control" value="{{ $warehouse->title }}">
                                                             <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}"">
                                                         </div>
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-6">
                                                             <input  type="number" class="form-control" name="war_qty[]">
                                                         </div>
                                                     </div>
