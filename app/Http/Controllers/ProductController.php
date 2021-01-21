@@ -23,6 +23,7 @@ use App\Tag;
 use App\TieredPrice;
 use App\User;
 use App\WareHouse;
+use App\WarehouseInventory;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -791,15 +792,7 @@ class ProductController extends Controller
             'title' => 'required|unique:products,title,'.$product->id
         ]);
 
-        foreach($request->type as $type) {
-            if ($type = "single-variant-warehouse-inventory") {
-                dd($request->all());
-            }
-        }
 
-
-
-        dd(23);
         DB::beginTransaction();
         try{
             if ($product != null) {
@@ -1177,6 +1170,7 @@ class ProductController extends Controller
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Shop Preferences Updated');
 
                     }
+
                     else if ($type == 'tiered-pricing') {
                         $variants = $request->variant_id;
                         if($variants != null) {
@@ -1230,6 +1224,22 @@ class ProductController extends Controller
                                 $item->save();
                             }
 
+                        }
+                    }
+
+                    else if ($type = "single-variant-warehouse-inventory") {
+                        foreach ($request->war_id as $counter => $warhouse_id) {
+                            if(WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->exists()){
+                                $inventory = WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->first();
+                            }
+                            else{
+                                $inventory = new WarehouseInventory();
+                            }
+
+                            $inventory->product_id = $product->id;
+                            $inventory->warehouse_id = $warhouse_id;
+                            $inventory->quantity = $request->war_qty_for_single_variant[$counter];
+                            $inventory->save();
                         }
                     }
                 }
