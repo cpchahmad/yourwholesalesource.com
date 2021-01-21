@@ -1094,11 +1094,11 @@
 {{--                                                        @endif--}}
                                                         <div class="row mb-3">
                                                             @foreach($warehouses as $warehouse)
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-6 mb-2">
                                                                     <input  type="hidden" class="form-control" name="war_id{{$warehouse->id}}[]" value="{{ $warehouse->id }}">
                                                                     <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                                <div class="col-md-6 mb-2">
                                                                     <input  type="number" step="any" class="form-control war-qty-row" name="war_qty{{$v->id}}[]">
                                                                 </div>
                                                             @endforeach
