@@ -1464,6 +1464,7 @@ class AdminOrderController extends Controller
                                     "fulfillment" => [
                                         "location_id" => $location->id,
                                         "tracking_number" => null,
+                                        "notify_customer" => false,
                                         "line_items" => [
 
                                         ]
