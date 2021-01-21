@@ -915,11 +915,10 @@
                             <h3 class="block-title">Warehouses</h3>
                             <hr>
                             <div class="row mb-3">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <label for="">Bulk Quantity</label>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="">Min Qty</label>
+                                <div class="col-md-4">
                                     <input id="bulk-warehouse-qty" type="number" class="form-control" >
                                 </div>
                             </div>
@@ -985,8 +984,8 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                <div class="row mb-3">
-                                                   @foreach($warehouses as $warehouse)
+                                                @foreach($warehouses as $warehouse)
+                                                    <div class="row mb-3">
                                                         <div class="col-md-2">
                                                             <input  type="text" class="form-control" value="{{ $warehouse->title }}">
                                                             <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}"">
@@ -994,8 +993,8 @@
                                                         <div class="col-md-2">
                                                             <input  type="number" class="form-control" name="war_qty[]">
                                                         </div>
-                                                   @endforeach
-                                                </div>
+                                                    </div>
+                                                @endforeach
                                             </td>
                                         </tr>
                                         </tbody>
