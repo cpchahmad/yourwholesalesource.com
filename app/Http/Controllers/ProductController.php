@@ -1027,31 +1027,31 @@ class ProductController extends Controller
 
                     }
 
-                    else if ($type == 'add-additional-tab'){
-                        $additional_tab = new AdditionalTab();
-                        $additional_tab->title = $request->input('tab-title');
-                        $additional_tab->description = $request->input('tab-description');
-                        $additional_tab->product_id = $product->id;
-                        $additional_tab->save();
-
-
-//                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
-//                        if(count($resp->meta_data) > 0){
-//                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-//                        }
-
-                        $meta_data_array = [];
-                        array_push($meta_data_array,[
-                            "key" => $additional_tab->title,
-                            "value"=> $additional_tab->description,
-                        ]);
-
-                        $productdata = [
-                            "meta_data" => $meta_data_array
-                        ];
-
-                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-                    }
+//                    else if ($type == 'add-additional-tab'){
+//                        $additional_tab = new AdditionalTab();
+//                        $additional_tab->title = $request->input('tab-title');
+//                        $additional_tab->description = $request->input('tab-description');
+//                        $additional_tab->product_id = $product->id;
+//                        $additional_tab->save();
+//
+//
+////                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
+////                        if(count($resp->meta_data) > 0){
+////                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
+////                        }
+//
+//                        $meta_data_array = [];
+//                        array_push($meta_data_array,[
+//                            "key" => $additional_tab->title,
+//                            "value"=> $additional_tab->description,
+//                        ]);
+//
+//                        $productdata = [
+//                            "meta_data" => $meta_data_array
+//                        ];
+//
+//                        $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+//                    }
 
                     else if ($type == 'fulfilled') {
                         $product->fulfilled_by = $request->input('fulfilled-by');
