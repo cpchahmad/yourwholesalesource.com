@@ -135,6 +135,7 @@ class AdminOrderController extends Controller
                                         "fulfillment" => [
                                             "location_id" => $location->id,
                                             "tracking_number" => null,
+                                            "notify_customer" => false,
                                             "line_items" => [
                                             ]
                                         ]
@@ -159,8 +160,6 @@ class AdminOrderController extends Controller
                                     $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json');
                                     return $this->set_fulfilments_for_already_fulfilled_order($request, $id, $fulfillable_quantities, $order, $res);
                                 }
-
-                                dd($response);
                                 return redirect()->back()->with('error', 'Cant Fulfill Items of Order in Related Store!');
                             } else {
                                 return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, $response);
@@ -543,12 +542,11 @@ class AdminOrderController extends Controller
                 $fulfillment_line_item->order_fulfillment_id = $fulfillment->id;
                 $fulfillment_line_item->order_line_item_id = $item;
                 $fulfillment_line_item->save();
-
             }
         }
-        if ($order->admin_shopify_id != null) {
-            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
-        }
+//        if ($order->admin_shopify_id != null) {
+//            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+//        }
 
         $user = $order->has_user;
         try{
@@ -610,9 +608,9 @@ class AdminOrderController extends Controller
 
             }
         }
-        if ($order->admin_shopify_id != null) {
-            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
-        }
+//        if ($order->admin_shopify_id != null) {
+//            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+//        }
 
         $user = $order->has_user;
         try{
