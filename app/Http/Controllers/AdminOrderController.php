@@ -235,6 +235,7 @@ class AdminOrderController extends Controller
                                     "fulfillment" => [
                                         "tracking_number" => $tracking_numbers[$index],
                                         "tracking_url" => $tracking_urls[$index],
+                                        "notify_customer" => false,
                                     ]
                                 ];
                                 if($courier_id[$index] !== null){
@@ -244,9 +245,9 @@ class AdminOrderController extends Controller
 
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
-                                if ($order->admin_shopify_id != null) {
-                                    $this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
-                                }
+//                                if ($order->admin_shopify_id != null) {
+//                                    $this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
+//                                }
                                 if (!$response->errors) {
                                     $current->tracking_number = $tracking_numbers[$index];
                                     $current->tracking_url = $tracking_urls[$index];
@@ -284,6 +285,7 @@ class AdminOrderController extends Controller
                                     "fulfillment" => [
                                         "tracking_number" => $tracking_numbers[$index],
                                         "tracking_url" => $tracking_urls[$index],
+                                        "notify_customer" => false,
                                     ]
                                 ];
 
@@ -292,7 +294,7 @@ class AdminOrderController extends Controller
                                     $data['fulfillment']['tracking_company'] = $courier->title;
                                 }
 
-                                $this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
+                                //$this->admin_maintainer->admin_order_fulfillment_add_tracking($order, $current, $data);
                                 $this->CompleteFullFillment($current);
                             }
                             /*Maintaining Log*/
@@ -646,9 +648,9 @@ class AdminOrderController extends Controller
         }
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $fulfillment->name . " has been cancelled successfully on " . now()->format('d M, Y h:i a');
-        if ($order->admin_shopify_id != null) {
-            $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
-        }
+//        if ($order->admin_shopify_id != null) {
+//            $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
+//        }
         $this->notify->generate('Order', 'Order Fulfillment Cancellation', $order->name . ' line items fulfillment cancelled', $order);
 
         $fulfillment->delete();
@@ -1097,10 +1099,10 @@ class AdminOrderController extends Controller
             $shop = $this->helper->getSpecificShop($order->shop_id);
             $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
         }
-        if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
-            $admin_shop = $this->helper->getAdminShop();
-            $admin_shop->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $orderFullfillment->admin_fulfillment_shopify_id . '/complete.json');
-        }
+//        if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
+//            $admin_shop = $this->helper->getAdminShop();
+//            $admin_shop->api()->rest('POST', '/admin/orders/' . $order->admin_shopify_id . '/fulfillments/' . $orderFullfillment->admin_fulfillment_shopify_id . '/complete.json');
+//        }
     }
 
     public function changeFulfillmentServiceUrl() {

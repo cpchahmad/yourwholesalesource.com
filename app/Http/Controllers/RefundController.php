@@ -287,7 +287,6 @@ class RefundController extends Controller
             if ($order->has_user != null) {
                 $user = User::find($order->has_user->id);
                 if ($user->has_wallet == null) {
-
                     $wallet = $walletController->wallet_create($order->has_user->id);
                 } else {
                     $wallet = $user->has_wallet;

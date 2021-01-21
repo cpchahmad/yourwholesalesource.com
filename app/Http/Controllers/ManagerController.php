@@ -401,6 +401,7 @@ class ManagerController extends Controller
                                 "fulfillment" => [
                                     "location_id" => $location_response->body->locations[0]->id,
                                     "tracking_number" => null,
+                                    "notify_customer" => false,
                                     "line_items" => [
 
                                     ]
@@ -725,9 +726,9 @@ class ManagerController extends Controller
 
             }
         }
-        if($order->admin_shopify_id != null) {
-            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
-        }
+//        if($order->admin_shopify_id != null) {
+//            $this->admin_maintainer->admin_order_fullfillment($order, $request, $fulfillment);
+//        }
         $this->notify->generate('Order','Order Fulfillment',$order->name.' line items fulfilled',$order);
 
         $manager = User::find(Auth::id());
@@ -762,9 +763,9 @@ class ManagerController extends Controller
         }
         $order_log = new OrderLog();
         $order_log->message = "A fulfillment named " . $fulfillment->name . " has been cancelled successfully on " . now()->format('d M, Y h:i a');
-        if($order->admin_shopify_id != null) {
-            $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
-        }
+//        if($order->admin_shopify_id != null) {
+//            $this->admin_maintainer->admin_order_fulfillment_cancel($order, $fulfillment);
+//        }
         $this->notify->generate('Order','Order Fulfillment Cancellation',$order->name.' line items fulfillment cancelled',$order);
 
         $fulfillment->delete();
