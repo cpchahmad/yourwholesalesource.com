@@ -1037,7 +1037,7 @@
                                         <tr>
                                             <th style="vertical-align: top;width: 10%;">Title</th>
                                             <th style="vertical-align: top;width: 15%;">SKU</th>
-                                            <th colspan="5">
+                                            <th colspan="2">
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <span style="vertical-align: top;">Warehouse</span>
@@ -1062,7 +1062,7 @@
                                                     <td>
                                                         <input disabled type="text" class="form-control"  value="{{$v->sku}}">
                                                     </td>
-                                                    <td colspan="5">
+                                                    <td colspan="2">
 {{--                                                        @if(count($v->has_tiered_prices) > 0)--}}
 {{--                                                            @foreach($v->has_tiered_prices as $item)--}}
 {{--                                                                <div class="row mb-3">--}}
