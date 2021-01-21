@@ -2768,7 +2768,7 @@ class ProductController extends Controller
 
             /*Product Images*/
             $images_array = [];
-            foreach ($product->has_images->orderBy('position', 'ASC')->get() as $index => $image) {
+            foreach ($product->has_images()->orderBy('position', 'ASC')->get() as $index => $image) {
                 if ($image->isV == 0) {
                     $src = asset('images') . '/' . $image->image;
                 } else {
