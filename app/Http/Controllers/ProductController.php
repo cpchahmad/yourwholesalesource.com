@@ -2561,7 +2561,7 @@ class ProductController extends Controller
         $positions = $request->input('positions');
         $product = $request->input('product');
         $images_array = [];
-        $shop = $this->helper->getShop();
+        //$shop = $this->helper->getShop();
         foreach ($positions as $index => $position){
             $image = Image::where('product_id',$product)
                 ->where('id',$position)->first();
