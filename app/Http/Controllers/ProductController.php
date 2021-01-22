@@ -2578,8 +2578,8 @@ class ProductController extends Controller
                     'images' => $images_array
                 ]
             ];
-            $imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $related_product->shopify_id .'.json', $data);
-            if(!$imagesResponse->errors){
+            //$imagesResponse = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $related_product->shopify_id .'.json', $data);
+//            if(!$imagesResponse->errors){
                 foreach ($positions as $index => $position){
                     $image = Image::where('product_id',$product)
                         ->where('id',$position)->first();
@@ -2589,11 +2589,11 @@ class ProductController extends Controller
                 return response()->json([
                     'message' => 'success',
                 ]);
-            }else{
-                return response()->json([
-                    'message' => 'error'
-                ]);
-            }
+//            }else{
+//                return response()->json([
+//                    'message' => 'error'
+//                ]);
+//            }
 
         }
         else{
