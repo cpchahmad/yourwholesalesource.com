@@ -49,7 +49,7 @@
                         @if(count($tags) > 0)
                                 <h5>All Tags</h5>
                                 @foreach($tags as $tag)
-                                    <a class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#delete_tag_modal_{{$tag->id}}">{{ $tag->name }}</a>
+                                    <a class="btn btn-sm btn-primary text-white mt-2" data-toggle="modal" data-target="#delete_tag_modal_{{$tag->id}}">{{ $tag->name }}</a>
                                     <div class="modal fade" id="delete_tag_modal_{{$tag->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">

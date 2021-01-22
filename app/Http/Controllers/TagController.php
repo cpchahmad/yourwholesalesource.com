@@ -32,7 +32,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('setttings.tags.index')->with('tags', Tag::paginate(20));
+        return view('setttings.tags.index')->with('tags', Tag::all());
     }
 
     /**
