@@ -826,6 +826,23 @@ class ProductController extends Controller
                         $product->height = $request->height;
                         $product->save();
 
+                        $dimension_array = array(
+                            'width' => is_null($product->width) ? "0" : $product->width,
+                            'height' => is_null($product->height) ? "0" : $product->height,
+                            'length' => is_null($product->length) ? "0" : $product->length
+                        );
+
+                        $productdata = [
+                            "sale_price" => $product->price,
+                            "regular_price" => $product->cost,
+                            "sku" => $product->sku,
+                            "weight" => $product->weight,
+                            "stock_quantity" => $product->quantity,
+                            "dimensions" => $dimension_array,
+                        ];
+
+                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+
                         if($product->quantity == 0) {
                             // Sending Notification Emails To all Concerned Retailer Stores
                             if(count($product->has_retailer_products) > 0) {
@@ -889,9 +906,9 @@ class ProductController extends Controller
                         $product->save();
 
                         $dimension_array = array(
-                            "length" => $request->length,
-                            "width" => $request->width,
-                            "height" => $request->height
+                            'width' => is_null($product->width) ? "0" : $product->width,
+                            'height' => is_null($product->height) ? "0" : $product->height,
+                            'length' => is_null($product->length) ? "0" : $product->length
                         );
 
                         $productdata = [
@@ -914,20 +931,14 @@ class ProductController extends Controller
                                 }
 
                                 if(count($users_temp)> 0) {
-                                    $users = [];
-                                    foreach($users_temp as $key => $ut){
+                                    foreach($users_temp as $ut){
                                         if($ut != null) {
-                                            $ua = [];
-                                            $ua['email'] = $ut;
-                                            $ua['name'] = 'test';
-                                            $users[$key] = (object)$ua;
+                                            try{
+                                                Mail::to($ut)->send(new ProductStockOutMail($product));
+                                            }
+                                            catch (\Exception $e){
+                                            }
                                         }
-                                    }
-
-                                    try{
-                                        Mail::to($users)->send(new ProductStockOutMail($product));
-                                    }
-                                    catch (\Exception $e){
                                     }
                                 }
                             }
