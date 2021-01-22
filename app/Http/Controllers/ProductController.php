@@ -793,8 +793,8 @@ class ProductController extends Controller
             'title' => 'required|unique:products,title,'.$product->id
         ]);
 
-//        DB::beginTransaction();
-//        try{
+        DB::beginTransaction();
+        try{
             if ($product != null) {
                 foreach($request->type as $type) {
                     if ($type == 'basic-info') {
@@ -1238,7 +1238,7 @@ class ProductController extends Controller
                         }
                     }
 
-                    else if ($type = "single-variant-warehouse-inventory") {
+                    else if ($type == "single-variant-warehouse-inventory") {
                         foreach ($request->war_id as $counter => $warhouse_id) {
                             if(WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->exists()){
                                 $inventory = WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->first();
@@ -1255,14 +1255,14 @@ class ProductController extends Controller
                     }
                 }
             }
-            //DB::commit();
+            DB::commit();
             return redirect()->back()->with('success', 'Product Updated Successfully');
-//        }
-//        catch(\Exception $e) {
-//            DB::rollBack();
-//            dd($e);
-//            return redirect()->back()->with('error', $e->getMessage());
-//        }
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            dd($e);
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function editTabDetails(Request $request, $id) {
