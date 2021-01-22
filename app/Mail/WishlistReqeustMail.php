@@ -25,9 +25,8 @@ class WishlistReqeustMail extends Mailable
     private $wishlist;
     private $template;
 
-    public function __construct($sender,Wishlist $wishlist)
+    public function __construct(Wishlist $wishlist)
     {
-        $this->sender = $sender;
         $this->wishlist = $wishlist;
         $this->template = EmailTemplate::find(5);
     }

@@ -83,22 +83,14 @@ class WishlistController extends Controller
             $users_temp =['info@wefullfill.com',$manager_email];
             $users = [];
 
-            foreach($users_temp as $ut){
-                if($ut != null) {
-                    $ua = [];
-
-                    $ua['email'] = $ut;
-
-                    $ua['name'] = 'test';
-
-                    $users[$key] = (object)$ua;
+            foreach($users_temp as $u){
+                if($u != null) {
+                    try{
+                        Mail::to($u)->send(new WishlistReqeustMail($wish));
+                    }
+                    catch (\Exception $e){
+                    }
                 }
-            }
-
-            try{
-                Mail::to($users)->send(new WishlistReqeustMail($user->email, $wish));
-            }
-            catch (\Exception $e){
             }
 
             if($request->hasFile('attachments')){

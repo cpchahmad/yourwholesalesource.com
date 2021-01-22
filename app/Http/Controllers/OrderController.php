@@ -519,8 +519,10 @@ class OrderController extends Controller
                             $total_weight = 0;
                             $country = $order->shipping_address->country;
                             foreach ($new->line_items as $v) {
-                                if ($v->linked_product != null) {
-                                    $total_weight = $total_weight + ($v->linked_product->weight * $v->quantity);
+                                if($v->linked_product != null){
+                                    if($v->linked_product->linked_product != null) {
+                                        $total_weight = $total_weight + ( $v->linked_product->linked_product->weight *  $v->quantity);
+                                    }
                                 }
                             }
 
