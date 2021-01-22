@@ -122,6 +122,7 @@
                                         <th>Source</th>
                                         <th>Order Date</th>
                                         <th>Price</th>
+                                        <th>Paid Status</th>
                                         <th>Status</th>
                                         <th>Stock Status</th>
                                         <th style="text-align: right" class="pr-0">
@@ -152,6 +153,17 @@
                                             <td>
                                                 {{number_format($order->cost_to_pay,2)}} USD
                                             </td>
+                                            <td>
+                                                @if($order->paid == '0')
+                                                    <span class="badge badge-warning" style="font-size: small"> Unpaid </span>
+                                                @elseif($order->paid == '1')
+                                                    <span class="badge badge-success" style="font-size: small"> Paid </span>
+                                                @elseif($order->paid == '2')
+                                                    <span class="badge badge-danger" style="font-size: small;"> Refunded</span>
+                                                @endif
+
+                                            </td>
+
 
                                             <td>
                                                 @if($order->status == 'paid')
