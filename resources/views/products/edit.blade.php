@@ -951,7 +951,7 @@
                                             <td class="variant_title">
                                                 {{ $product->title }}
                                             </td>
-                                            <td>
+                                            <td colspan="2">
                                                 <input disabled type="text" class="form-control"  value="{{$product->sku}}">
                                             </td>
                                             <td colspan="2">
@@ -1006,7 +1006,7 @@
                                                     <td class="variant_title">
                                                         @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
                                                     </td>
-                                                    <td>
+                                                    <td colspan="2">
                                                         <input disabled type="text" class="form-control"  value="{{$v->sku}}">
                                                     </td>
                                                     <td colspan="2">

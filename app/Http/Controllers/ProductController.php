@@ -784,6 +784,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
@@ -1239,6 +1240,21 @@ class ProductController extends Controller
                     }
 
                     else if ($type == "single-variant-warehouse-inventory") {
+                        foreach ($request->war_id as $counter => $warhouse_id) {
+                            if(WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->exists()){
+                                $inventory = WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->first();
+                            }
+                            else{
+                                $inventory = new WarehouseInventory();
+                            }
+
+                            $inventory->product_id = $product->id;
+                            $inventory->warehouse_id = $warhouse_id;
+                            $inventory->quantity = $request->war_qty_for_single_variant[$counter];
+                            $inventory->save();
+                        }
+                    }
+                    else if ($type == "multi-variant-warehouse-inventory") {
                         foreach ($request->war_id as $counter => $warhouse_id) {
                             if(WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->exists()){
                                 $inventory = WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->first();
