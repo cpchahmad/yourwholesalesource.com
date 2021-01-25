@@ -975,7 +975,7 @@
                                                             <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input  type="number" class="form-control" name="war_qty_for_single_variant[]">
+                                                            <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity($product) }}">
                                                         </div>
                                                     </div>
                                                 @endforeach
