@@ -962,7 +962,7 @@
                                                             <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity($product) }}">
+                                                            <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_product($product) }}">
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -1017,7 +1017,7 @@
                                                                     <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
-                                                                    <input  type="number" step="any" class="form-control warhouse-qty-row" name="war_qty_for_multi_variant_{{$v->id}}[]">
+                                                                    <input  type="number" step="any" class="form-control warhouse-qty-row" name="war_qty_for_multi_variant_{{$v->id}}[]" value="{{ $warehouse->get_inventory_quantity_for_variant($v) }}">
                                                                 </div>
                                                             @endforeach
                                                         </div>
