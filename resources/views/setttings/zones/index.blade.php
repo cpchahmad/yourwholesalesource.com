@@ -58,7 +58,10 @@
                                         <td>
                                             @if($zone->warehouse)
                                                 <span class="badge badge-success">{{$zone->warehouse->title}}</span>
-                                            @endif</td>
+                                            @else
+                                                <span>Not Provided Yet!</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#create_rate_modal{{$index}}"> Add Rate</button>
                                         </td>
@@ -117,6 +120,24 @@
 
                                                                 @endforeach
                                                             </div>
+
+                                                            <div class="form-group mt-3">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label for=""> Select Warehouse</label>
+                                                                        <select class="form-control" name="warehouse_id" id="">
+                                                                            @foreach($warehouses as $warehouse)
+                                                                                <option value="{{ $warehouse->id }}"
+                                                                                    @if($zone->warehouse->id == $warehouse->id)
+                                                                                        selected
+                                                                                    @endif
+                                                                                >{{ $warehouse->title }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
 
                                                         </div>
 
