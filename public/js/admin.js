@@ -171,15 +171,6 @@ $(document).ready(function () {
 
     // Bulk Variant Pricing & Cost Feature End
 
-
-
-
-
-
-
-
-
-
     var radioState;
 
     $('#example-radio-best-seller').on('click', function(e) {
