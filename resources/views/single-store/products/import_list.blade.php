@@ -113,12 +113,14 @@
                                                 <div class="block-content font-size-sm">
                                                     <div class="text-center loader-div p-2">
                                                         <h5>Do you want to add warehouse for that product?</h5>
-                                                        <input type="checkbox" class="custom-control-input status-switch" name="example-sw-success2">
 
                                                     </div>
                                                     <div class="">
                                                         <form action="{{ route('retailer.import_to_shopify',$product->id) }}">
-                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                            <input type="checkbox" class="custom-control-input status-switch" name="example-sw-success2">
+                                                            <div class="block-content block-content-full text-right border-top">
+                                                                <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                 </div>
