@@ -259,7 +259,19 @@
                                                         <td><input type="text" readonly class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                                         <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
                                                         <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
-
+                                                        <td colspan="2">
+                                                            @foreach($warehouses as $warehouse)
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
+                                                                        <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_retailer_variant($product->linked_product, $v) }}">
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </td>
                                                     </tr>
                                                     </tbody>
                                                 </form>
