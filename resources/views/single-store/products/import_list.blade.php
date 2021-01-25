@@ -117,7 +117,10 @@
                                                     </div>
                                                     <div class="">
                                                         <form action="{{ route('retailer.import_to_shopify',$product->id) }}">
-                                                            <input type="checkbox" class="custom-control-input status-switch" name="example-sw-success2">
+                                                            <div class="custom-control custom-switch custom-control-success mb-1">
+                                                                <input type="checkbox" class="custom-control-input status-switch" name="inventory-status">
+                                                                <label class="custom-control-label">yes/no</label>
+                                                            </div>
                                                             <div class="block-content block-content-full text-right border-top">
                                                                 <button type="submit" class="btn btn-sm btn-primary" >Save</button>
                                                             </div>
