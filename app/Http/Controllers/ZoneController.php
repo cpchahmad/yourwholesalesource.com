@@ -14,11 +14,12 @@ class ZoneController extends Controller
 {
    public function index(){
       $countries = Country::all();
-      $warehouse = WareHouse::all();
+      $warehouses = WareHouse::all();
        $zones =  Zone::query();
        return view('setttings.zones.index')->with([
            'zones'=>$zones->orderBy('created_at','DESC')->get(),
-           'countries' =>$countries
+           'countries' =>$countries,
+           'warehouses' =>$warehouses,
        ]);
    }
 
