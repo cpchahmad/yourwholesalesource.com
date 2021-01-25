@@ -198,6 +198,7 @@
                                             <th style="vertical-align: top">Quantity</th>
                                             <th style="vertical-align: top">SKU</th>
                                             <th style="vertical-align: top">Barcode</th>
+                                            <th style="vertical-align: top">Warehouse Inventory</th>
                                         </tr>
                                         </thead>
                                         @if(count($product->hasVariants) > 0)
@@ -210,8 +211,6 @@
                                                     <tr>
                                                         <td class="variant_title">
                                                             @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
-
-
                                                         </td>
                                                         <td class="text-center">
                                                             <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
@@ -259,9 +258,20 @@
                                                         <td class="drop-shipping text-center">N/A</td>
                                                         <td><input type="text" readonly class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                                         <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
-                                                        <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
+                                                        <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
+                                                        <td colspan="2">
+                                                            @foreach($warehouses as $warehouse)
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
+                                                                        <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_product($product) }}">
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
                                                         </td>
-
                                                     </tr>
                                                     </tbody>
                                                 </form>
