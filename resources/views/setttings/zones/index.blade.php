@@ -128,7 +128,7 @@
                                                                         <select class="form-control" name="warehouse_id" id="">
                                                                             @foreach($warehouses as $warehouse)
                                                                                 <option value="{{ $warehouse->id }}"
-                                                                                    @if($zone->warehouse->id == $warehouse->id)
+                                                                                    @if($zone->warehouse && $zone->warehouse->id == $warehouse->id)
                                                                                         selected
                                                                                     @endif
                                                                                 >{{ $warehouse->title }}</option>
