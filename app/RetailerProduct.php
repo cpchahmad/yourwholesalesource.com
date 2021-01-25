@@ -24,7 +24,23 @@ class RetailerProduct extends Model
     public function linked_product(){
         return $this->belongsTo('App\Product','linked_product_id');
     }
+
     public function has_shop() {
         return $this->belongsTo('App\Shop', 'shop_id');
+    }
+
+    public function has_inventory() {
+        $real_product = $this->linked_product;
+        $flag = false;
+
+        if(WarehouseInventory::where('product_id', $real_product->id)->whereNotNull('quantity')->exists())
+            $flag = true;
+
+        $real_product_variants = $real_product->hasVariants()->pluck('id')->toArray();
+
+        if(WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->exists())
+            $flag = true;
+
+        return $flag;
     }
 }
