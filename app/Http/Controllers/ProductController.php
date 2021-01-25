@@ -1254,19 +1254,26 @@ class ProductController extends Controller
                             $inventory->save();
                         }
                     }
-                    else if ($type == "multi-variant-warehouse-inventory") {
-                        foreach ($request->war_id as $counter => $warhouse_id) {
-                            if(WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->exists()){
-                                $inventory = WarehouseInventory::where('product_id', $product->id)->where('warehouse_id', $warhouse_id)->first();
-                            }
-                            else{
-                                $inventory = new WarehouseInventory();
-                            }
 
-                            $inventory->product_id = $product->id;
-                            $inventory->warehouse_id = $warhouse_id;
-                            $inventory->quantity = $request->war_qty_for_single_variant[$counter];
-                            $inventory->save();
+                    else if ($type == "multi-variant-warehouse-inventory") {
+                        $variants = $request->variant_ids_for_warehouse;
+                        if($variants) {
+                            foreach ($variants as $variant) {
+                                for($i=0; $i< count($request->input('war_id_'.$variant)); $i++) {
+                                    if($request->input('war_qty_for_multi_variant_'.$variant) != null) {}
+                                    if(WarehouseInventory::where('product_variant_id', $variant)->where('warehouse_id', $request->war_id[$i])->exists()) {
+                                        $inventory = WarehouseInventory::where('product_variant_id', $variant)->where('warehouse_id', $request->war_id[$i])->first();
+                                    }
+                                    else{
+                                        $inventory = new WarehouseInventory();
+                                    }
+
+                                    $inventory->product_variant_id = $request->input('war_qty_for_multi_variant_'.$variant)[$i];
+                                    $inventory->warehouse_id = $request->war_id[$i];
+                                    $inventory->quantity = $request->input('war_qty_for_multi_variant_'.$variant)[$i];
+                                    $inventory->save();
+                                }
+                            }
                         }
                     }
                 }

@@ -1000,7 +1000,7 @@
                                             <tbody>
                                             @foreach($product->hasVariants as $index => $v)
                                                 <tr>
-                                                    <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
+                                                    <input type="hidden" name="variant_ids_for_warehouse[]" value="{{ $v->id }}">
                                                     <input type="hidden" name="type[]" value="multi-variant-warehouse-inventory">
 
                                                     <td class="variant_title">
@@ -1013,7 +1013,7 @@
                                                         <div class="row mb-3">
                                                             @foreach($warehouses as $warehouse)
                                                                 <div class="col-md-6 mb-2">
-                                                                    <input  type="hidden" class="form-control" name="war_id_{{$v->id}}[]" value="{{ $warehouse->id }}">
+                                                                    <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
                                                                     <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
