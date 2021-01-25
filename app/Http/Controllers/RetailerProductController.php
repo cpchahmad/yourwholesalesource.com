@@ -8,6 +8,7 @@ use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\Shop;
+use App\WareHouse;
 use Illuminate\Http\Request;
 
 class RetailerProductController extends Controller
@@ -353,9 +354,11 @@ class RetailerProductController extends Controller
         }
         $products = $productQuery->paginate(12);
         $shop = $this->helper->getLocalShop();
+        $warehouses = WareHouse::all();
         return view('single-store.products.import_list')->with([
             'products' => $products,
             'shop' => $shop,
+            'warehouses' => $warehouses,
             'search' => $request->input('search'),
             'source' => $request->input('source'),
 
