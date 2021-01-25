@@ -36,6 +36,7 @@
                                     <th style="width: 30px;"></th>
                                     <th >Title</th>
                                     <th style="width: 25%;">Countries</th>
+                                    <th style="width: 25%;">Warehouse</th>
                                     <th></th>
                                     <th class="text-center" style="width: 15%;"></th>
                                     <th></th>
@@ -53,6 +54,9 @@
                                             @foreach($zone->has_countries as $country)
                                                 <span class="badge badge-primary">{{$country->name}}</span>
                                             @endforeach
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-success">{{$zone->warehouse->title}}</span>
                                         </td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#create_rate_modal{{$index}}"> Add Rate</button>
