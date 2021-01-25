@@ -45,6 +45,11 @@ class Product extends Model
     public function has_tiered_prices(){
         return $this->hasMany(TieredPrice::class);
     }
+
+    public function has_warehouse_inventory() {
+        return $this->hasMany(WarehouseInventory::class);
+    }
+
     public function isUpdated($shop) {
        if(RetailerProduct::where('shop_id', $shop->id)->where('linked_product_id', $this->id)->exists() &&
           Notification::where('type_id', $this->id)->where('type', 'Product')->where('sub_type', 'Product Variant Added')->exists() &&

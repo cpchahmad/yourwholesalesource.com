@@ -955,31 +955,15 @@
                                                 <input disabled type="text" class="form-control"  value="{{$product->sku}}">
                                             </td>
                                             <td colspan="2">
-                                                @if(count($product->has_tiered_prices) > 0)
-                                                    @foreach($product->has_tiered_prices as $item)
+                                                @if(count($product->has_warehouse_inventory) > 0)
+                                                    @foreach($product->has_warehouse_inventory as $warehouse)
                                                         <div class="row mb-3">
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="min_qty[]" value="{{ $item->min_qty }}">
+                                                            <div class="col-md-6">
+                                                                <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
+                                                                <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <input  type="number" class="form-control" name="max_qty[]" value="{{ $item->max_qty }}">
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <select name="type[]" id="" class="form-control">
-                                                                    @if($item->type == "fixed")
-                                                                        <option selected value="fixed">Fixed</option>
-                                                                        <option value="discount">Discount</option>
-                                                                    @else
-                                                                        <option value="fixed">Fixed</option>
-                                                                        <option selected value="discount">Discount</option>
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input  type="number" step="any" class="form-control" name="tiered_price[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">
-                                                            </div>
-                                                            <div class="col-md-2 btn-group btn-group-sm" role="group">
-                                                                <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>
+                                                            <div class="col-md-6">
+                                                                <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $warehouse->quantity }}">
                                                             </div>
                                                         </div>
                                                     @endforeach
