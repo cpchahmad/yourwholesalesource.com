@@ -2649,6 +2649,7 @@ class ProductController extends Controller
             /*Product Attributes*/
             $attributes_array = $this->attributes_template_array($product);
 
+
             /*Product Dimensions*/
             $dimension_array = array(
                 'width' => is_null($product->width) ? "0" : $product->width,
@@ -2728,9 +2729,14 @@ class ProductController extends Controller
 
 
             if($product->variants == 1)
+            {
                 $product_type = 'variable';
+                $productdata['attributes'] = $attributes_array;
+            }
             else
+            {
                 $product_type = 'simple';
+            }
 
 
             $productdata = [
@@ -2740,7 +2746,6 @@ class ProductController extends Controller
                 "slug" => $product->slug,
                 "tags" => $tags_array,
                 "type" => $product_type,
-                "attributes" => $attributes_array,
                 "images" => $images_array,
                 "published"=>  $published,
                 "sale_price" => $product->price,

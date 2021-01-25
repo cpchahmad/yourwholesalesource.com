@@ -58,8 +58,7 @@
                                         <td>
                                             @if($zone->warehouse)
                                                 <span class="badge badge-success">{{$zone->warehouse->title}}</span>
-                                            @endif
-                                        </td>
+                                            @endif</td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#create_rate_modal{{$index}}"> Add Rate</button>
                                         </td>
