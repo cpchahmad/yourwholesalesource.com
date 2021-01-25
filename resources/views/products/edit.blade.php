@@ -955,19 +955,6 @@
                                                 <input disabled type="text" class="form-control"  value="{{$product->sku}}">
                                             </td>
                                             <td colspan="2">
-                                                @if(count($product->has_warehouse_inventory) > 0)
-                                                    @foreach($product->has_warehouse_inventory as $item)
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-6">
-                                                                <input  type="text" disabled class="form-control" value="{{ $item->warehouse->title }}">
-                                                                <input  type="hidden" class="form-control" name="war_id[]" value="{{ $item->warehouse->id }}">
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $item->quantity }}">
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
                                                 @foreach($warehouses as $warehouse)
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
@@ -1014,7 +1001,7 @@
                                             @foreach($product->hasVariants as $index => $v)
                                                 <tr>
                                                     <input type="hidden" name="variant_id[]" value="{{ $v->id }}">
-                                                    <input type="hidden" name="type[]" value="tiered-pricing">
+                                                    <input type="hidden" name="type[]" value="multi-variant-warehouse-inventory">
 
                                                     <td class="variant_title">
                                                         @if($v->option1 != null) {{$v->option1}} @endif    @if($v->option2 != null) / {{$v->option2}} @endif    @if($v->option3 != null) / {{$v->option3}} @endif
@@ -1023,35 +1010,6 @@
                                                         <input disabled type="text" class="form-control"  value="{{$v->sku}}">
                                                     </td>
                                                     <td colspan="2">
-{{--                                                        @if(count($v->has_tiered_prices) > 0)--}}
-{{--                                                            @foreach($v->has_tiered_prices as $item)--}}
-{{--                                                                <div class="row mb-3">--}}
-{{--                                                                    <div class="col-md-2">--}}
-{{--                                                                        <input  type="number" class="form-control" name="min_qty{{$v->id}}[]" value="{{ $item->min_qty }}">--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-md-2">--}}
-{{--                                                                        <input  type="number" class="form-control" name="max_qty{{$v->id}}[]" value="{{ $item->max_qty }}">--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-md-3">--}}
-{{--                                                                        <select name="type{{$v->id}}[]" id="" class="form-control">--}}
-{{--                                                                            @if($item->type == "fixed")--}}
-{{--                                                                                <option selected value="fixed">Fixed</option>--}}
-{{--                                                                                <option value="discount">Discount</option>--}}
-{{--                                                                            @else--}}
-{{--                                                                                <option value="fixed">Fixed</option>--}}
-{{--                                                                                <option selected value="discount">Discount</option>--}}
-{{--                                                                            @endif--}}
-{{--                                                                        </select>--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-md-3">--}}
-{{--                                                                        <input  type="number" step="any" class="form-control" name="tiered_price{{$v->id}}[]"  value="{{ number_format($item->price, 2) }}" placeholder="$0.0">--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div class="col-md-2 btn-group btn-group-sm" role="group">--}}
-{{--                                                                        <button type="button" class="btn btn-sm btn-danger remove-price-row-from-db-btn" style="font-size: 11px; !important;" data-item="{{ $item->id }}">Remove</button>--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            @endforeach--}}
-{{--                                                        @endif--}}
                                                         <div class="row mb-3">
                                                             @foreach($warehouses as $warehouse)
                                                                 <div class="col-md-6 mb-2">
@@ -1059,7 +1017,7 @@
                                                                     <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                 </div>
                                                                 <div class="col-md-6 mb-2">
-                                                                    <input  type="number" step="any" class="form-control war-qty-row" name="war_qty{{$v->id}}[]">
+                                                                    <input  type="number" step="any" class="form-control warhouse-qty-row" name="war_qty_for_multi_variant{{$v->id}}[]">
                                                                 </div>
                                                             @endforeach
                                                         </div>
