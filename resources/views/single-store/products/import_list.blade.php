@@ -113,7 +113,7 @@
                                                 <div class="block-content font-size-sm">
                                                     <div class="text-center loader-div p-2">
                                                         <h5>Do you want to add warehouse for that product?</h5>
-                                                        <input type="checkbox" class="custom-control-input status-switch" name="warehouse_status">
+                                                        <input type="checkbox" class="custom-control-input status-switch" name="example-sw-success2">
 
                                                     </div>
                                                     <div class="">
