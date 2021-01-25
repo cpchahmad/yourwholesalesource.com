@@ -90,10 +90,43 @@
 
                                 <button  class="btn btn-sm btn-outline-success btn_save_retailer_product" style="vertical-align: bottom" title="Save Product" data-tabs=".product_tab_panes_{{$index}}"><i class="fa fa-save"></i></button>
                                 <button  class="btn btn-sm btn-outline-danger" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
-                                <button onclick="window.location.href='{{route('retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-primary" style="margin-top:7px" >
+{{--                                <button onclick="window.location.href='{{{{route('retailer.import_to_shopify',$product->id)}}}}'" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >--}}
+{{--                                    <i class="si si-cloud-upload mr-1"></i>--}}
+{{--                                    Import to store--}}
+{{--                                </button>--}}
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >
                                     <i class="si si-cloud-upload mr-1"></i>
                                     Import to store
                                 </button>
+                                <div class="modal fade" id="import_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                        <div class="modal-content">
+                                            <div class="block block-themed block-transparent mb-0">
+                                                <div class="block-header bg-primary-dark">
+                                                    <h3 class="block-title">Import To Shopify</h3>
+                                                    <div class="block-options">
+                                                        <button type="button" class="btn-block-option">
+                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="block-content font-size-sm">
+                                                    <div class="text-center loader-div p-2">
+                                                        <h5>Do you want to add warehouse for that product?</h5>
+                                                        <input type="checkbox" class="custom-control-input status-switch" name="warehouse_status">
+
+                                                    </div>
+                                                    <div class="">
+                                                        <form action="{{ route('retailer.import_to_shopify',$product->id) }}">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </li>
                     </ul>
@@ -128,29 +161,29 @@
                                     <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
                                         @csrf
                                         <input type="hidden" name="request_type" value="basic-info">
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" class="form-control" name="title" value="{{$product->title}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tags</label>
-                                        <input class="js-tags-input form-control" type="text"
-                                               value="{{$product->tags}}"   name="tags" >
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Type</label>
-                                                <input type="text" class="form-control" name="type" value="{{$product->type}}">
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <input type="text" class="form-control" name="title" value="{{$product->title}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tags</label>
+                                            <input class="js-tags-input form-control" type="text"
+                                                   value="{{$product->tags}}"   name="tags" >
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Type</label>
+                                                    <input type="text" class="form-control" name="type" value="{{$product->type}}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Vendor</label>
+                                                    <input type="text" class="form-control" name="vendor" value="{{$product->vendor}}">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Vendor</label>
-                                                <input type="text" class="form-control" name="vendor" value="{{$product->vendor}}">
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     </form>
                                 </div>
