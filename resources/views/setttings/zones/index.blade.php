@@ -124,7 +124,7 @@
                                                             <div class="form-group mt-3">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
-                                                                        <label for=""> Select Warehouse</label>
+                                                                        <label for="">Select Warehouse</label>
                                                                         <select class="form-control" name="warehouse_id" id="">
                                                                             @foreach($warehouses as $warehouse)
                                                                                 <option value="{{ $warehouse->id }}"

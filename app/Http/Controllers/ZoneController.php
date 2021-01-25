@@ -43,6 +43,7 @@ class ZoneController extends Controller
 //       dd($request);
         $zone = Zone::find($request->id);
         $zone->name = $request->input('name');
+        $zone->warehouse_id = $request->input('warehouse_id');
         $zone->save();
         $zone->has_countries()->sync($request->input('countries'));
         return redirect()->back()->with('success','Zone Successfully Updated!');
