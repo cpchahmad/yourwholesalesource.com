@@ -10,6 +10,10 @@ class WareHouse extends Model
         return $this->belongsTo(Country::class);
     }
 
+    public function warehouse_inventories() {
+        return $this->hasMany(WarehouseInventory::class, 'warehouse_id');
+    }
+
     public function get_inventory_quantity_for_product($product) {
         if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->exists()) {
             $item = WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->first();

@@ -58,6 +58,7 @@ class WareHouseController extends Controller
 
     public function delete($id) {
         $warehouse = WareHouse::find($id);
+        $warehouse->warehouse_inventories->delete();
         $warehouse->delete();
 
         return redirect()->back()->with('success', 'Warehouse Deleted Successfully!');
