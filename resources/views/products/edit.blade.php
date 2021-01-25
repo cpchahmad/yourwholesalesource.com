@@ -956,14 +956,14 @@
                                             </td>
                                             <td colspan="2">
                                                 @if(count($product->has_warehouse_inventory) > 0)
-                                                    @foreach($product->has_warehouse_inventory as $warehouse)
+                                                    @foreach($product->has_warehouse_inventory as $item)
                                                         <div class="row mb-3">
                                                             <div class="col-md-6">
-                                                                <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
-                                                                <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                                <input  type="text" disabled class="form-control" value="{{ $item->warehouse->title }}">
+                                                                <input  type="hidden" class="form-control" name="war_id[]" value="{{ $item->warehouse->id }}">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $warehouse->quantity }}">
+                                                                <input  type="number" class="form-control" name="war_qty_for_single_variant[]" value="{{ $item->quantity }}">
                                                             </div>
                                                         </div>
                                                     @endforeach
