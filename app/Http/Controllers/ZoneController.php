@@ -6,6 +6,7 @@ use App\Country;
 use App\Courier;
 use App\Product;
 use App\ShippingRate;
+use App\WareHouse;
 use App\Zone;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class ZoneController extends Controller
 {
    public function index(){
       $countries = Country::all();
+      $warehouse = WareHouse::all();
        $zones =  Zone::query();
        return view('setttings.zones.index')->with([
            'zones'=>$zones->orderBy('created_at','DESC')->get(),

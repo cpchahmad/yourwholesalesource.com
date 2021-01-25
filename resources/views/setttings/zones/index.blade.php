@@ -420,6 +420,21 @@
 
                                 @endforeach
                             </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for=""> Select Warehouse</label>
+                                </div>
+                            </div>
+                            <div class="countries-section">
+                                @foreach($warehouses as $warehouse)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select name="warehouse_id" id="" value="{{ $warehouse->id }}">{{ $warehouse->title }}</select>
+                                        </div>
+                                    </div>
+
+                                @endforeach
+                            </div>
 
                         </div>
 
