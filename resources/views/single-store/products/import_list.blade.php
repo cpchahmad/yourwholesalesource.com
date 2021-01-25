@@ -292,7 +292,7 @@
                                                                 <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_product($product) }}">
+                                                                <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_product($product->linked_product) }}">
                                                             </div>
                                                         </div>
                                                     @endforeach
