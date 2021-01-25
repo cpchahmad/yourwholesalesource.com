@@ -24,9 +24,10 @@ class ZoneController extends Controller
    }
 
    public function create(Request $request){
-//       dd($request);
+       dd($request->all());
        $zone = Zone::create([
-          'name' => $request->input('name')
+          'name' => $request->input('name'),
+          'warehouse_id' => $request->input('warehouse_id'),
        ]);
        $zone->has_countries()->attach($request->input('countries'));
        return redirect()->back()->with('success','Zone Successfully Generated!');

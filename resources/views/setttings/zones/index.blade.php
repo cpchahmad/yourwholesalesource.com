@@ -420,11 +420,11 @@
 
                                 @endforeach
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for=""> Select Warehouse</label>
-                                        <select name="warehouse_id" id="">
+                                        <select class="form-control" name="warehouse_id" id="">
                                             @foreach($warehouses as $warehouse)
                                                 <option value="{{ $warehouse->id }}">{{ $warehouse->title }}</option>
                                             @endforeach
