@@ -110,6 +110,15 @@ $(document).ready(function () {
         });
     });
 
+    // Warehouse Bulk Quantity Feture
+
+    $(document).on('input', '#bulk-warehouse-qty', function() {
+        var bulk_min_qty = $(this).val();
+        $('.warhouse-qty-row').each(function(){
+            $(this).val(bulk_min_qty);
+        });
+    });
+
     // Product Tiered Price Feature End
 
     // Bulk Tiered Pricing Feature Start
