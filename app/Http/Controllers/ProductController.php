@@ -784,7 +784,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
