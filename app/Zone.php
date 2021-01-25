@@ -19,6 +19,6 @@ class Zone extends Model
        return $this->hasOne(Courier::class, 'zone_id');
    }
    public function warehouse(){
-       return $this->hasOne(WareHouse::class, 'warehouse_id');
+       return $this->hasOne(WareHouse::class);
    }
 }
