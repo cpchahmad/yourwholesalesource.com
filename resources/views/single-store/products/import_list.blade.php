@@ -134,7 +134,7 @@
                                                                         </div>
                                                                         @if($warehouse->zone)
                                                                             @foreach($warehouse->zone->has_countries as $country)
-                                                                                {{ $country->name }}
+                                                                                <span class="badge badge-success mt-2">{{ $country->name }}</span>
                                                                             @endforeach
                                                                         @endif
                                                                     @endif

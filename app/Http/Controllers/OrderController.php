@@ -32,6 +32,8 @@ class OrderController extends Controller
     private $admin;
     private $inventory;
     private $log;
+    private $notify;
+
 
 
     /**
@@ -44,6 +46,7 @@ class OrderController extends Controller
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
         $this->log = new ActivityLogController();
+        $this->notify = new NotificationController();
     }
 
     public function index(Request $request)
