@@ -132,6 +132,7 @@
                                                                             <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
                                                                             <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
                                                                         </div>
+                                                                        <span class="mt-2">Countries: </span>
                                                                         @if($warehouse->zone)
                                                                             @foreach($warehouse->zone->has_countries as $country)
                                                                                 <span class="badge badge-success mt-2">{{ $country->name }}</span>
