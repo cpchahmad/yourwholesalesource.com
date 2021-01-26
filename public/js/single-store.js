@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+    // Inventory Management Status Checkbox
+    $('body').on('change','.inventory_checkbox',function () {
+        console.log(234);
+
+        if($(this).is(':checked')){
+            $('.warehouses').show();
+        }
+        else{
+            $('.warehouses').hide();
+        }
+
+    });
+
 
     $('.custom-order-btn').click(function () {
         console.log(324);
