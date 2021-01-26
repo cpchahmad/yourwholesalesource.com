@@ -22,6 +22,13 @@ class WareHouse extends Model
         return null;
     }
 
+    public function has_inventory_quantity_for_product($product) {
+        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->exists()) {
+            return true;
+        }
+        return false;
+    }
+
     public function get_inventory_quantity_for_variant($variant) {
         if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_variant_id', $variant->id)->exists()) {
             $item = WarehouseInventory::where('warehouse_id', $this->id)->where('product_variant_id', $variant->id)->first();
@@ -37,5 +44,13 @@ class WareHouse extends Model
             return $item->quantity;
         }
         return null;
+    }
+
+    public function has_inventory_quantity_for_retailer_variant($product, $variant) {
+        $real_variant = $product->hasVariants()->where('sku', $variant->sku)->first();
+        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_variant_id', $real_variant->id)->exists()) {
+            return true;
+        }
+        return false;
     }
 }

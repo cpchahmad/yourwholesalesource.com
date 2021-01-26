@@ -121,8 +121,17 @@
                                                         <form action="{{ route('retailer.import_to_shopify',$product->id) }}">
                                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                                             <div class="custom-control custom-switch custom-control-success mb-1">
-                                                                <input type="checkbox" class="custom-control-input" id="inventory_status_{{ $product->id }}" name="inventory_status">
+                                                                <input type="checkbox" class="custom-control-input inventory_checkbox" id="inventory_status_{{ $product->id }}" name="inventory_status">
                                                                 <label class="custom-control-label" for="inventory_status_{{ $product->id }}">No/Yes</label>
+                                                            </div>
+                                                            <div class="warehouses mt-2">
+                                                                @foreach($warehouses as $warehouse)
+                                                                        <div class="custom-control custom-switch custom-control-success mb-1">
+                                                                            <input type="checkbox" class="custom-control-input inventory_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
+                                                                            <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
+                                                                        </div>
+                                                                        <hr>
+                                                                @endforeach
                                                             </div>
                                                             <div class="block-content block-content-full text-right border-top">
                                                                 <button type="submit" class="btn btn-sm btn-primary" >Save</button>
@@ -302,15 +311,17 @@
                                                         <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
                                                         <td colspan="2">
                                                             @foreach($warehouses as $warehouse)
-                                                                <div class="row mb-3">
-                                                                    <div class="col-md-6">
-                                                                        <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
-                                                                        <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                                @if($warehouse->has_inventory_quantity_for_retailer_variant($product->linked_product, $v))
+                                                                    <div class="row mb-3">W
+                                                                        <div class="col-md-6">
+                                                                            <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
+                                                                            <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_retailer_variant($product->linked_product, $v) }}">
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_retailer_variant($product->linked_product, $v) }}">
-                                                                    </div>
-                                                                </div>
+                                                                @endif
                                                             @endforeach
                                                         </td>
                                                     </tr>
@@ -339,15 +350,17 @@
                                                 <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder=""></td>
                                                 <td colspan="2">
                                                     @foreach($warehouses as $warehouse)
-                                                        <div class="row mb-3">
-                                                            <div class="col-md-6">
-                                                                <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
-                                                                <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                       @if($warehouse->has_inventory_quantity_for_product($product->linked_product))
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
+                                                                    <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_product($product->linked_product) }}">
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <input  type="number" disabled class="form-control warhouse-qty-row" name="war_qty_for_single_variant[]" value="{{ $warehouse->get_inventory_quantity_for_product($product->linked_product) }}">
-                                                            </div>
-                                                        </div>
+                                                       @endif
                                                     @endforeach
                                                 </td>
                                             </tr>

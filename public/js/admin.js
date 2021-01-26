@@ -1,10 +1,35 @@
 $(document).ready(function () {
 
+    // Inventory Management Status Checkbox
+    $('body').on('change','.inventory_checkbox',function () {
+
+        if($(this).is(':checked')){
+            status = 1;
+            $('.status-text').text('Published')
+        }
+        else{
+            status = 0;
+            $('.status-text').text('Draft')
+        }
+        $.ajax({
+            url: $(this).data('route'),
+            type: 'post',
+            data:{
+                _token: $(this).data('csrf'),
+                type : 'status_update',
+                status : status
+            }
+        })
+    });
+
+
+    // Import To Woocommerce Button Loader
     $('.import-btn').click(function () {
         $(this).text('Loading');
 
     });
 
+    // Product Tab Edit button
     $('.edit-tab-button').click(function () {
         var id = $(this).data('id');
         var title = $(this).data('title');
