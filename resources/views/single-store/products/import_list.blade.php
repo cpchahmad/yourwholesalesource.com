@@ -132,9 +132,11 @@
                                                                             <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
                                                                             <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
                                                                         </div>
-                                                                        @foreach($warehouse->zone->has_countries as $country)
-                                                                            {{ $country->name }}
-                                                                        @endforeach
+                                                                        @if($warehouse->zone)
+                                                                            @foreach($warehouse->zone->has_countries as $country)
+                                                                                {{ $country->name }}
+                                                                            @endforeach
+                                                                        @endif
                                                                     @endif
                                                                 @endforeach
                                                             </div>
