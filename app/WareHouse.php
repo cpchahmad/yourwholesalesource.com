@@ -14,6 +14,10 @@ class WareHouse extends Model
         return $this->hasMany(WarehouseInventory::class, 'warehouse_id');
     }
 
+    public function zone() {
+        return $this->hasOne(Zone::class);
+    }
+
     public function has_inventory($product) {
         $flag = false;
         $real_variants = $product->hasVariants()->pluck('id')->toArray();

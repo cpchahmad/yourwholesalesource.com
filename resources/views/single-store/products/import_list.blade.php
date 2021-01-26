@@ -129,9 +129,12 @@
                                                                     @if($warehouse->has_inventory($product->linked_product))
                                                                         <hr>
                                                                         <div class="custom-control custom-switch custom-control-success mb-1">
-                                                                            <input type="checkbox" class="custom-control-input inventory_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
+                                                                            <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
                                                                             <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
                                                                         </div>
+                                                                        @foreach($warehouse->zone->has_countries as $country)
+                                                                            {{ $country->name }}
+                                                                        @endforeach
                                                                     @endif
                                                                 @endforeach
                                                             </div>
@@ -314,7 +317,7 @@
                                                         <td colspan="2">
                                                             @foreach($warehouses as $warehouse)
                                                                 @if($warehouse->has_inventory_quantity_for_retailer_variant($product->linked_product, $v))
-                                                                    <div class="row mb-3">W
+                                                                    <div class="row mb-3">
                                                                         <div class="col-md-6">
                                                                             <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                             <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
