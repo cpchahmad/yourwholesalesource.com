@@ -15,7 +15,7 @@ class WareHouse extends Model
     }
 
     public function zone() {
-        return $this->hasOne(Zone::class, 'ware_house_id');
+        return $this->hasOne(Zone::class);
     }
 
     public function has_inventory($product) {
