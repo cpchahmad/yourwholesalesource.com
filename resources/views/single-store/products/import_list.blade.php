@@ -124,7 +124,7 @@
                                                                 <input type="checkbox" class="custom-control-input inventory_checkbox" id="inventory_status_{{ $product->id }}" name="inventory_status">
                                                                 <label class="custom-control-label" for="inventory_status_{{ $product->id }}">No/Yes</label>
                                                             </div>
-                                                            <div class="warehouses mt-2 d-none">
+                                                            <div class="warehouses mt-2" style="display: none;">
                                                                 @foreach($warehouses as $warehouse)
                                                                     @if($warehouse->has_inventory($product->linked_product))
                                                                         <hr>
