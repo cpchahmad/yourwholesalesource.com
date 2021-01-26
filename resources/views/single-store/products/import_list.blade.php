@@ -121,7 +121,7 @@
                                                         <form action="{{ route('retailer.import_to_shopify',$product->id) }}">
                                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                                             <div class="custom-control custom-switch custom-control-success mb-1">
-                                                                <input type="checkbox" class="custom-control-input inventory_checkbox" id="inventory_status_{{ $product->id }}" name="inventory_status">
+                                                                <input type="checkbox" class="custom-control-input inventory-checkbox" id="inventory_status_{{ $product->id }}">
                                                                 <label class="custom-control-label" for="inventory_status_{{ $product->id }}">No/Yes</label>
                                                             </div>
                                                             <div class="warehouses mt-2" style="display: none;">
