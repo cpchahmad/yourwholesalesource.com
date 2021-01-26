@@ -1,18 +1,5 @@
 $(document).ready(function () {
 
-    // Inventory Management Status Checkbox
-    $('body').on('change','.inventory_checkbox',function () {
-
-        if($(this).is(':checked')){
-            $('.warehouses').show();
-        }
-        else{
-            $('.warehouses').hide();
-        }
-
-    });
-
-
     // Import To Woocommerce Button Loader
     $('.import-btn').click(function () {
         $(this).text('Loading');
