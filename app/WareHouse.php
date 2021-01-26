@@ -14,6 +14,19 @@ class WareHouse extends Model
         return $this->hasMany(WarehouseInventory::class, 'warehouse_id');
     }
 
+    public function has_inventory($product) {
+        $flag = false;
+        $real_variants = $product->hasVariants()->pluck('id')->toArray();
+
+        if(WarehouseInventory::where('warehouse_id', $this->id)->whereIn('product_variant_id', $real_variants)->exists()) {
+            $flag = true;
+        }
+        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->exists()) {
+            $flag = true;
+        }
+        return $flag;
+    }
+
     public function get_inventory_quantity_for_product($product) {
         if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->exists()) {
             $item = WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->first();

@@ -126,11 +126,13 @@
                                                             </div>
                                                             <div class="warehouses mt-2">
                                                                 @foreach($warehouses as $warehouse)
+                                                                    @if($warehouse->has_inventory($product->linked_product))
+                                                                        <hr>
                                                                         <div class="custom-control custom-switch custom-control-success mb-1">
                                                                             <input type="checkbox" class="custom-control-input inventory_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
                                                                             <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
                                                                         </div>
-                                                                        <hr>
+                                                                    @endif
                                                                 @endforeach
                                                             </div>
                                                             <div class="block-content block-content-full text-right border-top">
