@@ -191,7 +191,7 @@ class AdminWebhookController extends Controller
 
         /*Order Log*/
         $order_log = new OrderLog();
-        $order_log->message = "A fulfillment named " . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
+        $order_log->message = "A fulfillment named via Shopify" . $new_fulfillment->name . " has been processed successfully on " . date_create($new_fulfillment->created_at)->format('d M, Y h:i a');
         $order_log->status = "Fulfillment";
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
@@ -415,7 +415,7 @@ class AdminWebhookController extends Controller
 
         /*Maintaining Log*/
         $order_log = new OrderLog();
-        $order_log->message = "Tracking detailed Updated To Fulfillment named " . $fulfillment->name . "  successfully on " . now()->format('d M, Y h:i a');
+        $order_log->message = "Tracking detailed Updated To Fulfillment named from Shopify" . $fulfillment->name . "  successfully on " . now()->format('d M, Y h:i a');
         $order_log->status = "Tracking Details Updated";
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();

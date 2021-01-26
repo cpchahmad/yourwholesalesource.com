@@ -89,17 +89,17 @@
                             <div class="block-options pl-3 pr-2">
                                 <button  class="btn btn-sm btn-outline-success btn_save_retailer_product" style="vertical-align: bottom" title="Save Product" data-tabs=".product_tab_panes_{{$index}}"><i class="fa fa-save"></i></button>
                                 <button  class="btn btn-sm btn-outline-danger" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
-{{--                                @if($product->has_inventory())--}}
-{{--                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >--}}
-{{--                                        <i class="si si-cloud-upload mr-1"></i>--}}
-{{--                                        Import to store--}}
-{{--                                    </button>--}}
-{{--                                @else--}}
+                                @if($product->has_inventory())
+                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >
+                                        <i class="si si-cloud-upload mr-1"></i>
+                                        Import to store
+                                    </button>
+                                @else
                                 <button onclick="window.location.href='{{route('retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-success" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >
                                     <i class="si si-cloud-upload mr-1"></i>
                                     Import to store
                                 </button>
-{{--                                @endif--}}
+                                @endif
                                 <div class="modal fade" id="import_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">

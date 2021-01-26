@@ -68,7 +68,7 @@ class FulfillmentsCreateJob implements ShouldQueue
         }
         catch(\Exception $e) {
             $log = new ErrorLog();
-            $log->message = "Fulfillment exception: ". $e->getMessage();
+            $log->message = "Fulfillment exception for : ". $data->id. ' ' . $e->getMessage();
             $log->save();
         }
     }

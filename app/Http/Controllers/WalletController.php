@@ -416,8 +416,6 @@ class WalletController extends Controller
                     }
                 }
 
-
-
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
                 $new_transaction->amount =  $retailer_order->cost_to_pay;
