@@ -4,22 +4,12 @@ $(document).ready(function () {
     $('body').on('change','.inventory_checkbox',function () {
 
         if($(this).is(':checked')){
-            status = 1;
-            $('.status-text').text('Published')
+            $('.warehouses').show();
         }
         else{
-            status = 0;
-            $('.status-text').text('Draft')
+            $('.warehouses').hide();
         }
-        $.ajax({
-            url: $(this).data('route'),
-            type: 'post',
-            data:{
-                _token: $(this).data('csrf'),
-                type : 'status_update',
-                status : status
-            }
-        })
+
     });
 
 
