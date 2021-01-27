@@ -889,7 +889,7 @@ class OrderController extends Controller
         try{
             if($settings && $settings->enable) {
 
-                $orders = RetailerOrder::where('user_id', $this->user_id)->where('paid', 0)->latest()->limit(10)->get();
+                $orders = RetailerOrder::where('user_id', 86)->where('paid', 0)->latest()->limit(10)->get();
 
                 foreach ($orders as $new) {
                     if($new->paid == 0){
