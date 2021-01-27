@@ -922,17 +922,17 @@ class OrderController extends Controller
                             if($user->has_manager()->count() > 0) {
                                 $manager_email = $user->has_manager->email;
                             }
-                            $users_temp =['info@wefullfill.com',$manager_email];
-
-                            foreach($users_temp as $u){
-                                if($u != null) {
-                                    try{
-                                        Mail::to($u)->send(new OrderPlaceEmail($new));
-                                    }
-                                    catch (\Exception $e){
-                                    }
-                                }
-                            }
+//                            $users_temp =['info@wefullfill.com',$manager_email];
+//
+//                            foreach($users_temp as $u){
+//                                if($u != null) {
+//                                    try{
+//                                        Mail::to($u)->send(new OrderPlaceEmail($new));
+//                                    }
+//                                    catch (\Exception $e){
+//                                    }
+//                                }
+//                            }
 
 
 
