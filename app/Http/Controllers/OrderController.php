@@ -6,6 +6,7 @@ use App\AdminSetting;
 use App\Customer;
 use App\ErrorLog;
 use App\FulfillmentLineItem;
+use App\Jobs\AutoPaymentForPendingOrders;
 use App\Mail\OrderPlaceEmail;
 use App\Mail\WalletBalanceMail;
 use App\OrderFulfillment;
@@ -175,6 +176,8 @@ class OrderController extends Controller
     public function syncAllOrders($id) {
 
         $user = User::find($id);
+        dispatch(new AutoPaymentForPendingOrders($user->id));
+
         $shops = $user->has_stores()->get();
 
 
@@ -746,12 +749,9 @@ class OrderController extends Controller
                         $order_log->retailer_order_id = $new->id;
                         $order_log->save();
 
-                        dump($new);
 
                         /* Auto Order Payment in case user has enabled settings for it (START)*/
                         $settings = WalletSetting::where('user_id', $new->user_id)->first();
-
-                        dd($settings);
 
                         DB::beginTransaction();
                         try{
