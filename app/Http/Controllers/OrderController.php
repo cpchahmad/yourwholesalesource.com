@@ -891,8 +891,6 @@ class OrderController extends Controller
 
                 $orders = RetailerOrder::where('user_id', 86)->where('paid', 0)->latest()->limit(1)->get();
 
-                dd($orders);
-
                 foreach ($orders as $new) {
                     if($new->paid == 0){
 
