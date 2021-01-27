@@ -185,8 +185,6 @@ class OrderController extends Controller
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
-
-                dd($orders);
                 foreach ($orders as $index => $order) {
                     $product_ids = [];
                     $variant_ids = [];
@@ -748,8 +746,12 @@ class OrderController extends Controller
                         $order_log->retailer_order_id = $new->id;
                         $order_log->save();
 
+                        dump($new);
+
                         /* Auto Order Payment in case user has enabled settings for it (START)*/
                         $settings = WalletSetting::where('user_id', $new->user_id)->first();
+
+                        dd($settings);
 
                         DB::beginTransaction();
                         try{
