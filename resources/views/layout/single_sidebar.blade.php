@@ -215,7 +215,7 @@
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
             <div class="d-inline-block mr-3">
-                <a class="nav-main-link" href="{{route('users.index')}}">
+                <a class="nav-main-link" href="{{route('users.dashboard')}}">
                     <i class="nav-main-link-icon fa fa-sync"></i>
                     <span class="nav-main-link-name">Switch To User View</span>
                 </a>
