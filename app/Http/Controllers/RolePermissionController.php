@@ -14,7 +14,6 @@ class RolePermissionController extends Controller
 
 
        if($user->email == 'wordpress_admin@wefullfill.com') {
-           dd('34');
            return redirect('/');
        }
        if ($user->email == 'super_admin@wefullfill.com'){
