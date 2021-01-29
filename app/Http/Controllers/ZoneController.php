@@ -18,9 +18,7 @@ class ZoneController extends Controller
        $zones =  Zone::query();
 
        if($request->has('warehouse_search')) {
-           $zones->whereHas('warehouse', function ($q) use ($request){
-               $q->where('id', $request->input('warehouse_search'));
-           });
+           $zones->where('warehouse_id', $request->input('warehouse_id'));
        }
 
        return view('setttings.zones.index')->with([
