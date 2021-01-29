@@ -25,9 +25,6 @@
                         <div class="input-group">
                             <select name="warehouse_search" id="" class="form-control">
                                 @foreach($warehouses as $warehouse)
-                                    @if($warehouse_search)
-                                        <option disabled selected >{{ $warehouse_search }}</option>
-                                    @endif
                                     <option value="{{ $warehouse->id }}" >{{ $warehouse->title }}</option>
                                 @endforeach
                             </select>
