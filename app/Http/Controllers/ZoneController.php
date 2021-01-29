@@ -16,6 +16,13 @@ class ZoneController extends Controller
       $countries = Country::all();
       $warehouses = WareHouse::all();
        $zones =  Zone::query();
+
+       if($request->has('warehouse_search')) {
+           $zones->whereHas('warehouse', function ($q) use ($request){
+               $q->where('id', $request->input('warehouse_search'));
+           });
+       }
+
        return view('setttings.zones.index')->with([
            'zones'=>$zones->orderBy('created_at','DESC')->get(),
            'countries' =>$countries,

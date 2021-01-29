@@ -19,7 +19,7 @@
     </div>
     <div class="content">
         <div class="row mb2">
-            <div class="col-sm-6">
+            <div class="col-sm-10">
                 <form class="js-form-icon-search push" action="" method="get">
                     <div class="form-group">
                         <div class="input-group">
@@ -39,7 +39,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-sm-6 text-right">
+            <div class="col-sm-2 text-right">
                 <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_zone_modal">Create Shipping Zone</button>
             </div>
         </div>
