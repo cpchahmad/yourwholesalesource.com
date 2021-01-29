@@ -27,6 +27,26 @@
         </div>
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
+                <form class="js-form-icon-search push" action="" method="get">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select name="warehouse_search" id="" class="form-control">
+                                <option value="" disabled selected>{{ $warehouse_search }}</option>
+                                <option value="Product">Product</option>
+                                <option value="RetailerProduct">Retailer Product</option>
+                                <option value="Order">Order</option>
+                                <option value="Ticket">Ticket</option>
+                                <option value="Wishlist">Wishlist</option>
+                                <option value="Wallet">Wallet</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                                <a class="btn btn-danger" href="{{ route('zone.index') }}"> <i class="fa fa-times"></i> Clear </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="block">
                     <div class="block-content">
                         @if (count($zones) > 0)

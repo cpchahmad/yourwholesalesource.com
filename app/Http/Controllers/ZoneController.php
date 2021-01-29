@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ZoneController extends Controller
 {
-   public function index(){
+   public function index(Request $request){
       $countries = Country::all();
       $warehouses = WareHouse::all();
        $zones =  Zone::query();
@@ -20,6 +20,7 @@ class ZoneController extends Controller
            'zones'=>$zones->orderBy('created_at','DESC')->get(),
            'countries' =>$countries,
            'warehouses' =>$warehouses,
+           'warehouse_search' => $request->input('warehouse_search')
        ]);
    }
 
