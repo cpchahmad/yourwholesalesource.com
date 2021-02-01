@@ -70,7 +70,7 @@ class InventoryController extends Controller
 
                 }
             }
-            sleep(2);
+            //sleep(2);
 
 
         }
@@ -81,7 +81,7 @@ class InventoryController extends Controller
         $product = Product::whereNotNull('inventory_item_id')->get();
         foreach ($product as $p){
             $this->process_connect($p, $shop);
-            sleep(2);
+            //sleep(2);
         }
 
 

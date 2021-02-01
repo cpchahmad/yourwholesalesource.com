@@ -62,7 +62,7 @@ class AppChangeQuantitySku extends Command
                             $shop = $this->helper->getSpecificShop($v->shop_id);
                             if($shop != null){
                                 $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailer_product->shopify_id.'/variants/'.$v->shopify_id.'.json',$productdata);
-                                sleep(1);
+                                //sleep(1);
                             }
 
                         }
@@ -84,7 +84,7 @@ class AppChangeQuantitySku extends Command
                                     ]
                                 ];
                                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                                sleep(1);
+                                //sleep(1);
                             }
                         }
                     }

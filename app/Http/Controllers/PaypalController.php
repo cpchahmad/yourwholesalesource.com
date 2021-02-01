@@ -173,7 +173,7 @@ class PaypalController extends Controller
             $order_log->status = "paid";
             $order_log->retailer_order_id = $retailer_order->id;
             $order_log->save();
-            $this->admin->sync_order_to_admin_store($retailer_order);
+            //$this->admin->sync_order_to_admin_store($retailer_order);
             $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 
             $this->inventory->OrderQuantityUpdate($retailer_order,'new');
@@ -249,10 +249,6 @@ class PaypalController extends Controller
 
     }
 
-    public function test($id){
-        $order = RetailerOrder::find($id);
-        $this->admin->sync_order_to_admin_store($order);
-    }
 
     public function paypal_bulk_order_payment(Request $request) {
 
@@ -344,7 +340,7 @@ class PaypalController extends Controller
             $order_log->retailer_order_id = $retailer_order->id;
             $order_log->save();
             $this->inventory->OrderQuantityUpdate($retailer_order,'new');
-            $this->admin->sync_order_to_admin_store($retailer_order);
+            //$this->admin->sync_order_to_admin_store($retailer_order);
             try {
                 $this->admin->push_to_mabang($retailer_order->id);
             }

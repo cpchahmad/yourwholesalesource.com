@@ -551,7 +551,7 @@ class WalletController extends Controller
                     $order_log->save();
 
 
-                    $this->admin->sync_order_to_admin_store($retailer_order);
+                    //$this->admin->sync_order_to_admin_store($retailer_order);
                     $this->inventory->OrderQuantityUpdate($retailer_order,'new');
                     try {
                         $this->admin->push_to_mabang($retailer_order->id);
