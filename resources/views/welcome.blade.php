@@ -118,9 +118,9 @@
                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                 @if($index == 0)
                                                     @if($image->isV == 0)
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
                                                     @else
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                     @endif
                                                 @endif
                                             @endforeach
@@ -166,9 +166,9 @@
                                             @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                 @if($index == 0)
                                                     @if($image->isV == 0)
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
                                                     @else
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                     @endif
                                                 @endif
                                             @endforeach
