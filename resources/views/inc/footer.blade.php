@@ -23,6 +23,12 @@
 <script src="{{asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('js/jquery.lazy.min.js')}}"></script>
+<script>
+    $(function() {
+        $('img').lazy();
+    });
+</script>
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="{{ asset('assets/js/plugins/jquery-ui/jquery-ui.js') }}"></script>
