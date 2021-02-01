@@ -36,7 +36,7 @@
                     <button class="btn btn-sm btn-success" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.manual_push_to_wefulfill',$order->id)}}'">Sync to Wefulfill Store</button>
                 @endif
                 @if($order->status == 'Paid')
-                    <button class="btn btn-sm btn-warning" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('manually.sync.fulfillment',$order->id)}}'">Sync Order Fulfillment</button>
+                    <button class="btn btn-sm btn-info" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('admin.send.order.status.email',$order->id)}}'">Send Order Status Email</button>
                 @endif
                 @if($order->status == 'Paid' && is_null($order->push_to_erp))
                     <button class="btn btn-sm btn-info" style="float: right;margin-right: 10px" onclick="window.location.href='{{route('push.to.mabang',$order->id)}}'">Push To Mabang</button>
