@@ -2919,6 +2919,8 @@ class ProductController extends Controller
                 "meta_data" => $meta_data_array
             ];
 
+            dd($productdata);
+
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
 
