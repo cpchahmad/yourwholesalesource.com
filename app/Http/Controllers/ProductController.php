@@ -2870,21 +2870,21 @@ class ProductController extends Controller
                 }
             }
 
-            /*Platfroms*/
-            $meta_data_array = [];
-            $platforms = null;
-            if(count($product->has_platforms) > 0) {
-                foreach ($product->has_platforms as $index => $platform){
-                    $platforms = $platforms . $platform->name . ',';
-                }
-
-                array_push($meta_data_array,[
-                    "key" => "warned_platform",
-                    "value"=> $platforms,
-                ]);
-
-                $productdata["meta_data"] = $meta_data_array;
-            }
+//            /*Platfroms*/
+//            $meta_data_array = [];
+//            $platforms = null;
+//            if(count($product->has_platforms) > 0) {
+//                foreach ($product->has_platforms as $index => $platform){
+//                    $platforms = $platforms . $platform->name . ',';
+//                }
+//
+//                array_push($meta_data_array,[
+//                    "key" => "warned_platform",
+//                    "value"=> $platforms,
+//                ]);
+//
+//                $productdata["meta_data"] = $meta_data_array;
+//            }
 
 
 
