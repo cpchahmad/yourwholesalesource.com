@@ -2904,7 +2904,7 @@ class ProductController extends Controller
 
             $productdata = [
                 "name" => $product->title,
-                "description" => $product->description,
+//                "description" => $product->description,
                 "short_description" => $product->short_description,
                 "tags" => $tags_array,
                 "type" => $product_type,
