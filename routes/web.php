@@ -446,13 +446,11 @@ Route::get('test/emails', 'HelperController@testEmail');
 //});
 
 
-Route::get('/push-to-mabang', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
+Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
 
 
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 
 Route::get('bulk', 'AdminMaintainerController@bulk_import_to_woocommerce');
 
-
-Route::get('/dummy', 'AdminOrderController@dummy');
 

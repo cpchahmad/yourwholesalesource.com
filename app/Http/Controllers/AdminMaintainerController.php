@@ -409,6 +409,7 @@ class AdminMaintainerController extends Controller
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
         $order = RetailerOrder::find($id);
+        $order->pushed_to_erp = 1;
         $line_items = [];
         $images = [];
 
