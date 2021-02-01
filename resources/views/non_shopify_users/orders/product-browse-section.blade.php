@@ -7,13 +7,13 @@
                     @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                         @if($index == 0)
                             @if($image->isV == 0)
-                                <img class="img-avatar16"  src="{{asset('images')}}/{{$image->image}}">
-                            @else   <img class="img-avatar16"  src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                <img class="img-avatar16"  data-src="{{asset('images')}}/{{$image->image}}">
+                            @else   <img class="img-avatar16"  data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                             @endif
                         @endif
                     @endforeach
                 @else
-                    <img class="img-avatar16" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                    <img class="img-avatar16" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                 @endif
 
                 {{$product->title}}</label>
@@ -26,8 +26,8 @@
                         <input type="checkbox" name="variants[]" class="custom-control-input variant-checkbox" data-related="#product{{$product->id}}" id="varaint_product_{{$variant->id}}" value="{{$variant->id}}">
                         <label class="custom-control-label" for="varaint_product_{{$variant->id}}">
                             <img class="img-avatar16 " style="border: 1px solid whitesmoke"
-                                 @if($variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                 @else @if($variant->has_image->isV == 0) src="{{asset('images')}}/{{$variant->has_image->image}}" @else src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @endif @endif alt="">
+                                 @if($variant->has_image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                 @else @if($variant->has_image->isV == 0) data-src="{{asset('images')}}/{{$variant->has_image->image}}" @else data-src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @endif @endif alt="">
                            @if($variant->option1 != null)   {{$variant->option1}}    @endif @if($variant->option2 != null)  / {{$variant->option2}}    @endif   @if($variant->option3 != null)  / {{$variant->option3}}  @endif
 
                         </label>
@@ -44,13 +44,13 @@
                                 @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                     @if($index == 0)
                                         @if($image->isV == 0)
-                                            <img class="img-avatar16"  src="{{asset('images')}}/{{$image->image}}">
-                                        @else   <img class="img-avatar16"  src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                            <img class="img-avatar16"  data-src="{{asset('images')}}/{{$image->image}}">
+                                        @else   <img class="img-avatar16"  data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                         @endif
                                     @endif
                                 @endforeach
                             @else
-                                <img class="img-avatar16" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                <img class="img-avatar16" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                             @endif
                           Default Variant
 
