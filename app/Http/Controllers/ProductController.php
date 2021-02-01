@@ -194,8 +194,8 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if($product != null) {
-           DB::beginTransaction();
-           try{
+//           DB::beginTransaction();
+//           try{
                $shop = $this->helper->getAdminShop();
                $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$product->shopify_id.'.json');
 
@@ -213,11 +213,11 @@ class ProductController extends Controller
                $product->save();
 
                return $this->import_old_product_to_woocommerce($product->id);
-           }
-           catch(\Exception $e) {
-               DB::rollBack();
-               return redirect()->back()->with('error', $e->getMessage());
-           }
+//           }
+//           catch(\Exception $e) {
+//               DB::rollBack();
+//               return redirect()->back()->with('error', $e->getMessage());
+//           }
         }
         else {
             return redirect()->back()->with('error', 'Product Not Found');
