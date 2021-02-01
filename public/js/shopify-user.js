@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
     $('.show-product-modal').click(function () {
+
+        console.log(324);
         $('#browse_product_modal').modal('show');
 
         $.ajax({
