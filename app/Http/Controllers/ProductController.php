@@ -2906,7 +2906,6 @@ class ProductController extends Controller
                 "name" => $product->title,
                 "description" => $product->description,
                 "short_description" => $product->short_description,
-                "slug" => $product->slug,
                 "tags" => $tags_array,
                 "type" => $product_type,
                 "attributes" => $attributes_array,
@@ -2922,7 +2921,6 @@ class ProductController extends Controller
                 "categories" => $categories_array,
             ];
 
-            dd($productdata);
 
 
             /*Creating Product On Woocommerce*/
