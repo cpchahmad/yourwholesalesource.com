@@ -180,6 +180,8 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
     Route::post('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
+    Route::get('/manual-push-to-mabang/{id}', 'AdminMaintainerController@manual_push_to_mabang')->name('manual.push.to.mabang');
+
 
     // ROUTES ADDED AFTER WOOCOMMERCE INTEGRATION
     Route::resource('tags', 'TagController');
