@@ -2870,23 +2870,19 @@ class ProductController extends Controller
                 }
             }
 
-//            /*Platfroms*/
-//            $meta_data_array = [];
-//            $platforms = null;
-//            if(count($product->has_platforms) > 0) {
-//                foreach ($product->has_platforms as $index => $platform){
-//                    $platforms = $platforms . $platform->name . ',';
-//                }
-//
-//                array_push($meta_data_array,[
-//                    "key" => "warned_platform",
-//                    "value"=> $platforms,
-//                ]);
-//
-//                $productdata["meta_data"] = $meta_data_array;
-//            }
+            /*Platfroms*/
+            $meta_data_array = [];
+            $platforms = null;
+            if(count($product->has_platforms) > 0) {
+                foreach ($product->has_platforms as $index => $platform){
+                    $platforms = $platforms . $platform->name . ',';
+                }
+            }
 
-
+            array_push($meta_data_array,[
+                "key" => "warned_platform",
+                "value"=> $platforms,
+            ]);
 
 
 
@@ -2905,10 +2901,12 @@ class ProductController extends Controller
             $productdata = [
                 "name" => $product->title,
                 "description" => $product->description,
+                "short_description" => $product->short_description,
+                "slug" => $product->slug,
                 "tags" => $tags_array,
                 "type" => $product_type,
                 "attributes" => $attributes_array,
-                //"images" => $images_array,
+                "images" => $images_array,
                 "published"=>  $published,
                 "sale_price" => $product->price,
                 "regular_price" => $product->price,
@@ -2918,8 +2916,8 @@ class ProductController extends Controller
                 "stock_quantity" => $product->quantity,
                 "dimensions" => $dimension_array,
                 "categories" => $categories_array,
+                "meta_data" => $meta_data_array
             ];
-
 
 
             /*Creating Product On Woocommerce*/
