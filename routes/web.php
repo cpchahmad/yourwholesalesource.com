@@ -291,7 +291,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/refunds/{id}', 'CustomOrderController@refund')->name('users.refund');
             Route::get('/notifications/{id}', 'CustomOrderController@show_notification')->name('users.notification');
             Route::get('/notifications', 'CustomOrderController@notifications')->name('users.notifications');
-            Route::get('/get/admin/products','ProductController@getAdminProducts')->name('admin.product.all');
+            Route::get('users/get/admin/products','ProductController@getAdminProducts')->name('admin.product.all');
 
 
             Route::group(['middleware' => ['check_user_shop']], function () {
