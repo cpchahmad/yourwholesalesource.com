@@ -2,11 +2,10 @@ $(document).ready(function () {
 
     $('.show-product-modal').click(function () {
 
-        console.log(324);
         $('#browse_product_modal').modal('show');
 
         $.ajax({
-            url: `/get/admin/products`,
+            url: `users/get/admin/products`,
             type: 'GET',
             success: function(res) {
 
