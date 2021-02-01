@@ -2877,12 +2877,16 @@ class ProductController extends Controller
                 foreach ($product->has_platforms as $index => $platform){
                     $platforms = $platforms . $platform->name . ',';
                 }
+
+                array_push($meta_data_array,[
+                    "key" => "warned_platform",
+                    "value"=> $platforms,
+                ]);
+
+                $productdata["meta_data"] = $meta_data_array;
             }
 
-            array_push($meta_data_array,[
-                "key" => "warned_platform",
-                "value"=> $platforms,
-            ]);
+
 
 
 
@@ -2916,7 +2920,6 @@ class ProductController extends Controller
                 "stock_quantity" => $product->quantity,
                 "dimensions" => $dimension_array,
                 "categories" => $categories_array,
-                "meta_data" => $meta_data_array
             ];
 
 
