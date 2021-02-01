@@ -453,5 +453,6 @@ Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFro
 
 Route::get('bulk', 'AdminMaintainerController@bulk_import_to_woocommerce');
 
-Route::get('/testing', 'OrderController@test');
+
+Route::get('/dummy', 'AdminOrderController@dummy');
 
