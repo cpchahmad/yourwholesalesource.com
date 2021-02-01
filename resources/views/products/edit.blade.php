@@ -84,9 +84,9 @@
                                         <div class="col-lg-4 preview-image animated fadeIn mb-2" data-id="{{$image->id}}" data-pos="{{ $image->position }}">
                                             <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                 @if($image->isV == 0)
-                                                    <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="" >
+                                                    <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}" alt="" >
                                                 @else
-                                                    <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                 @endif
                                                 <div class="options-overlay bg-black-75">
                                                     <div class="options-overlay-content">
@@ -307,8 +307,8 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
-                                                             @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             @else @if($v->has_image->isV == 0) src="{{asset('images')}}/{{$v->has_image->image}}" @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
+                                                             @if($v->has_image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                             @else @if($v->has_image->isV == 0) data-src="{{asset('images')}}/{{$v->has_image->image}}" @else data-src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
                                                         <div class="modal fade" id="select_image_modal{{ $v->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-popout" role="document">
                                                                 <div class="modal-content">
@@ -326,9 +326,9 @@
                                                                                 @foreach($product->has_images as $image)
                                                                                     <div class="col-md-4">
                                                                                         @if($image->isV == 0)
-                                                                                            <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                                                            <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}" alt="">
                                                                                         @else
-                                                                                            <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                                                            <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                                                         @endif
                                                                                         <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="product" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
                                                                                     </div>
