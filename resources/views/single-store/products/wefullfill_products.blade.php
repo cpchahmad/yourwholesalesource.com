@@ -47,7 +47,7 @@
                     <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
                         <div class="block pointer m-0">
                             <div class="block-content p-3 text-center">
-                                <p class="m-0" style="font-size:14px;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
+                                <p class="m-0" style="font-size:14px;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                             </div>
                         </div>
                     </a>
@@ -68,7 +68,7 @@
                     <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
                         <div class="block pointer m-0">
                             <div class="block-content p-3 text-center">
-                                <p class="m-0" style="font-size:14px;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
+                                <p class="m-0" style="font-size:14px;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                             </div>
                         </div>
                     </a>
@@ -94,7 +94,7 @@
 
 
                     <div class="block-content p-3 text-center">
-                        <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" src="{{asset('winning.png')}}" alt=""> Winning Products </p>
+                        <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" data-src="{{asset('winning.png')}}" alt=""> Winning Products </p>
                     </div>
                 </div>
             </a>
@@ -104,7 +104,7 @@
                 <div class="block pointer m-0" style="background-color:#94a5ff;">
 
                     <div class="block-content p-3 text-center">
-                        <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="https://image.flaticon.com/icons/svg/46/46016.svg" alt="" style="margin-right: 10px"> 24 Hours Dispatch</p>
+                        <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" data-src="https://image.flaticon.com/icons/svg/46/46016.svg" alt="" style="margin-right: 10px"> 24 Hours Dispatch</p>
                     </div>
                 </div>
             </a>
@@ -115,7 +115,7 @@
 
 
                     <div class="block-content p-3 text-center">
-                        <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" src="{{asset('best.png')}}" alt=""> Best Sellers</p>
+                        <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" data-src="{{asset('best.png')}}" alt=""> Best Sellers</p>
                     </div>
                 </div>
             </a>
@@ -154,13 +154,13 @@
                                     @foreach($product->has_images()->orderBy('position')->cursor() as $index => $image)
                                         @if($index == 0)
                                             @if($image->isV == 0)
-                                                <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}">
-                                            @else   <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}">
+                                            @else   <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                             @endif
                                         @endif
                                     @endforeach
                                 @else
-                                    <img class="img-fluid options-item" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                    <img class="img-fluid options-item" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                 @endif
 
                             </a>

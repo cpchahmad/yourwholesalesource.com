@@ -173,11 +173,11 @@
                                     @if(count($images) > 0)
                                         @if($images[0]->isV == 0)
                                             <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images')}}/{{$images[0]->image}}">
-                                                <img class="img-fluid" src="{{asset('images')}}/{{$images[0]->image}}" alt="">
+                                                <img class="img-fluid" data-src="{{asset('images')}}/{{$images[0]->image}}" alt="">
                                             </a>
                                         @else
                                             <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('images/variants')}}/{{$images[0]->image}}">
-                                                <img class="img-fluid" src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
+                                                <img class="img-fluid" data-src="{{asset('images/variants')}}/{{$images[0]->image}}" alt="">
                                             </a>
                                         @endif
                                     @endif
@@ -243,7 +243,7 @@
                                                             <div class="block-content font-size-sm">
                                                                 <div class="text-center loader-div p-2">
                                                                     <h5>Calculating Shipping Price....</h5>
-                                                                    <img src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                                                                    <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
                                                                 </div>
                                                                 <div class="drop-content">
 
@@ -273,8 +273,8 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal{{$v->id}}"
-                                                                 @if($v->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                                 @else @if($v->has_image->isV == 0) src="{{asset('images')}}/{{$v->has_image->image}}" @else src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
+                                                                 @if($v->has_image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else @if($v->has_image->isV == 0) data-src="{{asset('images')}}/{{$v->has_image->image}}" @else data-src="{{asset('images/variants')}}/{{$v->has_image->image}}" @endif @endif alt="">
                                                             <div class="modal fade" id="select_image_modal{{ $v->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-popout" role="document">
                                                                     <div class="modal-content">
@@ -292,9 +292,9 @@
                                                                                     @foreach($product->has_images as $image)
                                                                                         <div class="col-md-4">
                                                                                             @if($image->isV == 0)
-                                                                                                <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                                                                <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}" alt="">
                                                                                             @else
-                                                                                                <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                                                                <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                                                             @endif
                                                                                             <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="retailer" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
                                                                                         </div>
@@ -346,7 +346,7 @@
                                                     Default
                                                 </td>
                                                 <td class="text-center">
-                                                    <img class="img-avatar " style="border: 1px solid whitesmoke" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                    <img class="img-avatar " style="border: 1px solid whitesmoke" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                 </td>
                                                 <td>
                                                     <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
@@ -405,9 +405,9 @@
                                                 <div class="col-md-4 mb2 preview-image animated fadeIn" >
                                                     <div class="options-container fx-img-zoom-in fx-opt-slide-right">
                                                         @if($image->isV == 0)
-                                                            <img class="img-fluid options-item" src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                            <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}" alt="">
                                                         @else
-                                                            <img class="img-fluid options-item" src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                            <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                         @endif
                                                         <div class="options-overlay bg-black-75">
                                                             <div class="options-overlay-content">
