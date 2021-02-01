@@ -492,7 +492,7 @@ class ProductController extends Controller
                             $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
 
                             $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                            //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
                         }
 
@@ -556,7 +556,7 @@ class ProductController extends Controller
                         $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$product->shopify_id.'/variants/'.$variant->shopify_id.'.json',$productdata);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
                     }
-                    Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                    //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
                 }
 
@@ -866,33 +866,7 @@ class ProductController extends Controller
                             $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                         }
 
-                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-
-
-//                    if (count($product->hasVariants) == 0) {
-//                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-//                        if(!$response->errors){
-//                            $shopifyVariants = $response->body->product->variants;
-//                            $variant_id = $shopifyVariants[0]->id;
-//                            $i = [
-//                                'variant' => [
-//                                    'price' =>$product->price,
-//                                    'sku' =>  $product->sku,
-//                                    'grams' => $product->weight * 1000,
-//                                    'weight' => $product->weight,
-//                                    'weight_unit' => 'kg',
-//                                    'barcode' => $product->barcode,
-//
-//                                ]
-//                            ];
-//                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
-//
-//                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-//                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-//
-//                        }
-//
-//                    }
+                        //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
                     }
 
@@ -946,34 +920,7 @@ class ProductController extends Controller
                             $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                         }
 
-                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-
-
-//                    if (count($product->hasVariants) == 0) {
-//                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-//                        if(!$response->errors){
-//                            $shopifyVariants = $response->body->product->variants;
-//                            $variant_id = $shopifyVariants[0]->id;
-//                            $i = [
-//                                'variant' => [
-//                                    'price' =>$product->price,
-//                                    'sku' =>  $product->sku,
-//                                    'grams' => $product->weight * 1000,
-//                                    'weight' => $product->weight,
-//                                    'weight_unit' => 'kg',
-//                                    'barcode' => $product->barcode,
-//
-//                                ]
-//                            ];
-//                            $this->log->store(0, 'Product', $product->id, $product->title,'Product Pricing Updated');
-//
-//                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-//                            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
-//
-//                        }
-//
-//                    }
-
+                        //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
                     }
 
                     else if ($type == 'single-variant-update') {
@@ -1033,7 +980,7 @@ class ProductController extends Controller
                         $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
 
-                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                        //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
                     }
 
