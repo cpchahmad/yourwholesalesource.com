@@ -1435,7 +1435,7 @@ class AdminOrderController extends Controller
     }
 
     public function dummy() {
-        $retailer_order = RetailerOrder::find(1440);
+        $retailer_order = RetailerOrder::find(1441);
         $data = ERPOrderFulfillment::where('retailer_order_id', $retailer_order->id)->first();
 
 
