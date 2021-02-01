@@ -219,6 +219,13 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
+<script src="{{asset('js/jquery.lazy.min.js')}}"></script>
+<script>
+    $(function() {
+        $('img').lazy();
+    });
+</script>
+
 
 
 <script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections','masked-inputs','select2','table-tools-checkable']); });</script>
