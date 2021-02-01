@@ -3126,7 +3126,7 @@ class ProductController extends Controller
         $products = Product::all();
 
         return view('non_shopify_users.orders.create')->with([
-            'products' => $products->get(),
+            'products' => $products,
         ])->render();
     }
 
