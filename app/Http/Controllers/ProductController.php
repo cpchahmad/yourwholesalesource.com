@@ -1494,7 +1494,7 @@ class ProductController extends Controller
 
                 $this->ProductVariantsUpdate($request, $product->id, $product);
 
-                sleep(5);
+                //sleep(5);
 
 
                 $attributes_array = $this->attributes_template_array($product);
@@ -3122,12 +3122,12 @@ class ProductController extends Controller
         return $variants_array;
     }
 
-    public function add_warehouse_inventory_for_single_product(Request $request, $id) {
-        dd($request->all());
-    }
+    public function getAdminProducts() {
+        $products = Product::all();
 
-    public function add_warehouse_inventory_for_variable_product(Request $request) {
-        dd($request->all());
+        return view('non_shopify_users.orders.create')->with([
+            'products' => $products->get(),
+        ])->render();
     }
 
 }

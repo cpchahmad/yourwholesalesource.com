@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/subcategory/{id}/delete','CategoryController@subdelete')->name('sub.delete');
     Route::get('/products','ProductController@index')->name('product.create');
     Route::get('/products/all','ProductController@all')->name('product.all');
+    Route::get('/get/admin/products','ProductController@getAdminProducts')->name('admin.product.all');
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
     Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');

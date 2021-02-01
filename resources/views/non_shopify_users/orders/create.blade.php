@@ -32,7 +32,7 @@
                         </div>
                         <div class="block-content pb-2">
                             <div class="text-center">
-                                <a class="btn btn-primary text-white" data-toggle="modal" data-target="#browse_product_modal"> Browse Products </a>
+                                <a class="btn btn-primary text-white show-product-modal" data-toggle="modal"> Browse Products </a>
                             </div>
                             <hr>
                             <div class="selected-variant-section">
@@ -214,7 +214,8 @@
                             <div class="form-group">
                                 <input type="search" id="product-search-field" name="product-search" class="form-control" placeholder="Search by Keyword" style="margin-bottom: 10px">
                                 <div class="countries-section" id="product-section">
-                                    @include('non_shopify_users.orders.product-browse-section')
+                                    Loading...
+{{--                                   // @include('non_shopify_users.orders.product-browse-section')--}}
                                 </div>
                             </div>
                         </div>
@@ -238,5 +239,6 @@
     <script
         src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">
     </script>
+
 
 @endsection

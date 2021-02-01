@@ -69,7 +69,7 @@ class CustomOrderController extends Controller
 
     public function show_create_form()
     {
-        $products = Product::query();
+        //$products = Product::query();
 //        $products->whereHas('hasVariants',function (){
 //
 //        });
@@ -78,7 +78,7 @@ class CustomOrderController extends Controller
         $setting = AdminSetting::all()->first();
 
         return view('non_shopify_users.orders.create')->with([
-            'products' => $products->get(),
+//            'products' => $products->get(),
             'customers' => $customers,
             'countries' => Country::all(),
             'setting' => $setting

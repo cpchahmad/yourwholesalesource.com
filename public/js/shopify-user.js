@@ -1,5 +1,19 @@
 $(document).ready(function () {
 
+    $('.show-product-modal').click(function () {
+        $('#browse_product_modal').modal('show');
+
+        $.ajax({
+            url: `/get/admin/products`,
+            type: 'GET',
+            success: function(res) {
+
+                $('#browse_product_modal').find('#product-section').empty();
+                $('#browse_product_modal').find('#product-section').append(res);
+            }
+        });
+    });
+
     $('.custom-order-btn').click(function () {
         $(this).text('Processing, Please Wait');
         $(this).prop('disabled', true);
