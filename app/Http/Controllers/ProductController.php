@@ -3125,7 +3125,7 @@ class ProductController extends Controller
     public function getAdminProducts() {
         $products = Product::all();
 
-        return view('non_shopify_users.orders.create')->with([
+        return view('non_shopify_users.orders.product-browse-section')->with([
             'products' => $products,
         ])->render();
     }
