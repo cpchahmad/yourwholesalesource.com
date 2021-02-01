@@ -553,7 +553,6 @@ class AdminMaintainerController extends Controller
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
         $resp = curl_exec($curl);
-        dd($resp);
         curl_close($curl);
 
         $order->pushed_to_erp = 1;
