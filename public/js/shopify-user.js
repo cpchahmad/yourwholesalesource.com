@@ -5,7 +5,7 @@ $(document).ready(function () {
         $('#browse_product_modal').modal('show');
 
         $.ajax({
-            url: `users/get/admin/products`,
+            url: `/users/get/admin/products`,
             type: 'GET',
             success: function(res) {
 
