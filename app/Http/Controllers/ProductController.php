@@ -2922,6 +2922,8 @@ class ProductController extends Controller
                 "categories" => $categories_array,
             ];
 
+            dd($productdata);
+
 
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
