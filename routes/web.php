@@ -240,7 +240,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
     });
 });
 /*Main Routes*/
-Route::group(['middleware' => []], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     /*Checking User Role*/
     Route::get('/check/roles','RolePermissionController@check_roles')->name('system.check-roles');
     Route::get('/choose/platform','RolePermissionController@selection')->name('system.selection');
@@ -250,7 +250,7 @@ Route::group(['middleware' => []], function () {
     Route::get('/connect/store','RolePermissionController@store_connect')->name('system.store.connect');
     /*Non-Shopify and Shopify User Routes */
 
-    Route::group(['middleware' => []], function () {
+    Route::group(['middleware' => ['role:non-shopify-users']], function () {
         Route::prefix('users')->group(function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
             Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
@@ -337,53 +337,53 @@ Route::group(['middleware' => []], function () {
     });
 });
 
-/*Common Routes*/
-Route::group(['middleware' => ['check_user_or_shop']], function () {
-    Route::prefix('app')->group(function () {
-        Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
-        Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
-        Route::post('/order/bulk/payment', 'OrderController@proceed_bulk_payment')->name('store.order.proceed.bulk.payment');
-
-        Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
-        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
-        Route::get('/pay-through-wallet/{id}', 'WalletController@order_payment_by_wallet')->name('store.order.wallet.pay');
-        Route::post('/pay-bulk-through-wallet', 'WalletController@order_bulk_payment_by_wallet')->name('store.order.wallet.pay.bulk');
-        Route::get('/pay-through-paypal/{id}', 'PaypalController@paypal_order_payment')->name('store.order.paypal.pay');
-        Route::post('/pay-bulk-through-paypal', 'PaypalController@paypal_bulk_order_payment')->name('store.order.paypal.bulk.pay');
-        Route::get('/pay-through-paypal/{id}/cancel', 'PaypalController@paypal_payment_cancel')->name('store.order.paypal.pay.cancel');
-        Route::any('/pay-through-paypal/{id}/success', 'PaypalController@paypal_payment_success')->name('store.order.paypal.pay.success');
-        Route::post('/topup-through-paypal/{id}', 'WalletController@paypal_topup_payment')->name('store.wallet.paypal.topup');
-        Route::get('/topup-through-paypal/{id}/cancel', 'WalletController@paypal_topup_payment_cancel')->name('store.wallet.paypal.topup.cancel');
-        Route::get('/topup-through-paypal/{id}/success', 'WalletController@paypal_topup_payment_success')->name('store.wallet.paypal.topup.success');
-
-        Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
-        Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
-        Route::get('/ticket/status/{id}/completed', 'TicketController@marked_as_completed')->name('help-center.ticket.marked_as_completed');
-        Route::get('/ticket/status/{id}/closed', 'TicketController@marked_as_closed')->name('help-center.ticket.marked_as_closed');
-
-        Route::post('/wishlist/create', 'WishlistController@create_wishlist')->name('wishlist.create');
-        Route::post('/wishlist/thread/create', 'WishlistController@create_wishlist_thread')->name('wishlist.thread.create');
-        Route::post('/wishlist/accepted', 'WishlistController@accept_wishlist')->name('wishlist.accept');
-        Route::post('/wishlist/approved', 'WishlistController@approve_wishlist')->name('wishlist.approve');
-        Route::post('/wishlist/completed', 'WishlistController@completed_wishlist')->name('wishlist.completed');
-        Route::post('/wishlist/completed/map_product', 'WishlistController@map_product')->name('wishlist.completed.map_product');
-        Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
-        Route::get('/wishlist/{id}/delete','WishlistController@delete_wishlist')->name('wishlist.delete');
-
-
-        Route::post('/ticket/review', 'TicketController@post_review')->name('ticket.post_review');
-        /*Refund*/
-        Route::post('/create/refund', 'RefundController@create_refund')->name('refund.create');
-        Route::post('/create/refund/thread', 'RefundController@create_refund_thread')->name('refund.create.thread');
-        Route::get('/refund/approve/{id}/order/{order_id}', 'RefundController@approve_refund')->name('refund.approve');
-        Route::get('cancel/order/{id}', 'RefundController@cancel_order')->name('app.order.cancel');
-        Route::get('cancel/refund/order/{id}', 'RefundController@refund_cancel_order')->name('app.refund_cancel_order');
-
-        Route::post('/orders/bulk-fulfillments', 'AdminOrderController@show_bulk_fulfillments')->name('app.orders.bulk.fulfillment');
-
-        Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
-    });
-});
+///*Common Routes*/
+//Route::group(['middleware' => ['check_user_or_shop']], function () {
+//    Route::prefix('app')->group(function () {
+//        Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
+//        Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+//        Route::post('/order/bulk/payment', 'OrderController@proceed_bulk_payment')->name('store.order.proceed.bulk.payment');
+//
+//        Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');
+//        Route::post('/wallet/top-up/bank-transfer', 'WalletController@request_wallet_topup_bank')->name('store.user.wallet.request.topup');
+//        Route::get('/pay-through-wallet/{id}', 'WalletController@order_payment_by_wallet')->name('store.order.wallet.pay');
+//        Route::post('/pay-bulk-through-wallet', 'WalletController@order_bulk_payment_by_wallet')->name('store.order.wallet.pay.bulk');
+//        Route::get('/pay-through-paypal/{id}', 'PaypalController@paypal_order_payment')->name('store.order.paypal.pay');
+//        Route::post('/pay-bulk-through-paypal', 'PaypalController@paypal_bulk_order_payment')->name('store.order.paypal.bulk.pay');
+//        Route::get('/pay-through-paypal/{id}/cancel', 'PaypalController@paypal_payment_cancel')->name('store.order.paypal.pay.cancel');
+//        Route::any('/pay-through-paypal/{id}/success', 'PaypalController@paypal_payment_success')->name('store.order.paypal.pay.success');
+//        Route::post('/topup-through-paypal/{id}', 'WalletController@paypal_topup_payment')->name('store.wallet.paypal.topup');
+//        Route::get('/topup-through-paypal/{id}/cancel', 'WalletController@paypal_topup_payment_cancel')->name('store.wallet.paypal.topup.cancel');
+//        Route::get('/topup-through-paypal/{id}/success', 'WalletController@paypal_topup_payment_success')->name('store.wallet.paypal.topup.success');
+//
+//        Route::post('/ticket/create', 'TicketController@create_ticket')->name('help-center.ticket.create');
+//        Route::post('/ticket/thread/create', 'TicketController@create_ticket_thread')->name('help-center.ticket.thread.create');
+//        Route::get('/ticket/status/{id}/completed', 'TicketController@marked_as_completed')->name('help-center.ticket.marked_as_completed');
+//        Route::get('/ticket/status/{id}/closed', 'TicketController@marked_as_closed')->name('help-center.ticket.marked_as_closed');
+//
+//        Route::post('/wishlist/create', 'WishlistController@create_wishlist')->name('wishlist.create');
+//        Route::post('/wishlist/thread/create', 'WishlistController@create_wishlist_thread')->name('wishlist.thread.create');
+//        Route::post('/wishlist/accepted', 'WishlistController@accept_wishlist')->name('wishlist.accept');
+//        Route::post('/wishlist/approved', 'WishlistController@approve_wishlist')->name('wishlist.approve');
+//        Route::post('/wishlist/completed', 'WishlistController@completed_wishlist')->name('wishlist.completed');
+//        Route::post('/wishlist/completed/map_product', 'WishlistController@map_product')->name('wishlist.completed.map_product');
+//        Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
+//        Route::get('/wishlist/{id}/delete','WishlistController@delete_wishlist')->name('wishlist.delete');
+//
+//
+//        Route::post('/ticket/review', 'TicketController@post_review')->name('ticket.post_review');
+//        /*Refund*/
+//        Route::post('/create/refund', 'RefundController@create_refund')->name('refund.create');
+//        Route::post('/create/refund/thread', 'RefundController@create_refund_thread')->name('refund.create.thread');
+//        Route::get('/refund/approve/{id}/order/{order_id}', 'RefundController@approve_refund')->name('refund.approve');
+//        Route::get('cancel/order/{id}', 'RefundController@cancel_order')->name('app.order.cancel');
+//        Route::get('cancel/refund/order/{id}', 'RefundController@refund_cancel_order')->name('app.refund_cancel_order');
+//
+//        Route::post('/orders/bulk-fulfillments', 'AdminOrderController@show_bulk_fulfillments')->name('app.orders.bulk.fulfillment');
+//
+//        Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
+//    });
+//});
 
 Route::get('/variant/{id}/change/image/{image_id}', 'ProductController@change_image')->name('change_image');
 Route::get('/search/products', 'CustomOrderController@find_products')->name('find_products');
