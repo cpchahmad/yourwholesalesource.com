@@ -48,6 +48,8 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Email</th>
+                                        <th>Whatspp Number</th>
+                                        <th>Skype</th>
                                         <th>Status</th>
                                         <th>Stores</th>
                                         <th>Non-Shopify Users</th>
@@ -62,6 +64,12 @@
                                                 <span style="margin-left: 10px;">{{ $manager->name }}</span></td>
                                             <td>
                                                 {{$manager->email}}
+                                            </td>
+                                            <td>
+                                                {{$manager->whatsapp}}
+                                            </td>
+                                            <td>
+                                                {{$manager->skype}}
                                             </td>
 
                                             <td>
