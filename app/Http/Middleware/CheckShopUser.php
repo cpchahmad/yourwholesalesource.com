@@ -18,7 +18,6 @@ class CheckShopUser
      */
     public function handle($request, Closure $next)
     {
-        dd(4325);
         /*Ossiset Shop Model*/
         $shop = ShopifyApp::shop();
         /*Local Shop Model!*/
