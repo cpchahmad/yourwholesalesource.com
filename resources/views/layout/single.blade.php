@@ -112,7 +112,12 @@
                                                     <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                                     <div class="font-w600">{{$manager->email}}</div>
                                                     <div class="text-info">
-                                                        <i class="fa fa-file-text"></i> +324324
+{{--                                                        <i class="fa fa-file-text"></i> --}}
+                                                        Whatsapp {{$manager->whatsapp}}
+                                                    </div>
+                                                    <div class="text-info">
+{{--                                                        <i class="fa fa-file-text"></i>--}}
+                                                        Skype {{$manager->skype}}
                                                     </div>
 
                                                 </div>
