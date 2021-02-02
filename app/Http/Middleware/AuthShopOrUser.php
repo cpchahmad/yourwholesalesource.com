@@ -18,6 +18,7 @@ class AuthShopOrUser
      */
     public function handle($request, Closure $next)
     {
+        dd(324);
         if(Auth::check()){
             return $next($request);
         }
@@ -25,7 +26,6 @@ class AuthShopOrUser
             return $next($request);
         }
         else{
-            dd(324);
             return redirect()->route('login');
         }
 
