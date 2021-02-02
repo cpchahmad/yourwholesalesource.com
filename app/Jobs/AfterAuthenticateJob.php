@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\ErrorLog;
 use App\Http\Controllers\InventoryController;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -35,6 +36,10 @@ class AfterAuthenticateJob implements ShouldQueue
     {
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
+
+        $log = new ErrorLog();
+        $log->message = 'newsd';
+        $log->save();
 
 
         if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
