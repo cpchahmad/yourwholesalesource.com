@@ -50,6 +50,7 @@ class AfterAuthenticateJob implements ShouldQueue
         }
         else{
             if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
+                dd(234);
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
             else{
