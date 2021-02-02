@@ -817,7 +817,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function showSuggestions(Request $request) {
-        $suggestions = Suggestion::latest()->get();
+        $suggestions = Suggestion::latest()->paginate(20);
 
         return view('setttings.suggestions.index')->with('suggestions', $suggestions);
     }
