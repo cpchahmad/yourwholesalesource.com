@@ -1654,15 +1654,12 @@ class AdminOrderController extends Controller
                             $log->save();
 
                             $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json');
-                            dd($response);
 
                             if(!$response->errors){
-
-
                                 /*Order Fullfillment Record*/
                                 $new_fulfillment = new OrderFulfillment();
-                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
-                                $new_fulfillment->name = $response->body->fulfillments[0]->name;
+                                $new_fulfillment->fulfillment_shopify_id = isset($response->body->fulfillments[0]) ? $response->body->fulfillments[0]->id : null;
+                                $new_fulfillment->name = isset($response->body->fulfillments[0]) ? $response->body->fulfillments[0]->name : $retailer_order->name . '.1';
                                 $new_fulfillment->retailer_order_id = $retailer_order->id;
                                 $new_fulfillment->status = 'fulfilled';
                                 $new_fulfillment->save();
