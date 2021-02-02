@@ -127,18 +127,18 @@
                                     <li>
                                         <a class="text-dark media py-4">
                                             <div class="media-body">
-                                                <div class="font-w600">Wallet Balance</div>
+                                                <div class="font-w600 text-left">Wallet Balance</div>
                                                 <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
                                             </div>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="media-body text-right">
+                                            <div class="media-body text-left">
                                                 <div class="font-w600">Help us improve our App</div>
                                                 <form action="" class="mt-2">
                                                     <textarea class="form-control"></textarea>
-                                                    <button class="btn btn-sm btn-success">Submit</button>
+                                                    <button class="btn btn-sm btn-success mt-2">Submit</button>
                                                 </form>
                                             </div>
                                         </a>
