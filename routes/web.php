@@ -47,7 +47,7 @@ Route::get('/logout', function(){
 })->name('logout');
 /*Super Admin Routes*/
 //Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
-Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/','AdminOrderController@dashboard')->name('admin.dashboard');
     Route::get('/categories','CategoryController@index')->name('category.create');
     Route::post('/categories/save','CategoryController@save')->name('category.save');
