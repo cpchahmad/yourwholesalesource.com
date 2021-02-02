@@ -46,6 +46,24 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="form-material">
+                                <label for="material-error">Whatsapp Number</label>
+                                <input required class="form-control" type="text" id="manager_whatsapp" name="whatsapp"
+                                       placeholder="Enter Sales Manager Whatsapp number here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-material">
+                                <label for="material-error">Skype User name</label>
+                                <input required class="form-control" type="text" id="manager_skype" name="skype"
+                                       placeholder="Enter Sales Manager Skype user name here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-material">
                                 <input  class="form-control" data-route="{{route('sales-managers.edit.search')}}" data-manager="{{$manager->id}}" type="search" id="search-edit-input-stores-users" name="search"
                                        placeholder="Search by Keyword in Users/Stores">
                             </div>
