@@ -250,7 +250,7 @@ Route::group(['middleware' => []], function () {
     Route::get('/connect/store','RolePermissionController@store_connect')->name('system.store.connect');
     /*Non-Shopify and Shopify User Routes */
 
-    Route::group(['middleware' => ['role:non-shopify-users']], function () {
+    Route::group(['middleware' => []], function () {
         Route::prefix('users')->group(function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
             Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
