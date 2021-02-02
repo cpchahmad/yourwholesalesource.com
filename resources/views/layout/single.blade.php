@@ -54,6 +54,24 @@
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark  side-overlay-hover enable-page-overlay side-scroll page-header-fixed">
 
+    @php
+        $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+        /*Local Shop Model!*/
+        $shop= \App\Shop::find($shop->id);
+           if($shop->has_manager != null){
+           $manager = $shop->has_manager;
+           }
+           else{
+               $manager = null;
+           }
+
+         if(count($shop->has_user) > 0){
+            $associated_user =   $shop->has_user[0];
+        }
+        else{
+            $associated_user = null;
+        }
+    @endphp
 
     <!-- Side Overlay-->
     <aside id="side-overlay" class="font-size-sm">
@@ -86,21 +104,23 @@
                             <div class="block-content">
                                 <!-- Activity List -->
                                 <ul class="nav-items mb-0 text-center">
-                                    <li>
-                                        <a class="text-dark media py-2">
-                                            <div class="mr-3 ml-2">
-                                                <i class="si si-pencil text-info"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <img src="https://tse4.mm.bing.net/th?id=OIP.7xMmG87UYpZvH41S6luAIwAAAA&pid=Api&P=0&w=300&h=300" alt="" class="img-avatar-rounded">
-                                                <div class="font-w600">Sales Manager</div>
-                                                <div class="text-info">
-                                                    <i class="fa fa-file-text"></i> Documentation.doc
+                                    @if($manager)
+                                        <li>
+                                            <a class="text-dark media py-2">
+                                                <div class="mr-3 ml-2">
+                                                    <i class="si si-pencil text-info"></i>
                                                 </div>
-                                                <small class="text-muted">15 min ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
+                                                <div class="media-body">
+                                                    <img class="rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                                                    <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
+                                                    <div class="text-info">
+                                                        <i class="fa fa-file-text"></i> +324324
+                                                    </div>
+
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @endif
                                     <li>
                                         <a class="text-dark media py-4">
                                             <div class="mr-3 ml-2">
