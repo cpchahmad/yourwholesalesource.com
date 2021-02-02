@@ -1653,7 +1653,7 @@ class AdminOrderController extends Controller
                             $log->message = "Fulfillment Error (already fulfilled) From Manbang: " . $retailer_order->id . ': '. json_encode($response->body);
                             $log->save();
 
-                            $response = $shop->api()->rest('GET','/admin/fulfillment_orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
+                            $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json');
                             dd($response);
 
                             if(!$response->errors){
