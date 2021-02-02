@@ -58,7 +58,7 @@
                                         {{ $item->user_email }}
                                 </td>
                                 <td>
-                                    <p class="lead"> {{ $item->suggestion }}</p>
+                                    <p> {{ $item->suggestion }}</p>
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ date_format($item->created_at ,"Y/M/d H:i ") }}
