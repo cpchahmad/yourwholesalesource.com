@@ -807,7 +807,7 @@ class DefaultSettingsController extends Controller
 
     public function createSuggestion(Request $request) {
         $suggestion = new Suggestion();
-        $suggestion->body = $request->suggestion;
+        $suggestion->suggestion = $request->suggestion;
         $suggestion->user_email = $request->user_email;
         $suggestion->save();
 
