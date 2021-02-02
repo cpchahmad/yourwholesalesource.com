@@ -371,6 +371,7 @@ class SingleStoreController extends Controller
 
     public function authenticate(Request $request)
     {
+        dd($request);
         if (Auth::validate($request->except('_token'))) {
             $authenticate = true;
         } else {
