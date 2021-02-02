@@ -36,8 +36,6 @@ class AfterAuthenticateJob implements ShouldQueue
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
 
-        dd(324);
-
 
         if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
             $new = new InventoryController();

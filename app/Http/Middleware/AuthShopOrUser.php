@@ -25,6 +25,7 @@ class AuthShopOrUser
             return $next($request);
         }
         else{
+            dd(324);
             return redirect()->route('login');
         }
 
