@@ -106,7 +106,7 @@
                                 <ul class="nav-items mb-0 text-center">
                                     @if($manager)
                                         <li>
-                                            <a class="text-dark media py-2">
+                                            <div class="text-dark media py-2">
                                                 <div class="media-body">
                                                     <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
                                                     <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
@@ -121,23 +121,24 @@
                                                     </div>
 
                                                 </div>
-                                            </a>
+                                            </div>
                                         </li>
                                     @endif
                                     <li>
-                                        <a class="text-dark media py-4">
+                                        <div class="text-dark media py-4">
                                             <div class="media-body">
                                                 <div class="font-w600 text-left">Wallet Balance</div>
                                                 <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="text-dark media py-2" href="javascript:void(0)">
                                             <div class="media-body">
                                                 <div class="font-w600 text-left">Help us improve our App</div>
-                                                <form action="" class="mt-2">
-                                                    <textarea class="form-control"></textarea>
+                                                <form method="POST" action="{{ route('suggestion.create') }}" class="mt-2">
+                                                    @csrf
+                                                    <textarea class="form-control" name="suggestion"></textarea>
                                                     <button class="btn btn-sm btn-success mt-2">Submit</button>
                                                 </form>
                                             </div>

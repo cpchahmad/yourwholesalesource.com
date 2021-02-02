@@ -457,6 +457,8 @@ Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFro
 
 Route::get('bulk', 'AdminMaintainerController@bulk_import_to_woocommerce');
 
+Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
+
 //Route::get('/dummy', 'AdminOrderController@dummy');
 
 

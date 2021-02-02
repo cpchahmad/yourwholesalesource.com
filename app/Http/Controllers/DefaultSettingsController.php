@@ -15,6 +15,7 @@ use App\Jobs\SendNewsProductEmailjob;
 use App\Product;
 use App\Refund;
 use App\Shop;
+use App\Suggestion;
 use App\Ticket;
 use App\TicketCategory;
 use App\TicketStatus;
@@ -802,6 +803,14 @@ class DefaultSettingsController extends Controller
         $template->save();
 
         return redirect()->back()->with('success', 'Campaign Updated Successfully!');
+    }
+
+    public function createSuggestion(Request $request) {
+        $suggestion = new Suggestion();
+        $suggestion->body = $request->suggestion;
+        $suggestion->save();
+
+        return redirect()->back()->with('success', 'Your suggestion has been noted. Thank you!');
     }
 
 
