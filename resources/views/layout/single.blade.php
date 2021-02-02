@@ -52,7 +52,8 @@
 
 </head>
 <body>
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed">
+<div id="page-container" class="sidebar-o sidebar-dark  side-overlay-hover enable-page-overlay side-scroll page-header-fixed">
+
 
     <!-- Side Overlay-->
     <aside id="side-overlay" class="font-size-sm">
