@@ -75,16 +75,6 @@
 
     <!-- Side Overlay-->
     <aside id="side-overlay" class="font-size-sm">
-{{--        <!-- Side Header -->--}}
-{{--        <div class="content-header border-bottom">--}}
-{{--            <!-- User Info -->--}}
-{{--            <div class="ml-2">--}}
-{{--                <a class="link-fx text-dark font-w600">Wefullfill</a>--}}
-{{--            </div>--}}
-{{--            <!-- END User Info -->--}}
-{{--        </div>--}}
-{{--        <!-- END Side Header -->--}}
-
         <!-- Side Content -->
         <div class="content-side">
             <!-- Side Overlay Tabs -->

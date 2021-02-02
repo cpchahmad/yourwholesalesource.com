@@ -2,7 +2,93 @@
 <html>
 @include('inc.header')
 <body>
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed">
+<div id="page-container" class="sidebar-o sidebar-dark side-overlay-hover  enable-page-overlay side-scroll page-header-fixed">
+
+    @php
+        if(auth()->user()->has_manager != null){
+            $manager = auth()->user()->has_manager;
+        }
+        else{
+            $manager = null;
+        }
+    @endphp
+    <!-- Side Overlay-->
+    <aside id="side-overlay" class="font-size-sm">
+        <!-- Side Content -->
+        <div class="content-side">
+            <!-- Side Overlay Tabs -->
+            <div class="block block-transparent pull-x pull-t">
+                <ul class="nav nav-tabs nav-tabs-alt nav-justified" data-toggle="tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active">
+                            <i class="fa fa-fw fa-user text-gray mr-1"></i> Your Sale Manager Info
+                        </a>
+                    </li>
+                </ul>
+                <div class="block-content tab-content overflow-hidden">
+                    <!-- Overview Tab -->
+                    <div class="tab-pane pull-x fade fade-left show active" id="so-overview" role="tabpanel">
+                        <!-- Activity -->
+                        <div class="block">
+                            <div class="block-content">
+                                <!-- Activity List -->
+                                <ul class="nav-items mb-0 text-center">
+                                    @if($manager)
+                                        <li>
+                                            <div class="text-dark media py-2">
+                                                <div class="media-body">
+                                                    <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                                                    <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
+                                                    <div class="font-w600">{{$manager->email}}</div>
+                                                    <div class="text-info">
+                                                        {{--                                                        <i class="fa fa-file-text"></i> --}}
+                                                        Whatsapp {{$manager->whatsapp}}
+                                                    </div>
+                                                    <div class="text-info">
+                                                        {{--                                                        <i class="fa fa-file-text"></i>--}}
+                                                        Skype {{$manager->skype}}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
+                                    <li>
+                                        <div class="text-dark media py-4">
+                                            <div class="media-body">
+                                                <div class="font-w600 text-left">Wallet Balance</div>
+                                                <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="media-body">
+                                                <div class="font-w600 text-left">Help us improve our App</div>
+                                                <form method="POST" action="{{ route('suggestion.create') }}" class="mt-2">
+                                                    @csrf
+                                                    <textarea class="form-control" name="suggestion"></textarea>
+                                                    <input type="hidden" name="user_email" value="{{ auth()->user()->email }}">
+                                                    <button class="btn btn-sm btn-success mt-2">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- END Activity List -->
+                            </div>
+                        </div>
+                        <!-- END Activity -->
+                    </div>
+                    <!-- END Overview Tab -->
+                </div>
+            </div>
+            <!-- END Side Overlay Tabs -->
+        </div>
+        <!-- END Side Content -->
+    </aside>
+    <!-- END Side Overlay -->
+
     @include('layout.shopify_sidebar')
     <main id="main-container">
         @include('flash_message.message')
