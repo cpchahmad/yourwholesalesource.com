@@ -806,9 +806,9 @@ class DefaultSettingsController extends Controller
     }
 
     public function createSuggestion(Request $request) {
-        dd($request->all());
         $suggestion = new Suggestion();
         $suggestion->body = $request->suggestion;
+        $suggestion->user_email = $request->user_email;
         $suggestion->save();
 
         return redirect()->back()->with('success', 'Your suggestion has been noted. Thank you!');
