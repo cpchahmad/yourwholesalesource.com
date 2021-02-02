@@ -46,12 +46,10 @@ class AfterAuthenticateJob implements ShouldQueue
             if(!in_array($currentShop->id,$user->has_shops->pluck('id')->toArray())){
                 $user->has_shops()->attach([$currentShop->id]);
             }
-            dd(45);
             session(['return_to'=>'/store/dashboard?ftl=1']);
         }
         else{
             if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
-                dd(234);
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
             else{
