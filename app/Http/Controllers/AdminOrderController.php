@@ -1558,7 +1558,7 @@ class AdminOrderController extends Controller
 
 
     public function dummy() {
-        $retailer_order = RetailerOrder::find(1455);
+        $retailer_order = RetailerOrder::find(1486);
         $data = ERPOrderFulfillment::where('retailer_order_id', $retailer_order->id)->first();
         if ($retailer_order != null && $retailer_order->paid == 1) {
             if ($retailer_order->custom == 1) {
@@ -1634,7 +1634,6 @@ class AdminOrderController extends Controller
                             }
                         }
                         $response = $shop->api()->rest('POST','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
-                        dump($response);
                         if(!$response->errors){
                             /*Order Fullfillment Record*/
                             $new_fulfillment = new OrderFulfillment();
@@ -1654,15 +1653,15 @@ class AdminOrderController extends Controller
                             $log->message = "Fulfillment Error (already fulfilled) From Manbang: " . $retailer_order->id . ': '. json_encode($response->body);
                             $log->save();
 
-                            $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'.json');
-
-                            dd($response);
+                            $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json');
 
                             if(!$response->errors){
+
+
                                 /*Order Fullfillment Record*/
                                 $new_fulfillment = new OrderFulfillment();
-                                $new_fulfillment->fulfillment_shopify_id = isset($response->body->fulfillments[0]) ? $response->body->fulfillments[0]->id : null;
-                                $new_fulfillment->name = isset($response->body->fulfillments[0]) ? $response->body->fulfillments[0]->name : $retailer_order->name . '.1';
+                                $new_fulfillment->fulfillment_shopify_id =  $response->body->fulfillments[0]->id;
+                                $new_fulfillment->name = $response->body->fulfillments[0]->name;
                                 $new_fulfillment->retailer_order_id = $retailer_order->id;
                                 $new_fulfillment->status = 'fulfilled';
                                 $new_fulfillment->save();
