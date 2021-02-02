@@ -186,6 +186,9 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     // ROUTES ADDED AFTER WOOCOMMERCE INTEGRATION
     Route::resource('tags', 'TagController');
 
+    Route::get('suggestions', 'DefaultSettingsController@showSuggestions')->name('admin.suggestions');
+
+
 
 });
 

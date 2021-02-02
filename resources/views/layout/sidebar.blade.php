@@ -163,6 +163,12 @@
                     <span class="nav-main-link-name">Activity Logs</span>
                 </a>
             </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('admin.suggestions') }}">
+                    <i class="nav-main-link-icon fa fa-check"></i>
+                    <span class="nav-main-link-name">Suggestions</span>
+                </a>
+            </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('email.campaigns.index') }}">

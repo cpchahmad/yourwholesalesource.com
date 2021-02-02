@@ -816,6 +816,12 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'Your suggestion has been noted. Thank you!');
     }
 
+    public function showSuggestions(Request $request) {
+        $suggestions = Suggestion::latest()->get();
+
+        return view('setttings.suggestions.index')->with('suggestions', $suggestions);
+    }
+
 
 
 }
