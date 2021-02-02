@@ -134,13 +134,12 @@
                                     </li>
                                     <li>
                                         <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="mr-3 ml-2">
-                                                <i class="si si-close text-danger"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-w600">Project deleted</div>
-                                                <div class="text-danger">Line Icon Set</div>
-                                                <small class="text-muted">4 hours ago</small>
+                                            <div class="media-body text-right">
+                                                <div class="font-w600">Help us improve our App</div>
+                                                <form action="" class="mt-2">
+                                                    <textarea class="form-control"></textarea>
+                                                    <button class="btn btn-sm btn-success">Submit</button>
+                                                </form>
                                             </div>
                                         </a>
                                     </li>
