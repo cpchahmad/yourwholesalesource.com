@@ -19,17 +19,12 @@ class AuthShopOrUser
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            dd(2);
             return $next($request);
         }
         else if( ShopifyApp::shop() != null){
-            dd(5);
-
             return $next($request);
         }
         else{
-            dd(56);
-
             return redirect()->route('login');
         }
 
