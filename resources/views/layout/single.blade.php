@@ -107,8 +107,8 @@
                                     @if($manager)
                                         <li>
                                             <a class="text-dark media py-2">
-                                                <div class="mr-3 ml-2">
-                                                    <i class="si si-pencil text-info"></i>
+                                                <div class="mr-3 ml-2 my-auto">
+                                                    <i class="si si-user text-info"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <img class="rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
@@ -123,13 +123,11 @@
                                     @endif
                                     <li>
                                         <a class="text-dark media py-4">
-                                            <div class="mr-3 ml-2">
+                                            <div class="mr-3 ml-2 my-auto">
                                                 <i class="si si-wallet text-success"></i>
                                             </div>
-                                            <div class="media-body">
-                                                <div class="font-w600">New sale ($15)</div>
-                                                <div class="text-success">Admin Template</div>
-                                                <small class="text-muted">3 min ago</small>
+                                            <div class="media-body p-3 bg-primary text-white">
+                                                Wallet Balance  : {{number_format($balance,2)}} USD
                                             </div>
                                         </a>
                                     </li>
