@@ -57,15 +57,15 @@
 
     <!-- Side Overlay-->
     <aside id="side-overlay" class="font-size-sm">
-        <!-- Side Header -->
-        <div class="content-header border-bottom">
-            <!-- User Info -->
-            <div class="ml-2">
-                <a class="link-fx text-dark font-w600" href="javascript:void(0)">Wefullfill</a>
-            </div>
-            <!-- END User Info -->
-        </div>
-        <!-- END Side Header -->
+{{--        <!-- Side Header -->--}}
+{{--        <div class="content-header border-bottom">--}}
+{{--            <!-- User Info -->--}}
+{{--            <div class="ml-2">--}}
+{{--                <a class="link-fx text-dark font-w600">Wefullfill</a>--}}
+{{--            </div>--}}
+{{--            <!-- END User Info -->--}}
+{{--        </div>--}}
+{{--        <!-- END Side Header -->--}}
 
         <!-- Side Content -->
         <div class="content-side">
@@ -73,8 +73,8 @@
             <div class="block block-transparent pull-x pull-t">
                 <ul class="nav nav-tabs nav-tabs-alt nav-justified" data-toggle="tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#so-overview">
-                            <i class="fa fa-fw fa-coffee text-gray mr-1"></i> Your Sale Manager Info
+                        <a class="nav-link active">
+                            <i class="fa fa-fw fa-user text-gray mr-1"></i> Your Sale Manager Info
                         </a>
                     </li>
                 </ul>
@@ -83,20 +83,11 @@
                     <div class="tab-pane pull-x fade fade-left show active" id="so-overview" role="tabpanel">
                         <!-- Activity -->
                         <div class="block">
-                            <div class="block-header block-header-default">
-                                <h3 class="block-title">Recent Activity</h3>
-                                <div class="block-options">
-                                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                                        <i class="si si-refresh"></i>
-                                    </button>
-                                    <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
-                                </div>
-                            </div>
                             <div class="block-content">
                                 <!-- Activity List -->
                                 <ul class="nav-items mb-0">
                                     <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                        <a class="text-dark media py-4">
                                             <div class="mr-3 ml-2">
                                                 <i class="si si-wallet text-success"></i>
                                             </div>
@@ -108,7 +99,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
+                                        <a class="text-dark media py-2">
                                             <div class="mr-3 ml-2">
                                                 <i class="si si-pencil text-info"></i>
                                             </div>
