@@ -251,6 +251,8 @@ class DefaultSettingsController extends Controller
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => Hash::make($request->input('password')),
+                'whatsapp' => $request->input('whatsapp'),
+                'skype' => $request->input('skype'),
             ]);
             /*Assigning User Role of Non-Shopify-User */
             $user->assignRole('sales-manager');

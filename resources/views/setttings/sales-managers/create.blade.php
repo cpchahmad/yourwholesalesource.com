@@ -45,6 +45,24 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="form-material">
+                                <label for="material-error">Whatsapp Number</label>
+                                <input required class="form-control" type="email" id="manager_whatsapp" name="whatsapp"
+                                       placeholder="Enter Sales Manager Whatsapp number here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-material">
+                                <label for="material-error">Skype User name</label>
+                                <input required class="form-control" type="email" id="manager_skype" name="skype"
+                                       placeholder="Enter Sales Manager Skype user name here">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="form-material">
                                 <label for="material-error">Password</label>
                                 <input required class="form-control" type="password" id="manager_password" name="password"
                                        placeholder="Enter Sales Manager Password here">
