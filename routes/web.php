@@ -46,7 +46,7 @@ Route::get('/logout', function(){
     return Redirect::to('login');
 })->name('logout');
 /*Super Admin Routes*/
-Route::group(['middleware' => ['auth.shop','super-admin-store']], function () {
+Route::group(['middleware' => ['auth.shop']], function () {
 //Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/','AdminOrderController@dashboard')->name('admin.dashboard');
     Route::get('/categories','CategoryController@index')->name('category.create');
