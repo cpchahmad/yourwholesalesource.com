@@ -220,6 +220,8 @@ class DefaultSettingsController extends Controller
         $manager = User::find($request->id);
         if($manager != null){
             $manager->name = $request->input('name');
+            $manager->whatsapp = $request->input('whatsapp');
+            $manager->skype = $request->input('skype');
             $manager->save();
             $this->detach_manager_models($manager);
             $this->attach_manager_models($request, $manager);
