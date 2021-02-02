@@ -53,6 +53,7 @@ class AfterAuthenticateJob implements ShouldQueue
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
             else{
+                dd(34);
                 session(['return_to' => '/']);
             }
     }
