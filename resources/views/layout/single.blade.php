@@ -133,15 +133,15 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="text-dark media py-2" href="javascript:void(0)">
-                                            <div class="media-body text-left">
-                                                <div class="font-w600">Help us improve our App</div>
+                                        <div class="text-dark media py-2" href="javascript:void(0)">
+                                            <div class="media-body">
+                                                <div class="font-w600 text-left">Help us improve our App</div>
                                                 <form action="" class="mt-2">
                                                     <textarea class="form-control"></textarea>
                                                     <button class="btn btn-sm btn-success mt-2">Submit</button>
                                                 </form>
                                             </div>
-                                        </a>
+                                        </div>
                                     </li>
                                 </ul>
                                 <!-- END Activity List -->
