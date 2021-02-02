@@ -139,6 +139,7 @@
                                                 <form method="POST" action="{{ route('suggestion.create') }}" class="mt-2">
                                                     @csrf
                                                     <textarea class="form-control" name="suggestion"></textarea>
+                                                    <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
                                                     <button class="btn btn-sm btn-success mt-2">Submit</button>
                                                 </form>
                                             </div>

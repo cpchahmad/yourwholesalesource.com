@@ -806,6 +806,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function createSuggestion(Request $request) {
+        dd($request->all());
         $suggestion = new Suggestion();
         $suggestion->body = $request->suggestion;
         $suggestion->save();
