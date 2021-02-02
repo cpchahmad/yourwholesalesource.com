@@ -57,7 +57,7 @@
                                 <td class="font-w600" style="vertical-align: middle">
                                         {{ $item->user_email }}
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle">
                                     <p> {{ $item->suggestion }}</p>
                                 </td>
                                 <td style="vertical-align: middle">
