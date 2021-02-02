@@ -1641,7 +1641,7 @@ class AdminOrderController extends Controller
                             $new_fulfillment->name = $response->body->fulfillment->name;
                             $new_fulfillment->retailer_order_id = $retailer_order->id;
                             $new_fulfillment->status = 'fulfilled';
-                            $new_fulfillment->save();
+                            //$new_fulfillment->save();
                             /*Order Log*/
 
                             $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
@@ -1655,6 +1655,8 @@ class AdminOrderController extends Controller
 
                             $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                             if(!$response->errors){
+
+                                dd($location_response);
 
                                 /*Order Fullfillment Record*/
                                 $new_fulfillment = new OrderFulfillment();
