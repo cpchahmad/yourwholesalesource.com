@@ -36,6 +36,8 @@ class AfterAuthenticateJob implements ShouldQueue
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
 
+        dd(324);
+
 
         if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
             $new = new InventoryController();
@@ -53,7 +55,6 @@ class AfterAuthenticateJob implements ShouldQueue
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
             else{
-                dd(34);
                 session(['return_to' => '/']);
             }
     }
