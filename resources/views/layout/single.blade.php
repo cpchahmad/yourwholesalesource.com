@@ -85,7 +85,22 @@
                         <div class="block">
                             <div class="block-content">
                                 <!-- Activity List -->
-                                <ul class="nav-items mb-0">
+                                <ul class="nav-items mb-0 text-center">
+                                    <li>
+                                        <a class="text-dark media py-2">
+                                            <div class="mr-3 ml-2">
+                                                <i class="si si-pencil text-info"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <img src="https://tse4.mm.bing.net/th?id=OIP.7xMmG87UYpZvH41S6luAIwAAAA&pid=Api&P=0&w=300&h=300" alt="" class="img-avatar-rounded">
+                                                <div class="font-w600">Sales Manager</div>
+                                                <div class="text-info">
+                                                    <i class="fa fa-file-text"></i> Documentation.doc
+                                                </div>
+                                                <small class="text-muted">15 min ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
                                     <li>
                                         <a class="text-dark media py-4">
                                             <div class="mr-3 ml-2">
@@ -95,20 +110,6 @@
                                                 <div class="font-w600">New sale ($15)</div>
                                                 <div class="text-success">Admin Template</div>
                                                 <small class="text-muted">3 min ago</small>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="text-dark media py-2">
-                                            <div class="mr-3 ml-2">
-                                                <i class="si si-pencil text-info"></i>
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="font-w600">You edited the file</div>
-                                                <div class="text-info">
-                                                    <i class="fa fa-file-text"></i> Documentation.doc
-                                                </div>
-                                                <small class="text-muted">15 min ago</small>
                                             </div>
                                         </a>
                                     </li>

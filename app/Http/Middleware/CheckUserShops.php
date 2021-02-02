@@ -16,6 +16,9 @@ class CheckUserShops
      */
     public function handle($request, Closure $next)
     {
+
+        dd(78);
+
         $user = Auth::user();
         if(count($user->has_shops) > 0){
             return $next($request);
