@@ -825,7 +825,7 @@ class CustomOrderController extends Controller
                 $order_log->status = "paid";
                 $order_log->retailer_order_id = $order->id;
                 $order_log->save();
-                $this->admin->sync_order_to_admin_store($order);
+                //$this->admin->sync_order_to_admin_store($order);
 //                $this->inventory->OrderQuantityUpdate($order,'new');
             }
 
@@ -901,7 +901,7 @@ class CustomOrderController extends Controller
                 $order_log->save();
 
 
-                $this->admin->sync_order_to_admin_store($retailer_order);
+                //$this->admin->sync_order_to_admin_store($retailer_order);
 //                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             }
             /*Maintaining Wallet Log*/
@@ -1048,7 +1048,7 @@ class CustomOrderController extends Controller
                 $order_log->status = "paid";
                 $order_log->retailer_order_id = $retailer_order->id;
                 $order_log->save();
-                $this->admin->sync_order_to_admin_store($retailer_order);
+                //$this->admin->sync_order_to_admin_store($retailer_order);
 //                $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             }
             return redirect()->route('users.custom.orders')->with('success', 'Bulk Payment Processed Successfully!');

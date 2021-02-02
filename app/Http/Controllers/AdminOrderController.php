@@ -1243,14 +1243,14 @@ class AdminOrderController extends Controller
     }
 
 
-    public function manual_push_order($id) {
-        $retailer_order = RetailerOrder::find($id);
-
-        $this->admin_maintainer->sync_order_to_admin_store($retailer_order);
-
-        return redirect()->back()->with('success','Order Synced to Wefulfill Successfully');
-
-    }
+//    public function manual_push_order($id) {
+//        $retailer_order = RetailerOrder::find($id);
+//
+//        $this->admin_maintainer->sync_order_to_admin_store($retailer_order);
+//
+//        return redirect()->back()->with('success','Order Synced to Wefulfill Successfully');
+//
+//    }
 
     public function sendOrderStatusEmail($id) {
         $order = RetailerOrder::find($id);
