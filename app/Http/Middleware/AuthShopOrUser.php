@@ -18,7 +18,6 @@ class AuthShopOrUser
      */
     public function handle($request, Closure $next)
     {
-        dd(34);
         if(Auth::check()){
             return $next($request);
         }
