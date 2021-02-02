@@ -111,7 +111,7 @@
                                                     <i class="si si-user text-info"></i>
                                                 </div>
                                                 <div class="media-body">
-                                                    <img class="rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                                                    <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
                                                     <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                                     <div class="text-info">
                                                         <i class="fa fa-file-text"></i> +324324
@@ -126,8 +126,9 @@
                                             <div class="mr-3 ml-2 my-auto">
                                                 <i class="si si-wallet text-success"></i>
                                             </div>
-                                            <div class="media-body p-3 bg-primary text-white">
-                                                Wallet Balance  : {{number_format($balance,2)}} USD
+                                            <div class="media-body">
+                                                <div class="font-w600">Wallet Balance</div>
+                                                <div class=" p-3 bg-primary text-white">{{number_format($balance,2)}} USD</div>
                                             </div>
                                         </a>
                                     </li>
