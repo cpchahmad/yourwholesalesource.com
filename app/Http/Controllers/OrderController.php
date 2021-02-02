@@ -145,9 +145,9 @@ class OrderController extends Controller
             $order_log->status = "paid";
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
-            $this->admin->sync_order_to_admin_store($order);
+            //$this->admin->sync_order_to_admin_store($order);
 
-//            $this->inventory->OrderQuantityUpdate($order,'new');
+            $this->inventory->OrderQuantityUpdate($order,'new');
             $this->log->store($order->user_id, 'Order', $order->id, $order->name, 'Order Payment Paid');
 
 
@@ -942,7 +942,7 @@ class OrderController extends Controller
                 $order_log->status = "paid";
                 $order_log->retailer_order_id = $order->id;
                 $order_log->save();
-                $this->admin->sync_order_to_admin_store($order);
+                //$this->admin->sync_order_to_admin_store($order);
 
             }
 
