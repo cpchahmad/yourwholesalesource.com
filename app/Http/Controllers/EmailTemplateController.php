@@ -82,6 +82,8 @@ class EmailTemplateController extends Controller
                 return view('emails.wishlist_complete')->with('template', EmailTemplate::find(12))->with('wishlist', Wishlist::find(1));
             case 13:
                 return view('emails.top_products_new')->with('template', EmailTemplate::find(13))->with('top_products_stores', Product::all());
+            case 14:
+                return view('emails.new_products')->with('template', EmailTemplate::find(14))->with('new_products', Product::all());
             case 15:
                 return view('emails.product_stock')->with('template', EmailTemplate::find(15))->with('product', Product::latest()->first());
             case 16:
