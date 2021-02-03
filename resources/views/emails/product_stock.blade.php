@@ -271,7 +271,7 @@
             <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
-                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" style="border-top-left-radius:5px; border-top-right-radius:5px;" width="600">
+                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" style="border-top-left-radius:5px; border-top-right-radius:5px;" width="500">
                             <tr>
                                 <td height="40"></td>
                             </tr>
