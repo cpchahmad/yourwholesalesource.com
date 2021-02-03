@@ -51,7 +51,7 @@
                                         <td class="text-right" style="vertical-align: middle">
 
                                             <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                                <a class="btn btn-xs btn-sm btn-success" href="{{ route('admin.emails.show', $template->id) }}" type="button"  title="View Template">
+                                                <a class="btn btn-xs btn-sm btn-success" target="_blank" " href="{{ route('admin.emails.show', $template->id) }}" type="button"  title="View Template">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 <a  class="btn btn-sm btn-warning" href="{{ route('admin.emails.edit', $template->id) }}"

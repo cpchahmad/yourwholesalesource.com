@@ -465,3 +465,6 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //Route::get('/dummy', 'AdminOrderController@dummy');
 
 
+Route::get('/email', function() {
+   return view('emails.wishlist_reject')->with('template', EmailTemplate::find(9));
+});
