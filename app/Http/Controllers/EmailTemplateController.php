@@ -101,9 +101,10 @@ class EmailTemplateController extends Controller
             $campaign->template_id = $template->id;
             $campaign->save();
 
-            $users_temp = $request->users;
+            $users_id = $request->users;
 
-            foreach ($users_temp as $user) {
+            foreach ($users_id as $id) {
+                $user = User::find($id);
                 $user->campaigns()->attach($campaign->id);
             }
         }
