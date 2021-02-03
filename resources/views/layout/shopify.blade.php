@@ -45,8 +45,8 @@
                                                         <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
                                                     </div>
                                                     <div class="text-info">
-                                                        {{--                                                        <i class="fa fa-file-text"></i>--}}
-                                                        <a href="skype:{{$manager->skype}}?call">{{ $manager->skype }}</a>
+                                                        <i class="fab fa-skype text-info fa-lg"></i>
+                                                        <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
                                                     </div>
 
                                                 </div>

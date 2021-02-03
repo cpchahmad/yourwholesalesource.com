@@ -106,8 +106,8 @@
                                                         <a href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
                                                     </div>
                                                     <div class="text-info">
-                                                        {{--                                                        <i class="fa fa-file-text"></i>--}}
-                                                        <a href="skype:{{$manager->skype}}?call">Call Me</a>
+                                                        <i class="fab fa-skype text-info fa-lg"></i>
+                                                        <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
                                                     </div>
 
                                                 </div>
@@ -311,8 +311,6 @@
 <script src="{{asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/select2/js/select2.min.js')}}"></script>
-<script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
-
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
