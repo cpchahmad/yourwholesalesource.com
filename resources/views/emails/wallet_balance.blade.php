@@ -204,6 +204,9 @@
                                                                                                         <td align="center" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:capitalize;">
                                                                                                             |
                                                                                                         </td>
+                                                                                                        <td align="left" valign="middle" class="MsoNormal padding-right" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
+                                                                                                            support@wefullfill.com
+                                                                                                        </td>
                                                                                                     </tr>
                                                                                                 </table>
                                                                                             </td>
@@ -224,9 +227,7 @@
                                                                                                         <td align="left">
                                                                                                             <table align="left" border="0" cellspacing="0" cellpadding="0" class="display-width" width="100%">
                                                                                                                 <tr>
-                                                                                                                    <td align="left" valign="middle" class="MsoNormal padding-right" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
-                                                                                                                        support@wefullfill.com
-                                                                                                                    </td>
+
                                                                                                                 </tr>
                                                                                                             </table>
                                                                                                         </td>
