@@ -70,6 +70,8 @@ class EmailTemplateController extends Controller
                 return view('emails.wishlist_reject')->with('template', EmailTemplate::find(9))->with('wishlist', Wishlist::find(1));
             case 10:
                 return view('emails.wallet_approve')->with('template', EmailTemplate::find(10))->with('wallet', Wallet::find(1));
+            case 11:
+                return view('emails.ticket_reply')->with('template', EmailTemplate::find(11))->with('ticket', Ticket::find(1));
             case 12:
                 return view('emails.wishlist_complete')->with('template', EmailTemplate::find(12))->with('wishlist', Wishlist::find(1));
             case 19:
