@@ -486,7 +486,7 @@
                                                                                         </td>
                                                                                         <td width="20"></td>
                                                                                         <td align="left" width="60" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
-                                                                                            {{$item->price}} USD
+                                                                                            {{number_format($item->price, 2)}} USD
                                                                                         </td>
                                                                                         <td width="20"></td>
                                                                                         <td align="left" width="60" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
