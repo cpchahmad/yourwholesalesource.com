@@ -414,10 +414,22 @@
                                     @endif
 
                                     @if($template->id == '18')
+                                        @php
+                                            $users = User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->get();
+                                        @endphp
                                         <div class="text-left">
                                             <label for="" style="color: #7daa40 !important;">Add Campaign</label>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-12">
+                                                <select class="js-select2 form-control" name="users[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Users.." multiple>
+                                                    @foreach($users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <div class="col-md-4">
                                                 <input type="text" name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
                                             </div>
