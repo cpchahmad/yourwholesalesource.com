@@ -80,7 +80,5 @@ class UpdateWinningProducts extends Command
             /*Updating Product On Woocommerce*/
             $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
         }
-
-
     }
 }
