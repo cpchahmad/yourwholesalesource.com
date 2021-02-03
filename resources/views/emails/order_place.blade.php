@@ -373,15 +373,15 @@
                                                                                     Product
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
-                                                                                <td align="right" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
+                                                                                <td align="left" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
                                                                                     Qty
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
-                                                                                <td align="right" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
+                                                                                <td align="left" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
                                                                                     Cost
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
-                                                                                <td align="right" width="90" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
+                                                                                <td align="left" width="90" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
                                                                                     Price
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
