@@ -82,7 +82,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Product Deleted</title>
+    <title>News Email</title>
 
     <meta  name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0," />
 
@@ -367,7 +367,7 @@
                                         </tr>
                                         <tr>
                                             <td align="center" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
-                                                {{ $template->subject }} ({{ $product->title }})
+                                                {{ $template->subject }}
                                             </td>
                                         </tr>
                                         <tr>
