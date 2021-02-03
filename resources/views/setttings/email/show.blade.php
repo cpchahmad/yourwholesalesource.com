@@ -419,8 +419,9 @@
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
                                               ->get();
                                         @endphp
+
                                         <div class="text-left">
-                                            <label for="" style="color: #7daa40 !important;">Add Campaign</label>
+                                            <label for="" style="color: #7daa40 !important;">Select Users</label>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -430,6 +431,12 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                        </div>
+
+                                        <div class="text-left">
+                                            <label for="" style="color: #7daa40 !important;">Add Campaign</label>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <input type="text" name="campaign_name" class="form-control" placeholder="Enter campaign name.." required>
                                             </div>
