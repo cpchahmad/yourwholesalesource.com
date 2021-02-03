@@ -34,6 +34,8 @@
 <script src="{{ asset('assets/js/plugins/jquery-ui/jquery-ui.js') }}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
+
 
 <script>jQuery(function(){ One.helpers(['summernote','magnific-popup','table-tools-sections','core-bootstrap-tooltip','select2','flatpickr','table-tools-checkable']); });</script>
 

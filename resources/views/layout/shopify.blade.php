@@ -41,10 +41,10 @@
                                                     <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                                     <div class="font-w600">{{$manager->email}}</div>
                                                     <div class="text-info">
-                                                        <i class="fa fa-whatsapp"></i>
+                                                        <i class="fab fa-whatsapp text-success fa-lg"></i>
                                                         <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
                                                     </div>
-                                                    <div class="text-info">
+                                                    <div class="text-info" data-contact-id="{{$manager->skype}}">
                                                         {{--                                                        <i class="fa fa-file-text"></i>--}}
                                                         Skype {{$manager->skype}}
                                                     </div>
