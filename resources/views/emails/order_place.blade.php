@@ -374,6 +374,10 @@
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
                                                                                 <td align="right" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
+                                                                                    Quantity
+                                                                                </td>
+                                                                                <td width="20" class="product-width"></td>
+                                                                                <td align="right" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
                                                                                     Cost
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
@@ -474,11 +478,15 @@
                                                                                         </td>
                                                                                         <td width="20"></td>
                                                                                         <td align="left" width="90" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
-                                                                                            {{number_format($item->cost,2)}}  X {{$item->quantity}}  USD
+                                                                                            {{$item->quantity}}
+                                                                                        </td>
+                                                                                        <td width="20"></td>
+                                                                                        <td align="left" width="90" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
+                                                                                            {{number_format($item->cost,2)}} USD
                                                                                         </td>
                                                                                         <td width="20"></td>
                                                                                         <td align="left" width="60" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
-                                                                                            {{$item->price}} X {{$item->quantity}}  USD
+                                                                                            {{$item->price}} USD
                                                                                         </td>
                                                                                         <td width="20"></td>
                                                                                         <td align="left" width="60" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
