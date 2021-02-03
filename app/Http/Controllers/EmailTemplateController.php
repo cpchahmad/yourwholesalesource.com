@@ -90,8 +90,6 @@ class EmailTemplateController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        dd($request->all());
         $template = EmailTemplate::find($id);
 
         if($template->id == 18 || $template->id == 20)
