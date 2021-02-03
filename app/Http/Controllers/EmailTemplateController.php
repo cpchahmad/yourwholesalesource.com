@@ -96,18 +96,9 @@ class EmailTemplateController extends Controller
                 return view('emails.wallet_balance')->with('template', EmailTemplate::find(19))->with('wallet', Wallet::find(1));
             case 20:
                 return view('emails.news_products')->with('template', EmailTemplate::find(20))->with('top_products_stores', Product::all());
-
+            default:
+                return redirect()->back();
         }
-
-        $date = \Carbon\Carbon::today()->subDays(7);
-        $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
-        $temp_product = Product::first();
-
-        return view('setttings.email.show')->with('template', EmailTemplate::find($id))
-            ->with('order', RetailerOrder::find(1))
-            ->with('top_products_stores', \App\Product::all())
-            ->with('new_products', $new_products)
-            ->with('temp_product', $temp_product);
     }
 
     /**
