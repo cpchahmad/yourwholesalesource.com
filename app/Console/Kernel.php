@@ -40,6 +40,7 @@ class Kernel extends ConsoleKernel
         $time = $template->time;
 
         $schedule->command('newproduct:cron')->weeklyOn($day, $time);
+        //$schedule->command('updatewinning:products')->daily();
     }
 
     /**
