@@ -293,7 +293,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td align="center" class="MsoNormal" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
-                                                            {{ $template->body }}. <strong>Your new wallet amount is {{ $wallet->available }} $</strong>
+                                                            {{ $template->body }}
                                                         </td>
                                                     </tr>
                                                     <tr>
