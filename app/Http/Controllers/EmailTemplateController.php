@@ -60,6 +60,8 @@ class EmailTemplateController extends Controller
     public function show($id)
     {
         switch ($id){
+            case 4:
+                return view('emails.order_status')->with('template', EmailTemplate::find(4))->with('order', RetailerOrder::latest()->first());
             case 5:
                 return view('emails.wishlist_approve')->with('template', EmailTemplate::find(5))->with('wishlist', Wishlist::find(1));
             case 6:
