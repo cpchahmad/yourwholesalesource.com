@@ -466,5 +466,5 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 
 
 Route::get('/email', function() {
-   return view('emails.wishlist_reject')->with('template', EmailTemplate::find(9));
+   return view('emails.product_stock')->with('template', EmailTemplate::find(16))->with('product', Product::latest()->first());
 });
