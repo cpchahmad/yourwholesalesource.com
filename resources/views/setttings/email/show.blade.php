@@ -358,7 +358,27 @@
                                     @endif
 
                                     @if($template->id == '20')
+                                        @php
+                                            $users = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->get();
+                                        @endphp
+
                                         <div class="text-left">
+                                            <label for="" style="color: #7daa40 !important;">Select Users</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <select class="js-select2 form-control" name="users[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Users.." multiple>
+                                                    @foreach($users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="text-left mt-2">
                                             <label for="" style="color: #7daa40 !important;">Select Products</label>
                                         </div>
                                         <select class="@error('type') is-invalid @enderror js-select2 form-control" name="products[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Products.." multiple>
