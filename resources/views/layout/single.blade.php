@@ -103,7 +103,7 @@
                                                     <div class="font-w600">{{$manager->email}}</div>
                                                     <div class="text-info">
 {{--                                                        <i class="fa fa-file-text"></i> --}}
-                                                        Whatsapp {{$manager->whatsapp}}
+                                                        <a href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
                                                     </div>
                                                     <div class="text-info">
 {{--                                                        <i class="fa fa-file-text"></i>--}}
