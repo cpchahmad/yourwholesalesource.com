@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label for="material-error">Whatsapp Number</label>
-                                <input required class="form-control" type="text" id="manager_whatsapp" name="whatsapp"
+                                <input  class="form-control" type="text" id="manager_whatsapp" name="whatsapp"
                                        placeholder="Enter Sales Manager Whatsapp number here" value="{{$manager->whatsapp}}">
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                         <div class="col-md-12">
                             <div class="form-material">
                                 <label for="material-error">Skype User name</label>
-                                <input required class="form-control" type="text" id="manager_skype" name="skype"
+                                <input class="form-control" type="text" id="manager_skype" name="skype"
                                        placeholder="Enter Sales Manager Skype user name here" value="{{$manager->skype}}">
                             </div>
                         </div>
