@@ -79,8 +79,6 @@ class EmailTemplateController extends Controller
             case 19:
                 return view('emails.wallet_balance')->with('template', EmailTemplate::find(19))->with('wallet', Wallet::find(1));
 
-            default:
-                return redirect()->back();
         }
 
         $date = \Carbon\Carbon::today()->subDays(7);
