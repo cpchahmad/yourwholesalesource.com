@@ -46,7 +46,7 @@
                                                     </div>
                                                     <div class="text-info">
                                                         {{--                                                        <i class="fa fa-file-text"></i>--}}
-                                                        <a href="" data-contact-id="{{$manager->skype}}"> Skype {{$manager->skype}}</a>
+                                                        <a href="skype:{{$manager->skype}}?call">{{ $manager->skype }}</a>
                                                     </div>
 
                                                 </div>
