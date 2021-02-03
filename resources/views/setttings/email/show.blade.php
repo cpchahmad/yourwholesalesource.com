@@ -415,7 +415,7 @@
 
                                     @if($template->id == '18')
                                         @php
-                                            $users = User::role('non-shopify-users')
+                                            $users = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
                                               ->get();
                                         @endphp
