@@ -60,7 +60,6 @@ class UpdateWinningProducts extends Command
             ->take(5);
 
         foreach ($top_products_stores as $product) {
-
             $product->has_categories()->sync(466);
             $product->save();
 
