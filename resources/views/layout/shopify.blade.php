@@ -44,9 +44,9 @@
                                                         <i class="fab fa-whatsapp text-success fa-lg"></i>
                                                         <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
                                                     </div>
-                                                    <div class="text-info" data-contact-id="{{$manager->skype}}">
+                                                    <div class="text-info">
                                                         {{--                                                        <i class="fa fa-file-text"></i>--}}
-                                                        Skype {{$manager->skype}}
+                                                        <a href="" data-contact-id="{{$manager->skype}}"> Skype {{$manager->skype}}</a>
                                                     </div>
 
                                                 </div>
