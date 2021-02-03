@@ -60,10 +60,13 @@ class EmailTemplateController extends Controller
     public function show($id)
     {
         switch ($id){
-            case 9:
-                return view('emails.wishlist_reject')->with('template', EmailTemplate::find(9))->with('wishlist', Wishlist::find(1));
+            case 5:
+                return view('emails.wishlist_approve')->with('template', EmailTemplate::find(5))->with('wishlist', Wishlist::find(1));
             case 8:
                 return view('emails.wishlist_approve')->with('template', EmailTemplate::find(8))->with('wishlist', Wishlist::find(1));
+            case 9:
+                return view('emails.wishlist_reject')->with('template', EmailTemplate::find(9))->with('wishlist', Wishlist::find(1));
+
             default:
                 return redirect()->back();
         }
