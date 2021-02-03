@@ -60,7 +60,7 @@ class EmailTemplateController extends Controller
     public function show($id)
     {
         if($id == 9) {
-            return view('emails')->with('template', EmailTemplate::find(9))->with('wishlist', Wishlist::find(1));
+            return view('emails.wishlist_reject')->with('template', EmailTemplate::find(9))->with('wishlist', Wishlist::find(1));
         }
         $date = \Carbon\Carbon::today()->subDays(7);
         $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
