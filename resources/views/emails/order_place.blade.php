@@ -374,7 +374,7 @@
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
                                                                                 <td align="right" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
-                                                                                    Quantity
+                                                                                    Qty
                                                                                 </td>
                                                                                 <td width="20" class="product-width"></td>
                                                                                 <td align="right" width="55" class="MsoNormal product" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:15px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:uppercase;">
