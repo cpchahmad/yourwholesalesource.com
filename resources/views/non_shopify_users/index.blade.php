@@ -189,30 +189,25 @@
                             Your Wallet Balance
                         </div>
                     </div>
-                    <input type="hidden" name="type[]" value="fulfilled">
-                    <div class="block-content" >
-                        <div class="font-w600 text-left">Wallet Balance</div>
+                    <div class="block-content pb-4 text-center" >
+                        <div class="font-w600">Wallet Balance</div>
                         <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
                     </div>
                 </div>
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title">
-                            Mark as Fulfilled
+                            Help us improve!
                         </div>
                     </div>
                     <input type="hidden" name="type[]" value="fulfilled">
-                    <div class="block-content" >
-                        <div class="form-group">
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy"  >
-                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                            </div>
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress"  >
-                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                            </div>
-                        </div>
+                    <div class="block-content pb-4 text-right" >
+                        <form method="POST" action="{{ route('suggestion.create') }}" class="mt-2">
+                            @csrf
+                            <textarea class="form-control" name="suggestion"></textarea>
+                            <input type="hidden" name="user_email" value="{{ auth()->user()->email }}">
+                            <button class="btn btn-sm btn-success mt-2">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
