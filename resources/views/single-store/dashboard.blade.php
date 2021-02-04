@@ -202,6 +202,7 @@
                     <div class="block-content pb-4 text-center" >
                         <div class="font-w600">Wallet Balance</div>
                         <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
+                        <a href="{{ route('store.user.wallet.show') }}" class="mt-2 p-2 bg-success d-block text-white">Top up</a>
                     </div>
                 </div>
                 <div class="block">
