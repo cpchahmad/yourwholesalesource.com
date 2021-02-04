@@ -151,7 +151,7 @@
             <div class="col-md-3">
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title">
+                        <div class="block-title text-center">
                             Your Account Manager
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title">
+                        <div class="block-title text-center">
                             Your Wallet Balance
                         </div>
                     </div>
@@ -196,13 +196,12 @@
                 </div>
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title">
+                        <div class="block-title text-center">
                             Help us improve!
                         </div>
                     </div>
-                    <input type="hidden" name="type[]" value="fulfilled">
                     <div class="block-content pb-4 text-right" >
-                        <form method="POST" action="{{ route('suggestion.create') }}" class="mt-2">
+                        <form method="POST" action="{{ route('suggestion.create') }}">
                             @csrf
                             <textarea class="form-control" name="suggestion"></textarea>
                             <input type="hidden" name="user_email" value="{{ auth()->user()->email }}">
