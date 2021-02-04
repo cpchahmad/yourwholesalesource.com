@@ -731,13 +731,4 @@ class AdminMaintainerController extends Controller
         $order_log->save();
 
     }
-
-    public function bulk_import_to_woocommerce() {
-        dispatch(new BulkImportJob());
-    }
-
-
-
-
-
 }
