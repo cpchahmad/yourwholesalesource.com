@@ -288,11 +288,19 @@
                                         </tr>
                                         <tr>
                                             <td align="left" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                                <img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/shopify-512.png" alt="150x50" width="80"/>
                                                 Shopify
                                             </td>
 
+
                                             <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
-                                                <img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/shopify-512.png" alt="150x50" width="80"/>
+                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
+                                                    <tr>
+                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
+                                                            <a href="{{ route('system.store.connect') }}" style="color:#ffffff;text-decoration:none;">Integrate</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </td>
                                         </tr>
                                         <tr>
@@ -379,7 +387,7 @@
                                             <td height="10"></td>
                                         </tr>
                                         <tr>
-                                            <td align="center" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                            <td align="left" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
                                                 Non-shopify Users
                                             </td>
                                         </tr>
@@ -467,12 +475,20 @@
                                             <td height="10"></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" class="MsoNormal" style="color:#8f3d94;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                            <td align="left" class="MsoNormal" style="color:#9c27b0;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/800px-WooCommerce_logo.svg.png" alt="150x50" width="100"/>
                                                 Woocommerce (Comming soon)
                                             </td>
-                                            <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/WooCommerce_logo.svg/800px-WooCommerce_logo.svg.png" alt="150x50" width="100"/>
-                                            </td>
+
+{{--                                            <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">--}}
+{{--                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->--}}
+{{--                                                    <tr>--}}
+{{--                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">--}}
+{{--                                                            <a href="" style="color:#ffffff;text-decoration:none;" >Integrate</a>--}}
+{{--                                                        </td>--}}
+{{--                                                    </tr>--}}
+{{--                                                </table>--}}
+{{--                                            </td>--}}
                                         </tr>
                                         <tr>
                                             <td height="10"></td>
