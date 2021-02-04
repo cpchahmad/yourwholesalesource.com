@@ -149,7 +149,66 @@
                 </div>
             </div>
             <div class="col-md-3">
-
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title">
+                            Mark as Fulfilled
+                        </div>
+                    </div>
+                    <input type="hidden" name="type[]" value="fulfilled">
+                    <div class="block-content" >
+                        <div class="form-group">
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy"  >
+                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress"  >
+                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title">
+                            Mark as Fulfilled
+                        </div>
+                    </div>
+                    <input type="hidden" name="type[]" value="fulfilled">
+                    <div class="block-content" >
+                        <div class="form-group">
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy"  >
+                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress"  >
+                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title">
+                            Mark as Fulfilled
+                        </div>
+                    </div>
+                    <input type="hidden" name="type[]" value="fulfilled">
+                    <div class="block-content" >
+                        <div class="form-group">
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy"  >
+                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-1">
+                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress"  >
+                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
