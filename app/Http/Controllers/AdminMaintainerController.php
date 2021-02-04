@@ -567,8 +567,7 @@ class AdminMaintainerController extends Controller
         $secret = "3af910778275dd85c2e6e0b24ce5bf2b";
         $timestamp = Carbon::now()->timestamp;
         $order = RetailerOrder::find($id);
-        $order->pushed_to_erp = 1;
-        $order->save();
+
         $line_items = [];
         $images = [];
 
@@ -713,6 +712,9 @@ class AdminMaintainerController extends Controller
 
         $resp = curl_exec($curl);
         curl_close($curl);
+
+        $order->pushed_to_erp = 1;
+        $order->save();
 
         /*Maintaining Log*/
         $order_log =  new OrderLog();
