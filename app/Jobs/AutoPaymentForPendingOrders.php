@@ -15,6 +15,7 @@ use App\RetailerOrder;
 use App\User;
 use App\WalletLog;
 use App\WalletSetting;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -61,7 +62,7 @@ class AutoPaymentForPendingOrders implements ShouldQueue
         try{
             if($settings && $settings->enable) {
 
-               $orders = RetailerOrder::where('user_id', $this->user_id)->where('paid', 0)->latest()->limit(10)->get();
+               $orders = RetailerOrder::where('user_id', $this->user_id)->where('paid', 0)->where('created_at', '>=', Carbon::now()->subDays(30))->get();
 
                foreach ($orders as $new) {
                    if($new->paid == 0){
