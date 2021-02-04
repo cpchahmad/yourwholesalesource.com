@@ -15,6 +15,7 @@ use App\EmailTemplate;
 use App\Http\Controllers\AdminMaintainerController;
 use App\Http\Controllers\HelperController;
 use App\Mail\NewsEmail;
+use App\Mail\StoreIntegrationMail;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
@@ -460,7 +461,7 @@ Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFro
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
 Route::get('/email', function() {
-   return view('emails.integration');
+    Mail::to('yasirnaseer.0@gmail.com')->send(new StoreIntegrationMail());
 });
 
 

@@ -344,8 +344,9 @@
                                         <table align="center" background="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" border="0" cellpadding="0" cellspacing="0" class="display-width" width="541" style="background-image:url(http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg); background-position:center; background-repeat:no-repeat;border-radius:5px;">
                                             <tr>
                                                 <td align="center">
-                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/7khMCbyaXN4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    <video width="100%" height="315" controls="controls" src="http://www.w3schools.com/html/mov_bbb.mp4" >
 
+                                                    </video>
                                                 </td>
                                             </tr>
                                         </table>
