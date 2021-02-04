@@ -559,6 +559,13 @@ class AdminMaintainerController extends Controller
         $order->pushed_to_erp = 1;
         $order->save();
 
+        /*Maintaining Log*/
+        $order_log =  new OrderLog();
+        $order_log->message = "Order synced to Mabang on ".date_create($order->created_at)->format('d M, Y h:i a');
+        $order_log->status = "Newly Synced";
+        $order_log->retailer_order_id = $order->id;
+        $order_log->save();
+
         return redirect()->back()->with('success', 'Pushed to Mabang');
     }
 
