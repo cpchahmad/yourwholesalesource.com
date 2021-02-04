@@ -156,22 +156,32 @@
                         </div>
                     </div>
 
-                    <div class="block-content" >
-                        <div class="media-body">
-                            <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
-                            <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
-                            <div class="font-w600">{{$manager->email}}</div>
-                            <div class="text-info">
-                                <i class="fab fa-whatsapp text-success fa-lg"></i>
-                                <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
-                            </div>
-                            <div class="text-info">
-                                <i class="fab fa-skype text-info fa-lg"></i>
-                                <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
-                            </div>
+                    @php
+                        if(auth()->user()->has_manager != null){
+                            $manager = auth()->user()->has_manager;
+                        }
+                        else{
+                            $manager = null;
+                        }
+                    @endphp
+                    @if($manager)
+                        <div class="block-content" >
+                            <div class="media-body">
+                                <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                                <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
+                                <div class="font-w600">{{$manager->email}}</div>
+                                <div class="text-info">
+                                    <i class="fab fa-whatsapp text-success fa-lg"></i>
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
+                                </div>
+                                <div class="text-info">
+                                    <i class="fab fa-skype text-info fa-lg"></i>
+                                    <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
+                                </div>
 
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="block">
                     <div class="block-header">

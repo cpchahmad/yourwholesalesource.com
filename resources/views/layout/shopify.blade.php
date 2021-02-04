@@ -4,14 +4,7 @@
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark side-overlay-hover  enable-page-overlay side-scroll page-header-fixed">
 
-    @php
-        if(auth()->user()->has_manager != null){
-            $manager = auth()->user()->has_manager;
-        }
-        else{
-            $manager = null;
-        }
-    @endphp
+
 {{--    <!-- Side Overlay-->--}}
 {{--    <aside id="side-overlay" class="font-size-sm">--}}
 {{--        <!-- Side Content -->--}}
