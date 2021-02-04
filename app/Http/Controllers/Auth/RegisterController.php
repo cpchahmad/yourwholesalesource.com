@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\WalletController;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
+use App\Mail\StoreIntegrationMail;
 use App\Mail\TopShopifyProuctMail;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -81,6 +82,7 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(new NewUser($user));
             Mail::to($user->email)->send(new NewWallet($user));
             Mail::to($user->email)->send(new TopShopifyProuctMail($user));
+            Mail::to($user->email)->send(new StoreIntegrationMail());
         }
         catch (\Exception $e){
         }
@@ -118,8 +120,6 @@ class RegisterController extends Controller
         $err = curl_error($curl);
 
         curl_close($curl);
-
-//        if ($err) {} else {}
 
         return  $user;
     }
