@@ -152,20 +152,24 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title">
-                            Mark as Fulfilled
+                            Your Account Manager
                         </div>
                     </div>
-                    <input type="hidden" name="type[]" value="fulfilled">
+
                     <div class="block-content" >
-                        <div class="form-group">
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy"  >
-                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                        <div class="media-body">
+                            <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                            <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
+                            <div class="font-w600">{{$manager->email}}</div>
+                            <div class="text-info">
+                                <i class="fab fa-whatsapp text-success fa-lg"></i>
+                                <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
                             </div>
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress"  >
-                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
+                            <div class="text-info">
+                                <i class="fab fa-skype text-info fa-lg"></i>
+                                <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
