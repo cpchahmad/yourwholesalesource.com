@@ -82,7 +82,7 @@ class RegisterController extends Controller
             Mail::to($user->email)->send(new NewUser($user));
             Mail::to($user->email)->send(new NewWallet($user));
             Mail::to($user->email)->send(new TopShopifyProuctMail($user));
-            Mail::to($user->email)->send(new StoreIntegrationMail());
+           // Mail::to($user->email)->send(new StoreIntegrationMail());
         }
         catch (\Exception $e){
         }
