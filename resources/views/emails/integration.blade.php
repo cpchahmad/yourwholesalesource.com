@@ -294,6 +294,13 @@
 
 
                                             <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;margin-left:20px;"> <!-- USING TABLE AS BUTTON -->
+                                                    <tr>
+                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
+                                                            <a  target="_blank" href="https://www.youtube.com/watch?v=7khMCbyaXN4" style="color:#ffffff;text-decoration:none;">Video Link</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                                 <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
                                                     <tr>
                                                         <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
@@ -343,10 +350,8 @@
                                     <div style="margin:auto;">
                                         <table align="center" background="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" border="0" cellpadding="0" cellspacing="0" class="display-width" width="541" style="background-image:url(http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg); background-position:center; background-repeat:no-repeat;border-radius:5px;">
                                             <tr>
-                                                <td align="center">
-                                                    <video width="100%" height="315" controls="controls" src="http://www.w3schools.com/html/mov_bbb.mp4" >
-
-                                                    </video>
+                                                <td align="left" class="MsoNormal" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;line-height:24px;">
+                                                    <a href="https://www.youtube.com/watch?v=7khMCbyaXN4"></a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -391,6 +396,16 @@
                                             <td align="left" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
                                                 Non-shopify Users
                                             </td>
+                                            <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;margin-left:20px;"> <!-- USING TABLE AS BUTTON -->
+                                                    <tr>
+                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
+                                                            <a  target="_blank" href="https://www.youtube.com/watch?v=iUGbKxxP6BA&t=91s" style="color:#ffffff;text-decoration:none;">Video Link</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+
                                         </tr>
                                         <tr>
                                             <td height="10"></td>
@@ -432,9 +447,7 @@
                                     <div style="margin:auto;">
                                         <table align="center" background="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" border="0" cellpadding="0" cellspacing="0" class="display-width" width="541" style="background-image:url(http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg); background-position:center; background-repeat:no-repeat;border-radius:5px;">
                                             <tr>
-                                                <td align="center">
-                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/iUGbKxxP6BA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                </td>
+
                                             </tr>
                                         </table>
                                     </div>
