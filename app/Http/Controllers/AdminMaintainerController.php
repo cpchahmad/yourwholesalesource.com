@@ -556,6 +556,9 @@ class AdminMaintainerController extends Controller
         $resp = curl_exec($curl);
         curl_close($curl);
 
+        dd($resp);
+
+
         $order->pushed_to_erp = 1;
         $order->save();
 
