@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\ErrorLog;
 use App\Jobs\BulkImportJob;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -558,19 +559,20 @@ class AdminMaintainerController extends Controller
 
         $resp = json_decode($resp);
 
-        dd($resp);
+        if($resp->code == "999") {
+            return redirect()->back()->with('error', $resp->message);
+        }
+        else {
+            $order->pushed_to_erp = 1;
+            $order->save();
 
-
-
-        $order->pushed_to_erp = 1;
-        $order->save();
-
-        /*Maintaining Log*/
-        $order_log =  new OrderLog();
-        $order_log->message = "Order synced to Mabang on ".date_create($order->created_at)->format('d M, Y h:i a');
-        $order_log->status = "Newly Synced";
-        $order_log->retailer_order_id = $order->id;
-        $order_log->save();
+            /*Maintaining Log*/
+            $order_log =  new OrderLog();
+            $order_log->message = "Order synced to Mabang on ".date_create($order->created_at)->format('d M, Y h:i a');
+            $order_log->status = "Newly Synced";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+        }
 
         return redirect()->back()->with('success', 'Pushed to Mabang');
     }
@@ -726,15 +728,23 @@ class AdminMaintainerController extends Controller
         $resp = curl_exec($curl);
         curl_close($curl);
 
-        $order->pushed_to_erp = 1;
-        $order->save();
+        $resp = json_decode($resp);
 
-        /*Maintaining Log*/
-        $order_log =  new OrderLog();
-        $order_log->message = "Order synced to Mabang on ".date_create($order->created_at)->format('d M, Y h:i a');
-        $order_log->status = "Newly Synced";
-        $order_log->retailer_order_id = $order->id;
-        $order_log->save();
+        if($resp->code == "999") {
+            $log = new ErrorLog();
+            $log->message = $order->id . ": ".$resp->message;
+            $log->save();
+        }
+        else {
+            $order->pushed_to_erp = 1;
+            $order->save();
 
+            /*Maintaining Log*/
+            $order_log =  new OrderLog();
+            $order_log->message = "Order synced to Mabang on ".date_create($order->created_at)->format('d M, Y h:i a');
+            $order_log->status = "Newly Synced";
+            $order_log->retailer_order_id = $order->id;
+            $order_log->save();
+        }
     }
 }
