@@ -443,7 +443,7 @@ class WalletController extends Controller
 
                 /*Maintaining Log*/
                 $order_log =  new OrderLog();
-                $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill through Wallet on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+                $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill manually through Wallet on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
                 $order_log->status = "paid";
                 $order_log->retailer_order_id = $retailer_order->id;
                 $order_log->save();
@@ -456,7 +456,7 @@ class WalletController extends Controller
                 }
                 catch (\Exception $e) {
                     $log = new ErrorLog();
-                    $log->message = "ERP order BUG from Wallet Single: ". $e->getMessage();
+                    $log->message = "ERP order pushing bug from single order wallet payment: ". $retailer_order->id . ': '. $e->getMessage();
                     $log->save();
                 }
 
