@@ -30,117 +30,193 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
-                        <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
-                        <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
+                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
+                                <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Products</div>
-                        <div class="font-size-h2 font-w400 text-dark">{{$products}}</div>
+                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Products</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$products}}</div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
-                        <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
+                                <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="block block-rounded block-link-pop">
+                            <div class="block-content block-content-full">
+                                <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="block block-rounded block-link-pop">
+                            <div class="block-content block-content-full">
+                                <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-three-store" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="block block-rounded block-link-pop">
+                            <div class="block-content block-content-full">
+                                <canvas id="canvas-graph-three-store" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="block block-rounded block-link-pop">
+                            <div class="block-content block-content-full">
+                                <canvas id="canvas-graph-four-store" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop">
-                    <div class="block-content block-content-full">
-                        <canvas id="canvas-graph-four-store" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="block block-rounded">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Products</h3>
-                    </div>
-                    <div class="block-content ">
-                        @if(count($top_products) > 0)
-                            <table class="table table-striped table-hover table-borderless table-vcenter">
-                                <thead>
-                                <tr class="text-uppercase">
-                                    <th class="font-w700">Product</th>
-                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
-                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="block block-rounded">
+                            <div class="block-header block-header-default">
+                                <h3 class="block-title">Top Products</h3>
+                            </div>
+                            <div class="block-content ">
+                                @if(count($top_products) > 0)
+                                    <table class="table table-striped table-hover table-borderless table-vcenter">
+                                        <thead>
+                                        <tr class="text-uppercase">
+                                            <th class="font-w700">Product</th>
+                                            <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                            <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-                                @foreach($top_products as $product)
-                                    <tr>
-                                        <td class="font-w600">
-                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                @if($index == 0)
-                                                    @if($image->isV == 0)
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                    @else
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                            {{$product->title}}
-                                        </td>
-                                        <td class="d-none d-sm-table-cell text-center">
-                                            {{$product->sold}}
-                                        </td>
-                                        <td class="">
-                                            ${{number_format($product->selling_cost,2)}}
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                        @foreach($top_products as $product)
+                                            <tr>
+                                                <td class="font-w600">
+                                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                        @if($index == 0)
+                                                            @if($image->isV == 0)
+                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                            @else
+                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                    {{$product->title}}
+                                                </td>
+                                                <td class="d-none d-sm-table-cell text-center">
+                                                    {{$product->sold}}
+                                                </td>
+                                                <td class="">
+                                                    ${{number_format($product->selling_cost,2)}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
-                                </tbody>
-                                @else
-                                    <p  class="text-center"> No Top Users Found </p>
-                                @endif
-                            </table>
+                                        </tbody>
+                                        @else
+                                            <p  class="text-center"> No Top Users Found </p>
+                                        @endif
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title text-center">
+                            Your Account Manager
+                        </div>
+                    </div>
+
+                    @php
+                        $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+                        /*Local Shop Model!*/
+                        $shop= \App\Shop::find($shop->id);
+                           if($shop->has_manager != null){
+                           $manager = $shop->has_manager;
+                           }
+                           else{
+                               $manager = null;
+                           }
+
+                         if(count($shop->has_user) > 0){
+                            $associated_user =   $shop->has_user[0];
+                        }
+                        else{
+                            $associated_user = null;
+                        }
+                    @endphp
+                    @if($manager)
+                        <div class="block-content" >
+                            <div class="media-body pb-3 text-center">
+                                <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                                <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
+                                <div class="font-w600">{{$manager->email}}</div>
+                                <div class="text-info">
+                                    <i class="fab fa-whatsapp text-success fa-lg"></i>
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
+                                </div>
+                                <div class="text-info">
+                                    <i class="fab fa-skype text-info fa-lg"></i>
+                                    <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title text-center">
+                            Your Wallet Balance
+                        </div>
+                    </div>
+                    <div class="block-content pb-4 text-center" >
+                        <div class="font-w600">Wallet Balance</div>
+                        <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title text-center">
+                            Help us improve!
+                        </div>
+                    </div>
+                    <div class="block-content pb-4 text-right" >
+                        <form method="POST" action="{{ route('suggestion.create') }}">
+                            @csrf
+                            <textarea class="form-control" name="suggestion"></textarea>
+                            <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
+                            <button class="btn btn-sm btn-success mt-2">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
