@@ -457,9 +457,11 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
-
-
-
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
+
+Route::get('/email', function() {
+   return view('emails.integration');
+});
+
 
 

@@ -100,6 +100,8 @@ class EmailTemplateController extends Controller
                 return view('emails.wallet_balance')->with('template', EmailTemplate::find(19))->with('wallet', Wallet::find(1));
             case 20:
                 return view('emails.news_products')->with('template', EmailTemplate::find(20))->with('top_products_stores', Product::all());
+            case 21:
+                return view('emails.integration')->with('template', EmailTemplate::find(21));
             default:
                 return redirect()->back();
         }
