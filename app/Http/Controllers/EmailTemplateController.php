@@ -60,6 +60,10 @@ class EmailTemplateController extends Controller
     public function show($id)
     {
         switch ($id){
+            case 1:
+                return view('emails.new_user')->with('template', EmailTemplate::find(1));
+            case 2:
+                return view('emails.new_shopify_user')->with('template', EmailTemplate::find(2));
             case 3:
                 return view('emails.order_place')->with('template', EmailTemplate::find(3))->with('order', RetailerOrder::latest()->first());
             case 4:
