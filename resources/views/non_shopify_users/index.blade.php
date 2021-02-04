@@ -20,193 +20,127 @@
         </div>
     </div>
     <div class="content">
+        <div class="row mb-2" style="padding-bottom:1.875rem">
+            <div class="col-md-4 d-flex">
+                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
+                </div>
+                <button class="btn btn-primary filter_by_date" data-url="{{route('users.dashboard')}}" style="margin-left: 10px"> Filter </button>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-10">
-                <div class="row mb-2" style="padding-bottom:1.875rem">
-                    <div class="col-md-4 d-flex">
-                        <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                            <i class="fa fa-calendar"></i>&nbsp;
-                            <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
-                        </div>
-                        <button class="btn btn-primary filter_by_date" data-url="{{route('users.dashboard')}}" style="margin-left: 10px"> Filter </button>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
+                        <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
-                            </div>
-                        </a>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
                     </div>
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
-                            </div>
-                        </a>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Refunds</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
                     </div>
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Refunds</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
-                            </div>
-                        </a>
+                </a>
+            </div>
+            <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+                <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                    <div class="block-content block-content-full">
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
+                        <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
                     </div>
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-one-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-two-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-three-users" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-four-users" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="block block-rounded">
-                            <div class="block-header block-header-default">
-                                <h3 class="block-title">Top Products</h3>
-                            </div>
-                            <div class="block-content ">
-                                @if(count($top_products) > 0)
-                                    <table class="table table-striped table-hover table-borderless table-vcenter">
-                                        <thead>
-                                        <tr class="text-uppercase">
-                                            <th class="font-w700">Product</th>
-                                            <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
-                                            <th class="font-w700 text-center" style="width: 60px;">Sales</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        @foreach($top_products as $product)
-                                            <tr>
-                                                <td class="font-w600">
-                                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                        @if($index == 0)
-                                                            @if($image->isV == 0)
-                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                            @else
-                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                    {{$product->title}}
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    {{$product->sold}}
-                                                </td>
-                                                <td class="">
-                                                    ${{number_format($product->selling_cost,2)}}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-
-                                        </tbody>
-                                        @else
-                                            <p  class="text-center"> No Top Users Found </p>
-                                        @endif
-                                    </table>
-                            </div>
-                        </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-one-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="block">
-                    <div class="block-header">
-                        <div class="block-title">
-                            Mark as Fulfilled
-                        </div>
-                    </div>
-                    <input type="hidden" name="type[]" value="fulfilled">
-                    <div class="block-content" >
-                        <div class="form-group">
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" >
-                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                            </div>
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
-                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                            </div>
-                        </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-two-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
                     </div>
                 </div>
-                <div class="block">
-                    <div class="block-header">
-                        <div class="block-title">
-                            Mark as Fulfilled
-                        </div>
-                    </div>
-                    <input type="hidden" name="type[]" value="fulfilled">
-                    <div class="block-content" >
-                        <div class="form-group">
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" >
-                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                            </div>
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
-                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                            </div>
-                        </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-three-users" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
                     </div>
                 </div>
-                <div class="block">
-                    <div class="block-header">
-                        <div class="block-title">
-                            Mark as Fulfilled
-                        </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded block-link-pop">
+                    <div class="block-content block-content-full">
+                        <canvas id="canvas-graph-four-users" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
                     </div>
-                    <input type="hidden" name="type[]" value="fulfilled">
-                    <div class="block-content" >
-                        <div class="form-group">
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" >
-                                <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
-                            </div>
-                            <div class="custom-control custom-radio mb-1">
-                                <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
-                                <label class="custom-control-label" for="example-radio-customAliExpress">By AliExpress</label>
-                            </div>
-                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Top Products</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_products) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Product</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($top_products as $product)
+                                    <tr>
+                                        <td class="font-w600">
+                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                @if($index == 0)
+                                                    @if($image->isV == 0)
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                    @else
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                            {{$product->title}}
+                                        </td>
+                                        <td class="d-none d-sm-table-cell text-center">
+                                            {{$product->sold}}
+                                        </td>
+                                        <td class="">
+                                            ${{number_format($product->selling_cost,2)}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                                @else
+                                    <p  class="text-center"> No Top Users Found </p>
+                                @endif
+                            </table>
                     </div>
                 </div>
             </div>
