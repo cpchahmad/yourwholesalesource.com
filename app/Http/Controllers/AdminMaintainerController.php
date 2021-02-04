@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\BulkImportJob;
 use App\OrderFulfillment;
+use App\OrderLog;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
@@ -712,6 +713,13 @@ class AdminMaintainerController extends Controller
 
         $resp = curl_exec($curl);
         curl_close($curl);
+
+        /*Maintaining Log*/
+        $order_log =  new OrderLog();
+        $order_log->message = "Order synced to Mabang on ".date_create($order->created_at)->format('d M, Y h:i a');
+        $order_log->status = "Newly Synced";
+        $order_log->retailer_order_id = $order->id;
+        $order_log->save();
 
     }
 
