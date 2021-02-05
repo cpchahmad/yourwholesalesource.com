@@ -61,6 +61,7 @@
 
                             <th>Title</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th>Stores</th>
                             <th>Manager</th>
                             <th>Products</th>
@@ -75,6 +76,12 @@
                                 <td class="font-w600"><a href="{{route('users.view',$user->id)}}">{{$user->name}}</a></td>
                                 <td>
                                     <span class="badge badge-primary">{{$user->email}}</span>
+                                </td>
+                                <td>
+                                    @if($user->email_verified_at == null)
+                                        <span class="badge badge-danger">Not Verified</span>
+                                    @else
+                                        <span class="badge badge-success">Verified</span>
                                 </td>
                                 <td>
                                     @if($user->has_shops()->count() > 0)
