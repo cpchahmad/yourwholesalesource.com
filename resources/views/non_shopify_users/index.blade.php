@@ -244,9 +244,9 @@
 
                             <hr>
                         @empty
-                            <li class="list-group-item">
+                            <strong >
                                 No Announcements
-                            </li>
+                            </strong>
                         @endforelse
                     </div>
                 </div>
