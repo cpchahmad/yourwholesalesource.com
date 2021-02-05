@@ -224,7 +224,7 @@
                                     {{ $news->title }}
                                     <p class="lead">{{ $news->description }}</p>
                                 </li>
-                            @else
+                            @empty
                                 <li class="list-group-item">
                                     No Announcements
                                 </li>
