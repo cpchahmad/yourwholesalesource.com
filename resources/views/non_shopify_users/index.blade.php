@@ -228,7 +228,7 @@
                                 <li class="list-group-item">
                                     No Announcements
                                 </li>
-                            @endforeach
+                            @endforelse
                         </ul>
                     </div>
                 </div>
