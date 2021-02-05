@@ -118,6 +118,11 @@ $countries = \App\Country::all();
                         <div class="block-content font-size-sm">
                             <div class="form-group">
                                 <div class="col-sm-12">
+                                    @isset($failure)
+                                        <div class="alert alert-info alert-block">
+                                            {{ $failure }}
+                                        </div>
+                                    @endisset
                                     <div class="form-material">
                                         <label for="material-error"> Gender</label>
                                         <select class="form-control " style="width: 100%;"   name="gender" required  >
