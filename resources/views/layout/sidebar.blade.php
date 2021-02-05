@@ -165,14 +165,14 @@
             </li>
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('admin.suggestions') }}">
-                    <i class="nav-main-link-icon fa fa-check"></i>
+                    <i class="nav-main-link-icon fa fa-question"></i>
                     <span class="nav-main-link-name">Suggestions</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('admin.news.index') }}">
-                    <i class="nav-main-link-icon fa fa-check"></i>
+                    <i class="nav-main-link-icon fa fa-lightbulb"></i>
                     <span class="nav-main-link-name">News</span>
                 </a>
             </li>
