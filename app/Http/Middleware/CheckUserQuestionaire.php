@@ -25,7 +25,7 @@ class CheckUserQuestionaire
                 $array = $user->has_shops->pluck('id')->toArray();
                 $filled_questionnaire = Questionaire::whereIn('shop_id',$array)->first();
                 if($filled_questionnaire == null){
-                    return redirect()->back(['ftl' => '1']);
+                    return redirect()->route('users.dashboard',['ftl' => '1']);
                 }
                 else{
                     return $next($request);
@@ -34,7 +34,7 @@ class CheckUserQuestionaire
             else{
                 $filled_questionnaire = Questionaire::where('user_id',$user->id)->first();
                 if($filled_questionnaire == null){
-                    return redirect()->back(['ftl' => '1']);
+                    return redirect()->route('users.dashboard',['ftl' => '1']);
                 }
                 else{
                     return $next($request);
@@ -44,5 +44,6 @@ class CheckUserQuestionaire
         else{
             return $next($request);
         }
+
     }
 }

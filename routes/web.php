@@ -253,10 +253,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/connect/store','RolePermissionController@store_connect')->name('system.store.connect');
     /*Non-Shopify and Shopify User Routes */
 
+    Route::get('users/home','ShopifyUsersController@index')->name('users.dashboard')->middleware('role:non-shopify-users');
+
     Route::group(['middleware' => ['role:non-shopify-users', 'check_user_questionaire']], function () {
         Route::prefix('users')->group(function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
-            Route::get('/home','ShopifyUsersController@index')->name('users.dashboard');
             Route::get('/reports','ShopifyUsersController@reports')->name('users.reports');
             Route::get('/wefulfill/university','ShopifyUsersController@showVideosSection')->name('users.university.index');
             Route::get('/settings','ShopifyUsersController@setting')->name('users.settings');
@@ -301,6 +302,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
             });
         });
+
     });
     /*Sales Manager Routes*/
     Route::group(['middleware' => ['role:sales-manager']], function () {
