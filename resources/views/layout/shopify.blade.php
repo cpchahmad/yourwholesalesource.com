@@ -118,7 +118,7 @@ $countries = \App\Country::all();
                         <div class="block-content font-size-sm">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    @isset($failure)
+                                    @if($failure)
                                         <div class="alert alert-info alert-block">
                                             {{ $failure }}
                                         </div>
