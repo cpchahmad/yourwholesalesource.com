@@ -12,6 +12,7 @@ use App\GeneralDiscountPreferences;
 use App\GeneralFixedPricePreferences;
 use App\Jobs\SendNewsEmailJob;
 use App\Jobs\SendNewsProductEmailjob;
+use App\News;
 use App\Product;
 use App\Refund;
 use App\Shop;
@@ -820,6 +821,36 @@ class DefaultSettingsController extends Controller
         $suggestions = Suggestion::latest()->paginate(20);
 
         return view('setttings.suggestions.index')->with('suggestions', $suggestions);
+    }
+
+    public function showNews() {
+        $news = News::latest()->paginate(20);
+        return view('setttings.news.index')->with('news', $news);
+    }
+
+    public function createNews(Request $request) {
+        $news = new News();
+        $news->title = $request->news;
+        $news->description = $request->description;
+        $news->save();
+
+        return redirect()->back()->with('success', 'News created Successfully!');
+    }
+
+    public function editNews(Request $request, $id) {
+        $news = News::find($id);
+        $news->title = $request->news;
+        $news->description = $request->description;
+        $news->save();
+
+        return redirect()->back()->with('success', 'News updated Successfully!');
+    }
+
+    public function deleteNews($id) {
+        $news = News::find($id);
+        $news->delete();
+
+        return redirect()->back()->with('success', 'News deleteds Successfully!');
     }
 
 
