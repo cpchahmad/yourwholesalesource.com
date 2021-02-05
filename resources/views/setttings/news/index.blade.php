@@ -117,7 +117,7 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end">
-                        {{ $suggestions->appends(request()->input())->links() }}
+                        {{ $news->appends(request()->input())->links() }}
                     </div>
                 </div>
             </div>
