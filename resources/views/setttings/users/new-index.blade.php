@@ -82,6 +82,7 @@
                                         <span class="badge badge-danger">Not Verified</span>
                                     @else
                                         <span class="badge badge-success">Verified</span>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($user->has_shops()->count() > 0)
