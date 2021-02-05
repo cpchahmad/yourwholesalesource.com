@@ -289,7 +289,7 @@ class WalletController extends Controller
                 catch (\Exception $e){
                 }
 
-                //dispatch(new AutoPaymentForPendingOrders($related_wallet->user_id));
+                dispatch(new AutoPaymentForPendingOrders($related_wallet->user_id));
 
                 $this->log->store(0, 'Wallet', $related_wallet->id, $related_wallet->owner->name,'Wallet Request Approved');
 

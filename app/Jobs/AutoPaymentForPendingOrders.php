@@ -107,8 +107,6 @@ class AutoPaymentForPendingOrders implements ShouldQueue
                                }
                            }
 
-
-
                            /*Order Processing*/
                            $new_transaction = new OrderTransaction();
                            $new_transaction->amount =  $new->cost_to_pay;
@@ -154,7 +152,7 @@ class AutoPaymentForPendingOrders implements ShouldQueue
                            }
                            catch (\Exception $e) {
                                $log = new ErrorLog();
-                               $log->message = "ERP order BUG from Auto Wallet Payment In Top-up Job: ". $e->getMessage();
+                               $log->message = "ERP order BUG from Auto Wallet Payment In Top-up Job: ". $new->id . ": ". $e->getMessage();
                                $log->save();
                            }
 
