@@ -850,7 +850,7 @@ class DefaultSettingsController extends Controller
         $news = News::find($id);
         $news->delete();
 
-        return redirect()->back()->with('success', 'News deleteds Successfully!');
+        return redirect()->back()->with('success', 'News deleted Successfully!');
     }
 
 

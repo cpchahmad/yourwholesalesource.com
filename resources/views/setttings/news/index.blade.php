@@ -71,7 +71,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="material-error">Description</label>
-                                                    <textarea  class="form-control  @error('description') is-invalid @enderror" type="text" id="zone_title"   name="description" placeholder="Enter news address.."></textarea>
+                                                    <textarea  class="form-control  @error('description') is-invalid @enderror" type="text" id="zone_title"   name="description" placeholder="Enter news description.."></textarea>
                                                     @error('description')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
@@ -150,9 +150,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material-error">Description</label>
-                                                                    <textarea  class="form-control  @error('description') is-invalid @enderror" type="text" id="zone_title"  name="description" placeholder="Enter News description..">
-                                                                        {{$item->description}}
-                                                                    </textarea>
+                                                                    <textarea  class="form-control  @error('description') is-invalid @enderror" type="text" id="zone_title"  name="description" placeholder="Enter News description..">{{$item->description}}</textarea>
                                                                     @error('description')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror

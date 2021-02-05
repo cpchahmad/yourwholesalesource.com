@@ -210,6 +210,29 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="block">
+                    <div class="block-header">
+                        <div class="block-title text-center">
+                            Announcements
+                        </div>
+                    </div>
+                    <div class="block-content pb-4 text-right" >
+                        <ul class="list-group">
+                            @forelse(\App\News::latest()->limit(5)->get() as $news)
+                                <li class="list-group-item">
+                                    {{ $news->title }}
+                                    <p class="lead">{{ $news->description }}</p>
+                                </li>
+                            @else
+                                <li class="list-group-item">
+                                    No Announcements
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
 
