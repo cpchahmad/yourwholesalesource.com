@@ -830,7 +830,7 @@ class DefaultSettingsController extends Controller
 
     public function createNews(Request $request) {
         $news = new News();
-        $news->title = $request->news;
+        $news->title = $request->title;
         $news->description = $request->description;
         $news->save();
 
@@ -839,7 +839,7 @@ class DefaultSettingsController extends Controller
 
     public function editNews(Request $request, $id) {
         $news = News::find($id);
-        $news->title = $request->news;
+        $news->title = $request->title;
         $news->description = $request->description;
         $news->save();
 

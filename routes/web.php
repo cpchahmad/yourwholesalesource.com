@@ -190,7 +190,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('news', 'DefaultSettingsController@showNews')->name('admin.news.index');
     Route::post('news', 'DefaultSettingsController@createNews')->name('admin.news.store');
     Route::post('news/edit/{id}', 'DefaultSettingsController@editNews')->name('admin.news.edit');
-    Route::get('news/delete/{id}', 'DefaultSettingsController@deleteNews')->name('admin.news.delete');
+    Route::post('news/delete/{id}', 'DefaultSettingsController@deleteNews')->name('admin.news.delete');
 
 
 
