@@ -118,9 +118,9 @@ $countries = \App\Country::all();
                         <div class="block-content font-size-sm">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    @if($failure)
+                                    @if(Session::has('failure'))
                                         <div class="alert alert-info alert-block">
-                                            {{ $failure }}
+                                            {{ Session::get('failure') }}
                                         </div>
                                     @endisset
                                     <div class="form-material">
