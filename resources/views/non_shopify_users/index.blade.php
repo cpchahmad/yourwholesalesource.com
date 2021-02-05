@@ -217,12 +217,12 @@
                             Announcements
                         </div>
                     </div>
-                    <div class="block-content pb-4 text-right" >
+                    <div class="block-content pb-4 text-left" >
                         <ul class="list-group">
                             @forelse(\App\News::latest()->limit(5)->get() as $news)
                                 <li class="list-group-item">
                                     {{ $news->title }}
-                                    <p class="lead">{{ $news->description }}</p>
+                                    <p class="">{{ $news->description }}</p>
                                 </li>
                             @empty
                                 <li class="list-group-item">
