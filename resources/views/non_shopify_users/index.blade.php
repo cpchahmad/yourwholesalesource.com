@@ -218,18 +218,35 @@
                         </div>
                     </div>
                     <div class="block-content pb-4 text-left" >
-                        <ul class="list-group">
-                            @forelse(\App\News::latest()->limit(5)->get() as $news)
-                                <li class="list-group-item">
-                                    <strong>{{ $news->title }} : </strong>
-                                    {{ $news->description }}
-                                </li>
-                            @empty
-                                <li class="list-group-item">
-                                    No Announcements
-                                </li>
-                            @endforelse
-                        </ul>
+                        @forelse(\App\News::latest()->limit(5)->get() as $news)
+                            <strong data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ $news->title }} : </strong>
+                            <div class="modal fade" id="news_modal_{{$news->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-popout" role="document">
+                                    <div class="modal-content text-left">
+                                        <div class="block block-themed block-transparent mb-0">
+                                            <div class="block-header bg-primary-dark">
+                                                <h3 class="block-title">Announcement</h3>
+                                                <div class="block-options">
+                                                    <button type="button" class="btn-block-option">
+                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="block-content font-size-sm">
+                                                <h5>{{ $news->title }}</h5>
+                                                <p>{{ $news->description }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                        @empty
+                            <li class="list-group-item">
+                                No Announcements
+                            </li>
+                        @endforelse
                     </div>
                 </div>
 
