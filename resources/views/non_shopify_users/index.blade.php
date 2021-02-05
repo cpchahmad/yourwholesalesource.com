@@ -221,8 +221,8 @@
                         <ul class="list-group">
                             @forelse(\App\News::latest()->limit(5)->get() as $news)
                                 <li class="list-group-item">
-                                    {{ $news->title }}
-                                    <p class="">{{ $news->description }}</p>
+                                    <strong>{{ $news->title }} : </strong>
+                                    {{ $news->description }}
                                 </li>
                             @empty
                                 <li class="list-group-item">
