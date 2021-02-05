@@ -219,7 +219,8 @@
                     </div>
                     <div class="block-content pb-4 text-left" >
                         @forelse(\App\News::latest()->limit(5)->get() as $news)
-                            <strong data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ $news->title }} : </strong>
+                            <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 10%">
+                            <strong data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ $news->title }} </strong>
                             <div class="modal fade" id="news_modal_{{$news->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
                                     <div class="modal-content text-left">
