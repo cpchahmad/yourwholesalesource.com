@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'check_user_shop' => \App\Http\Middleware\CheckUserShops::class,
         'check_shop_user' => \App\Http\Middleware\CheckShopUser::class,
         'check_user_or_shop' => \App\Http\Middleware\AuthShopOrUser::class,
+        'check_user_questionaire' => \App\Http\Middleware\CheckUserQuestionaire::class,
     ];
 
     /**
