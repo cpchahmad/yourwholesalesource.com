@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Email Template filters
-    $('body').on('change','.non-shopify-filter',function () {
+    $('body').on('change','#non-shopify-filter',function () {
         if($(this).is(':checked')){
             $('.non-shopify-users').attr('checked', true);
             console.log(67);

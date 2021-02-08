@@ -404,29 +404,132 @@
                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
                                                    Non-Shopify Users
                                                    <div class="custom-control custom-checkbox d-inline-block">
-                                                       <input type="checkbox" class="custom-control-input non-shopify-filter" >
-                                                       <label class="custom-control-label" >Select All</label>
+                                                       <input type="checkbox" class="custom-control-input " id="non-shopify-filter" >
+                                                       <label class="custom-control-label" for="non-shopify-filter" >Select All</label>
                                                    </div>
                                                </label>
-{{--                                               <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>--}}
+                                               <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
-{{--                                                   @if(count($users) > 0)--}}
-{{--                                                       @foreach($users as $user)--}}
-{{--                                                           <div class="col-md-12">--}}
-{{--                                                               <div class="custom-control custom-checkbox d-inline-block">--}}
-{{--                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check non-shopify-users" >--}}
-{{--                                                                   <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>--}}
-{{--                                                               </div>--}}
-{{--                                                           </div>--}}
-{{--                                                       @endforeach--}}
-{{--                                                   @else  <div class="col-md-12">--}}
-{{--                                                       <p> No User Available</p>--}}
-{{--                                                   </div>--}}
-{{--                                                   @endif--}}
-{{--                                               </div>--}}
+                                                   @if(count($users) > 0)
+                                                       @foreach($users as $user)
+                                                           <div class="col-md-12">
+                                                               <div class="custom-control custom-checkbox d-inline-block">
+                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check non-shopify-users"  id="user_{{$user_id}}">
+                                                                   <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
+                                                               </div>
+                                                           </div>
+                                                       @endforeach
+                                                   @else  <div class="col-md-12">
+                                                       <p> No User Available</p>
+                                                   </div>
+                                                   @endif
+                                               </div>
                                            </div>
 
+                                            <!-- Non-Shopify Users -->
+                                           <div class="col-md-6">
+                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users</label>
+                                               <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
+                                                   @if(count($users) > 0)
+                                                       @foreach($users as $user)
+                                                           <div class="col-md-12">
+                                                               <div class="custom-control custom-checkbox d-inline-block">
+                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" >
+                                                                   <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
+                                                               </div>
+                                                           </div>
+                                                       @endforeach
+                                                   @else  <div class="col-md-12">
+                                                       <p> No User Available</p>
+                                                   </div>
+                                                   @endif
+                                               </div>
+                                           </div>
+
+                                            <!-- Shopify Users with Orders -->
+                                           <div class="col-md-6">
+                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users with Orders</label>
+                                               <div @if(count($stores_with_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
+
+                                                   @if(count($stores_with_orders) > 0)
+                                                       @foreach($stores_with_orders as $store)
+                                                           <div class="col-md-12">
+                                                               <div class="custom-control custom-checkbox d-inline-block">
+                                                                   <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" >
+                                                                   <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
+                                                               </div>
+                                                           </div>
+                                                       @endforeach
+                                                   @else  <div class="col-md-12">
+                                                       <p> No Store Available</p>
+                                                   </div>
+                                                   @endif
+                                               </div>
+                                           </div>
+
+                                            <!-- Non-Shopify Users with Orders -->
+                                            <div class="col-md-6">
+                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users with Orders</label>
+                                                <div @if(count($users_with_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
+
+                                                    @if(count($users_with_orders) > 0)
+                                                        @foreach($users_with_orders as $store)
+                                                            <div class="col-md-12">
+                                                                <div class="custom-control custom-checkbox d-inline-block">
+                                                                    <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
+                                                                    <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else  <div class="col-md-12">
+                                                        <p> No Store Available</p>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <!-- Shopify Users with Products -->
+                                            <div class="col-md-6">`
+                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users with Products</label>
+                                                <div @if(count($stores_with_products) > 5) class="sales-stores-section" @else class="mb2" @endif>
+
+                                                    @if(count($stores_with_products) > 0)
+                                                        @foreach($stores_with_products as $store)
+                                                            <div class="col-md-12">
+                                                                <div class="custom-control custom-checkbox d-inline-block">
+                                                                    <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
+                                                                    <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else  <div class="col-md-12">
+                                                        <p> No Store Available</p>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <!-- Shopify Users without Products -->
+                                            <div class="col-md-6">
+                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users without Products</label>
+                                                <div @if(count($stores_with_no_products) > 5) class="sales-stores-section" @else class="mb2" @endif>
+
+                                                    @if(count($stores_with_no_products) > 0)
+                                                        @foreach($stores_with_no_products as $store)
+                                                            <div class="col-md-12">
+                                                                <div class="custom-control custom-checkbox d-inline-block">
+                                                                    <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
+                                                                    <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else  <div class="col-md-12">
+                                                        <p> No Store Available</p>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
 
 
