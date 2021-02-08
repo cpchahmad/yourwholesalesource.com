@@ -392,7 +392,7 @@
                                                     @foreach($stores as $store)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
                                                                 <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                             </div>
                                                         </div>
@@ -412,7 +412,7 @@
                                                     @foreach($users as $user)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" >
                                                                 <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
                                                             </div>
                                                         </div>
@@ -431,7 +431,7 @@
                                                     @foreach($stores_with_orders as $store)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" >
                                                                 <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                             </div>
                                                         </div>
@@ -450,7 +450,7 @@
                                                     @foreach($stores_with_no_orders as $store)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
                                                                 <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                             </div>
                                                         </div>
