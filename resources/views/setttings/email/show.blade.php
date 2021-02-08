@@ -401,14 +401,20 @@
                                            <!-- Non-Shopify Users -->
                                            <div class="col-md-6">
 
-                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users</label>
+                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
+                                                   Non-Shopify Users
+                                                   <div class="custom-control custom-checkbox d-inline-block">
+                                                       <input type="checkbox" class="custom-control-input checkbox-to-check non-shopify-filter" >
+                                                       <label class="custom-control-label" >Select All</label>
+                                                   </div>
+                                               </label>
                                                <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                    @if(count($users) > 0)
                                                        @foreach($users as $user)
                                                            <div class="col-md-12">
                                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" >
+                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check non-shopify-users" >
                                                                    <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
                                                                </div>
                                                            </div>
@@ -527,7 +533,7 @@
                                         </div>
 
 
-
+                                        <hr>
                                         <div class="text-left mt-2">
                                             <label for="" style="color: #7daa40 !important;">Select Products</label>
                                         </div>
@@ -544,6 +550,7 @@
                                             @endforeach
 
                                         </select>
+                                        <hr>
 
                                         <div class="text-left">
                                             <label for="" style="color: #7daa40 !important; margin-top: 10px;">Add Campaign</label>
