@@ -63,11 +63,9 @@ class OrderController extends Controller
         }
 
         if ($request->has('unpaid')) {
-            dump(34);
             $orders->where('paid', 0);
         }
         if ($request->has('unfulfilled')) {
-            dd(454);
             $orders->where('status', 'unfulfilled');
         }
         if ($request->has('cancel')) {

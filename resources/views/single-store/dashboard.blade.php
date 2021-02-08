@@ -57,7 +57,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['paid'=>1]) }}">
+                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['unpaid'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unpaid</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unpaid_orders_count}}</div>
