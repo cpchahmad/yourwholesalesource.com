@@ -57,7 +57,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['paid', 1]) }}">
+                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['paid'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unpaid</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unpaid_orders_count}}</div>
@@ -65,7 +65,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['unfulfilled', 1]) }}">
+                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['unfulfilled'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unfulfilled</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unfullfilled_orders_count}}</div>
@@ -73,7 +73,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['cancel', 1]) }}">
+                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['cancel'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Cancel/Refund</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$canceled_order_count}}</div>
