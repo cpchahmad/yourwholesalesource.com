@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 $user = Auth::user();
                 $approved_wishlist = Wishlist::where('status_id', 2)->where('user_id', $user->id)->count();
                 $completed_wishlist = Wishlist::where('status_id', 5)->where('shop_id', $user->id)->count();
+                $pending_ticket_count = Ticket::where('status_id', 2)->where('shop_id', $user->id)->count();
 
 
                 if ($user->has_wallet == null) {
@@ -69,6 +70,8 @@ class AppServiceProvider extends ServiceProvider
 
                   $approved_wishlist = Wishlist::where('status_id', 2)->where('shop_id', $shop->id)->count();
                   $completed_wishlist = Wishlist::where('status_id', 5)->where('shop_id', $shop->id)->count();
+                  $pending_ticket_count = Ticket::where('status_id', 2)->where('shop_id', $shop->id)->count();
+
 
                   if(count($shop->has_user) > 0){
                       if($shop->has_user[0]->has_wallet != null){
@@ -112,6 +115,7 @@ class AppServiceProvider extends ServiceProvider
                 'balance' => $balance,
                 'approved_wishlist' => $approved_wishlist,
                 'completed_wishlist' => $completed_wishlist,
+                'pending_ticket_count' => $pending_ticket_count,
                 'notifications' => $notifications,
                 'notifications_count' =>$notifications_count,
                 'wishlist_request_count' => $wishlist_request_count,
