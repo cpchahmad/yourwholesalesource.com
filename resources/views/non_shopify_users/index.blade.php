@@ -60,7 +60,7 @@
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Paid</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$paid_orders_count}}</div>
                             </div>
                         </a>
                     </div>
@@ -68,15 +68,15 @@
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unfulfilled</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$unfullfilled_orders_count}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Paid</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Cancel/Refund</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$canceled_order_count}}</div>
                             </div>
                         </a>
                     </div>
