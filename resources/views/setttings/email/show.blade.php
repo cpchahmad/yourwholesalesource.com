@@ -447,7 +447,7 @@
                                             <div @if(count($stores_with_no_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                 @if(count($stores_with_no_orders) > 0)
-                                                    @foreach($stores_with_no_orders as $user)
+                                                    @foreach($stores_with_no_orders as $store)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
                                                                 <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="store_{{$store->id}}">
