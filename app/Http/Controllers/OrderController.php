@@ -53,7 +53,6 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
-        dd(234);
 //        $shop = $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
 //        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 //        dd($response);
@@ -68,13 +67,10 @@ class OrderController extends Controller
             $orders->where('paid', 0);
         }
         if ($request->has('unfulfilled')) {
-            dump(454);
-
+            dd(454);
             $orders->where('status', 'unfulfilled');
         }
         if ($request->has('cancel')) {
-            dump(765);
-
             $orders->where('status', 'cancelled');
         }
 
