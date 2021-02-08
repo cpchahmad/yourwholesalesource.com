@@ -359,9 +359,7 @@
 
                                     @if($template->id == '20')
                                         @php
-                                            $stores = \App\User::role('non-shopify-users')
-                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-                                              ->has('has_shops')
+                                            $stores = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
                                               ->get();
 
                                             $users = \App\User::role('non-shopify-users')
@@ -373,7 +371,7 @@
                                         <div class="text-left">
                                             <label for="" style="color: #7daa40 !important;">Select Users</label>
                                         </div>
-                                        <div class="drop-content">
+                                        <div class="drop-content text-left">
                                             <div @if(count($stores) > 5) class="sales-stores-section"  @else class="mb2" @endif >
                                                 <label style="margin-left: 15px" for="material-error">Stores</label>
                                                 @if(count($stores) > 0)
@@ -384,7 +382,6 @@
                                                                 <label class="custom-control-label"  for="store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
                                                             </div>
                                                         </div>
-
                                                     @endforeach
                                                 @else
                                                     <div class="col-md-12">
