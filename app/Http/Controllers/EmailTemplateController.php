@@ -136,9 +136,16 @@ class EmailTemplateController extends Controller
             $campaign->time = $request->time;
             $campaign->status = 'pending';
             $campaign->template_id = $template->id;
-            $campaign->save();
+            //$campaign->save();
 
-            $users_id = $request->users;
+            $users_id[] = $request->users;
+            $users_id[] = $request->shopify_users;
+            $users_id[] = $request->shopify_users_with_orders;
+            $users_id[] = $request->non_shopify_users_with_orders;
+            $users_id[] = $request->users_with_products;
+            $users_id[] = $request->users_without_products;
+
+            dd($reqeust->all(), $users_id);
 
             foreach ($users_id as $id) {
                 $user = User::find($id);

@@ -468,7 +468,7 @@
                                                        @foreach($stores_with_orders as $store)
                                                            <div class="col-md-12">
                                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                                   <input type="checkbox" name="shopify_users_with[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check shopify-with-orders" id="user_{{$store->id}}" >
+                                                                   <input type="checkbox" name="shopify_users_with_orders[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check shopify-with-orders" id="user_{{$store->id}}" >
                                                                    <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                                </div>
                                                            </div>
