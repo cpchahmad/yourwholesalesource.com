@@ -130,45 +130,6 @@
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
 
-        @php
-            if(auth()->user()->has_manager != null){
-            $manager = auth()->user()->has_manager;
-            }
-            else{
-                $manager = null;
-            }
-        @endphp
-        <!-- User Dropdown -->
-            @if($manager != null)
-                <div class="dropdown d-inline-block ml-2">
-                    <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
-                        <span class="d-none d-sm-inline-block ml-1">Sales Manager {{$manager->name}} {{$manager->last_name}}</span>
-
-                        <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left p-0 border-0 font-size-sm" style="width: 460px" aria-labelledby="page-header-user-dropdown">
-                        <div class="p-3 text-center">
-                            <img class="img-avatar-thumb" style="display: inline-block !important;
-     width: 70px !important;
-     height: 70px !important;
-    border-radius: 0;" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="">
-                            <h6 style="margin-top: 10px">I am {{$manager->name}} {{$manager->last_name}}, Your Dedicated Sales Manager</h6>
-                        </div>
-                        <div class="p-2">
-                            <p class="p-2" style="margin-bottom: 0"> I am here to help you with any kind of queries you might have. Feel free to contact me using tickets so that i can help you with understanding how can you get most of WeFullFill. Thanks </p>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('users.help-center')}}">
-                                <span>Contact Me</span>
-                                <i class="fa fa-ticket-alt"></i>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-
-
 
         <div class="d-flex align-items-center">
             <div class="d-inline-block mr-3">
