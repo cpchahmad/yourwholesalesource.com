@@ -22,6 +22,7 @@ class CheckUserQuestionaire
         if($user != null){
             $filled_questionnaire = Questionaire::where('user_id',$user->id)->first();
             if($filled_questionnaire == null){
+                dd(324);
                 return redirect()->route('users.dashboard',['ftl' => '1'])->with('failure', 'Kindly fill the Questionaire to continue');
             }
             else if(count($user->has_shops) > 0){
