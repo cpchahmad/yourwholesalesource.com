@@ -426,16 +426,22 @@
                                                </div>
                                            </div>
 
-                                            <!-- Non-Shopify Users -->
+                                            <!-- Shopify Users -->
                                            <div class="col-md-6">
-                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users</label>
-                                               <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
+                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
+                                                   Shopify Users
+                                                   <div class="custom-control custom-checkbox d-inline-block">
+                                                       <input type="checkbox" class="custom-control-input " id="shopify-filter" >
+                                                       <label class="custom-control-label" for="shopify-filter" >Select All</label>
+                                                   </div>
+                                               </label>
+                                               <div @if(count($stores) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
-                                                   @if(count($users) > 0)
-                                                       @foreach($users as $user)
+                                                   @if(count($stores) > 0)
+                                                       @foreach($stores as $user)
                                                            <div class="col-md-12">
                                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" >
+                                                                   <input type="checkbox" name="shopify_users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check shopify-users"  id="user_{{$user->id}}" >
                                                                    <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
                                                                </div>
                                                            </div>
@@ -449,14 +455,20 @@
 
                                             <!-- Shopify Users with Orders -->
                                            <div class="col-md-6">
-                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users with Orders</label>
+                                               <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
+                                                   Shopify Users with Orders
+                                                   <div class="custom-control custom-checkbox d-inline-block">
+                                                       <input type="checkbox" class="custom-control-input " id="shopify-with-order-filter" >
+                                                       <label class="custom-control-label" for="shopify-with-order-filter" >Select All</label>
+                                                   </div>
+                                               </label>
                                                <div @if(count($stores_with_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                    @if(count($stores_with_orders) > 0)
                                                        @foreach($stores_with_orders as $store)
                                                            <div class="col-md-12">
                                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                                   <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" >
+                                                                   <input type="checkbox" name="shopify_users_with[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check shopify-with-orders" id="user_{{$store->id}}" >
                                                                    <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                                </div>
                                                            </div>
@@ -470,14 +482,20 @@
 
                                             <!-- Non-Shopify Users with Orders -->
                                             <div class="col-md-6">
-                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users with Orders</label>
+                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
+                                                    Non-Shopify Users with Orders
+                                                    <div class="custom-control custom-checkbox d-inline-block">
+                                                        <input type="checkbox" class="custom-control-input " id="non-shopify-with-order-filter" >
+                                                        <label class="custom-control-label" for="non-shopify-with-order-filter" >Select All</label>
+                                                    </div>
+                                                </label>
                                                 <div @if(count($users_with_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                     @if(count($users_with_orders) > 0)
                                                         @foreach($users_with_orders as $store)
                                                             <div class="col-md-12">
                                                                 <div class="custom-control custom-checkbox d-inline-block">
-                                                                    <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
+                                                                    <input type="checkbox" name="non_shopify_users_with_orders[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check non-shopify-with-orders" id="user_{{$store->id}}">
                                                                     <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                                 </div>
                                                             </div>
@@ -491,14 +509,20 @@
 
                                             <!-- Shopify Users with Products -->
                                             <div class="col-md-6">`
-                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users with Products</label>
+                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
+                                                    Shopify Users with Products
+                                                    <div class="custom-control custom-checkbox d-inline-block">
+                                                        <input type="checkbox" class="custom-control-input " id="shopify-with-products-filter" >
+                                                        <label class="custom-control-label" for="shopify-with-products-filter" >Select All</label>
+                                                    </div>
+                                                </label>
                                                 <div @if(count($stores_with_products) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                     @if(count($stores_with_products) > 0)
                                                         @foreach($stores_with_products as $store)
                                                             <div class="col-md-12">
                                                                 <div class="custom-control custom-checkbox d-inline-block">
-                                                                    <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
+                                                                    <input type="checkbox" name="users_with_products[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check shopify-with-products" id="user_{{$store->id}}">
                                                                     <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                                 </div>
                                                             </div>
@@ -512,14 +536,20 @@
 
                                             <!-- Shopify Users without Products -->
                                             <div class="col-md-6">
-                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users without Products</label>
+                                                <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">
+                                                    Shopify Users without Products
+                                                    <div class="custom-control custom-checkbox d-inline-block">
+                                                        <input type="checkbox" class="custom-control-input " id="shopify-without-products-filter" >
+                                                        <label class="custom-control-label" for="shopify-without-products-filter" >Select All</label>
+                                                    </div>
+                                                </label>
                                                 <div @if(count($stores_with_no_products) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                     @if(count($stores_with_no_products) > 0)
                                                         @foreach($stores_with_no_products as $store)
                                                             <div class="col-md-12">
                                                                 <div class="custom-control custom-checkbox d-inline-block">
-                                                                    <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
+                                                                    <input type="checkbox" name="users_without_products[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check shopify-without-products" id="user_{{$store->id}}">
                                                                     <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                                 </div>
                                                             </div>

@@ -4,12 +4,58 @@ $(document).ready(function () {
     $('body').on('change','#non-shopify-filter',function () {
         if($(this).is(':checked')){
             $('.non-shopify-users').attr('checked', true);
-            console.log(67);
         }
         else{
             $('.non-shopify-users').attr('checked', false);
         }
     });
+
+    $('body').on('change','#shopify-filter',function () {
+        if($(this).is(':checked')){
+            $('.shopify-users').attr('checked', true);
+        }
+        else{
+            $('.shopify-users').attr('checked', false);
+        }
+    });
+
+    $('body').on('change','#shopify-with-order-filter',function () {
+        if($(this).is(':checked')){
+            $('.shopify-with-orders').attr('checked', true);
+        }
+        else{
+            $('.shopify-with-orders').attr('checked', false);
+        }
+    });
+
+    $('body').on('change','#non-shopify-with-order-filter',function () {
+        if($(this).is(':checked')){
+            $('.non-shopify-with-orders').attr('checked', true);
+        }
+        else{
+            $('.non-shopify-with-orders').attr('checked', false);
+        }
+    });
+
+    $('body').on('change','#shopify-with-products-filter',function () {
+        if($(this).is(':checked')){
+            $('.shopify-with-products').attr('checked', true);
+        }
+        else{
+            $('.shopify-with-products').attr('checked', false);
+        }
+    });
+
+    $('body').on('change','#shopify-without-products-filter',function () {
+        if($(this).is(':checked')){
+            $('.shopify-without-products').attr('checked', true);
+        }
+        else{
+            $('.shopify-without-products').attr('checked', false);
+        }
+    });
+
+
 
     // Import To Woocommerce Button Loader
     $('.import-btn').click(function () {
