@@ -138,12 +138,7 @@ class EmailTemplateController extends Controller
             $campaign->template_id = $template->id;
             //$campaign->save();
 
-            $users_id[] = $request->users;
-            $users_id[] = $request->shopify_users;
-            $users_id[] = $request->shopify_users_with_orders;
-            $users_id[] = $request->non_shopify_users_with_orders;
-            $users_id[] = $request->users_with_products;
-            $users_id[] = $request->users_without_products;
+            $users_id = array_merge($request->users, $request->shopify_users, $request->shopify_users_with_orders, $request->non_shopify_users_with_orders, $request->users_with_products, $request->users_without_products);
 
             dd($request->all(), $users_id);
 
