@@ -32,37 +32,39 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Products</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$products}}</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 col-lg-6 col-xl-3">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
-                                <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
-                            </div>
-                        </a>
+                    <div class="block">
+                        <div class="col-md-6">
+                            <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                                <div class="block-content block-content-full">
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
+                                    <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                                <div class="block-content block-content-full">
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
+                                    <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                                <div class="block-content block-content-full">
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Products</div>
+                                    <div class="font-size-h2 font-w400 text-dark">{{$products}}</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                                <div class="block-content block-content-full">
+                                    <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
+                                    <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
