@@ -136,7 +136,7 @@ class EmailTemplateController extends Controller
             $campaign->time = $request->time;
             $campaign->status = 'pending';
             $campaign->template_id = $template->id;
-            //$campaign->save();
+            $campaign->save();
 
             $users_id = [];
 
