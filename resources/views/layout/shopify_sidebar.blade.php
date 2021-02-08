@@ -130,6 +130,18 @@
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
 
+        @php
+            if(auth()->user()->has_manager != null){
+            $manager = auth()->user()->has_manager;
+            }
+            else{
+                $manager = null;
+            }
+        @endphp
+        <!-- User Dropdown -->
+        </div>
+
+
 
         <div class="d-flex align-items-center">
             <div class="d-inline-block mr-3">
@@ -139,7 +151,6 @@
                 <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist  {{$completed_wishlist}}  </span>
                 <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets  {{$pending_ticket_count}}  </span>
             </div>
-
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3">
 {{--                <select name="change-view" id="change-view-store" class="form-control">--}}
