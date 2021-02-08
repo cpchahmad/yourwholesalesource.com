@@ -154,7 +154,7 @@ class EmailTemplateController extends Controller
                 $users_id = array_merge($users_id, $request->users_without_products);
 
 
-            dd($request->all(), $users_id);
+            dd($users_id, array_unique($users_id));
 
             foreach ($users_id as $id) {
                 $user = User::find($id);
