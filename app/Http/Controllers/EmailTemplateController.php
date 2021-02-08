@@ -153,10 +153,7 @@ class EmailTemplateController extends Controller
             if($request->users_without_products)
                 $users_id = array_merge($users_id, $request->users_without_products);
 
-
-            dd($users_id, array_unique($users_id));
-
-            foreach ($users_id as $id) {
+            foreach (array_unique($users_id) as $id) {
                 $user = User::find($id);
                 $user->campaigns()->attach($campaign->id);
             }
