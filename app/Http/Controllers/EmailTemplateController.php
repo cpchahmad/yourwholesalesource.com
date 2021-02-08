@@ -145,7 +145,7 @@ class EmailTemplateController extends Controller
             $users_id[] = $request->users_with_products;
             $users_id[] = $request->users_without_products;
 
-            dd($reqeust->all(), $users_id);
+            dd($request->all(), $users_id);
 
             foreach ($users_id as $id) {
                 $user = User::find($id);
