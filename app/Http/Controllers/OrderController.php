@@ -52,6 +52,8 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
+
+        dd(234);
 //        $shop = $current_shop = \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
 //        $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 //        dd($response);
