@@ -414,7 +414,7 @@
                                                        @foreach($users as $user)
                                                            <div class="col-md-12">
                                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check non-shopify-users"  id="user_{{$user_id}}">
+                                                                   <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check non-shopify-users"  id="user_{{$user->id}}">
                                                                    <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
                                                                </div>
                                                            </div>
