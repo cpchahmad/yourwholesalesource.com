@@ -366,12 +366,25 @@
 
                                             $stores_with_orders = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->whereHas('has_shops')
                                               ->whereHas('has_orders')
                                               ->get();
 
-                                            $stores_with_no_orders = \App\User::role('non-shopify-users')
+                                            $stores_with_products = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-                                              ->doesnthave('has_orders')
+                                              ->whereHas('has_shops')
+                                              ->whereHas('has_imported')
+                                              ->get();
+
+                                            $stores_with_no_products = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->whereHas('has_shops')
+                                              ->doesnthave('has_imported')
+                                              ->get();
+
+                                            $users_with_orders = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->whereHas('has_orders')
                                               ->get();
 
                                             $users = \App\User::role('non-shopify-users')
@@ -443,11 +456,11 @@
                                             </div>
 
                                             <!-- Shopify Users without Orders -->
-                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users without Orders</label>
-                                            <div @if(count($stores_with_no_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users  Orders</label>
+                                            <div @if(count($users_with_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
-                                                @if(count($stores_with_no_orders) > 0)
-                                                    @foreach($stores_with_no_orders as $store)
+                                                @if(count($users_with_orders) > 0)
+                                                    @foreach($users_with_orders as $store)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
                                                                 <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check">
