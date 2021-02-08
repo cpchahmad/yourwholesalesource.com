@@ -1,5 +1,16 @@
 $(document).ready(function () {
 
+    // Email Template filters
+    $('body').on('change','.non-shopify-filter',function () {
+        if($(this).is(':checked')){
+            $('.non-shopify-users').attr('checked', true);
+            console.log(67);
+        }
+        else{
+            $('.non-shopify-users').attr('checked', false);
+        }
+    });
+
     // Import To Woocommerce Button Loader
     $('.import-btn').click(function () {
         $(this).text('Loading');
