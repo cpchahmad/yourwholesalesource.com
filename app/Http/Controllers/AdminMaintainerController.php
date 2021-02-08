@@ -28,6 +28,8 @@ class AdminMaintainerController extends Controller
 {
     private $helper;
     private $log;
+    private $notify;
+
 
 
     /**
@@ -38,7 +40,7 @@ class AdminMaintainerController extends Controller
     {
         $this->helper = new HelperController();
         $this->log = new ActivityLogController();
-
+        $this->notify = new NotificationController();
     }
 
     public function getPages() {
