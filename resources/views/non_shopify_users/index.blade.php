@@ -60,7 +60,7 @@
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Paid</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$paid_orders_count}}</div>
+                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
                             </div>
                         </a>
                     </div>
@@ -68,15 +68,15 @@
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unfulfilled</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$unfullfilled_orders_count}}</div>
+                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Cancel/Refund</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$canceled_order_count}}</div>
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Paid</div>
+                                <div class="font-size-h2 font-w400 text-dark">${{number_format($refunds,2)}}</div>
                             </div>
                         </a>
                     </div>
@@ -85,34 +85,32 @@
                     <div class="col-md-6">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
+                                <div class="custom-control custom-switch custom-control-success mb-1 d-flex justify-content-end">
+                                    <input type="checkbox" class="custom-control-input status-switch" id="graph_checkbox" name="example-sw-success2">
+                                    <label class="custom-control-label" for="graph_checkbox">Orders / Sales</label>
+                                </div>
                                 <canvas id="canvas-graph-one-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-two-users" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
+                                <canvas id="canvas-graph-two-users" style="display: none;" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-three-users" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-four-users" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <div class="block block-rounded block-link-pop">--}}
+{{--                            <div class="block-content block-content-full">--}}
+{{--                                <canvas id="canvas-graph-three-users" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <div class="block block-rounded block-link-pop">--}}
+{{--                            <div class="block-content block-content-full">--}}
+{{--                                <canvas id="canvas-graph-four-users" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="block block-rounded">

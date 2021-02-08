@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    // Grapgh checkbox
+    $('body').on('change','#graph_checkbox',function () {
+        if($(this).is(':checked')){
+            $('#canvas-graph-two-users').show();
+            $('#canvas-graph-one-users').hide();
+        }
+        else{
+            $('#canvas-graph-two-users').hide();
+            $('#canvas-graph-one-users').show();
+        }
+    });
+
     $('.show-product-modal').click(function () {
 
         $('#browse_product_modal').modal('show');
