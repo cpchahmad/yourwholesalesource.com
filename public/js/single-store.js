@@ -14,8 +14,6 @@ $(document).ready(function () {
 
     // Inventory Management Status Checkbox
     $(document).on('change','.inventory-checkbox',function () {
-        console.log(234);
-
         if($(this).is(':checked')){
             $('.warehouses').show();
         }
