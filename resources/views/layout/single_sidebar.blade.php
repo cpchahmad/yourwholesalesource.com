@@ -151,32 +151,32 @@
 
 <header id="page-header">
     <div class="content-header">
-        <div class="d-flex align-items-center w-100 justify-content-between">
+        <div class="d-flex align-items-center  justify-content-between">
             <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
                 <i class="fa fa-fw fa-bars"></i>
             </button>
             <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
-        @php
-            $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
-       /*Local Shop Model!*/
-       $shop= \App\Shop::find($shop->id);
-           if($shop->has_manager != null){
-           $manager = $shop->has_manager;
-           }
-           else{
-               $manager = null;
-           }
+            @php
+                $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+           /*Local Shop Model!*/
+           $shop= \App\Shop::find($shop->id);
+               if($shop->has_manager != null){
+               $manager = $shop->has_manager;
+               }
+               else{
+                   $manager = null;
+               }
 
-         if(count($shop->has_user) > 0){
-            $associated_user =   $shop->has_user[0];
-        }
-        else{
-            $associated_user = null;
-        }
+             if(count($shop->has_user) > 0){
+                $associated_user =   $shop->has_user[0];
+            }
+            else{
+                $associated_user = null;
+            }
 
-        @endphp
+            @endphp
         </div>
 
 
