@@ -59,6 +59,17 @@ class CustomOrderController extends Controller
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
 
         }
+
+        if ($request->has('unpaid')) {
+            $orders->where('paid', 0);
+        }
+        if ($request->has('unfulfilled')) {
+            $orders->where('status', 'unfulfilled');
+        }
+        if ($request->has('cancel')) {
+            $orders->where('status', 'cancelled');
+        }
+
         $orders = $orders->orderBy('created_at', 'DESC')->paginate(30);
         return view('non_shopify_users.orders.index')->with([
             'orders' => $orders,
