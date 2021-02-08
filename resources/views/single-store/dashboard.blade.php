@@ -31,7 +31,8 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                <div class="row">
+                <div class="row block">
+                    <h5>My Orders</h5>
                     <div class="col-md-4">
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
                             <div class="block-content block-content-full">
