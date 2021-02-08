@@ -366,12 +366,12 @@
 
                                             $stores_with_orders = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-                                              ->whereHas('has_shops')
+                                              ->whereHas('has_orders')
                                               ->get();
 
                                             $stores_with_no_orders = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
-                                              ->whereHas('has_shops')
+                                              ->doesnthave('has_orders')
                                               ->get();
 
                                             $users = \App\User::role('non-shopify-users')
