@@ -475,7 +475,7 @@
                                             </div>
 
                                             <!-- Shopify Users with Products -->
-                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users with Orders</label>
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users with Products</label>
                                             <div @if(count($stores_with_products) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                 @if(count($stores_with_products) > 0)
@@ -494,7 +494,7 @@
                                             </div>
 
                                             <!-- Shopify Users without Products -->
-                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users with Orders</label>
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users without Products</label>
                                             <div @if(count($stores_with_no_products) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
                                                 @if(count($stores_with_no_products) > 0)
