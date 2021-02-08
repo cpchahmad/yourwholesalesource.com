@@ -484,6 +484,7 @@
                                 </div>
                                 <button type="submit" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none; background-color: #7daa40; color: #ffffff; margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">Update</button>
                             </form>
+                        @endisset
                     </div>
                 </div>
             </div>
