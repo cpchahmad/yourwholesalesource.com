@@ -178,6 +178,12 @@
 
                                 @endforeach
                             </table>
+
+                            <div class="row">
+                                <div class="col-md-12 text-center" style="font-size: 17px">
+                                    {!! $orders->appends(request()->input())->links() !!}
+                                </div>
+                            </div>
                         @else
                             <p>No Orders Found <a href="{{route('store.sync.orders')}}"
                                                   class="btn btn-sm btn-primary" style="font-size: 12px;float: right" type="button" data-toggle="tooltip" title=""
