@@ -94,6 +94,8 @@ class AppServiceProvider extends ServiceProvider
               else{
                   $balance = 0;
                   $approved_wishlist = 0;
+                  $completed_wishlist = 0;
+                  $pending_ticket_count = 0;
               }
             }
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
