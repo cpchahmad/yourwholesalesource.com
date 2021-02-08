@@ -82,14 +82,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
                                 <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
                                 <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
@@ -97,72 +99,72 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-three-store" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-four-store" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="block block-rounded">
-                            <div class="block-header block-header-default">
-                                <h3 class="block-title">Top Products</h3>
-                            </div>
-                            <div class="block-content ">
-                                @if(count($top_products) > 0)
-                                    <table class="table table-striped table-hover table-borderless table-vcenter">
-                                        <thead>
-                                        <tr class="text-uppercase">
-                                            <th class="font-w700">Product</th>
-                                            <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
-                                            <th class="font-w700 text-center" style="width: 60px;">Sales</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <div class="block block-rounded block-link-pop">--}}
+{{--                            <div class="block-content block-content-full">--}}
+{{--                                <canvas id="canvas-graph-three-store" data-labels="{{json_encode($graph_three_labels)}}" data-values="{{json_encode($graph_three_values)}}"></canvas>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <div class="block block-rounded block-link-pop">--}}
+{{--                            <div class="block-content block-content-full">--}}
+{{--                                <canvas id="canvas-graph-four-store" data-labels="{{json_encode($graph_four_labels)}}" data-values="{{json_encode($graph_four_values)}}"></canvas>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="block block-rounded">--}}
+{{--                            <div class="block-header block-header-default">--}}
+{{--                                <h3 class="block-title">Top Products</h3>--}}
+{{--                            </div>--}}
+{{--                            <div class="block-content ">--}}
+{{--                                @if(count($top_products) > 0)--}}
+{{--                                    <table class="table table-striped table-hover table-borderless table-vcenter">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr class="text-uppercase">--}}
+{{--                                            <th class="font-w700">Product</th>--}}
+{{--                                            <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>--}}
+{{--                                            <th class="font-w700 text-center" style="width: 60px;">Sales</th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody>--}}
 
-                                        @foreach($top_products as $product)
-                                            <tr>
-                                                <td class="font-w600">
-                                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                        @if($index == 0)
-                                                            @if($image->isV == 0)
-                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                            @else
-                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                    {{$product->title}}
-                                                </td>
-                                                <td class="d-none d-sm-table-cell text-center">
-                                                    {{$product->sold}}
-                                                </td>
-                                                <td class="">
-                                                    ${{number_format($product->selling_cost,2)}}
-                                                </td>
-                                            </tr>
-                                        @endforeach
+{{--                                        @foreach($top_products as $product)--}}
+{{--                                            <tr>--}}
+{{--                                                <td class="font-w600">--}}
+{{--                                                    @foreach($product->has_images()->orderBy('position')->get() as $index => $image)--}}
+{{--                                                        @if($index == 0)--}}
+{{--                                                            @if($image->isV == 0)--}}
+{{--                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">--}}
+{{--                                                            @else--}}
+{{--                                                                <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">--}}
+{{--                                                            @endif--}}
+{{--                                                        @endif--}}
+{{--                                                    @endforeach--}}
+{{--                                                    {{$product->title}}--}}
+{{--                                                </td>--}}
+{{--                                                <td class="d-none d-sm-table-cell text-center">--}}
+{{--                                                    {{$product->sold}}--}}
+{{--                                                </td>--}}
+{{--                                                <td class="">--}}
+{{--                                                    ${{number_format($product->selling_cost,2)}}--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
 
-                                        </tbody>
-                                        @else
-                                            <p  class="text-center"> No Top Users Found </p>
-                                        @endif
-                                    </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                                        </tbody>--}}
+{{--                                        @else--}}
+{{--                                            <p  class="text-center"> No Top Users Found </p>--}}
+{{--                                        @endif--}}
+{{--                                    </table>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             <div class="col-md-3">
                 <div class="block">
