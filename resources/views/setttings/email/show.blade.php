@@ -362,6 +362,14 @@
                                             $stores = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
                                               ->get();
 
+                                            $stores_with_orders = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
+                                              ->whereHas('has_orders', function() {})
+                                              ->get();
+
+                                            $stores_with_no_orders = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
+                                              ->whereDoesntHave('has_orders', function() {})
+                                              ->get();
+
                                             $users = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
                                               ->doesnthave('has_shops')
@@ -372,6 +380,7 @@
                                             <label for="" style="color: #7daa40 !important;">Select Users</label>
                                         </div>
                                         <div class="drop-content text-left">
+                                            <!-- Shopify Users -->
                                             <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Stores</label>
                                             <div @if(count($stores) > 5) class="sales-stores-section"  @else class="mb2" @endif >
 
@@ -390,6 +399,8 @@
                                                     </div>
                                                 @endif
                                             </div>
+
+                                            <!-- Non-Shopify Users -->
                                             <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users</label>
                                             <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
 
@@ -404,6 +415,44 @@
                                                     @endforeach
                                                 @else  <div class="col-md-12">
                                                     <p> No User Available</p>
+                                                </div>
+                                                @endif
+                                            </div>
+
+                                            <!-- Shopify Users with Orders -->
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users with Orders</label>
+                                            <div @if(count($stores_with_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
+
+                                                @if(count($stores_with_orders) > 0)
+                                                    @foreach($stores_with_orders as $store)
+                                                        <div class="col-md-12">
+                                                            <div class="custom-control custom-checkbox d-inline-block">
+                                                                <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="store_{{$store->id}}">
+                                                                <label class="custom-control-label"  for="store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else  <div class="col-md-12">
+                                                    <p> No Store Available</p>
+                                                </div>
+                                                @endif
+                                            </div>
+
+                                            <!-- Shopify Users without Orders -->
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Shopify Users without Orders</label>
+                                            <div @if(count($stores_with_no_orders) > 5) class="sales-stores-section" @else class="mb2" @endif>
+
+                                                @if(count($stores_with_no_orders) > 0)
+                                                    @foreach($stores_with_no_orders as $user)
+                                                        <div class="col-md-12">
+                                                            <div class="custom-control custom-checkbox d-inline-block">
+                                                                <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else  <div class="col-md-12">
+                                                    <p> No Store Available</p>
                                                 </div>
                                                 @endif
                                             </div>
