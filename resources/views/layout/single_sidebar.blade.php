@@ -159,20 +159,20 @@
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex justify-content-end align-items-center">
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3">
                 <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
             </div>
-            <div class="d-inline-block mr-3">
-                <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist  {{$approved_wishlist}}  </span>
-            </div>
-            <div class="d-inline-block mr-3">
-                <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist  {{$completed_wishlist}}  </span>
-            </div>
-            <div class="d-inline-block mr-3">
-                <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets  {{$pending_ticket_count}}  </span>
-            </div>
+{{--            <div class="d-inline-block mr-3">--}}
+{{--                <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist  {{$approved_wishlist}}  </span>--}}
+{{--            </div>--}}
+{{--            <div class="d-inline-block mr-3">--}}
+{{--                <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist  {{$completed_wishlist}}  </span>--}}
+{{--            </div>--}}
+{{--            <div class="d-inline-block mr-3">--}}
+{{--                <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets  {{$pending_ticket_count}}  </span>--}}
+{{--            </div>--}}
             @if(\Illuminate\Support\Facades\Auth::check())
             <div class="d-inline-block mr-3">
                 <a class="nav-main-link" href="{{route('users.dashboard')}}">
