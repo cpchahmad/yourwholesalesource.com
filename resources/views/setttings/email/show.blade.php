@@ -359,12 +359,12 @@
 
                                     @if($template->id == '20')
                                         @php
-                                            $shopify_users = \App\User::role('non-shopify-users')
+                                            $stores = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
                                               ->has('has_shops')
                                               ->get();
 
-                                            $non_shopify_users = \App\User::role('non-shopify-users')
+                                            $users = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
                                               ->doesnthave('has_shops')
                                               ->get();
@@ -373,25 +373,43 @@
                                         <div class="text-left">
                                             <label for="" style="color: #7daa40 !important;">Select Users</label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label for="" style="color: #7daa40 !important;">Shopify Users</label>
-                                                <select class="js-select2 form-control" name="users[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Users.." multiple>
-                                                    @foreach($shopify_users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                        <div class="drop-content">
+                                            <div @if(count($stores) > 5) class="sales-stores-section"  @else class="mb2" @endif >
+                                                <label style="margin-left: 15px" for="material-error">Stores</label>
+                                                @if(count($stores) > 0)
+                                                    @foreach($stores as $store)
+                                                        <div class="col-md-12">
+                                                            <div class="custom-control custom-checkbox d-inline-block">
+                                                                <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="store_{{$store->id}}">
+                                                                <label class="custom-control-label"  for="store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
+                                                            </div>
+                                                        </div>
 
-                                            <div class="col-md-12">
-                                                <label for="" style="color: #7daa40 !important;">Non-Shopify Users</label>
-                                                <select class="js-select2 form-control" name="users[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Users.." multiple>
-                                                    @foreach($non_shopify_users as $user)
-                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                     @endforeach
-                                                </select>
+                                                @else
+                                                    <div class="col-md-12">
+                                                        <p> No Store Available</p>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
+                                                <label style="margin-left: 15px" for="material-error">Non-Shopify Users</label>
+                                                @if(count($users) > 0)
+                                                    @foreach($users as $user)
+                                                        <div class="col-md-12">
+                                                            <div class="custom-control custom-checkbox d-inline-block">
+                                                                <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else  <div class="col-md-12">
+                                                    <p> No User Available</p>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
+
 
 
                                         <div class="text-left mt-2">
