@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $user = Auth::user();
                 $approved_wishlist = Wishlist::where('status_id', 2)->where('user_id', $user->id)->count();
+                $completed_wishlist = Wishlist::where('status_id', 5)->where('shop_id', $user->id)->count();
+
 
                 if ($user->has_wallet == null) {
                     $balance = 0;
@@ -64,7 +66,10 @@ class AppServiceProvider extends ServiceProvider
                   $query->whereHas('to_shops',function ($q) use ($shop){
                       $q->where('shopify_domain',$shop->shopify_domain);
                   });
+
                   $approved_wishlist = Wishlist::where('status_id', 2)->where('shop_id', $shop->id)->count();
+                  $completed_wishlist = Wishlist::where('status_id', 5)->where('shop_id', $shop->id)->count();
+
                   if(count($shop->has_user) > 0){
                       if($shop->has_user[0]->has_wallet != null){
                           $wallet =  $shop->has_user[0]->has_wallet;
@@ -106,6 +111,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'balance' => $balance,
                 'approved_wishlist' => $approved_wishlist,
+                'completed_wishlist' => $completed_wishlist,
                 'notifications' => $notifications,
                 'notifications_count' =>$notifications_count,
                 'wishlist_request_count' => $wishlist_request_count,
