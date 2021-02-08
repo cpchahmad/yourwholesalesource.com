@@ -359,15 +359,19 @@
 
                                     @if($template->id == '20')
                                         @php
-                                            $stores = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
+                                            $stores = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->whereHas('has_shops')
                                               ->get();
 
-                                            $stores_with_orders = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
-                                              ->whereHas('has_orders', function() {})
+                                            $stores_with_orders = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->whereHas('has_shops')
                                               ->get();
 
-                                            $stores_with_no_orders = \App\Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com', 'fantasy-supplier.myshopify.com'])
-                                              ->whereDoesntHave('has_orders', function() {})
+                                            $stores_with_no_orders = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->whereHas('has_shops')
                                               ->get();
 
                                             $users = \App\User::role('non-shopify-users')
@@ -388,8 +392,8 @@
                                                     @foreach($stores as $store)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="store_{{$store->id}}">
-                                                                <label class="custom-control-label"  for="store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
+                                                                <input type="checkbox" name="users[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
+                                                                <label class="custom-control-label"  for="user_{{$store->id}}">{{$store->name}} ({{$store->email}})</label>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -446,8 +450,8 @@
                                                     @foreach($stores_with_no_orders as $user)
                                                         <div class="col-md-12">
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="users[]" value="{{$user->id}}" class="custom-control-input checkbox-to-check" id="user_{{$user->id}}">
-                                                                <label class="custom-control-label"  for="user_{{$user->id}}">{{$user->name}} ({{$user->email}})</label>
+                                                                <input type="checkbox" name="stores[]" value="{{$store->id}}" class="custom-control-input checkbox-to-check" id="store_{{$store->id}}">
+                                                                <label class="custom-control-label"  for="store_{{$store->id}}">{{explode('.',$store->shopify_domain)[0]}} ({{$store->shopify_domain}})</label>
                                                             </div>
                                                         </div>
                                                     @endforeach
