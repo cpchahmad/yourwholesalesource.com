@@ -29,6 +29,9 @@ class ShopifyUsersController extends Controller
             $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
 
             $orders = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $paid_orders_count = RetailerOrder::where('paid', 1)->where('user_id', $user->id)->count();
+            $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('user_id', $user->id)->count();
+            $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('user_id', $user->id)->count();
             $sales = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
             $refunds =  RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $profit = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
@@ -67,6 +70,9 @@ class ShopifyUsersController extends Controller
         } else {
 
             $orders = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->count();
+            $paid_orders_count = RetailerOrder::where('paid', 1)->where('user_id', $user->id)->count();
+            $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('user_id', $user->id)->count();
+            $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('user_id', $user->id)->count();
             $sales = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->sum('cost_to_pay');
             $refunds = RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->sum('cost_to_pay');
             $profit = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->sum('cost_to_pay');
@@ -138,6 +144,9 @@ class ShopifyUsersController extends Controller
             'graph_four_values' => $graph_four_order_values,
             'graph_four_labels' => $graph_four_order_dates,
             'top_products' => $top_products,
+            'paid_orders_count' => $paid_orders_count,
+            'unfullfilled_orders_count' => $unfullfilled_orders_count,
+            'canceled_order_count' => $canceled_order_count,
         ]);
 
     }
