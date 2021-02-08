@@ -158,60 +158,15 @@
             <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
-        @php
-            $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
-       /*Local Shop Model!*/
-       $shop= \App\Shop::find($shop->id);
-           if($shop->has_manager != null){
-           $manager = $shop->has_manager;
-           }
-           else{
-               $manager = null;
-           }
-
-         if(count($shop->has_user) > 0){
-            $associated_user =   $shop->has_user[0];
-        }
-        else{
-            $associated_user = null;
-        }
-
-        @endphp
-        <!-- User Dropdown -->
-            @if($manager != null)
-                <div  class="dropdown d-inline-block ml-2">
-                    <button  type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
-                        <span class="d-none d-sm-inline-block ml-1">Sales Manager {{$manager->name}} {{$manager->last_name}}</span>
-                        <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-left p-0 border-0 font-size-sm" style="width: 460px" aria-labelledby="page-header-user-dropdown">
-                        <div class="p-3 text-center">
-                            <img class="img-avatar-thumb" style="display: inline-block !important;
-     width: 70px !important;
-     height: 70px !important;
-    border-radius: 0;" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="">
-                            <h6 style="margin-top: 10px">I am {{$manager->name}} {{$manager->last_name}}, Your Dedicated Sales Manager</h6>
-                        </div>
-                        <div class="p-2">
-                            <p class="p-2" style="margin-bottom: 0"> I am here to help you with any kind of queries you might have. Feel free to contact me using tickets so that i can help you with understanding how can you get most of WeFullFill. Thanks </p>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('store.help-center')}}">
-                                <span>Contact Me</span>
-                                <i class="fa fa-ticket-alt"></i>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-
 
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="d-inline-block mr-3">
                 <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
+                <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist  {{$approved_wishlist}}  </span>
+                <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist  {{$completed_wishlist}}  </span>
+                <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets  {{$pending_ticket_count}}  </span>
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
             <div class="d-inline-block mr-3">
