@@ -359,8 +359,14 @@
 
                                     @if($template->id == '20')
                                         @php
-                                            $users = \App\User::role('non-shopify-users')
+                                            $shopify_users = \App\User::role('non-shopify-users')
                                               ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->has('has_shops')
+                                              ->get();
+
+                                            $non_shopify_users = \App\User::role('non-shopify-users')
+                                              ->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com'])
+                                              ->doesnthave('has_shops')
                                               ->get();
                                         @endphp
 
@@ -369,8 +375,18 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
+                                                <label for="" style="color: #7daa40 !important;">Shopify Users</label>
                                                 <select class="js-select2 form-control" name="users[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Users.." multiple>
-                                                    @foreach($users as $user)
+                                                    @foreach($shopify_users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label for="" style="color: #7daa40 !important;">Non-Shopify Users</label>
+                                                <select class="js-select2 form-control" name="users[]" style="width: 100%; border-radius: 0 !important;" data-placeholder="Select Users.." multiple>
+                                                    @foreach($non_shopify_users as $user)
                                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                                     @endforeach
                                                 </select>
