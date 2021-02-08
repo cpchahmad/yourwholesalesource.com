@@ -122,7 +122,7 @@
 
 <header id="page-header">
     <div class="content-header">
-        <div class="d-flex align-items-center w-100 justify-content-between">
+        <div class="d-flex align-items-center  justify-content-between">
             <button type="button" class="btn btn-sm btn-dual mr-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
                 <i class="fa fa-fw fa-bars"></i>
             </button>
