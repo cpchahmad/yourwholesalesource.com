@@ -82,20 +82,20 @@ class SingleStoreController extends Controller
                 ->get();
 
 
-            $ordersQP = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id', $shop->id)
-                ->whereIn('paid', [1])
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
-
-            $productQ = DB::table('retailer_products')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                ->where('shop_id', $shop->id)
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
+//            $ordersQP = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('shop_id', $shop->id)
+//                ->whereIn('paid', [1])
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
+//
+//            $productQ = DB::table('retailer_products')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+//                ->where('shop_id', $shop->id)
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
 
 
         } else {
@@ -117,18 +117,18 @@ class SingleStoreController extends Controller
                 ->get();
 
 
-            $ordersQP = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id', $shop->id)
-                ->whereIn('paid', [1])
-                ->groupBy('date')
-                ->get();
-
-            $productQ = DB::table('retailer_products')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                ->where('shop_id', $shop->id)
-                ->groupBy('date')
-                ->get();
+//            $ordersQP = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('shop_id', $shop->id)
+//                ->whereIn('paid', [1])
+//                ->groupBy('date')
+//                ->get();
+//
+//            $productQ = DB::table('retailer_products')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+//                ->where('shop_id', $shop->id)
+//                ->groupBy('date')
+//                ->get();
 
         }
 
@@ -137,11 +137,11 @@ class SingleStoreController extends Controller
         $graph_one_order_values = $ordersQ->pluck('total')->toArray();
         $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
 
-        $graph_three_order_dates = $ordersQP->pluck('date')->toArray();
-        $graph_three_order_values = $ordersQP->pluck('total_sum')->toArray();
-
-        $graph_four_order_dates = $productQ->pluck('date')->toArray();
-        $graph_four_order_values = $productQ->pluck('total')->toArray();
+//        $graph_three_order_dates = $ordersQP->pluck('date')->toArray();
+//        $graph_three_order_values = $ordersQP->pluck('total_sum')->toArray();
+//
+//        $graph_four_order_dates = $productQ->pluck('date')->toArray();
+//        $graph_four_order_values = $productQ->pluck('total')->toArray();
 
 
         $top_products = Product::join('retailer_products', function ($join) use ($shop) {
@@ -171,10 +171,10 @@ class SingleStoreController extends Controller
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
             'graph_two_values' => $graph_two_order_values,
-            'graph_three_labels' => $graph_three_order_dates,
-            'graph_three_values' => $graph_three_order_values,
-            'graph_four_values' => $graph_four_order_values,
-            'graph_four_labels' => $graph_four_order_dates,
+//            'graph_three_labels' => $graph_three_order_dates,
+//            'graph_three_values' => $graph_three_order_values,
+//            'graph_four_values' => $graph_four_order_values,
+//            'graph_four_labels' => $graph_four_order_dates,
             'top_products' => $top_products,
             'paid_orders_count' => $paid_orders_count,
             'unfullfilled_orders_count' => $unfullfilled_orders_count,

@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
                                 <div class="custom-control custom-switch custom-control-success mb-1 d-flex justify-content-end">

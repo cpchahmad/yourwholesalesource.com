@@ -33,7 +33,7 @@ class ShopifyUsersController extends Controller
             $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('user_id', $user->id)->count();
             $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('user_id', $user->id)->count();
             $sales = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
-            $refunds =  RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            //$refunds =  RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $profit = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
             $cost = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
 
@@ -47,21 +47,21 @@ class ShopifyUsersController extends Controller
                 ->get();
 
 
-            $ordersQP = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('user_id',$user->id)
-                ->whereIn('paid',[1])
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
-
-            $ordersQR = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('user_id',$user->id)
-                ->whereIn('paid',[2])
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
+//            $ordersQP = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('user_id',$user->id)
+//                ->whereIn('paid',[1])
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
+//
+//            $ordersQR = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('user_id',$user->id)
+//                ->whereIn('paid',[2])
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
 
 
 
@@ -74,7 +74,7 @@ class ShopifyUsersController extends Controller
             $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('user_id', $user->id)->count();
             $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('user_id', $user->id)->count();
             $sales = RetailerOrder::whereIN('paid',[1,2])->where('user_id',$user->id)->sum('cost_to_pay');
-            $refunds = RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->sum('cost_to_pay');
+            //$refunds = RetailerOrder::whereIN('paid',[2])->where('user_id',$user->id)->sum('cost_to_pay');
             $profit = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->sum('cost_to_pay');
             $cost = RetailerOrder::whereIN('paid',[1])->where('user_id',$user->id)->sum('cost_to_pay');
 
@@ -86,19 +86,19 @@ class ShopifyUsersController extends Controller
                 ->get();
 
 
-            $ordersQP = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('user_id',$user->id)
-                ->whereIn('paid',[1])
-                ->groupBy('date')
-                ->get();
-
-            $ordersQR = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('user_id',$user->id)
-                ->whereIn('paid',[2])
-                ->groupBy('date')
-                ->get();
+//            $ordersQP = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('user_id',$user->id)
+//                ->whereIn('paid',[1])
+//                ->groupBy('date')
+//                ->get();
+//
+//            $ordersQR = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('user_id',$user->id)
+//                ->whereIn('paid',[2])
+//                ->groupBy('date')
+//                ->get();
 
         }
 
@@ -106,12 +106,12 @@ class ShopifyUsersController extends Controller
         $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
         $graph_one_order_values = $ordersQ->pluck('total')->toArray();
         $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
-
-        $graph_four_order_dates = $ordersQP->pluck('date')->toArray();
-        $graph_four_order_values = $ordersQP->pluck('total_sum')->toArray();
-
-        $graph_three_order_dates = $ordersQR->pluck('date')->toArray();
-        $graph_three_order_values = $ordersQR->pluck('total_sum')->toArray();
+//
+//        $graph_four_order_dates = $ordersQP->pluck('date')->toArray();
+//        $graph_four_order_values = $ordersQP->pluck('total_sum')->toArray();
+//
+//        $graph_three_order_dates = $ordersQR->pluck('date')->toArray();
+//        $graph_three_order_values = $ordersQR->pluck('total_sum')->toArray();
 
 
         $top_products =  Product::join('retailer_order_line_items',function($join) use ($user){
@@ -135,14 +135,14 @@ class ShopifyUsersController extends Controller
             'profit' => $profit,
             'sales' =>$sales,
             'cost' =>$cost,
-            'refunds' => $refunds,
+//            'refunds' => $refunds,
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
             'graph_two_values' => $graph_two_order_values,
-            'graph_three_labels' => $graph_three_order_dates,
-            'graph_three_values' => $graph_three_order_values,
-            'graph_four_values' => $graph_four_order_values,
-            'graph_four_labels' => $graph_four_order_dates,
+//            'graph_three_labels' => $graph_three_order_dates,
+//            'graph_three_values' => $graph_three_order_values,
+//            'graph_four_values' => $graph_four_order_values,
+//            'graph_four_labels' => $graph_four_order_dates,
             'top_products' => $top_products,
             'paid_orders_count' => $paid_orders_count,
             'unfullfilled_orders_count' => $unfullfilled_orders_count,
