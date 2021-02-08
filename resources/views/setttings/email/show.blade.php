@@ -372,8 +372,9 @@
                                             <label for="" style="color: #7daa40 !important;">Select Users</label>
                                         </div>
                                         <div class="drop-content text-left">
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Stores</label>
                                             <div @if(count($stores) > 5) class="sales-stores-section"  @else class="mb2" @endif >
-                                                <label style="margin-left: 15px" for="material-error">Stores</label>
+
                                                 @if(count($stores) > 0)
                                                     @foreach($stores as $store)
                                                         <div class="col-md-12">
@@ -389,8 +390,9 @@
                                                     </div>
                                                 @endif
                                             </div>
+                                            <label style="margin-left: 15px;color: #7daa40 !important;" for="material-error">Non-Shopify Users</label>
                                             <div @if(count($users) > 5) class="sales-stores-section" @else class="mb2" @endif>
-                                                <label style="margin-left: 15px" for="material-error">Non-Shopify Users</label>
+
                                                 @if(count($users) > 0)
                                                     @foreach($users as $user)
                                                         <div class="col-md-12">
