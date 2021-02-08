@@ -159,7 +159,6 @@ class EmailTemplateController extends Controller
             }
         }
 
-
         $template->subject = $request->subject;
         $template->body = $request->body;
 

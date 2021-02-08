@@ -60,6 +60,17 @@ class OrderController extends Controller
         if ($request->has('search')) {
             $orders->where('name', 'LIKE', '%' . $request->input('search') . '%');
         }
+
+        if ($request->has('unpaid')) {
+            $orders->where('paid', 0);
+        }
+        if ($request->has('unfulfilled')) {
+            $orders->where('status', 'unfulfilled');
+        }
+        if ($request->has('cancel')) {
+            $orders->where('status', 'cancelled');
+        }
+
         $orders = $orders->orderBy('name', 'DESC')->paginate(30);
         return view('single-store.orders.index')->with([
             'orders' => $orders,
