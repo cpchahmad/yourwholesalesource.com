@@ -85,24 +85,25 @@
                     <div class="col-md-12">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
-                                <div class="custom-control custom-switch custom-control-success mb-1">
+                                <div class="custom-control custom-switch custom-control-success mb-1 d-flex justify-content-end">
                                     <input type="checkbox" class="custom-control-input status-switch" id="graph_checkbox" name="example-sw-success2">
-                                    <label class="custom-control-label" for="graph_checkbox">Sales / Orders</label>
+                                    <label class="custom-control-label" for="graph_checkbox">Orders / Sales</label>
                                 </div>
                                 <canvas id="canvas-graph-one-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_one_values)}}"></canvas>
+                                <canvas id="canvas-graph-two-store" style="display: none;" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="block block-rounded block-link-pop">
-                            <div class="block-content block-content-full">
-                                <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="block block-rounded block-link-pop">--}}
+{{--                            <div class="block-content block-content-full">--}}
+{{--                                <canvas id="canvas-graph-two-store" data-labels="{{json_encode($graph_one_labels)}}" data-values="{{json_encode($graph_two_values)}}"></canvas>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 {{--                <div class="row">--}}
 {{--                    <div class="col-md-6">--}}
 {{--                        <div class="block block-rounded block-link-pop">--}}

@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    // Grapgh checkbox
+    $('body').on('change','#graph_checkbox',function () {
+        if($(this).is(':checked')){
+            $('#canvas-graph-two-store').show();
+            $('#canvas-graph-one-store').hide();
+        }
+        else{
+            $('#canvas-graph-two-store').hide();
+            $('#canvas-graph-one-store').show();
+        }
+    });
+
     // Inventory Management Status Checkbox
     $(document).on('change','.inventory-checkbox',function () {
         console.log(234);
