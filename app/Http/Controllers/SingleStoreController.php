@@ -64,8 +64,11 @@ class SingleStoreController extends Controller
             $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
 
             $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $paid_orders_count = RetailerOrder::where('paid', 1)->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
-            $products = RetailerProduct::where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+//            $products = RetailerProduct::where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
             $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
 
@@ -98,8 +101,11 @@ class SingleStoreController extends Controller
         } else {
 
             $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->count();
+            $paid_orders_count = RetailerOrder::where('paid', 1)->where('shop_id', $shop->id)->count();
+            $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('shop_id', $shop->id)->count();
+            $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('shop_id', $shop->id)->count();
             $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->sum('cost_to_pay');
-            $products = RetailerProduct::where('shop_id', $shop->id)->count();
+//            $products = RetailerProduct::where('shop_id', $shop->id)->count();
             $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
             $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
 
@@ -161,7 +167,7 @@ class SingleStoreController extends Controller
             'profit' => $profit,
             'sales' => $sales,
             'cost' => $cost,
-            'products' => $products,
+//            'products' => $products,
             'graph_one_labels' => $graph_one_order_dates,
             'graph_one_values' => $graph_one_order_values,
             'graph_two_values' => $graph_two_order_values,
@@ -170,6 +176,9 @@ class SingleStoreController extends Controller
             'graph_four_values' => $graph_four_order_values,
             'graph_four_labels' => $graph_four_order_dates,
             'top_products' => $top_products,
+            'paid_orders_count' => $paid_orders_count,
+            'unfullfilled_orders_count' => $unfullfilled_orders_count,
+            'canceled_order_count' => $canceled_order_count,
         ]);
 
     }
