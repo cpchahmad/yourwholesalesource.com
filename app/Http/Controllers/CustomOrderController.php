@@ -1096,7 +1096,20 @@ class CustomOrderController extends Controller
     {
         $user = User::find(Auth::id());
         $wishlists = Wishlist::where('user_id', $user->id)->newQuery();
+
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $wishlists->where('status_id','=',$request->input('status'));
+            }
+        }
+
+        if($request->has('imported')) {
+            $wishlists->where('imported_to_store',0);
+        }
+
         $wishlists = $wishlists->orderBy('created_at', 'DESC')->paginate(30);
+
+
 
         return view('non_shopify_users.wishlist.index')->with([
             'user' => $user,
