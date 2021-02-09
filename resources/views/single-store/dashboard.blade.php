@@ -207,7 +207,7 @@
                     @if($manager)
                         <div class="block-content" >
                             <div class="media-body pb-3 text-center">
-                                <img class="img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 18px;">
+                                <img class="img-avatar200 w-25" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="">
                                 <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                 <div class="font-w600">{{$manager->email}}</div>
                                 <div class="text-info">
