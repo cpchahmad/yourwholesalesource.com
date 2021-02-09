@@ -12,10 +12,11 @@
     </style>
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-                <h1 class="flex-sm-fill h4 my-2">
+            <div class="d-flex flex-column justify-content-between flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill h4 my-2 py-3">
                     Dashboard
                 </h1>
+                @include('inc.latest_news')
             </div>
         </div>
     </div>
