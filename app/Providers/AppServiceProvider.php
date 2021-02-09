@@ -101,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
                   $open_wishlist = 0;
                   $completed_wishlist = 0;
                   $pending_ticket_count = 0;
+                  $unread_rejected_wishlist = 0;
               }
             }
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
@@ -121,6 +122,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'balance' => $balance,
                 'approved_wishlist' => $approved_wishlist,
+                'unread_rejected_wishlist' => $unread_rejected_wishlist,
                 'open_wishlist' => $open_wishlist,
                 'completed_wishlist' => $completed_wishlist,
                 'pending_ticket_count' => $pending_ticket_count,
