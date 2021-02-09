@@ -32,6 +32,7 @@
         </div>
         <div class="row">
             <div class="col-md-9">
+                <!-- Orders -->
                 <div class="row block">
                     <div class="col-md-12">
                         <div class="block-title  p-3">My Orders</div>
@@ -85,6 +86,46 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Wishlist -->
+                <div class="row block">
+                    <div class="col-md-12">
+                        <div class="block-title  p-3">My Wishlist</div>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Outstanding</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{ $open_wishlist }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Approved</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{ $approved_wishlist }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Rejected</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
+                            <div class="block-content block-content-full">
+                                <div class="font-size-sm font-w600 text-uppercase text-muted">Completed</div>
+                                <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12 px-0">
                         <div class="block block-rounded block-link-pop">
