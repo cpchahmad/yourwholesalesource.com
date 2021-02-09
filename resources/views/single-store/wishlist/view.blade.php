@@ -238,7 +238,7 @@
 
 
                                 @if(!in_array($wishlist->has_product->id,$wishlist->has_store->has_imported->pluck('id')->toArray()))
-                                    <button onclick="window.location.href='{{ route('store.product.wefulfill.add-to-import-list',$wishlist->has_product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
+                                    <button onclick="window.location.href='{{ route('store.product.wefulfill.add-to-import-list',['id'=>$wishlist->has_product->id,'wishlist_id'=>$wishlist->id])}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
                                 @else
                                     <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
                                 @endif
