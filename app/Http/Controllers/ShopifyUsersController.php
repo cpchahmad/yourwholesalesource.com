@@ -110,10 +110,10 @@ class ShopifyUsersController extends Controller
 //        $graph_three_order_dates = $ordersQR->pluck('date')->toArray();
 //        $graph_three_order_values = $ordersQR->pluck('total_sum')->toArray();
 
-        $unread_rejected_wishlist = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+        $unread_rejected_wishlist = Notification::where('sub_type', 'Wishlist Rejected')
             ->whereHas('to_users',function ($q) use ($user){
                 $q->where('email',$user->email);
-            })->count();
+            })->where('read',0)->count();
 
         $top_products =  Product::join('retailer_order_line_items',function($join) use ($user){
             $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')

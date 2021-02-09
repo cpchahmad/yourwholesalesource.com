@@ -132,10 +132,10 @@ class SingleStoreController extends Controller
 
         }
 
-        $unread_rejected_wishlist = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+        $unread_rejected_wishlist = Notification::where('sub_type', 'Wishlist Rejected')
             ->whereHas('to_shops',function ($q) use ($shop){
                 $q->where('shopify_domain',$shop->shopify_domain);
-            })->count();
+            })->where('read',0)->count();
 
 
         $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
@@ -574,10 +574,10 @@ class SingleStoreController extends Controller
         $wishlist = Wishlist::where('user_id', $user->id)->newQuery();
 
         if($request->read == 1) {
-            $notifications = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+            $notifications = Notification::where('sub_type', 'Wishlist Rejected')
                 ->whereHas('to_shops',function ($q) use ($shop){
                     $q->where('shopify_domain',$shop->shopify_domain);
-                })->get();
+                })->where('read',0)->get();
 
             foreach($notifications as $notification) {
                 $notification->read = 1;

@@ -1098,10 +1098,10 @@ class CustomOrderController extends Controller
         $wishlists = Wishlist::where('user_id', $user->id)->newQuery();
 
         if($request->read == 1) {
-            $notifications = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+            $notifications = Notification::where('sub_type', 'Wishlist Rejected')
                 ->whereHas('to_users',function ($q) use ($user){
                     $q->where('email',$user->email);
-                })->get();
+                })->where('read',0)->get();
 
             foreach($notifications as $notification) {
                 $notification->read = 1;
