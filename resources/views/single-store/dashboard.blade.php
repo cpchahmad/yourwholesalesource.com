@@ -385,13 +385,13 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
-                            <i class="fa fa-speaker-deck"></i>
+                            <i class="fa fa-newspaper text-city"></i>
                             Announcements
                         </div>
                     </div>
                     <div class="block-content pb-4 text-left" >
                         @forelse(\App\News::latest()->limit(5)->get() as $news)
-                            <i class="fa fa-star text-success" ></i>
+                            <i class="fa fa-valume-up text-city" ></i>
                             <strong data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ \Illuminate\Support\Str::limit($news->title, $limit = 25, $end = '(view details)') }} </strong>
                             <div class="modal fade" id="news_modal_{{$news->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
