@@ -98,6 +98,7 @@ class AppServiceProvider extends ServiceProvider
                   }
 
                   $unread_rejected_wishlist = $query->where('sub_type', 'Wishlist Rejected')->count();
+                  dd($unread_rejected_wishlist);
               }
               else{
                   $balance = 0;

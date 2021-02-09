@@ -474,7 +474,10 @@ Route::get('/test', function () {
     $user = User::find(2);
     $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')->whereHas('to_users',function ($q) use ($user){
         $q->where('email',$user->email);
-    })->count();
+    })
+        ->orWhereHas('to_shops',function ($q) use ($user){
+            $q->where('email',$user->email);
+        })->count();
 
     dd($query);
 });
