@@ -208,7 +208,7 @@
                     @if($manager)
                         <div class="block-content" >
                             <div class="media-body pb-3 text-center">
-                                <img class="img-avatar200 w-25" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="">
+                                <img class="img-avatar200 img-avatar-rounded w-25" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 100px !important; height: 100px !important;">
                                 <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                 <div class="font-w600">{{$manager->email}}</div>
                                 <div class="text-info">
@@ -245,7 +245,7 @@
                         </div>
                     </div>
                     <div class="block-content pb-4" >
-                        <div class="font-size-sm font-w600 text-uppercase text-muted">Help us improve our application by providing your thoughts and opinions!</div>
+                        <div class="font-size-sm   text-muted">Help us improve our application by providing your thoughts and opinions!</div>
                         <button data-target="#feedback" data-toggle="modal" class="btn btn-outline-danger btn-block d-block mt-4 p-2">Feedback</button>
 
                         <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
