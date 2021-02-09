@@ -20,6 +20,10 @@ class WareHouse extends Model
 
     public function has_inventory($product) {
         $flag = false;
+
+        if(!$product)
+            return false;
+
         $real_variants = $product->hasVariants()->pluck('id')->toArray();
 
         if(WarehouseInventory::where('warehouse_id', $this->id)->whereIn('product_variant_id', $real_variants)->exists()) {
