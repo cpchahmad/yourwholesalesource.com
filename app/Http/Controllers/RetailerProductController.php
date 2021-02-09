@@ -9,6 +9,7 @@ use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\Shop;
 use App\WareHouse;
+use App\Wishlist;
 use Illuminate\Http\Request;
 
 class RetailerProductController extends Controller
@@ -28,7 +29,6 @@ class RetailerProductController extends Controller
     }
 
     public function add_to_import_list(Request $request){
-        dd($request->all());
 //        dd($this->helper->getLocalShop()->has_user);
         $product = Product::find($request->id);
         if($product != null){
@@ -38,6 +38,12 @@ class RetailerProductController extends Controller
                 ]);
             }
             else{
+                if($request->wishlist_id) {
+                    $wishlist = Wishlist::find($request->wishlist_id);
+                    $wishlist->imported_to_store = 1;
+                    $wishlist->save();
+                }
+
                 /*Product Copy*/
                 $retailerProduct = new RetailerProduct();
 
