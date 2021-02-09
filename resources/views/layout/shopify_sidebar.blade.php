@@ -149,7 +149,7 @@
                 <a href="/users/wishlist?status=2" class="text-white">
                     <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist  {{$approved_wishlist}} </span>
                 </a>
-                <a href="/users/wishlist?status=5" class="text-white">
+                <a href="/users/wishlist?status=5&imported=0" class="text-white">
                     <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist  {{$completed_wishlist}}  </span>
                 </a>
                 <a href="/users/help-center" class="text-white">
