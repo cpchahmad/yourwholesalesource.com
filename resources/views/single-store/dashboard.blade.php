@@ -44,7 +44,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
                                 <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
@@ -52,7 +52,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)">
+                        <a class="block block-rounded block-link-pop" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;" href="javascript:void(0)">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
                                 <div class="font-size-h2 font-w400 text-dark">${{number_format($profit,2)}}</div>
@@ -60,7 +60,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['unpaid'=>1]) }}">
+                        <a class="block block-rounded block-link-pop"  style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;"href="{{ route('store.orders', ['unpaid'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unpaid</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unpaid_orders_count}}</div>
@@ -68,7 +68,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['unfulfilled'=>1]) }}">
+                        <a class="block block-rounded block-link-pop" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;" href="{{ route('store.orders', ['unfulfilled'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unfulfilled</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unfullfilled_orders_count}}</div>
@@ -76,7 +76,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="{{ route('store.orders', ['cancel'=>1]) }}">
+                        <a class="block block-rounded block-link-pop" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;" href="{{ route('store.orders', ['cancel'=>1]) }}">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Cancel/Refund</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$canceled_order_count}}</div>
