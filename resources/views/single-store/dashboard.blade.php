@@ -227,7 +227,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
-                            <i class="si si-wallet text-primary"></i>
+                            <i class="fa fa-wallet text-city text-primary"></i>
                             Your Wallet
                         </div>
                     </div>
@@ -240,17 +240,47 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
-                            <i class="si si-pencil text-primary"></i>
+                            <i class="fa fa-pencil-alt text-primary"></i>
                             Help us improve!
                         </div>
                     </div>
                     <div class="block-content pb-4 text-right" >
-                        <form method="POST" action="{{ route('suggestion.create') }}">
-                            @csrf
-                            <textarea class="form-control" name="suggestion"></textarea>
-                            <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
-                            <button class="btn btn-sm btn-success mt-2">Submit</button>
-                        </form>
+                        <button data-target="#feedback" data-toggle="modal" class="btn btn-outline-success d-block mt-4 p-2">Feedback</button>
+                        <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+                                <div class="modal-content">
+                                    <div class="block block-themed block-transparent mb-0">
+                                        <div class="block-header bg-primary-dark">
+                                            <h3 class="block-title">Help us improve our App</h3>
+                                            <div class="block-options">
+                                                <button type="button" class="btn-block-option">
+                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <form action="{{ route('suggestion.create') }}" method="post"  enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="block-content font-size-sm">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Feedbacks</label>
+                                                            <textarea class="form-control" name="suggestion"></textarea>
+                                                            <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="block-content block-content-full text-right border-top">
+
+                                                <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
