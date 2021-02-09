@@ -113,7 +113,7 @@ class ShopifyUsersController extends Controller
         $unread_rejected_wishlist = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
             ->whereHas('to_users',function ($q) use ($user){
                 $q->where('email',$user->email);
-            })->get();
+            })->count();
 
         $top_products =  Product::join('retailer_order_line_items',function($join) use ($user){
             $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')

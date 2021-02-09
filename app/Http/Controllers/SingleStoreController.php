@@ -135,7 +135,7 @@ class SingleStoreController extends Controller
         $unread_rejected_wishlist = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
             ->whereHas('to_shops',function ($q) use ($shop){
                 $q->where('shopify_domain',$shop->shopify_domain);
-            })->get();
+            })->count();
 
 
         $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
