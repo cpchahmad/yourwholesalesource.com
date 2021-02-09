@@ -171,7 +171,7 @@
                                 <th style="vertical-align: top">Price</th>
                                 <th style="vertical-align: top">Cost</th>
                                 <th>
-                                    <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">Shipping</a>
+                                    <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">View Shipping</a>
                                 </th>
                                 <div class="modal fade" id="shipping_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
