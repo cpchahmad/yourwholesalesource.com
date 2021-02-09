@@ -182,6 +182,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
+                            <i class="fa fa-user"></i>
                             Your Account Manager
                         </div>
                     </div>
