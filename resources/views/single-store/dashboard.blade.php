@@ -226,7 +226,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title text-center">
-                            Your Wallet Balance
+                            Your Wallet
                         </div>
                     </div>
                     <div class="block-content pb-4 text-center" >
