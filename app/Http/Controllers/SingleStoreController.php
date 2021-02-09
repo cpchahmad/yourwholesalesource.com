@@ -567,6 +567,18 @@ class SingleStoreController extends Controller
         $user = $shop->has_user()->first();
         $wishlist = Wishlist::where('user_id', $user->id)->newQuery();
 
+        if($request->read == 1) {
+            dump(213);
+
+            $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+                ->whereHas('to_shops',function ($q) use ($shop){
+                    $q->where('shopify_domain',$shop->shopify_domain);
+                })->count();
+
+            dd($query);
+
+        }
+
 
         if($request->has('search')){
             $wishlist->where('product_name','LIKE','%'.$request->input('search').'%')
