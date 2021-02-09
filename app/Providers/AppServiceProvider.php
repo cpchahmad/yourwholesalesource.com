@@ -34,8 +34,8 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $user = Auth::user();
                 $approved_wishlist = Wishlist::where('status_id', 2)->where('user_id', $user->id)->count();
-                $completed_wishlist = Wishlist::where('status_id', 5)->where('imported_to_store',0)->where('shop_id', $user->id)->count();
-                $pending_ticket_count = Ticket::where('status_id', 2)->where('shop_id', $user->id)->count();
+                $completed_wishlist = Wishlist::where('status_id', 5)->where('imported_to_store',0)->where('user_id', $user->id)->count();
+                $pending_ticket_count = Ticket::where('status_id', 2)->where('user_id', $user->id)->count();
 
 
                 if ($user->has_wallet == null) {
