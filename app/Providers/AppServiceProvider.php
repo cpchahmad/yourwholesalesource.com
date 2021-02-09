@@ -120,7 +120,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'balance' => $balance,
                 'approved_wishlist' => $approved_wishlist,
-                'open_wishlist' => $approved_wishlist,
+                'open_wishlist' => $open_wishlist,
                 'completed_wishlist' => $completed_wishlist,
                 'pending_ticket_count' => $pending_ticket_count,
                 'notifications' => $notifications,
