@@ -26,12 +26,12 @@ class WareHouse extends Model
 
         $real_variants = $product->hasVariants()->pluck('id')->toArray();
 
-        if(WarehouseInventory::where('warehouse_id', $this->id)->whereIn('product_variant_id', $real_variants)->exists()) {
+        if(WarehouseInventory::where('warehouse_id', $this->id)->whereIn('product_variant_id', $real_variants)->exists())
             $flag = true;
-        }
-        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->exists()) {
+
+        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->exists())
             $flag = true;
-        }
+
         return $flag;
     }
 
