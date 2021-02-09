@@ -173,36 +173,37 @@
                                 <th>
                                     <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">View Shipping</a>
                                 </th>
-                                <div class="modal fade" id="shipping_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-popout" role="document">
-                                        <div class="modal-content">
-                                            <div class="block block-themed block-transparent mb-0">
-                                                <div class="block-header bg-primary-dark">
-                                                    <h3 class="block-title">Calculate Shipping Zone</h3>
-                                                    <div class="block-options">
-                                                        <button type="button" class="btn-block-option">
-                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="block-content font-size-sm">
-                                                    <div class="text-center loader-div p-2">
-                                                        <h5>Calculating Shipping Price....</h5>
-                                                        <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
-                                                    </div>
-                                                    <div class="drop-content">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <th style="vertical-align: top">Quantity</th>
                                 <th style="vertical-align: top">SKU</th>
                                 <th style="vertical-align: top">Barcode</th>
                             </tr>
+                            <div class="modal fade" id="shipping_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-popout" role="document">
+                                    <div class="modal-content">
+                                        <div class="block block-themed block-transparent mb-0">
+                                            <div class="block-header bg-primary-dark">
+                                                <h3 class="block-title">Calculate Shipping Zone</h3>
+                                                <div class="block-options">
+                                                    <button type="button" class="btn-block-option">
+                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="block-content font-size-sm">
+                                                <div class="text-center loader-div p-2">
+                                                    <h5>Calculating Shipping Price....</h5>
+                                                    <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                                                </div>
+                                                <div class="drop-content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             </thead>
                             @if(count($product->hasVariants) > 0)
                                 @foreach($product->hasVariants as $index => $v)
