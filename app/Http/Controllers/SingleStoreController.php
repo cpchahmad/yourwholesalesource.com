@@ -568,15 +568,18 @@ class SingleStoreController extends Controller
         $wishlist = Wishlist::where('user_id', $user->id)->newQuery();
 
         if($request->read == 1) {
-            dump(213);
-
-            $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+            $notifications = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
                 ->whereHas('to_shops',function ($q) use ($shop){
                     $q->where('shopify_domain',$shop->shopify_domain);
-                })->count();
+                })->get();
 
-            dd($query);
+            dump($notifications);
 
+            foreach($notifications as $notification) {
+                $notification->markAsRead();
+            }
+
+            dd($notifications);
         }
 
 
