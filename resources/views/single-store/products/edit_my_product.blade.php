@@ -173,7 +173,6 @@
                                 <th>
                                     <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">View Shipping</a>
                                 </th>
-
                                 <th style="vertical-align: top">Quantity</th>
                                 <th style="vertical-align: top">SKU</th>
                                 <th style="vertical-align: top">Barcode</th>
@@ -262,7 +261,7 @@
                                                 <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
                                             </td>
                                             <td><input type="text" class="form-control" readonly value="{{$v->cost}}" placeholder="$0.00"></td>
-                                            <td class="drop-shipping text-center"><input type="text" value="N/A"></td>
+                                            <td class=""><input type="text" value="N/A"></td>
                                             <td><input type="text" readonly class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                             <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
                                             <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder="">
