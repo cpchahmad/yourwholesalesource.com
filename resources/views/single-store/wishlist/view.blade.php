@@ -215,7 +215,7 @@
 
 
                                             @if(!in_array($wishlist->has_product->id,$wishlist->has_store->has_imported->pluck('id')->toArray()))
-                                                <a class="btn btn-sm btn-success" href="{{route('store.product.wefulfill.add-to-import-list',$wishlist->has_product->id)}}">
+                                                <a class="btn btn-sm btn-success" href="{{route('store.product.wefulfill.add-to-import-list',['id'=>$wishlist->has_product->id,'wishlist_id'=>$wishlist->id])}}">
                                                     <i class="fa fa-plus"></i> Add to Import List
                                                 </a>
                                             @endif

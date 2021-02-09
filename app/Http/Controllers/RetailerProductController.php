@@ -28,6 +28,7 @@ class RetailerProductController extends Controller
     }
 
     public function add_to_import_list(Request $request){
+        dd($request);
 //        dd($this->helper->getLocalShop()->has_user);
         $product = Product::find($request->id);
         if($product != null){

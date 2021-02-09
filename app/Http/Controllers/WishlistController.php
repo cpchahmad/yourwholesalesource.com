@@ -299,6 +299,7 @@ class WishlistController extends Controller
             }
             else{
                 $wish->status_id = 5;
+                $wish->imported_to_store = 0;
                 $wish->related_product_id = $request->input('link_product_id');
                 $wish->updated_at = now();
                 $wish->save();
