@@ -565,7 +565,7 @@ class SingleStoreController extends Controller
     {
         $shop = $this->helper->getLocalShop();
         $user = $shop->has_user()->first();
-        $wishlist = Wishlist::where('user_id', $user->id)->newQuery();
+        $wishlist = Wishlist::where('user_id', $user->id)->query();
 
 
         if($request->has('search')){
