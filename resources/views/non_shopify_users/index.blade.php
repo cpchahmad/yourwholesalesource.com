@@ -16,10 +16,12 @@
                 <h1 class="flex-sm-fill h4 my-2">
                     Dashboard
                 </h1>
-                <h1 class="flex-sm-fill h4 my-2">
-                    <i class="fa fa-volume-up text-city" ></i>
-                    {{ \App\News::latest()->first()->title }}
-                </h1>
+                <marquee>
+                    <h1 class="flex-sm-fill h4 my-2">
+                        <i class="fa fa-volume-up text-city" ></i>
+                        {{ \App\News::latest()->first()->title }}
+                    </h1>
+                </marquee>
             </div>
         </div>
     </div>
