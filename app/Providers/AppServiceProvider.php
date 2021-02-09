@@ -73,6 +73,9 @@ class AppServiceProvider extends ServiceProvider
                       $q->where('shopify_domain',$shop->shopify_domain);
                   });
 
+                  $unread_rejected_wishlist = $query->where('sub_type', 'Wishlist Rejected')->count();
+
+
                   $approved_wishlist = Wishlist::where('status_id', 2)->where('shop_id', $shop->id)->count();
                   $open_wishlist = Wishlist::where('status_id', 1)->where('shop_id', $shop->id)->count();
                   $completed_wishlist = Wishlist::where('status_id', 5)->where('imported_to_store',0)->where('shop_id', $shop->id)->count();
@@ -97,8 +100,7 @@ class AppServiceProvider extends ServiceProvider
                       $balance = 0;
                   }
 
-                  $unread_rejected_wishlist = $query->where('sub_type', 'Wishlist Rejected')->count();
-                  dd($unread_rejected_wishlist);
+
               }
               else{
                   $balance = 0;
