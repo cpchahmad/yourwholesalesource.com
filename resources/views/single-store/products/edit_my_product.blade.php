@@ -170,12 +170,12 @@
                                 <th style="vertical-align: top">Image</th>
                                 <th style="vertical-align: top">Price</th>
                                 <th style="vertical-align: top">Cost</th>
-                                <th style="vertical-align: top">Quantity</th>
-                                <th style="vertical-align: top">SKU</th>
-                                <th style="vertical-align: top">Barcode</th>
                                 <th>
                                     <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">Shipping</a>
                                 </th>
+                                <th style="vertical-align: top">Quantity</th>
+                                <th style="vertical-align: top">SKU</th>
+                                <th style="vertical-align: top">Barcode</th>
                             </tr>
                             <div class="modal fade" id="shipping_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
@@ -261,10 +261,10 @@
                                                 <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$v->price}}">
                                             </td>
                                             <td><input type="text" class="form-control" readonly value="{{$v->cost}}" placeholder="$0.00"></td>
+                                            <td class="drop-shipping text-center">N/A</td>
                                             <td><input type="text" readonly class="form-control" value="{{$v->quantity}}" name="quantity" placeholder="0"></td>
                                             <td><input type="text" readonly class="form-control" name="sku" value="{{$v->sku}}"></td>
                                             <td><input type="text" class="form-control" name="barcode" value="{{$v->barcode}}" placeholder=""></td>
-                                            <td class=""><input type="text" value="N/A"></td>
                                         </tr>
                                         </tbody>
                                     </form>
@@ -285,6 +285,7 @@
                                             <input type="text" class="form-control" name="price" placeholder="$0.00" value="{{$product->price}}">
                                         </td>
                                         <td><input type="text" class="form-control" readonly value="{{$product->cost}}" placeholder="$0.00"></td>
+                                        <td class="drop-shipping text-center">N/A</td>
                                         <td><input type="text" readonly class="form-control" value="{{$product->quantity}}" name="quantity" placeholder="0"></td>
                                         <td><input type="text" readonly class="form-control" name="sku" value="{{$product->sku}}"></td>
                                         <td><input type="text" class="form-control" name="barcode" value="{{$product->barcode}}" placeholder="">
