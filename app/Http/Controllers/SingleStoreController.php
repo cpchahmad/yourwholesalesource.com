@@ -565,7 +565,7 @@ class SingleStoreController extends Controller
     {
         $shop = $this->helper->getLocalShop();
         $user = $shop->has_user()->first();
-        $wishlist = Wishlist::where('user_id', $user->id)->query();
+        $wishlist = Wishlist::where('user_id', $user->id)->newQuery();
 
 
         if($request->has('search')){
@@ -583,7 +583,7 @@ class SingleStoreController extends Controller
             $wishlist->where('imported_to_store',0);
         }
 
-        $wishlist = $wishlist->orderBy('created_at','DESC')
+        $wishlist = $wishlist->where('user_id', $user->id)->orderBy('created_at','DESC')
             ->paginate(30);
 
         return view('single-store.wishlist.index')->with([
