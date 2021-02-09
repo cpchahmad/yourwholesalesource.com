@@ -85,14 +85,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 px-0">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
                                 <div class="d-flex justify-content-between">
                                     <div class="font-size-sm font-w700 text-uppercase text-muted p-3">Your Growth</div>
-                                    <div class="custom-control custom-switch custom-control-success mb-1">
+                                    <div class="custom-control custom-switch custom-control-success mb-1 my-auto">
                                         <input type="checkbox" class="custom-control-input status-switch" id="graph_checkbox" name="example-sw-success2">
                                         <label class="custom-control-label" for="graph_checkbox">Orders / Sales</label>
                                     </div>
