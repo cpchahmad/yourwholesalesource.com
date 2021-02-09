@@ -49,9 +49,6 @@ class AppServiceProvider extends ServiceProvider
                     $q->where('email',$user->email);
                 });
 
-                $unread_rejected_wishlist = $query->where('sub_type', 'Wishlist Rejected')->count();
-
-
                 // Manager Wallet Count Calculation
                 $manager = User::find(Auth::id());
                 $users  = $manager->has_users;
@@ -72,9 +69,6 @@ class AppServiceProvider extends ServiceProvider
                   $query->whereHas('to_shops',function ($q) use ($shop){
                       $q->where('shopify_domain',$shop->shopify_domain);
                   });
-
-                  $unread_rejected_wishlist = $query->where('sub_type', 'Wishlist Rejected')->count();
-
 
                   $approved_wishlist = Wishlist::where('status_id', 2)->where('shop_id', $shop->id)->count();
                   $open_wishlist = Wishlist::where('status_id', 1)->where('shop_id', $shop->id)->count();
@@ -108,7 +102,6 @@ class AppServiceProvider extends ServiceProvider
                   $open_wishlist = 0;
                   $completed_wishlist = 0;
                   $pending_ticket_count = 0;
-                  $unread_rejected_wishlist = 0;
               }
             }
             $notifications = $query->orderBy('created_at','DESC')->paginate(5);
@@ -129,7 +122,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'balance' => $balance,
                 'approved_wishlist' => $approved_wishlist,
-                'unread_rejected_wishlist' => $unread_rejected_wishlist,
                 'open_wishlist' => $open_wishlist,
                 'completed_wishlist' => $completed_wishlist,
                 'pending_ticket_count' => $pending_ticket_count,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Notification;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
@@ -109,6 +110,10 @@ class ShopifyUsersController extends Controller
 //        $graph_three_order_dates = $ordersQR->pluck('date')->toArray();
 //        $graph_three_order_values = $ordersQR->pluck('total_sum')->toArray();
 
+        $unread_rejected_wishlist = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+            ->whereHas('to_users',function ($q) use ($user){
+                $q->where('email',$user->email);
+            })->get();
 
         $top_products =  Product::join('retailer_order_line_items',function($join) use ($user){
             $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')
@@ -141,6 +146,7 @@ class ShopifyUsersController extends Controller
             'unpaid_orders_count' => $unpaid_orders_count,
             'unfullfilled_orders_count' => $unfullfilled_orders_count,
             'canceled_order_count' => $canceled_order_count,
+            'unread_rejected_wishlist' => $unread_rejected_wishlist,
         ]);
 
     }

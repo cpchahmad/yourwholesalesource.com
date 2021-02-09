@@ -132,6 +132,11 @@ class SingleStoreController extends Controller
 
         }
 
+        $unread_rejected_wishlist = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+            ->whereHas('to_shops',function ($q) use ($shop){
+                $q->where('shopify_domain',$shop->shopify_domain);
+            })->get();
+
 
         $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
         $graph_one_order_values = $ordersQ->pluck('total')->toArray();
@@ -179,6 +184,7 @@ class SingleStoreController extends Controller
             'unpaid_orders_count' => $unpaid_orders_count,
             'unfullfilled_orders_count' => $unfullfilled_orders_count,
             'canceled_order_count' => $canceled_order_count,
+            'unread_rejected_wishlist' => $unread_rejected_wishlist,
         ]);
 
     }
