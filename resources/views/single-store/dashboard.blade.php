@@ -234,7 +234,7 @@
                     <div class="block-content pb-4 text-center" >
                         <div class="font-w600">Your Balance</div>
                         <div class="font-size-h3 font-w700 mt-2 text-danger">{{number_format($balance,2)}} USD</div>
-                        <button data-target="#bank_transfer_modal" data-toggle="modal" class="btn btn-outline-success d-block mt-4 p-2">Top up</button>
+                        <button data-target="#bank_transfer_modal" data-toggle="modal" class="btn btn-outline-success btn-block d-block mt-4 p-2">Top up</button>
 
                         <div class="modal fade" id="bank_transfer_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-popout" role="document">
