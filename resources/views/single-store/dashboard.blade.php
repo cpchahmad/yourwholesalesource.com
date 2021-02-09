@@ -392,7 +392,7 @@
                     <div class="block-content pb-4 text-left" >
                         @forelse(\App\News::latest()->limit(5)->get() as $news)
                             <i class="fa fa-volume-up text-city" ></i>
-                            <span class="font-size-sm  font-w600 " data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ \Illuminate\Support\Str::limit($news->title, $limit = 25, $end = '(view details)') }} </span>
+                            <span class="font-size-sm  font-w600 " data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ \Illuminate\Support\Str::limit($news->title, $limit = 20, $end = '(view details)') }} </span>
                             <div class="modal fade" id="news_modal_{{$news->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-popout" role="document">
                                     <div class="modal-content text-left">
