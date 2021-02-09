@@ -45,6 +45,14 @@
                                 <input disabled type="text"  class="form-control" value="{{$manager->email}}">
                             </div>
                             <div class="form-group">
+                                <label for="">Whatsapp</label>
+                                <input  type="text"  class="form-control" value="{{$manager->whatsapp}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Skype</label>
+                                <input  type="text"  class="form-control" value="{{$manager->skype}}">
+                            </div>
+                            <div class="form-group">
                                 <label for="">Username</label>
                                 <input type="text" required name="name" class="form-control" value="{{$manager->name}}">
                             </div>
