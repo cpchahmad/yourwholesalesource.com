@@ -875,6 +875,8 @@ class ManagerController extends Controller
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
             $manager->name =  $request->input('name');
+            $manager->whatsapp =  $request->input('whatsapp');
+            $manager->skype =  $request->input('skype');
             $manager->save();
             if($request->hasFile('profile')){
                 $file = $request->file('profile');

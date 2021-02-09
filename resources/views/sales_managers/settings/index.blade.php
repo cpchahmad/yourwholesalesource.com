@@ -46,11 +46,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Whatsapp</label>
-                                <input  type="text"  class="form-control" value="{{$manager->whatsapp}}">
+                                <input  type="text" name="whatsapp" class="form-control" value="{{$manager->whatsapp}}">
                             </div>
                             <div class="form-group">
                                 <label for="">Skype</label>
-                                <input  type="text"  class="form-control" value="{{$manager->skype}}">
+                                <input  type="text" name="skype" class="form-control" value="{{$manager->skype}}">
                             </div>
                             <div class="form-group">
                                 <label for="">Username</label>
