@@ -240,15 +240,17 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
-                            <i class="fa fa-pencil-alt text-primary"></i>
+                            <i class="fa fa-pencil-alt text-danger"></i>
                             Help us improve!
                         </div>
                     </div>
-                    <div class="block-content pb-4 text-right" >
-                        <button data-target="#feedback" data-toggle="modal" class="btn btn-outline-success d-block mt-4 p-2">Feedback</button>
+                    <div class="block-content pb-4" >
+                        <div class="font-size-sm font-w600 text-uppercase text-muted">Help us improve our application by providing your thoughts and opinions!</div>
+                        <button data-target="#feedback" data-toggle="modal" class="btn btn-outline-danger btn-block d-block mt-4 p-2">Feedback</button>
+
                         <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content text-left">
                                     <div class="block block-themed block-transparent mb-0">
                                         <div class="block-header bg-primary-dark">
                                             <h3 class="block-title">Help us improve our App</h3>
