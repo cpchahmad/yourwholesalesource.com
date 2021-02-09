@@ -181,7 +181,7 @@
             <div class="col-md-3">
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title text-center">
+                        <div class="block-title ">
                             Your Account Manager
                         </div>
                     </div>
@@ -225,19 +225,19 @@
                 </div>
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title text-center">
+                        <div class="block-title ">
                             Your Wallet
                         </div>
                     </div>
                     <div class="block-content pb-4 text-center" >
                         <div class="font-w600">Your Balance</div>
-                        <div class="mt-2 p-2 text-danger">{{number_format($balance,2)}} USD</div>
+                        <div class="font-size-h3 font-w700 mt-2 text-danger">{{number_format($balance,2)}} USD</div>
                         <a href="{{ route('store.user.wallet.show') }}" class="mt-2 p-2 bg-success d-block text-white">Top up</a>
                     </div>
                 </div>
                 <div class="block">
                     <div class="block-header">
-                        <div class="block-title text-center">
+                        <div class="block-title ">
                             Help us improve!
                         </div>
                     </div>
