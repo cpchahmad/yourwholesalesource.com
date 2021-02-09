@@ -15,6 +15,7 @@ use App\EmailTemplate;
 use App\Http\Controllers\AdminMaintainerController;
 use App\Http\Controllers\HelperController;
 use App\Mail\NewsEmail;
+use App\Notification;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
@@ -467,6 +468,15 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 
 Route::get('/email', function() {
    return view('emails.integration');
+});
+
+Route::get('/test', function () {
+    $user = User::find(2);
+    $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')->whereHas('to_users',function ($q) use ($user){
+        $q->where('email',$user->email);
+    })->count();
+
+    dd($query);
 });
 
 
