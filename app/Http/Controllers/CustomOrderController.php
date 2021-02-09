@@ -1109,6 +1109,18 @@ class CustomOrderController extends Controller
             }
         }
 
+        if($request->read == 2) {
+            $notifications = Notification::where('sub_type', 'Wishlist Completed')
+                ->whereHas('to_users',function ($q) use ($user){
+                    $q->where('email',$user->email);
+                })->where('read',0)->get();
+
+            foreach($notifications as $notification) {
+                $notification->read = 1;
+                $notification->save();
+            }
+        }
+
 
         if($request->has('status')){
             if($request->input('status') != null){

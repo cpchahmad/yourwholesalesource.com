@@ -115,6 +115,11 @@ class ShopifyUsersController extends Controller
                 $q->where('email',$user->email);
             })->where('read',0)->count();
 
+        $unread_completed_wishlist = Notification::where('sub_type', 'Wishlist Completed')
+            ->whereHas('to_users',function ($q) use ($user){
+                $q->where('email',$user->email);
+            })->where('read',0)->count();
+
         $top_products =  Product::join('retailer_order_line_items',function($join) use ($user){
             $join->on('retailer_order_line_items.shopify_product_id','=','products.shopify_id')
                 ->join('retailer_orders',function($o) use ($user){
@@ -147,6 +152,7 @@ class ShopifyUsersController extends Controller
             'unfullfilled_orders_count' => $unfullfilled_orders_count,
             'canceled_order_count' => $canceled_order_count,
             'unread_rejected_wishlist' => $unread_rejected_wishlist,
+            'unread_completed_wishlist' => $unread_completed_wishlist,
         ]);
 
     }
