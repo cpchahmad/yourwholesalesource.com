@@ -17,13 +17,15 @@
                     Dashboard
                 </h1>
 
-                <h1 class="flex-sm-fill h5 my-2">
-                    <marquee>
-                        <i class="fa fa-volume-up text-city" ></i>
-                        {{ \App\News::latest()->first()->title }}
-                    </marquee>
-                </h1>
 
+                <div>
+                    <marquee>
+                        <h1 class="flex-sm-fill h5 my-2">
+                            <i class="fa fa-volume-up text-city" ></i>
+                            {{ \App\News::latest()->first()->title }}
+                        </h1>
+                    </marquee>
+                </div>
             </div>
         </div>
     </div>
