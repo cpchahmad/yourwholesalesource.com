@@ -227,7 +227,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
-                            <i class="fa fa-wallet text-city text-primary"></i>
+                            <i class="fa fa-wallet text-success text-primary"></i>
                             Your Wallet
                         </div>
                     </div>
