@@ -340,7 +340,7 @@
                                                         <div class="form-material">
                                                             <label for="material-error">Feedbacks</label>
                                                             <textarea class="form-control" name="suggestion"></textarea>
-                                                            <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
+                                                            <input type="hidden" name="user_email" value="{{ \Illuminate\Support\Facades\Auth::user()->email }}">
                                                         </div>
                                                     </div>
                                                 </div>
