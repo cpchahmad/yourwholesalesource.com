@@ -33,7 +33,7 @@
             <div class="col-md-9">
                 <div class="row block">
                     <div class="col-md-12">
-                        <div class="font-size-sm font-w700 text-uppercase text-muted p-3">My Orders</div>
+                        <div class="block-title  p-3">My Orders</div>
                     </div>
                     <div class="col-md-4">
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)">
