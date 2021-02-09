@@ -1097,6 +1097,19 @@ class CustomOrderController extends Controller
         $user = User::find(Auth::id());
         $wishlists = Wishlist::where('user_id', $user->id)->newQuery();
 
+        if($request->read == 1) {
+            $notifications = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+                ->whereHas('to_users',function ($q) use ($user){
+                    $q->where('email',$user->email);
+                })->get();
+
+            foreach($notifications as $notification) {
+                $notification->read = 1;
+                $notification->save();
+            }
+        }
+
+
         if($request->has('status')){
             if($request->input('status') != null){
                 $wishlists->where('status_id','=',$request->input('status'));

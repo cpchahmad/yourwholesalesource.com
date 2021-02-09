@@ -471,10 +471,10 @@ Route::get('/email', function() {
 });
 
 Route::get('/test', function () {
-    $shop = Shop::find(71);
+    $user = User::find(2);
     $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
-        ->whereHas('to_shops',function ($q) use ($shop){
-            $q->where('shopify_domain',$shop->shopify_domain);
+        ->whereHas('to_shops',function ($q) use ($user){
+            $q->where('email',$user->email);
         })->count();
 
     dd($query);

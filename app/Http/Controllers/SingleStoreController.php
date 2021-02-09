@@ -573,16 +573,11 @@ class SingleStoreController extends Controller
                     $q->where('shopify_domain',$shop->shopify_domain);
                 })->get();
 
-            dump($notifications);
-
             foreach($notifications as $notification) {
                 $notification->read = 1;
                 $notification->save();
             }
-
-            dd($notifications);
         }
-
 
         if($request->has('search')){
             $wishlist->where('product_name','LIKE','%'.$request->input('search').'%')
