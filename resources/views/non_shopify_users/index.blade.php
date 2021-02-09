@@ -12,9 +12,13 @@
     </style>
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <div class="d-flex justify-content-between flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
                     Dashboard
+                </h1>
+                <h1 class="flex-sm-fill h4 my-2">
+                    <i class="fa fa-volume-up text-city" ></i>
+                    {{ \App\News::latest()->first()->title }}
                 </h1>
             </div>
         </div>
