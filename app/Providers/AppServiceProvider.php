@@ -71,6 +71,7 @@ class AppServiceProvider extends ServiceProvider
                   });
 
                   $approved_wishlist = Wishlist::where('status_id', 2)->where('shop_id', $shop->id)->count();
+                  $unread_rejected_wishlist = $query->where('sub_type', 'Wishlist Rejected')->count();
                   $open_wishlist = Wishlist::where('status_id', 1)->where('shop_id', $shop->id)->count();
                   $completed_wishlist = Wishlist::where('status_id', 5)->where('imported_to_store',0)->where('shop_id', $shop->id)->count();
                   $pending_ticket_count = Ticket::where('status_id', 2)->where('shop_id', $shop->id)->count();

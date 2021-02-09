@@ -112,7 +112,7 @@
                         <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
                             <div class="block-content block-content-full">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Rejected</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
+                                <div class="font-size-h2 font-w400 text-dark">{{$unread_rejected_wishlist}}</div>
                             </div>
                         </a>
                     </div>
