@@ -84,7 +84,10 @@
                         </a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row block">
+                    <div class="col-md-12">
+                        <div class="font-size-sm font-w700 text-uppercase text-muted p-3">Your Growth</div>
+                    </div>
                     <div class="col-md-12">
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
