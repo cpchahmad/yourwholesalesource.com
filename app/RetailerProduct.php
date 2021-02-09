@@ -33,6 +33,9 @@ class RetailerProduct extends Model
         $real_product = $this->linked_product;
         $flag = false;
 
+        if(!$real_product)
+            return false;
+
         if(WarehouseInventory::where('product_id', $real_product->id)->whereNotNull('quantity')->exists())
             $flag = true;
 
