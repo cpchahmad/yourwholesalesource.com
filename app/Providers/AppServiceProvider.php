@@ -131,6 +131,7 @@ class AppServiceProvider extends ServiceProvider
                 'manager_refund_request_count' => $manager_refund_request_count,
                 'manager_tickets_request_count' => $manager_tickets_request_count,
                 'manager_wallet_request_count' => $manager_wallet_request_count,
+                'latest_news' => $latest_news
             ]);
 
         });
