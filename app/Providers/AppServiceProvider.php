@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         {
             $query = Notification::where('read',0)->newQuery();
             $manager_wallet_request_count = 0;
+            $latest_news = \App\News::latest()->first();
 
             if (Auth::check()) {
                 $user = Auth::user();
