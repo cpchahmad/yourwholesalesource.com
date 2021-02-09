@@ -234,7 +234,104 @@
                     <div class="block-content pb-4 text-center" >
                         <div class="font-w600">Your Balance</div>
                         <div class="font-size-h3 font-w700 mt-2 text-danger">{{number_format($balance,2)}} USD</div>
-                        <a href="{{ route('store.user.wallet.show') }}" class="btn btn-outline-success d-block mt-4 p-2">Top up</a>
+                        <button data-target="#bank_transfer_modal" data-toggle="modal" class="btn btn-outline-success d-block mt-4 p-2">Top up</button>
+
+                        <div class="modal fade" id="bank_transfer_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-popout" role="document">
+                                <div class="modal-content text-left">
+                                    <div class="block block-themed block-transparent mb-0">
+                                        <div class="block-header bg-primary-dark">
+                                            <h3 class="block-title">TOPUP through Bank Transfer</h3>
+                                            <div class="block-options">
+                                                <button type="button" class="btn-block-option">
+                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <form action="{{route('store.user.wallet.request.topup')}}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <input type="hidden" value="{{$associated_user->id}}" name="user_id">
+                                            <input type="hidden" value="{{$associated_user->has_wallet->id}}" name="wallet_id">
+                                            <input type="hidden" name="type" value="bank transfer">
+                                            <div class="block-content font-size-sm">
+
+                                                <div class="info-box">
+                                                    <p style="padding: 10px">
+                                                        BENEFICIAL NAME: Fantasy Supply Limited <i class="fa fa-question-circle" title="Fantasy Supply Limited is the mother company of Wefullfill"></i><br>
+                                                        BANK NAME: Oversea-Chinese Banking Corporation Limited Singapore<br>
+                                                        SWFIT CODE:OCBCSGSG<br>
+                                                        Bank Account: 501246136301<br>
+                                                        Bank Address: OCBC Bank,65 Chulia Street, OCBC Centre, Singapore 049513<br>
+                                                        Intermeidary Bank: JP Morgan Chase Bank, New York, USA<br>
+                                                        SWIFIT CODE:CHASUS33<br>
+
+                                                    </p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Cheque Number <i class="fa fa-question-circle" title="Cheque number of the deposit (optional)"></i></label>
+                                                            <input  class="form-control" type="text"  name="cheque"
+                                                                    value=""  placeholder="Enter Cheque Number here">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of Company or Sender who made this deposit"></i></label>
+                                                            <input  class="form-control" type="text"  name="cheque_title"
+                                                                    value="" required  placeholder="Enter Company/Sender Title here">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Bank Name <i class="fa fa-question-circle" title="Name of the bank where you deposit amount"></i></label>
+                                                            <input required class="form-control" type="text"  name="bank_name"
+                                                                   value=""  placeholder="Enter Bank Title here">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Amount (USD) <i class="fa fa-question-circle" title="Deposit amount in USD"></i></label>
+                                                            <input required class="form-control" type="number"  name="amount"
+                                                                   value=""  placeholder="Enter Cheque Amount here">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Bank Proof Copy <i class="fa fa-question-circle" title="Proof of bank receipt of deposit"></i></label>
+                                                            <input required class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="form-material">
+                                                            <label for="material-error">Notes <i class="fa fa-question-circle" title="Optional notes for this deposit"></i></label>
+                                                            <input  class="form-control" type="text"  name="notes"
+                                                                    value=""   placeholder="Enter Notes here">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="block-content block-content-full text-right border-top">
+                                                <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="block">
