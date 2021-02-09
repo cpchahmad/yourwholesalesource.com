@@ -182,7 +182,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-user text-primary"></i>
                             Your Account Manager
                         </div>
                     </div>
@@ -227,6 +227,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
+                            <i class="si si-wallet text-primary"></i>
                             Your Wallet
                         </div>
                     </div>
@@ -239,6 +240,7 @@
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
+                            <i class="si si-pencil text-primary"></i>
                             Help us improve!
                         </div>
                     </div>
