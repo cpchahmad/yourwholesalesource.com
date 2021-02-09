@@ -576,7 +576,8 @@ class SingleStoreController extends Controller
             dump($notifications);
 
             foreach($notifications as $notification) {
-                $notification->markAsRead();
+                $notification->read = 1;
+                $notification->save();
             }
 
             dd($notifications);
