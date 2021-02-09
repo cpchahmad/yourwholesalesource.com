@@ -89,7 +89,7 @@
                         <div class="block block-rounded block-link-pop">
                             <div class="block-content block-content-full">
                                 <div class="d-flex justify-content-between">
-                                    <div class="font-size-sm font-w700 text-uppercase text-muted p-3">Your Growth</div>
+                                    <div class="block-title p-3">Your Growth</div>
                                     <div class="custom-control custom-switch custom-control-success mb-1 my-auto">
                                         <input type="checkbox" class="custom-control-input status-switch" id="graph_checkbox" name="example-sw-success2">
                                         <label class="custom-control-label" for="graph_checkbox">Orders / Sales</label>
@@ -212,7 +212,7 @@
                                 <div class="font-w600">{{$manager->email}}</div>
                                 <div class="text-info">
                                     <i class="fab fa-whatsapp text-success fa-lg"></i>
-                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp {{$manager->whatsapp}}</a>
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}"> {{$manager->whatsapp}}</a>
                                 </div>
                                 <div class="text-info">
                                     <i class="fab fa-skype text-info fa-lg"></i>
@@ -230,8 +230,8 @@
                         </div>
                     </div>
                     <div class="block-content pb-4 text-center" >
-                        <div class="font-w600">Wallet Balance</div>
-                        <div class="mt-2 p-2 bg-primary text-white">{{number_format($balance,2)}} USD</div>
+                        <div class="font-w600">Your Balance</div>
+                        <div class="mt-2 p-2 text-danger">{{number_format($balance,2)}} USD</div>
                         <a href="{{ route('store.user.wallet.show') }}" class="mt-2 p-2 bg-success d-block text-white">Top up</a>
                     </div>
                 </div>
