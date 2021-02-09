@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
                     $q->where('email',$user->email);
                 });
 
-                $unread_rejected_wishlist = $temp->where('sub_type', 'Wishlist Rejected')->count();
+//                $unread_rejected_wishlist = $temp->where('sub_type', 'Wishlist Rejected')->count();
 
 
                 // Manager Wallet Count Calculation
