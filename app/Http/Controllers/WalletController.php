@@ -66,7 +66,8 @@ class WalletController extends Controller
                 'user' => $user,
                 'wallet' => $wallet
             ]);
-        } else {
+        }
+        else {
             $shop = $this->helper->getLocalShop();
             if (count($shop->has_user) > 0) {
                 if ($shop->has_user[0]->has_wallet == null) {

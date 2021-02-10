@@ -877,132 +877,132 @@ class SingleStoreController extends Controller
         return $ip;
     }
 
-    public function reports(Request $request) {
-
-        $shop = $this->helper->getLocalShop();
-        $shop_user = Shop::find($shop->id);
-        $shop_user = $shop_user->has_user()->first();
-        $shop_user = $shop_user->name;
-
-        if ($request->has('date-range')) {
-            $date_range = explode('-', $request->input('date-range'));
-            $start_date = $date_range[0];
-            $end_date = $date_range[1];
-            $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
-            $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
-
-            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
-            $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
-            $products = RetailerProduct::where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
-            $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
-            $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
-
-
-            $ordersQ = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id', $shop->id)
-                ->whereIn('paid', [1, 2])
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
-
-
-            $ordersQP = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id', $shop->id)
-                ->whereIn('paid', [1])
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
-
-            $productQ = DB::table('retailer_products')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                ->where('shop_id', $shop->id)
-                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
-                ->groupBy('date')
-                ->get();
-
-
-        } else {
-
-            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->count();
-            $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->sum('cost_to_pay');
-            $products = RetailerProduct::where('shop_id', $shop->id)->count();
-            $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
-            $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
-
-            $ordersQ = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id', $shop->id)
-                ->whereIn('paid', [1, 2])
-                ->groupBy('date')
-                ->get();
-
-
-            $ordersQP = DB::table('retailer_orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->where('shop_id', $shop->id)
-                ->whereIn('paid', [1])
-                ->groupBy('date')
-                ->get();
-
-            $productQ = DB::table('retailer_products')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
-                ->where('shop_id', $shop->id)
-                ->groupBy('date')
-                ->get();
-
-        }
-
-
-        $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
-        $graph_one_order_values = $ordersQ->pluck('total')->toArray();
-        $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
-
-        $graph_three_order_dates = $ordersQP->pluck('date')->toArray();
-        $graph_three_order_values = $ordersQP->pluck('total_sum')->toArray();
-
-        $graph_four_order_dates = $productQ->pluck('date')->toArray();
-        $graph_four_order_values = $productQ->pluck('total')->toArray();
-
-
-        $top_products = Product::join('retailer_products', function ($join) use ($shop) {
-            $join->on('products.id', '=', 'retailer_products.linked_product_id')
-                ->where('retailer_products.shop_id', '=', $shop->id)
-                ->join('retailer_order_line_items', function ($j) {
-                    $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
-                        ->join('retailer_orders', function ($o) {
-                            $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                                ->whereIn('paid', [1, 2]);
-                        });
-                });
-        })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-            ->groupBy('products.id')
-            ->orderBy('sold', 'DESC')
-            ->get()
-            ->take(10);
-
-        $range = $request->input('date-range') ? $request->input('date-range') : 'beginning till now';
-
-        return view('single-store.reports')->with([
-            'date_range' => $range,
-            'orders' => $orders,
-            'profit' => $profit,
-            'sales' => $sales,
-            'cost' => $cost,
-            'products' => $products,
-            'graph_one_labels' => $graph_one_order_dates,
-            'graph_one_values' => $graph_one_order_values,
-            'graph_two_values' => $graph_two_order_values,
-            'graph_three_labels' => $graph_three_order_dates,
-            'graph_three_values' => $graph_three_order_values,
-            'graph_four_values' => $graph_four_order_values,
-            'graph_four_labels' => $graph_four_order_dates,
-            'top_products' => $top_products,
-            'shop' => $shop_user,
-        ]);
-
-    }
+//    public function reports(Request $request) {
+//
+//        $shop = $this->helper->getLocalShop();
+//        $shop_user = Shop::find($shop->id);
+//        $shop_user = $shop_user->has_user()->first();
+//        $shop_user = $shop_user->name;
+//
+//        if ($request->has('date-range')) {
+//            $date_range = explode('-', $request->input('date-range'));
+//            $start_date = $date_range[0];
+//            $end_date = $date_range[1];
+//            $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
+//            $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
+//
+//            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+//            $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+//            $products = RetailerProduct::where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+//            $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+//            $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+//
+//
+//            $ordersQ = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('shop_id', $shop->id)
+//                ->whereIn('paid', [1, 2])
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
+//
+//
+//            $ordersQP = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('shop_id', $shop->id)
+//                ->whereIn('paid', [1])
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
+//
+//            $productQ = DB::table('retailer_products')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+//                ->where('shop_id', $shop->id)
+//                ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+//                ->groupBy('date')
+//                ->get();
+//
+//
+//        } else {
+//
+//            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->count();
+//            $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->sum('cost_to_pay');
+//            $products = RetailerProduct::where('shop_id', $shop->id)->count();
+//            $profit = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
+//            $cost = RetailerOrder::whereIN('paid', [1])->where('shop_id', $shop->id)->sum('cost_to_pay');
+//
+//            $ordersQ = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('shop_id', $shop->id)
+//                ->whereIn('paid', [1, 2])
+//                ->groupBy('date')
+//                ->get();
+//
+//
+//            $ordersQP = DB::table('retailer_orders')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
+//                ->where('shop_id', $shop->id)
+//                ->whereIn('paid', [1])
+//                ->groupBy('date')
+//                ->get();
+//
+//            $productQ = DB::table('retailer_products')
+//                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+//                ->where('shop_id', $shop->id)
+//                ->groupBy('date')
+//                ->get();
+//
+//        }
+//
+//
+//        $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
+//        $graph_one_order_values = $ordersQ->pluck('total')->toArray();
+//        $graph_two_order_values = $ordersQ->pluck('total_sum')->toArray();
+//
+//        $graph_three_order_dates = $ordersQP->pluck('date')->toArray();
+//        $graph_three_order_values = $ordersQP->pluck('total_sum')->toArray();
+//
+//        $graph_four_order_dates = $productQ->pluck('date')->toArray();
+//        $graph_four_order_values = $productQ->pluck('total')->toArray();
+//
+//
+//        $top_products = Product::join('retailer_products', function ($join) use ($shop) {
+//            $join->on('products.id', '=', 'retailer_products.linked_product_id')
+//                ->where('retailer_products.shop_id', '=', $shop->id)
+//                ->join('retailer_order_line_items', function ($j) {
+//                    $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+//                        ->join('retailer_orders', function ($o) {
+//                            $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+//                                ->whereIn('paid', [1, 2]);
+//                        });
+//                });
+//        })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+//            ->groupBy('products.id')
+//            ->orderBy('sold', 'DESC')
+//            ->get()
+//            ->take(10);
+//
+//        $range = $request->input('date-range') ? $request->input('date-range') : 'beginning till now';
+//
+//        return view('single-store.reports')->with([
+//            'date_range' => $range,
+//            'orders' => $orders,
+//            'profit' => $profit,
+//            'sales' => $sales,
+//            'cost' => $cost,
+//            'products' => $products,
+//            'graph_one_labels' => $graph_one_order_dates,
+//            'graph_one_values' => $graph_one_order_values,
+//            'graph_two_values' => $graph_two_order_values,
+//            'graph_three_labels' => $graph_three_order_dates,
+//            'graph_three_values' => $graph_three_order_values,
+//            'graph_four_values' => $graph_four_order_values,
+//            'graph_four_labels' => $graph_four_order_dates,
+//            'top_products' => $top_products,
+//            'shop' => $shop_user,
+//        ]);
+//
+//    }
 
     public function showVideosSection() {
         return view('videos.shopify');
@@ -1015,6 +1015,51 @@ class SingleStoreController extends Controller
         );
     }
 
+    public function showInvoice() {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->has_wallet == null) {
+                $wallet = $this->wallet_create(Auth::id());
+                try{
+                    Mail::to($user->email)->send(new NewWallet($user));
+
+                }catch (\Exception $e){
+
+                }
+
+            } else {
+                $wallet = $user->has_wallet;
+            }
+            return view('non_shopify_users.wallet.index')->with([
+                'user' => $user,
+                'wallet' => $wallet
+            ]);
+        }
+        else {
+            $shop = $this->helper->getLocalShop();
+            if (count($shop->has_user) > 0) {
+                if ($shop->has_user[0]->has_wallet == null) {
+                    $wallet = $this->wallet_create($shop->has_user[0]->id);
+                    try{
+                        Mail::to($shop->has_user[0]->email)->send(new NewWallet($shop->has_user[0]));
+                    }catch (\Exception $e){
+
+                    }
+
+                } else {
+                    $wallet = $shop->has_user[0]->has_wallet;
+                }
+                return view('single-store.invoice')->with([
+                    'user' => $shop->has_user[0],
+                    'wallet' => $wallet
+                ]);
+            }
+            else {
+                return view('single-store.wallet.index');
+            }
+        }
+
+    }
 
 
 
