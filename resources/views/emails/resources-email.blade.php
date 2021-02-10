@@ -243,7 +243,53 @@
 
 <!-- MENU ENDS -->
 
+<!-- Shopify Start -->
 
+<table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="center">
+            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+                <tr>
+                    <td align="center" style="padding:0 30px;">
+                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
+                            <tr>
+                                <td height="40"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="padding:0 20px;">
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
+                                        <tr>
+                                            <td align="left" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:600;letter-spacing:1px;line-height:18px;text-transform:capitalize;">
+                                                {{ $template->subject }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20"></td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
+                                                    <tr>
+                                                        <td align="left" class="MsoNormal" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;line-height:24px;">
+                                                            {{ $template->body }}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- Shopify End -->
 
 <!-- Non-Shopify Start -->
 
@@ -324,6 +370,7 @@
                                                                             <img src="{{ asset('thumb.PNG') }}" alt="215x190" width="215" style="color:#444444;width:100%;" />
                                                                         </a>
                                                                     </td>
+
                                                                 </tr>
                                                             </table>
                                                         </td>
@@ -335,6 +382,7 @@
                                                     <tr>
                                                         <td style="line-height:30px;" height="30" width="1"></td>
                                                     </tr>
+
                                                     </tbody>
                                                 </table>
 
@@ -357,6 +405,7 @@
                                                                         This is a video guide on how you can top-up your wefullfill wallet.
                                                                     </td>
                                                                 </tr>
+
                                                             </table>
                                                         </td>
                                                     </tr>
@@ -375,6 +424,8 @@
 </table>
 
 <!--  video 1 END -->
+
+
 
 <!--  video 2 STARTS -->
 
