@@ -482,6 +482,8 @@ Route::get('/email', function() {
    return view('emails.integration');
 });
 
+Route::get('/top/{id}', 'SingleStorecontroller@downloadInvoicePDF');
+
 
 
 
