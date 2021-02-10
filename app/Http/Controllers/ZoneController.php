@@ -97,17 +97,19 @@ class ZoneController extends Controller
 
     public function getShippingRates(Request $request){
        $country = $request->input('country');
-       $product = Product::where('shopify_id',$request->input('product_id'))->first();
+       $product = Product::where('woocommerce_id',$request->input('product_id'))->first();
        if($product != null){
-           $total_weight = $product->weight;
+            $total_weight = $product->weight;
 
-           $zoneQuery = Zone::query();
-         $zoneQuery->whereHas('has_countries',function ($q) use ($country){
-             $q->where('name','LIKE','%'.$country.'%');
-         });
-        $zones = $zoneQuery->get();
-             $message = null;
-        if(count($zones) > 0){
+            $zoneQuery = Zone::query();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                 $q->where('name','LIKE','%'.$country.'%');
+            });
+
+            $zones = $zoneQuery->get();
+            $message = null;
+
+            if(count($zones) > 0){
             foreach ($zones as $zone) {
                 if($zone->has_rate != null){
                     if (count($zone->has_rate) > 0) {
@@ -173,7 +175,7 @@ class ZoneController extends Controller
 
 
         }
-        else{
+            else{
             $message = "No Shipping Carrier Available For ".$country;
             $message_2 = "Delivery Time Not Available Right Now!";
             $message_3 = "Processing Time Not Found For This Product!";

@@ -80,6 +80,7 @@ class RegisterController extends Controller
         $wallet = new WalletController();
         $wallet->wallet_create($user->id);
 
+
         return  $user;
     }
 }

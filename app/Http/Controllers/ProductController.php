@@ -833,8 +833,8 @@ class ProductController extends Controller
                         );
 
                         $productdata = [
-                            "sale_price" => $product->price,
-                            "regular_price" => $product->cost,
+                            //"sale_price" => $product->price,
+                            "regular_price" => $product->price,
                             "sku" => $product->sku,
                             "weight" => $product->weight,
                             "stock_quantity" => $product->quantity,
@@ -886,8 +886,8 @@ class ProductController extends Controller
                         );
 
                         $productdata = [
-                            "sale_price" => $product->price,
-                            "regular_price" => $product->cost,
+                            //"sale_price" => $product->price,
+                            "regular_price" => $product->price,
                             "sku" => $product->sku,
                             "weight" => $product->weight,
                             "stock_quantity" => $product->quantity,
@@ -2695,7 +2695,7 @@ class ProductController extends Controller
                 "type" => $product_type,
                 "images" => $images_array,
                 "published"=>  $published,
-                "sale_price" => $product->price,
+                //"sale_price" => $product->price,
                 "regular_price" => $product->price,
                 "sku" => $product->sku,
                 "weight" => $product->weight,
@@ -2989,7 +2989,7 @@ class ProductController extends Controller
             $array_item['image'] = [];
 
             $array_item['regular_price'] = $varaint->price;
-            $array_item['sale_price'] = $varaint->cost;
+            //$array_item['sale_price'] = $varaint->cost;
             $array_item['sku'] = $varaint->sku;
             $array_item['stock_quantity'] = $varaint->quantity;
             $array_item['manage_stock'] = true;
@@ -3041,7 +3041,7 @@ class ProductController extends Controller
             $array_item['attributes'] = [];
 
             $array_item['regular_price'] = $varaint->price;
-            $array_item['sale_price'] = $varaint->cost;
+            //$array_item['sale_price'] = $varaint->cost;
             $array_item['sku'] = $varaint->sku;
             $array_item['stock_quantity'] = $varaint->quantity;
             $array_item['weight'] = $weight;
@@ -3088,7 +3088,7 @@ class ProductController extends Controller
             $array_item['image'] = [];
             $array_item['id'] = $varaint->woocommerce_id;
             $array_item['regular_price'] = $varaint->price;
-            $array_item['sale_price'] = $varaint->cost;
+            //$array_item['sale_price'] = $varaint->cost;
             $array_item['sku'] = $varaint->sku;
             $array_item['barcode'] = $varaint->barcode;
             $array_item['stock_quantity'] = $varaint->quantity;

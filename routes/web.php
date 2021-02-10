@@ -480,10 +480,6 @@ Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
-Route::get('/email', function() {
-   return view('emails.resources-email');
-});
-
 
 
 
