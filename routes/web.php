@@ -481,7 +481,7 @@ Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFro
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
 Route::get('/email', function() {
-   return view('emails.integration');
+   return view('emails.resources-email');
 });
 
 

@@ -102,6 +102,8 @@ class EmailTemplateController extends Controller
                 return view('emails.news_products')->with('template', EmailTemplate::find(20))->with('top_products_stores', Product::all());
             case 21:
                 return view('emails.integration')->with('template', EmailTemplate::find(21));
+            case 22:
+                return view('emails.resources-email')->with('template', EmailTemplate::find(22));
             default:
                 return redirect()->back();
         }
