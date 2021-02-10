@@ -206,7 +206,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard')->middleware(['check_shop_user']);
 //        Route::get('/reports','SingleStoreController@reports')->name('store.reports');
         Route::get('/invoice','SingleStoreController@showInvoice')->name('store.invoice');
-        Route::get('/invoice/download/{id}','SingleStoreController@showInvoice')->name('store.invoice.download');
+        Route::get('/invoice/download/{id}','SingleStoreController@downloadInvoicePDF')->name('store.invoice.download');
         Route::get('/wefulfill/university','SingleStoreController@showVideosSection')->name('store.university.index');
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');

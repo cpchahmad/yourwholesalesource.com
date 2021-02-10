@@ -37,9 +37,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 use function foo\func;
-use Barryvdh\DomPDF\Facade as PDF;
-
-
 
 class SingleStoreController extends Controller
 {
