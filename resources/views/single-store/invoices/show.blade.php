@@ -403,7 +403,7 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        {{ $wallet->create_at->toDateString() }}
+                                                                                        {{ $wallet->created_at->toDateString() }}
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
