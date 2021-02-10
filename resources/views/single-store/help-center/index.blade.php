@@ -90,6 +90,11 @@
                                                     <a href=""
                                                        class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="Delete Ticket"><i class="fa fa-times"></i></a>
+                                                    @if($ticket->order_id !== null)
+                                                        <button onclick="window.location.href='{{route('store.order.view',$ticket->order_id)}}'"
+                                                                class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
+                                                                data-original-title="Delete Ticket">View Order</button>
+                                                    @endif
                                                 </div>
                                             </td>
 
