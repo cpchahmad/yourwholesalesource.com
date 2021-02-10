@@ -25,6 +25,9 @@
                 @if(in_array($ticket->status_id,[1,2,3]))
                     <div class="text-right mb2">
                         <button class="btn btn-success" onclick="window.location.href='{{route('help-center.ticket.marked_as_completed',$ticket->id)}}'"> Marked as Completed </button>
+                        @if($ticket->order_id !== null)
+                            <button class="btn btn-primary mr-2" onclick="window.location.href='{{route('users.order.view',$ticket->order_id)}}'">View Order</button>
+                        @endif
                     </div>
                 @endif
                 @if(in_array($ticket->status_id,[4]) && $ticket->review == 0)
