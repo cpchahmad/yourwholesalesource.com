@@ -294,13 +294,6 @@
 
 
                                             <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
-                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;margin-left:20px;"> <!-- USING TABLE AS BUTTON -->
-                                                    <tr>
-                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
-                                                            <a  target="_blank" href="https://www.youtube.com/watch?v=7khMCbyaXN4" style="color:#ffffff;text-decoration:none;">Video Link</a>
-                                                        </td>
-                                                    </tr>
-                                                </table>
                                                 <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
                                                     <tr>
                                                         <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
@@ -338,25 +331,65 @@
             <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
-                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width"  style="" width="600">
-
+                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
                             <tr>
                                 <td align="center" style="">
-                                    <!--[if gte mso 9]>
-                                    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:541px; height:425px; margin:auto;">
-                                        <v:fill type="tile" src="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" color="#f6f8f7" />
-                                        <v:textbox inset="0,0,0,0">
-                                    <![endif]-->
-                                    <div style="margin:auto;">
-                                        <table align="center" background="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" border="0" cellpadding="0" cellspacing="0" class="display-width" width="541" style="background-image:url(http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg); background-position:center; background-repeat:no-repeat;border-radius:5px;">
-                                            <tr>
-                                                <td align="left" class="MsoNormal" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;line-height:24px;">
-                                                    <a href="https://www.youtube.com/watch?v=7khMCbyaXN4"></a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <!--[if gte mso 9]> </v:textbox> </v:rect> <![endif]-->
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
+
+                                        <tr>
+                                            <td style="padding:0 20px;">
+                                                <!-- TABLE LEFT -->
+
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="46%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tr>
+                                                        <td align="center" class="res-padding">
+                                                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
+                                                                <tr>
+                                                                    <td align="center" width="215">
+                                                                        <a href="https://www.youtube.com/watch?v=7khMCbyaXN4" style="color:#666666;text-decoration:none;" target="_blank">
+                                                                            <img src="{{ asset('thumb.PNG') }}" alt="215x190" width="215" style="color:#444444;width:100%;" />
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="1" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="line-height:30px;" height="30" width="1"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <!-- TABLE RIGHT -->
+
+                                                <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width" width="50%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tr>
+                                                        <td align="left">
+                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
+                                                                <tr>
+                                                                    <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
+                                                                        How Shopify users start dropshipping business with WeFullfill
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="10"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
+                                                                        Checkout this video tutorial to start your dropshipping journey with us!!
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
@@ -397,13 +430,7 @@
                                                 Non-shopify Users
                                             </td>
                                             <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
-                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;margin-left:20px;"> <!-- USING TABLE AS BUTTON -->
-                                                    <tr>
-                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
-                                                            <a  target="_blank" href="https://www.youtube.com/watch?v=iUGbKxxP6BA&t=91s" style="color:#ffffff;text-decoration:none;">Video Link</a>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+
                                             </td>
 
                                         </tr>
@@ -435,23 +462,65 @@
             <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
-                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width"  style="" width="600">
-
+                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
                             <tr>
                                 <td align="center" style="">
-                                    <!--[if gte mso 9]>
-                                    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:541px; height:425px; margin:auto;">
-                                        <v:fill type="tile" src="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" color="#f6f8f7" />
-                                        <v:textbox inset="0,0,0,0">
-                                    <![endif]-->
-                                    <div style="margin:auto;">
-                                        <table align="center" background="http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg" border="0" cellpadding="0" cellspacing="0" class="display-width" width="541" style="background-image:url(http://pennyblacktemplates.com/demo/notifications/images/layout-2/demo-video/images/541x560.jpg); background-position:center; background-repeat:no-repeat;border-radius:5px;">
-                                            <tr>
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
 
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <!--[if gte mso 9]> </v:textbox> </v:rect> <![endif]-->
+                                        <tr>
+                                            <td style="padding:0 20px;">
+                                                <!-- TABLE LEFT -->
+
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="46%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tr>
+                                                        <td align="center" class="res-padding">
+                                                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
+                                                                <tr>
+                                                                    <td align="center" width="215">
+                                                                        <a href="https://www.youtube.com/watch?v=iUGbKxxP6BA" style="color:#666666;text-decoration:none;" target="_blank">
+                                                                            <img src="{{ asset('thumb.PNG') }}" alt="215x190" width="215" style="color:#444444;width:100%;" />
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="1" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="line-height:30px;" height="30" width="1"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <!-- TABLE RIGHT -->
+
+                                                <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width" width="50%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tr>
+                                                        <td align="left">
+                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
+                                                                <tr>
+                                                                    <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
+                                                                        How to start Dropshipping through WeFullfill for non-Shopify sellers
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="10"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
+                                                                        Checkout this video tutorial to start your dropshipping journey with us!!
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>

@@ -90,7 +90,7 @@
                                             <th>Bank Proof Copy</th>
                                             <th>Notes</th>
                                             <th>Status</th>
-                                            <th class="text-right">PDF</th>
+                                            <th>PDF</th>
                                         </tr>
                                         </thead>
 
@@ -171,7 +171,7 @@
                                             <th>Bank Proof Copy</th>
                                             <th>Notes</th>
                                             <th>Status</th>
-                                            <th class="text-right">PDF</th>
+                                            <th >PDF</th>
                                         </tr>
                                         </thead>
 
