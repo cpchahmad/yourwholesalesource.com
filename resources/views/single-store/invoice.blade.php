@@ -90,6 +90,7 @@
                                             <th>Bank Proof Copy</th>
                                             <th>Notes</th>
                                             <th>Status</th>
+                                            <th>PDF</th>
                                         </tr>
                                         </thead>
 
@@ -135,6 +136,9 @@
                                                         <span class="badge badge-success">Approved</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    <button class="btn btn-danger">Download PDF</button>
+                                                </td>
 
                                             </tr>
                                             </tbody>
@@ -167,6 +171,7 @@
                                             <th>Bank Proof Copy</th>
                                             <th>Notes</th>
                                             <th>Status</th>
+                                            <th>PDF</th>
                                         </tr>
                                         </thead>
 
@@ -207,6 +212,9 @@
                                                     @else
                                                         <span class="badge badge-success">Approved</span>
                                                     @endif
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-danger">Download PDF</button>
                                                 </td>
                                                 <td>
 
