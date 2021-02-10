@@ -350,7 +350,7 @@
         <td align="center">
             <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
-                    <td align="center" style="padding:0 30px;">
+                    <td align="center" style="padding:20px 30px;">
                         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
                             <tr>
                                 <td align="center" style="">
