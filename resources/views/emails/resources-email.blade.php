@@ -426,87 +426,7 @@
 <!--  video 1 END -->
 
 
-
 <!--  video 2 STARTS -->
-
-<table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr>
-        <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
-                <tr>
-                    <td align="center" style="padding:0 30px;">
-                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
-                            <tr>
-                                <td align="center" style="">
-                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
-
-                                        <tr>
-                                            <td style="padding:0 20px;">
-                                                <!-- TABLE LEFT -->
-
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="46%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                                                    <tr>
-                                                        <td align="center" class="res-padding">
-                                                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
-                                                                <tr>
-                                                                    <td align="center" width="215">
-                                                                        <a href="https://www.youtube.com/watch?v=ToZapDNSxvY&ab_channel=WEFULLFILL" style="color:#666666;text-decoration:none;" target="_blank">
-                                                                            <img src="{{ asset('thumb.PNG') }}" alt="215x190" width="215" style="color:#444444;width:100%;" />
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-
-                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="1" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                                                    <tbody>
-                                                    <tr>
-                                                        <td style="line-height:30px;" height="30" width="1"></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-
-                                                <!-- TABLE RIGHT -->
-
-                                                <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width" width="50%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-                                                    <tr>
-                                                        <td align="left">
-                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
-                                                                <tr>
-                                                                    <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
-                                                                        How to Create a ticket in Wefullfill App
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td height="10"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
-                                                                        Reaching out to Wefullfill team for any concern or inquiries before, during or even after the order process is much easier with the Ticket system provided in the Application itself.
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
-
-<!--  video 2 END -->
-
-<!--  video 3 STARTS -->
 
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
@@ -564,6 +484,85 @@
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
                                                                         This video will guide you on how you can create a wishlist on wefullfill.
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!--  video 2 END -->
+
+<!--  video 3 STARTS -->
+
+<table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="center">
+            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+                <tr>
+                    <td align="center" style="padding:0 30px;">
+                        <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
+                            <tr>
+                                <td align="center" style="">
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
+
+                                        <tr>
+                                            <td style="padding:0 20px;">
+                                                <!-- TABLE LEFT -->
+
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="46%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tr>
+                                                        <td align="center" class="res-padding">
+                                                            <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
+                                                                <tr>
+                                                                    <td align="center" width="215">
+                                                                        <a href="https://www.youtube.com/watch?v=ToZapDNSxvY&ab_channel=WEFULLFILL" style="color:#666666;text-decoration:none;" target="_blank">
+                                                                            <img src="{{ asset('thumb.PNG') }}" alt="215x190" width="215" style="color:#444444;width:100%;" />
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="1" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="line-height:30px;" height="30" width="1"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <!-- TABLE RIGHT -->
+
+                                                <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width" width="50%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                    <tr>
+                                                        <td align="left">
+                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
+                                                                <tr>
+                                                                    <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
+                                                                        How to Create a ticket in Wefullfill App
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="10"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
+                                                                        Reaching out to Wefullfill team for any concern or inquiries before, during or even after the order process is much easier with the Ticket system provided in the Application itself.
                                                                     </td>
                                                                 </tr>
                                                             </table>
