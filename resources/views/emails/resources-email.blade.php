@@ -519,7 +519,7 @@
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
 
                                         <tr>
-                                            <td style="padding:0 20px;">
+                                            <td style="padding:20px;">
                                                 <!-- TABLE LEFT -->
 
                                                 <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="46%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
