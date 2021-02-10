@@ -337,83 +337,83 @@
                                                     </table>
 
                                                     <!--TABLE RIGHT-->
-                                                    <table align="right" border="0" cellspacing="0" cellpadding="0" class="display-width-2" width="37%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;width:auto;">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td align="left">
-                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; width:auto !important;">
-                                                                    <tr>
-                                                                        <td align="left" valign="top">
-                                                                            <table align="left"  border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
-                                                                                <tr>
-                                                                                    <td align="right" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        Manager :
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="right" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        Email :
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="right" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        Date :
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
+{{--                                                    <table align="right" border="0" cellspacing="0" cellpadding="0" class="display-width-2" width="37%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;width:auto;">--}}
+{{--                                                        <tbody>--}}
+{{--                                                        <tr>--}}
+{{--                                                            <td align="left">--}}
+{{--                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; width:auto !important;">--}}
+{{--                                                                    <tr>--}}
+{{--                                                                        <td align="left" valign="top">--}}
+{{--                                                                            <table align="left"  border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td align="right" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:15px;text-transform:uppercase;">--}}
+{{--                                                                                        Manager :--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td align="right" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:15px;text-transform:uppercase;">--}}
+{{--                                                                                        Email :--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td align="right" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:15px;text-transform:uppercase;">--}}
+{{--                                                                                        Date :--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                            </table>--}}
 
 
-                                                                        </td>
-                                                                        <td width="15"></td>
-                                                                        <td align="left" valign="top">
-                                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
-                                                                                <tr>
-                                                                                    <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        {{ $manager->name }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        {{ $manager->email }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td height="5"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">
-                                                                                        {{ $wallet->created_at->toDateString() }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
+{{--                                                                        </td>--}}
+{{--                                                                        <td width="15"></td>--}}
+{{--                                                                        <td align="left" valign="top">--}}
+{{--                                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">--}}
+{{--                                                                                        {{ $manager->name }}--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">--}}
+{{--                                                                                        {{ $manager->email }}--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td height="5"></td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                <tr>--}}
+{{--                                                                                    <td align="left" class="MsoNormal date" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:12px;letter-spacing:1px;line-height:15px;text-transform:uppercase;">--}}
+{{--                                                                                        {{ $wallet->created_at->toDateString() }}--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                            </table>--}}
+{{--                                                                        </td>--}}
+{{--                                                                    </tr>--}}
+{{--                                                                </table>--}}
+{{--                                                            </td>--}}
+{{--                                                        </tr>--}}
+{{--                                                        </tbody>--}}
+{{--                                                    </table>--}}
                                                 </td>
                                             </tr>
                                         </table>
@@ -553,6 +553,126 @@
             </td>
         </tr>
     </table>
+
+    <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center">
+                <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+                    <tr>
+                        <td align="center" style="padding:0 30px;">
+                            <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px;" width="600">
+                                <tr>
+                                    <td height="40"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="resp-padding" style="padding:0 30px;" >
+                                        <table align="center"  border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
+                                            <tr>
+                                                <td align="left">
+                                                    <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width-4" width="100%">
+                                                        <tr>
+                                                            <td>
+                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width-5" width="48%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                                    <tr>
+                                                                        <td align="left">
+                                                                            <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
+                                                                                <tr>
+                                                                                    <td align="left" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:15px;">
+                                                                                        Your Details:
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width:500px !important;">
+                                                                                        <table align="left" border="0" cellpadding="0" cellspacing="0" class="display-width bill" width="60%">
+                                                                                            <tr>
+                                                                                                <td width="100%" style="width:100% !important;border-bottom:3px solid #333333;"></td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="left" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;line-height:24px;text-transform:uppercase;">
+                                                                                        Account Name <br/> Email <br/> Top up Amount
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="1" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td style="line-height:40px;" height="40" width="1"></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+
+                                                                <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width-5" width="48%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; text-align: right">
+                                                                    <tr>
+                                                                        <td align="right">
+                                                                            <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important; text-align: right">
+                                                                                <tr>
+                                                                                    <td align="left" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;font-weight:600;letter-spacing:1px;line-height:15px;">
+                                                                                        Ship To:
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="right"  style="width:500px !important;">
+                                                                                        <table align="right" border="0" cellpadding="0" cellspacing="0" class="display-width bill" width="60%" >
+                                                                                            <tr>
+                                                                                                <td width="100%" style="width:100% !important;border-bottom:3px solid #ffffff;"></td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td align="light" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;letter-spacing:1px;line-height:24px;text-transform:uppercase;">
+                                                                                        {{ $user->name }} <br/> {{ $user->email }} <br/> <strong>$ {{ number_format($wallet->amount,2) }}</strong>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30" style="border-bottom:1px dashed #dddddd;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30"></td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="40"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
 
     <!-- INVOICE ENDS -->
 
