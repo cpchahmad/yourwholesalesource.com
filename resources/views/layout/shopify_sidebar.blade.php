@@ -102,10 +102,17 @@
                 </a>
             </li>
 
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{route('users.reports')}}">--}}
+{{--                    <i class="nav-main-link-icon si si-chart"></i>--}}
+{{--                    <span class="nav-main-link-name">Reports</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('users.reports')}}">
+                <a class="nav-main-link" href="{{route('users.invoice')}}">
                     <i class="nav-main-link-icon si si-chart"></i>
-                    <span class="nav-main-link-name">Reports</span>
+                    <span class="nav-main-link-name">Invoice Zone</span>
                 </a>
             </li>
 

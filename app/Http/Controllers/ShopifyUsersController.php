@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\Mail\NewWallet;
 use App\Notification;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
 use App\Shop;
 use App\User;
+use App\WalletRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 
@@ -371,6 +374,66 @@ class ShopifyUsersController extends Controller
 
     public function showVideosSection() {
         return view('videos.non-shopify');
+    }
+
+
+    public function showInvoice() {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->has_wallet == null) {
+                $wallet = $this->wallet_create(Auth::id());
+                try{
+                    Mail::to($user->email)->send(new NewWallet($user));
+
+                }catch (\Exception $e){
+
+                }
+
+            } else {
+                $wallet = $user->has_wallet;
+            }
+            return view('non_shopify_users.invoices.index')->with([
+                'user' => $user,
+                'wallet' => $wallet
+            ]);
+        }
+        else {
+            $shop = $this->helper->getLocalShop();
+            if (count($shop->has_user) > 0) {
+                if ($shop->has_user[0]->has_wallet == null) {
+                    $wallet = $this->wallet_create($shop->has_user[0]->id);
+                    try{
+                        Mail::to($shop->has_user[0]->email)->send(new NewWallet($shop->has_user[0]));
+                    }catch (\Exception $e){
+
+                    }
+
+                } else {
+                    $wallet = $shop->has_user[0]->has_wallet;
+                }
+                return view('single-store.invoices.index')->with([
+                    'user' => $shop->has_user[0],
+                    'wallet' => $wallet
+                ]);
+            }
+            else {
+                return view('single-store.wallet.index');
+            }
+        }
+
+    }
+
+    public function downloadInvoicePDF($id) {
+
+        $wallet_request = WalletRequest::find($id);
+        $user = User::find($wallet_request->user_id);
+        $manager= $user->has_manager;
+
+        return view('non_shopify_users.invoices.show')->with([
+            'wallet' => $wallet_request,
+            'user' => $user,
+            'manager' => $manager
+        ]);
     }
 
 }
