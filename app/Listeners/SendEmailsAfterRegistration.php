@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\ErrorLog;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
 use App\Mail\ResourcesMail;
@@ -41,6 +42,9 @@ class SendEmailsAfterRegistration
             Mail::to($user->email)->send(new ResourcesMail());
         }
         catch (\Exception $e){
+            $log = new ErrorLog();
+            $log->message = $e->getMessage();
+            $log->save();
         }
 
         // Sync To SendGrid WefullFill Members Contact List
