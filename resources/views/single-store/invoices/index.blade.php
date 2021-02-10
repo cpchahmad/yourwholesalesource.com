@@ -137,7 +137,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger">Download PDF</button>
+                                                    <button class="btn btn-danger" onclick="window.location.href='{{route('store.invoice.download',$req->id)}}'">Download</button>
                                                 </td>
 
                                             </tr>
@@ -214,7 +214,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger">Download PDF</button>
+                                                    <button class="btn btn-danger">Download</button>
                                                 </td>
                                                 <td>
 

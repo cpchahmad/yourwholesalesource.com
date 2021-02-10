@@ -21,6 +21,7 @@ use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
 use App\User;
+use App\WalletRequest;
 use App\WalletSetting;
 use App\Wishlist;
 use App\WishlistStatus;
@@ -36,10 +37,14 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
 use function foo\func;
+use Barryvdh\DomPDF\Facade as PDF;
+
+
 
 class SingleStoreController extends Controller
 {
     private $helper;
+
 
     /**
      * SingleStoreController constructor.
@@ -1049,7 +1054,7 @@ class SingleStoreController extends Controller
                 } else {
                     $wallet = $shop->has_user[0]->has_wallet;
                 }
-                return view('single-store.invoice')->with([
+                return view('single-store.invoices.index')->with([
                     'user' => $shop->has_user[0],
                     'wallet' => $wallet
                 ]);
@@ -1059,6 +1064,19 @@ class SingleStoreController extends Controller
             }
         }
 
+    }
+
+    public function downloadInvoicePDF($id) {
+
+        $wallet_request = WalletRequest::find($id);
+        $user = User::find($wallet_request->user_id);
+        $manager= $user->has_manager;
+
+        return view('single-store.invoices.show')->with([
+            'wallet' => $wallet_request,
+            'user' => $user,
+            'manager' => $manager
+        ]);
     }
 
 

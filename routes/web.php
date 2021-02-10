@@ -206,6 +206,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/dashboard','SingleStoreController@index')->name('store.dashboard')->middleware(['check_shop_user']);
 //        Route::get('/reports','SingleStoreController@reports')->name('store.reports');
         Route::get('/invoice','SingleStoreController@showInvoice')->name('store.invoice');
+        Route::get('/invoice/download/{id}','SingleStoreController@showInvoice')->name('store.invoice.download');
         Route::get('/wefulfill/university','SingleStoreController@showVideosSection')->name('store.university.index');
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
@@ -461,6 +462,16 @@ Route::get('test/emails', 'HelperController@testEmail');
 //});
 //Route::get('bulk', 'AdminMaintainerController@bulk_import_to_woocommerce');
 //Route::get('/dummy', 'AdminOrderController@dummy');
+//Route::get('/test', function () {
+//    $user = User::find(2);
+//    $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
+//        ->whereHas('to_shops',function ($q) use ($user){
+//            $q->where('email',$user->email);
+//        })->count();
+//
+//    dd($query);
+//});
+
 
 
 Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
@@ -471,15 +482,8 @@ Route::get('/email', function() {
    return view('emails.integration');
 });
 
-Route::get('/test', function () {
-    $user = User::find(2);
-    $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
-        ->whereHas('to_shops',function ($q) use ($user){
-            $q->where('email',$user->email);
-        })->count();
 
-    dd($query);
-});
+
 
 
 
