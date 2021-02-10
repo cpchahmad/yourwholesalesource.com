@@ -214,11 +214,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger">Download</button>
-                                                </td>
-                                                <td>
-
-
+                                                    <button target="_blank" class="btn btn-danger" onclick="window.location.href='{{route('store.invoice.download',$req->id)}}'">Download</button>
                                                 </td>
                                             </tr>
                                             </tbody>

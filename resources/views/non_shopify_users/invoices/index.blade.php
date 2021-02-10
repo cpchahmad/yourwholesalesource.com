@@ -90,7 +90,7 @@
                                             <th>Bank Proof Copy</th>
                                             <th>Notes</th>
                                             <th>Status</th>
-                                            <th>PDF</th>
+                                            <th class="text-right">PDF</th>
                                         </tr>
                                         </thead>
 
@@ -137,7 +137,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button target="_blank" class="btn btn-danger" onclick="window.location.href='{{route('store.invoice.download',$req->id)}}'">Download</button>
+                                                    <button target="_blank" class="btn btn-danger" onclick="window.location.href='{{route('users.invoice.download',$req->id)}}'">Download</button>
                                                 </td>
 
                                             </tr>
@@ -171,14 +171,13 @@
                                             <th>Bank Proof Copy</th>
                                             <th>Notes</th>
                                             <th>Status</th>
-                                            <th>PDF</th>
+                                            <th class="text-right">PDF</th>
                                         </tr>
                                         </thead>
 
                                         @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
                                             <tbody class="">
                                             <tr>
-
                                                 <td>
                                                     {{$req->cheque_title}}
                                                 </td>
@@ -214,11 +213,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-danger">Download</button>
-                                                </td>
-                                                <td>
-
-
+                                                    <button target="_blank" class="btn btn-danger" onclick="window.location.href='{{route('users.invoice.download',$req->id)}}'">Download</button>
                                                 </td>
                                             </tr>
                                             </tbody>
