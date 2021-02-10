@@ -1055,7 +1055,6 @@ class SingleStoreController extends Controller
                 ]);
             }
             else {
-
                 return view('single-store.wallet.index');
             }
         }
