@@ -266,8 +266,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::prefix('users')->group(function () {
             Route::get('/user/store/de-association/{id}','SingleStoreController@de_associate')->name('store.user.de-associate');
             Route::get('/reports','ShopifyUsersController@reports')->name('users.reports');
-            Route::get('/invoice','ShopifyUsersController@showInvoice')->name('store.invoice');
-            Route::get('/invoice/download/{id}','ShopifyUsersController@downloadInvoicePDF')->name('store.invoice.download');
+            Route::get('/invoice','ShopifyUsersController@showInvoice')->name('users.invoice');
+            Route::get('/invoice/download/{id}','ShopifyUsersController@downloadInvoicePDF')->name('users.invoice.download');
             Route::get('/wefulfill/university','ShopifyUsersController@showVideosSection')->name('users.university.index');
             Route::get('/settings','ShopifyUsersController@setting')->name('users.settings');
             Route::post('/settings/personal','ShopifyUsersController@save_personal_info')->name('users.save_personal_info');
