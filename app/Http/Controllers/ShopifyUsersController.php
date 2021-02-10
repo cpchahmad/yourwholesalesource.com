@@ -397,30 +397,8 @@ class ShopifyUsersController extends Controller
                 'wallet' => $wallet
             ]);
         }
-        else {
-            $shop = $this->helper->getLocalShop();
-            if (count($shop->has_user) > 0) {
-                if ($shop->has_user[0]->has_wallet == null) {
-                    $wallet = $this->wallet_create($shop->has_user[0]->id);
-                    try{
-                        Mail::to($shop->has_user[0]->email)->send(new NewWallet($shop->has_user[0]));
-                    }catch (\Exception $e){
 
-                    }
-
-                } else {
-                    $wallet = $shop->has_user[0]->has_wallet;
-                }
-                return view('single-store.invoices.index')->with([
-                    'user' => $shop->has_user[0],
-                    'wallet' => $wallet
-                ]);
-            }
-            else {
-                return view('single-store.wallet.index');
-            }
-        }
-
+        return redirect()->back();
     }
 
     public function downloadInvoicePDF($id) {
