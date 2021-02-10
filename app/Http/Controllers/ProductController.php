@@ -2855,7 +2855,7 @@ class ProductController extends Controller
                 "attributes" => $attributes_array,
                 "images" => $images_array,
                 "published"=>  $published,
-                "sale_price" => $product->price,
+                //"sale_price" => $product->price,
                 "regular_price" => $product->price,
                 "sku" => $product->sku,
                 "weight" => $product->weight,
