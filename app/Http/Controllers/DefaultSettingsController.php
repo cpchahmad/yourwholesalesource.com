@@ -695,6 +695,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function save_monthly_discount_settings(Request $request) {
+
         if(MonthlyDiscountSetting::first())
             $settings = MonthlyDiscountSetting::first();
         else
@@ -702,7 +703,7 @@ class DefaultSettingsController extends Controller
 
         $settings->sales_target = $request->sales_target;
         $settings->discount = $request->discount;
-        $settings->enable = $request->enable;
+        $settings->enable = $request->enable ? 1 : 0;
         $settings->save();
 
         return redirect()->back()->with('success', 'Monthly Discount Settins Saved Successfully!');
