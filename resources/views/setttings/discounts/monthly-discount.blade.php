@@ -25,13 +25,17 @@
                         @csrf
                         <div class="block-header d-flex justify-content-between">
                             <h3 class="block-title">Monthly Discount Settings</h3>
-                            <div class="custom-control custom-switch custom-control-success mb-1">
-                                <input @if($settings && $settings->enable)checked="" @endif   type="checkbox" class="custom-control-input status-switch" id="enable_status" name="enable">
-                                <label class="custom-control-label" for="enable_status">@if($settings && $settings->enable) Enabled @else Disabled @endif</label>
-                            </div>
                         </div>
 
                         <div class="block-content">
+
+                            <div class="form-group">
+                                <label class="">Enable/ Disable Settings</label>
+                                <div class="custom-control custom-switch custom-control-success mb-1">
+                                    <input @if($settings && $settings->enable)checked="" @endif   type="checkbox" class="custom-control-input status-switch" id="enable_status" name="enable">
+                                    <label class="custom-control-label" for="enable_status">@if($settings && $settings->enable) Enabled @else Disabled @endif</label>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="">Sales Target</label>
                                 <input type="text" class="form-control" name="sales_target" value="{{ $settings ? $settings->sales_target : null }}" placeholder="Enter the monthly sales target..">
