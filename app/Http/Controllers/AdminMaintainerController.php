@@ -583,7 +583,6 @@ class AdminMaintainerController extends Controller
             $order_log->retailer_order_id = $order->id;
             $order_log->save();
         }
-
         return redirect()->back()->with('success', 'Pushed to Mabang');
     }
 
