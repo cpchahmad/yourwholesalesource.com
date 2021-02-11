@@ -116,6 +116,8 @@
                                     $is_monthly_discount = false;
                                 }
 
+                                dd($is_monthly_discount);
+
 
                                 if($order->line_items->where('fulfilled_by', '!=', 'store')->count() >=2){
                                     $is_general_discount = true;
