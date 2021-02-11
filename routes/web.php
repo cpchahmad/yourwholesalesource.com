@@ -480,9 +480,9 @@ Route::get('/testing', function() {
     $shops = Shop::whereNotNull("shopify_token")->get();
 
     foreach ($shops as $shop) {
-        $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->where('created_at', '>=' ,now()->subDay(7))->sum('cost_to_pay');
+        $sales = RetailerOrder::whereIN('paid', [0, 1, 2])->where('shop_id', 71)->where('created_at', '>=' ,now()->subDay(3))->get();
 
-        dump($sales);
+        dd($sales);
     }
 
     dd(34534);

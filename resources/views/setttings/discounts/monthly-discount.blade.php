@@ -21,11 +21,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="block">
-                    <div class="block-header">
-                        <h3 class="block-title">Monthly Discount Settings</h3>
-                    </div>
                     <form action="{{ route('save.monthly.discount.settings') }}" method="post">
                         @csrf
+                        <div class="block-header d-flex justify-content-between">
+                            <h3 class="block-title">Monthly Discount Settings</h3>
+                            <div class="custom-control custom-switch custom-control-success mb-1">
+                                <input @if($settings && $settings->enable)checked="" @endif   type="checkbox" class="custom-control-input status-switch" id="enable_status" name="enable">
+                                <label class="custom-control-label" for="enable_status">@if($settings && $settings->enable) Enabled @else Disabled @endif</label>
+                            </div>
+                        </div>
+
                         <div class="block-content">
                             <div class="form-group">
                                 <label class="">Sales Target</label>

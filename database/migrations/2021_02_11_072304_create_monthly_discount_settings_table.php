@@ -17,6 +17,7 @@ class CreateMonthlyDiscountSettingsTable extends Migration
             $table->bigIncrements('id');
             $table->double('discount')->nullable();
             $table->double('sales_target')->nullable();
+            $table->boolean('enable')->default(false);
             $table->timestamps();
         });
     }
