@@ -537,7 +537,7 @@ class AdminMaintainerController extends Controller
         $data['province'] = is_null($shipping->province) ? 'No Province' : $shipping->province;
         $data['postCode'] = is_null($shipping->zip) ? 'No Zip' : $shipping->zip;
         $data['buyerUserId'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->id;
-        $data['buyerName'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->first_name. ' '.$order->has_customer->last_name;
+        $data['buyerName'] = is_null($shipping->first_name) ? "No customer Found" : $shipping->first_name. ' '.$shipping->last_name;
         $data['email'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->email;
         $data['itemTotal'] = $order->cost_to_pay;
         $data['shippingCost'] = $order->shipping_price;
@@ -707,7 +707,7 @@ class AdminMaintainerController extends Controller
         $data['province'] = is_null($shipping->province) ? 'No Province' : $shipping->province;
         $data['postCode'] = is_null($shipping->zip) ? 'No Zip' : $shipping->zip;
         $data['buyerUserId'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->id;
-        $data['buyerName'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->first_name. ' '.$order->has_customer->last_name;
+        $data['buyerName'] = is_null($shipping->first_name) ? "No customer Found" : $shipping->first_name. ' '.$shipping->last_name;
         $data['email'] = is_null($order->has_customer) ? "No customer Found" : $order->has_customer->email;
         $data['itemTotal'] = $order->cost_to_pay;
         $data['shippingCost'] = $order->shipping_price;
