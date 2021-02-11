@@ -15,6 +15,8 @@ class CreateMonthlyDiscountSettingsTable extends Migration
     {
         Schema::create('monthly_discount_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->double('discount')->nullable();
+            $table->double('sales_target')->nullable();
             $table->timestamps();
         });
     }
