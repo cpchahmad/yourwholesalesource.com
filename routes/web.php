@@ -15,6 +15,8 @@ use App\EmailTemplate;
 use App\Http\Controllers\AdminMaintainerController;
 use App\Http\Controllers\HelperController;
 use App\Mail\NewsEmail;
+use App\MonthlyDiscountPreference;
+use App\MonthlyDiscountSetting;
 use App\Notification;
 use App\Product;
 use App\RetailerOrder;
@@ -475,20 +477,6 @@ Route::get('test/emails', 'HelperController@testEmail');
 //
 //    dd($query);
 //});
-
-Route::get('/testing', function() {
-    $shops = Shop::whereNotNull("shopify_token")->get();
-
-    foreach ($shops as $shop) {
-        $sales = RetailerOrder::whereIN('paid', [0, 1, 2])->where('shop_id', 71)->where('created_at', '>=' ,now()->subDay(3))->get();
-
-        dd($sales);
-    }
-
-    dd(34534);
-
-});
-
 
 
 
