@@ -706,7 +706,6 @@ class DefaultSettingsController extends Controller
         $settings->enable = $request->enable ? 1 : 0;
         $settings->save();
 
-        dd($request->all());
 
         return redirect()->back()->with('success', 'Monthly Discount Settins Saved Successfully!');
     }
