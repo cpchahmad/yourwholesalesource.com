@@ -308,8 +308,8 @@
                                             @endif
 
                                             @php
-                                                dd($is_applied);
-                                                dd($is_monthly_discount);
+                                                dump($is_applied);
+                                                dump($is_monthly_discount);
                                                 dd($is_general_discount);
 
                                             @endphp
