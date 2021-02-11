@@ -476,6 +476,8 @@ class DefaultSettingsController extends Controller
         $stores= Shop::query();
 
         $users->whereNotIn('email', ['admin@wefullfill.com', 'super_admin@wefullfill.com']);
+
+        dd($users->count());
         if($request->has('user_search')){
 
             $users->where('name','LIKE','%'.$request->input('user_search').'%');
