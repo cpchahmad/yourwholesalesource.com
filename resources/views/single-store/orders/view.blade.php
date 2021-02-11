@@ -275,6 +275,22 @@
                                 $total_discount = 0;
                                 $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
                                 $line_item_count = count($order->line_items);
+                                $admin_setting_for_monthly_discount = \App\MonthlyDiscountSetting::first();
+
+
+                                if($admin_setting_for_monthly_discount && $admin_setting_for_monthly_discount->enable){
+                                    if($order->shop_id == null) {
+                                        if(\App\MonthlyDiscountPreference::where('user_id', $order->user_id)->exists() && \App\MonthlyDiscountPreference::where('user_id', $order->user_id)->first()->enable)
+                                            $is_monthly_discount = true;
+                                    }
+                                    else {
+                                        if(\App\MonthlyDiscountPreference::where('shop_id', $order->shop_id)->exists() && \App\MonthlyDiscountPreference::where('shop_id', $order->shop_id)->first()->enable)
+                                            $is_monthly_discount = true;
+                                    }
+                                }
+                                else {
+                                    $is_monthly_discount = false;
+                                }
 
                                 if($order->line_items->where('fulfilled_by', '!=', 'store')->count() >=2){
                                     $is_general_discount = true;
@@ -398,7 +414,7 @@
                                                  }
                                              }
                                             @endphp
-                                            @if($real_variant != null && $is_applied && !($is_general_discount))
+                                            @if($real_variant != null && $is_applied && !($is_general_discount) && !($is_monthly_discount))
                                                 @if(count($real_variant->has_tiered_prices) > 0)
                                                     @foreach($real_variant->has_tiered_prices as $var_price)
                                                         @php
@@ -434,12 +450,16 @@
                                                 <span></span>
                                             @endif
 
-                                            @if($is_general_discount && $is_applied_for_general_dsiscount)
+                                            @if($is_general_discount && $is_applied_for_general_dsiscount && !($is_monthly_discount))
                                                {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
                                             @endif
 
-                                            @if($is_general_discount && $is_applied_for_general_fixed)
+                                            @if($is_general_discount && $is_applied_for_general_fixed && !($is_monthly_discount))
                                                 {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
+                                            @endif
+
+                                            @if($is_monthly_discount)
+                                                {{ \App\MonthlyDiscountSetting::first()->discount }} % on whole order
                                             @endif
 
                                         </td>
@@ -565,6 +585,14 @@
                                        if($is_general_discount && $is_applied_for_general_fixed) {
                                            $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
                                         }
+
+                                       if($is_monthly_discount) {
+                                           $discount = (double) \App\MonthlyDiscountSetting::first()->discount;
+                                           $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
+                                           $price = number_format($price, 2);
+                                           $total_discount = $total_discount + $price;
+                                           $total_discount = $order->cost_to_pay - $total_discount;
+                                       }
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
                                 </td>

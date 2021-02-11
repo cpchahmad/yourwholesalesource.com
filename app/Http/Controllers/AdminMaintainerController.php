@@ -29,6 +29,8 @@ class AdminMaintainerController extends Controller
     private $helper;
     private $log;
     private $notify;
+    private $admin;
+    private $inventory;
 
 
 
@@ -41,6 +43,8 @@ class AdminMaintainerController extends Controller
         $this->helper = new HelperController();
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
+        $this->admin = new AdminMaintainerController();
+        $this->inventory = new InventoryController();
     }
 
     public function getPages() {
