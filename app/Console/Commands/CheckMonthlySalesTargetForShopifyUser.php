@@ -34,7 +34,7 @@ class CheckMonthlySalesTargetForShopifyUser extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->admin_settings = MonthlyDiscountSetting::first();
+        //$this->admin_settings = MonthlyDiscountSetting::first();
     }
 
     /**
