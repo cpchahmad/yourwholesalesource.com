@@ -29,7 +29,6 @@ class AdminMaintainerController extends Controller
     private $helper;
     private $log;
     private $notify;
-    private $admin;
     private $inventory;
 
 
@@ -43,7 +42,6 @@ class AdminMaintainerController extends Controller
         $this->helper = new HelperController();
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
-        $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
     }
 
@@ -851,7 +849,7 @@ class AdminMaintainerController extends Controller
                         $this->inventory->OrderQuantityUpdate($new,'new');
 
                         try {
-                            $this->admin->push_to_mabang($new->id);
+                            $this->push_to_mabang($new->id);
                         }
                         catch (\Exception $e) {
                             $log = new ErrorLog();
