@@ -307,6 +307,7 @@
                                                 {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
                                             @endif
 
+                                            {{ dd( $is_monthly_discount ) }}
                                             @if($is_monthly_discount && !($is_general_discount) && !($is_applied))
                                                 {{ $is_monthly_discount }}
                                                 {{ \App\MonthlyDiscountSetting::first()->discount }} % on whole order
