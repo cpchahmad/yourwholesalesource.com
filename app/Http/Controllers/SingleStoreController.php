@@ -65,7 +65,7 @@ class SingleStoreController extends Controller
             $comparing_start_date = Carbon::parse($start_date)->format('Y-m-d');
             $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
 
-            $orders = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
+            $orders = RetailerOrder::whereIN('paid', [0, 1, 2])->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $unpaid_orders_count = RetailerOrder::where('paid', 0)->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $unfullfilled_orders_count = RetailerOrder::where('paid', 0)->where('status', 'unfulfilled')->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $canceled_order_count = RetailerOrder::where('status', 'cancelled')->where('shop_id', $shop->id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();

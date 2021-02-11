@@ -33,4 +33,7 @@ class Shop extends Model
     public function has_questionnaire(){
         return $this->hasOne(Questionaire::class,'shop_id');
     }
+    public function has_monthly_discount_preference(){
+        return $this->hasOne(MonthlyDiscountPreference::class);
+    }
 }

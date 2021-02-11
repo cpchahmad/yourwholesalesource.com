@@ -101,6 +101,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function campaigns() {
         return $this->belongsToMany(Campaign::class, 'campaigns_users')->withPivot('status');
     }
+    public function has_monthly_discount_preference(){
+        return $this->hasOne(MonthlyDiscountPreference::class);
+    }
 
     public function sendPasswordResetNotification($token)
     {
