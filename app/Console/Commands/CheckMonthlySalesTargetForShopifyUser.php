@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Shop;
 use Illuminate\Console\Command;
 
 class CheckMonthlySalesTargetForShopifyUser extends Command
@@ -37,6 +38,6 @@ class CheckMonthlySalesTargetForShopifyUser extends Command
      */
     public function handle()
     {
-        //
+        $shops = Shop::whereNotNull("shopify_token")->get();
     }
 }

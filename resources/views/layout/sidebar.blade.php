@@ -203,6 +203,13 @@
                             <span class="nav-main-link-name">General Discounts</span>
                         </a>
                     </li>
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('admin.monthly.discount.settings')}}">
+                            <i class="nav-main-link-icon si si-basket-loaded"></i>
+                            <span class="nav-main-link-name">Monthly Sales Discounts</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

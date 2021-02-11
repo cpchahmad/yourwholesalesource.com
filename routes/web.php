@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('/save/tiered/pricing/preferences','DefaultSettingsController@save_tiered_pricing_preferences')->name('save.tiered.pricing.preferences');
     Route::post('/save/general/discount/preferences','DefaultSettingsController@save_general_discount_preferences')->name('save.general.discount.preferences');
     Route::post('/save/fixed/discount/preferences','DefaultSettingsController@save_fixed_discount_preferences')->name('save.general.fixed.preferences');
+    Route::post('/save/monthly/discount/settings','DefaultSettingsController@save_monthly_discount_settings')->name('save.monthly.discount.settings');
     Route::any('/default/settings/{id}/update','DefaultSettingsController@update')->name('default_info.update');
     Route::post('/create/platform','DefaultSettingsController@create_platform')->name('create_platform');
     Route::post('/update/platform/{id}','DefaultSettingsController@update_platform')->name('update_platform');
@@ -165,6 +166,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('/email/templates/{id}/status', 'EmailTemplateController@changeStatus')->name('admin.emails.status');
     Route::get('/tiered/pricing/preferences', 'DefaultSettingsController@getTieredPricingPreferences')->name('admin.tiered.pricing.preferences');
     Route::get('/general/discounts/preferences', 'DefaultSettingsController@getGeneralDiscountPreferences')->name('admin.general.discount.preferences');
+    Route::get('/monthly/discounts/settings', 'DefaultSettingsController@getMonthlyDiscountSettings')->name('admin.monthly.discount.settings');
     Route::get('/activity/logs', 'ActivityLogController@index')->name('admin.activity.log.index');
     Route::get('/campaigns', 'DefaultSettingsController@campaigns')->name('email.campaigns.index');
     Route::get('/campaigns/{id}', 'DefaultSettingsController@getCampaign')->name('email.campaigns.show');
@@ -473,6 +475,20 @@ Route::get('test/emails', 'HelperController@testEmail');
 //
 //    dd($query);
 //});
+
+Route::get('/testing', function() {
+    $shops = Shop::whereNotNull("shopify_token")->get();
+
+    foreach ($shops as $shop) {
+        $sales = RetailerOrder::whereIN('paid', [1, 2])->where('shop_id', $shop->id)->where('created_at', '>=' ,now()->subDay(7))->sum('cost_to_pay');
+
+        dump($sales);
+    }
+
+    dd(34534);
+
+});
+
 
 
 

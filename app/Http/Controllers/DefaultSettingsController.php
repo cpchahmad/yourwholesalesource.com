@@ -12,6 +12,7 @@ use App\GeneralDiscountPreferences;
 use App\GeneralFixedPricePreferences;
 use App\Jobs\SendNewsEmailJob;
 use App\Jobs\SendNewsProductEmailjob;
+use App\MonthlyDiscountSetting;
 use App\News;
 use App\Product;
 use App\Refund;
@@ -693,6 +694,19 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'General Fixed Price Preferences Saved Successfully!');
     }
 
+    public function save_monthly_discount_settings(Request $request) {
+        if(MonthlyDiscountSetting::first())
+            $settings = MonthlyDiscountSetting::first();
+        else
+            $settings = new MonthlyDiscountSetting();
+
+        $settings->sales_target = $request->sales_target;
+        $settings->discount = $request->discount;
+        $settings->save();
+
+        return redirect()->back()->with('success', 'Monthly Discount Settins Saved Successfully!');
+    }
+
     public function getTieredPricingPreferences()
     {
         $shops = \OhMyBrew\ShopifyApp\Models\Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
@@ -720,6 +734,13 @@ class DefaultSettingsController extends Controller
             'non_shopify_users' => $users,
         ]);
     }
+
+    public function getMonthlyDiscountSettings() {
+        $settings = MonthlyDiscountSetting::first();
+
+        return view('setttings.discounts.monthly-discount')->with('settings', $settings);
+    }
+
 
     public function campaigns() {
         $campaigns = Campaign::orderBy('updated_at', 'DESC')->paginate(20);
