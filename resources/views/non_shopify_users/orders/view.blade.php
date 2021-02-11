@@ -274,6 +274,7 @@
                             <tbody>
                             @php
                                 $total_discount = 0;
+                                $is_monthly_discount = false;
                                 $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
                                 $line_item_count = count($order->line_items);
                                 $admin_setting_for_monthly_discount = \App\MonthlyDiscountSetting::first();
