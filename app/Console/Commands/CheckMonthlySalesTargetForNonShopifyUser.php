@@ -42,7 +42,7 @@ class CheckMonthlySalesTargetForNonShopifyUser extends Command
     public function handle()
     {
         $users = User::role('non-shopify-users')
-            ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->whereHas('has_orders')->doesntHave('has_shops')->get();
+            ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->whereNotNull('email_verified_at')->doesnthave('has_shops')->get();
         $admin_settings = MonthlyDiscountSetting::first();
 
         foreach ($users as $user) {

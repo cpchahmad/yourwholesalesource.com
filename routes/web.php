@@ -480,7 +480,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 Route::get('/testing', function() {
     $users = User::role('non-shopify-users')
-        ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->doesntHave('has_shops')->get();
+        ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->whereNotNull('email_verified_at')->doesnthave('has_shops')->get();
     dd($users);
     $admin_settings = MonthlyDiscountSetting::first();
 
