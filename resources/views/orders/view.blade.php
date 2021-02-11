@@ -116,7 +116,6 @@
                                     $is_monthly_discount = false;
                                 }
 
-                                dd($is_monthly_discount);
 
 
                                 if($order->line_items->where('fulfilled_by', '!=', 'store')->count() >=2){
@@ -309,7 +308,10 @@
                                             @endif
 
                                             @if($is_monthly_discount && !($is_general_discount) && !($is_applied))
+                                                {{ $is_monthly_discount }}
                                                 {{ \App\MonthlyDiscountSetting::first()->discount }} % on whole order
+                                            @else
+                                                {{ $is_applied }} {{ $is_monthly_discount }} {{ $is_general_discount }}
                                             @endif
 
                                         </td>
