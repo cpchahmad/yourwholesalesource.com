@@ -308,8 +308,7 @@
                                             @endif
 
 
-                                            @if($is_monthly_discount )
-
+                                            @if($is_monthly_discount)
                                                 {{ \App\MonthlyDiscountSetting::first()->discount }} % on whole order
                                             @endif
 
@@ -465,6 +464,15 @@
                                         if($is_general_discount && $is_applied_for_general_fixed) {
                                            $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
                                         }
+
+                                        if($is_monthly_discount) {
+                                               $discount = (double) \App\MonthlyDiscountSetting::first()->discount;
+                                               $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
+                                               $price = number_format($price, 2);
+                                               $total_discount = $total_discount + $price;
+                                               $total_discount = $order->cost_to_pay - $total_discount;
+                                        }
+
                                     @endphp
                                     {{ number_format($total_discount,2) }} USD
                                 </td>
