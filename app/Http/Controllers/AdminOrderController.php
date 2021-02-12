@@ -174,7 +174,7 @@ class AdminOrderController extends Controller
                     return $this->set_fulfilments($request, $id, $fulfillable_quantities, $order, '');
                 }
             } else {
-                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+                return redirect()->back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
         } else {
             return redirect()->route('admin.order')->with('error', 'Order Not Found To Process Fulfillment');
@@ -205,7 +205,7 @@ class AdminOrderController extends Controller
                     return $this->unset_fullfilment($fulfillment, $order);
                 }
             } else {
-                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+                return redirect()->back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
 
         } else {
@@ -323,7 +323,7 @@ class AdminOrderController extends Controller
                 $this->notify->generate('Order', 'Order Tracking Details', $order->name . ' tracking details added successfully!', $order);
                 return redirect()->back()->with('success', 'Tracking Details Added To Fulfillment Successfully!');
             } else {
-                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+                return redirect()->back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
         } else {
             return redirect()->route('admin.order')->with('error', 'Order Not Found To Add Tracking In Fulfillment');
@@ -424,7 +424,7 @@ class AdminOrderController extends Controller
                 $this->notify->generate('Order', 'Order Tracking Details', $order->name . ' tracking details updated successfully!', $order);
                 return redirect()->back()->with('success', 'Tracking Details Updated Successfully!');
             } else {
-                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+                return redirect()->back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
         } else {
             return redirect()->route('admin.order')->with('error', 'Order Not Found To Edit Tracking In Fulfillment');
@@ -453,7 +453,7 @@ class AdminOrderController extends Controller
 
                 return redirect()->back()->with('success', 'Order Marked as Delivered Successfully');
             } else {
-                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+                return redirect()->back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
         } else {
             return redirect()->back()->with('error', 'Order Marked as Delivered Failed');
@@ -483,7 +483,7 @@ class AdminOrderController extends Controller
 
                 return redirect()->back()->with('success', 'Order Marked as Completed Successfully');
             } else {
-                return redirect() - back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
+                return redirect()->back()->with('error', 'Refunded Order Cant Be Processed Fulfillment');
             }
         } else {
             return redirect()->back()->with('error', 'Order Marked as Completed Failed');
