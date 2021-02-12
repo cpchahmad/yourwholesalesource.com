@@ -1273,7 +1273,7 @@ class AdminOrderController extends Controller
         $track_url = $request->trackUrl;
         $item_list = $request->itemList;
 
-        $order = RetailerOrder::where('admin_shopify_name', $order_id);
+        $order = RetailerOrder::where('admin_shopify_name', $order_id)->first();
         if($order_id !== null && $order) {
 
             try{
