@@ -5,7 +5,7 @@
 @endphp
 
 <div class="warehouses mt-2">
-    @if($retailer_product->has_inventory())
+    @if($retailer_product && $retailer_product->has_inventory())
         <label for="material-error">Warehouses</label>
         @foreach($warehouses as $warehouse)
             @if($warehouse->has_inventory($admin_product))
