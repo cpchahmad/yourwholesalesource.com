@@ -5,11 +5,11 @@
 @endphp
 
 @if($retailer_product && $retailer_product->has_inventory())
-    <div class="warehouses mt-2">
-            <label for="material-error">Warehouses</label>
+    <div class="warehouses">
+            <label for="material-error">WAREHOUSES</label>
             @foreach($warehouses as $warehouse)
                 @if($warehouse->has_inventory($admin_product))
-                    <div class="custom-control custom-switch custom-control-success mb-1">
+                    <div class="custom-control custom-switch custom-control-success mb-1 mt-2">
                         <label for="material-error">{{ $warehouse->title }}</label>
                     </div>
                     <span class="mt-2">Shipping Countries In that zone: </span>
