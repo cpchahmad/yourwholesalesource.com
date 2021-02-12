@@ -320,7 +320,7 @@
                                                         <td colspan="2">
                                                             @foreach($warehouses as $warehouse)
                                                                 @if($warehouse->has_inventory_quantity_for_retailer_variant($product->linked_product, $v))
-                                                                    <div class="row mb-3">
+                                                                    <div class="row mb-2">
                                                                         <div class="col-md-6">
                                                                             <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                             <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
@@ -359,7 +359,7 @@
                                                 <td colspan="2">
                                                     @foreach($warehouses as $warehouse)
                                                        @if($warehouse->has_inventory_quantity_for_product($product->linked_product))
-                                                            <div class="row mb-3">
+                                                            <div class="row mb-2">
                                                                 <div class="col-md-6">
                                                                     <input  type="text" disabled class="form-control" value="{{ $warehouse->title }}">
                                                                     <input  type="hidden" class="form-control" name="war_id[]" value="{{ $warehouse->id }}">
