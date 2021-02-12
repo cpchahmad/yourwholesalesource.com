@@ -435,7 +435,6 @@ class RetailerProductController extends Controller
     {
         $product = RetailerProduct::find($request->id);
 
-        dd($product);
 
 //        if($request->inventory_status) {
 //            $product->manage_inventory = 1;
