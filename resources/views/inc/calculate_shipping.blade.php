@@ -1,3 +1,26 @@
+@php
+    $warehouses = WareHouse::all();
+@endphp
+
+<div class="warehouses mt-2">
+    @foreach($warehouses as $warehouse)
+        @if($warehouse->has_inventory($product->linked_product))
+            <hr>
+            <div class="custom-control custom-switch custom-control-success mb-1">
+                <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
+                <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
+            </div>
+            <span class="mt-2">Countries: </span>
+            @if($warehouse->zone)
+                @foreach($warehouse->zone->has_countries as $country)
+                    <span class="badge badge-success mt-2">{{ $country->name }}</span>
+                    {{--                                                                                <strong>{{ $country->getShippingCost($product->linked_product) }}</strong>--}}
+                @endforeach
+            @endif
+        @endif
+    @endforeach
+</div>
+
 <div class="form-group row" style="margin-top: 10px">
     <div class="col-md-12">
         <div class="form-material">
