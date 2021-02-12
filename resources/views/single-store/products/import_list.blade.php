@@ -99,7 +99,7 @@
                                     <i class="si si-cloud-upload mr-1"></i>
                                     Import to store
                                 </button>
-                                @endif
+{{--                                @endif--}}
                                 <div class="modal fade" id="import_modal_{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">
