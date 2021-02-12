@@ -17,7 +17,7 @@
                     <div class="form-group row" style="margin-top: 10px">
                         <div class="col-md-12">
                             <div class="form-material">
-                                <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
+                                <select  class="form-control shipping_country_select" name="country" data-retailer-product="{{ $product->id }}" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
                                     @foreach($warehouse->zone->has_countries as $country)
                                         <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
                                     @endforeach
@@ -36,7 +36,7 @@
     <div class="col-md-12">
         <div class="form-material">
             <label for="material-error">Shipping Country</label>
-            <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
+            <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-retailer-product="{{ $product->id }}" data-route="{{route('calculate_shipping')}}">
                 @foreach($countries as $country)
                     <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
                 @endforeach

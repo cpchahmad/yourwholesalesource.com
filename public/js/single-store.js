@@ -668,6 +668,7 @@ $(document).ready(function () {
             data:{
                 product: $(this).data('product'),
                 country :$(this).val(),
+                retailer_product : $(this).data('retailer-product')
             },
             success:function (response) {
                 var modal = '#'+select.parents('.modal').attr('id');
