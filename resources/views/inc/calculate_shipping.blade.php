@@ -1,6 +1,8 @@
 @php
     $warehouses = \App\WareHouse::all();
     $prod = \App\RetailerProduct::find($product);
+
+    dd($prod);
 @endphp
 
 <div class="warehouses mt-2">
