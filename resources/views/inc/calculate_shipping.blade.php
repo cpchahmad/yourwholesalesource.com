@@ -44,28 +44,27 @@
             </div>
         </div>
     </div>
+@endif
 
-
-    @if(count($rates) > 0)
-        <table class="table table-vcenter table-hover table-striped">
-            <thead>
+@if(count($rates) > 0)
+    <table class="table table-vcenter table-hover table-striped">
+        <thead>
+        <tr>
+            <td></td>
+            <td>Estimated Delivery Time</td>
+            <td>Shipping Price</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($rates as $rate)
             <tr>
-                <td></td>
-                <td>Estimated Delivery Time</td>
-                <td>Shipping Price</td>
+                <td><input type="radio" class="shipping_price_radio" data-country="{{$selected}}" name="shipping_price" data-price="${{number_format($rate->shipping_price,2)}}"></td>
+                <td>{{$rate->shipping_time}}</td>
+                <td>${{number_format($rate->shipping_price,2)}}</td>
             </tr>
-            </thead>
-            <tbody>
-            @foreach($rates as $rate)
-                <tr>
-                    <td><input type="radio" class="shipping_price_radio" data-country="{{$selected}}" name="shipping_price" data-price="${{number_format($rate->shipping_price,2)}}"></td>
-                    <td>{{$rate->shipping_time}}</td>
-                    <td>${{number_format($rate->shipping_price,2)}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p class="text-center">No shipping price available for this country!</p>
-    @endif
+            @endforeach
+        </tbody>
+    </table>
+@else
+    <p class="text-center">No shipping price available for this country!</p>
 @endif
