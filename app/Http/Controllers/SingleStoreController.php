@@ -696,6 +696,7 @@ class SingleStoreController extends Controller
 
         }
 
+        dd($request->input('retailer_product'));
         $html = view('inc.calculate_shipping')->with([
             'countries' => Country::all(),
             'selected' => $country,
