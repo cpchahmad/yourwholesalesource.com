@@ -4,10 +4,9 @@
 @endphp
 
 <div class="warehouses mt-2">
+    <label for="material-error">Warehouses</label>
     @foreach($warehouses as $warehouse)
         @if($warehouse->has_inventory($prod))
-            <label for="material-error">Warehouses</label>
-            <hr>
             <div class="custom-control custom-switch custom-control-success mb-1">
                 <label for="material-error">{{ $warehouse->title }}</label>
             </div>
@@ -25,6 +24,7 @@
                     </div>
                 </div>
             @endif
+            <hr>
         @endif
     @endforeach
 </div>
