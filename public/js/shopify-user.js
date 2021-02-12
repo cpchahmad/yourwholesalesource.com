@@ -119,6 +119,8 @@ $(document).ready(function () {
 
     $('body').on('click','.calculate_shipping_btn',function () {
         var button = $(this);
+
+        console.log($(this).data('retailer-product'));
         $.ajax({
             url:$(this).data('route'),
             type: 'GET',
