@@ -4,47 +4,47 @@
     $retailer_product = \App\RetailerProduct::find($retailer_product_id);
 @endphp
 
-<div class="warehouses mt-2">
-    @if($retailer_product && $retailer_product->has_inventory())
-        <label for="material-error">Warehouses</label>
-        @foreach($warehouses as $warehouse)
-            @if($warehouse->has_inventory($admin_product))
-                <div class="custom-control custom-switch custom-control-success mb-1">
-                    <label for="material-error">{{ $warehouse->title }}</label>
-                </div>
-                <span class="mt-2">Shipping Countries In that zone: </span>
-                @if($warehouse->zone)
-                    <div class="form-group row" style="margin-top: 10px">
-                        <div class="col-md-12">
-                            <div class="form-material">
-                                <select  class="form-control shipping_country_select" name="country" data-retailer-product="{{ $retailer_product->id }}" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
-                                    <option disabled selected>Select a country</option>
-                                    @foreach($warehouse->zone->has_countries as $country)
-                                        <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
-                                    @endforeach
-                                </select>
+@if($retailer_product && $retailer_product->has_inventory())
+    <div class="warehouses mt-2">
+            <label for="material-error">Warehouses</label>
+            @foreach($warehouses as $warehouse)
+                @if($warehouse->has_inventory($admin_product))
+                    <div class="custom-control custom-switch custom-control-success mb-1">
+                        <label for="material-error">{{ $warehouse->title }}</label>
+                    </div>
+                    <span class="mt-2">Shipping Countries In that zone: </span>
+                    @if($warehouse->zone)
+                        <div class="form-group row" style="margin-top: 10px">
+                            <div class="col-md-12">
+                                <div class="form-material">
+                                    <select  class="form-control shipping_country_select" name="country" data-retailer-product="{{ $retailer_product->id }}" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
+                                        <option disabled selected>Select a country</option>
+                                        @foreach($warehouse->zone->has_countries as $country)
+                                            <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+                    <hr>
                 @endif
-                <hr>
-            @endif
-        @endforeach
-    @endif
-</div>
-
-<div class="form-group row" style="margin-top: 10px">
-    <div class="col-md-12">
-        <div class="form-material">
-            <label for="material-error">Shipping Country</label>
-            <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-retailer-product="{{ $retailer_product->id }}" data-route="{{route('calculate_shipping')}}">
-                @foreach($countries as $country)
-                    <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
-                @endforeach
-            </select>
+            @endforeach
+    </div>
+@else
+    <div class="form-group row" style="margin-top: 10px">
+        <div class="col-md-12">
+            <div class="form-material">
+                <label for="material-error">Shipping Country</label>
+                <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-retailer-product="{{ $retailer_product->id }}" data-route="{{route('calculate_shipping')}}">
+                    @foreach($countries as $country)
+                        <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
-</div>
+@endif
 
 @if(count($rates) > 0)
     <table class="table table-vcenter table-hover table-striped">
