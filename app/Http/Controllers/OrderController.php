@@ -198,6 +198,8 @@ class OrderController extends Controller
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
+
+                dd($orders);
                 foreach ($orders as $index => $order) {
                     $product_ids = [];
                     $variant_ids = [];
