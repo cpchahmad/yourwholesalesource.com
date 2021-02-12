@@ -95,7 +95,7 @@
 {{--                                        Import to store--}}
 {{--                                    </button>--}}
 {{--                                @else--}}
-                                <button onclick="window.location.href='{{route('retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-success" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >
+                                <button onclick="window.location.href='{{route('retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-success" style="margin-top:7px" >
                                     <i class="si si-cloud-upload mr-1"></i>
                                     Import to store
                                 </button>

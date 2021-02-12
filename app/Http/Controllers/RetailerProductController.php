@@ -435,10 +435,12 @@ class RetailerProductController extends Controller
     {
         $product = RetailerProduct::find($request->id);
 
-        if($request->inventory_status) {
-            $product->manage_inventory = 1;
-            $product->save();
-        }
+        dd($product);
+
+//        if($request->inventory_status) {
+//            $product->manage_inventory = 1;
+//            $product->save();
+//        }
 
         if ($product != null && $product->toShopify != 1) {
             $variants_array = [];
