@@ -6,6 +6,7 @@
 <div class="warehouses mt-2">
     @foreach($warehouses as $warehouse)
         @if($warehouse->has_inventory($prod))
+            <label for="material-error">Warehouses</label>
             <hr>
             <div class="custom-control custom-switch custom-control-success mb-1">
                 <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
@@ -13,10 +14,18 @@
             </div>
             <span class="mt-2">Countries: </span>
             @if($warehouse->zone)
-                @foreach($warehouse->zone->has_countries as $country)
-                    <span class="badge badge-success mt-2">{{ $country->name }}</span>
-                    {{--                                                                                <strong>{{ $country->getShippingCost($product->linked_product) }}</strong>--}}
-                @endforeach
+                <label for="material-error">Shipping Country In that zone</label>
+                <div class="form-group row" style="margin-top: 10px">
+                    <div class="col-md-12">
+                        <div class="form-material">
+                            <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
+                                @foreach($warehouse->zone->has_countries as $country)
+                                    <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
             @endif
         @endif
     @endforeach
