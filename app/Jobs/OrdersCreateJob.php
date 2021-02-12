@@ -154,6 +154,8 @@ class OrdersCreateJob implements ShouldQueue
                 $new->sync_status = 1;
                 $new->save();
 
+                $new->admin_shopify_name = 'W'.$new->id;
+
                 $cost_to_pay = 0;
 
                 foreach ($order->line_items as $item){
