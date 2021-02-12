@@ -700,7 +700,8 @@ class SingleStoreController extends Controller
             'countries' => Country::all(),
             'selected' => $country,
             'rates' => $shipping_rates,
-            'product' => $request->input('product')
+            'product' => $request->input('product'),
+            'retailer_product_id' => $request->input('retailer_product'),
         ])->render();
 
         return response()->json([
