@@ -661,6 +661,8 @@ $(document).ready(function () {
     $('body').on('change','.shipping_country_select',function () {
         $(this).parents('.modal').find('.drop-content').hide();
         $(this).parents('.modal').find('.loader-div').show();
+
+        console.log(1232);
         var select = $(this);
         $.ajax({
             url:$(this).data('route'),
