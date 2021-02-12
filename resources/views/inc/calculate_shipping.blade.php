@@ -18,6 +18,7 @@
                         <div class="col-md-12">
                             <div class="form-material">
                                 <select  class="form-control shipping_country_select" name="country" data-retailer-product="{{ $retailer_product->id }}" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
+                                    <option disabled selected>Select a country</option>
                                     @foreach($warehouse->zone->has_countries as $country)
                                         <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
                                     @endforeach
