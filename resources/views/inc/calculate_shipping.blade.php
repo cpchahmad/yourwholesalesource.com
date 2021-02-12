@@ -1,5 +1,5 @@
 @php
-    $warehouses = WareHouse::all();
+    $warehouses = \App\WareHouse::all();
 @endphp
 
 <div class="warehouses mt-2">
