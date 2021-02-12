@@ -1,13 +1,11 @@
 @php
     $warehouses = \App\WareHouse::all();
-    $prod = \App\RetailerProduct::find($product);
-
-    dd($product);
+    $prod = \App\Product::find($product);
 @endphp
 
 <div class="warehouses mt-2">
     @foreach($warehouses as $warehouse)
-        @if($warehouse->has_inventory($prod->linked_product))
+        @if($warehouse->has_inventory($prod))
             <hr>
             <div class="custom-control custom-switch custom-control-success mb-1">
                 <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
