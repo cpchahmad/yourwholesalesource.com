@@ -433,9 +433,8 @@ class RetailerProductController extends Controller
 
     public function import_to_shopify(Request $request)
     {
-        dd($request->all());
-        $product = RetailerProduct::find($request->id);
 
+        $product = RetailerProduct::find($request->id);
 
 //        if($request->inventory_status) {
 //            $product->manage_inventory = 1;
