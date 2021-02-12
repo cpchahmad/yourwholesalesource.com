@@ -199,9 +199,8 @@ class OrderController extends Controller
             if (!$response->errors) {
                 $orders = $response->body->orders;
 
-
+                dd($orders[4]);
                 foreach ($orders as $index => $order) {
-                    $order = $orders[4];
                     $product_ids = [];
                     $variant_ids = [];
                     foreach ($order->line_items as $item) {
@@ -414,12 +413,6 @@ class OrderController extends Controller
                             /* Auto Order Payment in case user has enabled settings for it*/
                             $this->admin->make_auto_payment($new);
                         }
-                        else {
-                            dd('retailer order do exits');
-                        }
-                    }
-                    else {
-                        dd('retailer_product do not exits');
                     }
 
                 }
