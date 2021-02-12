@@ -9,12 +9,10 @@
             <label for="material-error">Warehouses</label>
             <hr>
             <div class="custom-control custom-switch custom-control-success mb-1">
-                <input type="checkbox" class="custom-control-input warehouse_checkbox" id="inventory_status_{{ $warehouse->id }}" name="inventory_status">
-                <label class="custom-control-label" for="inventory_status_{{ $warehouse->id }}">{{ $warehouse->title }}</label>
+                <label for="material-error">{{ $warehouse->title }}</label>
             </div>
-            <span class="mt-2">Countries: </span>
+            <span class="mt-2">Shipping Countries In that zone: </span>
             @if($warehouse->zone)
-                <label for="material-error">Shipping Country In that zone</label>
                 <div class="form-group row" style="margin-top: 10px">
                     <div class="col-md-12">
                         <div class="form-material">
