@@ -529,7 +529,7 @@ class AdminMaintainerController extends Controller
         ];
 
 
-        $data['phone1'] =  isset($shipping->phone) ? $shipping->phone : 'No Phone';
+        $data['phone1'] =  isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone';
         $data['country'] = is_null($shipping->country) ? 'No country' : $shipping->country;
         $data['street1'] = is_null($shipping->address1) ? 'No First Address' : $shipping->address1;
         $data['street2'] = is_null($shipping->address2) ? 'No Second Address' : $shipping->address2;
@@ -698,7 +698,7 @@ class AdminMaintainerController extends Controller
         ];
 
 
-        $data['phone1'] =  isset($shipping->phone) ? $shipping->phone : 'No Phone';
+        $data['phone1'] =  isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone';
         $data['country'] = is_null($shipping->country) ? 'No country' : $shipping->country;
         $data['street1'] = is_null($shipping->address1) ? 'No First Address' : $shipping->address1;
         $data['street2'] = is_null($shipping->address2) ? 'No Second Address' : $shipping->address2;
