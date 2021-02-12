@@ -124,7 +124,7 @@ $(document).ready(function () {
             type: 'GET',
             data:{
                 product: $(this).data('product'),
-                retailer_product : $(this).data('retailer_product')
+                retailer_product : $(this).data('retailer-product')
             },
             success:function (response) {
                 var modal = button.data('target');
