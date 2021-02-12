@@ -123,8 +123,8 @@ $(document).ready(function () {
             url:$(this).data('route'),
             type: 'GET',
             data:{
-                product: $(this).data('product'),
-                retailer_product : $(this).data('retailer-product')
+                retailer_product : $(this).data('retailer-product'),
+                product: $(this).data('product')
             },
             success:function (response) {
                 var modal = button.data('target');
