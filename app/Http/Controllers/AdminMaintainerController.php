@@ -507,7 +507,7 @@ class AdminMaintainerController extends Controller
                     }
                 }
 
-                dd($item, $item->linked_real_variant);
+                dd($item, $item->linked_real_product);
 
 
                 array_push($line_items, [
