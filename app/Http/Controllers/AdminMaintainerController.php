@@ -573,6 +573,7 @@ class AdminMaintainerController extends Controller
         $resp = json_decode($resp);
 
         if($resp->code == "999") {
+            dd($body);
             return redirect()->back()->with('error', $resp->message);
         }
         else {
