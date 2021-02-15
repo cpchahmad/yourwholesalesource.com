@@ -543,9 +543,6 @@ class WishlistController extends Controller
     {
         $shop = $this->helper->getSpecificShop($wishlist->has_store->id);
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $shopify_product_id . '.json');
-        dump($response);
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products.json');
-        dd($response);
         return $response;
     }
 
