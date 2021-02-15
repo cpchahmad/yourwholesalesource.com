@@ -669,7 +669,6 @@ class SingleStoreController extends Controller
             $total_weight = 0;
         }
 
-
         $zoneQuery = Zone::query();
         $zoneQuery->whereHas('has_countries', function ($q) use ($country) {
             $q->where('name', 'LIKE', '%' . $country . '%');
