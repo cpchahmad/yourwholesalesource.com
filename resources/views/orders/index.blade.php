@@ -100,9 +100,8 @@
                                             <label class="custom-control-label" for="check-all"></label>
                                         </div>
                                     </th>
-                                    <th>WFnumber</th>
                                     <th>Name</th>
-                                    <th>Wnumber</th>
+                                    <th>WFFnumber</th>
                                     <th>Shop / User</th>
                                     <th>Source</th>
                                     <th>Order Date</th>
@@ -123,7 +122,6 @@
                                                 <label class="custom-control-label" for="row_{{$index}}"></label>
                                             </div>
                                         </td>
-                                        <td><label for="">{{ $order->id }}</label></td>
                                         <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
                                         <td class="font-w600">{{ $order->admin_shopify_name }}</td>
                                         <td>
