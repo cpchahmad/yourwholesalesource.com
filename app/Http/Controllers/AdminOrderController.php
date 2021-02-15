@@ -1369,6 +1369,11 @@ class AdminOrderController extends Controller
                         if (!$response->errors) {
                             $this->tracking_process($data, $fulfillment, $retailer_order);
                         }
+                        else {
+                            $log = new ErrorLog();
+                            $log->message = "New error From Manbang: " . $retailer_order->id . ': '. json_encode($response->body);
+                            $log->save();
+                        }
 
                     }
                 }
