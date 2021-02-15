@@ -268,6 +268,7 @@
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
+{{--                                <th></th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -495,6 +496,9 @@
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                             @endif
                                         </td>
+{{--                                        @if($item->has_associated_warehouse())--}}
+{{--                                            <td>warehouse</td>--}}
+{{--                                        @endif--}}
                                     </tr>
                                 @endif
                             @endforeach
