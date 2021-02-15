@@ -422,6 +422,9 @@ class AdminMaintainerController extends Controller
         $timestamp = Carbon::now()->timestamp;
         $order = RetailerOrder::find($id);
 
+        $order->admin_shopify_name = 'W'.$order->id;
+        $order->save();
+
         $line_items = [];
         $images = [];
 
