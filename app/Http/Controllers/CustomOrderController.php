@@ -248,6 +248,9 @@ class CustomOrderController extends Controller
 
         $new->save();
 
+        $new->admin_shopify_name = 'WFF'.$new->id;
+        $new->save();
+
         $cost_to_pay = 0;
         $total_weight = 0;
 

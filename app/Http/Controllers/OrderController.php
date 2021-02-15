@@ -262,7 +262,8 @@ class OrderController extends Controller
                             $new->sync_status = 1;
                             $new->save();
 
-                            $new->admin_shopify_name = 'W'.$new->id;
+                            $new->admin_shopify_name = 'WFF'.$new->id;
+                            $new->save();
 
                             $cost_to_pay = 0;
 
@@ -496,7 +497,8 @@ class OrderController extends Controller
                         $new->sync_status = 1;
                         $new->save();
 
-                        $new->admin_shopify_name = 'W'.$new->id;
+                        $new->admin_shopify_name = 'WFF'.$new->id;
+                        $new->save();
 
                         $cost_to_pay = 0;
 
