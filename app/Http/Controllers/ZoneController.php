@@ -98,7 +98,7 @@ class ZoneController extends Controller
     public function getShippingRates(Request $request){
        $country = $request->input('country');
 //       $product = Product::where('woocommerce_id',$request->input('product_id'))->first();
-       $product = Product::where('shopify_id',$request->input('product_id'))->first();
+       $product = Product::where('shopify_id',$request->input('product_id'))->orWhere('woocommerce_id',$request->input('product_id'))->first();
        if($product != null){
             $total_weight = $product->weight;
 
