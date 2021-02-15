@@ -1277,10 +1277,10 @@ class AdminOrderController extends Controller
         if($order_id !== null && $order) {
 
             try{
-                //$flag = true;
+                $flag = true;
                 if(ERPOrderFulfillment::where('retailer_order_id', $order->id)->exists()) {
                     $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
-                    //$flag = false;
+                    $flag = false;
                 }
                 else {
                     $fulfillment = new ERPOrderFulfillment();
@@ -1297,12 +1297,12 @@ class AdminOrderController extends Controller
 
                 $order->save();
 
-//                if($flag) {
+                if($flag) {
                     $this->set_erp_order_fulfillment($fulfillment, $order);
-//                }
-//                else {
-//                    $this->update_erp_order_fulfillemnt($fulfillment, $order);
-//                }
+                }
+                else {
+                    $this->update_erp_order_fulfillemnt($fulfillment, $order);
+                }
 
             }
             catch(\Exception $e) {
