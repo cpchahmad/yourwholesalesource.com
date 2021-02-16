@@ -514,11 +514,10 @@ Route::get('/tes', function(){
     $warehouse = WareHouse::find(1);
     $country = 'Kenya';
     $zoneQuery = $warehouse->zone;
-    dump($zoneQuery);
-    $zoneQuery->whereHas('has_countries', function ($q) use ($country) {
-        $q->where('name', 'LIKE', '%' . $country . '%');
-    });
+
     $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+    dd($zoneQuery);
 
     $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
 
