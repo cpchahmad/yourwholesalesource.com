@@ -500,7 +500,7 @@
                                             <td>
                                                 <select name="warehouse" id="" class="form-control">
                                                         @foreach($item->has_associated_warehouse() as $warehouse)
-                                                            <option  type="text" disabled class="form-control" value="{{ $warehouse->id }}">{{ $warehouse->title }}</option>
+                                                            <option  type="text" disabled class="form-control" value="{{ $warehouse->id }}">{{ $warehouse->quantity }}</option>
                                                         @endforeach
                                                 </select>
                                             </td>
