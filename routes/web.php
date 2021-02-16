@@ -21,9 +21,11 @@ use App\Notification;
 use App\Product;
 use App\RetailerOrder;
 use App\RetailerProduct;
+use App\ShippingRate;
 use App\Shop;
 use App\Tag;
 use App\User;
+use App\WareHouse;
 use App\WarehouseInventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -509,11 +511,36 @@ Route::get('test/emails', 'HelperController@testEmail');
 //});
 
 Route::get('/tes', function(){
-    $admin_product = Product::find(609);
-    $real_product_variants = $admin_product->hasVariants()->pluck('id')->toArray();
+    $warehouse = WareHouse::find(1);
+    $country = 'Kenya';
+    $zoneQuery = $warehouse->zone;
+    dump($zoneQuery);
+    $zoneQuery->whereHas('has_countries', function ($q) use ($country) {
+        $q->where('name', 'LIKE', '%' . $country . '%');
+    });
+    $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-    if(WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->exists())
-        dd( WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->groupBy('warehouse_id')->get());
+    $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
+
+    $shipping_rates = $shipping_rates->get();
+
+    foreach ($shipping_rates as $shipping_rate) {
+        if ($shipping_rate->min > 0) {
+            if ($shipping_rate->type == 'flat') {
+
+            } else {
+                $ratio = 0.15 / $shipping_rate->min;
+                $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
+            }
+
+        } else {
+            $ratio = 0;
+            $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
+        }
+
+    }
+
+    dd($shipping_rates);
 });
 
 
