@@ -571,7 +571,7 @@
                         <table class="table table-borderless table-vcenter">
                             <thead>
                             </thead>
-                            <tbody>
+                            <tbody class="js-warehouse-shipping">
                             <tr>
                                 <td>
                                     Subtotal ({{count($order->line_items)}} items)
@@ -609,25 +609,23 @@
                                     {{ number_format($total_discount,2) }} USD
                                 </td>
                             </tr>
-                            <div class="js-warehouse-shipping">
-                                <tr>
-                                    <td>
-                                        Shipping Price
-                                    </td>
-                                    <td align="right" class="shipping_price_text">
-                                        {{number_format($order->shipping_price,2)}} USD
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    Shipping Price
+                                </td>
+                                <td align="right" class="shipping_price_text">
+                                    {{number_format($order->shipping_price,2)}} USD
+                                </td>
+                            </tr>
 
-                                <tr>
-                                    <td>
-                                        Total Cost @if($order->paid == 0) to Pay @endif
-                                    </td>
-                                    <td align="right" class="total">
-                                        {{number_format($order->cost_to_pay - $total_discount,2)}} USD
-                                    </td>
-                                </tr>
-                            </div>
+                            <tr>
+                                <td>
+                                    Total Cost @if($order->paid == 0) to Pay @endif
+                                </td>
+                                <td align="right" class="total">
+                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD
+                                </td>
+                            </tr>
                             <tr>
                                 <td></td>
                                 <td align="right">
