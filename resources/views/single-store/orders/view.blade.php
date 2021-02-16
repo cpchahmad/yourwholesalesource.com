@@ -499,9 +499,9 @@
                                         @if($item->has_associated_warehouse())
                                             <td>
                                                 <select name="warehouse" id="" class="form-control">
-                                                        @if($item->has_associated_warehouse() as $warehouse)
+                                                        @foreach($item->has_associated_warehouse() as $warehouse)
                                                             <option  type="text" disabled class="form-control" value="{{ $warehouse->id }}">{{ $warehouse->title }}</option>
-                                                        @endif
+                                                        @endforeach
                                                 </select>
                                             </td>
                                         @endif
