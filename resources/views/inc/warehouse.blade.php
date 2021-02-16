@@ -3,7 +3,7 @@
         Shipping Price
     </td>
     <td align="right" class="shipping_price_text">
-        {{number_format($shipping,2)}} USD
+        {{$shipping}} USD
     </td>
 </tr>
 
