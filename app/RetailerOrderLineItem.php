@@ -20,16 +20,20 @@ class RetailerOrderLineItem extends Model
         return $this->hasOne(ProductVariant::class,'shopify_id','shopify_variant_id');
     }
 
-//    public function has_associated_warehouse() {
-//        if($this->linked_product != null && $this->linked_product->linked_product != null)
-//            $admin_product = $this->linked_product->linked_product;
-//
-//        if(WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->exists())
-//            $flag = true;
-//
-//        $real_product_variants = $real_product->hasVariants()->pluck('id')->toArray();
-//
-//        if(WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->exists())
-//            $flag = true;
-//    }
+    public function has_associated_warehouse() {
+        if($this->linked_product != null && $this->linked_product->linked_product != null)
+            $admin_product = $this->linked_product->linked_product;
+        else
+            return false;
+
+        if(WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->exists())
+            return true;
+
+        $real_product_variants = $admin_product->hasVariants()->pluck('id')->toArray();
+
+        if(WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->exists())
+            return true;
+
+        return false;
+    }
 }
