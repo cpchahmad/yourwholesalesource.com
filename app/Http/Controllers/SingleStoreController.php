@@ -755,7 +755,7 @@ class SingleStoreController extends Controller
 
 
         return response()->json([
-            'shipping' => $shipping_rate
+            'shipping' => $shipping_rate->first()->shipping_price
         ]);
 
 
