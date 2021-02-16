@@ -23,6 +23,7 @@ use App\TicketCategory;
 use App\User;
 use App\WalletRequest;
 use App\WalletSetting;
+use App\WareHouse;
 use App\Wishlist;
 use App\WishlistStatus;
 use App\Zone;
@@ -714,11 +715,15 @@ class SingleStoreController extends Controller
     {
 
         $order = RetailerOrder::find($request->input('order'));
-
         $shipping_address = json_decode($order->shipping_address);
-
-
         $country = $shipping_address->country;
+        $warehouse = WareHouse::find($request->input('id'));
+
+        if(!in_array($country, $warehouse->zone->has_countries->pluck('name')->pluck('name')->toArray()))
+            return response()->json([
+                'shipping' => 'This product is not shipped to this country'
+            ]);
+
 
         $product = Product::find($request->input('product'));
         if ($product != null) {
