@@ -713,7 +713,12 @@ class SingleStoreController extends Controller
     public function calculate_warehouse_shipping(Request $request)
     {
 
-        $country = "United States";
+        $order = RetailerOrder::find($request->input('order'));
+
+        $shipping_address = json_decode($order->shipping_address);
+
+
+        $country = $shipping_address->country;
 
         $product = Product::find($request->input('product'));
         if ($product != null) {
@@ -748,16 +753,9 @@ class SingleStoreController extends Controller
 
         }
 
-        $html = view('inc.calculate_shipping')->with([
-            'countries' => Country::all(),
-            'selected' => $country,
-            'rates' => $shipping_rates,
-            'product' => $request->input('product'),
-            'retailer_product_id' => $request->input('retailer_product'),
-        ])->render();
 
         return response()->json([
-            'html' => $html
+            'shipping' => $shipping_rate
         ]);
 
 

@@ -407,7 +407,7 @@ Route::get('/variant/{id}/change/image/{image_id}', 'ProductController@change_im
 Route::get('/search/products', 'CustomOrderController@find_products')->name('find_products');
 Route::get('/get_selected_variants', 'CustomOrderController@get_selected_variants')->name('get_selected_variants');
 Route::get('/calculate_shipping', 'SingleStoreController@calculate_shipping')->name('calculate_shipping');
-Route::get('/get-warehouse/shipping-price/{id}', 'SingleStoreController@calculate_warehouse_shipping')->name('calculate_warehouse_shipping');
+Route::get('/get-warehouse/shipping-price', 'SingleStoreController@calculate_warehouse_shipping')->name('calculate_warehouse_shipping');
 
 Route::get('test/sync/{id}', 'PaypalController@test');
 

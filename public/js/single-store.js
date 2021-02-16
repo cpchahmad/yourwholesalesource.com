@@ -5,21 +5,23 @@ $(document).ready(function () {
         var data = $(this).val().split(",");
         var id = data[0];
         var product = data[1];
+        var order = data[2];
 
         console.log(id, product);
 
 
-        // $.ajax({
-        //     url: `/get-warehouse/shipping-price/${id}`,
-        //     type: 'GET',
-        //     success:function (response) {
-        //         var modal = button.data('target');
-        //         $(modal).find('.loader-div').hide();
-        //         $(modal).find('.drop-content').empty();
-        //         $(modal).find('.drop-content').append(response.html);
-        //
-        //     }
-        // });
+        $.ajax({
+            url: `/get-warehouse/shipping-price`,
+            type: 'GET',
+            data: {
+                product: product,
+                id: id,
+                order: order,
+            },
+            success:function (response) {
+
+            }
+        });
     });
 
 

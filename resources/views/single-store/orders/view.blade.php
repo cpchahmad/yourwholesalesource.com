@@ -501,7 +501,7 @@
                                                 <select name="warehouse" id="" class="form-control warehouse-selector">
                                                     <option type="text" disabled selected>Select a warehouse (optional)</option>
                                                     @foreach($item->has_associated_warehouse() as $warehouse_inventory)
-                                                        <option  type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>
+                                                        <option  type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id . ','. $order->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
