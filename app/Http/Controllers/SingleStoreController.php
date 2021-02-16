@@ -719,7 +719,14 @@ class SingleStoreController extends Controller
         $country = $shipping_address->country;
         $warehouse = WareHouse::find($request->input('id'));
 
-        if(!in_array($country, $warehouse->zone->has_countries->pluck('name')->pluck('name')->toArray()))
+        if($warehouse->zone)
+            $countries = $warehouse->zone->has_countries->pluck('name')->pluck('name')->toArray();
+        else
+            return response()->json([
+                'shipping' => 'This product is not shipped to this country'
+            ]);
+
+        if(!in_array($country, $countries))
             return response()->json([
                 'shipping' => 'This product is not shipped to this country'
             ]);
