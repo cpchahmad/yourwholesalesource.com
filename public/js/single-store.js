@@ -3,8 +3,7 @@ $(document).ready(function () {
     // warehouse selection on order details page
     $('.warehouse-selector').change(function(){
         var id = $(this).val();
-        var product = $(this).data('product');
-        console.log(id, product);
+        console.log(id);
 
         // $.ajax({
         //     url: `/get-warehouse/shipping-price/${id}`,
