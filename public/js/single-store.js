@@ -7,9 +7,6 @@ $(document).ready(function () {
         var product = data[1];
         var order = data[2];
 
-        console.log(id, product);
-
-
         $.ajax({
             url: `/get-warehouse/shipping-price`,
             type: 'GET',
@@ -19,7 +16,7 @@ $(document).ready(function () {
                 order: order,
             },
             success:function (response) {
-                $('.js-warehouse-shipping').html('');
+                //$('.js-warehouse-shipping').html('');
                 $('.js-warehouse-shipping').html(response);
             }
         });
