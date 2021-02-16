@@ -722,16 +722,18 @@ class SingleStoreController extends Controller
         if($warehouse->zone)
             $countries = $warehouse->zone->has_countries->pluck('name')->toArray();
         else
-            return response()->json([
+            return view('inc.warehouse')->with([
                 'shipping' => 'This product is not shipped to this country',
-                'total' => number_format($order->cost_to_pay , 2) . 'US'
-            ]);
+                'order' => $order,
+                'total' => $order->cost_to_pay
+            ])->render();
 
         if(!in_array($country, $countries))
-            return response()->json([
+            return view('inc.warehouse')->with([
                 'shipping' => 'This product is not shipped to this country',
-                'total' => number_format($order->cost_to_pay , 2) . 'US'
-            ]);
+                'order' => $order,
+                'total' => $order->cost_to_pay
+            ])->render();
 
 
         $product = Product::find($request->input('product'));
@@ -758,10 +760,11 @@ class SingleStoreController extends Controller
             $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
         }
 
-        return response()->json([
+        return view('inc.warehouse')->with([
             'shipping' => number_format($shipping_rate->shipping_price, 2) . 'USD',
+            'order' => $order,
             'total' => number_format($order->subtotal_price + $shipping_rate->shipping_price, 2)
-        ]);
+        ])->render();
 
 
     }
