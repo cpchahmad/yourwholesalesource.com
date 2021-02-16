@@ -2,8 +2,12 @@ $(document).ready(function () {
 
     // warehouse selection on order details page
     $('.warehouse-selector').change(function(){
-        var id = $(this).val();
-        console.log(id);
+        var data = $(this).val().split(",");
+        var id = data[0];
+        var product = data[1];
+
+        console.log(id, product);
+
 
         // $.ajax({
         //     url: `/get-warehouse/shipping-price/${id}`,
