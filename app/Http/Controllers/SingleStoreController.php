@@ -723,12 +723,14 @@ class SingleStoreController extends Controller
             $countries = $warehouse->zone->has_countries->pluck('name')->toArray();
         else
             return response()->json([
-                'shipping' => 'This product is not shipped to this country'
+                'shipping' => 'This product is not shipped to this country',
+                'total' => number_format($order->cost_to_pay , 2) . 'USD'
             ]);
 
         if(!in_array($country, $countries))
             return response()->json([
-                'shipping' => 'This product is not shipped to this country'
+                'shipping' => 'This product is not shipped to this country',
+                'total' => number_format($order->cost_to_pay , 2) . 'USD'
             ]);
 
 
@@ -757,7 +759,8 @@ class SingleStoreController extends Controller
         }
 
         return response()->json([
-            'shipping' => number_format($shipping_rate->shipping_price, 2)
+            'shipping' => number_format($shipping_rate->shipping_price, 2) . 'USD',
+            'total' => number_format($order->subtotal_price + $shipping_rate->shipping_price, 2)
         ]);
 
 

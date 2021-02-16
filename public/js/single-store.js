@@ -20,6 +20,8 @@ $(document).ready(function () {
             },
             success:function (response) {
                 $('.shipping_price_text').html(response.shipping);
+                $('.')
+
             }
         });
     });
