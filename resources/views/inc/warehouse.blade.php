@@ -59,7 +59,6 @@
 @endphp
 @foreach($order->line_items as $item)
     @if($item->fulfilled_by != 'store')
-        <td>
             @php
                 $variant = $item->linked_variant;
                 $real_variant = null;
@@ -110,7 +109,6 @@
             @else
 
             @endif
-        </td>
     @endif
 @endforeach
 
