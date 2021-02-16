@@ -27,12 +27,12 @@ class RetailerOrderLineItem extends Model
             return false;
 
         if(WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->exists())
-            return true;
+            return WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->get();
 
         $real_product_variants = $admin_product->hasVariants()->pluck('id')->toArray();
 
         if(WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->exists())
-            return true;
+            return WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->get();
 
         return false;
     }

@@ -20,6 +20,7 @@ use App\ShippingRate;
 use App\User;
 use App\WalletLog;
 use App\WalletSetting;
+use App\WareHouse;
 use App\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +85,7 @@ class OrderController extends Controller
     {
         $shop = $this->helper->getLocalShop();
         $order = RetailerOrder::find($id);
+        $warehouses = WareHouse::all();
         $settings = AdminSetting::all()->first();
         if ($order != null) {
             return view('single-store.orders.view')->with([
