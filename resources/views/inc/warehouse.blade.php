@@ -164,7 +164,7 @@
         Total Cost @if($order->paid == 0) to Pay @endif
     </td>
     <td align="right" class="total">
-        {{number_format($total, 2)}} USD {{ $status }}
+        {{number_format($total, 2)}} USD
     </td>
 </tr>
 <tr>
