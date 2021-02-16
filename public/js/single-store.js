@@ -1,5 +1,25 @@
 $(document).ready(function () {
 
+    // warehouse selection on order details page
+    $('.warehouse-selector').change(function(){
+        var id = $(this).val();
+        var product = $(this).data('product');
+        console.log(id, product);
+
+        // $.ajax({
+        //     url: `/get-warehouse/shipping-price/${id}`,
+        //     type: 'GET',
+        //     success:function (response) {
+        //         var modal = button.data('target');
+        //         $(modal).find('.loader-div').hide();
+        //         $(modal).find('.drop-content').empty();
+        //         $(modal).find('.drop-content').append(response.html);
+        //
+        //     }
+        // });
+    });
+
+
     // Grapgh checkbox
     $('body').on('change','#graph_checkbox',function () {
         if($(this).is(':checked')){

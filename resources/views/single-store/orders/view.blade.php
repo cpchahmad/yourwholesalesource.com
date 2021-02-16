@@ -499,9 +499,9 @@
                                         @if($item->has_associated_warehouse())
                                             <td>
                                                 <select name="warehouse" id="" class="form-control">
-                                                    <option  type="text" disabled selected class="form-control" >Select a warehouse (optional)</option>
+                                                    <option type="text" disabled selected class="form-control warehouse-selector">Select a warehouse (optional)</option>
                                                     @foreach($item->has_associated_warehouse() as $warehouse_inventory)
-                                                        <option  type="text" class="form-control" value="{{ $warehouse_inventory->warehouse->id }}">{{ $warehouse_inventory->warehouse->title }}</option>
+                                                        <option  type="text" class="form-control" value="{{ $warehouse_inventory->warehouse->id }}" data-product="{{ $item->linked_product->linked_product->id }}">{{ $warehouse_inventory->warehouse->title }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
@@ -632,7 +632,7 @@
                                     @if($order->paid == 0)
 {{--                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
                                         <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay - $total_discount *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay - $total_discount,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay - $total_discount,2)}} USD" d ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
 
                                         <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
