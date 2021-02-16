@@ -59,7 +59,6 @@
 @endphp
 
 
-<tbody class="js-warehouse-shipping">
 <tr>
     <td>
         Subtotal ({{count($order->line_items)}} items)
@@ -162,5 +161,4 @@
     </td>
 </tr>
 
-</tbody>
 
