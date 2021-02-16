@@ -1,3 +1,60 @@
+@php
+    $total_discount = 0;
+    $is_monthly_discount = false;
+    $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
+    $line_item_count = count($order->line_items);
+    $admin_setting_for_monthly_discount = \App\MonthlyDiscountSetting::first();
+
+
+    if($admin_setting_for_monthly_discount && $admin_setting_for_monthly_discount->enable){
+        if($order->shop_id == null) {
+            if(\App\MonthlyDiscountPreference::where('user_id', $order->user_id)->exists() && \App\MonthlyDiscountPreference::where('user_id', $order->user_id)->first()->enable)
+                $is_monthly_discount = true;
+        }
+        else {
+            if(\App\MonthlyDiscountPreference::where('shop_id', $order->shop_id)->exists() && \App\MonthlyDiscountPreference::where('shop_id', $order->shop_id)->first()->enable)
+                $is_monthly_discount = true;
+        }
+    }
+    else {
+        $is_monthly_discount = false;
+    }
+
+    if($order->line_items->where('fulfilled_by', '!=', 'store')->count() >=2){
+        $is_general_discount = true;
+    }
+    else {
+        $is_general_discount = false;
+    }
+
+    if(\App\GeneralDiscountPreferences::first()->global == 1) {
+        $is_applied_for_general_dsiscount = true;
+    }
+    else {
+        $stores = \App\GeneralDiscountPreferences::first()->stores_id;
+        $store_array= json_decode($stores);
+        if(in_array($shop->id, $store_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
+    }
+
+    if(\App\GeneralFixedPricePreferences::first()->global == 1) {
+        $is_applied_for_general_fixed = true;
+    }
+    else {
+        $stores = \App\GeneralFixedPricePreferences::first()->stores_id;
+        $store_array= json_decode($stores);
+        if(in_array($shop->id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
+    }
+
+    if(\App\TieredPricingPrefrences::first()->global == 1) {
+        $is_applied = true;
+    }
+    else {
+        $stores = \App\TieredPricingPrefrences::first()->stores_id;
+        $store_array= json_decode($stores);
+        if(in_array($shop->id, $store_array)) { $is_applied = true; } else { $is_applied = false; }
+    }
+
+@endphp
 <tbody class="js-warehouse-shipping">
 <tr>
     <td>
