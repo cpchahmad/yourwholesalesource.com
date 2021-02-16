@@ -513,33 +513,26 @@ Route::get('test/emails', 'HelperController@testEmail');
 Route::get('/tes', function(){
     $warehouse = WareHouse::find(1);
     $country = 'Kenya';
-    $zoneQuery = $warehouse->zone;
+    $zoneQuery = $warehouse->zone->id;
 
-    $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-    dd($zoneQuery);
+    $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
 
-    $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
 
-    $shipping_rates = $shipping_rates->get();
-
-    foreach ($shipping_rates as $shipping_rate) {
-        if ($shipping_rate->min > 0) {
-            if ($shipping_rate->type == 'flat') {
-
-            } else {
-                $ratio = 0.15 / $shipping_rate->min;
-                $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
-            }
+    if ($shipping_rate->min > 0) {
+        if ($shipping_rate->type == 'flat') {
 
         } else {
-            $ratio = 0;
+            $ratio = 0.15 / $shipping_rate->min;
             $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
         }
 
+    } else {
+        $ratio = 0;
+        $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
     }
 
-    dd($shipping_rates);
+    dd($shipping_rate->shipping_price);
 });
 
 

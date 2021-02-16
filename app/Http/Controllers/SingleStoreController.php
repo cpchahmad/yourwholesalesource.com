@@ -739,35 +739,25 @@ class SingleStoreController extends Controller
             $total_weight = 0;
         }
 
-        $zoneQuery = $warehouse->zone;
-        $zoneQuery->whereHas('has_countries', function ($q) use ($country) {
-            $q->where('name', 'LIKE', '%' . $country . '%');
-        });
-        $zoneQuery = $zoneQuery->pluck('id')->toArray();
+        $zoneQuery = $warehouse->zone->id;
 
-        $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
+        $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
 
-        $shipping_rates = $shipping_rates->get();
-
-        foreach ($shipping_rates as $shipping_rate) {
-            if ($shipping_rate->min > 0) {
-                if ($shipping_rate->type == 'flat') {
-
-                } else {
-                    $ratio = $total_weight / $shipping_rate->min;
-                    $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
-                }
+        if ($shipping_rate->min > 0) {
+            if ($shipping_rate->type == 'flat') {
 
             } else {
-                $ratio = 0;
+                $ratio = $total_weight / $shipping_rate->min;
                 $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
             }
 
+        } else {
+            $ratio = 0;
+            $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
         }
 
-
         return response()->json([
-            'shipping' => $shipping_rate->first()->shipping_price
+            'shipping' => number_format($shipping_rate->shipping_price, 2)
         ]);
 
 
