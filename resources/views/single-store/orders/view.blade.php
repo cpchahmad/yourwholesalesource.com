@@ -613,7 +613,7 @@
                                 <td>
                                     Shipping Price
                                 </td>
-                                <td align="right">
+                                <td align="right shipping_price_text">
                                     {{number_format($order->shipping_price,2)}} USD
                                 </td>
                             </tr>
