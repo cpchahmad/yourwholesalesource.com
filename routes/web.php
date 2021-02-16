@@ -24,6 +24,7 @@ use App\RetailerProduct;
 use App\Shop;
 use App\Tag;
 use App\User;
+use App\WarehouseInventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
@@ -478,33 +479,41 @@ Route::get('test/emails', 'HelperController@testEmail');
 //
 //    dd($query);
 //});
+//
+//Route::get('/testing', function() {
+//    $users = User::role('non-shopify-users')
+//        ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->whereNotNull('email_verified_at')->doesnthave('has_shops')->get();
+//    dd($users);
+//    $admin_settings = MonthlyDiscountSetting::first();
+//
+//    foreach ($users as $user) {
+//        $sales = RetailerOrder::where('paid', 1)->where('user_id', 2)->where('created_at', '>=' ,now()->subDay(30))->sum('cost_to_pay');
+//
+//        if($admin_settings && $admin_settings->enable) {
+//            if($sales >= $admin_settings->sales_target) {
+//                MonthlyDiscountPreference::updateOrCreate(
+//                    [ 'user_id' => $user->id ],
+//                    [ 'enable' =>  true]
+//                );
+//            }
+//            else {
+//                MonthlyDiscountPreference::updateOrCreate(
+//                    [ 'user_id' => $user->id ],
+//                    [ 'enable' =>  false]
+//                );
+//            }
+//        }
+//
+//        dd(23432);
+//    }
+//});
 
-Route::get('/testing', function() {
-    $users = User::role('non-shopify-users')
-        ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->whereNotNull('email_verified_at')->doesnthave('has_shops')->get();
-    dd($users);
-    $admin_settings = MonthlyDiscountSetting::first();
+Route::get('/tes', function(){
+    $admin_product = Product::find(609);
+    $real_product_variants = $admin_product->hasVariants()->pluck('id')->toArray();
 
-    foreach ($users as $user) {
-        $sales = RetailerOrder::where('paid', 1)->where('user_id', 2)->where('created_at', '>=' ,now()->subDay(30))->sum('cost_to_pay');
-
-        if($admin_settings && $admin_settings->enable) {
-            if($sales >= $admin_settings->sales_target) {
-                MonthlyDiscountPreference::updateOrCreate(
-                    [ 'user_id' => $user->id ],
-                    [ 'enable' =>  true]
-                );
-            }
-            else {
-                MonthlyDiscountPreference::updateOrCreate(
-                    [ 'user_id' => $user->id ],
-                    [ 'enable' =>  false]
-                );
-            }
-        }
-
-        dd(23432);
-    }
+    if(WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->exists())
+        dd( WarehouseInventory::whereIn('product_variant_id', $real_product_variants)->whereNotNull('quantity')->groupBy('warehouse_id')->get());
 });
 
 
