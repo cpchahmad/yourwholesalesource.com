@@ -725,14 +725,16 @@ class SingleStoreController extends Controller
             return view('inc.warehouse')->with([
                 'shipping' => 'This product is not shipped to this country',
                 'order' => $order,
-                'total' => $order->sub_total
+                'total' => $order->subtotal_price,
+                'status' => 'failure'
             ])->render();
 
         if(!in_array($country, $countries))
             return view('inc.warehouse')->with([
                 'shipping' => 'This product is not shipped to this country',
                 'order' => $order,
-                'total' => $order->sub_total
+                'total' => $order->subtotal_price,
+                'status' => 'failure'
             ])->render();
 
 
@@ -763,7 +765,8 @@ class SingleStoreController extends Controller
         return view('inc.warehouse')->with([
             'shipping' => number_format($shipping_rate->shipping_price, 2) . 'USD',
             'order' => $order,
-            'total' => number_format($order->subtotal_price + $shipping_rate->shipping_price, 2)
+            'total' => number_format($order->subtotal_price + $shipping_rate->shipping_price, 2),
+            'status' => 'success'
         ])->render();
 
 
