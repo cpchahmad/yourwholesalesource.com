@@ -55,6 +55,8 @@
     }
 
 @endphp
+
+
 <tbody class="js-warehouse-shipping">
 <tr>
     <td>
