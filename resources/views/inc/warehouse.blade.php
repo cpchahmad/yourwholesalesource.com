@@ -1,6 +1,7 @@
 @php
     $total_discount = 0;
     $shop = \App\Shop::find($order->shop_id);
+    $settings = \App\AdminSetting::all()->first();
     $is_monthly_discount = false;
     $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
     $line_item_count = count($order->line_items);
