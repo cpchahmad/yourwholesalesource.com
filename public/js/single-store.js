@@ -19,7 +19,8 @@ $(document).ready(function () {
                 order: order,
             },
             success:function (response) {
-                $('.js-warehouse-shipping').empty().html(response);
+                $('.js-warehouse-shipping').html('');
+                $('.js-warehouse-shipping').html(response);
             }
         });
     });
