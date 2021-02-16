@@ -720,7 +720,7 @@ class SingleStoreController extends Controller
         $warehouse = WareHouse::find($request->input('id'));
 
         if($warehouse->zone)
-            $countries = $warehouse->zone->has_countries->pluck('name')->pluck('name')->toArray();
+            $countries = $warehouse->zone->has_countries->pluck('name')->toArray();
         else
             return response()->json([
                 'shipping' => 'This product is not shipped to this country'
