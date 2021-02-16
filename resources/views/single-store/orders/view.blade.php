@@ -622,7 +622,7 @@
                                 <td>
                                     Total Cost @if($order->paid == 0) to Pay @endif
                                 </td>
-                                <td align="right" class="shipping_price_text">
+                                <td align="right" class="total">
                                     {{number_format($order->cost_to_pay - $total_discount,2)}} USD
                                 </td>
                             </tr>

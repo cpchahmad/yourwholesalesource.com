@@ -724,13 +724,13 @@ class SingleStoreController extends Controller
         else
             return response()->json([
                 'shipping' => 'This product is not shipped to this country',
-                'total' => number_format($order->cost_to_pay , 2) . 'USD'
+                'total' => number_format($order->cost_to_pay , 2) . 'US'
             ]);
 
         if(!in_array($country, $countries))
             return response()->json([
                 'shipping' => 'This product is not shipped to this country',
-                'total' => number_format($order->cost_to_pay , 2) . 'USD'
+                'total' => number_format($order->cost_to_pay , 2) . 'US'
             ]);
 
 
