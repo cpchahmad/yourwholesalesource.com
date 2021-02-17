@@ -149,7 +149,7 @@ class RetailerOrder extends Model
 
             $country = $shipping_address->country;
 
-            $zoneQuery = Zone::Query();
+            $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
             $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                 $q->where('name','LIKE','%'.$country.'%');
             });
