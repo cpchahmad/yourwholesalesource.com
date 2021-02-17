@@ -679,13 +679,7 @@
                             </table>
                         @else
                             <table class="table table-borderless table-vcenter">
-                                <thead>
-                                </thead>
-                                <tbody class="js-warehouse-shipping">
-                                    <tr class="text-center p-2 shipping-error">
-                                        Sorry, the following shipping country is not availble in default warehouse. Please contact support
-                                    </tr>
-                                </tbody>
+
                             </table>
                         @endif
                     </div>
