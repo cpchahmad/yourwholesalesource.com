@@ -176,6 +176,7 @@ class InventoryController extends Controller
                         $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity + $item->quantity;
                     }
                     $variant->save();
+                    $variant_warehouse_inventory->save();
                     $variant->linked_product->quantity = $variant->linked_product->varaint_count($variant->linked_product);
                     $variant->linked_product->save();
                     Artisan::call('app:sku-quantity-change',['product_id'=> $variant->product_id]);
@@ -194,6 +195,7 @@ class InventoryController extends Controller
 
                         }
                         $product->save();
+                        $product_warehouse_inventory->save();
                         Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
                     }
                 }
