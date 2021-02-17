@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductVariant;
 use App\RetailerOrder;
+use App\WarehouseInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -164,12 +165,15 @@ class InventoryController extends Controller
 
             foreach ($order->line_items as $item){
                 $variant = ProductVariant::where('sku',$item->sku)->first();
+                $variant_warehouse_inventory = WarehouseInventory::where('warehouse_id', $item->selected_warehouse)->where('product_variant_id', $variant->id)->first();
                 if($variant != null){
                     if($type == 'new') {
                         $variant->quantity = $variant->quantity - $item->quantity;
+                        $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity - $item->quantity;
                     }
                     else{
                         $variant->quantity = $variant->quantity + $item->quantity;
+                        $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity + $item->quantity;
                     }
                     $variant->save();
                     $variant->linked_product->quantity = $variant->linked_product->varaint_count($variant->linked_product);
@@ -178,12 +182,15 @@ class InventoryController extends Controller
                 }
                 else{
                     $product = Product::where('sku',$item->sku)->first();
+                    $product_warehouse_inventory = WarehouseInventory::where('warehouse_id', $item->selected_warehouse)->where('product_id', $product->id)->first();
                     if($product != null){
                         if($type == 'new') {
                             $product->quantity = $product->quantity - $item->quantity;
+                            $product_warehouse_inventory->quantity = $product_warehouse_inventory->quantity - $item->quantity;
                         }
                         else{
                             $product->quantity = $product->quantity + $item->quantity;
+                            $product_warehouse_inventory->quantity = $product_warehouse_inventory->quantity + $item->quantity;
 
                         }
                         $product->save();
