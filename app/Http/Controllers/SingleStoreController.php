@@ -747,6 +747,10 @@ class SingleStoreController extends Controller
 
         $total_shipping = 0;
 
+        $selected_line_item = RetailerOrderLineItem::find($request->input('line_item'));
+        $selected_line_item->selected_warehouse = $request->input('id');
+        $selected_line_item->save();
+
 
         foreach ($order->line_items as $index => $v){
             $weight = $v->linked_product->linked_product->weight *  $v->quantity;

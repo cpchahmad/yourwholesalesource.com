@@ -17,22 +17,11 @@ $(document).ready(function () {
                 product: product,
                 id: id,
                 order: order,
+                line_item: line_item,
             },
             success:function (response) {
-
-                $.ajax({
-                    url: `/set/line-item/warehouse`,
-                    type: 'GET',
-                    data: {
-                        line_item: line_item,
-                        id: id,
-                    },
-                    success:function (res) {
-                        $('.shipping-error').html('');
-                        $('.js-warehouse-shipping').html(response);
-                    }
-                });
-
+                $('.shipping-error').html('');
+                $('.js-warehouse-shipping').html(response);
             }
         });
 
