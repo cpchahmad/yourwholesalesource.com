@@ -833,7 +833,7 @@ class SingleStoreController extends Controller
 //        }
 
         return view('inc.warehouse')->with([
-            'shipping' => number_format($total_shipping, 2) . 'USD',
+            'shipping' => number_format($total_shipping, 2) . ' USD',
             'order' => $order,
             'total' => number_format($order->subtotal_price + $total_shipping, 2),
             'status' => 'success'
