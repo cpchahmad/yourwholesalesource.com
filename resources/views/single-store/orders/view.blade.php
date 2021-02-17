@@ -268,7 +268,7 @@
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
-                                <th style="width: 25%;"></th>
+                                <th style="width: 25%;">Select Warehouse</th>
                             </tr>
                             </thead>
                             <tbody>
