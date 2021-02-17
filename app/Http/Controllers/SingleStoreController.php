@@ -781,21 +781,19 @@ class SingleStoreController extends Controller
                 }
                 elseif($v->linked_product->linked_product != null && $v->linked_product->linked_product->id == $request->input('product')) {
                     $zoneQuery = $warehouse->zones->pluck('id')->toArray();
-                    $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->get();
+                    $shipping_rate = ShippingRate::whereIn('zone_id', $zoneQuery)->first();
 
-                    foreach ($shipping_rates as $shipping_rate) {
-                        if ($shipping_rate->min > 0) {
-                            if ($shipping_rate->type == 'flat') {
-
-                            } else {
-                                $ratio = $weight / $shipping_rate->min;
-                                $total_shipping += $shipping_rate->shipping_price * $ratio;
-                            }
+                    if ($shipping_rate->min > 0) {
+                        if ($shipping_rate->type == 'flat') {
 
                         } else {
-                            $ratio = 0;
+                            $ratio = $weight / $shipping_rate->min;
                             $total_shipping += $shipping_rate->shipping_price * $ratio;
                         }
+
+                    } else {
+                        $ratio = 0;
+                        $total_shipping += $shipping_rate->shipping_price * $ratio;
                     }
 
                 }
