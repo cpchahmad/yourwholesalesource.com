@@ -27,7 +27,7 @@ $(document).ready(function () {
                         line_item: line_item,
                         id: id,
                     },
-                    success:function (response) {
+                    success:function (res) {
                         $('.shipping-error').html('');
                         $('.js-warehouse-shipping').html(response);
                     }
