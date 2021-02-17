@@ -19,8 +19,6 @@ $(document).ready(function () {
                 order: order,
             },
             success:function (response) {
-                $('.shipping-error').html('');
-                $('.js-warehouse-shipping').html(response);
 
                 $.ajax({
                     url: `/set/line-item/warehouse`,
@@ -30,7 +28,8 @@ $(document).ready(function () {
                         id: id,
                     },
                     success:function (response) {
-
+                        $('.shipping-error').html('');
+                        $('.js-warehouse-shipping').html(response);
                     }
                 });
 

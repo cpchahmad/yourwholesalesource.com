@@ -15,6 +15,7 @@ use App\Product;
 use App\Refund;
 use App\RetailerImage;
 use App\RetailerOrder;
+use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\ShippingRate;
 use App\Shop;
@@ -818,10 +819,15 @@ class SingleStoreController extends Controller
     }
 
     public function set_line_item_warehouse(Request $request) {
-        $line_item = $request->input('line_item');
+        $line_item = RetailerOrderLineItem::find($request->input('line_item'));
         $warehouse_id = $request->input('id');
 
+        $line_item->selected_warehouse = $warehouse_id;
+        $line_item->save();
 
+        return response()->json([
+            'status' => 'ok'
+        ]);
     }
 
     public function refunds(Request $request)
