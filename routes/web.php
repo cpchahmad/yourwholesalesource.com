@@ -440,13 +440,14 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //});
 //
 
-Route::get('/zoone', function() {
-   $zones =  \App\Zone::all();
+Route::get('/ware', function() {
+   $warehouse = WareHouse::find(3);
 
-   foreach($zones as $zone) {
-       $zone->warehouse_id =  3;
-       $zone->save();
-   }
+    $countries = $warehouse->zones->each(function($zone) {
+        $zone->has_countries->pluck('name')->toArray();
+    });
+
+    dd($countries);
 });
 
 
