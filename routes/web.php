@@ -441,7 +441,7 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //
 
 Route::get('/ware-sync', function() {
-   $p = Product::find(612);
+   $p = Product::find(611);
 
 
    if($p->variants == 1)
