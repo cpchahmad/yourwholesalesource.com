@@ -738,6 +738,63 @@ class SingleStoreController extends Controller
                 'status' => 'failure'
             ])->render();
 
+        $total_shipping = 0;
+
+
+        foreach ($order->line_items as $index => $v){
+            $weight = $v->linked_product->linked_product->weight *  $v->quantity;
+            if($v->linked_product != null){
+                if($v->linked_product->linked_product != null && !$v->linked_product->linked_product->id == $request->input('product')) {
+
+                    $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
+                    $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                        $q->where('name','LIKE','%'.$country.'%');
+                    });
+                    $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+                    $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+                    $shipping_rates =  $shipping_rates->first();
+                    if($shipping_rates != null){
+
+                        if($shipping_rates->type == 'flat'){
+                            $total_shipping += $shipping_rates->shipping_price;
+                        }
+                        else{
+                            if($shipping_rates->min > 0){
+                                $ratio = $weight/$shipping_rates->min;
+                                $total_shipping +=  $shipping_rates->shipping_price*$ratio;
+                            }
+                            else{
+                                $total_shipping += 0;
+                            }
+                        }
+
+                    }
+                    else{
+                        $total_shipping += 0;
+                    }
+                }
+                elseif($v->linked_product->linked_product != null && $v->linked_product->linked_product->id == $request->input('product')) {
+
+                    $zoneQuery = $warehouse->zone->id;
+                    $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
+
+                    if ($shipping_rate->min > 0) {
+                        if ($shipping_rate->type == 'flat') {
+
+                        } else {
+                            $ratio = $weight / $shipping_rate->min;
+                            $total_shipping += $shipping_rate->shipping_price * $ratio;
+                        }
+
+                    } else {
+                        $ratio = 0;
+                        $total_shipping += $shipping_rate->shipping_price * $ratio;
+                    }
+
+                }
+            }
+        }
 
         $product = Product::find($request->input('product'));
         if ($product != null) {
@@ -755,18 +812,18 @@ class SingleStoreController extends Controller
 
             } else {
                 $ratio = $total_weight / $shipping_rate->min;
-                $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
+                $total_shipping += $shipping_rate->shipping_price * $ratio;
             }
 
         } else {
             $ratio = 0;
-            $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
+            $total_shipping += $shipping_rate->shipping_price * $ratio;
         }
 
         return view('inc.warehouse')->with([
-            'shipping' => number_format($shipping_rate->shipping_price, 2) . 'USD',
+            'shipping' => number_format($total_shipping, 2) . 'USD',
             'order' => $order,
-            'total' => number_format($order->subtotal_price + $shipping_rate->shipping_price, 2),
+            'total' => number_format($order->subtotal_price + $total_shipping, 2),
             'status' => 'success'
         ])->render();
 

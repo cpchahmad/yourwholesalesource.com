@@ -106,7 +106,7 @@ class RetailerOrder extends Model
             foreach ($this->line_items as $index => $v){
                 $weight = $v->linked_product->linked_product->weight *  $v->quantity;
                 if($v->linked_product != null){
-                    if($v->linked_product->linked_product != null && !$v->has_associated_warehouse()) {
+                    if($v->linked_product->linked_product != null) {
                         $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
                         $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                             $q->where('name','LIKE','%'.$country.'%');
