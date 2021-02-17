@@ -745,7 +745,6 @@ class SingleStoreController extends Controller
             $weight = $v->linked_product->linked_product->weight *  $v->quantity;
             if($v->linked_product != null){
                 if($v->linked_product->linked_product != null && $v->linked_product->linked_product->id != $request->input('product')) {
-                    dd("3245");
                     $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
                     $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                         $q->where('name','LIKE','%'.$country.'%');
@@ -775,7 +774,6 @@ class SingleStoreController extends Controller
                     }
                 }
                 elseif($v->linked_product->linked_product != null && $v->linked_product->linked_product->id == $request->input('product')) {
-                    dd("876");
                     $zoneQuery = $warehouse->zone->id;
                     $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
 
