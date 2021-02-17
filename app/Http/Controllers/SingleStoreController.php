@@ -775,7 +775,6 @@ class SingleStoreController extends Controller
                     }
                 }
                 elseif($v->linked_product->linked_product != null && $v->linked_product->linked_product->id == $request->input('product')) {
-                    dd(2);
                     $zoneQuery = $warehouse->zone->id;
                     $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
 
@@ -796,29 +795,29 @@ class SingleStoreController extends Controller
             }
         }
 
-        $product = Product::find($request->input('product'));
-        if ($product != null) {
-            $total_weight = $product->weight;
-        } else {
-            $total_weight = 0;
-        }
-
-        $zoneQuery = $warehouse->zone->id;
-
-        $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
-
-        if ($shipping_rate->min > 0) {
-            if ($shipping_rate->type == 'flat') {
-
-            } else {
-                $ratio = $total_weight / $shipping_rate->min;
-                $total_shipping += $shipping_rate->shipping_price * $ratio;
-            }
-
-        } else {
-            $ratio = 0;
-            $total_shipping += $shipping_rate->shipping_price * $ratio;
-        }
+//        $product = Product::find($request->input('product'));
+//        if ($product != null) {
+//            $total_weight = $product->weight;
+//        } else {
+//            $total_weight = 0;
+//        }
+//
+//        $zoneQuery = $warehouse->zone->id;
+//
+//        $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
+//
+//        if ($shipping_rate->min > 0) {
+//            if ($shipping_rate->type == 'flat') {
+//
+//            } else {
+//                $ratio = $total_weight / $shipping_rate->min;
+//                $total_shipping += $shipping_rate->shipping_price * $ratio;
+//            }
+//
+//        } else {
+//            $ratio = 0;
+//            $total_shipping += $shipping_rate->shipping_price * $ratio;
+//        }
 
         return view('inc.warehouse')->with([
             'shipping' => number_format($total_shipping, 2) . 'USD',
