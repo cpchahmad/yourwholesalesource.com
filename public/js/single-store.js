@@ -13,6 +13,7 @@ $(document).ready(function () {
         }
         else {
             $('.default-warehouse').hide();
+            $('.normal').hide();
             $.ajax({
                 url: `/get-warehouse/shipping-price`,
                 type: 'GET',
