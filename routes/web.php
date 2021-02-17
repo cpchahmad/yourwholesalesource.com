@@ -443,8 +443,8 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 Route::get('/ware', function() {
    $warehouse = WareHouse::find(3);
 
-    $countries = $warehouse->zones->each(function($zone) {
-        $zone->has_countries->pluck('name')->toArray();
+    $countries = $warehouse->zones->map(function($zone) {
+        return $zone->has_countries->pluck('name');
     });
 
     dd($countries);
