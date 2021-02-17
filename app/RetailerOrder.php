@@ -107,7 +107,7 @@ class RetailerOrder extends Model
                 $weight = $v->linked_product->linked_product->weight *  $v->quantity;
                 if($v->linked_product != null){
                     if($v->linked_product->linked_product != null) {
-                        $zoneQuery = Zone::->query();
+                        $zoneQuery = Zone::query();
                         $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                             $q->where('name','LIKE','%'.$country.'%');
                         });
