@@ -720,17 +720,21 @@ class SingleStoreController extends Controller
         $warehouse = WareHouse::find($request->input('id'));
 
 
-        if($warehouse->zones)
-            $countries = $warehouse->zones->each(function($zone) {
-               $zone->has_countries->pluck('name')->toArray();
+        if($warehouse->zones) {
+            $countries = $warehouse->zones->map(function($zone) {
+                return $zone->has_countries->pluck('name');
             });
-        else
+            $countries = $countries->collapse()->toArray();
+        }
+        else {
             return view('inc.warehouse')->with([
                 'shipping' => 'This product is not shipped to this country',
                 'order' => $order,
                 'total' => $order->subtotal_price,
                 'status' => 'failure'
             ])->render();
+        }
+
 
         if(!in_array($country, $countries))
             return view('inc.warehouse')->with([
