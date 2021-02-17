@@ -16,7 +16,7 @@ $(document).ready(function () {
                 order: order,
             },
             success:function (response) {
-                $('.js-warehouse-shipping').html('');
+                $('.shipping-error').html('');
                 $('.js-warehouse-shipping').html(response);
             }
         });
