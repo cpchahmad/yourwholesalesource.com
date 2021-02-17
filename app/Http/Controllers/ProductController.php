@@ -866,7 +866,7 @@ class ProductController extends Controller
                             $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                         }
 
-                        //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
                     }
 
@@ -920,7 +920,7 @@ class ProductController extends Controller
                             $this->notify->generate('Product','Product Out Of Stock',$product->title.' is running out of stock, kindly update the stock on your store',$product);
                         }
 
-                        //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
                     }
 
                     else if ($type == 'single-variant-update') {
@@ -980,7 +980,7 @@ class ProductController extends Controller
                         $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
 
-                        //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
+                        Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
 
                     }
 
