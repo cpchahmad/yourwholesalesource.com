@@ -420,40 +420,17 @@ Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
 Route::get('check/questionnaire', 'HelperController@QuestionnaireCheck')->name('app.questionaire.check');
 Route::get('test/emails', 'HelperController@testEmail');
 
-//Route::get('fetch-order', 'HelperController@test');
 
+
+Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
+Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
+Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
+
+//Route::get('fetch-order', 'HelperController@test');
 //Route::get('create/service', 'InventoryController@create_service');
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
-
-
 //Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
-//Route::get('/test', 'WishlistController@test');
-//Route::get('/test', function() {
-//    return view('emails.order_place')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(3));
-//});
-//Route::get('/test2', function() {
-//    return view('emails.order_status')->with('order', RetailerOrder::find(1))->with('template', EmailTemplate::find(4));
-//});
-//
-//Route::get('/test2', function() {
-//    return view('emails.product_delete')->with('product', \App\Product::first())->with('template', EmailTemplate::find(15));
-//});
-//
-//Route::get('/test', function() {
-//    $date = \Carbon\Carbon::today()->subDays(7);
-//    $new_products = Product::where('created_at','>=',$date)->where('status', 1)->where('global', 1)->latest()->limit(6)->get();
-//
-//    dd($new_products);
-//
-//    return view('emails.new_products')->with('new_products', $new_products)->with('template', EmailTemplate::find(14));
-//});
-
 //Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
-
-//Route::get('/test', 'OrderController@manuallyGetOrders');
-//Route::get('/test2', 'WishlistController@test');
-//Route::get('pages', 'AdminMaintainerController@getPages');
-
 //Route::get('/testing', function() {
 //    $helper = new HelperController();
 //    $shop = $helper->getSpecificShop(71);
@@ -462,85 +439,18 @@ Route::get('test/emails', 'HelperController@testEmail');
 //    dd($response->body->orders[0]);
 //});
 //
-//Route::get('/test', function() {
-//    $this->admin = new AdminMaintainerController();
-//    $retailer_order = RetailerOrder::find(797);
-//
-//    $this->admin->sync_order_to_admin_store($retailer_order);
-//
-//
-//});
-//Route::get('bulk', 'AdminMaintainerController@bulk_import_to_woocommerce');
-//Route::get('/dummy', 'AdminOrderController@dummy');
-//Route::get('/test', function () {
-//    $user = User::find(2);
-//    $query = Notification::where('read',0)->where('sub_type', 'Wishlist Rejected')
-//        ->whereHas('to_shops',function ($q) use ($user){
-//            $q->where('email',$user->email);
-//        })->count();
-//
-//    dd($query);
-//});
-//
-//Route::get('/testing', function() {
-//    $users = User::role('non-shopify-users')
-//        ->whereNotIn('email', ['wordpress_admin@wefullfill.com','admin@wefullfill.com', 'super_admin@wefullfill.com'])->whereNotNull('email_verified_at')->doesnthave('has_shops')->get();
-//    dd($users);
-//    $admin_settings = MonthlyDiscountSetting::first();
-//
-//    foreach ($users as $user) {
-//        $sales = RetailerOrder::where('paid', 1)->where('user_id', 2)->where('created_at', '>=' ,now()->subDay(30))->sum('cost_to_pay');
-//
-//        if($admin_settings && $admin_settings->enable) {
-//            if($sales >= $admin_settings->sales_target) {
-//                MonthlyDiscountPreference::updateOrCreate(
-//                    [ 'user_id' => $user->id ],
-//                    [ 'enable' =>  true]
-//                );
-//            }
-//            else {
-//                MonthlyDiscountPreference::updateOrCreate(
-//                    [ 'user_id' => $user->id ],
-//                    [ 'enable' =>  false]
-//                );
-//            }
-//        }
-//
-//        dd(23432);
-//    }
-//});
 
-Route::get('/tes', function(){
-    $warehouse = WareHouse::find(1);
-    $country = 'Kenya';
-    $zoneQuery = $warehouse->zone->id;
+Route::get('/zoone', function() {
+   $zones =  \App\Zone::all();
 
-
-    $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
-
-
-    if ($shipping_rate->min > 0) {
-        if ($shipping_rate->type == 'flat') {
-
-        } else {
-            $ratio = 0.15 / $shipping_rate->min;
-            $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
-        }
-
-    } else {
-        $ratio = 0;
-        $shipping_rate->shipping_price = $shipping_rate->shipping_price * $ratio;
-    }
-
-    dd($shipping_rate->shipping_price);
+   foreach($zones as $zone) {
+       $zone->warehouse_id =  3;
+       $zone->save();
+   }
 });
 
 
 
-
-Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
-Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
-Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
 
 
