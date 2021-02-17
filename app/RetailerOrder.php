@@ -132,7 +132,6 @@ class RetailerOrder extends Model
 
                         }
                         else{
-                            dd('no');
                             $total_shipping += 0;
                         }
                     }
@@ -141,5 +140,31 @@ class RetailerOrder extends Model
 
             return number_format($total_shipping, 2);
         }
+    }
+
+    public function isShippable() {
+        $shipping_address = json_decode($this->shipping_address);
+
+        if(isset($shipping_address)){
+
+            $country = $shipping_address->country;
+
+            $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+            $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+            $shipping_rates =  $shipping_rates->first();
+            if($shipping_rates != null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        return false;
     }
 }
