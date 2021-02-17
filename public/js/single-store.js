@@ -7,19 +7,26 @@ $(document).ready(function () {
         var product = data[1];
         var order = data[2];
 
-        $.ajax({
-            url: `/get-warehouse/shipping-price`,
-            type: 'GET',
-            data: {
-                product: product,
-                id: id,
-                order: order,
-            },
-            success:function (response) {
-                $('.shipping-error').html('');
-                $('.js-warehouse-shipping').html(response);
-            }
-        });
+        if(id == 3) {
+            $('.normal').hide();
+            $('.default-warehouse').show();
+        }
+        else {
+            $('.default-warehouse').hide();
+            $.ajax({
+                url: `/get-warehouse/shipping-price`,
+                type: 'GET',
+                data: {
+                    product: product,
+                    id: id,
+                    order: order,
+                },
+                success:function (response) {
+                    $('.shipping-error').html('');
+                    $('.js-warehouse-shipping').html(response);
+                }
+            });
+        }
     });
 
 
