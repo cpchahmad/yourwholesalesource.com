@@ -49,42 +49,42 @@
 
                 </ul>
             </li>
-            <li class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <i class="nav-main-link-icon si si-bag"></i>
-                    <span class="nav-main-link-name">Orders</span>
-                </a>
-                <ul class="nav-main-submenu open">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.orders')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">My Orders</span>
-                        </a>
-                    </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">--}}
+{{--                    <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                    <span class="nav-main-link-name">Orders</span>--}}
+{{--                </a>--}}
+{{--                <ul class="nav-main-submenu open">--}}
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('store.orders')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">My Orders</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
 
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.payments')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Payment History</span>
-                        </a>
-                    </li>
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('store.payments')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Payment History</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.tracking')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Tracking Info</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.refunds')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Refunds</span>
-                        </a>
-                    </li>
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('store.tracking')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Tracking Info</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('store.refunds')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Refunds</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                </ul>
-            </li>
+{{--                </ul>--}}
+{{--            </li>--}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('store.customers')}}">

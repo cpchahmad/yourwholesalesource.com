@@ -31,33 +31,33 @@
             </li>
 
 
-            <li class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                    <i class="nav-main-link-icon si si-layers"></i>
-                    <span class="nav-main-link-name">Orders</span>
-                </a>
-                <ul class="nav-main-submenu open">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('users.custom.orders')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Orders</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('users.files')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Imported Files</span>
-                        </a>
-                    </li>
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('users.refunds')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Refunds</span>
-                        </a>
-                    </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">--}}
+{{--                    <i class="nav-main-link-icon si si-layers"></i>--}}
+{{--                    <span class="nav-main-link-name">Orders</span>--}}
+{{--                </a>--}}
+{{--                <ul class="nav-main-submenu open">--}}
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('users.custom.orders')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Orders</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('users.files')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Imported Files</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('users.refunds')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Refunds</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                </ul>
-            </li>
+{{--                </ul>--}}
+{{--            </li>--}}
             <li class="nav-main-item">
                 <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
                     <i class="nav-main-link-icon si si-wallet"></i>

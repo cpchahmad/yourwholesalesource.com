@@ -98,10 +98,10 @@ class RetailerOrder extends Model
     public function getShippingRateAttribute() {
 
         $shipping_address = json_decode($this->shipping_address);
+        $total_shipping = 0;
 
         if(isset($shipping_address)){
             $total_weight = 0;
-            $total_shipping = 0;
             $country = $shipping_address->country;
             foreach ($this->line_items as $index => $v){
                 $weight = $v->linked_product->linked_product->weight *  $v->quantity;
