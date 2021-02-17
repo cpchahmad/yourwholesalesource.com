@@ -719,7 +719,6 @@ class SingleStoreController extends Controller
         $country = $shipping_address->country;
         $warehouse = WareHouse::find($request->input('id'));
 
-        if($warehous)
 
         if($warehouse->zone)
             $countries = $warehouse->zone->has_countries->pluck('name')->toArray();

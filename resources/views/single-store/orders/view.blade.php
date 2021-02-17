@@ -614,6 +614,7 @@
                                         Shipping Price
                                     </td>
                                     <td align="right" class="shipping_price_text">
+                                        {{ $order->shipping_rate }}
                                         {{number_format($order->shipping_price,2)}} USD
                                     </td>
                                 </tr>

@@ -94,4 +94,51 @@ class RetailerOrder extends Model
         }
         return '';
     }
+
+    public function getShippingRateAttribute() {
+
+        $shipping_address = json_decode($this->shipping_address);
+
+        if(isset($shipping_address)){
+            $total_weight = 0;
+            $total_shipping = 0;
+            $country = $shipping_address->country;
+            foreach ($this->line_items as $index => $v){
+                $weight = $v->linked_product->linked_product->weight *  $v->quantity;
+                if($v->linked_product != null){
+                    if($v->linked_product->linked_product != null && !$v->has_associated_warehouse()) {
+                        $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
+                        $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                            $q->where('name','LIKE','%'.$country.'%');
+                        });
+                        $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+                        $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+                        $shipping_rates =  $shipping_rates->first();
+                        if($shipping_rates != null){
+
+                            if($shipping_rates->type == 'flat'){
+                                $total_shipping += $shipping_rates->shipping_price;
+                            }
+                            else{
+                                if($shipping_rates->min > 0){
+                                    $ratio = $weight/$shipping_rates->min;
+                                    $total_shipping +=  $shipping_rates->shipping_price*$ratio;
+                                }
+                                else{
+                                    $total_shipping += 0;
+                                }
+                            }
+
+                        }
+                        else{
+                            $total_shipping += 0;
+                        }
+                    }
+                }
+            }
+
+            return number_format($total_shipping, 2);
+        }
+    }
 }
