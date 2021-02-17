@@ -681,7 +681,7 @@
                         </table>
                         @else
                             <div class="text-center">
-                                Sorry, the following shipping country is not availble. Please contact support
+                                Sorry, the following shipping country is not availble in default warehouse. Please contact support
                             </div>
                         @endif
                     </div>
