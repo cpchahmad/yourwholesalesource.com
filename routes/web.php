@@ -447,7 +447,7 @@ Route::get('/ware', function() {
         return $zone->has_countries->pluck('name');
     });
 
-    dd($countries);
+    dd($countries->collapse());
 });
 
 
