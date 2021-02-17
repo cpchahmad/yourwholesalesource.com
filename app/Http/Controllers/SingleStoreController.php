@@ -720,6 +720,10 @@ class SingleStoreController extends Controller
         $country = $shipping_address->country;
         $warehouse = WareHouse::find($request->input('id'));
 
+        $selected_line_item = RetailerOrderLineItem::find($request->input('line_item'));
+        $selected_line_item->selected_warehouse = $request->input('id');
+        $selected_line_item->save();
+
 
         if($warehouse->zones) {
             $countries = $warehouse->zones->map(function($zone) {
@@ -746,11 +750,6 @@ class SingleStoreController extends Controller
             ])->render();
 
         $total_shipping = 0;
-
-        $selected_line_item = RetailerOrderLineItem::find($request->input('line_item'));
-        $selected_line_item->selected_warehouse = $request->input('id');
-        $selected_line_item->save();
-
 
         foreach ($order->line_items as $index => $v){
             $weight = $v->linked_product->linked_product->weight *  $v->quantity;
