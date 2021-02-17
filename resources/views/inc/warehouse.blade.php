@@ -173,8 +173,8 @@
         <td align="right">
             @if($order->paid == 0)
                 {{--                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
-                <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay - $total_discount *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay - $total_discount,2)}} USD" d ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($total - $total_discount *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($total,2)}}" data-pay=" {{number_format($total+($total*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($total - $total_discount,2)}} USD" d ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
 
                 <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
@@ -184,12 +184,12 @@
                                 <div class="block-content cst_content_wrapper font-size-sm text-center">
                                     <h2>Are your sure?</h2>
                                     <div class="text-center"> <p>
-                                            Subtotal: {{number_format($order->cost_to_pay - $total_discount,2)}} USD
+                                            Subtotal: {{number_format($total - $total_discount,2)}} USD
                                             <br>
-                                            WeFullFill Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->cost_to_pay - $total_discount*$settings->paypal_percentage/100,2)}} USD
-                                            <br>Total Cost : {{number_format(($order->cost_to_pay - $total_discount)+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD</p>
+                                            WeFullFill Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($total - $total_discount*$settings->paypal_percentage/100,2)}} USD
+                                            <br>Total Cost : {{number_format(($total - $total_discount)+($total*$settings->paypal_percentage/100),2)}} USD</p>
                                     </div>
-                                    <p> A amount of  {{number_format(($order->cost_to_pay - $total_discount) +($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
+                                    <p> A amount of  {{number_format(($total - $total_discount) +($total*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
 
                                     <div class="paypal_btn_trigger">
                                         <div id="paypal-button-container"></div>
