@@ -568,7 +568,8 @@
                         </h3>
                     </div>
                     <div class="block-content">
-                        <table class="table table-borderless table-vcenter">
+                        @if($order->isShippable())
+                            <table class="table table-borderless table-vcenter">
                             <thead>
                             </thead>
                             <tbody class="js-warehouse-shipping">
@@ -630,7 +631,7 @@
                                 <tr>
                                     <td></td>
                                     <td align="right">
-                                        @if($order->paid == 0 && $order->isShippable())
+                                        @if($order->paid == 0)
     {{--                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
                                             <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay - $total_discount *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
                                             <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay - $total_discount,2)}} USD" d ><i class="fa fa-wallet"></i> Wallet Pay</button>
@@ -678,7 +679,11 @@
 
 
                         </table>
-
+                        @else
+                            <div class="text-center">
+                                Sorry, the following shipping country is not availble. Please contact support
+                            </div>
+                        @endif
                     </div>
                 </div>
                 @if(count($order->fulfillments) >0)
