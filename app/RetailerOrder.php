@@ -132,6 +132,7 @@ class RetailerOrder extends Model
 
                         }
                         else{
+                            dd('no');
                             $total_shipping += 0;
                         }
                     }
