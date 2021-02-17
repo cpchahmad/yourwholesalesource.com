@@ -411,6 +411,7 @@ Route::get('/search/products', 'CustomOrderController@find_products')->name('fin
 Route::get('/get_selected_variants', 'CustomOrderController@get_selected_variants')->name('get_selected_variants');
 Route::get('/calculate_shipping', 'SingleStoreController@calculate_shipping')->name('calculate_shipping');
 Route::get('/get-warehouse/shipping-price', 'SingleStoreController@calculate_warehouse_shipping')->name('calculate_warehouse_shipping');
+Route::get('/set/line-item/warehouse', 'SingleStoreController@set_line_item_warehouse')->name('set_line_item_warehouse');
 
 Route::get('test/sync/{id}', 'PaypalController@test');
 

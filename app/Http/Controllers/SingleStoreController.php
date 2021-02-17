@@ -808,36 +808,18 @@ class SingleStoreController extends Controller
             }
         }
 
-//        $product = Product::find($request->input('product'));
-//        if ($product != null) {
-//            $total_weight = $product->weight;
-//        } else {
-//            $total_weight = 0;
-//        }
-//
-//        $zoneQuery = $warehouse->zone->id;
-//
-//        $shipping_rate = ShippingRate::where('zone_id', $zoneQuery)->first();
-//
-//        if ($shipping_rate->min > 0) {
-//            if ($shipping_rate->type == 'flat') {
-//
-//            } else {
-//                $ratio = $total_weight / $shipping_rate->min;
-//                $total_shipping += $shipping_rate->shipping_price * $ratio;
-//            }
-//
-//        } else {
-//            $ratio = 0;
-//            $total_shipping += $shipping_rate->shipping_price * $ratio;
-//        }
-
         return view('inc.warehouse')->with([
             'shipping' => number_format($total_shipping, 2) . ' USD',
             'order' => $order,
             'total' => number_format($order->subtotal_price + $total_shipping, 2),
             'status' => 'success'
         ])->render();
+
+    }
+
+    public function set_line_item_warehouse(Request $request) {
+        $line_item = $request->input('line_item');
+        $warehouse_id = $request->input('id');
 
 
     }

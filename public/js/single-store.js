@@ -6,10 +6,10 @@ $(document).ready(function () {
         var id = data[0];
         var product = data[1];
         var order = data[2];
+        var line_item = data[3];
 
 
         $('.default-warehouse').hide();
-        $('.normal').hide();
         $.ajax({
             url: `/get-warehouse/shipping-price`,
             type: 'GET',
@@ -21,6 +21,19 @@ $(document).ready(function () {
             success:function (response) {
                 $('.shipping-error').html('');
                 $('.js-warehouse-shipping').html(response);
+
+                $.ajax({
+                    url: `/set/line-item/warehouse`,
+                    type: 'GET',
+                    data: {
+                        line_item: line_item,
+                        id: id,
+                    },
+                    success:function (response) {
+
+                    }
+                });
+
             }
         });
 
