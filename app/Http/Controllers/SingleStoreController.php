@@ -780,8 +780,16 @@ class SingleStoreController extends Controller
                     }
                 }
                 elseif($v->linked_product->linked_product != null && $v->linked_product->linked_product->id == $request->input('product')) {
-                    $zoneQuery = $warehouse->zones->pluck('id')->toArray();
-                    $shipping_rate = ShippingRate::whereIn('zone_id', $zoneQuery)->first();
+                    $zoneQuery = Zone::where('warehouse_id', $warehouse->id)->newQuery();
+                    $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                        $q->where('name','LIKE','%'.$country.'%');
+                    });
+                    $zoneQuery = $zoneQuery->pluck('id')->toArray();
+                    $shipping_rate = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+                    $shipping_rate =  $shipping_rate->first();
+
+//                    $zoneQuery = $warehouse->zones->pluck('id')->toArray();
+//                    $shipping_rate = ShippingRate::whereIn('zone_id', $zoneQuery)->first();
 
                     if ($shipping_rate->min > 0) {
                         if ($shipping_rate->type == 'flat') {
