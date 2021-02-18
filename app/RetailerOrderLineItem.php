@@ -18,7 +18,7 @@ class RetailerOrderLineItem extends Model
     }
 
     public function linked_woocommerce_product(){
-        return $this->hasOne( Product::class,'woocommerce_id','woocommerce_product_id');
+        return $this->hasOne( Product::class,'woocommerce_id','woocommerce_id');
     }
 
 
