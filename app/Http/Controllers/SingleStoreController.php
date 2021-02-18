@@ -745,6 +745,8 @@ class SingleStoreController extends Controller
         });
         $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
+        dump($warehouse_id, $zoneQuery);
+
 
         $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
 
