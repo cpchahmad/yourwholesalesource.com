@@ -360,6 +360,8 @@ class WalletController extends Controller
 
     /*Updated Inventory*/
     public function order_payment_by_wallet(Request $request){
+
+        dd($request->all());
         $retailer_order = RetailerOrder::find($request->id);
         if($retailer_order->paid == 0){
             if (Auth::check()) {

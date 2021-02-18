@@ -626,7 +626,7 @@ $(document).ready(function () {
                     'Payment Processing Please Wait!',
                     'success'
                 );
-                window.location.href = button.data('href');
+                window.location.href = button.data('href')+"?cost="+button.data('pay');
             }
         });
     });
