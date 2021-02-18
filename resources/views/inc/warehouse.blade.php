@@ -192,7 +192,7 @@
                                     <p> A amount of  {{number_format(($total - $total_discount) +($total*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
 
                                     <div class="paypal_btn_trigger">
-                                        <div id="paypal-button-container"></div>
+                                        <div class="paypal-button-container"></div>
                                     </div>
 
                                 </div>
@@ -237,7 +237,7 @@
                                 $('.ajax_paypal_form_submit form').submit();
                             });
                         }
-                    }).render('#paypal-button-container');
+                    }).render('.paypal-button-container');
                 </script>
 
 
