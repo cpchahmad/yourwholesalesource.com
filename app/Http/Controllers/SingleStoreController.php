@@ -723,12 +723,10 @@ class SingleStoreController extends Controller
             $country = 'United States';
         }
 
-        if($request->has('warehouse')) {
-            $warehouse_id = $request->has('warehouse');
+        if($request->has('warehouse_id')) {
+            $warehouse_id = $request->has('warehouse_id');
         }
-        else {
-            $warehouse_id = 3;
-        }
+
 
         $product = Product::find($request->input('product'));
         if ($product != null) {

@@ -690,7 +690,6 @@ $(document).ready(function () {
         $(this).parents('.modal').find('.drop-content').hide();
         $(this).parents('.modal').find('.loader-div').show();
 
-        console.log(1232);
         var select = $(this);
         $.ajax({
             url:$(this).data('route'),
@@ -698,7 +697,8 @@ $(document).ready(function () {
             data:{
                 product: $(this).data('product'),
                 country :$(this).val(),
-                retailer_product : $(this).data('retailer-product')
+                retailer_product : $(this).data('retailer-product'),
+                warehouse_id : $(this).data('warehouse')
             },
             success:function (response) {
                 var modal = '#'+select.parents('.modal').attr('id');
