@@ -16,7 +16,7 @@
                     <div class="form-group row" style="margin-top: 10px">
                         <div class="col-md-12">
                             <div class="form-material">
-                                <select  class="form-control shipping_country_select" name="country" data-retailer-product="{{ $retailer_product->id }}" data-product="{{$product}}" data-warehouse="{{ $warehouse->id }}" data-route="{{route('calculate_shipping')}}">
+                                <select  class="form-control shipping_country_select" name="country" data-product="{{$product}}" data-warehouse="{{ $warehouse->id }}" data-route="{{route('calculate_shipping')}}">
                                     <option disabled selected>Select a country</option>
                                     @php
                                         $countries = $warehouse->zones->map(function($zone) {
