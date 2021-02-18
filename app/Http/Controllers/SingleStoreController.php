@@ -736,8 +736,6 @@ class SingleStoreController extends Controller
             $total_weight = 0;
         }
 
-        dump($total_weight);
-
 
         $zoneQuery = Zone::where('warehouse_id', $warehouse_id)->newQuery();
         $zoneQuery->whereHas('has_countries',function ($q) use ($country){
@@ -745,14 +743,10 @@ class SingleStoreController extends Controller
         });
         $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-        dump($warehouse_id, $zoneQuery);
-
-
         $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
 
         $shipping_rates = $shipping_rates->get();
 
-        dd($shipping_rates);
 
         foreach ($shipping_rates as $shipping_rate) {
             if ($shipping_rate->min > 0) {
