@@ -273,7 +273,7 @@
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
-                                <th style="width: 25%;">@if($order->paid == 0)Select Warehouse @else Selected Warehouse</th>
+                                <th style="width: 25%;">@if($order->paid == 0)Select Warehouse @else Selected Warehouse @endif</th>
                             </tr>
                             </thead>
                             <tbody>
