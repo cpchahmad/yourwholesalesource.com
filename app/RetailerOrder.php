@@ -186,7 +186,7 @@ class RetailerOrder extends Model
                     }
 
                 }
-                else if($v->linked_woocommerce_product != null){
+                elseif($v->linked_woocommerce_product != null){
                     $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
                     $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                         $q->where('name','LIKE','%'.$country.'%');

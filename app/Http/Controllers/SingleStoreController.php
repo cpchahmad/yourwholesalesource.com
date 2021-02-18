@@ -932,7 +932,11 @@ class SingleStoreController extends Controller
 
 
         foreach ($order->line_items as $index => $v){
-            $weight = $v->linked_product->linked_product->weight *  $v->quantity;
+            if($v->linked_product)
+                $weight = $v->linked_product->linked_product->weight *  $v->quantity;
+            else
+                $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
+
 
             $zoneQuery = Zone::where('warehouse_id', $v->selected_warehouse)->newQuery();
             $zoneQuery->whereHas('has_countries',function ($q) use ($country){
