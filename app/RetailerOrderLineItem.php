@@ -64,6 +64,6 @@ class RetailerOrderLineItem extends Model
     }
 
     public function has_warehouse() {
-        return $this->hasOne(WareHouse::class, 'selected_warehouse');
+        return $this->belongsTo(WareHouse::class, 'selected_warehouse');
     }
 }
