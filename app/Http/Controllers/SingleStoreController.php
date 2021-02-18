@@ -729,11 +729,15 @@ class SingleStoreController extends Controller
 
 
         $product = Product::find($request->input('product'));
+
         if ($product != null) {
             $total_weight = $product->weight;
         } else {
             $total_weight = 0;
         }
+
+        dump($total_weight);
+
 
         $zoneQuery = Zone::where('warehouse_id', $warehouse_id)->newQuery();
         $zoneQuery->whereHas('has_countries',function ($q) use ($country){
@@ -745,6 +749,8 @@ class SingleStoreController extends Controller
         $shipping_rates = ShippingRate::whereIn('zone_id', $zoneQuery)->newQuery();
 
         $shipping_rates = $shipping_rates->get();
+
+        dd($shipping_rates);
 
         foreach ($shipping_rates as $shipping_rate) {
             if ($shipping_rate->min > 0) {
