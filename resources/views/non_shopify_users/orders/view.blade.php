@@ -269,6 +269,7 @@
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
+                                <th style="width: 25%;">Select Warehouse</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -489,6 +490,15 @@
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                             @endif
                                         </td>
+                                        @if($item->has_associated_warehouse())
+                                            <td>
+                                                <select name="warehouse" id="" class="form-control warehouse-selector">
+                                                    @foreach($item->has_associated_warehouse() as $warehouse_inventory)
+                                                        <option  @if($warehouse_inventory->warehouse_id == 3) selected @endif type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id . ','. $order->id . ',' . $item->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endif
                             @endforeach
@@ -553,10 +563,11 @@
                         </h3>
                     </div>
                     <div class="block-content">
+                        @if($order->isShippable())
                         <table class="table table-borderless table-vcenter">
                             <thead>
                             </thead>
-                            <tbody>
+                            <tbody class="js-warehouse-shipping">
                             <tr>
                                 <td>
                                     Subtotal ({{count($order->line_items)}} items)
@@ -599,7 +610,7 @@
                                     Shipping Price
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->shipping_price,2)}} USD
+                                    {{ $order->shipping_rate }} USD
                                 </td>
                             </tr>
 
@@ -608,7 +619,7 @@
                                     Total Cost @if($order->paid == 0) to Pay @endif
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD
+                                    {{number_format($order->subtotal_price + $order->shipping_rate  - $total_discount,2)}} USD
                                 </td>
                             </tr>
                             <tr>
@@ -617,7 +628,7 @@
                                     @if($order->paid == 0)
 {{--                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
                                         <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay - $total_discount*$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{number_format($order->cost_to_pay - $total_discount,2)}} USD" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{ ($order->subtotal_price + $order->shipping_rate - $total_discount) }}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
                                         <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -661,7 +672,17 @@
 
 
                         </table>
-
+                        @else
+                            <table class="table table-borderless table-vcenter">
+                                <thead>
+                                </thead>
+                                <tbody class="js-warehouse-shipping">
+                                <tr class="text-center p-2 shipping-error">
+                                    Sorry, the following shipping country is not availble in default warehouse. Please contact support
+                                </tr>
+                                </tbody>
+                            </table>
+                        @endif
                     </div>
                 </div>
                 @if(count($order->fulfillments) >0)
