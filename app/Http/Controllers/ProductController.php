@@ -1728,6 +1728,13 @@ class ProductController extends Controller
             if ($request->variants) {
                 $this->ProductVariants($request, $product->id);
             }
+            else {
+                $inventory = new WarehouseInventory();
+                $inventory->product_id = $product->id;
+                $inventory->warehouse_id = 3;
+                $inventory->quantity = $product->quantity;
+                $inventory->save();
+            }
 
             if($request->tags) {
                 foreach ($request->tags as $tag) {
@@ -1796,6 +1803,12 @@ class ProductController extends Controller
             $variants->barcode = $data->variant_barcode[$i];
             $variants->product_id = $id;
             $variants->save();
+
+            $inventory = new WarehouseInventory();
+            $inventory->product_variant_id = $variants->id;
+            $inventory->warehouse_id = 3;
+            $inventory->quantity = $variants->quantity;
+            $inventory->save();
         }
     }
 
