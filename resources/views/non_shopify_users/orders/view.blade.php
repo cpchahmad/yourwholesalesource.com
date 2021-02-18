@@ -492,7 +492,11 @@
                                         </td>
                                         @if($item->has_associated_non_shopify_warehouse())
                                             <td>
-                                                3456
+                                                <select name="warehouse" id="" class="form-control warehouse-selector">
+                                                    @foreach($item->has_associated_non_shopify_warehouse() as $warehouse_inventory)
+                                                        <option  @if($warehouse_inventory->warehouse_id == 3) selected @endif type="text" value="{{ $warehouse_inventory->warehouse->id .','.  $item->linked_woocommerce_product->id . ','. $order->id . ',' . $item->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>
+                                                    @endforeach
+                                                </select>
                                             </td>
                                         @endif
                                     </tr>
