@@ -154,6 +154,8 @@ class RetailerOrder extends Model
                 elseif($v->linked_woocommerce_product)
                     $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
 
+                dump($weight);
+
 
                 if($v->linked_real_product != null){
                     $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
@@ -162,8 +164,11 @@ class RetailerOrder extends Model
                     });
                     $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
+                    dump($zoneQuery);
+
                     $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
                     $shipping_rates =  $shipping_rates->first();
+                    dd($shipping_rates);
                     if($shipping_rates != null){
 
                         if($shipping_rates->type == 'flat'){
