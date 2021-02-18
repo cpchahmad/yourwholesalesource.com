@@ -273,7 +273,7 @@
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
-                                <th style="width: 25%;">Select Warehouse</th>
+                                <th style="width: 25%;">@if($order->paid == 0)Select Warehouse @else Selected Warehouse</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -501,13 +501,17 @@
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
                                             @endif
                                         </td>
-                                        @if($item->has_associated_warehouse())
+                                        @if($order->paid == 0 && $item->has_associated_warehouse())
                                             <td>
                                                 <select name="warehouse" id="" class="form-control warehouse-selector">
                                                     @foreach($item->has_associated_warehouse() as $warehouse_inventory)
                                                         <option  @if($warehouse_inventory->warehouse_id == 3) selected @endif type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id . ','. $order->id . ',' . $item->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>
                                                     @endforeach
                                                 </select>
+                                            </td>
+                                        @else
+                                            <td>
+                                                {{ $item->has_warehouse->title }}
                                             </td>
                                         @endif
                                     </tr>

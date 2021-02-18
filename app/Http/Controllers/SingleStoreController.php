@@ -712,7 +712,6 @@ class SingleStoreController extends Controller
 
     }
 
-
     public function calculate_shipping(Request $request)
     {
 
@@ -779,7 +778,6 @@ class SingleStoreController extends Controller
 
 
     }
-
 
     public function calculate_warehouse_shipping_old(Request $request)
     {
