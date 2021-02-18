@@ -149,7 +149,12 @@ class RetailerOrder extends Model
         if(isset($shipping_address)){
             $country = $shipping_address->country;
             foreach ($this->line_items as $index => $v){
-                $weight = $v->linked_real_product->weight *  $v->quantity;
+                if($v->linked_real_product)
+                    $weight = $v->linked_real_product->weight *  $v->quantity;
+                else($v->linked_woocommerce_product)
+                    $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
+
+
                 if($v->linked_real_product != null){
                     $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
                     $zoneQuery->whereHas('has_countries',function ($q) use ($country){
