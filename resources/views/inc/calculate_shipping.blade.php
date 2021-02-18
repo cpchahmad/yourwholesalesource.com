@@ -13,14 +13,20 @@
                         <label for="material-error">{{ $warehouse->title }}</label>
                     </div>
                     <span class="mt-2">Shipping Countries In that zone: </span>
-                    @if($warehouse->zone)
+                    @if($warehouse->zones)
                         <div class="form-group row" style="margin-top: 10px">
                             <div class="col-md-12">
                                 <div class="form-material">
                                     <select  class="form-control shipping_country_select" name="country" data-retailer-product="{{ $retailer_product->id }}" data-product="{{$product}}" data-route="{{route('calculate_shipping')}}">
                                         <option disabled selected>Select a country</option>
-                                        @foreach($warehouse->zone->has_countries as $country)
-                                            <option @if($selected == $country->name) selected @endif  value="{{$country->name}}">{{$country->name}}</option>
+                                        @php
+                                            $countries = $warehouse->zones->map(function($zone) {
+                                                return $zone->has_countries->pluck('name');
+                                            });
+                                            $countries = $countries->collapse()->toArray();
+                                        @endphp
+                                        @foreach($countries as $country)
+                                            <option @if($selected == $country) selected @endif  value="{{$country}}">{{$country}}</option>
                                         @endforeach
                                     </select>
                                 </div>

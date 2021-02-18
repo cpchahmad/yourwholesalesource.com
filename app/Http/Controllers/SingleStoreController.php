@@ -898,12 +898,10 @@ class SingleStoreController extends Controller
 
         return response()->view('inc.warehouse', compact('shipping','order','total','status'))
             ->withHeaders([
-//                'Content-Type'=> 'application/javascript',
                 'Content-Type'=>'text/html; charset=UTF-8'
             ]);
 
     }
-
 
 
 

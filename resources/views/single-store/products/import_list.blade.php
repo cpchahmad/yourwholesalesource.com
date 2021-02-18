@@ -136,7 +136,6 @@
                                                                         @if($warehouse->zone)
                                                                             @foreach($warehouse->zone->has_countries as $country)
                                                                                 <span class="badge badge-success mt-2">{{ $country->name }}</span>
-{{--                                                                                <strong>{{ $country->getShippingCost($product->linked_product) }}</strong>--}}
                                                                             @endforeach
                                                                         @endif
                                                                     @endif
