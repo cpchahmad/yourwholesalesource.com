@@ -675,7 +675,8 @@ $(document).ready(function () {
             type: 'GET',
             data:{
                 product: $(this).data('product'),
-                retailer_product : $(this).data('retailer-product')
+                retailer_product : $(this).data('retailer-product'),
+                warehouse_id : $(this).data('warehouse')
             },
             success:function (response) {
                 var modal = button.data('target');
