@@ -724,7 +724,7 @@ class SingleStoreController extends Controller
         }
 
         if($request->has('warehouse_id')) {
-            $warehouse_id = $request->has('warehouse_id');
+            $warehouse_id = $request->input('warehouse_id');
         }
 
 
