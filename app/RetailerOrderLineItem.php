@@ -16,6 +16,12 @@ class RetailerOrderLineItem extends Model
     public function linked_real_product(){
         return $this->hasOne( Product::class,'shopify_id','shopify_product_id');
     }
+
+    public function linked_woocommerce_product(){
+        return $this->hasOne( Product::class,'woocommerce_id','woocommerce_product_id');
+    }
+
+
     public function linked_real_variant(){
         return $this->hasOne(ProductVariant::class,'shopify_id','shopify_variant_id');
     }
@@ -41,8 +47,8 @@ class RetailerOrderLineItem extends Model
     public function has_associated_non_shopify_warehouse() {
         if($this->linked_real_product != null)
             $admin_product = $this->linked_real_product;
-        else
-            return false;
+        elseif($this->linked_woocommerce_product != null)
+            $admin_product = $this->linked_woocommerce_product;
 
         if(WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->exists())
             return WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->groupBy('warehouse_id')->get();
