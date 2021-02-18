@@ -151,7 +151,7 @@ class RetailerOrder extends Model
             foreach ($this->line_items as $index => $v){
                 if($v->linked_real_product)
                     $weight = $v->linked_real_product->weight *  $v->quantity;
-                else($v->linked_woocommerce_product)
+                elseif($v->linked_woocommerce_product)
                     $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
 
 
