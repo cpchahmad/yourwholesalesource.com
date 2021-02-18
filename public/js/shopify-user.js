@@ -400,7 +400,7 @@ $(document).ready(function () {
                     'Payment Processing Please Wait!',
                     'success'
                 );
-                window.location.href = button.data('href');
+                window.location.href = button.data('href')+"?cost_to_pay="+button.data('pay');
             }
         });
     });
