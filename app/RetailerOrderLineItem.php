@@ -49,6 +49,8 @@ class RetailerOrderLineItem extends Model
             $admin_product = $this->linked_real_product;
         elseif($this->linked_woocommerce_product != null)
             $admin_product = $this->linked_woocommerce_product;
+        else
+            return false;
 
         if(WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->exists())
             return WarehouseInventory::where('product_id', $admin_product->id)->whereNotNull('quantity')->groupBy('warehouse_id')->get();
