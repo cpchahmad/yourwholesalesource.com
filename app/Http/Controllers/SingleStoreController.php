@@ -873,10 +873,12 @@ class SingleStoreController extends Controller
             $shipping_rate = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
             $shipping_rate =  $shipping_rate->first();
 
+            dump($shipping_rate);
+
 //                    $zoneQuery = $warehouse->zones->pluck('id')->toArray();
 //                    $shipping_rate = ShippingRate::whereIn('zone_id', $zoneQuery)->first();
 
-            if ($shipping_rate->min > 0) {
+            if ($shipping_rate && $shipping_rate->min > 0) {
                 if ($shipping_rate->type == 'flat') {
 
                 } else {
@@ -890,6 +892,8 @@ class SingleStoreController extends Controller
             }
 
         }
+
+        dd(234);
 
         return view('inc.warehouse')->with([
             'shipping' => number_format($total_shipping, 2) . ' USD',
