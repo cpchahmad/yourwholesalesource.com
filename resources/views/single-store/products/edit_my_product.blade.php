@@ -171,7 +171,7 @@
                                 <th style="vertical-align: top">Price</th>
                                 <th style="vertical-align: top">Cost</th>
                                 <th>
-                                    <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">Shipping</a>
+                                    <a class="calculate_shipping_btn btn btn-sm text-white btn-primary" data-route="{{route('calculate_shipping')}}" data-product="{{$product->linked_product_id}}" data-warehouse="{{ 3 }}" data-retailer-product="{{ $product->id }}" data-toggle="modal" data-target="#shipping_modal_{{$product->id}}">Shipping</a>
                                 </th>
                                 <th style="vertical-align: top">Quantity</th>
                                 <th style="vertical-align: top">SKU</th>
