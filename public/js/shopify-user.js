@@ -124,6 +124,7 @@ $(document).ready(function () {
             type: 'GET',
             data:{
                 product: $(this).data('product'),
+                warehouse_id : $(this).data('warehouse')
             },
             success:function (response) {
                 var modal = button.data('target');
