@@ -712,7 +712,7 @@ class SingleStoreController extends Controller
 
     }
 
-    public function calculate_warehouse_shipping(Request $request)
+    public function calculate_warehouse_shipping_old(Request $request)
     {
 
         $order = RetailerOrder::find($request->input('order'));
@@ -821,6 +821,87 @@ class SingleStoreController extends Controller
         ])->render();
 
     }
+
+    public function calculate_warehouse_shipping(Request $request)
+    {
+
+        $order = RetailerOrder::find($request->input('order'));
+        $shipping_address = json_decode($order->shipping_address);
+        $country = $shipping_address->country;
+        $warehouse = WareHouse::find($request->input('id'));
+
+
+        if($warehouse->zones) {
+            $countries = $warehouse->zones->map(function($zone) {
+                return $zone->has_countries->pluck('name');
+            });
+            $countries = $countries->collapse()->toArray();
+        }
+        else {
+            return view('inc.warehouse')->with([
+                'shipping' => 'This product is not shipped to this country',
+                'order' => $order,
+                'total' => $order->subtotal_price,
+                'status' => 'failure'
+            ])->render();
+        }
+
+
+        if(!in_array($country, $countries))
+            return view('inc.warehouse')->with([
+                'shipping' => 'This product is not shipped to this country',
+                'order' => $order,
+                'total' => $order->subtotal_price,
+                'status' => 'failure'
+            ])->render();
+
+        $total_shipping = 0;
+
+        $selected_line_item = RetailerOrderLineItem::find($request->input('line_item'));
+        $selected_line_item->selected_warehouse = $request->input('id');
+        $selected_line_item->save();
+
+
+        foreach ($order->line_items as $index => $v){
+            $weight = $v->linked_product->linked_product->weight *  $v->quantity;
+
+            $zoneQuery = Zone::where('warehouse_id', $v->selected_warehouse)->newQuery();
+            $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                $q->where('name','LIKE','%'.$country.'%');
+            });
+            $zoneQuery = $zoneQuery->pluck('id')->toArray();
+            $shipping_rate = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+            $shipping_rate =  $shipping_rate->first();
+
+//                    $zoneQuery = $warehouse->zones->pluck('id')->toArray();
+//                    $shipping_rate = ShippingRate::whereIn('zone_id', $zoneQuery)->first();
+
+            if ($shipping_rate->min > 0) {
+                if ($shipping_rate->type == 'flat') {
+
+                } else {
+                    $ratio = $weight / $shipping_rate->min;
+                    $total_shipping += $shipping_rate->shipping_price * $ratio;
+                }
+
+            } else {
+                $ratio = 0;
+                $total_shipping += $shipping_rate->shipping_price * $ratio;
+            }
+
+        }
+
+        return view('inc.warehouse')->with([
+            'shipping' => number_format($total_shipping, 2) . ' USD',
+            'order' => $order,
+            'total' => number_format($order->subtotal_price + $total_shipping, 2),
+            'status' => 'success'
+        ])->render();
+
+    }
+
+
+
 
     public function set_line_item_warehouse(Request $request) {
         $line_item = RetailerOrderLineItem::find($request->input('line_item'));
