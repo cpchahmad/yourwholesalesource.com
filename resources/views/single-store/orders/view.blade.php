@@ -1060,10 +1060,10 @@
     @endif
 
     @if($order->paid == 0)
-        <script
-            src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">
-        </script>
-{{--        <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>--}}
+{{--        <script--}}
+{{--            src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">--}}
+{{--        </script>--}}
+        <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
 
     <script>
 
@@ -1072,7 +1072,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '{{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}}'
+                            value: '{{number_format(($order->cost_to_pay - $total_discount) +($order->cost_to_pay*$settings->paypal_percentage/100),2)}}'
                         }
                     }]
                 });
