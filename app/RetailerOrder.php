@@ -141,6 +141,53 @@ class RetailerOrder extends Model
         }
     }
 
+
+
+    public function getShippingRateForNonShopifyAttribute() {
+
+        $shipping_address = json_decode($this->shipping_address);
+        $total_shipping = 0;
+
+        if(isset($shipping_address)){
+            $country = $shipping_address->country;
+            foreach ($this->line_items as $index => $v){
+                $weight = $v->linked_real_product *  $v->quantity;
+                if($v->linked_real_product != null){
+                    $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
+                    $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                        $q->where('name','LIKE','%'.$country.'%');
+                    });
+                    $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+                    $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+                    $shipping_rates =  $shipping_rates->first();
+                    if($shipping_rates != null){
+
+                        if($shipping_rates->type == 'flat'){
+                            $total_shipping += $shipping_rates->shipping_price;
+                        }
+                        else{
+                            if($shipping_rates->min > 0){
+                                $ratio = $weight/$shipping_rates->min;
+                                $total_shipping +=  $shipping_rates->shipping_price*$ratio;
+                            }
+                            else{
+                                $total_shipping += 0;
+                            }
+                        }
+
+                    }
+                    else{
+                        $total_shipping += 0;
+                    }
+
+                }
+            }
+
+            return number_format($total_shipping, 2);
+        }
+    }
+
     public function isShippable() {
         $shipping_address = json_decode($this->shipping_address);
 
