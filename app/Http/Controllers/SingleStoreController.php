@@ -899,6 +899,11 @@ class SingleStoreController extends Controller
         $country = $shipping_address->country;
         $warehouse = WareHouse::find($request->input('id'));
 
+        if($order->custom == 1)
+            $view = 'inc.non-shopify-warehouse';
+        else
+            $view = 'inc.warehouse';
+
 
         if($warehouse->zones) {
             $countries = $warehouse->zones->map(function($zone) {
@@ -907,7 +912,8 @@ class SingleStoreController extends Controller
             $countries = $countries->collapse()->toArray();
         }
         else {
-            return view('inc.non-shopify-warehouse')->with([
+
+            return view($view)->with([
                 'shipping' => 'This product is not shipped to this country',
                 'order' => $order,
                 'total' => $order->subtotal_price,
@@ -917,7 +923,7 @@ class SingleStoreController extends Controller
 
 
         if(!in_array($country, $countries))
-            return view('inc.non-shopify-warehouse')->with([
+            return view($view)->with([
                 'shipping' => 'This product is not shipped to this country',
                 'order' => $order,
                 'total' => $order->subtotal_price,
@@ -969,7 +975,7 @@ class SingleStoreController extends Controller
         $total=number_format($order->subtotal_price + $total_shipping, 2);
         $status='success';
 
-        return response()->view('inc.non-shopify-warehouse', compact('shipping','order','total','status'))
+        return response()->view($view, compact('shipping','order','total','status'))
             ->withHeaders([
                 'Content-Type'=>'text/html; charset=UTF-8'
             ]);
