@@ -896,7 +896,10 @@ class SingleStoreController extends Controller
         $total=number_format($order->subtotal_price + $total_shipping, 2);
         $status='success';
 
-        return response()->view('inc.warehouse', compact('shipping','order','total','status'));
+        return response()->view('inc.warehouse', compact('shipping','order','total','status'))
+            ->withHeaders([
+                'Content-Type'=> 'application/javascript'
+            ]);
 
     }
 
