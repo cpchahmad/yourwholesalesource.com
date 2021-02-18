@@ -873,27 +873,25 @@ class SingleStoreController extends Controller
             $shipping_rate = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
             $shipping_rate =  $shipping_rate->first();
 
-            dump($shipping_rate);
 
-//                    $zoneQuery = $warehouse->zones->pluck('id')->toArray();
-//                    $shipping_rate = ShippingRate::whereIn('zone_id', $zoneQuery)->first();
-
-            if ($shipping_rate && $shipping_rate->min > 0) {
-                if ($shipping_rate->type == 'flat') {
-
-                } else {
-                    $ratio = $weight / $shipping_rate->min;
+            if($shipping_rate)
+            {
+                if ($shipping_rate->min > 0) {
+                    if ($shipping_rate->type == 'flat') {
+                        $total_shipping += $shipping_rate->shipping_price;
+                    } else {
+                        $ratio = $weight / $shipping_rate->min;
+                        $total_shipping += $shipping_rate->shipping_price * $ratio;
+                    }
+                }
+                else {
+                    $ratio = 0;
                     $total_shipping += $shipping_rate->shipping_price * $ratio;
                 }
-
-            } elseif($shipping_rate) {
-                $ratio = 0;
-                $total_shipping += $shipping_rate->shipping_price * $ratio;
             }
 
         }
 
-        dd(234);
 
         return view('inc.warehouse')->with([
             'shipping' => number_format($total_shipping, 2) . ' USD',
