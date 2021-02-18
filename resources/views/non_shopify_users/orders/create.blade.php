@@ -164,14 +164,14 @@
                         </div>
                         <div class="block-content">
                             <div class="form-group">
-                                <div class="custom-control custom-radio custom-control-inline custom-control-lg">
-                                    <input type="radio" class="custom-control-input" id="example-rd-custom-inline-lg1" name="payment-option" checked="" value="paypal">
-                                    <label class="custom-control-label" for="example-rd-custom-inline-lg1">Pay With PAYPAL</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline custom-control-lg">
-                                    <input type="radio" class="custom-control-input" id="example-rd-custom-inline-lg2" name="payment-option" value="wallet">
-                                    <label class="custom-control-label" for="example-rd-custom-inline-lg2">Pay with Wallet</label>
-                                </div>
+{{--                                <div class="custom-control custom-radio custom-control-inline custom-control-lg">--}}
+{{--                                    <input type="radio" class="custom-control-input" id="example-rd-custom-inline-lg1" name="payment-option" checked="" value="paypal">--}}
+{{--                                    <label class="custom-control-label" for="example-rd-custom-inline-lg1">Pay With PAYPAL</label>--}}
+{{--                                </div>--}}
+{{--                                <div class="custom-control custom-radio custom-control-inline custom-control-lg">--}}
+{{--                                    <input type="radio" class="custom-control-input" id="example-rd-custom-inline-lg2" name="payment-option" value="wallet">--}}
+{{--                                    <label class="custom-control-label" for="example-rd-custom-inline-lg2">Pay with Wallet</label>--}}
+{{--                                </div>--}}
                                 <div class="custom-control custom-radio custom-control-inline custom-control-lg">
                                     <input type="radio" class="custom-control-input" id="example-rd-custom-inline-lg3" name="payment-option" value="draft">
                                     <label class="custom-control-label" for="example-rd-custom-inline-lg3">Save as Draft</label>
