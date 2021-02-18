@@ -886,7 +886,7 @@ class SingleStoreController extends Controller
                     $total_shipping += $shipping_rate->shipping_price * $ratio;
                 }
 
-            } else {
+            } elseif($shipping_rate) {
                 $ratio = 0;
                 $total_shipping += $shipping_rate->shipping_price * $ratio;
             }
