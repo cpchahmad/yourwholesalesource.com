@@ -154,8 +154,6 @@ class RetailerOrder extends Model
                 elseif($v->linked_woocommerce_product)
                     $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
 
-                dump($weight);
-
 
                 if($v->linked_real_product != null){
                     $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
@@ -164,11 +162,40 @@ class RetailerOrder extends Model
                     });
                     $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
-                    dump($zoneQuery);
+                    $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+                    $shipping_rates =  $shipping_rates->first();
+
+                    if($shipping_rates != null){
+
+                        if($shipping_rates->type == 'flat'){
+                            $total_shipping += $shipping_rates->shipping_price;
+                        }
+                        else{
+                            if($shipping_rates->min > 0){
+                                $ratio = $weight/$shipping_rates->min;
+                                $total_shipping +=  $shipping_rates->shipping_price*$ratio;
+                            }
+                            else{
+                                $total_shipping += 0;
+                            }
+                        }
+
+                    }
+                    else{
+                        $total_shipping += 0;
+                    }
+
+                }
+                else if($v->linked_woocommerce_product != null){
+                    $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
+                    $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                        $q->where('name','LIKE','%'.$country.'%');
+                    });
+                    $zoneQuery = $zoneQuery->pluck('id')->toArray();
 
                     $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
                     $shipping_rates =  $shipping_rates->first();
-                    dd($shipping_rates);
+
                     if($shipping_rates != null){
 
                         if($shipping_rates->type == 'flat'){
