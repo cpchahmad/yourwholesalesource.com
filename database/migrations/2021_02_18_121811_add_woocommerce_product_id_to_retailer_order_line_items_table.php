@@ -25,7 +25,7 @@ class AddWoocommerceProductIdToRetailerOrderLineItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('retailer_order_line_item', function (Blueprint $table) {
+        Schema::table('retailer_order_line_items', function (Blueprint $table) {
             //
         });
     }
