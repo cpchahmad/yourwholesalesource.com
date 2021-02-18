@@ -1,5 +1,32 @@
 $(document).ready(function () {
 
+    // warehouse selection on order details page
+    $('.warehouse-selector').change(function(){
+        var data = $(this).val().split(",");
+        var id = data[0];
+        var product = data[1];
+        var order = data[2];
+        var line_item = data[3];
+
+
+        $('.default-warehouse').hide();
+        $.ajax({
+            url: `/get-warehouse/shipping-price`,
+            type: 'GET',
+            data: {
+                product: product,
+                id: id,
+                order: order,
+                line_item: line_item,
+            },
+            success:function (response) {
+
+                $('.js-warehouse-shipping').empty().append(response);
+            }
+        });
+
+    });
+
     // Grapgh checkbox
     $('body').on('change','#graph_checkbox',function () {
         if($(this).is(':checked')){
