@@ -9,7 +9,6 @@ $(document).ready(function () {
         var line_item = data[3];
 
 
-        $('.default-warehouse').hide();
         $.ajax({
             url: `/get-warehouse/shipping-price`,
             type: 'GET',
