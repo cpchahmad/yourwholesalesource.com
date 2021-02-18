@@ -361,7 +361,7 @@ class WalletController extends Controller
     /*Updated Inventory*/
     public function order_payment_by_wallet(Request $request){
 
-        dd($request->all());
+        dd($request->cost_to_pay);
         $retailer_order = RetailerOrder::find($request->id);
         if($retailer_order->paid == 0){
             if (Auth::check()) {
@@ -387,19 +387,19 @@ class WalletController extends Controller
 
                 }
             }
-            if($wallet->available >= $retailer_order->cost_to_pay){
+            if($wallet->available >= $request->cost_to_pay){
                 /*Wallet Deduction*/
-                $wallet->available =   $wallet->available -  $retailer_order->cost_to_pay;
-                $wallet->used =  $wallet->used + $retailer_order->cost_to_pay;
+                $wallet->available =   $wallet->available -  $request->cost_to_pay;
+                $wallet->used =  $wallet->used + $request->cost_to_pay;
                 $wallet->save();
                 /*Maintaining Wallet Log*/
                 $wallet_log = new WalletLog();
                 $wallet_log->wallet_id =$wallet->id;
                 $wallet_log->status = "Order Payment";
                 $wallet_log->amount = $retailer_order->cost_to_pay;
-                $wallet_log->message = 'An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
+                $wallet_log->message = 'An Amount '.number_format($request->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a');
                 $wallet_log->save();
-                $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($retailer_order->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
+                $this->notify->generate('Wallet','Wallet Order Payment','An Amount '.number_format($request->cost_to_pay,2).' USD For Order Cost Against Wallet ' . $wallet->wallet_token . ' Deducted At ' . now()->format('d M, Y h:i a'),$wallet);
 
                 /*Order placing email*/
                 $user = User::find($retailer_order->user_id);
@@ -421,7 +421,7 @@ class WalletController extends Controller
 
                 /*Order Processing*/
                 $new_transaction = new OrderTransaction();
-                $new_transaction->amount =  $retailer_order->cost_to_pay;
+                $new_transaction->amount =  $request->cost_to_pay;
                 if($retailer_order->custom == 0){
                     $new_transaction->name = $retailer_order->has_store->shopify_domain;
                 }
