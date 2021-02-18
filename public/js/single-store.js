@@ -20,8 +20,8 @@ $(document).ready(function () {
                 line_item: line_item,
             },
             success:function (response) {
-                $('.shipping-error').html('');
-                $('.js-warehouse-shipping').html(response);
+
+                $('.js-warehouse-shipping').empty().append(response);
             }
         });
 
