@@ -211,39 +211,41 @@
                     </form>
                 </div>
 
+
+
+                {{--            <script--}}
+                {{--                src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">--}}
+                {{--            </script>--}}
+                <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+
+                <script>
+
+                    paypal.Buttons({
+                        createOrder: function(data, actions) {
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: '{{number_format(($total - $total_discount) +($total*$settings->paypal_percentage/100),2)}}'
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function(data, actions) {
+                            return actions.order.capture().then(function(details) {
+                                console.log(details);
+                                $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
+                                $('.ajax_paypal_form_submit form').submit();
+                            });
+                        }
+                    }).render('#paypal-button-container');
+                </script>
+
+
             @endif
         </td>
     </tr>
 @endif
 
 
-@if($order->paid == 0)
-            <script
-                src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">
-            </script>
-{{--    <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>--}}
-
-    <script>
-
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '{{number_format(($total - $total_discount) +($total*$settings->paypal_percentage/100),2)}}'
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    console.log(details);
-                    $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
-                    $('.ajax_paypal_form_submit form').submit();
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
-@endif
 
 
