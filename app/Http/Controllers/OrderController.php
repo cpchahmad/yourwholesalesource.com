@@ -197,13 +197,14 @@ class OrderController extends Controller
             $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
 
-            dd($response);
-
-
             if (!$response->errors) {
                 $orders = $response->body->orders;
 
+
+
                 foreach ($orders as $index => $order) {
+                    $order = $orders[3];
+
                     $product_ids = [];
                     $variant_ids = [];
                     foreach ($order->line_items as $item) {
@@ -420,6 +421,12 @@ class OrderController extends Controller
                             /* Auto Order Payment in case user has enabled settings for it*/
                             $this->admin->make_auto_payment($new);
                         }
+                        else{
+                            dd(1,$order);
+                        }
+                    }
+                    else{
+                        dd(2,$order);
                     }
 
                 }
