@@ -545,15 +545,10 @@ class AdminMaintainerController extends Controller
         $data['itemTotal'] = $order->cost_to_pay;
         $data['shippingCost'] = $order->shipping_price;
 
-
-        dump($data);
-
-
         $body = str_replace("\\", '', json_encode($data));
 
         $signature = hash_hmac('sha256', $body, $secret);
 
-        dd($body);
 
         $url = "http://openapi.mabangerp.com";
 
