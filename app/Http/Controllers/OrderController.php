@@ -197,14 +197,11 @@ class OrderController extends Controller
             $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
 
+
             if (!$response->errors) {
                 $orders = $response->body->orders;
 
-
-
                 foreach ($orders as $index => $order) {
-                    $order = $orders[4];
-
                     $product_ids = [];
                     $variant_ids = [];
                     foreach ($order->line_items as $item) {
@@ -421,12 +418,6 @@ class OrderController extends Controller
                             /* Auto Order Payment in case user has enabled settings for it*/
                             $this->admin->make_auto_payment($new);
                         }
-                        else{
-                            dd(1,$order, RetailerOrder::where('shopify_order_id', $order->id)->first());
-                        }
-                    }
-                    else{
-                        dd(2,$order);
                     }
 
                 }
