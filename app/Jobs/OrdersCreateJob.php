@@ -87,11 +87,6 @@ class OrdersCreateJob implements ShouldQueue
     //    $webhook = new WebhookController();
     //    $webhook->createOrder($this->data, $this->shopDomain);
 
-        $log = new ErrorLog();
-        $log->message = "Hi";
-        $log->save();
-
-
         $order =  $this->data;
         $shop = Shop::where('shopify_domain', $this->shopDomain)->first();
         $product_ids = [];
