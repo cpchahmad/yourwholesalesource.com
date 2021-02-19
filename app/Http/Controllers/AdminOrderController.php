@@ -333,7 +333,6 @@ class AdminOrderController extends Controller
 
     public function fulfillment_edit_tracking(Request $request, $id, $fulfillment_id) {
         $order = RetailerOrder::find($id);
-
         if ($order != null) {
             if ($order->paid == 1) {
                 $tracking_number = $request->input('tracking_number');
@@ -343,10 +342,6 @@ class AdminOrderController extends Controller
 
                 if ($order->custom == 0) {
                     $shop = $this->helper->getSpecificShop($order->shop_id);
-
-                    $response = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '.json');
-                    dump($response);
-
                     if ($shop != null) {
                             $current = OrderFulfillment::find($fulfillment_id);
                             if ($current != null) {
@@ -379,10 +374,6 @@ class AdminOrderController extends Controller
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
 
-                                dump($response);
-
-                                $response = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '.json');
-                                dd($response);
 //                                if ($order->admin_shopify_id != null) {
 //                                    $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
 //                                }
