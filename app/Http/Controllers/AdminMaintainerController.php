@@ -464,7 +464,7 @@ class AdminMaintainerController extends Controller
 
 
                 array_push($line_items, [
-                    "title" => $item->name,
+                    "title" => str_replace('"', ' ', $item->name),
                     "platformSku" => is_null($item->linked_variant) ? $item->linked_product->sku : $item->linked_variant->sku,
                     "quantity" => $item->quantity,
                     "pictureUrl" => $images[$index]
@@ -509,7 +509,7 @@ class AdminMaintainerController extends Controller
 
 
                 array_push($line_items, [
-                    "title" => $item->name,
+                    "title" => str_replace('"', ' ', $item->name),
                     "platformSku" => is_null($item->linked_real_variant) ? $item->linked_real_product->sku : $item->linked_real_variant->sku,
                     "quantity" => $item->quantity,
                     "pictureUrl" => $images[$index]
@@ -531,6 +531,8 @@ class AdminMaintainerController extends Controller
             "orderItemList" => $line_items
         ];
 
+        dd($data);
+
 
         $data['phone1'] =  isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone';
         $data['country'] = is_null($shipping->country) ? 'No country' : $shipping->country;
@@ -546,14 +548,9 @@ class AdminMaintainerController extends Controller
         $data['shippingCost'] = $order->shipping_price;
 
 
-        dump($data);
-
-
         $body = str_replace("\\", '', json_encode($data));
 
         $signature = hash_hmac('sha256', $body, $secret);
-
-        dd($body);
 
         $url = "http://openapi.mabangerp.com";
 
