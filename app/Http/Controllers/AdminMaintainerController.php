@@ -553,7 +553,7 @@ class AdminMaintainerController extends Controller
 
         $signature = hash_hmac('sha256', $body, $secret);
 
-        dd($signature);
+        dd($body);
 
         $url = "http://openapi.mabangerp.com";
 
