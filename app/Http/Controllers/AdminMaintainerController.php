@@ -546,9 +546,6 @@ class AdminMaintainerController extends Controller
         $data['shippingCost'] = $order->shipping_price;
 
 
-        dd($data);
-
-
         $body = str_replace("\\", '', json_encode($data));
 
         $signature = hash_hmac('sha256', $body, $secret);
