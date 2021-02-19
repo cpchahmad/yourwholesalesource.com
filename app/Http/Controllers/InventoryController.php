@@ -165,15 +165,18 @@ class InventoryController extends Controller
 
             foreach ($order->line_items as $item){
                 $variant = ProductVariant::where('sku',$item->sku)->first();
-                $variant_warehouse_inventory = WarehouseInventory::where('warehouse_id', $item->selected_warehouse)->where('product_variant_id', $variant->id)->first();
                 if($variant != null){
+                    $variant_warehouse_inventory = WarehouseInventory::where('warehouse_id', $item->selected_warehouse)->where('product_variant_id', $variant->id)->first();
+
                     if($type == 'new') {
                         $variant->quantity = $variant->quantity - $item->quantity;
-                        $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity - $item->quantity;
+                        if($variant_warehouse_inventory)
+                            $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity - $item->quantity;
                     }
                     else{
                         $variant->quantity = $variant->quantity + $item->quantity;
-                        $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity + $item->quantity;
+                        if($variant_warehouse_inventory)
+                            $variant_warehouse_inventory->quantity = $variant_warehouse_inventory->quantity + $item->quantity;
                     }
                     $variant->save();
                     $variant_warehouse_inventory->save();
@@ -183,15 +186,18 @@ class InventoryController extends Controller
                 }
                 else{
                     $product = Product::where('sku',$item->sku)->first();
-                    $product_warehouse_inventory = WarehouseInventory::where('warehouse_id', $item->selected_warehouse)->where('product_id', $product->id)->first();
                     if($product != null){
+                        $product_warehouse_inventory = WarehouseInventory::where('warehouse_id', $item->selected_warehouse)->where('product_id', $product->id)->first();
+
                         if($type == 'new') {
                             $product->quantity = $product->quantity - $item->quantity;
-                            $product_warehouse_inventory->quantity = $product_warehouse_inventory->quantity - $item->quantity;
+                            if($product_warehouse_inventory)
+                                $product_warehouse_inventory->quantity = $product_warehouse_inventory->quantity - $item->quantity;
                         }
                         else{
                             $product->quantity = $product->quantity + $item->quantity;
-                            $product_warehouse_inventory->quantity = $product_warehouse_inventory->quantity + $item->quantity;
+                            if($product_warehouse_inventory)
+                                $product_warehouse_inventory->quantity = $product_warehouse_inventory->quantity + $item->quantity;
 
                         }
                         $product->save();
