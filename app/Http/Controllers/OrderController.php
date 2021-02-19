@@ -422,7 +422,7 @@ class OrderController extends Controller
                             $this->admin->make_auto_payment($new);
                         }
                         else{
-                            dd(1,$order);
+                            dd(1,$order, RetailerOrder::where('shopify_order_id', $order->id)->first());
                         }
                     }
                     else{
