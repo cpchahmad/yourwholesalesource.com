@@ -546,9 +546,14 @@ class AdminMaintainerController extends Controller
         $data['shippingCost'] = $order->shipping_price;
 
 
+        dump($data);
+
+
         $body = str_replace("\\", '', json_encode($data));
 
         $signature = hash_hmac('sha256', $body, $secret);
+
+        dd($signature);
 
         $url = "http://openapi.mabangerp.com";
 
