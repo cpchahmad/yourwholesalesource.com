@@ -203,7 +203,7 @@ class OrderController extends Controller
 
 
                 foreach ($orders as $index => $order) {
-                    $order = $orders[3];
+                    $order = $orders[4];
 
                     $product_ids = [];
                     $variant_ids = [];
