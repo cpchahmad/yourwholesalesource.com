@@ -235,11 +235,11 @@
                                 <div class="font-w600">{{$manager->email}}</div>
                                 <div class="text-info">
                                     <i class="fab fa-whatsapp text-success fa-lg"></i>
-                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}"> {{$manager->whatsapp}}</a>
+                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp: {{$manager->whatsapp}}</a>
                                 </div>
                                 <div class="text-info">
                                     <i class="fab fa-skype text-info fa-lg"></i>
-                                    <a href="skype:{{$manager->skype}}?chat">{{ $manager->skype }}</a>
+                                    <a href="skype:{{$manager->skype}}?chat">Skype: {{ $manager->skype }}</a>
                                 </div>
 
                             </div>
