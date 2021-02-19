@@ -42,7 +42,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
-                                <input disabled type="text"  class="form-control" value="{{$manager->email}}">
+                                <input  type="email" name="email"  class="form-control" value="{{$manager->email}}">
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Whatsapp</label>

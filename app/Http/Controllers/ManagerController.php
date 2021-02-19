@@ -874,6 +874,12 @@ class ManagerController extends Controller
     public function save_personal_info(Request $request){
         $manager = User::find($request->input('manager_id'));
         if($manager != null){
+
+            $this->validate($request, [
+                'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            ]);
+
+
             $manager->name =  $request->input('name');
             $manager->whatsapp =  $request->input('whatsapp');
             $manager->skype =  $request->input('skype');
