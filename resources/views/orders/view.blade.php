@@ -486,7 +486,12 @@
                                     Shipping Price
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->shipping_price,2)}} USD
+                                    @if($order->custom == 0)
+                                    {{ $order->shipping_rate }} USD
+                                    @else
+                                        {{ $order->shipping_rate_for_non_shopify }} USD
+                                    @endif
+{{--                                    {{number_format($order->shipping_price,2)}} USD--}}
                                 </td>
                             </tr>
 
@@ -495,7 +500,12 @@
                                     Total Cost
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD
+                                    @if($order->custom == 0)
+                                        {{number_format($order->subtotal_price + $order->shipping_rate  - $total_discount,2)}} USD
+                                    @else
+                                        {{number_format($order->subtotal_price + $order->shipping_rate_for_non_shopify - $total_discount,2)}} USD
+                                    @endif
+{{--                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD--}}
                                 </td>
                             </tr>
                             </tbody>
