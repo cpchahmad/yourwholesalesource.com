@@ -615,7 +615,13 @@ class AdminMaintainerController extends Controller
                     }
                     else {
                         if($item->linked_variant->has_image->isV == 1) {
-                            array_push($images, "https://app.wefullfill.com/images/variants/".$item->linked_variant->has_image->image);
+                            $path = "https://app.wefullfill.com/images/variants/".$item->linked_variant->has_image->image;
+                            if(substr_count($path, "https") > 1) {
+                                $path_array = explode("variants/",$path);
+                                $path = $path_array[1];
+                            }
+
+                            array_push($images, $path);
                         }
                         else {
                             array_push($images, "https://app.wefullfill.com/images/".$item->linked_variant->has_image->image);
