@@ -68,7 +68,11 @@ class RetailerOrder extends Model
                 $q->where('name','LIKE','%'.$country.'%');
             });
             $zoneQuery = $zoneQuery->first();
-            if($zoneQuery && $zoneQuery->courier == null)
+
+            if($zoneQuery == null)
+                return '';
+
+            if($zoneQuery->courier == null)
                 return '';
 
             return$zoneQuery->courier->url;
@@ -87,7 +91,11 @@ class RetailerOrder extends Model
                 $q->where('name','LIKE','%'.$country.'%');
             });
             $zoneQuery = $zoneQuery->first();
-            if($zoneQuery && $zoneQuery->courier == null)
+
+            if($zoneQuery == null)
+                return '';
+
+            if($zoneQuery->courier == null)
                 return '';
 
             return$zoneQuery->courier->id;
