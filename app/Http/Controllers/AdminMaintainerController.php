@@ -550,8 +550,6 @@ class AdminMaintainerController extends Controller
         $data['itemTotal'] = $order->cost_to_pay;
         $data['shippingCost'] = $order->shipping_price;
 
-        dd($data);
-
 
         $body = str_replace("\\", '', json_encode($data));
 
