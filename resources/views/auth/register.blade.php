@@ -59,8 +59,8 @@
                             <input type="password" class="form-control form-control-alt form-control-lg" name="password_confirmation">
                             @error('password')
                             <span class="invalid-feedback" role="alert" style="color: red">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
