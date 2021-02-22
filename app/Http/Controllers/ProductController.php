@@ -2524,7 +2524,6 @@ class ProductController extends Controller
             ]
         ];
 
-        dd($variant->linked_product->woocommerce_id, $variant->woocommerce_id, $data, $image);
         $imagesResponse = $shop->put('products/'.$variant->linked_product->woocommerce_id.'/variations/'.$variant->woocommerce_id, $data);
         if ($imagesResponse->id) {
             $variant->image = $image_id;
