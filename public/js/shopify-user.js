@@ -211,7 +211,19 @@ $(document).ready(function () {
         });
     });
 
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 3000;  //time in ms, 5 second for example
+
     $('#product-search-field').keyup(function(){
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    $('#product-search-field').keydown(function(){
+        clearTimeout(typingTimer);
+    });
+
+    function doneTyping () {
         $.ajax({
             url: '/search/products',
             type: 'GET',
@@ -231,8 +243,7 @@ $(document).ready(function () {
 
             },
         });
-        0
-    });
+    }
 
     $('body').on('change','.product-checkbox',function(){
         var related = $(this).data('related');
