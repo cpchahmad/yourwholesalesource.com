@@ -449,7 +449,7 @@
                                 </td>
                                 <td align="right">
                                     @if($order->custom == 0)
-                                        {{number_format($order->subtotal_price - $order->shipping_rate  ,2)}} USD
+                                        {{number_format($order->total_cost - $order->shipping_rate  ,2)}} USD
                                     @else
                                         {{number_format($order->subtotal_price - $order->shipping_rate_for_non_shopify,2)}} USD
                                     @endif
