@@ -66,7 +66,7 @@
 
                         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                         <div class="g-recaptcha my-2" id="feedback-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY')  }}"></div>
-                        @error('g-recaptcha')
+                        @error('g-recaptcha-response')
                         <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
