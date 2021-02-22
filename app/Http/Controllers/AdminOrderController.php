@@ -1748,7 +1748,7 @@ class AdminOrderController extends Controller
 
         $new_fulfillment->admin_fulfillment_shopify_id = $data->erp_order_id;
         $new_fulfillment->save();
-        if ($data->track_number) {
+//        if ($data->track_number) {
             $count = 0;
             $fulfillment_count = count($retailer_order->fulfillments);
             foreach ($retailer_order->fulfillments as $f) {
@@ -1766,7 +1766,7 @@ class AdminOrderController extends Controller
 
             $retailer_order->save();
             $this->notify->generate('Order', 'Order Tracking Details', $retailer_order->name . ' tracking details added successfully!', $retailer_order);
-        }
+//        }
     }
 
     public function set_line_item_fullfill_status($data, $retailer_order): array
