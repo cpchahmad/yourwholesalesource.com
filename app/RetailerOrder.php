@@ -110,18 +110,8 @@ class RetailerOrder extends Model
 
     public function getTotalCostAttribute() {
         $cost_to_pay = 0;
-        foreach ($this->line_items as $index => $v) {
-            $retailer_product = RetailerProduct::where('shopify_id',$v->product_id)->first();
-
-            if($retailer_product != null) {
-                $related_variant =  RetailerProductVariant::where('shopify_id',$v->variant_id)->first();
-                if($related_variant != null){
-                    $cost_to_pay = $cost_to_pay + $related_variant->cost * $v->quantity;
-                }
-                else{
-                    $cost_to_pay = $cost_to_pay + $retailer_product->cost * $v->quantity;
-                }
-            }
+        foreach ($this->line_items as $index => $item) {
+            $cost_to_pay = $cost_to_pay + $item->cost * $item->quantity;
         }
 
         return $cost_to_pay;
