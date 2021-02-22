@@ -583,6 +583,7 @@ class AdminOrderController extends Controller
 
         $fulfillment = new OrderFulfillment();
         if ($order->custom == 0) {
+            dd($response);
             $fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
             $fulfillment->name = $response->body->fulfillments[0]->name;
         } else {
