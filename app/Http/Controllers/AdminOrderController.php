@@ -158,7 +158,7 @@ class AdminOrderController extends Controller
                             if ($response->errors) {
                                 dump($response);
                                 if(strpos($response->body->base[0], "already fulfilled") !== false){
-                                    $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '.json');
+                                    $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id . '/fulfillments.json');
                                     dd($res);
                                     return $this->set_fulfilments_for_already_fulfilled_order($request, $id, $fulfillable_quantities, $order, $res);
                                 }
