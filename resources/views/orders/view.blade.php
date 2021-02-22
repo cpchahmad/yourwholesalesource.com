@@ -448,7 +448,12 @@
                                     Subtotal ({{count($order->line_items)}} items)
                                 </td>
                                 <td align="right">
-                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD
+                                    @if($order->custom == 0)
+                                        {{number_format($order->subtotal_price - $order->shipping_rate  ,2)}} USD
+                                    @else
+                                        {{number_format($order->subtotal_price - $order->shipping_rate_for_non_shopify,2)}} USD
+                                    @endif
+{{--                                    {{number_format($order->cost_to_pay - $order->shipping_price,2)}} USD--}}
                                 </td>
                             </tr>
                             <tr>
