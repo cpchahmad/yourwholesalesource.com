@@ -216,10 +216,12 @@ $(document).ready(function () {
 
     $('#product-search-field').keyup(function(){
         clearTimeout(typingTimer);
+        console.log('up');
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
     });
 
     $('#product-search-field').keydown(function(){
+        console.log('down');
         clearTimeout(typingTimer);
     });
 
