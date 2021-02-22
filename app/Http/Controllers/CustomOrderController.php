@@ -153,7 +153,7 @@ class CustomOrderController extends Controller
 
     public function find_products(Request $request)
     {
-        $products = Product::query();
+        $products = Product::with(['has_images', 'hasVariants'])->newQuery();
         if ($request->has('search')) {
             $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
             $products->orWhereHas('hasVariants', function ($q) use ($request) {
@@ -162,7 +162,7 @@ class CustomOrderController extends Controller
             });
         }
         $html = view('non_shopify_users.orders.product-browse-section')->with([
-            'products' => $products->limit(10),
+            'products' => $products->limit(10)->get(),
         ])->render();
 
         return response()->json([
