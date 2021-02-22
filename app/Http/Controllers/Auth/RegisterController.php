@@ -8,6 +8,7 @@ use App\Mail\NewWallet;
 use App\Mail\ResourcesMail;
 use App\Mail\StoreIntegrationMail;
 use App\Mail\TopShopifyProuctMail;
+use App\Rules\Recaptcha;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -59,7 +60,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'g-recaptcha-response' => ['required', new Recaptcha()]
         ]);
+
     }
 
     /**

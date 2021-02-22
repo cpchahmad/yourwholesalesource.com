@@ -64,6 +64,10 @@
                             @enderror
                         </div>
 
+                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                        <div class="g-recaptcha" id="feedback-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY')  }}"></div>
+
+
 
                     <div class="form-group row">
                         <div class="col-md-7 col-xl-7 submit-column">
