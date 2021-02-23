@@ -212,7 +212,6 @@ $(document).ready(function () {
     });
 
     $('.product-search-button').click(function() {
-        console.log(23);
         $.ajax({
             url: '/search/products',
             type: 'GET',
