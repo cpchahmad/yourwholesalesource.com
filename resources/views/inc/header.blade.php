@@ -46,8 +46,8 @@
         }
 
         @media(max-width: 460px) {
-            .status-section {
-                display: none;
+            .page-header {
+                padding-top: 20px;
             }
 
         }
