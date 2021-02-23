@@ -38,6 +38,10 @@ class SendNewsEmailJob implements ShouldQueue
     {
         $users_temp = $this->campaign->users();
 
+        $log = new ErrorLog();
+        $log->message = "234";
+        $log->save();
+
         foreach ($users_temp as $user) {
             try{
                 Mail::to($user->email)->send(new NewsEmail());
@@ -49,7 +53,9 @@ class SendNewsEmailJob implements ShouldQueue
                 $this->campaign->save();
             }
             catch (\Exception $e){
-
+                $log = new ErrorLog();
+                $log->message = $e->getMessage();
+                $log->save();
             }
         }
     }
