@@ -1692,28 +1692,39 @@ class AdminOrderController extends Controller
                         }
                         else {
                             $log = new ErrorLog();
-                            $log->message = "Fulfillment Error (already fulfilled) From Manbang: " . $retailer_order->id . ': '. json_encode($response->body);
+                            $log->message = "Fulfillment Error (already fulfilled new) From Manbang: " . $retailer_order->id . ': '. json_encode($response->body);
                             $log->save();
 
                             $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                             if(!$response->errors){
 
-                                /*Order Fullfillment Record*/
-                                $new_fulfillment = new OrderFulfillment();
-                                $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillments[0]->id;
-                                $new_fulfillment->name = $response->body->fulfillments[0]->name;
-                                $new_fulfillment->retailer_order_id = $retailer_order->id;
-                                $new_fulfillment->status = 'fulfilled';
-                                $new_fulfillment->save();
-                                /*Order Log*/
+                                $response = $shop->api()->rest('PUT', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillments[0]->id . '.json', $fulfill_data);
 
-                                $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillments[0]->id . '/complete.json');
+                                if(!$response->errors){
+                                    /*Order Fullfillment Record*/
+                                    $new_fulfillment = new OrderFulfillment();
+                                    $new_fulfillment->fulfillment_shopify_id = $response->body->fulfillment->id;
+                                    $new_fulfillment->name = $response->body->fulfillment->name;
+                                    $new_fulfillment->retailer_order_id = $retailer_order->id;
+                                    $new_fulfillment->status = 'fulfilled';
+                                    $new_fulfillment->save();
+                                    /*Order Log*/
 
-                                $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+                                    $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
+
+                                    $this->after_fullfiment_process($new_fulfillment, $retailer_order, $data);
+                                }
+                                else {
+
+                                    $log = new ErrorLog();
+                                    $log->message = "Fulfillment Error (Inner inner new): " . json_encode($response->body);
+                                    $log->save();
+                                }
+
                             }else {
 
                                 $log = new ErrorLog();
-                                $log->message = "Fulfillment Error (Inner): " . json_encode($response->body);
+                                $log->message = "Fulfillment Error (Inner new): " . json_encode($response->body);
                                 $log->save();
                             }
                         }
