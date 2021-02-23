@@ -194,7 +194,7 @@ class OrderController extends Controller
         $shops = $user->has_stores()->get();
 
         foreach ($shops as $s) {
-            $shop = $this->helper->getSpecificShop(71);
+            $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
 
 
@@ -202,8 +202,6 @@ class OrderController extends Controller
                 $orders = $response->body->orders;
 
                 foreach ($orders as $index => $order) {
-
-                    dd($orders[0]);
                     $product_ids = [];
                     $variant_ids = [];
                     foreach ($order->line_items as $item) {
