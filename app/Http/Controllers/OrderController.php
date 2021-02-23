@@ -197,6 +197,8 @@ class OrderController extends Controller
             $shop = $this->helper->getSpecificShop($s->id);
             $response = $shop->api()->rest('GET', '/admin/api/2019-10/orders.json', ['status' => 'any']);
 
+            dd($response);
+
 
             if (!$response->errors) {
                 $orders = $response->body->orders;
