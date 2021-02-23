@@ -809,9 +809,11 @@ class DefaultSettingsController extends Controller
         $campaign->save();
 
         if($campaign->template_id == '18')
-            dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($campaign->time));
+            dispatch(new SendNewsEmailJob($campaign));
+            //dispatch(new SendNewsEmailJob($campaign))->delay(Carbon::parse($campaign->time));
         elseif($campaign->template_id == '20')
-            dispatch(new SendNewsProductEmailjob($campaign))->delay(Carbon::parse($campaign->time));
+            dispatch(new SendNewsProductEmailjob($campaign));
+            //dispatch(new SendNewsProductEmailjob($campaign))->delay(Carbon::parse($campaign->time));
 
         return redirect()->back()->with('success', 'Campaign Published Successfully!');
     }
