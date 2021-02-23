@@ -1717,7 +1717,7 @@ class AdminOrderController extends Controller
                                 else {
 
                                     $log = new ErrorLog();
-                                    $log->message = "Fulfillment Error (Inner inner new): " . json_encode($response->body);
+                                    $log->message = "Fulfillment Error (GET already fullfilled error): " . json_encode($response->body);
                                     $log->save();
                                 }
 
