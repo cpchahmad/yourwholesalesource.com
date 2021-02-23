@@ -44,6 +44,13 @@
             background-position: center;
             background-size: cover;
         }
+
+        @media(max-width: 460px) {
+            .status-section {
+                display: none;
+            }
+
+        }
     </style>
 
 </head>
