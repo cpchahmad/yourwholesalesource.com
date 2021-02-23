@@ -190,7 +190,7 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="d-inline-block mr-3">
+            <div class="">
                 <span class="badge badge-primary" style="font-size: 13px"> Wallet Balance  : {{number_format($balance,2)}} USD </span>
                 <a href="/store/wishlist?status=2" class="text-white">
                     <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist  {{$approved_wishlist}} </span>

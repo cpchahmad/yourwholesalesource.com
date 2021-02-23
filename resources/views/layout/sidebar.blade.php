@@ -231,7 +231,7 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="d-inline-block mr-3">
+            <div class="">
                 <a href="/wishlists?status=1" class="text-white">
                     <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
                 </a>
