@@ -231,39 +231,27 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="d-inline-block mr-3 badge badge-primary text-white">
+            <div class="d-inline-block mr-3">
                 <a href="/wishlists?status=1" class="text-white">
-                    Wishlist Requests
-                    <span class="" style="font-size: 13px"> {{$wishlist_request_count}} </span>
+                    <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
                 </a>
-            </div>
 
-            <div class="d-inline-block mr-3 badge text-white" style="background: Purple;color: white;">
-                <a href="/wishlists?status=3" class="text-white">
-                    Pending Accepted Wishlists
-                    <span class="" style="font-size: 13px"> {{$wishlist_accept_count}} </span>
+                <a href="/wishlists?status=3" class="text-white" style="background: Purple;color: white;">
+                    <span class="badge" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
                 </a>
-            </div>
 
-            <div class="d-inline-block mr-3 badge badge-success text-white">
-                <a href="/wallets-requests" class="text-white">
-                    Wallet Requests
-                    <span class="" style="font-size: 13px"> {{$wallet_request_count}} </span>
+                <a href="/wallets-requests" class="text-white badge badge-success">
+                    <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
                 </a>
-            </div>
 
-            <div class="d-inline-block mr-3 badge badge-warning text-white">
-                <a href="/refunds?priority=&status=1" class="text-white">
-                    Refund Requests
-                    <span class="" style="font-size: 13px"> {{$refund_request_count}} </span>
+                <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">
+                    <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>
                 </a>
-            </div>
 
-            <div class="d-inline-block mr-3 badge badge-dark text-white">
-                <a href="/tickets?priority=&status=1&more_status=3" class="text-white">
-                    Ticket Requests
-                    <span class="" style="font-size: 13px"> {{$tickets_request_count}} </span>
+                <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">
+                    <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>
                 </a>
+
             </div>
 
             <div class="dropdown d-inline-block ml-2">
