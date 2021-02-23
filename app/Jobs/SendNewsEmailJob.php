@@ -36,11 +36,7 @@ class SendNewsEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $users_temp = $this->campaign->users();
-
-        $log = new ErrorLog();
-        $log->message = "234";
-        $log->save();
+        $users_temp = $this->campaign->users()->get();
 
         foreach ($users_temp as $user) {
             try{

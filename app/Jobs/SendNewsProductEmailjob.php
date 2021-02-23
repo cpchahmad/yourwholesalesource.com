@@ -36,7 +36,7 @@ class SendNewsProductEmailjob implements ShouldQueue
      */
     public function handle()
     {
-        $users_temp = $this->campaign->users();
+        $users_temp = $this->campaign->users()->get();
 
         foreach ($users_temp as $user) {
             try{
