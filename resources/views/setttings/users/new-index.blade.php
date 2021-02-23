@@ -136,6 +136,9 @@
                                         <a class="btn btn-xs btn-sm btn-success" type="button" href="{{route('users.view',$user->id)}}" title="View User">
                                             <i class="fa fa-eye"></i>
                                         </a>
+                                        <a class="btn btn-xs btn-sm btn-danger" type="button" href="{{route('users.delete',$user->id)}}" title="Delete User">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

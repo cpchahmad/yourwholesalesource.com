@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/stores/customers/{id}','DefaultSettingsController@customer_view')->name('customers.view');
     Route::get('/non-shopify-users','DefaultSettingsController@users')->name('users.index');
     Route::get('/non-shopify-users/{id}','DefaultSettingsController@user')->name('users.view');
+    Route::get('/non-shopify-users/{id}/delete','DefaultSettingsController@Deleteuser')->name('users.delete');
     Route::get('/sync-store-orders/{id}', 'OrderController@syncAllOrders')->name('store.all.sync.orders');
     Route::get('/ticket-category','DefaultSettingsController@view_ticket_categories')->name('ticket.category.index');
     Route::post('/ticket-category','DefaultSettingsController@create_ticket_categories')->name('ticket.category.create');

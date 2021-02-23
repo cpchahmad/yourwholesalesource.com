@@ -547,6 +547,23 @@ class DefaultSettingsController extends Controller
         ]);
     }
 
+    public function deleteUser(Request $request) {
+        $user = User::find($request->id);
+
+        if($user->has_wallet)
+            $user->has_wallet->delete();
+
+        if($user->has_shops)
+            $user->has_shops()->each(function($shop) {
+               $shop->delete();
+            });
+
+        return redirect()->back()->with('success', 'User Delete Successfully!');
+
+
+    }
+
+
     public function users(Request $request){
         $sales_managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
         $users = User::role('non-shopify-users')->newQuery();
