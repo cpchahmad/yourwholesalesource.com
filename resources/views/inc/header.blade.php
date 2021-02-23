@@ -46,8 +46,8 @@
         }
 
         @media(max-width: 460px) {
-            .page-header {
-                padding-top: 20px;
+            .content-header {
+                padding-top: 60px;
             }
 
         }
