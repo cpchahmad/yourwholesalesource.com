@@ -411,7 +411,7 @@ class AdminOrderController extends Controller
 //                            }
                             /*Maintaining Log*/
                             $order_log = new OrderLog();
-                            $order_log->message = "Tracking detailed of fulfillment named " . $current->name . " updated successfully on " . now()->format('d M, Y h:i a');
+                            $order_log->message = "Tracking detailed of fulfillment named " . $current->name . " updated manually successfully on " . now()->format('d M, Y h:i a');
                             $order_log->status = "Tracking Details Updated";
                             $order_log->retailer_order_id = $order->id;
                             $order_log->save();
@@ -1573,7 +1573,7 @@ class AdminOrderController extends Controller
 
         /*Maintaining Log*/
         $order_log = new OrderLog();
-        $order_log->message = "Tracking detailed Updated To Fulfillment named " . $fulfillment->name . "  successfully on " . now()->format('d M, Y h:i a');
+        $order_log->message = "Tracking detailed Automatically Updated To Fulfillment named " . $fulfillment->name . "  successfully on " . now()->format('d M, Y h:i a');
         $order_log->status = "Tracking Details Updated";
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
