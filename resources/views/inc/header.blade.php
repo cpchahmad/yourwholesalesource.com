@@ -44,10 +44,20 @@
             background-position: center;
             background-size: cover;
         }
+        .section-status-mobile {
+            display: none;
+        }
+        .section-status {
+            display: none;
+        }
 
         @media(max-width: 460px) {
-            .content-header {
-                padding-top: 60px;
+            .section-status-mobile {
+                display: block;
+            }
+
+            .section-status {
+                display: none;
             }
 
         }
