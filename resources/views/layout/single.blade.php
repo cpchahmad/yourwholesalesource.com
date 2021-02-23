@@ -56,7 +56,7 @@
             display: block;
         }
 
-        @media(max-width: 460px) {
+        @media(max-width: 612px) {
             .section-status-mobile {
                 display: block !important;
             }
