@@ -713,7 +713,7 @@ class AdminOrderController extends Controller
                             ->where('retailer_orders.paid', '>=', 1);
                     });
             })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-                ->whereBetween('products.created_at', [$comparing_start_date, $comparing_end_date])
+                ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
                 ->groupBy('products.id')
                 ->orderBy('sold', 'DESC')
                 ->get()
@@ -729,7 +729,7 @@ class AdminOrderController extends Controller
                             });
                     });
             })->select('products.*', DB::raw('sum(retailer_order_line_items.quantity) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-                ->whereBetween('products.created_at', [$comparing_start_date, $comparing_end_date])
+                ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
                 ->groupBy('products.id')
                 ->orderBy('sold', 'DESC')
                 ->get()
