@@ -231,28 +231,38 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="">
-                <a href="/wishlists?status=1" class="text-white">
-                    <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
-                </a>
+            <ul class="">
+                <li>
+                    <a href="/wishlists?status=1" class="text-white">
+                        <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
+                    </a>
+                </li>
 
-                <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">
-                    <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
-                </a>
+                <li>
+                    <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">
+                        <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
+                    </a>
+                </li>
 
-                <a href="/wallets-requests" class="text-white badge badge-success">
-                    <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
-                </a>
+                <li>
+                    <a href="/wallets-requests" class="text-white badge badge-success">
+                        <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
+                    </a>
+                </li>
 
-                <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">
-                    <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>
-                </a>
+                <li>
+                    <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">
+                        <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>
+                    </a>
+                </li>
 
-                <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">
-                    <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>
-                </a>
+                <li>
+                    <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">
+                        <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>
+                    </a>
+                </li>
 
-            </div>
+            </ul>
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
