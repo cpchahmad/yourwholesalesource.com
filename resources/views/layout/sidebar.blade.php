@@ -236,8 +236,8 @@
                     <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
                 </a>
 
-                <a href="/wishlists?status=3" class="text-white" style="background: Purple;color: white;">
-                    <span class="badge" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
+                <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">
+                    <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
                 </a>
 
                 <a href="/wallets-requests" class="text-white badge badge-success">
