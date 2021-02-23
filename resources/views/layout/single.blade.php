@@ -48,6 +48,24 @@
             background-position: center;
             background-size: cover;
         }
+
+        .section-status-mobile {
+            display: none !important;
+        }
+        .status-section {
+            display: block;
+        }
+
+        @media(max-width: 460px) {
+            .section-status-mobile {
+                display: block !important;
+            }
+
+            .status-section {
+                display: none;
+            }
+
+        }
     </style>
 
 </head>
