@@ -38,48 +38,48 @@
                         <div class="block-title  p-3">My Orders</div>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" >
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Total Orders</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$orders}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" href="javascript:void(0)" >
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Sales</div>
                                 <div class="font-size-h2 font-w400 text-dark">${{number_format($sales,2)}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;" href="javascript:void(0)">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" >
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Profit</div>
                                 <div class="font-size-h2 font-w400 text-success">${{number_format($profit,2)}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop"  style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;"href="{{ route('store.orders', ['unpaid'=>1]) }}">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop"  href="{{ route('store.orders', ['unpaid'=>1]) }}">
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unpaid</div>
                                 <div class="font-size-h2 font-w400 text-danger">{{$unpaid_orders_count}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;" href="{{ route('store.orders', ['unfulfilled'=>1]) }}">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop"  href="{{ route('store.orders', ['unfulfilled'=>1]) }}">
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Unfulfilled</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unfullfilled_orders_count}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a class="block block-rounded block-link-pop" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;" href="{{ route('store.orders', ['cancel'=>1]) }}">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop"  href="{{ route('store.orders', ['cancel'=>1]) }}">
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Cancel/Refund</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$canceled_order_count}}</div>
                             </div>
@@ -93,32 +93,32 @@
                         <div class="block-title  p-3">My Wishlist</div>
                     </div>
                     <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=1" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=1" >
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Outstanding</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{ $open_wishlist }}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=2" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=2">
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Approved</div>
                                 <div class="font-size-h2 font-w400 text-success">{{ $approved_wishlist }}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=4&read=1" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=4&read=1" >
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Rejected</div>
                                 <div class="font-size-h2 font-w400 text-dark">{{$unread_rejected_wishlist}}</div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=5&read=2" style="box-shadow: 0 0.5rem 2.5rem #e6e6e6;-webkit-transform: translateY(-2px);transform: translateY(-2px);opacity: 1;">
-                            <div class="block-content block-content-full">
+                        <a class="block block-rounded block-link-pop" href="/store/wishlist?status=5&read=2" >
+                            <div class="block-content block-content-full border border-success">
                                 <div class="font-size-sm font-w600 text-uppercase text-muted">Completed</div>
                                 <div class="font-size-h2 font-w400 text-success">{{$unread_completed_wishlist}}</div>
                             </div>
