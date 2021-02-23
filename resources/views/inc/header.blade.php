@@ -45,10 +45,10 @@
             background-size: cover;
         }
         .section-status-mobile {
-            display: none;
+            display: none !important;
         }
         .status-section {
-            display: none;
+            display: block;
         }
 
         @media(max-width: 460px) {
