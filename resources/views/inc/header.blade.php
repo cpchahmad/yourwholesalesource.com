@@ -53,7 +53,7 @@
 
         @media(max-width: 460px) {
             .section-status-mobile {
-                display: block;
+                display: block !important;
             }
 
             .status-section {
