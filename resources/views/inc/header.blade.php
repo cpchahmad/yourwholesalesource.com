@@ -47,7 +47,7 @@
         .section-status-mobile {
             display: none;
         }
-        .section-status {
+        .status-section {
             display: none;
         }
 
@@ -56,7 +56,7 @@
                 display: block;
             }
 
-            .section-status {
+            .status-section {
                 display: none;
             }
 
