@@ -212,7 +212,11 @@
                     <form id="get-selection-form" action="{{route('get_selected_variants')}}" method="get">
                         <div class="block-content font-size-sm">
                             <div class="form-group">
-                                <input type="search" id="product-search-field" name="product-search" class="form-control" placeholder="Search by Keyword" style="margin-bottom: 10px">
+                                <div class="d-flex">
+                                    <input type="search" id="product-search-field" name="product-search" class="form-control" placeholder="Search by Keyword" style="margin-bottom: 10px">
+                                    <button type="button" class="btn btn-primary product-search-button">Search</button>
+                                </div>
+
                                 <div class="countries-section" id="product-section">
                                     Loading...
 {{--                                   // @include('non_shopify_users.orders.product-browse-section')--}}

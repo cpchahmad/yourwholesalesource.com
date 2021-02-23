@@ -211,12 +211,13 @@ $(document).ready(function () {
         });
     });
 
-    $('#product-search-field').keyup(function(){
+    $('.product-search-button').click(function() {
+        console.log(23);
         $.ajax({
             url: '/search/products',
             type: 'GET',
             data: {
-                search:$(this).val(),
+                search: $('#product-search-field').val(),
             },
             success: function(response) {
                 if(response.html !== ""){
@@ -231,8 +232,31 @@ $(document).ready(function () {
 
             },
         });
-
     });
+
+    //
+    // $('#product-search-field').keyup(function(){
+    //     $.ajax({
+    //         url: '/search/products',
+    //         type: 'GET',
+    //         data: {
+    //             search:$(this).val(),
+    //         },
+    //         success: function(response) {
+    //             if(response.html !== ""){
+    //
+    //                 $('#product-section').empty();
+    //                 $('#product-section').append(response.html);
+    //             }
+    //             else{
+    //                 $('#product-section').empty();
+    //                 $('#product-section').append('<p class="text-center" style="padding:10px"> No Product Found</p>');
+    //             }
+    //
+    //         },
+    //     });
+    //
+    // });
 
     $('body').on('change','.product-checkbox',function(){
         var related = $(this).data('related');
