@@ -212,8 +212,8 @@
                     <form id="get-selection-form" action="{{route('get_selected_variants')}}" method="get">
                         <div class="block-content font-size-sm">
                             <div class="form-group">
-                                <div class="d-flex">
-                                    <input type="search" id="product-search-field" name="product-search" class="form-control" placeholder="Search by Keyword" style="margin-bottom: 10px">
+                                <div class="d-flex mb-3">
+                                    <input type="search" id="product-search-field" name="product-search" class="form-control mr-2" placeholder="Search by Keyword" >
                                     <button type="button" class="btn btn-primary product-search-button">Search</button>
                                 </div>
 
