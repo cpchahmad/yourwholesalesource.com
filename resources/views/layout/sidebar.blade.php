@@ -231,26 +231,36 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="">
-                <a href="/wishlists?status=1" class="text-white">
-                    <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
-                </a>
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="/wishlists?status=1" class="text-white">
+                        <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
+                    </a>
+                </div>
 
-                <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">
-                    <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
-                </a>
+                <div class="col-md-2">
+                    <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">
+                        <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
+                    </a>
+                </div>
 
-                <a href="/wallets-requests" class="text-white badge badge-success">
-                    <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
-                </a>
+                <div class="col-md-2">
+                    <a href="/wallets-requests" class="text-white badge badge-success">
+                        <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
+                    </a>
+                </div>
 
-                <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">
-                    <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>
-                </a>
+                <div class="col-md-2">
+                    <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">
+                        <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>
+                    </a>
+                </div>
 
-                <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">
-                    <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>
-                </a>
+                <div class="col-md-2">
+                    <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">
+                        <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>
+                    </a>
+                </div>
 
             </div>
 
