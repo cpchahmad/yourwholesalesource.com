@@ -558,6 +558,8 @@ class DefaultSettingsController extends Controller
                $shop->delete();
             });
 
+        $user->delete();
+
         return redirect()->back()->with('success', 'User Delete Successfully!');
 
 
