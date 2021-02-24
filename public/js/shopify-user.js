@@ -214,7 +214,7 @@ $(document).ready(function () {
 
     $('.product-search-button').click(function() {
 
-        $('#product-section').empty();
+        //$('#product-section').empty();
         $('#browse_product_modal').find('.loader-div').show();
 
 
