@@ -318,6 +318,8 @@ $(document).ready(function () {
         e.preventDefault();
         if($(this).find('.variant-checkbox:checked').length > 0){
             alertify.success('Processing Your Selection. Wait!');
+            $('.add-to-order-btn').text('Processing');
+            $('.add-to-order-btn').props('disabled', true);
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'GET',
@@ -326,11 +328,15 @@ $(document).ready(function () {
                     $('#browse_product_modal').modal('hide');
                     if(response.html !== ""){
                         $('body').find('#variant_selection_check').val('1');
+                        $('.add-to-order-btn').text('Add to Order');
+                        $('.add-to-order-btn').props('disabled', false);
                         $('.selected-variant-section').empty();
                         $('.selected-variant-section').append(response.html);
                     }
                     else{
                         $('body').find('#variant_selection_check').val('0');
+                        $('.add-to-order-btn').text('Add to Order');
+                        $('.add-to-order-btn').props('disabled', false);
                         $('.selected-variant-section').empty();
                         $('.selected-variant-section').append('<p class="text-center" style="padding:10px"> No Selected Variants Found</p>');
                     }

@@ -225,7 +225,7 @@
                             </div>
                         </div>
                         <div class="block-content block-content-full text-right border-top">
-                            <button type="submit" class="btn btn-sm btn-primary " >Add to Order</button>
+                            <button type="submit" class="btn btn-sm btn-primary add-to-order-btn " >Add to Order</button>
                         </div>
                     </form>
 
