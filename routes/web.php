@@ -117,7 +117,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('/sales-managers','DefaultSettingsController@create_manager')->name('sales-managers.create');
     Route::post('/sales-manager/update/{id}','DefaultSettingsController@update_manager')->name('sales-managers.update');
     Route::any('/sales-managers/{id}/delete','DefaultSettingsController@delete_manager')->name('sales-managers.delete');
-    Route::any('/sales-managers/{id}/report','DefaultSettingsController@get_manager_report')->name('sales-managers.report');
+    Route::get('/sales-managers/{id}/report','DefaultSettingsController@get_manager_report')->name('sales-managers.report');
     Route::any('/sales-managers/{id}/set','DefaultSettingsController@set_manager_as_user')->name('sales-managers.set_manager_as_user');
     Route::get('/push/{id}/to-store','ProductController@import_to_shopify')->name('import_to_shopify');
     Route::get('/tickets','DefaultSettingsController@tickets')->name('tickets.index');

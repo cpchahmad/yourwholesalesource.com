@@ -288,8 +288,8 @@ class DefaultSettingsController extends Controller
         }
     }
 
-    public function get_manager_report(Request $request) {
-        $manager = User::find($request->id);
+    public function get_manager_report(Request $request, $id) {
+        $manager = User::find($id);
         if($manager != null){
             if ($request->has('date-range')) {
                 $date_range = explode('-', $request->input('date-range'));
