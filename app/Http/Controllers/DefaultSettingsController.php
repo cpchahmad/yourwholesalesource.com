@@ -377,7 +377,7 @@ class DefaultSettingsController extends Controller
                 'top_stores' => $top_stores,
                 'top_users' => $top_users,
                 'active_stores' => $active_stores,
-                'top_users' => $top_users,
+                'new_stores' => $new_stores,
             ]);
         }
         else{
