@@ -338,8 +338,9 @@ class DefaultSettingsController extends Controller
                         $o->on('retailer_orders.shop_id', '=', 'shops.id')
                             ->where(DB::raw('COUNT(retailer_orders.id)'), '>', 0);
                     })
-                    ->select('shops.*')
+                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
                     ->groupBy('shops.id')
+                    ->orderBy('sold', 'DESC')
                     ->get();
 
                 $new_stores =  $top_stores = $manager->has_sales_stores()
@@ -347,8 +348,9 @@ class DefaultSettingsController extends Controller
                         $o->on('retailer_orders.shop_id', '=', 'shops.id')
                             ->where(DB::raw('COUNT(retailer_orders.id)'), '==', 0);
                     })
-                    ->select('shops.*')
+                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
                     ->groupBy('shops.id')
+                    ->orderBy('sold', 'DESC')
                     ->get();
 
                 $top_stores = $manager->has_sales_stores()
