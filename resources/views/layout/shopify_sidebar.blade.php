@@ -221,7 +221,7 @@
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-sync-alt d-none d-sm-inline-block"></i>
+                    <i class="fa fa-sync-alt"></i>
 
                     <span class="d-none d-sm-inline-block ml-1">Switch to Store</span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
