@@ -202,8 +202,8 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('news/delete/{id}', 'DefaultSettingsController@deleteNews')->name('admin.news.delete');
     Route::get('admin/wefulfill/university', 'DefaultSettingsController@allVideos')->name('admin.videos.index');
     Route::post('/admin/wefulfill/university', 'DefaultSettingsController@createVideo')->name('admin.videos.create');
-    Route::post('/admin/wefulfill/university', 'DefaultSettingsController@editVideo')->name('admin.videos.edit');
-    Route::get('/admin/wefulfill/university/{id}', 'DefaultSettingsController@deleteVideo')->name('admin.videos.delete');
+    Route::post('/admin/wefulfill/university/edit/{id}', 'DefaultSettingsController@editVideo')->name('admin.videos.edit');
+    Route::get('/admin/wefulfill/university/delete/{id}', 'DefaultSettingsController@deleteVideo')->name('admin.videos.delete');
 
 
 
