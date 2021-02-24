@@ -216,7 +216,7 @@ $(document).ready(function () {
         $('#product-section').empty();
         $('#product-section').append(`
             <div class="text-center">
-                <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                <p>Processing...</p>
             </div>
         `);
 
