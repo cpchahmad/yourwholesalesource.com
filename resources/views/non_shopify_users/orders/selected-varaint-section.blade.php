@@ -10,7 +10,8 @@
                          @else @if($variant->has_image->isV == 0) src="{{asset('images')}}/{{$variant->has_image->image}}" @else src="{{asset('images/variants')}}/{{$variant->has_image->image}}" @endif @endif alt="">
                 </td>
                 <td class="font-w600" style="vertical-align: middle">
-                   {{$variant->linked_product->title}} - {{ $variant->title }}
+{{--                   {{$variant->linked_product->title}} ---}}
+                    {{ $variant->title }}
                 </td>
 
                 <td style="vertical-align: middle">
