@@ -900,7 +900,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function allVideos() {
-        $videos = Video::latest()->get()->groupBy(function($data){
+        $videos = Video::get()->groupBy(function($data){
             return $data->category;
         });
 
@@ -936,7 +936,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function showVideosSection() {
-        $videos = Video::latest()->get()->groupBy(function($data){
+        $videos = Video::get()->groupBy(function($data){
             return $data->category;
         });
 
