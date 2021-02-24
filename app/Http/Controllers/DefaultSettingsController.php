@@ -335,11 +335,11 @@ class DefaultSettingsController extends Controller
 
 
                 $active_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store->has('has_order');
+                    return $store->has('has_orders');
                 });
 
                 $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store->hasNot('has_order');
+                    return $store->hasNot('has_orders');
                 });
 
                 $new_stores =  $top_stores = $manager->has_sales_stores()
