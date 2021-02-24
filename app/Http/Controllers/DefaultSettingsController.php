@@ -352,7 +352,7 @@ class DefaultSettingsController extends Controller
                     ->get()
                     ->take(10);
 
-                $top_users = $manager->has_users->join('retailer_orders', function ($o) {
+                $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
                     $o->on('retailer_orders.user_id', '=', 'users.id');
                 })->where('retailer_orders.paid', '>=', 1)
                     ->where('retailer_orders.custom', '=', 1)
