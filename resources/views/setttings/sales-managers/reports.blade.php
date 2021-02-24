@@ -30,9 +30,9 @@
             <div class="col-md-8 d-flex">
                 <img class=" img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 50px !important; height: 50px !important;">
                 <div class="d-flex align-items-center ml-2">
-                    <div class="font-w600 ml-1">{{$manager->name}} {{$manager->last_name}}</div>
+                    <div class="font-w600 ml-2">{{$manager->name}} {{$manager->last_name}}</div>
                     <div class="font-w600 ml-1">
-                        <i class="fab fa-mail-bulk text-dark fa-lg"></i>
+                        <i class="fa fa-inbox text-dark fa-lg"></i>
                         {{$manager->email}}
                     </div>
                     <div class="text-info ml-1">
