@@ -339,7 +339,7 @@ class DefaultSettingsController extends Controller
                 });
 
                 $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store->doesNotHave('has_orders');
+                    return $store->doesntHave('has_orders');
                 });
 
                 $new_stores =  $top_stores = $manager->has_sales_stores()
