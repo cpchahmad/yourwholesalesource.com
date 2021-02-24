@@ -41,13 +41,12 @@ $(document).ready(function () {
     $('.show-product-modal').click(function () {
 
         $('#browse_product_modal').modal('show');
-        $('#browse_product_modal').find('.loader-div').show();
 
         $.ajax({
             url: `/users/get/admin/products`,
             type: 'GET',
             success: function(res) {
-                $('#browse_product_modal').find('.loader-div').hide();
+
                 $('#browse_product_modal').find('#product-section').empty();
                 $('#browse_product_modal').find('#product-section').append(res);
             }
@@ -214,9 +213,12 @@ $(document).ready(function () {
 
     $('.product-search-button').click(function() {
 
-        //$('#product-section').empty();
-        $('#browse_product_modal').find('.loader-div').show();
-
+        $('#product-section').empty();
+        $('#product-section').append(`
+            <div class="text-center">
+                <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+            </div>
+        `);
 
         $.ajax({
             url: '/search/products',
@@ -226,12 +228,11 @@ $(document).ready(function () {
             },
             success: function(response) {
                 if(response.html !== ""){
-                    $('#browse_product_modal').find('.loader-div').hide();
+
                     $('#product-section').empty();
                     $('#product-section').append(response.html);
                 }
                 else{
-                    $('#browse_product_modal').find('.loader-div').hide();
                     $('#product-section').empty();
                     $('#product-section').append('<p class="text-center" style="padding:10px"> No Product Found</p>');
                 }
@@ -328,14 +329,14 @@ $(document).ready(function () {
                     if(response.html !== ""){
                         $('body').find('#variant_selection_check').val('1');
                         $('.add-to-order-btn').text('Add to Order');
-                        $('.add-to-order-btn').props('disabled', false);
+                        $('.add-to-order-btn').prop('disabled', false);
                         $('.selected-variant-section').empty();
                         $('.selected-variant-section').append(response.html);
                     }
                     else{
                         $('body').find('#variant_selection_check').val('0');
                         $('.add-to-order-btn').text('Add to Order');
-                        $('.add-to-order-btn').props('disabled', false);
+                        $('.add-to-order-btn').prop('disabled', false);
                         $('.selected-variant-section').empty();
                         $('.selected-variant-section').append('<p class="text-center" style="padding:10px"> No Selected Variants Found</p>');
                     }
