@@ -43,7 +43,7 @@
                         <a href="skype:{{$manager->skype}}?chat"> {{ $manager->skype }}</a>
                     </div>
                 </div>
-                <img class="mr-3 img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 50px !important; height: 50px !important;">
+                <img class="ml-3 img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 50px !important; height: 50px !important;">
             </div>
         </div>
 {{--        <div class="row">--}}
