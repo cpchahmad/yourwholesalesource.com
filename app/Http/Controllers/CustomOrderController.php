@@ -221,6 +221,8 @@ class CustomOrderController extends Controller
     public function save_draft_order(Request $request)
     {
 
+        dd($request->all());
+
         $count = RetailerOrder::all()->count();
         $new = new RetailerOrder();
         $new->email = $request->input('email');

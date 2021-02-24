@@ -173,7 +173,7 @@
 {{--                                    <label class="custom-control-label" for="example-rd-custom-inline-lg2">Pay with Wallet</label>--}}
 {{--                                </div>--}}
                                 <div class="custom-control custom-radio custom-control-inline custom-control-lg">
-                                    <input type="radio" checked="checked" class="custom-control-input" id="example-rd-custom-inline-lg3" name="payment-option" value="draft">
+                                    <input type="radio" checked class="custom-control-input" id="example-rd-custom-inline-lg3" name="payment-option" value="draft">
                                     <label class="custom-control-label" for="example-rd-custom-inline-lg3">Save as Draft</label>
                                 </div>
                             </div>
