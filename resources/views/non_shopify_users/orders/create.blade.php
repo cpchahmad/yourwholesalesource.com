@@ -218,7 +218,7 @@
                                 </div>
 
                                 <div class="countries-section " id="product-section">
-                                    <div class="text-center">
+                                    <div class="text-center loader-div" style="display:none;">
                                         <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
                                     </div>
                                 </div>
