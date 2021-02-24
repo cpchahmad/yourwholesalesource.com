@@ -218,8 +218,9 @@
                                 </div>
 
                                 <div class="countries-section" id="product-section">
-                                    Loading...
-{{--                                   // @include('non_shopify_users.orders.product-browse-section')--}}
+                                    <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+
+                                    {{--                                   // @include('non_shopify_users.orders.product-browse-section')--}}
                                 </div>
                             </div>
                         </div>
