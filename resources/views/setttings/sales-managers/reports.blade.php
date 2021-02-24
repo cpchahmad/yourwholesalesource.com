@@ -28,7 +28,7 @@
                 <button class="btn btn-primary filter_by_date" data-url="{{route('sales-managers.report', $manager->id)}}" style="margin-left: 10px"> Filter </button>
             </div>
             <div class="col-md-8 d-flex justify-content-end">
-                <div class=""d-flex align-items-center ml-2">
+                <div class="d-flex align-items-center ml-2">
                     <div class="font-w600 ml-2">{{$manager->name}} {{$manager->last_name}}</div>
                     <div class="font-w600 ml-2">
                         <i class="fa fa-inbox text-dark fa-lg"></i>
