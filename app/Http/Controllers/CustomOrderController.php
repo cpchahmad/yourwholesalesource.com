@@ -153,7 +153,7 @@ class CustomOrderController extends Controller
 
     public function find_products(Request $request)
     {
-        $products = Product::newQuery();
+        $products = Product::query();
         if ($request->has('search')) {
             $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
             $products->orWhereHas('hasVariants', function ($q) use ($request) {
