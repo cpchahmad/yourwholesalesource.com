@@ -16,6 +16,7 @@ use App\MonthlyDiscountSetting;
 use App\News;
 use App\Product;
 use App\Refund;
+use App\RetailerOrder;
 use App\Shop;
 use App\Suggestion;
 use App\Ticket;
@@ -30,6 +31,7 @@ use App\WishlistStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -285,6 +287,95 @@ class DefaultSettingsController extends Controller
             return redirect()->route('sales-managers.index');
         }
     }
+
+    public function get_manager_report(Request $request) {
+        $manager = User::find($request->id);
+        if($manager != null){
+            if ($request->has('date-range')) {
+                $date_range = explode('-', $request->input('date-range'));
+                $start_date = $date_range[0];
+                $end_date = $date_range[1];
+                $comparing_start_date = \Carbon\Carbon::parse($start_date)->format('Y-m-d');
+                $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
+
+
+                $top_stores = Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com'])
+                    ->join('retailer_products', function ($join) {
+                        $join->on('retailer_products.shop_id', '=', 'shops.id')
+                            ->join('retailer_order_line_items', function ($j) {
+                                $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                                    ->join('retailer_orders', function ($o) {
+                                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                            ->where('retailer_orders.paid', '>=', 1);
+                                    });
+                            });
+
+                    })
+                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                    ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
+                    ->groupBy('shops.id')
+                    ->orderBy('sold', 'DESC')
+                    ->get()
+                    ->take(10);
+
+                $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) {
+                    $o->on('retailer_orders.user_id', '=', 'users.id');
+                })->where('retailer_orders.paid', '>=', 1)
+                    ->where('retailer_orders.custom', '=', 1)
+                    ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
+                    ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
+                    ->groupBy('users.id')
+                    ->orderBy('sold', 'DESC')
+                    ->get()
+                    ->take(10);
+
+
+
+            }
+            else {
+
+                $top_stores = $manager->has_sales_stores()
+                    ->join('retailer_products', function ($join) {
+                        $join->on('retailer_products.shop_id', '=', 'shops.id')
+                            ->join('retailer_order_line_items', function ($j) {
+                                $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                                    ->join('retailer_orders', function ($o) {
+                                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                            ->where('retailer_orders.paid', '>=', 1);
+                                    });
+                            });
+
+                    })
+                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                    ->groupBy('shops.id')
+                    ->orderBy('sold', 'DESC')
+                    ->get()
+                    ->take(10);
+
+                $top_users = $manager->has_users->join('retailer_orders', function ($o) {
+                    $o->on('retailer_orders.user_id', '=', 'users.id');
+                })->where('retailer_orders.paid', '>=', 1)
+                    ->where('retailer_orders.custom', '=', 1)
+                    ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
+                    ->groupBy('users.id')
+                    ->orderBy('sold', 'DESC')
+                    ->get()
+                    ->take(10);
+
+            }
+
+            return view('setttings.sales-managers.reports')->with([
+                'manager' => $manager,
+                'date_range' => $request->input('date-range'),
+                'top_stores' => $top_stores,
+                'top_users' => $top_users,
+            ]);
+        }
+        else{
+            return redirect()->route('sales-managers.index')->with('error', 'Manager Not Found!');
+        }
+    }
+
     public function set_manager_as_user(Request $request){
         $user = User::find($request->id);
         $user->assignRole('non-shopify-users');

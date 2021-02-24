@@ -769,7 +769,8 @@ class AdminOrderController extends Controller
 
 
 
-        } else {
+        }
+        else {
 
             $orders = RetailerOrder::whereIN('paid', [1, 2])->count();
             $sales = RetailerOrder::whereIN('paid', [1, 2])->sum('cost_to_pay');
