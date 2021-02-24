@@ -27,9 +27,8 @@
                 </div>
                 <button class="btn btn-primary filter_by_date" data-url="{{route('sales-managers.report', $manager->id)}}" style="margin-left: 10px"> Filter </button>
             </div>
-            <div class="col-md-8 d-flex justify-content-between">
-                <img class=" img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 50px !important; height: 50px !important;">
-                <div class="d-flex align-items-center ml-2">
+            <div class="col-md-8 d-flex justify-content-end">
+                <div class=""d-flex align-items-center ml-2">
                     <div class="font-w600 ml-2">{{$manager->name}} {{$manager->last_name}}</div>
                     <div class="font-w600 ml-2">
                         <i class="fa fa-inbox text-dark fa-lg"></i>
@@ -44,6 +43,7 @@
                         <a href="skype:{{$manager->skype}}?chat"> {{ $manager->skype }}</a>
                     </div>
                 </div>
+                <img class= img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 50px !important; height: 50px !important;">
             </div>
         </div>
 {{--        <div class="row">--}}
