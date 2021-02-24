@@ -31,15 +31,15 @@
                 <img class=" img-avatar-rounded" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 50px !important; height: 50px !important;">
                 <div class="d-flex align-items-center ml-2">
                     <div class="font-w600 ml-2">{{$manager->name}} {{$manager->last_name}}</div>
-                    <div class="font-w600 ml-1">
+                    <div class="font-w600 ml-2">
                         <i class="fa fa-inbox text-dark fa-lg"></i>
                         {{$manager->email}}
                     </div>
-                    <div class="text-info ml-1">
+                    <div class="text-info ml-2">
                         <i class="fab fa-whatsapp text-success fa-lg"></i>
                         <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}"> {{$manager->whatsapp}}</a>
                     </div>
-                    <div class="text-info ml-1">
+                    <div class="text-info ml-2">
                         <i class="fab fa-skype text-info fa-lg"></i>
                         <a href="skype:{{$manager->skype}}?chat"> {{ $manager->skype }}</a>
                     </div>
