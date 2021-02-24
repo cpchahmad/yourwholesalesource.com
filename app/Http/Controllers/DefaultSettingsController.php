@@ -334,11 +334,11 @@ class DefaultSettingsController extends Controller
             else {
 
 
-                $active_stores = $manager->has_sales_stores()->filter(function($store) {
+                $active_stores = $manager->has_sales_stores()->get()->filter(function($store) {
                     return $store->has('has_order');
                 });
 
-                $new_stores = $manager->has_sales_stores()->filter(function($store) {
+                $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
                     return $store->hasNot('has_order');
                 });
 
