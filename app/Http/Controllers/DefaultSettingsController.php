@@ -335,11 +335,11 @@ class DefaultSettingsController extends Controller
 
 
                 $active_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store ?? $store->has_orders()->count() > 0 && $store->has_imported()->count() > 0;
+                    return $store->has_orders()->count() > 0 && $store->has_imported()->count() > 0 ?? $store;
                 });
 
                 $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store ?? $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0;
+                    return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0 ?? $store;
                 });
 
                 dd($active_stores, $new_stores);
