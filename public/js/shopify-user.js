@@ -212,6 +212,14 @@ $(document).ready(function () {
     });
 
     $('.product-search-button').click(function() {
+
+        $('#product-section').empty();
+        $('#product-section').append(`
+            <div class="text-center">
+                <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+            </div>
+        `);
+
         $.ajax({
             url: '/search/products',
             type: 'GET',
