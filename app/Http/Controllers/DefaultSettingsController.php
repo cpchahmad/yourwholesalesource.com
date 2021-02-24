@@ -333,42 +333,25 @@ class DefaultSettingsController extends Controller
             }
             else {
 
-//                $active_stores = $manager->has_sales_stores()
-//                    ->join('retailer_orders', function ($o) {
-//                        $o->on('retailer_orders.shop_id', '=', 'shops.id');
-//                    })
-//                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
-//                    ->groupBy('shops.id')
-//                    ->orderBy('sold', 'DESC')
-//                    ->get();
-//
-//                $new_stores = $manager->has_sales_stores()
-//                    ->join('retailer_orders', function ($o) {
-//                        $o->on('retailer_orders.shop_id', '=', 'shops.id');
-//                    })
-//                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as orders'))
-//                    ->groupBy('shops.id')
-//                    ->orderBy('sold', 'DESC')
-//                    ->get();
 
-                $top_stores = $manager->has_sales_stores()
-                    ->join('retailer_products', function ($join) {
-                        $join->on('retailer_products.shop_id', '=', 'shops.id')
-                            ->join('retailer_order_line_items', function ($j) {
-                                $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
-                                    ->join('retailer_orders', function ($o) {
-                                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
-//                                            ->where('COUNT(retailer_orders.id)', '>', 1);
-                                    });
-                            });
+                $active_stores = $manager->has_sales_stores()->filter(function($store) {
+                    return $store->has('has_order');
+                });
 
+                $new_stores = $manager->has_sales_stores()->filter(function($store) {
+                    return $store->hasNot('has_order');
+                });
+
+                $new_stores =  $top_stores = $manager->has_sales_stores()
+                    ->join('retailer_orders', function ($o) {
+                        $o->on('retailer_orders.shop_id', '=', 'shops.id')
+                            ->where(DB::raw('COUNT(retailer_orders.id)'), '==', 0);
                     })
-                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                    ->select('shops.*')
                     ->groupBy('shops.id')
-                    ->orderBy('sold', 'DESC')
                     ->get();
 
-                $active_stores = $manager->has_sales_stores()
+                $top_stores = $manager->has_sales_stores()
                     ->join('retailer_products', function ($join) {
                         $join->on('retailer_products.shop_id', '=', 'shops.id')
                             ->join('retailer_order_line_items', function ($j) {
@@ -384,7 +367,6 @@ class DefaultSettingsController extends Controller
                     ->groupBy('shops.id')
                     ->orderBy('sold', 'DESC')
                     ->get();
-
 
                 $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
                     $o->on('retailer_orders.user_id', '=', 'users.id');
@@ -403,7 +385,7 @@ class DefaultSettingsController extends Controller
                 'top_stores' => $top_stores,
                 'top_users' => $top_users,
                 'active_stores' => $active_stores,
-//                'new_stores' => $new_stores,
+                'top_users' => $top_users,
             ]);
         }
         else{
