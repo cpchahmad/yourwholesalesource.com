@@ -299,7 +299,7 @@ class DefaultSettingsController extends Controller
                 $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
 
 
-                $top_stores = Shop::whereNotIn('shopify_domain', ['wefullfill.myshopify.com'])
+                $top_stores = $manager->has_sales_stores()
                     ->join('retailer_products', function ($join) {
                         $join->on('retailer_products.shop_id', '=', 'shops.id')
                             ->join('retailer_order_line_items', function ($j) {
@@ -315,10 +315,9 @@ class DefaultSettingsController extends Controller
                     ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
                     ->groupBy('shops.id')
                     ->orderBy('sold', 'DESC')
-                    ->get()
-                    ->take(10);
+                    ->get();
 
-                $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) {
+                $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
                     $o->on('retailer_orders.user_id', '=', 'users.id');
                 })->where('retailer_orders.paid', '>=', 1)
                     ->where('retailer_orders.custom', '=', 1)
@@ -326,13 +325,31 @@ class DefaultSettingsController extends Controller
                     ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
                     ->groupBy('users.id')
                     ->orderBy('sold', 'DESC')
-                    ->get()
-                    ->take(10);
+                    ->get();
+
 
 
 
             }
             else {
+
+                $active_stores =  $top_stores = $manager->has_sales_stores()
+                    ->join('retailer_orders', function ($o) {
+                        $o->on('retailer_orders.shop_id', '=', 'shops.id')
+                            ->where(DB::raw('COUNT(retailer_orders.id)'), '>', 0);
+                    })
+                    ->select('shops.*')
+                    ->groupBy('shops.id')
+                    ->get();
+
+                $new_stores =  $top_stores = $manager->has_sales_stores()
+                    ->join('retailer_orders', function ($o) {
+                        $o->on('retailer_orders.shop_id', '=', 'shops.id')
+                            ->where(DB::raw('COUNT(retailer_orders.id)'), '==', 0);
+                    })
+                    ->select('shops.*')
+                    ->groupBy('shops.id')
+                    ->get();
 
                 $top_stores = $manager->has_sales_stores()
                     ->join('retailer_products', function ($join) {
@@ -349,8 +366,7 @@ class DefaultSettingsController extends Controller
                     ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
                     ->groupBy('shops.id')
                     ->orderBy('sold', 'DESC')
-                    ->get()
-                    ->take(10);
+                    ->get();
 
                 $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
                     $o->on('retailer_orders.user_id', '=', 'users.id');
@@ -359,8 +375,7 @@ class DefaultSettingsController extends Controller
                     ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
                     ->groupBy('users.id')
                     ->orderBy('sold', 'DESC')
-                    ->get()
-                    ->take(10);
+                    ->get();
 
             }
 
@@ -369,6 +384,8 @@ class DefaultSettingsController extends Controller
                 'date_range' => $request->input('date-range'),
                 'top_stores' => $top_stores,
                 'top_users' => $top_users,
+                'active_stores' => $active_stores,
+                'new_stores' => $new_stores,
             ]);
         }
         else{
