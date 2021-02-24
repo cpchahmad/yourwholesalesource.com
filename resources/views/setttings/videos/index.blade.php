@@ -139,7 +139,7 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label for="material-error">Title</label>
-                                                            <input  class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title" value="{{$item->title}}" name="title" placeholder="Enter News title..">
+                                                            <input  class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title" value="{{$video->title}}" name="title" placeholder="Enter News title..">
                                                             @error('title')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
@@ -147,7 +147,7 @@
 
                                                         <div class="form-group">
                                                             <label for="material-error">Youtube Link</label>
-                                                            <input  class="form-control  @error('link') is-invalid @enderror" type="text" id="zone_title" value="{{$item->link}}"  name="link" placeholder="Enter video youtube link..">
+                                                            <input  class="form-control  @error('link') is-invalid @enderror" type="text" id="zone_title" value="{{$video->link}}"  name="link" placeholder="Enter video youtube link..">
                                                             @error('link')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
