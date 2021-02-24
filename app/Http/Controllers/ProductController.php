@@ -146,7 +146,7 @@ class ProductController extends Controller
     public function Edit($id)
     {
         $categories = Category::latest()->get();
-        $product = Product::find($id)->with(['has_images', 'hasVariants.has_image','has_platforms','has_categories','has_subcategories', 'has_preferences', 'has_non_shopify_user_preferences', 'has_tiered_prices', 'has_warehouse_inventory']);
+        $product = Product::find($id)->with(['has_images', 'hasVariants.has_image','has_platforms','has_categories','has_subcategories', 'has_preferences', 'has_non_shopify_user_preferences', 'has_tiered_prices', 'has_warehouse_inventory'])->get();
         $platforms = WarnedPlatform::all();
         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
         $tags = Tag::all();
