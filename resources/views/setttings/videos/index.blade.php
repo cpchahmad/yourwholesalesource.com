@@ -98,48 +98,48 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($videos as $category => $video)
+                    @foreach($video as $index => $item)
                     <tr>
                         <td class="font-w600" style="vertical-align: middle">
-                            {{ $video->title }}
+                            {{ $item->title }}
                         </td>
                         <td style="vertical-align: middle">
-                            <p> {{ $video->link }}</p>
+                            <a href="{{ $item->link }}">{{ $item->link }}</a>
                         </td>
                         <td style="vertical-align: middle">
-                            {{ date_format($video->created_at ,"Y/M/d H:i ") }}
+                            {{ date_format($item->created_at ,"Y/M/d H:i ") }}
                         </td>
                         <td class="text-right btn-group" style="float: right">
                             <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                    data-target="#edit_video_modal{{$video->id}}"><i
+                                    data-target="#edit_video_modal{{$item->id}}"><i
                                     class="fa fa-edit"></i>
                             </button>
-                            <form method="POST" action="{{ route('admin.videos.delete', $video->id) }}">
+                            <form method="POST" action="{{ route('admin.videos.delete', $item->id) }}">
                                 @csrf
                                 <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                         data-original-title="Delete Video"><i class="fa fa-times"></i></button>
                             </form>
                         </td>
-                        <div class="modal fade" id="edit_video_modal{{$video->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                        <div class="modal fade" id="edit_video_modal{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-popout" role="document">
                                 <div class="modal-content">
                                     <div class="block block-themed block-transparent mb-0">
                                         <div class="block-header bg-primary-dark">
-                                            <h3 class="block-title">Edit "{{ $video->title}}"</h3>
+                                            <h3 class="block-title">Edit "{{ $item->title}}"</h3>
                                             <div class="block-options">
                                                 <button type="button" class="btn-block-option">
                                                     <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <form action="{{route('admin.videos.edit',$video->id)}}" method="post">
+                                        <form action="{{route('admin.videos.edit',$item->id)}}" method="post">
                                             @csrf
                                             <div class="block-content font-size-sm">
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label for="material-error">Title</label>
-                                                            <input  class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title" value="{{$video->title}}" name="title" placeholder="Enter News title..">
+                                                            <input  class="form-control  @error('title') is-invalid @enderror" type="text" id="zone_title" value="{{$item->title}}" name="title" placeholder="Enter News title..">
                                                             @error('title')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
@@ -147,7 +147,7 @@
 
                                                         <div class="form-group">
                                                             <label for="material-error">Youtube Link</label>
-                                                            <input  class="form-control  @error('link') is-invalid @enderror" type="text" id="zone_title" value="{{$video->link}}"  name="link" placeholder="Enter video youtube link..">
+                                                            <input  class="form-control  @error('link') is-invalid @enderror" type="text" id="zone_title" value="{{$item->link}}"  name="link" placeholder="Enter video youtube link..">
                                                             @error('link')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                             @enderror
@@ -156,9 +156,9 @@
                                                         <div class="form-group">
                                                             <label for="material-error">Category</label>
                                                             <select name="category" id="" class="form-control">
-                                                                <option @if($video->category == "Shopify Users") selected @endif value="Shopify Users">Shopify Users</option>
-                                                                <option @if($video->category == "Non shopify Users") selected @endif value="Non shopify Users">Non-Shopify Users</option>
-                                                                <option @if($video->category == "Useful Resources") selected @endif value="Useful Resources">Useful Resources</option>
+                                                                <option @if($item->category == "Shopify Users") selected @endif value="Shopify Users">Shopify Users</option>
+                                                                <option @if($item->category == "Non shopify Users") selected @endif value="Non shopify Users">Non-Shopify Users</option>
+                                                                <option @if($item->category == "Useful Resources") selected @endif value="Useful Resources">Useful Resources</option>
                                                             </select>
                                                             @error('category')
                                                             <div class="invalid-feedback">{{ $message }}</div>
