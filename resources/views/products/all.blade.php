@@ -103,13 +103,13 @@
                                         @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                             @if($index == 0)
                                                 @if($image->isV == 0)
-                                                    <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke; background-color: #0E0EFF;" data-src="{{asset('images')}}/{{$image->image}}">
-                                                @else   <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke; background-color: #0E0EFF;" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke" data-src="{{asset('images')}}/{{$image->image}}">
+                                                @else   <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                 @endif
                                             @endif
                                         @endforeach
                                     @else
-                                        <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke; background-color: #0E0EFF;" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                        <img class="img-avatar2" style="max-width:100px;border: 1px solid whitesmoke" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                     @endif
                                 </a>
                             </td>
