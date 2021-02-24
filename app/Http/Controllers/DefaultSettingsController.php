@@ -333,7 +333,7 @@ class DefaultSettingsController extends Controller
             }
             else {
 
-                $active_stores =  $top_stores = $manager->has_sales_stores()
+                $active_stores = $manager->has_sales_stores()
                     ->join('retailer_orders', function ($o) {
                         $o->on('retailer_orders.shop_id', '=', 'shops.id')
                             ->where('retailer_orders.paid', '>=', 1);
@@ -343,7 +343,7 @@ class DefaultSettingsController extends Controller
                     ->orderBy('sold', 'DESC')
                     ->get();
 
-                $new_stores =  $top_stores = $manager->has_sales_stores()
+                $new_stores = $manager->has_sales_stores()
                     ->join('retailer_orders', function ($o) {
                         $o->on('retailer_orders.shop_id', '=', 'shops.id')
                             ->where('retailer_orders.paid', '>=', 1);
