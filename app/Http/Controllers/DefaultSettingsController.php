@@ -23,6 +23,7 @@ use App\TicketCategory;
 use App\TicketStatus;
 use App\TieredPricingPrefrences;
 use App\User;
+use App\Video;
 use App\WarnedPlatform;
 use App\Wishlist;
 use App\WishlistStatus;
@@ -897,6 +898,39 @@ class DefaultSettingsController extends Controller
 
         return redirect()->back()->with('success', 'News deleted Successfully!');
     }
+
+    public function allVideos() {
+        return view('setttings.videos.index')->with('videos', Video::groupBy('category')->latest()->get());
+    }
+
+    public function createVideo(Request $request) {
+        $video = new Video();
+        $video->title = $request->title;
+        $video->link = $request->link;
+        $video->category = $request->category;
+        $video->save();
+
+        return redirect()->back()->with('success', 'Video created Successfully');
+    }
+
+    public function editVideo(Request $request, $id) {
+        $video = Video::find($id);
+        $video->title = $request->title;
+        $video->link = $request->link;
+        $video->category = $request->category;
+        $video->save();
+
+        return redirect()->back()->with('success', 'Video updated Successfully');
+    }
+
+    public function deleteVideo($id) {
+        $video = Video::find($id);
+
+        $video->delete();
+
+        return redirect()->back()->with('success', 'Video Deleted Successfully');
+    }
+
 
 
 
