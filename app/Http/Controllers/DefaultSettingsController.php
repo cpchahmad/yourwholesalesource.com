@@ -342,14 +342,6 @@ class DefaultSettingsController extends Controller
                     return $store->doesntHave('has_orders');
                 });
 
-                $new_stores =  $top_stores = $manager->has_sales_stores()
-                    ->join('retailer_orders', function ($o) {
-                        $o->on('retailer_orders.shop_id', '=', 'shops.id')
-                            ->where(DB::raw('COUNT(retailer_orders.id)'), '==', 0);
-                    })
-                    ->select('shops.*')
-                    ->groupBy('shops.id')
-                    ->get();
 
                 $top_stores = $manager->has_sales_stores()
                     ->join('retailer_products', function ($join) {
