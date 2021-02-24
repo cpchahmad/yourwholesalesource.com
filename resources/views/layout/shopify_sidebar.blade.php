@@ -117,7 +117,7 @@
             </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('users.university.index')}}">
+                <a class="nav-main-link" href="{{route('university.index')}}">
                     <i class="nav-main-link-icon si si-info"></i>
                     <span class="nav-main-link-name">Wefulfill University</span>
                 </a>

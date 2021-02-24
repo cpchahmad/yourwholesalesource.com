@@ -935,6 +935,13 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'Video Deleted Successfully');
     }
 
+    public function showVideosSection() {
+        $videos = Video::latest()->get()->groupBy(function($data){
+            return $data->category;
+        });
+
+        return view('videos.index')->withVideos($videos);
+    }
 
 
 

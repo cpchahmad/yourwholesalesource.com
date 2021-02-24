@@ -372,11 +372,6 @@ class ShopifyUsersController extends Controller
 
     }
 
-    public function showVideosSection() {
-        return view('videos.non-shopify');
-    }
-
-
     public function showInvoice() {
         if (Auth::check()) {
             $user = Auth::user();

@@ -219,7 +219,6 @@ Route::group(['middleware' => ['auth.shop']], function () {
 //        Route::get('/reports','SingleStoreController@reports')->name('store.reports');
         Route::get('/invoice','SingleStoreController@showInvoice')->name('store.invoice');
         Route::get('/invoice/download/{id}','SingleStoreController@downloadInvoicePDF')->name('store.invoice.download');
-        Route::get('/wefulfill/university','SingleStoreController@showVideosSection')->name('store.university.index');
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
         Route::post('/settings/personal/address','SingleStoreController@save_address')->name('store.save_address');
@@ -280,7 +279,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/reports','ShopifyUsersController@reports')->name('users.reports');
             Route::get('/invoice','ShopifyUsersController@showInvoice')->name('users.invoice');
             Route::get('/invoice/download/{id}','ShopifyUsersController@downloadInvoicePDF')->name('users.invoice.download');
-            Route::get('/wefulfill/university','ShopifyUsersController@showVideosSection')->name('users.university.index');
             Route::get('/settings','ShopifyUsersController@setting')->name('users.settings');
             Route::post('/settings/personal','ShopifyUsersController@save_personal_info')->name('users.save_personal_info');
             Route::post('/settings/personal/address','ShopifyUsersController@save_address')->name('users.save_address');
@@ -408,6 +406,8 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/orders/bulk-fulfillments', 'AdminOrderController@show_bulk_fulfillments')->name('app.orders.bulk.fulfillment');
 
         Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
+
+        Route::get('/wefulfill/university','DefaultSettingsController@showVideosSection')->name('university.index');
     });
 });
 
