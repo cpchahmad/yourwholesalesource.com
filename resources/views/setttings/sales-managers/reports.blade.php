@@ -26,7 +26,7 @@
 {{--                    <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>--}}
                     <span></span> <i class="fa fa-caret-down"></i>
                 </div>
-                <button class="btn btn-primary filter_by_date" data-url="{{route('sales-managers.report')}}" style="margin-left: 10px"> Filter </button>
+                <button class="btn btn-primary filter_by_date" data-url="{{route('sales-managers.report', $manager->id)}}" style="margin-left: 10px"> Filter </button>
             </div>
         </div>
 {{--        <div class="row">--}}
