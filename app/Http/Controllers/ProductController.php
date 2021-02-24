@@ -116,6 +116,7 @@ class ProductController extends Controller
                 ->select('id', 'to_woocommerce','title', 'price', 'quantity', 'status')
                 ->with(['has_images:id,position,image,product_id', 'hasVariants:id,price,product_id'])
                 ->orderBy('created_at','DESC')->paginate(20),
+
             'search' =>$request->input('search'),
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
