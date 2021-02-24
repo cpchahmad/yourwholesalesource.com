@@ -342,7 +342,13 @@ class DefaultSettingsController extends Controller
                     return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0 ?? $store;
                 });
 
-                dd($active_stores, $new_stores);
+                $active_users = $manager->has_users()->get()->filter(function($user) {
+                    return $user->has_orders()->count() > 0 ?? $user;
+                });
+
+                $new_users = $manager->has_users()->get()->filter(function($user) {
+                    return $user->has_orders()->count() == 0 ?? $user;
+                });
 
 
                 $top_stores = $manager->has_sales_stores()
@@ -380,6 +386,8 @@ class DefaultSettingsController extends Controller
                 'top_users' => $top_users,
                 'active_stores' => $active_stores,
                 'new_stores' => $new_stores,
+                'active_users' => $active_users,
+                'new_users' => $new_users,
             ]);
         }
         else{

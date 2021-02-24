@@ -203,12 +203,11 @@
                                 </tbody>
                             </table>
                         @else
-                            <p  class="text-center"> No Top Users Found </p>
+                            <p  class="text-center"> No Active Stores Found </p>
                         @endif
                     </div>
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
@@ -233,11 +232,78 @@
                                 </tbody>
                             </table>
                         @else
-                            <p  class="text-center"> No Top Users Found </p>
+                            <p  class="text-center"> No New Stores Found </p>
                         @endif
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Active Non Shopify Users</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($active_users) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">User</th>
+                                    <th class="font-w700">Email</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($active_users as $user)
+                                    <tr>
+                                        <td class="font-w600">
+                                            <a href="{{route('users.view',$user->id)}}"> {{$user->name}} {{$user->last_name}}</a>
+                                        </td>
+                                        <td class="font-w600">
+                                            <a href="{{route('users.view',$user->id)}}">  {{$user->email}} </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p  class="text-center"> No Active Users Found </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">New Non Shopify Users</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($new_users) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">User</th>
+                                    <th class="font-w700">Email</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($new_users as $user)
+                                    <tr>
+                                        <td class="font-w600">
+                                            <a href="{{route('users.view',$user->id)}}"> {{$user->name}} {{$user->last_name}}</a>
+                                        </td>
+                                        <td class="font-w600">
+                                            <a href="{{route('users.view',$user->id)}}">  {{$user->email}} </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <p  class="text-center"> No New Users Found </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
