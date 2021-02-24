@@ -23,10 +23,22 @@
             <div class="col-md-4 d-flex">
                 <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                     <i class="fa fa-calendar"></i>&nbsp;
-{{--                    <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>--}}
-                    <span></span> <i class="fa fa-caret-down"></i>
+                    <span>{{$date_range}}</span> <i class="fa fa-caret-down"></i>
                 </div>
                 <button class="btn btn-primary filter_by_date" data-url="{{route('sales-managers.report', $manager->id)}}" style="margin-left: 10px"> Filter </button>
+            </div>
+            <div class="col-md-8 d-flex">
+                <img class="img-avatar200 img-avatar-rounded w-25" @if($manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->profile}}" @endif alt="Header Avatar" style="width: 100px !important; height: 100px !important;">
+                <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
+                <div class="font-w600">{{$manager->email}}</div>
+                <div class="text-info">
+                    <i class="fab fa-whatsapp text-success fa-lg"></i>
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp: {{$manager->whatsapp}}</a>
+                </div>
+                <div class="text-info">
+                    <i class="fab fa-skype text-info fa-lg"></i>
+                    <a href="skype:{{$manager->skype}}?chat">Skype: {{ $manager->skype }}</a>
+                </div>
             </div>
         </div>
 {{--        <div class="row">--}}
