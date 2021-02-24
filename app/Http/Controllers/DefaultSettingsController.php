@@ -342,6 +342,8 @@ class DefaultSettingsController extends Controller
                     return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0;
                 });
 
+                dd($active_stores, $new_stores);
+
 
                 $top_stores = $manager->has_sales_stores()
                     ->join('retailer_products', function ($join) {
