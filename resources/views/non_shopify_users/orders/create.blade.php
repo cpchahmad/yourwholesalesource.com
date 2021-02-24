@@ -217,10 +217,10 @@
                                     <button type="button" class="btn btn-primary product-search-button">Search</button>
                                 </div>
 
-                                <div class="countries-section" id="product-section">
-                                    <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
-
-                                    {{--                                   // @include('non_shopify_users.orders.product-browse-section')--}}
+                                <div class="countries-section " id="product-section">
+                                    <div class="text-center">
+                                        <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
