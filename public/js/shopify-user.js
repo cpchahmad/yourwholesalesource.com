@@ -353,6 +353,10 @@ $(document).ready(function () {
             e.preventDefault();
             alertify.error('Select at least one variant!');
         }
+        else {
+            $('.save-order-btn').text('Processing');
+            $('.save-order-btn').prop('disabled', true);
+        }
     });
 
     $('body').on('change','#customer_selection_drop',function (e) {
