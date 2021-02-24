@@ -335,8 +335,7 @@ class DefaultSettingsController extends Controller
 
                 $active_stores = $manager->has_sales_stores()
                     ->join('retailer_orders', function ($o) {
-                        $o->on('retailer_orders.shop_id', '=', 'shops.id')
-                            ->where(DB::raw('COUNT(retailer_orders.id)'), '>', 0);
+                        $o->on('retailer_orders.shop_id', '=', 'shops.id');
                     })
                     ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
                     ->groupBy('shops.id')
@@ -345,10 +344,9 @@ class DefaultSettingsController extends Controller
 
                 $new_stores = $manager->has_sales_stores()
                     ->join('retailer_orders', function ($o) {
-                        $o->on('retailer_orders.shop_id', '=', 'shops.id')
-                            ->where(DB::raw('COUNT(retailer_orders.id)'), '==', 0);
+                        $o->on('retailer_orders.shop_id', '=', 'shops.id');
                     })
-                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
+                    ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as orders'))
                     ->groupBy('shops.id')
                     ->orderBy('sold', 'DESC')
                     ->get();
@@ -359,8 +357,7 @@ class DefaultSettingsController extends Controller
                             ->join('retailer_order_line_items', function ($j) {
                                 $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
                                     ->join('retailer_orders', function ($o) {
-                                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                                            ->where('retailer_orders.paid', '>=', 1);
+                                        $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id');
                                     });
                             });
 
@@ -372,7 +369,7 @@ class DefaultSettingsController extends Controller
 
                 $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
                     $o->on('retailer_orders.user_id', '=', 'users.id');
-                })->where('retailer_orders.paid', '>=', 1)
+                })
                     ->where('retailer_orders.custom', '=', 1)
                     ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
                     ->groupBy('users.id')
