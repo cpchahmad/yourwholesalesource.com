@@ -84,7 +84,7 @@
     <div class="block">
         @foreach($videos as $category => $video)
             <div class="block-content">
-            <div class="block-header">
+            <div class="block-header font-size-h5 font-w600 pl-0">
                 {{ $category }}
             </div>
             <div class="table-responsive">
