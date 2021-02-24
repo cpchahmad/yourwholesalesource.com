@@ -336,7 +336,7 @@ class DefaultSettingsController extends Controller
                 $active_stores =  $top_stores = $manager->has_sales_stores()
                     ->join('retailer_orders', function ($o) {
                         $o->on('retailer_orders.shop_id', '=', 'shops.id')
-                            ->where(DB::raw('COUNT(retailer_orders.id)'), '>', 0);
+                            ->where('retailer_orders.paid', '>=', 1);
                     })
                     ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
                     ->groupBy('shops.id')
@@ -346,7 +346,7 @@ class DefaultSettingsController extends Controller
                 $new_stores =  $top_stores = $manager->has_sales_stores()
                     ->join('retailer_orders', function ($o) {
                         $o->on('retailer_orders.shop_id', '=', 'shops.id')
-                            ->where(DB::raw('COUNT(retailer_orders.id)'), '==', 0);
+                            ->where('retailer_orders.paid', '>=', 1);
                     })
                     ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'))
                     ->groupBy('shops.id')
