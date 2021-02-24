@@ -334,27 +334,14 @@ class DefaultSettingsController extends Controller
             else {
 
 
-                $active_stores = $manager->has_sales_stores()->get();
+                $active_stores = $manager->has_sales_stores()->get()->map(function($store) {
+                    return $store->has_orders()->count() > 0 && $store->has_imported()->count() > 0;
+                });
 
-                $act_store = [];
-                foreach($active_stores as $store) {
-                    if($store->has('has_orders')) {
-                        array_push($act_store, $store);
-                    }
-                }
+                $new_stores = $manager->has_sales_stores()->get()->map(function($store) {
+                    return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0;
+                });
 
-                dump($act_store);
-
-                $new_stores = $manager->has_sales_stores()->get();
-
-                $n_store = [];
-                foreach($new_stores as $store) {
-                    if($store->doesntHave('has_orders')) {
-                        array_push($n_store, $store);
-                    }
-                }
-
-                dd($n_store);
 
                 $top_stores = $manager->has_sales_stores()
                     ->join('retailer_products', function ($join) {
