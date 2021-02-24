@@ -3138,7 +3138,7 @@ class ProductController extends Controller
     public function getAdminProducts() {
         $products = Product::query()
         ->select('id', 'title', 'price')
-        ->with(['has_images:id,position,image', 'hasVariants:id,option1,option2,option3,price'])
+        ->with(['has_images:id,position,image,product_id', 'hasVariants:id,option1,option2,option3,price,product_id'])
         ->get();
 
         return view('non_shopify_users.orders.product-browse-section')->with([
