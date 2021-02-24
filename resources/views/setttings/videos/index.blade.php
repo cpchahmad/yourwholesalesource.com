@@ -183,7 +183,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-end">
-                    {{ $news->appends(request()->input())->links() }}
+                    {{ $videos->appends(request()->input())->links() }}
                 </div>
             </div>
         </div>

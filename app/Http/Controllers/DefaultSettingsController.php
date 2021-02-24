@@ -900,7 +900,7 @@ class DefaultSettingsController extends Controller
     }
 
     public function allVideos() {
-        return view('setttings.videos.index')->with('videos', Video::groupBy('category')->latest()->get());
+        return view('setttings.videos.index')->with('videos', Video::groupBy('category')->latest()->paginate(30));
     }
 
     public function createVideo(Request $request) {
