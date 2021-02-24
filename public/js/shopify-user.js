@@ -319,7 +319,7 @@ $(document).ready(function () {
         if($(this).find('.variant-checkbox:checked').length > 0){
             alertify.success('Processing Your Selection. Wait!');
             $('.add-to-order-btn').text('Processing');
-            $('.add-to-order-btn').props('disabled', true);
+            $('.add-to-order-btn').prop('disabled', true);
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'GET',
