@@ -39,7 +39,7 @@
                                 <hr>
                             @endif
                           <div class="wishlist_description">
-                                {!! $wishlist->description !!}
+                                {!! strip_tags($wishlist->description) !!}
                           </div>
                             <div class="attachments">
                                 @foreach($wishlist->has_attachments as $a)
