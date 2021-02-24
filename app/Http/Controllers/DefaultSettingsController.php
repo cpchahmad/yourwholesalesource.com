@@ -334,7 +334,7 @@ class DefaultSettingsController extends Controller
             else {
 
 
-                $active_stores = $manager->has_sales_stores();
+                $active_stores = $manager->has_sales_stores()->get();
 
                 $act_store = [];
                 foreach($active_stores as $store) {
@@ -345,9 +345,7 @@ class DefaultSettingsController extends Controller
 
                 dump($act_store);
 
-                $new_stores = $manager->has_sales_stores();->get()->map(function($store) {
-                    return $store->doesntHave('has_orders');
-                });
+                $new_stores = $manager->has_sales_stores()->get();
 
                 $n_store = [];
                 foreach($new_stores as $store) {
