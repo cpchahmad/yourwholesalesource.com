@@ -209,35 +209,35 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="block block-rounded">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">New Stores</h3>
-                    </div>
-                    <div class="block-content ">
-                        @if(count($new_stores) > 0)
-                            <table class="table table-striped table-hover table-borderless table-vcenter">
-                                <thead>
-                                <tr class="text-uppercase">
-                                    <th class="font-w700">Store</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($new_stores as $store)
-                                    <tr>
-                                        <td class="font-w600">
-                                            <a href="{{route('stores.view',$store->id)}}"> {{explode('.',$store->shopify_domain)[0]}} </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            <p  class="text-center"> No Top Users Found </p>
-                        @endif
-                    </div>
-                </div>
-            </div>
+{{--            <div class="col-md-6">--}}
+{{--                <div class="block block-rounded">--}}
+{{--                    <div class="block-header block-header-default">--}}
+{{--                        <h3 class="block-title">New Stores</h3>--}}
+{{--                    </div>--}}
+{{--                    <div class="block-content ">--}}
+{{--                        @if(count($new_stores) > 0)--}}
+{{--                            <table class="table table-striped table-hover table-borderless table-vcenter">--}}
+{{--                                <thead>--}}
+{{--                                <tr class="text-uppercase">--}}
+{{--                                    <th class="font-w700">Store</th>--}}
+{{--                                </tr>--}}
+{{--                                </thead>--}}
+{{--                                <tbody>--}}
+{{--                                @foreach($new_stores as $store)--}}
+{{--                                    <tr>--}}
+{{--                                        <td class="font-w600">--}}
+{{--                                            <a href="{{route('stores.view',$store->id)}}"> {{explode('.',$store->shopify_domain)[0]}} </a>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
+{{--                                </tbody>--}}
+{{--                            </table>--}}
+{{--                        @else--}}
+{{--                            <p  class="text-center"> No Top Users Found </p>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
 
     </div>
