@@ -180,7 +180,7 @@ class CustomOrderController extends Controller
         if ($request->has('variants')) {
             $selectedVaraints = ProductVariant::whereIn('id', $request->input('variants'))
                 ->select('id', 'title', 'price')
-                ->with(['has_images:id,isV,image', 'linked_product:id,title'])
+                ->with(['has_image:id,isV,image', 'linked_product:id,title'])
                 ->get();
         } else {
             $selectedVaraints = [];
