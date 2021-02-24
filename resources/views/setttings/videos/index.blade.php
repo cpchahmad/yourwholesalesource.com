@@ -182,9 +182,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-end">
-                    {{ $videos->appends(request()->input())->links() }}
-                </div>
             </div>
         </div>
         @endforeach

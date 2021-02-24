@@ -902,7 +902,7 @@ class DefaultSettingsController extends Controller
     public function allVideos() {
         $videos = Video::latest()->get()->groupBy(function($data){
             return $data->category;
-        })->paginate(30);
+        });
 
         return view('setttings.videos.index')->withVideos($videos);
     }
