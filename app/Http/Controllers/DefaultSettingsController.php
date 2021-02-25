@@ -301,7 +301,7 @@ class DefaultSettingsController extends Controller
                 $active_stores = $manager->has_sales_stores()
                     ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
                     ->get()->filter(function($store) {
-                        return $store->has_orders()->count() > 0 && $store->has_imported()->count() > 0 ?? $store;
+                        return $store->has_orders()->count() > 0 || $store->has_imported()->count() > 0 ?? $store;
                 });
 
                 $new_stores = $manager->has_sales_stores()
@@ -355,7 +355,7 @@ class DefaultSettingsController extends Controller
 
 
                 $active_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store->has_orders()->count() > 0 && $store->has_imported()->count() > 0 ?? $store;
+                    return $store->has_orders()->count() > 0 || $store->has_imported()->count() > 0 ?? $store;
                 });
 
                 $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
