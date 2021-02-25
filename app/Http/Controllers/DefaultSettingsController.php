@@ -990,7 +990,7 @@ class DefaultSettingsController extends Controller
         $suggestion->user_email = $request->user_email;
 
         if($request->hasFile('file')){
-            $file = $request->file('banner');
+            $file = $request->file('file');
             $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
             $attachement = date("mmYhisa_") . $name;
             $file->move(public_path() . '/suggestions/', $attachement);
