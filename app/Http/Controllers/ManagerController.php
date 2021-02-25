@@ -194,14 +194,14 @@ class ManagerController extends Controller
 //            ->get()
 //            ->take(10);
 
-        $top_stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->join('retailer_products',function($join) use ($shops_id){
+        $top_stores = $manager->has_sales_stores()->join('retailer_products',function($join) use ($shops_id){
             $join->on('retailer_products.shop_id','=','shops.id')
                 ->whereIn('retailer_products.shop_id',$shops_id)
                 ->join('retailer_order_line_items',function ($j){
                     $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
                         ->join('retailer_orders',function($o){
                             $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
-                                ->whereIn('paid',[1,2]);
+                                ->whereIn('paid',[1]);
                         });
                 });
         })
@@ -230,7 +230,7 @@ class ManagerController extends Controller
 //            ->get()
 //            ->take(10);
 
-        $top_users = User::role('non-shopify-users')->join('retailer_orders', function ($o) use ($users_id)  {
+        $top_users = $manager->has_users()->join('retailer_orders', function ($o) use ($users_id)  {
             $o->on('retailer_orders.user_id', '=', 'users.id');
         }) ->where('retailer_orders.paid','>=',1)
             ->where('retailer_orders.custom','=',1)
