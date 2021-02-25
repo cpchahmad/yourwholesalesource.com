@@ -33,19 +33,19 @@
         </div>
         <div class="row mb-2">
             <div class="col-md-6 ">
-                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
+                <div class="block block-rounded block-link-pop" href="/managers/tickets?priority=&status=1">
                     <div class="block-content block-content-full">
                         <div class="font-w700 text-gray-darker animated fadeIn">New Tickets</div>
-                        <a class="h2 font-w300 text-primary animated flipInX" >{{$new_tickets}}</a>
+                        <a class="h2 font-w300 text-primary animated flipInX text-dark" >{{$new_tickets}}</a>
                     </div>
                 </div>
 
             </div>
             <div class="col-md-6">
-                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
+                <div class="block block-rounded block-link-pop" href="/managers/tickets?priority=&status=3">
                     <div class="block-content block-content-full">
                         <div class="font-w700 text-gray-darker animated fadeIn">Waiting Support Feedback Tickets</div>
-                        <a class="h2 font-w300 text-primary animated flipInX" >{{$waiting_support_tickets}}</a>
+                        <a class="h2 font-w300 text-primary animated flipInX text-danger" >{{$waiting_support_tickets}}</a>
                     </div>
                 </div>
             </div>
