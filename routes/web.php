@@ -318,6 +318,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/notifications', 'CustomOrderController@notifications')->name('users.notifications');
             Route::get('/get/admin/products','ProductController@getAdminProducts')->name('admin.product.all');
 
+            Route::get('/dropship-requests', 'CustomOrderController@dropship_requests')->name('users.dropship.requests');
+            Route::get('/dropship-requests/{id}', 'CustomOrderController@view_dropship_requests')->name('users.dropship.request.view');
+            Route::get('/dropship-requests/create', 'CustomOrderController@create_dropship_requests')->name('users.dropship.request.create');
+            Route::get('/dropship-requests/{id}/delete', 'CustomOrderController@delete_dropship_requests')->name('users.dropship.request.delete');
+
 
             Route::group(['middleware' => ['check_user_shop']], function () {
 
