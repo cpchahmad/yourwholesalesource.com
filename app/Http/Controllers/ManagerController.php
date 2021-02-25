@@ -81,7 +81,7 @@ class ManagerController extends Controller
 
             $ordersQR = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->whereIn('paid',[2])
+                ->whereIn('paid',[1,2])
                 ->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)
                 ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
                 ->groupBy('date')
@@ -145,7 +145,7 @@ class ManagerController extends Controller
 
             $ordersQR = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
-                ->whereIn('paid',[2])
+                ->whereIn('paid',[1,2])
                 ->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)
                 ->groupBy('date')
                 ->get();
