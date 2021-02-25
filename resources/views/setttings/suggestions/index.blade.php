@@ -48,7 +48,6 @@
                         <tr>
                             <th>User</th>
                             <th>Suggestion</th>
-                            <th>Attachment</th>
                             <th>Suggested At</th>
                         </tr>
                         </thead>
@@ -60,9 +59,6 @@
                                 </td>
                                 <td style="vertical-align: middle">
                                     <p> {{ $item->suggestion }}</p>
-                                </td>
-                                <td style="vertical-align: middle">
-                                   ds
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ date_format($item->created_at ,"Y/M/d H:i ") }}
