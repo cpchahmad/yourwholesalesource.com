@@ -97,6 +97,32 @@ class ManagerController extends Controller
                 ->groupBy('date')
                 ->get();
 
+            $top_stores = $manager->has_sales_stores()
+                ->join('retailer_products', function ($join) {
+                    $join->on('retailer_products.shop_id', '=', 'shops.id')
+                        ->join('retailer_order_line_items', function ($j) {
+                            $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                                ->join('retailer_orders', function ($o) {
+                                    $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                        ->where('retailer_orders.paid', '>=', 1);
+                                });
+                        });
+                })
+                ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('shops.id')
+                ->orderBy('sold', 'DESC')
+                ->get();
+
+            $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
+                $o->on('retailer_orders.user_id', '=', 'users.id');
+            })->where('retailer_orders.paid', '>=', 1)
+                ->where('retailer_orders.custom', '=', 1)
+                ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
+                ->whereBetween('retailer_orders.created_at', [$comparing_start_date, $comparing_end_date])
+                ->groupBy('users.id')
+                ->orderBy('sold', 'DESC')
+                ->get();
 
 
 
@@ -134,6 +160,34 @@ class ManagerController extends Controller
                 ->whereIn('id',$shops_id)
                 ->groupBy('date')
                 ->get();
+
+
+            $top_stores = $manager->has_sales_stores()
+                ->join('retailer_products', function ($join) {
+                    $join->on('retailer_products.shop_id', '=', 'shops.id')
+                        ->join('retailer_order_line_items', function ($j) {
+                            $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
+                                ->join('retailer_orders', function ($o) {
+                                    $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
+                                        ->where('retailer_orders.paid', '>=', 1);
+                                });
+                        });
+
+                })
+                ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+                ->groupBy('shops.id')
+                ->orderBy('sold', 'DESC')
+                ->get();
+
+            $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
+                $o->on('retailer_orders.user_id', '=', 'users.id');
+            })->where('retailer_orders.paid', '>=', 1)
+                ->where('retailer_orders.custom', '=', 1)
+                ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
+                ->groupBy('users.id')
+                ->orderBy('sold', 'DESC')
+                ->get();
+
 
 
         }
@@ -182,32 +236,6 @@ class ManagerController extends Controller
             ->take(5);
 
 
-
-        $top_stores = $manager->has_sales_stores()
-            ->join('retailer_products', function ($join) {
-                $join->on('retailer_products.shop_id', '=', 'shops.id')
-                    ->join('retailer_order_line_items', function ($j) {
-                        $j->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
-                            ->join('retailer_orders', function ($o) {
-                                $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-                                    ->where('retailer_orders.paid', '>=', 1);
-                            });
-                    });
-
-            })
-            ->select('shops.*', DB::raw('COUNT(retailer_orders.id) as sold'), DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-            ->groupBy('shops.id')
-            ->orderBy('sold', 'DESC')
-            ->get();
-
-        $top_users = $manager->has_users()->join('retailer_orders', function ($o) {
-            $o->on('retailer_orders.user_id', '=', 'users.id');
-        })->where('retailer_orders.paid', '>=', 1)
-            ->where('retailer_orders.custom', '=', 1)
-            ->select('users.*', DB::raw('COUNT(retailer_orders.cost_to_pay) as sold'), DB::raw('sum(retailer_orders.cost_to_pay) as selling_cost'))
-            ->groupBy('users.id')
-            ->orderBy('sold', 'DESC')
-            ->get();
 
 
 
