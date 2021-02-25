@@ -203,7 +203,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Contains Battery or not? <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
+                                                <label for="material-error">Contains Battery or not?</label>
                                                 <br>
                                                 <div class=" mb-1">
                                                     <input type="radio"  class="" id="battery-yes" name="battery" value="yes" >
