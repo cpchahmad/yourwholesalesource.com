@@ -159,7 +159,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <div class="form-material">
-                                                        <label for="material-error">Shopify Store <i class="fa fa-question-circle"  title="This is the name of the store you want to you want to request for your wishlist"> </i></label>
+                                                        <label for="material-error">Shopify Store <i class="fa fa-question-circle"  title="This is the name of the store you want to you want to request for your dropship request"> </i></label>
                                                         <select name="shop_id" id="" class="form-control">
                                                             @foreach($user->has_stores()->get() as $store)
                                                                 <option value="{{ $store->id }}"> {{ $store->shopify_domain }}</option>
@@ -281,7 +281,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">How many options of the stock <i class="fa fa-question-circle"  title="This is the expected number on stock options you are going to send to us"> </i></label>
+                                                <label for="material-error">How many options of the stock? <i class="fa fa-question-circle"  title="This is the expected number on stock options you are going to send to us"> </i></label>
                                                 <input required class="form-control" type="number" name="option_count"
                                                        placeholder="Enter number of options of the stock here">
                                             </div>
