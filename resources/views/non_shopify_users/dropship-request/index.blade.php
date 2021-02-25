@@ -207,9 +207,9 @@
                                                 <br>
                                                 <div class="custom-control custom-radio mb-1">
                                                     <input type="radio"  class="custom-control-input" id="battery-yes" name="battery" value="yes"  >
-                                                    <label class="custom-control-label ml-5" for="battery-yes">Yes</label>
+                                                    <label class="custom-control-label" for="battery-yes">Yes</label>
                                                     <input type="radio"  class="custom-control-input" id="battery-no" name="battery" value="no"  >
-                                                    <label class="custom-control-label" for="battery-no">No</label>
+                                                    <label class="custom-control-label ml-5" for="battery-no">No</label>
                                                 </div>
                                             </div>
                                         </div>
