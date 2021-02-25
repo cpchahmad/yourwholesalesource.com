@@ -74,7 +74,11 @@
 
                     <div class="col-md-2">
                         <input type="submit" class="btn btn-primary " value="Filter">
-                        <a href="/products/all" class="btn btn-danger " >Clear</a>
+                        @role('wordpress-admin')
+                            <a href="/products/all" class="btn btn-danger " >Clear</a>
+                        @else
+                            <a href="/managers/products" class="btn btn-danger " >Clear</a>
+                        @endrole
                     </div>
                 </form>
             </div>
@@ -154,18 +158,20 @@
                                     <a class="btn btn-xs btn-sm btn-success" type="button" href="{{ route('product.view', $product->id) }}" title="View Product">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning"
-                                       type="button" data-toggle="tooltip" title=""
-                                       data-original-title="Edit Product"><i
-                                            class="fa fa-edit"></i></a>
-                                    <a href="{{ route('product.delete', $product->id) }}" class="btn btn-sm btn-danger"
-                                       type="button" data-toggle="tooltip" title=""
-                                       data-original-title="Delete Product"><i class="fa fa-times"></i></a>
-                                    @if($product->to_woocommerce == 0)
-                                    <a href="{{ route('product.import.to.woocommerce', $product->id) }}" class="btn btn-sm btn-info import-btn"
-                                       type="button" data-toggle="tooltip" title=""
-                                       data-original-title="Import To Woocommerce">Import</a>
-                                    @endif
+                                    @role('wordpress-admin')
+                                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-warning"
+                                           type="button" data-toggle="tooltip" title=""
+                                           data-original-title="Edit Product"><i
+                                                class="fa fa-edit"></i></a>
+                                        <a href="{{ route('product.delete', $product->id) }}" class="btn btn-sm btn-danger"
+                                           type="button" data-toggle="tooltip" title=""
+                                           data-original-title="Delete Product"><i class="fa fa-times"></i></a>
+                                        @if($product->to_woocommerce == 0)
+                                        <a href="{{ route('product.import.to.woocommerce', $product->id) }}" class="btn btn-sm btn-info import-btn"
+                                           type="button" data-toggle="tooltip" title=""
+                                           data-original-title="Import To Woocommerce">Import</a>
+                                        @endif
+                                    @endrole
                     </div>
                             </td>
                         </tr>
