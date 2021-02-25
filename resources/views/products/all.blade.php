@@ -27,9 +27,11 @@
                     <input type="submit" value="Search" class="btn btn-primary btn-sm  d-inline-block" style="margin-left: 10px">
                 </form>
             </div>
-            <div class="col-sm-3 text-right">
-                <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
-            </div>
+            @role('wordpress-admin')
+                <div class="col-sm-3 text-right">
+                    <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
+                </div>
+            @endrole
         </div>
 
         <div class="row">
