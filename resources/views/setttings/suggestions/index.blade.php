@@ -67,11 +67,11 @@
                                             $file_extension = explode('.',$item->file)[1];
                                         @endphp
 
-                                        @if($file_extension == "PNG" || $file_extension == "png" || $file_extension == "jpg" || $file_extension == "jpeg")
+{{--                                        @if($file_extension == "PNG" || $file_extension == "png" || $file_extension == "jpg" || $file_extension == "jpeg")--}}
+{{--                                            <a href="{{asset('suggestions')}}/{{$item->file}}" target="_blank">View Attachment</a>--}}
+{{--                                        @elseif($file_extension == "pdf")--}}
                                             <a href="{{asset('suggestions')}}/{{$item->file}}" target="_blank">View Attachment</a>
-                                        @elseif($file_extension == "pdf")
-                                            <a href="{{asset('suggestions')}}/{{$item->file}}">View Attachment</a>
-                                        @endif
+{{--                                        @endif--}}
                                     @else
                                         <p>No Attachments Added</p>
                                     @endif
