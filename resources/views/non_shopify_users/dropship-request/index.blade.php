@@ -194,8 +194,8 @@
                                         <div class="col-sm-12">
                                             <div class="form-material">
                                                 <label for="material-error">Expected Weekly Sales <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
-                                                <input required class="form-control" type="number" step="any"  name="weekyly_sales"
-                                                       placeholder="Weekly Sales/Orders">
+                                                <input required class="form-control" type="number" step="any"  name="weekly_sales"
+                                                       placeholder="Enter Weekly Sales here">
                                             </div>
                                         </div>
                                     </div>
@@ -218,13 +218,75 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Target Dropshipping Cost <i class="fa fa-question-circle"  title="This is the cost of product you want to request in your wishlist"> </i></label>
-                                                <input required class="form-control" type="number" step="any"  name="cost"
-                                                        placeholder="Enter Dropshipping Cost here">
+                                                <label for="material-error">Packing Size <i class="fa fa-question-circle"  title="This is the size of product you want to request in your dropship request"> </i></label>
+
+                                                <input required class="form-control" type="text"  name="packing_size"
+                                                       placeholder="Enter size details here">
                                             </div>
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Weight <i class="fa fa-question-circle"  title="This is the expected weight of product you want to request in your dropship request"> </i></label>
+                                                <input required class="form-control" type="number" step="any"  name="weight"
+                                                       placeholder="Enter Product Weight here">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Do you need Relabell or not?</label>
+                                                <br>
+                                                <div class=" mb-1">
+                                                    <input type="radio"  class="" id="relabell-yes" name="relabell" value="yes" >
+                                                    <label class="" for="relabell-yes">Yes</label>
+                                                    <input type="radio"  class="ml-2" id="relabell-no" name="relabell" value="no" >
+                                                    <label class="" for="relabell-no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Do you need us to repack with extra protections?</label>
+                                                <br>
+                                                <div class=" mb-1">
+                                                    <input type="radio"  class="" id="repack-yes" name="re_pack" value="yes" >
+                                                    <label class="" for="repack-yes">Yes</label>
+                                                    <input type="radio"  class="ml-2" id="repack-no" name="re_pack" value="no" >
+                                                    <label class="" for="repack-no">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">How many stock you are going to send to us? <i class="fa fa-question-circle"  title="This is the expected stock of product you are going to send to us"> </i></label>
+                                                <input required class="form-control" type="number" name="stock"
+                                                       placeholder="Enter Product Stock here">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">How many options of the stock <i class="fa fa-question-circle"  title="This is the expected number on stock options you are going to send to us"> </i></label>
+                                                <input required class="form-control" type="number" name="option_count"
+                                                       placeholder="Enter number of options of the stock here">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
@@ -240,11 +302,20 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Target Shipping Cost <i class="fa fa-question-circle"  title="This is the cost of product you want to request in your dropship request"> </i></label>
+                                                <input required class="form-control" type="number" step="any"  name="cost"
+                                                       placeholder="Enter Shipping Cost here">
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Description <i class="fa fa-question-circle"  title="Description of product you want to request in wishlist"> </i></label>
+                                                <label for="material-error">Description <i class="fa fa-question-circle"  title="Description of product you want to request in dropship request"> </i></label>
                                                 <textarea required class="js-summernote" name="description"
                                                           placeholder="Please Enter Description here !"></textarea>
                                             </div>
