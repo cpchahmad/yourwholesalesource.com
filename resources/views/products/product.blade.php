@@ -31,9 +31,11 @@
             <div class="col-sm-6">
             </div>
             @if($product->import_from_shopify != 1)
-                <div class="col-sm-6 text-right">
-                    <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
-                </div>
+                @role('wordpress-admin')
+                    <div class="col-sm-6 text-right">
+                        <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
+                    </div>
+                @endrole
             @endif
         </div>
         <div class="block">
