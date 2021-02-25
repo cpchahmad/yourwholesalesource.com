@@ -298,23 +298,28 @@ class DefaultSettingsController extends Controller
                 $comparing_start_date = \Carbon\Carbon::parse($start_date)->format('Y-m-d');
                 $comparing_end_date = Carbon::parse($end_date)->format('Y-m-d');
 
-                dd($comparing_start_date, $comparing_end_date);
-
-
-                $active_stores = $manager->has_sales_stores()->get()->filter(function($store) {
+                $active_stores = $manager->has_sales_stores()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->get()->filter(function($store) {
                         return $store->has_orders()->count() > 0 && $store->has_imported()->count() > 0 ?? $store;
                 });
 
-                $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
-                    return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0 ?? $store;
+                $new_stores = $manager->has_sales_stores()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->get()->filter(function($store) {
+                        return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0 ?? $store;
                 });
 
-                $active_users = $manager->has_users()->get()->filter(function($user) {
-                    return $user->has_orders()->count() > 0 ?? $user;
+                $active_users = $manager->has_users()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->get()->filter(function($user) {
+                        return $user->has_orders()->count() > 0 ?? $user;
                 });
 
-                $new_users = $manager->has_users()->get()->filter(function($user) {
-                    return $user->has_orders()->count() == 0 ?? $user;
+                $new_users = $manager->has_users()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->get()->filter(function($user) {
+                        return $user->has_orders()->count() == 0 ?? $user;
                 });
 
 
