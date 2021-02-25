@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Country;
 use App\Customer;
 use App\FulfillmentLineItem;
@@ -255,6 +256,69 @@ class ManagerController extends Controller
             'manager'=>$manager,
             'new_tickets' => $new_tickets,
             'waiting_support_tickets' => $waiting_support_tickets
+        ]);
+    }
+
+    public function viewAllProducts(Request $request) {
+        $categories = Category::latest()->get();
+        $shops = Shop::latest()->get();
+
+        $productQ = Product::query();
+        if($request->has('search')){
+            $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
+                $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
+            });
+        }
+
+        if($request->filled('parent_category') && !$request->filled('child_category')) {
+            $productQ->orWhereHas('has_categories', function($q) use ($request){
+                $q->where('title',$request->input('parent_category'));
+            });
+
+        }
+
+        if($request->filled('parent_category') && $request->filled('child_category')) {
+
+            $productQ->orWhereHas('has_categories', function($q) use ($request){
+                $q->where('title',$request->input('parent_category'));
+            })
+                ->whereHas('has_subcategories', function($q) use ($request){
+                    $q->where('title',$request->input('child_category'));
+                });
+        }
+
+        if($request->filled('shop_search')) {
+
+            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
+                $q->whereHas('has_shop', function($inner) use ($request) {
+                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
+                });
+            });
+        }
+
+        if($request->filled('wishlist_shop_search')) {
+
+            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
+                $q->whereHas('has_shop', function($inner) use ($request) {
+                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('wishlist_shop_search') . '%')
+                        ->where('import_from_shopify', 1);
+                });
+            });
+        }
+
+        return view('products.all')->with([
+            'products' => $productQ
+                ->select('id', 'to_woocommerce','title', 'price', 'quantity', 'status')
+                ->with(['has_images:id,position,image,product_id', 'hasVariants:id,price,product_id'])
+                ->orderBy('created_at','DESC')->paginate(20),
+
+            'search' =>$request->input('search'),
+            'parent_category' =>$request->input('parent_category'),
+            'child_category' =>$request->input('child_category'),
+            'shop_search' =>$request->input('shop_search'),
+            'wishlist_shop_search' =>$request->input('wishlist_shop_search'),
+            'categories' => $categories,
+            'shops' => $shops,
         ]);
     }
 

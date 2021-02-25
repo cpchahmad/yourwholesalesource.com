@@ -355,6 +355,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/wallet/request/approve/{id}', 'ManagerController@approved_bank_statement')->name('sales_managers.wallets.approve.request');
             Route::post('/wallet/top-up', 'ManagerController@topup_wallet_by_admin')->name('sales_managers.user.wallet.topup');
             Route::get('/home','ManagerController@dashboard')->name('managers.dashboard');
+            Route::get('/products','ManagerController@viewAllProducts')->name('managers.products');
 
             Route::get('/refunds','ManagerController@refunds')->name('sales_managers.refunds');
             Route::get('/refunds/{id}', 'ManagerController@view_refund')->name('sales_managers.refunds.view');
