@@ -69,6 +69,8 @@
 
                                         @if($file_extension == "PNG" || $file_extension == "png" || $file_extension == "jpg" || $file_extension == "jpeg")
                                             <a href="{{asset('suggestions')}}/{{$item->file}}" target="_blank">View Attachment</a>
+                                        @elseif($file_extension == "pdf")
+                                            <a href="{{asset('suggestions')}}/{{$item->file}}">View Attachment</a>
                                         @endif
                                     @else
                                         <p>No Attachments Added</p>
