@@ -92,7 +92,7 @@
                                                     <a href="{{route('users.dropship.request.view',$item->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('dropship.request.delete', $item->id) }}"
+                                                    <a href="{{ route('users.dropship.request.delete', $item->id) }}"
                                                        class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="Delete Wishlist"><i class="fa fa-times"></i></a>
                                                 </div>
@@ -131,7 +131,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <form action="{{route('dropship.request.create')}}" method="post"  enctype="multipart/form-data">
+                            <form action="{{route('users.dropship.request.create')}}" method="post"  enctype="multipart/form-data">
                                 @csrf
 
                                 <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
