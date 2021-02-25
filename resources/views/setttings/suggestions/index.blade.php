@@ -48,6 +48,7 @@
                         <tr>
                             <th>User</th>
                             <th>Suggestion</th>
+                            <th>Attachment</th>
                             <th>Suggested At</th>
                         </tr>
                         </thead>
@@ -59,6 +60,16 @@
                                 </td>
                                 <td style="vertical-align: middle">
                                     <p> {{ $item->suggestion }}</p>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    @if($item->file)
+                                        @php
+                                            $file_extension =0;
+                                        @endphp
+                                    <p> {{ $item->file }}</p>
+                                    @else
+                                        <p>No Attachments Added</p>
+                                    @endif
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ date_format($item->created_at ,"Y/M/d H:i ") }}

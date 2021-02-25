@@ -995,8 +995,6 @@ class DefaultSettingsController extends Controller
             $attachement = date("mmYhisa_") . $name;
             $file->move(public_path() . '/suggestions/', $attachement);
             $suggestion->file = $attachement;
-
-            dd($attachement, $file);
         }
 
         $suggestion->save();
