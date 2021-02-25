@@ -67,9 +67,7 @@ class ManagerController extends Controller
             $stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->whereIn('id',$shops_id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
 
             $new_tickets =  $manager->has_manager_tickets()->where('status_id',1) ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
-            $waiting_client_tickets =  $manager->has_manager_tickets()->where('status_id',2)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
             $waiting_support_tickets =  $manager->has_manager_tickets()->where('status_id',3)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
-            $closed_tickets =  $manager->has_manager_tickets()->where('status_id',4)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->count();
 
 
             $ordersQ = DB::table('retailer_orders')
@@ -135,9 +133,7 @@ class ManagerController extends Controller
             $stores = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->whereIn('id',$shops_id)->count();
 
             $new_tickets =  $manager->has_manager_tickets()->where('status_id',1)->count();
-            $waiting_client_tickets =  $manager->has_manager_tickets()->where('status_id',2)->count();
             $waiting_support_tickets =  $manager->has_manager_tickets()->where('status_id',3)->count();
-            $closed_tickets =  $manager->has_manager_tickets()->where('status_id',4)->count();
 
             $ordersQ = DB::table('retailer_orders')
                 ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total, sum(cost_to_pay) as total_sum'))
@@ -258,8 +254,6 @@ class ManagerController extends Controller
             'top_users' => $top_users,
             'manager'=>$manager,
             'new_tickets' => $new_tickets,
-            'closed_tickets' => $closed_tickets,
-            'waiting_clients_tickets' => $waiting_client_tickets,
             'waiting_support_tickets' => $waiting_support_tickets
         ]);
     }

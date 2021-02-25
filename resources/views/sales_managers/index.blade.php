@@ -44,29 +44,10 @@
             <div class="col-md-6">
                 <div class="block block-rounded block-link-pop" href="javascript:void(0)">
                     <div class="block-content block-content-full">
-                        <div class="font-w700 text-gray-darker animated fadeIn">Closed Tickets</div>
-                        <a class="h2 font-w300 text-primary animated flipInX" >{{$closed_tickets}}</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-6 ">
-                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
-                        <div class="font-w700 text-gray-darker animated fadeIn">Waiting Client Feedback Tickets </div>
-                        <a class="h2 font-w300 text-primary animated flipInX" >{{$waiting_clients_tickets}}</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-6">
-                <div class="block block-rounded block-link-pop" href="javascript:void(0)">
-                    <div class="block-content block-content-full">
                         <div class="font-w700 text-gray-darker animated fadeIn">Waiting Support Feedback Tickets</div>
                         <a class="h2 font-w300 text-primary animated flipInX" >{{$waiting_support_tickets}}</a>
                     </div>
                 </div>
-
             </div>
 
         </div>
