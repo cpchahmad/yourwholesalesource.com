@@ -322,6 +322,13 @@ class ManagerController extends Controller
         ]);
     }
 
+    public function viewSingleProduct($id) {
+        $product = Product::with(['has_images', 'hasVariants','has_platforms','has_categories','has_subcategories'])->find($id);
+        return view('products.product')->with([
+            'product' => $product
+        ]);
+    }
+
     public function tickets(Request $request){
         $tickets = Ticket::where('manager_id',Auth::id())->newQuery();
 

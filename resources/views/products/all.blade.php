@@ -106,7 +106,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td class="text-center">
-                                <a href="{{ route('product.view', $product->id) }}">
+                                <a href="@role('wordpress-admin') {{ route('product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole">
                                     @if(count($product->has_images) > 0)
                                         @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                             @if($index == 0)
@@ -122,7 +122,7 @@
                                 </a>
                             </td>
                             <td class="font-w600" style="vertical-align: middle">
-                                <a href="{{ route('product.view', $product->id) }}">
+                                <a href="@role('wordpress-admin') {{ route('product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole">
                                 {{ $product->title }}
                                 </a>
                             </td>
