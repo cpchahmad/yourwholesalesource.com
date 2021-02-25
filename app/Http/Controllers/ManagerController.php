@@ -943,6 +943,7 @@ class ManagerController extends Controller
             $manager->name =  $request->input('name');
             $manager->whatsapp =  $request->input('whatsapp');
             $manager->skype =  $request->input('skype');
+            $manager->email =  $request->input('email');
             $manager->save();
             if($request->hasFile('profile')){
                 $file = $request->file('profile');
