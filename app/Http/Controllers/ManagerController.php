@@ -205,7 +205,7 @@ class ManagerController extends Controller
                         });
                 });
         })
-            ->select('shops.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
+            ->select('shops.*',DB::raw('sum(retailer_orders.id) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
             ->groupBy('shops.id')
             ->orderBy('sold','DESC')
             ->get()
