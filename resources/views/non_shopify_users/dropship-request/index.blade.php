@@ -208,8 +208,8 @@
                                                 <div class=" mb-1">
                                                     <input type="radio"  class="" id="battery-yes" name="battery" value="yes" >
                                                     <label class="" for="battery-yes">Yes</label>
-                                                    <input type="radio"  class="" id="battery-no" name="battery" value="no" >
-                                                    <label class="ml-2" for="battery-no">No</label>
+                                                    <input type="radio"  class="ml-2" id="battery-no" name="battery" value="no" >
+                                                    <label class="" for="battery-no">No</label>
                                                 </div>
                                             </div>
                                         </div>
