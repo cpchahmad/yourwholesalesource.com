@@ -201,7 +201,7 @@ class ManagerController extends Controller
                     $j->on('retailer_order_line_items.shopify_product_id','=','retailer_products.shopify_id')
                         ->join('retailer_orders',function($o){
                             $o->on('retailer_order_line_items.retailer_order_id','=','retailer_orders.id')
-                                ->whereIn('paid',[1]);
+                                ->where('retailer_orders.paid', '>=', 1);
                         });
                 });
         })
