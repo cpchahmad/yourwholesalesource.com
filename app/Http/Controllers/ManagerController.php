@@ -209,7 +209,7 @@ class ManagerController extends Controller
             ->groupBy('shops.id')
             ->orderBy('sold','DESC')
             ->get()
-            ->take(10);
+            ->take(15);
 
 //        $top_users = User::role('non-shopify-users')->join('retailer_products',function($join) use ($users_id){
 //            $join->on('retailer_products.user_id','=','users.id')
@@ -239,7 +239,7 @@ class ManagerController extends Controller
             ->groupBy('users.id')
             ->orderBy('sold', 'DESC')
             ->get()
-            ->take(10);
+            ->take(15);
 
 //        dd($top_products);
 
