@@ -209,7 +209,7 @@
                                                     <input type="radio"  class="" id="battery-yes" name="battery" value="yes" >
                                                     <label class="" for="battery-yes">Yes</label>
                                                     <input type="radio"  class="" id="battery-no" name="battery" value="no" >
-                                                    <label class="" for="battery-no">No</label>
+                                                    <label class="ml-2" for="battery-no">No</label>
                                                 </div>
                                             </div>
                                         </div>
