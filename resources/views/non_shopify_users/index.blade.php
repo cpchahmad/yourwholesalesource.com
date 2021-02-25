@@ -391,7 +391,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="material-error">Attach a File <span class="text-muted">(image,video,pdf)</span></label>
-                                                                <input type="file" name="file" class="form-control">
+                                                                <input type="file" name="file" class="form-control" accept="video/*,image/*,.pdf">
                                                             </div>
                                                             <input type="hidden" name="user_email" value="{{ \Illuminate\Support\Facades\Auth::user()->email }}">
                                                         </div>
