@@ -403,10 +403,16 @@
                                             @csrf
                                             <div class="block-content font-size-sm">
                                                 <div class="form-group">
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-12 px-0">
                                                         <div class="form-material">
-                                                            <label for="material-error">Feedbacks</label>
-                                                            <textarea class="form-control" name="suggestion"></textarea>
+                                                            <div class="form-group">
+                                                                <label for="material-error">Feedbacks</label>
+                                                                <textarea class="form-control" name="suggestion"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="material-error">Attach a File <span class="text-muted">(image,video,pdf)</span></label>
+                                                                <input type="file" name="file" class="form-control" accept="video/*,image/*,.pdf">
+                                                            </div>
                                                             <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
                                                         </div>
                                                     </div>

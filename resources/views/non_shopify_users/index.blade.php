@@ -383,7 +383,7 @@
                                             @csrf
                                             <div class="block-content font-size-sm">
                                                 <div class="form-group">
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-12 px-0">
                                                         <div class="form-material">
                                                             <div class="form-group">
                                                                 <label for="material-error">Feedbacks</label>
