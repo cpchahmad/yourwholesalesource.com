@@ -15,6 +15,7 @@ use App\FulfillmentLineItem;
 use App\Imports\BulkTrackingImport;
 use App\Mail\NewShopifyUserMail;
 use App\Mail\OrderStatusMail;
+use App\ManagerReview;
 use App\Notification;
 use App\OrderFulfillment;
 use App\OrderLog;
@@ -853,6 +854,42 @@ class AdminOrderController extends Controller
                 ->orderBy('sold', 'DESC')
                 ->get()
                 ->take(10);
+
+            $managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
+            $sales_managers = [];
+
+            foreach ($sales_managers as $manager) {
+                $users_id = $manager->has_users->pluck('id')->toArray();
+                $shops_id = $manager->has_sales_stores->pluck('id')->toArray();
+
+                $manager_sales = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->sum('cost_to_pay');
+                $active_stores = 0;
+                $new_stores = 0;
+
+                $manager->has_sales_stores()
+                    ->get()->filter(function($store) use ($active_stores){
+                         if($store->has_orders()->count() > 0 || $store->has_imported()->count() > 0)
+                             $active_stores += 1;
+                    });
+
+                $manager->has_sales_stores()
+                    ->get()->filter(function($store) use ($new_stores) {
+                        if($store->has_orders()->count() == 0 && $store->has_imported()->count() == 0)
+                            $new_stores += 1;
+                    });
+
+                $reviews = $manager->has_reviews()->avg('rating');
+
+                array_push($sales_managers, [
+                    'manager_name' => $manager->name,
+                    'sales' => $manager_sales,
+                    'new_stores' => $new_stores,
+                    'active_stores' => $active_stores,
+                    'reviews' => $reviews
+                ]);
+
+
+            }
 
         }
 

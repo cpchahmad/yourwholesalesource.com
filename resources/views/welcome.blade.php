@@ -275,6 +275,56 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Our Sales Managers</h3>
+                    </div>
+                    <div class="block-content ">
+                        @if(count($top_products_stores) > 0)
+                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                                <thead>
+                                <tr class="text-uppercase">
+                                    <th class="font-w700">Product</th>
+                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
+                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($top_products_stores as $product)
+                                    <tr>
+                                        <td class="font-w600">
+                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
+                                                @if($index == 0)
+                                                    @if($image->isV == 0)
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
+                                                    @else
+                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                            <a href="{{route('product.view',$product->id)}}">{{$product->title}}</a>
+                                        </td>
+                                        <td class="d-none d-sm-table-cell text-center">
+                                            {{$product->sold}}
+                                        </td>
+                                        <td class="">
+                                            ${{number_format($product->selling_cost,2)}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                                @else
+                                    <p  class="text-center"> No Top Products Based on Stores Found </p>
+                                @endif
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
