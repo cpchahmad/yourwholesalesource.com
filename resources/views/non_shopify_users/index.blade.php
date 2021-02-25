@@ -385,8 +385,14 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <div class="form-material">
-                                                            <label for="material-error">Feedbacks</label>
-                                                            <textarea class="form-control" name="suggestion"></textarea>
+                                                            <div class="form-group">
+                                                                <label for="material-error">Feedbacks</label>
+                                                                <textarea class="form-control" name="suggestion"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="material-error">Attach a File <span class="text-muted">(image,video,pdf)</span></label>
+                                                                <input type="file" name="file" class="form-control">
+                                                            </div>
                                                             <input type="hidden" name="user_email" value="{{ \Illuminate\Support\Facades\Auth::user()->email }}">
                                                         </div>
                                                     </div>

@@ -988,6 +988,17 @@ class DefaultSettingsController extends Controller
         $suggestion = new Suggestion();
         $suggestion->suggestion = $request->suggestion;
         $suggestion->user_email = $request->user_email;
+
+        if($request->hasFile('file')){
+            $file = $request->file('banner');
+            $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
+            $attachement = date("mmYhisa_") . $name;
+            $file->move(public_path() . '/suggestions/', $attachement);
+            $suggestion->file = $attachement;
+
+            dd($attachement, $file);
+        }
+
         $suggestion->save();
 
         return redirect()->back()->with('success', 'Your suggestion has been noted. Thank you!');
