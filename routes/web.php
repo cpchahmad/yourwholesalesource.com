@@ -489,15 +489,15 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //});
 
 
-Route::get('/tess', function() {
-   $class = new \App\Http\Controllers\AdminOrderController();
-
-    $order = RetailerOrder::find(2362);
-    $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
-
-
-    $class->set_erp_order_fulfillment($fulfillment, $order);
-});
+//Route::get('/tess', function() {
+//   $class = new \App\Http\Controllers\AdminOrderController();
+//
+//    $order = RetailerOrder::find(2362);
+//    $fulfillment = ERPOrderFulfillment::where('retailer_order_id', $order->id)->first();
+//
+//
+//    $class->set_erp_order_fulfillment()
+//});
 
 
 

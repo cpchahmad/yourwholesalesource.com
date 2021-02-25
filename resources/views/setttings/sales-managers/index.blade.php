@@ -107,7 +107,7 @@
                                                        data-original-title="Delete Manager"><i class="fa fa-times"></i></a>
                                                     <a href="{{ route('sales-managers.report', $manager->id) }}"
                                                        class="btn btn-sm btn-info" type="button" data-toggle="tooltip" title=""
-                                                       data-original-title="View Manager Progress"><i class="fa fa-info"></i></a>
+                                                       data-original-title="View Manager Progress"><i class="fa fa-info-circle"></i></a>
                                                 </div>
 
                                             </td>
