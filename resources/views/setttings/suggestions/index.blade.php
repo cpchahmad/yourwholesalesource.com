@@ -48,6 +48,7 @@
                         <tr>
                             <th>User</th>
                             <th>Suggestion</th>
+                            <th>Attachment</th>
                             <th>Suggested At</th>
                         </tr>
                         </thead>
@@ -59,6 +60,18 @@
                                 </td>
                                 <td style="vertical-align: middle">
                                     <p> {{ $item->suggestion }}</p>
+                                </td>
+                                <td style="vertical-align: middle">
+                                    @if($item->file)
+                                        @php
+                                            $file_extension = explode('.',$item->file)[1];
+                                        @endphp
+
+                                        @if($file_extension == "PNG" || $file_extension == "png" || $file_extension == "jpg" || $file_extension == "jpeg")
+                                            <a href="{{asset('suggestions')}}/{{$item->file}}" target="_blank">View Attachment</a>
+                                    @else
+                                        <p>No Attachments Added</p>
+                                    @endif
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ date_format($item->created_at ,"Y/M/d H:i ") }}
