@@ -96,7 +96,9 @@
                         <th>Title</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        <th>Status</th>
+                        @role('wordpress-admin')
+                            <th>Status</th>
+                        @endrole
                         <th></th>
                     </tr>
                     </thead>
@@ -145,16 +147,16 @@
                                     {{$product->quantity}}
                                 @endif
                             </td>
-                            <td style="vertical-align: middle">
-                                <div class="custom-control custom-switch custom-control-success mb-1">
-                                    <input @if($product->status ==1)checked="" @endif data-route="{{route('product.change.status',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">
-                                    <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>
-                                </div>
-
-                            </td>
+                            @role('wordpress-admin')
+                                <td style="vertical-align: middle">
+                                    <div class="custom-control custom-switch custom-control-success mb-1">
+                                        <input @if($product->status ==1)checked="" @endif data-route="{{route('product.change.status',$product->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input status-switch" id="status_product_{{ $product->id }}" name="example-sw-success2">
+                                        <label class="custom-control-label" for="status_product_{{ $product->id }}">@if($product->status ==1) Published @else Draft @endif</label>
+                                    </div>
+                                </td>
+                            @endrole
                             <td class="text-right" style="vertical-align: middle">
-
-                    <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
+                                <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
                                     <a class="btn btn-xs btn-sm btn-success" type="button" href="{{ route('product.view', $product->id) }}" title="View Product">
                                         <i class="fa fa-eye"></i>
                                     </a>
