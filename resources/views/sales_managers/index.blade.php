@@ -36,7 +36,7 @@
                 <a class="block block-rounded block-link-pop" href="/managers/tickets?priority=&status=1">
                     <div class="block-content block-content-full">
                         <div class="font-w700 text-gray-darker animated fadeIn">New Tickets</div>
-                        <div class="h2 font-w300 text-primary animated flipInX text-danger" >{{$new_tickets}}</div>
+                        <div class="font-size-h2 font-w400 text-danger" >{{$new_tickets}}</div>
                     </div>
                 </a>
 
@@ -45,7 +45,7 @@
                 <a class="block block-rounded block-link-pop" href="/managers/tickets?priority=&status=3">
                     <div class="block-content block-content-full">
                         <div class="font-w700 text-gray-darker animated fadeIn">Waiting Support Feedback Tickets</div>
-                        <div class="h2 font-w300 text-primary animated flipInX text-danger" >{{$waiting_support_tickets}}</div>
+                        <div class="font-size-h2 font-w400 text-danger" >{{$waiting_support_tickets}}</div>
                     </div>
                 </a>
             </div>
