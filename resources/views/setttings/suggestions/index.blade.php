@@ -62,14 +62,7 @@
                                     <p> {{ $item->suggestion }}</p>
                                 </td>
                                 <td style="vertical-align: middle">
-                                    @if($item->file)
-                                        @php
-                                            $file_extension =0;
-                                        @endphp
-                                    <p> {{ $item->file }}</p>
-                                    @else
-                                        <p>No Attachments Added</p>
-                                    @endif
+                                   ds
                                 </td>
                                 <td style="vertical-align: middle">
                                     {{ date_format($item->created_at ,"Y/M/d H:i ") }}
