@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWishlistCountriesTable extends Migration
+class CreateDropshipRequestAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateWishlistCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wishlist_countries', function (Blueprint $table) {
+        Schema::create('dropship_request_attachments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('wishlist_id')->nullable();
-            $table->unsignedBigInteger('country_id')->nullable();
+            $table->unsignedBigInteger('dropship_request_id')->nullable();
+            $table->string('source')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateWishlistCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wishlist_countries');
+        Schema::dropIfExists('dropship_request_attachments');
     }
 }

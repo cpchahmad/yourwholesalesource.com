@@ -6,6 +6,7 @@ use App\AdminSetting;
 use App\Category;
 use App\Country;
 use App\Customer;
+use App\DropshipRequest;
 use App\Exports\ProcessedOrder;
 use App\Exports\RetailerOrderExport;
 use App\Exports\UnprocessedOrder;
@@ -1101,6 +1102,33 @@ class CustomOrderController extends Controller
         return view('non_shopify_users.help-center.view')->with([
             'user' => $user,
             'ticket' => $ticket,
+        ]);
+    }
+
+    public function dropship_requests(Request $request) {
+        $user = User::find(Auth::id());
+        $requests = DropshipRequest::where('user_id', $user->id)->newQuery();
+
+
+
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $requests->where('status_id','=',$request->input('status'));
+            }
+        }
+
+        if($request->has('imported')) {
+            $requests->where('imported_to_store',0);
+        }
+
+        $requests = $requests->orderBy('created_at', 'DESC')->paginate(30);
+
+
+
+        return view('non_shopify_users.dropship-request.index')->with([
+            'user' => $user,
+            'requests' => $requests,
+            'countries' => Country::all(),
         ]);
     }
 
