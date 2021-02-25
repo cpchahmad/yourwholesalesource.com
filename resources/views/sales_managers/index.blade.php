@@ -36,7 +36,7 @@
                 <div class="block block-rounded block-link-pop" href="/managers/tickets?priority=&status=1">
                     <div class="block-content block-content-full">
                         <div class="font-w700 text-gray-darker animated fadeIn">New Tickets</div>
-                        <a class="h2 font-w300 text-primary animated flipInX text-dark" >{{$new_tickets}}</a>
+                        <a class="h2 font-w300 text-primary animated flipInX text-danger" >{{$new_tickets}}</a>
                     </div>
                 </div>
 
