@@ -204,10 +204,15 @@
                                         <div class="col-sm-12">
                                             <div class="form-material">
                                                 <label for="material-error">Contains Battery or not? <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
-                                                <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery">
-                                                <label class="custom-control-label" for="example-radio-best-seller">Yes</label>
-                                                <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery">
-                                                <label class="custom-control-label" for="example-radio-best-seller">No</label>
+                                                <br>
+                                                <div class="custom-control custom-radio mb-1">
+                                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery" value="Best Seller"  >
+                                                    <label class="custom-control-label" for="example-radio-best-seller">Yes</label>
+                                                </div>
+                                                <div class="custom-control custom-radio mb-1">
+                                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery" value="Best Seller"  >
+                                                    <label class="custom-control-label" for="example-radio-best-seller">No</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
