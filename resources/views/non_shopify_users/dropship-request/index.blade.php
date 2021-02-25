@@ -142,7 +142,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Product Name <i class="fa fa-question-circle"  title="This is the name of product you want to request in your wishlist"> </i></label>
+                                                <label for="material-error">Product Name <i class="fa fa-question-circle"  title="This is the name of product you want to request in your dropship request"> </i></label>
 
                                                 <input required class="form-control" type="text"  name="product_name"
                                                        placeholder="Enter Title here">
@@ -170,6 +170,48 @@
                                             </div>
                                         @endif
                                     @endif
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product"> </i></label>
+                                                <input type="file" name="attachments[]" class="form-control" multiple>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Product Link <i class="fa fa-question-circle"  title="Reference link to product you want to request in your dropship request"> </i></label>
+                                                <input  class="form-control" type="url"  name="product_url"
+                                                        placeholder="Enter Product Link here">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Expected Weekly Sales <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
+                                                <input required class="form-control" type="number" step="any"  name="weekyly_sales"
+                                                       placeholder="Weekly Sales/Orders">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="material-error">Contains Battery or not? <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
+                                                <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery">
+                                                <label class="custom-control-label" for="example-radio-best-seller">Yes</label>
+                                                <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery">
+                                                <label class="custom-control-label" for="example-radio-best-seller">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
@@ -179,24 +221,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Expected Monthly Sales <i class="fa fa-question-circle"  title="This is the expected monthly sales of product you want to request in your wishlist"> </i></label>
-                                                <input required class="form-control" type="number" step="any"  name="monthly_sales"
-                                                       placeholder="Monthly Sales/Orders">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Reference <i class="fa fa-question-circle"  title="Reference link to product you want to request in your wishlist"> </i></label>
-                                                <input  class="form-control" type="url"  name="reference"
-                                                       placeholder="Enter Reference here">
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
@@ -211,15 +237,6 @@
                                         </div>
                                     </div>
 
-
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <div class="form-material">
-                                                <label for="material-error">Attachments <i class="fa fa-question-circle"  title="Files/Images related to this product"> </i></label>
-                                                <input type="file" name="attachments[]" class="form-control" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
