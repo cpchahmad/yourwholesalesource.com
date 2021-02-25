@@ -206,10 +206,10 @@
                                                 <label for="material-error">Contains Battery or not? <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
                                                 <br>
                                                 <div class="custom-control custom-radio mb-1">
-                                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery" value="yes"  >
-                                                    <label class="custom-control-label" for="example-radio-best-seller">Yes</label>
-                                                    <input type="radio"  class="custom-control-input" id="example-radio-best-seller" name="battery" value="no"  >
-                                                    <label class="custom-control-label" for="example-radio-best-seller">No</label>
+                                                    <input type="radio"  class="custom-control-input" id="battery-yes" name="battery" value="yes"  >
+                                                    <label class="custom-control-label ml-5" for="battery-yes">Yes</label>
+                                                    <input type="radio"  class="custom-control-input" id="battery-no" name="battery" value="no"  >
+                                                    <label class="custom-control-label" for="battery-no">No</label>
                                                 </div>
                                             </div>
                                         </div>
