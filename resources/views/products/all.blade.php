@@ -157,7 +157,7 @@
                             @endrole
                             <td class="text-right" style="vertical-align: middle">
                                 <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                    <a class="btn btn-xs btn-sm btn-success" type="button" href="{{ route('product.view', $product->id) }}" title="View Product">
+                                    <a class="btn btn-xs btn-sm btn-success" type="button" href="@role('wordpress-admin') {{ route('product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole" title="View Product">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     @role('wordpress-admin')
