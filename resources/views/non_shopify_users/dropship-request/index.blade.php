@@ -196,9 +196,9 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Expected Weekly Sales <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
-                                                <input required class="form-control" type="number" step="any"  name="weekly_sales"
-                                                       placeholder="Enter Weekly Sales here">
+                                                <label for="material-error">Expected Weekly Sold out amount <i class="fa fa-question-circle"  title="This is the expected weekly sales of product you want to request in your dropship request"> </i></label>
+                                                <input required class="form-control" type="number"   name="weekly_sales"
+                                                       placeholder="Enter Weekly Sold out quantity here">
                                             </div>
                                         </div>
                                     </div>

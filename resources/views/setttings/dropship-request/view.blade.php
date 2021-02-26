@@ -49,7 +49,7 @@
                             <hr>
                             <div class="text-right p-2">
                                 @if(in_array($item->status_id,[1,4]))
-                                    <button class="btn btn-success"  data-toggle="modal">Mark as Approved</button>
+                                    <button class="btn btn-success" data-target="mark-approved-modal" data-toggle="modal">Mark as Approved</button>
                                 @endif
                                 @if($item->status_id == 3)
                                     <button class="btn btn-primary" data-target="#mark-completed-modal" data-toggle="modal">Mark as Completed</button>
@@ -79,26 +79,23 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
+                                                                    <label for="material-error">You are about to approve the dropship request.</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="block-content font-size-sm">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
                                                                     <label for="material-error">Target Dropshipping Cost</label>
                                                                     <input readonly class="form-control" type="text" value="{{$item->cost}}">
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <label for="material-error">Approved Cost</label>
-                                                                    <input required class="form-control" type="number" step="any" name="approved_price">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">
-
                                                         <button type="submit" class="btn btn-sm btn-success">Approved</button>
                                                     </div>
                                                 </form>
@@ -413,7 +410,7 @@
                             @endif
                             <span class="font-weight-bold">Cost: </span> {{number_format($item->cost,2)}} USD
                             <hr>
-                            <span class="font-weight-bold">Weekly Sales: </span> {{number_format($item->weekly_sales,2)}} USD
+                            <span class="font-weight-bold">Weekly Sales: </span> {{ $item->weekly_sales }}
                             <hr>
                             <span class="font-weight-bold">Weight: </span> {{ $item->weight }} (kg)
                             <hr>

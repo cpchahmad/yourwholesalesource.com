@@ -227,7 +227,7 @@
                             <hr>
                             <span class="font-weight-bold">Cost: </span> {{number_format($item->cost,2)}} USD
                             <hr>
-                            <span class="font-weight-bold">Weekly Sales: </span> {{number_format($item->weekly_sales,2)}} USD
+                            <span class="font-weight-bold">Weekly Sales: </span> {{ $item->weekly_sales }}
                             <hr>
                             <span class="font-weight-bold">Weight: </span> {{ $item->weight }} (kg)
                             <hr>

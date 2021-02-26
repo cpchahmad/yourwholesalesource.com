@@ -13,6 +13,7 @@ class DropshipRequestController extends Controller
 {
     private $helper;
     private $log;
+    private $notify;
 
     /**
      * WishlistController constructor.
@@ -22,6 +23,7 @@ class DropshipRequestController extends Controller
     {
         $this->helper = new HelperController();
         $this->log = new ActivityLogController();
+        $this->notify = new NotificationController();
     }
 
     public function create_dropship_requests(Request $request) {
@@ -87,6 +89,71 @@ class DropshipRequestController extends Controller
 
             return redirect()->back()->with('success','Dropship Request created successfully!');
         }
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
+
+    public function approve_dropship_request(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = DropshipRequest::find($request->input('wishlist_id'));
+        if($manager != null && $drop_request != null){
+            $drop_request->status_id = 2;
+            //$drop_request->approved_price = $request->input('approved_price');
+            $drop_request->updated_at = now();
+            $drop_request->save();
+            $tl = new ManagerLog();
+            $tl->message = 'Manager Approved Dropship Request at ' . date_create($drop_request->updated_at)->format('d M, Y h:i a');
+            $tl->status = "Manager Approved Wishlist";
+            $tl->manager_id = $manager->id;
+            $tl->save();
+
+            $user = $drop_request->has_user;
+//            try{
+//                Mail::to($user->email)->send(new WishlistApproveMail($user, $drop_request));
+//            }
+//            catch (\Exception $e){
+//            }
+
+            $this->notify->generate('Dropship-Request','Dropship Request','Dropship Request named '.$drop_request->product_name.' has been approved by your manager',$drop_request);
+            $this->log->store(0, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Approved');
+
+
+            return redirect()->back()->with('success','Dropship Request Approved Successfully!');
+
+        }
+
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
+    public function reject_dropship_request(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = Wishlist::find($request->input('wishlist_id'));
+        if($manager != null && $drop_request != null){
+            $drop_request->status_id = 4;
+            $drop_request->reject_reason = $request->input('reject_reason');
+            $drop_request->updated_at = now();
+            $drop_request->save();
+            $tl = new ManagerLog();
+            $tl->message = 'Manager Rejected Dropship Request against price '.number_format($drop_request->cost,2).' at ' . date_create($drop_request->updated_at)->format('d M, Y h:i a');
+            $tl->status = "Manager Rejected Wishlist";
+            $tl->manager_id = $manager->id;
+            $tl->save();
+            $this->notify->generate('Dropship-Request','Dropship Request Rejected','Dropship Request named '.$drop_request->product_name.' has been rejected by your manager',$drop_request);
+
+            $user = $drop_request->has_user;
+//            try{
+//                Mail::to($user->email)->send(new WishlistRejectMail($user, $drop_request));
+//            }
+//            catch (\Exception $e){
+//            }
+            $this->log->store(0, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Rejected');
+
+            return redirect()->back()->with('success','Dropship Request Rejected Successfully!');
+
+        }
+
         else{
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
