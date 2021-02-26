@@ -74,7 +74,7 @@ class DropshipRequestController extends Controller
             if($request->hasFile('attachments')){
                 $files = $request->file('attachments');
                 foreach ($files as $file){
-                    $name = Str::slug($file->getClientOriginalName());
+                    $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
                     $attachement = date("mmYhisa_") . $name;
                     $file->move(public_path() . '/wishlist-attachments/', $attachement);
                     $wa = new DropshipRequestAttachment();
