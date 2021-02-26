@@ -858,8 +858,7 @@ class AdminOrderController extends Controller
             $managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
             $sales_managers = [];
 
-            foreach ($sales_managers as $manager) {
-                dd(32);
+            foreach ($managers as $manager) {
                 $users_id = $manager->has_users->pluck('id')->toArray();
                 $shops_id = $manager->has_sales_stores->pluck('id')->toArray();
 
@@ -888,9 +887,9 @@ class AdminOrderController extends Controller
                     'active_stores' => $active_stores,
                     'reviews' => $reviews
                 ]);
-
-                dd($sales_managers);
             }
+
+            dd($sales_managers);
         }
 
 
