@@ -961,7 +961,7 @@ class AdminOrderController extends Controller
             'top_products_users' => $top_products_users,
             'top_stores' => $top_stores,
             'top_users' => $top_users,
-            'sales_manages' => $managers
+            'sales_managers' => $sales_managers
         ]);
     }
 
