@@ -43,6 +43,15 @@
                                 @endforeach
                             </div>
                                 <hr>
+                                @if($item->status_id == 4 &&$item->reject_reason != null)
+                                    <div class="row p-2">
+                                        <div class="col-md-8">
+                                            <p class="font-w400 text-success "> <i class="fa fa-question-circle text-danger"></i>
+                                                {!! $item->reject_reason !!}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endif
                                 @if($item->status_id == 2)
                                     <div class="row p-2">
                                         <div class="col-md-8">
@@ -319,10 +328,7 @@
                                 <span class="font-weight-bold">Approved Cost: </span> {{number_format($item->approved_price,2)}} USD
                                 <hr>
                                 @endif
-                            @if($item->reject_reason != null)
-                                <span class="font-weight-bold">Reject Reason: </span> {{$item->reject_reason}}
-                                <hr>
-                            @endif
+
                             <span class="font-weight-bold">Dropship Request Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
                             <hr>
                             <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$item->has_manager->name}} </span>
