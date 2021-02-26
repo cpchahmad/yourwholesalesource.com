@@ -11,7 +11,7 @@
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item">Dropship Request</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href=""> {{$item->product}} </a>
+                            <a class="link-fx" href=""> {{$item->product_name}} </a>
                         </li>
                     </ol>
                 </nav>
