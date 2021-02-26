@@ -43,7 +43,7 @@
                                 @endforeach
                             </div>
                                 <hr>
-                                @if($item->status_id == 4 &&$item->reject_reason != null)
+                                @if($item->status_id == 4 && $item->reject_reason != null && $item->rejected_by_use == null)
                                     <div class="row p-2">
                                         <div class="col-md-8 text-danger font-w600">
                                             Rejection Reason:
