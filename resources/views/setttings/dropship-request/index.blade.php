@@ -120,7 +120,7 @@
                             </div>
 
                         @else
-                            <p class="text-center">No Wishlist Found.</p>
+                            <p class="text-center">No Dropship Request Found.</p>
                         @endif
                     </div>
 

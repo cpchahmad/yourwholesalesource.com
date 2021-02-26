@@ -61,13 +61,13 @@
                                             </p>
                                         </div>
                                         <div class="col-md-6 text-right">
-                                            <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
+                                            <button class="btn btn-success" data-target="#mark-accepted-modal" data-toggle="modal">Mark as Accepted</button>
                                             <button class="btn btn-danger ml-2" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                         </div>
                                     </div>
                                 @endif
                                 @if($item->status_id == 2)
-                                    <div class="modal fade" id="mark-approved-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                    <div class="modal fade" id="mark-accepted-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout" role="document">
                                             <div class="modal-content">
                                                 <div class="block block-themed block-transparent mb-0">
@@ -79,7 +79,7 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <form action="{{route('wishlist.accept')}}" method="post">
+                                                    <form action="{{route('dropship.requests.accept')}}" method="post">
                                                         @csrf
                                                         <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                         <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
@@ -87,22 +87,11 @@
                                                             <div class="form-group">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-material">
-                                                                        <label for="material-error">Target Dropshipping Cost</label>
+                                                                        <label for="material-error">You are about to accept the Qoute with a target Dropshipping Cost</label>
                                                                         <input readonly class="form-control" type="text" value="{{$item->cost}}">
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Approved Cost</label>
-                                                                        <input readonly class="form-control" type="number" step="any" name="approved_price" value="{{$item->approved_price}}">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                                         </div>
 
                                                         <div class="block-content block-content-full text-right border-top">
