@@ -137,7 +137,7 @@
                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <input type="hidden" name="type" value="user-wishlist">
 
-                                <div class="text-center text-danger">
+                                <div class="text-center text-danger p-3 font-w600">
                                     Reminder: Dear user, creating a Dropship Request means that you will send us the stock to fulfill
                                 </div>
 
