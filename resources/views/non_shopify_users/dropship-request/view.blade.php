@@ -46,6 +46,7 @@
                                 @if($item->status_id == 4 &&$item->reject_reason != null)
                                     <div class="row p-2">
                                         <div class="col-md-8 text-danger font-w400">
+                                            Rejection Reason:
                                             {!! $item->reject_reason !!}
                                         </div>
                                     </div>
