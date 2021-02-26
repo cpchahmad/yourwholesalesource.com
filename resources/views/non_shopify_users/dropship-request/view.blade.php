@@ -48,7 +48,7 @@
                                         <div class="col-md-8">
                                             <p class="font-w400 text-success "> <i class="fa fa-question-circle text-success"></i> The approved quote is
                                                 based on your offered packing size, weight and
-                                                other request, there will be a ﬁnal conﬁrmation
+                                                other request, there will be a final confirmation
                                                 once your stock landed in our warehouse .
                                             </p>
                                         </div>
