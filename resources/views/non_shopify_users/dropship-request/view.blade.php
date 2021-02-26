@@ -45,10 +45,8 @@
                                 <hr>
                                 @if($item->status_id == 4 &&$item->reject_reason != null)
                                     <div class="row p-2">
-                                        <div class="col-md-8">
-                                            <p class="font-w400 text-success "> <i class="fa fa-question-circle text-danger"></i>
-                                                {!! $item->reject_reason !!}
-                                            </p>
+                                        <div class="col-md-8 text-danger font-w400">
+                                            {!! $item->reject_reason !!}
                                         </div>
                                     </div>
                                 @endif
