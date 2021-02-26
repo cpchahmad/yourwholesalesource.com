@@ -52,8 +52,9 @@
                                                 once your stock landed in our warehouse .
                                             </p>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-4">
                                             <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
+                                            <button class="btn btn-danger pl-2" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                         </div>
                                     </div>
                                 @endif
@@ -99,6 +100,53 @@
                                                         <div class="block-content block-content-full text-right border-top">
 
                                                             <button type="submit" class="btn btn-sm btn-success">Accept</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="mark-rejected-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-popout" role="document">
+                                            <div class="modal-content">
+                                                <div class="block block-themed block-transparent mb-0">
+                                                    <div class="block-header bg-primary-dark">
+                                                        <h3 class="block-title">Mark as Rejected</h3>
+                                                        <div class="block-options">
+                                                            <button type="button" class="btn-block-option">
+                                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <form action="{{route('dropship.requests.reject')}}" method="post">
+                                                        @csrf
+                                                        <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
+                                                        <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
+                                                        <div class="block-content font-size-sm">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Target Dropshipping Cost</label>
+                                                                        <input readonly class="form-control" type="text" value="{{$item->cost}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Rejected Reason</label>
+                                                                        <textarea required class="js-summernote" name="reject_reason"
+                                                                                  placeholder="Please Enter Reject Reason here !"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="block-content block-content-full text-right border-top">
+
+                                                            <button type="submit" class="btn btn-sm btn-danger" >Reject</button>
                                                         </div>
                                                     </form>
                                                 </div>
