@@ -46,7 +46,7 @@
                                 @if($item->status_id == 2)
                                     <div class="row p-2">
                                         <div class="col-md-8">
-                                            <p class="font-size-sm"> The approved quote is
+                                            <p class="font-w400 text-success "> The approved quote is
                                                 based on your offered packing size, weight and
                                                 other request, there will be a ﬁnal conﬁrmation
                                                 once your stock landed in our warehouse .
