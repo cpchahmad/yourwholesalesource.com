@@ -394,68 +394,72 @@
                     </div>
                     <div class="block-content">
                         <div class="p-2 font-size-sm">
-                            <span class="font-weight-bold">#: </span> <span class="text-center">{{$item->id}}</span>
-                            @if($item->has_store != null)
+                            <div class="col-md-6">
+                                <span class="font-weight-bold">#: </span> <span class="text-center">{{$item->id}}</span>
+                                @if($item->has_store != null)
+                                    <hr>
+                                    <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{explode('.',$item->has_store->shopify_domain)[0]}}</span>
+                                    <hr>
+                                    <span class="font-weight-bold">Domain: </span> <span class="text-center">{{$item->has_store->shopify_domain}}</span>
+                                    <hr>
+                                @elseif($item->has_user != null)
+                                    <hr>
+                                    <span class="font-weight-bold">Client: </span> <span class="text-center">{{$item->has_user->name}}</span>
+                                    <hr>
+                                    <span class="font-weight-bold">Email: </span> <span class="text-center">{{$item->has_user->email}}</span>
+                                    <hr>
+                                @endif
+                                <span class="font-weight-bold">Cost: </span> {{number_format($item->cost,2)}} USD
                                 <hr>
-                                <span class="font-weight-bold">Store: </span> <span class=" badge badge-primary text-center">{{explode('.',$item->has_store->shopify_domain)[0]}}</span>
+                                <span class="font-weight-bold">Weekly Sales: </span> {{ $item->weekly_sales }}
                                 <hr>
-                                <span class="font-weight-bold">Domain: </span> <span class="text-center">{{$item->has_store->shopify_domain}}</span>
+                                <span class="font-weight-bold">Weight: </span> {{ $item->weight }} (kg)
                                 <hr>
-                            @elseif($item->has_user != null)
+                                <span class="font-weight-bold">Packing size: </span> {{ $item->packing_size }}
                                 <hr>
-                                <span class="font-weight-bold">Client: </span> <span class="text-center">{{$item->has_user->name}}</span>
+                                <span class="font-weight-bold">Contains Battery: </span> @if($item->battery) Yes @else No @endif
                                 <hr>
-                                <span class="font-weight-bold">Email: </span> <span class="text-center">{{$item->has_user->email}}</span>
+                                <span class="font-weight-bold">Relabell Needed: </span> @if($item->relabell) Yes @else No @endif
                                 <hr>
-                            @endif
-                            <span class="font-weight-bold">Cost: </span> {{number_format($item->cost,2)}} USD
-                            <hr>
-                            <span class="font-weight-bold">Weekly Sales: </span> {{ $item->weekly_sales }}
-                            <hr>
-                            <span class="font-weight-bold">Weight: </span> {{ $item->weight }} (kg)
-                            <hr>
-                            <span class="font-weight-bold">Packing size: </span> {{ $item->packing_size }}
-                            <hr>
-                            <span class="font-weight-bold">Contains Battery: </span> @if($item->battery) Yes @else No @endif
-                            <hr>
-                            <span class="font-weight-bold">Relabell Needed: </span> @if($item->relabell) Yes @else No @endif
-                            <hr>
-                            <span class="font-weight-bold">Repacking Needed: </span> @if($item->re_pack) Yes @else No @endif
-                            <hr>
-                            <span class="font-weight-bold">Stock: </span> {{ $item->stock }}
-                            <hr>
-                            <span class="font-weight-bold">Number of Options: </span> {{ $item->option_count }}
-                            <hr>
-                            <span class="font-weight-bold">Markets: </span>   @if(count($item->has_market) > 0)
-                                @foreach($item->has_market as $country)
-                                    <span class="badge badge-primary">{{$country->name}}</span>
-                                @endforeach
-                            @else
-                                none
-                            @endif
-                            <hr>
-                            @if($item->approved_price != null)
-                                <span class="font-weight-bold">Approved Cost: </span> {{number_format($item->approved_price,2)}} USD
+                                <span class="font-weight-bold">Repacking Needed: </span> @if($item->re_pack) Yes @else No @endif
                                 <hr>
-                            @endif
-                            @if($item->reject_reason != null)
-                                <span class="font-weight-bold">Reject Reason: </span>  {!! $item->reject_reason !!}
-                                <hr>
-                            @endif
-                            <span class="font-weight-bold">Created at: </span> <span class="text-center">{{date_create($item->created_at)->format('m d, Y h:i a')}}</span>
-                            <hr>
-                            <span class="font-weight-bold">Last Update at: </span> <span class="text-center">{{date_create($item->updated_at)->format('m d, Y h:i a')}}</span>
-                            <hr>
-                            <span class="font-weight-bold">Status: </span>   @if($item->has_status != null)
-                                <span class="badge " style="background: {{$item->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
-                            @endif
-                            <hr>
-                            <span class="font-weight-bold">Wishlist Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
-                            <hr>
-                            <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$item->has_manager->name}} </span>
-                            <hr>
-                            <span class="font-weight-bold">Manager Email: </span>  <span class="text-center"> {{$item->has_manager->email}} </span>
+                            </div>
+                           <div class="col-md-6">
+                               <span class="font-weight-bold">Stock: </span> {{ $item->stock }}
+                               <hr>
+                               <span class="font-weight-bold">Number of Options: </span> {{ $item->option_count }}
+                               <hr>
+                               <span class="font-weight-bold">Markets: </span>   @if(count($item->has_market) > 0)
+                                   @foreach($item->has_market as $country)
+                                       <span class="badge badge-primary">{{$country->name}}</span>
+                                   @endforeach
+                               @else
+                                   none
+                               @endif
+                               <hr>
+                               @if($item->approved_price != null)
+                                   <span class="font-weight-bold">Approved Cost: </span> {{number_format($item->approved_price,2)}} USD
+                                   <hr>
+                               @endif
+                               @if($item->reject_reason != null)
+                                   <span class="font-weight-bold">Reject Reason: </span>  {!! $item->reject_reason !!}
+                                   <hr>
+                               @endif
+                               <span class="font-weight-bold">Created at: </span> <span class="text-center">{{date_create($item->created_at)->format('m d, Y h:i a')}}</span>
+                               <hr>
+                               <span class="font-weight-bold">Last Update at: </span> <span class="text-center">{{date_create($item->updated_at)->format('m d, Y h:i a')}}</span>
+                               <hr>
+                               <span class="font-weight-bold">Status: </span>   @if($item->has_status != null)
+                                   <span class="badge " style="background: {{$item->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
+                               @endif
+                               <hr>
+                               <span class="font-weight-bold">Wishlist Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
+                               <hr>
+                               <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$item->has_manager->name}} </span>
+                               <hr>
+                               <span class="font-weight-bold">Manager Email: </span>  <span class="text-center"> {{$item->has_manager->email}} </span>
 
+                           </div>
                         </div>
 
                     </div>
