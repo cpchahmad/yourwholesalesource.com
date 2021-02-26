@@ -7,6 +7,7 @@ use App\DropshipRequestAttachment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Psy\Util\Str;
 
 class DropshipRequestController extends Controller
 {
