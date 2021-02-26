@@ -49,7 +49,7 @@
                             <hr>
                             <div class="text-right p-2">
                                 @if(in_array($item->status_id,[1,4]))
-                                    <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Approved</button>
+                                    <button class="btn btn-success"  data-toggle="modal">Mark as Approved</button>
                                 @endif
                                 @if($item->status_id == 3)
                                     <button class="btn btn-primary" data-target="#mark-completed-modal" data-toggle="modal">Mark as Completed</button>
@@ -71,7 +71,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('wishlist.approve')}}" method="post">
+                                                <form action="{{route('dropship.requests.approve')}}" method="post">
                                                     @csrf
                                                     <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                     <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">

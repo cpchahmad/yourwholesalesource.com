@@ -406,7 +406,9 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 
 
         Route::post('/dropship-requests/create', 'DropshipRequestController@create_dropship_requests')->name('dropship.request.create');
-        Route::get('/dropship-requests/{id}/delete', 'DropshipRequestController@delete_dropship_requests')->name('dropship.request.delete');
+        Route::get('/dropship-requests/{id}/delete', 'DropshipRequestController@delete_dropship_requests')->name('dropship.requests.delete');
+        Route::post('/dropship-requests/approved', 'DropshipRequestController@approve_dropship_request')->name('dropship.requests.approve');
+        Route::post('/dropship-requests/rejected', 'DropshipRequestController@reject_dropship_request')->name('dropship.requests.reject');
 
 
 

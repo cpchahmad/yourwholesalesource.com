@@ -91,7 +91,7 @@
                                                     <a href="{{route('users.dropship.request.view',$item->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('dropship.request.delete', $item->id) }}"
+                                                    <a href="{{ route('dropship.requests.delete', $item->id) }}"
                                                        class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="Delete Wishlist"><i class="fa fa-times"></i></a>
                                                 </div>
