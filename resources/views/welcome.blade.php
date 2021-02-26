@@ -283,7 +283,7 @@
                     </div>
                     <div class="block-content ">
                         @if (count($sales_managers) > 0)
-                            <table class="table table-hover table-borderless table-striped table-vcenter table-responsive">
+                            <table class="table table-hover table-borderless table-striped table-vcenter">
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -306,7 +306,7 @@
                                             {{$manager['new_stores']}}
                                         </td>
                                         <td>
-                                            {{number_format($manager['sales'], 2)}}
+                                            {{number_format($manager['sales'], 2)}} USD
                                         </td>
 
                                         <td>
