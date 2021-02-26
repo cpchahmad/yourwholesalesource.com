@@ -584,8 +584,8 @@ class DefaultSettingsController extends Controller
             $requests->where('product_name','LIKE','%'.$request->input('search').'%');
             $requests->orwhere('description','LIKE','%'.$request->input('search').'%');
         }
-        if($requests->has('status')){
-            if($requests->input('status') != null){
+        if($request->has('status')){
+            if($request->input('status') != null){
                 $requests->where('status_id','=',$request->input('status'));
 
             }
