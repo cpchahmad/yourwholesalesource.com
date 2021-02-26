@@ -282,45 +282,43 @@
                         <h3 class="block-title">Our Sales Managers</h3>
                     </div>
                     <div class="block-content ">
-                        @if(count($top_products_stores) > 0)
-                            <table class="table table-striped table-hover table-borderless table-vcenter">
+                        @if (count($sales_managers) > 0)
+                            <table class="table table-hover table-borderless table-striped table-vcenter table-responsive">
                                 <thead>
-                                <tr class="text-uppercase">
-                                    <th class="font-w700">Product</th>
-                                    <th class="d-none d-sm-table-cell font-w700 text-center" style="width: 80px;">Quantity</th>
-                                    <th class="font-w700 text-center" style="width: 60px;">Sales</th>
+                                <tr>
+                                    <th></th>
+                                    <th>Active Stores</th>
+                                    <th>New Stores</th>
+                                    <th>Sales</th>
+                                    <th>Reviews</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-
-                                @foreach($top_products_stores as $product)
+                                <tbody class="">
+                                @foreach($sales_managers as $index => $manager)
                                     <tr>
-                                        <td class="font-w600">
-                                            @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                                @if($index == 0)
-                                                    @if($image->isV == 0)
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images')}}/{{$image->image}}" alt="">
-                                                    @else
-                                                        <img class="img-avatar img-avatar32" style="margin-right: 5px" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                            <a href="{{route('product.view',$product->id)}}">{{$product->title}}</a>
+                                        <td class="font-w600 d-flex">
+                                            <img class="img-avatar" @if($manager->manager->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager->manager->profile}}" @endif alt="">
+                                            <span style="margin-left: 10px;">{{ $manager->manager->name }}</span></td>
+                                        <td>
+                                            {{$manager->active_stores}}
                                         </td>
-                                        <td class="d-none d-sm-table-cell text-center">
-                                            {{$product->sold}}
+                                        <td>
+                                            {{$manager->new_stores}}
                                         </td>
-                                        <td class="">
-                                            ${{number_format($product->selling_cost,2)}}
+                                        <td>
+                                            {{number_format($manager->sales, 2)}}
+                                        </td>
+
+                                        <td>
+                                            <span class="label label-success">{{ $manager->reviews }}</span>
                                         </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
-                                @else
-                                    <p  class="text-center"> No Top Products Based on Stores Found </p>
-                                @endif
                             </table>
+                        @else
+                            <p>No Sales Manager Found</p>
+                        @endif
                     </div>
                 </div>
             </div>

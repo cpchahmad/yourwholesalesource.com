@@ -769,6 +769,45 @@ class AdminOrderController extends Controller
                 ->take(10);
 
 
+            $managers = User::role('sales-manager')->orderBy('created_at','DESC')->get();
+            $sales_managers = [];
+
+            foreach ($managers as $manager) {
+                $users_id = $manager->has_users->pluck('id')->toArray();
+                $shops_id = $manager->has_sales_stores->pluck('id')->toArray();
+
+                $manager_sales = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])->sum('cost_to_pay');
+
+
+                $active_stores = $manager->has_sales_stores()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->get()->filter(function($store) {
+                    return $store->has_orders()->count() > 0 || $store->has_imported()->count() > 0 ?? $store;
+                });
+
+                $new_stores = $manager->has_sales_stores()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->get()->filter(function($store) {
+                    return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0 ?? $store;
+                });
+
+                $active_stores = count($active_stores);
+                $new_stores = count($new_stores);
+
+                $reviews = $manager->has_reviews()
+                    ->whereBetween('created_at', [$comparing_start_date, $comparing_end_date])
+                    ->avg('rating');
+
+                array_push($sales_managers, [
+                    'manager' => $manager,
+                    'sales' => $manager_sales,
+                    'new_stores' => $new_stores,
+                    'active_stores' => $active_stores,
+                    'reviews' => $reviews
+                ]);
+            }
+
+
 
         }
         else {
@@ -887,7 +926,6 @@ class AdminOrderController extends Controller
                 ]);
             }
 
-            dd($sales_managers);
         }
 
 
@@ -923,6 +961,7 @@ class AdminOrderController extends Controller
             'top_products_users' => $top_products_users,
             'top_stores' => $top_stores,
             'top_users' => $top_users,
+            'sales_manages' => $managers
         ]);
     }
 
