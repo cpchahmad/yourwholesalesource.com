@@ -607,7 +607,7 @@ class DefaultSettingsController extends Controller
         ]);
     }
 
-    public function view_dropship_request(Request $request){
+    public function view_dropship_requests(Request $request){
         $item = DropshipRequest::find($request->id);
         return view('setttings.dropship-request.view')->with([
             'item' => $item,
