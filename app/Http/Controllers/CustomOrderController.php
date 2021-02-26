@@ -1195,6 +1195,16 @@ class CustomOrderController extends Controller
         ]);
     }
 
+    public function view_dropship_request(Request $request) {
+        $user = User::find(Auth::id());
+        $item = DropshipRequest::find($request->id);
+        return view('non_shopify_users.dropship-request.view')->with([
+            'user' => $user,
+            'item' => $item
+        ]);
+    }
+
+
     public function delete_wishlist($id)
     {
         Wishlist::find($id)->delete();
