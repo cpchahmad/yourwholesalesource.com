@@ -96,7 +96,7 @@ class DropshipRequestController extends Controller
 
     public function approve_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
-        $drop_request = DropshipRequest::find($request->input('wishlist_id'));
+        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
             $drop_request->status_id = 2;
             //$drop_request->approved_price = $request->input('approved_price');
