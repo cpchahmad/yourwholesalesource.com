@@ -859,6 +859,7 @@ class AdminOrderController extends Controller
             $sales_managers = [];
 
             foreach ($sales_managers as $manager) {
+                dd(32);
                 $users_id = $manager->has_users->pluck('id')->toArray();
                 $shops_id = $manager->has_sales_stores->pluck('id')->toArray();
 
