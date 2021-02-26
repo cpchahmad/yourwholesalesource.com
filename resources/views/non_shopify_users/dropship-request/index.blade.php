@@ -4,7 +4,7 @@
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
                 <h1 class="flex-sm-fill h4 my-2">
-                    Wishlist
+                    Dropship Request
                 </h1>
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
@@ -42,7 +42,6 @@
                                 <table class="table table-hover table-borderless table-striped table-vcenter">
                                     <thead>
                                     <tr>
-
                                         <th>Product</th>
                                         <th>Cost</th>
                                         <th>Sales</th>
@@ -137,6 +136,10 @@
                                 <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <input type="hidden" name="type" value="user-wishlist">
+
+                                <div class="text-center text-danger">
+                                    Reminder: Dear user, creating a Dropship Request means that you will send us the stock to fulfill
+                                </div>
 
                                 <div class="block-content font-size-sm">
                                     <div class="form-group">
