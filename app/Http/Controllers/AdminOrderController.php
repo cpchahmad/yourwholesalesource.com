@@ -863,20 +863,18 @@ class AdminOrderController extends Controller
                 $shops_id = $manager->has_sales_stores->pluck('id')->toArray();
 
                 $manager_sales = RetailerOrder::whereIN('paid',[1,2])->whereIn('shop_id',$shops_id)->whereIn('user_id',$users_id)->sum('cost_to_pay');
-                $active_stores = 0;
-                $new_stores = 0;
 
-                $active_stores +=  $manager->has_sales_stores()
-                    ->get()->each(function($store) use ($active_stores){
-                         if($store->has_orders()->count() > 0 || $store->has_imported()->count() > 0)
-                             return 1;
-                    });
 
-                $new_stores += $manager->has_sales_stores()
-                    ->get()->each(function($store) use ($new_stores) {
-                        if($store->has_orders()->count() == 0 && $store->has_imported()->count() == 0)
-                            return 1;
-                    });
+                $active_stores = $manager->has_sales_stores()->get()->filter(function($store) {
+                    return $store->has_orders()->count() > 0 || $store->has_imported()->count() > 0 ?? $store;
+                });
+
+                $new_stores = $manager->has_sales_stores()->get()->filter(function($store) {
+                    return $store->has_orders()->count() == 0 && $store->has_imported()->count() == 0 ?? $store;
+                });
+
+                $active_stores = count($active_stores);
+                $new_stores = count($new_stores);
 
                 $reviews = $manager->has_reviews()->avg('rating');
 
