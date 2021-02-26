@@ -23,7 +23,7 @@
             <div class="col-md-8">
                 <div class="block">
                     <div class="block-header">
-                        <h5 class="block-title">{{$item->product_name}}  <span class="badge " style="background: {{$wishlist->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
+                        <h5 class="block-title">{{$item->product_name}}  <span class="badge " style="background: {{$item->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
                         </h5>
                     </div>
                     <div class="block-content">
@@ -64,7 +64,7 @@
                                                     </div>
                                                     <form action="{{route('wishlist.accept')}}" method="post">
                                                         @csrf
-                                                        <input  type="hidden" name="wishlist_id" value="{{$item->id}}">
+                                                        <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                         <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
                                                         <div class="block-content font-size-sm">
                                                             <div class="form-group">
@@ -215,7 +215,7 @@
 {{--                @endif--}}
                 <div class="block">
                     <div class="block-header">
-                        <h5 class="block-title">Wishlist Details</h5>
+                        <h5 class="block-title">Dropship Request Details</h5>
                     </div>
                     <div class="block-content">
                         <div class="p-2 font-size-sm">
@@ -240,7 +240,7 @@
                             <span class="font-weight-bold">Last Update at: </span> <span class="text-center">{{date_create($item->updated_at)->format('m d, Y h:i a')}}</span>
                             <hr>
                             <span class="font-weight-bold">Status: </span>   @if($item->has_status != null)
-                                <span class="badge " style="background: {{$wishlist->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
+                                <span class="badge " style="background: {{$item->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
                             @endif
                             <hr>
                             @if($item->approved_price != null)
@@ -251,7 +251,7 @@
                                 <span class="font-weight-bold">Reject Reason: </span> {{$item->reject_reason}}
                                 <hr>
                             @endif
-                            <span class="font-weight-bold">Wishlist Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
+                            <span class="font-weight-bold">Dropship Request Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
                             <hr>
                             <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$item->has_manager->name}} </span>
                             <hr>
