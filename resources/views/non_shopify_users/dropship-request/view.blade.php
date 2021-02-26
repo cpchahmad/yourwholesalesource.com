@@ -150,7 +150,7 @@
                     <div class="block">
                     <div class="block-header d-flex justify-content-between">
                         <h5 class="block-title">Shipping Marks</h5>
-                        <a class="btn btn-primary" href="{{ route('') }}">Create Shipping Marks</a>
+                        <a class="btn btn-primary" href="{{ route('dropship.requests.create.shipping.mark', $item->id) }}">Create Shipping Marks</a>
                     </div>
                     <div class="block-content">
                         <div class="p-2">
