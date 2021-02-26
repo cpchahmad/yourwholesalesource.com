@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DropshipRequest;
 use App\DropshipRequestAttachment;
+use App\ManagerLog;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
