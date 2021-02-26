@@ -44,15 +44,15 @@
                             </div>
                                 <hr>
                                 @if($item->status_id == 2)
-                                    <div class="d-flex justify-content-between p-2">
-                                        <div>
+                                    <div class="row p-2">
+                                        <div class="col-md-8">
                                             <p class="font-size-sm"> The approved quote is
                                                 based on your offered packing size, weight and
                                                 other request, there will be a ﬁnal conﬁrmation
                                                 once your stock landed in our warehouse .
                                             </p>
                                         </div>
-                                        <div>
+                                        <div class="col-md-12">
                                             <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
                                         </div>
                                     </div>
