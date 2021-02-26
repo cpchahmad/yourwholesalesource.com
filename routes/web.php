@@ -320,8 +320,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
             Route::get('/dropship-requests', 'CustomOrderController@dropship_requests')->name('users.dropship.requests');
             Route::get('/dropship-requests/{id}', 'CustomOrderController@view_dropship_requests')->name('users.dropship.request.view');
-            Route::post('/dropship-requests/create', 'CustomOrderController@create_dropship_requests')->name('users.dropship.request.create');
-            Route::get('/dropship-requests/{id}/delete', 'CustomOrderController@delete_dropship_requests')->name('users.dropship.request.delete');
 
 
             Route::group(['middleware' => ['check_user_shop']], function () {
@@ -402,6 +400,11 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/wishlist/completed/map_product', 'WishlistController@map_product')->name('wishlist.completed.map_product');
         Route::post('/wishlist/rejected', 'WishlistController@reject_wishlist')->name('wishlist.reject');
         Route::get('/wishlist/{id}/delete','WishlistController@delete_wishlist')->name('wishlist.delete');
+
+
+        Route::post('/dropship-requests/create', 'DropshipRequestController@create_dropship_requests')->name('dropship.request.create');
+        Route::get('/dropship-requests/{id}/delete', 'DropshipRequestController@delete_dropship_requests')->name('dropship.request.delete');
+
 
 
         Route::post('/ticket/review', 'TicketController@post_review')->name('ticket.post_review');

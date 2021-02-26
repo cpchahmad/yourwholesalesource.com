@@ -1132,9 +1132,6 @@ class CustomOrderController extends Controller
         ]);
     }
 
-    public function create_dropship_requests(Request $request) {
-        dd($request->all());
-    }
 
 
     public function wishlist(Request $request)

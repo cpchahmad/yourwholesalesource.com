@@ -44,7 +44,7 @@
                                     <tr>
                                         <th>Product</th>
                                         <th>Cost</th>
-                                        <th>Sales</th>
+                                        <th>Weekly Sales</th>
                                         <th style="width: 5%">Markets</th>
                                         <th>Status</th>
                                         <th>Approved Cost</th>
@@ -62,7 +62,7 @@
                                                 {{number_format($item->cost,2)}} USD
                                             </td>
                                             <td>
-                                                {{$item->monthly_sales}}
+                                                {{$item->weekly_sales}}
                                             </td>
                                             <td>
                                                 @if(count($item->has_market) > 0)
@@ -88,10 +88,10 @@
 
                                             <td class="text-right">
                                                 <div class="btn-group">
-                                                    <a href="{{route('users.dropship.request.view',$item->id)}}"
+                                                    <a href="{{route('dropship.request.view',$item->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('users.dropship.request.delete', $item->id) }}"
+                                                    <a href="{{ route('dropship.request.delete', $item->id) }}"
                                                        class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="Delete Wishlist"><i class="fa fa-times"></i></a>
                                                 </div>
@@ -130,7 +130,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <form action="{{route('users.dropship.request.create')}}" method="post"  enctype="multipart/form-data">
+                            <form action="{{route('dropship.request.create')}}" method="post"  enctype="multipart/form-data">
                                 @csrf
 
                                 <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
@@ -209,9 +209,9 @@
                                                 <label for="material-error">Contains Battery or not?</label>
                                                 <br>
                                                 <div class=" mb-1">
-                                                    <input type="radio"  class="" id="battery-yes" name="battery" value="yes" >
+                                                    <input type="radio"  class="" id="battery-yes" name="battery" value="1" >
                                                     <label class="" for="battery-yes">Yes</label>
-                                                    <input type="radio"  class="ml-2" id="battery-no" name="battery" value="no" >
+                                                    <input type="radio"  class="ml-2" id="battery-no" name="battery" value="0" >
                                                     <label class="" for="battery-no">No</label>
                                                 </div>
                                             </div>
@@ -245,9 +245,9 @@
                                                 <label for="material-error">Do you need Relabell or not?</label>
                                                 <br>
                                                 <div class=" mb-1">
-                                                    <input type="radio"  class="" id="relabell-yes" name="relabell" value="yes" >
+                                                    <input type="radio"  class="" id="relabell-yes" name="relabell" value="1" >
                                                     <label class="" for="relabell-yes">Yes</label>
-                                                    <input type="radio"  class="ml-2" id="relabell-no" name="relabell" value="no" >
+                                                    <input type="radio"  class="ml-2" id="relabell-no" name="relabell" value="0" >
                                                     <label class="" for="relabell-no">No</label>
                                                 </div>
                                             </div>
@@ -261,9 +261,9 @@
                                                 <label for="material-error">Do you need us to repack with extra protections?</label>
                                                 <br>
                                                 <div class=" mb-1">
-                                                    <input type="radio"  class="" id="repack-yes" name="re_pack" value="yes" >
+                                                    <input type="radio"  class="" id="repack-yes" name="re_pack" value="1" >
                                                     <label class="" for="repack-yes">Yes</label>
-                                                    <input type="radio"  class="ml-2" id="repack-no" name="re_pack" value="no" >
+                                                    <input type="radio"  class="ml-2" id="repack-no" name="re_pack" value="0" >
                                                     <label class="" for="repack-no">No</label>
                                                 </div>
                                             </div>
