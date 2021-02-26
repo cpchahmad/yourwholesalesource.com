@@ -79,7 +79,7 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
-                                                                    <label for="material-error">You are about to approve the dropship request</label>
+                                                                    <label for="material-error">You are about to approve the Dropship Request !</label>
                                                                 </div>
                                                             </div>
                                                         </div>
