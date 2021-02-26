@@ -440,7 +440,8 @@
                                    <hr>
                                @endif
                                @if($item->reject_reason != null)
-                                   <span class="font-weight-bold text-danger font-w600">Reject Reason: </span>  {!! $item->reject_reason !!}
+
+                                   <span class="font-weight-bold text-danger font-w600">@if($item->rejected_by_use)Reject Reason By User: @else Reject Reason: @endif </span>  {!! $item->reject_reason !!}
                                    <hr>
                                @endif
                                <span class="font-weight-bold">Created at: </span> <span class="text-center">{{date_create($item->created_at)->format('m d, Y h:i a')}}</span>
