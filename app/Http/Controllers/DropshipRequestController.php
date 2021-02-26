@@ -76,10 +76,10 @@ class DropshipRequestController extends Controller
                 foreach ($files as $file){
                     $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
                     $attachement = date("mmYhisa_") . $name;
-                    $file->move(public_path() . '/wishlist-attachments/', $attachement);
+                    $file->move(public_path() . '/dropship-attachments/', $attachement);
                     $wa = new DropshipRequestAttachment();
                     $wa->source = $attachement;
-                    $wa->wishlist_id = $drop_request->id;
+                    $wa->dropship_request_id = $drop_request->id;
                     $wa->save();
                 }
             }
