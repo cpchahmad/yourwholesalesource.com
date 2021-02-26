@@ -100,10 +100,10 @@
                                             <div class="btn-group">
                                                 <a href="{{route('dropship.requests.view',$item->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
-                                                   data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
+                                                   data-original-title="View Dropship Request"><i class="fa fa-eye"></i></a>
                                                 <a href=""
                                                    class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                                   data-original-title="Delete Wishlist"><i class="fa fa-times"></i></a>
+                                                   data-original-title="Delete Dropship Request"><i class="fa fa-times"></i></a>
                                             </div>
                                         </td>
 
