@@ -11,7 +11,7 @@
                         <li class="breadcrumb-item">Dashboard</li>
                         <li class="breadcrumb-item"> Dropship Request</li>
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href=""> {{$item->product_name}} Create Shipping Mark</a>
+                            <a class="link-fx" href=""> {{$drop_request->product_name}} Create Shipping Mark</a>
                         </li>
                     </ol>
                 </nav>
@@ -23,7 +23,7 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header">
-                        <h5 class="block-title">{{$item->product_name}}
+                        <h5 class="block-title">{{$drop_request->product_name}}
                         </h5>
                     </div>
                     <div class="block-content">
