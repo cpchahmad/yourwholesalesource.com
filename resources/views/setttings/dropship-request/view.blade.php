@@ -393,7 +393,7 @@
                         <h5 class="block-title">Dropship Request Details</h5>
                     </div>
                     <div class="block-content">
-                        <div class="p-2 font-size-sm">
+                        <div class="row font-size-sm">
                             <div class="col-md-6">
                                 <span class="font-weight-bold">#: </span> <span class="text-center">{{$item->id}}</span>
                                 @if($item->has_store != null)
