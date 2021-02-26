@@ -138,11 +138,20 @@ class DropshipRequestController extends Controller
             $drop_request->reject_reason = $request->input('reject_reason');
             $drop_request->updated_at = now();
             $drop_request->save();
-            $tl = new ManagerLog();
-            $tl->message = 'Manager Rejected Dropship Request against price '.number_format($drop_request->cost,2).' at ' . date_create($drop_request->updated_at)->format('d M, Y h:i a');
-            $tl->status = "Manager Rejected Wishlist";
-            $tl->manager_id = $manager->id;
-            $tl->save();
+
+            if($request->has('by_user')){
+                $drop_request->rejected_by_use = 1;
+            }
+            else {
+                $tl = new ManagerLog();
+                $tl->message = 'Manager Rejected Dropship Request against price '.number_format($drop_request->cost,2).' at ' . date_create($drop_request->updated_at)->format('d M, Y h:i a');
+                $tl->status = "Manager Rejected Dropship Request";
+                $tl->manager_id = $manager->id;
+                $tl->save();
+            }
+
+            $drop_request->save();
+
             $this->notify->generate('Dropship-Request','Dropship Request Rejected','Dropship Request named '.$drop_request->product_name.' has been rejected by your manager',$drop_request);
 
             $user = $drop_request->has_user;

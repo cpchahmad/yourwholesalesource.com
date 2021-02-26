@@ -60,7 +60,7 @@
                                                 once your stock landed in our warehouse .
                                             </p>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 text-right">
                                             <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
                                             <button class="btn btn-danger ml-2" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                         </div>
@@ -130,16 +130,8 @@
                                                         @csrf
                                                         <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                         <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
+                                                        <input  type="hidden" name="by_user" value="1">
                                                         <div class="block-content font-size-sm">
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Target Dropshipping Cost</label>
-                                                                        <input readonly class="form-control" type="text" value="{{$item->cost}}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                                             <div class="form-group">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-material">
@@ -149,11 +141,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
 
                                                         <div class="block-content block-content-full text-right border-top">
-
                                                             <button type="submit" class="btn btn-sm btn-danger" >Reject</button>
                                                         </div>
                                                     </form>
