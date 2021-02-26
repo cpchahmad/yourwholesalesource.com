@@ -45,7 +45,7 @@
                                 <hr>
                                 @if($item->status_id == 4 &&$item->reject_reason != null)
                                     <div class="row p-2">
-                                        <div class="col-md-8 text-danger font-w400">
+                                        <div class="col-md-8 text-danger font-w600">
                                             Rejection Reason:
                                             {!! $item->reject_reason !!}
                                         </div>
@@ -53,16 +53,16 @@
                                 @endif
                                 @if($item->status_id == 2)
                                     <div class="row p-2">
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <p class="font-w400 text-success "> <i class="fa fa-question-circle text-success"></i> The approved quote is
                                                 based on your offered packing size, weight and
                                                 other request, there will be a final confirmation
                                                 once your stock landed in our warehouse .
                                             </p>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
-                                            <button class="btn btn-danger pl-2" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
+                                            <button class="btn btn-danger ml-2" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                         </div>
                                     </div>
                                 @endif
