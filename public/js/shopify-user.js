@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.remove-product-details-tab-btn', function() {
-        $(this).parent().parent().empty();
+        $(this).closest('.single-product-details').empty();
     });
 
     // warehouse selection on order details page

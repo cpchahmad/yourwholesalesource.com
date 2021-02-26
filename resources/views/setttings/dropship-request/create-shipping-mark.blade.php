@@ -60,13 +60,14 @@
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
                                             <tr>
-                                                <th style="vertical-align: top;width: 10%;">SKU</th>
-                                                <th style="vertical-align: top;width: 12%;">Option</th>
-                                                <th style="vertical-align: top;width: 15%;">Inventory</th>
+                                                <th style="vertical-align: top;">SKU</th>
+                                                <th style="vertical-align: top;">Option</th>
+                                                <th style="vertical-align: top;">Inventory</th>
+                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody class="product-details-body">
-                                                <tr>
+                                                <tr class="single-product-details">
                                                     <td class="">
                                                         <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here..">
                                                     </td>
