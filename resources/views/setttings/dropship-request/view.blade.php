@@ -84,7 +84,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="block-content font-size-sm">
+                                                    <div class="block-content font-size-sm pt-0">
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
