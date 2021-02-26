@@ -52,7 +52,7 @@
                                                 once your stock landed in our warehouse .
                                             </p>
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-2">
                                             <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
                                         </div>
                                     </div>
