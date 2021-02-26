@@ -27,7 +27,8 @@
                         </h5>
                     </div>
                     <div class="block-content">
-                        <form action="">
+                        <form action="{{ route('dropship.requests.save.shipping.mark') }}" enctype="multipart/form-data" method="POST">
+                            @csrf
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
@@ -79,27 +80,7 @@
                                                         <input type="text" class="form-control" name="inventory[]" placeholder="Enter product inventory here..">
                                                     </td>
                                                     <td class="text-center">
-                                                        <img class="img-avatar " style="border: 1px solid whitesmoke"  data-input=".varaint_file_input" data-toggle="modal" data-target="#select_image_modal"
-                                                               data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg" alt="">
-                                                        <div class="modal fade" id="select_image_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-popout" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="block block-themed block-transparent mb-0">
-                                                                        <div class="block-header bg-primary-dark">
-                                                                            <h3 class="block-title">Select Image For Product</h3>
-                                                                            <div class="block-options">
-                                                                                <button type="button" class="btn-block-option">
-                                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="block-content font-size-sm">
-                                                                            <a class="img-avatar-variant btn btn-sm btn-primary text-white mb2" data-form="#varaint_image_form">Upload New Picture</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <input type="file" class="form-control" name="images[]">
                                                     </td>
                                                     <td class="text-right">
                                                         <div class=" btn-group btn-group-sm" role="group">
