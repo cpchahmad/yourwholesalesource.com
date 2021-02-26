@@ -129,6 +129,7 @@ class DropshipRequestController extends Controller
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
+
     public function reject_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
@@ -195,5 +196,11 @@ class DropshipRequestController extends Controller
         }
     }
 
+    public function create_shipping_mark($id) {
+        $drop_request = DropshipRequest::find($id);
 
+        return view('setttings.dropship-request.create-shipping-mark')->with([
+           'drop_request' => $drop_request
+        ]);
+    }
 }

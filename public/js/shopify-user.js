@@ -1,5 +1,33 @@
 $(document).ready(function () {
 
+    $(document).on('click', '.add-product-details-tab-btn', function() {
+        var id = $(this).attr('id');
+        $(this).parent().closest('.product-details-body').append(`
+              <tr>
+                    <td class="">
+                        <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here..">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="option_count[]" placeholder="Enter number of options here..">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="inventory[]" placeholder="Enter product inventory here..">
+                    </td>
+                    <td>
+                        <div class="col-md-2 btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-sm btn-primary add-product-details-tab-btn">+</button>
+                            <button type="button" class="btn btn-sm btn-danger remove-product-details-tab-btn">-</button>
+                        </div>
+                    </td>
+              </tr>
+        `);
+
+    });
+
+    $(document).on('click', '.remove-product-details-tab-btn', function() {
+        $(this).parent().parent().empty();
+    });
+
     // warehouse selection on order details page
     $('.warehouse-selector').change(function(){
         var data = $(this).val().split(",");

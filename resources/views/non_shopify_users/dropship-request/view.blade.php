@@ -141,10 +141,24 @@
                                         </div>
                                     </div>
                                 @endif
+                        </div>
+                    </div>
+                </div>
+
+
+                @if($item->status_id == 3)
+                    <div class="block">
+                    <div class="block-header d-flex justify-content-between">
+                        <h5 class="block-title">Shipping Marks</h5>
+                        <a class="btn btn-primary" href="{{ route('') }}">Create Shipping Marks</a>
+                    </div>
+                    <div class="block-content">
+                        <div class="p-2">
 
                         </div>
                     </div>
                 </div>
+                @endif
 {{--                @if(count($wishlist->has_thread) > 0)--}}
 {{--                    <h5> Thread </h5>--}}
 {{--                    @foreach($wishlist->has_thread as $thread)--}}
