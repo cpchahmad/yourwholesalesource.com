@@ -227,6 +227,22 @@
                             <hr>
                             <span class="font-weight-bold">Cost: </span> {{number_format($item->cost,2)}} USD
                             <hr>
+                            <span class="font-weight-bold">Weekly Sales: </span> {{number_format($item->weekly_sales,2)}} USD
+                            <hr>
+                            <span class="font-weight-bold">Weight: </span> {{ $item->weight }} (kg)
+                            <hr>
+                            <span class="font-weight-bold">Packing size: </span> {{ $item->packing_size }}
+                            <hr>
+                            <span class="font-weight-bold">Contains Battery: </span> @if($item->battery) Yes @else No @endif
+                            <hr>
+                            <span class="font-weight-bold">Relabell Needed: </span> @if($item->relabell) Yes @else No @endif
+                            <hr>
+                            <span class="font-weight-bold">Repacking Needed: </span> @if($item->re_pack) Yes @else No @endif
+                            <hr>
+                            <span class="font-weight-bold">Stock: </span> {{ $item->stock }}
+                            <hr>
+                            <span class="font-weight-bold">Number of Options: </span> {{ $item->option_count }}
+                            <hr>
                             <span class="font-weight-bold">Markets: </span>   @if(count($item->has_market) > 0)
                                 @foreach($item->has_market as $country)
                                     <span class="badge badge-primary">{{$country->name}}</span>

@@ -232,7 +232,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material">
-                                                <label for="material-error">Weight <i class="fa fa-question-circle"  title="This is the expected weight of product you want to request in your dropship request"> </i></label>
+                                                <label for="material-error">Weight <span class="text-muted">(kg)</span> <i class="fa fa-question-circle"  title="This is the expected weight of product you want to request in your dropship request"> </i></label>
                                                 <input required class="form-control" type="number" step="any"  name="weight"
                                                        placeholder="Enter Product Weight here">
                                             </div>
