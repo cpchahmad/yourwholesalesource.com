@@ -125,6 +125,9 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/tickets/{id}','DefaultSettingsController@ticket')->name('tickets.view');
     Route::get('/wishlists','DefaultSettingsController@wishlist')->name('wishlist.index');
     Route::get('/wishlists/{id}','DefaultSettingsController@view_wishlist')->name('wishlist.view');
+    Route::get('/dropship-requests','DefaultSettingsController@dropship_requests')->name('dropship.requests.index');
+    Route::get('/dropship-requests/{id}','DefaultSettingsController@view_dropship_requests')->name('dropship.requests.view');
+
     Route::get('/stores','DefaultSettingsController@stores')->name('stores.index');
     Route::get('/stores/{id}','DefaultSettingsController@store')->name('stores.view');
     Route::get('/stores/customers/{id}','DefaultSettingsController@customer_view')->name('customers.view');

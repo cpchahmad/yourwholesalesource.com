@@ -6,6 +6,8 @@ use App\AdminSetting;
 use App\Campaign;
 use App\Customer;
 use App\DefaultInfo;
+use App\DropshipRequest;
+use App\DropshipRequestStatus;
 use App\EmailTemplate;
 use App\Exports\CustomersExport;
 use App\GeneralDiscountPreferences;
@@ -575,10 +577,40 @@ class DefaultSettingsController extends Controller
             'selected_status' =>$request->input('status'),
         ]);
     }
+
+    public function dropship_requests(Request $request) {
+        $requests = DropshipRequest::query();
+        if($request->has('search')){
+            $requests->where('product_name','LIKE','%'.$request->input('search').'%');
+            $requests->orwhere('description','LIKE','%'.$request->input('search').'%');
+        }
+        if($requests->has('status')){
+            if($requests->input('status') != null){
+                $requests->where('status_id','=',$request->input('status'));
+
+            }
+        }
+        $requests = $requests->orderBy('created_at','DESC')->paginate(30);
+        return view('setttings.dropship-request.index')->with([
+            'requests' => $requests,
+            'search' =>$request->input('search'),
+            'statuses' => DropshipRequestStatus::all(),
+            'selected_status' =>$request->input('status'),
+        ]);
+    }
+
     public function view_wishlist(Request $request){
         $wishlist = Wishlist::find($request->id);
         return view('setttings.wishlist.view')->with([
             'wishlist' => $wishlist,
+            'products' => Product::all(),
+        ]);
+    }
+
+    public function view_dropship_request(Request $request){
+        $item = DropshipRequest::find($request->id);
+        return view('setttings.dropship-request.view')->with([
+            'item' => $item,
             'products' => Product::all(),
         ]);
     }
