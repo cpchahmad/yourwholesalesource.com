@@ -867,13 +867,13 @@ class AdminOrderController extends Controller
                 $new_stores = 0;
 
                 $active_stores +=  $manager->has_sales_stores()
-                    ->get()->filter(function($store) use ($active_stores){
+                    ->get()->each(function($store) use ($active_stores){
                          if($store->has_orders()->count() > 0 || $store->has_imported()->count() > 0)
                              return 1;
                     });
 
                 $new_stores += $manager->has_sales_stores()
-                    ->get()->filter(function($store) use ($new_stores) {
+                    ->get()->each(function($store) use ($new_stores) {
                         if($store->has_orders()->count() == 0 && $store->has_imported()->count() == 0)
                             return 1;
                     });
