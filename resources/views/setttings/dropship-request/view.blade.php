@@ -26,7 +26,7 @@
     </div>
     <div class="content">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="block">
                     <div class="block-header">
                         <h5 class="block-title">{{$item->product_name}}  <span class="badge " style="background: {{$item->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
@@ -49,7 +49,7 @@
                             <hr>
                             <div class="text-right p-2">
                                 @if(in_array($item->status_id,[1,4]))
-                                    <button class="btn btn-success" data-target="mark-approved-modal" data-toggle="modal">Mark as Approved</button>
+                                    <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Approved</button>
                                 @endif
                                 @if($item->status_id == 3)
                                     <button class="btn btn-primary" data-target="#mark-completed-modal" data-toggle="modal">Mark as Completed</button>
@@ -79,7 +79,7 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
-                                                                    <label for="material-error">You are about to approve the dropship request.</label>
+                                                                    <label for="material-error">You are about to approve the dropship request</label>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -293,7 +293,7 @@
 {{--                    </div>--}}
 {{--                @endif--}}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
 {{--                @if($item->has_store_product != 1)--}}
 {{--                @if($item->has_product != null)--}}
 {{--                    <div class="block">--}}
