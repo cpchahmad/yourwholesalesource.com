@@ -296,7 +296,7 @@
                                 <tbody class="">
                                 @foreach($sales_managers as $index => $manager)
                                     @php
-                                        dd($manager['manager'])
+                                        dd($manager['manager']->name)
                                     @endphp
 
                                     <tr>
