@@ -57,7 +57,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">{{ $drop_request->product_name }}</label>
-                                        <table class="table variants-div js-table-sections table-hover table-responsive" style="overflow-x: hidden">
+                                        <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
                                             <tr>
                                                 <th style="vertical-align: top;width: 10%;">SKU</th>
