@@ -295,14 +295,10 @@
                                 </thead>
                                 <tbody class="">
                                 @foreach($sales_managers as $index => $manager)
-                                    @php
-                                        dd($manager['manager']->name)
-                                    @endphp
-
                                     <tr>
                                         <td class="font-w600 d-flex">
                                             <img class="img-avatar" @if($manager['manager']->profile == null) src="{{ asset('assets/media/avatars/avatar10.jpg') }}" @else  src="{{asset('managers-profiles')}}/{{$manager['manager']->profile}}" @endif alt="">
-                                            <span style="margin-left: 10px;">{{ $manager->manager->name }}</span></td>
+                                            <span style="margin-left: 10px;">{{ $manager['manager']->name }}</span></td>
                                         <td>
                                             {{$manager['active_stores']}}
                                         </td>
