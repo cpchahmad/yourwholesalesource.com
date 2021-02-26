@@ -458,7 +458,7 @@
                                <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$item->has_manager->name}} </span>
                                <hr>
                                <span class="font-weight-bold">Manager Email: </span>  <span class="text-center"> {{$item->has_manager->email}} </span>
-
+                               <hr>
                            </div>
                         </div>
 
