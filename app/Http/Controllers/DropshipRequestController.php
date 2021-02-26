@@ -133,7 +133,6 @@ class DropshipRequestController extends Controller
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
 
-        dd($request->all());
 
         if($manager != null && $drop_request != null){
             $drop_request->status_id = 4;
