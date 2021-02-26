@@ -48,7 +48,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">Contact</label>
-                                        <input required class="form-control" type="text"  readonly value="@if($drop_request->shop_id) {{ $drop_request->has_store->has_user->email }} @else {{ $drop_request->has_user->email }} @endif">
+                                        <input required class="form-control" type="text"  readonly value="@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif">
                                     </div>
                                 </div>
                             </div>
