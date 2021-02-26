@@ -887,11 +887,10 @@ class AdminOrderController extends Controller
                     'active_stores' => $active_stores,
                     'reviews' => $reviews
                 ]);
-
-
             }
-
         }
+
+        dd($sales_managers);
 
 
         $graph_one_order_dates = $ordersQ->pluck('date')->toArray();
