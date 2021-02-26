@@ -88,7 +88,7 @@
 
                                             <td class="text-right">
                                                 <div class="btn-group">
-                                                    <a href="{{route('dropship.request.view',$item->id)}}"
+                                                    <a href="{{route('users.dropship.request.view',$item->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
                                                     <a href="{{ route('dropship.request.delete', $item->id) }}"
