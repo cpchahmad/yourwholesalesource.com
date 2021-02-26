@@ -295,6 +295,9 @@
                                 </thead>
                                 <tbody class="">
                                 @foreach($sales_managers as $index => $manager)
+                                    @php
+                                        dd($manager['manager'])
+                                    @endphp
 
                                     <tr>
                                         <td class="font-w600 d-flex">
