@@ -17,7 +17,7 @@ class DropshipRequest extends Model
 
     public function has_attachments()
     {
-        return $this->hasMany(DropshipRequestAttachment::class,'wishlist_id');
+        return $this->hasMany(DropshipRequestAttachment::class,'dropship_request_id');
     }
 
     public function has_store()
