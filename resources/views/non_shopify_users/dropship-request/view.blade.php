@@ -43,19 +43,27 @@
                                 @endforeach
                             </div>
                                 <hr>
-                                <div class="text-right p-2">
-                                    @if($item->status_id == 2)
-                                        <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
-                                    @endif
-
-                                </div>
+                                @if($item->status_id == 2)
+                                    <div class="d-flex justify-content-between p-2">
+                                        <div>
+                                            <p class="font-size-sm"> The approved quote is
+                                                based on your offered packing size, weight and
+                                                other request, there will be a ﬁnal conﬁrmation
+                                                once your stock landed in our warehouse .
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Accepted</button>
+                                        </div>
+                                    </div>
+                                @endif
                                 @if($item->status_id == 2)
                                     <div class="modal fade" id="mark-approved-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout" role="document">
                                             <div class="modal-content">
                                                 <div class="block block-themed block-transparent mb-0">
                                                     <div class="block-header bg-primary-dark">
-                                                        <h3 class="block-title">Mark as Approved</h3>
+                                                        <h3 class="block-title">Mark as Accepted</h3>
                                                         <div class="block-options">
                                                             <button type="button" class="btn-block-option">
                                                                 <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>

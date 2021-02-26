@@ -198,6 +198,7 @@ class WishlistController extends Controller
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
+
     public function reject_wishlist(Request $request){
         $manager = User::find($request->input('manager_id'));
         $wish = Wishlist::find($request->input('wishlist_id'));
@@ -229,6 +230,7 @@ class WishlistController extends Controller
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
+
     public function accept_wishlist(Request $request){
         $manager = User::find($request->input('manager_id'));
         $wish = Wishlist::find($request->input('wishlist_id'));

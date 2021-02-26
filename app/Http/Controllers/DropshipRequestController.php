@@ -6,6 +6,7 @@ use App\DropshipRequest;
 use App\DropshipRequestAttachment;
 use App\ManagerLog;
 use App\User;
+use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Psy\Util\Str;
@@ -159,5 +160,29 @@ class DropshipRequestController extends Controller
             return redirect()->back()->with('error','Associated Manager Not Found');
         }
     }
+
+    public function accept_dropship_request(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+        if($manager != null && $drop_request != null){
+//            if($request->has('has_product')){
+//                $drop_request->has_store_product = 1;
+//                $drop_request->product_shopify_id = $request->input('product_shopify_id');
+//            }
+            $drop_request->status_id = 3;
+            $drop_request->updated_at = now();
+            $drop_request->save();
+            $this->notify->generate('Dropship-Request','Dropship Request Accepted','Dropship Request named '.$drop_request->product_name.' has been accepted',$drop_request);
+
+            $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Accepted');
+
+            return redirect()->back()->with('success','Dropship Request Accepted Successfully!');
+        }
+
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
+
 
 }
