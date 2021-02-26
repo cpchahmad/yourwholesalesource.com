@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(document).on('click', '.add-product-details-tab-btn', function() {
         var id = $(this).attr('id');
         $(this).closest('.product-details-body').append(`
-              <tr>
+              <tr class="single-product-details">
                     <td class="">
                         <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here..">
                     </td>

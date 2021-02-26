@@ -92,7 +92,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 text-right">
                                     <div class="form-material">
                                         <button class="btn btn-primary" type="submit">Save</button>
                                     </div>
