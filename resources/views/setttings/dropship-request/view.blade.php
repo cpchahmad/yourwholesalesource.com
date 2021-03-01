@@ -458,6 +458,10 @@
                                <hr>
                                <span class="font-weight-bold">Manager Email: </span>  <span class="text-center"> {{$item->has_manager->email}} </span>
                                <hr>
+                               <span class="font-weight-bold">Tracking Number: </span> {{ $item->tracking_number }}
+                               <hr>
+                               <span class="font-weight-bold">Shipping Provider: </span> {{ $item->shipping_provider }}
+                               <hr>
                            </div>
                         </div>
 
