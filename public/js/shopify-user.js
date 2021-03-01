@@ -8,13 +8,13 @@ $(document).ready(function () {
                         <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here..">
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="option_count[]" placeholder="Enter number of options here..">
+                        <input type="text" class="form-control" name="option[]" placeholder="Enter name of options here..">
                     </td>
                     <td>
                         <input type="text" class="form-control" name="inventory[]" placeholder="Enter product inventory here..">
                     </td>
                     <td class="text-center">
-                        <input type="file" class="form-control" name="images[]">
+                        <input type="file" class="form-control" name="image[]">
                     </td>
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DropshipRequest;
 use App\DropshipRequestAttachment;
 use App\ManagerLog;
+use App\ShippingMark;
 use App\User;
 use App\Wishlist;
 use Illuminate\Http\Request;
@@ -205,7 +206,26 @@ class DropshipRequestController extends Controller
     }
 
     public function save_shipping_mark(Request $request, $id) {
-        dd($request->all(), $id);
+
+        foreach ($request->sku as $index => $item) {
+            $shipping_mark = new ShippingMark();
+            $shipping_mark->sku = $request->sku[$index];
+            $shipping_mark->option = $request->option[$index];
+            $shipping_mark->inventory = $request->inventory[$index];
+
+            // Saving product image
+            $file = $request->image[$index];
+            $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
+            $attachement = date("mmYhisa_") . $name;
+            $file->move(public_path() . '/shipping-marks/', $attachement);
+            $shipping_mark->image = $attachement;
+
+            $shipping_mark->dropship_request_id = $id;
+            $shipping_mark->save();
+        }
+
+        return redirect('users.dropship.request.view',$id)->with('Shipping Mark created successfully!');
+
     }
 
 }
