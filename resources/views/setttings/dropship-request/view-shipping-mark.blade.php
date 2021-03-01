@@ -68,7 +68,7 @@
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
                                                 <tr>
-                                                    <th style="vertical-align: top;">SKU</th>
+                                                    <th style="vertical-align: top;" class="w-25">SKU</th>
                                                     <th style="vertical-align: top;">Option</th>
                                                     <th style="vertical-align: top;">Inventory</th>
                                                 </tr>
@@ -78,12 +78,12 @@
                                                     <tr class="single-product-details">
                                                         <td class="d-flex align-items-center">
                                                             <img style="" class="img-avatar200" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
-                                                            <span>{{ $variant->sku }}</span>
+                                                            <span class="ml-2">{{ $variant->sku }}</span>
                                                         </td>
-                                                        <td>
+                                                        <td class="align-items-center">
                                                             <span>{{ $variant->option }}</span>
                                                         </td>
-                                                        <td>
+                                                        <td class="align-items-center">
                                                             <span>{{ $variant->inventory }}</span>
                                                         </td>
                                                     </tr>
