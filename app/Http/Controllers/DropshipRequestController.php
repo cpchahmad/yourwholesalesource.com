@@ -12,6 +12,7 @@ use App\User;
 use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 use Psy\Util\Str;
 
 class DropshipRequestController extends Controller
@@ -244,6 +245,11 @@ class DropshipRequestController extends Controller
     }
 
     public function view_shipping_mark($id, $mark_id) {
+
+        $b = new BarcodeGeneratorHTML();
+
+        dd($b);
+
         return view('setttings.dropship-request.view-shipping-mark')->with([
            'drop_request' => DropshipRequest::find($id),
            'mark' => ShippingMark::find($mark_id)

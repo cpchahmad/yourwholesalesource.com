@@ -105,7 +105,7 @@
                                     <div class="form-material text-right">
                                         @php
 
-                                            $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+                                            $generator = new \Picqer\Barcode\BarcodeGeneratorHTML()
                                             dd($generator);
 
                                         @endphp
