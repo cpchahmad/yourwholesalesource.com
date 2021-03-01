@@ -22,9 +22,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="block">
-                    <div class="block-header">
-                        <h5 class="block-title">{{$drop_request->product_name}}
-                        </h5>
+                    <div class="block-header p-4 d-flex justify-content-between">
+                        <h5 class="block-title">{{$drop_request->product_name}}</h5>
+                        <button class="btn btn-danger">Download</button>
                     </div>
                     <div class="block-content shipping-mark-body p-5">
                         <div class="p-4 bg-white">
