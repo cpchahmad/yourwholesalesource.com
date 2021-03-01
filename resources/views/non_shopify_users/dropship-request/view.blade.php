@@ -154,7 +154,7 @@
                     </div>
                     <div class="block-content">
                         <div class="p-2">
-                            @forelse($item->shipping_marks as $mark)
+                            @if(count($item->shipping_marks))
                                 <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                     <thead>
                                     <tr>
@@ -163,10 +163,9 @@
                                     </tr>
                                     </thead>
                                     <tbody class="product-details-body">
+                                @foreach($item->shipping_marks as $mark)
                                     <tr class="single-product-details">
-                                        <td class="">
-                                            # {{ $mark->id }}
-                                        </td>
+                                        <td class=""># {{ $mark->id }}</td>
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <a href="{{route('dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
@@ -178,11 +177,12 @@
                                             </div>
                                         </td>
                                     </tr>
+                            @endforeach
                                     </tbody>
                                 </table>
-                            @empty
+                            @else
                                 <div class="text-center">No Shipping Marks Added.</div>
-                            @endforelse
+                            @endif
                         </div>
                     </div>
                 </div>
