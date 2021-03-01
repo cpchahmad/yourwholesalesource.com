@@ -102,8 +102,8 @@
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <div class="form-material text-right">
-                                        <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($mark->barcode, "C128",2.4,42) !!}</span>
+                                    <div class="form-material">
+                                        <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($mark->barcode, "C128",2.0,42) !!}</span>
                                         <span>{{ $mark->barcode }}</span>
                                     </div>
                                 </div>
