@@ -64,6 +64,7 @@
 
         .shipping-mark-body {
             background-color: #7daa40;
+            padding: 70px;
         }
     </style>
 

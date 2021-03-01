@@ -26,7 +26,7 @@
                         <h5 class="block-title">{{$drop_request->product_name}}</h5>
                         <button class="btn btn-danger">Download</button>
                     </div>
-                    <div class="block-content shipping-mark-body p-5">
+                    <div class="block-content shipping-mark-body">
                         <div class="p-4 bg-white">
                             <div class="row">
                                 <div class="col-md-8">
