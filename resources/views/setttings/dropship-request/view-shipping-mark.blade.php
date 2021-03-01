@@ -105,11 +105,12 @@
                                     <div class="form-material text-right">
                                         @php
 
-                                            $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+                                            $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+                                            dd($generator);
 
                                         @endphp
 
-                                        {!! $generator->getBarcode('0001245259636', $generator::TYPE_CODE_128) !!}
+{{--                                        {!! $generator->getBarcode('0001245259636', $generator::TYPE_CODE_128) !!}--}}
                                     </div>
                                 </div>
                             </div>
