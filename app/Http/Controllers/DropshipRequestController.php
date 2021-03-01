@@ -245,7 +245,10 @@ class DropshipRequestController extends Controller
 
     public function view_shipping_mark($id, $mark_id) {
 
-        $b = new \picqer\php-barcode-generator\srcBarcodeGeneratorHTML();
+        require 'vendor/autoload.php';
+
+        $b = new Picqer\Barcode\BarcodeGeneratorHTML();
+
 
         dd($b);
 
