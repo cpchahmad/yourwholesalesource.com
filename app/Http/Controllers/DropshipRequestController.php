@@ -275,6 +275,33 @@ class DropshipRequestController extends Controller
         }
     }
 
+
+    public function completed_dropship_request(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+        if($manager != null && $drop_request != null){
+
+            $drop_request->status_id = 5;
+            $drop_request->updated_at = now();
+
+            if($drop_request->approved_price == null)
+            {
+                $drop_request->approved_price = $drop_request->cost;
+            }
+
+            $drop_request->save();
+            $this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
+
+            $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
+
+            return redirect()->back()->with('success','Dropship Request Completed Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
+
+
     public function mark_as_rejected_by_weight_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));

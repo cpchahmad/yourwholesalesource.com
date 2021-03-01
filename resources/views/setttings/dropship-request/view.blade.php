@@ -117,7 +117,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('wishlist.completed')}}" method="post">
+                                                <form action="{{route('dropship.requests.completed')}}" method="post">
                                                     @csrf
                                                     <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                     <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
@@ -130,42 +130,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <label for="material-error">Approved Cost</label>
-                                                                    <input readonly class="form-control" type="number" step="any" value="{{$item->approved_price}}">
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        @if($item->has_store_product != 1)
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Dropship Product</label>
-                                                                        <select name="link_product_id" style="width: 100%;" data-placeholder="Choose Reference Product" required class="form-control js-select2">
-                                                                            <option ></option>
-                                                                            @foreach($products as $product)
-                                                                                <option value="{{$product->id}}">{{$product->title}}</option>
-                                                                            @endforeach
-                                                                        </select>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Product Already at Store (Shopify Product ID)</label>
-                                                                        <input  class="form-control" type="text" name="product_shopify_id" value="{{$item->product_shopify_id}}">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">

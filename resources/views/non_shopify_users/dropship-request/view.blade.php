@@ -166,7 +166,7 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                        <form action="{{route('dropship.requests.approve')}}" method="post">
+                                                        <form action="{{route('dropship.requests.completed')}}" method="post">
                                                             @csrf
                                                             <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                             <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
