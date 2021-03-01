@@ -144,7 +144,7 @@
 
                                 @if($item->status_id == 3)
                                     <div class="row p-2">
-                                        <div class="col-md-12 text-right">
+                                        <div class="col-md-12 text-right pr-0">
                                             <button class="btn btn-success ml-2" data-target="#mark-shipped-modal" data-toggle="modal">Mark as Shipped</button>
                                         </div>
                                     </div>

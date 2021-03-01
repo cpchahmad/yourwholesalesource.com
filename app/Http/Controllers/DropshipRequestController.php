@@ -261,6 +261,8 @@ class DropshipRequestController extends Controller
 
             $drop_request->status_id = 6;
             $drop_request->updated_at = now();
+            $drop_request->tracking_number = $request->tracking_number;
+            $drop_request->shipping_provider = $request->shipping_provider;
             $drop_request->save();
             $this->notify->generate('Dropship-Request','Dropship Request Shipped','Dropship Request named '.$drop_request->product_name.' has been shipped',$drop_request);
 
