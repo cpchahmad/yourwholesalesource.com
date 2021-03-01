@@ -247,6 +247,9 @@ class DropshipRequestController extends Controller
 
     public function view_shipping_mark($id, $mark_id) {
 
+        $b = new DNS1D();
+
+        dd($b);
         return view('setttings.dropship-request.view-shipping-mark')->with([
            'drop_request' => DropshipRequest::find($id),
            'mark' => ShippingMark::find($mark_id)
