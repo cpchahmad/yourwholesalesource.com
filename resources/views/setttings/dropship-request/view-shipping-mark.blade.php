@@ -24,9 +24,9 @@
                 <div class="block">
                     <div class="block-header p-4 d-flex justify-content-between">
                         <h5 class="block-title">{{$drop_request->product_name}}</h5>
-                        <button class="btn btn-danger">Download</button>
+                        <button class="btn btn-danger shipping-pdf-btn">Download</button>
                     </div>
-                    <div class="block-content shipping-mark-body">
+                    <div class="block-content shipping-mark-body" id="pdfDownload">
                         <div class="p-4 bg-white">
                             <div class="row">
                                 <div class="col-md-8">
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-right align-self-center">
-                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" class="w-50"/>
+                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" class="w-75"/>
                                 </div>
                             </div>
 
@@ -114,5 +114,27 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+    <script>
+        $('.shipping-pdf-btn').click(function () {
+            var data = document.getElementById('pdfDownload');
+            html2canvas(data).then(canvas => {
+                //  Few necessary setting options
+                var imgWidth = 208;
+                var imgHeight = canvas.height * imgWidth / canvas.width;
+                const contentDataURL = canvas.toDataURL('image/png')
+                let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+                var position = 0;
+                pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight);
+                //  pdf.save('new-file.pdf');
+                window.open(pdf.output('bloburl', { filename: 'report.pdf' }), '_blank');
+
+
+            });
+        });
+    </script>
 
 @endsection
