@@ -64,8 +64,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" />
+                                <div class="col-md-6 text-center">
+                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" class="w-75"/>
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@
                                                 @foreach($mark->dropship_product->dropship_product_variants as $variant)
                                                     <tr class="single-product-details">
                                                         <td class="d-flex align-items-center">
-                                                            <img style="" class="img-avatar200" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
+                                                            <img style="width: 100px; height: auto;" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
                                                             <span class="ml-2">{{ $variant->sku }}</span>
                                                         </td>
                                                         <td class="align-items-center" style="vertical-align: middle;">
