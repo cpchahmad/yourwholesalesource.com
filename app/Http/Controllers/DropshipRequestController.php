@@ -254,4 +254,24 @@ class DropshipRequestController extends Controller
         ]);
     }
 
+    public function mark_as_shipped_dropship_request(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+        if($manager != null && $drop_request != null){
+
+            $drop_request->status_id = 6;
+            $drop_request->updated_at = now();
+            $drop_request->save();
+            $this->notify->generate('Dropship-Request','Dropship Request Shipped','Dropship Request named '.$drop_request->product_name.' has been shipped',$drop_request);
+
+            $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Shipped');
+
+            return redirect()->back()->with('success','Dropship Request Shipped Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
+
+
 }

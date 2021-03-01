@@ -141,6 +141,61 @@
                                         </div>
                                     </div>
                                 @endif
+
+                                @if($item->status_id == 3)
+                                    <div class="row p-2">
+                                        <div class="col-md-12 text-right">
+                                            <button class="btn btn-success ml-2" data-target="#mark-shipped-modal" data-toggle="modal">Mark as Shipped</button>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if($item->status_id == 3)
+                                    <div class="modal fade" id="mark-shipped-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-popout" role="document">
+                                            <div class="modal-content">
+                                                <div class="block block-themed block-transparent mb-0">
+                                                    <div class="block-header bg-primary-dark">
+                                                        <h3 class="block-title">Mark as Shipped</h3>
+                                                        <div class="block-options">
+                                                            <button type="button" class="btn-block-option">
+                                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <form action="{{route('dropship.requests.shipped')}}" method="post">
+                                                        @csrf
+                                                        <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
+                                                        <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
+                                                        <div class="block-content font-size-sm">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Tracking Number</label>
+                                                                        <input placeholder="Please Enter Tracking number here !" name="tracking_number" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Shipping Provider</label>
+                                                                        <input placeholder="Please Enter Shipping Provider Title here !" name="shipping_provider" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="block-content block-content-full text-right border-top">
+
+                                                            <button type="submit" class="btn btn-sm btn-success">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                         </div>
                     </div>
                 </div>
