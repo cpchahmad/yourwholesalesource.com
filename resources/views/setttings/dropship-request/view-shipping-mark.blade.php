@@ -77,6 +77,7 @@
                                                     <th style="vertical-align: top;" class="w-25">SKU</th>
                                                     <th style="vertical-align: top;">Option</th>
                                                     <th style="vertical-align: top;">Inventory</th>
+                                                    <th>Barcode</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="product-details-body">
@@ -92,19 +93,14 @@
                                                         <td class="align-items-center" style="vertical-align: middle;">
                                                             <span>{{ $variant->inventory }}</span>
                                                         </td>
+                                                        <td>
+                                                            <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->barcode, "C128",2.0,42) !!}</span>
+                                                            <span>{{ $variant->barcode }}</span>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="form-material">
-                                        <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($mark->barcode, "C128",2.0,42) !!}</span>
-                                        <span>{{ $mark->barcode }}</span>
                                     </div>
                                 </div>
                             </div>
