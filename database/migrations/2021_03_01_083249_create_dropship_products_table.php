@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShippingMarksTable extends Migration
+class CreateDropshipProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateShippingMarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('shipping_marks', function (Blueprint $table) {
+        Schema::create('dropship_products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title')->nullable();
             $table->unsignedBigInteger('dropship_request_id')->nullable();
-            $table->unsignedBigInteger('dropship_product_id')->nullable();
-            $table->string('barcode')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateShippingMarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipping_marks');
+        Schema::dropIfExists('dropship_products');
     }
 }

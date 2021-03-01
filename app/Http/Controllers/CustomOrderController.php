@@ -1197,7 +1197,7 @@ class CustomOrderController extends Controller
 
     public function view_dropship_request(Request $request) {
         $user = User::find(Auth::id());
-        $item = DropshipRequest::with('shipping_marks')->find($request->id);
+        $item = DropshipRequest::find($request->id);
         return view('non_shopify_users.dropship-request.view')->with([
             'user' => $user,
             'item' => $item

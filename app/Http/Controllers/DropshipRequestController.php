@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DropshipProduct;
+use App\DropshipProductVariant;
 use App\DropshipRequest;
 use App\DropshipRequestAttachment;
 use App\ManagerLog;
@@ -207,23 +209,38 @@ class DropshipRequestController extends Controller
 
     public function save_shipping_mark(Request $request, $id) {
 
+        dd($request->all());
+
+
+        $dropship_product = new DropshipProduct();
+        $dropship_product->title = $request->title;
+        $dropship_product->dropship_request_id = $id;
+        $dropship_product->save();
+
+
         foreach ($request->sku as $index => $item) {
-            $shipping_mark = new ShippingMark();
-            $shipping_mark->sku = $request->sku[$index];
-            $shipping_mark->option = $request->option[$index];
-            $shipping_mark->inventory = $request->inventory[$index];
-            $shipping_mark->barcode = rand();
+            $dropship_product_variant = new DropshipProductVariant();
+            $dropship_product_variant->sku = $request->sku[$index];
+            $dropship_product_variant->option = $request->option[$index];
+            $dropship_product_variant->inventory = $request->inventory[$index];
 
             // Saving product image
             $file = $request->image[$index];
             $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
             $attachement = date("mmYhisa_") . $name;
             $file->move(public_path() . '/shipping-marks/', $attachement);
-            $shipping_mark->image = $attachement;
+            $dropship_product_variant->image = $attachement;
 
-            $shipping_mark->dropship_request_id = $id;
-            $shipping_mark->save();
+            $dropship_product_variant->dropship_product_id = $dropship_product->id;
+            $dropship_product_variant->save();
         }
+
+        $shipping_mark = new ShippingMark();
+        $shipping_mark->dropship_product_id = $dropship_product->id;
+        $shipping_mark->dropship_request_id = $id;
+        $shipping_mark->barcode = rand();
+        $shipping_mark->save();
+
 
         return redirect(route('users.dropship.request.view',$id))->with('Shipping Mark created successfully!');
 

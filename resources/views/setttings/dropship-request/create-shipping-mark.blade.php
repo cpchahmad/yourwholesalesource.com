@@ -57,7 +57,15 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="material-error">{{ $drop_request->product_name }}</label>
+                                        <label for="material-error">Product title</label>
+                                        <input required class="form-control" type="text" name="title" placeholder="Enter Product title here..">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
                                             <tr>
