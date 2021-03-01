@@ -14,7 +14,12 @@ $(document).ready(function () {
                         <input type="text" class="form-control" name="inventory[]" placeholder="Enter product inventory here..">
                     </td>
                     <td class="text-center">
-                        <input type="file" class="form-control" name="images[]">
+                       <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="example-file-input-custom" name="images[]">
+                                <label class="custom-file-label" for="example-file-input-custom">Choose file</label>
+                            </div>
+                        </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group">
