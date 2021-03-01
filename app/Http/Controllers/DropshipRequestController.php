@@ -212,6 +212,7 @@ class DropshipRequestController extends Controller
             $shipping_mark->sku = $request->sku[$index];
             $shipping_mark->option = $request->option[$index];
             $shipping_mark->inventory = $request->inventory[$index];
+            $shipping_mark->barcode = rand();
 
             // Saving product image
             $file = $request->image[$index];

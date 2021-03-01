@@ -158,7 +158,7 @@
                                 <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                     <thead>
                                     <tr>
-                                        <th style="vertical-align: top;">#</th>
+                                        <th style="vertical-align: top;">Shipping marks</th>
                                         <th></th>
                                     </tr>
                                     </thead>
