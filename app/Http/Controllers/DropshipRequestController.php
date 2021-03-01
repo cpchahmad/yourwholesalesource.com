@@ -248,7 +248,7 @@ class DropshipRequestController extends Controller
 
     public function view_shipping_mark($id, $mark_id) {
 
-        return view('setttings.dropship-request.view-shipping-mark')->with([
+        return view('non_shopify_users.dropship-request.view-shipping-mark')->with([
            'drop_request' => DropshipRequest::find($id),
            'mark' => ShippingMark::find($mark_id)
         ]);

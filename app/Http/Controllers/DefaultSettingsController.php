@@ -19,6 +19,7 @@ use App\News;
 use App\Product;
 use App\Refund;
 use App\RetailerOrder;
+use App\ShippingMark;
 use App\Shop;
 use App\Suggestion;
 use App\Ticket;
@@ -1113,6 +1114,15 @@ class DefaultSettingsController extends Controller
 
         return view('videos.index')->withVideos($videos);
     }
+
+    public function view_shipping_mark($id, $mark_id) {
+
+        return view('setttings.dropship-request.view-shipping-mark')->with([
+            'drop_request' => DropshipRequest::find($id),
+            'mark' => ShippingMark::find($mark_id)
+        ]);
+    }
+
 
 
 

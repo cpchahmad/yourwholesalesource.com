@@ -201,11 +201,13 @@
                 </div>
 
 
-                @if($item->status_id == 3)
+                @if($item->status_id == 3 || $item->status_id == 6)
                     <div class="block">
                     <div class="block-header d-flex justify-content-between">
                         <h5 class="block-title">Shipping Marks</h5>
-                        <a class="btn btn-primary" href="{{ route('dropship.requests.create.shipping.mark', $item->id) }}">Create Shipping Marks</a>
+                        @if($item->status == 3)
+                            <a class="btn btn-primary" href="{{ route('dropship.requests.create.shipping.mark', $item->id) }}">Create Shipping Marks</a>
+                        @endif
                     </div>
                     <div class="block-content">
                         <div class="p-2">
@@ -223,7 +225,7 @@
                                         <td class="">{{ $mark->dropship_product->title }}</td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
+                                                <a href="{{route('users.dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Shipping mark"><i class="fa fa-eye"></i></a>
                                                 <a href="{{route('delete.shipping.mark',$mark->id)}}"
