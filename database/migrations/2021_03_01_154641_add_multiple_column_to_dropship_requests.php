@@ -16,6 +16,8 @@ class AddMultipleColumnToDropshipRequests extends Migration
         Schema::table('dropship_requests', function (Blueprint $table) {
             $table->string('tracking_number')->nullable();
             $table->string('shipping_provider')->nullable();
+            $table->string('rejection_proof')->nullable();
+            $table->double('adjusted_weight')->nullable();
         });
     }
 

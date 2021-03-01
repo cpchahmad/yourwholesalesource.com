@@ -51,10 +51,12 @@
                                 @if(in_array($item->status_id,[1,4]))
                                     <button class="btn btn-success" data-target="#mark-approved-modal" data-toggle="modal">Mark as Approved</button>
                                 @endif
-                                @if($item->status_id == 3)
+                                @if($item->status_id == 6)
                                     <button class="btn btn-primary" data-target="#mark-completed-modal" data-toggle="modal">Mark as Completed</button>
+                                    <button class="btn btn-primary" data-target="#mark-rejected-by-weight-modal" data-toggle="modal">Mark as Rejected By Weight</button>
+                                    <button class="btn btn-primary" data-target="#mark-rejected-by-inventory-modal" data-toggle="modal">Mark as Rejected By Inventory</button>
                                 @endif
-                                @if(!in_array($item->status_id,[4,5]))
+                                @if(!in_array($item->status_id,[4,5,6,7,8]))
                                     <button class="btn btn-danger" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
                                 @endif
                             </div>
@@ -102,8 +104,143 @@
                                     </div>
                                 </div>
                             @endif
-                            @if($item->status_id == 3)
+                            @if($item->status_id == 6)
                                 <div class="modal fade" id="mark-completed-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                        <div class="modal-content">
+                                            <div class="block block-themed block-transparent mb-0">
+                                                <div class="block-header bg-primary-dark">
+                                                    <h3 class="block-title">Mark as Completed</h3>
+                                                    <div class="block-options">
+                                                        <button type="button" class="btn-block-option">
+                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <form action="{{route('wishlist.completed')}}" method="post">
+                                                    @csrf
+                                                    <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
+                                                    <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
+                                                    <div class="block-content font-size-sm">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Target Dropshipping Cost</label>
+                                                                    <input readonly class="form-control" type="text" value="{{$item->cost}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Approved Cost</label>
+                                                                    <input readonly class="form-control" type="number" step="any" value="{{$item->approved_price}}">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @if($item->has_store_product != 1)
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Dropship Product</label>
+                                                                        <select name="link_product_id" style="width: 100%;" data-placeholder="Choose Reference Product" required class="form-control js-select2">
+                                                                            <option ></option>
+                                                                            @foreach($products as $product)
+                                                                                <option value="{{$product->id}}">{{$product->title}}</option>
+                                                                            @endforeach
+                                                                        </select>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Product Already at Store (Shopify Product ID)</label>
+                                                                        <input  class="form-control" type="text" name="product_shopify_id" value="{{$item->product_shopify_id}}">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="block-content block-content-full text-right border-top">
+
+                                                        <button type="submit" class="btn btn-sm btn-success">Completed</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="mark-rejected-by-weight-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                        <div class="modal-content">
+                                            <div class="block block-themed block-transparent mb-0">
+                                                <div class="block-header bg-primary-dark">
+                                                    <h3 class="block-title">Mark as Rejected By Weight</h3>
+                                                    <div class="block-options">
+                                                        <button type="button" class="btn-block-option">
+                                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <form action="{{route('dropship.reqeusts.rejected.by.weight')}}" method="post">
+                                                    @csrf
+                                                    <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
+                                                    <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
+                                                    <div class="block-content font-size-sm">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Target Dropshipping Cost</label>
+                                                                    <input readonly class="form-control" type="text" value="{{$item->cost}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Approved Cost</label>
+                                                                    <input class="form-control" type="number" step="any" name="approved_price">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Adjusted Weight</label>
+                                                                    <input class="form-control" type="number" step="any" name="adjusted_weight">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Proof</label>
+                                                                    <input class="form-control" type="file" name="rejection_proof">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="block-content block-content-full text-right border-top">
+
+                                                        <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="mark-rejected-by-inventory-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">
                                             <div class="block block-themed block-transparent mb-0">
@@ -227,69 +364,6 @@
                         </div>
                     </div>
                 </div>
-{{--                @if(count($item->has_thread) > 0)--}}
-{{--                    <h5> Thread </h5>--}}
-{{--                    @foreach($item->has_thread as $thread)--}}
-{{--                        <div class="block">--}}
-{{--                            <div class="block-header">--}}
-{{--                                @if($thread->source == 'manager')--}}
-{{--                                    <h5 class="block-title">{{$thread->has_manager->name}} @if($thread->show) <span class="badge badge-warning ml-2" style="float: right;font-size: small"> Hidden </span> @endif <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>--}}
-{{--                                @elseif($thread->source == 'store')--}}
-{{--                                    <h5 class="block-title">{{explode('.',$item->has_store->shopify_domain)[0]}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>--}}
-{{--                                @else--}}
-{{--                                    <h5 class="block-title">{{$item->has_user->name}} <span class="badge badge-primary " style="float: right;font-size: small"> {{date_create($thread->created_at)->format('m d, Y h:i a')}}</span></h5>--}}
-
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                            <div class="block-content">--}}
-{{--                                <div class="p-2">--}}
-{{--                                    {!! $thread->reply !!}--}}
-
-{{--                                    <div class="attachments">--}}
-{{--                                        @foreach($thread->has_attachments as $a)--}}
-{{--                                            <img style="width: 100%;max-width: 250px" src="{{asset('wishlist-attachments')}}/{{$a->source}}" alt="">--}}
-{{--                                        @endforeach--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-{{--                @endif--}}
-{{--                @if(!in_array($item->status_id,[3,5]))--}}
-{{--                    <div class="block">--}}
-{{--                        <div class="block-header">--}}
-{{--                            <h5 class="block-title">Reply</h5>--}}
-{{--                        </div>--}}
-{{--                        <div class="block-content">--}}
-{{--                            <div class="p-2">--}}
-{{--                                <form action="{{route('wishlist.thread.create')}}" method="post" enctype="multipart/form-data">--}}
-{{--                                    @csrf--}}
-{{--                                    <input type="hidden" name="manager_id" value="{{$item->manager_id}}">--}}
-{{--                                    <input type="hidden" name="source" value="manager">--}}
-{{--                                    <input type="hidden" name="wishlist_id" value="{{$item->id}}">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <div class="form-material">--}}
-{{--                                            <label for="material-error">Message</label>--}}
-{{--                                            <textarea required class="js-summernote" name="reply"--}}
-{{--                                                      placeholder="Please Enter Message here !"></textarea>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="custom-control custom-checkbox  d-inline-block mb-2">--}}
-{{--                                        <input type="checkbox" name="show_flag" class="custom-control-input" id="flag">--}}
-{{--                                        <label class="custom-control-label" for="flag">Hide comment for user?</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <div class="form-material">--}}
-{{--                                            <label for="material-error">Attachments </label>--}}
-{{--                                            <input type="file" name="attachments[]" class="form-control" multiple>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <input type="submit" class="btn btn-primary" value="Save">--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
             </div>
             <div class="col-md-12">
 {{--                @if($item->has_store_product != 1)--}}
