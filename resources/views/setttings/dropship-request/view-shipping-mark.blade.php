@@ -74,7 +74,7 @@
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
                                                 <tr>
-                                                    <th style="vertical-align: top;"></th>
+                                                    <th style="vertical-align: top;" class="w-25"></th>
                                                     <th style="vertical-align: top;" class="w-25">SKU</th>
                                                     <th style="vertical-align: top;" class="w-25">Option</th>
                                                     <th style="vertical-align: top;" class="w-50">Inventory</th>
