@@ -28,37 +28,44 @@
                     </div>
                     <div class="block-content shipping-mark-body p-5">
                         <div class="p-4 bg-white">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="form-material">
-                                        <label for="" class="font-size-h5">Dropship Request Number</label>
-                                        <span class="d-block font-w600"># {{$drop_request->id}}</span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="" class="font-size-h5">Dropship Request Number</label>
+                                                <span class="d-block font-w600"># {{$drop_request->id}}</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="form-material">
-                                        <label for="" class="font-size-h5">Store/User name</label>
-                                        <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->shopify_domain }} @else {{ $drop_request->has_user->name }} @endif</span>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="" class="font-size-h5">Store/User name</label>
+                                                <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->shopify_domain }} @else {{ $drop_request->has_user->name }} @endif</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="form-material">
-                                        <label for="" class="font-size-h5">Contact</label>
-                                        <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif</span>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="" class="font-size-h5">Contact</label>
+                                                <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="form-material">
-                                        <label for="" class="font-size-h5">Product title</label>
-                                        <span class="d-block font-w600">{{$mark->dropship_product->title}}</span>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-material">
+                                                <label for="" class="font-size-h5">Product title</label>
+                                                <span class="d-block font-w600">{{$mark->dropship_product->title}}</span>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" />
                                 </div>
                             </div>
 
@@ -80,10 +87,10 @@
                                                             <img style="" class="img-avatar200" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
                                                             <span class="ml-2">{{ $variant->sku }}</span>
                                                         </td>
-                                                        <td class="align-items-center">
+                                                        <td class="align-items-center" style="vertical-align: middle;">
                                                             <span>{{ $variant->option }}</span>
                                                         </td>
-                                                        <td class="align-items-center">
+                                                        <td class="align-items-center" style="vertical-align: middle;">
                                                             <span>{{ $variant->inventory }}</span>
                                                         </td>
                                                     </tr>
