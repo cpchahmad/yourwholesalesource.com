@@ -154,7 +154,35 @@
                     </div>
                     <div class="block-content">
                         <div class="p-2">
-
+                            @forelse($item->shipping_marks as $mark)
+                                <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
+                                    <thead>
+                                    <tr>
+                                        <th style="vertical-align: top;">#</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="product-details-body">
+                                    <tr class="single-product-details">
+                                        <td class="">
+                                            # {{ $mark->id }}
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="btn-group">
+                                                <a href="{{route('dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
+                                                   class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="View Shipping mark"><i class="fa fa-eye"></i></a>
+                                                <a href="{{route('delete.shipping.mark',$mark->id)}}"
+                                                   class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
+                                                   data-original-title="Delete Shipping mark"><i class="fa fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            @empty
+                                <div class="text-center">No Shipping Marks Added.</div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
