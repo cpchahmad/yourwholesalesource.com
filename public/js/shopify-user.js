@@ -17,7 +17,7 @@ $(document).ready(function () {
                        <div class="form-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="example-file-input-custom" name="images[]">
-                                <label class="custom-file-label" for="example-file-input-custom">Choose file</label>
+                                <label class="custom-file-label text-left" for="example-file-input-custom">Choose file</label>
                             </div>
                         </div>
                     </td>
