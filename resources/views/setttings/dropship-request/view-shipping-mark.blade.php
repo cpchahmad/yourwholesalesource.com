@@ -71,13 +71,13 @@
                                                     <th style="vertical-align: top;">SKU</th>
                                                     <th style="vertical-align: top;">Option</th>
                                                     <th style="vertical-align: top;">Inventory</th>
-                                                    <th style="vertical-align: top;">Image</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="product-details-body">
                                                 @foreach($mark->dropship_product->dropship_product_variants as $variant)
                                                     <tr class="single-product-details">
-                                                        <td class="">
+                                                        <td class="d-flex align-items-center">
+                                                            <img style="" class="img-avatar200" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
                                                             <span>{{ $variant->sku }}</span>
                                                         </td>
                                                         <td>
@@ -85,9 +85,6 @@
                                                         </td>
                                                         <td>
                                                             <span>{{ $variant->inventory }}</span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <img style="" class="img-avatar200" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
                                                         </td>
                                                     </tr>
                                                 @endforeach
