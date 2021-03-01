@@ -31,15 +31,15 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="">Dropship Request Number</label>
-                                        <span class="d-block font-w600">{{$drop_request->id}}</span>
+                                        <label for="" class="font-size-h5">Dropship Request Number</label>
+                                        <span class="d-block font-w600"># {{$drop_request->id}}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="material-error">Store/User name</label>
+                                        <label for="" class="font-size-h5">Store/User name</label>
                                         <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->shopify_domain }} @else {{ $drop_request->has_user->name }} @endif</span>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="material-error">Contact</label>
+                                        <label for="" class="font-size-h5">Contact</label>
                                         <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif</span>
                                     </div>
                                 </div>
@@ -56,23 +56,23 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="material-error">Product title</label>
+                                        <label for="" class="font-size-h5">Product title</label>
                                         <span class="d-block font-w600">{{$mark->dropship_product->title}}</span>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
-                                            <tr colspan="4" class="text-center font-w600">{{ $mark->dropship_product->title }}</tr>
-                                            <tr>
-                                                <th style="vertical-align: top;">SKU</th>
-                                                <th style="vertical-align: top;">Option</th>
-                                                <th style="vertical-align: top;">Inventory</th>
-                                                <th style="vertical-align: top;">Image</th>
-                                            </tr>
+                                                <tr>
+                                                    <th style="vertical-align: top;">SKU</th>
+                                                    <th style="vertical-align: top;">Option</th>
+                                                    <th style="vertical-align: top;">Inventory</th>
+                                                    <th style="vertical-align: top;">Image</th>
+                                                </tr>
                                             </thead>
                                             <tbody class="product-details-body">
                                                 @foreach($mark->dropship_product->dropship_product_variants as $variant)
@@ -87,7 +87,7 @@
                                                             <span>{{ $variant->inventory }}</span>
                                                         </td>
                                                         <td class="text-center">
-                                                            <img style="width: 100%;max-width: 250px" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
+                                                            <img style="" class="img-avatar200" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
                                                         </td>
                                                     </tr>
                                                 @endforeach
