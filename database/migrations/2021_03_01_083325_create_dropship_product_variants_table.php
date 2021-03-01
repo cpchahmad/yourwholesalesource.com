@@ -20,6 +20,7 @@ class CreateDropshipProductVariantsTable extends Migration
             $table->string('option')->nullable();
             $table->integer('inventory')->nullable();
             $table->string('image')->nullable();
+            $table->string('barcode')->nullable();
             $table->timestamps();
         });
     }

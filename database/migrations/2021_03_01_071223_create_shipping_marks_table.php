@@ -17,7 +17,6 @@ class CreateShippingMarksTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dropship_request_id')->nullable();
             $table->unsignedBigInteger('dropship_product_id')->nullable();
-            $table->string('barcode')->nullable();
             $table->timestamps();
         });
     }
