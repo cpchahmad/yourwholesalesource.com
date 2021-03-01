@@ -9,7 +9,7 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item">Dashboard</li>
-                        <li class="breadcrumb-item"> Dropship Request</li>
+                        <li class="breadcrumb-item">Dropship Request</li>
                         <li class="breadcrumb-item" aria-current="page">
                             <a class="link-fx" href="">Create Shipping Mark for {{$drop_request->product_name}}</a>
                         </li>
@@ -90,7 +90,6 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>

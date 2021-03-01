@@ -203,4 +203,9 @@ class DropshipRequestController extends Controller
            'drop_request' => $drop_request
         ]);
     }
+
+    public function save_shipping_mark(Request $request, $id) {
+        dd($request->all(), $id);
+    }
+
 }

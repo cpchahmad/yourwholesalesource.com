@@ -16,7 +16,7 @@ $(document).ready(function () {
                     <td class="text-center">
                         <input type="file" class="form-control" name="images[]">
                     </td>
-                    <td class="text-center">
+                    <td class="text-right">
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-sm btn-primary add-product-details-tab-btn">+</button>
                             <button type="button" class="btn btn-sm btn-danger remove-product-details-tab-btn">-</button>
