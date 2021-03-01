@@ -53,8 +53,8 @@
                                 @endif
                                 @if($item->status_id == 6)
                                     <button class="btn btn-primary" data-target="#mark-completed-modal" data-toggle="modal">Mark as Completed</button>
-                                    <button class="btn btn-primary" data-target="#mark-rejected-by-weight-modal" data-toggle="modal">Mark as Rejected By Weight</button>
-                                    <button class="btn btn-primary" data-target="#mark-rejected-by-inventory-modal" data-toggle="modal">Mark as Rejected By Inventory</button>
+                                    <button class="btn btn-danger" data-target="#mark-rejected-by-weight-modal" data-toggle="modal">Mark as Rejected By Weight</button>
+                                    <button class="btn btn-danger" data-target="#mark-rejected-by-inventory-modal" data-toggle="modal">Mark as Rejected By Inventory</button>
                                 @endif
                                 @if(!in_array($item->status_id,[4,5,6,7,8]))
                                     <button class="btn btn-danger" data-target="#mark-rejected-modal" data-toggle="modal">Mark as Rejected</button>
@@ -189,7 +189,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('dropship.reqeusts.rejected.by.weight')}}" method="post">
+                                                <form action="{{route('dropship.reqeusts.rejected.by.weight')}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                     <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
