@@ -29,7 +29,7 @@
                     <div class="block-content shipping-mark-body p-5">
                         <div class="p-4 bg-white">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="form-material d-flex justify-content-between">
@@ -63,8 +63,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 text-center">
-                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" class="w-75"/>
+                                <div class="col-md-4 text-right align-self-center">
+                                    <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" class="w-50"/>
                                 </div>
                             </div>
 
