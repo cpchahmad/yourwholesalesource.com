@@ -209,9 +209,6 @@ class DropshipRequestController extends Controller
 
     public function save_shipping_mark(Request $request, $id) {
 
-        dd($request->all());
-
-
         $dropship_product = new DropshipProduct();
         $dropship_product->title = $request->title;
         $dropship_product->dropship_request_id = $id;
