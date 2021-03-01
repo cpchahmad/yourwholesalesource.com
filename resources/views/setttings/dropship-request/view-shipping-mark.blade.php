@@ -103,14 +103,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material text-right">
-                                        @php
-
-                                            $generator = new \Picqer\Barcode\BarcodeGeneratorHTML()
-                                            dd($generator);
-
-                                        @endphp
-
-{{--                                        {!! $generator->getBarcode('0001245259636', $generator::TYPE_CODE_128) !!}--}}
+                                        {!! \Milon\Barcode\DNS1D::getBarcodeHTML($mark->barcode, "C128",1.4,22) !!}
                                     </div>
                                 </div>
                             </div>
