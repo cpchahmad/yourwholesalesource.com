@@ -487,6 +487,8 @@
                                 <hr>
                                 <span class="font-weight-bold">Weight: </span> {{ $item->weight }} (kg)
                                 <hr>
+                                <span class="font-weight-bold">Adjusted Weight: </span> {{ $item->adjusted_weight }} (kg)
+                                <hr>
                                 <span class="font-weight-bold">Packing size: </span> {{ $item->packing_size }}
                                 <hr>
                                 <span class="font-weight-bold">Contains Battery: </span> @if($item->battery) Yes @else No @endif

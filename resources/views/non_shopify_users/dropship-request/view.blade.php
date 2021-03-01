@@ -244,7 +244,34 @@
                     </div>
                 </div>
                 @endif
-{{--                @if(count($wishlist->has_thread) > 0)--}}
+
+                @if($item->status_id == 7)
+                    <div class="block">
+                        <div class="block-header d-flex justify-content-between">
+                            <h5 class="block-title">Rejection Proof</h5>
+                        </div>
+                        <div class="block-content">
+                            <div class="p-2">
+                                <div class="form-group">
+                                    <div class="form-material">
+                                        <label for="material-error">Approved Dropshipping Cost</label>
+                                        <input readonly class="form-control" type="text" value="{{$item->approved_cost}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-material">
+                                        <label for="material-error">Adjusted Weight</label>
+                                        <input readonly class="form-control" type="text" value="{{$item->adjusted_weight}}">
+                                    </div>
+                                </div>
+
+                                <img style="width: 100%;max-width: 250px" src="{{asset('rejection-proof')}}/{{$item->rejection_proof}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                {{--                @if(count($wishlist->has_thread) > 0)--}}
 {{--                    <h5> Thread </h5>--}}
 {{--                    @foreach($wishlist->has_thread as $thread)--}}
 {{--                        @if(!($thread->show))--}}
