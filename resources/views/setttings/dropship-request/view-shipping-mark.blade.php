@@ -93,7 +93,7 @@
                                                         <td class="align-items-center" style="vertical-align: middle;">
                                                             <span>{{ $variant->inventory }}</span>
                                                         </td>
-                                                        <td>
+                                                        <td class="align-items-center" style="vertical-align: middle;">
                                                             <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->barcode, "C128",2.0,42) !!}</span>
                                                             <span>{{ $variant->barcode }}</span>
                                                         </td>
