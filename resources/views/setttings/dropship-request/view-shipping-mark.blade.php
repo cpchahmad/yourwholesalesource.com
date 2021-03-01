@@ -32,7 +32,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <div class="form-material">
+                                            <div class="form-material d-flex justify-content-between">
                                                 <label for="" class="font-size-h5">Dropship Request Number</label>
                                                 <span class="d-block font-w600"># {{$drop_request->id}}</span>
                                             </div>
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <div class="form-material">
+                                            <div class="form-material d-flex justify-content-between">
                                                 <label for="" class="font-size-h5">Store/User name</label>
                                                 <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->shopify_domain }} @else {{ $drop_request->has_user->name }} @endif</span>
                                             </div>
@@ -48,16 +48,15 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <div class="form-material">
+                                            <div class="form-material d-flex justify-content-between">
                                                 <label for="" class="font-size-h5">Contact</label>
                                                 <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif</span>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <div class="form-material">
+                                            <div class="form-material d-flex justify-content-between">
                                                 <label for="" class="font-size-h5">Product title</label>
                                                 <span class="d-block font-w600">{{$mark->dropship_product->title}}</span>
                                             </div>
@@ -97,6 +96,20 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material text-right">
+                                        @php
+
+                                            $generator = new \Picqer\Barcode\BarcodeGeneratorHTML();
+
+                                        @endphp
+
+                                        {!! $generator->getBarcode('0001245259636', $generator::TYPE_CODE_128) !!}
                                     </div>
                                 </div>
                             </div>
