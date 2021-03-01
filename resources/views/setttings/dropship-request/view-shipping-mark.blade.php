@@ -27,7 +27,7 @@
                         </h5>
                     </div>
                     <div class="block-content shipping-mark-body p-5">
-                        <div class="p-4">
+                        <div class="p-4 bg-white">
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
@@ -66,35 +66,31 @@
                                     <div class="form-material">
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
+                                            <tr colspan="4" class="text-center font-w600">{{ $mark->dropship_product->title }}</tr>
                                             <tr>
                                                 <th style="vertical-align: top;">SKU</th>
                                                 <th style="vertical-align: top;">Option</th>
                                                 <th style="vertical-align: top;">Inventory</th>
                                                 <th style="vertical-align: top;">Image</th>
-                                                <th></th>
                                             </tr>
                                             </thead>
                                             <tbody class="product-details-body">
-                                            <tr class="single-product-details">
-                                                <td class="">
-                                                    <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here..">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" name="option[]" placeholder="Enter name of options here..">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" name="inventory[]" placeholder="Enter product inventory here..">
-                                                </td>
-                                                <td class="text-center">
-                                                    <input type="file" class="form-control" name="image[]">
-                                                </td>
-                                                <td class="text-right">
-                                                    <div class=" btn-group btn-group-sm" role="group">
-                                                        <button type="button" class="btn btn-sm btn-primary add-product-details-tab-btn">+</button>
-                                                        <button type="button" class="btn btn-sm btn-danger remove-product-details-tab-btn">-</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                @foreach($mark->dropship_product->dropship_product_variants as $variant)
+                                                    <tr class="single-product-details">
+                                                        <td class="">
+                                                            <span>{{ $variant->sku }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ $variant->option }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ $variant->inventory }}</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <img style="width: 100%;max-width: 250px" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
