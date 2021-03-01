@@ -165,7 +165,7 @@
                                     <tbody class="product-details-body">
                                 @foreach($item->shipping_marks as $mark)
                                     <tr class="single-product-details">
-                                        <td class=""># {{ $mark->id }}</td>
+                                        <td class=""># {{ $mark->dropship_product->title }}</td>
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <a href="{{route('dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
