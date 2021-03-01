@@ -34,4 +34,9 @@ class DropshipRequest extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function shipping_marks()
+    {
+        return $this->hasMany(ShippingMark::class);
+    }
 }
