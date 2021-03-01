@@ -12,7 +12,6 @@ use App\User;
 use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Picqer\Barcode\BarcodeGeneratorHTML;
 use Psy\Util\Str;
 
 class DropshipRequestController extends Controller
@@ -246,7 +245,7 @@ class DropshipRequestController extends Controller
 
     public function view_shipping_mark($id, $mark_id) {
 
-        $b = new BarcodeGeneratorHTML();
+        $b = new \picqer\php-barcode-generator\srcBarcodeGeneratorHTML();
 
         dd($b);
 
