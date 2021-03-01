@@ -61,6 +61,10 @@
             }
 
         }
+
+        .shipping-mark-body {
+
+        }
     </style>
 
 </head>

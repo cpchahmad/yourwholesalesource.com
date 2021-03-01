@@ -519,6 +519,7 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //    $class->set_erp_order_fulfillment()
 //});
 
+        Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'DropshipRequestController@view_shipping_mark')->name('dropship.requests.view.shipping.mark');
 
 
 
