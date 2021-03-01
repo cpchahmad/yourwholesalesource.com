@@ -63,7 +63,7 @@
         }
 
         .shipping-mark-body {
-
+            background-color: #7daa40;
         }
     </style>
 

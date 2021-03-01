@@ -26,12 +26,13 @@
                         <h5 class="block-title">{{$drop_request->product_name}}
                         </h5>
                     </div>
-                    <div class="block-content">
-                        <div class="shipping-mark-body">
+                    <div class="block-content shipping-mark-body p-5">
+                        <div class="p-4">
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="">Dropship Request Number</label><span class="">{{$drop_request->id}}</span>
+                                        <label for="">Dropship Request Number</label>
+                                        <span class="d-block font-w600">{{$drop_request->id}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +40,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">Store/User name</label>
-                                        <input required class="form-control" type="text" readonly value="@if($drop_request->shop_id) {{ $drop_request->has_store->shopify_domain }} @else {{ $drop_request->has_user->name }} @endif">
+                                        <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->shopify_domain }} @else {{ $drop_request->has_user->name }} @endif</span>
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">Contact</label>
-                                        <input required class="form-control" type="text"  readonly value="@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif">
+                                        <span class="d-block font-w600">@if($drop_request->shop_id) {{ $drop_request->has_store->has_user()->first()->email }} @else {{ $drop_request->has_user->email }} @endif</span>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +57,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">Product title</label>
-                                        <input required class="form-control" type="text" name="title" placeholder="Enter Product title here..">
+                                        <span class="d-block font-w600">{{$mark->dropship_product->title}}</span>
                                     </div>
                                 </div>
                             </div>
