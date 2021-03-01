@@ -402,7 +402,13 @@
                             @if($item->approved_price != null)
                                 <span class="font-weight-bold">Approved Cost: </span> {{number_format($item->approved_price,2)}} USD
                                 <hr>
-                                @endif
+                            @endif
+
+                            <span class="font-weight-bold">Tracking Number: </span> {{ $item->tracking_number }}
+                            <hr>
+
+                            <span class="font-weight-bold">Shipping Provider: </span> {{ $item->shipping_provider }}
+                            <hr>
 
                             <span class="font-weight-bold">Dropship Request Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
                             <hr>
