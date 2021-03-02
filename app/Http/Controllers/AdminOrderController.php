@@ -1217,7 +1217,8 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::where('id', $orderFullfillment->retailer_order_id)->first();
         if ($orderFullfillment->fulfillment_shopify_id) {
             $shop = $this->helper->getSpecificShop($order->shop_id);
-            $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
+            $re = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
+            dd($re);
         }
 //        if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
 //            $admin_shop = $this->helper->getAdminShop();
