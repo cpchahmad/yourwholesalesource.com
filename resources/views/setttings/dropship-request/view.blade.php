@@ -437,7 +437,7 @@
                                     <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                         <thead>
                                         <tr>
-                                            <th style="vertical-align: top;">Shipping marks</th>
+                                            <th style="vertical-align: top;">Product</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -447,7 +447,7 @@
                                                 <td class="">{{ $mark->dropship_product->title }}</td>
                                                 <td class="text-right">
                                                     <div class="btn-group">
-                                                        <a href="{{route('users.dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
+                                                        <a href="{{route('dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
                                                            class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                            data-original-title="View Shipping mark"><i class="fa fa-eye"></i></a>
                                                     </div>
