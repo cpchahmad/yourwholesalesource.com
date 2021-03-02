@@ -332,6 +332,32 @@ class DropshipRequestController extends Controller
         }
     }
 
+    public function mark_as_rejected_by_inventory_dropship_request(Request $request){
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+        if($manager != null && $drop_request != null){
 
+            $drop_request->status_id = 8;
+            $drop_request->updated_at = now();
+            $drop_request->save();
+
+            foreach ($request->variant_ids as $index => $variant_id)
+            {
+                $variant = DropshipProductVariant::find($variant_id);
+                $variant->received = $request->received[$index];
+                $variant->missing = $request->missing[$index];
+                $variant->save();
+            }
+
+            $this->notify->generate('Dropship-Request','Dropship Request Rejected','Dropship Request named '.$drop_request->product_name.' has been rejected',$drop_request);
+
+            $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Rejected');
+
+            return redirect()->back()->with('success','Dropship Request Rejected Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
 
 }
