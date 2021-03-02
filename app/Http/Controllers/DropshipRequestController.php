@@ -337,8 +337,6 @@ class DropshipRequestController extends Controller
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
 
-            dd($request->all());
-
             $drop_request->status_id = 8;
             $drop_request->updated_at = now();
             $drop_request->save();
