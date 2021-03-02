@@ -1486,6 +1486,7 @@ class AdminOrderController extends Controller
                         $response = $shop->api()->rest('PUT', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $fulfillment->fulfillment_shopify_id . '.json', $tracking);
 
                         if (!$response->errors) {
+                            $shop->api()->rest('POST', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillment->id . '/complete.json');
                             $this->tracking_process($data, $fulfillment, $retailer_order);
                         }
                         else {
