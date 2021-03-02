@@ -1491,7 +1491,7 @@ class AdminOrderController extends Controller
                         }
                         else {
                             $log = new ErrorLog();
-                            $log->message = "New error From Manbang: " . $retailer_order->id . ': '. json_encode($response->body);
+                            $log->message = "New error From Manbang (update_erp_fulfillment): " . $retailer_order->id . ': '. json_encode($response->body);
                             $log->save();
                         }
 
