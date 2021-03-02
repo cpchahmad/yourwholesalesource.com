@@ -815,6 +815,7 @@ class ProductController extends Controller
                         ];
 
                         $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        dd($response);
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
                     }
 
