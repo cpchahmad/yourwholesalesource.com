@@ -424,7 +424,7 @@
 {{--                @endif--}}
 
 
-                @if(in_array($item->status_id,[6,7.8]))
+                @if(in_array($item->status_id,[6,7,8]))
                     <div class="block">
                         <div class="block-header d-flex justify-content-between">
                             <h5 class="block-title">Shipping Marks</h5>

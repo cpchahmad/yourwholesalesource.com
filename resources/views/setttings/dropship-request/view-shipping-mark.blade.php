@@ -78,6 +78,8 @@
                                                     <th style="vertical-align: top;" class="w-25">SKU</th>
                                                     <th style="vertical-align: top;" class="w-25">Option</th>
                                                     <th style="vertical-align: top;" class="w-50">Inventory</th>
+                                                    <th style="vertical-align: top;" >Received</th>
+                                                    <th style="vertical-align: top;" >Missing</th>
                                                     <th>Barcode</th>
                                                 </tr>
                                             </thead>
@@ -95,6 +97,12 @@
                                                         </td>
                                                         <td class="align-items-center" style="vertical-align: middle;">
                                                             <span>{{ $variant->inventory }}</span>
+                                                        </td>
+                                                        <td class="align-items-center" style="vertical-align: middle;">
+                                                            <span>{{ $variant->received }}</span>
+                                                        </td>
+                                                        <td class="align-items-center" style="vertical-align: middle;">
+                                                            <span>{{ $variant->missing }}</span>
                                                         </td>
                                                         <td class="align-items-center text-center" style="vertical-align: middle;">
                                                             <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->barcode, "C128",2.0,42) !!}</span>
