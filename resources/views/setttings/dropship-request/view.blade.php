@@ -209,67 +209,65 @@
                                         <div class="modal-content">
                                             <div class="block block-themed block-transparent mb-0">
                                                 <div class="block-header bg-primary-dark">
-                                                    <h3 class="block-title">Mark as Completed</h3>
+                                                    <h3 class="block-title">Mark as Rejected By Inventory</h3>
                                                     <div class="block-options">
                                                         <button type="button" class="btn-block-option">
                                                             <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('wishlist.completed')}}" method="post">
+                                                <form action="{{route('dropship.reqeusts.rejected.by.inventory')}}" method="post">
                                                     @csrf
                                                     <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                     <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
                                                     <div class="block-content font-size-sm">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <label for="material-error">Target Dropshipping Cost</label>
-                                                                    <input readonly class="form-control" type="text" value="{{$item->cost}}">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
 
                                                         <div class="form-group">
-                                                            <div class="col-sm-12">
-                                                                <div class="form-material">
-                                                                    <label for="material-error">Approved Cost</label>
-                                                                    <input readonly class="form-control" type="number" step="any" value="{{$item->approved_price}}">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Product</th>
+                                                                        <th>Inventory</th>
 
-                                                                </div>
-                                                            </div>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach($item->dropship_products as $product)
+                                                                       <tr>
+                                                                           <td>{{ $product->title }}</td>
+                                                                           <td>
+                                                                               <table>
+                                                                                   <thead>
+                                                                                   <tr>
+                                                                                       <th>SKU</th>
+                                                                                       <th>Actual Inventory</th>
+                                                                                       <th>Received</th>
+                                                                                       <th>Missing</th>
+                                                                                   </tr>
+                                                                                   </thead>
+                                                                                   <tbody>
+                                                                                       @foreach($product->dropship_product_variants as $variant)
+                                                                                                <tr>
+                                                                                                    <td>{{ $variant->sku }}</td>
+                                                                                                    <td>{{ $variant->inventory }}</td>
+                                                                                                    <td>{{ $variant->sku }}</td>
+                                                                                                    <td>{{ $variant->sku }}</td>
+                                                                                                </tr>
+                                                                                       @endforeach
+                                                                                   </tbody>
+                                                                               </table>
+                                                                           </td>
+                                                                       </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                        @if($item->has_store_product != 1)
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Dropship Product</label>
-                                                                        <select name="link_product_id" style="width: 100%;" data-placeholder="Choose Reference Product" required class="form-control js-select2">
-                                                                            <option ></option>
-                                                                            @foreach($products as $product)
-                                                                                <option value="{{$product->id}}">{{$product->title}}</option>
-                                                                            @endforeach
-                                                                        </select>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Product Already at Store (Shopify Product ID)</label>
-                                                                        <input  class="form-control" type="text" name="product_shopify_id" value="{{$item->product_shopify_id}}">
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">
 
-                                                        <button type="submit" class="btn btn-sm btn-success">Completed</button>
+                                                        <button type="submit" class="btn btn-sm btn-success">Reject</button>
                                                     </div>
                                                 </form>
                                             </div>

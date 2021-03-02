@@ -39,4 +39,8 @@ class DropshipRequest extends Model
     {
         return $this->hasMany(ShippingMark::class);
     }
+
+    public function dropship_products() {
+        return $this->hasMany(DropshipProduct::class);
+    }
 }
