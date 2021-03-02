@@ -276,7 +276,7 @@ class DropshipRequestController extends Controller
     }
 
 
-    public function completed_dropship_request(Request $request){
+    public function complete_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
