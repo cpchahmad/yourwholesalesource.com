@@ -468,7 +468,6 @@ class AdminMaintainerController extends Controller
                     }
                 }
 
-
                 array_push($line_items, [
                     "title" => str_replace('"', ' ', $item->name),
                     "platformSku" => is_null($item->linked_variant) ? $item->linked_product->sku : $item->linked_variant->sku,
@@ -513,10 +512,19 @@ class AdminMaintainerController extends Controller
                     }
                 }
 
+                if($item->linked_real_variant != null)
+                    $sku = $item->linked_real_variant->sku;
+                elseif($item->linked_woocommerce_variant != null)
+                    $sku = $item->linked_woocommerce_variant->sku;
+                elseif($item->link_real_product != null)
+                    $sku = $item->link_real_product->sku;
+                else
+                    $sku = $item->link_woocommerce_product->sku;
+
 
                 array_push($line_items, [
                     "title" => str_replace('"', ' ', $item->name),
-                    "platformSku" => is_null($item->linked_real_variant) ? $item->linked_real_product->sku : $item->linked_real_variant->sku,
+                    "platformSku" => $sku,
                     "quantity" => $item->quantity,
                     "pictureUrl" => $images[$index]
                 ]);
@@ -644,6 +652,8 @@ class AdminMaintainerController extends Controller
                         array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
                     }
                 }
+
+
 
 
                 array_push($line_items, [
