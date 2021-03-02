@@ -252,7 +252,7 @@
                                                                                                     <td>{{ $variant->inventory }}</td>
                                                                                                     <td><input type="text" class="form-control" name="received[]" value="{{ $variant->inventory }}"></td>
                                                                                                     <td><input type="text" class="form-control" name="missing[]" value="0"></td>
-                                                                                                    <input type="hidden" name="variant_ids[]">
+                                                                                                    <input type="hidden" name="variant_ids[]" value="{{ $variant->id }}">
                                                                                                 </tr>
                                                                                        @endforeach
                                                                                    </tbody>
