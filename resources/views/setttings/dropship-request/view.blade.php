@@ -250,8 +250,8 @@
                                                                                                 <tr>
                                                                                                     <td>{{ $variant->sku }}</td>
                                                                                                     <td>{{ $variant->inventory }}</td>
-                                                                                                    <td><input type="text" name="received[]"></td>
-                                                                                                    <td><input type="text" name="missing[]"></td>
+                                                                                                    <td><input type="text" class="form-control" name="received[]"></td>
+                                                                                                    <td><input type="text" class="form-control" name="missing[]"></td>
                                                                                                 </tr>
                                                                                        @endforeach
                                                                                    </tbody>
