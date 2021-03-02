@@ -424,6 +424,46 @@
 {{--                    <hr>--}}
 {{--                @endif--}}
 {{--                @endif--}}
+
+
+                @if(in_array($item->status_id,[6,7.8]))
+                    <div class="block">
+                        <div class="block-header d-flex justify-content-between">
+                            <h5 class="block-title">Shipping Marks</h5>
+                        </div>
+                        <div class="block-content">
+                            <div class="p-2">
+                                @if(count($item->shipping_marks))
+                                    <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
+                                        <thead>
+                                        <tr>
+                                            <th style="vertical-align: top;">Shipping marks</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="product-details-body">
+                                        @foreach($item->shipping_marks as $mark)
+                                            <tr class="single-product-details">
+                                                <td class="">{{ $mark->dropship_product->title }}</td>
+                                                <td class="text-right">
+                                                    <div class="btn-group">
+                                                        <a href="{{route('users.dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
+                                                           class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                           data-original-title="View Shipping mark"><i class="fa fa-eye"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="text-center">No Shipping Marks Added.</div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="block">
                     <div class="block-header">
                         <h5 class="block-title">Dropship Request Details</h5>
