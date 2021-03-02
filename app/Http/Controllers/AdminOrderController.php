@@ -353,7 +353,7 @@ class AdminOrderController extends Controller
                                     $current->courier_id = $courier_id;
                                 $current->save();
 
-                                //$this->CompleteFullFillment($current);
+                                $this->CompleteFullFillment($current);
                                 /*Maintaining Log*/
                                 $order_log = new OrderLog();
                                 $order_log->message = "Tracking detailed of fulfillment named " . $current->name . "  updated successfully on " . now()->format('d M, Y h:i a');
@@ -374,9 +374,7 @@ class AdminOrderController extends Controller
                                 }
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
-                                $res = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id. '.json', [
-                                    'fulfillment_status' => 'fulfilled'
-                                ]);
+                                $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id. '.json');
 
                                 dd($response, $res);
 //                                if ($order->admin_shopify_id != null) {
