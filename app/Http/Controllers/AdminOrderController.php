@@ -358,7 +358,7 @@ class AdminOrderController extends Controller
                                 $order_log->message = "Tracking detailed of fulfillment named " . $current->name . "  updated successfully on " . now()->format('d M, Y h:i a');
                                 $order_log->status = "Tracking Details Updated";
                                 $order_log->retailer_order_id = $order->id;
-                                //$order_log->save();
+                                $order_log->save();
 
                                 $data = [
                                     "fulfillment" => [
