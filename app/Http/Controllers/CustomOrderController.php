@@ -273,6 +273,7 @@ class CustomOrderController extends Controller
                     $new_line->shopify_product_id = $variant->linked_product->shopify_id;
                     $new_line->woocommerce_id = $variant->linked_product->woocommerce_id;
                     $new_line->shopify_variant_id = $variant->shopify_id;
+                    $new_line->woocommerce_variant_id = $variant->woocommerce_id;
                     $new_line->title = $variant->linked_product->title;
                     $new_line->quantity = $request->input('quantity')[$index];
                     $new_line->sku = $variant->sku;

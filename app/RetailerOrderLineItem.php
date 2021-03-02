@@ -26,6 +26,10 @@ class RetailerOrderLineItem extends Model
         return $this->hasOne(ProductVariant::class,'shopify_id','shopify_variant_id');
     }
 
+    public function linked_woocommerce_variant(){
+        return $this->hasOne(ProductVariant::class,'woocommerce_id','woocommerce_variant_id');
+    }
+
     public function has_associated_warehouse() {
         if($this->linked_product != null && $this->linked_product->linked_product != null)
             $admin_product = $this->linked_product->linked_product;
