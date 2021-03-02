@@ -329,6 +329,59 @@
                     </div>
                 @endif
 
+                @if($item->status_id == 8)
+                    <div class="block">
+                        <div class="block-header d-flex justify-content-between">
+                            <h5 class="block-title">Inventory Details</h5>
+                        </div>
+                        <div class="block-content">
+                            <div class="p-2">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Inventory</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($item->dropship_products as $product)
+                                        <tr>
+                                            <td style="vertical-align: middle;">{{ $product->title }}</td>
+                                            <td>
+                                                <table class="w-100">
+                                                    <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>SKU</th>
+                                                        <th>Actual</th>
+                                                        <th>Received</th>
+                                                        <th>Missing</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($product->dropship_product_variants as $variant)
+                                                        <tr>
+                                                            <td class="d-flex align-items-center">
+                                                                <img style="width: 100px; height: auto;" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
+                                                            </td>
+                                                            <td>{{ $variant->sku }}</td>
+                                                            <td>{{ $variant->inventory }}</td>
+                                                            <td>{{ $variant->received }}</td>
+                                                            <td>{{ $variant->missing }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 {{--                @if(count($wishlist->has_thread) > 0)--}}
 {{--                    <h5> Thread </h5>--}}
 {{--                    @foreach($wishlist->has_thread as $thread)--}}
