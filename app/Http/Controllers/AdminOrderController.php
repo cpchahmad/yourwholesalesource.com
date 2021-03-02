@@ -374,7 +374,9 @@ class AdminOrderController extends Controller
                                 }
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
-                                $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id. '.json');
+                                $res = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id. '.json', [
+                                    'fulfillment_status' => 'fulfilled'
+                                ]);
 
                                 dd($response, $res);
 //                                if ($order->admin_shopify_id != null) {
