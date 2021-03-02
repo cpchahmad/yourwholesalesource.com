@@ -353,7 +353,6 @@ class AdminOrderController extends Controller
                                     $current->courier_id = $courier_id;
                                 $current->save();
 
-                                $this->CompleteFullFillment($current);
                                 /*Maintaining Log*/
                                 $order_log = new OrderLog();
                                 $order_log->message = "Tracking detailed of fulfillment named " . $current->name . "  updated successfully on " . now()->format('d M, Y h:i a');
@@ -374,9 +373,9 @@ class AdminOrderController extends Controller
                                 }
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $current->fulfillment_shopify_id . '.json', $data);
-                                $res = $shop->api()->rest('GET', '/admin/orders/' . $order->shopify_order_id. '.json');
 
-                                dd($response, $res);
+                                $this->CompleteFullFillment($current);
+
 //                                if ($order->admin_shopify_id != null) {
 //                                    $this->admin_maintainer->admin_order_fulfillment_edit_tracking($order, $current, $data);
 //                                }
@@ -1217,8 +1216,7 @@ class AdminOrderController extends Controller
         $order = RetailerOrder::where('id', $orderFullfillment->retailer_order_id)->first();
         if ($orderFullfillment->fulfillment_shopify_id) {
             $shop = $this->helper->getSpecificShop($order->shop_id);
-            $re = $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
-            dd($re);
+            $shop->api()->rest('POST', '/admin/orders/' . $order->shopify_order_id . '/fulfillments/' . $orderFullfillment->fulfillment_shopify_id . '/complete.json');
         }
 //        if ($orderFullfillment->admin_fulfillment_shopify_id && $order->admin_shopify_id) {
 //            $admin_shop = $this->helper->getAdminShop();
@@ -1775,7 +1773,6 @@ class AdminOrderController extends Controller
 
                             $response = $shop->api()->rest('GET','/admin/orders/'.$retailer_order->shopify_order_id.'/fulfillments.json',$fulfill_data);
                             if(!$response->errors){
-                                dd($response);
 
                                 $response = $shop->api()->rest('PUT', '/admin/orders/' . $retailer_order->shopify_order_id . '/fulfillments/' . $response->body->fulfillments[0]->id . '.json', $fulfill_data);
 
