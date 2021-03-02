@@ -697,7 +697,6 @@ class AdminMaintainerController extends Controller
                     "quantity" => $item->quantity,
                     "pictureUrl" => $images[$index]
                 ]);
-
             }
         }
 
