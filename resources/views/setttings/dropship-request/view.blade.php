@@ -224,24 +224,23 @@
 
 
                                                         <div class="form-group">
-                                                            <table>
+                                                            <table class="table">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Product</th>
                                                                         <th>Inventory</th>
-
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach($item->dropship_products as $product)
                                                                        <tr>
-                                                                           <td>{{ $product->title }}</td>
+                                                                           <td style="vertical-align: middle;">{{ $product->title }}</td>
                                                                            <td>
                                                                                <table>
                                                                                    <thead>
                                                                                    <tr>
                                                                                        <th>SKU</th>
-                                                                                       <th>Actual Inventory</th>
+                                                                                       <th>Actual</th>
                                                                                        <th>Received</th>
                                                                                        <th>Missing</th>
                                                                                    </tr>
@@ -251,8 +250,8 @@
                                                                                                 <tr>
                                                                                                     <td>{{ $variant->sku }}</td>
                                                                                                     <td>{{ $variant->inventory }}</td>
-                                                                                                    <td>{{ $variant->sku }}</td>
-                                                                                                    <td>{{ $variant->sku }}</td>
+                                                                                                    <td><input type="text" name="received[]"></td>
+                                                                                                    <td><input type="text" name="missing[]"></td>
                                                                                                 </tr>
                                                                                        @endforeach
                                                                                    </tbody>
