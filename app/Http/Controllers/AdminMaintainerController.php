@@ -647,7 +647,7 @@ class AdminMaintainerController extends Controller
 
 
                 array_push($line_items, [
-                    "title" => $item->name,
+                    "title" => str_replace('"', ' ', $item->name),
                     "platformSku" => is_null($item->linked_variant) ? $item->linked_product->sku : $item->linked_variant->sku,
                     "quantity" => $item->quantity,
                     "pictureUrl" => $images[$index]
@@ -692,7 +692,7 @@ class AdminMaintainerController extends Controller
 
 
                 array_push($line_items, [
-                    "title" => $item->name,
+                    "title" => str_replace('"', ' ', $item->name),
                     "platformSku" => is_null($item->linked_real_variant) ? $item->linked_real_product->sku : $item->linked_real_variant->sku,
                     "quantity" => $item->quantity,
                     "pictureUrl" => $images[$index]
