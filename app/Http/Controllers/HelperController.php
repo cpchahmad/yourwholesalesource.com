@@ -41,7 +41,7 @@ class HelperController extends Controller
     }
 
     public function getWooCommerceAdminShop() {
-        return new Client(env('WOOCOMMERCE_ADMIN_SHOP'), env('WOOCOMMERCE_CONSUMMER_KEY'), env('WOOCOMMERCE_CONSUMMER_SECRET'), ['wp_api' => true, 'version' => 'wc/v3',]);
+        return new Client(env('WOOCOMMERCE_ADMIN_SHOP'), env('WOOCOMMERCE_CONSUMMER_KEY'), env('WOOCOMMERCE_CONSUMMER_SECRET'), ['wp_api' => true, 'version' => 'wc/v2',]);
     }
     public function getLocalShop(){
         /*Ossiset Shop Model*/
