@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                                 <div class="modal fade" id="mark-rejected-by-inventory-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-popout" role="document">
+                                    <div class="modal-dialog modal-dialog-popout modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="block block-themed block-transparent mb-0">
                                                 <div class="block-header bg-primary-dark">
@@ -236,7 +236,7 @@
                                                                        <tr>
                                                                            <td style="vertical-align: middle;">{{ $product->title }}</td>
                                                                            <td>
-                                                                               <table>
+                                                                               <table class="w-100">
                                                                                    <thead>
                                                                                    <tr>
                                                                                        <th>SKU</th>
