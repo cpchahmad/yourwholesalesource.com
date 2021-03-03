@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\ProductVariantTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -63,6 +64,11 @@ class Product extends Model
 
     public function tags() {
         return $this->belongsToMany(Tag::class, 'product_tag');
+    }
+
+    public function getStoreLinkAttribute() {
+        $slug = Str::slug($this->title);
+        return "https://wefullfill.com/product/".$slug;
     }
 
 }

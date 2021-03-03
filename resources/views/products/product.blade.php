@@ -34,6 +34,10 @@
                 @role('wordpress-admin')
                     <div class="col-sm-6 text-right">
                         <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
+                        @if($product->woocommerce_id != null)
+                            <a href="https://wefullfill.com/wp-admin/post.php?post={{ $product->woocommerce_id }}&action=edit" class="btn btn-success btn-square ">View in Wordpress Admin</a>
+                            <a href="{{ $product->store_link }}" class="btn btn-info btn-square ">View in Store</a>
+                        @endif
                     </div>
                 @endrole
             @endif
