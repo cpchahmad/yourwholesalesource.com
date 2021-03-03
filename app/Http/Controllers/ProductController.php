@@ -68,7 +68,7 @@ class ProductController extends Controller
         $categories = Category::latest()->get();
         $shops = Shop::latest()->get();
 
-        $productQ = Product::query();
+        $productQ = Product::whereNull('is_dropship_product')->newQuery();
         if($request->has('search')){
             $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
                 $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
@@ -113,7 +113,6 @@ class ProductController extends Controller
 
         return view('products.all')->with([
             'products' => $productQ
-                ->whereNull('is_dropship_product')
                 ->select('id', 'to_woocommerce','title', 'price', 'quantity', 'status', 'woocommerce_id')
                 ->with(['has_images:id,position,image,product_id', 'hasVariants:id,price,product_id'])
                 ->orderBy('created_at','DESC')->paginate(20),
