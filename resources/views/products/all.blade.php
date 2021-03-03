@@ -172,7 +172,7 @@
                                            type="button" data-toggle="tooltip" title=""
                                            data-original-title="Import To Woocommerce">Import</a>
                                         @endif
-                                        @if($product->woocommerce_id != null)
+                                        @if($product->woocommerce_id !== null)
                                             <a href="{{ $product->admin_link }}" class="btn btn-sm btn-dark" target="_blank"
                                                type="button" data-toggle="tooltip" title=""
                                                data-original-title="View in Woocommerce">View in Wordpress</a>
