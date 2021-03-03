@@ -175,7 +175,8 @@
                                         @if($product->to_woocommerce == 1)
                                             <a href="{{ $product->admin_link }}" class="btn btn-sm btn-dark" target="_blank"
                                                type="button" data-toggle="tooltip" title=""
-                                               data-original-title="View in Woocommerce">View in Wordpress</a>
+                                               data-original-title="View in Woocommerce"><i class="fa fa-eye"></i>
+                                            </a>
                                         @endif
                                     @endrole
                     </div>
