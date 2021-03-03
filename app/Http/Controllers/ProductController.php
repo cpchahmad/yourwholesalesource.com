@@ -63,6 +63,24 @@ class ProductController extends Controller
         ]);
     }
 
+    public function view_dropship_products_listing(Request $request) {
+        $productQ = Product::whereNotNull('is_dropship_product')->newQuery();
+        if($request->has('search')){
+            $productQ->where('title','LIKE','%'.$request->input('search').'%')->orWhereHas('hasVariants', function($q) use ($request) {
+                $q->where('sku', 'LIKE', '%' . $request->input('search') . '%');
+            });
+        }
+
+        return view('products.dropship-products-listing')->with([
+            'products' => $productQ
+                ->select('id', 'to_woocommerce','title', 'price', 'quantity', 'status', 'woocommerce_id')
+                ->with(['has_images:id,position,image,product_id', 'hasVariants:id,price,product_id'])
+                ->orderBy('created_at','DESC')->paginate(20),
+            'search' =>$request->input('search'),
+        ]);
+
+    }
+
     public function all(Request $request)
     {
         $categories = Category::latest()->get();
