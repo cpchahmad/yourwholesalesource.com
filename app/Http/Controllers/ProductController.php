@@ -229,7 +229,6 @@ class ProductController extends Controller
         }
     }
 
-
     public function addTieredPrice(Request $request, $id) {
         $variants = $request->variant_id;
         $product = Product::find($id);
@@ -320,36 +319,38 @@ class ProductController extends Controller
                 }
 
 
-                $images_array = [];
-                $product = Product::find($id);
-                foreach ($product->has_images as $index => $image) {
-                    if ($image->isV == 0) {
-                        $src = asset('images') . '/' . $image->image;
-                    }
-                    else {
-                        $src = asset('images/variants') . '/' . $image->image;
-                    }
-
-                    array_push($images_array, [
-                        'alt' => $product->title . '_' . $index,
-                        'name' => $product->title . '_' . $index,
-                        'src' => $src,
-                    ]);
-                }
-
-                $productdata = [
-                    "images" => $images_array,
-                ];
-
-                /*Updating Product On Woocommerce*/
-                $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
-
-                $woocommerce_images = $response->images;
-
-                if (count($woocommerce_images) == count($product->has_images)) {
+                if($product->toWoocommerce == 1) {
+                    $images_array = [];
+                    $product = Product::find($id);
                     foreach ($product->has_images as $index => $image) {
-                        $image->woocommerce_id = $woocommerce_images[$index]->id;
-                        $image->save();
+                        if ($image->isV == 0) {
+                            $src = asset('images') . '/' . $image->image;
+                        }
+                        else {
+                            $src = asset('images/variants') . '/' . $image->image;
+                        }
+
+                        array_push($images_array, [
+                            'alt' => $product->title . '_' . $index,
+                            'name' => $product->title . '_' . $index,
+                            'src' => $src,
+                        ]);
+                    }
+
+                    $productdata = [
+                        "images" => $images_array,
+                    ];
+
+                    /*Updating Product On Woocommerce*/
+                    $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+
+                    $woocommerce_images = $response->images;
+
+                    if (count($woocommerce_images) == count($product->has_images)) {
+                        foreach ($product->has_images as $index => $image) {
+                            $image->woocommerce_id = $woocommerce_images[$index]->id;
+                            $image->save();
+                        }
                     }
                 }
 
@@ -808,13 +809,15 @@ class ProductController extends Controller
                         $product->short_description = $request->short_description;
                         $product->save();
 
-                        $productdata = [
-                            "name" => $product->title,
-                            "description" => $product->description,
-                            "short_description" => $product->short_description,
-                        ];
+                        if($product->toWoocommerce == 1) {
+                            $productdata = [
+                                "name" => $product->title,
+                                "description" => $product->description,
+                                "short_description" => $product->short_description,
+                            ];
 
-                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                            $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
                     }
@@ -832,22 +835,25 @@ class ProductController extends Controller
                         $product->height = $request->height;
                         $product->save();
 
-                        $dimension_array = array(
-                            'width' => is_null($product->width) ? "0" : $product->width,
-                            'height' => is_null($product->height) ? "0" : $product->height,
-                            'length' => is_null($product->length) ? "0" : $product->length
-                        );
+                        if($product->toWoocommerce == 1) {
 
-                        $productdata = [
-                            //"sale_price" => $product->price,
-                            "regular_price" => $product->price,
-                            "sku" => $product->sku,
-                            "weight" => $product->weight,
-                            "stock_quantity" => $product->quantity,
-                            "dimensions" => $dimension_array,
-                        ];
+                            $dimension_array = array(
+                                'width' => is_null($product->width) ? "0" : $product->width,
+                                'height' => is_null($product->height) ? "0" : $product->height,
+                                'length' => is_null($product->length) ? "0" : $product->length
+                            );
 
-                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                            $productdata = [
+                                //"sale_price" => $product->price,
+                                "regular_price" => $product->price,
+                                "sku" => $product->sku,
+                                "weight" => $product->weight,
+                                "stock_quantity" => $product->quantity,
+                                "dimensions" => $dimension_array,
+                            ];
+
+                            $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+                        }
 
                         if($product->quantity == 0) {
                             // Sending Notification Emails To all Concerned Retailer Stores
@@ -885,22 +891,25 @@ class ProductController extends Controller
                         $product->height = $request->height;
                         $product->save();
 
-                        $dimension_array = array(
-                            'width' => is_null($product->width) ? "0" : $product->width,
-                            'height' => is_null($product->height) ? "0" : $product->height,
-                            'length' => is_null($product->length) ? "0" : $product->length
-                        );
+                        if($product->toWoocommerce == 1) {
 
-                        $productdata = [
-                            //"sale_price" => $product->price,
-                            "regular_price" => $product->price,
-                            "sku" => $product->sku,
-                            "weight" => $product->weight,
-                            "stock_quantity" => $product->quantity,
-                            "dimensions" => $dimension_array,
-                        ];
+                            $dimension_array = array(
+                                'width' => is_null($product->width) ? "0" : $product->width,
+                                'height' => is_null($product->height) ? "0" : $product->height,
+                                'length' => is_null($product->length) ? "0" : $product->length
+                            );
 
-                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                            $productdata = [
+                                //"sale_price" => $product->price,
+                                "regular_price" => $product->price,
+                                "sku" => $product->sku,
+                                "weight" => $product->weight,
+                                "stock_quantity" => $product->quantity,
+                                "dimensions" => $dimension_array,
+                            ];
+
+                            $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+                        }
 
                         if($product->quantity == 0) {
                             // Sending Notification Emails To all Concerned Retailer Stores
@@ -967,23 +976,27 @@ class ProductController extends Controller
                             $variant->save();
                         }
 
-                        $attributes_array = $this->attributes_template_array($product);
+                        if($product->toWoocommerce == 1) {
 
-                        $productdata = [
-                            'attributes' => $attributes_array
-                        ];
+                            $attributes_array = $this->attributes_template_array($product);
 
-                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                            $productdata = [
+                                'attributes' => $attributes_array
+                            ];
 
-                        $variants_array =  $this->woocommerce_variants_template_array_for_updation($product, $response->attributes);
+                            $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
 
-                        $variantdata = [
-                            'update' => $variants_array
-                        ];
+                            $variants_array = $this->woocommerce_variants_template_array_for_updation($product, $response->attributes);
+
+                            $variantdata = [
+                                'update' => $variants_array
+                            ];
 
 
-                        /*Updating Product Variations On Woocommerce*/
-                        $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
+                            /*Updating Product Variations On Woocommerce*/
+                            $response = $woocommerce->post("products/" . $product->woocommerce_id . "/variations/batch", $variantdata);
+                        }
+
                         $this->log->store(0, 'Product', $product->id, $product->title,'Variant Updated');
 
                         //Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
@@ -1038,23 +1051,25 @@ class ProductController extends Controller
                         }
                         $product->save();
 
-                        /*Updating Categories on Woocommerce and getting there id's so that we can pass them to products array*/
-                        if(count($product->has_categories) > 0){
-                            $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
-                            $categories_id_array = [];
+                        if($product->toWoocommerce == 1) {
+                            /*Updating Categories on Woocommerce and getting there id's so that we can pass them to products array*/
+                            if (count($product->has_categories) > 0) {
+                                $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
+                                $categories_id_array = [];
 
-                            foreach($product_categories as $item) {
-                                array_push($categories_id_array, [
-                                    'id' => $item,
-                                ]);
+                                foreach ($product_categories as $item) {
+                                    array_push($categories_id_array, [
+                                        'id' => $item,
+                                    ]);
+                                }
+
+                                $productdata = [
+                                    "categories" => $categories_id_array
+                                ];
+
+                                /*Updating Product On Woocommerce*/
+                                $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
                             }
-
-                            $productdata = [
-                                "categories" => $categories_id_array
-                            ];
-
-                            /*Updating Product On Woocommerce*/
-                            $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Category Updated');
@@ -1069,17 +1084,19 @@ class ProductController extends Controller
 
                         $product->save();
 
+                        if($product->toWoocommerce == 1) {
 
-                        /*Updating Tags on Woocommerce */
-                        $tags_array = [];
-                        foreach ($product->tags()->get() as $tag) {
-                            array_push($tags_array, [
-                                'id' => $tag->woocommerce_id,
-                            ]);
+                            /*Updating Tags on Woocommerce */
+                            $tags_array = [];
+                            foreach ($product->tags()->get() as $tag) {
+                                array_push($tags_array, [
+                                    'id' => $tag->woocommerce_id,
+                                ]);
+                            }
+
+                            /*Updating Product On Woocommerce*/
+                            $response = $woocommerce->put('products/' . $product->woocommerce_id, ["tags" => $tags_array]);
                         }
-
-                        /*Updating Product On Woocommerce*/
-                        $response = $woocommerce->put('products/'. $product->woocommerce_id, ["tags" => $tags_array]);
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Vendor Updated');
                     }
@@ -1093,28 +1110,32 @@ class ProductController extends Controller
                         }
                         $product->save();
 
-                        $resp =  $woocommerce->get('products/'.$product->woocommerce_id);
-                        if(count($resp->meta_data) > 0){
-                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, ["meta_data" => null]);
-                        }
+                        if($product->toWoocommerce == 1) {
 
-                        $meta_data_array = [];
-                        if(count($product->has_platforms) > 0) {
-                            $platforms = '';
-                            foreach ($product->has_platforms as $index => $platform){
-                                $platforms = $platforms . $platform->name . ',';
+                            $resp = $woocommerce->get('products/' . $product->woocommerce_id);
+                            if (count($resp->meta_data) > 0) {
+                                $resp = $woocommerce->put('products/' . $product->woocommerce_id, ["meta_data" => null]);
                             }
 
-                            array_push($meta_data_array,[
-                                "key" => "warned_platform",
-                                "value"=> $platforms,
-                            ]);
+                            $meta_data_array = [];
+                            if (count($product->has_platforms) > 0) {
+                                $platforms = '';
+                                foreach ($product->has_platforms as $index => $platform) {
+                                    $platforms = $platforms . $platform->name . ',';
+                                }
 
-                            $productdata = [
-                                "meta_data" => $meta_data_array
-                            ];
+                                array_push($meta_data_array, [
+                                    "key" => "warned_platform",
+                                    "value" => $platforms,
+                                ]);
 
-                            $resp =  $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                                $productdata = [
+                                    "meta_data" => $meta_data_array
+                                ];
+
+                                $resp = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+                            }
+
                         }
 
                         $this->log->store(0, 'Product', $product->id, $product->title,'Product Basic Information Updated');
@@ -1281,8 +1302,6 @@ class ProductController extends Controller
         $this->log->store(0, 'Product', $product->id, $product->title,'Product Tab Updated');
     }
 
-
-
     public function updateExistingProductNewVariantsOld(Request $request, $id) {
         $product = Product::find($id);
         $shop = $this->helper->getShop();
@@ -1348,22 +1367,24 @@ class ProductController extends Controller
                 ];
 
                 /*Updating Product Attributes On Woocommerce*/
-                $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                if($product->toWoocommerce == 1) {
+                    $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
 
-                $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
+                    $variants_array = $this->woocommerce_variants_template_array($product, $response->attributes);
 
-                $variantdata = [
-                    'create' => $variants_array
-                ];
+                    $variantdata = [
+                        'create' => $variants_array
+                    ];
 
-                /*Creating Product Variations On Woocommerce*/
-                $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
+                    /*Creating Product Variations On Woocommerce*/
+                    $response = $woocommerce->post("products/" . $product->woocommerce_id . "/variations/batch", $variantdata);
 
-                $woocommerce_variants = $response->create;
-                foreach ($product->hasVariants as $index => $v){
-                    $v->woocommerce_id = $woocommerce_variants[$index]->id;
+                    $woocommerce_variants = $response->create;
+                    foreach ($product->hasVariants as $index => $v) {
+                        $v->woocommerce_id = $woocommerce_variants[$index]->id;
 //                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                    $v->save();
+                        $v->save();
+                    }
                 }
                 $this->notify->generate('Product','Product Variant Added','New Variants are added to '.$product->title,$product);
                 $this->log->store(0, 'Product', $product->id, $product->title,'New Variants Option Added');
@@ -1377,8 +1398,6 @@ class ProductController extends Controller
         return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
 
     }
-
-
 
     public function updateExistingProductOldVariantsOld(Request $request, $id) {
         $product = Product::find($id);
@@ -1503,31 +1522,33 @@ class ProductController extends Controller
                 //sleep(5);
 
 
-                $attributes_array = $this->attributes_template_array($product);
+                if($product->toWoocommerce == 1) {
+                    $attributes_array = $this->attributes_template_array($product);
 
-                $productdata = [
-                    "attributes" => $attributes_array,
-                    "type" => "variable"
-                ];
+                    $productdata = [
+                        "attributes" => $attributes_array,
+                        "type" => "variable"
+                    ];
 
-                /*Updating Product Attributes On Woocommerce*/
-                $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                    /*Updating Product Attributes On Woocommerce*/
+                    $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
 
 
-                $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
+                    $variants_array = $this->woocommerce_variants_template_array($product, $response->attributes);
 
-                $variantdata = [
-                    'create' => $variants_array
-                ];
+                    $variantdata = [
+                        'create' => $variants_array
+                    ];
 
-                /*Creating Product Variations On Woocommerce*/
-                $response = $woocommerce->post("products/".$product->woocommerce_id."/variations/batch", $variantdata);
+                    /*Creating Product Variations On Woocommerce*/
+                    $response = $woocommerce->post("products/" . $product->woocommerce_id . "/variations/batch", $variantdata);
 
-                $woocommerce_variants = $response->create;
-                foreach ($product->hasVariants as $index => $v){
-                    $v->woocommerce_id = $woocommerce_variants[$index]->id;
-                    //                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
-                    $v->save();
+                    $woocommerce_variants = $response->create;
+                    foreach ($product->hasVariants as $index => $v) {
+                        $v->woocommerce_id = $woocommerce_variants[$index]->id;
+                        //                $v->inventory_item_id = $shopifyVariants[$index]->inventory_item_id;
+                        $v->save();
+                    }
                 }
 
                 // Sending Notification To all Concerned Retailer Stores
@@ -1541,7 +1562,6 @@ class ProductController extends Controller
         return redirect()->route('product.edit', $product->id)->with('error', 'Something went wrong');
 
     }
-
 
     public function deleteExistingProductImageOld(Request $request, $id) {
         $product = Product::find($id);
@@ -1586,22 +1606,23 @@ class ProductController extends Controller
                 ]);
             }
 
-            $productdata = [
-                "images" => $images_array,
-            ];
+            if($product->toWoocommerce == 1) {
+                $productdata = [
+                    "images" => $images_array,
+                ];
 
-            /*Updating Product On Woocommerce*/
-            $response = $woocommerce->put('products/'.$product->woocommerce_id, $productdata);
+                /*Updating Product On Woocommerce*/
+                $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
 
-            $woocommerce_images = $response->images;
+                $woocommerce_images = $response->images;
 
-            if (count($woocommerce_images) == count($product->has_images)) {
-                foreach ($product->has_images as $index => $image) {
-                    $image->woocommerce_id = $woocommerce_images[$index]->id;
-                    $image->save();
+                if (count($woocommerce_images) == count($product->has_images)) {
+                    foreach ($product->has_images as $index => $image) {
+                        $image->woocommerce_id = $woocommerce_images[$index]->id;
+                        $image->save();
+                    }
                 }
             }
-
 
 
             return response()->json([
@@ -1769,7 +1790,8 @@ class ProductController extends Controller
             }
 
             $this->log->store(0, 'Product', $product->id, $product->title,  'Created');
-            return $this->import_to_woocommerce($product->id);
+            return redirect()->back()->with('success', 'Product Created Successfully');
+            //return $this->import_to_woocommerce($product->id);
         }
         catch(\Exception $e) {
             DB::rollBack();
@@ -1823,9 +1845,11 @@ class ProductController extends Controller
         $woocommerce = $this->helper->getAdminShop();
 
         $product = Product::find($id);
-        foreach ($product->hasVariants as $v){
-            $res = $woocommerce->delete('products/'.$product->woocommerce_id.'/variations/'.$v->woocommerce_id, ['force' => true]);
-            $v->delete();
+        if($product->toWoocommerce == 1) {
+            foreach ($product->hasVariants as $v) {
+                $res = $woocommerce->delete('products/' . $product->woocommerce_id . '/variations/' . $v->woocommerce_id, ['force' => true]);
+                $v->delete();
+            }
         }
 
         $product = Product::find($id);
@@ -1870,7 +1894,8 @@ class ProductController extends Controller
 
         DB::beginTransaction();
         try{
-            $woocommerce->delete('products/'.$product->woocommerce_id, ['force' => true]);
+            if($product->toWoocommerce == 1)
+                $woocommerce->delete('products/'.$product->woocommerce_id, ['force' => true]);
 
             $variants = ProductVariant::where('product_id', $id)->get();
             foreach ($variants as $variant) {
@@ -1913,7 +1938,6 @@ class ProductController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-
 
     public function delete_old($id)
     {
@@ -2296,14 +2320,14 @@ class ProductController extends Controller
         else
             $published = 'draft';
 
+        if($product->toWoocommerce == 1) {
+            $productdata = [
+                "status"=>  $published,
+            ];
 
-        $productdata = [
-            "status"=>  $published,
-        ];
-
-        $woocommerce = $this->helper->getWooCommerceAdminShop();
-        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
-
+            $woocommerce = $this->helper->getWooCommerceAdminShop();
+            $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+        }
     }
 
     public function getExportFile(Request $request){
@@ -2451,6 +2475,11 @@ class ProductController extends Controller
                     $image = Image::find($image_id);
                     return $this->woocommerce_image_selection($image_id, $image, $shop, $variant);
                 }
+                else if($variant->linked_product->tooWoocommerce == 0)
+                {
+                    $variant->image = $image_id;
+                    $variant->save();
+                }
                 else{
                     return response()->json([
                         'message' => 'false'
@@ -2530,6 +2559,7 @@ class ProductController extends Controller
             ]
         ];
 
+
         $imagesResponse = $shop->put('products/'.$variant->linked_product->woocommerce_id.'/variations/'.$variant->woocommerce_id, $data);
         if ($imagesResponse->id) {
             $variant->image = $image_id;
@@ -2543,7 +2573,6 @@ class ProductController extends Controller
             ]);
         }
     }
-
 
     public function update_image_position(Request $request){
         $positions = $request->input('positions');
@@ -2932,8 +2961,6 @@ class ProductController extends Controller
             echo 'imported already';
         }
     }
-
-
 
     public function attributes_template_array($product){
 

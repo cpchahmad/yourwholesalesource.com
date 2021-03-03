@@ -530,7 +530,7 @@
                                    <span class="badge " style="background: {{$item->has_status->color}};color: white;"> {{$item->has_status->name}}</span>
                                @endif
                                <hr>
-                               <span class="font-weight-bold">Wishlist Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
+                               <span class="font-weight-bold">Dropship Request Time: </span>  <span class="text-center">{{$item->created_at->diffForHumans()}}</span>
                                <hr>
                                <span class="font-weight-bold">Manager: </span>  <span class="badge badge-warning text-center" style="font-size: small"> {{$item->has_manager->name}} </span>
                                <hr>
