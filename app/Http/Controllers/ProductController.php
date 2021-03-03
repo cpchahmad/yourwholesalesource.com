@@ -3195,7 +3195,7 @@ class ProductController extends Controller
     }
 
     public function getAdminProducts() {
-        $products = Product::query()
+        $products = Product::whereNull('is_dropship_product')->where('global',1)->newQuery()
         ->select('id', 'title', 'price')
         ->with(['has_images:id,position,image,product_id', 'hasVariants:id,option1,option2,option3,price,product_id'])
         ->get();
