@@ -25,30 +25,17 @@
                 <form action="" method="GET" class="d-flex">
                     <input type="search" class="form-control d-inline-block" value="{{$search}}" name="search" placeholder="Search By Title, SKU..">
                     <input type="submit" value="Search" class="btn btn-primary btn-sm  d-inline-block" style="margin-left: 10px">
-                </form>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12  mb2">
-                <form class="row d-flex text-right" action="" method="get">
-
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" name="shop_search" value="{{$shop_search}}" placeholder="Search By Wishlist Assigned">
-                    </div>
-
-                    <div class="col-md-2">
+                    <div class="">
                         <input type="submit" class="btn btn-primary " value="Filter">
                         @role('wordpress-admin')
                         <a href="/dropship/products" class="btn btn-danger " >Clear</a>
                         @else
                             <a href="/managers/products" class="btn btn-danger " >Clear</a>
-                        @endrole
+                            @endrole
                     </div>
                 </form>
             </div>
         </div>
-
 
         <div class="block">
             <div class="block-content">
