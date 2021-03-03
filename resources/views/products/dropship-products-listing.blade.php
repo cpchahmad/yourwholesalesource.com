@@ -25,14 +25,6 @@
                 <form action="" method="GET" class="d-flex">
                     <input type="search" class="form-control d-inline-block" value="{{$search}}" name="search" placeholder="Search By Title, SKU..">
                     <input type="submit" value="Search" class="btn btn-primary btn-sm  d-inline-block" style="margin-left: 10px">
-                    <div class="">
-                        <input type="submit" class="btn btn-primary " value="Filter">
-                        @role('wordpress-admin')
-                        <a href="/dropship/products" class="btn btn-danger " >Clear</a>
-                        @else
-                            <a href="/managers/products" class="btn btn-danger " >Clear</a>
-                            @endrole
-                    </div>
                 </form>
             </div>
         </div>
