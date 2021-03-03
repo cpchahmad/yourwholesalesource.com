@@ -319,7 +319,7 @@ class ProductController extends Controller
                 }
 
 
-                if($product->toWoocommerce == 1) {
+                if($product->to_woocommerce == 1) {
                     $images_array = [];
                     $product = Product::find($id);
                     foreach ($product->has_images as $index => $image) {
@@ -809,7 +809,7 @@ class ProductController extends Controller
                         $product->short_description = $request->short_description;
                         $product->save();
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
                             $productdata = [
                                 "name" => $product->title,
                                 "description" => $product->description,
@@ -835,7 +835,7 @@ class ProductController extends Controller
                         $product->height = $request->height;
                         $product->save();
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
 
                             $dimension_array = array(
                                 'width' => is_null($product->width) ? "0" : $product->width,
@@ -891,7 +891,7 @@ class ProductController extends Controller
                         $product->height = $request->height;
                         $product->save();
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
 
                             $dimension_array = array(
                                 'width' => is_null($product->width) ? "0" : $product->width,
@@ -976,7 +976,7 @@ class ProductController extends Controller
                             $variant->save();
                         }
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
 
                             $attributes_array = $this->attributes_template_array($product);
 
@@ -1051,7 +1051,7 @@ class ProductController extends Controller
                         }
                         $product->save();
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
                             /*Updating Categories on Woocommerce and getting there id's so that we can pass them to products array*/
                             if (count($product->has_categories) > 0) {
                                 $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
@@ -1084,7 +1084,7 @@ class ProductController extends Controller
 
                         $product->save();
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
 
                             /*Updating Tags on Woocommerce */
                             $tags_array = [];
@@ -1110,7 +1110,7 @@ class ProductController extends Controller
                         }
                         $product->save();
 
-                        if($product->toWoocommerce == 1) {
+                        if($product->to_woocommerce == 1) {
 
                             $resp = $woocommerce->get('products/' . $product->woocommerce_id);
                             if (count($resp->meta_data) > 0) {
@@ -1367,7 +1367,7 @@ class ProductController extends Controller
                 ];
 
                 /*Updating Product Attributes On Woocommerce*/
-                if($product->toWoocommerce == 1) {
+                if($product->to_woocommerce == 1) {
                     $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
 
                     $variants_array = $this->woocommerce_variants_template_array($product, $response->attributes);
@@ -1522,7 +1522,7 @@ class ProductController extends Controller
                 //sleep(5);
 
 
-                if($product->toWoocommerce == 1) {
+                if($product->to_woocommerce == 1) {
                     $attributes_array = $this->attributes_template_array($product);
 
                     $productdata = [
@@ -1606,7 +1606,7 @@ class ProductController extends Controller
                 ]);
             }
 
-            if($product->toWoocommerce == 1) {
+            if($product->to_woocommerce == 1) {
                 $productdata = [
                     "images" => $images_array,
                 ];
@@ -1847,7 +1847,7 @@ class ProductController extends Controller
         $woocommerce = $this->helper->getAdminShop();
 
         $product = Product::find($id);
-        if($product->toWoocommerce == 1) {
+        if($product->to_woocommerce == 1) {
             foreach ($product->hasVariants as $v) {
                 $res = $woocommerce->delete('products/' . $product->woocommerce_id . '/variations/' . $v->woocommerce_id, ['force' => true]);
                 $v->delete();
@@ -1896,7 +1896,7 @@ class ProductController extends Controller
 
         DB::beginTransaction();
         try{
-            if($product->toWoocommerce == 1)
+            if($product->to_woocommerce == 1)
                 $woocommerce->delete('products/'.$product->woocommerce_id, ['force' => true]);
 
             $variants = ProductVariant::where('product_id', $id)->get();
@@ -2322,7 +2322,7 @@ class ProductController extends Controller
         else
             $published = 'draft';
 
-        if($product->toWoocommerce == 1) {
+        if($product->to_woocommerce == 1) {
             $productdata = [
                 "status"=>  $published,
             ];
