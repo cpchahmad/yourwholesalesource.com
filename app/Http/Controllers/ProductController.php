@@ -153,6 +153,13 @@ class ProductController extends Controller
         ]);
     }
 
+    public function view_single_dropship_product($id)
+    {
+        $product = Product::with(['has_images', 'hasVariants'])->find($id);
+        return view('products.dropship-product')->with([
+            'product' => $product
+        ]);
+    }
     public function retailer_view($id)
     {
         $product = RetailerProduct::find($id);

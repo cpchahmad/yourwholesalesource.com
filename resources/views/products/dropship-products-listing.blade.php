@@ -47,7 +47,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td class="text-center">
-                                        <a href="@role('wordpress-admin') {{ route('product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole">
+                                        <a href="@role('wordpress-admin') {{ route('dropship.product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole">
                                             @if(count($product->has_images) > 0)
                                                 @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
                                                     @if($index == 0)
@@ -62,7 +62,7 @@
                                         </a>
                                     </td>
                                     <td class="font-w600" style="vertical-align: middle">
-                                        <a href="@role('wordpress-admin') {{ route('product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole">
+                                        <a href="@role('wordpress-admin') {{ route('dropship.product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole">
                                             {{ $product->title }}
                                         </a>
                                     </td>
@@ -89,7 +89,7 @@
                                     </td>
                                     <td class="text-right" style="vertical-align: middle">
                                         <div class="btn-group mr-2 mb-2" role="group" aria-label="Alternate Primary First group">
-                                            <a class="btn btn-xs btn-sm btn-success" type="button" href="@role('wordpress-admin') {{ route('product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole" title="View Product">
+                                            <a class="btn btn-xs btn-sm btn-success" type="button" href="@role('wordpress-admin') {{ route('dropship.product.view', $product->id) }} @else {{ route('managers.products.view', $product->id) }} @endrole" title="View Product">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         </div>

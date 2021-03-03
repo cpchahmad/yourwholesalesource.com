@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/products/all','ProductController@all')->name('product.all');
     Route::get('dropship/products','ProductController@view_dropship_products_listing')->name('dropship.product.all');
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
+    Route::any('/dropship/products/{id}/view','ProductController@view_single_dropship_product')->name('dropship.product.view');
     Route::any('/retailer/products/{id}/view','ProductController@retailer_view')->name('product.retailer.view');
     Route::any('/products/{id}/edit','ProductController@edit')->name('product.edit');
     Route::get('/products/{id}/import/to/woocommerce','ProductController@import_to_woocommerce')->name('product.import.to.woocommerce');
