@@ -154,7 +154,7 @@ class CustomOrderController extends Controller
 
     public function find_products(Request $request)
     {
-        $products = Product::whereNull('is_dropship_product')->where('global',1)->newQuery();
+        $products = Product::whereNull('is_dropship_product')->newQuery();
         if ($request->has('search')) {
             $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
             $products->orWhereHas('hasVariants', function ($q) use ($request) {
