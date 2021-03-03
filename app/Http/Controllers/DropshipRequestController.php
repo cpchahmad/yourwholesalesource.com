@@ -432,6 +432,7 @@ class DropshipRequestController extends Controller
                 $variants->barcode = $variant->barcode;
                 $variants->image = $variant->image;
                 $variants->product_id = $product->id;
+                $variants->is_dropship_product = 1;
                 $variants->save();
 
                 $inventory = new WarehouseInventory();
