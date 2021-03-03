@@ -100,7 +100,7 @@
                                                              data-src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
                                                     </td>
                                                     <td class="variant_title">
-                                                        {{ $variant->option }}
+                                                        {{ $variant->title }}
                                                     </td>
                                                     <td>
                                                         @if($variant->quantity >0)
