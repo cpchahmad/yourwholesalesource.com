@@ -30,7 +30,7 @@
         <div class="row mb2">
             <div class="col-sm-6">
             </div>
-            @if($product->import_from_shopify != 1)
+            @if($product->import_from_shopify != 1 && $product->is_dropship_product == null)
                 @role('wordpress-admin')
                     <div class="col-sm-6 text-right">
                         <a href="{{ route('product.edit',$product->id) }}" class="btn btn-primary btn-square ">Edit Product</a>
