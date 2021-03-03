@@ -410,8 +410,8 @@ class DropshipRequestController extends Controller
             // Creating admin Product
             $product = new Product();
             $product->title = $dropship_product->title;
-            $product->price = $dropship_request->approved_cost;
-            $product->cost = $dropship_request->approved_cost;
+            $product->price = $dropship_request->approved_price;
+            $product->cost = $dropship_request->approved_price;
             $product->quantity = $dropship_product->dropship_product_variants()->sum('inventory');
             $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
             $product->global = 0;
@@ -425,9 +425,9 @@ class DropshipRequestController extends Controller
             foreach($dropship_product->dropship_product_variants as $variant) {
                 $variants = new  ProductVariant();
                 $variants->title = $variant->option;
-                $variants->price = $dropship_request->approved_cost;
+                $variants->price = $dropship_request->approved_price;
                 $variants->quantity = $variant->inventory;
-                $variants->cost = $dropship_request->approved_cost;
+                $variants->cost = $dropship_request->approved_price;
                 $variants->sku = $variant->sku;
                 $variants->barcode = $variant->barcode;
                 $variants->image = $variant->image;
