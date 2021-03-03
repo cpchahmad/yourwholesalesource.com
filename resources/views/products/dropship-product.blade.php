@@ -96,8 +96,8 @@
                                                 <tr>
                                                     <td>
                                                         <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                             @if($variant->image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                             data-src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
+                                                             @if($variant->image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg" @else
+                                                             data-src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
                                                     </td>
                                                     <td class="variant_title">
                                                         {{ $variant->option }}
