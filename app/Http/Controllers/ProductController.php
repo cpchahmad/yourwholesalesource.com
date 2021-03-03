@@ -113,6 +113,7 @@ class ProductController extends Controller
 
         return view('products.all')->with([
             'products' => $productQ
+                ->whereNull('is_dropship_product')
                 ->select('id', 'to_woocommerce','title', 'price', 'quantity', 'status', 'woocommerce_id')
                 ->with(['has_images:id,position,image,product_id', 'hasVariants:id,price,product_id'])
                 ->orderBy('created_at','DESC')->paginate(20),
