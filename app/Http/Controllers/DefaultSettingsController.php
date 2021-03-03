@@ -604,7 +604,7 @@ class DefaultSettingsController extends Controller
         $wishlist = Wishlist::find($request->id);
         return view('setttings.wishlist.view')->with([
             'wishlist' => $wishlist,
-            'products' => Product::all(),
+            'products' => Product::whereNull('is_dropship_product')->get(),
         ]);
     }
 
