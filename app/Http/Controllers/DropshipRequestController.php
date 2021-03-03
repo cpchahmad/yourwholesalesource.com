@@ -6,9 +6,13 @@ use App\DropshipProduct;
 use App\DropshipProductVariant;
 use App\DropshipRequest;
 use App\DropshipRequestAttachment;
+use App\Image;
 use App\ManagerLog;
+use App\Product;
+use App\ProductVariant;
 use App\ShippingMark;
 use App\User;
+use App\WarehouseInventory;
 use App\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -291,8 +295,10 @@ class DropshipRequestController extends Controller
 
             $drop_request->save();
             $this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
-
             $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
+
+
+            $this->generateAdminProducts($drop_request);
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
         }
@@ -396,4 +402,52 @@ class DropshipRequestController extends Controller
         }
     }
 
+
+    public function generateAdminProducts($dropship_request)
+    {
+        foreach ($dropship_request->dropship_products as $dropship_product)
+        {
+            // Creating admin Product
+            $product = new Product();
+            $product->title = $dropship_product->title;
+            $product->price = $dropship_request->approved_cost;
+            $product->cost = $dropship_request->approved_cost;
+            $product->quantity = $dropship_product->dropship_product_variants()->sum('inventory');
+            $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
+            $product->global = 0;
+            //$product->length = $dropship_product->length;
+            //$product->width = $dropship_product->width;
+            //$product->height = $dropship_product->height;
+            $product->variants = 1;
+            $product->save();
+
+            // Creating Variants
+            foreach($dropship_product->dropship_product_variants as $variant) {
+                $variants = new  ProductVariant();
+                $variants->title = $variant->option;
+                $variants->price = $dropship_request->approved_cost;
+                $variants->quantity = $variant->inventory;
+                $variants->cost = $dropship_request->approved_cost;
+                $variants->sku = $variant->sku;
+                $variants->barcode = $variant->barcode;
+                $variants->image = $variant->image;
+                $variants->product_id = $product->id;
+                $variants->save();
+
+                $inventory = new WarehouseInventory();
+                $inventory->product_variant_id = $variants->id;
+                $inventory->warehouse_id = 3;
+                $inventory->quantity = $variants->quantity;
+                $inventory->save();
+            }
+
+            // Creating Main Product Image
+            $image = new Image();
+            $image->isV = 0;
+            $image->product_id = $product->id;
+            $image->image = $dropship_product->dropship_product_variants()->first()->image;
+            $image->save();
+
+        }
+    }
 }
