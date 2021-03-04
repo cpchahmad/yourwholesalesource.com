@@ -110,4 +110,5 @@ class User extends Authenticatable implements MustVerifyEmail
         Mail::to(request()->email)->send(new SendResetPasswordEmail($token,$this));
     }
 
+
 }

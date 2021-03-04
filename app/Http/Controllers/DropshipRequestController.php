@@ -416,6 +416,7 @@ class DropshipRequestController extends Controller
             $product->global = 0;
             $product->variants = 1;
             $product->is_dropship_product = 1;
+            $product->dropship_product_id = $dropship_product->id;
             $product->save();
 
             // Creating Main Product Image

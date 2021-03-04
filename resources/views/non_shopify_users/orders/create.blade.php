@@ -32,7 +32,8 @@
                         </div>
                         <div class="block-content pb-2">
                             <div class="text-center">
-                                <a class="btn btn-primary text-white show-product-modal" data-toggle="modal"> Browse Products </a>
+                                <a class="btn btn-primary text-white show-product-modal" data-toggle="modal"> Browse Wefullfill Products </a>
+                                <a class="btn btn-primary text-white show-dropship-product-modal" data-toggle="modal"> Browse Your Products </a>
                             </div>
                             <hr>
                             <div class="selected-variant-section">
@@ -234,6 +235,45 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="browse_dropship_product_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-popout" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">Browse Products</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form id="get-selection-form" action="{{route('get_selected_variants')}}" method="get">
+                        <div class="block-content font-size-sm">
+                            <div class="form-group">
+                                <div class="d-flex mb-3">
+                                    <input type="search" id="product-search-field" name="product-search" class="form-control mr-2" placeholder="Search by Keyword" >
+                                    <button type="button" class="btn btn-primary product-search-button">Search</button>
+                                </div>
+
+                                <div class="countries-section " id="product-section">
+                                    <div class="text-center ">
+                                        <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="block-content block-content-full text-right border-top">
+                            <button type="submit" class="btn btn-sm btn-primary add-to-order-btn " >Add to Order</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true"></div>

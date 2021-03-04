@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdditionalTab;
 use App\Category;
 use App\Console\Commands\AppChangeQuantitySku;
+use App\DropshipRequest;
 use App\Exports\ProductsExport;
 use App\Exports\ProductVariantExport;
 use App\Exports\RetailerOrderExport;
@@ -27,6 +28,7 @@ use App\WarehouseInventory;
 use App\WarnedPlatform;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
@@ -3216,6 +3218,20 @@ class ProductController extends Controller
         ->select('id', 'title', 'price')
         ->with(['has_images:id,position,image,product_id', 'hasVariants:id,option1,option2,option3,price,product_id'])
         ->get();
+
+        return view('non_shopify_users.orders.product-browse-section')->with([
+            'products' => $products,
+        ])->render();
+    }
+
+    public function getUserDropshipProducts() {
+        $user = User::find(Auth::id());
+        $requests = DropshipRequest::where('user_id', $user->id)->dropship_products;
+
+        $products = Product::whereNull('is_dropship_product')->newQuery()
+            ->select('id', 'title', 'price')
+            ->with(['has_images:id,position,image,product_id', 'hasVariants:id,option1,option2,option3,price,product_id'])
+            ->get();
 
         return view('non_shopify_users.orders.product-browse-section')->with([
             'products' => $products,
