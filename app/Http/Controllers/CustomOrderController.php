@@ -191,18 +191,17 @@ class CustomOrderController extends Controller
 
         $products = Product::whereIn('dropship_product_id', $dropship_products_id)->newQuery();
 
-        dd($products->get());
 
         if ($request->has('search')) {
-            $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
-            $products->orWhereHas('hasVariants', function ($q) use ($request) {
+            $products->where('title', 'LIKE', '%' . $request->input('search') . '%')
+            ->orWhereHas('hasVariants', function ($q) use ($request) {
                 $q->where('title', 'LIKE', '%' . $request->input('search') . '%');
                 $q->orwhere('sku', 'LIKE', '%' . $request->input('search') . '%');
             });
         }
         $html = view('non_shopify_users.orders.dropship-product-browse-section')->with([
             'products' => $products
-                ->limit(10)->get(),
+                ->get(),
         ])->render();
 
         return response()->json([
