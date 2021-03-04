@@ -444,6 +444,7 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 
 Route::get('/variant/{id}/change/image/{image_id}', 'ProductController@change_image')->name('change_image');
 Route::get('/search/products', 'CustomOrderController@find_products')->name('find_products');
+Route::get('/search/dropship/products', 'CustomOrderController@find_dropship_products')->name('find_dropship_products');
 Route::get('/get_selected_variants', 'CustomOrderController@get_selected_variants')->name('get_selected_variants');
 Route::get('/calculate_shipping', 'SingleStoreController@calculate_shipping')->name('calculate_shipping');
 Route::get('/get-warehouse/shipping-price', 'SingleStoreController@calculate_warehouse_shipping')->name('calculate_warehouse_shipping');

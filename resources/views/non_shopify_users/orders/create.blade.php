@@ -254,11 +254,11 @@
                         <div class="block-content font-size-sm">
                             <div class="form-group">
                                 <div class="d-flex mb-3">
-                                    <input type="search" id="product-search-field" name="product-search" class="form-control mr-2" placeholder="Search by Keyword" >
-                                    <button type="button" class="btn btn-primary product-search-button">Search</button>
+                                    <input type="search" id="dropship-product-search-field" name="product-search" class="form-control mr-2" placeholder="Search by Keyword" >
+                                    <button type="button" class="btn btn-primary dropship-product-search-button">Search</button>
                                 </div>
 
-                                <div class="countries-section " id="product-section">
+                                <div class="countries-section " id="dropship-product-section">
                                     <div class="text-center ">
                                         <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
                                     </div>

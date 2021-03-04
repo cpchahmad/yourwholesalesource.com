@@ -21,7 +21,7 @@
                                 <img class="img-avatar16 " style="border: 1px solid whitesmoke"
                                      @if($variant->image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                      @else src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
-                               @if($variant->option != null)   {{$variant->option}}   @endif
+                                {{$variant->title}}
 
                             </label>
                             <span class="d-inline-block" style="float: right;font-weight: 400">{{number_format($variant->price,2)}} USD</span>

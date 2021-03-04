@@ -175,6 +175,41 @@ class CustomOrderController extends Controller
 
     }
 
+
+    public function find_dropship_products(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $dropship_requests = DropshipRequest::where('user_id', $user->id)->get();
+
+        $dropship_products_id = [];
+
+        foreach ($dropship_requests as $request) {
+            foreach($request->dropship_products as $product){
+                array_push($dropship_products_id, $product->id);
+            }
+        }
+
+        $products = Product::whereIn('dropship_product_id', $dropship_products_id)->get();
+
+        if ($request->has('search')) {
+            $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
+            $products->orWhereHas('hasVariants', function ($q) use ($request) {
+                $q->where('title', 'LIKE', '%' . $request->input('search') . '%');
+                $q->orwhere('sku', 'LIKE', '%' . $request->input('search') . '%');
+            });
+        }
+        $html = view('non_shopify_users.orders.dropship-product-browse-section')->with([
+            'products' => $products->get()
+                ->limit(10)->get(),
+        ])->render();
+
+        return response()->json([
+            'html' => $html
+        ]);
+
+    }
+
+
     public function get_selected_variants(Request $request)
     {
 

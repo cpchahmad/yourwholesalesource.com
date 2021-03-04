@@ -94,8 +94,8 @@ $(document).ready(function () {
             type: 'GET',
             success: function(res) {
 
-                $('#browse_dropship_product_modal').find('#product-section').empty();
-                $('#browse_dropship_product_modal').find('#product-section').append(res);
+                $('#browse_dropship_product_modal').find('#dropship-product-section').empty();
+                $('#browse_dropship_product_modal').find('#dropship-product-section').append(res);
             }
         });
     });
@@ -282,6 +282,36 @@ $(document).ready(function () {
                 else{
                     $('#product-section').empty();
                     $('#product-section').append('<p class="text-center" style="padding:10px"> No Product Found</p>');
+                }
+
+            },
+        });
+    });
+
+    $('.dropship-product-search-button').click(function() {
+
+        $('#dropship-product-section').empty();
+        $('#dropship-product-section').append(`
+            <div class="text-center">
+                <p>Processing...</p>
+            </div>
+        `);
+
+        $.ajax({
+            url: '/search/dropship/products',
+            type: 'GET',
+            data: {
+                search: $('#dropship-product-search-field').val(),
+            },
+            success: function(response) {
+                if(response.html !== ""){
+
+                    $('#dropship-product-section').empty();
+                    $('#dropship-product-section').append(response.html);
+                }
+                else{
+                    $('#dropship-product-section').empty();
+                    $('#dropship-product-section').append('<p class="text-center" style="padding:10px"> No Product Found</p>');
                 }
 
             },
