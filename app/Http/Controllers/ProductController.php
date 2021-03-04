@@ -3226,7 +3226,18 @@ class ProductController extends Controller
 
     public function getUserDropshipProducts() {
         $user = User::find(Auth::id());
-        $dropship_products_id = DropshipRequest::where('user_id', $user->id)->dropship_products()->pluck('id')->toArray();
+        $dropship_requests = DropshipRequest::where('user_id', $user->id)->get();
+
+        $dropship_products_id = [];
+
+        foreach ($dropship_requests as $request) {
+            foreach($request->dropship_products as $product){
+                array_push($dropship_products_id, $product->id);
+            }
+        }
+
+        dd($dropship_products_id);
+
         $admin_products = Product::whereIn('dropship_product_id', $dropship_products_id)->get();
 
         return view('non_shopify_users.orders.dropship-product-browse-section')->with([
