@@ -189,7 +189,7 @@ class CustomOrderController extends Controller
             }
         }
 
-        $products = Product::whereIn('dropship_product_id', $dropship_products_id)->get();
+        $products = Product::whereIn('dropship_product_id', $dropship_products_id)->newQuery();
 
         if ($request->has('search')) {
             $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
