@@ -516,6 +516,8 @@ class AdminMaintainerController extends Controller
                     $sku = $item->linked_real_variant->sku;
                 elseif($item->linked_woocommerce_variant != null)
                     $sku = $item->linked_woocommerce_variant->sku;
+                elseif($item->linked_dropship_variant != null)
+                    $sku = $item->linked_dropship_variant->sku;
                 elseif($item->link_real_product != null)
                     $sku = $item->link_real_product->sku;
                 else
@@ -704,6 +706,8 @@ class AdminMaintainerController extends Controller
                     $sku = $item->linked_real_variant->sku;
                 elseif($item->linked_woocommerce_variant != null)
                     $sku = $item->linked_woocommerce_variant->sku;
+                elseif($item->linked_dropship_variant != null)
+                    $sku = $item->linked_dropship_variant->sku;
                 elseif($item->link_real_product != null)
                     $sku = $item->link_real_product->sku;
                 else
