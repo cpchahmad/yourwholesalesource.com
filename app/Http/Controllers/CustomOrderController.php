@@ -547,6 +547,23 @@ class CustomOrderController extends Controller
         ]);
     }
 
+    public function my_dropship_products(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $productQuery = $user->dropship_products();
+
+        if ($request->has('search')) {
+            $productQuery->where('title', 'LIKE', '%' . $request->input('search') . '%')->orWhere('tags', 'LIKE', '%' . $request->input('search') . '%');
+        }
+
+        return view('non_shopify_users.product.dropship_products')->with([
+            'products' => $productQuery->paginate(20),
+            'search' => $request->input('search'),
+        ]);
+    }
+
+
     public function view_fantasy_product($id)
     {
         $product = Product::find($id);

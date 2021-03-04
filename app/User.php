@@ -7,6 +7,7 @@ use App\Mail\SendVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use OhMyBrew\ShopifyApp\Models\Shop;
 use Spatie\Permission\Traits\HasRoles;
@@ -107,6 +108,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function dropship_requests(){
         return $this->hasMany(DropshipRequest::class);
+    }
+
+    public function dropship_products() {
+        $user = $this->id;
+        $dropship_requests = DropshipRequest::where('user_id', $user->id)->get();
+
+        $dropship_products_id = [];
+
+        foreach ($dropship_requests as $request) {
+            foreach($request->dropship_products as $product){
+                array_push($dropship_products_id, $product->id);
+            }
+        }
+
+        return $productQuery = Product::whereIn('dropship_product_id', $dropship_products_id)->newQuery();
     }
 
     public function sendPasswordResetNotification($token)

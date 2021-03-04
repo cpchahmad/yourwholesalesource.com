@@ -313,6 +313,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
             Route::get('/products/wefullfill','CustomOrderController@wefullfill_products')->name('users.product.wefulfill');
+            Route::get('/products/dropship','CustomOrderController@my_dropship_products')->name('users.product.dropship');
             Route::get('/products/wefullfill/{id}','CustomOrderController@view_fantasy_product')->name('users.product.wefulfill.show');
             Route::get('/help-center','CustomOrderController@helpcenter')->name('users.help-center');
             Route::get('/help-center/ticket/{id}', 'CustomOrderController@view_ticket')->name('help-center.users.ticket.view');
