@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/products/{id}/import/to/woocommerce','ProductController@import_to_woocommerce')->name('product.import.to.woocommerce');
     Route::get('/download/sku/csv/{id}','ProductController@download_sku')->name('product.download.sku.csv');
     Route::any('/products/{id}/update','ProductController@update')->name('product.update');
+    Route::post('/dropship/products/{id}/update','ProductController@updateDropshipProduct')->name('dropship.product.update');
     Route::any('/products/{id}/update/tab/details','ProductController@editTabDetails')->name('product.update.tab-details');
     Route::any('/products/{id}/add/new/variants','ProductController@updateExistingProductNewVariants')->name('product.update.add.new.variants');
     Route::any('/products/{id}/update/old/variants','ProductController@updateExistingProductOldVariants')->name('product.update.old.variants');

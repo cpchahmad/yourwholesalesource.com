@@ -813,6 +813,13 @@ class ProductController extends Controller
         return redirect()->back()->with('success', 'Product Updated Successfully');
     }
 
+    public function updateDropshipProduct(Request $request, $id)
+    {
+        $product = Product::find($id);
+
+
+    }
+
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
