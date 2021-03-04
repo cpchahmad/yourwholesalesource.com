@@ -193,11 +193,7 @@ class CustomOrderController extends Controller
 
 
         if ($request->has('search')) {
-            $products->where('title', 'LIKE', '%' . $request->input('search') . '%')
-            ->orWhereHas('hasVariants', function ($q) use ($request) {
-                $q->where('title', 'LIKE', '%' . $request->input('search') . '%');
-                $q->orwhere('sku', 'LIKE', '%' . $request->input('search') . '%');
-            });
+            $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
         }
         $html = view('non_shopify_users.orders.dropship-product-browse-section')->with([
             'products' => $products
