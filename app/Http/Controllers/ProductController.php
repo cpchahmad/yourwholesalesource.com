@@ -3236,8 +3236,6 @@ class ProductController extends Controller
             }
         }
 
-        dd($dropship_products_id);
-
         $admin_products = Product::whereIn('dropship_product_id', $dropship_products_id)->get();
 
         return view('non_shopify_users.orders.dropship-product-browse-section')->with([
