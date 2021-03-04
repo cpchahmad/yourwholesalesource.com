@@ -105,8 +105,7 @@
                                                             <span>{{ $variant->missing }}</span>
                                                         </td>
                                                         <td class="align-items-center text-center" style="vertical-align: middle;">
-                                                            <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->barcode, "C128",2.0,42) !!}</span>
-                                                            <span>{{ $variant->barcode }}</span>
+                                                            <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->sku, "C128",2.0,42) !!}</span>
                                                         </td>
                                                     </tr>
                                                 @endforeach
