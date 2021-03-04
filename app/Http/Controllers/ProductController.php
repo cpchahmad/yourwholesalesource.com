@@ -815,9 +815,18 @@ class ProductController extends Controller
 
     public function updateDropshipProduct(Request $request, $id)
     {
-        dd($request->all());
         $product = Product::find($id);
 
+        foreach ($product->hasVariants as $index => $variant)
+        {
+            $variant->sku = $request->variant_sku[$index];
+            $variant->cost = $request->variant_cost[$index];
+            $variant->price = $request->variant_price[$index];
+            $variant->is_dropship_variant = 1;
+            $variant->save();
+        }
+
+        return redirect()->back()->with('success', 'Product updated Successfully!');
 
     }
 
