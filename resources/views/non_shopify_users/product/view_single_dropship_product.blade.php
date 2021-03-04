@@ -92,6 +92,7 @@
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Title</th>
+                                                <th>SKU</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
                                                 <th>Cost</th>
@@ -105,9 +106,11 @@
                                                              @if($variant->image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                              @else  src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
                                                     </td>
-
                                                     <td>
                                                          {{ $variant->title }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $variant->sku }}
                                                     </td>
                                                     <td>
                                                         @if($variant->quantity >0)
