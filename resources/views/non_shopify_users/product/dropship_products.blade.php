@@ -49,7 +49,7 @@
                             <div class="options-container">
                                 <a href="{{route('users.product.wefulfill.show',$product->id)}}">
                                     @if(count($product->has_images) > 0)
-                                        <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$product->has_images()->first()->image}}" alt="">
+                                        <img class="img-fluid options-item" data-src="{{asset('shipping-marks')}}/{{$product->has_images()->first()->image}}" alt="">
                                     @else
                                         <img class="img-fluid options-item" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                     @endif
