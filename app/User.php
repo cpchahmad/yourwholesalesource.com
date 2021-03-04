@@ -105,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(MonthlyDiscountPreference::class);
     }
 
-    public function has_dropship_requests(){
+    public function dropship_requests(){
         return $this->hasMany(DropshipProduct::class);
     }
 
