@@ -105,6 +105,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(MonthlyDiscountPreference::class);
     }
 
+    public function has_dropship_requests(){
+        return $this->hasMany(DropshipProduct::class);
+    }
+
     public function sendPasswordResetNotification($token)
     {
         Mail::to(request()->email)->send(new SendResetPasswordEmail($token,$this));
