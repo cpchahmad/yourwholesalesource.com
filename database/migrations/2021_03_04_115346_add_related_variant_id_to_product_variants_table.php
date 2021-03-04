@@ -13,7 +13,7 @@ class AddRelatedVariantIdToProductVariantsTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_variantss', function (Blueprint $table) {
+        Schema::table('product_variants', function (Blueprint $table) {
             $table->unsignedBigInteger('related_variant_id')->nullable();
         });
     }
