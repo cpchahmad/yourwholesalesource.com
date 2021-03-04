@@ -191,6 +191,8 @@ class CustomOrderController extends Controller
 
         $products = Product::whereIn('dropship_product_id', $dropship_products_id)->newQuery();
 
+        dd($products->get());
+
         if ($request->has('search')) {
             $products->where('title', 'LIKE', '%' . $request->input('search') . '%');
             $products->orWhereHas('hasVariants', function ($q) use ($request) {
