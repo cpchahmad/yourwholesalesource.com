@@ -815,6 +815,7 @@ class ProductController extends Controller
 
     public function updateDropshipProduct(Request $request, $id)
     {
+        dd($request->all());
         $product = Product::find($id);
 
 
