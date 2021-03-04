@@ -175,8 +175,8 @@ class RetailerOrder extends Model
                     $weight = $v->linked_real_product->weight *  $v->quantity;
                 elseif($v->linked_woocommerce_product)
                     $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
-                elseif($v->linked_dropship_product)
-                    $weight = $v->linked_dropship_product->weight *  $v->quantity;
+                elseif($v->linked_dropship_variant)
+                    $weight = $v->linked_dropship_variant->linked_product->weight *  $v->quantity;
 
 
                 if($v->linked_real_product != null){
