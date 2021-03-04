@@ -4,9 +4,7 @@
             <input type="checkbox" class="custom-control-input product-checkbox" data-related="#product_variant{{$product->id}}" id="product{{$product->id}}">
             <label class="custom-control-label" for="product{{$product->id}}">
                 @if(count($product->has_images) > 0)
-                    @if($product->has_images()->first()->isV == 0)
-                        <img class="img-avatar16"  src="{{asset('shipping-marks')}}/{{$product->has_images()->first()->image}}">
-                    @endif
+                    <img class="img-avatar16"  src="{{asset('shipping-marks')}}/{{$product->has_images()->first()->image}}">
                 @else
                     <img class="img-avatar16" src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                 @endif
