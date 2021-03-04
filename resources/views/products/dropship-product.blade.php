@@ -119,8 +119,8 @@
                                                                     Out of Stock
                                                                 @endif
                                                             </td>
-                                                            <td><input type="text" class="form-control" value="{{number_format($variant->price,2)}}" name="variant_price"></td>
-                                                            <td><input type="text" class="form-control" value="{{number_format($variant->cost,2)}}" name="variant_price"></td>
+                                                            <td><input type="text" class="form-control" value="{{number_format($variant->price,2)}}" name="variant_price[]"></td>
+                                                            <td><input type="text" class="form-control" value="{{number_format($variant->cost,2)}}" name="variant_cost[]"></td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
