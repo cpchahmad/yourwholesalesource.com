@@ -86,6 +86,7 @@
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Title</th>
+                                                <th>SKU</th>
                                                 <th>Quantity</th>
                                                 <th>Price</th>
                                                 <th>Cost</th>
@@ -101,6 +102,9 @@
                                                     </td>
                                                     <td class="variant_title">
                                                         {{ $variant->title }}
+                                                    </td>
+                                                    <td class="variant_sku">
+                                                        {{ $variant->sku }}
                                                     </td>
                                                     <td>
                                                         @if($variant->quantity >0)
