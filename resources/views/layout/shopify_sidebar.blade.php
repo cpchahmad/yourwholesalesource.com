@@ -44,14 +44,6 @@
                 </ul>
             </li>
 
-{{--            <li class="nav-main-item">--}}
-{{--                <a class="nav-main-link active" href="{{route('users.product.wefulfill')}}">--}}
-{{--                    <i class="nav-main-link-icon si si-present"></i>--}}
-{{--                    <span class="nav-main-link-name">Products</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
-
             <li class="nav-main-item">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                     <i class="nav-main-link-icon si si-layers"></i>
@@ -89,6 +81,12 @@
                 <a class="nav-main-link"  href="{{route('users.wishlist')}}">
                     <i class="nav-main-link-icon fa fa-heart"></i>
                     <span class="nav-main-link-name">Wishlist</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link active" href="{{route('users.dropship.request')}}">
+                    <i class="nav-main-link-icon fa fa-shipping-fast"></i>
+                    <span class="nav-main-link-name">Dropship Request</span>
                 </a>
             </li>
 
