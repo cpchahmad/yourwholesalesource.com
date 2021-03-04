@@ -93,6 +93,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <div class="form-material">
+                                                                    <label for="material-error">Approved Cost</label>
+                                                                    <input class="form-control" type="number" step="any" name="approved_price">
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">

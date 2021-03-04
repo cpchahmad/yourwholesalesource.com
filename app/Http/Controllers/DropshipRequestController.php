@@ -110,7 +110,7 @@ class DropshipRequestController extends Controller
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
             $drop_request->status_id = 2;
-            //$drop_request->approved_price = $request->input('approved_price');
+            $drop_request->approved_price = $request->input('approved_price');
             $drop_request->updated_at = now();
             $drop_request->save();
             $tl = new ManagerLog();
