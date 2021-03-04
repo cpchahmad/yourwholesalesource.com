@@ -183,8 +183,8 @@ class CustomOrderController extends Controller
 
         $dropship_products_id = [];
 
-        foreach ($dropship_requests as $request) {
-            foreach($request->dropship_products as $product){
+        foreach ($dropship_requests as $r) {
+            foreach($r->dropship_products as $product){
                 array_push($dropship_products_id, $product->id);
             }
         }
