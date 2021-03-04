@@ -22,7 +22,7 @@
                             <label class="custom-control-label" for="varaint_product_{{$variant->id}}">
                                 <img class="img-avatar16 " style="border: 1px solid whitesmoke"
                                      @if($variant->image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                     @elseif($variant->has_image->isV == 0) src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
+                                     @else src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
                                @if($variant->option != null)   {{$variant->option}}   @endif
 
                             </label>

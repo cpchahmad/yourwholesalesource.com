@@ -3238,6 +3238,8 @@ class ProductController extends Controller
 
         $admin_products = Product::whereIn('dropship_product_id', $dropship_products_id)->get();
 
+        dd($admin_products);
+
         return view('non_shopify_users.orders.dropship-product-browse-section')->with([
             'products' => $admin_products,
         ])->render();
