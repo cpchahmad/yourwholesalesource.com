@@ -476,6 +476,13 @@ class DefaultSettingsController extends Controller
         foreach ($user->has_users as $non) {
             $non->sale_manager_id = null;
             $non->save();
+
+            if($non->has_shops()->count() > 0) {
+                foreach ($non->has_shops as $shop) {
+                    $shop->sale_manager_id = null;
+                    $shop->save();
+                }
+            }
         }
     }
 
@@ -492,10 +499,18 @@ class DefaultSettingsController extends Controller
                 $shop->save();
             }
         }
+
         if ($request->has('users')) {
             foreach ($request->input('users') as $u) {
                 $non = User::find($u);
                 $non->sale_manager_id = $manager->id;
+
+                if($non->has_shops()->count() > 0) {
+                    foreach ($non->has_shops as $shop) {
+                        $shop->sale_manager_id = $manager->id;
+                        $shop->save();
+                    }
+                }
                 $non->save();
             }
         }
