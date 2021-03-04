@@ -481,6 +481,10 @@
                                                     if($item->linked_real_variant->quantity == 0)
                                                         $out_of_stock = true;
                                                 }
+                                                elseif($item->linked_dropship_variant) {
+                                                      if($item->linked_dropship_variant->linked_product->quantity == 0)
+                                                        $out_of_stock = true;
+                                                }
                                                 elseif($item->linked_real_product){
                                                     if($item->linked_real_product->quantity == 0)
                                                         $out_of_stock = true;
@@ -488,7 +492,7 @@
 
                                             @endphp
 
-                                            @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null))
+                                            @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null  && $item->linked_dropship_variant == null))
                                                 <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
                                             @else
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
