@@ -135,7 +135,7 @@
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
                                                                     <label for="material-error">Target Dropshipping Cost</label>
-                                                                    <input readonly class="form-control" type="text" value="{{$item->approved_cost}}">
+                                                                    <input readonly class="form-control" type="text" value="{{$item->approved_price}}">
                                                                 </div>
                                                             </div>
                                                         </div>
