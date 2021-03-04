@@ -199,7 +199,7 @@ class CustomOrderController extends Controller
             });
         }
         $html = view('non_shopify_users.orders.dropship-product-browse-section')->with([
-            'products' => $products->get()
+            'products' => $products
                 ->limit(10)->get(),
         ])->render();
 
