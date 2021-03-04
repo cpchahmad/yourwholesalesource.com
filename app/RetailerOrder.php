@@ -175,7 +175,7 @@ class RetailerOrder extends Model
                     $weight = $v->linked_real_product->weight *  $v->quantity;
                 elseif($v->linked_woocommerce_product)
                     $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
-                elseif($v->linked_dropship_variant)
+                elseif($v->linked_dropship_variant->linked_product)
                     $weight = $v->linked_dropship_variant->linked_product->weight *  $v->quantity;
 
 
@@ -240,6 +240,36 @@ class RetailerOrder extends Model
                         $total_shipping += 0;
                     }
 
+                }
+                elseif($v->linked_dropship_variant->linked_product != null) {
+                    $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
+                    $zoneQuery->whereHas('has_countries',function ($q) use ($country){
+                        $q->where('name','LIKE','%'.$country.'%');
+                    });
+                    $zoneQuery = $zoneQuery->pluck('id')->toArray();
+
+                    $shipping_rates = ShippingRate::whereIn('zone_id',$zoneQuery)->newQuery();
+                    $shipping_rates =  $shipping_rates->first();
+
+                    if($shipping_rates != null){
+
+                        if($shipping_rates->type == 'flat'){
+                            $total_shipping += $shipping_rates->shipping_price;
+                        }
+                        else{
+                            if($shipping_rates->min > 0){
+                                $ratio = $weight/$shipping_rates->min;
+                                $total_shipping +=  $shipping_rates->shipping_price*$ratio;
+                            }
+                            else{
+                                $total_shipping += 0;
+                            }
+                        }
+
+                    }
+                    else{
+                        $total_shipping += 0;
+                    }
                 }
             }
 
