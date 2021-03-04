@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link active" href="{{route('users.dropship.request')}}">
+                <a class="nav-main-link active" href="{{route('users.dropship.requests')}}">
                     <i class="nav-main-link-icon fa fa-shipping-fast"></i>
                     <span class="nav-main-link-name">Dropship Request</span>
                 </a>
