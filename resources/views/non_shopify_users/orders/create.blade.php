@@ -33,7 +33,7 @@
                         <div class="block-content pb-2">
                             <div class="text-center">
                                 <a class="btn btn-primary text-white show-product-modal" data-toggle="modal"> Browse Wefullfill Products </a>
-                                @if(count(\Illuminate\Support\Facades\Auth::user()->has_dropship_requests()) > 0)
+                                @if(count(\Illuminate\Support\Facades\Auth::user()->dropship_requests()) > 0)
                                     <a class="btn btn-success text-white show-dropship-product-modal" data-toggle="modal"> Browse Your Products </a>
                                 @endif
                             </div>
