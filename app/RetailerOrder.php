@@ -175,7 +175,7 @@ class RetailerOrder extends Model
                     $weight = $v->linked_real_product->weight *  $v->quantity;
                 elseif($v->linked_woocommerce_product)
                     $weight = $v->linked_woocommerce_product->weight *  $v->quantity;
-                elseif($v->linked_dropship_variant->linked_product)
+                elseif($v->linked_dropship_variant)
                     $weight = $v->linked_dropship_variant->linked_product->weight *  $v->quantity;
 
 
@@ -241,7 +241,7 @@ class RetailerOrder extends Model
                     }
 
                 }
-                elseif($v->linked_dropship_variant->linked_product != null) {
+                elseif($v->linked_dropship_variant != null) {
                     $zoneQuery = Zone::where('warehouse_id', 3)->newQuery();
                     $zoneQuery->whereHas('has_countries',function ($q) use ($country){
                         $q->where('name','LIKE','%'.$country.'%');
