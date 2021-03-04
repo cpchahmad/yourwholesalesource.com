@@ -37,7 +37,7 @@
                         <div class="row js-gallery" >
                             <div class="col-md-12 mb2">
                                 @if(count($product->has_images) > 0)
-                                    <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$product->has_images()->first()->image}}" alt="">
+                                    <img class="img-fluid options-item" data-src="{{asset('shipping-marks')}}/{{$product->has_images()->first()->image}}" alt="">
                                 @else
                                     <img class="img-fluid options-item" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                 @endif
