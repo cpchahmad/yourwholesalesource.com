@@ -93,42 +93,41 @@
                                                 <th>Cost</th>
                                             </tr>
                                             </thead>
-                                            <tbody>
-                                                <form action="{{ route('dropship.product.update', $product->id) }}" method="POST">
-                                                    @csrf
+                                            <form action="{{ route('dropship.product.update', $product->id) }}" method="POST">
+                                                @csrf
+                                                <tbody>
                                                     @foreach($product->hasVariants as $index => $variant)
-                                                    <tr>
-                                                        <td>
-                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
-                                                                 @if($variant->image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg" @else
-                                                                 data-src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
-                                                        </td>
-                                                        <td class="variant_title">
-                                                            {{ $variant->title }}
-                                                        </td>
-                                                        <td class="variant_sku">
-                                                            <input type="text" value="{{ $variant->sku }}" name="variant_sku[]">
-                                                        </td>
-                                                        <td class="align-items-center text-center" style="vertical-align: middle;">
-                                                            <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->sku, "C128",2.0,32) !!}</span>
-                                                        </td>
-                                                        <td>
-                                                            @if($variant->quantity >0)
-                                                                {{$variant->quantity}}
-                                                            @else
-                                                                Out of Stock
-                                                            @endif
-                                                        </td>
-                                                        <td><input type="text" value="{{number_format($variant->price,2)}}" name="variant_price"></td>
-                                                        <td><input type="text" value="{{number_format($variant->cost,2)}}" name="variant_price"></td>
-                                                    </tr>
-
-                                                    <tr class="text-right">
-                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                    </tr>
-                                                @endforeach
-                                                </form>
-                                            </tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                                     @if($variant->image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg" @else
+                                                                     data-src="{{asset('shipping-marks')}}/{{$variant->image}}" @endif alt="">
+                                                            </td>
+                                                            <td class="variant_title">
+                                                                {{ $variant->title }}
+                                                            </td>
+                                                            <td class="variant_sku">
+                                                                <input type="text" value="{{ $variant->sku }}" class="form-control" name="variant_sku[]">
+                                                            </td>
+                                                            <td class="align-items-center text-center" style="vertical-align: middle;">
+                                                                <span>{!! \Milon\Barcode\DNS1D::getBarcodeHTML($variant->sku, "C128",2.0,32) !!}</span>
+                                                            </td>
+                                                            <td>
+                                                                @if($variant->quantity >0)
+                                                                    {{$variant->quantity}}
+                                                                @else
+                                                                    Out of Stock
+                                                                @endif
+                                                            </td>
+                                                            <td><input type="text" class="form-control" value="{{number_format($variant->price,2)}}" name="variant_price"></td>
+                                                            <td><input type="text" class="form-control" value="{{number_format($variant->cost,2)}}" name="variant_price"></td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </form>
                                         </table>
                                     @else
                                         <p>This Product has Zero Variants</p>
