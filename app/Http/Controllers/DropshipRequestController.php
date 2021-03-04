@@ -226,7 +226,6 @@ class DropshipRequestController extends Controller
             $dropship_product_variant->sku = $request->sku[$index];
             $dropship_product_variant->option = $request->option[$index];
             $dropship_product_variant->inventory = $request->inventory[$index];
-            $dropship_product_variant->barcode = rand();
 
 
             // Saving product image
@@ -415,12 +414,16 @@ class DropshipRequestController extends Controller
             $product->quantity = $dropship_product->dropship_product_variants()->sum('inventory');
             $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
             $product->global = 0;
-            //$product->length = $dropship_product->length;
-            //$product->width = $dropship_product->width;
-            //$product->height = $dropship_product->height;
             $product->variants = 1;
             $product->is_dropship_product = 1;
             $product->save();
+
+            // Creating Main Product Image
+            $image = new Image();
+            $image->isV = 0;
+            $image->product_id = $product->id;
+            $image->image = $dropship_product->dropship_product_variants()->first()->image;
+            $image->save();
 
             // Creating Variants
             foreach($dropship_product->dropship_product_variants as $variant) {
@@ -433,6 +436,7 @@ class DropshipRequestController extends Controller
                 $variants->barcode = $variant->barcode;
                 $variants->image = $variant->image;
                 $variants->product_id = $product->id;
+                $variants->is_dropship_variant = 1;
                 $variants->save();
 
                 $inventory = new WarehouseInventory();
@@ -441,13 +445,6 @@ class DropshipRequestController extends Controller
                 $inventory->quantity = $variants->quantity;
                 $inventory->save();
             }
-
-            // Creating Main Product Image
-            $image = new Image();
-            $image->isV = 0;
-            $image->product_id = $product->id;
-            $image->image = $dropship_product->dropship_product_variants()->first()->image;
-            $image->save();
 
         }
     }
