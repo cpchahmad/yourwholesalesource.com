@@ -111,8 +111,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function dropship_products() {
-        $user = $this->id;
-        $dropship_requests = DropshipRequest::where('user_id', $user->id)->get();
+        $dropship_requests = DropshipRequest::where('user_id', $this->id)->get();
 
         $dropship_products_id = [];
 

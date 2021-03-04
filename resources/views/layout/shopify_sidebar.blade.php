@@ -44,12 +44,12 @@
                 </ul>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link active" href="{{route('users.product.wefulfill')}}">
-                    <i class="nav-main-link-icon si si-present"></i>
-                    <span class="nav-main-link-name">Products</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link active" href="{{route('users.product.wefulfill')}}">--}}
+{{--                    <i class="nav-main-link-icon si si-present"></i>--}}
+{{--                    <span class="nav-main-link-name">Products</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
 
             <li class="nav-main-item">
