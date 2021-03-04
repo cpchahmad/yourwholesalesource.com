@@ -572,6 +572,14 @@ class CustomOrderController extends Controller
         ]);
     }
 
+    public function view_single_dropship_product($id)
+    {
+        $product = Product::find($id);
+        return view('non_shopify_users.product.view_single_dropship_product')->with([
+            'product' => $product,
+        ]);
+    }
+
     public function process_file(Request $request)
     {
         if ($request->hasFile('import_order_file')) {

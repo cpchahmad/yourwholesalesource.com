@@ -49,14 +49,7 @@
                             <div class="options-container">
                                 <a href="{{route('users.product.wefulfill.show',$product->id)}}">
                                     @if(count($product->has_images) > 0)
-                                        @foreach($product->has_images()->orderBy('position')->get() as $index => $image)
-                                            @if($index == 0)
-                                                @if($image->isV == 0)
-                                                    <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}">
-                                                @else   <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                @endif
-                                            @endif
-                                        @endforeach
+                                        <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$product->has_images()->first()->image}}" alt="">
                                     @else
                                         <img class="img-fluid options-item" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                     @endif
@@ -65,17 +58,14 @@
                                 <div class="options-overlay bg-black-75">
                                     <div class="options-overlay-content">
                                         <div class="push-20">
-                                            <a class="btn btn-sm btn-primary" href="{{route('users.product.wefulfill.show',$product->id)}}">View</a>
-                                            @if($product->marketing_video != null)
-                                                <a class="btn btn-sm btn-success text-white" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</a>
-                                            @endif
+                                            <a class="btn btn-sm btn-primary" href="{{route('users.product.dropship.show',$product->id)}}">View</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="block-content" style="padding-bottom: 10px">
                                 <div class="push-10">
-                                    <a class="h6" style="font-size: 0.9rem" href="{{route('users.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
+                                    <a class="h6" style="font-size: 0.9rem" href="{{route('users.product.dropship.show',$product->id)}}">{{$product->title}}</a>
                                     <div class="d-flex">
                                         <div class="font-w600 text-success mt-1">
                                             From.
@@ -86,17 +76,11 @@
                                             @endif
 
                                         </div>
-                                        <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">{{$product->new_shipping_price}}</div>
                                     </div>
                                 </div>
 
-                                @if($product->processing_time != null)
-                                    <hr>
-                                    <p class="text-muted font-size-sm">  Dispatch Within {{$product->processing_time}} </p>
-
-                                @endif
                                 <hr>
-                                <button onclick="window.location.href='{{route('users.product.wefulfill.show',$product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
+                                <button onclick="window.location.href='{{route('users.product.dropship.show',$product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
                             </div>
                         </div>
                     </div>
