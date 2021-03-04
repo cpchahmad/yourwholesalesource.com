@@ -200,7 +200,7 @@ class CustomOrderController extends Controller
             });
         }
 
-        $products = $products->get();
+        $products = $products->whereIn('dropship_product_id', $dropship_products_id)->get();
         $html = view('non_shopify_users.orders.dropship-product-browse-section')->with([
             'products' => $products,
         ])->render();
