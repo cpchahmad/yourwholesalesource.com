@@ -518,10 +518,10 @@ class AdminMaintainerController extends Controller
                     $sku = $item->linked_woocommerce_variant->sku;
                 elseif($item->linked_dropship_variant != null)
                     $sku = $item->linked_dropship_variant->sku;
-                elseif($item->link_real_product != null)
-                    $sku = $item->link_real_product->sku;
+                elseif($item->linked_real_product != null)
+                    $sku = $item->linked_real_product->sku;
                 else
-                    $sku = $item->link_woocommerce_product->sku;
+                    $sku = $item->linked_woocommerce_product->sku;
 
 
                 array_push($line_items, [
@@ -708,10 +708,10 @@ class AdminMaintainerController extends Controller
                     $sku = $item->linked_woocommerce_variant->sku;
                 elseif($item->linked_dropship_variant != null)
                     $sku = $item->linked_dropship_variant->sku;
-                elseif($item->link_real_product != null)
-                    $sku = $item->link_real_product->sku;
+                elseif($item->linked_real_product != null)
+                    $sku = $item->linked_real_product->sku;
                 else
-                    $sku = $item->link_woocommerce_product->sku;
+                    $sku = $item->linked_woocommerce_product->sku;
 
                 array_push($line_items, [
                     "title" => str_replace('"', ' ', $item->name),
