@@ -70,6 +70,9 @@
                                         <table class="table variants-div js-table-sections table-hover" style="overflow-x: hidden">
                                             <thead>
                                             <tr>
+                                                @if($drop_request->dropship_products()->first())
+                                                    <th></th>
+                                                @endif
                                                 <th style="vertical-align: top;">SKU</th>
                                                 <th style="vertical-align: top;">Option</th>
                                                 <th style="vertical-align: top;">Inventory</th>
@@ -81,6 +84,9 @@
                                                 @if($drop_request->dropship_products()->first())
                                                     @foreach($drop_request->dropship_products()->first()->dropship_product_variants as $variant)
                                                         <tr class="single-product-details">
+                                                            <td class="">
+                                                                <img style="width: 100px; height: auto;" src="{{asset('shipping-marks')}}/{{$variant->image}}" alt="">
+                                                            </td>
                                                             <td class="">
                                                                 <input type="text" class="form-control" name="sku[]"  placeholder="Enter sku here.." value="{{ $variant->sku }}">
                                                             </td>
