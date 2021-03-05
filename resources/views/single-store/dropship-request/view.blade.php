@@ -87,7 +87,7 @@
                                                             <div class="form-group">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-material">
-                                                                        <label for="material-error">You are about to accept the Qoute with a target Dropshipping Cost</label>
+                                                                        <label for="material-error">You are about to accept the Qoute with a Approved Dropshipping Cost of:</label>
                                                                         <input readonly class="form-control" type="text" value="{{$item->approved_price}}">
                                                                     </div>
                                                                 </div>
