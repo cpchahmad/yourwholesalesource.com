@@ -221,8 +221,11 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if($variant->option1 != null) {{$variant->option1}} @endif    @if($variant->option2 != null) / {{$variant->option2}} @endif    @if($variant->option3 != null) / {{$variant->option3}} @endif
-
+                                                        @if($product->is_dropship_product == 1)
+                                                            {{ $variant->title }}
+                                                        @else
+                                                            @if($variant->option1 != null) {{$variant->option1}} @endif    @if($variant->option2 != null) / {{$variant->option2}} @endif    @if($variant->option3 != null) / {{$variant->option3}} @endif
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         @if($variant->quantity >0)

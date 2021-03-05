@@ -535,6 +535,7 @@ class DropshipRequestController extends Controller
         $retailerProduct->price = $product->price;
         $retailerProduct->cost = $product->price;
         $retailerProduct->weight = $product->weight;
+        $retailerProduct->quantity = $product->quantity;
         $retailerProduct->variants = $product->variants;
         $retailerProduct->toShopify = 1;
         $retailerProduct->shop_id = $dropship_request->shop_id;
