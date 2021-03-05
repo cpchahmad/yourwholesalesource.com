@@ -139,7 +139,7 @@
                                 <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                                 <input type="hidden" name="user_id" value="{{$user->id}}">
                                 <input type="hidden" name="shop_id" value="{{$shop->id}}">
-                                <input type="hidden" name="type" value="user-wishlist">
+                                <input type="hidden" name="type" value="shopify-user-wishlist">
 
                                 <div class="text-center text-danger p-3 font-w600">
                                     Reminder: Dear user, creating a Dropship Request means that you will send us the stock to fulfill
