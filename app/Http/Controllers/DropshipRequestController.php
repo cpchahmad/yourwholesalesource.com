@@ -193,12 +193,12 @@ class DropshipRequestController extends Controller
 
             $drop_request->has_store_product = 1;
             $drop_request->product_shopify_id = $request->input('product_shopify_id');
-            //$drop_request->status_id = 3;
+            $drop_request->status_id = 3;
             $drop_request->updated_at = now();
             $drop_request->save();
-            //$this->notify->generate('Dropship-Request','Dropship Request Accepted','Dropship Request named '.$drop_request->product_name.' has been accepted',$drop_request);
+            $this->notify->generate('Dropship-Request','Dropship Request Accepted','Dropship Request named '.$drop_request->product_name.' has been accepted',$drop_request);
 
-            //$this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Accepted');
+            $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Accepted');
 
 
             if($drop_request->shop_id != null) {
