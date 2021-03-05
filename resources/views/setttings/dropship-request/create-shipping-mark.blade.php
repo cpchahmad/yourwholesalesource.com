@@ -77,7 +77,30 @@
                                             </tr>
                                             </thead>
                                             <tbody class="product-details-body">
-                                                <tr class="single-product-details">
+                                                @if($drop_request->dropship_products()->first())
+                                                    @foreach($drop_request->dropship_products()->first()->dropship_product_variants as $variant)
+                                                        <tr class="single-product-details">
+                                                            <td class="">
+                                                                <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here.." value="{{ $variant->sku }}">
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="option[]" placeholder="Enter name of options here.." value="{{ $variant->option }}">
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="inventory[]" placeholder="Enter product inventory here.." value="{{ $variant->inventory }}">
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <input type="file" class="form-control" name="image[]">
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <div class=" btn-group btn-group-sm" role="group">
+                                                                    <button type="button" class="btn btn-sm btn-danger remove-product-details-tab-btn">-</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr class="single-product-details">
                                                     <td class="">
                                                         <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here..">
                                                     </td>
@@ -97,6 +120,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
