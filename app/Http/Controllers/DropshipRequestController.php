@@ -232,10 +232,6 @@ class DropshipRequestController extends Controller
                     $dropship_product_variant->save();
                 }
 
-                $shipping_mark = new ShippingMark();
-                $shipping_mark->dropship_product_id = $dropship_product->id;
-                $shipping_mark->dropship_request_id = $drop_request->id;
-                $shipping_mark->save();
             }
 
             return redirect()->back()->with('success','Dropship Request Accepted Successfully!');

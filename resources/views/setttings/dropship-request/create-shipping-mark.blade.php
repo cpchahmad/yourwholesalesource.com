@@ -58,7 +58,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label for="material-error">Product title</label>
-                                        <input required class="form-control" type="text" name="title" placeholder="Enter Product title here..">
+                                        <input required class="form-control" type="text" name="title" placeholder="Enter Product title here.." @if($drop_request->dropship_products()->first()) value="{{ $drop_request->dropship_products()->first()->title }}">
                                     </div>
                                 </div>
                             </div>
