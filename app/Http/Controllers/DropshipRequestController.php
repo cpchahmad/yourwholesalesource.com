@@ -254,7 +254,7 @@ class DropshipRequestController extends Controller
 
         $dropship_product = DropshipProduct::find($request->product_id);
 
-        foreach ($dropship_product->dropship_variants as $index => $item) {
+        foreach ($dropship_product->dropship_product_variants as $index => $item) {
             $item->sku = $request->sku[$index];
             $item->option = $request->option[$index];
             $item->inventory = $request->inventory[$index];
