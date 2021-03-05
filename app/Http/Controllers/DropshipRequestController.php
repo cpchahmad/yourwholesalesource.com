@@ -513,7 +513,7 @@ class DropshipRequestController extends Controller
         $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $dropship_request->shopify_product_id . '.json');
         $shopify_product = $response->body->product;
 
-        dd($shopify_product);
+        dd($response);
 
 
 
