@@ -1364,7 +1364,7 @@ class SingleStoreController extends Controller
 
         $shop = $this->helper->getLocalShop();
 
-        $requests = DropshipRequest::where('user_id', $shop->id)->newQuery();
+        $requests = DropshipRequest::where('shop_id', $shop->id)->newQuery();
 
 
         if($request->has('status')){
