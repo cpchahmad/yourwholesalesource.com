@@ -206,7 +206,6 @@ class DropshipRequestController extends Controller
                 $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $drop_request->product_shopify_id . '.json');
                 $shopify_product = $response->body->product;
 
-                dd($shopify_product);
 
                 $dropship_product = new DropshipProduct();
                 $dropship_product->title = $shopify_product->title;
@@ -219,13 +218,15 @@ class DropshipRequestController extends Controller
                     $dropship_product_variant->option = $item->title;
                     $dropship_product_variant->inventory = $item->quantity;
 
-
-                    // Saving product image
-                    $file = $request->image[$index];
-                    $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
-                    $attachement = date("mmYhisa_") . $name;
-                    $file->move(public_path() . '/shipping-marks/', $attachement);
-                    $dropship_product_variant->image = $attachement;
+                    foreach ($shopify_product->images as $img)
+                    {
+                        if($item->image_id == $img->id) {
+                            $image = file_get_contents($img->src);
+                            $filename = now()->format('YmdHi') . $dropship_product->title . rand(12321, 456546464) . '.jpg';
+                            file_put_contents(public_path('/shipping-marks/' . $filename), $image);
+                            $dropship_product_variant->image = $filename;
+                        }
+                    }
 
                     $dropship_product_variant->dropship_product_id = $dropship_product->id;
                     $dropship_product_variant->save();
@@ -233,9 +234,8 @@ class DropshipRequestController extends Controller
 
                 $shipping_mark = new ShippingMark();
                 $shipping_mark->dropship_product_id = $dropship_product->id;
-                $shipping_mark->dropship_request_id = $id;
+                $shipping_mark->dropship_request_id = $drop_request->id;
                 $shipping_mark->save();
-
             }
 
             return redirect()->back()->with('success','Dropship Request Accepted Successfully!');
