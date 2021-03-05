@@ -252,8 +252,6 @@ class DropshipRequestController extends Controller
 
     public function save_shopify_product_shipping_mark(Request $request, $id) {
 
-        dd($request->all());
-
         $dropship_product = DropshipProduct::find($request->product_id);
 
         foreach ($dropship_product->dropship_variants as $index => $item) {
