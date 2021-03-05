@@ -92,6 +92,14 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Product Shopify Id:</label>
+                                                                        <input placeholder="Please Enter Shopify Product Id here !" name="product_shopify_id" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="block-content block-content-full text-right border-top">

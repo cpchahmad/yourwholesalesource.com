@@ -131,6 +131,17 @@
                                                     <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                     <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
                                                     <div class="block-content font-size-sm">
+                                                        @if($item->shop_id !== null)
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Completing the Request will allow users to provide a shopify id</label>
+                                                                        <input type="hidden" name="need_id" value="1">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
@@ -139,23 +150,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        @if($item->shop_id !== null)
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Request user for a shopify id?</label>
-                                                                        <br>
-                                                                        <div class=" mb-1">
-                                                                            <input type="radio"  class="" id="id-yes" name="need_id" value="1" >
-                                                                            <label class="" for="id-yes">Yes</label>
-                                                                            <input type="radio"  class="ml-2" id="id-no" name="need_id" value="0" >
-                                                                            <label class="" for="id-no">No</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">

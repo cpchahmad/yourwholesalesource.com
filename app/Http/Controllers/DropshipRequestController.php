@@ -190,10 +190,10 @@ class DropshipRequestController extends Controller
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
-//            if($request->has('has_product')){
-//                $drop_request->has_store_product = 1;
-//                $drop_request->product_shopify_id = $request->input('product_shopify_id');
-//            }
+            if($request->has('has_product')){
+                $drop_request->has_store_product = 1;
+                $drop_request->product_shopify_id = $request->input('product_shopify_id');
+            }
             $drop_request->status_id = 3;
             $drop_request->updated_at = now();
             $drop_request->save();
@@ -296,34 +296,25 @@ class DropshipRequestController extends Controller
             if($request->need_id && $request->need_id == 1) {
                 $drop_request->status_id = 10;
                 $drop_request->updated_at = now();
-
                 $drop_request->save();
+
                 $this->notify->generate('Dropship-Request','Dropship Request Waiting for Shopify Product Id','Dropship Request named '.$drop_request->product_name.' has been marked as waitng for shopify product id',$drop_request);
                 $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Waiting for Shopify Product Id');
+
                 return redirect()->back()->with('success','Dropship Request Completed Successfully!');
             }
-
-
 
             $drop_request->status_id = 5;
             $drop_request->updated_at = now();
 
-
             if($drop_request->approved_price == null)
-            {
                 $drop_request->approved_price = $drop_request->cost;
-            }
 
             $drop_request->save();
             $this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
             $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
 
-
-            $product = $this->generateAdminProducts($drop_request);
-
-            if($drop_request->shop_id !== null) {
-                $this->generateRetailerProduct($product, $drop_request);
-            }
+            $this->generateAdminProducts($drop_request);
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
         }
@@ -336,6 +327,7 @@ class DropshipRequestController extends Controller
     public function cancel_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+
         if($manager != null && $drop_request != null){
 
             $drop_request->status_id = 9;
@@ -434,20 +426,20 @@ class DropshipRequestController extends Controller
 
             //$drop_request->status_id = 5;
             $drop_request->updated_at = now();
-            $drop_request->has_store_product = 1;
-            $drop_request->product_shopify_id = $request->input('product_shopify_id');
             $drop_request->save();
 
             //$this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
             //$this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
 
+            $shop = $this->helper->getSpecificShop($drop_request->shop_id);
+            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $drop_request->product_shopify_id . '.json');
+            $shopify_product = $response->body->product;
 
 
-            $product = $this->generateAdminProductsFromShopify($drop_request);
+            $product = $this->generateAdminProductsFromShopify($drop_request, $shopify_product);
 
-            if($drop_request->shop_id !== null) {
-                $this->generateRetailerProduct($product, $drop_request);
-            }
+            $this->generateRetailerProduct($product, $drop_request, $shopify_product);
+
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
         }
@@ -507,79 +499,83 @@ class DropshipRequestController extends Controller
         }
     }
 
-    public function generateAdminProductsFromShopify($dropship_request)
+    public function generateAdminProductsFromShopify($dropship_request, $shopify_product)
     {
-        $shop = $this->helper->getSpecificShop($dropship_request->shop_id);
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $dropship_request->product_shopify_id . '.json');
-        $shopify_product = $response->body->product;
+        // Creating admin Product
+        $product = new Product();
+        $product->title = $shopify_product->title;
+        $product->price = $dropship_request->approved_price;
+        $product->cost = $dropship_request->approved_price;
+        $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
+        $product->global = 0;
+        $product->variants = 1;
+        $product->is_dropship_product = 1;
+        $product->save();
 
-        dd($response);
-
-
-
-            // Creating admin Product
-            $product = new Product();
-            $product->title = $shopify_product->title;
-            $product->price = $dropship_request->approved_price;
-            $product->cost = $dropship_request->approved_price;
-            $product->quantity = $shopify_product->quantity;
-            $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
-            $product->global = 0;
-            $product->variants = 1;
-            $product->is_dropship_product = 1;
-            $product->dropship_product_id = $dropship_product->id;
-            $product->save();
-
-            // Creating Main Product Image
+        // Creating Main Product Image
+        $count_product_images = count($product->has_images);
+        foreach ($shopify_product->images as $index => $img) {
+            $image = file_get_contents($img->src);
+            $filename = now()->format('YmdHi') . $product->title . rand(12321, 456546464) . '.jpg';
+            file_put_contents(public_path('images/' . $filename), $image);
             $image = new Image();
             $image->isV = 0;
+            $image->position = $index + 1 + $count_product_images;
             $image->product_id = $product->id;
-            $image->image = $dropship_product->dropship_product_variants()->first()->image;
+            $image->shopify_id = $img->id;
+            $image->image = $filename;
             $image->save();
+        }
 
-            // Creating Variants
-            foreach($dropship_product->dropship_product_variants as $variant) {
-                $variants = new  ProductVariant();
-                $variants->title = $variant->option;
-                $variants->price = $dropship_request->approved_price;
-                $variants->quantity = $variant->inventory;
-                $variants->cost = $dropship_request->approved_price;
-                $variants->sku = $variant->sku;
-                $variants->barcode = $variant->barcode;
-                $variants->image = $variant->image;
-                $variants->product_id = $product->id;
-                $variants->is_dropship_variant = 1;
-                $variants->save();
+        // Creating Variants
+        foreach ($shopify_product->variants as $i => $v) {
+            $variants = new  ProductVariant();
+            $variants->title = $v->option;
+            $variants->price = $dropship_request->approved_price;
+            $variants->quantity = $v->inventory;
+            $variants->cost = $dropship_request->approved_price;
+            $variants->sku = $v->sku;
+            $variants->product_id = $product->id;
+            $variants->is_dropship_variant = 1;
+            $variants->save();
 
-                $inventory = new WarehouseInventory();
-                $inventory->product_variant_id = $variants->id;
-                $inventory->warehouse_id = 3;
-                $inventory->quantity = $variants->quantity;
-                $inventory->save();
+            if(count($shopify_product->variants) > 0) {
+                if ($shopify_product->variants[$i]->image_id != null) {
+                    $image_linked = $product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
+                    if($image_linked != null) {
+                        $variants->image = $image_linked->id;
+                        $variants->save();
+                    }
+                }
             }
 
-            return $product;
+            $inventory = new WarehouseInventory();
+            $inventory->product_variant_id = $variants->id;
+            $inventory->warehouse_id = 3;
+            $inventory->quantity = $variants->quantity;
+            $inventory->save();
 
+        }
 
+        return $product;
     }
 
-
-    public function generateRetailerProduct($product, $dropship_request) {
+    public function generateRetailerProduct($product, $dropship_request, $shopify_product) {
         /*Product Copy*/
         $retailerProduct = new RetailerProduct();
-
         $retailerProduct->linked_product_id = $product->id;
         $retailerProduct->is_dropship_product = 1;
 
         $retailerProduct->title = $product->title;
         $retailerProduct->price = $product->price;
         $retailerProduct->cost = $product->price;
-        $retailerProduct->quantity = $product->quantity;
         $retailerProduct->weight = $product->weight;
         $retailerProduct->variants = $product->variants;
-        $retailerProduct->toShopify = 0;
+        $retailerProduct->toShopify = 1;
         $retailerProduct->shop_id = $dropship_request->shop_id;
         $retailerProduct->user_id = $dropship_request->user_id;
+        $retailerProduct->shopify_id = $shopify_product->id;
+
 
         $retailerProduct->save();
         /*Product Images Copy*/
@@ -637,4 +633,5 @@ class DropshipRequestController extends Controller
         $this->log->store($retailerProduct->user_id, 'RetailerProduct', $retailerProduct->id, $retailerProduct->title, 'Product Added to Import List');
 
     }
+
 }
