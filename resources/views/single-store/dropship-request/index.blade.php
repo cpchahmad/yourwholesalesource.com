@@ -60,7 +60,7 @@
                                         <tbody class="">
                                         <tr>
 
-                                            <td class="font-w600"><a href="{{route('users.dropship.request.view',$item->id)}}">{{ $item->product_name }}</a></td>
+                                            <td class="font-w600"><a href="{{route('store.dropship.request.view',$item->id)}}">{{ $item->product_name }}</a></td>
                                             <td>
                                                 {{number_format($item->cost,2)}} USD
                                             </td>
@@ -91,7 +91,7 @@
 
                                             <td class="text-right">
                                                 <div class="btn-group">
-                                                    <a href="{{route('users.dropship.request.view',$item->id)}}"
+                                                    <a href="{{route('store.dropship.request.view',$item->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Wishlist"><i class="fa fa-eye"></i></a>
                                                     <a href="{{ route('dropship.requests.delete', $item->id) }}"
