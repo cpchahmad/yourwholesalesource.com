@@ -422,6 +422,21 @@ class RetailerProductController extends Controller
         ]);
     }
 
+    public function my_dropship_products(Request $request){
+        $productQuery = RetailerProduct::with('has_images')->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
+        if($request->has('search')){
+            $productQuery->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        $products = $productQuery->paginate(12);
+        $shop = $this->helper->getLocalShop();
+        return view('single-store.products.my_dropship_products')->with([
+            'products' => $products,
+            'shop' => $shop,
+            'search' => $request->input('search'),
+        ]);
+    }
+
+
     public function edit_my_product($id){
         $product = RetailerProduct::find($id);
         $shop= $this->helper->getLocalShop();

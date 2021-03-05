@@ -240,6 +240,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::post('/wefullfill/{id}/update/variants','RetailerProductController@updateProductVariants')->name('store.product.variant.update');
         Route::get('/import-list','RetailerProductController@import_list')->name('store.import_list');
         Route::get('/my_products','RetailerProductController@my_products')->name('store.my_products');
+        Route::get('/my_dropship_products','RetailerProductController@my_dropship_products')->name('store.my_dropship_products');
         Route::get('/my_products/{id}','RetailerProductController@edit_my_product')->name('store.my_product.edit');
         Route::get('/products/delete/{id}','RetailerProductController@delete')->name('store.product.delete');
         Route::get('/products/sync/{id}','RetailerProductController@syncWithAdminProduct')->name('store.product.sync');
