@@ -423,7 +423,7 @@ class RetailerProductController extends Controller
     }
 
     public function my_dropship_products(Request $request){
-        $productQuery = RetailerProduct::with('has_images')->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
+        $productQuery = RetailerProduct::with('has_images')->where('shop_id',$this->helper->getLocalShop()->id)->where('is_dropship_product', 1)->newQuery();
         if($request->has('search')){
             $productQuery->where('title','LIKE','%'.$request->input('search').'%');
         }
