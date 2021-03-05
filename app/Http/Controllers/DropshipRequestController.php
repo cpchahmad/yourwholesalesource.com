@@ -196,10 +196,48 @@ class DropshipRequestController extends Controller
             }
             $drop_request->status_id = 3;
             $drop_request->updated_at = now();
-            $drop_request->save();
-            $this->notify->generate('Dropship-Request','Dropship Request Accepted','Dropship Request named '.$drop_request->product_name.' has been accepted',$drop_request);
+            //$drop_request->save();
+            //$this->notify->generate('Dropship-Request','Dropship Request Accepted','Dropship Request named '.$drop_request->product_name.' has been accepted',$drop_request);
 
-            $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Accepted');
+            //$this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Accepted');
+
+
+            if($drop_request->shop_id != null) {
+                $shop = $this->helper->getSpecificShop($drop_request->shop_id);
+                $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $drop_request->product_shopify_id . '.json');
+                $shopify_product = $response->body->product;
+
+                dd($shopify_product);
+
+                $dropship_product = new DropshipProduct();
+                $dropship_product->title = $shopify_product->title;
+                $dropship_product->dropship_request_id = $drop_request->id;
+                $dropship_product->save();
+
+                foreach ($shopify_product->variants as $index => $item) {
+                    $dropship_product_variant = new DropshipProductVariant();
+                    $dropship_product_variant->sku = $item->sku;
+                    $dropship_product_variant->option = $item->title;
+                    $dropship_product_variant->inventory = $item->quantity;
+
+
+                    // Saving product image
+                    $file = $request->image[$index];
+                    $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
+                    $attachement = date("mmYhisa_") . $name;
+                    $file->move(public_path() . '/shipping-marks/', $attachement);
+                    $dropship_product_variant->image = $attachement;
+
+                    $dropship_product_variant->dropship_product_id = $dropship_product->id;
+                    $dropship_product_variant->save();
+                }
+
+                $shipping_mark = new ShippingMark();
+                $shipping_mark->dropship_product_id = $dropship_product->id;
+                $shipping_mark->dropship_request_id = $id;
+                $shipping_mark->save();
+
+            }
 
             return redirect()->back()->with('success','Dropship Request Accepted Successfully!');
         }
