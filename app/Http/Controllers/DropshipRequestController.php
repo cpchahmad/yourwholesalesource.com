@@ -10,6 +10,9 @@ use App\Image;
 use App\ManagerLog;
 use App\Product;
 use App\ProductVariant;
+use App\RetailerImage;
+use App\RetailerProduct;
+use App\RetailerProductVariant;
 use App\ShippingMark;
 use App\User;
 use App\WarehouseInventory;
@@ -308,7 +311,11 @@ class DropshipRequestController extends Controller
             $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
 
 
-            $this->generateAdminProducts($drop_request);
+            $product = $this->generateAdminProducts($drop_request);
+
+            if($drop_request->shop_id !== null) {
+                $this->generateRetailerProduct($product);
+            }
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
         }
@@ -458,6 +465,89 @@ class DropshipRequestController extends Controller
                 $inventory->save();
             }
 
+            return $product;
+
         }
+    }
+
+
+    public function generateRetailerProduct($product) {
+        /*Product Copy*/
+        $retailerProduct = new RetailerProduct();
+
+        $retailerProduct->linked_product_id = $product->id;
+        $retailerProduct->is_dropship_product = 1;
+
+        $retailerProduct->title = $product->title;
+        $retailerProduct->price = $product->price;
+        $retailerProduct->cost = $product->price;
+        $retailerProduct->quantity = $product->quantity;
+        $retailerProduct->weight = $product->weight;
+        $retailerProduct->variants = $product->variants;
+        $retailerProduct->toShopify = 0;
+        $retailerProduct->shop_id = $this->helper->getLocalShop()->id;
+
+        if(count($this->helper->getLocalShop()->has_user) > 0){
+            $retailerProduct->user_id = $this->helper->getLocalShop()->has_user[0]->id;
+        }
+
+        $retailerProduct->save();
+        /*Product Images Copy*/
+        if(count($product->has_images) > 0){
+            foreach ($product->has_images()->orderBy('position')->get() as $index => $image){
+                $retailerProductImage = new RetailerImage();
+                $retailerProductImage->isV = $image->isV;
+                $retailerProductImage->product_id = $retailerProduct->id;
+                $retailerProductImage->shop_id =  $retailerProduct->shop_id;
+                $retailerProductImage->user_id =  $retailerProduct->user_id;
+                $retailerProductImage->image = $image->image;
+                $retailerProductImage->position = $index+1;
+                $retailerProductImage->save();
+            }
+        }
+        /*Product Variants Copy*/
+        if($retailerProduct->variants != null){
+            if(count($product->hasVariants) > 0){
+                foreach ($product->hasVariants as $variant){
+                    $retailerProductVariant = new RetailerProductVariant();
+                    $retailerProductVariant->title = $variant->title;
+                    $retailerProductVariant->price = $variant->price;
+                    $retailerProductVariant->cost = $variant->price;
+                    $retailerProductVariant->quantity = $variant->quantity;
+                    $retailerProductVariant->sku = $variant->sku;
+                    $retailerProductVariant->product_id = $retailerProduct->id;
+                    $retailerProductVariant->shop_id =  $retailerProduct->shop_id;
+                    $retailerProductVariant->user_id =  $retailerProduct->user_id;
+                    $retailerProductVariant->image = $variant->image;
+                    $retailerProductVariant->linked_variant_id = $variant->id;
+                    $retailerProductVariant->is_dropship_variant = 1;
+
+                    $retailerProductVariant->save();
+                }
+            }
+        }
+
+
+
+
+
+        /*Shop Product Import Relation*/
+        $shop = $this->helper->getLocalShop();
+        if($shop != null){
+            if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray())){
+                $shop->has_imported()->attach([$product->id]);
+            }
+        }
+
+        /*Shop-User Import Relation*/
+        if(count($this->helper->getLocalShop()->has_user) > 0){
+            $user = $this->helper->getLocalShop()->has_user[0];
+            if(!in_array($product->id,$user->has_imported->pluck('id')->toArray())){
+                $user->has_imported()->attach([$product->id]);
+            }
+        }
+
+        $this->log->store($retailerProduct->user_id, 'RetailerProduct', $retailerProduct->id, $retailerProduct->title, 'Product Added to Import List');
+
     }
 }
