@@ -250,6 +250,38 @@ class DropshipRequestController extends Controller
         ]);
     }
 
+    public function save_shopify_product_shipping_mark(Request $request, $id) {
+
+        dd($request->all());
+
+        $dropship_product = DropshipProduct::find($request->product_id);
+
+        foreach ($dropship_product->dropship_variants as $index => $item) {
+            $item->sku = $request->sku[$index];
+            $item->option = $request->option[$index];
+            $item->inventory = $request->inventory[$index];
+
+
+            // Saving product image
+            $file = $request->image[$index];
+            if($file)
+            {
+                $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
+                $attachement = date("mmYhisa_") . $name;
+                $file->move(public_path() . '/shipping-marks/', $attachement);
+                $item->image = $attachement;
+            }
+
+            $item->dropship_product_id = $dropship_product->id;
+            $item->save();
+        }
+
+        $shipping_mark = new ShippingMark();
+        $shipping_mark->dropship_product_id = $dropship_product->id;
+        $shipping_mark->dropship_request_id = $id;
+        $shipping_mark->save();
+    }
+
     public function save_shipping_mark(Request $request, $id) {
 
         $dropship_request = DropshipRequest::find($id);

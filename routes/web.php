@@ -432,6 +432,7 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('/dropship-requests/rejected_by_inventory', 'DropshipRequestController@mark_as_rejected_by_inventory_dropship_request')->name('dropship.reqeusts.rejected.by.inventory');
         Route::get('/dropship-requests/{id}/create-shipping-mark', 'DropshipRequestController@create_shipping_mark')->name('dropship.requests.create.shipping.mark');
         Route::post('/dropship-requests/{id}/create-shipping-mark/create', 'DropshipRequestController@save_shipping_mark')->name('dropship.requests.save.shipping.mark');
+        Route::post('/dropship-requests/{id}/create-shopify-product-shipping-mark/create', 'DropshipRequestController@save_shopify_product_shipping_mark')->name('dropship.requests.save.shipping.mark.shopify');
         Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'DefaultSettingsController@view_shipping_mark')->name('dropship.requests.view.shipping.mark');
         Route::get('/delete-shipping-mark/{id}', 'DropshipRequestController@delete_shipping_mark')->name('delete.shipping.mark');
 

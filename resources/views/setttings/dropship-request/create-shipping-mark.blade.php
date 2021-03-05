@@ -27,7 +27,7 @@
                         </h5>
                     </div>
                     <div class="block-content">
-                        <form action="{{ route('dropship.requests.save.shipping.mark', $drop_request->id) }}" enctype="multipart/form-data" method="POST">
+                        <form action="{{ route('dropship.requests.save.shipping.mark.shopify', $drop_request->id) }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="form-group">
                                 <div class="col-sm-12">
@@ -59,6 +59,7 @@
                                     <div class="form-material">
                                         <label for="material-error">Product title</label>
                                         <input required class="form-control" type="text" name="title" placeholder="Enter Product title here.." @if($drop_request->dropship_products()->first()) value="{{ $drop_request->dropship_products()->first()->title }}" @endif>
+                                        @if($drop_request->dropship_products()->first()) <input type="hidden" name="product_id" value="{{ $drop_request->dropship_products()->first()->id }}">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +82,7 @@
                                                     @foreach($drop_request->dropship_products()->first()->dropship_product_variants as $variant)
                                                         <tr class="single-product-details">
                                                             <td class="">
-                                                                <input type="text" class="form-control" name="sku[]" value="" placeholder="Enter sku here.." value="{{ $variant->sku }}">
+                                                                <input type="text" class="form-control" name="sku[]"  placeholder="Enter sku here.." value="{{ $variant->sku }}">
                                                             </td>
                                                             <td>
                                                                 <input type="text" class="form-control" name="option[]" placeholder="Enter name of options here.." value="{{ $variant->option }}">
