@@ -352,22 +352,10 @@ class DropshipRequestController extends Controller
         }
     }
 
-
     public function complete_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
-
-            if($request->need_id && $request->need_id == 1) {
-                $drop_request->status_id = 10;
-                $drop_request->updated_at = now();
-                $drop_request->save();
-
-                $this->notify->generate('Dropship-Request','Dropship Request Waiting for Shopify Product Id','Dropship Request named '.$drop_request->product_name.' has been marked as waitng for shopify product id',$drop_request);
-                $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Waiting for Shopify Product Id');
-
-                return redirect()->back()->with('success','Dropship Request Completed Successfully!');
-            }
 
             $drop_request->status_id = 5;
             $drop_request->updated_at = now();
@@ -379,7 +367,10 @@ class DropshipRequestController extends Controller
             $this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
             $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
 
-            $this->generateAdminProducts($drop_request);
+            $product = $this->generateAdminProducts($drop_request);
+
+            if($drop_request->shop_id == null)
+                $this->generateRetailerProduct($product, $drop_request);
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
         }
@@ -484,36 +475,6 @@ class DropshipRequestController extends Controller
         }
     }
 
-    public function connect_dropship_request(Request $request) {
-        $manager = User::find($request->input('manager_id'));
-        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
-        if($manager != null && $drop_request != null){
-
-            //$drop_request->status_id = 5;
-            $drop_request->updated_at = now();
-            $drop_request->save();
-
-            //$this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
-            //$this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
-
-            $shop = $this->helper->getSpecificShop($drop_request->shop_id);
-            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $drop_request->product_shopify_id . '.json');
-            $shopify_product = $response->body->product;
-
-
-            $product = $this->generateAdminProductsFromShopify($drop_request, $shopify_product);
-
-            $this->generateRetailerProduct($product, $drop_request, $shopify_product);
-
-
-            return redirect()->back()->with('success','Dropship Request Completed Successfully!');
-        }
-        else{
-            return redirect()->back()->with('error','Associated Manager Not Found');
-        }
-    }
-
-
     public function generateAdminProducts($dropship_request)
     {
         foreach ($dropship_request->dropship_products as $dropship_product)
@@ -564,68 +525,7 @@ class DropshipRequestController extends Controller
         }
     }
 
-    public function generateAdminProductsFromShopify($dropship_request, $shopify_product)
-    {
-        // Creating admin Product
-        $product = new Product();
-        $product->title = $shopify_product->title;
-        $product->price = $dropship_request->approved_price;
-        $product->cost = $dropship_request->approved_price;
-        $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
-        $product->global = 0;
-        $product->variants = 1;
-        $product->is_dropship_product = 1;
-        $product->save();
-
-        // Creating Main Product Image
-        $count_product_images = count($product->has_images);
-        foreach ($shopify_product->images as $index => $img) {
-            $image = file_get_contents($img->src);
-            $filename = now()->format('YmdHi') . $product->title . rand(12321, 456546464) . '.jpg';
-            file_put_contents(public_path('images/' . $filename), $image);
-            $image = new Image();
-            $image->isV = 0;
-            $image->position = $index + 1 + $count_product_images;
-            $image->product_id = $product->id;
-            $image->shopify_id = $img->id;
-            $image->image = $filename;
-            $image->save();
-        }
-
-        // Creating Variants
-        foreach ($shopify_product->variants as $i => $v) {
-            $variants = new  ProductVariant();
-            $variants->title = $v->option;
-            $variants->price = $dropship_request->approved_price;
-            $variants->quantity = $v->inventory;
-            $variants->cost = $dropship_request->approved_price;
-            $variants->sku = $v->sku;
-            $variants->product_id = $product->id;
-            $variants->is_dropship_variant = 1;
-            $variants->save();
-
-            if(count($shopify_product->variants) > 0) {
-                if ($shopify_product->variants[$i]->image_id != null) {
-                    $image_linked = $product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
-                    if($image_linked != null) {
-                        $variants->image = $image_linked->id;
-                        $variants->save();
-                    }
-                }
-            }
-
-            $inventory = new WarehouseInventory();
-            $inventory->product_variant_id = $variants->id;
-            $inventory->warehouse_id = 3;
-            $inventory->quantity = $variants->quantity;
-            $inventory->save();
-
-        }
-
-        return $product;
-    }
-
-    public function generateRetailerProduct($product, $dropship_request, $shopify_product) {
+    public function generateRetailerProduct($product, $dropship_request) {
         /*Product Copy*/
         $retailerProduct = new RetailerProduct();
         $retailerProduct->linked_product_id = $product->id;
@@ -639,10 +539,10 @@ class DropshipRequestController extends Controller
         $retailerProduct->toShopify = 1;
         $retailerProduct->shop_id = $dropship_request->shop_id;
         $retailerProduct->user_id = $dropship_request->user_id;
-        $retailerProduct->shopify_id = $shopify_product->id;
-
-
+        $retailerProduct->shopify_id = $dropship_request->product_shopify_id;
         $retailerProduct->save();
+
+
         /*Product Images Copy*/
         if(count($product->has_images) > 0){
             foreach ($product->has_images()->orderBy('position')->get() as $index => $image){
@@ -678,25 +578,101 @@ class DropshipRequestController extends Controller
             }
         }
 
-
-//        /*Shop Product Import Relation*/
-//        $shop = Shop::find($dropship_request->shop_id);
-//        if($shop != null){
-//            if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray())){
-//                $shop->has_imported()->attach([$product->id]);
-//            }
-//        }
-//
-//        /*Shop-User Import Relation*/
-//        if(count($this->helper->getLocalShop()->has_user) > 0){
-//            $user = $this->helper->getLocalShop()->has_user[0];
-//            if(!in_array($product->id,$user->has_imported->pluck('id')->toArray())){
-//                $user->has_imported()->attach([$product->id]);
-//            }
-//        }
-
         $this->log->store($retailerProduct->user_id, 'RetailerProduct', $retailerProduct->id, $retailerProduct->title, 'Product Added to Import List');
 
     }
+
+
+
+//    public function generateAdminProductsFromShopify($dropship_request, $shopify_product)
+//    {
+//        // Creating admin Product
+//        $product = new Product();
+//        $product->title = $shopify_product->title;
+//        $product->price = $dropship_request->approved_price;
+//        $product->cost = $dropship_request->approved_price;
+//        $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
+//        $product->global = 0;
+//        $product->variants = 1;
+//        $product->is_dropship_product = 1;
+//        $product->save();
+//
+//        // Creating Main Product Image
+//        $count_product_images = count($product->has_images);
+//        foreach ($shopify_product->images as $index => $img) {
+//            $image = file_get_contents($img->src);
+//            $filename = now()->format('YmdHi') . $product->title . rand(12321, 456546464) . '.jpg';
+//            file_put_contents(public_path('images/' . $filename), $image);
+//            $image = new Image();
+//            $image->isV = 0;
+//            $image->position = $index + 1 + $count_product_images;
+//            $image->product_id = $product->id;
+//            $image->shopify_id = $img->id;
+//            $image->image = $filename;
+//            $image->save();
+//        }
+//
+//        // Creating Variants
+//        foreach ($shopify_product->variants as $i => $v) {
+//            $variants = new  ProductVariant();
+//            $variants->title = $v->option;
+//            $variants->price = $dropship_request->approved_price;
+//            $variants->quantity = $v->inventory;
+//            $variants->cost = $dropship_request->approved_price;
+//            $variants->sku = $v->sku;
+//            $variants->product_id = $product->id;
+//            $variants->is_dropship_variant = 1;
+//            $variants->save();
+//
+//            if(count($shopify_product->variants) > 0) {
+//                if ($shopify_product->variants[$i]->image_id != null) {
+//                    $image_linked = $product->has_images()->where('shopify_id', $shopify_product->variants[$i]->image_id)->first();
+//                    if($image_linked != null) {
+//                        $variants->image = $image_linked->id;
+//                        $variants->save();
+//                    }
+//                }
+//            }
+//
+//            $inventory = new WarehouseInventory();
+//            $inventory->product_variant_id = $variants->id;
+//            $inventory->warehouse_id = 3;
+//            $inventory->quantity = $variants->quantity;
+//            $inventory->save();
+//
+//        }
+//
+//        return $product;
+//    }
+
+
+//    public function connect_dropship_request(Request $request) {
+//        $manager = User::find($request->input('manager_id'));
+//        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+//        if($manager != null && $drop_request != null){
+//
+//            //$drop_request->status_id = 5;
+//            $drop_request->updated_at = now();
+//            $drop_request->save();
+//
+//            //$this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
+//            //$this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
+//
+//            $shop = $this->helper->getSpecificShop($drop_request->shop_id);
+//            $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $drop_request->product_shopify_id . '.json');
+//            $shopify_product = $response->body->product;
+//
+//
+//            $product = $this->generateAdminProductsFromShopify($drop_request, $shopify_product);
+//
+//            $this->generateRetailerProduct($product, $drop_request);
+//
+//
+//            return redirect()->back()->with('success','Dropship Request Completed Successfully!');
+//        }
+//        else{
+//            return redirect()->back()->with('error','Associated Manager Not Found');
+//        }
+//    }
 
 }
