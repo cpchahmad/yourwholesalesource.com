@@ -131,17 +131,6 @@
                                                     <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
                                                     <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
                                                     <div class="block-content font-size-sm">
-                                                        @if($item->shop_id !== null)
-                                                            <div class="form-group">
-                                                                <div class="col-sm-12">
-                                                                    <div class="form-material">
-                                                                        <label for="material-error">Completing the Request will allow users to provide a shopify id</label>
-                                                                        <input type="hidden" name="need_id" value="1">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
