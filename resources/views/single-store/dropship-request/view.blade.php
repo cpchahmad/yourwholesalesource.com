@@ -395,7 +395,7 @@
                                         <td class="">{{ $mark->dropship_product->title }}</td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('users.dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
+                                                <a href="{{route('store.dropship.requests.view.shipping.mark',['id'=> $item->id, 'mark_id' => $mark->id])}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Shipping mark"><i class="fa fa-eye"></i></a>
                                                 <a href="{{route('delete.shipping.mark',$mark->id)}}"
@@ -613,9 +613,9 @@
                         <div class="p-2 font-size-sm">
                             <span class="font-weight-bold">#: </span> <span class="text-center">{{$item->id}}</span>
                             <hr>
-                            <span class="font-weight-bold">Client: </span> <span class="text-center">{{$user->name}}</span>
+                            <span class="font-weight-bold">Client: </span> <span class="text-center">{{$shop->shopify_domain}}</span>
                             <hr>
-                            <span class="font-weight-bold">Email: </span> <span class="text-center">{{$user->email}}</span>
+                            <span class="font-weight-bold">Email: </span> <span class="text-center">{{$shop->has_user()->first()->email}}</span>
                             <hr>
                             <span class="font-weight-bold">Cost: </span> {{number_format($item->cost,2)}} USD
                             <hr>

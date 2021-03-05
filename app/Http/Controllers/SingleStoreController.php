@@ -1363,9 +1363,8 @@ class SingleStoreController extends Controller
     public function dropship_requests(Request $request) {
 
         $shop = $this->helper->getLocalShop();
-        $user = $shop->has_user()->first();
 
-        $requests = DropshipRequest::where('user_id', $user->id)->newQuery();
+        $requests = DropshipRequest::where('user_id', $shop->id)->newQuery();
 
 
         if($request->has('status')){
