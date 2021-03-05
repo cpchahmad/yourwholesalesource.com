@@ -557,10 +557,16 @@ class DropshipRequestController extends Controller
                 $retailerProductImage->save();
             }
         }
+
+
+        $shop = $this->helper->getSpecificShop($dropship_request->shop_id);
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $dropship_request->product_shopify_id . '.json');
+        $shopify_product_variants = $response->body->product->variants;
+
         /*Product Variants Copy*/
         if($retailerProduct->variants != null){
             if(count($product->hasVariants) > 0){
-                foreach ($product->hasVariants as $variant){
+                foreach ($product->hasVariants as $variant_index => $variant){
                     $retailerProductVariant = new RetailerProductVariant();
                     $retailerProductVariant->title = $variant->title;
                     $retailerProductVariant->price = $variant->price;
@@ -573,6 +579,7 @@ class DropshipRequestController extends Controller
                     $retailerProductVariant->image = $variant->image;
                     $retailerProductVariant->linked_variant_id = $variant->id;
                     $retailerProductVariant->is_dropship_variant = 1;
+                    $retailerProductVariant->shopify_id = $shopify_product_variants[$variant_index]->id;
 
                     $retailerProductVariant->save();
                 }
