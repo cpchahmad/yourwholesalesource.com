@@ -263,6 +263,12 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/notifications', 'SingleStoreController@notifications')->name('store.notifications');
 
 
+        Route::get('/dropship-requests', 'SingleStoreController@dropship_requests')->name('store.dropship.requests');
+        Route::get('/dropship-requests/{id}', 'SingleStoreController@view_dropship_request')->name('store.dropship.request.view');
+        Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'SingleStoreController@view_shipping_mark')->name('store.dropship.requests.view.shipping.mark');
+
+
+
         Route::post('/orders/bulk-payment', 'OrderController@show_bulk_payments')->name('store.orders.bulk.payment');
 
 

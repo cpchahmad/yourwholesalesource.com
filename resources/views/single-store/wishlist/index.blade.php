@@ -18,9 +18,7 @@
         </div>
     </div>
     <div class="content">
-        @php
-            $user = $shop->has_user()->first();
-        @endphp
+       s
         @if($user->has_manager != null)
             <form class="js-form-icon-search push" action="" method="get">
                 <div class="form-group">

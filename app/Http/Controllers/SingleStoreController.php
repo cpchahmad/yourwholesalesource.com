@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Country;
 use App\Customer;
+use App\DropshipRequest;
 use App\Mail\NewShopifyUserMail;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
@@ -17,6 +18,7 @@ use App\RetailerImage;
 use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
+use App\ShippingMark;
 use App\ShippingRate;
 use App\Shop;
 use App\Ticket;
@@ -980,8 +982,6 @@ class SingleStoreController extends Controller
 
     }
 
-
-
     public function set_line_item_warehouse(Request $request) {
         $line_item = RetailerOrderLineItem::find($request->input('line_item'));
         $warehouse_id = $request->input('id');
@@ -1357,6 +1357,52 @@ class SingleStoreController extends Controller
             'wallet' => $wallet_request,
             'user' => $user,
             'manager' => $manager
+        ]);
+    }
+
+    public function dropship_requests(Request $request) {
+
+        $shop = $this->helper->getLocalShop();
+        $user = $shop->has_user()->first();
+
+        $requests = DropshipRequest::where('user_id', $user->id)->newQuery();
+
+
+        if($request->has('status')){
+            if($request->input('status') != null){
+                $requests->where('status_id','=',$request->input('status'));
+            }
+        }
+
+        if($request->has('imported')) {
+            $requests->where('imported_to_store',0);
+        }
+
+        $requests = $requests->orderBy('created_at', 'DESC')->paginate(30);
+
+        return view('single-store.dropship-request.index')->with([
+            'shop' => $shop,
+            'requests' => $requests,
+            'countries' => Country::all(),
+        ]);
+    }
+
+
+    public function view_dropship_request(Request $request) {
+        $shop = $this->helper->getLocalShop();
+        $item = DropshipRequest::with('shipping_marks')->find($request->id);
+        return view('single-store.dropship-request.view')->with([
+            'shop' => $shop,
+            'item' => $item
+        ]);
+    }
+
+
+    public function view_shipping_mark($id, $mark_id) {
+
+        return view('single-store.dropship-request.view-shipping-mark')->with([
+            'drop_request' => DropshipRequest::find($id),
+            'mark' => ShippingMark::find($mark_id)
         ]);
     }
 

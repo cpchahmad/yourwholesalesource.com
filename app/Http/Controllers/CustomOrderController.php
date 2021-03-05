@@ -1197,8 +1197,6 @@ class CustomOrderController extends Controller
         ]);
     }
 
-
-
     public function wishlist(Request $request)
     {
         $user = User::find(Auth::id());
