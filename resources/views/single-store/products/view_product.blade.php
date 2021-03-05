@@ -210,7 +210,7 @@
                                                         @if($product->is_dropship_product == 1)
                                                             <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
                                                                  @if($variant->image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                                 @else  data-src="{{asset('images')}}/{{$variant->image}}"  @endif alt="">
+                                                                 @else  data-src="{{asset('shipping-marks')}}/{{$variant->image}}"  @endif alt="">
                                                         @elseif($product->import_from_shopify == 1)
                                                             <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
                                                                  @if($variant->has_image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
