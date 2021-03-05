@@ -206,8 +206,6 @@ class DropshipRequestController extends Controller
                 $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $drop_request->product_shopify_id . '.json');
                 $shopify_product = $response->body->product;
 
-                dd($shopify_product);
-
 
                 $dropship_product = new DropshipProduct();
                 $dropship_product->title = $shopify_product->title;
@@ -218,7 +216,7 @@ class DropshipRequestController extends Controller
                     $dropship_product_variant = new DropshipProductVariant();
                     $dropship_product_variant->sku = $item->sku;
                     $dropship_product_variant->option = $item->title;
-                    $dropship_product_variant->inventory = $item->quantity;
+                    $dropship_product_variant->inventory = $item->inventory_quantity;
 
                     foreach ($shopify_product->images as $img)
                     {
