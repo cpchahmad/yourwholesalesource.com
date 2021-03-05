@@ -510,7 +510,7 @@ class DropshipRequestController extends Controller
     public function generateAdminProductsFromShopify($dropship_request)
     {
         $shop = $this->helper->getSpecificShop($dropship_request->shop_id);
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $dropship_request->shopify_product_id . '.json');
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $dropship_request->product_shopify_id . '.json');
         $shopify_product = $response->body->product;
 
         dd($response);
