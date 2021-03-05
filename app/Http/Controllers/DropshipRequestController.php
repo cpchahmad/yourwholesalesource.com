@@ -14,6 +14,7 @@ use App\RetailerImage;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\ShippingMark;
+use App\Shop;
 use App\User;
 use App\WarehouseInventory;
 use App\Wishlist;
@@ -314,7 +315,7 @@ class DropshipRequestController extends Controller
             $product = $this->generateAdminProducts($drop_request);
 
             if($drop_request->shop_id !== null) {
-                $this->generateRetailerProduct($product);
+                $this->generateRetailerProduct($product, $drop_request);
             }
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
@@ -471,7 +472,7 @@ class DropshipRequestController extends Controller
     }
 
 
-    public function generateRetailerProduct($product) {
+    public function generateRetailerProduct($product, $dropship_request) {
         /*Product Copy*/
         $retailerProduct = new RetailerProduct();
 
@@ -485,11 +486,8 @@ class DropshipRequestController extends Controller
         $retailerProduct->weight = $product->weight;
         $retailerProduct->variants = $product->variants;
         $retailerProduct->toShopify = 0;
-        $retailerProduct->shop_id = $this->helper->getLocalShop()->id;
-
-        if(count($this->helper->getLocalShop()->has_user) > 0){
-            $retailerProduct->user_id = $this->helper->getLocalShop()->has_user[0]->id;
-        }
+        $retailerProduct->shop_id = $dropship_request->shop_id;
+        $retailerProduct->user_id = $dropship_request->user_id;
 
         $retailerProduct->save();
         /*Product Images Copy*/
@@ -528,24 +526,21 @@ class DropshipRequestController extends Controller
         }
 
 
-
-
-
-        /*Shop Product Import Relation*/
-        $shop = $this->helper->getLocalShop();
-        if($shop != null){
-            if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray())){
-                $shop->has_imported()->attach([$product->id]);
-            }
-        }
-
-        /*Shop-User Import Relation*/
-        if(count($this->helper->getLocalShop()->has_user) > 0){
-            $user = $this->helper->getLocalShop()->has_user[0];
-            if(!in_array($product->id,$user->has_imported->pluck('id')->toArray())){
-                $user->has_imported()->attach([$product->id]);
-            }
-        }
+//        /*Shop Product Import Relation*/
+//        $shop = Shop::find($dropship_request->shop_id);
+//        if($shop != null){
+//            if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray())){
+//                $shop->has_imported()->attach([$product->id]);
+//            }
+//        }
+//
+//        /*Shop-User Import Relation*/
+//        if(count($this->helper->getLocalShop()->has_user) > 0){
+//            $user = $this->helper->getLocalShop()->has_user[0];
+//            if(!in_array($product->id,$user->has_imported->pluck('id')->toArray())){
+//                $user->has_imported()->attach([$product->id]);
+//            }
+//        }
 
         $this->log->store($retailerProduct->user_id, 'RetailerProduct', $retailerProduct->id, $retailerProduct->title, 'Product Added to Import List');
 
