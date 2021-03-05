@@ -365,7 +365,48 @@
                                         </div>
                                     </div>
                                 @endif
+                                @if($item->status_id == 10)
+                                    <div class="row p-2">
+                                        <div class="col-md-12 text-right pr-0">
+                                            <button class="btn btn-success ml-2" data-target="#provide-shopify-id-modal" data-toggle="modal">Provide Product Shopify Id</button>
+                                        </div>
+                                        <div class="modal fade" id="provide-shopify-id-modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-popout" role="document">
+                                                <div class="modal-content">
+                                                    <div class="block block-themed block-transparent mb-0">
+                                                        <div class="block-header bg-primary-dark">
+                                                            <h3 class="block-title">Provide Shopify Id</h3>
+                                                            <div class="block-options">
+                                                                <button type="button" class="btn-block-option">
+                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <form action="{{route('dropship.requests.product.connection')}}" method="post">
+                                                            @csrf
+                                                            <input  type="hidden" name="dropship_request_id" value="{{$item->id}}">
+                                                            <input  type="hidden" name="manager_id" value="{{$item->manager_id}}">
+                                                            <div class="block-content font-size-sm">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="form-material">
+                                                                            <label for="material-error">Kindly provide the produc shopify id:</label>
+                                                                            <input placeholder="Please Enter Shopify Product Id here !" name="product_shopify_id" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
+                                                            <div class="block-content block-content-full text-right border-top">
+                                                                <button type="submit" class="btn btn-sm btn-success">Sumbit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                         </div>
                     </div>
                 </div>

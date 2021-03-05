@@ -427,6 +427,35 @@ class DropshipRequestController extends Controller
         }
     }
 
+    public function connect_dropship_request(Request $request) {
+        $manager = User::find($request->input('manager_id'));
+        $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
+        if($manager != null && $drop_request != null){
+
+            //$drop_request->status_id = 5;
+            $drop_request->updated_at = now();
+            $drop_request->has_store_product = 1;
+            $drop_request->product_shopify_id = $request->input('product_shopify_id');
+            $drop_request->save();
+
+            //$this->notify->generate('Dropship-Request','Dropship Request Completed','Dropship Request named '.$drop_request->product_name.' has been completed',$drop_request);
+            //$this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Completed');
+
+
+
+            $product = $this->generateAdminProductsFromShopify($drop_request);
+
+            if($drop_request->shop_id !== null) {
+                $this->generateRetailerProduct($product, $drop_request);
+            }
+
+            return redirect()->back()->with('success','Dropship Request Completed Successfully!');
+        }
+        else{
+            return redirect()->back()->with('error','Associated Manager Not Found');
+        }
+    }
+
 
     public function generateAdminProducts($dropship_request)
     {
@@ -476,6 +505,62 @@ class DropshipRequestController extends Controller
             return $product;
 
         }
+    }
+
+    public function generateAdminProductsFromShopify($dropship_request)
+    {
+        $shop = $this->helper->getSpecificShop($dropship_request->store_id);
+        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $dropship_request->shopify_product_id . '.json');
+        $shopify_product = $response->body->product;
+
+        dd($shopify_product);
+
+
+
+            // Creating admin Product
+            $product = new Product();
+            $product->title = $shopify_product->title;
+            $product->price = $dropship_request->approved_price;
+            $product->cost = $dropship_request->approved_price;
+            $product->quantity = $shopify_product->quantity;
+            $product->weight = is_null($dropship_request->adjusted_weight) ? $dropship_request->weight : $dropship_request->adjusted_weight;
+            $product->global = 0;
+            $product->variants = 1;
+            $product->is_dropship_product = 1;
+            $product->dropship_product_id = $dropship_product->id;
+            $product->save();
+
+            // Creating Main Product Image
+            $image = new Image();
+            $image->isV = 0;
+            $image->product_id = $product->id;
+            $image->image = $dropship_product->dropship_product_variants()->first()->image;
+            $image->save();
+
+            // Creating Variants
+            foreach($dropship_product->dropship_product_variants as $variant) {
+                $variants = new  ProductVariant();
+                $variants->title = $variant->option;
+                $variants->price = $dropship_request->approved_price;
+                $variants->quantity = $variant->inventory;
+                $variants->cost = $dropship_request->approved_price;
+                $variants->sku = $variant->sku;
+                $variants->barcode = $variant->barcode;
+                $variants->image = $variant->image;
+                $variants->product_id = $product->id;
+                $variants->is_dropship_variant = 1;
+                $variants->save();
+
+                $inventory = new WarehouseInventory();
+                $inventory->product_variant_id = $variants->id;
+                $inventory->warehouse_id = 3;
+                $inventory->quantity = $variants->quantity;
+                $inventory->save();
+            }
+
+            return $product;
+
+
     }
 
 
