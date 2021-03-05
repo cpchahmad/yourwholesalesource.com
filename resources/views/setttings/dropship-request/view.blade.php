@@ -134,11 +134,27 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
-                                                                    <label for="material-error">Target Dropshipping Cost</label>
-                                                                    <input readonly class="form-control" type="text" value="{{$item->approved_price}}">
+                                                                    <label for="material-error">Request user for a shopify product id?</label>
+                                                                    <br>
+                                                                    <div class=" mb-1">
+                                                                        <input type="radio"  class="" id="id-yes" name="need_id" value="1" >
+                                                                        <label class="" for="id-yes">Yes</label>
+                                                                        <input type="radio"  class="ml-2" id="id-no" name="need_id" value="0" >
+                                                                        <label class="" for="id-no">No</label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        @if($item->shop_id !== null)
+                                                            <div class="form-group">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-material">
+                                                                        <label for="material-error">Request User for a Shopify Product Id?</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
                                                     </div>
 
                                                     <div class="block-content block-content-full text-right border-top">
@@ -180,7 +196,7 @@
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
                                                                     <label for="material-error">Approved Cost</label>
-                                                                    <input class="form-control" type="number" step="any" name="approved_price">
+                                                                    <input class="form-control" type="number" step="any" name="approved_price" value="{{$item->price}}">
                                                                 </div>
                                                             </div>
                                                         </div>
