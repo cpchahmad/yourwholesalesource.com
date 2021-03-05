@@ -57,7 +57,12 @@
 
                             <div class="col-md-12 mb2">
                                 @if(count($images) > 0)
-                                    @if($product->import_from_shopify == 1)
+                                    @if($product->is_dropship_product == 1)
+                                        <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('shipping-marks')}}/{{$images[0]->image}}">
+                                            <img class="img-fluid" data-src="{{asset('shipping-marks')}}/{{$images[0]->image}}" alt="">
+                                        </a>
+                                    @else
+                                    @elseif($product->import_from_shopify == 1)
                                         <a class="img-link img-link-zoom-in img-lightbox" href="{{$images[0]->image}}">
                                             <img class="img-fluid" data-src="{{$images[0]->image}}" alt="">
                                         </a>
@@ -201,7 +206,12 @@
                                             <tbody>
                                             @foreach($product->hasVariants as $index => $variant)
                                                 <tr>
-                                                    <td> @if($product->import_from_shopify == 1)
+                                                    <td>
+                                                        @if($product->is_dropship_product == 1)
+                                                            <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
+                                                                 @if($variant->image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                                 @else  data-src="{{asset('images')}}/{{$variant->image}}"  @endif alt="">
+                                                        @elseif($product->import_from_shopify == 1)
                                                             <img class="img-avatar img-avatar-variant" style="border: 1px solid whitesmoke" data-form="#varaint_image_form_{{$index}}" data-input=".varaint_file_input"
                                                                  @if($variant->has_image == null)  data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                                  @else  data-src="{{$variant->has_image->image}}" @endif alt="">

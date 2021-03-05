@@ -73,18 +73,7 @@
                                             <div class="options-container">
                                                 <a href="{{route('store.my_product.wefulfill.show',$product->id)}}">
                                                     @if(count($product->has_images) > 0)
-                                                        @foreach($product->has_images()->orderBy('position')->cursor() as $index => $image)
-                                                            @if($index == 0)
-                                                                @if($product->import_from_shopify == 1)
-                                                                    <img class="img-fluid options-item" data-src="{{$image->image}}">
-                                                                @else
-                                                                    @if($image->isV == 0)
-                                                                        <img class="img-fluid options-item" data-src="{{asset('images')}}/{{$image->image}}">
-                                                                    @else   <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
-                                                                    @endif
-                                                                @endif
-                                                            @endif
-                                                        @endforeach
+                                                        <img class="img-fluid options-item" data-src="{{asset('shipping-marks')}}/{{$image->image}}">
                                                     @else
                                                         <img class="img-fluid options-item" data-src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                     @endif
