@@ -1390,6 +1390,7 @@ class SingleStoreController extends Controller
 
     public function view_dropship_request(Request $request) {
         $shop = $this->helper->getLocalShop();
+
         $item = DropshipRequest::with('shipping_marks')->find($request->id);
         return view('single-store.dropship-request.view')->with([
             'shop' => $shop,
