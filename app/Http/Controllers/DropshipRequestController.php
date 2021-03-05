@@ -369,7 +369,7 @@ class DropshipRequestController extends Controller
 
             $product = $this->generateAdminProducts($drop_request);
 
-            if($drop_request->shop_id == null)
+            if($drop_request->shop_id != null)
                 $this->generateRetailerProduct($product, $drop_request);
 
             return redirect()->back()->with('success','Dropship Request Completed Successfully!');
