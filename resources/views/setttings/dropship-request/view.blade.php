@@ -134,14 +134,8 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                                 <div class="form-material">
-                                                                    <label for="material-error">Request user for a shopify product id?</label>
-                                                                    <br>
-                                                                    <div class=" mb-1">
-                                                                        <input type="radio"  class="" id="id-yes" name="need_id" value="1" >
-                                                                        <label class="" for="id-yes">Yes</label>
-                                                                        <input type="radio"  class="ml-2" id="id-no" name="need_id" value="0" >
-                                                                        <label class="" for="id-no">No</label>
-                                                                    </div>
+                                                                    <label for="material-error">Target Dropshipping Cost</label>
+                                                                    <input readonly class="form-control" type="text" value="{{$item->approved_price}}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -150,7 +144,14 @@
                                                             <div class="form-group">
                                                                 <div class="col-sm-12">
                                                                     <div class="form-material">
-                                                                        <label for="material-error">Request User for a Shopify Product Id?</label>
+                                                                        <label for="material-error">Request user for a shopify id?</label>
+                                                                        <br>
+                                                                        <div class=" mb-1">
+                                                                            <input type="radio"  class="" id="id-yes" name="need_id" value="1" >
+                                                                            <label class="" for="id-yes">Yes</label>
+                                                                            <input type="radio"  class="ml-2" id="id-no" name="need_id" value="0" >
+                                                                            <label class="" for="id-no">No</label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
