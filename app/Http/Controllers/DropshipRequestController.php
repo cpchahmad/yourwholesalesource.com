@@ -190,10 +190,9 @@ class DropshipRequestController extends Controller
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
-            if($request->has('has_product')){
-                $drop_request->has_store_product = 1;
-                $drop_request->product_shopify_id = $request->input('product_shopify_id');
-            }
+
+            $drop_request->has_store_product = 1;
+            $drop_request->product_shopify_id = $request->input('product_shopify_id');
             //$drop_request->status_id = 3;
             $drop_request->updated_at = now();
             $drop_request->save();
