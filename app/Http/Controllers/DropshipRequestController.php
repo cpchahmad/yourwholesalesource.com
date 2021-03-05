@@ -296,11 +296,18 @@ class DropshipRequestController extends Controller
             if($request->need_id && $request->need_id == 1) {
                 $drop_request->status_id = 10;
                 $drop_request->updated_at = now();
+
+                $drop_request->save();
+                $this->notify->generate('Dropship-Request','Dropship Request Waiting for Shopify Product Id','Dropship Request named '.$drop_request->product_name.' has been marked as waitng for shopify product id',$drop_request);
+                $this->log->store($drop_request->user_id, 'Dropship Request', $drop_request->id, $drop_request->product_name, 'Dropship Request Waiting for Shopify Product Id');
+                return redirect()->back()->with('success','Dropship Request Completed Successfully!');
             }
-            else {
-                $drop_request->status_id = 5;
-                $drop_request->updated_at = now();
-            }
+
+
+
+            $drop_request->status_id = 5;
+            $drop_request->updated_at = now();
+
 
             if($drop_request->approved_price == null)
             {
