@@ -285,16 +285,17 @@ class DropshipRequestController extends Controller
 
 
     public function complete_dropship_request(Request $request){
-        dd($request->all());
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
         if($manager != null && $drop_request != null){
 
-            $drop_request->status_id = 5;
-            $drop_request->updated_at = now();
-
-            if($request->need_id) {
-
+            if($request->need_id && $request->need_id == 1) {
+                $drop_request->status_id = 10;
+                $drop_request->updated_at = now();
+            }
+            else {
+                $drop_request->status_id = 5;
+                $drop_request->updated_at = now();
             }
 
             if($drop_request->approved_price == null)
