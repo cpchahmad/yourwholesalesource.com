@@ -72,7 +72,7 @@ class Product extends Model
     }
 
     public function getAdminLinkAttribute() {
-        return "https://wefullfill.com/wp-admin/post.php?post={{ $this->woocommerce_id }}&action=edit";
+        return "https://wefullfill.com/wp-admin/post.php?post=". $this->woocommerce_id ."&action=edit";
     }
 
 }
