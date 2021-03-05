@@ -61,7 +61,6 @@
                                         <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('shipping-marks')}}/{{$images[0]->image}}">
                                             <img class="img-fluid" data-src="{{asset('shipping-marks')}}/{{$images[0]->image}}" alt="">
                                         </a>
-                                    @else
                                     @elseif($product->import_from_shopify == 1)
                                         <a class="img-link img-link-zoom-in img-lightbox" href="{{$images[0]->image}}">
                                             <img class="img-fluid" data-src="{{$images[0]->image}}" alt="">
