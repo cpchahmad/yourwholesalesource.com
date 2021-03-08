@@ -43,40 +43,40 @@
                         </div>
 
 
-                        <div class="block">
-                            <div class="block-header">
-                                <h3 class="block-title">
-                                    List of Woocommerce stores
-                                    <a href="{{route('system.woocommerce.store.connect')}}" class="btn btn-success btn-sm" style="float: right;margin-left: 10px"> Add Store</a>
-                                    <a href="{{route('users.woocommerce.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a>
-                                </h3>
-                            </div>
+{{--                        <div class="block">--}}
+{{--                            <div class="block-header">--}}
+{{--                                <h3 class="block-title">--}}
+{{--                                    List of Woocommerce stores--}}
+{{--                                    <a href="{{route('system.woocommerce.store.connect')}}" class="btn btn-success btn-sm" style="float: right;margin-left: 10px"> Add Store</a>--}}
+{{--                                    <a href="{{route('users.woocommerce.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a>--}}
+{{--                                </h3>--}}
+{{--                            </div>--}}
 
-                            <div class="block-content ">
-                                <table class="js-table-sections table table-hover">
-                                    <tbody>
-                                    <form method="POST" action="{{ route('switch.woocommerce') }}" class="woo-shop-login-form">
-                                        @csrf
-                                        @foreach($associated_user->has_woocommerce_shops as $index => $shop)
-                                            <tr>
-                                                <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>
-                                                <td class="text-right" style="vertical-align: middle">
-                                                    <button type="button" class="btn btn-sm btn-success settings-woo-shop-log-btn" >
-                                                        <input type="hidden" class="woo-shop-domain-name" value="{{$shop->woocommerce_domain}}">
-                                                        <input type="hidden" name="woocommerce_domain" value="" class="woo-shop-domain-input">
-                                                        Switch View
-                                                    </button>
-                                                    <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
-                                                       title="Remove Store" ><i class="fa fa-trash"></i></a>
+{{--                            <div class="block-content ">--}}
+{{--                                <table class="js-table-sections table table-hover">--}}
+{{--                                    <tbody>--}}
+{{--                                    <form method="POST" action="{{ route('switch.woocommerce') }}" class="woo-shop-login-form">--}}
+{{--                                        @csrf--}}
+{{--                                        @foreach($associated_user->has_woocommerce_shops as $index => $shop)--}}
+{{--                                            <tr>--}}
+{{--                                                <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>--}}
+{{--                                                <td class="text-right" style="vertical-align: middle">--}}
+{{--                                                    <button type="button" class="btn btn-sm btn-success settings-woo-shop-log-btn" >--}}
+{{--                                                        <input type="hidden" class="woo-shop-domain-name" value="{{$shop->woocommerce_domain}}">--}}
+{{--                                                        <input type="hidden" name="woocommerce_domain" value="" class="woo-shop-domain-input">--}}
+{{--                                                        Switch View--}}
+{{--                                                    </button>--}}
+{{--                                                    <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"--}}
+{{--                                                       title="Remove Store" ><i class="fa fa-trash"></i></a>--}}
 
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </form>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                    </form>--}}
+{{--                                    </tbody>--}}
+{{--                                </table>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
 
                         <div class="block">
