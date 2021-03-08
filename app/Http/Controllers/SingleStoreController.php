@@ -31,7 +31,6 @@ use App\Wishlist;
 use App\WishlistStatus;
 use App\Zone;
 use Carbon\Carbon;
-use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +39,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
+use Automattic\WooCommerce\Client;
+use Automattic\WooCommerce\HttpClient\HttpClientException;
 use function foo\func;
 
 class SingleStoreController extends Controller
