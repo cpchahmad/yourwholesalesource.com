@@ -558,7 +558,7 @@ class RetailerProductController extends Controller
 
         }
         $products = $productQuery->paginate(12);
-        $shop = $this->helper->getLocalShop();
+        $shop = $this->helper->getCurrentWooShop();
         return view('woocommerce-store.products.my_products')->with([
             'products' => $products,
             'shop' => $shop,
