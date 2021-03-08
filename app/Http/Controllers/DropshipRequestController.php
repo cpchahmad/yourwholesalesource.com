@@ -280,7 +280,7 @@ class DropshipRequestController extends Controller
         $shipping_mark->dropship_request_id = $id;
         $shipping_mark->save();
 
-        return redirect()->back()->with('success', 'Shipping Mark created Successfully!');
+        return redirect()->route('store.dropship.request.view', $id)->with('success', 'Shipping Mark created Successfully!');
     }
 
     public function save_shipping_mark(Request $request, $id) {
