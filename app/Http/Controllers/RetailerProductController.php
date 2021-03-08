@@ -154,7 +154,7 @@ class RetailerProductController extends Controller
     public function add_to_woocommerce_import_list(Request $request){
         $product = Product::find($request->id);
         if($product != null){
-            if(RetailerProduct::where('linked_product_id',$product->id)->where('woocmmerce_shop_id',$this->helper->getCurrentWooShop()->id)->exists()){
+            if(RetailerProduct::where('linked_product_id',$product->id)->where('woocommerce_shop_id',$this->helper->getCurrentWooShop()->id)->exists()){
                 return redirect()->back()->with([
                     'info' => 'This Product Already Imported'
                 ]);
