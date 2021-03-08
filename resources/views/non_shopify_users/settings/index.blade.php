@@ -57,17 +57,15 @@
                                     <tbody>
                                     <form method="POST" action="{{ route('switch.woocommerce') }}" class="shop-login-form">
                                         @csrf
-                                        @foreach($associated_user->has_shops as $index => $shop)
+                                        @foreach($associated_user->has_woocommerce_shops as $index => $shop)
                                             <tr>
-                                                <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
+                                                <td style="vertical-align: middle">{{ $shop->wocommerce_domain }}</td>
                                                 <td class="text-right" style="vertical-align: middle">
                                                     <button type="button" class="btn btn-sm btn-success settings-shop-log-btn" >
-                                                        <input type="hidden" class="shop-domain-name" value="{{$shop->shopify_domain}}">
+                                                        <input type="hidden" class="shop-domain-name" value="{{$shop->woocommerce_domain}}">
                                                         <input type="hidden" name="shop" value="" class="shop-domain-input">
                                                         Switch View
                                                     </button>
-                                                    {{--                                                <a href="{{url('/shop/install?shop='.$shop->shopify_domain)}}" class="">Switch View</a>--}}
-
                                                     <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
                                                        title="Remove Store" ><i class="fa fa-trash"></i></a>
 

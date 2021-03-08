@@ -14,7 +14,7 @@ class AddWoocommerceShopIdToUserShopTable extends Migration
     public function up()
     {
         Schema::table('user_shop', function (Blueprint $table) {
-            $table->unsignedInteger('woocommerce_shop_id');
+            $table->unsignedInteger('woocommerce_shop_id')->nullable();
         });
     }
 

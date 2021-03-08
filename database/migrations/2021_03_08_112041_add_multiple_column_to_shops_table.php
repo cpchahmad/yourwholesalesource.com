@@ -14,9 +14,9 @@ class AddMultipleColumnToShopsTable extends Migration
     public function up()
     {
         Schema::table('shops', function (Blueprint $table) {
-            $table->string('woocommerce_domain');
-            $table->string('consumer_key');
-            $table->string('consumer_secret');
+            $table->string('woocommerce_domain')->nullable();
+            $table->string('consumer_key')->nullable();
+            $table->string('consumer_secret')->nullable();
         });
     }
 
