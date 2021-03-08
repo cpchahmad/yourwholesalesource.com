@@ -272,4 +272,8 @@ class HelperController extends Controller
         }
     }
 
+    public function getCurrentWooShop() {
+        return session()->get('woocommerce_domain');
+    }
+
 }

@@ -276,6 +276,68 @@ Route::group(['middleware' => ['auth.shop']], function () {
 
     });
 });
+
+
+//Woocommerce Store Routes
+Route::group(['middleware' => ['check_woocommerce_shop']], function () {
+    Route::get('/import/{id}/to-store','RetailerProductController@import_to_shopify')->name('woocommerce.retailer.import_to_shopify');
+    Route::prefix('woocommerce-store')->group(function () {
+        Route::post('/user/authenticate','WoocommerceStoreController@authenticate')->name('woocommerce.user.authenticate');
+        Route::post('/user/store/association','WoocommerceStoreController@associate')->name('woocommerce.user.associate');
+        Route::get('/dashboard','WoocommerceStoreController@index')->name('woocommerce.store.dashboard');
+        Route::get('/reports','WoocommerceStoreController@reports')->name('store.reports');
+        Route::get('/invoice','WoocommerceStoreController@showInvoice')->name('woocommerce.invoice');
+        Route::get('/invoice/download/{id}','WoocommerceStoreController@downloadInvoicePDF')->name('woocommerce.invoice.download');
+        Route::get('/settings','WoocommerceStoreController@setting')->name('woocommerce.index');
+        Route::post('/settings/personal','WoocommerceStoreController@save_personal_info')->name('woocommerce.save_personal_info');
+        Route::post('/settings/personal/address','WoocommerceStoreController@save_address')->name('woocommerce.save_address');
+        Route::post('/wallet/settings/{id}','WoocommerceStoreController@saveWalletSettings')->name('woocommerce.save.wallet.settings');
+        Route::get('/products/wefullfill','WoocommerceStoreController@wefullfill_products')->name('woocommerce.product.wefulfill');
+        Route::get('/products/wefullfill/{id}','WoocommerceStoreController@view_fantasy_product')->name('woocommerce.product.wefulfill.show');
+        Route::get('/my_products/wefullfill/{id}','WoocommerceStoreController@view_my_product')->name('woocommerce.my_product.wefulfill.show');
+        /*Import List Route*/
+        Route::get('/wefullfill/{id}/add-to-import-list','RetailerProductController@add_to_import_list')->name('woocommerce.product.wefulfill.add-to-import-list');
+        Route::get('/wefullfill/{id}/updated-product','RetailerProductController@show_updated_product')->name('woocommerce.product.wefulfill.updated-product');
+        Route::post('/wefullfill/{id}/update/variants','RetailerProductController@updateProductVariants')->name('woocommerce.product.variant.update');
+        Route::get('/import-list','RetailerProductController@import_list')->name('woocommerce.import_list');
+        Route::get('/my_products','RetailerProductController@my_products')->name('woocommerce.my_products');
+        Route::get('/my_dropship_products','RetailerProductController@my_dropship_products')->name('woocommerce.my_dropship_products');
+        Route::get('/my_products/{id}','RetailerProductController@edit_my_product')->name('woocommerce.my_product.edit');
+        Route::get('/products/delete/{id}','RetailerProductController@delete')->name('woocommerce.product.delete');
+        Route::get('/products/sync/{id}','RetailerProductController@syncWithAdminProduct')->name('woocommerce.product.sync');
+        Route::post('/import-list/{id}/update','RetailerProductController@update')->name('woocommerce.import_list.product.update');
+        Route::get('/getOrders', 'OrderController@getOrders')->name('woocommerce.sync.orders');
+        Route::get('/orders', 'OrderController@index')->name('woocommerce.orders');
+        Route::get('/order/delete/{id}', 'OrderController@delete')->name('woocommerce.order.delete');
+        Route::get('/order/view/{id}', 'OrderController@view_order')->name('woocommerce.order.view');
+        Route::get('/customers', 'WoocommerceStoreController@customers')->name('woocommerce.customers');
+        Route::get('/customers/{id}', 'WoocommerceStoreController@customer_view')->name('woocommerce.customer.view');
+        Route::get('/getCustomers', 'WoocommerceStoreController@getCustomers')->name('woocommerce.sync.customers');
+        Route::get('/payments', 'WoocommerceStoreController@payment_history')->name('woocommerce.payments');
+        Route::get('/tracking-info', 'WoocommerceStoreController@tracking_info')->name('woocommerce.tracking');
+        Route::get('/help-center','WoocommerceStoreController@helpcenter')->name('woocommerce.help-center');
+        Route::get('/help-center/ticket/{id}', 'WoocommerceStoreController@view_ticket')->name('help-center.woocommerce.ticket.view');
+        Route::get('/wishlist','WoocommerceStoreController@wishlist')->name('woocommerce.wishlist');
+        Route::get('/wishlist/{id}','WoocommerceStoreController@view_wishlist')->name('woocommerce.wishlist.view');
+        Route::get('/refunds', 'WoocommerceStoreController@refunds')->name('woocommerce.refunds');
+        Route::get('/refunds/{id}', 'WoocommerceStoreController@refund')->name('woocommerce.refund');
+        Route::get('/notifications/{id}', 'WoocommerceStoreController@show_notification')->name('woocommerce.notification');
+        Route::get('/notifications', 'WoocommerceStoreController@notifications')->name('woocommerce.notifications');
+
+
+        Route::get('/dropship-requests', 'WoocommerceStoreController@dropship_requests')->name('woocommerce.dropship.requests');
+        Route::get('/dropship-requests/{id}', 'WoocommerceStoreController@view_dropship_request')->name('woocommerce.dropship.request.view');
+        Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'WoocommerceStoreController@view_shipping_mark')->name('woocommerce.dropship.requests.view.shipping.mark');
+        Route::get('/dropship-requests/{id}/create-shipping-mark', 'WoocommerceStoreController@create_shipping_mark')->name('woocommerce.dropship.requests.create.shipping.mark');
+
+
+
+        Route::post('/orders/bulk-payment', 'OrderController@show_bulk_payments')->name('woocommerce.orders.bulk.payment');
+
+
+    });
+});
+
 /*Main Routes*/
 Route::group(['middleware' => ['auth', 'verified']], function () {
     /*Checking User Role*/
@@ -285,10 +347,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     /*Store Connection*/
     Route::get('/shop/login', 'SingleStoreController@storeAuthenticate');
     Route::get('/connect/store','RolePermissionController@store_connect')->name('system.store.connect');
-    Route::get('/connect/woocommerce/store','SingleStoreController@woocommerce_store_connect')->name('system.woocommerce.store.connect');
-    Route::post('/user/authenticate/woocommerce','SingleStoreController@authenticate_woocommerce')->name('store.user.authenticate.woocommerce');
-    Route::get('/woocommerce/stores','SingleStoreController@woocommerce_stores')->name('users.woocommerce.stores');
-    Route::post('/woocommerce/install','SingleStoreController@switch_to_store')->name('switch.woocommerce');
+    Route::get('/connect/woocommerce/store','WoocoommerceStoreController@woocommerce_store_connect')->name('system.woocommerce.store.connect');
+    Route::post('/user/authenticate/woocommerce','WoocoommerceStoreController@authenticate_woocommerce')->name('store.user.authenticate.woocommerce');
+    Route::get('/woocommerce/stores','WoocoommerceStoreController@woocommerce_stores')->name('users.woocommerce.stores');
+    Route::post('/woocommerce/install','WoocoommerceStoreController@switch_to_store')->name('switch.woocommerce');
     /*Non-Shopify and Shopify User Routes */
 
     Route::get('users/home','ShopifyUsersController@index')->name('users.dashboard')->middleware('role:non-shopify-users');

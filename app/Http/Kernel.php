@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckWoocommerceShop;
 use App\Http\Middleware\SameSiteNone;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -71,6 +72,7 @@ class Kernel extends HttpKernel
         'check_shop_user' => \App\Http\Middleware\CheckShopUser::class,
         'check_user_or_shop' => \App\Http\Middleware\AuthShopOrUser::class,
         'check_user_questionaire' => \App\Http\Middleware\CheckUserQuestionaire::class,
+        'check_woocommerce_shop' => CheckWoocommerceShop::class
     ];
 
     /**

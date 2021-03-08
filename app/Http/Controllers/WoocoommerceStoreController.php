@@ -43,7 +43,7 @@ use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
 use function foo\func;
 
-class SingleStoreController extends Controller
+class WoocoommerceStoreController extends Controller
 {
     private $helper;
 
@@ -179,7 +179,7 @@ class SingleStoreController extends Controller
             ->take(10);
 
 
-        return view('single-store.dashboard')->with([
+        return view('woocommerce-store.dashboard')->with([
             'date_range' => $request->input('date-range'),
             'orders' => $orders,
             'profit' => $profit,
@@ -1414,4 +1414,70 @@ class SingleStoreController extends Controller
             'drop_request' => $drop_request
         ]);
     }
+
+
+    public function woocommerce_store_connect() {
+        return view('non_shopify_users.woocommerce_store_connect');
+    }
+
+    public function authenticate_woocommerce(Request $request)
+    {
+        $this->validate($request, [
+            'woocommerce_domain' => 'required|unique:shops',
+            'consumer_key' => 'required',
+            'consumer_secret' => 'required'
+        ]);
+
+        $woocommerce = new Client($request->woocommerce_domain, $request->consumer_key, $request->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
+
+        try {
+            $products = $woocommerce->get('products');
+        }
+        catch(HttpClientException $e) {
+            $error_msg = $e->getMessage(); // Error message.
+            $e->getRequest(); // Last request data.
+            $e->getResponse(); // Last response data
+            return redirect()->back()->with('error', 'Your Credentials are incorrect. Please Try again!, Error:'.$error_msg);
+        }
+
+
+        $woo_shop = new Shop();
+        $woo_shop->woocommerce_domain = $request->woocommerce_domain;
+        $woo_shop->consumer_key = $request->consumer_key;
+        $woo_shop->consumer_secret = $request->consumer_secret;
+        $woo_shop->save();
+
+
+        Auth::user()->has_woocommerce_shops()->attach([$woo_shop->id]);
+
+
+        return redirect()->back()->with('success', 'Store Connected Successfully!');
+    }
+
+    public function woocommerce_stores() {
+        $shops = auth()->user()->has_woocommerce_shops;
+        return view('non_shopify_users.woocommerce_stores')->with([
+            'shops' => $shops
+        ]);
+    }
+
+    public function switch_to_store(Request $request) {
+        Session::put('woocommerce_domain', $request->input('shop'));
+
+        dd(Session::all());
+
+        return redirect(route('woocommerce.store.dashboard'));
+    }
+
+    public function getWooShop() {
+        $shop = Auth::user()->has_woocommerce_shops[0];
+
+        $woocommerce = new Client($shop->shop_url, $shop->consumer_key, $shop->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
+
+        return $woocommerce;
+    }
+
+
+
+
 }
