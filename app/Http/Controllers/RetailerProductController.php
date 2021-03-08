@@ -173,6 +173,7 @@ class RetailerProductController extends Controller
 
                 $retailerProduct->title = $product->title;
                 $retailerProduct->description = $product->description;
+                $retailerProduct->short_description = $product->short_description;
                 $retailerProduct->type = $product->type;
                 $retailerProduct->tags = $product->tags;
                 $retailerProduct->vendor = $product->vendor;
@@ -186,7 +187,14 @@ class RetailerProductController extends Controller
                 $retailerProduct->status = 1;
                 $retailerProduct->fulfilled_by = $product->fulfilled_by;
                 $retailerProduct->to_woocommerce = 0;
+                $retailerProduct->attribute1 = $product->attribute1;
+                $retailerProduct->attribute2 = $product->attribute2;
+                $retailerProduct->attribute3 = $product->attribute3;
+                $retailerProduct->length = $product->length;
+                $retailerProduct->width = $product->width;
+                $retailerProduct->height = $product->height;
                 $retailerProduct->woocommerce_shop_id = $this->helper->getCurrentWooShop()->id;
+
 
                 if(count($this->helper->getCurrentWooShop()->has_owner) > 0){
                     $retailerProduct->user_id = $this->helper->getCurrentWooShop()->has_owner[0]->id;
