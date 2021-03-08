@@ -149,7 +149,7 @@
                 <div class="col-sm-4 col-lg-3">
                     <div class="block">
                         <div class="options-container">
-                            <a href="{{route('store.product.wefulfill.show',$product->id)}}">
+                            <a href="{{route('woocommerce.product.wefulfill.show',$product->id)}}">
                                 @if(count($product->has_images) > 0)
                                     @foreach($product->has_images()->orderBy('position')->cursor() as $index => $image)
                                         @if($index == 0)
@@ -168,13 +168,13 @@
                                 <div class="options-overlay-content">
                                     <div class="push-20">
 
-                                        <a class="btn btn-sm btn-primary" href="{{route('store.product.wefulfill.show',$product->id)}}">View</a>
+                                        <a class="btn btn-sm btn-primary" href="{{route('woocommerce.product.wefulfill.show',$product->id)}}">View</a>
                                         @if($product->marketing_video != null)
                                             <a class="btn btn-sm btn-success text-white" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</a>
                                         @endif
 
                                         @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
-                                            <a class="btn btn-sm btn-success" href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}">
+                                            <a class="btn btn-sm btn-success" href="{{route('woocommerce.product.wefulfill.add-to-import-list',$product->id)}}">
                                                 <i class="fa fa-plus"></i> Add to Import List
                                             </a>
                                         @endif
@@ -184,7 +184,7 @@
                         </div>
                         <div class="block-content" style="padding-bottom: 10px">
                             <div class="push-10">
-                                <a class="h6" style="font-size: 0.9rem" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
+                                <a class="h6" style="font-size: 0.9rem" href="{{route('woocommerce.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
                                 <div class="d-flex">
                                     <div class="font-w600 text-success mt-1">
                                         From.
@@ -206,12 +206,12 @@
                             @endif
                             <hr>
                             @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
-                                <button onclick="window.location.href='{{ route('store.product.wefulfill.add-to-import-list',$product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
+                                <button onclick="window.location.href='{{ route('woocommerce.product.wefulfill.add-to-import-list',$product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
                             @else
                                 <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
                             @endif
                             @if($product->isUpdated($shop))
-                                <button onclick="window.location.href='{{ route('store.product.wefulfill.updated-product',$product->id)}}'" class="btn btn-danger btn-block mb2">View Updated Variants</button>
+                                <button onclick="window.location.href='{{ route('woocommerce.product.wefulfill.updated-product',$product->id)}}'" class="btn btn-danger btn-block mb2">View Updated Variants</button>
                             @endif
                             <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
                         </div>
