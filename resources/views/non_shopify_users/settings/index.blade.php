@@ -59,7 +59,7 @@
                                         @csrf
                                         @foreach($associated_user->has_woocommerce_shops as $index => $shop)
                                             <tr>
-                                                <td style="vertical-align: middle">{{ $shop->wocommerce_domain }}</td>
+                                                <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>
                                                 <td class="text-right" style="vertical-align: middle">
                                                     <button type="button" class="btn btn-sm btn-success settings-shop-log-btn" >
                                                         <input type="hidden" class="shop-domain-name" value="{{$shop->woocommerce_domain}}">
