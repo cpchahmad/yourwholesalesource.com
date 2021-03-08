@@ -1,4 +1,4 @@
-@extends('layout.single')
+@extends('layout.woocommerce')
 @section('content')
 <style>
     .marketing_video iframe{
