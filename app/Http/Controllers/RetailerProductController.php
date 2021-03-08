@@ -496,6 +496,31 @@ class RetailerProductController extends Controller
         ]);
     }
 
+
+    public function woocommerce_import_list(Request $request){
+        $productQuery = RetailerProduct::where('toWoocommerce',0)->where('woocommerce_shop_id',$this->helper->getCurrentWooShop()->id)->newQuery();
+        if($request->has('search')){
+            $productQuery->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('source')){
+            if($request->input('source') != 'all'){
+                $productQuery->where('fulfilled_by',$request->input('source'));
+            }
+
+        }
+        $products = $productQuery->paginate(12);
+        $shop = $this->helper->getCurrentWooShop();
+        $warehouses = WareHouse::all();
+        return view('woocommerce-store.products.import_list')->with([
+            'products' => $products,
+            'shop' => $shop,
+            'warehouses' => $warehouses,
+            'search' => $request->input('search'),
+            'source' => $request->input('source'),
+
+        ]);
+    }
+
     public function delete($id)
     {
         $product = RetailerProduct::find($id);
