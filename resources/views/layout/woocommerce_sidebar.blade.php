@@ -28,27 +28,27 @@
                 </a>
                 <ul class="nav-main-submenu">
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.product.wefulfill')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.product.wefulfill')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">By WeFullfill</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.import_list')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.import_list')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">Import List</span>
                         </a>
                     </li>
 
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.my_products')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.my_products')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">My Products</span>
                         </a>
                     </li>
 
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.my_dropship_products')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.my_dropship_products')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">My Dropship Products</span>
                         </a>

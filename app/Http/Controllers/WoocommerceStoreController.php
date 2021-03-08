@@ -207,7 +207,6 @@ class WoocommerceStoreController extends Controller
 
     public function wefullfill_products(Request $request)
     {
-
         $country = $this->ip_info($this->getRealIpAddr(), 'Country');
         $categories = Category::all();
         $productQuery = Product::with('has_images', 'hasVariants','has_platforms','has_categories','has_subcategories')->where('status', 1)->newQuery();
@@ -229,19 +228,6 @@ class WoocommerceStoreController extends Controller
         if ($request->has('tag')) {
             if ($request->input('tag') == 'best-seller') {
                 $products = $productQuery->where('sortBy', 'Best Seller')->paginate(12);
-//                $productQuery =  Product::join('retailer_products',function($join) {
-//                    $join->on('retailer_products.linked_product_id', '=', 'products.id')
-//                        ->join('retailer_order_line_items', function ($join) {
-//                            $join->on('retailer_order_line_items.shopify_product_id', '=', 'retailer_products.shopify_id')
-//                                ->join('retailer_orders', function ($o) {
-//                                    $o->on('retailer_order_line_items.retailer_order_id', '=', 'retailer_orders.id')
-//                                        ->whereIn('paid', [1, 2]);
-//                                });
-//                        });
-//                })->select('products.*',DB::raw('sum(retailer_order_line_items.quantity) as sold'),DB::raw('sum(retailer_order_line_items.cost) as selling_cost'))
-//                    ->groupBy('products.id')
-//                    ->orderBy('sold','DESC');
-//                $products = $productQuery->paginate(12);
             } else if ($request->input('tag') == 'winning-products') {
 //                $products = $productQuery->where('tags','LIKE','%'.$request->input('tag').'%')->paginate(12);
                 $products = $productQuery->where('sortBy', 'Winning Product')->paginate(12);
@@ -309,8 +295,8 @@ class WoocommerceStoreController extends Controller
 
         }
 
-        $shop = $this->helper->getLocalShop();
-        return view('single-store.products.wefullfill_products')->with([
+        $shop = $this->helper->getCurrentWooShop();
+        return view('woocommerce-store.products.wefullfill_products')->with([
             'categories' => $categories,
             'products' => $products,
             'shop' => $shop,
