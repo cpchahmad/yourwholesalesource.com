@@ -546,6 +546,28 @@ class RetailerProductController extends Controller
         ]);
     }
 
+    public function my_woocommerce_products(Request $request){
+        $productQuery = RetailerProduct::with('has_images')->where('toShopify',1)->where('shop_id',$this->helper->getCurrentWooShop()->id)->newQuery();
+        if($request->has('search')){
+            $productQuery->where('title','LIKE','%'.$request->input('search').'%');
+        }
+        if($request->has('source')){
+            if($request->input('source') != 'all'){
+                $productQuery->Where('fulfilled_by',$request->input('source'));
+            }
+
+        }
+        $products = $productQuery->paginate(12);
+        $shop = $this->helper->getLocalShop();
+        return view('woocommerce-store.products.my_products')->with([
+            'products' => $products,
+            'shop' => $shop,
+            'search' => $request->input('search'),
+            'source' => $request->input('source'),
+        ]);
+    }
+
+
     public function my_dropship_products(Request $request){
         $productQuery = RetailerProduct::with('has_images')->where('shop_id',$this->helper->getLocalShop()->id)->where('is_dropship_product', 1)->newQuery();
         if($request->has('search')){
