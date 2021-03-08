@@ -547,7 +547,7 @@ class RetailerProductController extends Controller
     }
 
     public function my_woocommerce_products(Request $request){
-        $productQuery = RetailerProduct::with('has_images')->where('toShopify',1)->where('shop_id',$this->helper->getCurrentWooShop()->id)->newQuery();
+        $productQuery = RetailerProduct::with('has_images')->where('toShopify',1)->where('woocommerce_shop_id',$this->helper->getCurrentWooShop()->id)->newQuery();
         if($request->has('search')){
             $productQuery->where('title','LIKE','%'.$request->input('search').'%');
         }
@@ -558,7 +558,7 @@ class RetailerProductController extends Controller
 
         }
         $products = $productQuery->paginate(12);
-        $shop = $this->helper->getCurrentWooShop();
+        $shop = $this->helper->get();
         return view('woocommerce-store.products.my_products')->with([
             'products' => $products,
             'shop' => $shop,
