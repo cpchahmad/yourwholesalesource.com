@@ -56,7 +56,6 @@ $(document).ready(function () {
     });
 
 
-
     // Import To Woocommerce Button Loader
     $('.import-btn').click(function () {
         $(this).text('Loading');
@@ -570,7 +569,6 @@ $(document).ready(function () {
         var status = '';
         if($(this).is(':checked')){
             status = 1;
-
             $(this).next().text('Published')
         }
         else{
