@@ -1427,7 +1427,7 @@ class SingleStoreController extends Controller
             'consumer_secret' => 'required'
         ]);
 
-        $woocommerce = new Client($request->shop_url, $request->consumer_key, $request->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
+        $woocommerce = new Client($request->woocommerce_domain, $request->consumer_key, $request->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
 
         try {
             $products = $woocommerce->get('products');
@@ -1442,7 +1442,7 @@ class SingleStoreController extends Controller
 
         $woo_shop = new Shop();
         $woo_shop->user_id = Auth::user()->id;
-        $woo_shop->woocommerce_domain = $request->shop_url;
+        $woo_shop->woocommerce_domain = $request->woocommerce_domain;
         $woo_shop->consumer_key = $request->consumer_key;
         $woo_shop->consumer_secret = $request->consumer_secret;
         $woo_shop->save();

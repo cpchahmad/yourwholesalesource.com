@@ -49,8 +49,8 @@
                                 {{ csrf_field() }}
                                 <div class="form-material" style="margin-bottom: 10px">
                                     <label for="shop">Store Domain</label>
-                                    <input id="shop" name="shop_url" class="form-control @error('shop_url') is-invalid @enderror" type="text" autofocus="autofocus" placeholder="example.com">
-                                    @error('shop_url')
+                                    <input id="shop" name="woocommerce_domain" class="form-control @error('woocommerce_domain') is-invalid @enderror" type="text" autofocus="autofocus" placeholder="example.com">
+                                    @error('woocommerce_domain')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <label for="consumer_key" class="mt-2">Consumer Key</label>
