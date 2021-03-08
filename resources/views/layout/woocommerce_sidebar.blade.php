@@ -314,7 +314,7 @@
 
                     </ul>
                     <div class="p-2 border-top">
-                        <a class="btn btn-sm btn-light btn-block text-center" href="{{route('store.notifications')}}">
+                        <a class="btn btn-sm btn-light btn-block text-center" href="{{route('woocommerce.notifications')}}">
                             <i class="fa fa-fw fa-arrow-down mr-1"></i> See All
                         </a>
                     </div>
@@ -329,7 +329,7 @@
                     @else
                         <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
                     @endif
-                    <span class="d-none d-sm-inline-block ml-1">{{explode('.',$shop->shopify_domain)[0]}}</span>
+                    <span class="d-none d-sm-inline-block ml-1">{{explode('//',$shop->woocommerce_domain)[1]}}</span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
@@ -343,7 +343,7 @@
                     </div>
                     <div class="p-2">
 
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('store.index')}}">
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{route('woocommerce.index')}}">
                             <span>Settings</span>
                             <i class="si si-settings"></i>
                         </a>
