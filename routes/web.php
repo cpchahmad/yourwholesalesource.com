@@ -280,7 +280,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
 
 //Woocommerce Store Routes
 Route::group(['middleware' => ['check_woocommerce_shop']], function () {
-    Route::get('/import/{id}/to-woocommerce-store','RetailerProductController@import_to_woocomerce')->name('woocommerce.retailer.import_to_shopify');
+    Route::get('/import/{id}/to-woocommerce-store','RetailerProductController@import_to_woocommerce')->name('woocommerce.retailer.import_to_shopify');
     Route::prefix('woocommerce-store')->group(function () {
         Route::post('/user/authenticate','WoocommerceStoreController@authenticate')->name('woocommerce.user.authenticate');
         Route::post('/user/store/association','WoocommerceStoreController@associate')->name('woocommerce.user.associate');
