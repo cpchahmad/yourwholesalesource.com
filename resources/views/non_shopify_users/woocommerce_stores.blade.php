@@ -56,11 +56,11 @@
                         <tr>
 
                             <td class="font-w600" style="vertical-align: middle">
-                                {{explode('.',$shop->shop_url)[0]}}
+                                {{explode('.',$shop->woocommerce_domain)[0]}}
                             </td>
-                            <td style="vertical-align: middle">{{ $shop->shop_url }}</td>
+                            <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>
                             <td class="text-right" style="vertical-align: middle">
-                                <a href="{{url('/shop/install?shop='.$shop->shop_url)}}" class="btn btn-sm btn-success">Switch View</a>
+                                <a href="{{url('/shop/install?shop='.$shop->woocommerce_domain)}}" class="btn btn-sm btn-success">Switch View</a>
 
                                 <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
                                    title="Remove Store" ><i class="fa fa-trash"></i></a>
