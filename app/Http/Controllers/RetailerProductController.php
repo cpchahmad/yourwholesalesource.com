@@ -498,7 +498,7 @@ class RetailerProductController extends Controller
 
 
     public function woocommerce_import_list(Request $request){
-        $productQuery = RetailerProduct::where('toWoocommerce',0)->where('woocommerce_shop_id',$this->helper->getCurrentWooShop()->id)->newQuery();
+        $productQuery = RetailerProduct::where('to_woocommerce',0)->where('woocommerce_shop_id',$this->helper->getCurrentWooShop()->id)->newQuery();
         if($request->has('search')){
             $productQuery->where('title','LIKE','%'.$request->input('search').'%');
         }
