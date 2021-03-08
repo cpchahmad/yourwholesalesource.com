@@ -44,7 +44,7 @@ use Automattic\WooCommerce\Client;
 use Automattic\WooCommerce\HttpClient\HttpClientException;
 use function foo\func;
 
-class WoocoommerceStoreController extends Controller
+class WoocommerceStoreController extends Controller
 {
     private $helper;
 
