@@ -69,7 +69,7 @@
                     <ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" role="tablist">
                         <li class="nav-item import_checkbox_select">
                             <div class="custom-control custom-checkbox d-inline-block">
-                                <input type="checkbox" class="custom-control-input select_one_checkbox" data-remove_url="{{route('store.product.delete',$product->id)}}" data-method="GET" data-url="{{route('retailer.import_to_shopify',$product->id)}}" id="row_{{$product->id}}">
+                                <input type="checkbox" class="custom-control-input select_one_checkbox" data-remove_url="{{route('store.product.delete',$product->id)}}" data-method="GET" data-url="{{route('woocommerce.retailer.import_to_shopify',$product->id)}}" id="row_{{$product->id}}">
                                 <label class="custom-control-label" for="row_{{$product->id}}"></label>
                             </div>
                         </li>
@@ -95,7 +95,7 @@
 {{--                                        Import to store--}}
 {{--                                    </button>--}}
 {{--                                @else--}}
-                                <button onclick="window.location.href='{{route('retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-success" style="margin-top:7px" >
+                                <button onclick="window.location.href='{{route('woocommerce.retailer.import_to_shopify',$product->id)}}'" class="btn btn-sm btn-success" style="margin-top:7px" >
                                     <i class="si si-cloud-upload mr-1"></i>
                                     Import to store
                                 </button>
@@ -118,7 +118,7 @@
 
                                                     </div>
                                                     <div class="">
-                                                        <form action="{{ route('retailer.import_to_shopify',$product->id) }}">
+                                                        <form action="{{ route('woocommerce.retailer.import_to_shopify',$product->id) }}">
                                                             <input type="hidden" name="id" value="{{ $product->id }}">
                                                             <div class="custom-control custom-switch custom-control-success mb-1">
                                                                 <input type="checkbox" class="custom-control-input inventory-checkbox" id="inventory_status_{{ $product->id }}">
