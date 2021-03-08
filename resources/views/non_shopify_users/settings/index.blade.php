@@ -45,7 +45,11 @@
 
                         <div class="block">
                             <div class="block-header">
-                                <h3 class="block-title">List of Woocommerce stores <a href="{{route('system.woocommerce.store.connect')}}" class="btn btn-success btn-sm" style="float: right;margin-left: 10px"> Add Store</a> <a href="{{route('users.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a></h3>
+                                <h3 class="block-title">
+                                    List of Woocommerce stores
+                                    <a href="{{route('system.woocommerce.store.connect')}}" class="btn btn-success btn-sm" style="float: right;margin-left: 10px"> Add Store</a>
+                                    <a href="{{route('users.woocommerce.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a>
+                                </h3>
                             </div>
 
                             <div class="block-content ">

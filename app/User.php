@@ -51,6 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function has_stores(){
         return $this->belongsToMany(\App\Shop::class,'user_shop','user_id','shop_id');
     }
+
+    public function has_woocommerce_shops(){
+        return $this->belongsToMany(\App\Shop::class,'user_shop','user_id','woocommerce_shop_id');
+    }
+
     public function has_imported(){
         return $this->belongsToMany('App\Product','retailer_product_user','user_id','product_id');
     }

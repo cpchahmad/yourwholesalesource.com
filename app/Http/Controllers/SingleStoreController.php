@@ -1422,7 +1422,7 @@ class SingleStoreController extends Controller
     public function authenticate_woocommerce(Request $request)
     {
         $this->validate($request, [
-            'shop_url' => 'required|unique:woocommerce_shops',
+            'shop_url' => 'required|unique:shops',
             'consumer_key' => 'required',
             'consumer_secret' => 'required'
         ]);
@@ -1440,9 +1440,9 @@ class SingleStoreController extends Controller
         }
 
 
-        $woo_shop = new WoocommerceShop();
+        $woo_shop = new Shop();
         $woo_shop->user_id = Auth::user()->id;
-        $woo_shop->shop_url = $request->shop_url;
+        $woo_shop->woocommerce_domain = $request->shop_url;
         $woo_shop->consumer_key = $request->consumer_key;
         $woo_shop->consumer_secret = $request->consumer_secret;
         $woo_shop->save();
