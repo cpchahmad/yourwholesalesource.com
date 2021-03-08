@@ -165,22 +165,26 @@
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($item->linked_variant != null)
-                                                    <img class="img-avatar"
-                                                         @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
-                                                         @else @if($item->linked_variant->has_image->isV == 1)
-                                                             @php
-                                                                 $path = asset('images/variants').'/'. $item->linked_variant->has_image->image;
-                                                                 if(substr_count($path, "https") > 1) {
-                                                                     $path_array = explode("variants/",$path);
-                                                                     $path = $path_array[1];
-                                                                 }
+                                                    @if($item->linked_variant->is_dropship_variant == 1)
+                                                        <img class="img-avatar" src="{{asset('shipping-marks')}}/{{$item->linked_variant->image}}" alt="">
+                                                    @else
+                                                        <img class="img-avatar"
+                                                             @if($item->linked_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                             @else @if($item->linked_variant->has_image->isV == 1)
+                                                                 @php
+                                                                     $path = asset('images/variants').'/'. $item->linked_variant->has_image->image;
+                                                                     if(substr_count($path, "https") > 1) {
+                                                                         $path_array = explode("variants/",$path);
+                                                                         $path = $path_array[1];
+                                                                     }
 
-                                                             @endphp
-                                                            src="{{ $path }}"
-                                                         @else
-                                                            src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
-                                                       @endif
-                                                         @endif alt="">
+                                                                 @endphp
+                                                                src="{{ $path }}"
+                                                             @else
+                                                                src="{{asset('images')}}/{{$item->linked_variant->has_image->image}}"
+                                                           @endif
+                                                             @endif alt="">
+                                                    @endif
                                                 @else
                                                     @if($item->linked_product != null)
                                                         @if(count($item->linked_product->has_images)>0)

@@ -379,7 +379,6 @@ class DropshipRequestController extends Controller
         }
     }
 
-
     public function cancel_dropship_request(Request $request){
         $manager = User::find($request->input('manager_id'));
         $drop_request = DropshipRequest::find($request->input('dropship_request_id'));
@@ -538,6 +537,7 @@ class DropshipRequestController extends Controller
         $retailerProduct->quantity = $product->quantity;
         $retailerProduct->variants = $product->variants;
         $retailerProduct->toShopify = 1;
+        $retailerProduct->fulfilled_by = 'Fantasy';
         $retailerProduct->shop_id = $dropship_request->shop_id;
         $retailerProduct->user_id = $dropship_request->user_id;
         $retailerProduct->shopify_id = $dropship_request->product_shopify_id;
