@@ -88,7 +88,7 @@
                         <li class="nav-item ml-auto action_buttons_in_tabs">
                             <div class="block-options pl-3 pr-2">
                                 <button  class="btn btn-sm btn-outline-success btn_save_retailer_product" style="vertical-align: bottom" title="Save Product" data-tabs=".product_tab_panes_{{$index}}"><i class="fa fa-save"></i></button>
-                                <button  class="btn btn-sm btn-outline-danger" onclick="window.location.href='{{route('store.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
+                                <button  class="btn btn-sm btn-outline-danger" onclick="window.location.href='{{route('woocommerce.product.delete',$product->id)}}'" style="vertical-align: bottom" title="Delete Product"><i class="fa fa-trash-alt"></i></button>
 {{--                                @if($product->has_inventory())--}}
 {{--                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#import_modal_{{$product->id}}" style="margin-top:7px" >--}}
 {{--                                        <i class="si si-cloud-upload mr-1"></i>--}}

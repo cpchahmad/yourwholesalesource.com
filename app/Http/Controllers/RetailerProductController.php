@@ -776,6 +776,262 @@ class RetailerProductController extends Controller
         }
     }
 
+    public function import_to_woocommerce(Request $request)
+    {
+        $product = RetailerProduct::find($request->id);
+        $woocommerce = $this->helper->getWooShop();
+
+        if ($product != null ) {
+
+            /*Product Attributes*/
+            $attributes_array = $this->attributes_template_array($product);
+
+
+            /*Product Dimensions*/
+            $dimension_array = array(
+                'width' => is_null($product->width) ? "0" : $product->width,
+                'height' => is_null($product->height) ? "0" : $product->height,
+                'length' => is_null($product->length) ? "0" : $product->length
+            );
+
+            /*Product Images*/
+            $images_array = [];
+            foreach ($product->has_images as $index => $image) {
+                if ($image->isV == 0) {
+                    $src = asset('images') . '/' . $image->image;
+                } else {
+                    $src = asset('images/variants') . '/' . $image->image;
+                }
+                array_push($images_array, [
+                    'alt' => $product->title . '_' . $index,
+                    'name' => $product->title . '_' . $index,
+                    'position' => $index + 1,
+                    'src' => $src,
+                ]);
+            }
+
+            /*Tags*/
+            $tags_array = [];
+            if($product->tags()->count() > 0) {
+                foreach ($product->tags()->get() as $tag) {
+                    array_push($tags_array, [
+                        'id' => $tag->woocommerce_id,
+                    ]);
+                }
+            }
+
+            /*Categories*/
+            $categories_array = [];
+
+            if(count($product->has_categories) > 0){
+                $product_categories = $product->has_categories->pluck('woocommerce_id')->toArray();
+
+                foreach ($product_categories as $category) {
+                    array_push($categories_array, [
+                        'id' => $category,
+                    ]);
+                }
+            }
+
+            /*SubCategories*/
+            if(count($product->has_subcategories) > 0) {
+                $product_sub_categories = $product->has_subcategories->pluck('woocommerce_id')->toArray();
+                foreach ($product_sub_categories as $category) {
+                    array_push($categories_array, [
+                        'id' => $category,
+                    ]);
+                }
+            }
+
+
+            if($product->status == 1)
+                $published = 'publish';
+            else
+                $published = 'draft';
+
+
+            if($product->variants == 1)
+            {
+                $product_type = 'variable';
+                $productdata['attributes'] = $attributes_array;
+            }
+            else
+            {
+                $product_type = 'simple';
+            }
+
+
+            $productdata = [
+                "name" => $product->title,
+                "description" => $product->description,
+                "short_description" => $product->short_description,
+                "slug" => $product->slug,
+                "tags" => $tags_array,
+                "type" => $product_type,
+                "images" => $images_array,
+                "published"=>  $published,
+                "regular_price" => $product->price,
+                "sku" => $product->sku,
+                "weight" => $product->weight,
+                "manage_stock" => true,
+                "stock_quantity" => $product->quantity,
+                "dimensions" => $dimension_array,
+                "categories" => $categories_array,
+            ];
+
+            /*Creating Product On Woocommerce*/
+            $response = $woocommerce->post('products', $productdata);
+
+            $product_woocommerce_id =  $response->id;
+            $product->woocommerce_id = $product_woocommerce_id;
+            $product->to_woocommerce = 1;
+            $product->save();
+
+            $woocommerce_images = $response->images;
+
+            if (count($woocommerce_images) == count($product->has_images)) {
+                foreach ($product->has_images as $index => $image) {
+                    $image->woocommerce_id = $woocommerce_images[$index]->id;
+                    $image->save();
+                }
+            }
+
+            if($product->variants == 1) {
+                $variants_array =  $this->woocommerce_variants_template_array($product, $response->attributes);
+
+                $variantdata = [
+                    'create' => $variants_array
+                ];
+
+                /*Creating Product Variations On Woocommerce*/
+                $response = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
+
+                $woocommerce_variants = $response->create;
+                foreach ($product->hasVariants as $index => $v){
+                    $v->woocommerce_id = $woocommerce_variants[$index]->id;
+                    $v->save();
+                }
+            }
+
+
+            $this->log->store(0, 'Retailer Product', $product->id, $product->title, 'Product Imported To Woocommerce');
+
+            return redirect()->back()->with('success','Product Push to Store Successfully!');
+        }
+        else{
+            echo 'imported already';
+        }
+    }
+
+    public function attributes_template_array($product){
+
+        $product = RetailerProduct::find($product->id);
+
+        $attributes_array = [];
+        $option1_array = [];
+        $option2_array = [];
+        $option3_array = [];
+        if (count($product->option1($product)) > 0) {
+            foreach ($product->option1($product) as $a) {
+                array_push($option1_array, $a);
+            }
+        }
+        if (count($product->option2($product)) > 0) {
+            foreach ($product->option2($product) as $a) {
+                array_push($option2_array, $a);
+            }
+        }
+        if (count($product->option3($product)) > 0) {
+            foreach ($product->option3($product) as $a) {
+                array_push($option3_array, $a);
+            }
+        }
+
+        if(count($option1_array)>0) {
+            array_push($attributes_array, [
+                'name' => $product->attribute1,
+                'position' => 0,
+                'visible' => true,
+                'variation' => true,
+                'options' => $option1_array
+            ]);
+        }
+
+        if(count($option2_array)>0) {
+            array_push($attributes_array, [
+                'name' => $product->attribute2,
+                'position' => 1,
+                'visible' => true,
+                'variation' => true,
+                'options' => $option2_array
+
+            ]);
+        }
+        if(count($option3_array)>0) {
+            array_push($attributes_array, [
+                'name' => $product->attribute3,
+                'position' => 2,
+                'visible' => true,
+                'variation' => true,
+                'options' => $option3_array
+            ]);
+        }
+        return $attributes_array;
+    }
+
+    public function woocommerce_variants_template_array($product){
+        $product = RetailerProduct::find($product->id);
+
+        if(is_null($product->weight)) {
+            $weight = 0.0;
+        }
+        else {
+            $weight = $product->weight;
+        }
+
+        $variants_array = [];
+        foreach ($product->hasVariants as $index => $varaint) {
+            $array_item = [];
+            $array_item['attributes'] = [];
+            $array_item['image'] = [];
+
+            $array_item['regular_price'] = $varaint->price;
+            //$array_item['sale_price'] = $varaint->cost;
+            $array_item['sku'] = $varaint->sku;
+            $array_item['stock_quantity'] = $varaint->quantity;
+            $array_item['manage_stock'] = true;
+            $array_item['weight'] = $weight;
+
+            if($varaint->option1 !== null) {
+                array_push($array_item['attributes'], [
+                    'option' => $varaint->option1,
+                    'name' => $product->attribute1,
+                ]);
+            }
+            if($varaint->option2 !== null) {
+                array_push($array_item['attributes'], [
+                    'option' => $varaint->option2,
+                    'name' => $product->attribute2,
+                ]);
+            }
+            if($varaint->option3 !== null) {
+                array_push($array_item['attributes'], [
+                    'option' => $varaint->option3,
+                    'name' => $product->attribute3,
+
+                ]);
+            }
+
+            if($varaint->has_image != null){
+                $array_item['image']['id'] = $varaint->has_image->woocommerce_id;
+            }
+
+            array_push($variants_array, $array_item);
+        }
+
+        return $variants_array;
+    }
+
     public function variants_template_array($product){
         if(is_null($product->weight)) {
             $weight = 0.0;

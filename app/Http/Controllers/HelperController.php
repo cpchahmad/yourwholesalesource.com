@@ -43,6 +43,13 @@ class HelperController extends Controller
     public function getWooCommerceAdminShop() {
         return new Client(env('WOOCOMMERCE_ADMIN_SHOP'), env('WOOCOMMERCE_CONSUMMER_KEY'), env('WOOCOMMERCE_CONSUMMER_SECRET'), ['wp_api' => true, 'version' => 'wc/v3',]);
     }
+
+    public function getWooShop() {
+        $current_shop = $this->getCurrentWooShop();
+        return new Client($current_shop->woocommerce_domain, $current_shop->consumer_key , $current_shop->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
+    }
+
+
     public function getLocalShop(){
         /*Ossiset Shop Model*/
         $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
