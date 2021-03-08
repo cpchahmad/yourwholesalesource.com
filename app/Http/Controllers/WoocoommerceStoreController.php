@@ -1465,8 +1465,6 @@ class WoocoommerceStoreController extends Controller
     public function switch_to_store(Request $request) {
         Session::put('woocommerce_domain', $request->input('woocommerce_domain'));
 
-        dd(Session::all());
-
         return redirect(route('woocommerce.store.dashboard'));
     }
 
