@@ -212,7 +212,7 @@ class WoocommerceStoreController extends Controller
         $productQuery = Product::with('has_images', 'hasVariants','has_platforms','has_categories','has_subcategories')->where('status', 1)->newQuery();
 
         $productQuery->where('global', 0)->whereHas('has_preferences', function ($q) {
-            return $q->where('shopify_domain', '=', $this->helper->getLocalShop()->shopify_domain);
+            return $q->where('woocommerce_domain', '=', $this->helper->getCurrentWooShop()->woocommerce_domain);
         });
 
         $productQuery->orWhere('global', 1)->where('status', 1);
