@@ -812,8 +812,8 @@ class RetailerProductController extends Controller
 
             /*Tags*/
             $tags_array = [];
-            if($product->tags()->count() > 0) {
-                foreach ($product->tags()->get() as $tag) {
+            if($product->linked_product->tags()->count() > 0) {
+                foreach ($product->linked_product->tags()->get() as $tag) {
                     array_push($tags_array, [
                         'id' => $tag->woocommerce_id,
                     ]);
