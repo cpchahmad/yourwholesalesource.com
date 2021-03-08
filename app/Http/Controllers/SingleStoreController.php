@@ -1442,7 +1442,6 @@ class SingleStoreController extends Controller
 
 
         $woo_shop = new Shop();
-        $woo_shop->user_id = Auth::user()->id;
         $woo_shop->woocommerce_domain = $request->woocommerce_domain;
         $woo_shop->consumer_key = $request->consumer_key;
         $woo_shop->consumer_secret = $request->consumer_secret;
