@@ -47,6 +47,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{route('store.my_dropship_products')}}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">My Dropship Products</span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
             <li class="nav-main-item">
@@ -108,6 +115,14 @@
                     <span class="nav-main-link-name">Wishlist</span>
                 </a>
             </li>
+
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{route('store.dropship.requests')}}">
+                    <i class="nav-main-link-icon fa fa-shipping-fast"></i>
+                    <span class="nav-main-link-name">Dropship Request</span>
+                </a>
+            </li>
+
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('store.notifications')}}">

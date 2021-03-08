@@ -89,10 +89,6 @@
                     <span class="nav-main-link-name">Dropship Request</span>
                 </a>
             </li>
-
-
-
-
             <li class="nav-main-item" style="display: none">
                 <a class="nav-main-link active" href="{{route('users.stores')}}">
                     <i class="nav-main-link-icon si si-share"></i>
