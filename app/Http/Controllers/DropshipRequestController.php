@@ -591,6 +591,16 @@ class DropshipRequestController extends Controller
 
     }
 
+    public function delete_shipping_mark($id) {
+        $mark = ShippingMark::find($id);
+
+        $mark->dropship_product()->dropship_product_variants()->delete();
+        $mark->dropship_product()->delete();
+        $mark->delete();
+
+        return redirect()->back()->with('success', 'Shipping mark deleted successfully!');
+    }
+
 
 
 //    public function generateAdminProductsFromShopify($dropship_request, $shopify_product)
@@ -683,5 +693,7 @@ class DropshipRequestController extends Controller
 //            return redirect()->back()->with('error','Associated Manager Not Found');
 //        }
 //    }
+
+
 
 }
