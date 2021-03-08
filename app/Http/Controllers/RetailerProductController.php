@@ -220,7 +220,7 @@ class RetailerProductController extends Controller
                             $retailerProductVariant->quantity = $variant->quantity;
                             $retailerProductVariant->sku = $variant->sku;
                             $retailerProductVariant->barcode = $variant->barcode;
-                            $retailerProductVariant->related_variant_id = $variant->id;
+                            $retailerProductVariant->linked_variant_id = $variant->id;
 
                             $retailerProductVariant->product_id = $retailerProduct->id;
                             $retailerProductVariant->woocommerce_shop_id =  $retailerProduct->woocommerce_shop_id;
