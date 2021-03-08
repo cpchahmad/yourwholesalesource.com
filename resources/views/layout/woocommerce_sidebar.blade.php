@@ -182,7 +182,7 @@
             </button>
             @php
                 $current_shop_domain = \App\Http\Controllers\HelperController::getCurrentWooShop();
-                $shop = Shop::where('woocommerce_domain',$current_shop_domain)->first();
+                $shop = \App\Shop::where('woocommerce_domain',$current_shop_domain)->first();
 
                    if($shop->has_manager != null){
                        $manager = $shop->has_manager;
