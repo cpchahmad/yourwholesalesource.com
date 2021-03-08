@@ -273,7 +273,7 @@ class HelperController extends Controller
     }
 
     public function getCurrentWooShop() {
-        return session()->get('woocommerce_domain');
+        return \App\Shop::where('woocommmerce_domain', session()->get('woocommerce_domain'))->first();
     }
 
 }

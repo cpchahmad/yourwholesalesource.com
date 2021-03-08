@@ -181,23 +181,21 @@
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
             @php
-                $current_shop_domain = \App\Http\Controllers\HelperController::getCurrentWooShop();
-                $shop = \App\Shop::where('woocommerce_domain',$current_shop_domain)->first();
+                $shop = \App\Http\Controllers\HelperController::getCurrentWooShop();
 
-                   if($shop->has_manager != null){
+                if($shop->has_manager != null){
                        $manager = $shop->has_manager;
-                   }
-                   else{
+                }
+                else{
                        $manager = null;
-                   }
+                }
 
-                 if(count($shop->has_owner) > 0){
+                if(count($shop->has_owner) > 0){
                     $associated_user =   $shop->has_owner[0];
-            }
-            else{
-                $associated_user = null;
-            }
-
+                }
+                else{
+                    $associated_user = null;
+                }
             @endphp
         </div>
 

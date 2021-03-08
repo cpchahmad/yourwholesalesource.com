@@ -62,7 +62,7 @@ class WoocommerceStoreController extends Controller
     public function index(Request $request)
     {
 
-        $shop = $this->helper->getLocalShop();
+        $shop = $this->helper->getCurrentWooShop();
 
         if ($request->has('date-range')) {
             $date_range = explode('-', $request->input('date-range'));

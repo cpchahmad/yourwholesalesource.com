@@ -76,8 +76,7 @@
         @include('flash_message.message')
 
         @php
-            $current_shop_domain = \App\Http\Controllers\HelperController::getCurrentWooShop();
-            $shop = \App\Shop::where('woocommerce_domain',$current_shop_domain)->first();
+            $shop = \App\Http\Controllers\HelperController::getCurrentWooShop()
             $countries = \App\Country::all();
 
         @endphp
