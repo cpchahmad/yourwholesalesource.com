@@ -319,7 +319,7 @@ class WoocommerceStoreController extends Controller
     public function view_my_product($id)
     {
         $product = RetailerProduct::find($id);
-        $shop = $this->helper->getLocalShop();
+        $shop = $this->helper->getCurrentWooShop();
         return view('woocommerce-store.products.view_product')->with([
             'product' => $product,
             'shop' => $shop
