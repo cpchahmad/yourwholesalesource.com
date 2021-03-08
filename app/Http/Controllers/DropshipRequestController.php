@@ -262,8 +262,9 @@ class DropshipRequestController extends Controller
 
             // Saving product image
 
-            if($file = isset($request->image[$index]))
+            if(isset($request->image[$index]))
             {
+                $file = $request->image[$index];
                 $name = \Illuminate\Support\Str::slug($file->getClientOriginalName());
                 $attachement = date("mmYhisa_") . $name;
                 $file->move(public_path() . '/shipping-marks/', $attachement);
