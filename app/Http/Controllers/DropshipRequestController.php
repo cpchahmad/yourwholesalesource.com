@@ -594,7 +594,10 @@ class DropshipRequestController extends Controller
     public function delete_shipping_mark($id) {
         $mark = ShippingMark::find($id);
 
-        $mark->dropship_product->dropship_product_variants()->get()->delete();
+        $mark->dropship_product->dropship_product_variants()->each(function($variant) {
+            $variant->delete();
+        });
+
         $mark->dropship_product->delete();
         $mark->delete();
 
