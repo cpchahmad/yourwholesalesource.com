@@ -42,6 +42,41 @@
                             </div>
                         </div>
 
+
+                        <div class="block">
+                            <div class="block-header">
+                                <h3 class="block-title">List of Woocommerce stores <a href="{{route('system.woocommerce.store.connect')}}" class="btn btn-success btn-sm" style="float: right;margin-left: 10px"> Add Store</a> <a href="{{route('users.stores')}}" class="btn btn-primary btn-sm" style="float: right"> Manage Stores</a></h3>
+                            </div>
+
+                            <div class="block-content ">
+                                <table class="js-table-sections table table-hover">
+                                    <tbody>
+                                    <form method="POST" action="{{ route('switch.woocommerce') }}" class="shop-login-form">
+                                        @csrf
+                                        @foreach($associated_user->has_shops as $index => $shop)
+                                            <tr>
+                                                <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
+                                                <td class="text-right" style="vertical-align: middle">
+                                                    <button type="button" class="btn btn-sm btn-success settings-shop-log-btn" >
+                                                        <input type="hidden" class="shop-domain-name" value="{{$shop->shopify_domain}}">
+                                                        <input type="hidden" name="shop" value="" class="shop-domain-input">
+                                                        Switch View
+                                                    </button>
+                                                    {{--                                                <a href="{{url('/shop/install?shop='.$shop->shopify_domain)}}" class="">Switch View</a>--}}
+
+                                                    <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
+                                                       title="Remove Store" ><i class="fa fa-trash"></i></a>
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </form>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
                         <div class="block">
                             <div class="block-header">
                                 <h3 class="block-title">Account Details</h3>

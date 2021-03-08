@@ -285,6 +285,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     /*Store Connection*/
     Route::get('/shop/login', 'SingleStoreController@storeAuthenticate');
     Route::get('/connect/store','RolePermissionController@store_connect')->name('system.store.connect');
+    Route::get('/connect/woocommerce/store','SingleStoreController@woocommerce_store_connect')->name('system.woocommerce.store.connect');
+    Route::post('/user/authenticate/woocommerce','SingleStoreController@authenticate_woocommerce')->name('store.user.authenticate.woocommerce');
+    Route::get('/woocommerce/stores','SingleStoreController@woocommerce_stores')->name('users.woocommerce.stores');
+    Route::post('/woocommerce/install','SingleStoreController@switch_to_store')->name('switch.woocommerce');
     /*Non-Shopify and Shopify User Routes */
 
     Route::get('users/home','ShopifyUsersController@index')->name('users.dashboard')->middleware('role:non-shopify-users');

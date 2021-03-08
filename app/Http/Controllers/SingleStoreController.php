@@ -1415,6 +1415,69 @@ class SingleStoreController extends Controller
     }
 
 
+    public function woocommerce_store_connect() {
+        return view('non_shopify_users.woocommerce_store_connect');
+    }
+
+    public function authenticate_woocommerce(Request $request)
+    {
+        $this->validate($request, [
+            'shop_url' => 'required|unique:woocommerce_shops',
+            'consumer_key' => 'required',
+            'consumer_secret' => 'required'
+        ]);
+
+        $woocommerce = new Client($request->shop_url, $request->consumer_key, $request->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
+
+        try {
+            $products = $woocommerce->get('products');
+        }
+        catch(HttpClientException $e) {
+            $error_msg = $e->getMessage(); // Error message.
+            $e->getRequest(); // Last request data.
+            $e->getResponse(); // Last response data
+            return redirect()->back()->with('error', 'Your Credentials are incorrect. Please Try again!, Error:'.$error_msg);
+        }
+
+
+        $woo_shop = new WoocommerceShop();
+        $woo_shop->user_id = Auth::user()->id;
+        $woo_shop->shop_url = $request->shop_url;
+        $woo_shop->consumer_key = $request->consumer_key;
+        $woo_shop->consumer_secret = $request->consumer_secret;
+        $woo_shop->save();
+
+
+        Auth::user()->has_woocommerce_shops()->attach([$woo_shop->id]);
+
+
+        return redirect()->back()->with('success', 'Store Connected Successfully!');
+    }
+
+    public function woocommerce_stores() {
+        $shops = auth()->user()->has_woocommerce_shops;
+        return view('non_shopify_users.woocommerce_stores')->with([
+            'shops' => $shops
+        ]);
+    }
+
+    public function switch_to_store(Request $request) {
+        Session::put('shop_url', $request->input('shop'));
+
+        dd(Session::all());
+
+        return redirect('/store/dashboard');
+    }
+
+    public function getWooShop() {
+        $shop = Auth::user()->has_woocommerce_shops[0];
+
+        $woocommerce = new Client($shop->shop_url, $shop->consumer_key, $shop->consumer_secret, ['wp_api' => true, 'version' => 'wc/v3',]);
+
+        return $woocommerce;
+    }
+
+
 
 
 }
