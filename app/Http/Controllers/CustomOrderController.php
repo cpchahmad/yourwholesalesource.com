@@ -1436,5 +1436,13 @@ class CustomOrderController extends Controller
         return $ip;
     }
 
+    public function create_shipping_mark($id) {
+        $drop_request = DropshipRequest::find($id);
+
+        return view('non_shopify_users.dropship-request.create-shipping-mark')->with([
+            'drop_request' => $drop_request
+        ]);
+    }
+
 
 }

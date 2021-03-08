@@ -1406,6 +1406,15 @@ class SingleStoreController extends Controller
         ]);
     }
 
+    public function create_shipping_mark($id) {
+        $drop_request = DropshipRequest::find($id);
+
+        return view('single-store.dropship-request.create-shipping-mark')->with([
+            'drop_request' => $drop_request
+        ]);
+    }
+
+
 
 
 }

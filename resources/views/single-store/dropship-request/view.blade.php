@@ -425,7 +425,7 @@
                     <div class="block-header d-flex justify-content-between">
                         <h5 class="block-title">Shipping Marks</h5>
                         @if($item->status_id == 3 && count($item->shipping_marks) != 1)
-                            <a class="btn btn-primary" href="{{ route('dropship.requests.create.shipping.mark', $item->id) }}">Create Shipping Marks</a>
+                            <a class="btn btn-primary" href="{{ route('store.dropship.requests.create.shipping.mark', $item->id) }}">Create Shipping Marks</a>
                         @endif
                     </div>
                     <div class="block-content">

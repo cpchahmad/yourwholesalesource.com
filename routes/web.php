@@ -267,6 +267,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/dropship-requests', 'SingleStoreController@dropship_requests')->name('store.dropship.requests');
         Route::get('/dropship-requests/{id}', 'SingleStoreController@view_dropship_request')->name('store.dropship.request.view');
         Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'SingleStoreController@view_shipping_mark')->name('store.dropship.requests.view.shipping.mark');
+        Route::get('/dropship-requests/{id}/create-shipping-mark', 'SingleStoreController@create_shipping_mark')->name('store.dropship.requests.create.shipping.mark');
 
 
 
@@ -337,6 +338,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/dropship-requests', 'CustomOrderController@dropship_requests')->name('users.dropship.requests');
             Route::get('/dropship-requests/{id}', 'CustomOrderController@view_dropship_request')->name('users.dropship.request.view');
             Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'DropshipRequestController@view_shipping_mark')->name('users.dropship.requests.view.shipping.mark');
+            Route::get('/dropship-requests/{id}/create-shipping-mark', 'CustomOrderController@create_shipping_mark')->name('users.dropship.requests.create.shipping.mark');
 
 
             Route::group(['middleware' => ['check_user_shop']], function () {
