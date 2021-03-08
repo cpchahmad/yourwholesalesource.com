@@ -71,7 +71,7 @@
 </head>
 <body>
 <div id="page-container" class="sidebar-o sidebar-dark  side-overlay-hover enable-page-overlay side-scroll page-header-fixed">
-    @include('layout.woocommerce_sidebar_sidebar')
+    @include('layout.woocommerce_sidebar')
     <main id="main-container">
         @include('flash_message.message')
 
