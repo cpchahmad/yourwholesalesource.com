@@ -181,6 +181,7 @@ class WoocommerceStoreController extends Controller
 
 
         return view('woocommerce-store.dashboard')->with([
+            'shop' => $shop,
             'date_range' => $request->input('date-range'),
             'orders' => $orders,
             'profit' => $profit,

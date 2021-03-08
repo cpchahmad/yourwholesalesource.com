@@ -230,8 +230,6 @@
                     </div>
 
                     @php
-                        $shop =  \App\Http\Controllers\HelperController::getCurrentWooShop();
-
                         if($shop->has_manager != null){
                            $manager = $shop->has_manager;
                         }
