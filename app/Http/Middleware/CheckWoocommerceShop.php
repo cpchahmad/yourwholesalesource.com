@@ -15,8 +15,7 @@ class CheckWoocommerceShop
      */
     public function handle($request, Closure $next)
     {
-        dd($request->session()->all());
-        if(session()->has('current_shop_domain')){
+        if(session()->has('woocommerce_domain')){
             return $next($request);
         }
 
