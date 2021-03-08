@@ -76,7 +76,7 @@
         @include('flash_message.message')
 
         @php
-            $shop = \App\Http\Controllers\HelperController::getCurrentWooShop()
+            $shop = \App\Http\Controllers\HelperController::getCurrentWooShop();
             $countries = \App\Country::all();
 
         @endphp
