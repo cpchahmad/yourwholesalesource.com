@@ -118,6 +118,14 @@ $(document).ready(function () {
         $('.shop-login-form').submit();
     });
 
+    $('.settings-woo-shop-log-btn').click(function() {
+        var shop = $(this).find('.woo-shop-domain-name').val();
+        $('.woo-shop-domain-input').val(shop);
+        $('.woo-shop-login-form').submit();
+    });
+
+
+
     /*Order Bulk Pay*/
     /*BULK ORDER PAY*/
     $('.check-order-all-user').change(function () {

@@ -1462,7 +1462,8 @@ class SingleStoreController extends Controller
     }
 
     public function switch_to_store(Request $request) {
-        Session::put('shop_url', $request->input('shop'));
+        dd($request->all());
+        Session::put('woocommerce_domain', $request->input('shop'));
 
         dd(Session::all());
 

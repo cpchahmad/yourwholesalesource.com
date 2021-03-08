@@ -55,15 +55,15 @@
                             <div class="block-content ">
                                 <table class="js-table-sections table table-hover">
                                     <tbody>
-                                    <form method="POST" action="{{ route('switch.woocommerce') }}" class="shop-login-form">
+                                    <form method="POST" action="{{ route('switch.woocommerce') }}" class="woo-shop-login-form">
                                         @csrf
                                         @foreach($associated_user->has_woocommerce_shops as $index => $shop)
                                             <tr>
                                                 <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>
                                                 <td class="text-right" style="vertical-align: middle">
-                                                    <button type="button" class="btn btn-sm btn-success settings-shop-log-btn" >
-                                                        <input type="hidden" class="shop-domain-name" value="{{$shop->woocommerce_domain}}">
-                                                        <input type="hidden" name="shop" value="" class="shop-domain-input">
+                                                    <button type="button" class="btn btn-sm btn-success settings-woo-shop-log-btn" >
+                                                        <input type="hidden" class="woo-shop-domain-name" value="{{$shop->woocommerce_domain}}">
+                                                        <input type="hidden" name="woocommerce_domain" value="" class="woo-shop-domain-input">
                                                         Switch View
                                                     </button>
                                                     <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger text-white"
