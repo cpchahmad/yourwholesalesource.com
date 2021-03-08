@@ -181,8 +181,6 @@
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
             @php
-                $shop = \App\Http\Controllers\HelperController::getCurrentWooShop();
-
                 if($shop->has_manager != null){
                        $manager = $shop->has_manager;
                 }
