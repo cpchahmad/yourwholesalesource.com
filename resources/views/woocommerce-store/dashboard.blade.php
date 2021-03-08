@@ -238,7 +238,7 @@
                         }
 
                         if(count($shop->has_user) > 0){
-                            $associated_user =   $shop->has_user[0];
+                            $associated_user =   $shop->has_woocommerce_user[0];
                         }
                         else{
                             $associated_user = null;
