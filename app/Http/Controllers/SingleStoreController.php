@@ -1422,7 +1422,7 @@ class SingleStoreController extends Controller
     public function authenticate_woocommerce(Request $request)
     {
         $this->validate($request, [
-            'shop_url' => 'required|unique:shops',
+            'woocommerce_domain' => 'required|unique:shops',
             'consumer_key' => 'required',
             'consumer_secret' => 'required'
         ]);
