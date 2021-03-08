@@ -186,6 +186,7 @@ class RetailerProductController extends Controller
                 $retailerProduct->status = 1;
                 $retailerProduct->fulfilled_by = $product->fulfilled_by;
                 $retailerProduct->toShopify = 0;
+                $retailerProduct->to_woocommerce = 0;
                 $retailerProduct->woocommerce_shop_id = $this->helper->getCurrentWooShop()->id;
 
                 if(count($this->helper->getCurrentWooShop()->has_owner) > 0){
