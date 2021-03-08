@@ -44,14 +44,14 @@ class WareHouse extends Model
     }
 
     public function has_inventory_quantity_for_product($product) {
-        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->whereNotNull('quantity')->exists()) {
+        if($product && WarehouseInventory::where('warehouse_id', $this->id)->where('product_id', $product->id)->whereNotNull('quantity')->exists()) {
             return true;
         }
         return false;
     }
 
     public function get_inventory_quantity_for_variant($variant) {
-        if(WarehouseInventory::where('warehouse_id', $this->id)->where('product_variant_id', $variant->id)->exists()) {
+        if($variant && WarehouseInventory::where('warehouse_id', $this->id)->where('product_variant_id', $variant->id)->exists()) {
             $item = WarehouseInventory::where('warehouse_id', $this->id)->where('product_variant_id', $variant->id)->first();
             return $item->quantity;
         }
