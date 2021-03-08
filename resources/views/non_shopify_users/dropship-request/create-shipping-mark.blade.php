@@ -27,7 +27,7 @@
                         </h5>
                     </div>
                     <div class="block-content">
-                        <form action="{{ route('dropship.requests.save.shipping.mark.shopify', $drop_request->id) }}" enctype="multipart/form-data" method="POST">
+                        <form action="{{ route('dropship.requests.save.shipping.mark', $drop_request->id) }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="form-group">
                                 <div class="col-sm-12">
