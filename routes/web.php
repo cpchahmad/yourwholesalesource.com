@@ -296,7 +296,7 @@ Route::group(['middleware' => ['check_woocommerce_shop']], function () {
         Route::get('/products/wefullfill/{id}','WoocommerceStoreController@view_fantasy_product')->name('woocommerce.product.wefulfill.show');
         Route::get('/my_products/wefullfill/{id}','WoocommerceStoreController@view_my_product')->name('woocommerce.my_product.wefulfill.show');
         /*Import List Route*/
-        Route::get('/wefullfill/{id}/add-to-import-list','RetailerProductController@add_to_import_list')->name('woocommerce.product.wefulfill.add-to-import-list');
+        Route::get('/wefullfill/{id}/add-to-import-list','RetailerProductController@add_to_woocommerce_import_list')->name('woocommerce.product.wefulfill.add-to-import-list');
         Route::get('/wefullfill/{id}/updated-product','RetailerProductController@show_updated_product')->name('woocommerce.product.wefulfill.updated-product');
         Route::post('/wefullfill/{id}/update/variants','RetailerProductController@updateProductVariants')->name('woocommerce.product.variant.update');
         Route::get('/import-list','RetailerProductController@import_list')->name('woocommerce.import_list');

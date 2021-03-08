@@ -310,7 +310,7 @@ class WoocommerceStoreController extends Controller
     {
         $product = Product::find($id);
         $shop = $this->helper->getLocalShop();
-        return view('single-store.products.view_product')->with([
+        return view('woocommerce-store.products.view_product')->with([
             'product' => $product,
             'shop' => $shop
         ]);
@@ -320,7 +320,7 @@ class WoocommerceStoreController extends Controller
     {
         $product = RetailerProduct::find($id);
         $shop = $this->helper->getLocalShop();
-        return view('single-store.products.view_product')->with([
+        return view('woocommerce-store.products.view_product')->with([
             'product' => $product,
             'shop' => $shop
         ]);
@@ -339,7 +339,7 @@ class WoocommerceStoreController extends Controller
         } else {
             $associated_user = null;
         }
-        return view('single-store.index')->with([
+        return view('woocommerce-store.index')->with([
             'shop' => $shop,
             'user' => $user,
             'associated_user' => $associated_user,

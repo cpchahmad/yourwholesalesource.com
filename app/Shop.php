@@ -17,6 +17,10 @@ class Shop extends Model
    public function has_imported(){
         return $this->belongsToMany('App\Product','retailer_product_shop','shop_id','product_id');
    }
+
+   public function has_imported_woocommerce_products(){
+       return $this->belongsToMany('App\Product','retailer_product_shop','woocommerce_shop_id','product_id');
+   }
    public function has_orders(){
         return $this->hasMany('App\RetailerOrder','shop_id');
    }

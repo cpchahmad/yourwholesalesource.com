@@ -151,6 +151,130 @@ class RetailerProductController extends Controller
         }
     }
 
+    public function add_to_woocommerce_import_list(Request $request){
+        $product = Product::find($request->id);
+        if($product != null){
+            if(RetailerProduct::where('linked_product_id',$product->id)->where('woocmmerce_shop_id',$this->helper->getCurrentWooShop()->id)->exists()){
+                return redirect()->back()->with([
+                    'info' => 'This Product Already Imported'
+                ]);
+            }
+            else{
+                if($request->wishlist_id) {
+                    $wishlist = Wishlist::find($request->wishlist_id);
+                    $wishlist->imported_to_store = 1;
+                    $wishlist->save();
+                }
+
+                /*Product Copy*/
+                $retailerProduct = new RetailerProduct();
+
+                $retailerProduct->linked_product_id = $product->id;
+
+                $retailerProduct->title = $product->title;
+                $retailerProduct->description = $product->description;
+                $retailerProduct->type = $product->type;
+                $retailerProduct->tags = $product->tags;
+                $retailerProduct->vendor = $product->vendor;
+                $retailerProduct->price = $product->price;
+                $retailerProduct->cost = $product->price;
+                $retailerProduct->quantity = $product->quantity;
+                $retailerProduct->weight = $product->weight;
+                $retailerProduct->sku = $product->sku;
+                $retailerProduct->barcode = $product->barcode;
+                $retailerProduct->variants = $product->variants;
+                $retailerProduct->status = 1;
+                $retailerProduct->fulfilled_by = $product->fulfilled_by;
+                $retailerProduct->toShopify = 0;
+                $retailerProduct->woocommerce_shop_id = $this->helper->getCurrentWooShop()->id;
+
+                if(count($this->helper->getCurrentWooShop()->has_owner) > 0){
+                    $retailerProduct->user_id = $this->helper->getCurrentWooShop()->has_owner[0]->id;
+                }
+
+                $retailerProduct->save();
+                /*Product Images Copy*/
+                if(count($product->has_images) > 0){
+                    foreach ($product->has_images()->orderBy('position')->get() as $index => $image){
+                        $retailerProductImage = new RetailerImage();
+                        $retailerProductImage->isV = $image->isV;
+                        $retailerProductImage->product_id = $retailerProduct->id;
+                        $retailerProductImage->shop_id =  $retailerProduct->shop_id;
+                        $retailerProductImage->user_id =  $retailerProduct->user_id;
+                        $retailerProductImage->image = $image->image;
+                        $retailerProductImage->position = $index+1;
+                        $retailerProductImage->save();
+                    }
+                }
+                /*Product Variants Copy*/
+                if($retailerProduct->variants != null){
+                    if(count($product->hasVariants) > 0){
+                        foreach ($product->hasVariants as $variant){
+                            $retailerProductVariant = new RetailerProductVariant();
+                            $retailerProductVariant->title = $variant->title;
+                            $retailerProductVariant->option1 = $variant->option1;
+                            $retailerProductVariant->option2 = $variant->option2;
+                            $retailerProductVariant->option3 = $variant->option3;
+                            $retailerProductVariant->price = $variant->price;
+                            $retailerProductVariant->cost = $variant->price;
+                            $retailerProductVariant->quantity = $variant->quantity;
+                            $retailerProductVariant->sku = $variant->sku;
+                            $retailerProductVariant->barcode = $variant->barcode;
+                            $retailerProductVariant->related_variant_id = $variant->id;
+
+                            $retailerProductVariant->product_id = $retailerProduct->id;
+                            $retailerProductVariant->woocommerce_shop_id =  $retailerProduct->woocommerce_shop_id;
+                            $retailerProductVariant->user_id =  $retailerProduct->user_id;
+
+                            if($variant->has_image != null){
+                                $image_linked = $retailerProduct->has_images()->where('image',$variant->has_image->image)->first();
+                                $retailerProductVariant->image =$image_linked->id;
+                            }
+
+                            $retailerProductVariant->save();
+                        }
+                    }
+                }
+
+                /*Product Category Copy*/
+                $category_ids = $product->has_categories->pluck('id')->toArray();
+                $retailerProduct->has_categories()->attach($category_ids);
+
+                /*Product SubCategory Copy*/
+                $subcategory_ids = $product->has_subcategories->pluck('id')->toArray();
+                $retailerProduct->has_subcategories()->attach($subcategory_ids);
+
+                /*Shop Product Import Relation*/
+                $shop = $this->helper->getCurrentWooShop();
+                if($shop != null){
+                    if(!in_array($product->id,$shop->has_imported_woocommerce_products->pluck('id')->toArray())){
+                        $shop->has_imported()->attach([$product->id]);
+                    }
+                }
+                /*Shop-User Import Relation*/
+                if(count($this->helper->getCurrentWooShop()->has_owner) > 0){
+                    $user = $this->helper->getCurrentWooShop()->has_owner[0];
+                    if(!in_array($product->id,$user->has_imported->pluck('id')->toArray())){
+                        $user->has_imported()->attach([$product->id]);
+                    }
+                }
+
+                $this->log->store($retailerProduct->user_id, 'RetailerProduct', $retailerProduct->id, $retailerProduct->title, 'Product Added to Import List');
+
+                return redirect()->back()->with([
+                    'success' => 'Product Added to Import List Successfully'
+                ]);
+
+            }
+        }
+        else{
+            return redirect()->back()->with([
+                'error' => 'This Product Cannot Be Imported'
+            ]);
+        }
+    }
+
+
     public function show_updated_product($id) {
         $product = Product::find($id);
         $shop= $this->helper->getLocalShop();
