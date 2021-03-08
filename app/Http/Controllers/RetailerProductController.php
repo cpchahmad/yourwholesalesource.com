@@ -248,7 +248,7 @@ class RetailerProductController extends Controller
                 $shop = $this->helper->getCurrentWooShop();
                 if($shop != null){
                     if(!in_array($product->id,$shop->has_imported_woocommerce_products->pluck('id')->toArray())){
-                        $shop->has_imported()->attach([$product->id]);
+                        $shop->has_imported_woocommerce_products()->attach([$product->id]);
                     }
                 }
                 /*Shop-User Import Relation*/
