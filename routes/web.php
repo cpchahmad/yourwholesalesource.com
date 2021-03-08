@@ -300,7 +300,7 @@ Route::group(['middleware' => ['check_woocommerce_shop']], function () {
         Route::get('/wefullfill/{id}/updated-product','RetailerProductController@show_updated_product')->name('woocommerce.product.wefulfill.updated-product');
         Route::post('/wefullfill/{id}/update/variants','RetailerProductController@updateProductVariants')->name('woocommerce.product.variant.update');
         Route::get('/import-list','RetailerProductController@import_list')->name('woocommerce.import_list');
-        Route::get('/my_products','RetailerProductController@my_products')->name('woocommerce.my_products');
+        Route::get('/my_products','RetailerProductController@my_woocommerce_products')->name('woocommerce.my_products');
         Route::get('/my_dropship_products','RetailerProductController@my_dropship_products')->name('woocommerce.my_dropship_products');
         Route::get('/my_products/{id}','RetailerProductController@edit_my_product')->name('woocommerce.my_product.edit');
         Route::get('/products/delete/{id}','RetailerProductController@delete')->name('woocommerce.product.delete');
