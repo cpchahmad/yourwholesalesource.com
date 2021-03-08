@@ -230,17 +230,16 @@
                     </div>
 
                     @php
-                        $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
-                        /*Local Shop Model!*/
-                        $shop= \App\Shop::find($shop->id);
-                           if($shop->has_manager != null){
-                           $manager = $shop->has_manager;
-                           }
-                           else{
-                               $manager = null;
-                           }
+                        $shop =  \App\Http\Controllers\HelperController::getCurrentWooShop();
 
-                         if(count($shop->has_user) > 0){
+                        if($shop->has_manager != null){
+                           $manager = $shop->has_manager;
+                        }
+                        else{
+                               $manager = null;
+                        }
+
+                        if(count($shop->has_user) > 0){
                             $associated_user =   $shop->has_user[0];
                         }
                         else{
