@@ -56,7 +56,7 @@
                         <tr>
 
                             <td class="font-w600" style="vertical-align: middle">
-                                {{explode('.',$shop->woocommerce_domain)[0]}}
+                                {{explode('//',$shop->woocommerce_domain)[1]}}
                             </td>
                             <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>
                             <td class="text-right" style="vertical-align: middle">
