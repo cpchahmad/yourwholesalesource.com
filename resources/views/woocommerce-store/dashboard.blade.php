@@ -237,7 +237,7 @@
                                $manager = null;
                         }
 
-                        if(count($shop->has_user) > 0){
+                        if(count($shop->has_owner) > 0){
                             $associated_user =   $shop->has_owner[0];
                         }
                         else{
