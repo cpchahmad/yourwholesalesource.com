@@ -570,11 +570,12 @@ $(document).ready(function () {
         var status = '';
         if($(this).is(':checked')){
             status = 1;
-            $('.status-text').text('Published')
+
+            $(this).next().text('Published')
         }
         else{
             status = 0;
-            $('.status-text').text('Draft')
+            $(this).next().text('Draft')
         }
         $.ajax({
             url: $(this).data('route'),
