@@ -510,7 +510,7 @@ class WoocommerceStoreController extends Controller
         $all_customers = [];
         do{
             try {
-                $customers = $woocommerce->get('products',['page' => $page]);
+                $customers = $woocommerce->get('products',['per_page' => 3, 'page' => $page]);
             }catch(HttpClientException $e){
 
             }
