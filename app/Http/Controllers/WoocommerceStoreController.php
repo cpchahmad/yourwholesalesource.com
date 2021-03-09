@@ -573,7 +573,7 @@ class WoocommerceStoreController extends Controller
         $orders = $shop->has_woocommerce_orders()->get();
         $tickets = $tickets->paginate(30);
 
-        return view('single-store.help-center.index')->with([
+        return view('woocommerce-store.help-center.index')->with([
             'shop' => $shop,
             'tickets' => $tickets,
             'orders' => $orders,
