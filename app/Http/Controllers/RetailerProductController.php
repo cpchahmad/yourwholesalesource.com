@@ -490,6 +490,42 @@ class RetailerProductController extends Controller
         if ($product != null) {
             if ($request->has('request_type')) {
 
+                dd($request->all());
+
+                /*Product Basic Update Shopify and Database*/
+                if ($request->input('request_type') == 'basic-info') {
+                    $product->title = $request->title;
+
+                    if($request->tags)
+                        $product->tags()->sync($request->tags);
+
+                    $product->save();
+                    if ($product->to_woocommerce == 1) {
+
+                        /*Updating Tags on Woocommerce */
+                        $tags_array = [];
+                        foreach ($product->tags()->get() as $tag) {
+                            array_push($tags_array, [
+                                'id' => $tag->woocommerce_id,
+                            ]);
+                        }
+
+
+                        $productdata = [
+                            "product" => [
+                                "name" => $request->title,
+                                "tags" => $tags_array
+                            ]
+                        ];
+
+                        /*Updating Product On Woocommerce*/
+                        $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Basic Information Updated');
+
+                    }
+                }
+
                 /*Single Variant Update Shopify and Database*/
                 if ($request->input('request_type') == 'single-variant-update') {
                     $variant = RetailerProductVariant::find($request->variant_id);
@@ -557,36 +593,17 @@ class RetailerProductController extends Controller
                 }
 
 
-                /*Product Basic Update Shopify and Database*/
-                if ($request->input('request_type') == 'basic-info') {
-                    $product->title = $request->title;
-                    $product->tags = $request->tags;
-                    $product->save();
-                    if ($product->to_woocommerce == 1) {
-                        $productdata = [
-                            "product" => [
-                                "title" => $request->title,
-                                "tags" =>$request->tags,
-                            ]
-                        ];
-                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Basic Information Updated');
-
-                        $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productdata);
-                    }
-                }
-
                 if ($request->input('request_type') == 'description') {
                     $product->description = $request->description;
                     $product->save();
                     if ($product->toShopify == 1) {
                         $productdata = [
-                            "product" => [
-                                "body_html" => $request->description,
-                            ]
+                            "description" => $product->description,
+                            "short_description" => $product->short_description,
                         ];
-                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Description Updated');
 
-                        $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productdata);
+                        $response = $woocommerce->put('products/'. $product->woocommerce_id, $productdata);
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Description Updated');
                     }
                 }
 

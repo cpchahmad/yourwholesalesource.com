@@ -46,4 +46,10 @@ class RetailerProduct extends Model
 
         return $flag;
     }
+
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class, 'retailer_product_tag');
+    }
+
 }

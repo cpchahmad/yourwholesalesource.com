@@ -205,21 +205,6 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Type</label>
-                                                    <input type="text" class="form-control" name="type" value="{{$product->type}}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Vendor</label>
-                                                    <input type="text" class="form-control" name="vendor" value="{{$product->vendor}}">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </form>
                                 </div>
                             </div>
