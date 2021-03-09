@@ -173,7 +173,7 @@
                                             <a class="btn btn-sm btn-success text-white" data-toggle="modal" data-target="#video_modal{{$product->id}}"> View Video</a>
                                         @endif
 
-                                        @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
+                                        @if(!in_array($product->id,$shop->has_imported_woocommerce_products->pluck('id')->toArray()))
                                             <a class="btn btn-sm btn-success" href="{{route('woocommerce.product.wefulfill.add-to-import-list',$product->id)}}">
                                                 <i class="fa fa-plus"></i> Add to Import List
                                             </a>
@@ -205,7 +205,7 @@
 
                             @endif
                             <hr>
-                            @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
+                            @if(!in_array($product->id,$shop->has_imported_woocommerce_products->pluck('id')->toArray()))
                                 <button onclick="window.location.href='{{ route('woocommerce.product.wefulfill.add-to-import-list',$product->id)}}'" class="btn btn-primary btn-block mb2"><i class="fa fa-plus"></i> Add to Import List</button>
                             @else
                                 <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
