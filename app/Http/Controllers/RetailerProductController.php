@@ -804,7 +804,7 @@ class RetailerProductController extends Controller
 
             /*Product Images*/
             $images_array = [];
-            foreach ($product->has_images as $index => $image) {
+            foreach ($product->has_images()->limit(5)->get() as $index => $image) {
                 if ($image->isV == 0) {
                     $src = asset('images') . '/' . $image->image;
                 } else {
