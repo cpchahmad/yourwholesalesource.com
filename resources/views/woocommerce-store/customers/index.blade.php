@@ -1,4 +1,4 @@
-@extends('layout.single')
+@extends('layout.woocommerce')
 @section('content')
 
     <div class="bg-body-light">
