@@ -2540,7 +2540,7 @@ class ProductController extends Controller
         }
         else if($request->input('type') == 'retailer-product') {
             $variant = RetailerProductVariant::find($id);
-            $shop = $this->helper->getCurrentWooShop();
+            $shop = $this->helper->getWooShop();
             if($variant->linked_product != null) {
                 if ($variant->linked_product->woocommerce_id != null) {
                     $image = RetailerImage::find($image_id);
