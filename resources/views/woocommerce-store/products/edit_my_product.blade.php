@@ -129,7 +129,7 @@
                                             @endif
                                             <div class="options-overlay bg-black-75">
                                                 <div class="options-overlay-content">
-                                                    <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('store.import_list.product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
+                                                    <a class="btn btn-sm btn-light delete-file" data-type="existing-product-image-delete" data-token="{{csrf_token()}}" data-route="{{route('woocommerce.import_list.product.update',$product->id)}}" data-file="{{$image->id}}"><i class="fa fa-times"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -294,7 +294,7 @@
                         <div class="form-image-src" style="display: none">
                             @if(count($product->hasVariants) > 0)
                                 @foreach($product->hasVariants as $index => $v)
-                                    <form id="varaint_image_form_{{$index}}{{$v->id}}" action="{{route('store.import_list.product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                                    <form id="varaint_image_form_{{$index}}{{$v->id}}" action="{{route('woocommerce.import_list.product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="request_type" value="variant-image-update">
                                         <input type="hidden" name="variant_id" value="{{$v->id}}">
