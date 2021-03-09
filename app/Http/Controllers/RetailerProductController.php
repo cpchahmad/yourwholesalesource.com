@@ -567,25 +567,16 @@ class RetailerProductController extends Controller
                     $product->barcode = $request->input('barcode');
                     $product->save();
 
-                    if($product->toShopify == 1){
-                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
-                        if(!$response->errors){
-                            $shopifyVariants = $response->body->product->variants;
-                            $variant_id = $shopifyVariants[0]->id;
-                            $i = [
-                                'variant' => [
-                                    'price' =>$product->price,
-                                    'grams' => $product->weight * 1000,
-                                    'weight' => $product->weight,
-                                    'weight_unit' => 'kg',
-                                    'barcode' => $product->barcode,
+                    if($product->to_woocommerce == 1){
 
-                                ]
-                            ];
-                            $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+                        $productdata = [
+                            "regular_price" => $product->price,
+                            "weight" => $product->weight,
+                        ];
 
-                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                        }
+                        $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
                     }
 
                 }
