@@ -858,15 +858,14 @@ class RetailerProductController extends Controller
                 $published = 'draft';
 
 
+            $attributes = null;
             if($product->variants == 1)
             {
                 $product_type = 'variable';
-                $productdata['attributes'] = $attributes_array;
+                $attributes = $attributes_array;
             }
             else
-            {
                 $product_type = 'simple';
-            }
 
 
             $productdata = [
@@ -885,14 +884,11 @@ class RetailerProductController extends Controller
                 "stock_quantity" => $product->quantity,
                 "dimensions" => $dimension_array,
                 "categories" => $categories_array,
+                "attributes" => $attributes
             ];
-
-            dump($productdata);
 
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
-
-            dd($response);
 
             $product_woocommerce_id =  $response->id;
             $product->woocommerce_id = $product_woocommerce_id;
