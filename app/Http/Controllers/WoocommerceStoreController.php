@@ -995,16 +995,16 @@ class WoocommerceStoreController extends Controller
 
     public function refunds(Request $request)
     {
-        $shop = $this->helper->getLocalShop();
-        $refunds = Refund::where('shop_id', $shop->id)->newQuery();
+        $shop = $this->helper->getCurrentWooShop();
+        $refunds = Refund::where('woocommerce_shop_id', $shop->id)->newQuery();
         if ($request->has('search')) {
             $refunds->where('order_name', 'LIKE', '%' . $request->input('search') . '%');
         }
         $refunds->whereHas('has_order', function () {
 
         });
-        $orders = RetailerOrder::where('shop_id', $shop->id)->where('paid', 1)->get();
-        return view('single-store.orders.refunds')->with([
+        $orders = RetailerOrder::where('woocommerce_shop_id', $shop->id)->where('paid', 1)->get();
+        return view('woocommerce-store.orders.refunds')->with([
             'refunds' => $refunds->orderBy('created_at')->paginate(20),
             'search' => $request->input('search'),
             'shop' => $shop,

@@ -63,7 +63,7 @@
                 </a>
                 <ul class="nav-main-submenu open">
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.orders')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.orders')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">My Orders</span>
                         </a>
@@ -71,20 +71,20 @@
 
 
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.payments')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.payments')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">Payment History</span>
                         </a>
                     </li>
 
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.tracking')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.tracking')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">Tracking Info</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('store.refunds')}}">
+                        <a class="nav-main-link" href="{{route('woocommerce.refunds')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">Refunds</span>
                         </a>
