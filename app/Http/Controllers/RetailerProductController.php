@@ -804,7 +804,7 @@ class RetailerProductController extends Controller
 
             /*Product Images*/
             $images_array = [];
-            foreach ($product->has_images as $index => $image) {
+            foreach ($product->has_images()->limit(10)->get() as $index => $image) {
                 if ($image->isV == 0) {
                     $src = asset('images') . '/' . $image->image;
                 } else {
@@ -899,7 +899,7 @@ class RetailerProductController extends Controller
 
             dump($woocommerce_images);
 
-            if (count($woocommerce_images) == count($product->has_images)) {
+            if (count($woocommerce_images) == count($product->has_images()->limit(10)->get())) {
                 foreach ($product->has_images as $index => $image) {
                     $image->woocommerce_id = $woocommerce_images[$index]->id;
                     $image->save();
@@ -918,7 +918,7 @@ class RetailerProductController extends Controller
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
 
-                dd($response);
+                dump($response);
                 $woocommerce_variants = $response->create;
                 foreach ($product->hasVariants as $index => $v){
                     $v->woocommerce_id = $woocommerce_variants[$index]->id;
@@ -927,6 +927,7 @@ class RetailerProductController extends Controller
             }
 
 
+            dd(123);
             $this->log->store(0, 'Retailer Product', $product->id, $product->title, 'Product Imported To Woocommerce');
 
             return redirect()->back()->with('success','Product Push to Store Successfully!');
