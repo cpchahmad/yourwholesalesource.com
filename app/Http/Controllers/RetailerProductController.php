@@ -1126,8 +1126,11 @@ class RetailerProductController extends Controller
                 "attributes" => $attributes
             ];
 
+
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
+
+            dump($productdata, $productdata);
 
             $product_woocommerce_id =  $response->id;
             $product->woocommerce_id = $product_woocommerce_id;
@@ -1151,12 +1154,9 @@ class RetailerProductController extends Controller
                     'create' => $variants_array
                 ];
 
-                dump($variantdata);
 
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
-
-                dump($response);
 
                 $woocommerce_variants = $response->create;
                 foreach ($product->hasVariants as $index => $v){
