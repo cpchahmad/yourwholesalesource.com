@@ -49,7 +49,7 @@
                                     <th>Total Spends</th>
 
                                     <th style="text-align: right">
-                                        <a href="{{route('store.sync.customers')}}"
+                                        <a href="{{route('woocommerce.sync.customers')}}"
                                            class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
                                            data-original-title="Sync Customers"><i class="fa fa-sync"></i> Sync New Customers</a>
                                     </th>
