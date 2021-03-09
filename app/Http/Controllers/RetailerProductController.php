@@ -663,7 +663,7 @@ class RetailerProductController extends Controller
                             $woocommerce_images = $response->images;
 
                             if (count($woocommerce_images) == count($product->has_images()->limit(10)->get())) {
-                                foreach ($product->has_images as $index => $image) {
+                                foreach ($product->has_images()->limit(10)->get() as $index => $image) {
                                     $image->woocommerce_id = $woocommerce_images[$index]->id;
                                     $image->save();
                                 }
