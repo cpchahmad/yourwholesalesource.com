@@ -558,7 +558,6 @@ class RetailerProductController extends Controller
 
                 }
 
-
                 /*Default Variant Update*/
                 if ($request->input('request_type') == 'default-variant-update') {
 
@@ -633,12 +632,47 @@ class RetailerProductController extends Controller
 
                 if ($request->input('request_type') == 'existing-product-image-delete') {
                     $image =  RetailerImage::find($request->input('file'));
-                    if ($product->toShopify == 1) {
-                        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/' . $image->shopify_id . '.json');
-                    }
                     $image->delete();
-                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Image Deleted');
 
+                    if ($product->to_woocommerce == 1) {
+                        $images_array = [];
+
+                        foreach ($product->has_images as $index => $image) {
+                            if ($image->isV == 0) {
+                                $src = asset('images') . '/' . $image->image;
+                            }
+                            else {
+                                $src = asset('images/variants') . '/' . $image->image;
+                            }
+
+                            array_push($images_array, [
+                                'alt' => $product->title . '_' . $index,
+                                'name' => $product->title . '_' . $index,
+                                'src' => $src,
+                            ]);
+                        }
+
+                        if($product->to_woocommerce == 1) {
+                            $productdata = [
+                                "images" => $images_array,
+                            ];
+
+                            /*Updating Product On Woocommerce*/
+                            $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+
+                            $woocommerce_images = $response->images;
+
+                            if (count($woocommerce_images) == count($product->has_images)) {
+                                foreach ($product->has_images as $index => $image) {
+                                    $image->woocommerce_id = $woocommerce_images[$index]->id;
+                                    $image->save();
+                                }
+                            }
+                        }
+                    }
+
+
+                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Image Deleted');
 
                     return response()->json([
                         'success' => 'ok'
@@ -1130,8 +1164,6 @@ class RetailerProductController extends Controller
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
 
-            dump($productdata, $response);
-
             $product_woocommerce_id =  $response->id;
             $product->woocommerce_id = $product_woocommerce_id;
             $product->to_woocommerce = 1;
@@ -1165,7 +1197,6 @@ class RetailerProductController extends Controller
                 }
             }
 
-            dd(13);
             $this->log->store(0, 'Retailer Product', $product->id, $product->title, 'Product Imported To Woocommerce');
 
             return redirect()->back()->with('success','Product Push to Store Successfully!');
