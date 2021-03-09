@@ -486,6 +486,7 @@ class WoocommerceStoreController extends Controller
         $customersQ = Customer::where('woocommerce_shop_id', $this->helper->getCurrentWooShop()->id)->newQuery();
         $customers = $customersQ->paginate(30);
         return view('woocommerce-store.customers.index')->with([
+            'shop' => $this->helper->getCurrentWooShop(),
             'customers' => $customers,
         ]);
     }
