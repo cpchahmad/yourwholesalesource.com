@@ -1059,7 +1059,7 @@ class RetailerProductController extends Controller
 
             /*Tags*/
             $tags_array = [];
-            if($product->linked_product->tags()->count() > 0) {
+            if($product->tags()->count() > 0) {
                 foreach ($product->linked_product->tags()->get() as $tag) {
                     array_push($tags_array, [
                         'id' => $tag->woocommerce_id,
@@ -1151,8 +1151,12 @@ class RetailerProductController extends Controller
                     'create' => $variants_array
                 ];
 
+                dump($variantdata);
+
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
+
+                dump($response);
 
                 $woocommerce_variants = $response->create;
                 foreach ($product->hasVariants as $index => $v){
@@ -1161,6 +1165,7 @@ class RetailerProductController extends Controller
                 }
             }
 
+            dd(13);
             $this->log->store(0, 'Retailer Product', $product->id, $product->title, 'Product Imported To Woocommerce');
 
             return redirect()->back()->with('success','Product Push to Store Successfully!');
