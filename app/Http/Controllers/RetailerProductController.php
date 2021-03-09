@@ -887,8 +887,12 @@ class RetailerProductController extends Controller
                 "categories" => $categories_array,
             ];
 
+            dump($productdata);
+
             /*Creating Product On Woocommerce*/
             $response = $woocommerce->post('products', $productdata);
+
+            dd($response);
 
             $product_woocommerce_id =  $response->id;
             $product->woocommerce_id = $product_woocommerce_id;
