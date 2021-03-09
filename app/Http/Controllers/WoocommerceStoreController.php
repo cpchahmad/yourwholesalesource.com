@@ -1060,15 +1060,16 @@ class WoocommerceStoreController extends Controller
     public function notifications()
     {
         $query = Notification::query();
-        $auth_shop = ShopifyApp::shop();
-        if ($auth_shop != null) {
+        $shop = $this->helper->getCurrentWooShop();
 
-            $shop = Shop::find($auth_shop->id);
-            $query->whereHas('to_shops', function ($q) use ($shop) {
-                $q->where('shopify_domain', $shop->shopify_domain);
+        if ($shop != null) {
+
+            $query->whereHas('to_woocommerce_shops', function ($q) use ($shop) {
+                $q->where('woocommerce_domain', $shop->woocommerce_domain);
             });
-            if (count($shop->has_user) > 0) {
-                $user = $shop->has_user[0];
+
+            if (count($shop->has_owner) > 0) {
+                $user = $shop->has_owner[0];
                 $query->orwhereHas('to_users', function ($q) use ($user) {
                     $q->where('email', $user->email);
                 });
@@ -1077,7 +1078,8 @@ class WoocommerceStoreController extends Controller
 
         }
         $notifications = $query->orderBy('created_at', 'DESC')->paginate(30);
-        return view('single-store.notifications.index')->with([
+        return view('woocommerce-store.notifications.index')->with([
+            'shop' => $shop,
             'notifications' => $notifications
         ]);
 

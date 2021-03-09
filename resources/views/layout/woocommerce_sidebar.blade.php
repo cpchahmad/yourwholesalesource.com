@@ -125,7 +125,7 @@
 
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('store.notifications')}}">
+                <a class="nav-main-link" href="{{route('woocommerce.notifications')}}">
                     <i class="nav-main-link-icon fa fa-sticky-note"></i>
                     <span class="nav-main-link-name">Notifications</span>
                 </a>
