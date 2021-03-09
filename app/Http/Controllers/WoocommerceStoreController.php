@@ -1064,8 +1064,8 @@ class WoocommerceStoreController extends Controller
 
         if ($shop != null) {
 
-            $shop->whereHas('to_woocommerce_shops', function ($q) use ($shop) {
-                $q->where('id', $shop->id);
+            $query->whereHas('to_woocommerce_shops', function ($q) use ($shop) {
+                $q->where('woocommerce_shop_id', $shop->id);
             });
 
             if (count($shop->has_owner) > 0) {
