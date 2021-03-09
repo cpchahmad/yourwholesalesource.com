@@ -650,9 +650,9 @@ class WoocommerceStoreController extends Controller
 
     public function view_ticket(Request $request)
     {
-        $shop = $this->helper->getLocalShop();
+        $shop = $this->helper->getCurrentWooShop();
         $ticket = Ticket::find($request->id);
-        return view('single-store.help-center.view')->with([
+        return view('woocommerce-store.help-center.view')->with([
             'shop' => $shop,
             'ticket' => $ticket,
         ]);
