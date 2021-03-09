@@ -209,8 +209,8 @@
                                 <form action="{{route('help-center.ticket.thread.create')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="manager_id" value="{{$ticket->manager_id}}">
-                                    <input type="hidden" name="shop_id" value="{{$ticket->shop_id}}">
-                                    <input type="hidden" name="source" value="store">
+                                    <input type="hidden" name="shop_id" value="{{$ticket->woocommerce_shop_id}}">
+                                    <input type="hidden" name="source" value="woocommerce-store">
                                     <input type="hidden" name="ticket_id" value="{{$ticket->id}}">
                                     <div class="form-group">
                                         <div class="form-material">
