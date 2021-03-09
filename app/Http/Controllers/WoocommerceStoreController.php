@@ -510,7 +510,7 @@ class WoocommerceStoreController extends Controller
         $all_customers = [];
         do{
             try {
-                $customers = $woocommerce->get('products',['per_page' => 100, 'page' => $page]);
+                $customers = $woocommerce->get('customers',['per_page' => 100, 'page' => $page]);
             }catch(HttpClientException $e){
 
             }
@@ -518,7 +518,7 @@ class WoocommerceStoreController extends Controller
             $page++;
         } while (count($customers) > 0);
 
-        dd($customers);
+        dd($all_customers);
 
 
         foreach ($customers as $index => $customer) {
