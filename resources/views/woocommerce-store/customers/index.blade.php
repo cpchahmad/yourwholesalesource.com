@@ -86,7 +86,7 @@
                                 @endforeach
                             </table>
                         @else
-                            <p>No Orders Found <a href="{{route('store.sync.customers')}}"
+                            <p>No Customers Found <a href="{{route('store.sync.customers')}}"
                                                   class="btn btn-sm btn-primary" style="font-size: 12px;float: right" type="button" data-toggle="tooltip" title=""
                                                   data-original-title="Sync Customers"><i class="fa fa-sync"></i> Sync New Customers</a></p>
                         @endif

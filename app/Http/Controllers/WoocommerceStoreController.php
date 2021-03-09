@@ -501,8 +501,9 @@ class WoocommerceStoreController extends Controller
 
     public function getCustomers()
     {
-        $shop = $this->helper->getShop();
-        $response = $shop->api()->rest('GET', '/admin/api/2019-10/customers.json');
+        $woocommerce = $this->helper->getWooShop();
+        $response = $woocommerce->get('customers');
+        dd($response);
         if ($response->errors) {
             return redirect()->back();
         } else {
