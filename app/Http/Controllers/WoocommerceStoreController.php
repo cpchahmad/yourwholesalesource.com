@@ -507,9 +507,11 @@ class WoocommerceStoreController extends Controller
 
         $customers = $woocommerce->get('customers');
 
+        dd($customers);
+
         foreach ($customers as $index => $customer) {
-            if (Customer::where('customer_woocommerce_id', $customer->id)->exists()) {
-                $new_customer = Customer::where('customer_woocommerce_id', $customer->id)->first();
+            if (Customer::where('customer_woocommerce_id', $customer->id)->where('woocommerce_shop_id', $shop->id)->exists()) {
+                $new_customer = Customer::where('customer_woocommerce_id', $customer->id)->where('woocommerce_shop_id', $shop->id)->first();
             } else {
                 $new_customer = new Customer();
             }
@@ -519,7 +521,7 @@ class WoocommerceStoreController extends Controller
             $new_customer->phone = isset($customer->billing->phone) ?? $customer->billing->phone;
             $new_customer->email = $customer->email;
             //$new_customer->total_spent = $customer->total_spent;
-            $new_customer->shop_id = $shop->id;
+            $new_customer->woocommerce_shop_id = $shop->id;
             $local_shop = $shop;
             if (count($local_shop->has_owner) > 0) {
                 $new_customer->user_id = $local_shop->has_owner[0]->id;
