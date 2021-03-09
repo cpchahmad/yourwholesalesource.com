@@ -11,7 +11,7 @@ class Notification extends Model
     }
 
     public function to_woocommerce_shops(){
-        return $this->belongsToMany('App\Shop','notification_shop','notification_id','woocommerce_shop_id');
+        return $this->belongsToMany(Shop::class,'notification_shop','notification_id','woocommerce_shop_id');
     }
 
     public function to_users(){
