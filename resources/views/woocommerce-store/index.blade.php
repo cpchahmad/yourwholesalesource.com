@@ -75,7 +75,7 @@
                                     <h3 class="block-title">Address Information</h3>
                                 </div>
                                 <div class="block-content">
-                                    <form action="{{route('store.save_address')}}" method="post">
+                                    <form action="{{route('woocommerce.save_address')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="user_id" value="{{$associated_user->id}}">
                                         <div class="form-group">
