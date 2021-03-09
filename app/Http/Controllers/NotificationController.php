@@ -26,6 +26,8 @@ class NotificationController extends Controller
             $notification->to_shops()->attach($shop);
             $user = $object->user_id;
             $notification->to_users()->attach($user);
+            $woo_shop = $object->woocommerce_shop_id;
+            $notification->to_woocommerce_shops()->attach($woo_shop);
         }
         if(in_array($type,['Wallet'])){
             $user = $object->user_id;
