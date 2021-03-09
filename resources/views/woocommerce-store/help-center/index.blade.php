@@ -84,14 +84,14 @@
                                             <td>{{count($ticket->has_attachments)}}</td>
                                             <td class="text-right">
                                                 <div class="btn-group">
-                                                    <a href="{{route('help-center.store.ticket.view',$ticket->id)}}"
+                                                    <a href="{{route('help-center.woocommerce.ticket.view',$ticket->id)}}"
                                                        class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="View Ticket"><i class="fa fa-eye"></i></a>
                                                     <a href=""
                                                        class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                        data-original-title="Delete Ticket"><i class="fa fa-times"></i></a>
                                                     @if($ticket->order_id !== null)
-                                                        <button onclick="window.location.href='{{route('store.order.view',$ticket->order_id)}}'"
+                                                        <button onclick="window.location.href='{{route('woocommerce.order.view',$ticket->order_id)}}'"
                                                                 class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
                                                                 data-original-title="Delete Ticket">View Order</button>
                                                     @endif
