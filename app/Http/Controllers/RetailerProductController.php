@@ -558,6 +558,38 @@ class RetailerProductController extends Controller
         return redirect()->back()->with('success', 'Product Deleted with Variants Successfully');
     }
 
+
+    public function delete_woocommerce_product($id)
+    {
+        $product = RetailerProduct::find($id);
+        $shop = $this->helper->getCurrentWooShop();
+        $woocommerce = $this->helper->getWooShop();
+
+        if($product->to_woocommerce == 1)  // In future also check for wishlist product
+            $woocommerce->delete('products/'.$product->woocommerce_id, ['force' => true]);
+
+
+        $variants = RetailerProductVariant::where('product_id', $id)->get();
+        foreach ($product->hasVariants as $variant) {
+            $variant->delete();
+        }
+        foreach ($product->has_images as $image){
+            $image->delete();
+        }
+        $product->has_categories()->detach();
+        $product->has_subcategories()->detach();
+
+
+        $shop->has_imported_woocommerce_products()->detach([$product->linked_product_id]);
+        if(count($shop->has_owner) > 0){
+            $shop->has_owner[0]->has_imported_woocommerce_products()->detach([$product->linked_product_id]);
+        }
+
+        $product->delete();
+        return redirect()->back()->with('success', 'Product Deleted with Variants Successfully');
+    }
+
+
     public function my_products(Request $request){
         $productQuery = RetailerProduct::with('has_images')->where('toShopify',1)->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
         if($request->has('search')){
