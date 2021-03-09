@@ -24,6 +24,7 @@ use App\Shop;
 use App\Ticket;
 use App\TicketCategory;
 use App\User;
+use App\Video;
 use App\WalletRequest;
 use App\WalletSetting;
 use App\WareHouse;
@@ -1291,7 +1292,12 @@ class WoocommerceStoreController extends Controller
 //    }
 
     public function showVideosSection() {
-        return view('woocommerce-store.videos.index');
+        $videos = Video::get()->groupBy(function($data){
+            return $data->category;
+        });
+
+        return view('woocommerce-store.videos.index')->withVideos($videos);
+
     }
 
     public function saveWalletSettings(Request $request, $id) {
