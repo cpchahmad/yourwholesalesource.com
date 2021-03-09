@@ -537,6 +537,8 @@ class WoocommerceStoreController extends Controller
 
         $response = $woocommerce->post('customers', $data);
 
+        dump($response);
+
         $response = $woocommerce->get('customers');
         dd($response);
         if ($response->errors) {
