@@ -305,7 +305,7 @@ Route::group(['middleware' => ['check_woocommerce_shop']], function () {
         Route::get('/my_products/{id}','RetailerProductController@edit_my_woocommerce_product')->name('woocommerce.my_product.edit');
         Route::get('/products/delete/{id}','RetailerProductController@delete_woocommerce_product')->name('woocommerce.product.delete');
         Route::get('/products/sync/{id}','RetailerProductController@syncWithAdminProduct')->name('woocommerce.product.sync');
-        Route::post('/import-list/{id}/update','RetailerProductController@update')->name('woocommerce.import_list.product.update');
+        Route::post('/import-list/{id}/update','RetailerProductController@update_woocommerce_product')->name('woocommerce.import_list.product.update');
         Route::get('/getOrders', 'OrderController@getOrders')->name('woocommerce.sync.orders');
         Route::get('/orders', 'OrderController@index')->name('woocommerce.orders');
         Route::get('/order/delete/{id}', 'OrderController@delete')->name('woocommerce.order.delete');

@@ -480,6 +480,198 @@ class RetailerProductController extends Controller
         }
     }
 
+
+    public function update_woocommerce_product(Request $request, $id)
+    {
+        $product = RetailerProduct::find($id);
+        $shop =$this->helper->getCurrentWooShop();
+        $woocommerce = $this->helper->getWooShop();
+
+        if ($product != null) {
+            if ($request->has('request_type')) {
+
+                /*Single Variant Update Shopify and Database*/
+                if ($request->input('request_type') == 'single-variant-update') {
+                    $variant = RetailerProductVariant::find($request->variant_id);
+                    $variant->price = $request->input('price');
+                    $variant->barcode = $request->input('barcode');
+                    $variant->product_id = $id;
+                    $variant->save();
+
+                    if($product->to_woocommerce == 1){
+
+                        $attributes_array = $this->attributes_template_array($product);
+
+                        $productdata = [
+                            'attributes' => $attributes_array
+                        ];
+
+                        $response = $woocommerce->put('products/' . $product->woocommerce_id, $productdata);
+
+                        $variants_array = $this->woocommerce_variants_template_array_for_updation($product, $response->attributes);
+
+                        $variantdata = [
+                            'update' => $variants_array
+                        ];
+
+
+                        /*Updating Product Variations On Woocommerce*/
+                        $response = $woocommerce->post("products/" . $product->woocommerce_id . "/variations/batch", $variantdata);
+
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+
+                    }
+
+                }
+
+
+                /*Default Variant Update*/
+                if ($request->input('request_type') == 'default-variant-update') {
+
+                    $product->price = $request->input('price');
+                    $product->quantity = $request->input('quantity');
+                    $product->barcode = $request->input('barcode');
+                    $product->save();
+
+                    if($product->toShopify == 1){
+                        $response = $shop->api()->rest('GET', '/admin/api/2019-10/products/' . $product->shopify_id .'.json');
+                        if(!$response->errors){
+                            $shopifyVariants = $response->body->product->variants;
+                            $variant_id = $shopifyVariants[0]->id;
+                            $i = [
+                                'variant' => [
+                                    'price' =>$product->price,
+                                    'grams' => $product->weight * 1000,
+                                    'weight' => $product->weight,
+                                    'weight_unit' => 'kg',
+                                    'barcode' => $product->barcode,
+
+                                ]
+                            ];
+                            $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Updated');
+
+                            $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
+                        }
+                    }
+
+                }
+
+
+                /*Product Basic Update Shopify and Database*/
+                if ($request->input('request_type') == 'basic-info') {
+                    $product->title = $request->title;
+                    $product->tags = $request->tags;
+                    $product->save();
+                    if ($product->to_woocommerce == 1) {
+                        $productdata = [
+                            "product" => [
+                                "title" => $request->title,
+                                "tags" =>$request->tags,
+                            ]
+                        ];
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Basic Information Updated');
+
+                        $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productdata);
+                    }
+                }
+
+                if ($request->input('request_type') == 'description') {
+                    $product->description = $request->description;
+                    $product->save();
+                    if ($product->toShopify == 1) {
+                        $productdata = [
+                            "product" => [
+                                "body_html" => $request->description,
+                            ]
+                        ];
+                        $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Description Updated');
+
+                        $resp = $shop->api()->rest('PUT', '/admin/api/2019-10/products/' . $product->shopify_id . '.json', $productdata);
+                    }
+                }
+
+
+                if ($request->input('request_type') == 'variant-image-update') {
+//                    dd($request);
+                    $variant = RetailerProductVariant::find($request->variant_id);
+                    if ($request->hasFile('varaint_src')) {
+                        $image = $request->file('varaint_src');
+                        $destinationPath = 'images/variants/';
+                        $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+                        $image->move($destinationPath, $filename);
+                        $image = new RetailerImage();
+                        $image->isV = 1;
+                        $image->product_id = $product->id;
+                        $image->image = $filename;
+                        $image->save();
+                        $variant->image = $image->id;
+                        $variant->save();
+                        if ($product->toShopify == 1) {
+                            $imageData = [
+                                'image' => [
+                                    'src' => asset('images/variants') . '/' . $image->image,
+                                    'variant_ids' => [$variant->shopify_id]
+                                ]
+                            ];
+                            $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
+                            $image->shopify_id = $imageResponse->body->image->id;
+                            $image->save();
+
+                        }
+                    }
+                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Variant Image Updated');
+
+                    return redirect()->back();
+
+                }
+
+                if ($request->input('request_type') == 'existing-product-image-delete') {
+                    $image =  RetailerImage::find($request->input('file'));
+                    if ($product->toShopify == 1) {
+                        $shop->api()->rest('DELETE', '/admin/api/2019-10/products/' . $product->shopify_id . '/images/' . $image->shopify_id . '.json');
+                    }
+                    $image->delete();
+                    $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Image Deleted');
+
+
+                    return response()->json([
+                        'success' => 'ok'
+                    ]);
+                }
+
+                if ($request->input('request_type') == 'existing-product-image-add') {
+                    if ($request->hasFile('images')) {
+                        foreach ($request->file('images') as $image) {
+                            $destinationPath = 'images/';
+                            $filename = now()->format('YmdHi') . str_replace(' ', '-', $image->getClientOriginalName());
+                            $image->move($destinationPath, $filename);
+                            $image = new RetailerImage();
+                            $image->isV = 0;
+                            $image->product_id = $product->id;
+                            $image->image = $filename;
+                            $image->save();
+                            if ($product->toShopify == 1) {
+                                $imageData = [
+                                    'image' => [
+                                        'src' => asset('images') . '/' . $image->image,
+                                    ]
+                                ];
+                                $imageResponse = $shop->api()->rest('POST', '/admin/api/2019-10/products/' . $product->shopify_id . '/images.json', $imageData);
+                                $image->shopify_id = $imageResponse->body->image->id;
+                                $image->save();
+                                $this->log->store($product->user_id, 'RetailerProduct', $product->id, $product->title, 'Product Image Added');
+
+                            }
+                        }
+                    }
+                    $product->save();
+                }
+
+            }
+        }
+    }
+
+
     public function import_list(Request $request){
         $productQuery = RetailerProduct::where('toShopify',0)->where('shop_id',$this->helper->getLocalShop()->id)->newQuery();
         if($request->has('search')){

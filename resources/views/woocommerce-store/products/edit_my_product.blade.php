@@ -76,8 +76,16 @@
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
-                                <input class="js-tags-input form-control" type="text"
-                                       value="{{$product->tags}}"   name="tags" >
+                                <select style="border-radius: 0;" class="js-select2 form-control" id="example-select2-multiple" name="tags[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
+                                    @foreach($tags as $tag)
+
+                                        <option value="{{ $tag->id }}"
+                                                @if(in_array($tag->id, $product->linked_product->tags()->get()->pluck('id')->toArray()))
+                                                selected
+                                            @endif
+                                        >{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
