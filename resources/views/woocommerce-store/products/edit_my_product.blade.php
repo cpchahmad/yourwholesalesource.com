@@ -236,7 +236,7 @@
                                                                                 @else
                                                                                     <img class="img-fluid options-item" data-src="{{asset('images/variants')}}/{{$image->image}}" alt="">
                                                                                 @endif
-                                                                                <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="retailer" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
+                                                                                <p style="color: #ffffff;cursor: pointer" data-image="{{$image->id}}" data-variant="{{$v->id}}" data-type="retailer-product" class="rounded-bottom bg-info choose-variant-image text-center">Choose</p>
                                                                             </div>
                                                                         @endforeach
                                                                     </div>

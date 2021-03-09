@@ -2538,6 +2538,31 @@ class ProductController extends Controller
                 ]);
             }
         }
+        else if($request->input('type') == 'retailer-product') {
+            $variant = RetailerProductVariant::find($id);
+            $shop = $this->helper->getCurrentWooShop();
+            if($variant->linked_product != null) {
+                if ($variant->linked_product->woocommerce_id != null) {
+                    $image = RetailerImage::find($image_id);
+                    return $this->woocommerce_image_selection($image_id, $image, $shop, $variant);
+                }
+                else if($variant->linked_product->to_woocommerce == 0)
+                {
+                    $variant->image = $image_id;
+                    $variant->save();
+                }
+                else{
+                    return response()->json([
+                        'message' => 'false'
+                    ]);
+                }
+            }
+            else{
+                return response()->json([
+                    'message' => 'false'
+                ]);
+            }
+        }
         else{
 
             $variant = RetailerProductVariant::find($id);
