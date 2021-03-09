@@ -503,70 +503,31 @@ class WoocommerceStoreController extends Controller
     public function getCustomers()
     {
         $woocommerce = $this->helper->getWooShop();
+        $shop = $this->helper->getCurrentWooShop();
 
-        $data = [
-            'email' => 'john.doe@example.com',
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'username' => 'john.doe',
-            'billing' => [
-                'first_name' => 'John',
-                'last_name' => 'Doe',
-                'company' => '',
-                'address_1' => '969 Market',
-                'address_2' => '',
-                'city' => 'San Francisco',
-                'state' => 'CA',
-                'postcode' => '94103',
-                'country' => 'US',
-                'email' => 'john.doe@example.com',
-                'phone' => '(555) 555-5555'
-            ],
-            'shipping' => [
-                'first_name' => 'John',
-                'last_name' => 'Doe',
-                'company' => '',
-                'address_1' => '969 Market',
-                'address_2' => '',
-                'city' => 'San Francisco',
-                'state' => 'CA',
-                'postcode' => '94103',
-                'country' => 'US'
-            ]
-        ];
+        $customers = $woocommerce->get('customers');
 
-        $response = $woocommerce->post('customers', $data);
-
-        dump($response);
-
-        $response = $woocommerce->get('customers');
-        dd($response);
-        if ($response->errors) {
-            return redirect()->back();
-        } else {
-            $customers = $response->body->customers;
-            foreach ($customers as $index => $customer) {
-                if (Customer::where('customer_shopify_id', $customer->id)->exists()) {
-                    $new_customer = Customer::where('customer_shopify_id', $customer->id)->first();
-                } else {
-                    $new_customer = new Customer();
-                }
-                $new_customer->customer_shopify_id = $customer->id;
-                $new_customer->first_name = $customer->first_name;
-                $new_customer->last_name = $customer->last_name;
-                $new_customer->phone = $customer->phone;
-                $new_customer->email = $customer->email;
-                $new_customer->total_spent = $customer->total_spent;
-                $new_customer->shop_id = $shop->id;
-                $local_shop = $this->helper->getLocalShop();
-                if (count($local_shop->has_user) > 0) {
-                    $new_customer->user_id = $local_shop->has_user[0]->id;
-                }
-                $new_customer->save();
+        foreach ($customers as $index => $customer) {
+            if (Customer::where('customer_woocommerce_id', $customer->id)->exists()) {
+                $new_customer = Customer::where('customer_woocommerce_id', $customer->id)->first();
+            } else {
+                $new_customer = new Customer();
             }
-            return redirect()->back()->with('success', 'Customers Synced Successfully!');
+            $new_customer->customer_woocommerce_id = $customer->id;
+            $new_customer->first_name = $customer->first_name;
+            $new_customer->last_name = $customer->last_name;
+            $new_customer->phone = $customer->phone;
+            $new_customer->email = $customer->email;
+            $new_customer->total_spent = $customer->total_spent;
+            $new_customer->shop_id = $shop->id;
+            $local_shop = $shop;
+            if (count($local_shop->has_owner) > 0) {
+                $new_customer->user_id = $local_shop->has_owner[0]->id;
+            }
+            $new_customer->save();
         }
 
+        return redirect()->back()->with('success', 'Customers Synced Successfully!');
     }
 
     public function payment_history(Request $request)
