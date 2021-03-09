@@ -897,6 +897,8 @@ class RetailerProductController extends Controller
 
             $woocommerce_images = $response->images;
 
+            dump($woocommerce_images);
+
             if (count($woocommerce_images) == count($product->has_images)) {
                 foreach ($product->has_images as $index => $image) {
                     $image->woocommerce_id = $woocommerce_images[$index]->id;
@@ -911,9 +913,12 @@ class RetailerProductController extends Controller
                     'create' => $variants_array
                 ];
 
+                dump($variantdata);
+
                 /*Creating Product Variations On Woocommerce*/
                 $response = $woocommerce->post("products/".$product_woocommerce_id."/variations/batch", $variantdata);
 
+                dd($response);
                 $woocommerce_variants = $response->create;
                 foreach ($product->hasVariants as $index => $v){
                     $v->woocommerce_id = $woocommerce_variants[$index]->id;
