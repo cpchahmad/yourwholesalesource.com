@@ -94,7 +94,7 @@
             </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('store.customers')}}">
+                <a class="nav-main-link" href="{{route('woocommerce.customers')}}">
                     <i class="nav-main-link-icon si si-user"></i>
                     <span class="nav-main-link-name">Customer</span>
                 </a>
