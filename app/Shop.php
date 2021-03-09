@@ -24,6 +24,9 @@ class Shop extends Model
    public function has_orders(){
         return $this->hasMany('App\RetailerOrder','shop_id');
    }
+   public function has_woocommerce_orders(){
+        return $this->hasMany('App\RetailerOrder','woocommerce_shop_id');
+   }
    public function has_manager(){
         return $this->belongsTo('App\User','sale_manager_id');
    }

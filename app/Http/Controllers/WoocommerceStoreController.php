@@ -567,10 +567,10 @@ class WoocommerceStoreController extends Controller
 
     public function helpcenter(Request $request)
     {
-        $shop = $this->helper->getLocalShop();
-        $user = $shop->has_user()->first();
+        $shop = $this->helper->getCurrentWooShop();
+        $user = $shop->has_owner()->first();
         $tickets = Ticket::where('user_id', $user->id)->where('source', 'store')->newQuery();
-        $orders = $shop->has_orders()->get();
+        $orders = $shop->has_woocommerce_orders()->get();
         $tickets = $tickets->paginate(30);
 
         return view('single-store.help-center.index')->with([

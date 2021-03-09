@@ -133,14 +133,14 @@
 
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('store.help-center')}}">
+                <a class="nav-main-link" href="{{route('woocommerce.help-center')}}">
                     <i class="nav-main-link-icon fa fa-hands-helping"></i>
                     <span class="nav-main-link-name">Ticket Center</span>
                 </a>
             </li>
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('store.index')}}">
+                <a class="nav-main-link" href="{{route('woocommerce.index')}}">
                     <i class="nav-main-link-icon si si-wrench"></i>
                     <span class="nav-main-link-name">Settings</span>
                 </a>
@@ -154,7 +154,7 @@
 {{--            </li>--}}
 
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('store.invoice')}}">
+                <a class="nav-main-link" href="{{route('woocommerce.invoice')}}">
                     <i class="nav-main-link-icon si si-chart"></i>
                     <span class="nav-main-link-name">Invoice Zone</span>
                 </a>
