@@ -610,5 +610,9 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 
 
 
-
+Route::get('/tess', function () {
+    $n = Notification::whereHas('to_woocommerce_shops', function($q)
+    { $q->where('woocommerce_domian', 'https://woocommerce-493920-1596635.cloudwaysapps.com/');}
+    )->get();
+});
 
