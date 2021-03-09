@@ -1277,6 +1277,9 @@ class RetailerProductController extends Controller
             if($varaint->has_image != null && $varaint->has_image->woocommerce_id != null){
                 $array_item['image']['id'] = $varaint->has_image->woocommerce_id;
             }
+            else {
+                $array_item['image'] = null;
+            }
 
             array_push($variants_array, $array_item);
         }
