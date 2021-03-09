@@ -1168,6 +1168,9 @@
                                     <div class="col-xs-12">
                                         <div class="form-material form-material-primary">
                                             <label>Tags</label>
+                                            @php
+                                                $tags = \App\Tag::all();
+                                            @endphp
                                             <select style="border-radius: 0;" class="js-select2 form-control" id="example-select2-multiple" name="tags[]" style="width: 100%;" data-placeholder="Choose many.." multiple>
                                                 @foreach($tags as $tag)
 
