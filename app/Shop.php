@@ -48,4 +48,8 @@ class Shop extends Model
    public function has_monthly_discount_preference(){
         return $this->hasOne(MonthlyDiscountPreference::class);
    }
+
+    public function has_notifications(){
+        return $this->belongsToMany(Shop::class,'notification_shop','shop_id','woocommerce_shop_id');
+    }
 }
