@@ -139,7 +139,7 @@
                     <form action="{{route('refund.create')}}" method="post"  enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="source" value="store">
-                        <input type="hidden" name="manager_id" value="{{$shop->sale_manager_id}}">
+                        <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                         <input type="hidden" name="woocommerce_shop_id" value="{{$shop->id}}">
                         <input type="hidden" name="type" value="store-ticket">
 
