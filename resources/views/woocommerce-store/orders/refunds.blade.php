@@ -17,7 +17,10 @@
             </div>
         </div>
     </div>
-    @if($shop->has_manager != null)
+    @php
+        $user = $shop->has_owner()->first();
+    @endphp
+    @if($user->has_manager != null)
     <div class="content">
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-12">
@@ -137,7 +140,7 @@
                         @csrf
                         <input type="hidden" name="source" value="store">
                         <input type="hidden" name="manager_id" value="{{$shop->sale_manager_id}}">
-                        <input type="hidden" name="shop_id" value="{{$shop->id}}">
+                        <input type="hidden" name="woocommerce_shop_id" value="{{$shop->id}}">
                         <input type="hidden" name="type" value="store-ticket">
 
                         <div class="block-content font-size-sm">
