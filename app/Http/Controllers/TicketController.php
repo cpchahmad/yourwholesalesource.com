@@ -67,6 +67,11 @@ class TicketController extends Controller
                 $user = $shop->has_user()->first();
                 $ticket->user_id = $user->id;
             }
+            elseif($request->type == 'woocommerce-store-ticket'){
+                $shop = $this->helper->getCurrentWooShop();
+                $user = $shop->has_owner()->first();
+                $ticket->user_id = $user->id;
+            }
             else{
                 $ticket->user_id = Auth::id();
             }

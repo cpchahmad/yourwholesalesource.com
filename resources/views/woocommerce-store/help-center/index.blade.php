@@ -133,10 +133,10 @@
                             </div>
                             <form action="{{route('help-center.ticket.create')}}" method="post"  enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" name="source" value="store">
+                                <input type="hidden" name="source" value="woocommerce-store">
                                 <input type="hidden" name="manager_id" value="{{$user->sale_manager_id}}">
                                 <input type="hidden" name="shop_id" value="{{$shop->id}}">
-                                <input type="hidden" name="type" value="store-ticket">
+                                <input type="hidden" name="type" value="woocommerce-store-ticket">
 
 
                                 <div class="block-content font-size-sm">
@@ -154,7 +154,7 @@
                                             <div class="form-material">
                                                 <label for="material-error">Email</label>
                                                 <input required class="form-control" type="text"  name="email"
-                                                     value="{{$shop->shopify_domain}}"  placeholder="Enter Email here">
+                                                     value="{{$shop->woocommerce_domain}}"  placeholder="Enter Email here">
                                             </div>
                                         </div>
                                     </div>

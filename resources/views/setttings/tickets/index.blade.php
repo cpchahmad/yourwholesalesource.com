@@ -88,7 +88,14 @@
 
                                         <td class="font-w600"><a href="">{{ $ticket->title }}</a></td>
                                         <td>
-                                            @if($ticket->source == 'store') {{explode('.',$ticket->email)[0]}} @else {{$ticket->has_user->name}}  @endif   <span class="badge badge-primary">{{$ticket->source}}</span>
+                                            @if($ticket->source == 'store')
+                                                {{explode('.',$ticket->email)[0]}}
+                                            @elseif($ticket->source == 'woocommerce-store')
+                                                {{explode('//',$ticket->email)[1]}}
+                                            @else
+                                                {{$ticket->has_user->name}}
+                                            @endif
+                                                <span class="badge badge-primary">{{$ticket->source}}</span>
                                         </td>
                                         <td class="d-flex">
                                             @if($ticket->has_manager != null)
