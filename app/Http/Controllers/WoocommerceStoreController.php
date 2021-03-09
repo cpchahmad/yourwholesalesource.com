@@ -569,7 +569,7 @@ class WoocommerceStoreController extends Controller
     {
         $shop = $this->helper->getCurrentWooShop();
         $user = $shop->has_owner()->first();
-        $tickets = Ticket::where('user_id', $user->id)->where('source', 'store')->newQuery();
+        $tickets = Ticket::where('user_id', $user->id)->where('source', 'woocommerce-store')->newQuery();
         $orders = $shop->has_woocommerce_orders()->get();
         $tickets = $tickets->paginate(30);
 
