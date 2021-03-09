@@ -19,7 +19,7 @@
     </div>
     <div class="content">
         @php
-            $user = $shop->has_user()->first();
+            $user = $shop->has_owner()->first();
         @endphp
         @if($user->has_manager != null)
             <form class="js-form-icon-search push" action="" method="get">
