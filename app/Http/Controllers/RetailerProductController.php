@@ -582,7 +582,7 @@ class RetailerProductController extends Controller
 
         $shop->has_imported_woocommerce_products()->detach([$product->linked_product_id]);
         if(count($shop->has_owner) > 0){
-            $shop->has_owner[0]->has_imported_woocommerce_products()->detach([$product->linked_product_id]);
+            $shop->has_owner[0]->has_imported()->detach([$product->linked_product_id]);
         }
 
         $product->delete();
