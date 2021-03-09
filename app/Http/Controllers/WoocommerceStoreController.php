@@ -328,14 +328,11 @@ class WoocommerceStoreController extends Controller
 
     public function setting()
     {
-        /*Ossiset Shop Model*/
-        $shop = ShopifyApp::shop();
-        /*Local Shop Model!*/
-        $shop = Shop::find($shop->id);
-        $user = $shop->has_user->first();
+        $shop = $this->helper->getCurrentWooShop();
+        $user = $shop->has_owner->first();
 
-        if (count($shop->has_user) > 0) {
-            $associated_user = $shop->has_user[0];
+        if (count($shop->has_owner) > 0) {
+            $associated_user = $shop->has_owner[0];
         } else {
             $associated_user = null;
         }

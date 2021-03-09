@@ -1,4 +1,4 @@
-@extends('layout.single')
+@extends('layout.woocommerce')
 @section('content')
     <div class="content content-narrow">
         <div class="row mb2">
@@ -36,13 +36,13 @@
                                 <div class="block-content ">
                                     <table class="js-table-sections table table-hover">
                                         <tbody>
-                                        @foreach($associated_user->has_shops as $index => $shop)
+                                        @foreach($associated_user->has_woocommerce_shops as $index => $shop)
                                             <tr>
 
                                                 <td class="font-w600" style="vertical-align: middle">
-                                                    {{explode('.',$shop->shopify_domain)[0]}}
+                                                    {{explode('//',$shop->woocommerce_domain)[1]}}
                                                 </td>
-                                                <td style="vertical-align: middle">{{ $shop->shopify_domain }}</td>
+                                                <td style="vertical-align: middle">{{ $shop->woocommerce_domain }}</td>
 {{--                                                <td class="text-right" style="vertical-align: middle">--}}
 {{--                                                    <a data-href="{{route('store.user.de-associate',$shop->id)}}" class="de-associate-button btn btn-xs btn-danger"--}}
 {{--                                                       type="button" data-toggle="tooltip" title=""--}}
