@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ManagerReview extends Model
 {
     protected $fillable = [
-        'name','email','review','rating','attachment','ticket_id','manager_id','user_id','shop_id'
+        'name','email','review','rating','attachment','ticket_id','manager_id','user_id','shop_id','woocommerce_shop_id'
     ];
 
     public function has_ticket(){
