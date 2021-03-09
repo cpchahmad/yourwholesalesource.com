@@ -112,10 +112,10 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('store.order.view',$order->id)}}"
+                                                <a href="{{route('woocommerce.order.view',$order->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Order"><i class="fa fa-eye"></i></a>
-                                                <a href="{{route('store.order.delete',$order->id)}}"
+                                                <a href="{{route('woocommerce.order.delete',$order->id)}}"
                                                    class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="Delete Order"><i class="fa fa-times"></i></a>
                                             </div>

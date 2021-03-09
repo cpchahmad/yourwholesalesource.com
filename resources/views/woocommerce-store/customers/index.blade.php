@@ -73,7 +73,7 @@
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">
-                                                <a href="{{route('store.customer.view',$customer->id)}}"
+                                                <a href="{{route('woocommerce.customer.view',$customer->id)}}"
                                                    class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Customer"><i class="fa fa-eye"></i></a>
                                             </div>
@@ -86,7 +86,7 @@
                                 @endforeach
                             </table>
                         @else
-                            <p>No Customers Found <a href="{{route('store.sync.customers')}}"
+                            <p>No Customers Found <a href="{{route('woocommerce.sync.customers')}}"
                                                   class="btn btn-sm btn-primary" style="font-size: 12px;float: right" type="button" data-toggle="tooltip" title=""
                                                   data-original-title="Sync Customers"><i class="fa fa-sync"></i> Sync New Customers</a></p>
                         @endif

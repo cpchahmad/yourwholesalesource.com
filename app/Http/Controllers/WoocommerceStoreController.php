@@ -494,7 +494,8 @@ class WoocommerceStoreController extends Controller
     public function customer_view($id)
     {
         $customer = Customer::find($id);
-        return view('single-store.customers.view')->with([
+        return view('woocommerce-store.customers.view')->with([
+            'shop' => $this->helper->getCurrentWooShop(),
             'customer' => $customer,
         ]);
     }
