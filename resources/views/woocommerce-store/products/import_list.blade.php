@@ -198,7 +198,7 @@
                                                 @foreach($tags as $tag)
 
                                                     <option value="{{ $tag->id }}"
-                                                            @if(in_array($tag->id, $product->linked_product->tags()->get()->pluck('id')->toArray()))
+                                                            @if(in_array($tag->id, $product->tags()->get()->pluck('id')->toArray()))
                                                             selected
                                                         @endif
                                                     >{{ $tag->name }}</option>
