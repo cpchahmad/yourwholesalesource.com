@@ -1,4 +1,4 @@
-@extends('layout.single')
+@extends('layout.woocommerce')
 @section('content')
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
+                        <form action="{{route('woocommerce.import_list.product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="request_type" value="basic-info">
                             <div class="form-group">
@@ -102,7 +102,7 @@
                         <h3 class="block-title"> Description</h3>
                     </div>
                     <div class="col-md-12">
-                        <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
+                        <form action="{{route('woocommerce.import_list.product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="request_type" value="description">
                             <textarea class="js-summernote" name="description"
@@ -144,7 +144,7 @@
                             <hr>
                         @endif
                         <div class="row">
-                            <form class="product-images-form" action="{{route('store.import_list.product.update',$product->id)}}" method="post" enctype="multipart/form-data">
+                            <form class="product-images-form" action="{{route('woocommerce.import_list.product.update',$product->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="request_type" value="existing-product-image-add">
                                 <div class="col-md-12" style="padding-bottom: 13px;width: 1046px">
@@ -206,7 +206,7 @@
                             </thead>
                             @if(count($product->hasVariants) > 0)
                                 @foreach($product->hasVariants as $index => $v)
-                                    <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
+                                    <form action="{{route('woocommerce.import_list.product.update',$product->id)}}" method="post">
                                         @csrf
                                         <input type="hidden" name="request_type" value="single-variant-update">
                                         <input type="hidden" name="variant_id" value="{{$v->id}}">
@@ -270,7 +270,7 @@
                                     </form>
                                 @endforeach
                             @else
-                                <form action="{{route('store.import_list.product.update',$product->id)}}" method="post">
+                                <form action="{{route('woocommerce.import_list.product.update',$product->id)}}" method="post">
                                     @csrf
                                     <input type="hidden" name="request_type" value="default-variant-update">
                                     <tbody class="">

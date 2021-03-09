@@ -625,6 +625,15 @@ class RetailerProductController extends Controller
         ]);
     }
 
+    public function edit_my_woocommerce_product($id){
+        $product = RetailerProduct::find($id);
+        $shop= $this->helper->getCurrentWooShop();
+        return view('woocommerce-store.products.edit_my_product')->with([
+            'product' => $product,
+            'shop' => $shop
+        ]);
+    }
+
     public function import_to_shopify(Request $request)
     {
 
