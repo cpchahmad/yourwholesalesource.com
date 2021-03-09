@@ -1296,7 +1296,10 @@ class WoocommerceStoreController extends Controller
             return $data->category;
         });
 
-        return view('woocommerce-store.videos.index')->withVideos($videos);
+        return view('woocommerce-store.videos.index')->with[
+            'videos' => $videos,
+            'shop' => $this->helper->getCurrentWooShop()
+        ];
 
     }
 
