@@ -309,7 +309,7 @@ class WoocommerceStoreController extends Controller
     public function view_fantasy_product($id)
     {
         $product = Product::find($id);
-        $shop = $this->helper->getLocalShop();
+        $shop = $this->helper->getCurrentWooShop();
         return view('woocommerce-store.products.view_product')->with([
             'product' => $product,
             'shop' => $shop
