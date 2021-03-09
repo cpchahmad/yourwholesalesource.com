@@ -503,7 +503,7 @@ class WoocommerceStoreController extends Controller
     public function getCustomers()
     {
         $woocommerce = $this->helper->getWooShop();
-        $response = $woocommerce->get('orders');
+        $response = $woocommerce->get('customers');
         dd($response);
         if ($response->errors) {
             return redirect()->back();
