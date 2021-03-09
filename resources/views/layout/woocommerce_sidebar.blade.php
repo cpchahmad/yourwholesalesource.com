@@ -103,7 +103,7 @@
 
 
             <li class="nav-main-item">
-                <a class="nav-main-link"  href="{{route('store.user.wallet.show')}}">
+                <a class="nav-main-link"  href="{{route('woocommerce.user.wallet.show')}}">
                     <i class="nav-main-link-icon si si-wallet"></i>
                     <span class="nav-main-link-name">Wallet</span>
                 </a>

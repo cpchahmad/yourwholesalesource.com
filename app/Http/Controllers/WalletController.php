@@ -62,10 +62,17 @@ class WalletController extends Controller
             } else {
                 $wallet = $user->has_wallet;
             }
-            return view('non_shopify_users.wallet.index')->with([
-                'user' => $user,
-                'wallet' => $wallet
-            ]);
+
+            if($this->helper->getCurrentWooShop())
+                return view('woocommerce-store.wallet.index')->with([
+                    'user' => $user,
+                    'wallet' => $wallet
+                ]);
+            else
+                return view('non_shopify_users.wallet.index')->with([
+                    'user' => $user,
+                    'wallet' => $wallet
+                ]);
         }
         else {
             $shop = $this->helper->getLocalShop();
