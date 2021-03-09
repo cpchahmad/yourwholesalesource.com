@@ -28,13 +28,13 @@
 </div>
 
 <div class="content">
-    <form class="js-form-icon-search push" action="{{route('store.product.wefulfill')}}" method="get">
+    <form class="js-form-icon-search push" action="{{route('woocommerce.product.wefulfill')}}" method="get">
         <div class="form-group">
             <div class="input-group">
                 <input type="search" class="form-control" placeholder="Search by title, tags keyword" value="{{$search}}" name="search">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                    <a class="btn btn-danger" href="{{route('store.product.wefulfill')}}"> <i class="fa fa-times"></i> Clear </a>
+                    <a class="btn btn-danger" href="{{route('woocommerce.product.wefulfill')}}"> <i class="fa fa-times"></i> Clear </a>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
         @foreach($categories as $index => $category)
             @if($index < 11)
                 <div class="col-md-3 p-0">
-                    <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
+                    <a href="{{route('woocommerce.product.wefulfill')}}?category={{$category->title}}">
                         <div class="block pointer m-0">
                             <div class="block-content p-3 text-center">
                                 <p class="m-0" style="font-size:14px;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
@@ -65,7 +65,7 @@
 
             @if($index >= 11)
                 <div class="col-md-3 p-0 after12" style="display: none">
-                    <a href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
+                    <a href="{{route('woocommerce.product.wefulfill')}}?category={{$category->title}}">
                         <div class="block pointer m-0">
                             <div class="block-content p-3 text-center">
                                 <p class="m-0" style="font-size:14px;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
@@ -89,7 +89,7 @@
     </div>
     <div class="row mb-2" style="padding: 0 14px;">
         <div class="col-md-4 p-0 " >
-            <a href="{{route('store.product.wefulfill')}}?tag=winning-products">
+            <a href="{{route('woocommerce.product.wefulfill')}}?tag=winning-products">
                 <div class="block pointer m-0" style="background-color:#edfb79;">
 
 
@@ -100,7 +100,7 @@
             </a>
         </div>
         <div class="col-md-4 p-0">
-            <a href="{{route('store.product.wefulfill')}}?tag=24-hours-dispatch">
+            <a href="{{route('woocommerce.product.wefulfill')}}?tag=24-hours-dispatch">
                 <div class="block pointer m-0" style="background-color:#94a5ff;">
 
                     <div class="block-content p-3 text-center">
@@ -110,7 +110,7 @@
             </a>
         </div>
         <div class="col-md-4 p-0 ">
-            <a href="{{route('store.product.wefulfill')}}?tag=best-seller">
+            <a href="{{route('woocommerce.product.wefulfill')}}?tag=best-seller">
                 <div class="block pointer m-0" style="background-color:#83ff83;">
 
 
