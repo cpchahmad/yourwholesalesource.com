@@ -50,11 +50,11 @@
                                         @csrf
                                         <input type="hidden" value="{{$ticket->id}}" name="ticket_id">
                                         <input type="hidden" value="{{$ticket->user_id}}" name="user_id">
-                                        <input type="hidden" value="{{$ticket->shop_id}}" name="shop_id">
+                                        <input type="hidden" value="{{$ticket->woocommerce_shop_id}}" name="woocommerce_shop_id">
                                         <input type="hidden" value="{{$ticket->manager_id}}" name="manager_id">
                                         <input type="hidden" id="rating-input" value="0" name="rating">
                                         <input type="hidden" value="{{$ticket->has_user->name}}" name="name">
-                                        <input type="hidden" value="{{$ticket->has_user->name}}" name="email">
+                                        <input type="hidden" value="{{$ticket->has_user->email}}" name="email">
 
                                         <div class="block-content font-size-sm">
                                             <div class="form-group">
