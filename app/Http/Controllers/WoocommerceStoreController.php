@@ -1291,7 +1291,7 @@ class WoocommerceStoreController extends Controller
 //    }
 
     public function showVideosSection() {
-        return view('videos.shopify');
+        return view('woocommerce-store.videos.shopify');
     }
 
     public function saveWalletSettings(Request $request, $id) {

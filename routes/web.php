@@ -331,7 +331,7 @@ Route::group(['middleware' => ['check_woocommerce_shop']], function () {
         Route::get('/dropship-requests/{id}/create-shipping-mark', 'WoocommerceStoreController@create_shipping_mark')->name('woocommerce.dropship.requests.create.shipping.mark');
 
 
-
+        Route::get('/wefulfill/university','WoocommerceStoreController@showVideosSection')->name('woocommerce.university.index');
         Route::post('/orders/bulk-payment', 'OrderController@show_bulk_payments')->name('woocommerce.orders.bulk.payment');
 
 
