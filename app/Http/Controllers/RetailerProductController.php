@@ -1274,7 +1274,7 @@ class RetailerProductController extends Controller
                 ]);
             }
 
-            if($varaint->has_image != null){
+            if($varaint->has_image != null && $varaint->has_image->woocommerce_id != null){
                 $array_item['image']['id'] = $varaint->has_image->woocommerce_id;
             }
 
