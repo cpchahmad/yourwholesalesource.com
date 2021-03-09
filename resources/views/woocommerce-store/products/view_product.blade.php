@@ -1,4 +1,4 @@
-@extends('layout.woocommerce')
+@extends('layout.woocommerce ')
 @section('content')
     <style>
         iframe{
