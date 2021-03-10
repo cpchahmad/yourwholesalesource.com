@@ -88,7 +88,11 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-    //    $webhook = new WebhookController();
+        $log = new ErrorLog();
+        $log->message = "const";
+        $log->save();
+
+        //    $webhook = new WebhookController();
     //    $webhook->createOrder($this->data, $this->shopDomain);
 
         try{
@@ -131,10 +135,10 @@ class OrdersCreateJob implements ShouldQueue
                             $customer->email = $order->customer->email;
                             $customer->total_spent = $order->customer->total_spent;
                             $customer->shop_id = $shop->id;
-                            $local_shop = $this->helper->getLocalShop();
-                            if(count($local_shop->has_user) > 0){
-                                $customer->user_id = $local_shop->has_user[0]->id;
-                            }
+                            //$local_shop = $this->helper->getLocalShop();
+//                            if(count($local_shop->has_user) > 0){
+//                                $customer->user_id = $local_shop->has_user[0]->id;
+//                            }
                             $customer->save();
                             $new->customer_id = $customer->id;
                         }
