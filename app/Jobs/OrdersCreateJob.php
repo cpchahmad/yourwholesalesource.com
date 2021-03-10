@@ -69,7 +69,7 @@ class OrdersCreateJob implements ShouldQueue
     public function __construct($shopDomain, $data)
     {
         $this->shopDomain = $shopDomain;
-        $this->data = json_decode( json_encode($data), true);
+        $this->data = json_decode( json_encode($data));
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
         $this->admin = new AdminMaintainerController();
