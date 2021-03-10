@@ -69,15 +69,16 @@ class OrdersCreateJob implements ShouldQueue
     public function __construct($shopDomain, $data)
     {
         $this->shopDomain = $shopDomain;
-        $this->data = $data;
+        //$this->data = $data;
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
 
         $hook = new Webhook();
-        $hook->type = $shopDomain;
+        $hook->type = 'order_created';
         $hook->status = 0;
+        $hook->body = $data;
         $hook->save();
 
 
