@@ -38,7 +38,7 @@
                     </div>
                     <div class="mt-3">
                         <h3>Dear {{ $shop }},<br>
-                            Thank you for working with wefulfill, here below is your report from <span id="custom-date">{{ $date_range }}</span></h3>
+                            Thank you for working with WholeSaleSource, here below is your report from <span id="custom-date">{{ $date_range }}</span></h3>
                     </div>
 
                 </div>

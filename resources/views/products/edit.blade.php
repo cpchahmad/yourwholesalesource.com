@@ -1051,7 +1051,7 @@
                                 <div class="form-group">
                                     <div class="custom-control custom-radio mb-1">
                                         <input type="radio" required class="custom-control-input" id="example-radio-customFantasy"  name="fulfilled-by" value="Fantasy" @if($product->fulfilled_by == 'Fantasy') checked @endif >
-                                        <label class="custom-control-label" for="example-radio-customFantasy">By WeFullFill</label>
+                                        <label class="custom-control-label" for="example-radio-customFantasy">By WholeSaleSource</label>
                                     </div>
                                     <div class="custom-control custom-radio mb-1">
                                         <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" @if($product->fulfilled_by == 'AliExpress') checked @endif >

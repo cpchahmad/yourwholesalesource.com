@@ -13,13 +13,13 @@
     <div class="content content-full pt-2 pb-2">
         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
             <h1 class="flex-sm-fill h4 my-2">
-                WeFullFill Products
+                WholeSaleSource Products
             </h1>
             <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-alt">
                     <li class="breadcrumb-item">Dashboard</li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a class="link-fx" href="">WeFullFill Products</a>
+                        <a class="link-fx" href="">WholeSaleSource Products</a>
                     </li>
                 </ol>
             </nav>
@@ -213,7 +213,7 @@
                             @if($product->isUpdated($shop))
                                 <button onclick="window.location.href='{{ route('store.product.wefulfill.updated-product',$product->id)}}'" class="btn btn-danger btn-block mb2">View Updated Variants</button>
                             @endif
-                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WholeSaleSource</span>
                         </div>
                     </div>
                 </div>

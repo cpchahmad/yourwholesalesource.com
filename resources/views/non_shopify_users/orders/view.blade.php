@@ -390,7 +390,7 @@
                                             @if($item->fulfilled_by == 'store')
                                                 <span class="badge badge-danger"> Store</span>
                                             @elseif ($item->fulfilled_by == 'Fantasy')
-                                                <span class="badge badge-success"> WeFullFill </span>
+                                                <span class="badge badge-success"> WholeSaleSource </span>
                                             @else
                                                 <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                             @endif
@@ -532,7 +532,7 @@
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
-                                Line Items Can't Fulfilled by WeFullFill
+                                Line Items Can't Fulfilled by WholeSaleSource
                             </h3>
 
                         </div>
@@ -657,7 +657,7 @@
                                                             <div class="text-center"> <p>
                                                                     Subtotal: {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify - $total_discount,2)}} USD
                                                                     <br>
-                                                                    WeFullFill Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify - $total_discount*$settings->paypal_percentage/100,2)}} USD
+                                                                    WholeSaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify - $total_discount*$settings->paypal_percentage/100,2)}} USD
                                                                     <br>Total Cost : {{number_format(($order->total_cost + $order->shipping_rate_for_non_shopify - $total_discount) +(($order->total_cost + $order->shipping_rate_for_non_shopify)*$settings->paypal_percentage/100),2)}} USD</p>
                                                             </div>
                                                             <p> A amount of  {{number_format(($order->total_cost + $order->shipping_rate_for_non_shopify - $total_discount) +(($order->total_cost + $order->shipping_rate_for_non_shopify)*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
@@ -853,7 +853,7 @@
                                                             <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
 
                                                         @elseif($order->pay_by == 'Wallet')
-                                                            <p> Cost-Payment Captured by WeFullFill Wallet  {{--by {{$order->has_payment->name}}--}} </p>
+                                                            <p> Cost-Payment Captured by WholeSaleSource Wallet  {{--by {{$order->has_payment->name}}--}} </p>
 
                                                         @else
                                                             <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
@@ -1032,7 +1032,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <div class="form-material">
-                                            <label for="material-error">WeFullFill Charges ({{$settings->payment_charge_percentage}}%)</label>
+                                            <label for="material-error">WholeSaleSource Charges ({{$settings->payment_charge_percentage}}%)</label>
                                             <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
                                                     placeholder="Enter 14 Digit Card Number here">
                                         </div>

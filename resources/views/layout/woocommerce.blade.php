@@ -3,21 +3,21 @@
 <head>
     <meta charset="utf-8">
 
-    <title>WeFullfill</title>
+    <title>WholeSaleSource</title>
 
-    <meta name="description" content="WeFullfill 2020 created by TetraLogicx Pvt. Limited.">
-    <meta name="author" content="tetralogicx">
+    <meta name="description" content="WholeSaleSource">
+    <meta name="author" content="WholeSaleSource">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
 
 
-    <link rel="shortcut icon" href="{{ asset('assets/img/favicons/wefullfill.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/img/favicons/wefullfill.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/wefullfill.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/wholesale.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/wholesale.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/wholesale.png') }}">
 
-    <meta property="og:title" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework">
-    <meta property="og:site_name" content="OneUI">
-    <meta property="og:description" content="OneUI - Bootstrap 4 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+    <meta property="og:title" content="WholeSaleSource">
+    <meta property="og:site_name" content="WholeSaleSource">
+    <meta property="og:description" content="WholeSaleSource">
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
@@ -83,7 +83,7 @@
         @if(count($shop->has_owner) == 0)
             <div class="alert alert-info alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>To Initiate Your WeFullFill Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
+                <strong>To Initiate Your WholeSaleSource Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
             </div>
         @endif
 

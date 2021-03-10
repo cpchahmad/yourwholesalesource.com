@@ -202,14 +202,14 @@
 
                                                                                                         <td align="left" valign="middle" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;">
                                                                                                             <a href="#" style="color:#FFFFFF;text-decoration:none;">
-                                                                                                                www.wefullfill.com
+                                                                                                                www.WholeSaleSource.com
                                                                                                             </a>
                                                                                                         </td>
                                                                                                         <td align="center" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:capitalize;">
                                                                                                             |
                                                                                                         </td>
                                                                                                         <td align="right" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
-                                                                                                            support@wefullfill.com
+                                                                                                            support@WholeSaleSource.com
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>
@@ -394,7 +394,7 @@
                                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
-                                                                        Top up Request for Wefullfill
+                                                                        Top up Request for WholeSaleSource
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -402,7 +402,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
-                                                                        This is a video guide on how you can top-up your wefullfill wallet.
+                                                                        This is a video guide on how you can top-up your WholeSaleSource wallet.
                                                                     </td>
                                                                 </tr>
 

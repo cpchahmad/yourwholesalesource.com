@@ -340,7 +340,7 @@
                             @endif
                             <hr>
                             <button onclick="window.location.href='{{route('product.view',$wishlist->has_product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
-                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WholeSaleSource</span>
                         </div>
                     </div>
                     <hr>
@@ -385,7 +385,7 @@
                             @endif
                             <hr>
                             <button onclick="window.location.href='{{route('product.retailer.view',$wishlist->has_retailer_product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
-                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WeFullFill</span>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WholeSaleSource</span>
                         </div>
                     </div>
                     <hr>

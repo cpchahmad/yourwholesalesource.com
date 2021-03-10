@@ -164,7 +164,7 @@
                                                     @if($item->fulfilled_by == 'store')
                                                         <span class="badge badge-danger"> Store</span>
                                                     @elseif ($item->fulfilled_by == 'Fantasy')
-                                                        <span class="badge badge-success"> WeFullFill </span>
+                                                        <span class="badge badge-success"> WholeSaleSource </span>
                                                     @else
                                                         <span
                                                             class="badge badge-success"> {{$item->fulfilled_by}} </span>
@@ -275,7 +275,7 @@
                                                                     Subtotal: {{number_format($orders->where('paid',0)->sum('cost_to_pay'),2)}}
                                                                     USD
                                                                     <br>
-                                                                    WeFullFill Paypal Fee
+                                                                    WholeSaleSource Paypal Fee
                                                                     ({{$settings->paypal_percentage}}
                                                                     %): {{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->paypal_percentage/100,2)}}
                                                                     USD
@@ -446,7 +446,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
-                                        <label for="material-error">WeFullFill Charges
+                                        <label for="material-error">WholeSaleSource Charges
                                             ({{$settings->payment_charge_percentage}}%)</label>
                                         <input class="form-control" type="text" readonly
                                                value="{{number_format($orders->where('paid',0)->sum('cost_to_pay')*$settings->payment_charge_percentage/100,2)}} USD"

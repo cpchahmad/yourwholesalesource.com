@@ -313,7 +313,7 @@
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" required class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
-                                    <label class="custom-control-label" for="example-radio-customfulfilled">By WeFullFill</label>
+                                    <label class="custom-control-label" for="example-radio-customfulfilled">By WholeSaleSource</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
