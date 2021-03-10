@@ -608,5 +608,10 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //    $class->set_erp_order_fulfillment()
 //});
 
+Route::get('/testing', function() {
+    $helper = new HelperController();
+    $shop = $helper->getSpecificShop(1);
+    $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
-
+    dd($response);
+});
