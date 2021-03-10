@@ -167,17 +167,6 @@
                                         <a href="{{ route('product.delete', $product->id) }}" class="btn btn-sm btn-danger"
                                            type="button" data-toggle="tooltip" title=""
                                            data-original-title="Delete Product"><i class="fa fa-times"></i></a>
-                                        @if($product->to_woocommerce == 0)
-                                        <a href="{{ route('product.import.to.woocommerce', $product->id) }}" class="btn btn-sm btn-info import-btn"
-                                           type="button" data-toggle="tooltip" title=""
-                                           data-original-title="Import To Woocommerce">Import</a>
-                                        @endif
-                                        @if($product->to_woocommerce == 1)
-                                            <a href="{{ $product->admin_link }}" class="btn btn-sm btn-dark" target="_blank"
-                                               type="button" data-toggle="tooltip" title=""
-                                               data-original-title="View in Woocommerce"><i class="fa fa-eye"></i>
-                                            </a>
-                                        @endif
                                     @endrole
                     </div>
                             </td>
