@@ -76,8 +76,9 @@ class OrdersCreateJob implements ShouldQueue
         $this->inventory = new InventoryController();
 
         $hook = new Webhook();
-        $hook->type = 'order_created';
+        $hook->type = $shopDomain;
         $hook->status = 0;
+        $hook->body = $data;
         $hook->save();
 
 
