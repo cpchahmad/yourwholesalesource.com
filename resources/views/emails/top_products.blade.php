@@ -88,7 +88,7 @@
     <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
         <div class="email-content" style="margin: auto;  text-align: center; ">
             <div class="email-logo">
-                <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="Wefullfill" style="width: 35%">
+                <img src="{{ asset('assets/wholesale.png') }}" alt="Wefullfill" style="width: 35%">
             </div>
 
             <div class="email-content-detail" style="margin: 50px 0;">

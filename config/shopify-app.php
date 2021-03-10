@@ -286,28 +286,28 @@ return [
     'webhooks' => [
         [
             'topic' => 'orders/create',
-            'address' => 'https://app.wefullfill.com/webhook/orders-create'
+            'address' => 'https://app.yourwholesalesource.com/webhook/orders-create'
         ],
         [
             'topic' => 'customers/create',
-            'address' => 'https://app.wefullfill.com/webhook/customers-create'
+            'address' => 'https://app.yourwholesalesource.com/webhook/customers-create'
         ],
 
         [
             'topic' => 'fulfillments/create',
-            'address' => 'https://app.wefullfill.com/webhook/fulfillments-create'
+            'address' => 'https://app.yourwholesalesource.com/webhook/fulfillments-create'
         ],
         [
             'topic' => 'fulfillments/update',
-            'address' => 'https://app.wefullfill.com/webhook/fulfillments-update'
+            'address' => 'https://app.yourwholesalesource.com/webhook/fulfillments-update'
         ],
         [
             'topic' => 'orders/cancelled',
-            'address' => 'https://app.wefullfill.com/webhook/orders-cancelled'
+            'address' => 'https://app.yourwholesalesource.com/webhook/orders-cancelled'
         ],
         [
             "topic" => "products/delete",
-            "address" => "https://app.wefullfill.com/webhook/products-delete"
+            "address" => "https://app.yourwholesalesource.com/webhook/products-delete"
         ]
 
 

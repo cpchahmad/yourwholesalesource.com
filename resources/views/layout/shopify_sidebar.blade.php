@@ -77,18 +77,18 @@
                     <span class="nav-main-link-name">Wallet</span>
                 </a>
             </li>
-            <li class="nav-main-item">
-                <a class="nav-main-link"  href="{{route('users.wishlist')}}">
-                    <i class="nav-main-link-icon fa fa-heart"></i>
-                    <span class="nav-main-link-name">Wishlist</span>
-                </a>
-            </li>
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('users.dropship.requests')}}">
-                    <i class="nav-main-link-icon fa fa-shipping-fast"></i>
-                    <span class="nav-main-link-name">Dropship Request</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link"  href="{{route('users.wishlist')}}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-heart"></i>--}}
+{{--                    <span class="nav-main-link-name">Wishlist</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{route('users.dropship.requests')}}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-shipping-fast"></i>--}}
+{{--                    <span class="nav-main-link-name">Dropship Request</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="nav-main-item" style="display: none">
                 <a class="nav-main-link active" href="{{route('users.stores')}}">
                     <i class="nav-main-link-icon si si-share"></i>

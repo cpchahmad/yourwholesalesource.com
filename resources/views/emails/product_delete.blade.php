@@ -167,7 +167,7 @@
                                                     <tr>
                                                         <td align="center" valign="middle">
                                                             <a href="#" style="color:#ffffff;text-decoration:none;">
-                                                                <img src="https://wefullfill.com/wp-content/uploads/2021/01/wefullfill-final-logo-change-white_540x.png" alt="150x50" width="150"/>
+                                                                <img src="{{ asset('assets/wholesale.png') }}g" alt="150x50" width="150"/>
                                                             </a>
                                                         </td>
                                                     </tr>
