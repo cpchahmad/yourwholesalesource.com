@@ -45,7 +45,7 @@ Route::get('/generate-super-admin', 'HelperController@SuperAdminCreate');
 Route::get('/getShippingRates', 'ZoneController@getShippingRates');
 Route::get('/getExportFile', 'ProductController@getExportFile')->name('app.download.product');
 /*Auth Routes*/
-Auth::routes(['verify' => true]);
+Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', function(){
     session()->flush();

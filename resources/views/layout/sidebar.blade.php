@@ -34,12 +34,12 @@
                         </a>
                     </li>
 
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('dropship.product.all')}}">
-                            <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Dropship Products</span>
-                        </a>
-                    </li>
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{ route('dropship.product.all')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-bag"></i>--}}
+{{--                            <span class="nav-main-link-name">Dropship Products</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('product.create') }}">
