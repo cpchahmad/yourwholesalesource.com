@@ -339,7 +339,7 @@ Route::group(['middleware' => ['check_woocommerce_shop']], function () {
 });
 
 /*Main Routes*/
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth']], function () {
     /*Checking User Role*/
     Route::get('/check/roles','RolePermissionController@check_roles')->name('system.check-roles');
     Route::get('/choose/platform','RolePermissionController@selection')->name('system.selection');
