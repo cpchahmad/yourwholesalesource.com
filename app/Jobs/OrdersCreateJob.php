@@ -75,6 +75,10 @@ class OrdersCreateJob implements ShouldQueue
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
 
+        $log = new ErrorLog();
+        $log->message = "const new 2";
+        $log->save();
+
         $hook = new Webhook();
         $hook->type = 'order_created';
         $hook->status = 0;
@@ -82,9 +86,7 @@ class OrdersCreateJob implements ShouldQueue
         $hook->save();
 
 
-        $log = new ErrorLog();
-        $log->message = "const new";
-        $log->save();
+
 
 
     }
