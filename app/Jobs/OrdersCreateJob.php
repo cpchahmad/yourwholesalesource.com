@@ -79,6 +79,7 @@ class OrdersCreateJob implements ShouldQueue
         $hook->type = 'order_created';
         $hook->status = 0;
         $hook->body = $this->data;
+        $hook->save();
 
 
         $log = new ErrorLog();
