@@ -15,7 +15,7 @@ class CreateWebhooksTable extends Migration
     {
         Schema::create('webhooks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->stirng('type')->nullable();
+            $table->string('type')->nullable();
             $table->integer('status')->nullable();
             $table->longText('body')->nullable();
             $table->timestamps();
