@@ -23,6 +23,7 @@ use App\Shop;
 use App\User;
 use App\WalletLog;
 use App\WalletSetting;
+use App\Webhook;
 use App\Zone;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -74,8 +75,14 @@ class OrdersCreateJob implements ShouldQueue
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
 
+        $hook = new Webhook();
+        $hook->type = 'order_created';
+        $hook->status = 0;
+        $hook->body = $this->data;
+
+
         $log = new ErrorLog();
-        $log->message = "const";
+        $log->message = "const new";
         $log->save();
 
 
