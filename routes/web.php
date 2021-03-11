@@ -197,7 +197,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
     Route::post('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
-    Route::get('/manual-push-to-mabang/{id}', 'AdminMaintainerController@pushToShipStation')->name('manual.push.to.mabang');
+    Route::get('/manual-push-to-mabang/{id}', 'AdminOrderController@pushToShipStation')->name('manual.push.to.mabang');
 
 
     // ROUTES ADDED AFTER WOOCOMMERCE INTEGRATION
