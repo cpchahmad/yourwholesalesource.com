@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 leftSection">
+                        <div class="col-md-12 offset-md-3 leftSection">
                             <div class="left">
                                 @yield('content')
                             </div>
