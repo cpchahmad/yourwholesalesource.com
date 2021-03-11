@@ -38,8 +38,8 @@ class CategoryController extends Controller
                 $category->ranking = $highest_ranking + 1;
                 $category->save();
 
-                $woocommerce = $this->helper->getWooCommerceAdminShop();
-                $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+//                $woocommerce = $this->helper->getWooCommerceAdminShop();
+//                $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
 
             } else {
                 $category = new Category();
@@ -48,9 +48,9 @@ class CategoryController extends Controller
                 $category->ranking = $highest_ranking + 1;
                 $category->save();
 
-                $woocommerce = $this->helper->getWooCommerceAdminShop();
-                $response = $woocommerce->post('products/categories', ['name' => $category->title]);
-                $category->woocommerce_id = $response->id;
+//                $woocommerce = $this->helper->getWooCommerceAdminShop();
+//                $response = $woocommerce->post('products/categories', ['name' => $category->title]);
+//                $category->woocommerce_id = $response->id;
                 $category->save();
             }
             DB::commit();
@@ -83,8 +83,8 @@ class CategoryController extends Controller
             $category->ranking = $request->ranking;
             $category->save();
 
-            $woocommerce = $this->helper->getWooCommerceAdminShop();
-            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+//            $woocommerce = $this->helper->getWooCommerceAdminShop();
+//            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
 
             DB::commit();
             return redirect()->back()->with('success','Category updated successfully!');
@@ -110,8 +110,8 @@ class CategoryController extends Controller
                 }
             }
 
-            $woocommerce = $this->helper->getWooCommerceAdminShop();
-            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
+//            $woocommerce = $this->helper->getWooCommerceAdminShop();
+//            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
 
             $category->delete();
             $subcategories = SubCategory::where('category_id', $id)->get();
@@ -140,9 +140,9 @@ class CategoryController extends Controller
                     $subcategory->category_id = $request->category_id;
                     $subcategory->save();
 
-                    $woocommerce = $this->helper->getWooCommerceAdminShop();
-                    $response = $woocommerce->post('products/categories', ['name' => $subcategory->title, 'parent' => $subcategory->hasCategory->woocommerce_id]);
-                    $subcategory->woocommerce_id = $response->id;
+//                    $woocommerce = $this->helper->getWooCommerceAdminShop();
+//                    $response = $woocommerce->post('products/categories', ['name' => $subcategory->title, 'parent' => $subcategory->hasCategory->woocommerce_id]);
+//                    $subcategory->woocommerce_id = $response->id;
                     $subcategory->save();
                 }
             }
@@ -163,8 +163,8 @@ class CategoryController extends Controller
             $category->title = $request->title;
             $category->save();
 
-            $woocommerce = $this->helper->getWooCommerceAdminShop();
-            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+//            $woocommerce = $this->helper->getWooCommerceAdminShop();
+//            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
 
             DB::commit();
             return redirect()->back()->with('success','Sub Category updated successfully!');
@@ -182,8 +182,8 @@ class CategoryController extends Controller
         try{
             $category = SubCategory::find($id);
 
-            $woocommerce = $this->helper->getWooCommerceAdminShop();
-            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
+//            $woocommerce = $this->helper->getWooCommerceAdminShop();
+//            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
 
             $category->delete();
 
