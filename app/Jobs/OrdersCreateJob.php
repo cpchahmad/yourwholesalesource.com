@@ -80,6 +80,7 @@ class OrdersCreateJob implements ShouldQueue
         $hook->type = 'order_created';
         $hook->status = 0;
         $hook->body = json_encode($data);
+        $hook->shop_domain = $shopDomain;
         $hook->save();
     }
 
