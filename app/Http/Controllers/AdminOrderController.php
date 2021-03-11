@@ -2092,6 +2092,8 @@ class AdminOrderController extends Controller
         ];
 
         $line_items = [];
+        $images = [];
+
 
         foreach ($order->line_items as $index =>  $item) {
             if($item->linked_real_variant != null) {
