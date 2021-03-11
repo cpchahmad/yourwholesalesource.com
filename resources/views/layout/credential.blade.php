@@ -36,13 +36,13 @@
     <!-- Main Container -->
     <main id="main-container">
 {{--        @include('flash_message.message')--}}
-        <div class="bg-image" style="background-image: url('{{ asset('assets/join-page2.jpg') }}');">
+        <div class="bg-image" style="background-image: url('https://yourwholesalesource.com/wp-content/uploads/2018/07/Home@2x.jpg');">
             <div class="hero-static">
                 <div class="content">
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <div class="logo mb2 d-inline-block text-center justify-content-center">
-                                <img style="width: 100%;max-width: 77px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/we_full_fill_logo.png') }}" alt="">
+                                <img style="width: 100%;max-width: 77px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/wholesale.png') }}" alt="">
                                 <h1 class="d-inline-block text-white">WholeSaleSource</h1>
                             </div>
                         </div>
