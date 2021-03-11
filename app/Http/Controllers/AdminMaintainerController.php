@@ -885,14 +885,14 @@ class AdminMaintainerController extends Controller
 
                         $this->inventory->OrderQuantityUpdate($new,'new');
 
-                        try {
-                            $this->push_to_mabang($new->id);
-                        }
-                        catch (\Exception $e) {
-                            $log = new ErrorLog();
-                            $log->message = "ERP order BUG from Auto Wallet Payment: ". $new->id . " : " . $e->getMessage();
-                            $log->save();
-                        }
+//                        try {
+//                            $this->push_to_mabang($new->id);
+//                        }
+//                        catch (\Exception $e) {
+//                            $log = new ErrorLog();
+//                            $log->message = "ERP order BUG from Auto Wallet Payment: ". $new->id . " : " . $e->getMessage();
+//                            $log->save();
+//                        }
 
                     }
                     else{

@@ -460,14 +460,14 @@ class WalletController extends Controller
 
                 //$this->admin->sync_order_to_admin_store($retailer_order);
                 $this->inventory->OrderQuantityUpdate($retailer_order,'new');
-                try {
-                    $this->admin->push_to_mabang($retailer_order->id);
-                }
-                catch (\Exception $e) {
-                    $log = new ErrorLog();
-                    $log->message = "ERP order pushing bug from single order wallet payment: ". $retailer_order->id . ': '. $e->getMessage();
-                    $log->save();
-                }
+//                try {
+//                    $this->admin->push_to_mabang($retailer_order->id);
+//                }
+//                catch (\Exception $e) {
+//                    $log = new ErrorLog();
+//                    $log->message = "ERP order pushing bug from single order wallet payment: ". $retailer_order->id . ': '. $e->getMessage();
+//                    $log->save();
+//                }
 
                 $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 
@@ -562,14 +562,14 @@ class WalletController extends Controller
 
                     //$this->admin->sync_order_to_admin_store($retailer_order);
                     $this->inventory->OrderQuantityUpdate($retailer_order,'new');
-                    try {
-                        $this->admin->push_to_mabang($retailer_order->id);
-                    }
-                    catch (\Exception $e) {
-                        $log = new ErrorLog();
-                        $log->message = "ERP order BUG from Wallet Bulk: ". $e->getMessage();
-                        $log->save();
-                    }
+//                    try {
+//                        $this->admin->push_to_mabang($retailer_order->id);
+//                    }
+//                    catch (\Exception $e) {
+//                        $log = new ErrorLog();
+//                        $log->message = "ERP order BUG from Wallet Bulk: ". $e->getMessage();
+//                        $log->save();
+//                    }
 
 
                     $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');

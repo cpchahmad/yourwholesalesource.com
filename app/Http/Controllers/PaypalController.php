@@ -178,14 +178,14 @@ class PaypalController extends Controller
 
             $this->inventory->OrderQuantityUpdate($retailer_order,'new');
 
-            try {
-                $this->admin->push_to_mabang($retailer_order->id);
-            }
-            catch (\Exception $e) {
-                $log = new ErrorLog();
-                $log->message = "ERP order BUG from Paypal Single: ". $e->getMessage();
-                $log->save();
-            }
+//            try {
+//                $this->admin->push_to_mabang($retailer_order->id);
+//            }
+//            catch (\Exception $e) {
+//                $log = new ErrorLog();
+//                $log->message = "ERP order BUG from Paypal Single: ". $e->getMessage();
+//                $log->save();
+//            }
 
 
             if($retailer_order->custom == 0){
@@ -341,14 +341,14 @@ class PaypalController extends Controller
             $order_log->save();
             $this->inventory->OrderQuantityUpdate($retailer_order,'new');
             //$this->admin->sync_order_to_admin_store($retailer_order);
-            try {
-                $this->admin->push_to_mabang($retailer_order->id);
-            }
-            catch (\Exception $e) {
-                $log = new ErrorLog();
-                $log->message = "ERP order BUG from Paypal Bulk: ". $e->getMessage();
-                $log->save();
-            }
+//            try {
+//                $this->admin->push_to_mabang($retailer_order->id);
+//            }
+//            catch (\Exception $e) {
+//                $log = new ErrorLog();
+//                $log->message = "ERP order BUG from Paypal Bulk: ". $e->getMessage();
+//                $log->save();
+//            }
         }
 
 
