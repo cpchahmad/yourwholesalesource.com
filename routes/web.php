@@ -611,13 +611,7 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 Route::get('/testing', function() {
     $helper = new HelperController();
     $shop = $helper->getSpecificShop(188);
-    $response = $shop->api()->rest('POST', '/admin/webhooks.json', [
-        'webhook' => [
-            'topic' => 'orders/create',
-            'address' => 'https://app.yourwholesalesource.com/webhook/orders-create',
-            "format"=> "json"
-        ]
-    ]);
+
 
     $response = $shop->api()->rest('POST', '/admin/webhooks.json', [
         'webhook' => [
@@ -642,6 +636,8 @@ Route::get('/testing', function() {
             "format"=> "json"
         ]
     ]);
+
+    $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
     dd($response);
 });
