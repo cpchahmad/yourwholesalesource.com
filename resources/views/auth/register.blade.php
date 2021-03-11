@@ -75,8 +75,8 @@
 
 
                     <div class="form-group row">
-                        <div class="col-md-7 col-xl-7 submit-column">
-                            <button type="submit" class="btn btn-block btn-success">
+                        <div class="col-md-12 col-xl-12 submit-column">
+                            <button type="submit" class="btn btn-block btn-info">
                                 <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Create Account
                             </button>
                         </div>
@@ -100,8 +100,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-7 col-xl-7 submit-column">
-                                <button type="submit" class="btn btn-block btn-success">
+                            <div class="col-md-21 col-xl-12 submit-column">
+                                <button type="submit" class="btn btn-block btn-info">
                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Create Account
                                 </button>
                             </div>
