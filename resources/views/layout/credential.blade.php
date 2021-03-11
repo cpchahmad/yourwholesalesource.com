@@ -36,7 +36,7 @@
     <!-- Main Container -->
     <main id="main-container">
 {{--        @include('flash_message.message')--}}
-        <div class="bg-image" style=" background:linear-gradient(0deg, rgba(255, 0, 150, 0.3), rgba(255, 0, 150, 0.3)), url('https://yourwholesalesource.com/wp-content/uploads/2018/07/Home@2x.jpg');">
+        <div class="bg-image" style=" background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://yourwholesalesource.com/wp-content/uploads/2018/07/Home@2x.jpg');">
             <div class="hero-static">
                 <div class="content">
                     <div class="row">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 offset-md-4 leftSection mt-5">
-                            <div class="">
+                            <div class="left">
                                 @yield('content')
                             </div>
                         </div>
