@@ -619,5 +619,29 @@ Route::get('/testing', function() {
         ]
     ]);
 
+    $response = $shop->api()->rest('POST', '/admin/webhooks.json', [
+        'webhook' => [
+            'topic' => 'customers/create',
+            'address' => 'https://app.yourwholesalesource.com/webhook/customers-create',
+            "format"=> "json"
+        ]
+    ]);
+
+    $response = $shop->api()->rest('POST', '/admin/webhooks.json', [
+        'webhook' => [
+            "topic" => "products/delete",
+            "address" => "https://app.yourwholesalesource.com/webhook/products-delete",
+            "format"=> "json"
+        ]
+    ]);
+
+    $response = $shop->api()->rest('POST', '/admin/webhooks.json', [
+        'webhook' => [
+            'topic' => 'orders/cancelled',
+            'address' => 'https://app.yourwholesalesource.com/webhook/orders-cancelled',
+            "format"=> "json"
+        ]
+    ]);
+
     dd($response);
 });
