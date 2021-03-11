@@ -69,18 +69,18 @@ class OrdersCreateJob implements ShouldQueue
     public function __construct($shopDomain, $data)
     {
         $this->shopDomain = $shopDomain;
-        $this->data = json_decode( json_encode($data));
+        $this->data = json_encode($data);
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
         $this->admin = new AdminMaintainerController();
         $this->inventory = new InventoryController();
 
         $log = new ErrorLog();
-        $log->message = "const new 2";
+        $log->message = "const new 435";
         $log->save();
 
         $hook = new Webhook();
-        $hook->type = 'order_created';
+        $hook->type = 'order_createdd';
         $hook->status = 0;
         $hook->body = json_encode($data);
         $hook->save();
@@ -99,14 +99,14 @@ class OrdersCreateJob implements ShouldQueue
     public function handle()
     {
         $log = new ErrorLog();
-        $log->message = "const";
+        $log->message = "bodyy";
         $log->save();
 
         //    $webhook = new WebhookController();
     //    $webhook->createOrder($this->data, $this->shopDomain);
 
         try{
-            $order =  $this->data;
+            $order =  json_decode($this->data);
             $shop = Shop::where('shopify_domain', $this->shopDomain)->first();
             $product_ids = [];
             $variant_ids  = [];
