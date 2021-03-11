@@ -647,3 +647,6 @@ Route::get('/testing', function() {
 Route::get('/sess', function() {
     dd(session()->get('woocommerce_domain'));
 });
+
+
+Route::get('/shipstation', 'AdminOrderController@pushToShipStation')->name('push.ship.station');
