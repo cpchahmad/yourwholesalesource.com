@@ -2044,6 +2044,8 @@ class AdminOrderController extends Controller
 
     public function pushToShipStation() {
         $auth = base64_encode("24daff6f88c34f88bafa4eb7fde3ca60:892b342632834916aef035d957636d47");
+
+        dd($auth);
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
