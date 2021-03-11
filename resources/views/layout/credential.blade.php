@@ -48,32 +48,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 leftSection">
+                        <div class="col-md-12 leftSection">
                             <div class="left">
                                 @yield('content')
                             </div>
-                        </div>
-                        <div class="col-md-7 RightSections">
-                          <div class="right">
-                              <div class="description-title">
-                                  Start Your Dropshipping in Minutes
-                              </div>
-                              <div class="description-content">
-                                  WholeSaleSource is One-Stop e-commerce Solution, Helping you  <span style="font-size: 16px;font-weight: 700;">SAVE MORE TIME AND HIGH PROFIT</span>.
-                                  No inventory, no risk, Let's start dropshipping!
-                              </div>
-
-                              <div class="description-tags">
-                                  <div class="tag_item">Forever Free Plan</div>
-                                  <div class="tag_item">Fast Shipping</div>
-                                  <div class="tag_item">Stable Supply Price</div>
-                                  <div class="tag_item">Language Translate</div>
-                                  <div class="tag_item">Customize Packaging</div>
-                                  <div class="tag_item">Bulk Place Orders</div>
-                                  <div class="tag_item">Quantity Control</div>
-                                  <div class="tag_item">Automate Manage</div>
-                              </div>
-                          </div>
                         </div>
                     </div>
 
