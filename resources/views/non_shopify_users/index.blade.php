@@ -87,43 +87,43 @@
                 </div>
 
                 <!-- Wishlist -->
-                <div class="row block">
-                    <div class="col-md-12">
-                        <div class="block-title  p-3">My Wishlist</div>
-                    </div>
-                    <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=1" >
-                            <div class="block-content block-content-full border border-primary bg-gray-lighter">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Outstanding</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{ $open_wishlist }}</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=2" >
-                            <div class="block-content block-content-full border border-primary bg-gray-lighter">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Approved</div>
-                                <div class="font-size-h2 font-w400 text-success">{{ $approved_wishlist }}</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=4&read=1" >
-                            <div class="block-content block-content-full border border-primary bg-gray-lighter">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Rejected</div>
-                                <div class="font-size-h2 font-w400 text-dark">{{$unread_rejected_wishlist}}</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=5&read=2" >
-                            <div class="block-content block-content-full border border-primary bg-gray-lighter">
-                                <div class="font-size-sm font-w600 text-uppercase text-muted">Completed</div>
-                                <div class="font-size-h2 font-w400 text-success">{{$unread_completed_wishlist}}</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+{{--                <div class="row block">--}}
+{{--                    <div class="col-md-12">--}}
+{{--                        <div class="block-title  p-3">My Wishlist</div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=1" >--}}
+{{--                            <div class="block-content block-content-full border border-primary bg-gray-lighter">--}}
+{{--                                <div class="font-size-sm font-w600 text-uppercase text-muted">Outstanding</div>--}}
+{{--                                <div class="font-size-h2 font-w400 text-dark">{{ $open_wishlist }}</div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=2" >--}}
+{{--                            <div class="block-content block-content-full border border-primary bg-gray-lighter">--}}
+{{--                                <div class="font-size-sm font-w600 text-uppercase text-muted">Approved</div>--}}
+{{--                                <div class="font-size-h2 font-w400 text-success">{{ $approved_wishlist }}</div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=4&read=1" >--}}
+{{--                            <div class="block-content block-content-full border border-primary bg-gray-lighter">--}}
+{{--                                <div class="font-size-sm font-w600 text-uppercase text-muted">Rejected</div>--}}
+{{--                                <div class="font-size-h2 font-w400 text-dark">{{$unread_rejected_wishlist}}</div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-6">--}}
+{{--                        <a class="block block-rounded block-link-pop" href="/users/wishlist?status=5&read=2" >--}}
+{{--                            <div class="block-content block-content-full border border-primary bg-gray-lighter">--}}
+{{--                                <div class="font-size-sm font-w600 text-uppercase text-muted">Completed</div>--}}
+{{--                                <div class="font-size-h2 font-w400 text-success">{{$unread_completed_wishlist}}</div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                 <div class="row">
                     <div class="col-md-12">
