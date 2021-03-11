@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <div class="logo mb2 d-inline-block text-center justify-content-center">
-                                <img style="width: 100%;max-width: 77px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/wholesale.png') }}" alt="">
+                                <img style="width: 100%;max-width: 130px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/wholesale.png') }}" alt="">
                                 <h1 class="d-inline-block text-white">WholeSaleSource</h1>
                             </div>
                         </div>
