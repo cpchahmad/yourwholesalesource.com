@@ -293,10 +293,10 @@ class CustomOrderController extends Controller
         $new->shopify_created_at = date_create($request->input('order_date'))->format('Y-m-d h:i:s');
         $new->shopify_updated_at = date_create($request->input('order_date'))->format('Y-m-d h:i:s');
 
-        //$new->save();
+        $new->save();
 
         $new->admin_shopify_name = 'WFF'.$new->id;
-        //$new->save();
+        $new->save();
 
         $cost_to_pay = 0;
         $total_weight = 0;
@@ -305,8 +305,6 @@ class CustomOrderController extends Controller
         if ($request->has('line_items')) {
             foreach ($request->input('line_items') as $index => $item) {
                 $variant = ProductVariant::find($item);
-
-                dd($variant);
                 if ($variant != null) {
                     $new_line = new RetailerOrderLineItem();
                     $new_line->retailer_order_id = $new->id;
