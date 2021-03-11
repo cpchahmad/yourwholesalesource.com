@@ -76,11 +76,11 @@ class OrdersCreateJob implements ShouldQueue
         $this->inventory = new InventoryController();
 
         $log = new ErrorLog();
-        $log->message = "const new 435";
+        $log->message = "const new here";
         $log->save();
 
         $hook = new Webhook();
-        $hook->type = 'order_createdd';
+        $hook->type = 'order_created';
         $hook->status = 0;
         $hook->body = json_encode($data);
         $hook->save();
@@ -98,14 +98,17 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        $log = new ErrorLog();
-        $log->message = "bodyy";
-        $log->save();
+
 
         //    $webhook = new WebhookController();
     //    $webhook->createOrder($this->data, $this->shopDomain);
 
         try{
+            $log = new ErrorLog();
+            $log->message = "bodyy";
+            $log->save();
+
+
             $order =  json_decode($this->data);
             $shop = Shop::where('shopify_domain', $this->shopDomain)->first();
             $product_ids = [];
