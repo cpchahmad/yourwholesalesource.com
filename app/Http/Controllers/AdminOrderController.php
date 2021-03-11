@@ -2169,7 +2169,8 @@ class AdminOrderController extends Controller
             "amountPaid"=> $order->cost_to_pay,
             "shippingAmount"=> $order->shipping_price,
             "billTo" => $bill_to,
-            "shipTo" => $ship_to
+            "shipTo" => $ship_to,
+            "items" => $line_items
         ];
 
 
