@@ -41,6 +41,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('newproduct:cron')->weeklyOn($day, $time);
         $schedule->command('updatewinning:products')->daily();
+        $schedule->command('process:webhook')->daily();
         //$schedule->command('check_monthly_sales_target:non_shopify_user')->monthly();
         //$schedule->command('check_monthly_sales_target:shopify_user')->monthly();
     }

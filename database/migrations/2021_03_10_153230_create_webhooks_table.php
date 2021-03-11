@@ -18,6 +18,7 @@ class CreateWebhooksTable extends Migration
             $table->string('type')->nullable();
             $table->integer('status')->nullable();
             $table->longText('body')->nullable();
+            $table->string('shop_domain')->nullable();
             $table->timestamps();
         });
     }
