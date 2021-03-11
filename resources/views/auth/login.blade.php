@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     <div class="form-group row">
-                        <div class="col-md-12 col-xl-5 submit-column">
+                        <div class="col-md-12 col-xl-12 submit-column">
                             <button type="submit" class="btn btn-block btn-info">
                                 <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                             </button>
