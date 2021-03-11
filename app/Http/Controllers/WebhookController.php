@@ -30,12 +30,7 @@ class WebhookController extends Controller
 
     public function create_order($webhook) {
 
-        $log = new ErrorLog();
-        $log->message = "Executed";
-        $log->save();
-
        try{
-
            $order =  json_decode($webhook->body);
            $shop = Shop::where('shopify_domain', $webhook->shop_domain)->first();
            $product_ids = [];
@@ -284,11 +279,96 @@ class WebhookController extends Controller
        catch (\Exception $e) {
 
            $log = new ErrorLog();
-           $log->message = $e->getMessage();
+           $log->message = "Order create Webhook: ". $e->getMessage();
            $log->save();
        }
 
        $webhook->status = 1;
        $webhook->save();
    }
+
+    public function product_deleted($webhook) {
+
+        try{
+            $data =  json_decode($webhook->body);
+            $shop = Shop::where('shopify_domain', $webhook->shop_domain)->first();
+            $product = RetailerProduct::where('shopify_id', $data->id)->first();
+
+            if($product != null) {
+                foreach ($product->hasVariants as $variant) {
+                    $variant->delete();
+                }
+                foreach ($product->has_images as $image){
+                    $image->delete();
+                }
+                $product->has_categories()->detach();
+                $product->has_subcategories()->detach();
+
+                $shop->has_imported()->detach([$product->linked_product_id]);
+                if(count($shop->has_user) > 0){
+                    $shop->has_user[0]->has_imported()->detach([$product->linked_product_id]);
+                }
+                $product->delete();
+            }
+        }
+        catch (\Exception $e) {
+
+            $log = new ErrorLog();
+            $log->message = "Product Deleted Webhook: ". $e->getMessage();
+            $log->save();
+        }
+
+        $webhook->status = 1;
+        $webhook->save();
+    }
+
+    public function create_customer($webhook) {
+        $customer =  json_decode($webhook->body);
+        $shop = Shop::where('shopify_domain', $webhook->shop_domain)->first();
+        if (Customer::where('customer_shopify_id',$customer->id)->exists()){
+            $new_customer = Customer::where('customer_shopify_id',$customer->id)->first();
+        }
+        else{
+            $new_customer = new Customer();
+        }
+        $new_customer->customer_shopify_id = $customer->id;
+        $new_customer->first_name = $customer->first_name;
+        $new_customer->last_name = $customer->last_name;
+        $new_customer->phone = $customer->phone;
+        $new_customer->email = $customer->email;
+        $new_customer->total_spent = $customer->total_spent;
+        $new_customer->shop_id = $shop->id;
+        if(count($shop->has_user) > 0){
+            $new_customer->user_id = $shop->has_user[0]->id;
+        }
+        $new_customer->save();
+
+        $webhook->status = 1;
+        $webhook->save();
+    }
+
+    public function cancel_order($webhook) {
+
+        try{
+
+            $data = json_decode($webhook->body);
+            if ($webhook->shop_domain == 'wefullfill.myshopify.com') {
+                $hook = new AdminWebhookController();
+                $order = RetailerOrder::where('admin_shopify_id',$data->id)->first();
+                if($order != null){
+                    $hook->cancellation_refund($data);
+                }
+            }
+        }
+        catch (\Exception $e) {
+
+            $log = new ErrorLog();
+            $log->message = "Order cancelled webhook: ". $e->getMessage();
+            $log->save();
+        }
+
+        $webhook->status = 1;
+        $webhook->save();
+    }
+
 }

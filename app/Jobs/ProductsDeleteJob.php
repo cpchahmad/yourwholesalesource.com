@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
 use App\Shop;
+use App\Webhook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -42,6 +43,14 @@ class ProductsDeleteJob implements ShouldQueue
     {
         $this->shopDomain = $shopDomain;
         $this->data = $data;
+
+
+        $hook = new Webhook();
+        $hook->type = 'product_deleted';
+        $hook->status = 0;
+        $hook->body = json_encode($data);
+        $hook->shop_domain = $shopDomain;
+        $hook->save();
     }
 
     /**

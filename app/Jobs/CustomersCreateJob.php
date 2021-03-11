@@ -2,6 +2,7 @@
 
 use App\Customer;
 use App\Shop;
+use App\Webhook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -38,6 +39,13 @@ class CustomersCreateJob implements ShouldQueue
     {
         $this->shopDomain = $shopDomain;
         $this->data = $data;
+
+        $hook = new Webhook();
+        $hook->type = 'customer_created';
+        $hook->status = 0;
+        $hook->body = json_encode($data);
+        $hook->shop_domain = $shopDomain;
+        $hook->save();
     }
 
     /**

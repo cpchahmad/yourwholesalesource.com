@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminWebhookController;
 use App\OrderFulfillment;
 use App\RetailerOrder;
+use App\Webhook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,6 +40,13 @@ class OrdersCancelledJob implements ShouldQueue
     {
         $this->shopDomain = $shopDomain;
         $this->data = $data;
+
+        $hook = new Webhook();
+        $hook->type = 'order_cancelled';
+        $hook->status = 0;
+        $hook->body = json_encode($data);
+        $hook->shop_domain = $shopDomain;
+        $hook->save();
     }
 
     /**
