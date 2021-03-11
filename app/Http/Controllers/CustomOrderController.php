@@ -27,6 +27,7 @@ use App\TicketCategory;
 use App\User;
 use App\UserFile;
 use App\UserFileTemp;
+use App\Video;
 use App\WalletLog;
 use App\Wishlist;
 use App\Zone;
@@ -1443,6 +1444,18 @@ class CustomOrderController extends Controller
             'drop_request' => $drop_request
         ]);
     }
+
+    public function showVideosSection() {
+        $videos = Video::get()->groupBy(function($data){
+            return $data->category;
+        });
+
+        return view('non_shopify_users.videos.index')->with([
+            'videos' => $videos,
+        ]);
+
+    }
+
 
 
 }

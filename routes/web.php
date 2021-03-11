@@ -406,6 +406,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/dropship-requests/{id}/view-shipping-mark/{mark_id}', 'DropshipRequestController@view_shipping_mark')->name('users.dropship.requests.view.shipping.mark');
             Route::get('/dropship-requests/{id}/create-shipping-mark', 'CustomOrderController@create_shipping_mark')->name('users.dropship.requests.create.shipping.mark');
 
+            Route::get('/wefulfill/university','CustomOrderController@showVideosSection')->name('users.university.index');
 
             Route::group(['middleware' => ['check_user_shop']], function () {
 
@@ -640,4 +641,9 @@ Route::get('/testing', function() {
     $response = $shop->api()->rest('GET', '/admin/webhooks.json');
 
     dd($response);
+});
+
+
+Route::get('/sess', function() {
+    dd(session()->get('woocommerce_domain'));
 });
