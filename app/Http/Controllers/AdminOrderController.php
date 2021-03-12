@@ -2064,31 +2064,21 @@ class AdminOrderController extends Controller
 
 
         $bill_to  = [
-            "name"=> "The President",
-            "company"=> null,
-            "street1"=> null,
-            "street2"=> null,
-            "street3"=> null,
-            "city"=> null,
-            "state"=> null,
-            "postalCode"=> null,
-            "country"=> null,
-            "phone"=> null,
-            "residential"=> null
+            "name"=> is_null($shipping->first_name) ? "No customer Found" : $shipping->first_name. ' '.$shipping->last_name,
+            "street1"=> is_null($shipping->address1) ? 'No First Address' : $shipping->address1,
+            "city"=> is_null($shipping->city) ? 'No City' : $shipping->city,
+            "postalCode"=> is_null($shipping->zip) ? 'No Zip' : $shipping->zip,
+            "country"=> is_null($shipping->country) ? 'No country' : $shipping->country,
+            "phone"=> isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone',
         ];
 
         $ship_to  = [
-            "name"=> "The President",
-            "company"=> null,
-            "street1"=> null,
-            "street2"=> null,
-            "street3"=> null,
-            "city"=> null,
-            "state"=> null,
-            "postalCode"=> null,
-            "country"=> null,
-            "phone"=> null,
-            "residential"=> null
+            "name"=> is_null($shipping->first_name) ? null : $shipping->first_name. ' '.$shipping->last_name,
+            "street1"=> is_null($shipping->address1) ? 'No First Address' : $shipping->address1,
+            "city"=> is_null($shipping->city) ? 'No City' : $shipping->city,
+            "postalCode"=> is_null($shipping->zip) ? 'No Zip' : $shipping->zip,
+            "country"=> is_null($shipping->country) ? 'No country' : $shipping->country,
+            "phone"=> isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone',
         ];
 
         $line_items = [];
