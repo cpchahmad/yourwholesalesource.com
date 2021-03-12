@@ -2128,14 +2128,14 @@ class AdminOrderController extends Controller
                 }
             }
 
-            if($item->linked_real_variant != null)
-                $sku = $item->linked_real_variant->sku;
+            if($item->linked_variant != null)
+                $sku = $item->linked_variant->sku;
+            elseif($item->linked_product != null)
+                $sku = $item->linked_product->sku;
             elseif($item->linked_woocommerce_variant != null)
                 $sku = $item->linked_woocommerce_variant->sku;
             elseif($item->linked_dropship_variant != null)
                 $sku = $item->linked_dropship_variant->sku;
-            elseif($item->linked_real_product != null)
-                $sku = $item->linked_real_product->sku;
             else
                 $sku = $item->linked_woocommerce_product->sku;
 
