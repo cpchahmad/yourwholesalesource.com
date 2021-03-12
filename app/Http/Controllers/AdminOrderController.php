@@ -2068,7 +2068,7 @@ class AdminOrderController extends Controller
             "street1"=> is_null($shipping->address1) ? 'No First Address' : $shipping->address1,
             "city"=> is_null($shipping->city) ? 'No City' : $shipping->city,
             "postalCode"=> is_null($shipping->zip) ? 'No Zip' : $shipping->zip,
-            "country"=> is_null($shipping->country) ? 'No country' : $shipping->country,
+            "country"=> is_null($shipping->country_code) ? 'No country' : $shipping->country_code,
             "phone"=> isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone',
         ];
 
@@ -2077,7 +2077,7 @@ class AdminOrderController extends Controller
             "street1"=> is_null($shipping->address1) ? 'No First Address' : $shipping->address1,
             "city"=> is_null($shipping->city) ? 'No City' : $shipping->city,
             "postalCode"=> is_null($shipping->zip) ? 'No Zip' : $shipping->zip,
-            "country"=> is_null($shipping->country) ? 'No country' : $shipping->country,
+            "country"=> is_null($shipping->country_code) ? 'No country' : $shipping->country_code,
             "phone"=> isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone',
         ];
 
