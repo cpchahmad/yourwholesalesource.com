@@ -2175,7 +2175,7 @@ class AdminOrderController extends Controller
             "items" => $line_items
         ];
 
-        $data = json_encode($data);
+        $data = str_replace("\\", '', json_encode($data));
 
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
