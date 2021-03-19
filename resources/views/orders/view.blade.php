@@ -88,7 +88,6 @@
                                 <th style="width: 10%">Name</th>
                                 <th>Fulfilled By</th>
                                 <th>Cost</th>
-                                <th>Discount</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
@@ -96,68 +95,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $total_discount = 0;
-                                $is_monthly_discount = false;
-                                $n = $order->line_items->where('fulfilled_by', '!=', 'store')->sum('quantity');
-                                $line_item_count = count($order->line_items);
-                                $admin_setting_for_monthly_discount = \App\MonthlyDiscountSetting::first();
 
-
-                                if($admin_setting_for_monthly_discount && $admin_setting_for_monthly_discount->enable){
-                                    if($order->shop_id == null) {
-                                        if(\App\MonthlyDiscountPreference::where('user_id', $order->user_id)->exists() && \App\MonthlyDiscountPreference::where('user_id', $order->user_id)->first()->enable)
-                                            $is_monthly_discount = true;
-                                    }
-                                    else {
-                                        if(\App\MonthlyDiscountPreference::where('shop_id', $order->shop_id)->exists() && \App\MonthlyDiscountPreference::where('shop_id', $order->shop_id)->first()->enable)
-                                            $is_monthly_discount = true;
-                                    }
-                                }
-                                else {
-                                    $is_monthly_discount = false;
-                                }
-
-
-
-                                if($order->line_items->where('fulfilled_by', '!=', 'store')->count() >=2){
-                                    $is_general_discount = true;
-                                }
-                                else {
-                                    $is_general_discount = false;
-                                }
-
-                                if(\App\GeneralDiscountPreferences::first()->global == 1) {
-                                    $is_applied_for_general_dsiscount = true;
-                                }
-                                else {
-                                    $stores = \App\GeneralDiscountPreferences::first()->stores_id;
-                                    $store_array= json_decode($stores);
-                                    if(in_array($order->shop_id, $store_array)) { $is_applied_for_general_dsiscount = true; } else { $is_applied_for_general_dsiscount = false; }
-
-                                }
-
-                                if(\App\GeneralFixedPricePreferences::first()->global == 1) {
-                                    $is_applied_for_general_fixed = true;
-                                }
-                                else {
-                                    $stores = \App\GeneralFixedPricePreferences::first()->stores_id;
-                                    $store_array= json_decode($stores);
-                                    if(in_array($order->shop_id, $store_array)) { $is_applied_for_general_fixed = true; } else { $is_applied_for_general_fixed = false; }
-
-
-                                }
-
-                                if(\App\TieredPricingPrefrences::first()->global == 1) {
-                                    $is_applied = true;
-                                }
-                                else {
-                                    $stores = \App\TieredPricingPrefrences::first()->stores_id;
-                                    $store_array= json_decode($stores);
-                                    if(in_array($order->shop_id, $store_array)) { $is_applied = true; } else { $is_applied = false; }
-                                }
-
-                            @endphp
 
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
@@ -255,74 +193,6 @@
                                         </td>
 
                                         <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
-                                        <td>
-                                            @php
-                                                $variant = $item->linked_variant;
-                                                $real_variant = null;
-
-
-                                                if($variant) {
-                                                    $real_variant = \App\ProductVariant::where('sku', $variant->sku)->first();
-                                                }
-                                                else{
-                                                    $retailer_product = $item->linked_product;
-                                                    if($retailer_product !== null) {
-                                                       $real_variant = \App\Product::where('title', $retailer_product->title)->first();
-                                                    }
-                                                }
-                                            @endphp
-
-
-                                            @if($real_variant != null && $is_applied && !($is_general_discount) && !($is_monthly_discount))
-                                                @if(count($real_variant->has_tiered_prices) > 0)
-                                                    @foreach($real_variant->has_tiered_prices as $var_price)
-                                                        @php
-                                                            $price = null;
-
-                                                            $qty = (int) $item->quantity;
-                                                            if(($var_price->min_qty <= $qty) && ($qty <= $var_price->max_qty)) {
-                                                                if($var_price->type == 'fixed') {
-                                                                    $price = $var_price->price * ($qty -1);
-                                                                    $price = number_format($price, 2);
-                                                                    $total_discount = $total_discount + $price;
-                                                                    $price = $price . " USD";
-                                                                }
-                                                                else if($var_price->type == 'discount') {
-                                                                    $discount = (double) $var_price->price;
-                                                                    $price = $item->cost - ($item->price * $discount / 100);
-                                                                    $price = $price * ($qty -1);
-                                                                    $price = number_format($price, 2);
-                                                                    $total_discount = $total_discount + $price;
-                                                                    $price = $price . " USD";
-                                                                }
-                                                            }
-                                                            else {
-                                                                $price = '';
-                                                            }
-                                                        @endphp
-                                                        {{ ($price) }}
-                                                    @endforeach
-                                                @else
-                                                    <span></span>
-                                                @endif
-                                            @else
-                                                <span></span>
-                                            @endif
-
-                                            @if($is_general_discount && $is_applied_for_general_dsiscount && !($is_monthly_discount))
-                                                    {{ \App\GeneralDiscountPreferences::first()->discount_amount }} % on whole order
-                                            @endif
-
-                                            @if($is_general_discount && $is_applied_for_general_fixed && !($is_monthly_discount))
-                                                {{ number_format(\App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1), 2) }} $ off on whole order
-                                            @endif
-
-
-                                            @if($is_monthly_discount)
-                                                {{ \App\MonthlyDiscountSetting::first()->discount }} % on whole order
-                                            @endif
-
-                                        </td>
 
                                         <td>{{$item->price}} X {{$item->quantity}}  USD </td>
                                         <td>
@@ -471,36 +341,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Total Discount
-                                </td>
-                                <td align="right">
-                                    @php
-                                        if($is_general_discount && $is_applied_for_general_dsiscount) {
-                                               $discount = (double) \App\GeneralDiscountPreferences::first()->discount_amount;
-                                               $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
-                                               $price = number_format($price, 2);
-                                               $total_discount = $total_discount + $price;
-                                               $total_discount = $order->cost_to_pay - $total_discount;
-                                         }
-
-                                        if($is_general_discount && $is_applied_for_general_fixed) {
-                                           $total_discount = (double) \App\GeneralFixedPricePreferences::first()->fixed_amount * ($n - 1);
-                                        }
-
-                                        if($is_monthly_discount) {
-                                               $discount = (double) \App\MonthlyDiscountSetting::first()->discount;
-                                               $price = $order->cost_to_pay - ($order->cost_to_pay * $discount / 100);
-                                               $price = number_format($price, 2);
-                                               $total_discount = $total_discount + $price;
-                                               $total_discount = $order->cost_to_pay - $total_discount;
-                                        }
-
-                                    @endphp
-                                    {{ number_format($total_discount,2) }} USD
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     Shipping Price
                                 </td>
                                 <td align="right">
@@ -519,9 +359,9 @@
                                 </td>
                                 <td align="right">
                                     @if($order->custom == 0)
-                                        {{number_format($order->total_cost + $order->shipping_rate  - $total_discount,2)}} USD
+                                        {{number_format($order->total_cost + $order->shipping_rate,2)}} USD
                                     @else
-                                        {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify - $total_discount,2)}} USD
+                                        {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify,2)}} USD
                                     @endif
 {{--                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD--}}
                                 </td>
