@@ -208,12 +208,12 @@
             <span class="badge badge-primary mt-1 mr-1" style="font-size: 13px"> Wallet: {{number_format($balance,2)}} USD </span>
 
             <div class="status-section">
-                <a href="/store/wishlist?status=2" class="text-white">
-                    <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist {{$approved_wishlist}} </span>
-                </a>
-                <a href="/store/wishlist?status=5&imported=0" class="text-white">
-                    <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist {{$completed_wishlist}}  </span>
-                </a>
+{{--                <a href="/store/wishlist?status=2" class="text-white">--}}
+{{--                    <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist {{$approved_wishlist}} </span>--}}
+{{--                </a>--}}
+{{--                <a href="/store/wishlist?status=5&imported=0" class="text-white">--}}
+{{--                    <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist {{$completed_wishlist}}  </span>--}}
+{{--                </a>--}}
                 <a href="/store/help-center" class="text-white">
                     <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets {{$pending_ticket_count}}  </span>
                 </a>
@@ -229,27 +229,27 @@
                         <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
                     </div>
                     <ul class="nav-items mb-0">
-                        <li>
-                            <a class="text-dark media py-2" href="/store/wishlist?status=2">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">Approved Wishlist {{$approved_wishlist}}</div>
-                                </div>
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a class="text-dark media py-2" href="/store/wishlist?status=2">--}}
+{{--                                <div class="mr-2 ml-3">--}}
+{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="media-body pr-2">--}}
+{{--                                    <div class="font-w600">Approved Wishlist {{$approved_wishlist}}</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
-                        <li>
-                            <a class="text-dark media py-2" href="/store/wishlist?status=5&imported=0">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">Completed Wishlist {{$completed_wishlist}}</div>
-                                </div>
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a class="text-dark media py-2" href="/store/wishlist?status=5&imported=0">--}}
+{{--                                <div class="mr-2 ml-3">--}}
+{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="media-body pr-2">--}}
+{{--                                    <div class="font-w600">Completed Wishlist {{$completed_wishlist}}</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
                         <li>
                             <a class="text-dark media py-2" href="/store/help-center">

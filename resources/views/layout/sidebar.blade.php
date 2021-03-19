@@ -252,13 +252,13 @@
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
             <div class="status-section">
-                <a href="/wishlists?status=1" class="text-white">
-                    <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>
-                </a>
+{{--                <a href="/wishlists?status=1" class="text-white">--}}
+{{--                    <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>--}}
+{{--                </a>--}}
 
-                <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">
-                    <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>
-                </a>
+{{--                <a href="/wishlists?status=3" class="text-white badge" style="background: Purple;color: white;">--}}
+{{--                    <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>--}}
+{{--                </a>--}}
 
                 <a href="/wallets-requests" class="text-white badge badge-success">
                     <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
