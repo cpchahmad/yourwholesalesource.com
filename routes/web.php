@@ -197,7 +197,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
     Route::post('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
-    Route::get('/manual-push-to-ship-station/{id}', 'AdminOrderController@manualPushToShipStation')->name('manual.push.to.shipstaion');
+    Route::get('/manual-push-to-ship-station/{id}', 'AdminMaintainerController@manualPushToShipStation')->name('manual.push.to.shipstaion');
 
 
     // ROUTES ADDED AFTER WOOCOMMERCE INTEGRATION
@@ -649,4 +649,3 @@ Route::get('/sess', function() {
 });
 
 
-Route::get('/shipstation', 'AdminOrderController@pushToShipStation')->name('push.ship.station');
