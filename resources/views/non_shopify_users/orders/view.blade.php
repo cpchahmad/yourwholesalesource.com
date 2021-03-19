@@ -337,6 +337,7 @@
                                                             <img class="img-avatar img-avatar-variant"
                                                                  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                         @endif
+                                                    @else
                                                         <img class="img-avatar img-avatar-variant"
                                                              src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                     @endif
