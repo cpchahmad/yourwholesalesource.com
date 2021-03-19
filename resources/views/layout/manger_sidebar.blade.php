@@ -57,12 +57,12 @@
                 </a>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link active" href="{{route('sales_managers.wishlist')}}">
-                    <i class="nav-main-link-icon fa fa-heart"></i>
-                    <span class="nav-main-link-name">Wishlist</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link active" href="{{route('sales_managers.wishlist')}}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-heart"></i>--}}
+{{--                    <span class="nav-main-link-name">Wishlist</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link active"  href="{{route('sales_managers.stores')}}">
@@ -118,19 +118,19 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="d-inline-block mr-3 badge badge-primary text-white">
-                <a href="/managers/wishlist?status=1" class="text-white">
-                    Wishlist Requests
-                    <span class="" style="font-size: 13px"> {{$manager_wishlist_request_count}} </span>
-                </a>
-            </div>
+{{--            <div class="d-inline-block mr-3 badge badge-primary text-white">--}}
+{{--                <a href="/managers/wishlist?status=1" class="text-white">--}}
+{{--                    Wishlist Requests--}}
+{{--                    <span class="" style="font-size: 13px"> {{$manager_wishlist_request_count}} </span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
-            <div class="d-inline-block mr-3 badge text-white" style="background: Purple;color: white;">
-                <a href="/managers/wishlist?status=3" class="text-white">
-                    Pending Accepted Wishlists
-                    <span class="" style="font-size: 13px"> {{$manager_wishlist_accept_count}} </span>
-                </a>
-            </div>
+{{--            <div class="d-inline-block mr-3 badge text-white" style="background: Purple;color: white;">--}}
+{{--                <a href="/managers/wishlist?status=3" class="text-white">--}}
+{{--                    Pending Accepted Wishlists--}}
+{{--                    <span class="" style="font-size: 13px"> {{$manager_wishlist_accept_count}} </span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
             <div class="d-inline-block mr-3 badge badge-success text-white">
                 <a href="/managers/wallets-requests" class="text-white">
