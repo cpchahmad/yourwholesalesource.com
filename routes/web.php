@@ -197,7 +197,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('warehouses/update/{id}', 'WareHouseController@update')->name('warehouse.update');
     Route::post('warehouses/{id}', 'WareHouseController@delete')->name('warehouse.destroy');
 
-    Route::get('/manual-push-to-mabang/{id}', 'AdminOrderController@pushToShipStation')->name('manual.push.to.mabang');
+    Route::get('/manual-push-to-ship-station/{id}', 'AdminOrderController@manualPushToShipStation')->name('manual.push.to.shipstaion');
 
 
     // ROUTES ADDED AFTER WOOCOMMERCE INTEGRATION
@@ -539,7 +539,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 
 
-Route::get('/push-to-mabang/{id}', 'AdminMaintainerController@push_to_mabang')->name('push.to.mabang');
+Route::get('/push-to-ship-station/{id}', 'AdminMaintainerController@pushToShipStation')->name('push.to.shipstation');
 Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
