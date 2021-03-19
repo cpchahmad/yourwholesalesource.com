@@ -637,6 +637,19 @@
                                                                     <img class="img-avatar img-avatar-variant"
                                                                          src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                                 @endif
+                                                            @elseif($item->linked_admin_product != null)
+                                                                @if(count($item->linked_admin_product->has_images)>0)
+                                                                    @if($item->linked_admin_product->has_images[0]->isV == 1)
+                                                                        <img class="img-avatar img-avatar-variant"
+                                                                             src="{{asset('images/variants')}}/{{$item->linked_admin_product->has_images[0]->image}}">
+                                                                    @else
+                                                                        <img class="img-avatar img-avatar-variant"
+                                                                             src="{{asset('images')}}/{{$item->linked_admin_product->has_images[0]->image}}">
+                                                                    @endif
+                                                                @else
+                                                                    <img class="img-avatar img-avatar-variant"
+                                                                         src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                                @endif
                                                             @else
                                                                 <img class="img-avatar img-avatar-variant"
                                                                      src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">

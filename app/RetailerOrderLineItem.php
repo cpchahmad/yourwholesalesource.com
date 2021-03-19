@@ -34,6 +34,10 @@ class RetailerOrderLineItem extends Model
         return $this->hasOne(ProductVariant::class,'id','dropship_variant_id');
     }
 
+    public function linked_admin_product() {
+        return $this->hasOne( Product::class,'id','admin_product_id');
+    }
+
     public function has_associated_warehouse() {
         if($this->linked_product != null && $this->linked_product->linked_product != null)
             $admin_product = $this->linked_product->linked_product;
