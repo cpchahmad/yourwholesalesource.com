@@ -265,7 +265,7 @@ class WishlistController extends Controller
                         $categories = Category::latest()->get();
                         $platforms = WarnedPlatform::all();
                         $shops = Shop::whereNotIn('shopify_domain',['wefullfill.myshopify.com'])->get();
-                        if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
+                        if(Auth::user()->email == 'moe@webinopoly.com '){
                             return view('setttings.wishlist.map_product')->with([
                                 'product' => $response->body->product,
                                 'wishlist' => $wish,
@@ -355,7 +355,7 @@ class WishlistController extends Controller
                 $this->notify->generate('Wish-list','Wishlist Completed','Wishlist named '.$wish->product_name.' has been completed',$wish);
 
 
-                if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
+                if(Auth::user()->email == 'moe@webinopoly.com '){
                     $this->log->store(0, 'Wishlist', $wish->id, $wish->product_name, 'Wishlist Completed');
                     return redirect()->route('wishlist.index')->with('success','Wishlist Completed Successfully!');
                 }
@@ -366,7 +366,7 @@ class WishlistController extends Controller
 
             }
             else{
-                if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
+                if(Auth::user()->email == 'moe@webinopoly.com '){
                     return redirect()->route('wishlist.index')->with('errors','Product Not Found on respective store, cant complete the wishlist process!');
 
                 }
@@ -378,7 +378,7 @@ class WishlistController extends Controller
             }
         }
         else{
-            if(Auth::user()->email == 'wordpress_admin@wefullfill.com'){
+            if(Auth::user()->email == 'moe@webinopoly.com '){
                 return redirect()->route('wishlist.index')->with('errors','Wishlist Not Found!');
 
             }
