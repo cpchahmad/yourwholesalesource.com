@@ -916,4 +916,131 @@ class AdminMaintainerController extends Controller
             $log->save();
         }
     }
+
+    public function pushToShipStation($id) {
+        $auth = base64_encode("24daff6f88c34f88bafa4eb7fde3ca60:892b342632834916aef035d957636d47");
+        $order = RetailerOrder::find($id);
+
+
+        $url = "https://ssapi.shipstation.com/orders/createorder";
+
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $headers = array(
+            "Authorization: Basic MjRkYWZmNmY4OGMzNGY4OGJhZmE0ZWI3ZmRlM2NhNjA6ODkyYjM0MjYzMjgzNDkxNmFlZjAzNWQ5NTc2MzZkNDc=",
+            "Content-Type: application/json",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $shipping = json_decode($order->shipping_address);
+
+
+        $bill_to  = [
+            "name"=> is_null($shipping->first_name) ? "No customer Found" : $shipping->first_name. ' '.$shipping->last_name,
+            "street1"=> is_null($shipping->address1) ? 'No First Address' : $shipping->address1,
+            "city"=> is_null($shipping->city) ? 'No City' : $shipping->city,
+            "postalCode"=> is_null($shipping->zip) ? 'No Zip' : $shipping->zip,
+            "country"=> is_null($shipping->country_code) ? 'No country' : $shipping->country_code,
+            "phone"=> isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone',
+        ];
+
+        $ship_to  = [
+            "name"=> is_null($shipping->first_name) ? null : $shipping->first_name. ' '.$shipping->last_name,
+            "street1"=> is_null($shipping->address1) ? 'No First Address' : $shipping->address1,
+            "city"=> is_null($shipping->city) ? 'No City' : $shipping->city,
+            "postalCode"=> is_null($shipping->zip) ? 'No Zip' : $shipping->zip,
+            "country"=> is_null($shipping->country_code) ? 'No country' : $shipping->country_code,
+            "phone"=> isset($shipping->phone) && $shipping->phone != "" ? $shipping->phone : 'No Phone',
+        ];
+
+        $line_items = [];
+        $images = [];
+
+
+        foreach ($order->line_items as $index =>  $item) {
+            if($item->linked_real_variant != null) {
+                if($item->linked_real_variant->has_image == null) {
+                    array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                }
+                else {
+                    if($item->linked_real_variant->has_image->isV == 1) {
+                        array_push($images, "https://app.wefullfill.com/images/variants/".$item->linked_real_variant->has_image->image);
+                    }
+                    else {
+                        array_push($images, "https://app.wefullfill.com/images/".$item->linked_real_variant->has_image->image);
+                    }
+                }
+            }
+            else {
+                if($item->linked_real_product != null) {
+                    if(count($item->linked_real_product->has_images)>0) {
+                        if($item->linked_real_product->has_images[0]->isV == 1) {
+                            array_push($images, "https://app.wefullfill.com/images/variants".$item->linked_real_product->has_images[0]->image);
+                        }
+                        else {
+                            array_push($images, "https://app.wefullfill.com/images/".$item->linked_real_product->has_images[0]->image);
+                        }
+                    }
+                    else {
+                        array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                    }
+                }
+                else {
+                    array_push($images, "https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg");
+                }
+            }
+
+            if($item->linked_variant != null)
+                $sku = $item->linked_variant->sku;
+            elseif($item->linked_product != null)
+                $sku = $item->linked_product->sku;
+            elseif($item->linked_woocommerce_variant != null)
+                $sku = $item->linked_woocommerce_variant->sku;
+            elseif($item->linked_dropship_variant != null)
+                $sku = $item->linked_dropship_variant->sku;
+            else
+                $sku = $item->linked_woocommerce_product->sku;
+
+            array_push($line_items, [
+                "lineItemKey" => $item->id,
+                "name" => str_replace('"', ' ', $item->name),
+                "sku" => $sku,
+                "quantity" => $item->quantity,
+                "imageUrl" => $images[$index],
+                "unitPrice"=> $item->cost,
+                "shippingAmount"=> $order->shipping_price,
+                "fulfillmentSku"=> $sku,
+            ]);
+        }
+
+
+        $data = [
+            "orderNumber"=> $order->id,
+            "orderKey"=> "WYS". $order->id,
+            "orderDate"=> $order->created_at,
+            "orderStatus"=> "awaiting_shipment",
+            "customerId"=> is_null($order->has_customer) ? "No customer Found" : $order->has_customer->id,
+            "customerUsername"=> is_null($shipping->first_name) ? "No customer Found" : $shipping->first_name. ' '.$shipping->last_name,
+            "customerEmail"=> is_null($order->has_customer) ? "No customer Found" : $order->has_customer->email,
+            "amountPaid"=> $order->cost_to_pay,
+            "shippingAmount"=> $order->shipping_price,
+            "billTo" => $bill_to,
+            "shipTo" => $ship_to,
+            "items" => $line_items
+        ];
+
+        $data = str_replace("\\", '', json_encode($data));
+
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        dd($resp);
+    }
+
 }
