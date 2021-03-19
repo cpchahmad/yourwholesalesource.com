@@ -733,7 +733,7 @@ class CustomOrderController extends Controller
                             $new_line = new RetailerOrderLineItem();
                             $new_line->retailer_order_id = $new->id;
                             $new_line->shopify_product_id = $variant->shopify_id;
-
+                            $new_line->admin_product_id  = $variant->id;
                             $new_line->title = $variant->title;
                             $new_line->quantity = $item->quantity;
                             $new_line->sku = $variant->sku;
