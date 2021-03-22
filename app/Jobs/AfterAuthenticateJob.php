@@ -89,7 +89,7 @@ class AfterAuthenticateJob implements ShouldQueue
             if(!in_array($currentShop->id,$user->has_shops->pluck('id')->toArray())){
                 $user->has_shops()->attach([$currentShop->id]);
             }
-            session(['return_to'=>'/store/dashboard?ftl=1']);
+         //   session(['return_to'=>'/store/dashboard?ftl=1']);
         }
         else{
             $new = new ErrorLog();
@@ -97,7 +97,7 @@ class AfterAuthenticateJob implements ShouldQueue
             $new->save;
 
             if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
-                session(['return_to'=>'/store/dashboard?ftl=1']);
+               // session(['return_to'=>'/store/dashboard?ftl=1']);
             }
             else{
                 session(['return_to' => '/']);
