@@ -8,7 +8,7 @@ class RolePermissionController extends Controller
 {
    public function check_roles(){
        $user = Auth::user();
-       dump('87');
+       dd('87');
 //       if($user->email == 'admin@wefullfill.com'){
 //           return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
 //       }
