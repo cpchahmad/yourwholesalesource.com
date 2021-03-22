@@ -715,6 +715,9 @@ Route::get('/regsiter-web', function() {
       "friendly_name"=> "My Fulfillment Webhook"
     ];
 
+    $data = str_replace("\\", '', json_encode($data));
+
+
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 
 //for debug only!
