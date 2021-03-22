@@ -548,15 +548,15 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 //Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
 //Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
-//Route::get('/testing', function() {
-//    $helper = new HelperController();
-//    $shop = $helper->getSpecificShop(71);
-//    $response = $shop->api()->rest('GET', '/admin/orders.json');
-//
-//    dd($response->body->orders[0]);
-//});
-//
-//
+Route::get('/testing', function() {
+    $helper = new HelperController();
+    $shop = $helper->getSpecificShop(193);
+    $response = $shop->api()->rest('GET', '/admin/webhooks.json');
+
+    dd($response);
+});
+
+
 
 
 //Route::get('/tess', function() {
