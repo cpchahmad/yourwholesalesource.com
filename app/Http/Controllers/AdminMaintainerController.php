@@ -669,6 +669,8 @@ class AdminMaintainerController extends Controller
         $resp = curl_exec($curl);
         curl_close($curl);
 
+        dd($resp);
+
         $order_log =  new OrderLog();
         $order_log->message = "Order synced to Shipstation on ".date_create($order->created_at)->format('d M, Y h:i a');
         $order_log->status = "Newly Synced";
