@@ -664,3 +664,8 @@ Route::get('/regsiter-web', function() {
     dd($resp);
 });
 
+Route::any('/any-web', function() {
+   $log = new \App\ErrorLog();
+   $log->message = 'hiii';
+   $log->save();
+});
