@@ -420,44 +420,6 @@ class SingleStoreController extends Controller
             if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
 
-                $new = new ErrorLog();
-                $new->message = "New store installed";
-                $new->save();
-
-                $shop->api()->rest('POST', '/admin/webhooks.json', [
-                    'webhook' => [
-                        'topic' => 'orders/create',
-                        'address' => 'https://app.yourwholesalesource.com/webhook/orders-create',
-                        "format"=> "json"
-                    ]
-                ]);
-
-
-                $shop->api()->rest('POST', '/admin/webhooks.json', [
-                    'webhook' => [
-                        'topic' => 'customers/create',
-                        'address' => 'https://app.yourwholesalesource.com/webhook/customers-create',
-                        "format"=> "json"
-                    ]
-                ]);
-
-                $shop->api()->rest('POST', '/admin/webhooks.json', [
-                    'webhook' => [
-                        "topic" => "products/delete",
-                        "address" => "https://app.yourwholesalesource.com/webhook/products-delete",
-                        "format"=> "json"
-                    ]
-                ]);
-
-                $shop->api()->rest('POST', '/admin/webhooks.json', [
-                    'webhook' => [
-                        'topic' => 'orders/cancelled',
-                        'address' => 'https://app.yourwholesalesource.com/webhook/orders-cancelled',
-                        "format"=> "json"
-                    ]
-                ]);
-
-
                 // Sending Welcome Email
                 try{
                     Mail::to($user->email)->send(new NewShopifyUserMail($user));
