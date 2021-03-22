@@ -547,7 +547,6 @@ class AdminMaintainerController extends Controller
     }
 
     public function pushToShipStation($id) {
-        $auth = base64_encode("24daff6f88c34f88bafa4eb7fde3ca60:892b342632834916aef035d957636d47");
         $order = RetailerOrder::find($id);
 
 
@@ -559,7 +558,7 @@ class AdminMaintainerController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $headers = array(
-            "Authorization: Basic MjRkYWZmNmY4OGMzNGY4OGJhZmE0ZWI3ZmRlM2NhNjA6ODkyYjM0MjYzMjgzNDkxNmFlZjAzNWQ5NTc2MzZkNDc=",
+            "Authorization: Basic ZmI0NWNiZmU5OGFjNDliMDlmMTJhYmY4YzkyY2Y2MDc6MTk5MDQxN2RlMTQxNDhjYjg4Mzk4MDNkNDYwNTBhOWY=",
             "Content-Type: application/json",
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
