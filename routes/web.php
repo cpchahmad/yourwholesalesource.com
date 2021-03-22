@@ -557,46 +557,6 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //});
 //
 //
-//Route::get('/ware-sync', function() {
-//
-//    $products = Product::latest()->get();
-//
-//    foreach ($products as $p) {
-//        if($p->variants == 1)
-//        {
-//            $variants = $p->hasVariants;
-//
-//            foreach ($variants as $variant) {
-//                if(WarehouseInventory::where('product_variant_id', $variant->id)->where('warehouse_id', 3)->exists()) {
-//                    $inventory = WarehouseInventory::where('product_variant_id', $variant->id)->where('warehouse_id', 3)->first();
-//                }
-//                else{
-//                    $inventory = new WarehouseInventory();
-//                }
-//
-//                $inventory->product_variant_id = $variant->id;
-//                $inventory->warehouse_id = 3;
-//                $inventory->quantity = $variant->quantity;
-//                $inventory->save();
-//            }
-//        }
-//        else {
-//
-//            if(WarehouseInventory::where('product_id', $p->id)->where('warehouse_id', 3)->exists()){
-//                $inventory = WarehouseInventory::where('product_id', $p->id)->where('warehouse_id', 3)->first();
-//            }
-//            else{
-//                $inventory = new WarehouseInventory();
-//            }
-//
-//            $inventory->product_id = $p->id;
-//            $inventory->warehouse_id = 3;
-//            $inventory->quantity = $p->quantity;
-//            $inventory->save();
-//        }
-//    }
-//
-//});
 
 
 //Route::get('/tess', function() {
@@ -665,31 +625,6 @@ Route::get('/webhok', function() {
     $response = curl_exec($curl);
 
     curl_close($curl);
-    dd($response);
-});
-
-Route::get('storeid', function() {
-    $curl = curl_init();
-
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://ssapi.shipstation.com/stores/storeId",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "Host: ssapi.shipstation.com",
-            "Authorization: Basic MjRkYWZmNmY4OGMzNGY4OGJhZmE0ZWI3ZmRlM2NhNjA6ODkyYjM0MjYzMjgzNDkxNmFlZjAzNWQ5NTc2MzZkNDc=",
-        ),
-    ));
-
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-
     dd($response);
 });
 
