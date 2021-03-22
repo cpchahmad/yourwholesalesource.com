@@ -709,7 +709,7 @@ Route::get('/regsiter-web', function() {
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
     $data = [
-      "target_url"=> "https://app.yourwholesalesource.com//get/order/ship-station-fulfillment-details",
+      "target_url"=> "https://app.yourwholesalesource.com/get/order/ship-station-fulfillment-details",
       "event"=> "SHIP_NOTIFY",
       "store_id"=> null,
       "friendly_name"=> "My Fulfillment Webhook"
