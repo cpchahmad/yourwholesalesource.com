@@ -694,3 +694,35 @@ Route::get('storeid', function() {
 });
 
 
+Route::get('/regsiter-web', function() {
+    $url = "https://ssapi.shipstation.com/webhooks/subscribe";
+
+    $curl = curl_init($url);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $headers = array(
+        "Authorization: __YOUR_AUTH_HERE__",
+        "Content-Type: application/json",
+    );
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+    $data = [
+      "target_url"=> "https://app.yourwholesalesource.com//get/order/ship-station-fulfillment-details",
+      "event"=> "SHIP_NOTIFY",
+      "store_id"=> null,
+      "friendly_name"=> "My Fulfillment Webhook"
+    ];
+
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+//for debug only!
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+
+    $resp = curl_exec($curl);
+    curl_close($curl);
+    dd($resp);
+});
+
