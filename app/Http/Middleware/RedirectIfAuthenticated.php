@@ -21,7 +21,6 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return redirect('/check/roles');
         }
-        dd(234);
         return $next($request);
     }
 }
