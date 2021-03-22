@@ -545,7 +545,7 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 
 Route::any('/get/shipment', function() {
    $log = new \App\ErrorLog();
-   $log->message = "hi there";
+   $log->message = "hi there new shippment";
    $log->save();
 });
 
