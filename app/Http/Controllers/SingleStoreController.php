@@ -6,6 +6,7 @@ use App\Category;
 use App\Country;
 use App\Customer;
 use App\DropshipRequest;
+use App\ErrorLog;
 use App\Mail\NewShopifyUserMail;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
@@ -36,6 +37,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use OhMyBrew\ShopifyApp\Facades\ShopifyApp;
@@ -417,6 +419,10 @@ class SingleStoreController extends Controller
         if ($user != null && $shop != null) {
             if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
+
+                $new = new ErrorLog();
+                $new->message = "New store installed";
+                $new->save();
 
                 $shop->api()->rest('POST', '/admin/webhooks.json', [
                     'webhook' => [
