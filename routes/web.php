@@ -548,7 +548,7 @@ Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')-
 //Route::get('/get/inventory/sync', 'InventoryController@inventory_connect');
 //Route::get('/test', 'AdminOrderController@changeFulfillmentServiceUrl');
 //Route::get('/sendgrid/sync/old/users', 'AdminMaintainerController@sendGrid');
-Route::get('/testing', function() {
+Route::get('/testing-2', function() {
     $helper = new HelperController();
     $shop = $helper->getSpecificShop(193);
     $response = $shop->api()->rest('GET', '/admin/webhooks.json');
@@ -664,8 +664,3 @@ Route::get('/regsiter-web', function() {
     dd($resp);
 });
 
-Route::any('/any-web', function() {
-   $log = new \App\ErrorLog();
-   $log->message = 'hiii';
-   $log->save();
-});
