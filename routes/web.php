@@ -638,16 +638,16 @@ Route::get('/regsiter-web', function() {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     $headers = array(
-        "Authorization: Basic MjRkYWZmNmY4OGMzNGY4OGJhZmE0ZWI3ZmRlM2NhNjA6ODkyYjM0MjYzMjgzNDkxNmFlZjAzNWQ5NTc2MzZkNDc=",
+        "Authorization: Basic ZmI0NWNiZmU5OGFjNDliMDlmMTJhYmY4YzkyY2Y2MDc6MTk5MDQxN2RlMTQxNDhjYjg4Mzk4MDNkNDYwNTBhOWY=",
         "Content-Type: application/json",
     );
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
     $data = [
-      "target_url"=> "https://app.yourwholesalesource.com/get/order/ship-station-fulfillment-details",
+      "target_url"=> "https://app.yourwholesalesource.com/get/ship-station-fulfillment-details",
       "event"=> "SHIP_NOTIFY",
       "store_id"=> null,
-      "friendly_name"=> "My Fulfillment Webhook"
+      "friendly_name"=> "Shipstation Shipment Webhook"
     ];
 
     $data = str_replace("\\", '', json_encode($data));
