@@ -1387,7 +1387,7 @@ class AdminOrderController extends Controller
     public function getFulfillmentFromErp(Request $request) {
 
         $log = new ErrorLog();
-        $log->message = 'Webhook Triggered';
+        $log->message = 'Webhook Triggered for shipment';
         $log->save();
 
         dd(2345);
