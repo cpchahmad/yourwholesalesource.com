@@ -540,7 +540,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 
 Route::get('/push-to-ship-station/{id}', 'AdminMaintainerController@pushToShipStation')->name('push.to.shipstation');
-Route::any('/order/fulfillment/details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
+Route::any('/get/order/ship-station-fulfillment-details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
 //Route::get('fetch-order', 'HelperController@test');
@@ -644,8 +644,28 @@ Route::get('/testing', function() {
 });
 
 
-Route::get('/sess', function() {
-    dd(session()->get('woocommerce_domain'));
+Route::get('/webhok', function() {
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://ssapi.shipstation.com/webhooks",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "Host: ssapi.shipstation.com",
+            "Authorization: Basic MjRkYWZmNmY4OGMzNGY4OGJhZmE0ZWI3ZmRlM2NhNjA6ODkyYjM0MjYzMjgzNDkxNmFlZjAzNWQ5NTc2MzZkNDc=",
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
 });
 
 
