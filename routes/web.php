@@ -543,7 +543,7 @@ Route::get('/push-to-ship-station/{id}', 'AdminMaintainerController@pushToShipSt
 //Route::any('/get/shipment', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
-Route::get('/get/shipment', function() {
+Route::any('/get/shipment', function() {
    $log = new \App\ErrorLog();
    $log->message = "hi there";
    $log->save();
@@ -671,7 +671,7 @@ Route::get('/regsiter-web', function() {
     dd($resp);
 });
 
-Route::get('/any-web', function() {
+Route::any('/any-web', function() {
     $log = new \App\ErrorLog();
     $log->message = "Order create webhook";
     $log->save();
