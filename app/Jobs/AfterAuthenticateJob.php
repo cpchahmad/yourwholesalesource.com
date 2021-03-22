@@ -34,6 +34,11 @@ class AfterAuthenticateJob implements ShouldQueue
      */
     public function handle()
     {
+        $new = new ErrorLog();
+        $new->message = "New store main installed";
+        $new->save;
+
+
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
 
@@ -87,6 +92,10 @@ class AfterAuthenticateJob implements ShouldQueue
             session(['return_to'=>'/store/dashboard?ftl=1']);
         }
         else{
+            $new = new ErrorLog();
+            $new->message = "New store else installed";
+            $new->save;
+
             if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
