@@ -34,11 +34,6 @@ class AfterAuthenticateJob implements ShouldQueue
      */
     public function handle()
     {
-        $new = new ErrorLog();
-        $new->message = "New store main installed";
-        $new->save;
-
-
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
 
@@ -50,52 +45,44 @@ class AfterAuthenticateJob implements ShouldQueue
 
         if($user != null && !in_array($user->email,['super_admin@wefullfill.com']) && !in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
 
-            $new = new ErrorLog();
-            $new->message = "New store installed";
-            $new->save;
-
-            $currentShop->api()->rest('POST', '/admin/webhooks.json', [
-                'webhook' => [
-                    'topic' => 'orders/create',
-                    'address' => 'https://app.yourwholesalesource.com/webhook/orders-create',
-                    "format"=> "json"
-                ]
-            ]);
-
-
-            $currentShop->api()->rest('POST', '/admin/webhooks.json', [
-                'webhook' => [
-                    'topic' => 'customers/create',
-                    'address' => 'https://app.yourwholesalesource.com/webhook/customers-create',
-                    "format"=> "json"
-                ]
-            ]);
-
-            $currentShop->api()->rest('POST', '/admin/webhooks.json', [
-                'webhook' => [
-                    "topic" => "products/delete",
-                    "address" => "https://app.yourwholesalesource.com/webhook/products-delete",
-                    "format"=> "json"
-                ]
-            ]);
-
-            $currentShop->api()->rest('POST', '/admin/webhooks.json', [
-                'webhook' => [
-                    'topic' => 'orders/cancelled',
-                    'address' => 'https://app.yourwholesalesource.com/webhook/orders-cancelled',
-                    "format"=> "json"
-                ]
-            ]);
             if(!in_array($currentShop->id,$user->has_shops->pluck('id')->toArray())){
                 $user->has_shops()->attach([$currentShop->id]);
+
+                $currentShop->api()->rest('POST', '/admin/webhooks.json', [
+                    'webhook' => [
+                        'topic' => 'orders/create',
+                        'address' => 'https://app.yourwholesalesource.com/webhook/orders-create',
+                        "format"=> "json"
+                    ]
+                ]);
+
+                $currentShop->api()->rest('POST', '/admin/webhooks.json', [
+                    'webhook' => [
+                        'topic' => 'customers/create',
+                        'address' => 'https://app.yourwholesalesource.com/webhook/customers-create',
+                        "format"=> "json"
+                    ]
+                ]);
+
+                $currentShop->api()->rest('POST', '/admin/webhooks.json', [
+                    'webhook' => [
+                        "topic" => "products/delete",
+                        "address" => "https://app.yourwholesalesource.com/webhook/products-delete",
+                        "format"=> "json"
+                    ]
+                ]);
+
+                $currentShop->api()->rest('POST', '/admin/webhooks.json', [
+                    'webhook' => [
+                        'topic' => 'orders/cancelled',
+                        'address' => 'https://app.yourwholesalesource.com/webhook/orders-cancelled',
+                        "format"=> "json"
+                    ]
+                ]);
             }
             session(['return_to'=>'/store/dashboard?ftl=1']);
         }
         else{
-            $new = new ErrorLog();
-            $new->message = "New store else installed";
-            $new->save;
-
             if(!in_array($currentShop->shopify_domain,['wefullfill.myshopify.com'])){
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
