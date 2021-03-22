@@ -540,7 +540,7 @@ Route::get('test/emails', 'HelperController@testEmail');
 
 
 Route::get('/push-to-ship-station/{id}', 'AdminMaintainerController@pushToShipStation')->name('push.to.shipstation');
-Route::any('/get/ship-station-fulfillment-details', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
+Route::any('get/shipment', 'AdminOrderController@getFulfillmentFromErp')->name('erp.order.fulfillment');
 Route::post('suggestions/create', 'DefaultSettingsController@createSuggestion')->name('suggestion.create');
 
 //Route::get('fetch-order', 'HelperController@test');
