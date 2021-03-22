@@ -671,9 +671,9 @@ Route::get('/regsiter-web', function() {
     dd($resp);
 });
 
-Route::any('/any-web', function() {
-    $log = new \App\ErrorLog();
-    $log->message = "Order create webhook";
-    $log->save();
-});
+//Route::any('/any-web', function() {
+//    $log = new \App\ErrorLog();
+//    $log->message = "Order create webhook";
+//    $log->save();
+//});
 
