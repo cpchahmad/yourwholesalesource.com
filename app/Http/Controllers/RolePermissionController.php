@@ -19,11 +19,14 @@ class RolePermissionController extends Controller
            return redirect('/shop/install?shop=wefullfill.myshopify.com');
        }
        else{
+           dump('6');
            if($user->hasRole('non-shopify-users') && $user->hasRole('sales-manager')){
                return redirect()->route('system.selection');
            }
            else{
+               dump('12');
                if($user->hasRole('non-shopify-users')){
+                   dd('45');
                    return redirect()->route('users.dashboard',['ftl' => '1']);
                }
                else if($user->hasRole('sales-manager')){
