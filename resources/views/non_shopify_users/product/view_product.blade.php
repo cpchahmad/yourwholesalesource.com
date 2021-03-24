@@ -149,8 +149,10 @@
                             <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
                         </span>
                             @endif
-                            <div class="text-right d-inline-block" style="float: right">
+                            <div class="text-right d-inline-block">
                                 <span class="h3 font-w700 text-success">Cost Price: ${{number_format($product->price,2)}} </span>
+                            </div>
+                            <div class="text-right d-inline-block">
                                 <span class="h3 font-w700 text-danger">Recommended Price: ${{number_format($product->recommended_price,2)}} </span>
                             </div>
                         </div>
