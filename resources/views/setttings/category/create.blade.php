@@ -300,27 +300,27 @@
                                         </tbody>
                                         <tbody>
                                             @if ($sub->hasSub)
-                                                @foreach($sub->hasSub as $sub)
-                                                    <tbody class="js-table-sections-header " data-id="{{$sub->id}}">
+                                                @foreach($sub->hasSub as $inner)
+                                                    <tbody class="js-table-sections-header " data-id="{{$inner->id}}">
                                                 <tr>
                                                     <td class="text-center text-success">
                                                     </td>
-                                                    <td class="font-w600 text-success">{{ $sub->title }}</td>
+                                                    <td class="font-w600 text-success">{{ $inner->title }}</td>
                                                     <td>
                                                         <small></small>
                                                     </td>
                                                     <td class="hidden-xs btn-group ">
 
                                                         <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                                                data-target="#sub{{$sub->id}}" title="Edit SubCategory"><i
+                                                                data-target="#sub{{$inner->id}}" title="Edit SubCategory"><i
                                                                 class="fa fa-edit"></i></button>
-                                                        <a href="{{ route('sub.delete', $sub->id) }}"
+                                                        <a href="{{ route('sub.delete', $inner->id) }}"
                                                            class="btn btn-sm btn-danger" data-toggle="tooltip" title=""
                                                            data-original-title="Delete SubCategory"><i class="fa fa-times"></i></a>
 
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="sub{{$sub->id}}" tabindex="-1" role="dialog"
+                                                <div class="modal fade" id="sub{{$inner->id}}" tabindex="-1" role="dialog"
                                                      aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-popin">
                                                         <div class="modal-content">
