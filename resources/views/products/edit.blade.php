@@ -126,7 +126,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Recommended Price</label>
-                                                    <input type="number" step="any" class="form-control" name="recommed_price"
+                                                    <input type="number" step="any" class="form-control" name="recommended_price"
                                                            value="{{$product->recommended_price}}"  placeholder="$ 0.00">
 
                                                 </div>
