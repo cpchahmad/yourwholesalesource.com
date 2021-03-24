@@ -108,7 +108,7 @@
                     <div class="block" style="min-height: 28rem;">
 
                         <div class="block-content block-content-narrow">
-                            <form class="form-horizontal push-10-t" action="{{ route('sub.sub.save') }}" method="post">
+                            <form class="form-horizontal push-10-t" action="{{ route('sub.save') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <div class="col-sm-12">
