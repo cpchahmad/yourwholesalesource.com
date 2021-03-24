@@ -178,7 +178,7 @@
                             </thead>
                             <?php $i = 1;?>
                             @foreach($categories as $category)
-                                <tbody class="js-table-sections-header " data-id="{{$category->id}}">
+                                <tbody class="js-table-sections-header" data-id="main_{{$category->id}}">
                                 <tr>
                                     <td class="text-center">
                                         <i class="fa fa-angle-right"></i>
@@ -244,7 +244,7 @@
                                 <tbody>
                                 @if ($category->hasSub)
                                     @foreach($category->hasSub as $sub)
-                                        <tbody class="js-table-sections-header " data-id="{{$sub->id}}">
+                                        <tbody class="js-table-sections-header" data-id="sub_{{$sub->id}}">
                                         <tr>
 
                                             <td class="text-center text-success">
