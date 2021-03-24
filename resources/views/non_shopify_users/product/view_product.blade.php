@@ -151,8 +151,6 @@
                             @endif
                             <div class="text-right d-inline-block" style="float: right">
                                 <span class="h3 font-w700 text-success">Cost Price: ${{number_format($product->price,2)}} </span>
-                            </div>
-                            <div class="text-right d-inline-block" style="float: right">
                                 <span class="h3 font-w700 text-danger">Recommended Price: ${{number_format($product->recommended_price,2)}} </span>
                             </div>
                         </div>
