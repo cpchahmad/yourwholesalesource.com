@@ -301,7 +301,6 @@
                                         <tbody>
                                         @if ($sub->hasSub)
                                             @foreach($sub->hasSub as $inner)
-                                                <tbody class="js-table-sections-header " data-id="{{$inner->id}}">
                                                 <tr>
                                                     <td class="text-center text-success">
                                                     </td>
@@ -354,14 +353,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </tbody>
+
                                                 @endforeach
-                                                @endif
-                                                </tbody>
-                                                @endforeach
-                                                @endif
-                                                </tbody>
-                                            @endforeach
+                                        @endif
+                                        </tbody>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            @endforeach
                         </table>
                     @else
                         <h3>no found</h3>
