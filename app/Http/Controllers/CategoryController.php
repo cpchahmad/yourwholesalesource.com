@@ -22,8 +22,10 @@ class CategoryController extends Controller
     {
 
         $categories = Category::orderBy('ranking')->get();
+        $sub_categories = SubCategory::latest()->get();
         return view('setttings.category.create')->with([
-            'categories' => $categories
+            'categories' => $categories,
+            'sub_categories' => $sub_categories,
         ]);
     }
 

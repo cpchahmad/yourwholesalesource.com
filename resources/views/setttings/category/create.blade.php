@@ -20,7 +20,7 @@
 
     <div class="content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="block" style="height: 28rem;">
 
                     <div class="block-content block-content-narrow">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             @if ($categories)
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="block" style="min-height: 28rem;">
 
                         <div class="block-content block-content-narrow">
@@ -78,6 +78,65 @@
                                                     data-original-title="Add New SubCategory"><i class="fa fa-plus"></i>
                                             </button>
                                         </div>
+                                </div>
+
+                                <div style="display: none;">
+                                    <div class="form-group append_sub_category">
+                                        <div class="col-sm-11">
+                                            <div class="form-material">
+                                                <input class="form-control" type="text" name="sub_title[]"
+                                                       placeholder="Enter Sub Category Title here">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <button class="btn btn-sm btn-primary" type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if ($sub_categories)
+                <div class="col-md-4">
+                    <div class="block" style="min-height: 28rem;">
+
+                        <div class="block-content block-content-narrow">
+                            <form class="form-horizontal push-10-t" action="{{ route('sub.sub.save') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div class="form-material">
+                                            <label for="material-select">Select Category</label>
+                                            <select class="form-control" id="material-select" name="category_id"
+                                                    size="1">
+                                                @foreach($sub_categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group sub_cat_start d-flex">
+                                    <div class="col-sm-10">
+                                        <div class="form-material">
+                                            <label for="material-error">Sub Category</label>
+                                            <input class="form-control" type="text" id="sub_cat" name="sub_title[]"
+                                                   placeholder="Enter Sub Category Title here">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2" style="margin-top: 28px">
+                                        <button class="btn btn-xs btn-default btn-primary sub_cat_btn" type="button"
+                                                data-toggle="tooltip" title=""
+                                                data-original-title="Add New SubCategory"><i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div style="display: none;">
