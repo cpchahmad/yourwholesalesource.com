@@ -113,17 +113,24 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group row">
-                                                <div class="col-md-6 push-10">
+                                                <div class="col-md-4 push-10">
                                                     <label>Price</label>
                                                     <input type="number" step="any" class="form-control" name="price"
                                                            value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <label>Cost Per Item</label>
                                                     <input type="number" step="any" class="form-control" name="cost"
                                                            value="{{$product->cost}}"  placeholder="$ 0.00">
 
                                                 </div>
+                                                <div class="col-md-4">
+                                                    <label>Recommended Price</label>
+                                                    <input type="number" step="any" class="form-control" name="recommed_price"
+                                                           value="{{$product->recommended_price}}"  placeholder="$ 0.00">
+
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -209,6 +216,10 @@
                                                 <div class="col-xs-12">
                                                     <label>Price</label>
                                                     <input type="number" step="any" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    <label>Recommended Price</label>
+                                                    <input type="number" step="any" class="form-control" name="recommended_price" value="{{$product->recommended_price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <label>Weight</label>

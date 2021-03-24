@@ -869,6 +869,7 @@ class ProductController extends Controller
                     else if ($type == 'pricing') {
                         $product->price = $request->price;
                         $product->compare_price = $request->compare_price;
+                        $product->recommended_price = $request->recommended_price;
                         $product->cost = $request->cost;
                         $product->quantity = $request->quantity;
                         $product->weight = $request->weight;
@@ -929,6 +930,7 @@ class ProductController extends Controller
                     else if ($type == 'pricing-for-variant') {
                         $product->price = $request->price;
                         $product->quantity = $request->quantity;
+                        $product->recommended_price = $request->recommended_price;
                         $product->weight = $request->weight;
                         $product->length = $request->length;
                         $product->width = $request->width;
@@ -1763,6 +1765,7 @@ class ProductController extends Controller
             $product->slug = \Illuminate\Support\Str::slug($request->title, '-');
             $product->price = $request->price;
             $product->compare_price = $request->compare_price;
+            $product->recommended_price = $request->recommended_price;
             $product->cost = $request->cost;
             $product->type = $request->product_type;
             $product->vendor = $request->vendor;
