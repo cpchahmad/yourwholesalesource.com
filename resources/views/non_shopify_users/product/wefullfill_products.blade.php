@@ -178,13 +178,17 @@
                                     <a class="h6" style="font-size: 0.9rem" href="{{route('users.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
                                     <div class="d-flex">
                                         <div class="font-w600 text-success mt-1">
-                                            From.
+                                            Cost Price
                                             @if(count($product->hasVariants) > 0)
                                                 ${{ number_format($product->hasVariants->min('price'), 2) }}
                                             @else
                                                 ${{ number_format($product->price, 2) }}
                                             @endif
 
+                                        </div>
+                                        <div class="font-w600 text-danger mt-1">
+                                            Recommended Price
+                                            ${{ number_format($product->linked_product->recommended_price, 2) }}
                                         </div>
                                         <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">{{$product->new_shipping_price}}</div>
                                     </div>
