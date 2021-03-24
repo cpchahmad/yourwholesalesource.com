@@ -186,11 +186,11 @@
                                             @endif
 
                                         </div>
-                                        <div class="font-w600 text-danger mt-1">
-                                            Recommended Price
-                                            ${{ number_format($product->recommended_price, 2) }}
-                                        </div>
                                         <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">{{$product->new_shipping_price}}</div>
+                                    </div>
+                                    <div class="font-w600 text-danger mt-1">
+                                        Recommended Price
+                                        ${{ number_format($product->recommended_price, 2) }}
                                     </div>
                                 </div>
 
