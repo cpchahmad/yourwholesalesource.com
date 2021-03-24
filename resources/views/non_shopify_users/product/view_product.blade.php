@@ -129,8 +129,7 @@
                             </a>
                         </h2>
                         <div class="clearfix d-flex justify-content-between" style="margin-top: 5px;width: 100%">
-
-                            <div>
+                            <div class="w-50">
                                 @if($product->quantity > 0)
                                     @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
                                         <span class="h5">
@@ -149,11 +148,11 @@
                                     <span class="h5"><span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small></span>
                                 @endif
                             </div>
-                            <div>
-                                <div class="text-right d-inline-block">
+                            <div class="w-100">
+                                <div class="text-right">
                                     <span class="h3 font-w700 text-success">Cost Price: ${{number_format($product->price,2)}} </span>
                                 </div>
-                                <div class="text-right d-inline-block">
+                                <div class="text-right">
                                     <span class="h3 font-w700 text-danger">Recommended Price: ${{number_format($product->recommended_price,2)}} </span>
                                 </div>
                             </div>
