@@ -161,8 +161,6 @@ class CategoryController extends Controller
     public function sub_sub_save(Request $request)
     {
 
-        dd($request->all());
-
         DB::beginTransaction();
         try{
             foreach ($request->sub_title as $sub) {
