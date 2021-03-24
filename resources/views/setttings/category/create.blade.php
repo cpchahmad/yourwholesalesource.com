@@ -108,13 +108,13 @@
                     <div class="block" style="min-height: 28rem;">
 
                         <div class="block-content block-content-narrow">
-                            <form class="form-horizontal push-10-t" action="{{ route('sub.save') }}" method="post">
+                            <form class="form-horizontal push-10-t" action="{{ route('sub.sub.save') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <div class="form-material">
                                             <label for="material-select">Select Category</label>
-                                            <select class="form-control" id="material-select" name="category_id"
+                                            <select class="form-control" id="material-select" name="sub_category_id"
                                                     size="1">
                                                 @foreach($sub_categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>

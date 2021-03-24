@@ -6,6 +6,7 @@ use App\Category;
 use App\Image;
 use App\Product;
 use App\SubCategory;
+use App\SubSubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use function foo\func;
@@ -156,6 +157,36 @@ class CategoryController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function sub_sub_save(Request $request)
+    {
+
+        dd($request->all());
+
+        DB::beginTransaction();
+        try{
+            foreach ($request->sub_title as $sub) {
+                if (!empty($sub)) {
+                    $subcategory = new SubSubCategory();
+                    $subcategory->title = $sub;
+                    $subcategory->sub_category_id = $request->sub_category_id;
+                    $subcategory->save();
+
+//                    $woocommerce = $this->helper->getWooCommerceAdminShop();
+//                    $response = $woocommerce->post('products/categories', ['name' => $subcategory->title, 'parent' => $subcategory->hasCategory->woocommerce_id]);
+//                    $subcategory->woocommerce_id = $response->id;
+                    $subcategory->save();
+                }
+            }
+            DB::commit();
+            return redirect()->back()->with('success','Sub Category created successfully!');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
 
     public function subupdate(Request $request, $id)
     {

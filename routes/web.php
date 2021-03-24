@@ -63,6 +63,9 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('/subcategory/save','CategoryController@subsave')->name('sub.save');
     Route::any('/subcategory/{id}/update','CategoryController@subupdate')->name('sub.update');
     Route::get('/subcategory/{id}/delete','CategoryController@subdelete')->name('sub.delete');
+    Route::post('/subcategory/save','CategoryController@sub_sub_save')->name('sub.sub.save');
+    Route::any('/subcategory/{id}/update','CategoryController@sub_sub_update')->name('sub.sub.update');
+    Route::get('/subcategory/{id}/delete','CategoryController@sub_sub_delete')->name('sub.sub.delete');
     Route::get('/products','ProductController@index')->name('product.create');
     Route::get('/products/all','ProductController@all')->name('product.all');
     Route::get('dropship/products','ProductController@view_dropship_products_listing')->name('dropship.product.all');
