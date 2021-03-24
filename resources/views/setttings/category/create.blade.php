@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group sub_cat_start d-flex">
+                                <div class="form-group sub_sub_cat_start d-flex">
                                     <div class="col-sm-10">
                                         <div class="form-material">
                                             <label for="material-error">Sub Category</label>
@@ -132,7 +132,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-2" style="margin-top: 28px">
-                                        <button class="btn btn-xs btn-default btn-primary sub_cat_btn" type="button"
+                                        <button class="btn btn-xs btn-default btn-primary sub_sub_cat_btn" type="button"
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Add New SubCategory"><i class="fa fa-plus"></i>
                                         </button>
@@ -140,7 +140,7 @@
                                 </div>
 
                                 <div style="display: none;">
-                                    <div class="form-group append_sub_category">
+                                    <div class="form-group append_sub_sub_category">
                                         <div class="col-sm-11">
                                             <div class="form-material">
                                                 <input class="form-control" type="text" name="sub_title[]"
@@ -317,6 +317,12 @@
             $('.sub_cat_btn').on('click', function () {
                 var lastRepeatingGroup = $('.append_sub_category').last();
                 lastRepeatingGroup.clone().insertAfter('.sub_cat_start');
+                return false;
+            });
+
+            $('.sub_sub_cat_btn').on('click', function () {
+                var lastRepeatingGroup = $('.append_sub_sub_category').last();
+                lastRepeatingGroup.clone().insertAfter('.sub_sub_cat_start');
                 return false;
             });
             $('.sub_cat_append_remove').on('click', function () {
