@@ -128,32 +128,34 @@
                                 {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else WholeSaleSource @endif</span>
                             </a>
                         </h2>
-                        <div class="clearfix" style="margin-top: 5px;width: 100%">
+                        <div class="clearfix d-flex justify-content-between" style="margin-top: 5px;width: 100%">
 
-                            @if($product->quantity > 0)
-                                @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
-                                    <span class="h5">
+                            <div>
+                                @if($product->quantity > 0)
+                                    @if($product->varaint_count($product) > 0 && count($product->hasVariants) > 0)
+                                        <span class="h5">
                                         <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->varaint_count($product)}} Available in {{count($product->hasVariants)}} Variants</small>
                                     </span>
-                                @elseif($product->quantity > 0)
-                                    <span class="h5">
+                                    @elseif($product->quantity > 0)
+                                        <span class="h5">
                                         <span class="font-w600 text-success">IN STOCK</span><br><small>{{$product->quantity}} Available  </small>
                                     </span>
-                                @else
-                                    <span class="h5">
+                                    @else
+                                        <span class="h5">
                                 <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
                             </span>
+                                    @endif
+                                @else
+                                    <span class="h5"><span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small></span>
                                 @endif
-                            @else
-                                <span class="h5">
-                            <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
-                        </span>
-                            @endif
-                            <div class="text-right d-inline-block">
-                                <span class="h3 font-w700 text-success">Cost Price: ${{number_format($product->price,2)}} </span>
                             </div>
-                            <div class="text-right d-inline-block">
-                                <span class="h3 font-w700 text-danger">Recommended Price: ${{number_format($product->recommended_price,2)}} </span>
+                            <div>
+                                <div class="text-right d-inline-block">
+                                    <span class="h3 font-w700 text-success">Cost Price: ${{number_format($product->price,2)}} </span>
+                                </div>
+                                <div class="text-right d-inline-block">
+                                    <span class="h3 font-w700 text-danger">Recommended Price: ${{number_format($product->recommended_price,2)}} </span>
+                                </div>
                             </div>
                         </div>
                         <hr>
