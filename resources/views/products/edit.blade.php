@@ -113,18 +113,18 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group row">
-                                                <div class="col-md-4 push-10">
-                                                    <label>Price</label>
+                                                <div class="col-md-6 push-10">
+                                                    <label>Cost Price</label>
                                                     <input type="number" step="any" class="form-control" name="price"
                                                            value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <label>Cost Per Item</label>
-                                                    <input type="number" step="any" class="form-control" name="cost"
-                                                           value="{{$product->cost}}"  placeholder="$ 0.00">
+{{--                                                <div class="col-md-4">--}}
+{{--                                                    <label>Cost Per Item</label>--}}
+{{--                                                    <input type="number" step="any" class="form-control" name="cost"--}}
+{{--                                                           value="{{$product->cost}}"  placeholder="$ 0.00">--}}
 
-                                                </div>
-                                                <div class="col-md-4">
+{{--                                                </div>--}}
+                                                <div class="col-md-6">
                                                     <label>Recommended Price</label>
                                                     <input type="number" step="any" class="form-control" name="recommended_price"
                                                            value="{{$product->recommended_price}}"  placeholder="$ 0.00">
@@ -214,7 +214,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-xs-12">
-                                                    <label>Price</label>
+                                                    <label>Cost Price</label>
                                                     <input type="number" step="any" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-xs-12">
