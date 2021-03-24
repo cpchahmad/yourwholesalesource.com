@@ -244,7 +244,6 @@
                                 <tbody>
                                 @if ($category->hasSub)
                                     @foreach($category->hasSub as $sub)
-                                        <tbody class="js-table-sections-header " data-id="{{$sub->id}}">
                                         <tr>
                                             <td class="text-center text-success">
                                             </td>
@@ -297,71 +296,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </tbody>
-                                        <tbody>
-                                        @if ($sub->hasSub)
-                                            @foreach($sub->hasSub as $inner)
-                                                <tbody class="js-table-sections-header " data-id="{{$inner->id}}">
-                                                <tr>
-                                                    <td class="text-center text-success">
-                                                    </td>
-                                                    <td class="font-w600 text-success">{{ $inner->title }}</td>
-                                                    <td>
-                                                        <small></small>
-                                                    </td>
-                                                    <td class="hidden-xs btn-group ">
-
-                                                        <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                                                data-target="#sub{{$inner->id}}" title="Edit SubCategory"><i
-                                                                class="fa fa-edit"></i></button>
-                                                        <a href="{{ route('sub.delete', $inner->id) }}"
-                                                           class="btn btn-sm btn-danger" data-toggle="tooltip" title=""
-                                                           data-original-title="Delete SubCategory"><i class="fa fa-times"></i></a>
-
-                                                    </td>
-                                                </tr>
-                                                <div class="modal fade" id="sub{{$inner->id}}" tabindex="-1" role="dialog"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-popin">
-                                                        <div class="modal-content">
-                                                            <div class="block block-themed block-transparent remove-margin-b">
-                                                                <div class="block-header bg-primary-dark">
-                                                                    <ul class="block-options">
-                                                                        <li>
-                                                                            <button data-dismiss="modal" type="button"><i
-                                                                                    class="si si-close"></i></button>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <h3 class="block-title">Update SubCategory</h3>
-                                                                </div>
-                                                                <div class="block-content">
-                                                                    <form class="form-horizontal push-10-t"
-                                                                          action="{{ route('sub.update', $sub->id) }}"
-                                                                          method="post">
-                                                                        @csrf
-                                                                        <div class="form-group">
-                                                                            <input type="text" class="form-control" name="title"
-                                                                                   value="{{ $sub->title }}">
-                                                                        </div>
-                                                                        <div class="form-group text-right">
-                                                                            <button class="btn btn-sm btn-success " type="submit">
-                                                                                Update
-                                                                            </button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </tbody>
-                                                @endforeach
-                                                @endif
-                                                </tbody>
-                                                @endforeach
-                                                @endif
-                                                </tbody>
-                                            @endforeach
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            @endforeach
                         </table>
                     @else
                         <h3>no found</h3>
