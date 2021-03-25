@@ -1,5 +1,15 @@
 $(document).ready(function () {
 
+    $('body').on('click','.see-more-block',function () {
+        $('.after12').show();
+        $(this).hide();
+    });
+    $('body').on('click','.see-less-block',function () {
+        $('.after12').hide();
+        $('.see-more-block').show();
+
+    });
+
     $(document).on('click', '.add-product-details-tab-btn', function() {
         var id = $(this).attr('id');
         $(this).closest('.product-details-body').append(`
