@@ -220,6 +220,18 @@
 {{--            </div>--}}
 
 
+
+
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <div class="d-inline-block mr-3">
+                    <a class="nav-main-link" href="{{route('users.dashboard')}}">
+                        <i class="nav-main-link-icon fa fa-sync"></i>
+                        <span class="nav-main-link-name d-none d-sm-inline-block">Switch To User View</span>
+                    </a>
+
+                </div>
+            @endif
+
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell text-danger"></i>
@@ -229,27 +241,27 @@
                         <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
                     </div>
                     <ul class="nav-items mb-0">
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="/store/wishlist?status=2">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">Approved Wishlist {{$approved_wishlist}}</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
+                        {{--                        <li>--}}
+                        {{--                            <a class="text-dark media py-2" href="/store/wishlist?status=2">--}}
+                        {{--                                <div class="mr-2 ml-3">--}}
+                        {{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="media-body pr-2">--}}
+                        {{--                                    <div class="font-w600">Approved Wishlist {{$approved_wishlist}}</div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </a>--}}
+                        {{--                        </li>--}}
 
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="/store/wishlist?status=5&imported=0">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">Completed Wishlist {{$completed_wishlist}}</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
+                        {{--                        <li>--}}
+                        {{--                            <a class="text-dark media py-2" href="/store/wishlist?status=5&imported=0">--}}
+                        {{--                                <div class="mr-2 ml-3">--}}
+                        {{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="media-body pr-2">--}}
+                        {{--                                    <div class="font-w600">Completed Wishlist {{$completed_wishlist}}</div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </a>--}}
+                        {{--                        </li>--}}
 
                         <li>
                             <a class="text-dark media py-2" href="/store/help-center">
@@ -264,16 +276,6 @@
                     </ul>
                 </div>
             </div>
-
-        @if(\Illuminate\Support\Facades\Auth::check())
-            <div class="d-inline-block mr-3">
-                <a class="nav-main-link" href="{{route('users.dashboard')}}">
-                    <i class="nav-main-link-icon fa fa-sync"></i>
-                    <span class="nav-main-link-name">Switch To User View</span>
-                </a>
-
-            </div>
-            @endif
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
