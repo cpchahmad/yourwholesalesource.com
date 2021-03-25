@@ -2524,11 +2524,11 @@ class ProductController extends Controller
 
     public function change_image($id,$image_id,Request $request){
         if($request->input('type') == 'product'){
-            dd(346432);
             //$shop = $this->helper->getWooCommerceAdminShop();
             $shop = null;
             $variant = ProductVariant::find($id);
             if($variant->linked_product != null) {
+                dd(45);
                 if ($variant->linked_product->woocommerce_id != null) {
                     dd(7654);
                     $image = Image::find($image_id);
