@@ -309,6 +309,14 @@
                                                     <img class="img-avatar"
                                                          @if($item->linked_dropship_variant->image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
                                                          @else src="{{asset('shipping-marks')}}/{{$item->linked_dropship_variant->image}}" @endif alt="">
+                                                @elseif($item->linked_woocommerce_variant != null)
+                                                    <img class="img-avatar"
+                                                         @if($item->linked_woocommerce_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                         @else @if($item->linked_woocommerce_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_woocommerce_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_woocommerce_variant->has_image->image}}" @endif @endif alt="">
+                                                @elseif($item->linked_admin_variant != null)
+                                                    <img class="img-avatar"
+                                                         @if($item->linked_admin_variant->has_image == null)  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg"
+                                                         @else @if($item->linked_admin_variant->has_image->isV == 1) src="{{asset('images/variants')}}/{{$item->linked_admin_variant->has_image->image}}" @else src="{{asset('images')}}/{{$item->linked_admin_variant->has_image->image}}" @endif @endif alt="">
                                                 @else
                                                     @if($item->linked_real_product != null)
                                                         @if(count($item->linked_real_product->has_images)>0)
@@ -323,7 +331,19 @@
                                                             <img class="img-avatar img-avatar-variant"
                                                                  src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
                                                         @endif
-
+                                                    @elseif($item->linked_woocommerce_product != null)
+                                                        @if(count($item->linked_woocommerce_product->has_images)>0)
+                                                            @if($item->linked_woocommerce_product->has_images[0]->isV == 1)
+                                                                <img class="img-avatar img-avatar-variant"
+                                                                     src="{{asset('images/variants')}}/{{$item->linked_woocommerce_product->has_images[0]->image}}">
+                                                            @else
+                                                                <img class="img-avatar img-avatar-variant"
+                                                                     src="{{asset('images')}}/{{$item->linked_woocommerce_product->has_images[0]->image}}">
+                                                            @endif
+                                                        @else
+                                                            <img class="img-avatar img-avatar-variant"
+                                                                 src="https://wfpl.org/wp-content/plugins/lightbox/images/No-image-found.jpg">
+                                                        @endif
                                                     @elseif($item->linked_admin_product != null)
                                                         @if(count($item->linked_admin_product->has_images)>0)
                                                             @if($item->linked_admin_product->has_images[0]->isV == 1)
@@ -381,18 +401,29 @@
                                                       if($item->linked_dropship_variant->linked_product->quantity == 0)
                                                         $out_of_stock = true;
                                                 }
+                                                elseif($item->linked_woocommerce_variant) {
+                                                      if($item->linked_woocommerce_variant->linked_product->quantity == 0)
+                                                        $out_of_stock = true;
+                                                }
+                                                elseif($item->linked_admin_variant) {
+                                                      if($item->linked_admin_variant->linked_product->quantity == 0)
+                                                        $out_of_stock = true;
+                                                }
                                                 elseif($item->linked_real_product){
                                                     if($item->linked_real_product->quantity == 0)
                                                         $out_of_stock = true;
                                                 }
-                                                elseif($item->linked_admin_product){
-                                                    if($item->linked_admin_product->quantity == 0)
+                                                elseif($item->linked_woocommerce_product) {
+                                                      if($item->linked_woocommerce_product->quantity == 0)
                                                         $out_of_stock = true;
                                                 }
-
+                                                elseif($item->linked_admin_product) {
+                                                      if($item->linked_admin_product->quantity == 0)
+                                                        $out_of_stock = true;
+                                                }
                                             @endphp
 
-                                            @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null  && $item->linked_dropship_variant == null && $item->linked_admin_product == null))
+                                            @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null  && $item->linked_dropship_variant == null && $item->linked_woocommerce_product == null && $item->linked_woocommerce_variant == null && $item->linked_admin_variant == null && $item->linked_admin_product == null))
                                                 <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
                                             @else
                                                 <span class="badge badge-success" style="font-size: small"> In Stock </span>
