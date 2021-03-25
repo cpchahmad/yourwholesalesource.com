@@ -2524,6 +2524,7 @@ class ProductController extends Controller
 
     public function change_image($id,$image_id,Request $request){
         if($request->input('type') == 'product'){
+            dd(346432);
             //$shop = $this->helper->getWooCommerceAdminShop();
             $shop = null;
             $variant = ProductVariant::find($id);
