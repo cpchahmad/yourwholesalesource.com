@@ -45,10 +45,10 @@
             @foreach($categories as $index => $category)
                 @if($index < 11)
                     <div class="col-md-3 p-0">
-                        <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
+                        <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}" data-toggle="tooltip" data-placement="top" title="Top Tooltip">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
-                                    <p class="m-0" style="font-size:14px;color: black;font-weight: 600;" data-toggle="tooltip" data-placement="top" title="Top Tooltip"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
+                                    <p class="m-0" style="font-size:14px;color: black;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
                             </div>
                         </a>
