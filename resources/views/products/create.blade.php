@@ -384,12 +384,12 @@
                                                     <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox" id="rowsub_{{$sub->title}}">
                                                     <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
                                                 </div>
-                                                <div class="row product_sub_sub_cat" style="display: none">
+                                                <div class="row product_sub_sub_cat pl-5" style="display: none">
                                                     <div class="col-xs-12 col-xs-push-1">
                                                         @foreach($sub->hasSub as $inner)
                                                             <div class="custom-control custom-checkbox d-inline-block">
-                                                                <input type="checkbox" name="sub_cat[]" value="{{$inner->id}}" class="custom-control-input sub_sub_cat_checkbox" id="rowsub_{{$inner->title}}">
-                                                                <label class="custom-control-label" for="rowsub_{{$inner->title}}">{{$inner->title}}</label>
+                                                                <input type="checkbox" name="sub_sub_cat[]" value="{{$inner->id}}" class="custom-control-input sub_sub_cat_checkbox" id="row_sub_sub_{{$inner->title}}">
+                                                                <label class="custom-control-label" for="row_sub_sub_{{$inner->title}}">{{$inner->title}}</label>
                                                             </div>
                                                             <br>
                                                         @endforeach
