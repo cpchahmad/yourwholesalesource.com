@@ -207,20 +207,20 @@
             <!-- User Dropdown -->
             <span class="badge badge-primary mt-1 mr-1" style="font-size: 13px"> Wallet: {{number_format($balance,2)}} USD </span>
 
-            <div class="status-section">
+{{--            <div class="status-section">--}}
 {{--                <a href="/store/wishlist?status=2" class="text-white">--}}
 {{--                    <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist {{$approved_wishlist}} </span>--}}
 {{--                </a>--}}
 {{--                <a href="/store/wishlist?status=5&imported=0" class="text-white">--}}
 {{--                    <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist {{$completed_wishlist}}  </span>--}}
 {{--                </a>--}}
-                <a href="/store/help-center" class="text-white">
-                    <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets {{$pending_ticket_count}}  </span>
-                </a>
-            </div>
+{{--                <a href="/store/help-center" class="text-white">--}}
+{{--                    <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets {{$pending_ticket_count}}  </span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
 
-            <div class="dropdown d-inline-block ml-2 section-status-mobile">
+            <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell"></i>
                 </button>
