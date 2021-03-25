@@ -1131,7 +1131,7 @@
                                         </div>
 
                                         <div class="row product_sub_cat" style="display: none">
-                                            <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
+                                            <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                             <div class="col-xs-12 col-xs-push-1">
                                                 @foreach($category->hasSub as $sub)
                                                     <div class="custom-control custom-checkbox d-inline-block">
