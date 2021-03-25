@@ -251,7 +251,7 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <div class="status-section">
+{{--            <div class="status-section">--}}
 {{--                <a href="/wishlists?status=1" class="text-white">--}}
 {{--                    <span class="badge badge-primary" style="font-size: 13px">Wishlist Requests {{$wishlist_request_count}} </span>--}}
 {{--                </a>--}}
@@ -260,21 +260,21 @@
 {{--                    <span class="" style="font-size: 13px"> Pending Accepted Wishlists {{$wishlist_accept_count}} </span>--}}
 {{--                </a>--}}
 
-                <a href="/wallets-requests" class="text-white badge badge-success">
-                    <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>
-                </a>
+{{--                <a href="/wallets-requests" class="text-white badge badge-success">--}}
+{{--                    <span class="" style="font-size: 13px"> Wallet Requests {{$wallet_request_count}} </span>--}}
+{{--                </a>--}}
 
-                <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">
-                    <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>
-                </a>
+{{--                <a href="/refunds?priority=&status=1" class="text-white badge badge-warning">--}}
+{{--                    <span class="" style="font-size: 13px"> Refund Requests {{$refund_request_count}} </span>--}}
+{{--                </a>--}}
 
-                <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">
-                    <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>
-                </a>
+{{--                <a href="/tickets?priority=&status=1&more_status=3" class="text-white badge badge-dark">--}}
+{{--                    <span class="" style="font-size: 13px"> Ticket Requests {{$tickets_request_count}} </span>--}}
+{{--                </a>--}}
 
-            </div>
+{{--            </div>--}}
 
-            <div class="dropdown d-inline-block ml-2 section-status-mobile">
+            <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell"></i>
                 </button>
@@ -340,6 +340,7 @@
                     </ul>
                 </div>
             </div>
+
 
             <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
