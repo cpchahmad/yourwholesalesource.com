@@ -2524,7 +2524,8 @@ class ProductController extends Controller
 
     public function change_image($id,$image_id,Request $request){
         if($request->input('type') == 'product'){
-            $shop = $this->helper->getWooCommerceAdminShop();
+            //$shop = $this->helper->getWooCommerceAdminShop();
+            $shop = null;
             $variant = ProductVariant::find($id);
             if($variant->linked_product != null) {
                 if ($variant->linked_product->woocommerce_id != null) {
@@ -2537,12 +2538,14 @@ class ProductController extends Controller
                     $variant->save();
                 }
                 else{
+                    dd(54);
                     return response()->json([
                         'message' => 'false'
                     ]);
                 }
             }
             else{
+                dd(32);
                 return response()->json([
                     'message' => 'false'
                 ]);
