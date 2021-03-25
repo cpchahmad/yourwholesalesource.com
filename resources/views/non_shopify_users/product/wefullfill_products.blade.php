@@ -46,10 +46,10 @@
                 @if($index < 11)
                     <div class="col-md-3 p-0 tooltip-ex">
                         <span class="tooltip-ex-text bg-info ml-5">
-                            <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" class="text-white" target="_blank">Ribbon meaning?</a>
+                            <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" class="text-white" target="_blank">Ribbon color meaning?</a>
                         </span>
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
-                            <div class="block m-0">
+                            <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
                                     <p class="m-0" style="font-size:14px;color: black;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
@@ -70,7 +70,7 @@
                 @if($index >= 11)
                     <div class="col-md-3 p-0 after12 tooltip-ex" style="display: none" >
                         <span class="tooltip-ex-text bg-info ml-5">
-                            <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" class="text-white" target="_blank">Click here to know what each ribbon means!</a>
+                            <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" class="text-white" target="_blank">Ribbon Color meanining!</a>
                         </span>
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}" data-toggle="tooltip" title=""
                            data-original-title="Delete Order">
