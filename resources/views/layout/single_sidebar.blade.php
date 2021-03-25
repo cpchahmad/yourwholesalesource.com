@@ -226,7 +226,7 @@
                 <div class="d-inline-block mr-3">
                     <a class="nav-main-link" href="{{route('users.dashboard')}}">
                         <i class="nav-main-link-icon fa fa-sync"></i>
-                        <span class="nav-main-link-name d-none d-sm-inline-block">Switch To User View</span>
+                        <span class="nav-main-link-name d-none d-md-inline-block">Switch To User View</span>
                     </a>
 
                 </div>
@@ -331,7 +331,7 @@
                     @else
                         <img class="rounded" src="{{ asset('assets/media/avatars/avatar10.jpg') }}" alt="Header Avatar" style="width: 18px;">
                     @endif
-                    <span class="d-none d-sm-inline-block ml-1">{{explode('.',$shop->shopify_domain)[0]}}</span>
+                    <span class="d-none d-md-inline-block ml-1">{{explode('.',$shop->shopify_domain)[0]}}</span>
                     <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown">
