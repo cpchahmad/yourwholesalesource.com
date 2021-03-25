@@ -1140,7 +1140,7 @@
                                                                id="rowsub_{{$sub->title}}">
                                                         <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
                                                     </div>
-                                                    <div class="row product_sub_sub_cat" style="display: none">
+                                                    <div class="row product_sub_sub_cat" >
                                                         <div class="col-xs-12 col-xs-push-1">
                                                             @foreach($sub->hasSub as $inner)
                                                                 <div class="custom-control custom-checkbox d-inline-block">
