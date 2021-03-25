@@ -34,7 +34,6 @@
                 <div class="input-group">
                     <input type="search" class="form-control" placeholder="Search by title, tags keyword" value="{{$search}}" name="search">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-primary btn-block" data-toggle="tooltip" data-placement="top" title="Top Tooltip">Top</button>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                         <a class="btn btn-danger" href="{{route('users.product.wefulfill')}}"> <i class="fa fa-times"></i> Clear </a>
                     </div>
@@ -45,7 +44,10 @@
         <div class="row mb-2" style="padding: 0 14px;">
             @foreach($categories as $index => $category)
                 @if($index < 11)
-                    <div class="col-md-3 p-0">
+                    <div class="col-md-3 p-0 tooltip-ex">
+                        <span class="tooltip-ex-text">
+                            <span style="color: black;">I am a tooltip</span>
+                        </span>
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
