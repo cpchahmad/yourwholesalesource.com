@@ -46,7 +46,7 @@
                 @if($index < 11)
                     <div class="col-md-3 p-0 tooltip-ex">
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
-                            <div class="block pointer m-0">
+                            <div class="block m-0">
                                 <div class="block-content p-3 text-center">
                                     <span class="tooltip-ex-text bg-info">
                                         <span style="">I am a tooltip</span>
