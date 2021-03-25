@@ -240,13 +240,13 @@
 
                                                     <div class="info-box">
                                                         <p style="padding: 10px">
-                                                            BENEFICIAL NAME: Fantasy Supply Limited <i class="fa fa-question-circle" title="Fantasy Supply Limited is the mother company of Wefullfill"></i><br>
-                                                            BANK NAME: Oversea-Chinese Banking Corporation Limited Singapore<br>
-                                                            SWFIT CODE:OCBCSGSG<br>
-                                                            Bank Account: 501246136301<br>
-                                                            Bank Address: OCBC Bank,65 Chulia Street, OCBC Centre, Singapore 049513<br>
-                                                            Intermeidary Bank: JP Morgan Chase Bank, New York, USA<br>
-                                                            SWIFIT CODE:CHASUS33<br>
+                                                            BENEFICIAL NAME: Your Wholesale Source <i class="fa fa-question-circle" title="Your Wholesale Source is the mother company of WholeSaleSource"></i><br>
+                                                            BANK NAME: xxxxxxxxxxxxxxxxxxxxxxxx<br>
+                                                            SWFIT CODE:xxxxxxxxxxxxxx<br>
+                                                            Bank Account: xxxxxxxxxxxxxxx<br>
+                                                            Bank Address: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>
+                                                            Intermeidary Bank: xxxxxxxxxxxxxxxxxxxxx<br>
+                                                            SWIFIT CODE:xxxxxxxxxx<br>
 
                                                         </p>
                                                     </div>
