@@ -83,7 +83,7 @@
                     </div>
                 @endif
                 @if($index == count($categories)-1)
-                    <div class="col-md-3 p-0 after12 see-less-block" style="display: none">
+                    <div class="col-md-3 p-0 mt-4 after12 see-less-block" style="display: none">
                         <div class="block pointer m-0">
                             <div class="block-content p-3 text-center">
                                 <p  class="m-0" style="font-size:14px;">See Less ....</p>
