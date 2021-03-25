@@ -68,7 +68,8 @@
                 @endif
 
                 @if($index >= 11)
-                    <div class="col-md-3 p-0 after12" style="display: none">
+                    <div class="col-md-3 p-0 after12" style="display: none" data-toggle="tooltip" title=""
+                         data-original-title="Delete Order">
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
