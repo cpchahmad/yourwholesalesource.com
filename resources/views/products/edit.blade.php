@@ -1149,7 +1149,6 @@
                                                                            id="row_sub_sub_{{$inner->title}}">
                                                                     <label class="custom-control-label" for="row_sub_sub_{{$inner->title}}">{{$inner->title}}</label>
                                                                 </div>
-                                                                <br>
                                                             @endforeach
                                                         </div>
                                                     </div>
