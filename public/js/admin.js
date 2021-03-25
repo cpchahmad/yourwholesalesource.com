@@ -306,11 +306,13 @@ $(document).ready(function () {
     $('body').on('change','.sub_cat_checkbox',function () {
         if($(this).is(':checked')){
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
+            $(this).parent().next().show();
         }
         else{
             var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
                 $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+                $(this).parent().next().hide();
             }
         }
     });
