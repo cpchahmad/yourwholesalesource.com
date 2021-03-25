@@ -185,8 +185,8 @@
                         <div class="block-content" style="padding-bottom: 10px">
                             <div class="push-10">
                                 <a class="h6" style="font-size: 0.9rem" href="{{route('store.product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
-                                <div class="d-flex">
-                                    <div class="font-w600 text-success mt-1">
+                                <div class="">
+                                    <div class="font-w400 text-success mt-1">
                                         Cost Price
                                         @if(count($product->hasVariants) > 0)
                                             ${{ number_format($product->hasVariants->min('price'), 2) }}
@@ -198,7 +198,7 @@
                                         Recommended Price
                                             ${{ number_format($product->recommended_price, 2) }}
                                     </div>
-                                    <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">{{$product->new_shipping_price}}</div>
+                                    <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">Shipping Price{{$product->new_shipping_price}}</div>
                                 </div>
 
                             </div>
