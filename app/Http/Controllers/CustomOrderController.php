@@ -312,7 +312,8 @@ class CustomOrderController extends Controller
                     $new_line->woocommerce_id = $variant->linked_product->woocommerce_id;
                     $new_line->shopify_variant_id = $variant->shopify_id;
                     $new_line->woocommerce_variant_id = $variant->woocommerce_id;
-                    $new_line->dropship_variant_id = $variant->id;
+                    $new_line->dropship_variant_id = $variant->is_dropship_variant == 1 ? $variant->id : null;
+                    $new_line->admin_variant_id = $variant->id;
                     $new_line->title = $variant->linked_product->title;
                     $new_line->quantity = $request->input('quantity')[$index];
                     $new_line->sku = $variant->sku;
@@ -702,7 +703,8 @@ class CustomOrderController extends Controller
                             $new_line->retailer_order_id = $new->id;
                             $new_line->shopify_product_id = $variant->linked_product->shopify_id;
                             $new_line->shopify_variant_id = $variant->shopify_id;
-                            $new_line->dropship_variant_id = $variant->id;
+                            $new_line->dropship_variant_id = $variant->is_dropship_variant == 1 ? $variant->id : null;
+                            $new_line->admin_variant_id = $variant->id;
                             $new_line->title = $variant->linked_product->title;
                             $new_line->quantity = $item->quantity;
                             $new_line->sku = $variant->sku;
