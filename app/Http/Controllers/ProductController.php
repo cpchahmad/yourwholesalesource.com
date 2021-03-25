@@ -834,6 +834,7 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $product = Product::find($id);
         $woocommerce = $this->helper->getWooCommerceAdminShop();
 
@@ -1094,6 +1095,9 @@ class ProductController extends Controller
                         }
                         if ($request->sub_cat) {
                             $product->has_subcategories()->sync($request->sub_cat);
+                        }
+                        if ($request->sub_sub_cat) {
+                            $product->has_sub_sub_categories()->sync($request->sub_sub_cat);
                         }
                         $product->save();
 
