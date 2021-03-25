@@ -207,6 +207,28 @@ class CategoryController extends Controller
 
     }
 
+    public function sub_sub_update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try{
+            $category = SubSubCategory::find($id);
+            $category->title = $request->title;
+            $category->save();
+
+//            $woocommerce = $this->helper->getWooCommerceAdminShop();
+//            $response = $woocommerce->put('products/categories/'.$category->woocommerce_id, ['name' => $category->title]);
+
+            DB::commit();
+            return redirect()->back()->with('success','Sub Category updated successfully!');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+
+    }
+
+
     public function subdelete($id)
     {
         DB::beginTransaction();
