@@ -45,12 +45,12 @@
             @foreach($categories as $index => $category)
                 @if($index < 11)
                     <div class="col-md-3 p-0 tooltip-ex">
-                        <span class="tooltip-ex-text bg-info">
-                            <span style="">I am a tooltip</span>
-                        </span>
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
+                                    <span class="tooltip-ex-text bg-info">
+                                        <span style="">I am a tooltip</span>
+                                    </span>
                                     <p class="m-0" style="font-size:14px;color: black;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
                             </div>
