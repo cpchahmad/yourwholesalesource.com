@@ -1798,7 +1798,7 @@ class ProductController extends Controller
                 $product->has_subcategories()->attach($request->sub_cat);
             }
             if ($request->sub_sub_cat) {
-                $product->has_subcategories()->attach($request->sub_cat);
+                $product->has_sub_sub_categories()->attach($request->sub_sub_cat);
             }
             if ($request->platforms) {
                 $product->has_platforms()->attach($request->platforms);
