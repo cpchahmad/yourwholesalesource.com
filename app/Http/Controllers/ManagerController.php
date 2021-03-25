@@ -306,7 +306,7 @@ class ManagerController extends Controller
             });
         }
 
-        return view('products.all')->with([
+        return view('sales_managers.products.all')->with([
             'products' => $productQ
                 ->select('id', 'to_woocommerce','title', 'price', 'quantity', 'status')
                 ->with(['has_images:id,position,image,product_id', 'hasVariants:id,price,product_id'])
@@ -324,7 +324,7 @@ class ManagerController extends Controller
 
     public function viewSingleProduct($id) {
         $product = Product::with(['has_images', 'hasVariants','has_platforms','has_categories','has_subcategories'])->find($id);
-        return view('products.product')->with([
+        return view('sales_managers.products.view_product')->with([
             'product' => $product
         ]);
     }
