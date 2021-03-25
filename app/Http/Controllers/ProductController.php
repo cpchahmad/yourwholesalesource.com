@@ -1747,8 +1747,8 @@ class ProductController extends Controller
 
     public function save(Request $request)
     {
-        dd($request->all());
-         $this->validate($request, [
+
+        $this->validate($request, [
            'sku' => 'required|unique:products',
            'title' => 'required|unique:products'
         ]);
