@@ -2529,24 +2529,25 @@ class ProductController extends Controller
             $variant = ProductVariant::find($id);
             if($variant->linked_product != null) {
                 if ($variant->linked_product->woocommerce_id != null) {
-                    dd(7654);
                     $image = Image::find($image_id);
                     return $this->woocommerce_image_selection($image_id, $image, $shop, $variant);
                 }
                 else if($variant->linked_product->tooWoocommerce == 0)
-                {dd(8765);
+                {
                     $variant->image = $image_id;
                     $variant->save();
+
+                    return response()->json([
+                        'message' => 'success'
+                    ]);
                 }
                 else{
-                    dd(54);
                     return response()->json([
                         'message' => 'false'
                     ]);
                 }
             }
             else{
-                dd(32);
                 return response()->json([
                     'message' => 'false'
                 ]);
