@@ -673,6 +673,10 @@ class AdminOrderController extends Controller
 
     public function dashboard(Request $request)
     {
+        if(Auth::user()->email != 'moe@webinopoly.com ')
+            return redirect('/check/roles');
+
+
         if ($request->has('date-range')) {
             $date_range = explode('-', $request->input('date-range'));
             $start_date = $date_range[0];
