@@ -1131,16 +1131,16 @@
                                         </div>
 
                                         <div class="row product_sub_cat" style="display: none">
-                                            <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                             <div class="col-xs-12 col-xs-push-1">
                                                 @foreach($category->hasSub as $sub)
+                                                    <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                                     <div class="custom-control custom-checkbox d-inline-block">
                                                         <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox"
                                                                @if(in_array($sub->id,$product->subcategory($product))) checked @endif
                                                                id="rowsub_{{$sub->title}}">
                                                         <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
                                                     </div>
-                                                    <div class="row product_sub_sub_cat pl-5" >
+                                                    <div class="row product_sub_sub_cat pl-5" style="display: none">
                                                         <div class="col-xs-12 col-xs-push-1">
                                                             @foreach($sub->hasSub as $inner)
                                                                 <div class="custom-control custom-checkbox d-inline-block">
@@ -1149,6 +1149,7 @@
                                                                            id="row_sub_sub_{{$inner->title}}">
                                                                     <label class="custom-control-label" for="row_sub_sub_{{$inner->title}}">{{$inner->title}}</label>
                                                                 </div>
+                                                                <br>
                                                             @endforeach
                                                         </div>
                                                     </div>
