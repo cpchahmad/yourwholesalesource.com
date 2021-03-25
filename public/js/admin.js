@@ -318,7 +318,7 @@ $(document).ready(function () {
     /* Admin Module - SubSubCategory Checkbox Selection JS */
     $('body').on('change','.sub_sub_cat_checkbox',function () {
         if($(this).is(':checked')){
-            $(this).parents('.product_sub_sub_cat').prev().find('.category_checkbox').prop('checked',true);
+            $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',true);
         }
         else{
             var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
