@@ -276,6 +276,21 @@ $(document).ready(function () {
         }
         $(this).next().next().toggle();
     });
+    /* Admin Module - Sub Category Open JS */
+    $('body').on('click','.sub_category_down',function () {
+        if($(this).data('value') === 0){
+            $(this).find('i').addClass('fa-angle-down');
+            $(this).find('i').removeClass('fa-angle-right');
+            $(this).data('value',1);
+
+        }
+        else{
+            $(this).find('i').removeClass('fa-angle-down');
+            $(this).find('i').addClass('fa-angle-right');
+            $(this).data('value',0);
+        }
+        $(this).next().next().toggle();
+    });
     /* Admin Module - Category Checkbox Selection JS */
     $('body').on('change','.category_checkbox',function () {
         if($(this).is(':checked')){
@@ -296,6 +311,19 @@ $(document).ready(function () {
             var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
                 $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+            }
+        }
+    });
+
+    /* Admin Module - SubSubCategory Checkbox Selection JS */
+    $('body').on('change','.sub_sub_cat_checkbox',function () {
+        if($(this).is(':checked')){
+            $(this).parents('.product_sub_sub_cat').prev().find('.category_checkbox').prop('checked',true);
+        }
+        else{
+            var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
+            if(checked === 0){
+                $(this).parents('.product_sub_sub_cat').prev().find('.sub_category_checkbox').prop('checked',false);
             }
         }
     });
