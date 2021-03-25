@@ -46,7 +46,7 @@
                 @if($index < 11)
                     <div class="col-md-3 p-0 tooltip-ex">
                         <span class="tooltip-ex-text bg-info ml-5">
-                            <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" target="_blank">Click Here</a>
+                            <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" class="text-white" target="_blank">Click Here</a>
                         </span>
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block m-0">
