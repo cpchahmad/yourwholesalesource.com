@@ -194,8 +194,9 @@
 
                                                            if($item->linked_variant && $item->linked_variant->quantity == 0) {
                                                                $out_of_stock += 1;
+
                                                            }
-                                                           else if($item->linked_product && $item->linked_product->quantity == 0){
+                                                           else if($item->linked_variant == null && $item->linked_product && $item->linked_product->quantity == 0){
                                                                $out_of_stock += 1;
                                                            }
                                                        }
@@ -203,10 +204,22 @@
                                                     else {
                                                        $out_of_stock = 0;
                                                        foreach($order->line_items()->where('fulfilled_by', 'fantasy')->get() as $item) {
-                                                           if($item->linked_dropship_variant == null && $item->linked_admin_product == null)
+                                                        if($item->linked_real_variant == null && $item->linked_woocommerce_variant == null && $item->linked_real_product == null && $item->linked_woocommerce_product == null && $item->linked_admin_product == null && $item->linked_admin_variant == null)
                                                                $out_of_stock += 1;
 
-                                                           if($item->linked_dropship_variant && $item->linked_dropship_variant->quantity == 0) {
+                                                           if($item->linked_real_variant && $item->linked_real_variant->quantity == 0) {
+                                                               $out_of_stock += 1;
+                                                           }
+                                                           elseif($item->linked_woocommerce_variant && $item->linked_woocommerce_variant->quantity == 0){
+                                                               $out_of_stock += 1;
+                                                           }
+                                                           elseif($item->linked_admin_variant && $item->linked_admin_variant->quantity == 0){
+                                                               $out_of_stock += 1;
+                                                           }
+                                                           elseif($item->linked_real_product && $item->linked_real_product->quantity == 0){
+                                                               $out_of_stock += 1;
+                                                           }
+                                                           else if($item->linked_woocommerce_product && $item->linked_woocommerce_product->quantity == 0){
                                                                $out_of_stock += 1;
                                                            }
                                                            else if($item->linked_admin_product && $item->linked_admin_product->quantity == 0){
