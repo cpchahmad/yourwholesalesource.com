@@ -69,6 +69,19 @@ trait ProductVariantTrait {
                 return [];
             }
     }
+    public function sub_sub_category($product){
+        if(count($product->has_sub_sub_categories) > 0) {
+            $array = array_unique($product->has_sub_sub_categories->pluck('id')->toArray());
+            if ($array[0] == "") {
+                $array = [];
+            }
+
+            return $array;
+        }
+        else{
+            return [];
+        }
+    }
     public function varaint_count($product){
         $sum =  $product->hasVariants->sum('quantity');
         return $sum;
