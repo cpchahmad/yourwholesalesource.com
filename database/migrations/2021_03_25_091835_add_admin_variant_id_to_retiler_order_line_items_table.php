@@ -13,7 +13,7 @@ class AddAdminVariantIdToRetilerOrderLineItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('retiler_order_line_items', function (Blueprint $table) {
+        Schema::table('retailer_order_line_items', function (Blueprint $table) {
             $table->unsignedBigInteger('admin_variant_id')->nullable();
         });
     }
