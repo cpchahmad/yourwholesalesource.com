@@ -135,6 +135,16 @@
                             <hr>
                         @endif
 
+                        @if(count($product->has_sub_sub_categories) > 0)
+                            <div class="tags" style="margin-top: 5px">
+                                <h4 style="margin-bottom: 5px">Subcategories</h4>
+                                @foreach($product->has_sub_sub_categories as $sub_sub_cat)
+                                    <span class="badge badge-primary">{{$sub_sub_cat->title}}</span>
+                                @endforeach
+                            </div>
+                            <hr>
+                        @endif
+
                         @if($product->tags != null)
                             <div class="tags" style="margin-top: 5px">
                                 <h4 style="margin-bottom: 5px">Tags</h4>
