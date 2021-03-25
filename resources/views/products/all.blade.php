@@ -38,17 +38,17 @@
             <div class="col-md-12  mb2">
                 <form class="row d-flex text-right" action="" method="get">
 
-                   <div class="col-md-3">
-                       <input type="text" class="form-control" name="shop_search" value="{{$shop_search}}" placeholder="Search By Wishlist Assigned">
-                   </div>
+{{--                   <div class="col-md-3">--}}
+{{--                       <input type="text" class="form-control" name="shop_search" value="{{$shop_search}}" placeholder="Search By Wishlist Assigned">--}}
+{{--                   </div>--}}
 
 
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" name="wishlist_shop_search" value="{{$wishlist_shop_search}}" placeholder="Search By Wishlist Pushed By User">
-                    </div>
+{{--                    <div class="col-md-3">--}}
+{{--                        <input type="text" class="form-control" name="wishlist_shop_search" value="{{$wishlist_shop_search}}" placeholder="Search By Wishlist Pushed By User">--}}
+{{--                    </div>--}}
 
                     @role('wordpress-admin')
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <select name="parent_category" id="" class="form-control parent-category">
                                 <option value="" style="display: none">Category</option>
                                 @foreach($categories as $category)
@@ -57,7 +57,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="sub-categories-section">
                                 @if($child_category !== null)
                                     @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     @endrole
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <input type="submit" class="btn btn-primary " value="Filter">
                         @role('wordpress-admin')
                             <a href="/products/all" class="btn btn-danger " >Clear</a>
