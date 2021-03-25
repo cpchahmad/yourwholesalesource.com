@@ -22,6 +22,10 @@ class Product extends Model
     public function has_subcategories(){
         return $this->belongsToMany('App\SubCategory','subcategory_product','product_id','subcategory_id');
     }
+
+    public function has_sub_sub_categories(){
+        return $this->belongsToMany('App\SubSubCategory','sub_sub_category_product','product_id','sub_sub_category_id');
+    }
     public function has_platforms(){
         return $this->belongsToMany('App\WarnedPlatform','product_platform','product_id','platform_id');
     }
