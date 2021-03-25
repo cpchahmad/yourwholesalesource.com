@@ -324,7 +324,7 @@ $(document).ready(function () {
         else{
             var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
-                $(this).parents('.product_sub_sub_cat').prev().find('.sub_category_checkbox').prop('checked',false);
+                $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
             }
         }
     });
