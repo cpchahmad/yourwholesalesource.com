@@ -304,9 +304,9 @@
                                         @if ($sub->hasSub)
                                             @foreach($sub->hasSub as $inner)
                                                 <tr>
-                                                    <td class="text-center text-success">
+                                                    <td class="text-center text-info">
                                                     </td>
-                                                    <td class="font-w600 text-success">{{ $inner->title }}</td>
+                                                    <td class="font-w600 text-info">{{ $inner->title }}</td>
                                                     <td>
                                                         <small></small>
                                                     </td>
@@ -315,7 +315,7 @@
                                                         <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
                                                                 data-target="#sub{{$inner->id}}" title="Edit SubCategory"><i
                                                                 class="fa fa-edit"></i></button>
-                                                        <a href="{{ route('sub.delete', $inner->id) }}"
+                                                        <a href="{{ route('sub.sub.delete', $inner->id) }}"
                                                            class="btn btn-sm btn-danger" data-toggle="tooltip" title=""
                                                            data-original-title="Delete SubCategory"><i class="fa fa-times"></i></a>
 
@@ -337,12 +337,12 @@
                                                                 </div>
                                                                 <div class="block-content">
                                                                     <form class="form-horizontal push-10-t"
-                                                                          action="{{ route('sub.update', $sub->id) }}"
+                                                                          action="{{ route('sub.sub.update', $inner->id) }}"
                                                                           method="post">
                                                                         @csrf
                                                                         <div class="form-group">
                                                                             <input type="text" class="form-control" name="title"
-                                                                                   value="{{ $sub->title }}">
+                                                                                   value="{{ $inner->title }}">
                                                                         </div>
                                                                         <div class="form-group text-right">
                                                                             <button class="btn btn-sm btn-success " type="submit">
