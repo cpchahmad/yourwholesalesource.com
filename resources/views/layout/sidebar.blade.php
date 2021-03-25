@@ -283,27 +283,27 @@
                         <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
                     </div>
                     <ul class="nav-items mb-0">
-                        <li>
-                            <a class="text-dark media py-2" href="/wishlists?status=1">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">Wishlist Requests {{$wishlist_request_count}}</div>
-                                </div>
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a class="text-dark media py-2" href="/wishlists?status=1">--}}
+{{--                                <div class="mr-2 ml-3">--}}
+{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="media-body pr-2">--}}
+{{--                                    <div class="font-w600">Wishlist Requests {{$wishlist_request_count}}</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
-                        <li>
-                            <a class="text-dark media py-2" href="/wishlists?status=3">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">Pending Accepted Wishlists {{$wishlist_accept_count}}</div>
-                                </div>
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a class="text-dark media py-2" href="/wishlists?status=3">--}}
+{{--                                <div class="mr-2 ml-3">--}}
+{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="media-body pr-2">--}}
+{{--                                    <div class="font-w600">Pending Accepted Wishlists {{$wishlist_accept_count}}</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
                         <li>
                             <a class="text-dark media py-2" href="/wallets-requests">

@@ -168,62 +168,18 @@
         <div class="d-flex align-items-center">
             <span class="badge badge-primary mt-1 mr-1" style="font-size: 13px"> Wallet: {{number_format($balance,2)}} USD </span>
 
-            <div class="status-section">
+{{--            <div class="status-section">--}}
 {{--                <a href="/users/wishlist?status=2" class="text-white">--}}
 {{--                    <span class="badge badge-info" style="font-size: 13px"> Approved Wishlist {{$approved_wishlist}} </span>--}}
 {{--                </a>--}}
 {{--                <a href="/users/wishlist?status=5&imported=0" class="text-white">--}}
 {{--                    <span class="badge badge-success" style="font-size: 13px"> Completed Wishlist {{$completed_wishlist}} </span>--}}
 {{--                </a>--}}
-                <a href="/users/help-center" class="text-white">
-                    <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets {{$pending_ticket_count}} </span>
-                </a>
-            </div>
+{{--                <a href="/users/help-center" class="text-white">--}}
+{{--                    <span class="badge badge-dark" style="font-size: 13px"> Pending Tickets {{$pending_ticket_count}} </span>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
-            <div class="dropdown d-inline-block ml-2 section-status-mobile">
-                <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="si si-bell"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
-                    <div class="p-2 bg-primary text-center">
-                        <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
-                    </div>
-                    <ul class="nav-items mb-0">
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="/users/wishlist?status=2">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">Approved Wishlist {{$approved_wishlist}}</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-
-{{--                        <li>--}}
-{{--                            <a class="text-dark media py-2" href="/users/wishlist?status=5&imported=0">--}}
-{{--                                <div class="mr-2 ml-3">--}}
-{{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
-{{--                                </div>--}}
-{{--                                <div class="media-body pr-2">--}}
-{{--                                    <div class="font-w600">Completed Wishlist {{$completed_wishlist}}</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-
-                        <li>
-                            <a class="text-dark media py-2" href="/users/help-center">
-                                <div class="mr-2 ml-3">
-                                    <i class="fa fa-fw fa-check-circle text-success"></i>
-                                </div>
-                                <div class="media-body pr-2">
-                                    <div class="font-w600">Pending Tickets {{$pending_ticket_count}}</div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <!-- User Dropdown -->
             <div class="d-flex align-items-center">
 {{--                <select name="change-view" id="change-view-store" class="form-control">--}}
@@ -257,6 +213,52 @@
             </div>
 
             <div class="dropdown d-inline-block ml-2">
+                    <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="si si-bell text-danger"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="page-header-notifications-dropdown">
+                        <div class="p-2 bg-primary text-center">
+                            <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
+                        </div>
+                        <ul class="nav-items mb-0">
+                            {{--                        <li>--}}
+                            {{--                            <a class="text-dark media py-2" href="/users/wishlist?status=2">--}}
+                            {{--                                <div class="mr-2 ml-3">--}}
+                            {{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+                            {{--                                </div>--}}
+                            {{--                                <div class="media-body pr-2">--}}
+                            {{--                                    <div class="font-w600">Approved Wishlist {{$approved_wishlist}}</div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </a>--}}
+                            {{--                        </li>--}}
+
+                            {{--                        <li>--}}
+                            {{--                            <a class="text-dark media py-2" href="/users/wishlist?status=5&imported=0">--}}
+                            {{--                                <div class="mr-2 ml-3">--}}
+                            {{--                                    <i class="fa fa-fw fa-check-circle text-success"></i>--}}
+                            {{--                                </div>--}}
+                            {{--                                <div class="media-body pr-2">--}}
+                            {{--                                    <div class="font-w600">Completed Wishlist {{$completed_wishlist}}</div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </a>--}}
+                            {{--                        </li>--}}
+
+                            <li>
+                                <a class="text-dark media py-2" href="/users/help-center">
+                                    <div class="mr-2 ml-3">
+                                        <i class="fa fa-fw fa-check-circle text-success"></i>
+                                    </div>
+                                    <div class="media-body pr-2">
+                                        <div class="font-w600">Pending Tickets {{$pending_ticket_count}}</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="dropdown d-inline-block ml-2">
                 <button type="button" class="btn btn-sm btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="si si-bell"></i>
                     <span class="badge badge-primary badge-pill d-none d-md-inline-block">{{$notifications_count}}</span>
