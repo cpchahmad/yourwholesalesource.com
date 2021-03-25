@@ -44,14 +44,15 @@
         <div class="row mb-2" style="padding: 0 14px;">
             @foreach($categories as $index => $category)
                 @if($index < 11)
-                    <div class="col-md-3 p-0">
-                        <button href="{{route('users.product.wefulfill')}}?category={{$category->title}}" data-toggle="tooltip" data-placement="top" title="Top Tooltip">
+                    <div class="col-md-3 p-0 tooltip">
+                        <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
+                                    <p class="tooltiptext">tooltiptext</p>
                                     <p class="m-0" style="font-size:14px;color: black;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
                             </div>
-                        </button>
+                        </a>
                     </div>
                 @endif
                 @if($index == 11)
@@ -66,13 +67,13 @@
 
                 @if($index >= 11)
                     <div class="col-md-3 p-0 after12" style="display: none">
-                        <button href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
+                        <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
                                 <div class="block-content p-3 text-center">
                                     <p class="m-0" style="font-size:14px;color: black;font-weight: 600;"> @if($category->icon != null) <img class="img-avatar" data-src="{{asset('categories-icons')}}/{{$category->icon}}" alt=""> @endif {{$category->title}}</p>
                                 </div>
                             </div>
-                        </button>
+                        </a>
                     </div>
                 @endif
                 @if($index == count($categories)-1)
