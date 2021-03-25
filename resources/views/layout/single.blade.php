@@ -66,6 +66,26 @@
             }
 
         }
+
+        .tooltip-ex { /* Container for our tooltip */
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-ex .tooltip-ex-text { /* This is for the tooltip text */
+            visibility: hidden;
+            width: 100px;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px; /* This defines tooltip text position */
+            /*position: absolute;*/
+            z-index: 1;
+        }
+
+        .tooltip-ex:hover .tooltip-ex-text { /* Makes tooltip text visible when text is hovered on */
+            visibility: visible;
+        }
     </style>
 
 </head>
