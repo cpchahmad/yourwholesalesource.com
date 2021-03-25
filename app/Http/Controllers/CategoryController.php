@@ -227,7 +227,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function sub_subdelete($id)
+    public function sub_sub_delete($id)
     {
         DB::beginTransaction();
         try{
