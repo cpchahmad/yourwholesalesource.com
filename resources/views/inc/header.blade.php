@@ -75,12 +75,11 @@
         .tooltip-ex .tooltip-ex-text { /* This is for the tooltip text */
             visibility: hidden;
             width: 100px;
-            background-color: #8512d5;
             color: white;
             text-align: center;
             padding: 10px;
             border-radius: 10px; /* This defines tooltip text position */
-            position: absolute;
+            /*position: absolute;*/
             z-index: 1;
         }
 

@@ -45,8 +45,8 @@
             @foreach($categories as $index => $category)
                 @if($index < 11)
                     <div class="col-md-3 p-0 tooltip-ex">
-                        <span class="tooltip-ex-text">
-                            <span style="color: black;">I am a tooltip</span>
+                        <span class="tooltip-ex-text bg-info">
+                            <span style="">I am a tooltip</span>
                         </span>
                         <a href="{{route('users.product.wefulfill')}}?category={{$category->title}}">
                             <div class="block pointer m-0">
