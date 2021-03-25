@@ -58,7 +58,7 @@
                     </div>
                 @endif
                 @if($index == 11)
-                    <div class="col-md-3 p-0 see-more-block">
+                    <div class="col-md-3 p-0 see-more-block mt-4">
                         <div class="block pointer  m-0">
                             <div class="block-content p-3 text-center">
                                 <p  class="m-0" style="font-size:14px;">See More ....</p>
