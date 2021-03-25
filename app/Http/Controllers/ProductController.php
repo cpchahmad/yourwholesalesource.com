@@ -2528,14 +2528,13 @@ class ProductController extends Controller
             $shop = null;
             $variant = ProductVariant::find($id);
             if($variant->linked_product != null) {
-                dd(45);
                 if ($variant->linked_product->woocommerce_id != null) {
                     dd(7654);
                     $image = Image::find($image_id);
                     return $this->woocommerce_image_selection($image_id, $image, $shop, $variant);
                 }
                 else if($variant->linked_product->tooWoocommerce == 0)
-                {
+                {dd(8765);
                     $variant->image = $image_id;
                     $variant->save();
                 }
