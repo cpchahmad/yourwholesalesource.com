@@ -227,6 +227,26 @@ class CategoryController extends Controller
         }
     }
 
+    public function sub_subdelete($id)
+    {
+        DB::beginTransaction();
+        try{
+            $category = SubSubCategory::find($id);
+
+//            $woocommerce = $this->helper->getWooCommerceAdminShop();
+//            $woocommerce->delete('products/categories/'. $category->woocommerce_id, ['force' => true]);
+
+            $category->delete();
+
+            DB::commit();
+            return redirect()->back()->with('success','Deleted!');
+        }
+        catch(\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
     public function update_image_position(Request $request){
         $positions = $request->input('positions');
         $categories = $request->input('category');
