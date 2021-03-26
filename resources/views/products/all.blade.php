@@ -76,7 +76,7 @@
                                 @if($sub_sub_category !== null)
                                     @php $sub_sub_categories = \App\SubCategory::where('title', $child_category)->first()->hasSub;@endphp
                                     <select name="sub_sub_category" id="" class="form-control sub-sub-category">
-                                        <option value="" style="display: none">Sub Categories</option>
+                                        <option value="" style="display: none">Sub Sub Categories</option>
                                         @foreach($sub_sub_categories as $category)
                                             <option @if($sub_sub_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
                                         @endforeach
