@@ -102,13 +102,26 @@ class ProductController extends Controller
 
         }
 
-        if($request->filled('parent_category') && $request->filled('child_category')) {
+        if($request->filled('parent_category') && $request->filled('child_category') && !$request->filled('sub_sub_category') ) {
 
             $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             })
             ->orWhereHas('has_subcategories', function($q) use ($request){
                 $q->where('title',$request->input('child_category'));
+            });
+        }
+
+        if($request->filled('parent_category') && $request->filled('child_category') && $request->filled('sub_sub_category') ) {
+
+            $productQ->whereHas('has_categories', function($q) use ($request){
+                $q->where('title',$request->input('parent_category'));
+            })
+            ->orWhereHas('has_subcategories', function($q) use ($request){
+                $q->where('title',$request->input('child_category'));
+            })
+            ->orWhereHas('has_sub_sub_categories', function($q) use ($request){
+                $q->where('title',$request->input('sub_sub_category'));
             });
         }
 
