@@ -48,7 +48,7 @@
 {{--                    </div>--}}
 
                     @role('wordpress-admin')
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <select name="parent_category" id="" class="form-control parent-category">
                                 <option value="" style="display: none">Category</option>
                                 @foreach($categories as $category)
@@ -57,7 +57,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="sub-categories-section">
                                 @if($child_category !== null)
                                     @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
@@ -71,7 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="sub-sub-categories-section">
                                 @if($sub_sub_category !== null)
                                     @php $sub_sub_categories = \App\SubCategory::where('title', $child_category)->first()->hasSub;@endphp
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     @endrole
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <input type="submit" class="btn btn-primary " value="Filter">
                         @role('wordpress-admin')
                             <a href="/products/all" class="btn btn-danger " >Clear</a>

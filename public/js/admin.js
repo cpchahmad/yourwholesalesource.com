@@ -91,7 +91,7 @@ $(document).ready(function () {
     });
 
     // Sub Category Filter
-    $('.child-category').change(function(){
+    $(document).on('change', '.child-category', function(){
         var id = $(this).val();
         $('.sub-sub-categories-section').html('Please Wait..');
 
