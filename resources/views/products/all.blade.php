@@ -81,8 +81,6 @@
                                             <option @if($sub_sub_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
                                         @endforeach
                                     </select>
-                                @else
-                                    hi
                                 @endif
                             </div>
                         </div>

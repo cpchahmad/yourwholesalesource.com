@@ -86,6 +86,13 @@
         .tooltip-ex:hover .tooltip-ex-text { /* Makes tooltip text visible when text is hovered on */
             visibility: visible;
         }
+
+        .loading-snipper{
+            background-image: url('{{ asset('assets/spinner.gif') }}');
+            width: 100%;
+            height: auto;
+        }
     </style>
 
 </head>
+
