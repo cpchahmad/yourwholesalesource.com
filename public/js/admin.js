@@ -79,7 +79,7 @@ $(document).ready(function () {
     // Category Filter
     $('.parent-category').change(function(){
         var id = $(this).val();
-        $('.sub-categories-section').html(`<span class="loading-snipper"></span>`);
+        $('.sub-categories-section').html('Please Wait..');
 
         $.ajax({
             url: `/category/${id}/get/sub-categories`,
@@ -93,7 +93,7 @@ $(document).ready(function () {
     // Sub Category Filter
     $(document).on('change', '.child-category', function(){
         var id = $(this).val();
-        $('.sub-sub-categories-section').html(`<span class="loading-snipper"></span>`);
+        $('.sub-sub-categories-section').html(`Please Wait..`);
 
         $.ajax({
             url: `/sub-category/${id}/get/sub-sub-categories`,
