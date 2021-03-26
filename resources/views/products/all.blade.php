@@ -70,6 +70,20 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <div class="sub-sub-categories-section">
+                                @if($sub_sub_category !== null)
+                                    @php $sub_sub_categories = \App\SubCategory::where('title', $child_category)->first()->hasSub;@endphp
+                                    <select name="sub_sub_category" id="" class="form-control sub-sub-category">
+                                        <option value="" style="display: none">Sub Categories</option>
+                                        @foreach($sub_sub_categories as $category)
+                                            <option @if($sub_sub_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </div>
+                        </div>
                     @endrole
                     <div class="col-md-4">
                         <input type="submit" class="btn btn-primary " value="Filter">

@@ -90,6 +90,20 @@ $(document).ready(function () {
         });
     });
 
+    // Sub Category Filter
+    $('.child-category').change(function(){
+        var id = $(this).val();
+        $('.sub-sub-categories-section').html('Please Wait..');
+
+        $.ajax({
+            url: `/sub-category/${id}/get/sub-sub-categories`,
+            type: 'GET',
+            success: function(res) {
+                $('.sub-sub-categories-section').empty().html(res);
+            }
+        });
+    });
+
 
     // Product Tiered Price Feature
     $(document).on('click', '.add-price-row-btn', function() {

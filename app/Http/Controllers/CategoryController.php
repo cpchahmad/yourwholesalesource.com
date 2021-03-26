@@ -293,4 +293,11 @@ class CategoryController extends Controller
 
         return view('products.sub-categories')->with('sub_categories', $subcategories)->render();
     }
+
+    public function getSubSubCategories($title) {
+        $category = SubCategory::where('title', $title)->first();
+        $subcategories = $category->hasSub;
+
+        return view('products.sub-sub-categories')->with('sub_sub_categories', $subcategories)->render();
+    }
 }

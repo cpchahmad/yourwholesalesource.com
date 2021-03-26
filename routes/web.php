@@ -194,6 +194,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('/campaigns/{id}/update', 'DefaultSettingsController@updateCampaign')->name('email.campaigns.update');
     Route::get('/sync_manual/{id}', 'AdminOrderController@manualSyncfulfillment')->name('manually.sync.fulfillment');
     Route::get('/category/{title}/get/sub-categories', 'CategoryController@getSubCategories');
+    Route::get('/sub-category/{title}/get/sub-sub-categories', 'CategoryController@getSubSubCategories');
 
     Route::get('warehouses', 'WareHouseController@index')->name('warehouse.index');
     Route::post('warehouses/store', 'WareHouseController@store')->name('warehouse.store');
