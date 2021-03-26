@@ -287,24 +287,6 @@ class ManagerController extends Controller
                 });
         }
 
-        if($request->filled('shop_search')) {
-
-            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
-                $q->whereHas('has_shop', function($inner) use ($request) {
-                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
-                });
-            });
-        }
-
-        if($request->filled('wishlist_shop_search')) {
-
-            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
-                $q->whereHas('has_shop', function($inner) use ($request) {
-                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('wishlist_shop_search') . '%')
-                        ->where('import_from_shopify', 1);
-                });
-            });
-        }
 
         return view('sales_managers.products.all')->with([
             'products' => $productQ
@@ -315,8 +297,6 @@ class ManagerController extends Controller
             'search' =>$request->input('search'),
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
-            'shop_search' =>$request->input('shop_search'),
-            'wishlist_shop_search' =>$request->input('wishlist_shop_search'),
             'categories' => $categories,
             'shops' => $shops,
         ]);

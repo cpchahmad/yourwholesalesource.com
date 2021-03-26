@@ -525,6 +525,7 @@ class WishlistController extends Controller
                     'variant' => [
                         "fulfillment_service" => "wefullfill",
                         'inventory_management' => 'wefullfill',
+                        'sku' => $retailerProductVariant->sku,
                     ]
                 ];
                 $s = $this->helper->getSpecificShop($retailerProduct->shop_id);

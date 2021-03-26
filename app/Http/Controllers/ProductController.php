@@ -96,7 +96,7 @@ class ProductController extends Controller
         }
 
         if($request->filled('parent_category') && !$request->filled('child_category')) {
-            $productQ->orWhereHas('has_categories', function($q) use ($request){
+            $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             });
 
@@ -104,32 +104,15 @@ class ProductController extends Controller
 
         if($request->filled('parent_category') && $request->filled('child_category')) {
 
-            $productQ->orWhereHas('has_categories', function($q) use ($request){
+            $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             })
-            ->whereHas('has_subcategories', function($q) use ($request){
+            ->orWhereHas('has_subcategories', function($q) use ($request){
                 $q->where('title',$request->input('child_category'));
             });
         }
 
-        if($request->filled('shop_search')) {
 
-            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
-                $q->whereHas('has_shop', function($inner) use ($request) {
-                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('shop_search') . '%');
-                });
-            });
-        }
-
-        if($request->filled('wishlist_shop_search')) {
-
-            $productQ->orWhereHas('has_retailer_products', function($q) use ($request){
-                $q->whereHas('has_shop', function($inner) use ($request) {
-                    $inner->where('shopify_domain',  'LIKE', '%' . $request->input('wishlist_shop_search') . '%')
-                          ->where('import_from_shopify', 1);
-                });
-            });
-        }
 
         return view('products.all')->with([
             'products' => $productQ
@@ -140,8 +123,6 @@ class ProductController extends Controller
             'search' =>$request->input('search'),
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
-            'shop_search' =>$request->input('shop_search'),
-            'wishlist_shop_search' =>$request->input('wishlist_shop_search'),
             'categories' => $categories,
             'shops' => $shops,
         ]);
