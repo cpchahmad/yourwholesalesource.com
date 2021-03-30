@@ -83,6 +83,19 @@ class RetailerOrderLineItem extends Model
         return $this->belongsTo(WareHouse::class, 'selected_warehouse');
     }
 
+    public function getWeightAttribute() {
+        if($this->linked_real_product)
+            $weight = $this->linked_real_product->weight *  $this->quantity;
+        elseif($this->linked_woocommerce_product)
+            $weight = $this->linked_woocommerce_product->weight *  $this->quantity;
+        elseif($this->linked_dropship_variant)
+            $weight = $this->linked_dropship_variant->linked_product->weight *  $this->quantity;
+        elseif($this->linked_product != null && $this->linked_product->linked_product)
+            $weight = $this->linked_product->linked_product->weight *  $this->quantity;
+
+        return $weight;
+
+    }
     public function getOunceWeightAttribute() {
         return ($this->weight * $this->quantity) * 35.274;
     }
