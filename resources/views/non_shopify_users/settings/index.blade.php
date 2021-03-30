@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">Phone Number</label>
-                                        <input type="text" name="company_name"  class="form-control  @error('phone') is-invalid @enderror" value="{{$associated_user->phone}}">
+                                        <input type="text" name="phone"  class="form-control  @error('phone') is-invalid @enderror" value="{{$associated_user->phone}}">
                                         @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
