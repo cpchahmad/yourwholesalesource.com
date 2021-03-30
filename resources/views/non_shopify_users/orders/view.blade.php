@@ -571,9 +571,9 @@
                                                                     Subtotal: {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee  ,2)}} USD
                                                                     <br>
                                                                     WholeSaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
-                                                                    <br>Total Cost : {{ number_format(number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee,2) + number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee *$settings->paypal_percentage/100,2) ,2) }} USD</p>
+                                                                    <br>Total Cost : {{ number_format(number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee,2) + number_format(($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee)  *$settings->paypal_percentage/100,2) ,2) }} USD</p>
                                                             </div>
-                                                            <p> A amount of  {{ number_format(number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee,2) + number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee * $settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
+                                                            <p> A amount of  {{ number_format(number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee,2) + number_format(($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee) * $settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
 
                                                             <div class="paypal_btn_trigger">
                                                                 <div id="paypal-button-container"></div>
@@ -990,7 +990,7 @@
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: '{{number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee +($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee*$settings->paypal_percentage/100),2)}}'
+                                value: '{{number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee +(($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee )*$settings->paypal_percentage/100),2)}}'
                             }
                         }]
                     });
