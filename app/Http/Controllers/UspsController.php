@@ -6,7 +6,7 @@ use Usps;
 use Illuminate\Http\Request;
 class UspsController extends Controller
 {
-    public function validate_address($postal_code, $province_code, $city, $address, $appartment = null)
+    public function validate_address()
     {
         $order = RetailerOrder::latest()->first();
         $shipping_address = json_decode($this->shipping_address);
