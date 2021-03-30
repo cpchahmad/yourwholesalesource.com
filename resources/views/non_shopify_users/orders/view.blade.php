@@ -537,6 +537,16 @@
 
                             <tr>
                                 <td>
+                                    Handling Fee
+                                </td>
+                                <td align="right">
+                                    {{ $order->handling_fee }} USD
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
                                     Total Cost @if($order->paid == 0) to Pay @endif
                                 </td>
                                 <td align="right">

@@ -302,4 +302,17 @@ class RetailerOrder extends Model
 
         return false;
     }
+
+    public function getHandlingFeeAttribute() {
+        $handling_fee = 0;
+        foreach($this->line_items()->where('fulfilled_by', '!=', 'store')->cursor() as $index => $item) {
+            if($index == 0)
+                $handling_fee += 2.5;
+            else
+                $handling_fee += 0.5;
+        }
+
+
+        return $handling_fee;
+    }
 }
