@@ -21,6 +21,7 @@ use App\RetailerOrder;
 use App\RetailerOrderLineItem;
 use App\RetailerProduct;
 use App\RetailerProductVariant;
+use App\Ribbon;
 use App\ShippingRate;
 use App\Ticket;
 use App\TicketCategory;
@@ -1452,8 +1453,11 @@ class CustomOrderController extends Controller
             return $data->category;
         });
 
+        $ribbons = Ribbon::get();
+
         return view('non_shopify_users.videos.index')->with([
             'videos' => $videos,
+            'ribbons' => $ribbons
         ]);
 
     }
