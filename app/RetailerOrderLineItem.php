@@ -89,7 +89,7 @@ class RetailerOrderLineItem extends Model
         elseif($this->linked_admin_product)
             $weight = $this->linked_admin_product->weight *  $this->quantity;
         elseif($this->linked_product != null && $this->linked_product->linked_product)
-            $weight = $this->linked_product->linked_product->weight *  $this->quantity;
+            $weight = $this->linked_product->weight *  $this->quantity;
 
         return $weight;
 
