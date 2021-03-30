@@ -195,7 +195,7 @@ class ShopifyUsersController extends Controller
                 $name = Str::slug($file->getClientOriginalName());
                 $profile = date("mmYhisa_") . $name;
                 $file->move(public_path() . '/managers-profiles/', $profile);
-                $user->profile = $profile;
+                $user->tax_certificate = $profile;
                 $user->save();
             }
             return redirect()->back()->with('success','Personal Information Updated Successfully!');
