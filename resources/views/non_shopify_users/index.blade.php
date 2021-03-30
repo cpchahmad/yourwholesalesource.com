@@ -234,7 +234,7 @@
                                 <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                 <div class="font-w600">{{$manager->email}}</div>
                                 <div class="text-info">
-                                    <i class="fab fa-phone text-success fa-lg"></i>
+                                    <i class="fa fa-phone"></i>
                                     <span class="font-w600">{{$manager->phone}}</span>
                                 </div>
 {{--                                <div class="text-info">--}}

@@ -254,13 +254,13 @@
                                 <div class="font-w600">{{$manager->name}} {{$manager->last_name}}</div>
                                 <div class="font-w600">{{$manager->email}}</div>
                                 <div class="text-info">
-                                    <i class="fab fa-whatsapp text-success fa-lg"></i>
-                                    <a target="_blank" href="https://api.whatsapp.com/send?phone={{$manager->whatsapp}}">Whatsapp: {{$manager->whatsapp}}</a>
+                                    <i class="fa fa-phone"></i>
+                                    <span class="font-w600">{{$manager->phone}}</span>
                                 </div>
-                                <div class="text-info">
-                                    <i class="fab fa-skype text-info fa-lg"></i>
-                                    <a href="skype:{{$manager->skype}}?chat">Skype: {{ $manager->skype }}</a>
-                                </div>
+{{--                                <div class="text-info">--}}
+{{--                                    <i class="fab fa-skype text-info fa-lg"></i>--}}
+{{--                                    <a href="skype:{{$manager->skype}}?chat">Skype: {{ $manager->skype }}</a>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>
