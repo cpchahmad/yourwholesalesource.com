@@ -53,7 +53,7 @@
                                         <input type="hidden" name="type" value="user-ticket">
 
                                         <div class="block-content font-size-sm">
-                                            <div class="text-center text-danger">
+                                            <div class="text-center text-danger font-w600">
                                                 An amount of $2.50 restocking fee will be applied on all returns
                                             </div>
                                             <div class="form-group">
