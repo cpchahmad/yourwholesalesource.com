@@ -25,6 +25,7 @@
         </div>
         <div class="col-sm-6 text-right">
             <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_video">Create Video</button>
+            <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_ribbon">Add Ribbon</button>
             <div class="modal fade" id="create_video" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-popout" role="document">
                     <div class="modal-content text-left">
@@ -65,6 +66,55 @@
                                                     <option value="Useful Resources">Useful Resources</option>
                                                 </select>
                                                 @error('category')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block-content block-content-full text-right border-top">
+                                    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="create_ribbon" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-popout" role="document">
+                    <div class="modal-content text-left">
+                        <div class="block block-themed block-transparent mb-0">
+                            <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Add Ribbon</h3>
+                                <div class="block-options">
+                                    <button type="button" class="btn-block-option">
+                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <form action="{{route('admin.ribbon.create')}}" method="post">
+                                @csrf
+                                <div class="block-content font-size-sm">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="material-error">Ribbon Color</label>
+                                                <input  class="form-control  @error('color') is-invalid @enderror" type="text" id="zone_title"  name="title" placeholder="Enter ribbon color..">
+                                                @error('color')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="material-error">Cause</label>
+                                                <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title"  name="link" placeholder="Enter ribbon color cause..">
+                                                @error('cause')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="material-error">Ribbon Image</label>
+                                                <input  class="form-control  @error('image') is-invalid @enderror" type="file" id="zone_title"  name="link" placeholder="Select ribbon image..">
+                                                @error('image')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>

@@ -212,10 +212,11 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('news', 'DefaultSettingsController@createNews')->name('admin.news.store');
     Route::post('news/edit/{id}', 'DefaultSettingsController@editNews')->name('admin.news.edit');
     Route::post('news/delete/{id}', 'DefaultSettingsController@deleteNews')->name('admin.news.delete');
-    Route::get('admin/wefulfill/university', 'DefaultSettingsController@allVideos')->name('admin.videos.index');
-    Route::post('/admin/wefulfill/university', 'DefaultSettingsController@createVideo')->name('admin.videos.create');
-    Route::post('/admin/wefulfill/university/edit/{id}', 'DefaultSettingsController@editVideo')->name('admin.videos.edit');
-    Route::post('/admin/wefulfill/university/delete/{id}', 'DefaultSettingsController@deleteVideo')->name('admin.videos.delete');
+    Route::get('admin/yourwholesalesource/university', 'DefaultSettingsController@allVideos')->name('admin.videos.index');
+    Route::post('/admin/yourwholesalesource/university', 'DefaultSettingsController@createVideo')->name('admin.videos.create');
+    Route::post('/admin/yourwholesalesource/university', 'DefaultSettingsController@createRibbon')->name('admin.ribbon.create');
+    Route::post('/admin/yourwholesalesource/university/edit/{id}', 'DefaultSettingsController@editVideo')->name('admin.videos.edit');
+    Route::post('/admin/yourwholesalesource/university/delete/{id}', 'DefaultSettingsController@deleteVideo')->name('admin.videos.delete');
 
 
 
