@@ -710,8 +710,8 @@ Route::get('omni', function() {
 //    ];
 
     $data = [
-        'createdAt' => '2016-05-02T09:19:19Z',
-        'firstName' => 'Some Name',
+        'createdAt' => $user->created_at,
+        'firstName' => 'Some New Name',
         'lastName' => 'Kensington',
         'tags' => [
             0 => 'designer'
@@ -719,7 +719,7 @@ Route::get('omni', function() {
         'identifiers' => [
             0 => [
                 'type' => 'email',
-                'id' => 'some.powers@example.com',
+                'id' => 'some_new.powers@example.com',
                 'channels' => [
                     'email' => [
                         'status' => 'subscribed',
