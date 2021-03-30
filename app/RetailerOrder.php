@@ -313,6 +313,6 @@ class RetailerOrder extends Model
         }
 
 
-        return $handling_fee;
+        return number_format($handling_fee, 2);
     }
 }
