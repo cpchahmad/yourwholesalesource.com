@@ -688,17 +688,38 @@ Route::get('omni', function() {
     $user = User::first();
     $curl = curl_init();
 
+//    $data = [
+//        'createdAt' => $user->created_at,
+//        'firstName' => $user->name,
+//        'sendWelcomeMessage' => true,
+//        'tags' => [
+//            'Our Members',
+//        ],
+//        'identifiers' => [
+//            [
+//                'type' => 'email',
+//                'id' => $user->email,
+//                'channels' => [
+//                    'email' => [
+//                        'status' => 'subscribed',
+//                        'statusDate' => '2016-02-29T10:07:28Z',
+//                    ],
+//                ],
+//            ]
+//        ]
+//    ];
+
     $data = [
-        'createdAt' => $user->created_at,
-        'firstName' => $user->name,
-        'sendWelcomeMessage' => true,
+        'createdAt' => '2016-05-02T09:19:19Z',
+        'firstName' => 'Some Name',
+        'lastName' => 'Kensington',
         'tags' => [
-            'Our Members',
+            0 => 'designer'
         ],
         'identifiers' => [
-            [
+            0 => [
                 'type' => 'email',
-                'id' => $user->email,
+                'id' => 'some.powers@example.com',
                 'channels' => [
                     'email' => [
                         'status' => 'subscribed',
