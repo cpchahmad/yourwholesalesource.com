@@ -43,6 +43,7 @@ class UspsController extends Controller
     {
         $order = RetailerOrder::latest()->first();
 
+        dump(23);
         $user_id = env('USPS_USER_ID');
         try {
             $origin_zip = env('USPS_ORIGIN_ZIP');
@@ -69,6 +70,8 @@ EOT;
             $request_doc_template.=<<<EOT
 </RateV4Request>
 EOT;
+
+            dump(23);
             //prepare xml doc for query string;
             //dd($request_doc_template);
             $doc_string = preg_replace('/[\t\n]/', '', $request_doc_template);
@@ -77,11 +80,15 @@ EOT;
             //echo $url.'\n\n';
             $response = file_get_contents($url);
             $xml = simplexml_load_string($response) or die("Cannot create Object");
+
+            dd($xml);
             return $xml;
         } catch (\Exception $e) {
             dd($e);
             flash($e->getMessage())->error();
             return null;
         }
+
+        dd(7654);
     }
 }
