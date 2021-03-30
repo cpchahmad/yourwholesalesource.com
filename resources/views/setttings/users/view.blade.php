@@ -700,8 +700,8 @@
 
                                                 <input type="hidden" name="user_id" value="{{$associated_user->id}}">
                                                 <div class="image-profile text-center mb2">
-                                                     @if($associated_user->tex_certificate !== null)
-                                                        <a href="asset('managers-profiles')}}/{{$associated_user->tex_certificate}}" target="_blank" class="btn btn-primary">View Tax Cerficate</a>
+                                                     @if($associated_user->tax_certificate !== null)
+                                                        <a href="asset('managers-profiles')}}/{{$associated_user->tax_certificate}}" target="_blank" class="btn btn-primary">View Tax Certificate</a>
                                                      @endif
                                                 </div>
                                                 <div class="form-group">
