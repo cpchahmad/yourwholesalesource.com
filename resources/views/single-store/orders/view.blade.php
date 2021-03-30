@@ -495,7 +495,7 @@
                                         Total Cost @if($order->paid == 0) to Pay @endif
                                     </td>
                                     <td align="right" class="total">
-                                        {{number_format($order->total_cost + $order->shipping_rate ,2)}} USD
+                                        {{number_format($order->total_cost + $order->shipping_rate + $order->handling_fee ,2)}} USD
                                     </td>
                                 </tr>
                                 <tr>
