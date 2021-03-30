@@ -91,10 +91,10 @@ class RetailerOrderLineItem extends Model
         elseif($this->linked_product != null && $this->linked_product->linked_product)
             $weight = $this->linked_product->linked_product->weight *  $this->quantity;
 
-        return 12;
+        return $weight;
 
     }
     public function getOunceWeightAttribute() {
-        return ($this->weight * $this->quantity) * 35.274;
+        return $this->weight * 35.274;
     }
 }

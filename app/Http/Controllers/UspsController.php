@@ -60,7 +60,7 @@ class UspsController extends Controller
                             <Service>PRIORITY</Service>
                             <ZipOrigination>{$origin_zip}</ZipOrigination>
                             <ZipDestination>{$order->postal_code}</ZipDestination>
-                            <Pounds>{($item->weight * $item->quantity)}</Pounds>
+                            <Pounds>{$item->weight}</Pounds>
                             <Ounces>{$item->ounce_weight}</Ounces>
                             <Container></Container>
                             <Machinable>FALSE</Machinable>
