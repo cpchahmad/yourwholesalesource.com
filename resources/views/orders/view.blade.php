@@ -404,13 +404,22 @@
 
                             <tr>
                                 <td>
+                                    Handling Fee
+                                </td>
+                                <td align="right">
+                                    {{ $order->handling_fee }}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
                                     Total Cost
                                 </td>
                                 <td align="right">
                                     @if($order->custom == 0)
-                                        {{number_format($order->total_cost + $order->shipping_rate,2)}} USD
+                                        {{number_format($order->total_cost + $order->shipping_rate + $order->handling_fee, 2)}} USD
                                     @else
-                                        {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify,2)}} USD
+                                        {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee, 2)}} USD
                                     @endif
 {{--                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD--}}
                                 </td>
