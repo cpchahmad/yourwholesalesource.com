@@ -1108,7 +1108,6 @@ class DefaultSettingsController extends Controller
     }
 
     public function createRibbon(Request $request) {
-        dd($request->all());
         $ribbon = new Ribbon();
         $ribbon->color = $request->color;
         $ribbon->cause = $request->cause;
