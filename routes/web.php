@@ -686,7 +686,7 @@ Route::get('/regsiter-web', function() {
 
 Route::get('/usps', function() {
     $order = RetailerOrder::latest()->first();
-    dump($order->line_items()->count(), $order->line_items[0]->weight);
+    dump($order->line_items()->count(), $order->line_items[0]->weight, $order->line_items[0]->ounce_weight);
     $usps = new \App\Http\Controllers\UspsController();
     $usps->shipping_rates();
 });
