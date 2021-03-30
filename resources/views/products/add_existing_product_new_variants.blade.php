@@ -141,7 +141,7 @@
                                                     <tr>
                                                         <th style="width: 20%;">Title</th>
                                                         <th style="width: 15%;">Price</th>
-                                                        <th style="width: 17%;">Cost</th>
+                                                        <th style="width: 17%;">COG</th>
                                                         <th style="width: 10%;">Quantity</th>
                                                         <th style="width: 20%;">SKU</th>
                                                         <th style="width: 20%;">Barcode</th>
