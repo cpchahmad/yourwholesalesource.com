@@ -29,17 +29,17 @@
                         <form action="{{route('sales_managers.save_personal_info')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="manager_id" value="{{$manager->id}}">
-                            <div class="image-profile text-center mb2">
-                                <img class="image-drop img-avatar200"
-                                     @if($manager->profile == null) src="{{asset('assets/media/avatars/avatar0.jpg')}}" @else
-                                     src="{{asset('managers-profiles')}}/{{$manager->profile}}"
-                                     @endif
-                                     alt="">
-                            </div>
-                            <div class="image-profile text-center mb2">
-                                <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Profile</a>
-                                <input type="file" name="profile" class="manager-profile form-control" style="display: none">
-                            </div>
+{{--                            <div class="image-profile text-center mb2">--}}
+{{--                                <img class="image-drop img-avatar200"--}}
+{{--                                     @if($manager->profile == null) src="{{asset('assets/media/avatars/avatar0.jpg')}}" @else--}}
+{{--                                     src="{{asset('managers-profiles')}}/{{$manager->profile}}"--}}
+{{--                                     @endif--}}
+{{--                                     alt="">--}}
+{{--                            </div>--}}
+{{--                            <div class="image-profile text-center mb2">--}}
+{{--                                <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Profile</a>--}}
+{{--                                <input type="file" name="profile" class="manager-profile form-control" style="display: none">--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <input  type="email" name="email"  class="form-control" value="{{$manager->email}}">
@@ -48,13 +48,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Whatsapp</label>
-                                <input  type="text" name="whatsapp" class="form-control" value="{{$manager->whatsapp}}">
+                                <label for="">Phone Number</label>
+                                <input  type="text" name="phone" class="form-control" value="{{$manager->phone}}">
                             </div>
-                            <div class="form-group">
-                                <label for="">Skype</label>
-                                <input  type="text" name="skype" class="form-control" value="{{$manager->skype}}">
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for=""></label>--}}
+{{--                                <input  type="text" name="skype" class="form-control" value="{{$manager->skype}}">--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label for="">Username</label>
                                 <input type="text" required name="name" class="form-control" value="{{$manager->name}}">

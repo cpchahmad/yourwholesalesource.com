@@ -89,11 +89,11 @@
                                     <input type="hidden" name="user_id" value="{{$associated_user->id}}">
                                     <div class="image-profile text-center mb2">
                                          @if($associated_user->tax_certificate !== null)
-                                            <a class="btn btn-primary" href="{{asset('managers-profiles')}}/{{$associated_user->tax_certificate}}" target="_blank">View Tax Certificate</a>
+                                            <a class="btn btn-primary" href="{{asset('managers-profiles')}}/{{$associated_user->tax_certificate}}" target="_blank">View Tax Exempt Certificate</a>
                                          @endif
                                     </div>
                                     <div class="image-profile text-center mb2">
-                                        <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Tax Certificate</a>
+                                        <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Tax Exempt Certificate</a>
                                         <input type="file" name="tax_certificate" class="manager-profile form-control" style="display: none">
                                     </div>
                                     <div class="form-group">

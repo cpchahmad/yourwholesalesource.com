@@ -921,18 +921,18 @@ class ManagerController extends Controller
 
 
             $manager->name =  $request->input('name');
-            $manager->whatsapp =  $request->input('whatsapp');
-            $manager->skype =  $request->input('skype');
+            $manager->phone =  $request->input('phone');
+            //$manager->skype =  $request->input('skype');
             $manager->email =  $request->input('email');
             $manager->save();
-            if($request->hasFile('profile')){
-                $file = $request->file('profile');
-                $name = Str::slug($file->getClientOriginalName());
-                $profile = date("mmYhisa_") . $name;
-                $file->move(public_path() . '/managers-profiles/', $profile);
-                $manager->profile = $profile;
-                $manager->save();
-            }
+//            if($request->hasFile('profile')){
+//                $file = $request->file('profile');
+//                $name = Str::slug($file->getClientOriginalName());
+//                $profile = date("mmYhisa_") . $name;
+//                $file->move(public_path() . '/managers-profiles/', $profile);
+//                $manager->profile = $profile;
+//                $manager->save();
+//            }
             return redirect()->back()->with('success','Personal Information Updated Successfully!');
         }
         else{
