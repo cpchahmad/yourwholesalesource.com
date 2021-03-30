@@ -82,4 +82,8 @@ class RetailerOrderLineItem extends Model
     public function has_warehouse() {
         return $this->belongsTo(WareHouse::class, 'selected_warehouse');
     }
+
+    public function getOunceWeightAttribute() {
+        return ($this->weight * $this->quantity) * 35.274;
+    }
 }

@@ -63,13 +63,12 @@ class SendEmailsAfterRegistration
                     'channels' => [
                         'email' => [
                             'status' => 'subscribed',
-                            'statusDate' => '2016-02-29T10:07:28Z',
+                            'statusDate' => $user->created_at,
                         ],
                     ],
                 ]
             ]
         ];
-
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.omnisend.com/v3/contacts",
@@ -91,8 +90,5 @@ class SendEmailsAfterRegistration
 
         curl_close($curl);
 
-        $log = new ErrorLog();
-        $log->message(json_encode($response));
-        $log->save();
     }
 }

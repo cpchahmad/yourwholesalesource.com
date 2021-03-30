@@ -684,3 +684,7 @@ Route::get('/regsiter-web', function() {
 //    $log->save();
 //});
 
+Route::get('/usps', function() {
+    $usps = new \App\Http\Controllers\UspsController();
+    $usps->shipping_rates();
+});

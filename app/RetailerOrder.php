@@ -315,4 +315,11 @@ class RetailerOrder extends Model
 
         return number_format($handling_fee, 2);
     }
+
+    public function getPostalCodeAttribute() {
+        $shipping_address = json_decode($this->shipping_address);
+
+        if(isset($shipping_address))
+            return $shipping_address->zip;
+    }
 }
