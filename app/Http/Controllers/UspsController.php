@@ -9,7 +9,7 @@ class UspsController extends Controller
     public function validate_address()
     {
         $order = RetailerOrder::latest()->first();
-        $shipping_address = json_decode($this->shipping_address);
+        $shipping_address = json_decode($order->shipping_address);
         $p_code = 12;
         $user_id = env('USPS_USER_ID');
 //        try {
