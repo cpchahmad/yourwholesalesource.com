@@ -45,7 +45,7 @@ class UspsController extends Controller
 
         dump(23);
         $user_id = env('USPS_USER_ID');
-        try {
+//        try {
             $origin_zip = env('USPS_ORIGIN_ZIP');
 
             $request_doc_template = <<<EOT
@@ -83,11 +83,11 @@ EOT;
 
             dd($xml);
             return $xml;
-        } catch (\Exception $e) {
-            dd($e);
-            flash($e->getMessage())->error();
-            return null;
-        }
+//        } catch (\Exception $e) {
+//            dd($e);
+//            flash($e->getMessage())->error();
+//            return null;
+//        }
 
         dd(7654);
     }
