@@ -40,8 +40,8 @@
     <div class="content">
         <div class="block mt-5">
         <div class="block-content">
-            <div class="block-header font-size-h5 font-w600 pl-0">
-                Ribbons
+            <div class="row justify-content-center">
+                <h1>Ribbons</h1>
             </div>
             @if(count($ribbons))
                 <div class="table-responsive">
