@@ -113,18 +113,18 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group row">
-                                                <div class="col-md-6 push-10">
+                                                <div class="col-md-4 push-10">
                                                     <label>Cost Price</label>
                                                     <input type="number" step="any" class="form-control" name="price"
                                                            value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
-{{--                                                <div class="col-md-4">--}}
-{{--                                                    <label>Cost Per Item</label>--}}
-{{--                                                    <input type="number" step="any" class="form-control" name="cost"--}}
-{{--                                                           value="{{$product->cost}}"  placeholder="$ 0.00">--}}
+                                                <div class="col-md-4">
+                                                    <label>COG</label>
+                                                    <input type="number" step="any" class="form-control" name="cost"
+                                                           value="{{$product->cost}}"  placeholder="$ 0.00">
 
-{{--                                                </div>--}}
-                                                <div class="col-md-6">
+                                                </div>
+                                                <div class="col-md-4">
                                                     <label>Recommended Price</label>
                                                     <input type="number" step="any" class="form-control" name="recommended_price"
                                                            value="{{$product->recommended_price}}"  placeholder="$ 0.00">
@@ -218,6 +218,10 @@
                                                     <input type="number" step="any" class="form-control" name="price" value="{{$product->price}}"  placeholder="$ 0.00" >
                                                 </div>
                                                 <div class="col-xs-12">
+                                                    <label>COG</label>
+                                                    <input type="number" step="any" class="form-control" name="price" value="{{$product->cost}}"  placeholder="$ 0.00" >
+                                                </div>
+                                                <div class="col-xs-12">
                                                     <label>Recommended Price</label>
                                                     <input type="number" step="any" class="form-control" name="recommended_price" value="{{$product->recommended_price}}"  placeholder="$ 0.00" >
                                                 </div>
@@ -288,7 +292,7 @@
                                     <input id="bulk-var-price" type="number" class="form-control" >
                                 </div>
                                 <div class="col-md-2">
-                                    <label for="">Cost</label>
+                                    <label for="">COG</label>
                                     <input id="bulk-var-cost" type="number" class="form-control" >
                                 </div>
                             </div>
@@ -299,7 +303,7 @@
                                         <th style="vertical-align: top">Title</th>
                                         <th style="vertical-align: top">Image</th>
                                         <th style="vertical-align: top">Price</th>
-                                        <th style="vertical-align: top">Cost</th>
+                                        <th style="vertical-align: top">COG</th>
                                         <th style="vertical-align: top">Quantity</th>
                                         <th style="vertical-align: top">SKU</th>
                                         <th style="vertical-align: top">Barcode</th>

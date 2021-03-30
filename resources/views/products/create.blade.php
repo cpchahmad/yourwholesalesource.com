@@ -95,20 +95,20 @@
                         </div>
                         <div class="block-content">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Cost Price</label>
                                         <input type="number" step="any" class="form-control" name="price" placeholder="$ 0.00" required>
                                     </div>
                                 </div>
-{{--                                <div class="col-md-4">--}}
-{{--                                    <div class="form-group">--}}
-{{--                                        <label>Cost Per Item</label>--}}
-{{--                                        <input type="number" step="any" class="form-control" name="cost"--}}
-{{--                                               placeholder="$ 0.00">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>COG</label>
+                                        <input type="number" step="any" class="form-control" name="cost"
+                                               placeholder="$ 0.00">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Recommended Price</label>
                                         <input type="number" step="any" class="form-control" name="recommended_price"
@@ -272,7 +272,7 @@
                                                 <tr>
                                                     <th style="width: 10%;">Title</th>
                                                     <th style="width: 20%;">Price</th>
-                                                    <th style="width: 23%;">Cost</th>
+                                                    <th style="width: 23%;">COG</th>
                                                     <th style="width: 10%;">Quantity</th>
                                                     <th style="width: 20%;">SKU</th>
                                                     <th style="width: 20%;">Barcode</th>
