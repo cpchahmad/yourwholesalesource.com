@@ -700,15 +700,21 @@
 
                                                 <input type="hidden" name="user_id" value="{{$associated_user->id}}">
                                                 <div class="image-profile text-center mb2">
-                                                    <img class="image-drop img-avatar200"
-                                                         @if($associated_user->profile == null) src="{{asset('assets/media/avatars/avatar0.jpg')}}" @else
-                                                         src="{{asset('managers-profiles')}}/{{$associated_user->profile}}"
-                                                         @endif
-                                                         alt="">
+                                                     @if($associated_user->tex_certificate !== null)
+                                                        <a href="asset('managers-profiles')}}/{{$associated_user->tex_certificate}}" target="_blank" class="btn btn-primary">View Tax Cerficate</a>
+                                                     @endif
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Email</label>
                                                     <input disabled type="text"  class="form-control" value="{{$associated_user->email}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Company Name</label>
+                                                    <input disabled type="text"  class="form-control" value="{{$associated_user->company_name}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Phone number</label>
+                                                    <input disabled type="text"  class="form-control" value="{{$associated_user->phone}}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Username</label>
