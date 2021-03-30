@@ -99,21 +99,21 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="material-error">Ribbon Color</label>
-                                                <input  class="form-control  @error('color') is-invalid @enderror" type="text" id="zone_title"  name="title" placeholder="Enter ribbon color..">
+                                                <input  class="form-control  @error('color') is-invalid @enderror" type="text" id="zone_title"  name="color" placeholder="Enter ribbon color..">
                                                 @error('color')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="material-error">Cause</label>
-                                                <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title"  name="link" placeholder="Enter ribbon color cause..">
+                                                <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title"  name="cause" placeholder="Enter ribbon color cause..">
                                                 @error('cause')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="form-group">
                                                 <label for="material-error">Ribbon Image</label>
-                                                <input  class="form-control  @error('image') is-invalid @enderror" type="file" id="zone_title"  name="link" placeholder="Select ribbon image..">
+                                                <input  class="form-control  @error('image') is-invalid @enderror" type="file" id="zone_title"  name="image" placeholder="Select ribbon image..">
                                                 @error('image')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -297,21 +297,21 @@
                                                             <div class="col-sm-12">
                                                                 <div class="form-group">
                                                                     <label for="material-error">Ribbon Color</label>
-                                                                    <input  class="form-control  @error('color') is-invalid @enderror" type="text" id="zone_title"  value="{{ $ribbon->color }}" name="title" placeholder="Enter ribbon color..">
+                                                                    <input  class="form-control  @error('color') is-invalid @enderror" type="text" id="zone_title"  value="{{ $ribbon->color }}" name="color" placeholder="Enter ribbon color..">
                                                                     @error('color')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material-error">Cause</label>
-                                                                    <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title" {{ $ribbon->cause }}  name="link" placeholder="Enter ribbon color cause..">
+                                                                    <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title" {{ $ribbon->cause }}  name="cause" placeholder="Enter ribbon color cause..">
                                                                     @error('cause')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material-error">Ribbon Image</label>
-                                                                    <input  class="form-control  @error('image') is-invalid @enderror" type="file" id="zone_title"  name="link" placeholder="Select ribbon image..">
+                                                                    <input  class="form-control  @error('image') is-invalid @enderror" type="file" id="zone_title"  name="image" placeholder="Select ribbon image..">
                                                                     @error('image')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
