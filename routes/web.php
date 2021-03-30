@@ -718,7 +718,7 @@ Route::get('omni', function() {
         'identifiers' => [
             0 => [
                 'type' => 'email',
-                'id' => $user->email,
+                'id' => 'test@example.com',
                 'channels' => [
                     'email' => [
                         'status' => 'subscribed',
