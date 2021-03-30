@@ -525,7 +525,7 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
 
         Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
 
-        Route::get('/wefulfill/university','DefaultSettingsController@showVideosSection')->name('university.index');
+        Route::get('/yourwholesalesource/university','DefaultSettingsController@showVideosSection')->name('university.index');
     });
 });
 

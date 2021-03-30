@@ -187,4 +187,41 @@
 {{--            </div>--}}
 {{--        </div>--}}
     </div>
+
+    <div class="content">
+        <div class="block mt-5">
+            <div class="block-content">
+                <div class="row justify-content-center">
+                    <h1>Ribbons</h1>
+                </div>
+                @if(count($ribbons))
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-striped table-vcenter">
+                            <thead>
+                            <tr>
+                                <th>Color</th>
+                                <th>Cause</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($ribbons as $index => $ribbon)
+                                <tr>
+                                    <td class="font-w600" style="vertical-align: middle">
+                                        @if($ribbon->image)<img src="{{ asset('/ribbons') }}/{{ $ribbon->image }}" alt="" style="width: 30px; height: auto;" ">@endif
+                                        {{ $ribbon->color }}
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        {{ $ribbon->cause }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="text-center p-3">No Ribbons Added Yet!</div>
+                @endif
+            </div>
+        </div>
+    </div>
 @endsection

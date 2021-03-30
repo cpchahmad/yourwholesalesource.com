@@ -1174,7 +1174,9 @@ class DefaultSettingsController extends Controller
             return $data->category;
         });
 
-        return view('videos.index')->withVideos($videos);
+        $ribbons = Ribbon::get();
+
+        return view('videos.index')->withVideos($videos)->withRibbons($ribbons);
     }
 
     public function view_shipping_mark($id, $mark_id) {
