@@ -37,7 +37,8 @@
         @endforeach
     </div>
 
-    <div class="block mt-5">
+    <div class="content">
+        <div class="block mt-5">
         <div class="block-content">
             <div class="block-header font-size-h5 font-w600 pl-0">
                 Ribbons
@@ -70,5 +71,6 @@
                 <div class="text-center p-3">No Ribbons Added Yet!</div>
             @endif
         </div>
+    </div>
     </div>
 @endsection
