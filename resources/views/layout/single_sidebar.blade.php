@@ -1,5 +1,4 @@
 <nav id="sidebar" aria-label="Main Navigation">
-<nav id="sidebar" aria-label="Main Navigation">
     <div class="content-header bg-white-5">
         <a class="font-w600 text-dual" href="index.html">
             <i class="fa fa-circle-notch text-primary"></i>
