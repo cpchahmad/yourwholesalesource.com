@@ -19,6 +19,7 @@ use App\News;
 use App\Product;
 use App\Refund;
 use App\RetailerOrder;
+use App\Ribbon;
 use App\ShippingMark;
 use App\Shop;
 use App\Suggestion;
@@ -1091,7 +1092,9 @@ class DefaultSettingsController extends Controller
             return $data->category;
         });
 
-        return view('setttings.videos.index')->withVideos($videos);
+        $ribbons = Ribbon::get();
+
+        return view('setttings.videos.index')->withVideos($videos)->withRibbons($ribbons);
     }
 
     public function createVideo(Request $request) {
@@ -1102,6 +1105,24 @@ class DefaultSettingsController extends Controller
         $video->save();
 
         return redirect()->back()->with('success', 'Video created Successfully');
+    }
+
+    public function createRibbon(Request $request) {
+        $ribbon = new Ribbon();
+        $ribbon->color = $request->color;
+        $ribbon->cause = $request->cause;
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
+            $attachement = date("mmYhisa_") . $name;
+            $file->move(public_path() . '/ribbons/', $attachement);
+            $ribbon->image = $attachement;
+        }
+
+        $ribbon->save();
+
+        return redirect()->back()->with('success', 'Ribbon Added Successfully');
     }
 
     public function editVideo(Request $request, $id) {
