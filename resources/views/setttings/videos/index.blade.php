@@ -259,7 +259,7 @@
                              @foreach($ribbons as $index => $ribbon)
                             <tr>
                                 <td class="font-w600" style="vertical-align: middle">
-                                    @if($ribbon->image)<img src="{{ asset('/ribbons') }}/{{ $ribbon->image }}" alt="" style="width: 20px; height: auto;" ">@endif
+                                    @if($ribbon->image)<img src="{{ asset('/ribbons') }}/{{ $ribbon->image }}" alt="" style="width: 30px; height: auto;" ">@endif
                                     {{ $ribbon->color }}
                                 </td>
                                 <td style="vertical-align: middle">
