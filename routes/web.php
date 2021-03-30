@@ -693,18 +693,18 @@ Route::get('omni', function() {
         'firstName' => $user->name,
         'sendWelcomeMessage' => true,
         'tags' => [
-            0 => 'Our Members',
+            'Our Members',
         ],
         'identifiers' => [
-            0 => [
+            [
                 'type' => 'email',
                 'id' => $user->email,
                 'channels' => [
                     'email' => [
                         'status' => 'subscribed',
-                        'statusDate' => $user->created_at,
-                    ]
-                ]
+                        'statusDate' => '2016-02-29T10:07:28Z',
+                    ],
+                ],
             ]
         ]
     ];

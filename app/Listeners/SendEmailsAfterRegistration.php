@@ -53,24 +53,47 @@ class SendEmailsAfterRegistration
         $data = [
             'createdAt' => $user->created_at,
             'firstName' => $user->name,
-            'sendWelcomeMessage' => true,
             'tags' => [
-                0 => 'Our Members',
+                0 => 'Our Memebers',
             ],
             'identifiers' => [
                 0 => [
                     'type' => 'email',
-                    'id' => $user->email,
+                    'id' => 'austin.powers@example.com',
                     'channels' => [
                         'email' => [
                             'status' => 'subscribed',
-                            'statusDate' => $user->created_at,
-                        ]
-                    ]
-                ]
-            ]
+                            'statusDate' => '2016-02-29T10:07:28Z',
+                        ],
+                    ],
+                ],
+                1 => [
+                    'type' => 'phone',
+                    'id' => '+443031237300',
+                    'channels' => [
+                        'sms' => [
+                            'status' => 'nonSubscribed',
+                            'statusDate' => '2016-02-29T10:07:28Z',
+                        ],
+                    ],
+                ],
+            ],
+            'country' => 'United Kingdom',
+            'countryCode' => 'GB',
+            'state' => '',
+            'city' => 'London',
+            'address' => 'Westminster',
+            'postalCode' => 'SW1A 1AA',
+            'gender' => 'f',
+            'birthdate' => '1997-05-02',
+            'customProperties' => [
+                'age' => 33,
+                'hair_color' => 'brown',
+                'married' => true,
+                'marriageDate' => '2018-07-07',
+                'loyaltyPoints' => 125.8,
+            ],
         ];
-
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.omnisend.com/v3/contacts",
@@ -80,10 +103,10 @@ class SendEmailsAfterRegistration
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_POSTFIELDS => "{\"createdAt\":\"2016-05-02T09:19:19Z\",\"firstName\":\"Vanessa\",\"lastName\":\"Kensington\",\"tags\":[\"designer\",\"leader\",\"source: shopify\"],\"identifiers\":[{\"type\":\"email\",\"id\":\"austin.powers@example.com\",\"channels\":{\"email\":{\"status\":\"subscribed\",\"statusDate\":\"2016-02-29T10:07:28Z\"}}},{\"type\":\"phone\",\"id\":\"+443031237300\",\"channels\":{\"sms\":{\"status\":\"nonSubscribed\",\"statusDate\":\"2016-02-29T10:07:28Z\"}}}],\"country\":\"United Kingdom\",\"countryCode\":\"GB\",\"state\":\"\",\"city\":\"London\",\"address\":\"Westminster\",\"postalCode\":\"SW1A 1AA\",\"gender\":\"f\",\"birthdate\":\"1997-05-02\",\"customProperties\":{\"age\":33,\"hair_color\":\"brown\",\"married\":true,\"marriageDate\":\"2018-07-07\",\"loyaltyPoints\":125.8}}",
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/json",
-                "x-api-key: ". env('OMNISEND_API_KEY')
+                "x-api-key: 606318754c7fa4545433398e-On0aNj7aqEIeOjWkFv3uUrvP6SNRlw6vWmtL6pdbsghhzFPZjq"
             ),
         ));
 
