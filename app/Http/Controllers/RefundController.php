@@ -50,7 +50,7 @@ class RefundController extends Controller
                     $ticket->title = $request->input('title');
                     $ticket->token = $request->input('_token');
                     $ticket->order_number =$order->name;
-                    $ticket->order_cost = $order->cost_to_pay;
+                    $ticket->order_cost = $order->total_cost;
                     $ticket->reason = $request->input('message');
                     $ticket->priority = $request->input('priority');
                     $ticket->status = 'New';
@@ -133,14 +133,14 @@ class RefundController extends Controller
             }
         }
 
-        $wallet->available = $wallet->available+(double)$order->cost_to_pay;
+        $wallet->available = $wallet->available+(double)$order->total_cost - (double)2.50;
         $wallet->save();
         /*Wallet Log*/
         $wallet_log = new WalletLog();
         $wallet_log->wallet_id = $wallet->id;
         $wallet_log->status = "Top-up through Refund";
-        $wallet_log->amount = $order->cost_to_pay;
-        $wallet_log->message = 'A Top-up of Amount '.number_format($order->cost_to_pay,2).' USD On Behalf on Refund '.$order->name.' Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a');
+        $wallet_log->amount = $order->total_cost;
+        $wallet_log->message = 'A Top-up of Amount '.number_format($order->total_cost,2).' USD On Behalf on Refund '.$order->name.' Against Wallet ' . $wallet->wallet_token . ' At ' . now()->format('d M, Y h:i a');
         $wallet_log->save();
 
         /*Refund Order*/
@@ -149,7 +149,7 @@ class RefundController extends Controller
         $order->save();
         /*Order Log*/
         $order_log =  new OrderLog();
-        $order_log->message = "An amount of ".$order->cost_to_pay." USD refunded to Wallet on ".now()->format('d M, Y h:i a');
+        $order_log->message = "An amount of ".$order->total_cost." USD refunded to Wallet on ".now()->format('d M, Y h:i a');
         $order_log->status = "refunded";
         $order_log->retailer_order_id = $order->id;
         $order_log->save();
