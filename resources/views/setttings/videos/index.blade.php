@@ -255,7 +255,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($ribbons as $index => $ribbon)
+                        @if(count($ribbons))
+                            @foreach($ribbons as $index => $ribbon)
                         <tr>
                             <td class="font-w600" style="vertical-align: middle">
                                 {{ $ribbon->color }}
@@ -330,6 +331,9 @@
 
                         </tr>
                     @endforeach
+                        @else
+                            <div class="text-center p-3">No Ribbons Added Yet!</div>
+                        @endif
                     </tbody>
                 </table>
             </div>
