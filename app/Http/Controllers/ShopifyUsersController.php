@@ -185,8 +185,13 @@ class ShopifyUsersController extends Controller
                 'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             ]);
 
-            if($request->hasFile('profile')){
-                $file = $request->file('profile');
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->company_name = $request->company_name;
+            $user->save();
+
+            if($request->hasFile('tax_certificate')){
+                $file = $request->file('tax_certificate');
                 $name = Str::slug($file->getClientOriginalName());
                 $profile = date("mmYhisa_") . $name;
                 $file->move(public_path() . '/managers-profiles/', $profile);

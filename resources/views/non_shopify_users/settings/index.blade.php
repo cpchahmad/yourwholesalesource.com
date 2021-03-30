@@ -88,20 +88,32 @@
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{$associated_user->id}}">
                                     <div class="image-profile text-center mb2">
-                                        <img class="image-drop img-avatar200"
-                                             @if($associated_user->profile == null) src="{{asset('assets/media/avatars/avatar0.jpg')}}" @else
-                                             src="{{asset('managers-profiles')}}/{{$associated_user->profile}}"
-                                             @endif
-                                             alt="">
+                                         @if($associated_user->tax_certificate !== null)
+                                            <a class="btn btn-primary" href="{{asset('managers-profiles')}}/{{$associated_user->tax_certificate}}" target="_blank">View Tax Certificate</a>
+                                         @endif
                                     </div>
                                     <div class="image-profile text-center mb2">
-                                        <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Profile</a>
-                                        <input type="file" name="profile" class="manager-profile form-control" style="display: none">
+                                        <a  class="btn btn-primary text-white upload-manager-profile" style="margin: 10px">Upload Tax Certificate</a>
+                                        <input type="file" name="tax_certificate" class="manager-profile form-control" style="display: none">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Email</label>
                                         <input type="text" name="email"  class="form-control  @error('email') is-invalid @enderror" value="{{$associated_user->email}}">
                                         @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Company Name</label>
+                                        <input type="text" name="company_name"  class="form-control  @error('company_name') is-invalid @enderror" value="{{$associated_user->company_name}}">
+                                        @error('company_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Phone Number</label>
+                                        <input type="text" name="company_name"  class="form-control  @error('phone') is-invalid @enderror" value="{{$associated_user->phone}}">
+                                        @error('phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
