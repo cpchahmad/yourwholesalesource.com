@@ -176,7 +176,6 @@ class ShopifyUsersController extends Controller
     }
 
     public function save_personal_info(Request $request){
-        dd($request->all());
         $user = User::find($request->input('user_id'));
         if($user != null){
             $user->name =  $request->input('name');
