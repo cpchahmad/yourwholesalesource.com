@@ -92,7 +92,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <form action="{{route('admin.ribbon.create')}}" method="post">
+                            <form action="{{route('admin.ribbon.create')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="block-content font-size-sm">
                                     <div class="form-group">
@@ -259,6 +259,7 @@
                              @foreach($ribbons as $index => $ribbon)
                             <tr>
                                 <td class="font-w600" style="vertical-align: middle">
+                                    @if($ribbon->image)<img src="{{ asset('/ribbons') }}/{{ $ribbon->image }}" alt="" style="width: 20px; height: auto;" ">@endif
                                     {{ $ribbon->color }}
                                 </td>
                                 <td style="vertical-align: middle">
@@ -290,7 +291,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('admin.videos.edit',$ribbon->id)}}" method="post">
+                                                <form action="{{route('admin.videos.edit',$ribbon->id)}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="block-content font-size-sm">
                                                         <div class="form-group">
