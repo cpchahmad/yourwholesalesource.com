@@ -517,7 +517,7 @@
                                                                         Subtotal: {{number_format(($order->total_cost + $order->shipping_rate + $order->handling_fee ),2)}} USD
                                                                         <br>
                                                                         WholeSaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $order->shipping_rate + $order->handling_fee *$settings->paypal_percentage/100,2)}} USD
-                                                                        <br>Total Cost : {{number_format(($order->total_cost + $order->shipping_rate + $order->handling_fee )+($order->total_cost + $order->shipping_rate + $order->handling_fee*$settings->paypal_percentage/100),2)}} USD</p>
+                                                                        <br>Total Cost : {{number_format(($order->total_cost + $order->shipping_rate + $order->handling_fee )+($order->total_cost + $order->shipping_rate + $order->handling_fee *$settings->paypal_percentage/100),2)}} USD</p>
                                                                 </div>
                                                                 <p> A amount of  {{number_format(($order->total_cost + $order->shipping_rate + $order->handling_fee ) +($order->total_cost + $order->shipping_rate + $order->handling_fee*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
 
