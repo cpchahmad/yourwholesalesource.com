@@ -14,7 +14,7 @@
 {{--                <a class="nav-link active">Login</a>--}}
 {{--            </li>--}}
             <li class="nav-item">
-                <a class="nav-link active" href="#by_email">By Account</a>
+                <a class="nav-link active" href="#by_email">Login</a>
             </li>
 {{--            <li class="nav-item">--}}
 {{--                <a class="nav-link" href="#by_store">By Store</a>--}}
