@@ -8,18 +8,21 @@ class UspsController extends Controller
 {
     public function validate_address($postal_code, $province_code, $city, $address, $appartment = null)
     {
+        $order = RetailerOrder::latest()->first();
+        $shipping_address = json_decode($this->shipping_address);
+        $p_code = 12;
         $user_id = env('USPS_USER_ID');
-        try {
+//        try {
             $request_doc_template = <<<EOT
             <?xml version="1.0" ?>
             <AddressValidateRequest USERID="{$user_id}">
             <Revision>1</Revision>
             <Address ID="0">
-            <Address1>{$address}</Address1>
+            <Address1>{$shipping_address->address1}</Address1>
             <Address2/>
-            <City>{$city}</City>
-            <State>{$province_code}</State>
-            <Zip5>{$postal_code}</Zip5>
+            <City>{$shipping_address->city}</City>
+            <State>{$p_code}</State>
+            <Zip5>{$shipping_address->zip}</Zip5>
             <Zip4/>
             </Address>
             </AddressValidateRequest>
@@ -31,11 +34,11 @@ class UspsController extends Controller
             //echo $url.'\n\n';
             $response = file_get_contents($url);
             $xml = simplexml_load_string($response) or die("Cannot create Object");
-            return $xml->Address;
-        } catch (\Exception $e) {
-            flash($e->getMessage())->error();
-            return null;
-        }
+            dd($xml->Address);
+//        } catch (\Exception $e) {
+//            flash($e->getMessage())->error();
+//            return null;
+//        }
     }
 
 
