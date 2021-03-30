@@ -407,7 +407,7 @@
                                     Handling Fee
                                 </td>
                                 <td align="right">
-                                    {{ $order->handling_fee }}
+                                    {{ $order->handling_fee }} USD
                                 </td>
                             </tr>
 
