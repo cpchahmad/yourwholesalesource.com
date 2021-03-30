@@ -711,15 +711,14 @@ Route::get('omni', function() {
 
     $data = [
         'createdAt' => $user->created_at,
-        'firstName' => 'Some New Name',
-        'lastName' => 'Kensington',
+        'firstName' => $user->name,
         'tags' => [
             0 => 'designer'
         ],
         'identifiers' => [
             0 => [
                 'type' => 'email',
-                'id' => 'some_new.powers@example.com',
+                'id' => $user->email,
                 'channels' => [
                     'email' => [
                         'status' => 'subscribed',
