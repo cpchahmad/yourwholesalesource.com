@@ -248,8 +248,8 @@
                 <table class="table table-borderless table-striped table-vcenter">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Link</th>
+                        <th>Color</th>
+                        <th>Cause</th>
                         <th>Created At</th>
                         <th></th>
                     </tr>
