@@ -450,7 +450,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label>Warned Platform</label>
+                                    <label>Platform</label>
                                     <br>
                                     @foreach($platforms as $platform)
                                         <div class="custom-control custom-checkbox d-inline-block">

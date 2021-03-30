@@ -100,7 +100,7 @@
                         @if($product->has_platform && count($product->has_platforms) > 0)
                             <div class="tags" style="margin-top: 5px">
 
-                                <h4 style="margin-bottom: 5px">Warned Platforms</h4>
+                                <h4 style="margin-bottom: 5px">Platforms</h4>
                                 @foreach($product->has_platforms as $cat)
                                     <span class="badge badge-primary">{{$cat->name}}</span>
                                 @endforeach
