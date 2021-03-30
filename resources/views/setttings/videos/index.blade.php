@@ -270,28 +270,28 @@
                                 </td>
                                 <td class="text-right btn-group" style="float: right">
                                     <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                            data-target="#edit_video_modal{{$ribbon->id}}"><i
+                                            data-target="#edit_ribbon_modal{{$ribbon->id}}"><i
                                             class="fa fa-edit"></i>
                                     </button>
-                                    <form method="POST" action="{{ route('admin.videos.delete', $ribbon->id) }}">
+                                    <form method="POST" action="{{ route('admin.ribbons.delete', $ribbon->id) }}">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                                data-original-title="Delete Video"><i class="fa fa-times"></i></button>
+                                                data-original-title="Delete Ribbon"><i class="fa fa-times"></i></button>
                                     </form>
                                 </td>
-                                <div class="modal fade" id="edit_video_modal{{$ribbon->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                                <div class="modal fade" id="edit_ribbon_modal{{$ribbon->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-popout" role="document">
                                         <div class="modal-content">
                                             <div class="block block-themed block-transparent mb-0">
                                                 <div class="block-header bg-primary-dark">
-                                                    <h3 class="block-title">Edit "{{ $ribbon->title}}"</h3>
+                                                    <h3 class="block-title">Edit "{{ $ribbon->color}}"</h3>
                                                     <div class="block-options">
                                                         <button type="button" class="btn-block-option">
                                                             <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <form action="{{route('admin.videos.edit',$ribbon->id)}}" method="post" enctype="multipart/form-data">
+                                                <form action="{{route('admin.ribbons.edit',$ribbon->id)}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="block-content font-size-sm">
                                                         <div class="form-group">

@@ -216,7 +216,9 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::post('/admin/yourwholesalesource/university', 'DefaultSettingsController@createVideo')->name('admin.videos.create');
     Route::post('/admin/yourwholesalesource/university/ribbon', 'DefaultSettingsController@createRibbon')->name('admin.ribbon.create');
     Route::post('/admin/yourwholesalesource/university/edit/{id}', 'DefaultSettingsController@editVideo')->name('admin.videos.edit');
+    Route::post('/admin/yourwholesalesource/university/ribbon/edit/{id}', 'DefaultSettingsController@editRibbon')->name('admin.ribbons.edit');
     Route::post('/admin/yourwholesalesource/university/delete/{id}', 'DefaultSettingsController@deleteVideo')->name('admin.videos.delete');
+    Route::post('/admin/yourwholesalesource/university/ribbon//delete/{id}', 'DefaultSettingsController@deleteRibbon')->name('admin.ribbons.delete');
 
 
 

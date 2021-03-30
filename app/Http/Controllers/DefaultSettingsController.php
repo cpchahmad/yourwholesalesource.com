@@ -1135,12 +1135,38 @@ class DefaultSettingsController extends Controller
         return redirect()->back()->with('success', 'Video updated Successfully');
     }
 
+    public function editRibbon(Request $request, $id) {
+        $ribbon = Ribbon::find($id);
+        $ribbon->color = $request->color;
+        $ribbon->cause = $request->cause;
+
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $name =now()->format('YmdHi') . str_replace([' ','(',')'], '-', $file->getClientOriginalName());
+            $attachement = date("mmYhisa_") . $name;
+            $file->move(public_path() . '/ribbons/', $attachement);
+            $ribbon->image = $attachement;
+        }
+
+        $ribbon->save();
+
+        return redirect()->back()->with('success', 'Ribbon updated Successfully');
+    }
+
     public function deleteVideo($id) {
         $video = Video::find($id);
 
         $video->delete();
 
         return redirect()->back()->with('success', 'Video Deleted Successfully');
+    }
+
+    public function deleteRibbon($id) {
+        $ribbon = Ribbon::find($id);
+
+        $ribbon->delete();
+
+        return redirect()->back()->with('success', 'Ribbon Deleted Successfully');
     }
 
     public function showVideosSection() {
