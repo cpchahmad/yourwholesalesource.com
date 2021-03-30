@@ -161,6 +161,13 @@
             </li>
 
             <li class="nav-main-item">
+                <a class="nav-main-link" data-target="#feedback" data-toggle="modal">
+                    <i class="nav-main-link-icon fa fa-question"></i>
+                    <span class="nav-main-link-name">Add Suggestions</span>
+                </a>
+            </li>
+
+            <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('university.index')}}">
                     <i class="nav-main-link-icon si si-info"></i>
                     <span class="nav-main-link-name">WholeSaleSource University</span>

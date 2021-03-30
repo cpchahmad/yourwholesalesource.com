@@ -376,60 +376,62 @@
 
                     </div>
                 </div>
-                <div class="block">
-                    <div class="block-header">
-                        <div class="block-title ">
-                            <i class="fa fa-pencil-alt text-danger"></i>
-                            Help us improve!
-                        </div>
-                    </div>
-                    <div class="block-content pb-4" >
-                        <div class="font-size-sm   text-muted">Help us improve our application by providing your thoughts and opinions!</div>
-                        <button data-target="#feedback" data-toggle="modal" class="btn btn-outline-danger btn-block d-block mt-4 p-2">Feedback</button>
+{{--                <div class="block">--}}
+{{--                    <div class="block-header">--}}
+{{--                        <div class="block-title ">--}}
+{{--                            <i class="fa fa-pencil-alt text-danger"></i>--}}
+{{--                            Help us improve!--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="block-content pb-4" >--}}
+{{--                        <div class="font-size-sm   text-muted">Help us improve our application by providing your thoughts and opinions!</div>--}}
+{{--                        <button data-target="#feedback" data-toggle="modal" class="btn btn-outline-danger btn-block d-block mt-4 p-2">Feedback</button>--}}
 
-                        <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
-                                <div class="modal-content text-left">
-                                    <div class="block block-themed block-transparent mb-0">
-                                        <div class="block-header bg-primary-dark">
-                                            <h3 class="block-title">Help us improve our App</h3>
-                                            <div class="block-options">
-                                                <button type="button" class="btn-block-option">
-                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <form action="{{ route('suggestion.create') }}" method="post"  enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="block-content font-size-sm">
-                                                <div class="form-group">
-                                                    <div class="col-sm-12 px-0">
-                                                        <div class="form-material">
-                                                            <div class="form-group">
-                                                                <label for="material-error">Feedbacks</label>
-                                                                <textarea class="form-control" name="suggestion"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="material-error">Attach a File <span class="text-muted">(image,video,pdf)</span></label>
-                                                                <input type="file" name="file" class="form-control" accept="video/*,image/*,.pdf">
-                                                            </div>
-                                                            <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                                            <div class="block-content block-content-full text-right border-top">
-
-                                                <button type="submit" class="btn btn-sm btn-primary" >Save</button>
-                                            </div>
-                                        </form>
+                <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+                        <div class="modal-content text-left">
+                            <div class="block block-themed block-transparent mb-0">
+                                <div class="block-header bg-primary-dark">
+                                    <h3 class="block-title">Help us improve our App</h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option">
+                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                        </button>
                                     </div>
                                 </div>
+                                <form action="{{ route('suggestion.create') }}" method="post"  enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="block-content font-size-sm">
+                                        <div class="form-group">
+                                            <div class="col-sm-12 px-0">
+                                                <div class="form-material">
+                                                    <div class="form-group">
+                                                        <label for="material-error">Feedbacks</label>
+                                                        <textarea class="form-control" name="suggestion"></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="material-error">Attach a File <span class="text-muted">(image,video,pdf)</span></label>
+                                                        <input type="file" name="file" class="form-control" accept="video/*,image/*,.pdf">
+                                                    </div>
+                                                    <input type="hidden" name="user_email" value="{{ $associated_user->email }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="block-content block-content-full text-right border-top">
+
+                                        <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="block">
                     <div class="block-header">
                         <div class="block-title ">
