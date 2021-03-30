@@ -3,7 +3,7 @@
         <a class="font-w600 text-dual" href="index.html">
             <i class="fa fa-circle-notch text-primary"></i>
             <span class="smini-hide">
-                            <span class="font-w700 font-size-h5">WholeSaleSource</span>
+                            <span class="font-w700 font-size-h5">YourWholesaleSource</span>
                         </span>
         </a>
         <div>

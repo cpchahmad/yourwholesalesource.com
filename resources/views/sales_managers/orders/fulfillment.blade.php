@@ -171,7 +171,7 @@
                         </h3>
                     </div>
                     <div class="block-content">
-                        <p>Fulfilling From WholeSaleSource Logistics Office</p>
+                        <p>Fulfilling From YourWholesaleSource Logistics Office</p>
                         <p class="font-weight-bold"><span class="fulfillable_quantity_drop badge badge-pill badge-dark" data-total="{{$order->total_fulfillable($order)}}" style="font-size: 13px">{{$order->total_fulfillable($order)}} of {{$order->total_fulfillable($order)}} </span> Mark as Fulfilled</p>
                         <hr>
                         <div class="row mb2">

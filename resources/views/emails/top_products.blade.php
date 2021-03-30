@@ -151,7 +151,7 @@
 
     <div class="email-footer-caption">
         <ul style=" color: white; list-style: none; padding: 0 ;  margin-top: 25px;text-align: center; ">
-            <li class="site-name" style="width: max-content; display: inline-block; margin-right: 15px;padding-right: 15px;border-right: 1px solid white;"><a href="" style="color: white;text-decoration: none;">WholeSaleSource</a></li>
+            <li class="site-name" style="width: max-content; display: inline-block; margin-right: 15px;padding-right: 15px;border-right: 1px solid white;"><a href="" style="color: white;text-decoration: none;">YourWholesaleSource</a></li>
             <li class="dalls" style="width: max-content; display: inline-block; margin-right: 15px; padding-right: 15px; border-right: 1px solid white;">ROOM 2103 TUNG CHIU COMMERCIAL CENTRE 193,LOCKHART ROAD WAN</li>
             <li class="country" style="width: max-content; display: inline-block;">China</li>
         </ul>

@@ -28,7 +28,7 @@
                     <div class="col-md-3">
                         <select name="source" class="form-control">
                             <option @if($source == 'all') selected @endif value="all">All Sources</option>
-                            <option @if($source == 'Fantasy') selected @endif value="Fantasy">WholeSaleSource</option>
+                            <option @if($source == 'Fantasy') selected @endif value="Fantasy">YourWholesaleSource</option>
                             <option @if($source == 'AliExpress') selected @endif value="AliExpress">AliExpress</option>
                         </select>
                     </div>
@@ -102,7 +102,7 @@
                                             <div class="block-content" style="padding-bottom: 10px">
                                                 <div class="push-10">
                                                     <a class="h6" href="{{route('store.my_product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
-                                                    <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}  <span class="mb2 font-size-sm" style="float: right;color: grey">@if($product->fulfilled_by == "Fantasy") WholeSaleSource @else {{$product->fulfilled_by}} @endif </span></div>
+                                                    <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}  <span class="mb2 font-size-sm" style="float: right;color: grey">@if($product->fulfilled_by == "Fantasy") YourWholesaleSource @else {{$product->fulfilled_by}} @endif </span></div>
                                                 </div>
                                                 <hr>
                                                 <div class="btn-group" role="group">

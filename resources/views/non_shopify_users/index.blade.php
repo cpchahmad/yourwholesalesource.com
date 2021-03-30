@@ -279,7 +279,7 @@
 
                                                 <div class="info-box">
                                                     <p style="padding: 10px">
-                                                        BENEFICIAL NAME: Fantasy Supply Limited <i class="fa fa-question-circle" title="Fantasy Supply Limited is the mother company of WholeSaleSource"></i><br>
+                                                        BENEFICIAL NAME: Fantasy Supply Limited <i class="fa fa-question-circle" title="Fantasy Supply Limited is the mother company of YourWholesaleSource"></i><br>
                                                         BANK NAME: Oversea-Chinese Banking Corporation Limited Singapore<br>
                                                         SWFIT CODE:OCBCSGSG<br>
                                                         Bank Account: 501246136301<br>

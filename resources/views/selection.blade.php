@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
 
-    <title>WholeSaleSource</title>
+    <title>YourWholesaleSource</title>
 
-    <meta name="description" content="WholeSaleSource 2020 created by TetraLogicx Pvt. Limited.">
+    <meta name="description" content="YourWholesaleSource 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="pixelcave">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
@@ -59,7 +59,7 @@
                     <div class="side-header side-content bg-white-op">
                         <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
                         <a class="h5 text-white">
-                            <span class="h4 font-w600 sidebar-mini-hide">WholeSaleSource</span>
+                            <span class="h4 font-w600 sidebar-mini-hide">YourWholesaleSource</span>
                         </a>
                     </div>
                 </div>

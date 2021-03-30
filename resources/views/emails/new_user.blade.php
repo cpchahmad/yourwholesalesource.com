@@ -197,15 +197,15 @@
                                                                                                     <tr>
 
                                                                                                         <td align="left" valign="middle" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;">
-                                                                                                            <a href="http://www.WholeSaleSource.com" style="color:#FFFFFF;text-decoration:none;">
-                                                                                                                www.WholeSaleSource.com
+                                                                                                            <a href="http://www.YourWholesaleSource.com" style="color:#FFFFFF;text-decoration:none;">
+                                                                                                                www.YourWholesaleSource.com
                                                                                                             </a>
                                                                                                         </td>
                                                                                                         <td align="center" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:capitalize;">
                                                                                                             |
                                                                                                         </td>
                                                                                                         <td align="left" valign="middle" class="MsoNormal padding-right" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
-                                                                                                            support@WholeSaleSource.com
+                                                                                                            support@YourWholesaleSource.com
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>
@@ -305,7 +305,7 @@
                                                             <table align="center" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
                                                                 <tr>
                                                                     <td align="center" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
-                                                                        <a href="https://www.WholeSaleSource.com/pages/help-center" style="color:#ffffff;text-decoration:none;">Help Center</a>
+                                                                        <a href="https://www.YourWholesaleSource.com/pages/help-center" style="color:#ffffff;text-decoration:none;">Help Center</a>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -368,7 +368,7 @@
                                                                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
                                                                                         <tr>
                                                                                             <td align="center" class="MsoNormal" style="color:#FFFFFF; font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;letter-spacing:1px;line-height:24px;">
-                                                                                                Copyright &copy; 2021, WholeSaleSource
+                                                                                                Copyright &copy; 2021, YourWholesaleSource
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>

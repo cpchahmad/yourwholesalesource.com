@@ -240,7 +240,7 @@
 
                                                     <div class="info-box">
                                                         <p style="padding: 10px">
-                                                            BENEFICIAL NAME: Your Wholesale Source <i class="fa fa-question-circle" title="Your Wholesale Source is the mother company of WholeSaleSource"></i><br>
+                                                            BENEFICIAL NAME: Your Wholesale Source <i class="fa fa-question-circle" title="Your Wholesale Source is the mother company of YourWholesaleSource"></i><br>
                                                             BANK NAME: xxxxxxxxxxxxxxxxxxxxxxxx<br>
                                                             SWFIT CODE:xxxxxxxxxxxxxx<br>
                                                             Bank Account: xxxxxxxxxxxxxxx<br>

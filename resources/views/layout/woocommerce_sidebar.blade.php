@@ -3,7 +3,7 @@
         <a class="font-w600 text-dual" href="index.html">
             <i class="fa fa-circle-notch text-primary"></i>
             <span class="smini-hide">
-                            <span class="font-w700 font-size-h5">WholeSaleSource</span>
+                            <span class="font-w700 font-size-h5">YourWholesaleSource</span>
                         </span>
         </a>
         <div>
@@ -30,7 +30,7 @@
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('woocommerce.product.wefulfill')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">By WholeSaleSource</span>
+                            <span class="nav-main-link-name">By YourWholesaleSource</span>
                         </a>
                     </li>
                     <li class="nav-main-item">
@@ -163,7 +163,7 @@
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('woocommerce.university.index')}}">
                     <i class="nav-main-link-icon si si-info"></i>
-                    <span class="nav-main-link-name">WholeSaleSource University</span>
+                    <span class="nav-main-link-name">YourWholesaleSource University</span>
                 </a>
             </li>
 

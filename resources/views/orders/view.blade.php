@@ -219,7 +219,7 @@
                                             @if($item->fulfilled_by == 'store')
                                                 <span class="badge badge-danger"> Store</span>
                                             @elseif ($item->fulfilled_by == 'Fantasy')
-                                                <span class="badge badge-success"> WholeSaleSource </span>
+                                                <span class="badge badge-success"> YourWholesaleSource </span>
                                             @else
                                                 <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                             @endif
@@ -322,7 +322,7 @@
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
-                                Line Items Can't Fulfilled by WholeSaleSource
+                                Line Items Can't Fulfilled by YourWholesaleSource
                             </h3>
 
                         </div>
@@ -740,7 +740,7 @@
                                                             <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
 
                                                         @elseif($order->pay_by == 'Wallet')
-                                                            <p> Cost-Payment Captured by WholeSaleSource Wallet  {{--by {{$order->has_payment->name}}--}} </p>
+                                                            <p> Cost-Payment Captured by YourWholesaleSource Wallet  {{--by {{$order->has_payment->name}}--}} </p>
 
 
                                                         @else

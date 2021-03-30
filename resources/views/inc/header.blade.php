@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title>WholeSaleSource</title>
+    <title>YourWholesaleSource</title>
     <meta name="description" content="WeFullfill 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="tetralogicx">
     <meta name="robots" content="noindex, nofollow">
@@ -8,9 +8,9 @@
     <link rel="shortcut icon" href="{{ asset('assets/wholesale.png') }}">
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/wholesale.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/wholesale.png') }}">
-    <meta property="og:title" content="WholeSaleSource">
-    <meta property="og:site_name" content="WholeSaleSource">
-    <meta property="og:description" content="WholeSaleSource">
+    <meta property="og:title" content="YourWholesaleSource">
+    <meta property="og:site_name" content="YourWholesaleSource">
+    <meta property="og:description" content="YourWholesaleSource">
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">

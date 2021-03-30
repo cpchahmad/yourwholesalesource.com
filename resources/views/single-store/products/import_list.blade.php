@@ -28,7 +28,7 @@
                 <div class="col-md-3">
                     <select name="source" class="form-control">
                         <option @if($source == 'all') selected @endif value="all">All Sources</option>
-                        <option @if($source == 'Fantasy') selected @endif value="Fantasy">WholeSaleSource</option>
+                        <option @if($source == 'Fantasy') selected @endif value="Fantasy">YourWholesaleSource</option>
                         <option @if($source == 'AliExpress') selected @endif value="AliExpress">AliExpress</option>
                     </select>
                 </div>

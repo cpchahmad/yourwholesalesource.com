@@ -202,14 +202,14 @@
 
                                                                                                         <td align="left" valign="middle" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;">
                                                                                                             <a href="#" style="color:#FFFFFF;text-decoration:none;">
-                                                                                                                www.WholeSaleSource.com
+                                                                                                                www.YourWholesaleSource.com
                                                                                                             </a>
                                                                                                         </td>
                                                                                                         <td align="center" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:capitalize;">
                                                                                                             |
                                                                                                         </td>
                                                                                                         <td align="right" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
-                                                                                                            support@WholeSaleSource.com
+                                                                                                            support@YourWholesaleSource.com
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>
@@ -372,7 +372,7 @@
                                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
-                                                                        How Shopify users start dropshipping business with WholeSaleSource
+                                                                        How Shopify users start dropshipping business with YourWholesaleSource
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -503,7 +503,7 @@
                                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
-                                                                        How to start Dropshipping through WholeSaleSource for non-Shopify sellers
+                                                                        How to start Dropshipping through YourWholesaleSource for non-Shopify sellers
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -660,7 +660,7 @@
                                                                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
                                                                                         <tr>
                                                                                             <td align="center" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;letter-spacing:1px;line-height:24px;">
-                                                                                                Copyright &copy; 2021, WholeSaleSource
+                                                                                                Copyright &copy; 2021, YourWholesaleSource
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>

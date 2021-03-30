@@ -242,7 +242,7 @@
                                 @else
                                     <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
                                 @endif
-                                <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WholeSaleSource</span>
+                                <span class="mb2 font-size-sm" style="color: grey">Fulfilled By YourWholesaleSource</span>
                             </div>
                         </div>
                         <hr>
@@ -288,7 +288,7 @@
                                 <hr>
                                 <button onclick="window.location.href='{{route('store.my_product.wefulfill.show',$wishlist->has_retailer_product->id)}}'" class="btn btn-primary btn-block mb2"> View </button>
                                 <button disabled class="btn btn-success btn-block mb2"><i class="fa fa-check-circle-o"></i> Added to Import List</button>
-                                <span class="mb2 font-size-sm" style="color: grey">Fulfilled By WholeSaleSource</span>
+                                <span class="mb2 font-size-sm" style="color: grey">Fulfilled By YourWholesaleSource</span>
                             </div>
                         </div>
                         <hr>

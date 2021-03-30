@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
 
-    <title>WholeSaleSource</title>
+    <title>YourWholesaleSource</title>
 
-    <meta name="description" content="WholeSaleSource 2020 created by TetraLogicx Pvt. Limited.">
+    <meta name="description" content="YourWholesaleSource 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="tetralogicx">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
@@ -16,9 +16,9 @@
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/wholesale.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/wholesale.png') }}">
 
-    <meta property="og:title" content="WholeSaleSource">
-    <meta property="og:site_name" content="WholeSaleSource">
-    <meta property="og:description" content="WholeSaleSource">
+    <meta property="og:title" content="YourWholesaleSource">
+    <meta property="og:site_name" content="YourWholesaleSource">
+    <meta property="og:description" content="YourWholesaleSource">
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
@@ -36,14 +36,14 @@
     <!-- Main Container -->
     <main id="main-container">
 {{--        @include('flash_message.message')--}}
-        <div class="bg-image" style=" background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://yourwholesalesource.com/wp-content/uploads/2018/07/Home@2x.jpg');">
+        <div class="bg-image" style=" background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://yourYourWholesaleSource.com/wp-content/uploads/2018/07/Home@2x.jpg');">
             <div class="hero-static">
                 <div class="content">
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <div class="logo mb2 d-inline-block text-center justify-content-center">
                                 <img style="width: 100%;max-width: 130px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/wholesale.png') }}" alt="">
-                                <h1 class="d-inline-block text-white">WholeSaleSource</h1>
+                                <h1 class="d-inline-block text-white">YourWholesaleSource</h1>
                             </div>
                         </div>
                     </div>
