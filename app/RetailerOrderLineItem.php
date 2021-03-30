@@ -86,10 +86,8 @@ class RetailerOrderLineItem extends Model
     public function getWeightAttribute() {
         if($this->linked_real_product)
             $weight = $this->linked_real_product->weight *  $this->quantity;
-        elseif($this->linked_woocommerce_product)
-            $weight = $this->linked_woocommerce_product->weight *  $this->quantity;
-        elseif($this->linked_dropship_variant)
-            $weight = $this->linked_dropship_variant->linked_product->weight *  $this->quantity;
+        if($this->linked_admin_product)
+            $weight = $this->linked_admin_product->weight *  $this->quantity;
         elseif($this->linked_product != null && $this->linked_product->linked_product)
             $weight = $this->linked_product->linked_product->weight *  $this->quantity;
 
