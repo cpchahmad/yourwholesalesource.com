@@ -305,7 +305,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material-error">Cause</label>
-                                                                    <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title" {{ $ribbon->cause }}  name="cause" placeholder="Enter ribbon color cause..">
+                                                                    <input  class="form-control  @error('cause') is-invalid @enderror" type="text" id="zone_title" value="{{ $ribbon->cause }}"  name="cause" placeholder="Enter ribbon color cause..">
                                                                     @error('cause')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                     @enderror
