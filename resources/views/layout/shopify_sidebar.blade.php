@@ -133,7 +133,7 @@
 
             <li class="nav-main-item">
                 <a class="nav-main-link" data-target="#feedback" data-toggle="modal">
-                    <i class="nav-main-link-icon si si-chart"></i>
+                    <i class="nav-main-link-icon fa fa-question"></i>
                     <span class="nav-main-link-name">Add Suggestions</span>
                 </a>
             </li>
