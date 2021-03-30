@@ -10,7 +10,6 @@ class UspsController extends Controller
     {
         $order = RetailerOrder::latest()->first();
         $shipping_address = json_decode($order->shipping_address);
-        $p_code = 12;
         $user_id = env('USPS_USER_ID');
 //        try {
             $request_doc_template = <<<EOT
@@ -21,7 +20,7 @@ class UspsController extends Controller
             <Address1>{$shipping_address->address1}</Address1>
             <Address2/>
             <City>{$shipping_address->city}</City>
-            <State>{$p_code}</State>
+            <State>{$shipping_address->province_code}</State>
             <Zip5>{$shipping_address->zip}</Zip5>
             <Zip4/>
             </Address>
