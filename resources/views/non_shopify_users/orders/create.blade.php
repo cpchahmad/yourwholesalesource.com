@@ -122,7 +122,7 @@
                                             <input type="text" class="form-control" name="province"
                                                    value=""  placeholder="" required>
                                         </div>
-                                        <div class="col-md-4 mb2">
+                                        <div class="col-md-6 mb2">
                                             <label>Province Code</label>
                                             <input type="text" class="form-control" name="province_code"
                                                    value=""  placeholder="" required>
