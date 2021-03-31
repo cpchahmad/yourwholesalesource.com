@@ -10,6 +10,7 @@ class StripeController extends Controller
 {
     public function processPayment(Request $request)
     {
+        dd($request->all());
         Stripe::setApiKey(env('STRIPE_SECRET'));
         Charge::create ([
             "amount" => 100 * 100,

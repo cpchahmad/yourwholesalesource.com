@@ -928,6 +928,7 @@
                                 data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                                 id="payment-form">
                                 @csrf
+                                <input type="hidden" name="amount_to_be_paid" value="{{ number_format($order->total_cost + $usps_rate + $order->handling_fee, 2) }}">
                                 <div>
                                     <div class='form-group required'>
                                         <label class='control-label'>Name on Card</label>
