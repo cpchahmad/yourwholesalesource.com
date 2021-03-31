@@ -10,15 +10,16 @@ class UspsController extends Controller
         $address = json_decode(json_encode($this->validate_address($order)));
 
         if(!(isset($address->Error))) {
+
             $shipping = json_decode(json_encode($this->shipping_rates($order)));
-            dd($shipping);
+
             if(isset($shipping->Package))
                 return $shipping;
             else
                 return null;
         }
         else {
-            return 234;
+            return null;
         }
     }
 
@@ -50,7 +51,6 @@ class UspsController extends Controller
             $xml = simplexml_load_string($response) or die("Cannot create Object");
             return $xml->Address;
         } catch (\Exception $e) {
-            dd($e);
             return null;
         }
     }
@@ -60,7 +60,7 @@ class UspsController extends Controller
     {
 
         $user_id = env('USPS_USER_ID');
-//        try {
+        try {
             $origin_zip = env('USPS_ORIGIN_ZIP');
 
             $request_doc_template = <<<EOT
@@ -95,11 +95,10 @@ class UspsController extends Controller
             $response = file_get_contents($url);
             $xml = simplexml_load_string($response) or die("Cannot create Object");
 
-            dd($xml);
             return $xml;
-//        } catch (\Exception $e) {
+        } catch (\Exception $e) {
 //            dd($e);
-//            return null;
-//        }
+            return null;
+        }
     }
 }
