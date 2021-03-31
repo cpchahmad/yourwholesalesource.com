@@ -13,7 +13,7 @@ $(document).ready(function () {
             $errorMessage = $form.find('div.error'),
             valid = true;
         $errorMessage.hide();
-        $('.pay-btn').props('disabled', true);
+        $('.pay-btn').prop('disabled', true);
         $('.pay-btn').text('Processing..');
         $('.has-error').removeClass('has-error');
         $inputs.each(function(i, el) {
@@ -43,7 +43,7 @@ $(document).ready(function () {
                 .find('.alert')
                 .text(response.error.message);
 
-            $('.pay-btn').props('disabled', false);
+            $('.pay-btn').prop('disabled', false);
             $('.pay-btn').text('Pay Now');
         } else {
             /* token contains id, last4, and card type */
