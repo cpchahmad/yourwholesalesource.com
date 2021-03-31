@@ -23,6 +23,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Srmklive\PayPal\Services\ExpressCheckout;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class WalletController extends Controller
 {
@@ -130,36 +132,46 @@ class WalletController extends Controller
        $user = User::find($request->input('user_id'));
        $wallet = Wallet::find($request->input('wallet_id'));
        if($user != null && $wallet != null){
-         $wallet_request = WalletRequest::create($request->all());
-           if ($request->hasFile('attachment')) {
-               $image = $request->file('attachment');
-               $destinationPath = 'wallet-attachment/';
-               $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
-               $image->move($destinationPath, $filename);
-               $wallet_request->attachment = $filename;
-               $wallet_request->save();
 
-           }
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Charge::create ([
+               "amount" => $request->input('amount') * 100,
+               "currency" => "usd",
+               "source" => $request->stripeToken,
+               "description" => "Wallet Top-up for ". $user->name
+            ]);
 
-           $wallet_log = new WalletLog();
-           $wallet_log->wallet_id = $request->input('wallet_id');
-           $wallet_log->status = "Top-up Request Through Bank Transfer";
-           $wallet_log->amount = $request->input('amount');
-           $wallet_log->message = 'A Top-up Request of Amount '.number_format($request->input('amount'),2).' USD Through Bank Transfer Against Wallet ' . $wallet->wallet_token . ' Requested At ' . now()->format('d M, Y h:i a');
+            $wallet_request = WalletRequest::create($request->all());
+
+            if($request->hasFile('attachment')) {
+                $image = $request->file('attachment');
+                $destinationPath = 'wallet-attachment/';
+                $filename = now()->format('YmdHi') . str_replace([' ','(',')'], '-', $image->getClientOriginalName());
+                $image->move($destinationPath, $filename);
+                $wallet_request->attachment = $filename;
+                $wallet_request->save();
+
+            }
+
+            $wallet_log = new WalletLog();
+            $wallet_log->wallet_id = $request->input('wallet_id');
+            $wallet_log->status = "Top-up Request Through Bank Transfer";
+            $wallet_log->amount = $request->input('amount');
+            $wallet_log->message = 'A Top-up Request of Amount '.number_format($request->input('amount'),2).' USD Through Bank Transfer Against Wallet ' . $wallet->wallet_token . ' Requested At ' . now()->format('d M, Y h:i a');
 
 
-           $wallet_log->save();
-           $wallet->pending = $wallet->pending + $request->input('amount');
-           $wallet->save();
+            $wallet_log->save();
+            $wallet->pending = $wallet->pending + $request->input('amount');
+            $wallet->save();
 
-           /*Wallet request email*/
-           $manager_email = null;
-           if($user->has_manager()->count() > 0) {
+            /*Wallet request email*/
+            $manager_email = null;
+            if($user->has_manager()->count() > 0) {
                $manager_email = $user->has_manager->email;
-           }
+            }
 
-           $users_temp =['info@wefullfill.com',$manager_email];
-           $users = [];
+            $users_temp =['info@wefullfill.com',$manager_email];
+            $users = [];
 
            foreach($users_temp as $key => $ut){
                if($ut != null) {
