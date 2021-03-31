@@ -90,7 +90,7 @@ class OrderController extends Controller
         $warehouses = WareHouse::all();
         $settings = AdminSetting::all()->first();
 
-        $shipping = $this->getShippingInfo($order);
+        $shipping = $this->usps->getShippingInfo($order);
         if($shipping !== null)
             $shipping_rates = view('inc.usps_shipping_rates')->render();
         else
