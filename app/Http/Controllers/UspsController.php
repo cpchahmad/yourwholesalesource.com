@@ -6,6 +6,20 @@ use Usps;
 use Illuminate\Http\Request;
 class UspsController extends Controller
 {
+    public function getShippingInfo($order) {
+        $address = $this->validate_address($order);
+
+        if($address !== null) {
+            $shipping = $this->shipping_rates($order);
+
+            if($shipping != null)
+                return $shipping;
+            else
+                return null;
+
+        }
+    }
+
     public function validate_address($order)
     {
         $shipping_address = json_decode($order->shipping_address);

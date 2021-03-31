@@ -35,6 +35,7 @@ class OrderController extends Controller
     private $inventory;
     private $log;
     private $notify;
+    private $usps;
 
 
 
@@ -49,6 +50,7 @@ class OrderController extends Controller
         $this->inventory = new InventoryController();
         $this->log = new ActivityLogController();
         $this->notify = new NotificationController();
+        $this->usps = new UspsController();
     }
 
     public function index(Request $request)
@@ -87,6 +89,14 @@ class OrderController extends Controller
         $order = RetailerOrder::find($id);
         $warehouses = WareHouse::all();
         $settings = AdminSetting::all()->first();
+
+        $shipping = $this->getShippingInfo($order);
+        if($shipping !== null)
+            $shipping_rates = view('inc.usps_shipping_rates')->render();
+        else
+            $shipping_rates = '<p> The Address is Not Valid</p>';
+
+        dd($shipping_rates);
         if ($order != null) {
             return view('single-store.orders.view')->with([
                 'order' => $order,
