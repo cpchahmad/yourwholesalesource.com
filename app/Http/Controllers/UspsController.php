@@ -12,15 +12,14 @@ class UspsController extends Controller
         if(!(isset($address->Error))) {
 
             $shipping = json_decode(json_encode($this->shipping_rates($order)));
-            dd($shipping);
-            if($shipping != null)
+
+            if(isset($shipping->package))
                 return $shipping;
             else
                 return null;
-
         }
         else {
-            dd(564);
+            return null;
         }
     }
 
