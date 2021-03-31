@@ -60,7 +60,7 @@ class UspsController extends Controller
     {
 
         $user_id = env('USPS_USER_ID');
-        try {
+//        try {
             $origin_zip = env('USPS_ORIGIN_ZIP');
 
             $request_doc_template = <<<EOT
@@ -97,9 +97,9 @@ class UspsController extends Controller
 
             dd($xml);
             return $xml;
-        } catch (\Exception $e) {
-            dd($e);
-            return null;
-        }
+//        } catch (\Exception $e) {
+//            dd($e);
+//            return null;
+//        }
     }
 }
