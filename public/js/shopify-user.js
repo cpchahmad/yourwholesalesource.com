@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+    // Paypal Wallet Top-up
+    $('.paypal-wallet-pay-btn').click(function() {
+        $('#paypal_pay_trigger').modal('show');
+    });
+
     // Stripe Order Payment
     var $form = $(".require-validation");
 

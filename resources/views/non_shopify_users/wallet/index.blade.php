@@ -3,11 +3,6 @@
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
 
-    <script>
-        $('.paypal-wallet-pay-btn').click(function() {
-            $('#paypal_pay_trigger').modal('show');
-        })
-    </script>
 
     <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
