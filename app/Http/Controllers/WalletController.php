@@ -141,7 +141,7 @@ class WalletController extends Controller
                     "amount" => $request->input('amount') * 100,
                     "currency" => "usd",
                     "source" => $request->stripeToken,
-                    "description" => "Wallet Top-up for ". $user->name . " against Wallet Id" . $wallet->wallet_token
+                    "description" => "Wallet Top-up for: ". $user->name . ", against Wallet Id: " . $wallet->wallet_token
                 ]);
             }
 
