@@ -95,7 +95,7 @@ class UspsController extends Controller
             $response = file_get_contents($url);
             $xml = simplexml_load_string($response) or die("Cannot create Object");
 
-//            dd($xml);
+            dd($xml);
             return $xml;
         } catch (\Exception $e) {
 //            dd($e);
