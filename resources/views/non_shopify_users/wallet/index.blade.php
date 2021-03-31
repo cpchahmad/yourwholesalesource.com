@@ -195,7 +195,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-12 px-0">
                                                             <div class="form-material">
                                                                 <label for="material-error">Amount <i class="fa fa-question-circle" title="Amount of Order"></i></label>
                                                                 <input required class="form-control" type="number"  name="amount"
@@ -205,7 +205,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-12 px-0">
                                                             <div class="form-material">
                                                                 <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of company or sender who place the order"></i></label>
                                                                 <input  class="form-control" type="text"  name="cheque_title"
@@ -215,7 +215,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <div class="col-sm-12">
+                                                        <div class="col-sm-12 px-0">
                                                             <div class="form-material">
                                                                 <label for="material-error">Notes <i class="fa fa-question-circle" title="Optional notes according to this order"></i></label>
                                                                 <input  class="form-control" type="text"  name="notes"
@@ -233,7 +233,7 @@
                                                     </div>
                                                     <div class="text-right mb-2">
                                                         <div class="">
-                                                            <button class="btn btn-primary btn-lg btn-block pay-btn" type="submit">Pay Now</button>
+                                                            <button class="btn btn-primary pay-btn" type="submit">Save</button>
                                                         </div>
                                                     </div>
                                                 </form>
