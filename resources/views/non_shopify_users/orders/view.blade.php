@@ -959,7 +959,7 @@
                                             type='text'>
                                     </div>
                                 </div>
-                                <div class=''>
+                                <div class='d-none'>
                                     <div class='error form-group'>
                                         <div class='alert-danger alert'>Please correct the errors and try
                                             again.

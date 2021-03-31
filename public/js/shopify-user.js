@@ -12,7 +12,7 @@ $(document).ready(function () {
             $inputs = $form.find('.required').find(inputSelector),
             $errorMessage = $form.find('div.error'),
             valid = true;
-        $errorMessage.addClass('hide');
+        $errorMessage.addClass('d-none');
         $('.has-error').removeClass('has-error');
         $inputs.each(function(i, el) {
             var $input = $(el);
@@ -37,14 +37,13 @@ $(document).ready(function () {
     function stripeResponseHandler(status, response) {
         if (response.error) {
             $('.error')
-                .removeClass('hide')
+                .removeClass('d-none')
                 .find('.alert')
                 .text(response.error.message);
         } else {
             /* token contains id, last4, and card type */
             var token = response['id'];
             var $form = $(".require-validation");
-            console.log($form, 12);
             $form.find('input[type=text]').empty();
             $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
             $form.get(0).submit();
