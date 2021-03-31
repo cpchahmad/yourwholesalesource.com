@@ -9,7 +9,8 @@ class UspsController extends Controller
     public function getShippingInfo($order) {
         $address = $this->validate_address($order);
 
-        if($address !== null) {
+        if(!(isset($address->Package->Error))) {
+            dd(23);
             $shipping = $this->shipping_rates($order);
 
             if($shipping != null)
@@ -17,6 +18,9 @@ class UspsController extends Controller
             else
                 return null;
 
+        }
+        else {
+            dd(564);
         }
     }
 
