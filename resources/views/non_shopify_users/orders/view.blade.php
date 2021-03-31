@@ -960,13 +960,13 @@
                                     </div>
                                 </div>
                                 <div class=''>
-                                    <div class='error form-group hide'>
+                                    <div class='error form-group'>
                                         <div class='alert-danger alert'>Please correct the errors and try
                                             again.
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-right">
+                                <div class="text-right mb-2">
                                     <div class="">
                                         <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
                                     </div>
