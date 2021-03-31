@@ -129,7 +129,7 @@
                         <div class="col-md-6">
                             <div class="block pay-options" data-toggle="modal" data-target="#alibaba_topup_modal">
                                 <div class="block-content">
-                                    <p class="text-center"> Top-up with AliBaba Order </p>
+                                    <p class="text-center"> Top-up with Credit Card </p>
                                 </div>
                             </div>
                             <div class="modal fade" id="alibaba_topup_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
@@ -137,7 +137,7 @@
                                     <div class="modal-content">
                                         <div class="block block-themed block-transparent mb-0">
                                             <div class="block-header bg-primary-dark">
-                                                <h3 class="block-title">TOPUP VIA Alibaba</h3>
+                                                <h3 class="block-title">TOPUP VIA Credit Card</h3>
                                                 <div class="block-options">
                                                     <button type="button" class="btn-block-option">
                                                         <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
@@ -145,36 +145,53 @@
                                                 </div>
                                             </div>
 
-                                            <form action="{{route('store.user.wallet.request.topup',$wallet->id)}}" method="post">
-                                                @csrf
-                                                <input type="hidden" value="{{$user->id}}" name="user_id">
-                                                <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
-                                                <input type="hidden" value="alibaba" name="type">
-                                                <input type="hidden" value="alibaba" name="bank_name">
-                                                <div class="block-content font-size-sm">
-                                                    <div class="text-center" style="margin-bottom: 20px">
-                                                        <a target="_blank" href="https://www.alibaba.com/product-detail/Drop-shipping-service-with-fast-delivery_62322670218.html?spm=a2747.manage.0.0.6d6d71d2pQDQTq">
-                                                            <img style="width: 100%; max-width: 200px" src="{{asset('assets/alibaba_trademark.png')}}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-material">
-                                                                <label for="material-error">Alibaba Order Number <i class="fa fa-question-circle" title="Order Number of Alibaba"></i></label>
-                                                                <input  class="form-control" type="text"  name="cheque"
-                                                                        value="" required  placeholder="Enter Order Number here">
-                                                            </div>
+                                            <div class="block-content">
+                                                <form
+                                                    role="form"
+                                                    action="{{ route('store.user.wallet.request.topup',$wallet->id) }}"
+                                                    method="post"
+                                                    class="require-validation"
+                                                    data-cc-on-file="false"
+                                                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
+                                                    id="payment-form">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$user->id}}" name="user_id">
+                                                    <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
+                                                    <input type="hidden" value="stripe" name="type">
+                                                    <input type="hidden" value="stripe" name="bank_name">
+
+                                                    <div>
+                                                        <div class='form-group required'>
+                                                            <label class='control-label'>Name on Card</label>
+                                                            <input
+                                                                class='form-control' size='4' type='text'>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-material">
-                                                                <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of company or sender who place the order"></i></label>
-                                                                <input  class="form-control" type="text"  name="cheque_title"
-                                                                        value="" required  placeholder="Enter Company/Sender Title here">
-                                                            </div>
+                                                    <div class=''>
+                                                        <div class='form-group card required'>
+                                                            <label class='control-label'>Card Number</label> <input
+                                                                autocomplete='off' class='form-control card-number' size='20'
+                                                                type='text'>
                                                         </div>
                                                     </div>
+                                                    <div class='row'>
+                                                        <div class='col-4 form-group cvc required'>
+                                                            <label class='control-label'>CVC</label> <input autocomplete='off'
+                                                                                                            class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                                                                                            type='text'>
+                                                        </div>
+                                                        <div class='col-4 form-group expiration required'>
+                                                            <label class='control-label'>Expiration Month</label> <input
+                                                                class='form-control card-expiry-month' placeholder='MM' size='2'
+                                                                type='text'>
+                                                        </div>
+                                                        <div class='col-4 form-group expiration required'>
+                                                            <label class='control-label'>Expiration Year</label> <input
+                                                                class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                                                type='text'>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
@@ -184,14 +201,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
-                                                                <label for="material-error">Alibaba Proof Copy <i class="fa fa-question-circle" title="Proof of alibaba receipt of your order (optional)"></i></label>
-                                                                <input  class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
+                                                                <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of company or sender who place the order"></i></label>
+                                                                <input  class="form-control" type="text"  name="cheque_title"
+                                                                        value="" required  placeholder="Enter Company/Sender Title here">
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
@@ -201,12 +221,84 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="block-content block-content-full text-right border-top">
-                                                    <button type="submit" class="btn btn-sm btn-primary">Save</button>
-                                                </div>
-                                            </form>
+                                                    <div>
+                                                        <div class='error form-group' style="display: none;">
+                                                            <div class='alert-danger alert'>Please correct the errors and try
+                                                                again.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right mb-2">
+                                                        <div class="">
+                                                            <button class="btn btn-primary btn-lg btn-block pay-btn" type="submit">Pay Now</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+{{--                                            <form action="{{route('store.user.wallet.request.topup',$wallet->id)}}" method="post">--}}
+{{--                                                @csrf--}}
+{{--                                                <input type="hidden" value="{{$user->id}}" name="user_id">--}}
+{{--                                                <input type="hidden" value="{{$wallet->id}}" name="wallet_id">--}}
+{{--                                                <input type="hidden" value="stripe" name="type">--}}
+{{--                                                <input type="hidden" value="stripe" name="bank_name">--}}
+{{--                                                <div class="block-content font-size-sm">--}}
+{{--                                                    <div class="text-center" style="margin-bottom: 20px">--}}
+{{--                                                        <a target="_blank" href="https://www.alibaba.com/product-detail/Drop-shipping-service-with-fast-delivery_62322670218.html?spm=a2747.manage.0.0.6d6d71d2pQDQTq">--}}
+{{--                                                            <img style="width: 100%; max-width: 200px" src="{{asset('assets/alibaba_trademark.png')}}" alt="">--}}
+{{--                                                        </a>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="col-sm-12">--}}
+{{--                                                            <div class="form-material">--}}
+{{--                                                                <label for="material-error">Alibaba Order Number <i class="fa fa-question-circle" title="Order Number of Alibaba"></i></label>--}}
+{{--                                                                <input  class="form-control" type="text"  name="cheque"--}}
+{{--                                                                        value="" required  placeholder="Enter Order Number here">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="col-sm-12">--}}
+{{--                                                            <div class="form-material">--}}
+{{--                                                                <label for="material-error">Company/Sender Title <i class="fa fa-question-circle" title="Name of company or sender who place the order"></i></label>--}}
+{{--                                                                <input  class="form-control" type="text"  name="cheque_title"--}}
+{{--                                                                        value="" required  placeholder="Enter Company/Sender Title here">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="col-sm-12">--}}
+{{--                                                            <div class="form-material">--}}
+{{--                                                                <label for="material-error">Amount <i class="fa fa-question-circle" title="Amount of Order"></i></label>--}}
+{{--                                                                <input required class="form-control" type="number"  name="amount"--}}
+{{--                                                                       value=""  placeholder="Enter Top-up Amount here">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="col-sm-12">--}}
+{{--                                                            <div class="form-material">--}}
+{{--                                                                <label for="material-error">Alibaba Proof Copy <i class="fa fa-question-circle" title="Proof of alibaba receipt of your order (optional)"></i></label>--}}
+{{--                                                                <input  class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <div class="col-sm-12">--}}
+{{--                                                            <div class="form-material">--}}
+{{--                                                                <label for="material-error">Notes <i class="fa fa-question-circle" title="Optional notes according to this order"></i></label>--}}
+{{--                                                                <input  class="form-control" type="text"  name="notes"--}}
+{{--                                                                        value=""   placeholder="Enter Notes here">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+
+{{--                                                <div class="block-content block-content-full text-right border-top">--}}
+{{--                                                    <button type="submit" class="btn btn-sm btn-primary">Save</button>--}}
+{{--                                                </div>--}}
+{{--                                            </form>--}}
                                         </div>
                                     </div>
                                 </div>
