@@ -1,6 +1,47 @@
 @extends('layout.shopify')
 @section('content')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+
+    <script>
+        $('.paypal-wallet-pay-btn').click(function() {
+            $('#paypal_pay_trigger').modal('show');
+        })
+    </script>
+
+    <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded block-themed block-transparent mb-0">
+                    <div class="block-content cst_content_wrapper font-size-sm text-center">
+                        <h2>Are your sure?</h2>
+                        <div class="text-center"> <p>
+                                Subtotal: {{number_format($order->total_cost + $usps_rate + $order->handling_fee  ,2)}} USD
+                                <br>
+                                YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
+                                <br>Total Cost : {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD</p>
+                        </div>
+                        <p> A amount of  {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
+
+                        <div class="paypal_btn_trigger">
+                            <div id="paypal-button-container"></div>
+                        </div>
+
+                    </div>
+                    <div class="block-content block-content-full text-center border-top">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ajax_paypal_form_submit" style="display: none;">
+        <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="id" value="{{ $order->id }}">
+            <textarea name="response"></textarea>
+        </form>
+    </div>
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
@@ -318,7 +359,7 @@
                                                 </div>
 
                                                 <div class="block-content block-content-full text-right border-top">
-                                                    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+                                                    <button type="button" class="btn btn-sm btn-primary paypal-wallet-pay-btn" >Save</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -327,6 +368,8 @@
                             </div>
                         </div>
                     </div>
+
+
 
                     <div class="row">
                         <div class="col-md-12">
