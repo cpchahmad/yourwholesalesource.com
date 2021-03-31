@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     // Stripe
     var $form = $(".require-validation");
-    console.log($form, 12);
 
     $('form.require-validation').bind('submit', function(e) {
         var $form = $(".require-validation"),
@@ -44,6 +43,8 @@ $(document).ready(function () {
         } else {
             /* token contains id, last4, and card type */
             var token = response['id'];
+            var $form = $(".require-validation");
+            console.log($form, 12);
             $form.find('input[type=text]').empty();
             $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
             $form.get(0).submit();
