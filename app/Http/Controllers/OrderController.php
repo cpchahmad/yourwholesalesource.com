@@ -96,12 +96,12 @@ class OrderController extends Controller
         else
             $shipping_rates = '<p> The Address is Not Valid</p>';
 
-        dd($shipping_rates);
         if ($order != null) {
             return view('single-store.orders.view')->with([
                 'order' => $order,
                 'settings' => $settings,
-                'shop' => $shop
+                'shop' => $shop,
+                'rates' => $shipping_rates
             ]);
         }
     }
