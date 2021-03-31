@@ -1,16 +1,2 @@
 Order Id,Quantity,Sku,Name,Address,Address2,City,Postcode,Country,Province,Provincecode,Contact phone,Email,Order date
-25750828,1,FT19-X710,,,,,,New Zealand,Auckland,AU,,wefullfill@gmail.com,5/5/2023
-25750674,1,FT19-ZX421white,Shelford Meads,3 Oak Place,,Dunedin,9024,New Zealand,Auckland,AU,2041788178,wefullfill@gmail.com,5/5/2023
-25750525,1,FT20-X134,Gavin Daniel,"157 Mclachlan road , Kaukapakapa",,Auckland,984,New Zealand,Auckland,AU,212379225,wefullfill@gmail.com,5/5/2023
-25750305,1,FT20-X134,Bevan Sandison,49 Rossington Drive,,West Melton,7618,New Zealand,Auckland,AU,278361260,wefullfill@gmail.com,5/5/2023
-25750155,1,FT20-X134,Stephen Thompson,533 Peninsula rd,,Queenstown,9300,New Zealand,Auckland,AU,64273430024,wefullfill@gmail.com,1/6/2020
-25747826,1,FT20-W129rose,Rachael Upton,22 simkin Avenue,,Auckland,1072,New Zealand,Auckland,AU,21800529,wefullfill@gmail.com,2/6/2020
-25750091,1,FT19-X346,J R Haylock,89 Kaiwara Street,,Christchurch,8025,New Zealand,Auckland,AU,027 8994877,,3/6/2020
-25750060,1,FT20-X077Mblue,Monique O'Donnell,280/141,Bethlehem Rd,Tauranga,3110,New Zealand,Auckland,AU,273109956,,4/6/2020
-25750038,1,FT20-X077XLblue,Sharon Clarke,4 Captains Cove,,Whakatane,3120,New Zealand,Auckland,AU,272006296,wefullfill@gmail.com,5/6/2020
-25750008,1,FT20-G080darkwood,Celeste Woollaston,3B Hersham Place,,Christchurch,8062,New Zealand,Auckland,AU,211609011,wefullfill@gmail.com,6/6/2020
-25749993,1,FT20-X077Lblue*2,Yolanda Thomson,16 Moreland Avenue,,Christchurch,8053,New Zealand,Auckland,AU,211264994,wefullfill@gmail.com,7/6/2020
-25749938,2,FT19-X710,James smith,88a scott road,Stanmore Bay,Auckland,932,New Zealand,Auckland,AU,225714579,,8/6/2020
-25749897,1,FT19-X210,Richard Russell,5 Norton Park Ave,,Lower Hutt,5011,New Zealand,Auckland,AU,211030839,wefullfill@gmail.com,9/6/2020
-25749900,1,FT18-G342unicorn,bronwyn agnew,4 Tolcarne Avenue,,Dunedin,9010,New Zealand,Auckland,AU,34675003,,10/6/2020
-25748323,1,FT20-X134,Brooke Karauti,262 Raeburne Street,,Te Awamutu,3800,New Zealand,Auckland,AU,64210489439,,11/6/2020
+25750674,1,RE-E-RBP-07PS,Shelford Meads,29102 Pompano Way,,LA,92677,United States,California,CA,2041788178,test@gmail.com,5/5/2023
