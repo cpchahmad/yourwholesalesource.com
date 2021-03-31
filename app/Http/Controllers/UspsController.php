@@ -9,8 +9,8 @@ class UspsController extends Controller
     public function getShippingInfo($order) {
         $address = json_decode(json_encode($this->validate_address($order)));
 
-//        if(!(isset($address->SimpleXMLElement->Error))) {
-            dd(23, $address->Error);
+        if(!(isset($address->Error))) {
+            dd(2);
             $shipping = $this->shipping_rates($order);
 
             if($shipping != null)
@@ -18,10 +18,10 @@ class UspsController extends Controller
             else
                 return null;
 
-//        }
-//        else {
-//            dd(564);
-//        }
+        }
+        else {
+            dd(564);
+        }
     }
 
     public function validate_address($order)
