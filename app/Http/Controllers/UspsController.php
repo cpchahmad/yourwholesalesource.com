@@ -69,19 +69,19 @@ class UspsController extends Controller
                 <Revision>1</Revision>
             EOT;
 
-            foreach ($order->line_items as $item ) {
-                $request_doc_template.=<<<EOT
-                    <Package ID="{$item->id}">
-                    <Service>PRIORITY</Service>
-                    <ZipOrigination>{$origin_zip}</ZipOrigination>
-                    <ZipDestination>{$order->postal_code}</ZipDestination>
-                    <Pounds>{$item->weight}</Pounds>
-                    <Ounces>{$item->ounce_weight}</Ounces>
-                    <Container></Container>
-                    <Machinable>FALSE</Machinable>
-                    </Package>
-                EOT;
-            }
+
+            $request_doc_template.=<<<EOT
+                <Package ID="{$order->id}">
+                <Service>PRIORITY</Service>
+                <ZipOrigination>{$origin_zip}</ZipOrigination>
+                <ZipDestination>{$order->postal_code}</ZipDestination>
+                <Pounds>{$order->weight}</Pounds>
+                <Ounces>{$order->ounce_weight}</Ounces>
+                <Container></Container>
+                <Machinable>FALSE</Machinable>
+                </Package>
+            EOT;
+
             $request_doc_template.=<<<EOT
                 </RateV4Request>
             EOT;

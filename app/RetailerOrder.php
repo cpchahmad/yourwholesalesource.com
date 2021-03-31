@@ -322,4 +322,25 @@ class RetailerOrder extends Model
         if(isset($shipping_address))
             return $shipping_address->zip;
     }
+
+    public function getWeightAttribute() {
+        $total_weight = 0;
+        foreach($this->line_items()->where('fulfilled_by', '!=', 'store')->cursor() as $index => $item) {
+            if($item->linked_real_product)
+                $weight = $item->linked_real_product->weight *  $item->quantity;
+            elseif($item->linked_admin_product)
+                $weight = $item->linked_admin_product->weight *  $item->quantity;
+            elseif($this->linked_product != null)
+                $weight = $item->linked_product->weight *  $item->quantity;
+
+            $total_weight += $weight;
+        }
+
+        return $total_weight;
+    }
+
+
+    public function getOunceWeightAttribute() {
+        return $this->weight * 35.274;
+    }
 }
