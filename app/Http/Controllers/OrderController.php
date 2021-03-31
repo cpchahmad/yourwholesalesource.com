@@ -90,9 +90,10 @@ class OrderController extends Controller
         $warehouses = WareHouse::all();
         $settings = AdminSetting::all()->first();
 
-        $shipping = $this->usps->getShippingInfo($order);
-        if($shipping !== null)
-            $shipping_rates = view('inc.usps_shipping_rates')->render();
+        $shipping_rates = $this->usps->getShippingInfo($order);
+        if($shipping_rates !== null)
+            dd($shipping_rates);
+            //$shipping_rates = view('inc.usps_shipping_rates')->render();
         else
             $shipping_rates = '<p> The Address is Not Valid</p>';
 
