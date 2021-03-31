@@ -133,15 +133,17 @@ class WalletController extends Controller
        $wallet = Wallet::find($request->input('wallet_id'));
        if($user != null && $wallet != null){
 
-            Stripe::setApiKey(env('STRIPE_SECRET'));
-            Charge::create ([
-               "amount" => $request->input('amount') * 100,
-               "currency" => "usd",
-               "source" => $request->stripeToken,
-               "description" => "Wallet Top-up for ". $user->name
-            ]);
-
             $wallet_request = WalletRequest::create($request->all());
+
+            if($wallet_request->type == 'stripe') {
+                Stripe::setApiKey(env('STRIPE_SECRET'));
+                Charge::create ([
+                    "amount" => $request->input('amount') * 100,
+                    "currency" => "usd",
+                    "source" => $request->stripeToken,
+                    "description" => "Wallet Top-up for ". $user->name . " against Wallet Id" . $wallet->wallet_token
+                ]);
+            }
 
             if($request->hasFile('attachment')) {
                 $image = $request->file('attachment');
