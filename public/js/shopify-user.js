@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // Paypal Wallet Top-up
     $('.paypal-wallet-pay-btn').click(function() {
-        var amount = $('#bank_transfer_modal').find('.amount-to-be-added').val();
+        var amount = parseFloat($('#bank_transfer_modal').find('.amount-to-be-added').val());
 
         $('#bank_transfer_modal').modal('hide');
 
