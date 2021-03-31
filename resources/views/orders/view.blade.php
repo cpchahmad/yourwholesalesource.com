@@ -393,12 +393,15 @@
                                     Shipping Price
                                 </td>
                                 <td align="right">
-                                    @if($order->custom == 0)
-                                    {{ $order->shipping_rate }} USD
-                                    @else
-                                        {{ $order->shipping_rate_for_non_shopify }} USD
-                                    @endif
-{{--                                    {{number_format($order->shipping_price,2)}} USD--}}
+{{--                                    @if($order->custom == 0)--}}
+{{--                                    {{ $order->shipping_rate }} USD--}}
+{{--                                    @else--}}
+{{--                                        {{ $order->shipping_rate_for_non_shopify }} USD--}}
+{{--                                    @endif--}}
+                                    @php
+                                        $usps_rate = $order->usps_shipping;
+                                    @endphp
+                                    {{ $usps_rate == 0 ? 'The Address is not Valid' : $usps_rate . 'USD'}}
                                 </td>
                             </tr>
 
@@ -416,11 +419,8 @@
                                     Total Cost
                                 </td>
                                 <td align="right">
-                                    @if($order->custom == 0)
-                                        {{number_format($order->total_cost + $order->shipping_rate + $order->handling_fee, 2)}} USD
-                                    @else
-                                        {{number_format($order->total_cost + $order->shipping_rate_for_non_shopify + $order->handling_fee, 2)}} USD
-                                    @endif
+
+                                    {{number_format($order->total_cost + $usps_rate + $order->handling_fee, 2)}} USD
 {{--                                    {{number_format($order->cost_to_pay - $total_discount,2)}} USD--}}
                                 </td>
                             </tr>
