@@ -265,7 +265,7 @@
                         <div class="col-md-6 ">
                             <div class="block pay-options"  data-toggle="modal" data-target="#bank_transfer_modal">
                                 <div class="block-content">
-                                    <p class="text-center" > Top-up with Bank Transfer </p>
+                                    <p class="text-center" > Top-up with Paypal </p>
                                 </div>
                             </div>
                             <div class="modal fade" id="bank_transfer_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
@@ -273,7 +273,7 @@
                                     <div class="modal-content">
                                         <div class="block block-themed block-transparent mb-0">
                                             <div class="block-header bg-primary-dark">
-                                                <h3 class="block-title">TOPUP through Bank Transfer</h3>
+                                                <h3 class="block-title">TOPUP through Paypal</h3>
                                                 <div class="block-options">
                                                     <button type="button" class="btn-block-option">
                                                         <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
@@ -284,31 +284,8 @@
                                                 @csrf
                                                 <input type="hidden" value="{{$user->id}}" name="user_id">
                                                 <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
-                                                <input type="hidden" name="type" value="bank transfer">
+                                                <input type="hidden" name="type" value="paypal">
                                                 <div class="block-content font-size-sm">
-
-                                                    <div class="info-box">
-                                                        <p style="padding: 10px">
-                                                            BENEFICIAL NAME: Your Wholesale Source <i class="fa fa-question-circle" title="Your Wholesale Source is the mother company of YourWholesaleSource"></i><br>
-                                                            BANK NAME: xxxxxxxxxxxxxxxxxxxxxxxx<br>
-                                                            SWFIT CODE:xxxxxxxxxxxxxx<br>
-                                                            Bank Account: xxxxxxxxxxxxxxx<br>
-                                                            Bank Address: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>
-                                                            Intermeidary Bank: xxxxxxxxxxxxxxxxxxxxx<br>
-                                                            SWIFIT CODE:xxxxxxxxxx<br>
-
-                                                        </p>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-material">
-                                                                <label for="material-error">Cheque Number <i class="fa fa-question-circle" title="Cheque number of the deposit (optional)"></i></label>
-                                                                <input  class="form-control" type="text"  name="cheque"
-                                                                        value=""  placeholder="Enter Cheque Number here">
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
@@ -318,15 +295,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-material">
-                                                                <label for="material-error">Bank Name <i class="fa fa-question-circle" title="Name of the bank where you deposit amount"></i></label>
-                                                                <input required class="form-control" type="text"  name="bank_name"
-                                                                       value=""  placeholder="Enter Bank Title here">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
@@ -336,14 +305,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <div class="form-material">
-                                                                <label for="material-error">Bank Proof Copy <i class="fa fa-question-circle" title="Proof of bank receipt of deposit"></i></label>
-                                                                <input required class="form-control" type="file"  name="attachment" placeholder="Provide Bank Proof Copy ">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
