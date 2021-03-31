@@ -929,6 +929,7 @@
                                 id="payment-form">
                                 @csrf
                                 <input type="hidden" name="amount_to_be_paid" value="{{ number_format($order->total_cost + $usps_rate + $order->handling_fee, 2) }}">
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <div>
                                     <div class='form-group required'>
                                         <label class='control-label'>Name on Card</label>
