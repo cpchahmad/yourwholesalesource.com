@@ -13,7 +13,7 @@ class UspsController extends Controller
 
             $shipping = json_decode(json_encode($this->shipping_rates($order)));
 
-            if(isset($shipping->package))
+            if(isset($shipping->Package))
                 return $shipping;
             else
                 return null;
