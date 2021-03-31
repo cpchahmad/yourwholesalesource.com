@@ -1,5 +1,7 @@
 @extends('layout.shopify')
 @section('content')
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
