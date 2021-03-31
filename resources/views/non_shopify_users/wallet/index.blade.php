@@ -15,14 +15,12 @@
                 <div class="block block-rounded block-themed block-transparent mb-0">
                     <div class="block-content cst_content_wrapper font-size-sm text-center">
                         <h2>Are your sure?</h2>
-                        <div class="text-center"> <p>
-                                Subtotal: {{number_format($order->total_cost + $usps_rate + $order->handling_fee  ,2)}} USD
-                                <br>
-                                YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
-                                <br>Total Cost : {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD</p>
-                        </div>
-                        <p> A amount of  {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
+                        <div class="text-center">
+                            <p>
+                                Amount: 23USD
+                            </p>
 
+                        </div>
                         <div class="paypal_btn_trigger">
                             <div id="paypal-button-container"></div>
                         </div>
