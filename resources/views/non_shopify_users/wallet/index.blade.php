@@ -9,7 +9,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '23'
+                            value: parseFloat($('#bank_transfer_modal').find('.amount-to-be-added').val())
                         }
                     }]
                 });
