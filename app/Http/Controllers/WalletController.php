@@ -129,7 +129,6 @@ class WalletController extends Controller
 
     public function request_wallet_topup_bank(Request $request)
     {
-        dd($request->all());
        $user = User::find($request->input('user_id'));
        $wallet = Wallet::find($request->input('wallet_id'));
        if($user != null && $wallet != null){
