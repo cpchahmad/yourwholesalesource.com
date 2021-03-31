@@ -261,7 +261,7 @@ class WalletController extends Controller
     public function EditWalletDetails($id, Request $request){
             $wallet = WalletRequest::find($id);
             $wallet->cheque_title = $request->input('cheque_title');
-            $wallet->cheque = $request->input('cheque');
+            //$wallet->cheque = $request->input('cheque');
             $wallet->amount = $request->input('amount');
             $wallet->save();
 

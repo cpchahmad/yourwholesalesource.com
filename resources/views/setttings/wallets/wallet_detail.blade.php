@@ -238,14 +238,6 @@
                                                                 <form action="{{route('admin.wallets.edit',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
-                                                                                <div class="form-material">
-                                                                                    <label for="material-error">Cheque</label>
-                                                                                    <input required class="form-control" type="text"  name="cheque"
-                                                                                           value="{{ $req->cheque    }}" >
-                                                                                </div>
-                                                                        </div>
-
-                                                                        <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>
                                                                                 <input required class="form-control" type="text"  name="cheque_title"
@@ -259,8 +251,6 @@
                                                                                        value="{{ $req->amount }}" >
                                                                             </div>
                                                                         </div>
-
-
                                                                     </div>
                                                                     <div class="block-content block-content-full text-right border-top">
                                                                         <button type="submit" class="btn btn-sm btn-primary" >Edit Wallet Request</button>
