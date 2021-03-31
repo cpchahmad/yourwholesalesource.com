@@ -5,7 +5,6 @@
 {{--        </script>--}}
     <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
 
-
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
@@ -479,10 +478,13 @@
                                         Shipping Price
                                     </td>
                                     <td align="right" class="shipping_price_text">
+                                        @php
+                                            $usps_rate = $order->usps_shipping;
+                                        @endphp
 {{--                                        {{ shipping_rate }} USD--}}
 {{--                                        {{number_format($order->shipping_price,2)}} USD--}}
-                                        {!! $rates !!}
-                                    </td>
+                                        {{ $usps_rate == 0 ? 'The Address is not Valid' : $usps_rate }}
+                                     </td>
                                 </tr>
 
                                 <tr>
