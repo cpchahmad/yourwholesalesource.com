@@ -10,7 +10,7 @@ class UspsController extends Controller
         $address = $this->validate_address($order);
 
         if(!(isset($address->Package->Error))) {
-            dd(23);
+            dd(23, $address);
             $shipping = $this->shipping_rates($order);
 
             if($shipping != null)
