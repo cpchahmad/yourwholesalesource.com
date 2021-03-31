@@ -342,7 +342,7 @@ class RetailerOrder extends Model
         $usps = new UspsController();
         $shipping_rates = $usps->getShippingInfo($this);
         if($shipping_rates !== null)
-            $shipping_rate = $shipping_rates->Postage->Rate;
+            $shipping_rate = $shipping_rates[0]->Postage->Rate;
         else
             $shipping_rate = 0;
 
