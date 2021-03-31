@@ -410,55 +410,189 @@
                             </div>
                         </div>
                     </div>
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <div class="block">--}}
+{{--                                <div class="block-header">--}}
+{{--                                    <div class="block-title">--}}
+{{--                                        Bank Transfer Top-up Requests--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="block-content">--}}
+{{--                                    @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)--}}
+{{--                                        <table class="table table-hover table-borderless table-striped table-vcenter">--}}
+{{--                                            <thead>--}}
+{{--                                            <tr>--}}
+{{--                                                <th>Bank</th>--}}
+{{--                                                <th>Cheque</th>--}}
+{{--                                                <th>Company/Sender Title</th>--}}
+{{--                                                <th>Amount</th>--}}
+{{--                                                <th>Bank Proof Copy</th>--}}
+{{--                                                <th>Notes</th>--}}
+{{--                                                <th>Status</th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+
+{{--                                            @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)--}}
+{{--                                                <tbody class="">--}}
+{{--                                                <tr>--}}
+{{--                                                    <td class="font-w600">{{ $req->bank_name }}</td>--}}
+{{--                                                    <td>--}}
+{{--                                                        @if($req->cheque != null)--}}
+{{--                                                        {{$req->cheque}}--}}
+{{--                                                        @else--}}
+{{--                                                            <span class="text-primary-dark">No Cheque Provided</span>--}}
+{{--                                                            @endif--}}
+
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        {{$req->cheque_title}}--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        {{number_format($req->amount,2)}} USD--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="js-gallery">--}}
+{{--                                                        @if($req->attachment != null)--}}
+{{--                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">--}}
+{{--                                                                View Proof--}}
+{{--                                                            </a>--}}
+{{--                                                        @else--}}
+{{--                                                            No Proof Provided--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        @if($req->notes != null)--}}
+{{--                                                            {{$req->notes}}--}}
+{{--                                                        @else--}}
+{{--                                                            No Notes--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
+
+{{--                                                    <td>--}}
+{{--                                                        @if($req->status == 0)--}}
+{{--                                                            <span class="badge badge-warning">Pending</span>--}}
+{{--                                                        @else--}}
+{{--                                                            <span class="badge badge-success">Approved</span>--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
+
+{{--                                                </tr>--}}
+{{--                                                </tbody>--}}
+
+{{--                                            @endforeach--}}
+{{--                                        </table>--}}
+{{--                                    @else--}}
+{{--                                        <p>No  Bank Transfer Requests Found</p>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-12">--}}
+{{--                            <div class="block">--}}
+{{--                                <div class="block-header">--}}
+{{--                                    <div class="block-title">--}}
+{{--                                        AliBaba Top-up Requests--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="block-content">--}}
+{{--                                    @if (count($wallet->requests()->where('type','alibaba')->get()) > 0)--}}
+{{--                                        <table class="table table-hover table-borderless table-striped table-vcenter">--}}
+{{--                                            <thead>--}}
+{{--                                            <tr>--}}
+{{--                                                <th>Company/Sender Title</th>--}}
+{{--                                                <th>Alibaba Order Number </th>--}}
+{{--                                                <th>Amount</th>--}}
+{{--                                                <th>Bank Proof Copy</th>--}}
+{{--                                                <th>Notes</th>--}}
+{{--                                                <th>Status</th>--}}
+{{--                                            </tr>--}}
+{{--                                            </thead>--}}
+
+{{--                                            @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)--}}
+{{--                                                <tbody class="">--}}
+{{--                                                <tr>--}}
+{{--                                                    <td>--}}
+{{--                                                        {{$req->cheque_title}}--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        {{$req->cheque}}--}}
+{{--                                                    </td>--}}
+
+{{--                                                    <td>--}}
+{{--                                                        {{number_format($req->amount,2)}} USD--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="js-gallery">--}}
+{{--                                                        @if($req->attachment != null)--}}
+{{--                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">--}}
+{{--                                                                View Proof--}}
+{{--                                                            </a>--}}
+{{--                                                        @else--}}
+{{--                                                            No Proof Provided--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+{{--                                                        @if($req->notes != null)--}}
+{{--                                                            {{$req->notes}}--}}
+{{--                                                        @else--}}
+{{--                                                            No Notes--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
+
+{{--                                                    <td>--}}
+{{--                                                        @if($req->status == 0)--}}
+{{--                                                            <span class="badge badge-warning">Pending</span>--}}
+{{--                                                        @else--}}
+{{--                                                            <span class="badge badge-success">Approved</span>--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
+{{--                                                    <td>--}}
+
+
+{{--                                                    </td>--}}
+{{--                                                </tr>--}}
+{{--                                                </tbody>--}}
+
+{{--                                            @endforeach--}}
+{{--                                        </table>--}}
+{{--                                    @else--}}
+{{--                                        <p>No AliBaba Top-up Requests Found</p>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="block">
                                 <div class="block-header">
                                     <div class="block-title">
-                                        Bank Transfer Top-up Requests
+                                        Credit Card Top-up Requests
                                     </div>
                                 </div>
                                 <div class="block-content">
-                                    @if (count($wallet->requests()->where('type','bank transfer')->get()) > 0)
+                                    @if (count($wallet->requests()->where('type','stripe')->get()) > 0)
                                         <table class="table table-hover table-borderless table-striped table-vcenter">
                                             <thead>
                                             <tr>
-                                                <th>Bank</th>
-                                                <th>Cheque</th>
                                                 <th>Company/Sender Title</th>
                                                 <th>Amount</th>
-                                                <th>Bank Proof Copy</th>
                                                 <th>Notes</th>
                                                 <th>Status</th>
                                             </tr>
                                             </thead>
 
-                                            @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
+                                            @foreach($wallet->requests()->where('type','stripe')->get() as $index => $req)
                                                 <tbody class="">
                                                 <tr>
-                                                    <td class="font-w600">{{ $req->bank_name }}</td>
-                                                    <td>
-                                                        @if($req->cheque != null)
-                                                        {{$req->cheque}}
-                                                        @else
-                                                            <span class="text-primary-dark">No Cheque Provided</span>
-                                                            @endif
-
-                                                    </td>
                                                     <td>
                                                         {{$req->cheque_title}}
                                                     </td>
+
                                                     <td>
                                                         {{number_format($req->amount,2)}} USD
-                                                    </td>
-                                                    <td class="js-gallery">
-                                                        @if($req->attachment != null)
-                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
-                                                                View Proof
-                                                            </a>
-                                                        @else
-                                                            No Proof Provided
-                                                        @endif
                                                     </td>
                                                     <td>
                                                         @if($req->notes != null)
@@ -475,81 +609,7 @@
                                                             <span class="badge badge-success">Approved</span>
                                                         @endif
                                                     </td>
-
-                                                </tr>
-                                                </tbody>
-
-                                            @endforeach
-                                        </table>
-                                    @else
-                                        <p>No  Bank Transfer Requests Found</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="block">
-                                <div class="block-header">
-                                    <div class="block-title">
-                                        AliBaba Top-up Requests
-                                    </div>
-                                </div>
-                                <div class="block-content">
-                                    @if (count($wallet->requests()->where('type','alibaba')->get()) > 0)
-                                        <table class="table table-hover table-borderless table-striped table-vcenter">
-                                            <thead>
-                                            <tr>
-                                                <th>Company/Sender Title</th>
-                                                <th>Alibaba Order Number </th>
-                                                <th>Amount</th>
-                                                <th>Bank Proof Copy</th>
-                                                <th>Notes</th>
-                                                <th>Status</th>
-                                            </tr>
-                                            </thead>
-
-                                            @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
-                                                <tbody class="">
-                                                <tr>
                                                     <td>
-                                                        {{$req->cheque_title}}
-                                                    </td>
-                                                    <td>
-                                                        {{$req->cheque}}
-                                                    </td>
-
-                                                    <td>
-                                                        {{number_format($req->amount,2)}} USD
-                                                    </td>
-                                                    <td class="js-gallery">
-                                                        @if($req->attachment != null)
-                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
-                                                                View Proof
-                                                            </a>
-                                                        @else
-                                                            No Proof Provided
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if($req->notes != null)
-                                                            {{$req->notes}}
-                                                        @else
-                                                            No Notes
-                                                        @endif
-                                                    </td>
-
-                                                    <td>
-                                                        @if($req->status == 0)
-                                                            <span class="badge badge-warning">Pending</span>
-                                                        @else
-                                                            <span class="badge badge-success">Approved</span>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-
-
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -563,6 +623,7 @@
                             </div>
                         </div>
                     </div>
+
                     @include('inc.wallet_log')
                 </div>
             </div>
