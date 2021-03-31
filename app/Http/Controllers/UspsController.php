@@ -99,7 +99,7 @@ class UspsController extends Controller
             dd($xml);
             return $xml;
         } catch (\Exception $e) {
-//            dd($e);
+            dd($e);
             return null;
         }
     }
