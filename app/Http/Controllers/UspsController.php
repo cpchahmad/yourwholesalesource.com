@@ -51,6 +51,7 @@ class UspsController extends Controller
             $xml = simplexml_load_string($response) or die("Cannot create Object");
             return $xml->Address;
         } catch (\Exception $e) {
+            dd($e);
             return null;
         }
     }
