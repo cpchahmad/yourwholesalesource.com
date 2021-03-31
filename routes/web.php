@@ -683,11 +683,7 @@ Route::get('/regsiter-web', function() {
 //    $log->message = "Order create webhook";
 //    $log->save();
 //});
+Route::post('stripe', 'StripeController@processPayment')->name('stripe.process.payment');
 
-Route::get('/usps', function() {
-    $order = RetailerOrder::latest()->first();
-    //dump($order->line_items()->count(), $order->line_items[0]->weight, $order->line_items[0]->ounce_weight);
-    $usps = new \App\Http\Controllers\UspsController();
-    //$usps->validate_address();
-    $usps->shipping_rates();
-});
+
+
