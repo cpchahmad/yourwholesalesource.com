@@ -35,7 +35,7 @@
         <div class="row" >
             <div class="col-md-12">
                 <button style="float: right;margin-bottom: 10px" class="btn btn-sm btn-primary import_button">Import Orders Through CSV</button>
-                <a target="_blank" href="{{asset('CSVOrderFormat.csv')}}" style="margin-right: 10px;margin-bottom: 10px;float: right" class="btn btn-sm btn-warning">View Sample CSV</a>
+                <a target="_blank" href="{{asset('NewCSVOrderFormat.csv')}}" style="margin-right: 10px;margin-bottom: 10px;float: right" class="btn btn-sm btn-warning">View Sample CSV</a>
 
                 <form id="import-form" action="{{route('order_file_processing')}}" method="post" enctype="multipart/form-data">
                     @csrf

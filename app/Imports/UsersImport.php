@@ -49,7 +49,7 @@ class UsersImport extends HeadingRowFormatter implements ToModel,WithHeadingRow
             'address2' => $row['Address2'],
             'city' => $row['City'],
             'province' => $row['Province'],
-            'province_code' => $row['Provincecode'],
+            'province_code' => isset($row['Provincecode']) ?? $row['Provincecode'],
             'postcode' => $row['Postcode'],
             'country' => $row['Country'],
             'phone' => $row['Contact phone'],
