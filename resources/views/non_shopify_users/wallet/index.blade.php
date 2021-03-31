@@ -16,8 +16,8 @@
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
-                    $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
-                    $('.ajax_paypal_form_submit form').submit();
+                    $('.ajax_paypal_wallet_form_submit').find('textarea').val(JSON.stringify(details));
+                    $('.ajax_paypal_wallet_form_submit').submit();
                 });
             }
         }).render('#paypal-button-container');
@@ -46,13 +46,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="ajax_paypal_form_submit" style="display: none;">
-{{--        <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">--}}
-{{--            {{ csrf_field() }}--}}
-{{--            <input type="hidden" name="id" value="{{ $order->id }}">--}}
-{{--            <textarea name="response"></textarea>--}}
-{{--        </form>--}}
     </div>
 
     <div class="bg-body-light">
@@ -135,6 +128,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="block pay-options" data-toggle="modal" data-target="#alibaba_topup_modal">
@@ -333,11 +327,12 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <form action="{{route('store.user.wallet.request.topup')}}" method="post" enctype="multipart/form-data">
+                                            <form action="{{route('store.user.wallet.request.topup')}}" class="ajax_paypal_wallet_form_submit" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" value="{{$user->id}}" name="user_id">
                                                 <input type="hidden" value="{{$wallet->id}}" name="wallet_id">
                                                 <input type="hidden" name="type" value="paypal">
+                                                <textarea style="display: none;" name="response"></textarea>
                                                 <div class="block-content font-size-sm">
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
