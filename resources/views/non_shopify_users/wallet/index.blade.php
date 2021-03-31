@@ -31,7 +31,7 @@
                         <h2>Are your sure?</h2>
                         <div class="text-center">
                             <p>
-                                Amount: 23USD
+                                An Amount: <span class="amount-to-be-paid"></span> USD is going to processed during this session
                             </p>
 
                         </div>
@@ -353,7 +353,7 @@
                                                         <div class="col-sm-12">
                                                             <div class="form-material">
                                                                 <label for="material-error">Amount (USD) <i class="fa fa-question-circle" title="Deposit amount in USD"></i></label>
-                                                                <input required class="form-control" type="number"  name="amount"
+                                                                <input required class="form-control amount-to-be-added" type="number"  name="amount"
                                                                        value=""  placeholder="Enter Cheque Amount here">
                                                             </div>
                                                         </div>
