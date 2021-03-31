@@ -92,7 +92,8 @@ class OrderController extends Controller
 
         $shipping_rates = $this->usps->getShippingInfo($order);
         if($shipping_rates !== null)
-            $shipping_rates = view('inc.usps_shipping_rates')->with('rates', $shipping_rates)->render();
+            dd($shipping_rates);
+            //$shipping_rates = view('inc.usps_shipping_rates')->with('rates', $shipping_rates)->render();
         else
             $shipping_rates = '<p> The Address is Not Valid</p>';
 
