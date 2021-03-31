@@ -2,7 +2,26 @@
 @section('content')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+    <script>
 
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '23'
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
+                    $('.ajax_paypal_form_submit form').submit();
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
 
     <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

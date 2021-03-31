@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     // Paypal Wallet Top-up
     $('.paypal-wallet-pay-btn').click(function() {
+        $('#bank_transfer_modal').modal('hide');
         $('#paypal_pay_trigger').modal('show');
     });
 
