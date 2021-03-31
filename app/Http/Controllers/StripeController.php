@@ -79,12 +79,11 @@ class StripeController extends Controller
         else{
             $retailer_order->status = 'Paid';
         }
-        $retailer_order->pay_by = 'Wallet';
         $retailer_order->save();
 
         /*Maintaining Log*/
         $order_log =  new OrderLog();
-        $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill manually through Wallet on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
+        $order_log->message = "An amount of ".$new_transaction->amount." USD paid to WeFullFill through Credit Card on ".date_create($new_transaction->created_at)->format('d M, Y h:i a')." for further process";
         $order_log->status = "paid";
         $order_log->retailer_order_id = $retailer_order->id;
         $order_log->save();
@@ -104,7 +103,7 @@ class StripeController extends Controller
         $this->log->store($retailer_order->user_id, 'Order', $retailer_order->id, $retailer_order->name, 'Order Payment Paid');
 
 
-        return redirect()->back()->with('success', 'Stripe Payment successful!');
+        return redirect()->back()->with('success', 'Order Payment completed successful!');
 
     }
 }
