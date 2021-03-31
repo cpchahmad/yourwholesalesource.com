@@ -12,7 +12,7 @@ $(document).ready(function () {
             $inputs = $form.find('.required').find(inputSelector),
             $errorMessage = $form.find('div.error'),
             valid = true;
-        $errorMessage.addClass('d-none');
+        $errorMessage.hide();
         $('.has-error').removeClass('has-error');
         $inputs.each(function(i, el) {
             var $input = $(el);
@@ -37,7 +37,7 @@ $(document).ready(function () {
     function stripeResponseHandler(status, response) {
         if (response.error) {
             $('.error')
-                .removeClass('d-none')
+                .show()
                 .find('.alert')
                 .text(response.error.message);
         } else {

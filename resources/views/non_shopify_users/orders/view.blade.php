@@ -959,8 +959,8 @@
                                             type='text'>
                                     </div>
                                 </div>
-                                <div class='d-none'>
-                                    <div class='error form-group'>
+                                <div >
+                                    <div class='error form-group' style="display: none;">
                                         <div class='alert-danger alert'>Please correct the errors and try
                                             again.
                                         </div>
