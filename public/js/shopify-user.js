@@ -5,7 +5,8 @@ $(document).ready(function () {
         var amount = $('#bank_transfer_modal').find('.amount-to-be-added').val();
 
         $('#bank_transfer_modal').modal('hide');
-        $('#paypal_pay_trigger').find('.amount-to-be-paid').val(amount);
+
+        $('#paypal_pay_trigger').find('.amount-to-be-paid').text(amount);
         $('#paypal_pay_trigger').modal('show');
     });
 
