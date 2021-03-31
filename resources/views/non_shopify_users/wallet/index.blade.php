@@ -36,11 +36,11 @@
         </div>
     </div>
     <div class="ajax_paypal_form_submit" style="display: none;">
-        <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
-            {{ csrf_field() }}
-            <input type="hidden" name="id" value="{{ $order->id }}">
-            <textarea name="response"></textarea>
-        </form>
+{{--        <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">--}}
+{{--            {{ csrf_field() }}--}}
+{{--            <input type="hidden" name="id" value="{{ $order->id }}">--}}
+{{--            <textarea name="response"></textarea>--}}
+{{--        </form>--}}
     </div>
 
     <div class="bg-body-light">
