@@ -8,7 +8,7 @@ use Stripe\Stripe;
 
 class StripeController extends Controller
 {
-    public function stripePost(Request $request)
+    public function processPayment(Request $request)
     {
         Stripe::setApiKey(env('STRIPE_SECRET'));
         Charge::create ([
