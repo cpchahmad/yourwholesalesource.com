@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     // Stripe
     var $form = $(".require-validation");
+    console.log($form, 12);
 
     $('form.require-validation').bind('submit', function(e) {
         var $form = $(".require-validation"),
