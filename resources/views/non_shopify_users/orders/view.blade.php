@@ -942,18 +942,18 @@
                                             type='text'>
                                     </div>
                                 </div>
-                                <div class=''>
-                                    <div class='form-group cvc required'>
+                                <div class='row'>
+                                    <div class='col-4 form-group cvc required'>
                                         <label class='control-label'>CVC</label> <input autocomplete='off'
                                                                                         class='form-control card-cvc' placeholder='ex. 311' size='4'
                                                                                         type='text'>
                                     </div>
-                                    <div class=' form-group expiration required'>
+                                    <div class='col-4 form-group expiration required'>
                                         <label class='control-label'>Expiration Month</label> <input
                                             class='form-control card-expiry-month' placeholder='MM' size='2'
                                             type='text'>
                                     </div>
-                                    <div class='form-group expiration required'>
+                                    <div class='col-4 form-group expiration required'>
                                         <label class='control-label'>Expiration Year</label> <input
                                             class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                             type='text'>
@@ -968,7 +968,7 @@
                                 </div>
                                 <div class="text-right mb-2">
                                     <div class="">
-                                        <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
+                                        <button class="btn btn-primary btn-lg btn-block pay-btn" type="submit">Pay Now</button>
                                     </div>
                                 </div>
                             </form>
