@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class UspsController extends Controller
 {
     public function getShippingInfo($order) {
-        $address = $this->validate_address($order);
+        $address = json_decode(json_encode($this->validate_address($order)));
 
 //        if(!(isset($address->SimpleXMLElement->Error))) {
-            dd(23, $address->SimpleXMLElement->Error);
+            dd(23, $address);
             $shipping = $this->shipping_rates($order);
 
             if($shipping != null)
