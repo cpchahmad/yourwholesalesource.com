@@ -431,7 +431,67 @@
                                             @endforeach
                                         </table>
                                     @else
-                                        <p>No AliBaba Top-up Requests Found</p>
+                                        <p>No Credit Card Top-up Requests Found</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="block">
+                                <div class="block-header">
+                                    <div class="block-title">
+                                        Paypal Top-up Requests
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    @if (count($wallet->requests()->where('type','paypal')->get()) > 0)
+                                        <table class="table table-hover table-borderless table-striped table-vcenter">
+                                            <thead>
+                                            <tr>
+                                                <th>Company/Sender Title</th>
+                                                <th>Amount</th>
+                                                <th>Notes</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            </thead>
+
+                                            @foreach($wallet->requests()->where('type','paypal')->get() as $index => $req)
+                                                <tbody class="">
+                                                <tr>
+                                                    <td>
+                                                        {{$req->cheque_title}}
+                                                    </td>
+
+                                                    <td>
+                                                        {{number_format($req->amount,2)}} USD
+                                                    </td>
+                                                    <td>
+                                                        @if($req->notes != null)
+                                                            {{$req->notes}}
+                                                        @else
+                                                            No Notes
+                                                        @endif
+                                                    </td>
+
+                                                    <td>
+                                                        @if($req->status == 0)
+                                                            <span class="badge badge-warning">Pending</span>
+                                                        @else
+                                                            <span class="badge badge-success">Approved</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+
+                                            @endforeach
+                                        </table>
+                                    @else
+                                        <p>No Paypal Top-up Requests Found</p>
                                     @endif
                                 </div>
                             </div>
