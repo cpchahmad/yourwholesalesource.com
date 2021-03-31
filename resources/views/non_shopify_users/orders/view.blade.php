@@ -776,7 +776,7 @@
                                                             <p> Cost-Payment Captured by YourWholesaleSource Wallet  {{--by {{$order->has_payment->name}}--}} </p>
 
                                                         @else
-                                                            <p> Cost-Payment Captured On Card *****{{$order->has_payment->card_last_four}} by {{$order->has_payment->name}} </p>
+                                                            <p> Cost-Payment Captured On Credit Card  </p>
                                                         @endif
                                                     </div>
                                                 </div>
