@@ -4,6 +4,7 @@
 {{--            src="https://www.paypal.com/sdk/js?client-id=ASxb6_rmf3pte_En7MfEVLPe_KDZQj68bKpzJzl7320mmpV3uDRDLGCY1LaCkyYZ4zNpHdC9oZ73-WFv">--}}
 {{--        </script>--}}
     <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
@@ -508,7 +509,7 @@
                                     <td></td>
                                     <td align="right">
                                         @if($order->paid == 0)
-    {{--                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>--}}
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
                                             <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay  *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
                                             <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{ number_format($order->total_cost + $usps_rate + $order->handling_fee , 2) }}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
@@ -898,62 +899,63 @@
                                 </button>
                             </div>
                         </div>
-                        <form action="{{route('store.order.proceed.payment')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="order_id" value="{{$order->id}}">
-                            <div class="block-content font-size-sm">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Card Name</label>
-                                            <input  class="form-control" type="text" required=""  name="card_name"
-                                                    placeholder="Enter Card Title here">
+                        <div class="block-content">
+                            <form
+                                role="form"
+                                action="{{ route('stripe.process.payment') }}"
+                                method="post"
+                                class="require-validation"
+                                data-cc-on-file="false"
+                                data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
+                                id="payment-form">
+                                @csrf
+                                <input type="hidden" name="amount_to_be_paid" value="{{ number_format($order->total_cost + $usps_rate + $order->handling_fee, 2) }}">
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <div>
+                                    <div class='form-group required'>
+                                        <label class='control-label'>Name on Card</label>
+                                        <input
+                                            class='form-control' size='4' type='text'>
+                                    </div>
+                                </div>
+                                <div class=''>
+                                    <div class='form-group card required'>
+                                        <label class='control-label'>Card Number</label> <input
+                                            autocomplete='off' class='form-control card-number' size='20'
+                                            type='text'>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-4 form-group cvc required'>
+                                        <label class='control-label'>CVC</label> <input autocomplete='off'
+                                                                                        class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                                                                        type='text'>
+                                    </div>
+                                    <div class='col-4 form-group expiration required'>
+                                        <label class='control-label'>Expiration Month</label> <input
+                                            class='form-control card-expiry-month' placeholder='MM' size='2'
+                                            type='text'>
+                                    </div>
+                                    <div class='col-4 form-group expiration required'>
+                                        <label class='control-label'>Expiration Year</label> <input
+                                            class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                            type='text'>
+                                    </div>
+                                </div>
+                                <div >
+                                    <div class='error form-group' style="display: none;">
+                                        <div class='alert-danger alert'>Please correct the errors and try
+                                            again.
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Card Number</label>
-                                            <input type="text" required=""  name="card_number"  class="form-control js-card js-masked-enabled"
-                                                   placeholder="9999-9999-9999-9999">
-                                        </div>
+                                <div class="text-right mb-2">
+                                    <div class="">
+                                        <button class="btn btn-primary btn-lg btn-block pay-btn" type="submit">Pay Now</button>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Amount to Pay</label>
-                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay,2)}} USD"  name="amount"
-                                                    placeholder="Enter 14 Digit Card Number here">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">YourWholesaleSource Charges ({{$settings->payment_charge_percentage}}%)</label>
-                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
-                                                    placeholder="Enter 14 Digit Card Number here">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <div class="form-material">
-                                            <label for="material-error">Total Cost</label>
-                                            <input  class="form-control" type="text" readonly value="{{number_format($order->cost_to_pay+$order->cost_to_pay*$settings->payment_charge_percentage/100,2)}} USD"  name="amount"
-                                                    placeholder="Enter 14 Digit Card Number here">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="block-content block-content-full text-right border-top">
-                                <button type="submit" class="btn btn-success" >Proceed Payment</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

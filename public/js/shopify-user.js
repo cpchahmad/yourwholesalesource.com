@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    // Stripe
+    // Stripe Order Payment
     var $form = $(".require-validation");
 
     $('form.require-validation').bind('submit', function(e) {

@@ -1,5 +1,71 @@
 $(document).ready(function () {
 
+    // Stripe Order Payment
+    var $form = $(".require-validation");
+
+    $('form.require-validation').bind('submit', function(e) {
+        var $form = $(".require-validation"),
+            inputSelector = ['input[type=email]', 'input[type=password]',
+                'input[type=text]', 'input[type=file]',
+                'textarea'
+            ].join(', '),
+            $inputs = $form.find('.required').find(inputSelector),
+            $errorMessage = $form.find('div.error'),
+            valid = true;
+        $errorMessage.hide();
+        $('.pay-btn').prop('disabled', true);
+        $('.pay-btn').text('Processing..');
+        $('.has-error').removeClass('has-error');
+        $inputs.each(function(i, el) {
+            var $input = $(el);
+            if ($input.val() === '') {
+                $input.parent().addClass('has-error');
+                $errorMessage.removeClass('hide');
+                e.preventDefault();
+            }
+        });
+        if (!$form.data('cc-on-file')) {
+            e.preventDefault();
+            Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+            Stripe.createToken({
+                number: $('.card-number').val(),
+                cvc: $('.card-cvc').val(),
+                exp_month: $('.card-expiry-month').val(),
+                exp_year: $('.card-expiry-year').val()
+            }, stripeResponseHandler);
+        }
+    });
+
+    function stripeResponseHandler(status, response) {
+        if (response.error) {
+            $('.error')
+                .show()
+                .find('.alert')
+                .text(response.error.message);
+
+            $('.pay-btn').prop('disabled', false);
+            $('.pay-btn').text('Pay Now');
+        } else {
+            /* token contains id, last4, and card type */
+            var token = response['id'];
+            var $form = $(".require-validation");
+            $form.find('input[type=text]').empty();
+            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+            $form.get(0).submit();
+        }
+    }
+
+    $('body').on('click','.see-more-block',function () {
+        $('.after12').show();
+        $(this).hide();
+    });
+    $('body').on('click','.see-less-block',function () {
+        $('.after12').hide();
+        $('.see-more-block').show();
+
+    });
+
+
     // warehouse selection on order details page
     $('.warehouse-selector').change(function(){
         var data = $(this).val().split(",");
