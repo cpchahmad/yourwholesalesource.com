@@ -18,10 +18,10 @@ class UspsController extends Controller
             else
                 return null;
 
-        }
-        else {
-            dd(564);
-        }
+//        }
+//        else {
+//            dd(564);
+//        }
     }
 
     public function validate_address($order)
