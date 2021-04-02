@@ -613,7 +613,7 @@
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="block-header bg-primary-dark">
-                                                        <h3 class="block-title">Edit Shipping Address</h3>
+                                                        <h3 class="block-title text-white">Edit Shipping Address</h3>
                                                         <div class="block-options">
                                                             <button type="button" class="btn-block-option">
                                                                 <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
@@ -621,7 +621,7 @@
                                                         </div>
                                                     </div>
                                                     <form action="">
-                                                        <div class="row text-right p-3">
+                                                        <div class="row text-left p-3">
                                                             <div class="col-md-6 mb2">
                                                                 <label>First Name</label>
                                                                 <input type="text" class="form-control" name="first_name"
@@ -679,7 +679,7 @@
 
                                                             <div class="block-content block-content-full text-right border-top">
 
-                                                                <button type="submit" class="btn btn-sm btn-success">Accept</button>
+                                                                <button type="submit" class="btn btn-sm btn-success">Save</button>
                                                             </div>
                                                         </div>
                                                     </form>
