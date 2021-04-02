@@ -607,12 +607,12 @@
                                         @endif
                                     </td>
                                 @else
-                                    <td align="left">
+                                    <td align="right">
                                         <button class="btn btn-success" data-toggle="modal" data-target="#order_address_update_modal">Edit Shipping Address</button>
                                         <div class="modal" id="order_address_update_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
-                                                    <div class="block-header bg-primary-dark">
+                                                    <div class="block-header bg-primary-dark text-left">
                                                         <h3 class="block-title text-white">Edit Shipping Address</h3>
                                                         <div class="block-options">
                                                             <button type="button" class="btn-block-option">
