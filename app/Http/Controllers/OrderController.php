@@ -105,7 +105,7 @@ class OrderController extends Controller
                 'order' => $order,
                 'settings' => $settings,
                 'shop' => $shop,
-                'countries' => Country::all();
+                'countries' => Country::all()
             ]);
         }
     }
