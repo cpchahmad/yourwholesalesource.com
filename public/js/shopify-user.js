@@ -208,7 +208,7 @@ $(document).ready(function () {
         set_bulk_array();
 
         if($(this).is(':checked')){
-            //$('.bulk-div').show();
+            $('.bulk-div').show();
         }
         else{
             $('.bulk-div').hide();
