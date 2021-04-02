@@ -87,7 +87,6 @@ class OrderController extends Controller
 
         $order->shipping_address = json_encode($request->except(['_token']));
         $order->save();
-
         return redirect()->back()->with('success', 'Shipping addres updated successfully');
     }
 
