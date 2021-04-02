@@ -658,7 +658,7 @@
                                                             <div class="col-md-6 mb2">
                                                                 <label>Province Code</label>
                                                                 <input type="text" class="form-control" name="province_code"
-                                                                       value="{{ $shipping->province_code }}"  placeholder="" required>
+                                                                       value="{{ isset($shipping->province_code) ?? $shipping->province_code }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-6 mb2">
                                                                 <label>Zip Code</label>
@@ -683,7 +683,7 @@
                                                             <div class="col-md-12 mb2">
                                                                 <label>Phone</label>
                                                                 <input type="text" required class="form-control" name="phone"
-                                                                       value="{{ $shipping->phone }}"  placeholder="" >
+                                                                       value="{{ isset($shipping->phone) ?? $shipping->phone }}"  placeholder="" >
                                                             </div>
 
                                                             <div class="block-content block-content-full text-right border-top">
