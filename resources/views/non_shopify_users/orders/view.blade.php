@@ -608,7 +608,7 @@
                                     </td>
                                 @else
                                     <td align="right">
-                                        <button class="btn btn-success" data-toggle="modal" data-target="#order_address_update_modal"><i class="fa fa-credit-card"></i>Edit Shipping Address</button>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#order_address_update_modal">Edit Shipping Address</button>
                                         <div class="modal" id="order_address_update_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -621,7 +621,7 @@
                                                         </div>
                                                     </div>
                                                     <form action="">
-                                                        <div class="row">
+                                                        <div class="row text-right p-3">
                                                             <div class="col-md-6 mb2">
                                                                 <label>First Name</label>
                                                                 <input type="text" class="form-control" name="first_name"
@@ -677,12 +677,10 @@
                                                                        value=""  placeholder="" >
                                                             </div>
 
-                                                            <div class="col-md-12 mb2">
-                                                                <label>Order Date</label>
-                                                                <input type="date" required class="form-control" name="order_date"
-                                                                       value=""  placeholder="" >
-                                                            </div>
+                                                            <div class="block-content block-content-full text-right border-top">
 
+                                                                <button type="submit" class="btn btn-sm btn-success">Accept</button>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>
