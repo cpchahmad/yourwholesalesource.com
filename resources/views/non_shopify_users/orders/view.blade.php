@@ -562,48 +562,134 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td align="right">
-                                    @if($order->paid == 0)
-                                        <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
-                                        <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->total_cost + $order->shipping_rate_for_non_shopify,2)}}" data-pay=" {{number_format(($order->total_cost + $order->shipping_rate_for_non_shopify)+(($order->total_cost + $order->shipping_rate_for_non_shopify)*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                                        <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{ number_format($order->total_cost + $usps_rate + $order->handling_fee  , 2) }}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
-                                        <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="block block-rounded block-themed block-transparent mb-0">
-                                                        <div class="block-content cst_content_wrapper font-size-sm text-center">
-                                                            <h2>Are your sure?</h2>
-                                                            <div class="text-center"> <p>
-                                                                    Subtotal: {{number_format($order->total_cost + $usps_rate + $order->handling_fee  ,2)}} USD
-                                                                    <br>
-                                                                    YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
-                                                                    <br>Total Cost : {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD</p>
+                                @if($order->usps_shipping !== 0)
+                                    <td align="right">
+                                        @if($order->paid == 0)
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
+                                            <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->total_cost + $order->shipping_rate_for_non_shopify,2)}}" data-pay=" {{number_format(($order->total_cost + $order->shipping_rate_for_non_shopify)+(($order->total_cost + $order->shipping_rate_for_non_shopify)*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                            <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{ number_format($order->total_cost + $usps_rate + $order->handling_fee  , 2) }}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+
+                                            <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="block block-rounded block-themed block-transparent mb-0">
+                                                            <div class="block-content cst_content_wrapper font-size-sm text-center">
+                                                                <h2>Are your sure?</h2>
+                                                                <div class="text-center"> <p>
+                                                                        Subtotal: {{number_format($order->total_cost + $usps_rate + $order->handling_fee  ,2)}} USD
+                                                                        <br>
+                                                                        YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
+                                                                        <br>Total Cost : {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD</p>
+                                                                </div>
+                                                                <p> A amount of  {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
+
+                                                                <div class="paypal_btn_trigger">
+                                                                    <div id="paypal-button-container"></div>
+                                                                </div>
+
                                                             </div>
-                                                            <p> A amount of  {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
-
-                                                            <div class="paypal_btn_trigger">
-                                                                <div id="paypal-button-container"></div>
+                                                            <div class="block-content block-content-full text-center border-top">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
-
-                                                        </div>
-                                                        <div class="block-content block-content-full text-center border-top">
-                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="ajax_paypal_form_submit" style="display: none;">
-                                            <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{ $order->id }}">
-                                                <textarea name="response"></textarea>
-                                            </form>
-                                        </div>
+                                            <div class="ajax_paypal_form_submit" style="display: none;">
+                                                <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id" value="{{ $order->id }}">
+                                                    <textarea name="response"></textarea>
+                                                </form>
+                                            </div>
 
-                                    @endif
-                                </td>
+                                        @endif
+                                    </td>
+                                @else
+                                    <td align="right">
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#order_address_update_modal"><i class="fa fa-credit-card"></i>Edit Shipping Address</button>
+                                        <div class="modal" id="order_address_update_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="block-header bg-primary-dark">
+                                                        <h3 class="block-title">Edit Shipping Address</h3>
+                                                        <div class="block-options">
+                                                            <button type="button" class="btn-block-option">
+                                                                <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <form action="">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb2">
+                                                                <label>First Name</label>
+                                                                <input type="text" class="form-control" name="first_name"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb2">
+                                                                <label>First Name</label>
+                                                                <input type="text" class="form-control" name="last_name"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-12 mb2">
+                                                                <label>Address</label>
+                                                                <input type="text" class="form-control" name="address1"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-12 mb2">
+                                                                <label>Street (optional)</label>
+                                                                <input type="text" class="form-control" name="address2"
+                                                                       value=""  placeholder="" >
+                                                            </div>
+                                                            <div class="col-md-6 mb2">
+                                                                <label>City</label>
+                                                                <input type="text" class="form-control" name="city"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb2">
+                                                                <label>Province</label>
+                                                                <input type="text" class="form-control" name="province"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb2">
+                                                                <label>Province Code</label>
+                                                                <input type="text" class="form-control" name="province_code"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-6 mb2">
+                                                                <label>Zip Code</label>
+                                                                <input type="text" class="form-control" name="zip"
+                                                                       value=""  placeholder="" required>
+                                                            </div>
+                                                            <div class="col-md-12 mb2">
+                                                                <label>Country</label>
+                                                                <select name="country" data-route="{{route('users.order.shipping.rate')}}" id="country-selection" required class="form-control">
+                                                                    <option value="">Select Country</option>
+                                                                    @foreach($countries as $country)
+                                                                        <option value="{{$country->name}}">{{$country->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-12 mb2">
+                                                                <label>Phone</label>
+                                                                <input type="text" required class="form-control" name="phone"
+                                                                       value=""  placeholder="" >
+                                                            </div>
+
+                                                            <div class="col-md-12 mb2">
+                                                                <label>Order Date</label>
+                                                                <input type="date" required class="form-control" name="order_date"
+                                                                       value=""  placeholder="" >
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
 
                             </tbody>

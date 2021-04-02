@@ -673,7 +673,7 @@ class AdminOrderController extends Controller
 
     public function dashboard(Request $request)
     {
-        if(Auth::user()->email != 'moe@webinopoly.com ')
+        if(Auth::user()->email != 'moe@webinopoly.com')
             return redirect('/check/roles');
 
 
