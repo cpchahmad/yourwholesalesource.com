@@ -271,19 +271,32 @@ class ManagerController extends Controller
         }
 
         if($request->filled('parent_category') && !$request->filled('child_category')) {
-            $productQ->orWhereHas('has_categories', function($q) use ($request){
+            $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             });
 
         }
 
-        if($request->filled('parent_category') && $request->filled('child_category')) {
+        if($request->filled('parent_category') && $request->filled('child_category') && !$request->filled('sub_sub_category') ) {
 
-            $productQ->orWhereHas('has_categories', function($q) use ($request){
+            $productQ->whereHas('has_categories', function($q) use ($request){
                 $q->where('title',$request->input('parent_category'));
             })
-                ->whereHas('has_subcategories', function($q) use ($request){
+                ->orWhereHas('has_subcategories', function($q) use ($request){
                     $q->where('title',$request->input('child_category'));
+                });
+        }
+
+        if($request->filled('parent_category') && $request->filled('child_category') && $request->filled('sub_sub_category') ) {
+
+            $productQ->whereHas('has_categories', function($q) use ($request){
+                $q->where('title',$request->input('parent_category'));
+            })
+                ->orWhereHas('has_subcategories', function($q) use ($request){
+                    $q->where('title',$request->input('child_category'));
+                })
+                ->orWhereHas('has_sub_sub_categories', function($q) use ($request){
+                    $q->where('title',$request->input('sub_sub_category'));
                 });
         }
 
@@ -297,6 +310,7 @@ class ManagerController extends Controller
             'search' =>$request->input('search'),
             'parent_category' =>$request->input('parent_category'),
             'child_category' =>$request->input('child_category'),
+            'sub_sub_category' =>$request->input('sub_sub_category'),
             'categories' => $categories,
             'shops' => $shops,
         ]);
