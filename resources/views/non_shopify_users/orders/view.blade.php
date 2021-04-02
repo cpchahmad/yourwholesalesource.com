@@ -620,61 +620,70 @@
                                                             </button>
                                                         </div>
                                                     </div>
+                                                    @php
+                                                        $shipping = json_decode($order->shipping_address)
+                                                    @endphp
                                                     <form action="">
                                                         <div class="row text-left p-3">
                                                             <div class="col-md-6 mb2">
                                                                 <label>First Name</label>
-                                                                <input type="text" class="form-control" name="first_name"
+                                                                <input type="text" class="form-control" value="{{$shipping->first_name}}" name="first_name"
                                                                        value=""  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-6 mb2">
-                                                                <label>First Name</label>
+                                                                <label>Last Name</label>
                                                                 <input type="text" class="form-control" name="last_name"
-                                                                       value=""  placeholder="" required>
+                                                                       value="{{ $shipping->last_name }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-12 mb2">
                                                                 <label>Address</label>
                                                                 <input type="text" class="form-control" name="address1"
-                                                                       value=""  placeholder="" required>
+                                                                       value="{{ $shipping->address1 }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-12 mb2">
                                                                 <label>Street (optional)</label>
                                                                 <input type="text" class="form-control" name="address2"
-                                                                       value=""  placeholder="" >
+                                                                       value="{{ $shipping->address2 }}"  placeholder="" >
                                                             </div>
                                                             <div class="col-md-6 mb2">
                                                                 <label>City</label>
                                                                 <input type="text" class="form-control" name="city"
-                                                                       value=""  placeholder="" required>
+                                                                       value="{{ $shipping->city }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-6 mb2">
                                                                 <label>Province</label>
                                                                 <input type="text" class="form-control" name="province"
-                                                                       value=""  placeholder="" required>
+                                                                       value="{{ $shipping->province }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-6 mb2">
                                                                 <label>Province Code</label>
                                                                 <input type="text" class="form-control" name="province_code"
-                                                                       value=""  placeholder="" required>
+                                                                       value="{{ $shipping->province_code }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-6 mb2">
                                                                 <label>Zip Code</label>
                                                                 <input type="text" class="form-control" name="zip"
-                                                                       value=""  placeholder="" required>
+                                                                       value="{{ $shipping->zip }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-12 mb2">
                                                                 <label>Country</label>
                                                                 <select name="country" required class="form-control">
                                                                     <option value="">Select Country</option>
                                                                     @foreach($countries as $country)
-                                                                        <option value="{{$country->name}}">{{$country->name}}</option>
+                                                                        <option value="{{$country->name}}"
+                                                                                @if($country->name == $shipping->country)
+                                                                                    selected
+                                                                                @endif
+                                                                        >
+                                                                            {{$country->name}}
+                                                                        </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-12 mb2">
                                                                 <label>Phone</label>
                                                                 <input type="text" required class="form-control" name="phone"
-                                                                       value=""  placeholder="" >
+                                                                       value="{{ $shipping->phone }}"  placeholder="" >
                                                             </div>
 
                                                             <div class="block-content block-content-full text-right border-top">
