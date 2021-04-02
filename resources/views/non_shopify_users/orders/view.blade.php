@@ -563,7 +563,7 @@
                             <tr>
                                 <td></td>
 
-                                @if($order->usps_shipping !== 0)
+                                @if($usps_rate !== 0)
                                     <td align="right">
                                         @if($order->paid == 0)
                                             <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
