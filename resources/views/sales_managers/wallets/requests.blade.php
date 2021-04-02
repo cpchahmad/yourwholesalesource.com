@@ -24,14 +24,14 @@
                     $bank =0;
                     $ali =0;
                     foreach($wallets as $wallet) {
-                        foreach($wallet->requests()->where('type','bank transfer')->get() as $req) {
+                        foreach($wallet->requests()->where('type','stripe')->get() as $req) {
                             if($req->status == 0) {
                                  $bank++;
                             }
                         }
                     }
                     foreach($wallets as $wallet) {
-                        foreach($wallet->requests()->where('type','alibaba')->get() as $req) {
+                        foreach($wallet->requests()->where('type','paypal')->get() as $req) {
                             if($req->status == 0) {
                                  $ali++;
                             }
@@ -41,10 +41,10 @@
                 @endphp
                 <ul class="nav nav-tabs nav-justified nav-tabs-block " data-toggle="tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#bank">Bank Transfer Top-up Requests ({{ $bank }})</a>
+                        <a class="nav-link active" href="#bank">Credit Card Top-up Requests ({{ $bank }})</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#alibaba"> AliBaba Top-up Requests ({{ $ali }})</a>
+                        <a class="nav-link " href="#alibaba">Paypal Top-up Requests ({{ $ali }})</a>
                     </li>
                 </ul>
 
@@ -55,7 +55,7 @@
                         <div class="block">
                             <div class="block-header">
                                 <div class="block-title">
-                                    Bank Transfer Top-up Requests
+                                    Credit Card Top-up Requests
                                 </div>
                             </div>
                             <div class="block-content">
@@ -66,9 +66,7 @@
                                         <th>Wallet Holder Name</th>
                                         <th>Wallet ID</th>
                                         <th>Company/Sender Title</th>
-                                        <th>Alibaba Order Number </th>
                                         <th>Amount</th>
-                                        <th>Bank Proof Copy</th>
                                         <th>Notes</th>
                                         <th>Status</th>
                                         <th style="width: 150px !important;"></th>
@@ -76,7 +74,7 @@
                                     </thead>
                                     <tbody class="">
                                     @foreach($wallets as $wallet)
-                                        @foreach($wallet->requests()->where('type','bank transfer')->get() as $index => $req)
+                                        @foreach($wallet->requests()->where('type','stripe')->get() as $index => $req)
                                             @if($req->status == 0)
                                                 <tr>
                                                     <td>
@@ -89,20 +87,7 @@
                                                         {{$req->cheque_title}}
                                                     </td>
                                                     <td>
-                                                        {{$req->cheque}}
-                                                    </td>
-
-                                                    <td>
                                                         {{number_format($req->amount,2)}} USD
-                                                    </td>
-                                                    <td class="js-gallery">
-                                                        @if($req->attachment != null)
-                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
-                                                                View Proof
-                                                            </a>
-                                                        @else
-                                                            No Proof Provided
-                                                        @endif
                                                     </td>
                                                     <td>
                                                         @if($req->notes != null)
@@ -140,14 +125,6 @@
                                                                 </div>
                                                                 <form action="{{route('admin.wallets.edit',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
-                                                                        <div class="form-group">
-                                                                            <div class="form-material">
-                                                                                <label for="material-error">Alibaba Order Number</label>
-                                                                                <input required class="form-control" type="text"  name="cheque"
-                                                                                       value="{{ $req->cheque }}" >
-                                                                            </div>
-                                                                        </div>
-
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>
@@ -238,9 +215,7 @@
                                         <th>Wallet Holder Name</th>
                                         <th>Wallet ID</th>
                                         <th>Company/Sender Title</th>
-                                        <th>Alibaba Order Number </th>
                                         <th>Amount</th>
-                                        <th>Bank Proof Copy</th>
                                         <th>Notes</th>
                                         <th>Status</th>
                                         <th style="width: 150px !important;"></th>
@@ -248,7 +223,7 @@
                                     </thead>
                                     <tbody class="">
                                     @foreach($wallets as $wallet)
-                                        @foreach($wallet->requests()->where('type','alibaba')->get() as $index => $req)
+                                        @foreach($wallet->requests()->where('type','paypal')->get() as $index => $req)
                                             @if($req->status == 0)
                                                 <tr>
                                                     <td>
@@ -261,20 +236,7 @@
                                                         {{$req->cheque_title}}
                                                     </td>
                                                     <td>
-                                                        {{$req->cheque}}
-                                                    </td>
-
-                                                    <td>
                                                         {{number_format($req->amount,2)}} USD
-                                                    </td>
-                                                    <td class="js-gallery">
-                                                        @if($req->attachment != null)
-                                                            <a class="img-link img-link-zoom-in img-lightbox" href="{{asset('wallet-attachment')}}/{{$req->attachment}}">
-                                                                View Proof
-                                                            </a>
-                                                        @else
-                                                            No Proof Provided
-                                                        @endif
                                                     </td>
                                                     <td>
                                                         @if($req->notes != null)
@@ -312,14 +274,6 @@
                                                                 </div>
                                                                 <form action="{{route('admin.wallets.edit',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
-                                                                        <div class="form-group">
-                                                                            <div class="form-material">
-                                                                                <label for="material-error">Alibaba Order Number</label>
-                                                                                <input required class="form-control" type="text"  name="cheque"
-                                                                                       value="{{ $req->cheque }}" >
-                                                                            </div>
-                                                                        </div>
-
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>

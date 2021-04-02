@@ -140,14 +140,14 @@
             </div>
 
             <div class="d-inline-block mr-3 badge badge-warning text-white">
-                <a href="/manager/refunds?priority=&status=1" class="text-white">
+                <a href="/managers/refunds?priority=&status=1" class="text-white">
                     Refund Requests
                     <span class="" style="font-size: 13px"> {{$manager_refund_request_count}} </span>
                 </a>
             </div>
 
             <div class="d-inline-block mr-3 badge badge-dark text-white">
-                <a href="/manager/tickets?priority=&status=1&more_status=3" class="text-white">
+                <a href="/managers/tickets?priority=&status=1&more_status=3" class="text-white">
                     Ticket Requests
                     <span class="" style="font-size: 13px"> {{$manager_tickets_request_count}} </span>
                 </a>
