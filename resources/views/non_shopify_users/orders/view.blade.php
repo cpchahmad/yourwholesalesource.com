@@ -664,7 +664,7 @@
                                                             </div>
                                                             <div class="col-md-12 mb2">
                                                                 <label>Country</label>
-                                                                <select name="country" data-route="{{route('users.order.shipping.rate')}}" id="country-selection" required class="form-control">
+                                                                <select name="country" required class="form-control">
                                                                     <option value="">Select Country</option>
                                                                     @foreach($countries as $country)
                                                                         <option value="{{$country->name}}">{{$country->name}}</option>

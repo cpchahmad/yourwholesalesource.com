@@ -419,11 +419,13 @@ class CustomOrderController extends Controller
         $order = RetailerOrder::find($id);
         $settings = AdminSetting::all()->first();
         $user = User::find(Auth::id());
+
         if ($order != null) {
             return view('non_shopify_users.orders.view')->with([
                 'order' => $order,
                 'settings' => $settings,
-                'user' => $user
+                'user' => $user,
+                'countries' => Country::all(),
             ]);
         }
     }
