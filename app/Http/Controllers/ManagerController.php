@@ -308,9 +308,6 @@ class ManagerController extends Controller
                 ->orderBy('created_at','DESC')->paginate(20),
 
             'search' =>$request->input('search'),
-            'parent_category' =>$request->input('parent_category'),
-            'child_category' =>$request->input('child_category'),
-            'sub_sub_category' =>$request->input('sub_sub_category'),
             'categories' => $categories,
             'shops' => $shops,
         ]);

@@ -34,60 +34,6 @@
             @endrole
         </div>
 
-        <div class="row">
-            <div class="col-md-12  mb2">
-                <form class="row d-flex text-right" action="" method="get">
-
-                    <div class="col-md-3">
-                        <select name="parent_category" id="" class="form-control parent-category">
-                            <option value="" style="display: none">Category</option>
-                            @foreach($categories as $category)
-                                <option @if($parent_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="sub-categories-section">
-                            @if($child_category !== null)
-                                @php $sub_categories = \App\Category::where('title', $parent_category)->first()->hasSub;@endphp
-                                <select name="child_category" id="" class="form-control child-category">
-                                    <option value="" style="display: none">Sub Categories</option>
-                                    @foreach($sub_categories as $category)
-                                        <option @if($child_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="sub-sub-categories-section">
-                            @if($sub_sub_category !== null)
-                                @php $sub_sub_categories = \App\SubCategory::where('title', $child_category)->first()->hasSub;@endphp
-                                <select name="sub_sub_category" id="" class="form-control sub-sub-category">
-                                    <option value="" style="display: none">Sub Sub Categories</option>
-                                    @foreach($sub_sub_categories as $category)
-                                        <option @if($sub_sub_category == $category->title) selected @endif value="{{ $category->title }}" >{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <input type="submit" class="btn btn-primary " value="Filter">
-                        @role('wordpress-admin')
-                            <a href="/products/all" class="btn btn-danger " >Clear</a>
-                        @else
-                            <a href="/managers/products" class="btn btn-danger " >Clear</a>
-                        @endrole
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
         <div class="block">
             <div class="block-content">
                 @if(count($products) >0)
