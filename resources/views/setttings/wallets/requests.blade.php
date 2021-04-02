@@ -127,14 +127,6 @@
                                                                     <div class="block-content font-size-sm">
                                                                         <div class="form-group">
                                                                             <div class="form-material">
-                                                                                <label for="material-error">Alibaba Order Number</label>
-                                                                                <input required class="form-control" type="text"  name="cheque"
-                                                                                       value="{{ $req->cheque }}" >
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="form-group">
-                                                                            <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>
                                                                                 <input required class="form-control" type="text"  name="cheque_title"
                                                                                        value="{{ $req->cheque_title }}" >
@@ -283,14 +275,6 @@
                                                                 </div>
                                                                 <form action="{{route('admin.wallets.edit',$req->id)}}" method="get">
                                                                     <div class="block-content font-size-sm">
-                                                                        <div class="form-group">
-                                                                            <div class="form-material">
-                                                                                <label for="material-error">Alibaba Order Number</label>
-                                                                                <input required class="form-control" type="text"  name="cheque"
-                                                                                       value="{{ $req->cheque }}" >
-                                                                            </div>
-                                                                        </div>
-
                                                                         <div class="form-group">
                                                                             <div class="form-material">
                                                                                 <label for="material-error">Company/Sender Name</label>
