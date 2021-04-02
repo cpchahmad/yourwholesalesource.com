@@ -99,12 +99,10 @@
                         @endif
                         @if(count($product->has_categories) > 0)
                             <div class="tags" style="margin-top: 5px">
-
-                                    <h4 style="margin-bottom: 5px">Categories</h4>
-                                    @foreach($product->has_categories as $cat)
-                                        <span class="badge badge-primary">{{$cat->title}}</span>
-                                    @endforeach
-
+                                <h4 style="margin-bottom: 5px">Categories</h4>
+                                @foreach($product->has_categories as $cat)
+                                    <span class="badge badge-primary">{{$cat->title}}</span>
+                                @endforeach
                             <hr>
                         @endif
                         @if(count($product->has_subcategories) > 0)
