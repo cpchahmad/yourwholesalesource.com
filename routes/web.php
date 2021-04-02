@@ -466,6 +466,7 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
     Route::prefix('app')->group(function () {
         Route::get('/orders/{id}/mark-as-complete','AdminOrderController@mark_as_completed')->name('admin.order.complete');
         Route::post('/order/payment', 'OrderController@proceed_payment')->name('store.order.proceed.payment');
+        Route::post('/order/update/address/{id}', 'OrderController@order_addresss_update')->name('store.order.address.update');
         Route::post('/order/bulk/payment', 'OrderController@proceed_bulk_payment')->name('store.order.proceed.bulk.payment');
 
         Route::get('/wallet', 'WalletController@user_wallet_view')->name('store.user.wallet.show');

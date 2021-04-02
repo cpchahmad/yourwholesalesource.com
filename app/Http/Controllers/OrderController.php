@@ -82,6 +82,10 @@ class OrderController extends Controller
         ]);
     }
 
+    public function order_addresss_update(Request $request) {
+        dd($request->all());
+    }
+
 
     public function view_order($id)
     {

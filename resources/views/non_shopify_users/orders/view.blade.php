@@ -607,7 +607,7 @@
                                         @endif
                                     </td>
                                 @else
-                                    <td align="right">
+                                    <td align="left">
                                         <button class="btn btn-success" data-toggle="modal" data-target="#order_address_update_modal">Edit Shipping Address</button>
                                         <div class="modal" id="order_address_update_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -623,7 +623,8 @@
                                                     @php
                                                         $shipping = json_decode($order->shipping_address)
                                                     @endphp
-                                                    <form action="">
+                                                    <form action="{{ route('store.order.address.update', $order->id) }}" method="POST">
+                                                        @csrf
                                                         <div class="row text-left p-3">
                                                             <div class="col-md-6 mb2">
                                                                 <label>First Name</label>
