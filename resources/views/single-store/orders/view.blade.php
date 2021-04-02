@@ -507,73 +507,166 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td align="right">
-                                        @if($order->paid == 0)
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
-                                            <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay  *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
-                                            <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{ number_format($order->total_cost + $usps_rate + $order->handling_fee , 2) }}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
+                                    @if($usps_rate !== 0)
+                                        <td align="right">
+                                            @if($order->paid == 0)
+                                                <button class="btn btn-success" data-toggle="modal" data-target="#payment_modal"><i class="fa fa-credit-card"></i> Credit Card Pay</button>
+                                                <button class="btn btn-success paypal-pay-button" data-toggle="modal" data-target="#paypal_pay_trigger" data-href="{{route('store.order.paypal.pay',$order->id)}}" data-percentage="{{$settings->paypal_percentage}}" data-fee="{{number_format($order->cost_to_pay  *$settings->paypal_percentage/100,2)}}" data-subtotal="{{number_format($order->cost_to_pay,2)}}" data-pay=" {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD" ><i class="fab fa-paypal"></i> Paypal Pay</button>
+                                                <button class="btn btn-success wallet-pay-button" data-href="{{route('store.order.wallet.pay',$order->id)}}" data-pay=" {{ number_format($order->total_cost + $usps_rate + $order->handling_fee , 2) }}" ><i class="fa fa-wallet"></i> Wallet Pay</button>
 
 
-                                            <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="block block-rounded block-themed block-transparent mb-0">
-                                                            <div class="block-content cst_content_wrapper font-size-sm text-center">
-                                                                <h2>Are your sure?</h2>
-                                                                <div class="text-center"> <p>
-                                                                        Subtotal: {{number_format(($order->total_cost + $usps_rate + $order->handling_fee ),2)}} USD
-                                                                        <br>
-                                                                        YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee *$settings->paypal_percentage/100,2)}} USD
-                                                                        <br>Total Cost : {{number_format(($order->total_cost + $usps_rate + $order->handling_fee )+($order->total_cost + $usps_rate + $order->handling_fee *$settings->paypal_percentage/100),2)}} USD</p>
+                                                <div class="modal" id="paypal_pay_trigger" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="block block-rounded block-themed block-transparent mb-0">
+                                                                <div class="block-content cst_content_wrapper font-size-sm text-center">
+                                                                    <h2>Are your sure?</h2>
+                                                                    <div class="text-center"> <p>
+                                                                            Subtotal: {{number_format(($order->total_cost + $usps_rate + $order->handling_fee ),2)}} USD
+                                                                            <br>
+                                                                            YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee *$settings->paypal_percentage/100,2)}} USD
+                                                                            <br>Total Cost : {{number_format(($order->total_cost + $usps_rate + $order->handling_fee )+($order->total_cost + $usps_rate + $order->handling_fee *$settings->paypal_percentage/100),2)}} USD</p>
+                                                                    </div>
+                                                                    <p> A amount of  {{number_format(($order->total_cost + $usps_rate + $order->handling_fee ) +($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
+
+                                                                    <div class="paypal_btn_trigger">
+                                                                        <div class="paypal-button-container"></div>
+                                                                    </div>
+
                                                                 </div>
-                                                                <p> A amount of  {{number_format(($order->total_cost + $usps_rate + $order->handling_fee ) +($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>
-
-                                                                <div class="paypal_btn_trigger">
-                                                                    <div class="paypal-button-container"></div>
+                                                                <div class="block-content block-content-full text-center border-top">
+                                                                   <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                                 </div>
-
-                                                            </div>
-                                                            <div class="block-content block-content-full text-center border-top">
-                                                               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="ajax_paypal_form_submit" style="display: none;">
+                                                        <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" name="id" value="{{ $order->id }}">
+                                                            <textarea name="response"></textarea>
+                                                        </form>
+                                                </div>
+
+
+
+                                                <script>
+
+                                                    paypal.Buttons({
+                                                        createOrder: function(data, actions) {
+                                                            return actions.order.create({
+                                                                purchase_units: [{
+                                                                    amount: {
+                                                                        value: '{{number_format(($order->total_cost + $usps_rate + $order->handling_fee ) +($order->total_cost + $order->shipping_rate + $order->handling_fee*$settings->paypal_percentage/100),2)}}'
+                                                                    }
+                                                                }]
+                                                            });
+                                                        },
+                                                        onApprove: function(data, actions) {
+                                                            return actions.order.capture().then(function(details) {
+                                                                console.log(details);
+                                                                $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
+                                                                $('.ajax_paypal_form_submit form').submit();
+                                                            });
+                                                        }
+                                                    }).render('.paypal-button-container');
+                                                </script>
+
+                                            @endif
+                                        </td>
+                                    @else
+                                        <td align="right">
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#order_address_update_modal">Edit Shipping Address</button>
+                                            <div class="modal" id="order_address_update_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="block-header bg-primary-dark text-left">
+                                                            <h3 class="block-title text-white">Edit Shipping Address</h3>
+                                                            <div class="block-options">
+                                                                <button type="button" class="btn-block-option">
+                                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        @php
+                                                            $shipping = json_decode($order->shipping_address)
+                                                        @endphp
+                                                        <form action="{{ route('store.order.address.update', $order->id) }}" method="POST">
+                                                            @csrf
+                                                            <div class="row text-left p-3">
+                                                                <div class="col-md-6 mb2">
+                                                                    <label>First Name</label>
+                                                                    <input type="text" class="form-control" value="{{$shipping->first_name}}" name="first_name"
+                                                                           value=""  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-6 mb2">
+                                                                    <label>Last Name</label>
+                                                                    <input type="text" class="form-control" name="last_name"
+                                                                           value="{{ $shipping->last_name }}"  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-12 mb2">
+                                                                    <label>Address</label>
+                                                                    <input type="text" class="form-control" name="address1"
+                                                                           value="{{ $shipping->address1 }}"  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-12 mb2">
+                                                                    <label>Street (optional)</label>
+                                                                    <input type="text" class="form-control" name="address2"
+                                                                           value="{{ $shipping->address2 }}"  placeholder="" >
+                                                                </div>
+                                                                <div class="col-md-6 mb2">
+                                                                    <label>City</label>
+                                                                    <input type="text" class="form-control" name="city"
+                                                                           value="{{ $shipping->city }}"  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-6 mb2">
+                                                                    <label>Province</label>
+                                                                    <input type="text" class="form-control" name="province"
+                                                                           value="{{ $shipping->province }}"  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-6 mb2">
+                                                                    <label>Province Code</label>
+                                                                    <input type="text" class="form-control" name="province_code"
+                                                                           value="{{ isset($shipping->province_code) ?? $shipping->province_code }}"  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-6 mb2">
+                                                                    <label>Zip Code</label>
+                                                                    <input type="text" class="form-control" name="zip"
+                                                                           value="{{ $shipping->zip }}"  placeholder="" required>
+                                                                </div>
+                                                                <div class="col-md-12 mb2">
+                                                                    <label>Country</label>
+                                                                    <select name="country" required class="form-control">
+                                                                        <option value="">Select Country</option>
+                                                                        @foreach($countries as $country)
+                                                                            <option value="{{$country->name}}"
+                                                                                    @if($country->name == $shipping->country)
+                                                                                    selected
+                                                                                @endif
+                                                                            >
+                                                                                {{$country->name}}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-12 mb2">
+                                                                    <label>Phone</label>
+                                                                    <input type="text" required class="form-control" name="phone"
+                                                                           value="{{ isset($shipping->phone) ?? $shipping->phone }}"  placeholder="" >
+                                                                </div>
+
+                                                                <div class="block-content block-content-full text-right border-top">
+
+                                                                    <button type="submit" class="btn btn-sm btn-success">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="ajax_paypal_form_submit" style="display: none;">
-                                                    <form action="{{ route('store.order.paypal.pay.success', $order->id) }}" method="POST">
-                                                        {{ csrf_field() }}
-                                                        <input type="hidden" name="id" value="{{ $order->id }}">
-                                                        <textarea name="response"></textarea>
-                                                    </form>
-                                            </div>
-
-
-
-                                            <script>
-
-                                                paypal.Buttons({
-                                                    createOrder: function(data, actions) {
-                                                        return actions.order.create({
-                                                            purchase_units: [{
-                                                                amount: {
-                                                                    value: '{{number_format(($order->total_cost + $usps_rate + $order->handling_fee ) +($order->total_cost + $order->shipping_rate + $order->handling_fee*$settings->paypal_percentage/100),2)}}'
-                                                                }
-                                                            }]
-                                                        });
-                                                    },
-                                                    onApprove: function(data, actions) {
-                                                        return actions.order.capture().then(function(details) {
-                                                            console.log(details);
-                                                            $('.ajax_paypal_form_submit').find('textarea').val(JSON.stringify(details));
-                                                            $('.ajax_paypal_form_submit form').submit();
-                                                        });
-                                                    }
-                                                }).render('.paypal-button-container');
-                                            </script>
-
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
 
                             </tbody>
