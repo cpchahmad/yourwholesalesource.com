@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AdminSetting;
+use App\Country;
 use App\Customer;
 use App\ErrorLog;
 use App\FulfillmentLineItem;
@@ -104,6 +105,7 @@ class OrderController extends Controller
                 'order' => $order,
                 'settings' => $settings,
                 'shop' => $shop,
+                'countries' => Country::all();
             ]);
         }
     }
