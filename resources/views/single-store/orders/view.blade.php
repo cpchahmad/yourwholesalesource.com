@@ -962,7 +962,7 @@
                                 <hr>
                                 <h6>Shipping Address</h6>
                                 <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
-                                    <br> {{$shipping->company}}
+                                    <br> {{isset($shipping->company) ?? $shipping->company}}
                                     <br> {{$shipping->address1}}
                                     <br> {{$shipping->address2}}
                                     <br> {{$shipping->city}}
