@@ -12,6 +12,7 @@ class RolePermissionController extends Controller
 //       if($user->email == 'admin@wefullfill.com'){
 //           return redirect('/shop/install?shop=fantasy-supplier.myshopify.com');
 //       }
+       dd($user);
 
        if($user->email == 'moe@webinopoly.com') {
            dd(32);
