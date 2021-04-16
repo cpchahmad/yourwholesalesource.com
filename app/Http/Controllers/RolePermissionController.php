@@ -30,9 +30,9 @@ class RolePermissionController extends Controller
                else if($user->hasRole('sales-manager')){
                    return redirect()->route('managers.dashboard');
                }
-//               else{
-//                   return redirect()->route('admin.dashboard');
-//               }
+               else{
+                   return redirect()->route('admin.dashboard');
+               }
            }
        }
 
