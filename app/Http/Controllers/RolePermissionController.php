@@ -14,6 +14,7 @@ class RolePermissionController extends Controller
 //       }
 
        if($user->email == 'moe@webinopoly.com') {
+           dd(32);
            return redirect('/');
        }
        if ($user->email == 'super_admin@wefullfill.com'){
