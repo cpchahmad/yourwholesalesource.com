@@ -145,6 +145,7 @@ class ProductCsvImportController extends Controller
                 $this->createProduct($p, $variant);
                 $variant->cost_per_item = 'processed';
                 $variant->save();
+                dd($variant);
             }
         }
     }
@@ -178,18 +179,24 @@ class ProductCsvImportController extends Controller
         $product->save();
 
 
-        if(getimagesize($p->image_src) !== false)
-        {
-            $image = file_get_contents($p->image_src);
-            $filename = now()->format('YmdHi') .  $p->handle . rand(12321, 456546464) . '.jpg';
-            file_put_contents(public_path('images/' . $filename), $image);
-            $image = new Image();
-            $image->isV = 0;
-            $image->position = 1;
-            $image->product_id = $product->id;
-            $image->image = $filename;
-            $image->save();
+        try{
+            if(getimagesize($p->image_src) !== false)
+            {
+                $image = file_get_contents($p->image_src);
+                $filename = now()->format('YmdHi') .  $p->handle . rand(12321, 456546464) . '.jpg';
+                file_put_contents(public_path('images/' . $filename), $image);
+                $image = new Image();
+                $image->isV = 0;
+                $image->position = 1;
+                $image->product_id = $product->id;
+                $image->image = $filename;
+                $image->save();
+            }
         }
+        catch (\Exception $e) {
+
+        }
+
 
 
         $this->ProductVariants($variant, $product);
