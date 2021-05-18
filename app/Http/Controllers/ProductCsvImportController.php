@@ -138,7 +138,7 @@ class ProductCsvImportController extends Controller
     }
 
     public function processProducts() {
-        $variants = VariantCsv::where('cost_per_item', '')->limit(500)->get();
+        $variants = VariantCsv::where('cost_per_item', '')->limit(380)->get();
 
         foreach ($variants as $variant) {
             if($variant->variant_sku != '' && $p = ProductCsv::where('variant_sku', $variant->variant_sku)->first()) {
