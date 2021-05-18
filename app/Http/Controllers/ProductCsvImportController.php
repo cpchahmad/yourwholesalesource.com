@@ -147,6 +147,8 @@ class ProductCsvImportController extends Controller
                 $variant->save();
             }
         }
+
+        dd(123);
     }
 
     public function createProduct ($p, $variant) {
