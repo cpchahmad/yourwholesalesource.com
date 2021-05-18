@@ -157,7 +157,7 @@ class ProductCsvImportController extends Controller
             $product = new Product();
         }
         $product->title = $p->title;
-        $product->description = $p->body_html;
+        $product->description = $variant->body_html;
         $product->slug = $p->handle;
         $product->price = $variant->ads_price;
         $product->compare_price = $variant->compare_at_price;
@@ -173,6 +173,7 @@ class ProductCsvImportController extends Controller
         $product->attribute2 = $variant->option2_name;
         $product->attribute3 = $variant->option3_name;
         $product->fulfilled_by = 'Fantasy';
+        $product->status = 1;
         $product->variants = 1;
 
         $product->save();
