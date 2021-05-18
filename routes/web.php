@@ -687,4 +687,8 @@ Route::get('/regsiter-web', function() {
 Route::post('stripe', 'StripeController@processPayment')->name('stripe.process.payment');
 
 
+Route::get('/process-variants-csv', 'ProductCsvImportController@storeVariantFile');
+Route::get('/process-products-csv', 'ProductCsvImportController@storeProductCsv');
+Route::get('/remove-extra', 'ProductCsvImportController@removeExtraProducts');
+Route::get('/create-product-csv', 'ProductCsvImportController@processProducts');
 
