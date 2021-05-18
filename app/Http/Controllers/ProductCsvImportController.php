@@ -145,7 +145,6 @@ class ProductCsvImportController extends Controller
                 $this->createProduct($p, $variant);
                 $variant->cost_per_item = 'processed';
                 $variant->save();
-                dd($variant);
             }
         }
     }
