@@ -86,9 +86,13 @@ class OrderController extends Controller
     public function order_addresss_update(Request $request, $id) {
         $order = RetailerOrder::find($id);
 
+        dump($request->all());
+
         $order->shipping_address = json_encode($request->except(['_token']));
         $order->save();
-        return redirect()->back()->with('success', 'Shipping addres updated successfully');
+
+        dd($order);
+        return redirect()->back()->with('success', 'Shipping address updated successfully');
     }
 
 
