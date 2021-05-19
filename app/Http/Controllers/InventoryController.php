@@ -189,7 +189,9 @@ class InventoryController extends Controller
                     $variant->linked_product->quantity = $variant->linked_product->varaint_count($variant->linked_product);
                     $variant->linked_product->save();
 
-                    $this->deductProductInventory($variant->linked_product, $item->quantity);
+                    if($type == 'new')
+                        $this->deductProductInventory($variant->linked_product, $item->quantity);
+
                     Artisan::call('app:sku-quantity-change',['product_id'=> $variant->product_id]);
                 }
                 else{
@@ -212,7 +214,9 @@ class InventoryController extends Controller
                         if($product_warehouse_inventory)
                             $product_warehouse_inventory->save();
 
-                        $this->deductProductInventory($variant->linked_product, $item->quantity);
+                        if($type == 'new')
+                            $this->deductProductInventory($product, $item->quantity);
+
                         Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
                     }
                 }
