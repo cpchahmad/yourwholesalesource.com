@@ -350,11 +350,11 @@ class InventoryController extends Controller
 
         if($variant)
         {
-            $variant->quantity = $inflow_product->totalQuantityOnHand;
+            $variant->quantity = (int) $inflow_product->totalQuantityOnHand;
             $variant->save();
         }
 
-        $product->quantity = $inflow_product->totalQuantityOnHand;
+        $product->quantity = (int) $inflow_product->totalQuantityOnHand;
         $product->save();
 
     }
