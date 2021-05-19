@@ -346,7 +346,17 @@ class InventoryController extends Controller
 
         $inflow_product = json_decode($response);
 
-        dd($inflow_product);
+        $variant = $product->hasVariants()->where('sku', $inflow_product->sku)->first();
+
+        if($variant)
+        {
+            $variant->quantity = $inflow_product->totalQuantityOnHand;
+            $variant->save();
+        }
+
+        $product->quantity = $inflow_product->totalQuantityOnHand;
+        $product->save();
+
     }
 }
 

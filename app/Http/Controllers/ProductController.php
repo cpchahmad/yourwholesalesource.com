@@ -3287,6 +3287,8 @@ class ProductController extends Controller
             }
         });
 
+
+        return redirect()->back()->with('success', 'Inventory Synced Successfully!');
     }
 
 }
