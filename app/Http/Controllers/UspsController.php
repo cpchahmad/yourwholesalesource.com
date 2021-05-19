@@ -8,7 +8,7 @@ class UspsController extends Controller
 {
     public function getShippingInfo($order) {
         $address = json_decode(json_encode($this->validate_address($order)));
-
+        dd($address);
         if(!(isset($address->Error))) {
 
             $shipping = json_decode(json_encode($this->shipping_rates($order)));
