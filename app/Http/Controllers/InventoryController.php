@@ -286,7 +286,7 @@ class InventoryController extends Controller
                         "productId" => $product->inflow_id,
                         "quantity" => [
                             "standardQuantity" => "-".$quantity,
-                            "uomQuantity" => "-2".$quantity,
+                            "uomQuantity" => "-".$quantity,
                             "serialNumbers" => [
                             ]
                         ],
@@ -295,7 +295,6 @@ class InventoryController extends Controller
                 ]
             ];
 
-            dd($payload);
 
             $payload = json_encode($payload);
 
