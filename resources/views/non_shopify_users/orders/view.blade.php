@@ -1,5 +1,8 @@
 @extends('layout.shopify')
 @section('content')
+    @php
+        $usps_rate = $order->usps_shipping;
+    @endphp
 
     <div class="bg-body-light">
         <div class="content content-full pt-2 pb-2">
@@ -534,9 +537,6 @@
                                     Shipping Price
                                 </td>
                                 <td align="right">
-                                    @php
-                                        $usps_rate = $order->usps_shipping;
-                                    @endphp
                                     {{ $usps_rate == 0 ? 'The Address is not Valid' : $usps_rate . 'USD'}}
                                     {{-- {{ $order->shipping_rate_for_non_shopify }} USD--}}
                                 </td>
