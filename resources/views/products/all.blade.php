@@ -30,6 +30,7 @@
             @role('wordpress-admin')
                 <div class="col-sm-3 text-right">
                     <a href="{{ route('product.create') }}" class="btn btn-success btn-square ">Add New Product</a>
+                    <a href="{{ route('product.sync.inventory') }}" class="btn btn-info btn-square ">Sync Inventory</a>
                 </div>
             @endrole
         </div>

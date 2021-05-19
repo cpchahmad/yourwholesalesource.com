@@ -7,8 +7,11 @@ use App\Product;
 use App\ProductVariant;
 use App\RetailerOrder;
 use App\WarehouseInventory;
+use Carbon\Carbon;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 
 class InventoryController extends Controller
 {
@@ -265,5 +268,83 @@ class InventoryController extends Controller
         }
     }
 
+    public function deductProductInventory($product) {
+
+        $stockAdjustmentId = (string) Str::uuid();
+        $stockAdjustmentId = (string) Str::uuid();
+        $adjustmentNumber = Str::random();
+        $timestamp = Carbon::now()->timestamp;
+
+        $payload = [
+            "stockAdjustmentId" => (string) Str::uuid(),
+            "adjustmentNumber" => Str::random(),
+            "locationId" => "d2bc5676-c298-4edb-9ddb-20c8fc135fc5",
+            "lines" => [
+                [
+                    "stockAdjustmentLineId" => (string) Str::uuid(),
+                    "description" => "Testing",
+                    "productId" => $product->inflow_id,
+                    "quantity" => [
+                        "standardQuantity" => "-2",
+                        "uomQuantity" => "-2",
+                        "serialNumbers" => [
+                        ]
+                    ],
+                    "timestamp" => Carbon::now()->timestamp
+                ]
+            ]
+        ];
+
+        $payload = json_encode($payload);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/6bc5998f-eb23-4761-bbbb-2fe8f3f5b5bc/stock-adjustments?include=lines',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'PUT',
+            CURLOPT_POSTFIELDS => $payload,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Accept: application/json;version=2021-04-26',
+                'Authorization: Bearer 117TXC5I_fH4jCwKo2ajz9nIGdUDAWixMGg46Uue-Qc'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+    }
+
+    public function syncProductInventory($product) {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/6bc5998f-eb23-4761-bbbb-2fe8f3f5b5bc/products/'.$product->inflow_id.'?include=inventoryLines',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Accept: application/json;version=2021-04-26',
+                'Authorization: Bearer 117TXC5I_fH4jCwKo2ajz9nIGdUDAWixMGg46Uue-Qc'
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        dd($response);
+    }
 }
 

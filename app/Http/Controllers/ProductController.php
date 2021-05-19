@@ -40,6 +40,7 @@ class ProductController extends Controller
     private $helper;
     private $notify;
     private $log;
+    private $inventory;
 
     /**
      * ProductController constructor.
@@ -49,6 +50,7 @@ class ProductController extends Controller
         $this->helper = new HelperController();
         $this->notify = new NotificationController();
         $this->log = new ActivityLogController();
+        $this->inventory = new InventoryController();
     }
 
     public function index()
@@ -3276,6 +3278,15 @@ class ProductController extends Controller
         return view('non_shopify_users.orders.dropship-product-browse-section')->with([
             'products' => $admin_products,
         ])->render();
+    }
+
+    public function syncInventoryWithInflow() {
+        Product::chunk(100, function ($products) {
+            foreach ($products as $product) {
+                $this->inventory->syncProductInventory($product);
+            }
+        });
+
     }
 
 }

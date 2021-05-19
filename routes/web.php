@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::any('/sub_sub_category/{id}/update','CategoryController@sub_sub_update')->name('sub.sub.update');
     Route::get('/sub_sub_category/{id}/delete','CategoryController@sub_sub_delete')->name('sub.sub.delete');
     Route::get('/products','ProductController@index')->name('product.create');
+    Route::get('/products/sync/inventory','ProductController@syncInventoryWithInflow')->name('product.sync.inventory');
     Route::get('/products/all','ProductController@all')->name('product.all');
     Route::get('dropship/products','ProductController@view_dropship_products_listing')->name('dropship.product.all');
     Route::any('/products/{id}/view','ProductController@view')->name('product.view');
