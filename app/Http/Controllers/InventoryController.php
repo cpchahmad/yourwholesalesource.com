@@ -344,7 +344,9 @@ class InventoryController extends Controller
 
         curl_close($curl);
 
-        dd($response);
+        $inflow_product = json_decode($response);
+
+        dd($inflow_product);
     }
 }
 
