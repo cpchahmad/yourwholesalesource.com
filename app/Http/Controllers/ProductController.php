@@ -3281,7 +3281,7 @@ class ProductController extends Controller
     }
 
     public function syncInventoryWithInflow() {
-        Product::chunk(100, function ($products) {
+        Product::whereNotNull('inflow_id')->chunk(100, function ($products) {
             foreach ($products as $product) {
                 $this->inventory->syncProductInventory($product);
             }
