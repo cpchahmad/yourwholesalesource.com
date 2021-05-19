@@ -346,8 +346,6 @@ class InventoryController extends Controller
 
         $inflow_product = json_decode($response);
 
-        $inflow_product = $inflow_product[0];
-
         $variant = $product->hasVariants()->where('sku', $inflow_product->sku)->first();
 
         if($variant)
