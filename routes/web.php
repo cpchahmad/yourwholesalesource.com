@@ -541,6 +541,7 @@ Route::get('test/sync/{id}', 'PaypalController@test');
 
 Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
 Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
+Route::get('/sync-inflow-product', 'InventoryController@syncInflowProducts');
 
 Route::get('check/questionnaire', 'HelperController@QuestionnaireCheck')->name('app.questionaire.check');
 Route::get('test/emails', 'HelperController@testEmail');
