@@ -295,6 +295,8 @@ class InventoryController extends Controller
                 ]
             ];
 
+            dd($payload);
+
             $payload = json_encode($payload);
 
             $curl = curl_init();
