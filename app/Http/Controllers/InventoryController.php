@@ -348,8 +348,6 @@ class InventoryController extends Controller
 
         $inflow_product = $inflow_product[0];
 
-        dd($inflow_product->sku);
-
         $variant = $product->hasVariants()->where('sku', $inflow_product->sku)->first();
 
         if($variant)
