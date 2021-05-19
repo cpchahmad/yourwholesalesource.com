@@ -242,7 +242,7 @@ class InventoryController extends Controller
 
         foreach ($products as $product) {
             $inflow_product = new InflowProduct();
-            $inflow_product->product_id = $product->id;
+            $inflow_product->product_id = $product->productId;
             $inflow_product->sku = $product->sku;
             $inflow_product->save();
         }
