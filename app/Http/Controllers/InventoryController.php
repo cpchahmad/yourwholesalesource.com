@@ -321,7 +321,6 @@ class InventoryController extends Controller
 
             curl_close($curl);
 
-            dd($response);
         }
 
     }
