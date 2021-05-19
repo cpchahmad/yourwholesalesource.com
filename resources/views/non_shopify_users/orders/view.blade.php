@@ -659,7 +659,7 @@
                                                             <div class="col-md-6 mb2">
                                                                 <label>Province Code</label>
                                                                 <input type="text" class="form-control" name="province_code"
-                                                                       value="{{ isset($shipping->province_code) ?? $shipping->province_code }}"  placeholder="" required>
+                                                                       value="{{ isset($shipping->province_code) ? $shipping->province_code : '' }}"  placeholder="" required>
                                                             </div>
                                                             <div class="col-md-6 mb2">
                                                                 <label>Zip Code</label>
