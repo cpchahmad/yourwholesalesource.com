@@ -682,11 +682,10 @@ Route::get('/regsiter-web', function() {
     dd($resp);
 });
 
-//Route::any('/any-web', function() {
-//    $log = new \App\ErrorLog();
-//    $log->message = "Order create webhook";
-//    $log->save();
-//});
+Route::any('/any-web', function() {
+    $inventory = new \App\Http\Controllers\InventoryController();
+    $inventory->deductProductInventory(Product::find(3170), 1);
+});
 Route::post('stripe', 'StripeController@processPayment')->name('stripe.process.payment');
 
 

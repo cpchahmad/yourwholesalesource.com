@@ -188,6 +188,8 @@ class InventoryController extends Controller
 
                     $variant->linked_product->quantity = $variant->linked_product->varaint_count($variant->linked_product);
                     $variant->linked_product->save();
+
+                    $this->deductProductInventory($variant->linked_product, $item->quantity);
                     Artisan::call('app:sku-quantity-change',['product_id'=> $variant->product_id]);
                 }
                 else{
@@ -210,6 +212,7 @@ class InventoryController extends Controller
                         if($product_warehouse_inventory)
                             $product_warehouse_inventory->save();
 
+                        $this->deductProductInventory($variant->linked_product, $item->quantity);
                         Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
                     }
                 }
@@ -268,57 +271,58 @@ class InventoryController extends Controller
         }
     }
 
-    public function deductProductInventory($product) {
+    public function deductProductInventory($product, $quantity) {
 
-        $stockAdjustmentId = (string) Str::uuid();
-        $stockAdjustmentId = (string) Str::uuid();
-        $adjustmentNumber = Str::random();
-        $timestamp = Carbon::now()->timestamp;
+        if($product->inflow_id != null) {
 
-        $payload = [
-            "stockAdjustmentId" => (string) Str::uuid(),
-            "adjustmentNumber" => Str::random(),
-            "locationId" => "d2bc5676-c298-4edb-9ddb-20c8fc135fc5",
-            "lines" => [
-                [
-                    "stockAdjustmentLineId" => (string) Str::uuid(),
-                    "description" => "Testing",
-                    "productId" => $product->inflow_id,
-                    "quantity" => [
-                        "standardQuantity" => "-2",
-                        "uomQuantity" => "-2",
-                        "serialNumbers" => [
-                        ]
-                    ],
-                    "timestamp" => Carbon::now()->timestamp
+            $payload = [
+                "stockAdjustmentId" => (string) Str::uuid(),
+                "adjustmentNumber" => Str::random(),
+                "locationId" => "d2bc5676-c298-4edb-9ddb-20c8fc135fc5",
+                "lines" => [
+                    [
+                        "stockAdjustmentLineId" => (string) Str::uuid(),
+                        "description" => "Testing",
+                        "productId" => $product->inflow_id,
+                        "quantity" => [
+                            "standardQuantity" => "-".$quantity,
+                            "uomQuantity" => "-2".$quantity,
+                            "serialNumbers" => [
+                            ]
+                        ],
+                        "timestamp" => Carbon::now()->timestamp
+                    ]
                 ]
-            ]
-        ];
+            ];
 
-        $payload = json_encode($payload);
+            $payload = json_encode($payload);
 
-        $curl = curl_init();
+            $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/6bc5998f-eb23-4761-bbbb-2fe8f3f5b5bc/stock-adjustments?include=lines',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_POSTFIELDS => $payload,
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
-                'Accept: application/json;version=2021-04-26',
-                'Authorization: Bearer 117TXC5I_fH4jCwKo2ajz9nIGdUDAWixMGg46Uue-Qc'
-            ),
-        ));
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://cloudapi.inflowinventory.com/6bc5998f-eb23-4761-bbbb-2fe8f3f5b5bc/stock-adjustments?include=lines',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'PUT',
+                CURLOPT_POSTFIELDS => $payload,
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    'Accept: application/json;version=2021-04-26',
+                    'Authorization: Bearer 117TXC5I_fH4jCwKo2ajz9nIGdUDAWixMGg46Uue-Qc'
+                ),
+            ));
 
-        $response = curl_exec($curl);
+            $response = curl_exec($curl);
 
-        curl_close($curl);
+            curl_close($curl);
+
+            dd($response);
+        }
+
     }
 
     public function syncProductInventory($product) {
