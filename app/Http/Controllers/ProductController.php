@@ -6,6 +6,7 @@ use App\AdditionalTab;
 use App\Category;
 use App\Console\Commands\AppChangeQuantitySku;
 use App\DropshipRequest;
+use App\ErrorLog;
 use App\Exports\ProductsExport;
 use App\Exports\ProductVariantExport;
 use App\Exports\RetailerOrderExport;
@@ -3283,7 +3284,15 @@ class ProductController extends Controller
 
     public function syncInventoryWithInflow() {
 
-        $this->dispatch(new SyncInflowInventory());
+        try{
+            $this->dispatch(new SyncInflowInventory());
+        }
+        catch (\Exception $e) {
+            $log = new ErrorLog();
+            $log->message = "Sync Inflow Job: ". $e->getMessage();
+            $log->save();
+        }
+
 
         return redirect()->back()->with('success', 'Inventory Synced Successfully!');
     }
