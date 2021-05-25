@@ -77,6 +77,8 @@ class DefaultSettingsController extends Controller
       ],[
          'payment_charge_percentage'  => $request->input('payment_charge_percentage'),
           'paypal_percentage' =>$request->input('paypal_percentage'),
+          'stripe_public' =>$request->input('stripe_public'),
+          'stripe_private' =>$request->input('stripe_private'),
       ]);
         return redirect()->back()->with('success', 'Payment Charge Percentage Saved Successfully');
     }

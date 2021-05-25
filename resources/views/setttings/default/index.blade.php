@@ -143,6 +143,27 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>Stripe Public Key</label>
+                                        <input class="form-control" type="number" step="any" name="stripe_public" required
+                                               @if($settings != null)  value="{{$settings->stripe_public}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>Stripe Private Key</label>
+                                        <input class="form-control" type="number" step="any" name="stripe_private" required
+                                               @if($settings != null)  value="{{$settings->stripe_private}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-12 text-right">
                                     <button class="btn btn-sm btn-primary" type="submit">Save</button>
@@ -151,6 +172,7 @@
                         </form>
                     </div>
                 </div>
+
             </div>
             <div class="col-md-8">
                 <div class="block">
