@@ -229,7 +229,7 @@ class InventoryController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/6bc5998f-eb23-4761-bbbb-2fe8f3f5b5bc/products?include=inventoryLines',
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products?include=inventoryLines',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -240,7 +240,7 @@ class InventoryController extends Controller
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
                 'Accept: application/json;version=2021-04-26',
-                'Authorization: Bearer 117TXC5I_fH4jCwKo2ajz9nIGdUDAWixMGg46Uue-Qc'
+                'Authorization: Bearer m7O7-bVkW5Qg-AFXyYj0twUzP2CR2ADO7ei3KMBUc3s'
             ),
         ));
 
@@ -249,6 +249,8 @@ class InventoryController extends Controller
         curl_close($curl);
 
         $products = json_decode($response);
+
+        dd($products);
 
         foreach ($products as $product) {
             $inflow_product = new InflowProduct();
