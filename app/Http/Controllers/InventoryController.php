@@ -263,20 +263,20 @@ class InventoryController extends Controller
     }
 
     public function addInflowIds() {
-        $inflow_products = InflowProduct::all();
+        InflowProduct::chuck(1000, function($inflow_products) {
+            foreach ($inflow_products as $inflow_product) {
+                $variant = ProductVariant::where('sku', $inflow_product->sku)->first();
 
-        foreach ($inflow_products as $inflow_product) {
-            $variant = ProductVariant::where('sku', $inflow_product->sku)->first();
+                if($variant) {
+                    $local_product = $variant->linked_product;
 
-            if($variant) {
-                $local_product = $variant->linked_product;
-
-                if($local_product) {
-                    $local_product->inflow_id = $inflow_product->product_id;
-                    $local_product->save();
+                    if($local_product) {
+                        $local_product->inflow_id = $inflow_product->product_id;
+                        $local_product->save();
+                    }
                 }
             }
-        }
+        });
     }
 
     public function deductProductInventory($product, $quantity) {

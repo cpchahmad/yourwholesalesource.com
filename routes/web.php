@@ -696,18 +696,10 @@ Route::get('/create-product-csv', 'ProductCsvImportController@processProducts');
 
 
 
-Route::get('dupli', function () {
-    $duplicates = DB::table('inflow_products')
-        ->select('product_id', DB::raw('COUNT(*) as `count`'))
-        ->groupBy('product_id')
-        ->havingRaw('COUNT(*) > 1')
-        ->get();
-
-    dd($duplicates);
-});
 
 
-Route::get('get-in', 'InventoryController@syncInflowProducts');
+
+Route::get('add-in', 'InventoryController@addInflowIds');
 
 
 
