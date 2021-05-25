@@ -10,6 +10,7 @@ use App\Exports\ProductsExport;
 use App\Exports\ProductVariantExport;
 use App\Exports\RetailerOrderExport;
 use App\Image;
+use App\Jobs\SyncInflowInventory;
 use App\Mail\ProductDeleteMail;
 use App\Mail\ProductStockOutMail;
 use App\Mail\VariantStockOutMail;
@@ -3281,12 +3282,8 @@ class ProductController extends Controller
     }
 
     public function syncInventoryWithInflow() {
-        Product::whereNotNull('inflow_id')->chunk(100, function ($products) {
-            foreach ($products as $product) {
-                $this->inventory->syncProductInventory($product);
-            }
-        });
 
+        $this->dispatch(SyncInflowInventory::class);
 
         return redirect()->back()->with('success', 'Inventory Synced Successfully!');
     }

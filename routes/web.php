@@ -696,10 +696,10 @@ Route::get('/create-product-csv', 'ProductCsvImportController@processProducts');
 
 
 
+Route::get('/sync-test', function() {
+   $inv = new \App\Http\Controllers\InventoryController();
+   $product = Product::latest()->first();
 
-
-
-Route::get('add-in', 'InventoryController@addInflowIds');
-
-
-
+   dd($product);
+   $inv->syncProductInventory($product);
+});
