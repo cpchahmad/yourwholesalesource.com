@@ -229,7 +229,7 @@ class InventoryController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products?include=inventoryLines&count=1000&skip=2000',
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products?include=inventoryLines&count=1000&skip=3000',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -251,11 +251,14 @@ class InventoryController extends Controller
         $products = collect(json_decode($response));
 
 
-        foreach ($products as $product) {
-            $inflow_product = new InflowProduct();
-            $inflow_product->product_id = $product->productId;
-            $inflow_product->sku = $product->sku;
-            $inflow_product->save();
+        if(count($products))
+        {
+            foreach ($products as $product) {
+                $inflow_product = new InflowProduct();
+                $inflow_product->product_id = $product->productId;
+                $inflow_product->sku = $product->sku;
+                $inflow_product->save();
+            }
         }
     }
 
