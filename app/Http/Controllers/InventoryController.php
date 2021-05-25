@@ -229,7 +229,7 @@ class InventoryController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products?include=inventoryLines&count=3000&skip=5000',
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products?include=inventoryLines&count=5000&skip=8000',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
