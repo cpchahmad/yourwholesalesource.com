@@ -3284,18 +3284,7 @@ class ProductController extends Controller
 
     public function syncInventoryWithInflow() {
 
-        dump(23);
-        try{
-            $this->dispatch(new SyncInflowInventory());
-            dd(45);
-
-        }
-        catch (\Exception $e) {
-            $log = new ErrorLog();
-            $log->message = "Sync Inflow Job: ". $e->getMessage();
-            $log->save();
-        }
-
+        $this->dispatch(new SyncInflowInventory());
 
         return redirect()->back()->with('success', 'Inventory Synced Successfully!');
     }
