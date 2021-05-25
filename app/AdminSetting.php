@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class AdminSetting extends Model
 {
    protected $fillable = [
-       'payment_charge_percentage','paypal_percentage'
+       'payment_charge_percentage','paypal_percentage', 'stripe_public', 'stripe_private'
    ];
 }
