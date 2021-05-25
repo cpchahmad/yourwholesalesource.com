@@ -694,3 +694,14 @@ Route::get('/process-products-csv', 'ProductCsvImportController@storeProductCsv'
 Route::get('/remove-extra', 'ProductCsvImportController@removeExtraProducts');
 Route::get('/create-product-csv', 'ProductCsvImportController@processProducts');
 
+
+
+Route::get('dupli', function () {
+    $duplicates = DB::table('products')
+        ->select('sku', DB::raw('COUNT(*) as `count`'))
+        ->groupBy('sku')
+        ->havingRaw('COUNT(*) > 1')
+        ->get();
+
+    dd($duplicates);
+});
