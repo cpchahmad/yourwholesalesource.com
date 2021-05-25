@@ -3283,7 +3283,7 @@ class ProductController extends Controller
 
     public function syncInventoryWithInflow() {
 
-        $this->dispatch(SyncInflowInventory::class);
+        $this->dispatch(new SyncInflowInventory());
 
         return redirect()->back()->with('success', 'Inventory Synced Successfully!');
     }
