@@ -72,6 +72,7 @@ class DefaultSettingsController extends Controller
 
     public function save_percentage(Request $request)
     {
+        dd($request->all());
       AdminSetting::UpdateOrcreate([
           'id' => 1,
       ],[
