@@ -263,7 +263,7 @@ class InventoryController extends Controller
     }
 
     public function addInflowIds() {
-        InflowProduct::where('status', 0)->chuck(1000, function($inflow_products) {
+        InflowProduct::where('status', 0)->chunk(1000, function($inflow_products) {
             foreach ($inflow_products as $inflow_product) {
                 $variant = ProductVariant::where('sku', $inflow_product->sku)->first();
 
