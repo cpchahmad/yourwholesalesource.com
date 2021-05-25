@@ -703,5 +703,35 @@ Route::get('dupli', function () {
         ->havingRaw('COUNT(*) > 1')
         ->get();
 
+    foreach($duplicates as $d)
+    {
+        $products = \App\Product::where('title', $d->title)->get();
+
+    }
+});
+
+
+Route::get('dupli', function () {
+    $duplicates = DB::table('products')
+        ->select('sku', DB::raw('COUNT(*) as `count`'))
+        ->groupBy('sku')
+        ->havingRaw('COUNT(*) > 1')
+        ->get();
+
+    foreach($duplicates as $d)
+    {
+        $products = \App\Product::where('title', $d->title)->get();
+
+    }
+});
+
+
+Route::get('dupli-var', function () {
+    $duplicates = DB::table('variant_csvs')
+        ->select('variant_sku', DB::raw('COUNT(*) as `count`'))
+        ->groupBy('variant_sku')
+        ->havingRaw('COUNT(*) > 1')
+        ->get();
+
     dd($duplicates);
 });
