@@ -718,20 +718,7 @@ Route::get('dupli', function () {
         ->havingRaw('COUNT(*) > 1')
         ->get();
 
-    foreach($duplicates as $d)
-    {
-        $products = \App\Product::where('sku', $d->sku)->get();
-        $product = $products[0];
-        foreach ($product->hasVariants as $variant) {
-            $variant->delete();
-        }
-        foreach ($product->has_images as $image){
-            $image->delete();
-        }
-        $product->has_categories()->detach();
-        $product->has_subcategories()->detach();
-        $product->delete();
-    }
+   dd($duplicates);
 });
 
 
