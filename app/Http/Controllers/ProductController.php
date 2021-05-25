@@ -3284,9 +3284,11 @@ class ProductController extends Controller
 
     public function syncInventoryWithInflow() {
 
-        dd(23);
+        dump(23);
         try{
             $this->dispatch(new SyncInflowInventory());
+            dd(45);
+
         }
         catch (\Exception $e) {
             $log = new ErrorLog();
