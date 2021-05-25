@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\Mail\OrderPlaceEmail;
 use App\OrderLog;
 use App\OrderTransaction;
@@ -29,8 +30,9 @@ class StripeController extends Controller
     public function processPayment(Request $request)
     {
         $retailer_order = RetailerOrder::find($request->order_id);
+        $settings = AdminSetting::first();
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey($settings->stripe_private);
         Charge::create ([
             "amount" => $request->amount_to_be_paid * 100,
             "currency" => "usd",
