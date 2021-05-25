@@ -72,15 +72,15 @@ class DefaultSettingsController extends Controller
 
     public function save_percentage(Request $request)
     {
-        dd($request->all());
-      AdminSetting::UpdateOrcreate([
-          'id' => 1,
-      ],[
-         'payment_charge_percentage'  => $request->input('payment_charge_percentage'),
-          'paypal_percentage' =>$request->input('paypal_percentage'),
-          'stripe_public' =>$request->input('stripe_public'),
-          'stripe_private' =>$request->input('stripe_private'),
-      ]);
+
+          AdminSetting::UpdateOrcreate([
+              'id' => 1,
+          ],[
+             'payment_charge_percentage'  => $request->input('payment_charge_percentage'),
+              'paypal_percentage' =>$request->input('paypal_percentage'),
+              'stripe_public' =>$request->input('stripe_public'),
+              'stripe_private' =>$request->input('stripe_private'),
+          ]);
         return redirect()->back()->with('success', 'Payment Charge Percentage Saved Successfully');
     }
 
