@@ -34,7 +34,7 @@ class SyncInflowInventory implements ShouldQueue
     public function handle()
     {
         try {
-            $log = new ErrorLog();
+            $log = new ErroLog();
             $log->message = "Sdsfds";
             $log->save();
 //            Product::whereNotNull('inflow_id')->chunk(300, function ($products) {
