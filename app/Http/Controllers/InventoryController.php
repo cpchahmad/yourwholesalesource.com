@@ -246,6 +246,8 @@ class InventoryController extends Controller
 
         $response = curl_exec($curl);
 
+        dd($response);
+
         curl_close($curl);
 
         $products = json_decode($response);
