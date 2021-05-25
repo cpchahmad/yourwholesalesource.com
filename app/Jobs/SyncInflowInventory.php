@@ -34,11 +34,14 @@ class SyncInflowInventory implements ShouldQueue
     public function handle()
     {
         try {
-            Product::whereNotNull('inflow_id')->chunk(300, function ($products) {
-                foreach ($products as $product) {
-                    $this->inventory->syncProductInventory($product);
-                }
-            });
+            $log = new ErrorLog();
+            $log->message = "Sync Inflow Job: ";
+            $log->save();
+//            Product::whereNotNull('inflow_id')->chunk(300, function ($products) {
+//                foreach ($products as $product) {
+//                    $this->inventory->syncProductInventory($product);
+//                }
+//            });
         }
         catch(\Exception $e) {
             $log = new ErrorLog();
