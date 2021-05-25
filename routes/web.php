@@ -700,6 +700,5 @@ Route::get('/sync-test', function() {
    $inv = new \App\Http\Controllers\InventoryController();
    $product = Product::latest()->first();
 
-   dd($product);
    $inv->syncProductInventory($product);
 });
