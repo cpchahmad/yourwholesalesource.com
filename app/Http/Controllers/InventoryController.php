@@ -246,12 +246,10 @@ class InventoryController extends Controller
 
         $response = curl_exec($curl);
 
-
         curl_close($curl);
 
         $products = collect(json_decode($response));
 
-        dd($products);
 
         foreach ($products as $product) {
             $inflow_product = new InflowProduct();
