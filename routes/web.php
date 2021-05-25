@@ -698,8 +698,8 @@ Route::get('/create-product-csv', 'ProductCsvImportController@processProducts');
 
 Route::get('dupli', function () {
     $duplicates = DB::table('inflow_products')
-        ->select('product_id', DB::raw('COUNT(*) as `count`'))
-        ->groupBy('product_id')
+        ->select('sku', DB::raw('COUNT(*) as `count`'))
+        ->groupBy('sku')
         ->havingRaw('COUNT(*) > 1')
         ->get();
 
