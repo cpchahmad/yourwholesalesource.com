@@ -148,7 +148,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label>Stripe Public Key</label>
-                                        <input class="form-control" type="number" step="any" name="stripe_public" required
+                                        <input class="form-control" type="input" step="any" name="stripe_public" required
                                                @if($settings != null)  value="{{$settings->stripe_public}}" @endif>
 
                                     </div>
@@ -158,7 +158,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-material">
                                         <label>Stripe Private Key</label>
-                                        <input class="form-control" type="number" step="any" name="stripe_private" required
+                                        <input class="form-control" type="input" step="any" name="stripe_private" required
                                                @if($settings != null)  value="{{$settings->stripe_private}}" @endif>
 
                                     </div>
