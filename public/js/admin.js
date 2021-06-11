@@ -317,44 +317,44 @@ $(document).ready(function () {
         }
     });
     /* Admin Module - SubCategory Checkbox Selection JS */
-    // $('body').on('change','.sub_cat_checkbox',function () {
-    //     console.log('sub');
-    //     var parent_id = $(this).data('parent-id');
-    //     if($(this).is(':checked')){
-    //         console.log($(this));
-    //         console.log($(this).data('parent-id'));
-    //         $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
-    //
-    //     }
-    //     else{
-    //         console.log('sub-unch');
-    //         var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
-    //         if(checked === 0){
-    //             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
-    //         }
-    //     }
-    // });
-    //
-    // /* Admin Module - SubSubCategory Checkbox Selection JS */
-    // $('body').on('change','.sub_sub_cat_checkbox',function () {
-    //     console.log('sub-sub');
-    //
-    //     if($(this).is(':checked')){
-    //         console.log('sub--sub-ch');
-    //
-    //         $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',true);
-    //         $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
-    //     }
-    //     else{
-    //         console.log('sub--sub-unch');
-    //
-    //         var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
-    //         if(checked === 0){
-    //             $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
-    //             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
-    //         }
-    //     }
-    // });
+    $('body').on('change','.sub_cat_checkbox',function () {
+        console.log('sub');
+        var parent_id = $(this).data('parent-id');
+        if($(this).is(':checked')){
+            console.log($(this));
+            console.log($(this).data('parent-id'));
+            $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
+
+        }
+        else{
+            console.log('sub-unch');
+            var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
+            if(checked === 0){
+                $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+            }
+        }
+    });
+
+    /* Admin Module - SubSubCategory Checkbox Selection JS */
+    $('body').on('change','.sub_sub_cat_checkbox',function () {
+        console.log('sub-sub');
+
+        if($(this).is(':checked')){
+            console.log('sub--sub-ch');
+
+            $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',true);
+            $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
+        }
+        else{
+            console.log('sub--sub-unch');
+
+            var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
+            if(checked === 0){
+                $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
+                $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+            }
+        }
+    });
     /* Admin Module - Dropzone Click JS */
     $('body').on('click','.dropzone',function () {
         $('.images-upload').trigger('click');
