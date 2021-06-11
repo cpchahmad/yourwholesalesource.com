@@ -450,7 +450,7 @@ class CustomOrderController extends Controller
     {
         $country = $this->ip_info($this->getRealIpAddr(), 'Country');
 
-        $categories = Category::all();
+        $categories = Category::orderBy('title')->get();
         $productQuery = Product::where('status', 1)->newQuery();
 
         $productQuery->where('global', 0)->whereHas('has_non_shopify_user_preferences', function ($q) {
