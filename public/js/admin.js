@@ -319,9 +319,10 @@ $(document).ready(function () {
     /* Admin Module - SubCategory Checkbox Selection JS */
     $('body').on('change','.sub_cat_checkbox',function () {
         console.log('sub');
+        var parent_id = $(this).data('parent-id');
         if($(this).is(':checked')){
-            console.log($(this).parent('.product_sub_cat'));
-            $(this).parent('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
+            console.log($(this).closest(`.product_sub_cat_${parent_id}`));
+            $(this).closest(`.product_sub_cat_${parent_id}`).prev().find('.category_checkbox').prop('checked',true);
 
         }
         else{
