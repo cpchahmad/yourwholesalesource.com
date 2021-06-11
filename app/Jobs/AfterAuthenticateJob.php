@@ -34,7 +34,6 @@ class AfterAuthenticateJob implements ShouldQueue
      */
     public function handle()
     {
-        dd(2345);
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
 

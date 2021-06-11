@@ -38,7 +38,7 @@ Route::get('/order/download/{id}/csv', 'CustomOrderController@download_order')->
 
 Route::get('/shop-login', function () {
 
-    return \redirect('/authenticate');
+    return \redirect('/sdf');
 });
 
 
