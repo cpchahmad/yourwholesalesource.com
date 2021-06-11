@@ -305,6 +305,36 @@ $(document).ready(function () {
         }
         $(this).next().next().toggle();
     });
+    // /* Admin Module - Category Checkbox Selection JS */
+    // $('body').on('change','.category_checkbox',function () {
+    //     if($(this).is(':checked')){
+    //         $(this).parent().next().find('input[type=checkbox]').prop('checked',true);
+    //         $(this).parent().next().show();
+    //     }
+    //     else{
+    //         $(this).parent().next().find('input[type=checkbox]').prop('checked',false);
+    //         $(this).parent().next().hide();
+    //     }
+    // });
+    // /* Admin Module - SubCategory Checkbox Selection JS */
+    // $('body').on('change','.sub_cat_checkbox',function () {
+    //     console.log('sub');
+    //     var parent_id = $(this).data('parent-id');
+    //     console.log(parent_id);
+    //     if($(this).is(':checked')){
+    //         console.log($(this).closest(`.product_sub_cat_${parent_id}`));
+    //         $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
+    //
+    //     }
+    //     else{
+    //         console.log('sub-unch');
+    //         var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
+    //         if(checked === 0){
+    //             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+    //         }
+    //     }
+    // });
+
     /* Admin Module - Category Checkbox Selection JS */
     $('body').on('change','.category_checkbox',function () {
         if($(this).is(':checked')){
@@ -318,16 +348,10 @@ $(document).ready(function () {
     });
     /* Admin Module - SubCategory Checkbox Selection JS */
     $('body').on('change','.sub_cat_checkbox',function () {
-        console.log('sub');
-        var parent_id = $(this).data('parent-id');
-        console.log(parent_id);
         if($(this).is(':checked')){
-            console.log($(this).closest(`.product_sub_cat_${parent_id}`));
-            $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
-
+            $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
         }
         else{
-            console.log('sub-unch');
             var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
                 $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);

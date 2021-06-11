@@ -1120,6 +1120,53 @@
                                 Product Category
                             </div>
                         </div>
+{{--                        <div action="{{route('product.update',$product->id)}}" method="post">--}}
+{{--                            @csrf--}}
+{{--                            <input type="hidden" name="type[]" value="category">--}}
+{{--                            <div class="block-content" style="height: 200px;overflow: auto;overflow-x: hidden;">--}}
+{{--                                <div class="form-group product_category">--}}
+{{--                                    @foreach($categories as $category)--}}
+{{--                                        <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>--}}
+{{--                                        <div class="custom-control custom-checkbox d-inline-block">--}}
+{{--                                            <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox"--}}
+{{--                                                   @if(in_array($category->id,$product->category($product))) checked @endif--}}
+{{--                                                   id="rowcat_{{$category->title}}">--}}
+{{--                                            <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>--}}
+{{--                                        </div>--}}
+
+{{--                                        <div class="row product_sub_cat" style="display: none">--}}
+{{--                                            <div class="col-xs-12 col-xs-push-1">--}}
+{{--                                                @foreach($category->hasSub as $sub)--}}
+{{--                                                    <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>--}}
+{{--                                                    <div class="custom-control custom-checkbox d-inline-block">--}}
+{{--                                                        <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox"--}}
+{{--                                                               @if(in_array($sub->id,$product->subcategory($product))) checked @endif--}}
+{{--                                                               id="rowsub_{{$sub->title}}">--}}
+{{--                                                        <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="row product_sub_sub_cat pl-5" style="display: none">--}}
+{{--                                                        <div class="col-xs-12 col-xs-push-1">--}}
+{{--                                                            @foreach($sub->hasSub as $inner)--}}
+{{--                                                                <div class="custom-control custom-checkbox d-inline-block">--}}
+{{--                                                                    <input type="checkbox" name="sub_sub_cat[]" value="{{$inner->id}}" class="custom-control-input sub_sub_cat_checkbox"--}}
+{{--                                                                           @if(in_array($inner->id,$product->sub_sub_category($product))) checked @endif--}}
+{{--                                                                           id="row_sub_sub_{{$inner->title}}">--}}
+{{--                                                                    <label class="custom-control-label" for="row_sub_sub_{{$inner->title}}">{{$inner->title}}</label>--}}
+{{--                                                                </div>--}}
+{{--                                                                <br>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <br>--}}
+{{--                                                @endforeach--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <br>--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
                         <div action="{{route('product.update',$product->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="type[]" value="category">
@@ -1128,34 +1175,20 @@
                                     @foreach($categories as $category)
                                         <span class="category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                         <div class="custom-control custom-checkbox d-inline-block">
-                                            <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox_{{ $category->id }}"
+                                            <input type="checkbox" name="category[]" value="{{$category->id}}" class="custom-control-input category_checkbox"
                                                    @if(in_array($category->id,$product->category($product))) checked @endif
                                                    id="rowcat_{{$category->title}}">
                                             <label class="custom-control-label" for="rowcat_{{$category->title}}">{{$category->title}}</label>
                                         </div>
 
-                                        <div class="row product_sub_cat_{{$category->id}}" style="display: none">
+                                        <div class="row product_sub_cat" style="display: none">
                                             <div class="col-xs-12 col-xs-push-1">
                                                 @foreach($category->hasSub as $sub)
-                                                    <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
                                                     <div class="custom-control custom-checkbox d-inline-block">
-                                                        <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" data-parent-id="{{$category->id}}" class="custom-control-input sub_cat_checkbox"
+                                                        <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" class="custom-control-input sub_cat_checkbox"
                                                                @if(in_array($sub->id,$product->subcategory($product))) checked @endif
                                                                id="rowsub_{{$sub->title}}">
                                                         <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
-                                                    </div>
-                                                    <div class="row product_sub_sub_cat pl-5" style="display: none">
-                                                        <div class="col-xs-12 col-xs-push-1">
-                                                            @foreach($sub->hasSub as $inner)
-                                                                <div class="custom-control custom-checkbox d-inline-block">
-                                                                    <input type="checkbox" name="sub_sub_cat[]" value="{{$inner->id}}" class="custom-control-input sub_sub_cat_checkbox"
-                                                                           @if(in_array($inner->id,$product->sub_sub_category($product))) checked @endif
-                                                                           id="row_sub_sub_{{$inner->title}}">
-                                                                    <label class="custom-control-label" for="row_sub_sub_{{$inner->title}}">{{$inner->title}}</label>
-                                                                </div>
-                                                                <br>
-                                                            @endforeach
-                                                        </div>
                                                     </div>
                                                     <br>
                                                 @endforeach
@@ -1166,6 +1199,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="block-footer" style="height: 15px">
 
                         </div>
