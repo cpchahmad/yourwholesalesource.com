@@ -34,6 +34,7 @@ class AfterAuthenticateJob implements ShouldQueue
      */
     public function handle()
     {
+        dd(2345);
         $currentShop = ShopifyApp::shop();
         $user = Auth::user();
 
@@ -87,7 +88,6 @@ class AfterAuthenticateJob implements ShouldQueue
                 session(['return_to'=>'/store/dashboard?ftl=1']);
             }
             else{
-                dd(23);
                 session(['return_to' => '/']);
             }
     }
