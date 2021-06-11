@@ -318,6 +318,7 @@ $(document).ready(function () {
     });
     /* Admin Module - SubCategory Checkbox Selection JS */
     $('body').on('change','.sub_cat_checkbox',function () {
+        console.log('sub');
         if($(this).is(':checked')){
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
 
@@ -332,6 +333,8 @@ $(document).ready(function () {
 
     /* Admin Module - SubSubCategory Checkbox Selection JS */
     $('body').on('change','.sub_sub_cat_checkbox',function () {
+        console.log('sub-sub');
+
         if($(this).is(':checked')){
             $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',true);
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
