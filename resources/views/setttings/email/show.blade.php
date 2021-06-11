@@ -279,7 +279,7 @@
                                                                     @if($item->fulfilled_by == 'store')
                                                                         <span class=""> Store</span>
                                                                     @elseif ($item->fulfilled_by == 'Fantasy')
-                                                                        <span class=""> YourWholesaleSource </span>
+                                                                        <span class=""> Awareness Drop Shipping </span>
                                                                     @else
                                                                         <span class=""> {{$item->fulfilled_by}} </span>
                                                                     @endif

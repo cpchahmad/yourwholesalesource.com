@@ -84,7 +84,7 @@
                                             <div class="block-content" style="padding-bottom: 10px">
                                                 <div class="push-10">
                                                     <a class="h6" href="{{route('store.my_product.wefulfill.show',$product->id)}}">{{$product->title}}</a>
-                                                    <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}  <span class="mb2 font-size-sm" style="float: right;color: grey">@if($product->fulfilled_by == "Fantasy") YourWholesaleSource @else {{$product->fulfilled_by}} @endif </span></div>
+                                                    <div class="font-w600 text-success mt-1 push-10-l">${{number_format($product->price,2)}}  <span class="mb2 font-size-sm" style="float: right;color: grey">@if($product->fulfilled_by == "Fantasy") Awareness Drop Shipping @else {{$product->fulfilled_by}} @endif </span></div>
                                                 </div>
                                                 <hr>
                                                 <div class="btn-group" role="group">

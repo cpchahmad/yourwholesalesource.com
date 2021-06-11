@@ -340,7 +340,7 @@
                             @endif
                             <hr>
                             <button onclick="window.location.href='{{route('sales_managers.products.view',$wishlist->has_product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
-                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By YourWholesaleSource</span>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By Awareness Drop Shipping</span>
                         </div>
                     </div>
                     <hr>
@@ -385,7 +385,7 @@
                             @endif
                             <hr>
                             <button onclick="window.location.href='{{route('sales_managers.products.view',$wishlist->has_retailer_product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
-                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By YourWholesaleSource</span>
+                            <span class="mb2 font-size-sm" style="color: grey">Fulfilled By Awareness Drop Shipping</span>
                         </div>
                     </div>
                     <hr>

@@ -36,10 +36,6 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::get('/order/download/{id}/csv', 'CustomOrderController@download_order')->name('app.order.download');
 
-Route::get('/shop-login', function (\Illuminate\Http\Request  $request) {
-
-    return \redirect('/authenticate?shop='.$request->shop);
-});
 
 
 Route::get('/reset', 'HelperController@reset_all');
@@ -52,6 +48,9 @@ Route::get('/getExportFile', 'ProductController@getExportFile')->name('app.downl
 /*Auth Routes*/
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/shop-login', function (\Illuminate\Http\Request  $request) {
+    return \redirect('/authenticate?shop='.$request->shop);
+});
 Route::get('/logout', function(){
     session()->flush();
     Auth::logout();

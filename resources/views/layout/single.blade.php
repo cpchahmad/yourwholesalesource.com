@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>YourWholesaleSource</title>
+    <title>Awareness Drop Shipping</title>
 
     <meta name="description" content="WeFullfill 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="tetralogicx">
@@ -205,7 +205,7 @@
         @if(count($shop->has_user) == 0)
             <div class="alert alert-info alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>To Initiate Your YourWholesaleSource Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
+                <strong>To Initiate Your Awareness Drop Shipping Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
             </div>
         @endif
 

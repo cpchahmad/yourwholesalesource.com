@@ -6,7 +6,7 @@
                 <div class="text-center"> <p>
                         Subtotal: {{number_format($order->cost_to_pay,2)}} USD
                         <br>
-                        YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}} USD
+                        Awareness Drop Shipping Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->cost_to_pay*$settings->paypal_percentage/100,2)}} USD
                         <br>Total Cost : {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD</p>
                 </div>
                 <p> A amount of  {{number_format($order->cost_to_pay+($order->cost_to_pay*$settings->paypal_percentage/100),2)}} USD will be deducted through your Paypal Account</p>

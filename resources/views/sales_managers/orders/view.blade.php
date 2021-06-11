@@ -149,7 +149,7 @@
                                             @if($item->fulfilled_by == 'store')
                                                 <span class="badge badge-danger"> Store</span>
                                             @elseif ($item->fulfilled_by == 'Fantasy')
-                                                <span class="badge badge-success"> YourWholesaleSource </span>
+                                                <span class="badge badge-success"> Awareness Drop Shipping </span>
                                             @else
                                                 <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                             @endif
@@ -187,7 +187,7 @@
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
-                                Line Items Can't Fulfilled by YourWholesaleSource
+                                Line Items Can't Fulfilled by Awareness Drop Shipping
                             </h3>
 
                         </div>

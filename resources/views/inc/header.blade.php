@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <title>YourWholesaleSource</title>
+    <title>Awareness Drop Shipping</title>
     <meta name="description" content="WeFullfill 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="tetralogicx">
     <meta name="robots" content="noindex, nofollow">

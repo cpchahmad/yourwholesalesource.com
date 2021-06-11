@@ -638,7 +638,7 @@
                                                                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
                                                                                         <tr>
                                                                                             <td align="center" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;letter-spacing:1px;line-height:24px;">
-                                                                                                Copyright &copy; 2021, YourWholesaleSource
+                                                                                                Copyright &copy; 2021, Awareness Drop Shipping
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>

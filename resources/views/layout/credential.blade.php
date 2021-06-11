@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>YourWholesaleSource</title>
+    <title>Awareness Drop Shipping</title>
 
     <meta name="description" content="YourWholesaleSource 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="tetralogicx">
@@ -43,7 +43,7 @@
                         <div class="col-md-12 text-center">
                             <div class="logo mb2 d-inline-block text-center justify-content-center">
                                 <img style="width: 100%;max-width: 130px;vertical-align: sub;margin-right: 10px" class="d-inline-block" src="{{ asset('assets/wholesale.png') }}" alt="">
-                                <h1 class="d-inline-block text-white">YourWholesaleSource</h1>
+                                <h1 class="d-inline-block text-white">Awareness Drop Shipping</h1>
                             </div>
                         </div>
                     </div>

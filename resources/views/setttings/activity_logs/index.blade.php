@@ -58,7 +58,7 @@
                             <tr>
                                 <td class="font-w600" style="vertical-align: middle">
                                     @if($log->user_id == 0)
-                                        YourWholesaleSource(Admin)
+                                        Awareness Drop Shipping(Admin)
                                     @else
                                         {{ $log->user->name }}
                                     @endif

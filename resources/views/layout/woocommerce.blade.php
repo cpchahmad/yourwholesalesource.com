@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>YourWholesaleSource</title>
+    <title>Awareness Drop Shipping</title>
 
     <meta name="description" content="YourWholesaleSource">
     <meta name="author" content="YourWholesaleSource">
@@ -83,7 +83,7 @@
         @if(count($shop->has_owner) == 0)
             <div class="alert alert-info alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>To Initiate Your YourWholesaleSource Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
+                <strong>To Initiate Your Awareness Drop Shipping Wallet Services. Please <a href="{{route('store.index')}}"> Complete Your Registration</a>.</strong>
             </div>
         @endif
 

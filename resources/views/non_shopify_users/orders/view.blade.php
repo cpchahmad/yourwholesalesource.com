@@ -378,7 +378,7 @@
                                             @if($item->fulfilled_by == 'store')
                                                 <span class="badge badge-danger"> Store</span>
                                             @elseif ($item->fulfilled_by == 'Fantasy')
-                                                <span class="badge badge-success"> YourWholesaleSource </span>
+                                                <span class="badge badge-success"> Awareness Drop Shipping </span>
                                             @else
                                                 <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
                                             @endif
@@ -469,7 +469,7 @@
                     <div class="block">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">
-                                Line Items Can't Fulfilled by YourWholesaleSource
+                                Line Items Can't Fulfilled by Awareness Drop Shipping
                             </h3>
 
                         </div>
@@ -579,7 +579,7 @@
                                                                 <div class="text-center"> <p>
                                                                         Subtotal: {{number_format($order->total_cost + $usps_rate + $order->handling_fee  ,2)}} USD
                                                                         <br>
-                                                                        YourWholesaleSource Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
+                                                                        Awareness Drop Shipping Paypal Fee ({{$settings->paypal_percentage}}%): {{number_format($order->total_cost + $usps_rate + $order->handling_fee  *$settings->paypal_percentage/100,2)}} USD
                                                                         <br>Total Cost : {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD</p>
                                                                 </div>
                                                                 <p> A amount of  {{ number_format(number_format($order->total_cost + $usps_rate + $order->handling_fee,2) + number_format($order->total_cost + $usps_rate + $order->handling_fee*$settings->paypal_percentage/100,2) ,2) }} USD will be deducted through your Paypal Account</p>
@@ -867,7 +867,7 @@
                                                             <p> Cost-Payment Captured Via Paypal "{{$order->has_payment->paypal_payment_id}}" by {{$order->has_payment->name}} </p>
 
                                                         @elseif($order->pay_by == 'Wallet')
-                                                            <p> Cost-Payment Captured by YourWholesaleSource Wallet  {{--by {{$order->has_payment->name}}--}} </p>
+                                                            <p> Cost-Payment Captured by Awareness Drop Shipping Wallet  {{--by {{$order->has_payment->name}}--}} </p>
 
                                                         @else
                                                             <p> Cost-Payment Captured On Credit Card  </p>

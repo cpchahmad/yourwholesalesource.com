@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>YourWholesaleSource</title>
+    <title>Awareness Drop Shipping</title>
 
     <meta name="description" content="YourWholesaleSource 2020 created by TetraLogicx Pvt. Limited.">
     <meta name="author" content="pixelcave">
@@ -59,7 +59,7 @@
                     <div class="side-header side-content bg-white-op">
                         <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
                         <a class="h5 text-white">
-                            <span class="h4 font-w600 sidebar-mini-hide">YourWholesaleSource</span>
+                            <span class="h4 font-w600 sidebar-mini-hide">Awareness Drop Shipping</span>
                         </a>
                     </div>
                 </div>

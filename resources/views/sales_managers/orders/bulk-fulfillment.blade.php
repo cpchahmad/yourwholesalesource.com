@@ -119,7 +119,7 @@
                         </h3>
                     </div>
                     <div class="block-content">
-                        <p>Fulfilling From YourWholesaleSource Logistics Office</p>
+                        <p>Fulfilling From Awareness Drop Shipping Logistics Office</p>
                         <p class="font-weight-bold"><span class="fulfillable_quantity_drop badge badge-pill badge-dark" data-total="{{$fulfillable_quantity}}" style="font-size: 13px">{{$fulfillable_quantity}} of {{$fulfillable_quantity}} </span> Mark as Fulfilled</p>
                         <hr>
                         <div class="row mb2">

@@ -299,7 +299,7 @@
                                                 <a href="{{route('sales_managers.products.view',$product->id)}}">{{$product->title}}</a>
                                             </td>
                                             <td>${{number_format($product->price,2)}}</td>
-                                            <td><span class="mb2 font-size-sm" style="color: grey">@if($product->fulfilled_by == "Fantasy") YourWholesaleSource @else {{$product->fulfilled_by}} @endif</span></td>
+                                            <td><span class="mb2 font-size-sm" style="color: grey">@if($product->fulfilled_by == "Fantasy") Awareness Drop Shipping @else {{$product->fulfilled_by}} @endif</span></td>
                                             <td class="">
                                                 <div class="btn-group">
                                                     <a href="{{route('sales_managers.products.view',$product->id)}}"

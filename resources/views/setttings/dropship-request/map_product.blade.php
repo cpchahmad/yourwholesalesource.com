@@ -319,7 +319,7 @@
                             <div class="form-group">
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" required class="custom-control-input" id="example-radio-customfulfilled" name="fulfilled-by" value="Fantasy" checked="">
-                                    <label class="custom-control-label" for="example-radio-customfulfilled">By YourWholesaleSource</label>
+                                    <label class="custom-control-label" for="example-radio-customfulfilled">By Awareness Drop Shipping</label>
                                 </div>
                                 <div class="custom-control custom-radio mb-1">
                                     <input type="radio" required class="custom-control-input" id="example-radio-customAliExpress" name="fulfilled-by" value="AliExpress" >
