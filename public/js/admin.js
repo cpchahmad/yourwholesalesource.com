@@ -290,21 +290,6 @@ $(document).ready(function () {
         }
         $(this).next().next().toggle();
     });
-    /* Admin Module - Sub Category Open JS */
-    $('body').on('click','.sub_category_down',function () {
-        if($(this).data('value') === 0){
-            $(this).find('i').addClass('fa-angle-down');
-            $(this).find('i').removeClass('fa-angle-right');
-            $(this).data('value',1);
-
-        }
-        else{
-            $(this).find('i').removeClass('fa-angle-down');
-            $(this).find('i').addClass('fa-angle-right');
-            $(this).data('value',0);
-        }
-        $(this).next().next().toggle();
-    });
     /* Admin Module - Category Checkbox Selection JS */
     $('body').on('change','.category_checkbox',function () {
         if($(this).is(':checked')){
@@ -318,16 +303,10 @@ $(document).ready(function () {
     });
     /* Admin Module - SubCategory Checkbox Selection JS */
     $('body').on('change','.sub_cat_checkbox',function () {
-        console.log('sub');
-        var parent_id = $(this).data('parent-id');
         if($(this).is(':checked')){
-            console.log($(this));
-            console.log($(this).data('parent-id'));
-            $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
-
+            $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
         }
         else{
-            console.log('sub-unch');
             var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
                 $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
@@ -335,27 +314,6 @@ $(document).ready(function () {
         }
     });
 
-    /* Admin Module - SubSubCategory Checkbox Selection JS */
-    $('body').on('change','.sub_sub_cat_checkbox',function () {
-        console.log('sub-sub');
-
-        if($(this).is(':checked')){
-            console.log('sub--sub-ch');
-
-            $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',true);
-            $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
-        }
-        else{
-            console.log('sub--sub-unch');
-
-            var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
-            if(checked === 0){
-                $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
-                $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
-            }
-        }
-    });
-    /* Admin Module - Dropzone Click JS */
     $('body').on('click','.dropzone',function () {
         $('.images-upload').trigger('click');
     });
