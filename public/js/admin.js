@@ -321,7 +321,7 @@ $(document).ready(function () {
         console.log('sub');
         if($(this).is(':checked')){
             console.log($(this).closest('.product_sub_cat'));
-            $(this).closest('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
+            $(this).parent('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
 
         }
         else{
