@@ -317,8 +317,10 @@ $(document).ready(function () {
         }
     });
     /* Admin Module - SubCategory Checkbox Selection JS */
-    $('body').on('change','.sub_cat_checkbox',function () {
+    $('body').on('change','.sub_cat_checkbox',function (event) {
         console.log('sub');
+        event.stopPropagation();
+
         var parent_id = $(this).data('parent-id');
         if($(this).is(':checked')){
             console.log($(this));
