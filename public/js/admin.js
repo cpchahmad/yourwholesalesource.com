@@ -321,8 +321,8 @@ $(document).ready(function () {
         console.log('sub');
         var parent_id = $(this).data('parent-id');
         if($(this).is(':checked')){
-            console.log($(this).parent().parent().parent());
-            $(this).parent().parent().parent().prev().find('.category_checkbox').prop('checked',true);
+            console.log($(this).closest(`.product_sub_cat_${parent_id}`));
+            $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
 
         }
         else{
