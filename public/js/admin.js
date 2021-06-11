@@ -320,6 +320,7 @@ $(document).ready(function () {
     $('body').on('change','.sub_cat_checkbox',function () {
         console.log('sub');
         var parent_id = $(this).data('parent-id');
+        console.log(parent_id);
         if($(this).is(':checked')){
             console.log($(this).closest(`.product_sub_cat_${parent_id}`));
             $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
