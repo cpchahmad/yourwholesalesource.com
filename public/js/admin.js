@@ -322,6 +322,7 @@ $(document).ready(function () {
         var parent_id = $(this).data('parent-id');
         if($(this).is(':checked')){
             console.log($(this));
+            console.log($(this).data('parent-id'));
             $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
 
         }
