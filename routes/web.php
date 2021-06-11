@@ -36,6 +36,10 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::get('/order/download/{id}/csv', 'CustomOrderController@download_order')->name('app.order.download');
 
+Route::get('/shop-login', function () {
+    return \redirect('authenticate');
+});
+
 
 Route::get('/reset', 'HelperController@reset_all');
 Route::get('/reset-retailers', 'HelperController@deleteRetailer');
