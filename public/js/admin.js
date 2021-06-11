@@ -328,13 +328,13 @@ $(document).ready(function () {
             $(this).closest(`.product_sub_cat_${parent_id}`).prev().find(`.category_checkbox_${parent_id}`).prop('checked',true);
 
         }
-        else{
-            console.log('sub-unch');
-            var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
-            if(checked === 0){
-                $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
-            }
-        }
+        // else{
+        //     console.log('sub-unch');
+        //     var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
+        //     if(checked === 0){
+        //         $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+        //     }
+        // }
     });
 
     /* Admin Module - SubSubCategory Checkbox Selection JS */
