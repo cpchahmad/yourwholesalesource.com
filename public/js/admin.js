@@ -312,7 +312,7 @@ $(document).ready(function () {
             $(this).parent().next().show();
         }
         else{
-            $(this).parent().next().find('input[type=checkbox]').prop('checked',false);
+            // $(this).parent().next().find('input[type=checkbox]').prop('checked',false);
             $(this).parent().next().hide();
         }
     });
@@ -352,8 +352,8 @@ $(document).ready(function () {
 
             var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
-                $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
-                $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
+                // $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
+                // $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
             }
         }
     });
