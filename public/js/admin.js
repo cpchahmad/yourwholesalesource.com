@@ -320,10 +320,12 @@ $(document).ready(function () {
     $('body').on('change','.sub_cat_checkbox',function () {
         console.log('sub');
         if($(this).is(':checked')){
+            console.log('sub-ch');
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
 
         }
         else{
+            console.log('sub-unch');
             var checked = $(this).parents('.product_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
                 $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',false);
@@ -336,10 +338,14 @@ $(document).ready(function () {
         console.log('sub-sub');
 
         if($(this).is(':checked')){
+            console.log('sub--sub-ch');
+
             $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',true);
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
         }
         else{
+            console.log('sub--sub-unch');
+
             var checked = $(this).parents('.product_sub_sub_cat').find('input[type=checkbox]:checked').length;
             if(checked === 0){
                 $(this).parents('.product_sub_sub_cat').prev().find('.sub_cat_checkbox').prop('checked',false);
