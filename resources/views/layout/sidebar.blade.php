@@ -135,27 +135,27 @@
                 </a>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#" >
-                    <i class="nav-main-link-icon si si-basket-loaded"></i>
-                    <span class="nav-main-link-name">Shipping</span>
-                </a>
-                <ul class="nav-main-submenu">
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{route('zone.index')}}">
-                            <i class="nav-main-link-icon si si-basket-loaded"></i>
-                            <span class="nav-main-link-name">Shipping Zones</span>
-                        </a>
-                    </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#" >--}}
+{{--                    <i class="nav-main-link-icon si si-basket-loaded"></i>--}}
+{{--                    <span class="nav-main-link-name">Shipping</span>--}}
+{{--                </a>--}}
+{{--                <ul class="nav-main-submenu">--}}
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{route('zone.index')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-basket-loaded"></i>--}}
+{{--                            <span class="nav-main-link-name">Shipping Zones</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
 
-                    <li class="nav-main-item">
-                        <a class="nav-main-link" href="{{ route('couriers.index')}}">
-                            <i class="nav-main-link-icon si si-basket-loaded"></i>
-                            <span class="nav-main-link-name">Courier Service Providers</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+{{--                    <li class="nav-main-item">--}}
+{{--                        <a class="nav-main-link" href="{{ route('couriers.index')}}">--}}
+{{--                            <i class="nav-main-link-icon si si-basket-loaded"></i>--}}
+{{--                            <span class="nav-main-link-name">Courier Service Providers</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('default_info') }}">
