@@ -36,7 +36,8 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::get('/order/download/{id}/csv', 'CustomOrderController@download_order')->name('app.order.download');
 
-Route::get('/shop-login', function () {
+Route::get('/shop-login', function (\http\Client\Request  $request) {
+    dd($request->all());
     return \redirect('/authenticate');
 });
 
