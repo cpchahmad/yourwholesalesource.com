@@ -180,9 +180,9 @@
                             @foreach($categories as $category)
                                 <tbody class="js-table-sections-header" data-id="main_{{$category->id}}">
                                 <tr>
-                                    <td class="text-center">
-                                        <i class="fa fa-angle-right"></i>
-                                    </td>
+{{--                                    <td class="text-center">--}}
+{{--                                        <i class="fa fa-angle-right"></i>--}}
+{{--                                    </td>--}}
                                     <td class="font-w600"> @if($category->icon != null) <img class="img-avatar img-avatar48" src="{{asset('categories-icons')}}/{{$category->icon}}" alt="" data-ranking="{{ $category->ranking }}"> @endif {{ $category->ranking }} ) {{ $category->title }}</td>
                                     <td>
                                         <span class="label label-primary"></span>
