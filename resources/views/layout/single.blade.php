@@ -86,6 +86,10 @@
         .tooltip-ex:hover .tooltip-ex-text { /* Makes tooltip text visible when text is hovered on */
             visibility: visible;
         }
+
+        #page-container.sidebar-dark #sidebar {
+            background-color: #66B7E8!important;
+        }
     </style>
 
 </head>

@@ -92,6 +92,10 @@
             width: 100%;
             height: auto;
         }
+
+        #page-container.sidebar-dark #sidebar {
+            background-color: #66B7E8!important;
+        }
     </style>
 
 </head>
