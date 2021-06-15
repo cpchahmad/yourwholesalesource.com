@@ -264,7 +264,7 @@ class CustomOrderController extends Controller
         $new = new RetailerOrder();
         $new->email = $request->input('email');
         $count = $count + 1;
-        $new->name = '#WF' . $count;
+        $new->name = '#YWS' . $count;
 
         $new->taxes_included = '0';
         $new->total_tax = '0';
@@ -616,7 +616,7 @@ class CustomOrderController extends Controller
                 }
                 if ($atleast_one_varaint) {
                     $new = new RetailerOrder();
-                    $new->name = '#WFI-' . $order_name;
+                    $new->name = '#YWS-' . $order_name;
                     $new->taxes_included = '0';
                     $new->total_tax = '0';
                     $new->currency = 'USD';
