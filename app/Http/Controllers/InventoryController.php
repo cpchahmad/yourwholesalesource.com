@@ -29,8 +29,8 @@ class InventoryController extends Controller
     public function create_service(){
         $data = [
             'fulfillment_service' => [
-                'name' => 'WeFullFill',
-                'callback_url' => 'https://app.wefullfill.com',
+                'name' => 'YourWholeSaleSource',
+                'callback_url' => 'https://app.yourwholesalesource.com',
                 "inventory_management"=> true,
                 "tracking_support"=>false,
                 "requires_shipping_method"=> false,

@@ -308,7 +308,7 @@ $(document).ready(function () {
     /* Admin Module - Category Checkbox Selection JS */
     $('body').on('change','.category_checkbox',function () {
         if($(this).is(':checked')){
-            $(this).parent().next().find('input[type=checkbox]').prop('checked',true);
+            //$(this).parent().next().find('input[type=checkbox]').prop('checked',true);
             $(this).parent().next().show();
         }
         else{
@@ -318,9 +318,8 @@ $(document).ready(function () {
     });
     /* Admin Module - SubCategory Checkbox Selection JS */
     $('body').on('change','.sub_cat_checkbox',function () {
-        console.log('sub');
+
         if($(this).is(':checked')){
-            console.log('sub-ch');
             $(this).parents('.product_sub_cat').prev().find('.category_checkbox').prop('checked',true);
 
         }
