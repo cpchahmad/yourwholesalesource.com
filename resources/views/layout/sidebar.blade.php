@@ -1,10 +1,7 @@
 <nav id="sidebar" aria-label="Main Navigation">
     <div class="content-header bg-white-5">
         <a class="font-w600 text-dual" href="{{ route('admin.dashboard') }}">
-            <span class=""><img src="{{ asset('assets/wholesale.png') }}" alt=""></span>
-            <span class="smini-hide">
-                            <span class="font-w700 font-size-h5">Awareness Drop Shipping</span>
-                        </span>
+            <span class=""><img src="{{ asset('assets/wholesale.png') }}" class="w-75" alt=""></span>
         </a>
         <div>
             <a class="d-lg-none btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
