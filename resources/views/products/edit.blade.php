@@ -1141,8 +1141,8 @@
                                                     <div class="custom-control custom-checkbox d-inline-block">
                                                         <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" data-parent-id="{{ $category->id }}" class="custom-control-input sub_cat_checkbox"
                                                                @if(in_array($sub->id,$product->subcategory($product))) checked @endif
-                                                               id="rowsub_{{$sub->title}}">
-                                                        <label class="custom-control-label" for="rowsub_{{$sub->title}}">{{$sub->title}}</label>
+                                                               id="rowsub_{{$category->id}}_{{$sub->id}}">
+                                                        <label class="custom-control-label" for="rowsub_{{$category->id}}_{{$sub->id}}">{{$sub->title}}</label>
                                                     </div>
                                                     <div class="row product_sub_sub_cat pl-5" style="display: none">
                                                         <div class="col-xs-12 col-xs-push-1">
@@ -1150,8 +1150,8 @@
                                                                 <div class="custom-control custom-checkbox d-inline-block">
                                                                     <input type="checkbox" name="sub_sub_cat[]" value="{{$inner->id}}" class="custom-control-input sub_sub_cat_checkbox"
                                                                            @if(in_array($inner->id,$product->sub_sub_category($product))) checked @endif
-                                                                           id="row_sub_sub_{{$inner->title}}">
-                                                                    <label class="custom-control-label" for="row_sub_sub_{{$inner->title}}">{{$inner->title}}</label>
+                                                                           id="row_sub_sub_{{$category->id}}_{{$sub->id}}_{{$inner->id}}">
+                                                                    <label class="custom-control-label" for="row_sub_sub_{{$category->id}}_{{$sub->id}}_{{$inner->id}}">{{$inner->title}}</label>
                                                                 </div>
                                                                 <br>
                                                             @endforeach
