@@ -55,11 +55,11 @@
                                                     data-target="#edit_warehouse_modal{{$index}}"><i
                                                     class="fa fa-edit"></i>
                                             </button>
-                                            <form method="POST" action="{{ route('warehouse.destroy', $warehouse->id) }}">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""
-                                                        data-original-title="Delete Warehouse"><i class="fa fa-times"></i></button>
-                                            </form>
+{{--                                            <form method="POST" action="{{ route('warehouse.destroy', $warehouse->id) }}">--}}
+{{--                                                @csrf--}}
+{{--                                                <button type="submit" class="btn btn-sm btn-danger" type="button" data-toggle="tooltip" title=""--}}
+{{--                                                        data-original-title="Delete Warehouse"><i class="fa fa-times"></i></button>--}}
+{{--                                            </form>--}}
                                         </td>
                                     </tr>
                                     <div class="modal fade" id="edit_warehouse_modal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
