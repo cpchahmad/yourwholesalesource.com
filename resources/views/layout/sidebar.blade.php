@@ -1,7 +1,7 @@
 <nav id="sidebar" aria-label="Main Navigation">
     <div class="content-header bg-white-5">
         <a class="font-w600 text-dual" href="{{ route('admin.dashboard') }}">
-            <span class=""><img src="{{ asset('assets/wholesale.png') }}" class="w-75" alt=""></span>
+            <span class=""><img src="https://yourwholesalesource.com/wp-content/uploads/2018/07/footer-logo-300x106.png" class="w-75" alt=""></span>
         </a>
         <div>
             <a class="d-lg-none btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
@@ -161,19 +161,19 @@
                 </a>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">
-                    <i class="nav-main-link-icon fa fa-envelope"></i>
-                    <span class="nav-main-link-name">Email Template</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-envelope"></i>--}}
+{{--                    <span class="nav-main-link-name">Email Template</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('admin.activity.log.index') }}">
-                    <i class="nav-main-link-icon fa fa-check"></i>
-                    <span class="nav-main-link-name">Activity Logs</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{ route('admin.activity.log.index') }}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-check"></i>--}}
+{{--                    <span class="nav-main-link-name">Activity Logs</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('admin.suggestions') }}">
                     <i class="nav-main-link-icon fa fa-question"></i>
@@ -188,12 +188,12 @@
                 </a>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('email.campaigns.index') }}">
-                    <i class="nav-main-link-icon fa fa-flag"></i>
-                    <span class="nav-main-link-name">Campaigns</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{ route('email.campaigns.index') }}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-flag"></i>--}}
+{{--                    <span class="nav-main-link-name">Campaigns</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
 {{--            <li class="nav-main-item">--}}
 {{--                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">--}}

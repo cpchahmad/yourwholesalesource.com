@@ -1,7 +1,7 @@
 <nav id="sidebar" aria-label="Main Navigation">
     <div class="content-header bg-white-5">
         <a class="font-w600 text-dual">
-            <span class=""><img src="{{ asset('assets/wholesale.png') }}" class="w-75" alt=""></span>
+            <span class=""><img src="https://yourwholesalesource.com/wp-content/uploads/2018/07/footer-logo-300x106.png" class="w-75" alt=""></span>
         </a>
         <div>
             <a class="d-lg-none btn btn-sm btn-dual ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">

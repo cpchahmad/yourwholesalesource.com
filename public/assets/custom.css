@@ -1,0 +1,16 @@
+.nav-main-dark .nav-main-link, .page-header-dark #page-header .nav-main-link, .sidebar-dark #sidebar .nav-main-link {
+    color: white;
+    font-size: 17px;
+}
+
+#page-container.sidebar-dark #sidebar {
+    background-color: #66B7E8!important;
+}
+
+.block-header {
+    background: #66B7E8!important;
+    color: white;
+}
+.block-header h3.block-title {
+    color: white;
+}
