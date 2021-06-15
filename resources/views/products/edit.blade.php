@@ -1137,7 +1137,9 @@
                                         <div class="row product_sub_cat" style="display: none">
                                             <div class="col-xs-12 col-xs-push-1">
                                                 @foreach($category->hasSub as $sub)
-                                                    <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
+                                                    @if($sub->hasSub->count())
+                                                        <span class="sub_category_down" data-value="0" style="margin-right: 5px;font-size: 16px"> <i class="fa fa-angle-right"></i></span>
+                                                    @endif
                                                     <div class="custom-control custom-checkbox d-inline-block">
                                                         <input type="checkbox" name="sub_cat[]" value="{{$sub->id}}" data-parent-id="{{ $category->id }}" class="custom-control-input sub_cat_checkbox"
                                                                @if(in_array($sub->id,$product->subcategory($product))) checked @endif
