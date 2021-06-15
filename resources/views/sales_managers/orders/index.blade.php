@@ -76,12 +76,12 @@
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($order->has_store != null)
-                                                    <span class="badge badge-primary" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
+                                                    <span class="" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
                                                 @else
-                                                    <span class="badge badge-warning" style="font-size: 12px"> Manual </span>
+                                                    <span class="" style="font-size: 12px"> Manual </span>
                                                 @endif
                                             @else
-                                                <span class="badge badge-primary" style="font-size: 12px"> {{$order->has_user->email}}</span>
+                                                <span class="" style="font-size: 12px"> {{$order->has_user->email}}</span>
                                             @endif
                                         </td>
                                         <td>
