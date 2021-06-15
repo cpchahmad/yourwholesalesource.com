@@ -101,7 +101,6 @@
                                         </div>
                                     </th>
                                     <th>Name</th>
-                                    <th>WFFnumber</th>
                                     <th>Shop / User</th>
                                     <th>Source</th>
                                     <th>Order Date</th>
@@ -123,16 +122,15 @@
                                             </div>
                                         </td>
                                         <td class="font-w600"><a href="{{route('admin.order.view',$order->id)}}">{{ $order->name }}</a></td>
-                                        <td class="font-w600">{{ $order->admin_shopify_name }}</td>
                                         <td>
                                             @if($order->custom == 0)
                                                 @if($order->has_store != null)
-                                                    <span class="badge badge-primary" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
+                                                    <span class="" style="font-size: 12px"> {{explode('.',$order->has_store->shopify_domain)[0]}}</span>
                                                 @else
-                                                    <span class="badge badge-warning" style="font-size: 12px"> Manual </span>
+                                                    <span class="" style="font-size: 12px"> Manual </span>
                                                 @endif
                                             @else
-                                                <span class="badge badge-primary" style="font-size: 12px"> {{$order->has_user->email}}</span>
+                                                <span class="" style="font-size: 12px"> {{$order->has_user->email}}</span>
                                             @endif
                                         </td>
                                         <td>
