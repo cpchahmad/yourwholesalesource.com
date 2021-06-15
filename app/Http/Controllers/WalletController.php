@@ -112,7 +112,7 @@ class WalletController extends Controller
     {
         $wallet = Wallet::create([
             'user_id' => $id,
-            'wallet_token' => 'WFF00100' . rand(10000000000, 99999999999),
+            'wallet_token' => 'YWS00100' . rand(10000000000, 99999999999),
             'pending' => 0,
             'available' => 0,
             'transferred' => 0,
