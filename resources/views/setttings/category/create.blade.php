@@ -316,7 +316,7 @@
                                                     <td class="hidden-xs btn-group ">
 
                                                         <button class="btn btn-sm btn-warning" type="button" data-toggle="modal"
-                                                                data-target="#sub{{$inner->id}}" title="Edit SubCategory"><i
+                                                                data-target="#sub-sub{{$inner->id}}" title="Edit SubCategory"><i
                                                                 class="fa fa-edit"></i></button>
                                                         <a href="{{ route('sub.sub.delete', $inner->id) }}"
                                                            class="btn btn-sm btn-danger" data-toggle="tooltip" title=""
@@ -324,7 +324,7 @@
 
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="sub{{$inner->id}}" tabindex="-1" role="dialog"
+                                                <div class="modal fade" id="sub-sub{{$inner->id}}" tabindex="-1" role="dialog"
                                                      aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-popin">
                                                         <div class="modal-content">
