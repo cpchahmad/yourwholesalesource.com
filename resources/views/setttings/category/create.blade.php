@@ -246,10 +246,11 @@
                                     @foreach($category->hasSub as $sub)
                                         <tbody class="js-table-sections-header" data-id="sub_{{$sub->id}}">
                                         <tr>
-
-                                            <td class="text-center text-success">
-                                                <i class="fa fa-angle-right"></i>
-                                            </td>
+                                            @if($sub->hasSub->count())
+                                                <td class="text-center text-success">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </td>
+                                            @endif
                                             <td class="font-w600 text-success">{{ $sub->title }}</td>
                                             <td>
                                                 <small></small>
