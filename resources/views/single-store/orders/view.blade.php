@@ -629,7 +629,7 @@
                                                                 <div class="col-md-6 mb2">
                                                                     <label>Province Code</label>
                                                                     <input type="text" class="form-control" name="province_code"
-                                                                           value="{{ isset($shipping->province_code) ?? $shipping->province_code }}"  placeholder="" required>
+                                                                           value="@if(isset($shipping->province_code)) {{ $shipping->province_code }} @endif"  placeholder="" required>
                                                                 </div>
                                                                 <div class="col-md-6 mb2">
                                                                     <label>Zip Code</label>
@@ -654,7 +654,7 @@
                                                                 <div class="col-md-12 mb2">
                                                                     <label>Phone</label>
                                                                     <input type="text" required class="form-control" name="phone"
-                                                                           value="{{ isset($shipping->phone) ?? $shipping->phone }}"  placeholder="" >
+                                                                           value="@if(isset($shipping->phone)) {{ $shipping->phone }} @endif"  placeholder="" >
                                                                 </div>
 
                                                                 <div class="block-content block-content-full text-right border-top">
