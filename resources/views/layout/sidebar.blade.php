@@ -161,12 +161,12 @@
                 </a>
             </li>
 
-{{--            <li class="nav-main-item">--}}
-{{--                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">--}}
-{{--                    <i class="nav-main-link-icon fa fa-envelope"></i>--}}
-{{--                    <span class="nav-main-link-name">Email Template</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('admin.emails.index') }}">
+                    <i class="nav-main-link-icon fa fa-envelope"></i>
+                    <span class="nav-main-link-name">Email Template</span>
+                </a>
+            </li>
 
 {{--            <li class="nav-main-item">--}}
 {{--                <a class="nav-main-link" href="{{ route('admin.activity.log.index') }}">--}}
@@ -226,7 +226,7 @@
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('admin.videos.index') }}">
                     <i class="nav-main-link-icon si si-info"></i>
-                    <span class="nav-main-link-name">Awareness Drop Shipping University</span>
+                    <span class="nav-main-link-name">Help Center</span>
                 </a>
             </li>
         </ul>

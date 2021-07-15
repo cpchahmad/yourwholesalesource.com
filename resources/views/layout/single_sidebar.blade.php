@@ -167,7 +167,7 @@
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('university.index')}}">
                     <i class="nav-main-link-icon si si-info"></i>
-                    <span class="nav-main-link-name">Awareness Drop Shipping University</span>
+                    <span class="nav-main-link-name">Help Center</span>
                 </a>
             </li>
 
