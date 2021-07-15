@@ -151,7 +151,7 @@
     </tr>
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
@@ -269,7 +269,7 @@
 
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
 
                 <tr>
                     <td align="center">
@@ -304,7 +304,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td align="center" class="button-width">
-                                                            <table align="center" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
+                                                            <table align="center" bgcolor="#66b7e8" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
                                                                 <tr>
                                                                     <td align="center" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
                                                                         <a href="{{route('password.reset',$token)}}" style="color:#ffffff;text-decoration:none;">View Details</a>
@@ -345,7 +345,7 @@
             <table align="center"  border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
                 <tr>
                     <td align="center">
-                        <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+                        <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                             <tr>
                                 <td align="center" style="padding:0 30px;">
                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">

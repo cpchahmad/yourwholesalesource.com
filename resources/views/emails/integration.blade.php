@@ -155,7 +155,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
@@ -248,7 +248,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
@@ -287,14 +287,14 @@
                                             <td height="10"></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                            <td align="left" class="MsoNormal" style="color:#66b7e8;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
                                                 <img src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/shopify-512.png" alt="150x50" width="80"/>
                                                 Shopify
                                             </td>
 
 
-                                            <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
-                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
+                                            <td align="right" class="MsoNormal" style="color:#66b7e8;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                                <table align="right" bgcolor="#66b7e8" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->
                                                     <tr>
                                                         <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">
                                                             <a href="{{ route('system.store.connect') }}" style="color:#ffffff;text-decoration:none;">Integrate</a>
@@ -328,7 +328,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
@@ -407,7 +407,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width"  width="600">
@@ -429,7 +429,7 @@
                                             <td align="left" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
                                                 Non-shopify Users
                                             </td>
-                                            <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
+                                            <td align="right" class="MsoNormal" style="color:#66b7e8;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">
 
                                             </td>
 
@@ -459,7 +459,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width" width="600">
@@ -539,7 +539,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="display-width"  width="600">
@@ -563,8 +563,8 @@
                                                 Woocommerce (Comming soon)
                                             </td>
 
-{{--                                            <td align="right" class="MsoNormal" style="color:#7daa40;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">--}}
-{{--                                                <table align="right" bgcolor="#7daa40" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->--}}
+{{--                                            <td align="right" class="MsoNormal" style="color:#66b7e8;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:18px;font-weight:700;letter-spacing:1px;line-height:26px;text-transform:uppercase;">--}}
+{{--                                                <table align="right" bgcolor="#66b7e8" border="0" cellspacing="0" cellpadding="0" class="display-button" style="border-radius:5px;"> <!-- USING TABLE AS BUTTON -->--}}
 {{--                                                    <tr>--}}
 {{--                                                        <td align="right" valign="middle" class="MsoNormal" style="color:#ffffff;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:bold;letter-spacing:1px;padding:7px 15px;text-transform:uppercase;">--}}
 {{--                                                            <a href="" style="color:#ffffff;text-decoration:none;" >Integrate</a>--}}
@@ -602,7 +602,7 @@
 <table align="center" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center">
-            <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+            <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                 <tr>
                     <td align="center" style="padding:0 30px;">
                         <table align="center" border="0" bgcolor="#ffffff" cellpadding="0" cellspacing="0" class="display-width" style="border-bottom-left-radius:5px; border-bottom-right-radius:5px;" width="600">
@@ -635,10 +635,10 @@
             <table align="center"  border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%">
                 <tr>
                     <td align="center">
-                        <table align="center" bgcolor="#7daa40" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
+                        <table align="center" bgcolor="#66b7e8" border="0" cellpadding="0" cellspacing="0" class="display-width" width="680">
                             <tr>
                                 <td align="center" style="padding:0 30px;">
-                                    <table align="center" border="0" bgcolor="#7daa40" cellpadding="0" cellspacing="0" class="display-width" width="600">
+                                    <table align="center" border="0" bgcolor="#66b7e8" cellpadding="0" cellspacing="0" class="display-width" width="600">
                                         <tr>
                                             <td height="50"></td>
                                         </tr>

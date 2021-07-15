@@ -21,7 +21,7 @@
 
     .wrap {
         padding-left: 20px;
-        background-color: #7daa40 !important;
+        background-color: #66b7e8 !important;
         color: #ffffff !important;
         padding: 1px 20px
     }
@@ -36,14 +36,14 @@
 
     a.title {
         text-decoration: none;
-        color: #7daa40 !important;
+        color: #66b7e8 !important;
         font-size: 18px;
         margin-left: 5px;
     }
 
     a.title:hover{
         text-decoration: none;
-        color: #7daa40 !important;
+        color: #66b7e8 !important;
         font-size: 18px;
         margin-left: 5px;
 
@@ -51,7 +51,7 @@
 
     a.title:active{
         text-decoration: none;
-        color: #7daa40 !important;
+        color: #66b7e8 !important;
         font-size: 18px;
         margin-left: 5px;
 
@@ -85,7 +85,7 @@
 </style>
 
 <div class="email-body" style="padding: 20px;max-width: 80%;margin: auto; font-family: cursive;">
-    <div class="email-contaner" style="border: 2px solid #7daa40;padding: 25px;">
+    <div class="email-contaner" style="border: 2px solid #66b7e8;padding: 25px;">
         <div class="email-content" style="margin: auto;  text-align: center; ">
             <div class="email-logo">
                 <img src="{{ asset('assets/wholesale.png') }}" alt="Wefullfill" style="width: 35%">
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="{{ route('store.product.wefulfill') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #7daa40;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #7daa40;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Products</a>
+                    <a href="{{ route('store.product.wefulfill') }}" target="_blank" class="email_btn" style="padding: 17px 55px; border: 2px solid #66b7e8;font-size: 20px;letter-spacing: 1px;text-decoration: none;color: #66b7e8;margin-top: 0;FONT-WEIGHT: 600;margin-bottom: 25px;margin-top: 25px">View Products</a>
                 </div>
             </div>
         </div>
