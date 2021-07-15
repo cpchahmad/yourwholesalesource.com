@@ -23,7 +23,7 @@ class OrderStatusMail extends Mailable
     private $order;
     private $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
     public function __construct(User $user, RetailerOrder $order)
     {
         $this->user = $user;

@@ -24,7 +24,7 @@ class TicketReplyMail extends Mailable
     private $ticket;
     private $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
     public function __construct(User $user, Ticket $ticket)
     {
         $this->user = $user;

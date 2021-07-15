@@ -13,7 +13,7 @@ class SendVerifyEmail extends Mailable
     use Queueable, SerializesModels;
 
     private $user;
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
 
     /**
      * Create a new message instance.

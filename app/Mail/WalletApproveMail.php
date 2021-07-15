@@ -24,7 +24,7 @@ class WalletApproveMail extends Mailable
     private $wallet;
     private $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
     public function __construct(User $user, Wallet $wallet)
     {
         $this->user = $user;

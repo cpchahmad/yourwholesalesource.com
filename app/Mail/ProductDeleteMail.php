@@ -21,7 +21,7 @@ class ProductDeleteMail extends Mailable
 
     private $product;
     private $template;
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
 
     public function __construct(Product $product)
     {

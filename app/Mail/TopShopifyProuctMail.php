@@ -23,7 +23,7 @@ class TopShopifyProuctMail extends Mailable
     private $top_products_stores;
     private $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
     public function __construct(User $user)
     {
         $this->user = $user;

@@ -13,7 +13,7 @@ use OhMyBrew\ShopifyApp\Models\Shop;
 use Spatie\Permission\Traits\HasRoles;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;

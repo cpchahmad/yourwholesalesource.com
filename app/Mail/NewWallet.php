@@ -19,7 +19,7 @@ class NewWallet extends Mailable
      */
     private $user;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
     public function __construct(User $user)
     {
 

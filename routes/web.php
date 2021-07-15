@@ -46,7 +46,7 @@ Route::get('/generate-super-admin', 'HelperController@SuperAdminCreate');
 Route::get('/getShippingRates', 'ZoneController@getShippingRates');
 Route::get('/getExportFile', 'ProductController@getExportFile')->name('app.download.product');
 /*Auth Routes*/
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/shop-login', function (\Illuminate\Http\Request  $request) {
     return \redirect('/authenticate?shop='.$request->shop);
@@ -351,7 +351,7 @@ Route::group(['middleware' => ['check_woocommerce_shop']], function () {
 });
 
 /*Main Routes*/
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     /*Checking User Role*/
     Route::get('/check/roles','RolePermissionController@check_roles')->name('system.check-roles');
     Route::get('/choose/platform','RolePermissionController@selection')->name('system.selection');

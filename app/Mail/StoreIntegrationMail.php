@@ -16,7 +16,7 @@ class StoreIntegrationMail extends Mailable
 
     public $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
 
     /**
      * Create a new message instance.

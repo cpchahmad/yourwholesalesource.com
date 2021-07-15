@@ -20,7 +20,7 @@ class SendResetPasswordEmail extends Mailable
      */
     private $token;
     private $user;
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
 
 
 

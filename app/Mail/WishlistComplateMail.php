@@ -23,7 +23,7 @@ class WishlistComplateMail extends Mailable
     private $wishlist;
     private $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
     public function __construct(User $user, Wishlist $wishlist)
     {
         $this->user = $user;

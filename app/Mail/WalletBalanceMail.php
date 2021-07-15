@@ -19,7 +19,7 @@ class WalletBalanceMail extends Mailable
      * @return void
      */
 
-    private $user = "info@wefullfill.com";
+    private $user = "info@tetralogicx.com";
     private $wallet;
     private $template;
 

@@ -14,7 +14,7 @@ class ResourcesMail extends Mailable
 
     public $template;
 
-    private $sender = 'info@wefullfill.com';
+    private $sender = 'info@tetralogicx.com';
 
 
     /**

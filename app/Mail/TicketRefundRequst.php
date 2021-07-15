@@ -19,7 +19,7 @@ class TicketRefundRequst extends Mailable
      *
      * @return void
      */
-    private $user = "order@wefullfill.com";
+    private $user = "info@tetralogicx.com";
 
     private $sender;
     private $ticket;
