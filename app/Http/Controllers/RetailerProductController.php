@@ -953,7 +953,7 @@ class RetailerProductController extends Controller
                 $product_type = $product->type;
             }
             else{
-                $product_type = 'WeFullFill';
+                $product_type = 'YourWholeSaleSource';
             }
 
             $productdata = [
@@ -992,9 +992,9 @@ class RetailerProductController extends Controller
                         'weight' => $product->weight,
                         'weight_unit' => 'kg',
                         'barcode' => $product->barcode,
-//                        "fulfillment_service" => "wefullfill",
+                        "fulfillment_service" => "YourWholeSaleSource",
 //                        'inventory_quantity' => $product->quantity,
-//                        'inventory_management' => 'wefullfill',
+                        'inventory_management' => 'YourWholeSaleSource',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
@@ -1327,22 +1327,40 @@ class RetailerProductController extends Controller
         }
 
         $variants_array = [];
-        foreach ($product->hasVariants as $index => $varaint) {
+        if($product->hasVariants()->count()) {
+            foreach ($product->hasVariants as $index => $varaint) {
+                array_push($variants_array, [
+                    'title' => $varaint->title,
+                    'sku' => $varaint->sku,
+                    'option1' => $varaint->option1,
+                    'option2' => $varaint->option2,
+                    'option3' => $varaint->option3,
+                    'inventory_quantity' => $varaint->quantity,
+                    "fulfillment_service" => "YourWholeSaleSource",
+                    'inventory_management' => 'YourWholeSaleSource',
+                    'grams' => $weight * 1000,
+                    'weight' => $weight,
+                    'weight_unit' => 'kg',
+                    'barcode' => $varaint->barcode,
+                    'price' => $varaint->price,
+                    'cost' => $varaint->cost,
+                ]);
+            }
+        }
+        else {
             array_push($variants_array, [
-                'title' => $varaint->title,
-                'sku' => $varaint->sku,
-                'option1' => $varaint->option1,
-                'option2' => $varaint->option2,
-                'option3' => $varaint->option3,
-                'inventory_quantity' => $varaint->quantity,
-                "fulfillment_service" => "wefullfill",
-                'inventory_management' => 'wefullfill',
+                'title' => "Default Title",
+                'sku' => $product->sku,
+                'option1' => "Default Title",
+                'option2' => null,
+                'option3' => null,
+                'inventory_quantity' => $product->quantity,
+                "fulfillment_service" => "YourWholeSaleSource",
+                'inventory_management' => 'YourWholeSaleSource',
                 'grams' => $weight * 1000,
                 'weight' => $weight,
                 'weight_unit' => 'kg',
-                'barcode' => $varaint->barcode,
-                'price' => $varaint->price,
-                'cost' => $varaint->cost,
+                'price' =>$product->price,
             ]);
         }
         return $variants_array;
