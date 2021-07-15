@@ -97,7 +97,7 @@ class EmailTemplateController extends Controller
             case 18:
                 return view('emails.news-email')->with('template', EmailTemplate::find(18));
             case 19:
-                return view('emails.wallet_balance')->with('template', EmailTemplate::find(19))->with('wallet', Wallet::find(1));
+                return view('emails.wallet_balance')->with('template', EmailTemplate::find(19))->with('wallet', Wallet::first());
             case 20:
                 return view('emails.news_products')->with('template', EmailTemplate::find(20))->with('top_products_stores', Product::all());
             case 21:
