@@ -306,7 +306,7 @@
                                                     <tr>
                                                         <td align="left" valign="middle">
                                                             <a href="#" style="color:#444444;text-decoration:none;">
-                                                                <img src="https://cdn.shopify.com/s/files/1/0370/7361/7029/files/image_3.png?v=1585895317" alt="150x50" width="150"/>
+                                                                <img src="{{ asset('assets/wholesale.png') }}" alt="150x50" width="150"/>
                                                             </a>
                                                         </td>
                                                     </tr>
