@@ -38,7 +38,7 @@ class WishlistRejectMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Wishlist Rejected')->view('emails.wishlist_reject')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Wishlist Rejected')->view('emails.wishlist_reject')->with([
             'template' => $this->template,
             'wishlist' => $this->wishlist,
         ]);

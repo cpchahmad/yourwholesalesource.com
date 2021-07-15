@@ -36,7 +36,7 @@ class ProductStockOutMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Product is Out of Stock on Wefullfill')->view('emails.product_stock')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Product is Out of Stock on YourWholeSaleSource')->view('emails.product_stock')->with([
             'product' => $this->product,
             'template' => $this->template,
         ]);

@@ -32,7 +32,7 @@ class SendVerifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Verify Email')->view('emails.reset')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Verify Email')->view('emails.reset')->with([
             'token' => $this->token,
             'user' => $this->user
         ]);

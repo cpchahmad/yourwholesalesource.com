@@ -35,7 +35,7 @@ class StoreIntegrationMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Continue with store integration')->view('emails.integration')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Continue with store integration')->view('emails.integration')->with([
             'template' => $this->template,
         ]);
     }

@@ -38,7 +38,7 @@ class OrderStatusMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Order Status Updated')->view('emails.order_status')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Order Status Updated')->view('emails.order_status')->with([
             'template' => $this->template,
             'order' => $this->order,
         ]);

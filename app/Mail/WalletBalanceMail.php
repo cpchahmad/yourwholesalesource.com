@@ -37,7 +37,7 @@ class WalletBalanceMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->user,'Wefullfill')->subject('Your Wallet is running out of Balance')->view('emails.wallet_balance')->with([
+        return $this->from($this->user,'YourWholeSaleSource')->subject('Your Wallet is running out of Balance')->view('emails.wallet_balance')->with([
             'wallet' => $this->wallet,
             'template' => $this->template
         ]);

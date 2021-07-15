@@ -35,7 +35,7 @@ class NewShopifyUserMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Welcome to Wefullfill')->view('emails.new_shopify_user')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Welcome to YourWholeSaleSource')->view('emails.new_shopify_user')->with([
             'user' => $this->user,
             'template' => $this->template,
         ]);

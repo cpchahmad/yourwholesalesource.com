@@ -39,7 +39,7 @@ class WishlistApproveMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Wishlist Approved')->view('emails.wishlist_approve')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Wishlist Approved')->view('emails.wishlist_approve')->with([
             'template' => $this->template,
             'wishlist' => $this->wishlist,
         ]);

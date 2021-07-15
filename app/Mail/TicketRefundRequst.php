@@ -39,7 +39,7 @@ class TicketRefundRequst extends Mailable
      */
     public function build()
     {
-        return $this->from($this->user,'Wefullfill')->subject('There is a ticket request')->view('emails.refund_request')->with([
+        return $this->from($this->user,'YourWholeSaleSource')->subject('There is a ticket request')->view('emails.refund_request')->with([
             'ticket' => $this->ticket,
             'template' => $this->template
         ]);

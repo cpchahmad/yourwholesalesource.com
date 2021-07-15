@@ -38,7 +38,7 @@ class TopShopifyProuctMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Our Top Products')->view('emails.top_products_new')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Our Top Products')->view('emails.top_products_new')->with([
             'user' => $this->user,
             'template' => $this->template,
             'top_products_stores' => $this->top_products_stores,

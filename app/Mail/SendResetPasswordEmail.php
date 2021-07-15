@@ -43,7 +43,7 @@ class SendResetPasswordEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Reset Password Link')->view('emails.reset')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Reset Password Link')->view('emails.reset')->with([
             'token' => $this->token,
             'user' => $this->user
         ]);

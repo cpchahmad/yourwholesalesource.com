@@ -40,7 +40,7 @@ class OrderPlaceEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->user,'Wefullfill')->subject('Order is Placed')->view('emails.order_place')->with([
+        return $this->from($this->user,'YourWholeSaleSource')->subject('Order is Placed')->view('emails.order_place')->with([
             'template' => $this->template,
             'order' => $this->retailerOrder,
         ]);

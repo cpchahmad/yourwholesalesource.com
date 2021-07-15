@@ -33,7 +33,7 @@ class NewWallet extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('WeFullFill Wallet Initialized')->view('emails.new_wallet')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('YourWholeSaleSource Wallet Initialized')->view('emails.new_wallet')->with([
             'user' => $this->user,
             'wallet' => $this->user->has_wallet
         ]);

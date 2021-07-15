@@ -39,7 +39,7 @@ class WalletApproveMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Wallet Approved')->view('emails.wallet_approve')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Wallet Approved')->view('emails.wallet_approve')->with([
             'template' => $this->template,
             'wallet' => $this->wallet,
         ]);

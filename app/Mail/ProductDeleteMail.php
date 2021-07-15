@@ -36,7 +36,7 @@ class ProductDeleteMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Product Deleted on Wefullfill')->view('emails.product_delete')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Product Deleted on YourWholeSaleSource')->view('emails.product_delete')->with([
             'product' => $this->product,
             'template' => $this->template
         ]);

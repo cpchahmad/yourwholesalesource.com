@@ -38,7 +38,7 @@ class NewsProductEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Important News')->view('emails.news_products')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Important News')->view('emails.news_products')->with([
             'user' => $this->user,
             'template' => $this->template,
             'top_products_stores' => $this->top_products_stores,

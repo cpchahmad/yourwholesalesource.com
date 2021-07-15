@@ -39,7 +39,7 @@ class TicketReplyMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Ticket Replied')->view('emails.ticket_reply')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Ticket Replied')->view('emails.ticket_reply')->with([
             'template' => $this->template,
             'ticket' => $this->ticket,
         ]);

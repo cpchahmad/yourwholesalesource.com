@@ -40,7 +40,7 @@ class WalletRequestMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->user,'Wefullfill')->subject('There is a wallet request')->view('emails.wallet_reqeust')->with([
+        return $this->from($this->user,'YourWholeSaleSource')->subject('There is a wallet request')->view('emails.wallet_reqeust')->with([
             'template' => $this->template,
             'wallet' => $this->wallet,
         ]);

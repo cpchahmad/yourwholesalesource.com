@@ -33,7 +33,7 @@ class NewsEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'Wefullfill')->subject('Important News')->view('emails.news-email')->with([
+        return $this->from($this->sender,'YourWholeSaleSource')->subject('Important News')->view('emails.news-email')->with([
             'template' => $this->template,
         ]);
     }
