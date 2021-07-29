@@ -31,13 +31,13 @@
         <div class="row mb2">
             <div class="col-md-9">
             </div>
-            <div class="col-md-3 text-right">
-                @if(!$product instanceof \App\RetailerProduct)
-                    @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
-                        <a href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}" class="btn btn-primary btn-square ">Add to Import List</a>
-                    @endif
-                @endif
-            </div>
+{{--            <div class="col-md-3 text-right">--}}
+{{--                @if(!$product instanceof \App\RetailerProduct)--}}
+{{--                    @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))--}}
+{{--                        <a href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}" class="btn btn-primary btn-square ">Add to Import List</a>--}}
+{{--                    @endif--}}
+{{--                @endif--}}
+{{--            </div>--}}
         </div>
         <div class="block">
             <div class="block-content">
@@ -188,7 +188,14 @@
                             </div>
                         </div>
                         <hr>
-                        <p>{!! $product->description !!}</p>
+                        <div class="col-md-3 text-right">
+                            @if(!$product instanceof \App\RetailerProduct)
+                                @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
+                                    <a href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}" class="btn btn-primary btn-square ">Add to Import List</a>
+                                @endif
+                            @endif
+                        </div>
+                        <div>{!! $product->description !!}</div>
                         <!-- END Vital Info -->
                     </div>
                     <div class="col-md-12">
