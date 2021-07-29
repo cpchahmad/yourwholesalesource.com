@@ -31,6 +31,23 @@
                         </a>
                     </li>
                     <li class="nav-main-item">
+                        @php  $categories = \App\Category::orderBy('title')->get(); @endphp
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <i class="nav-main-link-icon si si-layers"></i>
+                            <span class="nav-main-link-name">Categories</span>
+                        </a>
+                        <ul class="nav-main-submenu open">
+                            @foreach($categories as $category)
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{route('store.product.wefulfill')}}?category={{$category->title}}">
+                                        <i class="nav-main-link-icon si si-bag"></i>
+                                        <span class="nav-main-link-name">{{ $category->title }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="nav-main-item">
                         <a class="nav-main-link" href="{{route('store.import_list')}}">
                             <i class="nav-main-link-icon si si-bag"></i>
                             <span class="nav-main-link-name">Import List</span>
