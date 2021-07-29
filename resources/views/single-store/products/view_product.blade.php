@@ -161,7 +161,11 @@
                             <a href="{{route('product.edit',$product->id)}}">
                                 {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else Awareness Drop Shipping @endif</span>
                             </a>
+
                         </h2>
+                        <h4>
+                            <span class="h4 font-w700 text-danger">{{$product->sku}} </span>
+                        </h4>
                         <div class="clearfix" style="margin-top: 5px;width: 100%">
 
                             @if($product->quantity > 0)
@@ -175,17 +179,16 @@
                                     </span>
                                 @else
                                     <span class="h5">
-                                <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
-                            </span>
+                                        <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
+                                    </span>
                                 @endif
                             @else
                                 <span class="h5">
-                            <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
-                        </span>
+                                    <span class="font-w600 text-danger">OUT OF STOCK</span><br><small>Not Available</small>
+                                </span>
                             @endif
                             <div class="text-right d-inline-block" style="float: right">
                                 <span class="h3 font-w700 text-success">${{number_format($product->price,2)}} </span>
-                                <span class="h3 font-w700 text-danger">{{$product->sku}} </span>
                             </div>
                         </div>
                         <hr>
