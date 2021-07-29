@@ -185,6 +185,7 @@
                             @endif
                             <div class="text-right d-inline-block" style="float: right">
                                 <span class="h3 font-w700 text-success">${{number_format($product->price,2)}} </span>
+                                <span class="h3 font-w700 text-danger">{{$product->sku}} </span>
                             </div>
                         </div>
                         <hr>
