@@ -163,8 +163,8 @@
                             </a>
 
                         </h2>
-                        <h4>
-                            <span class="h4 font-w700 text-danger">{{$product->sku}} </span>
+                        <h4 class="mb-1">
+                            <span class="h4 font-w700 text-danger">SKU: {{$product->sku}} </span>
                         </h4>
                         <div class="clearfix" style="margin-top: 5px;width: 100%">
 
