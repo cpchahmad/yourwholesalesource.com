@@ -137,6 +137,9 @@
                                 {{$product->title}} <span @if($product->fulfilled_by == 'AliExpress') class="badge badge-info" @else class="badge badge-primary" @endif  style="font-size: 12px;vertical-align: super">@if($product->fulfilled_by == 'AliExpress') {{$product->fulfilled_by}} @else Awareness Drop Shipping @endif</span>
                             </a>
                         </h2>
+                        <h4 class="mb-1">
+                            <span class="h4 font-w700 text-danger">SKU: {{$product->sku}} </span>
+                        </h4>
                         <div class="clearfix d-flex justify-content-between" style="margin-top: 5px;width: 100%">
                             <div class="w-50">
                                 @if($product->quantity > 0)
