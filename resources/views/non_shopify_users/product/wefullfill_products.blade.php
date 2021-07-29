@@ -208,7 +208,7 @@
                                 @endif
                                 <hr>
                                 <button onclick="window.location.href='{{route('users.product.wefulfill.show',$product->id)}}'" class="btn btn-primary btn-block mb2">View Product</button>
-                                <button onclick="window.location.href='{{route('app.download.product')}}?shop=wefullfill.myshopify.com&&product_id={{$product->shopify_id}}'" class="btn btn-warning btn-block mb2">Download</button>
+                                <button onclick="window.location.href='{{route('app.download.product')}}?shop=wefullfill.myshopify.com&&product_id={{$product->shopify_id}}'" class="btn btn-warning btn-block mb2">Download To Store</button>
 
                                 <span class="mb2 font-size-sm" style="color: grey">Fulfilled By Awareness Drop Shipping</span>
                             </div>
