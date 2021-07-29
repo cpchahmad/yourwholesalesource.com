@@ -188,14 +188,16 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="col-md-3 text-right">
+
+                        <div>{!! $product->description !!}</div>
+
+                        <div class="mt-2">
                             @if(!$product instanceof \App\RetailerProduct)
                                 @if(!in_array($product->id,$shop->has_imported->pluck('id')->toArray()))
                                     <a href="{{route('store.product.wefulfill.add-to-import-list',$product->id)}}" class="btn btn-primary btn-square ">Add to Import List</a>
                                 @endif
                             @endif
                         </div>
-                        <div>{!! $product->description !!}</div>
                         <!-- END Vital Info -->
                     </div>
                     <div class="col-md-12">
