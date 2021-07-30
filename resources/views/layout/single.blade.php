@@ -47,7 +47,7 @@
             height: 250px;
             background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.2)), url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdz4ZW3dtIPQ_NphkVcRlgDG62txM98qMYd4e17-5dRnbpQnMR_PmORfxQEsZrlMUaIKU&usqp=CAU");
             background-position: center;
-            background-size: cover;
+            background-size: contain;
         }
 
         .section-status-mobile {

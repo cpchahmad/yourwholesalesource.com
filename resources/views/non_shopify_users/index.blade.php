@@ -411,46 +411,46 @@
                     </div>
                 </div>
 
-                <div class="block">
-                    <div class="block-header">
-                        <div class="block-title ">
-                            <i class="fa fa-newspaper text-city"></i>
-                            Announcements
-                        </div>
-                    </div>
-                    <div class="block-content pb-4 text-left" >
-                        @forelse(\App\News::latest()->limit(5)->get() as $news)
-                            <i class="fa fa-volume-up text-city" ></i>
-                            <span class="font-size-sm  font-w600 " data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ \Illuminate\Support\Str::limit($news->title, $limit = 20, $end = '.. (view details)') }} </span>
-                            <div class="modal fade" id="news_modal_{{$news->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-popout" role="document">
-                                    <div class="modal-content text-left">
-                                        <div class="block block-themed block-transparent mb-0">
-                                            <div class="block-header bg-primary-dark">
-                                                <h3 class="block-title">Announcement</h3>
-                                                <div class="block-options">
-                                                    <button type="button" class="btn-block-option">
-                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="block-content font-size-sm">
-                                                <h5>{{ $news->title }}</h5>
-                                                <p>{{ $news->description }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                <div class="block">--}}
+{{--                    <div class="block-header">--}}
+{{--                        <div class="block-title ">--}}
+{{--                            <i class="fa fa-newspaper text-city"></i>--}}
+{{--                            Announcements--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="block-content pb-4 text-left" >--}}
+{{--                        @forelse(\App\News::latest()->limit(5)->get() as $news)--}}
+{{--                            <i class="fa fa-volume-up text-city" ></i>--}}
+{{--                            <span class="font-size-sm  font-w600 " data-toggle="modal" data-target="#news_modal_{{$news->id}}">{{ \Illuminate\Support\Str::limit($news->title, $limit = 20, $end = '.. (view details)') }} </span>--}}
+{{--                            <div class="modal fade" id="news_modal_{{$news->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">--}}
+{{--                                <div class="modal-dialog modal-dialog-popout" role="document">--}}
+{{--                                    <div class="modal-content text-left">--}}
+{{--                                        <div class="block block-themed block-transparent mb-0">--}}
+{{--                                            <div class="block-header bg-primary-dark">--}}
+{{--                                                <h3 class="block-title">Announcement</h3>--}}
+{{--                                                <div class="block-options">--}}
+{{--                                                    <button type="button" class="btn-block-option">--}}
+{{--                                                        <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>--}}
+{{--                                                    </button>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="block-content font-size-sm">--}}
+{{--                                                <h5>{{ $news->title }}</h5>--}}
+{{--                                                <p>{{ $news->description }}</p>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <hr>
-                        @empty
-                            <strong >
-                                No Announcements
-                            </strong>
-                        @endforelse
-                    </div>
-                </div>
+{{--                            <hr>--}}
+{{--                        @empty--}}
+{{--                            <strong >--}}
+{{--                                No Announcements--}}
+{{--                            </strong>--}}
+{{--                        @endforelse--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
 
