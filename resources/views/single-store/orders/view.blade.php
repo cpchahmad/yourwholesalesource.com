@@ -277,8 +277,8 @@
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
-                                <th>Stock Status</th>
-                                <th style="width: 25%;">@if($order->paid == 0)Select Warehouse @else Selected Warehouse @endif</th>
+{{--                                <th>Stock Status</th>--}}
+{{--                                <th style="width: 25%;">@if($order->paid == 0)Select Warehouse @else Selected Warehouse @endif</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -369,39 +369,39 @@
                                                 <span class="badge badge-success"> Fulfilled</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            @php
-                                                $out_of_stock = false;
-                                                if($item->linked_variant) {
-                                                    if($item->linked_variant->quantity == 0)
-                                                        $out_of_stock = true;
-                                                }
-                                                elseif($item->linked_product){
-                                                    if($item->linked_product->quantity == 0)
-                                                        $out_of_stock = true;
-                                                }
+{{--                                        <td>--}}
+{{--                                            @php--}}
+{{--                                                $out_of_stock = false;--}}
+{{--                                                if($item->linked_variant) {--}}
+{{--                                                    if($item->linked_variant->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                }--}}
+{{--                                                elseif($item->linked_product){--}}
+{{--                                                    if($item->linked_product->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                }--}}
 
-                                            @endphp
+{{--                                            @endphp--}}
 
-                                            @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null))
-                                                <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
-                                            @else
-                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>
-                                            @endif
-                                        </td>
-                                        @if($order->paid == 0 && $item->has_associated_warehouse())
-                                            <td>
-                                                <select name="warehouse" id="" class="form-control warehouse-selector">
-                                                    @foreach($item->has_associated_warehouse() as $warehouse_inventory)
-                                                        <option  @if($warehouse_inventory->warehouse_id == 3) selected @endif type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id . ','. $order->id . ',' . $item->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                        @else
-                                            <td>
-                                                {{ $item->has_warehouse->title }}
-                                            </td>
-                                        @endif
+{{--                                            @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null))--}}
+{{--                                                <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>--}}
+{{--                                            @else--}}
+{{--                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
+{{--                                        @if($order->paid == 0 && $item->has_associated_warehouse())--}}
+{{--                                            <td>--}}
+{{--                                                <select name="warehouse" id="" class="form-control warehouse-selector">--}}
+{{--                                                    @foreach($item->has_associated_warehouse() as $warehouse_inventory)--}}
+{{--                                                        <option  @if($warehouse_inventory->warehouse_id == 3) selected @endif type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id . ','. $order->id . ',' . $item->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>--}}
+{{--                                                    @endforeach--}}
+{{--                                                </select>--}}
+{{--                                            </td>--}}
+{{--                                        @else--}}
+{{--                                            <td>--}}
+{{--                                                {{ $item->has_warehouse->title }}--}}
+{{--                                            </td>--}}
+{{--                                        @endif--}}
                                     </tr>
                                 @endif
                             @endforeach
