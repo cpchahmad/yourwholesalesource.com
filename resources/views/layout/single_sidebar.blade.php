@@ -149,7 +149,7 @@
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('store.help-center')}}">
                     <i class="nav-main-link-icon fa fa-hands-helping"></i>
-                    <span class="nav-main-link-name">Ticket Center</span>
+                    <span class="nav-main-link-name">Tickets</span>
                 </a>
             </li>
 

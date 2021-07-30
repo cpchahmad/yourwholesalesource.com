@@ -74,7 +74,7 @@
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <a href="{{route('store.customer.view',$customer->id)}}"
-                                                   class="btn btn-sm btn-success" type="button" data-toggle="tooltip" title=""
+                                                   class="btn btn-sm btn-primary" type="button" data-toggle="tooltip" title=""
                                                    data-original-title="View Customer"><i class="fa fa-eye"></i></a>
                                             </div>
 

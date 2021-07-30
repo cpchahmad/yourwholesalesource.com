@@ -45,7 +45,7 @@
         .overlay{
             width: 100%;
             height: 250px;
-            background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.2)), url("https://cdn.shopify.com/s/files/1/0370/7361/7029/files/Wefullfill.jpg?v=1598885447");
+            background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.2)), url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdz4ZW3dtIPQ_NphkVcRlgDG62txM98qMYd4e17-5dRnbpQnMR_PmORfxQEsZrlMUaIKU&usqp=CAU");
             background-position: center;
             background-size: cover;
         }

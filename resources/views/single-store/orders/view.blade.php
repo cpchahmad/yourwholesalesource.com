@@ -141,7 +141,7 @@
                 </div>
 
                 @if($order->paid == 1)
-                    <button class="btn btn-primary" style="float: right;margin-right: 10px" data-target="#create_refund_modal" data-toggle="modal">Generate Refund</button>
+                    <button class="btn btn-sm btn-primary" style="float: right;margin-right: 10px" data-target="#create_refund_modal" data-toggle="modal">Generate Refund</button>
                     <div class="modal fade" id="create_refund_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
                             <div class="modal-content">
