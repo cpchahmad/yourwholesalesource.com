@@ -198,14 +198,14 @@
 
                                                                                                         <td align="left" valign="middle" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;">
                                                                                                             <a href="http://www.YourWholesaleSource.com" style="color:#FFFFFF;text-decoration:none;">
-                                                                                                                www.Awareness Drop Shipping.com
+                                                                                                                www.awarenessdropshipping.com
                                                                                                             </a>
                                                                                                         </td>
                                                                                                         <td align="center" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:capitalize;">
                                                                                                             |
                                                                                                         </td>
                                                                                                         <td align="left" valign="middle" class="MsoNormal padding-right" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
-                                                                                                            support@Awareness Drop Shipping.com
+                                                                                                            info@awarenessdropshipping.com
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>
@@ -286,7 +286,7 @@
                                                 <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="80%">
                                                     <tr>
                                                         <td align="center" class="MsoNormal" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:25px;font-weight:600;letter-spacing:1px;line-height:35px;text-transform:capitalize;">
-                                                            Your Awareness Drop Shipping Wallet Ready To Use
+                                                            Your Awareness Dropshipping Wallet Ready To Use
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -368,7 +368,7 @@
                                                                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
                                                                                         <tr>
                                                                                             <td align="center" class="MsoNormal" style="color:#FFFFFF; font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;letter-spacing:1px;line-height:24px;">
-                                                                                                Copyright &copy; 2021, Awareness Drop Shipping
+                                                                                                Copyright &copy; 2021, Awareness Dropshipping
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>

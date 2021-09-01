@@ -202,14 +202,14 @@
 
                                                                                                         <td align="left" valign="middle" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;">
                                                                                                             <a href="#" style="color:#FFFFFF;text-decoration:none;">
-                                                                                                                www.Awareness Drop Shipping.com
+                                                                                                                www.awarenessdropshipping.com
                                                                                                             </a>
                                                                                                         </td>
                                                                                                         <td align="center" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:capitalize;">
                                                                                                             |
                                                                                                         </td>
                                                                                                         <td align="right" width="40" valign="middle" class="MsoNormal remove-bar" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:capitalize;">
-                                                                                                            support@Awareness Drop Shipping.com
+                                                                                                            info@awarenessdropshipping.com
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 </table>
@@ -394,7 +394,7 @@
                                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
-                                                                        Top up Request for Awareness Drop Shipping
+                                                                        Top up Request for Awareness Dropshipping
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -402,7 +402,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
-                                                                        This is a video guide on how you can top-up your Awareness Drop Shipping wallet.
+                                                                        This is a video guide on how you can top-up your Awareness Dropshipping wallet.
                                                                     </td>
                                                                 </tr>
 
@@ -483,7 +483,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
-                                                                        This video will guide you on how you can create a wishlist on Awareness Drop Shipping.
+                                                                        This video will guide you on how you can create a wishlist on Awareness Dropshipping.
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -554,7 +554,7 @@
                                                             <table align="left" border="0" cellpadding="0" cellspacing="0" class="video-padding" width="100%">
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#333333;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:16px;font-weight:600;letter-spacing:1px;line-height:26px;text-transform:capitalize;">
-                                                                        How to Create a ticket in Awareness Drop Shipping App
+                                                                        How to Create a ticket in Awareness Dropshipping App
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -562,7 +562,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left" class="MsoNormal resp-content" style="color:#666666;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;line-height:24px;">
-                                                                        Reaching out to Awareness Drop Shipping team for any concern or inquiries before, during or even after the order process is much easier with the Ticket system provided in the Application itself.
+                                                                        Reaching out to Awareness Dropshipping team for any concern or inquiries before, during or even after the order process is much easier with the Ticket system provided in the Application itself.
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -652,7 +652,7 @@
                                                                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="display-width" width="100%" style="width:auto !important;">
                                                                                         <tr>
                                                                                             <td align="center" class="MsoNormal" style="color:#FFFFFF;font-family:'Segoe UI',sans-serif,Arial,Helvetica,Lato;font-size:14px;letter-spacing:1px;line-height:24px;">
-                                                                                                Copyright &copy; 2021, Awareness Drop Shipping
+                                                                                                Copyright &copy; 2021, Awareness Dropshipping
                                                                                             </td>
                                                                                         </tr>
                                                                                     </table>
