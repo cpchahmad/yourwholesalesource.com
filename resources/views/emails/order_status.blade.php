@@ -306,7 +306,7 @@
                                                     <tr>
                                                         <td align="left" valign="middle">
                                                             <a href="#" style="color:#444444;text-decoration:none;">
-                                                                <img src="{{ asset('assets/trans.png') }}" alt="150x50" width="150"/>
+                                                                <img src="{{ asset('assets/colored.png') }}" alt="150x50" width="150"/>
                                                             </a>
                                                         </td>
                                                     </tr>
