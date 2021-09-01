@@ -21,7 +21,7 @@ class NewShopifyUserMail extends Mailable
     private $user;
     private $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -35,7 +35,7 @@ class NewShopifyUserMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Welcome to YourWholeSaleSource')->view('emails.new_shopify_user')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Welcome to AwarenessDropshipping')->view('emails.new_shopify_user')->with([
             'user' => $this->user,
             'template' => $this->template,
         ]);

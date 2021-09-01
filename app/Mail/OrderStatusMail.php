@@ -23,7 +23,7 @@ class OrderStatusMail extends Mailable
     private $order;
     private $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user, RetailerOrder $order)
     {
         $this->user = $user;
@@ -38,7 +38,7 @@ class OrderStatusMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Order Status Updated')->view('emails.order_status')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Order Status Updated')->view('emails.order_status')->with([
             'template' => $this->template,
             'order' => $this->order,
         ]);

@@ -19,7 +19,7 @@ class WishlistReqeustMail extends Mailable
      *
      * @return void
      */
-    private $user = "info@tetralogicx.com";
+    private $user = "info@fundraisingforacause.com";
 
     private $sender;
     private $wishlist;
@@ -38,7 +38,7 @@ class WishlistReqeustMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->user,'YourWholeSaleSource')->subject('There is a wishlist request')->view('emails.wishlist_request')->with([
+        return $this->from($this->user,'AwarenessDropshipping')->subject('There is a wishlist request')->view('emails.wishlist_request')->with([
             'template' => $this->template,
             'wishlist' => $this->wishlist,
         ]);

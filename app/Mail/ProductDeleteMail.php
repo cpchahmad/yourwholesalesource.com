@@ -21,7 +21,7 @@ class ProductDeleteMail extends Mailable
 
     private $product;
     private $template;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
     public function __construct(Product $product)
     {
@@ -36,7 +36,7 @@ class ProductDeleteMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Product Deleted on YourWholeSaleSource')->view('emails.product_delete')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Product Deleted on AwarenessDropshipping')->view('emails.product_delete')->with([
             'product' => $this->product,
             'template' => $this->template
         ]);

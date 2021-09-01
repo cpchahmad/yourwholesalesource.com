@@ -19,7 +19,7 @@ class NewWallet extends Mailable
      */
     private $user;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user)
     {
 
@@ -33,7 +33,7 @@ class NewWallet extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('YourWholeSaleSource Wallet Initialized')->view('emails.new_wallet')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('AwarenessDropshipping Wallet Initialized')->view('emails.new_wallet')->with([
             'user' => $this->user,
             'wallet' => $this->user->has_wallet
         ]);

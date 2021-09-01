@@ -23,7 +23,7 @@ class WishlistRejectMail extends Mailable
     private $wishlist;
     private $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user, Wishlist $wishlist)
     {
         $this->user = $user;
@@ -38,7 +38,7 @@ class WishlistRejectMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Wishlist Rejected')->view('emails.wishlist_reject')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Wishlist Rejected')->view('emails.wishlist_reject')->with([
             'template' => $this->template,
             'wishlist' => $this->wishlist,
         ]);

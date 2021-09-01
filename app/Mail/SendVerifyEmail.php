@@ -13,7 +13,7 @@ class SendVerifyEmail extends Mailable
     use Queueable, SerializesModels;
 
     private $user;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
     /**
      * Create a new message instance.
@@ -32,7 +32,7 @@ class SendVerifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Verify Email')->view('emails.reset')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Verify Email')->view('emails.reset')->with([
             'token' => $this->token,
             'user' => $this->user
         ]);

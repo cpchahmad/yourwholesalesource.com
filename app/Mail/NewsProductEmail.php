@@ -22,7 +22,7 @@ class NewsProductEmail extends Mailable
     private $user;
     private $top_products_stores;
     private $template;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
     public function __construct(User $user)
     {
@@ -38,7 +38,7 @@ class NewsProductEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Important News')->view('emails.news_products')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Important News')->view('emails.news_products')->with([
             'user' => $this->user,
             'template' => $this->template,
             'top_products_stores' => $this->top_products_stores,

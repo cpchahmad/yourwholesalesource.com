@@ -18,7 +18,7 @@ class NewsEmail extends Mailable
      * @return void
      */
     private $template;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
 
     public function __construct()
@@ -33,7 +33,7 @@ class NewsEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Important News')->view('emails.news-email')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Important News')->view('emails.news-email')->with([
             'template' => $this->template,
         ]);
     }

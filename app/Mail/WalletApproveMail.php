@@ -24,7 +24,7 @@ class WalletApproveMail extends Mailable
     private $wallet;
     private $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user, Wallet $wallet)
     {
         $this->user = $user;
@@ -39,7 +39,7 @@ class WalletApproveMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Wallet Approved')->view('emails.wallet_approve')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Wallet Approved')->view('emails.wallet_approve')->with([
             'template' => $this->template,
             'wallet' => $this->wallet,
         ]);

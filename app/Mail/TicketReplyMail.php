@@ -24,7 +24,7 @@ class TicketReplyMail extends Mailable
     private $ticket;
     private $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user, Ticket $ticket)
     {
         $this->user = $user;
@@ -39,7 +39,7 @@ class TicketReplyMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Ticket Replied')->view('emails.ticket_reply')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Ticket Replied')->view('emails.ticket_reply')->with([
             'template' => $this->template,
             'ticket' => $this->ticket,
         ]);

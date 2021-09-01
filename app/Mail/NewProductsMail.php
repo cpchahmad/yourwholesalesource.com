@@ -21,7 +21,7 @@ class NewProductsMail extends Mailable
 
     private $new_products;
     private $template;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
     public function __construct($new_products)
     {
@@ -36,7 +36,7 @@ class NewProductsMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Our New Products')->view('emails.new_products')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Our New Products')->view('emails.new_products')->with([
             'template' => $this->template,
             'new_products' => $this->new_products,
         ]);

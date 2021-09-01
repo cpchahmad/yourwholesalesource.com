@@ -14,7 +14,7 @@ class ResourcesMail extends Mailable
 
     public $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
 
     /**
@@ -34,7 +34,7 @@ class ResourcesMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Dont forgot to check out these useful resources')->view('emails.resources-email')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Dont forgot to check out these useful resources')->view('emails.resources-email')->with([
             'template' => $this->template,
         ]);
     }

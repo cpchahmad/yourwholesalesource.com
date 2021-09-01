@@ -21,7 +21,7 @@ class ProductStockOutMail extends Mailable
 
     private $product;
     private $template;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
     public function __construct(Product $product)
     {
@@ -36,7 +36,7 @@ class ProductStockOutMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Product is Out of Stock on YourWholeSaleSource')->view('emails.product_stock')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Product is Out of Stock on AwarenessDropshipping')->view('emails.product_stock')->with([
             'product' => $this->product,
             'template' => $this->template,
         ]);

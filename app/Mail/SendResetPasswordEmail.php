@@ -20,7 +20,7 @@ class SendResetPasswordEmail extends Mailable
      */
     private $token;
     private $user;
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
 
 
 
@@ -43,7 +43,7 @@ class SendResetPasswordEmail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Reset Password Link')->view('emails.reset')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Reset Password Link')->view('emails.reset')->with([
             'token' => $this->token,
             'user' => $this->user
         ]);

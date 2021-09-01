@@ -23,7 +23,7 @@ class TopShopifyProuctMail extends Mailable
     private $top_products_stores;
     private $template;
 
-    private $sender = 'info@tetralogicx.com';
+    private $sender = 'info@fundraisingforacause.com';
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -38,7 +38,7 @@ class TopShopifyProuctMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->sender,'YourWholeSaleSource')->subject('Our Top Products')->view('emails.top_products_new')->with([
+        return $this->from($this->sender,'AwarenessDropshipping')->subject('Our Top Products')->view('emails.top_products_new')->with([
             'user' => $this->user,
             'template' => $this->template,
             'top_products_stores' => $this->top_products_stores,
