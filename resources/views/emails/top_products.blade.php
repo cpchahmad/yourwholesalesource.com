@@ -88,7 +88,7 @@
     <div class="email-contaner" style="border: 2px solid #66b7e8;padding: 25px;">
         <div class="email-content" style="margin: auto;  text-align: center; ">
             <div class="email-logo">
-                <img src="{{ asset('assets/wholesale.png') }}" alt="Wefullfill" style="width: 35%">
+                <img src="{{ asset('assets/trans.png') }}" alt="Wefullfill" style="width: 35%">
             </div>
 
             <div class="email-content-detail" style="margin: 50px 0;">
