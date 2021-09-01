@@ -91,7 +91,7 @@
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
                                 <th>Stock Status</th>
-                                <th>Selected Warehouse</th>
+{{--                                <th>Selected Warehouse</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -298,9 +298,9 @@
                                                 @endif
                                             @endif
                                         </td>
-                                        <td>
-                                            {{ $item->has_warehouse->title }}
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            {{ $item->has_warehouse->title }}--}}
+{{--                                        </td>--}}
                                     </tr>
                                 @endif
                             @endforeach

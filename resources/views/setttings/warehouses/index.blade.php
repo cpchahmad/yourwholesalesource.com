@@ -21,9 +21,9 @@
         <div class="row mb2">
             <div class="col-sm-6">
             </div>
-            <div class="col-sm-6 text-right">
-                <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_warehouse">Create Warehouse</button>
-            </div>
+{{--            <div class="col-sm-6 text-right">--}}
+{{--                <button class="btn btn-sm btn-primary text-white" data-toggle="modal" data-target="#create_warehouse">Create Warehouse</button>--}}
+{{--            </div>--}}
         </div>
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
