@@ -29,7 +29,7 @@ class InventoryController extends Controller
     public function create_service(){
         $data = [
             'fulfillment_service' => [
-                'name' => 'YourWholeSaleSource',
+                'name' => 'AwarenessDropshipping',
                 'callback_url' => 'https://app.yourwholesalesource.com',
                 "inventory_management"=> true,
                 "tracking_support"=>false,

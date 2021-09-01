@@ -953,7 +953,7 @@ class RetailerProductController extends Controller
                 $product_type = $product->type;
             }
             else{
-                $product_type = 'YourWholeSaleSource';
+                $product_type = 'AwarenessDropshipping';
             }
 
             $productdata = [
@@ -996,9 +996,9 @@ class RetailerProductController extends Controller
                         'weight' => $product->weight,
                         'weight_unit' => 'kg',
                         'barcode' => $product->barcode,
-                        "fulfillment_service" => "YourWholeSaleSource",
+                        "fulfillment_service" => "AwarenessDropshipping",
 //                        'inventory_quantity' => $product->quantity,
-                        'inventory_management' => 'YourWholeSaleSource',
+                        'inventory_management' => 'AwarenessDropshipping',
                     ]
                 ];
                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
@@ -1340,8 +1340,8 @@ class RetailerProductController extends Controller
                     'option2' => $varaint->option2,
                     'option3' => $varaint->option3,
                     'inventory_quantity' => $varaint->quantity,
-                    "fulfillment_service" => "YourWholeSaleSource",
-                    'inventory_management' => 'YourWholeSaleSource',
+                    "fulfillment_service" => "AwarenessDropshipping",
+                    'inventory_management' => 'AwarenessDropshipping',
                     'grams' => $weight * 1000,
                     'weight' => $weight,
                     'weight_unit' => 'kg',
@@ -1359,8 +1359,8 @@ class RetailerProductController extends Controller
                 'option2' => null,
                 'option3' => null,
                 'inventory_quantity' => $product->quantity,
-                "fulfillment_service" => "YourWholeSaleSource",
-                'inventory_management' => 'YourWholeSaleSource',
+                "fulfillment_service" => "AwarenessDropshipping",
+                'inventory_management' => 'AwarenessDropshipping',
                 'grams' => $weight * 1000,
                 'weight' => $weight,
                 'weight_unit' => 'kg',

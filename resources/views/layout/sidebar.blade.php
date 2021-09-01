@@ -67,12 +67,12 @@
                     <span class="nav-main-link-name">Orders</span>
                 </a>
             </li>
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('orders.bulk.tracking')}}">
-                    <i class="nav-main-link-icon fa fa-truck"></i>
-                    <span class="nav-main-link-name">Bulk Tracking</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{route('orders.bulk.tracking')}}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-truck"></i>--}}
+{{--                    <span class="nav-main-link-name">Bulk Tracking</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('stores.index')}}">

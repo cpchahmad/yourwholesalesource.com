@@ -131,7 +131,7 @@ class AdminOrderController extends Controller
                         if (!$location_response->errors) {
 
                             foreach ($location_response->body->locations as $location) {
-                                if ($location->name == "YourWholeSaleSource") {
+                                if ($location->name == "AwarenessDropshipping") {
                                     $data = [
                                         "fulfillment" => [
                                             "location_id" => $location->id,
@@ -1209,7 +1209,7 @@ class AdminOrderController extends Controller
             $webhook->set_fulfillments($data);
         }
         else {
-            return redirect()->back()->with('error', 'Order is not fulfilled in YourWholeSaleSource');
+            return redirect()->back()->with('error', 'Order is not fulfilled in AwarenessDropshipping');
         }
 
         return redirect()->back()->with('success', 'Order Fulfillment Synced Successfully!');
