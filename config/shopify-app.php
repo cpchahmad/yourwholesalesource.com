@@ -308,6 +308,10 @@ return [
         [
             "topic" => "products/delete",
             "address" => "https://app.yourwholesalesource.com/webhook/products-delete"
+        ],
+        [
+            "topic" => "app/uninstalled",
+            "address" => "https://app.yourwholesalesource.com/webhook/app-uninstalled"
         ]
 
 
