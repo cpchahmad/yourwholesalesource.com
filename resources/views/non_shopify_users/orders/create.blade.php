@@ -227,7 +227,7 @@
 
                                 <div class="countries-section " id="product-section">
                                     <div class="text-center ">
-                                        <img data-src="https://i.ya-webdesign.com/images/shopping-transparent-animated-gif.gif" alt="">
+                                        <img data-src="https://i.gifer.com/ZZ5H.gif" alt="">
                                     </div>
                                 </div>
                             </div>

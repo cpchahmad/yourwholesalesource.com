@@ -5,7 +5,7 @@
     <div class="content content-full pt-2 pb-2">
         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
             <h1 class="flex-sm-fill h4 my-2">
-                Awareness Drop Shipping University
+                Awareness Dropshipping University
             </h1>
             <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-alt">
