@@ -59,16 +59,16 @@
 
 
 
-                            <div class="block">
-                                <div class="block-header d-flex justify-content-between">
-                                    <h3 class="block-title">Auto Wallet Order Payment Setting</h3>
+{{--                            <div class="block">--}}
+{{--                                <div class="block-header d-flex justify-content-between">--}}
+{{--                                    <h3 class="block-title">Auto Wallet Order Payment Setting</h3>--}}
 
-                                    <div class="custom-control custom-switch custom-control-success mb-1">
-                                        <input @if($user->has_wallet_setting && $user->has_wallet_setting->enable)checked="" @endif data-route="{{route('store.save.wallet.settings',$user->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input wallet-switch" id="wallet_setting" name="example-sw-success2">
-                                        <label class="custom-control-label status-text" for="wallet_setting">@if($user->has_wallet_setting && $user->has_wallet_setting->enable) Enabled @else Disabled @endif</label>
-                                    </div>
-                                </div>
-                            </div>
+{{--                                    <div class="custom-control custom-switch custom-control-success mb-1">--}}
+{{--                                        <input @if($user->has_wallet_setting && $user->has_wallet_setting->enable)checked="" @endif data-route="{{route('store.save.wallet.settings',$user->id)}}" data-csrf="{{csrf_token()}}" type="checkbox" class="custom-control-input wallet-switch" id="wallet_setting" name="example-sw-success2">--}}
+{{--                                        <label class="custom-control-label status-text" for="wallet_setting">@if($user->has_wallet_setting && $user->has_wallet_setting->enable) Enabled @else Disabled @endif</label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
                             <div class="block">
                                 <div class="block-header">
