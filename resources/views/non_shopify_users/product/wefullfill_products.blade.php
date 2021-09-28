@@ -95,40 +95,40 @@
 
             @endforeach
         </div>
-        <div class="row mb-2" style="padding: 0 14px;">
-            <div class="col-md-4 p-0 " >
-                <a href="{{route('users.product.wefulfill')}}?tag=winning-products">
-                    <div class="block pointer m-0" style="background-color:#edfb79;">
+{{--        <div class="row mb-2" style="padding: 0 14px;">--}}
+{{--            <div class="col-md-4 p-0 " >--}}
+{{--                <a href="{{route('users.product.wefulfill')}}?tag=winning-products">--}}
+{{--                    <div class="block pointer m-0" style="background-color:#edfb79;">--}}
 
 
-                        <div class="block-content p-3 text-center">
-                            <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" data-src="{{asset('winning.png')}}" alt=""> Winning Products </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 p-0">
-                <a href="{{route('users.product.wefulfill')}}?tag=24-hours-dispatch">
-                    <div class="block pointer m-0" style="background-color:#94a5ff;">
+{{--                        <div class="block-content p-3 text-center">--}}
+{{--                            <p class="m-0" style="font-size:14px;font-weight: 600;"><img class="img-avatar" data-src="{{asset('winning.png')}}" alt=""> Winning Products </p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-4 p-0">--}}
+{{--                <a href="{{route('users.product.wefulfill')}}?tag=24-hours-dispatch">--}}
+{{--                    <div class="block pointer m-0" style="background-color:#94a5ff;">--}}
 
-                        <div class="block-content p-3 text-center">
-                            <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" data-src="https://image.flaticon.com/icons/svg/46/46016.svg" alt="" style="margin-right: 10px"> 24 Hours Dispatch</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 p-0 ">
-                <a href="{{route('users.product.wefulfill')}}?tag=best-seller">
-                    <div class="block pointer m-0" style="background-color:#83ff83;">
+{{--                        <div class="block-content p-3 text-center">--}}
+{{--                            <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" data-src="https://image.flaticon.com/icons/svg/46/46016.svg" alt="" style="margin-right: 10px"> 24 Hours Dispatch</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div class="col-md-4 p-0 ">--}}
+{{--                <a href="{{route('users.product.wefulfill')}}?tag=best-seller">--}}
+{{--                    <div class="block pointer m-0" style="background-color:#83ff83;">--}}
 
 
-                        <div class="block-content p-3 text-center">
-                            <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" data-src="{{asset('best.png')}}" alt=""> Best Sellers</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+{{--                        <div class="block-content p-3 text-center">--}}
+{{--                            <p class="m-0" style="font-size:14px;font-weight: 600;"> <img class="img-avatar" data-src="{{asset('best.png')}}" alt=""> Best Sellers</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="row mb-2">
             <div class="col-md-6 text-right">
             </div>
