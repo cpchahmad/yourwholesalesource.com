@@ -90,7 +90,7 @@
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
-                                <th>Stock Status</th>
+{{--                                <th>Stock Status</th>--}}
 {{--                                <th>Selected Warehouse</th>--}}
                             </tr>
                             </thead>
@@ -237,67 +237,67 @@
                                                 <span class="badge badge-success"> Fulfilled</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            @php
-                                                if($order->custom == 0) {
-                                                    $out_of_stock = false;
-                                                    if($item->linked_variant) {
-                                                        if($item->linked_variant->quantity == 0)
-                                                            $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_product){
-                                                        if($item->linked_product->quantity == 0)
-                                                            $out_of_stock = true;
-                                                    }
-                                                }
-                                                else {
-                                                    $out_of_stock = false;
-                                                    if($item->linked_real_variant) {
-                                                        if($item->linked_real_variant->quantity == 0)
-                                                            $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_dropship_variant) {
-                                                      if($item->linked_dropship_variant->linked_product->quantity == 0)
-                                                        $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_woocommerce_variant) {
-                                                      if($item->linked_woocommerce_variant->linked_product->quantity == 0)
-                                                        $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_admin_variant) {
-                                                      if($item->linked_admin_variant->linked_product->quantity == 0)
-                                                        $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_real_product){
-                                                        if($item->linked_real_product->quantity == 0)
-                                                            $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_woocommerce_product) {
-                                                      if($item->linked_woocommerce_product->quantity == 0)
-                                                        $out_of_stock = true;
-                                                    }
-                                                    elseif($item->linked_admin_product) {
-                                                      if($item->linked_admin_product->quantity == 0)
-                                                        $out_of_stock = true;
-                                                    }
+{{--                                        <td>--}}
+{{--                                            @php--}}
+{{--                                                if($order->custom == 0) {--}}
+{{--                                                    $out_of_stock = false;--}}
+{{--                                                    if($item->linked_variant) {--}}
+{{--                                                        if($item->linked_variant->quantity == 0)--}}
+{{--                                                            $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_product){--}}
+{{--                                                        if($item->linked_product->quantity == 0)--}}
+{{--                                                            $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                }--}}
+{{--                                                else {--}}
+{{--                                                    $out_of_stock = false;--}}
+{{--                                                    if($item->linked_real_variant) {--}}
+{{--                                                        if($item->linked_real_variant->quantity == 0)--}}
+{{--                                                            $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_dropship_variant) {--}}
+{{--                                                      if($item->linked_dropship_variant->linked_product->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_woocommerce_variant) {--}}
+{{--                                                      if($item->linked_woocommerce_variant->linked_product->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_admin_variant) {--}}
+{{--                                                      if($item->linked_admin_variant->linked_product->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_real_product){--}}
+{{--                                                        if($item->linked_real_product->quantity == 0)--}}
+{{--                                                            $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_woocommerce_product) {--}}
+{{--                                                      if($item->linked_woocommerce_product->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                    }--}}
+{{--                                                    elseif($item->linked_admin_product) {--}}
+{{--                                                      if($item->linked_admin_product->quantity == 0)--}}
+{{--                                                        $out_of_stock = true;--}}
+{{--                                                    }--}}
 
-                                                }
-                                            @endphp
+{{--                                                }--}}
+{{--                                            @endphp--}}
 
-                                            @if($order->custom == 0)
-                                                @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null ))
-                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
-                                                @else
-                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>
-                                                @endif
-                                            @else
-                                                @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null  && $item->linked_dropship_variant == null && $item->linked_woocommerce_product == null && $item->linked_woocommerce_variant == null && $item->linked_admin_variant == null && $item->linked_admin_product == null))
-                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
-                                                @else
-                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>
-                                                @endif
-                                            @endif
-                                        </td>
+{{--                                            @if($order->custom == 0)--}}
+{{--                                                @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null ))--}}
+{{--                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>--}}
+{{--                                                @else--}}
+{{--                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>--}}
+{{--                                                @endif--}}
+{{--                                            @else--}}
+{{--                                                @if($out_of_stock || ($item->linked_real_variant == null && $item->linked_real_product == null  && $item->linked_dropship_variant == null && $item->linked_woocommerce_product == null && $item->linked_woocommerce_variant == null && $item->linked_admin_variant == null && $item->linked_admin_product == null))--}}
+{{--                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>--}}
+{{--                                                @else--}}
+{{--                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>--}}
+{{--                                                @endif--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
 {{--                                        <td>--}}
 {{--                                            {{ $item->has_warehouse->title }}--}}
 {{--                                        </td>--}}
@@ -458,7 +458,7 @@
                             <div class="block-content">
                                 @if($fulfillment->tracking_number != null)
                                     <p style="font-size: 12px">
-                                        Courier Service Provider : @if($fulfillment->courier ) {{ $fulfillment->courier->title }} @endif <br>
+                                        @if($fulfillment->courier ) Courier Service Provider : {{ $fulfillment->courier->title }} @endif <br>
                                         Tracking Number : {{$fulfillment->tracking_number}} <br>
                                         Tracking Url : {{$fulfillment->tracking_url}} <br>
                                         Tracking Notes : {{$fulfillment->tracking_notes}} <br>

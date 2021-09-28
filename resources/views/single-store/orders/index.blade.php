@@ -60,7 +60,7 @@
                                     <th>Cost</th>
                                     <th>Payment Status</th>
                                     <th>Status</th>
-                                    <th>Stock Status</th>
+{{--                                    <th>Stock Status</th>--}}
                                     <th style="text-align: right" class="pr-0">
                                         <a href="{{route('store.sync.orders')}}"
                                              class="btn btn-sm btn-primary" style="font-size: 12px" type="button" data-toggle="tooltip" title=""
@@ -129,38 +129,38 @@
                                             @endif
 
                                         </td>
-                                        <td>
-                                            @php
-                                                $out_of_stock = 0;
-                                                foreach($order->line_items()->where('fulfilled_by', 'fantasy')->get() as $item) {
-                                                    if($item->linked_variant == null && $item->linked_product == null)
-                                                        $out_of_stock += 1;
+{{--                                        <td>--}}
+{{--                                            @php--}}
+{{--                                                $out_of_stock = 0;--}}
+{{--                                                foreach($order->line_items()->where('fulfilled_by', 'fantasy')->get() as $item) {--}}
+{{--                                                    if($item->linked_variant == null && $item->linked_product == null)--}}
+{{--                                                        $out_of_stock += 1;--}}
 
-                                                    if($item->linked_variant && $item->linked_variant->quantity == 0) {
-                                                        $out_of_stock += 1;
-                                                    }
-                                                    else if($item->linked_product && $item->linked_product->quantity == 0){
-                                                        $out_of_stock += 1;
-                                                    }
-                                                }
-                                            @endphp
+{{--                                                    if($item->linked_variant && $item->linked_variant->quantity == 0) {--}}
+{{--                                                        $out_of_stock += 1;--}}
+{{--                                                    }--}}
+{{--                                                    else if($item->linked_product && $item->linked_product->quantity == 0){--}}
+{{--                                                        $out_of_stock += 1;--}}
+{{--                                                    }--}}
+{{--                                                }--}}
+{{--                                            @endphp--}}
 
-                                            @if($order->line_items->where('fulfilled_by', 'store')->count() > 0)
-                                                @if($order->line_items()->where('fulfilled_by', 'fantasy')->count() == $out_of_stock)
-                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
-                                                @else
-                                                    <span class="badge badge-warning" style="font-size: small"> Partial Out of Stock </span>
-                                                @endif
-                                            @else
-                                                @if($out_of_stock == 0)
-                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>
-                                                @elseif($order->line_items()->count() == $out_of_stock)
-                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>
-                                                @else
-                                                    <span class="badge badge-warning" style="font-size: small"> Partial out of Stock </span>
-                                                @endif
-                                            @endif
-                                        </td>
+{{--                                            @if($order->line_items->where('fulfilled_by', 'store')->count() > 0)--}}
+{{--                                                @if($order->line_items()->where('fulfilled_by', 'fantasy')->count() == $out_of_stock)--}}
+{{--                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>--}}
+{{--                                                @else--}}
+{{--                                                    <span class="badge badge-warning" style="font-size: small"> Partial Out of Stock </span>--}}
+{{--                                                @endif--}}
+{{--                                            @else--}}
+{{--                                                @if($out_of_stock == 0)--}}
+{{--                                                    <span class="badge badge-success" style="font-size: small"> In Stock </span>--}}
+{{--                                                @elseif($order->line_items()->count() == $out_of_stock)--}}
+{{--                                                    <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>--}}
+{{--                                                @else--}}
+{{--                                                    <span class="badge badge-warning" style="font-size: small"> Partial out of Stock </span>--}}
+{{--                                                @endif--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <a href="{{route('store.order.view',$order->id)}}"
