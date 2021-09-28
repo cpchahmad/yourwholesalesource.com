@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-6 text-right">
 {{--                <a href="{{route('system.store.connect')}}" class="btn btn-success btn-square ">Add Store</a>--}}
-                <button class="btn btn-warning" data-target="#add_store_modal" data-toggle="modal"> Add Store </button>
+                <button class="btn btn-success" data-target="#add_store_modal" data-toggle="modal"> Add Store </button>
                 <div class="modal fade" id="add_store_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-popout" role="document">
                         <div class="modal-content">
