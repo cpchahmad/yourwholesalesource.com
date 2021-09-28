@@ -200,10 +200,12 @@
                                             ${{ number_format($product->price, 2) }}
                                         @endif
                                     </div>
-                                    <div class="font-w600 text-danger mt-1">
-                                        Recommended Price
-                                            ${{ number_format($product->recommended_price, 2) }}
-                                    </div>
+                                    @if($product->recommended_price)
+                                        <div class="font-w600 text-danger mt-1">
+                                            Recommended Price
+                                                ${{ number_format($product->recommended_price, 2) }}
+                                        </div>
+                                    @endif
 {{--                                    <div class="font-400 text-primary mt-1 push-10-l" style="margin-left: auto">Shipping Price{{$product->new_shipping_price}}</div>--}}
                                 </div>
 
