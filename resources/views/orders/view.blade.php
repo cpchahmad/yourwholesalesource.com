@@ -25,7 +25,7 @@
     <div class="content">
         <div class="row" style="margin-bottom: 20px">
             <div class="col-md-12">
-                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right;margin-right: 10px"> Download CSV </button>
+{{--                <button  onclick="window.location.href='{{route('app.order.download',$order->id)}}'" class="btn btn-sm btn-primary"  style="float: right;margin-right: 10px"> Download CSV </button>--}}
                 @if($order->status == "shipped")
                     <button  onclick="window.location.href='{{route('admin.order.mark_as_delivered',$order->id)}}'" class="btn btn-sm btn-success"  style="margin-right: 10px;float: right"> Mark as Delivered </button>
                 @endif
