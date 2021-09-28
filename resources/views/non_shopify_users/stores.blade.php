@@ -35,7 +35,43 @@
             <div class="col-sm-6">
             </div>
             <div class="col-sm-6 text-right">
-                <a href="{{route('system.store.connect')}}" class="btn btn-success btn-square ">Add Store</a>
+{{--                <a href="{{route('system.store.connect')}}" class="btn btn-success btn-square ">Add Store</a>--}}
+                <button class="btn btn-warning" data-target="#add_store_modal" data-toggle="modal"> Add Store </button>
+                <div class="modal fade" id="add_store_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-popout" role="document">
+                        <div class="modal-content">
+                            <div class="block block-themed block-transparent mb-0">
+                                <div class="block-header bg-primary-dark">
+                                    <h3 class="block-title">Add Store</h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option">
+                                            <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="block-content pb-3">
+                                    <div class="text-center push-10-t push-30">
+                                        <img class="w-50" src="https://png.pngitem.com/pimgs/s/173-1738304_shopify-hd-png-download.png" alt="">
+                                    </div>
+                                    <div class="push-30">
+                                        <form method="POST" action="{{ route('authenticate') }}">
+                                            {{ csrf_field() }}
+                                            <div class="form-material" style="margin-bottom: 10px">
+                                                <label for="shop">Store Domain</label>
+                                                <input id="shop" name="shop" class="form-control" type="text" autofocus="autofocus" placeholder="example.myshopify.com">
+                                                <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+
+                                            </div>
+
+                                            <button class="btn btn-primary" type="submit">Connect </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="block">
