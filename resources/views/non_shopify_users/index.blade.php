@@ -32,8 +32,8 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                <div class="row block p-2">
-                    Wallet: {{number_format($balance,2)}} USD
+                <div class="row block p-2 py-3">
+                    <h5 class="text-danger">Wallet: {{number_format($balance,2)}} USD</h5>
                 </div>
                 <div class="row block">
                     <div class="col-md-12">
