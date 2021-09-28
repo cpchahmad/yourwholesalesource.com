@@ -28,17 +28,37 @@
 </div>
 
 <div class="content">
-    <form class="js-form-icon-search push" action="{{route('store.product.wefulfill')}}" method="get">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search by title, tags keyword" value="{{$search}}" name="search">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
-                    <a class="btn btn-danger" href="{{route('store.product.wefulfill')}}"> <i class="fa fa-times"></i> Clear </a>
+    <div class="row mb-2">
+        <div class="col-md-6 text-right">
+            <form class="js-form-icon-search push" action="{{route('store.product.wefulfill')}}" method="get">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Search by title, tags keyword" value="{{$search}}" name="search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                            <a class="btn btn-danger" href="{{route('store.product.wefulfill')}}"> <i class="fa fa-times"></i> Clear </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
+        <div class="col-md-6 text-right">
+            <form action="" method="get">
+                <div class="d-flex">
+                    <select name="filter" class="form-control" required>
+                        <option value="">Filter By</option>
+                        <option @if($filter == 'most-order') selected @endif value="most-order">Most Order</option>
+                        <option @if($filter == 'most-imported') selected @endif value="most-imported">Most Imported</option>
+                        <option @if($filter == 'new-arrival') selected @endif value="new-arrival">New Arrival</option>
+                    </select>
+                    <input type="submit" style="margin-left: 10px" class="btn btn-sm btn-primary" value="Filter">
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
 
     <div class="row mb-2" style="padding: 0 14px;">
         @foreach($categories as $index => $category)
@@ -130,25 +150,7 @@
 
 
 {{--    </div>--}}
-    <div class="row mb-2">
-        <div class="col-md-6 text-right">
-        </div>
-        <div class="col-md-6 text-right">
-            <form action="" method="get">
-                <div class="d-flex">
-                    <select name="filter" class="form-control" required>
-                        <option value="">Filter By</option>
-                        <option @if($filter == 'most-order') selected @endif value="most-order">Most Order</option>
-                        <option @if($filter == 'most-imported') selected @endif value="most-imported">Most Imported</option>
-                        <option @if($filter == 'new-arrival') selected @endif value="new-arrival">New Arrival</option>
-                    </select>
-                    <input type="submit" style="margin-left: 10px" class="btn btn-sm btn-primary" value="Filter">
-                </div>
-            </form>
 
-
-        </div>
-    </div>
     <div class="row" style="margin-top: 20px">
         @if(count($products) > 0)
             @foreach($products as $index => $product)
