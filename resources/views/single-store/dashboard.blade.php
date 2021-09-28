@@ -33,6 +33,10 @@
         <div class="row">
             <div class="col-md-9">
                 <!-- Orders -->
+                <div class="row block pt-3 plp-3">
+                    <h3 class="text-danger">My Wallet: {{number_format($balance,2)}} USD</h3>
+                </div>
+
                 <div class="row block">
                     <div class="col-md-12">
                         <div class="block-title  p-3">My Orders</div>
