@@ -226,7 +226,7 @@
 
         <div class="d-flex align-items-center">
             <!-- User Dropdown -->
-            <span class="badge badge-primary mt-1 mr-1" style="font-size: 13px"> Wallet: {{number_format($balance,2)}} USD </span>
+{{--            <span class="badge badge-primary mt-1 mr-1" style="font-size: 13px"> Wallet: {{number_format($balance,2)}} USD </span>--}}
 
 {{--            <div class="status-section">--}}
 {{--                <a href="/store/wishlist?status=2" class="text-white">--}}
