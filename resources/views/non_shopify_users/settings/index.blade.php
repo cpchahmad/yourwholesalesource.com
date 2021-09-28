@@ -13,7 +13,7 @@
                             <div class="block-header">
                                 <h3 class="block-title">List of Shopify stores
 
-                                    <button class="btn btn-success" data-target="#add_store_modal" data-toggle="modal"> Add Store </button>
+                                    <button class="btn btn-success btn-sm ml-2 float-right" data-target="#add_store_modal" data-toggle="modal"> Add Store </button>
                                     <div class="modal fade" id="add_store_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-popout" role="document">
                                             <div class="modal-content">
