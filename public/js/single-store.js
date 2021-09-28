@@ -1,5 +1,15 @@
 $(document).ready(function () {
 
+    // Paypal Wallet Top-up
+    $('.paypal-wallet-pay-btn').click(function() {
+        var amount = parseFloat($('#bank_transfer_modal').find('.amount-to-be-added').val());
+
+        $('#bank_transfer_modal').modal('hide');
+
+        $('#paypal_pay_trigger').find('.amount-to-be-paid').text(amount.toFixed(2));
+        $('#paypal_pay_trigger').modal('show');
+    });
+
     // Stripe Order Payment
     var $form = $(".require-validation");
 
