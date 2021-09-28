@@ -42,7 +42,7 @@
                         </div>
                         <div class="block-content pb-3">
                             <div class="text-center push-10-t push-30">
-                                <img class="avatar-img" src="https://png.pngitem.com/pimgs/s/173-1738304_shopify-hd-png-download.png" alt="">
+                                <img class="w-50" src="https://png.pngitem.com/pimgs/s/173-1738304_shopify-hd-png-download.png" alt="">
                             </div>
                             <div class="push-30">
                             <form method="POST" action="{{ route('authenticate') }}">
