@@ -110,12 +110,12 @@
                 </a>
             </li>
 
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('users.notifications')}}">
-                    <i class="nav-main-link-icon fa fa-sticky-note"></i>
-                    <span class="nav-main-link-name">Notifications</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{route('users.notifications')}}">--}}
+{{--                    <i class="nav-main-link-icon fa fa-sticky-note"></i>--}}
+{{--                    <span class="nav-main-link-name">Notifications</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link" href="{{route('users.help-center')}}">
@@ -138,12 +138,12 @@
 {{--                </a>--}}
 {{--            </li>--}}
 
-            <li class="nav-main-item">
-                <a class="nav-main-link" href="{{route('users.invoice')}}">
-                    <i class="nav-main-link-icon si si-chart"></i>
-                    <span class="nav-main-link-name">Invoice Zone</span>
-                </a>
-            </li>
+{{--            <li class="nav-main-item">--}}
+{{--                <a class="nav-main-link" href="{{route('users.invoice')}}">--}}
+{{--                    <i class="nav-main-link-icon si si-chart"></i>--}}
+{{--                    <span class="nav-main-link-name">Invoice Zone</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-main-item">
                 <a class="nav-main-link" data-target="#feedback" data-toggle="modal">
