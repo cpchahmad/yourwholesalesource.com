@@ -269,7 +269,7 @@
                             <tr>
                                 <th></th>
                                 <th style="width: 10%">Name</th>
-                                <th>Fulfilled By</th>
+{{--                                <th>Fulfilled By</th>--}}
                                 <th>Cost</th>
                                 <th>Price X Quantity</th>
                                 <th>Status</th>
@@ -374,15 +374,15 @@
                                             {{$item->name}}
 
                                         </td>
-                                        <td>
-                                            @if($item->fulfilled_by == 'store')
-                                                <span class="badge badge-danger"> Store</span>
-                                            @elseif ($item->fulfilled_by == 'Fantasy')
-                                                <span class="badge badge-success"> Awareness Drop Shipping </span>
-                                            @else
-                                                <span class="badge badge-success"> {{$item->fulfilled_by}} </span>
-                                            @endif
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            @if($item->fulfilled_by == 'store')--}}
+{{--                                                <span class="badge badge-danger"> Store</span>--}}
+{{--                                            @elseif ($item->fulfilled_by == 'Fantasy')--}}
+{{--                                                <span class="badge badge-success"> Awareness Drop Shipping </span>--}}
+{{--                                            @else--}}
+{{--                                                <span class="badge badge-success"> {{$item->fulfilled_by}} </span>--}}
+{{--                                            @endif--}}
+{{--                                        </td>--}}
 
                                         <td>{{number_format($item->cost,2)}}  X {{$item->quantity}} USD</td>
 
