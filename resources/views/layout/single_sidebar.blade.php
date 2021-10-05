@@ -1,3 +1,23 @@
+@php
+$shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
+/*Local Shop Model!*/
+$shop= \App\Shop::find($shop->id);
+if($shop->has_manager != null){
+    $manager = $shop->has_manager;
+}
+else{
+   $manager = null;
+}
+
+if(count($shop->has_user) > 0){
+    $associated_user =   $shop->has_user[0];
+}
+else{
+    $associated_user = null;
+}
+
+@endphp
+
 <nav id="sidebar" aria-label="Main Navigation">
     <div class="content-header bg-white-5">
         <a class="font-w600 text-dual">
@@ -11,7 +31,8 @@
     </div>
 
     <div class="content-side content-side-full">
-        <ul class="nav-main">
+        @if($associated_user)
+            <ul class="nav-main">
             <li class="nav-main-item">
                 <a class="nav-main-link active" href="{{route('store.dashboard')}}">
                     <i class="nav-main-link-icon si si-speedometer"></i>
@@ -189,6 +210,7 @@
             </li>
 
         </ul>
+        @endif
     </div>
 </nav>
 
@@ -201,30 +223,11 @@
             <button type="button" class="btn btn-sm btn-dual mr-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
                 <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
-            @php
-                $shop =  \OhMyBrew\ShopifyApp\Facades\ShopifyApp::shop();
-           /*Local Shop Model!*/
-           $shop= \App\Shop::find($shop->id);
-               if($shop->has_manager != null){
-               $manager = $shop->has_manager;
-               }
-               else{
-                   $manager = null;
-               }
-
-             if(count($shop->has_user) > 0){
-                $associated_user =   $shop->has_user[0];
-            }
-            else{
-                $associated_user = null;
-            }
-
-            @endphp
         </div>
 
 
-
-        <div class="d-flex align-items-center">
+        @if($associated_user)
+            <div class="d-flex align-items-center">
             <!-- User Dropdown -->
 {{--            <span class="badge badge-primary mt-1 mr-1" style="font-size: 13px"> Wallet: {{number_format($balance,2)}} USD </span>--}}
 
@@ -380,6 +383,7 @@
 
 
         </div>
+        @endif
         <!-- END Right Section -->
     </div>
     <!-- END Header Content -->

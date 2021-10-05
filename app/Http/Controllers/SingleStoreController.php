@@ -400,13 +400,29 @@ class SingleStoreController extends Controller
         }
     }
 
-
     public function authenticate(Request $request)
     {
+
         if (Auth::validate($request->except('_token'))) {
             $authenticate = true;
         } else {
-            $authenticate = false;
+
+            $user =  User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+            ]);
+
+            $user->assignRole('non-shopify-users');
+            $user->save();
+            $wallet = new WalletController();
+            $wallet->wallet_create($user->id);
+            if (Auth::validate($request->except(['_token', 'name']))) {
+                $authenticate = true;
+            }
+            else {
+                $authenticate = false;
+            }
         }
         return response()->json([
             'authenticate' => $authenticate
@@ -415,62 +431,13 @@ class SingleStoreController extends Controller
 
     public function associate(Request $request)
     {
+
         $user = User::where('email', $request->input('email'))->first();
         $shop = Shop::where('shopify_domain', $request->input('store'))->first();
+
         if ($user != null && $shop != null) {
             if (!in_array($shop->id, $user->has_shops->pluck('id')->toArray())) {
                 $user->has_shops()->attach([$shop->id]);
-
-                // Sending Welcome Email
-                try{
-                    Mail::to($user->email)->send(new NewShopifyUserMail($user));
-                }
-                catch (\Exception $e){
-                }
-
-                // Sending Top Product Recommendation Email
-                try{
-                    Mail::to($user->email)->send(new TopShopifyProuctMail($user));
-                }
-                catch (\Exception $e){
-                }
-
-                // Sync To SendGrid WefullFill Members Contact List
-                $contacts = [];
-                array_push($contacts, [
-                    'email' => $user->email,
-                    'first_name' => $user->name,
-                ]);
-                $contacts_payload = [
-                    'list_ids' => ["33d743f3-a906-4512-83cd-001f7ba5ab33"],
-                    'contacts' => $contacts
-                ];
-
-                $payload = json_encode($contacts_payload);
-
-                $curl = curl_init();
-
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => "https://api.sendgrid.com/v3/marketing/contacts",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 30,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "PUT",
-                    CURLOPT_POSTFIELDS => $payload,
-                    CURLOPT_HTTPHEADER => array(
-                        "authorization: Bearer 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",
-                        "content-type: application/json"
-                    ),
-                ));
-
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-
-                curl_close($curl);
-
-
 
                 return response()->json([
                     'status' => 'assigned'

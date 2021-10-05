@@ -245,7 +245,6 @@ $(document).ready(function () {
 
     }
 
-
     $('body').on('click','.authenticate_user',function () {
         $('#authenticate_user_form').find('input[type=submit]').trigger('click');
     });
@@ -269,7 +268,7 @@ $(document).ready(function () {
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, Associate it!'
+                        confirmButtonText: 'Associate it!'
                     }).then((result) => {
                         if (result.value) {
                             $('.pre-loader').css('display','flex');
@@ -279,12 +278,14 @@ $(document).ready(function () {
                                 data:{
                                     _token :form.data('token'),
                                     store:form.data('store'),
-                                    email :form.find('#user-email').val()
+                                    email :form.find('#user-email').val(),
+                                    name: form.find('#user-name').val(),
+                                    password: form.find('#user-password').val(),
                                 },
                                 success:function (response) {
                                     $('.pre-loader').css('display','none');
                                     if(response.status === 'error'){
-                                        alertify.error('Assigning Process Failed');
+                                        alertify.error('Assigning Process Failed, make sure you verified your email');
                                     }
                                     else{
                                         if(response.status === 'already_assigned'){

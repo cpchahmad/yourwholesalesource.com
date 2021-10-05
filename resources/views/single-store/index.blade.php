@@ -132,6 +132,17 @@
                                         <div class="form-group">
                                             <div class="col-sm-12">
                                                 <div class="form-material">
+                                                    <label for="material-error">Name</label>
+                                                    <input required class="form-control" type="text" id="user-name" name="name"
+                                                           value=""   placeholder="Enter Name">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <div class="form-material">
                                                     <label for="material-error">Email Address</label>
                                                     <input required class="form-control" type="email" id="user-email" name="email"
                                                            value=""   placeholder="Enter Registered Email Address">
