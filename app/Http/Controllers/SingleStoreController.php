@@ -362,6 +362,27 @@ class SingleStoreController extends Controller
         ]);
     }
 
+    public function storeAuthentication()
+    {
+        /*Ossiset Shop Model*/
+        $shop = ShopifyApp::shop();
+        /*Local Shop Model!*/
+        $shop = Shop::find($shop->id);
+        $user = $shop->has_user->first();
+
+        if (count($shop->has_user) > 0) {
+            $associated_user = $shop->has_user[0];
+        } else {
+            $associated_user = null;
+        }
+        return view('single-store.authentication')->with([
+            'shop' => $shop,
+            'user' => $user,
+            'associated_user' => $associated_user,
+            'countries' => Country::all()
+        ]);
+    }
+
     public function save_personal_info(Request $request)
     {
         $user = User::find($request->input('user_id'));

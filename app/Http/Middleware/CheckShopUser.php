@@ -27,7 +27,7 @@ class CheckShopUser
         if (count($shop->has_user) > 0) {
             return $next($request);
         } else {
-            return redirect()->route('store.index');
+            return redirect()->route('store.authentication');
         }
     }
 }

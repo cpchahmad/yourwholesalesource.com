@@ -240,6 +240,7 @@ Route::group(['middleware' => ['auth.shop']], function () {
         Route::get('/invoice','SingleStoreController@showInvoice')->name('store.invoice');
         Route::get('/invoice/download/{id}','SingleStoreController@downloadInvoicePDF')->name('store.invoice.download');
         Route::get('/settings','SingleStoreController@setting')->name('store.index');
+        Route::get('/settings/authentication','SingleStoreController@storeAuthentication')->name('store.authentication');
         Route::post('/settings/personal','SingleStoreController@save_personal_info')->name('store.save_personal_info');
         Route::post('/settings/personal/address','SingleStoreController@save_address')->name('store.save_address');
         Route::post('/wallet/settings/{id}','SingleStoreController@saveWalletSettings')->name('store.save.wallet.settings');
