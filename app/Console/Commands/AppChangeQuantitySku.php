@@ -62,7 +62,19 @@ class AppChangeQuantitySku extends Command
                             $shop = $this->helper->getSpecificShop($v->shop_id);
                             if($shop != null){
                                 $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailer_product->shopify_id.'/variants/'.$v->shopify_id.'.json',$productdata);
-                                //sleep(1);
+                                $location_response = $shop->api()->rest('GET', '/admin/locations.json');
+                                if (!$location_response->errors) {
+
+                                    foreach ($location_response->body->locations as $location) {
+                                        if ($location->name == "AwarenessDropshipping") {
+                                            $response = $shop->api()->rest('POST', '/admin/inventory_levels/set.json', [
+                                                "location_id"=> $location->id,
+                                                "inventory_item_id"=> $v->inventory_item_id,
+                                                "available"=> $v->quantity
+                                            ]);
+                                        }
+                                    }
+                                }
                             }
 
                         }
@@ -77,6 +89,7 @@ class AppChangeQuantitySku extends Command
                             if(!$response->errors){
                                 $shopifyVariants = $response->body->product->variants;
                                 $variant_id = $shopifyVariants[0]->id;
+                                $variant_inventory_item_id = $shopifyVariants[0]->inventory_item_id;
                                 $i = [
                                     'variant' => [
                                         'sku' => $retailer_product->sku,
@@ -84,7 +97,20 @@ class AppChangeQuantitySku extends Command
                                     ]
                                 ];
                                 $shop->api()->rest('PUT', '/admin/api/2019-10/variants/' . $variant_id .'.json', $i);
-                                //sleep(1);
+                                $location_response = $shop->api()->rest('GET', '/admin/locations.json');
+                                if (!$location_response->errors) {
+
+                                    foreach ($location_response->body->locations as $location) {
+                                        if ($location->name == "AwarenessDropshipping") {
+                                            $response = $shop->api()->rest('POST', '/admin/inventory_levels/set.json', [
+                                                "location_id"=> $location->id,
+                                                "inventory_item_id"=> $variant_inventory_item_id,
+                                                "available"=> $retailer_product->quantity
+                                            ]);
+
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

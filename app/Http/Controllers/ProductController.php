@@ -1300,6 +1300,7 @@ class ProductController extends Controller
                 }
             }
             DB::commit();
+            Artisan::call('app:sku-quantity-change',['product_id'=> $product->id]);
             return redirect()->back()->with('success', 'Product Updated Successfully');
         }
         catch(\Exception $e) {

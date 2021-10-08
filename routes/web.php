@@ -707,3 +707,33 @@ Route::get('/sync-test', function() {
 
    $inv->syncProductInventory($product);
 });
+
+
+Route::get('syn-inventory-man', function() {
+    $helper = new HelperController();
+    $retailer_products = RetailerProduct::whereNotNull('shopify_id')->whereNotNull('shop_id')->get();
+
+    foreach ($retailer_products as $retailer_product){
+        $shop = $helper->getSpecificShop($retailer_product->shop_id);
+        if($shop != null){
+            $resp =  $shop->api()->rest('GET', '/admin/api/2019-10/products/'.$retailer_product->shopify_id.'.json');
+            if($resp->errors)
+                continue;
+            $variants = $resp->body->product->variants;
+            foreach ($variants as $variant) {
+                $productdata = [
+                    "variant" => [
+                        "fulfillment_service" => "AwarenessDropshipping",
+                        'inventory_management' => 'AwarenessDropshipping',
+                    ]
+                ];
+
+                $resp =  $shop->api()->rest('PUT', '/admin/api/2019-10/products/'.$retailer_product->shopify_id.'/variants/'.$variant->id.'.json',$productdata);
+                dump($resp);
+
+            }
+        }
+
+    }
+
+});
