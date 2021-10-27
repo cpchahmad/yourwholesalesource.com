@@ -212,13 +212,14 @@
 {{--            </div>--}}
 
             <div class="dropdown d-inline-block ml-2">
-                <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-sync-alt"></i>
+                @if(auth()->user()->has_shops()->count())
+                    <button type="button" class="btn btn-sm btn-dual" id="page-header-user-dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-sync-alt"></i>
 
-                    <span class="d-none d-md-inline-block ml-1">Switch to Store</span>
-                    <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-left p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown2">
+                        <span class="d-none d-md-inline-block ml-1">Switch to Store</span>
+                        <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left p-0 border-0 font-size-sm" aria-labelledby="page-header-user-dropdown2">
                     <div class="p-2">
                         <form method="POST" action="{{ route('authenticate') }}" class="shop-login-form">
                             @csrf
@@ -231,6 +232,7 @@
                         </form>
                     </div>
                 </div>
+                @endif
             </div>
 
             <div class="dropdown d-inline-block ml-2">
