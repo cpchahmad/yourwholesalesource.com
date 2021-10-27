@@ -25,7 +25,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-material">
                                                 <label for="material-error">Name</label>
-                                                <input required class="form-control" type="text" id="user-name" name="name"
+                                                <input class="form-control" type="text" id="user-name" name="name"
                                                        value=""   placeholder="Enter Name">
 
                                             </div>
