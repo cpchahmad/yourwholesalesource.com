@@ -21,7 +21,7 @@
                             <form id="authenticate_user_form" data-store="{{$shop->shopify_domain}}" data-token="{{csrf_token()}}" data-route="{{route('store.user.associate')}}" action="{{route('store.user.authenticate')}}" method="post">
                                 @csrf
                                 <div class="block-content p-0">
-                                    <div class="form-group">
+                                    <div class="form-group js-user-section">
                                         <div class="col-sm-12">
                                             <div class="form-material">
                                                 <label for="material-error">Name</label>

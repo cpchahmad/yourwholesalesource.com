@@ -1,5 +1,13 @@
 $(document).ready(function () {
 
+    $(document).on('click', '.js-new-user-tab', function () {
+        $('.js-user-section').show();
+    });
+
+    $(document).on('click', '.js-existing-user-tab', function () {
+        $('.js-user-section').hide();
+    });
+
     // Paypal Wallet Top-up
     $('.paypal-wallet-pay-btn').click(function() {
         var amount = parseFloat($('#bank_transfer_modal').find('.amount-to-be-added').val());
@@ -298,7 +306,7 @@ $(document).ready(function () {
                                                 'success'
                                             );
                                         }
-                                        location.reload();
+                                        window.location.href = '/store/dashboard';
                                     }
 
                                 }

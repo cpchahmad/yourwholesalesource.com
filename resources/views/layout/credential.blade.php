@@ -27,6 +27,21 @@
     @include('inc.font')
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ asset('assets/css/oneui.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/dropzone/dist/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/magnific-popup/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/plugins/select2/css/select2.css')}}">
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 
 </head>
 <body>
@@ -67,6 +82,25 @@
 
 <script src="{{ asset('assets/js/oneui.core.min.js') }}"></script>
 <script src="{{ asset('assets/js/oneui.app.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>]
+
+<script src="{{ asset('js/single-store.js') }}?v={{now()}}"></script>
+<script src="{{ asset('assets/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/dropzone/dist/dropzone.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
+<script src="{{asset('assets/js/plugins/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.maskedinput/jquery.maskedinput.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/select2/js/select2.min.js')}}"></script>
+
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script src="{{asset('js/jquery.lazy.min.js')}}"></script>
+<script>
+    $(function() {
+        $('img').lazy();
+    });
+</script>
 
 
 </body>
