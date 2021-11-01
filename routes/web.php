@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/default/payment/settings','DefaultSettingsController@paymentIndex')->name('default_info_payment');
     Route::post('/default/settings/save','DefaultSettingsController@save')->name('default_info.save');
     Route::post('/charge/payment/save','DefaultSettingsController@save_percentage')->name('payment.charge.save');
+    Route::post('/api/settings/save','DefaultSettingsController@save_api_settings')->name('api.settings.save');
     Route::post('/save/tiered/pricing/preferences','DefaultSettingsController@save_tiered_pricing_preferences')->name('save.tiered.pricing.preferences');
     Route::post('/save/general/discount/preferences','DefaultSettingsController@save_general_discount_preferences')->name('save.general.discount.preferences');
     Route::post('/save/fixed/discount/preferences','DefaultSettingsController@save_fixed_discount_preferences')->name('save.general.fixed.preferences');

@@ -87,7 +87,7 @@
                     </div>
                     <div class="block-content block-content-narrow">
                         <form class="form-horizontal push-10-t"
-                              action="{{route('payment.charge.save')}}"
+                              action="{{route('api.settings.save')}}"
                               method="post">
                             @csrf
 

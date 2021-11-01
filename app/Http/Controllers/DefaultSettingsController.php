@@ -85,12 +85,29 @@ class DefaultSettingsController extends Controller
           AdminSetting::UpdateOrcreate([
               'id' => 1,
           ],[
-             'payment_charge_percentage'  => $request->input('payment_charge_percentage'),
+              'payment_charge_percentage'  => $request->input('payment_charge_percentage'),
+              'paypal_script_tag'  => $request->input('paypal_script_tag'),
               'paypal_percentage' =>$request->input('paypal_percentage'),
               'stripe_public' =>$request->input('stripe_public'),
               'stripe_private' =>$request->input('stripe_private'),
           ]);
         return redirect()->back()->with('success', 'Payment Charge Percentage Saved Successfully');
+    }
+
+    public function save_api_settings(Request $request)
+    {
+
+        AdminSetting::UpdateOrcreate([
+            'id' => 1,
+        ],[
+            'omni_key'  => $request->input('omni_key'),
+            'usps_user_id'  => $request->input('usps_user_id'),
+            'usps_origin_zip' =>$request->input('usps_origin_zip'),
+            'ship_station_key' =>$request->input('ship_station_key'),
+            'inflow_company_id' =>$request->input('inflow_company_id'),
+            'inflow_api_key' =>$request->input('inflow_api_key'),
+        ]);
+        return redirect()->back()->with('success', 'API Settings Saved Successfully');
     }
 
     public function save(Request $request)
