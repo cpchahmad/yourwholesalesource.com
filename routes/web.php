@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth', 'role:wordpress-admin']], function () {
     Route::get('/products/{id}/varaints/update','ProductController@update_existing_product_new_variants')->name('product.existing_product_update_variants');
     Route::get('/products-tabs/{id}/delete','ProductController@delete_tab')->name('product.tab.delete');
     Route::get('/default/settings','DefaultSettingsController@index')->name('default_info');
+    Route::get('/default/payment/settings','DefaultSettingsController@paymentIndex')->name('default_info_payment');
     Route::post('/default/settings/save','DefaultSettingsController@save')->name('default_info.save');
     Route::post('/charge/payment/save','DefaultSettingsController@save_percentage')->name('payment.charge.save');
     Route::post('/save/tiered/pricing/preferences','DefaultSettingsController@save_tiered_pricing_preferences')->name('save.tiered.pricing.preferences');

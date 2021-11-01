@@ -70,6 +70,15 @@ class DefaultSettingsController extends Controller
         ]);
     }
 
+    public function paymentIndex() {
+        $info = DefaultInfo::get()->first();
+        $admin_settings = AdminSetting::all()->first();
+
+        return view('setttings.default.payment-index')->with([
+            'info' => $info,
+            'settings' =>$admin_settings,
+        ]);
+    }
     public function save_percentage(Request $request)
     {
 
