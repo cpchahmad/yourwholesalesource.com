@@ -22,23 +22,14 @@
             <div class="col-md-12">
                 <div class="block">
                     <div class="block-header">
-                        <h3 class="block-title">Payment Charge Percentage</h3>
+                        <h3 class="block-title">Payment API Settings</h3>
                     </div>
                     <div class="block-content block-content-narrow">
                         <form class="form-horizontal push-10-t"
                               action="{{route('payment.charge.save')}}"
                               method="post">
                             @csrf
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="form-material">
-                                        <label>Credit Card Percentage</label>
-                                        <input class="form-control" type="number" step="any" name="payment_charge_percentage" required
-                                         @if($settings != null)  value="{{$settings->payment_charge_percentage}}" @endif>
 
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <div class="form-material">
@@ -46,6 +37,15 @@
                                         <input class="form-control" type="number" step="any" name="paypal_percentage" required
                                                @if($settings != null)  value="{{$settings->paypal_percentage}}" @endif>
 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>Paypal Script Tag</label>
+                                        <textarea class="form-control" name="paypal_script_tag" required>@if($settings != null){{$settings->paypal_script_tag}}@endif</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -70,6 +70,93 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-12 text-right">
+                                    <button class="btn btn-sm btn-primary" type="submit">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="block-header">
+                        <h3 class="block-title">Other API Settings</h3>
+                    </div>
+                    <div class="block-content block-content-narrow">
+                        <form class="form-horizontal push-10-t"
+                              action="{{route('payment.charge.save')}}"
+                              method="post">
+                            @csrf
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>OmniSend Api Key</label>
+                                        <input class="form-control" type="text" name="omni_key" required
+                                               @if($settings != null)  value="{{$settings->omni_key}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>USPS User ID</label>
+                                        <input class="form-control" type="text" name="usps_user_id" required
+                                               @if($settings != null)  value="{{$settings->usps_user_id}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>USPS Origin Zip</label>
+                                        <input class="form-control" type="text" name="usps_origin_zip" required
+                                               @if($settings != null)  value="{{$settings->usps_origin_zip}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>ShipStation Key</label>
+                                        <input class="form-control" type="text" name="ship_station_key" required
+                                               @if($settings != null)  value="{{$settings->ship_station_key}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>Inflow Company Id</label>
+                                        <input class="form-control" type="text" name="inflow_company_id" required
+                                               @if($settings != null)  value="{{$settings->inflow_company_id}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="form-material">
+                                        <label>Inflow API Key</label>
+                                        <input class="form-control" type="text" name="inflow_api_key" required
+                                               @if($settings != null)  value="{{$settings->inflow_api_key}}" @endif>
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-12 text-right">
                                     <button class="btn btn-sm btn-primary" type="submit">Save</button>
