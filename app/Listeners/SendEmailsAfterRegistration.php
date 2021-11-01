@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\AdminSetting;
 use App\ErrorLog;
 use App\Mail\NewUser;
 use App\Mail\NewWallet;
@@ -33,6 +34,8 @@ class SendEmailsAfterRegistration
     public function handle($event)
     {
         $user = $event->user;
+        $admin_settings = AdminSetting::first();
+
 
 //        try{
 //            Mail::to($user->email)->send(new NewUser($user));
@@ -81,7 +84,7 @@ class SendEmailsAfterRegistration
             CURLOPT_POSTFIELDS => json_encode($data),
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/json",
-                "x-api-key: ". env('OMNISEND_API_KEY')
+                "x-api-key: ". $admin_settings->omni_key
             ),
         ));
 

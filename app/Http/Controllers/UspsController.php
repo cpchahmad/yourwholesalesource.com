@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\AdminSetting;
 use App\RetailerOrder;
 use App\ShippingQuantity;
 use Usps;
@@ -25,8 +26,10 @@ class UspsController extends Controller
 
     public function validate_address($order)
     {
+        $admin_settings = AdminSetting::first();
+
         $shipping_address = json_decode($order->shipping_address);
-        $user_id = env('USPS_USER_ID');
+        $user_id = $admin_settings->usps_user_id;
         try {
             $request_doc_template = <<<EOT
             <?xml version="1.0" ?>
@@ -58,10 +61,10 @@ class UspsController extends Controller
 
     public function shipping_rates($order)
     {
-
-        $user_id = env('USPS_USER_ID');
+        $admin_settings = AdminSetting::first();
+        $user_id = $admin_settings->usps_user_id;
         try {
-            $origin_zip = env('USPS_ORIGIN_ZIP');
+            $origin_zip = $admin_settings->usps_origin_zip;
 
             $request_doc_template = <<<EOT
                 <?xml version="1.0" ?>

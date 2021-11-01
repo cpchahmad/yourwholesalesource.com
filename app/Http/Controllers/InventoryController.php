@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AdminSetting;
 use App\InflowProduct;
 use App\Product;
 use App\ProductVariant;
@@ -225,11 +226,12 @@ class InventoryController extends Controller
 
 
     public function syncInflowProducts() {
+        $admin_settings = AdminSetting::first();
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products?include=inventoryLines&count=10000&skip=18000',
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/'.$admin_settings->inflow_company_id.'/products?include=inventoryLines&count=10000&skip=18000',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -282,6 +284,7 @@ class InventoryController extends Controller
     }
 
     public function deductProductInventory($product, $quantity) {
+        $admin_settings = AdminSetting::first();
 
         if($product->inflow_id != null) {
 
@@ -311,7 +314,7 @@ class InventoryController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/stock-adjustments?include=lines',
+                CURLOPT_URL => 'https://cloudapi.inflowinventory.com/'.$admin_settings->inflow_company_id.'/stock-adjustments?include=lines',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
@@ -336,10 +339,12 @@ class InventoryController extends Controller
     }
 
     public function syncProductInventory($product) {
+        $admin_settings = AdminSetting::first();
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/c56df956-12ae-42f6-a237-0f184b484d87/products/'.$product->inflow_id.'?include=inventoryLines',
+            CURLOPT_URL => 'https://cloudapi.inflowinventory.com/'.$admin_settings->inflow_company_id.'/products/'.$product->inflow_id.'?include=inventoryLines',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

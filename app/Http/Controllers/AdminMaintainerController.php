@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\AdminSetting;
 use App\ErrorLog;
 use App\Jobs\BulkImportJob;
 use App\Mail\OrderPlaceEmail;
@@ -548,7 +549,7 @@ class AdminMaintainerController extends Controller
 
     public function pushToShipStation($id) {
         $order = RetailerOrder::find($id);
-
+        $admin_settings = AdminSetting::first();
 
         $url = "https://ssapi.shipstation.com/orders/createorder";
 
@@ -558,7 +559,7 @@ class AdminMaintainerController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $headers = array(
-            "Authorization: Basic ZmI0NWNiZmU5OGFjNDliMDlmMTJhYmY4YzkyY2Y2MDc6MTk5MDQxN2RlMTQxNDhjYjg4Mzk4MDNkNDYwNTBhOWY=",
+            "Authorization: Basic ".$admin_settings->ship_station_key,
             "Content-Type: application/json",
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
@@ -595,10 +596,10 @@ class AdminMaintainerController extends Controller
                 }
                 else {
                     if($item->linked_real_variant->has_image->isV == 1) {
-                        array_push($images, "https://app.wefullfill.com/images/variants/".$item->linked_real_variant->has_image->image);
+                        array_push($images, "https://app.yourwholesalesource.com/images/variants/".$item->linked_real_variant->has_image->image);
                     }
                     else {
-                        array_push($images, "https://app.wefullfill.com/images/".$item->linked_real_variant->has_image->image);
+                        array_push($images, "https://app.yourwholesalesource.com/images/".$item->linked_real_variant->has_image->image);
                     }
                 }
             }
@@ -606,10 +607,10 @@ class AdminMaintainerController extends Controller
                 if($item->linked_real_product != null) {
                     if(count($item->linked_real_product->has_images)>0) {
                         if($item->linked_real_product->has_images[0]->isV == 1) {
-                            array_push($images, "https://app.wefullfill.com/images/variants".$item->linked_real_product->has_images[0]->image);
+                            array_push($images, "https://app.yourwholesalesource.com/images/variants".$item->linked_real_product->has_images[0]->image);
                         }
                         else {
-                            array_push($images, "https://app.wefullfill.com/images/".$item->linked_real_product->has_images[0]->image);
+                            array_push($images, "https://app.yourwholesalesource.com/images/".$item->linked_real_product->has_images[0]->image);
                         }
                     }
                     else {
