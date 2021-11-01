@@ -1078,8 +1078,11 @@
 
     @if($order->paid == 0)
 
-
-        <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+        @php
+            $admin_settings = \App\AdminSetting::first();
+        @endphp
+        {!! $admin_settings->paypal_script_tag !!}
+{{--        <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>--}}
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 

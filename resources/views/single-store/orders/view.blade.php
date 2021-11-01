@@ -5,8 +5,10 @@
 {{--        </script>--}}
     @php
         $usps_rate = $order->usps_shipping;
+        $admin_settings = \App\AdminSetting::first();
     @endphp
-    <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>
+    {!! $admin_settings->paypal_script_tag !!}
+{{--    <script src="https://www.paypal.com/sdk/js?client-id=AV6qhCigre8RgTt8E6Z0KNesHxr1aDyJ2hmsk2ssQYmlaVxMHm2JFJvqDCsU15FhoCJY0mDzOu-jbFPY&currency=USD"></script>--}}
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
     <div class="bg-body-light">
