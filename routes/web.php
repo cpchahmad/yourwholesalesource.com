@@ -743,11 +743,15 @@ Route::get('syn-inventory-man', function() {
 
 Route::get('delete-variants', function() {
    $products = Product::all();
+   $count = 0;
 
    foreach ($products as $product) {
        if($product->hasVariants()->count() == 2) {
            $variants = $product->hasVariants;
-           dd($variants);
+           if($variants[0]->title == $variants[1]->title)
+               $count += 1;
        }
    }
+
+   dd($count);
 });
