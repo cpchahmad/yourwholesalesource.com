@@ -43,8 +43,11 @@
                     <div class="block-content" >
                         <ul class="list-unstyled">
                             <li><strong>1. </strong>After successfully installing the application, kindly visit the Products Tab and start by adding products to your import list.</li>
+                            <br>
                             <li><strong>2. </strong>In Import List page, you will have the ability of updating the product information according to your needs such as price, description, images etc. After editing and saving the information you can import the product to store.</li>
+                            <br>
                             <li><strong>3. </strong>When an order is placed using the products imported, you will be required to make payment for the order using our supported methods such as wallet payment, credit card and paypal, after this our team will make the fulfillment for the order</li>
+                            <br>
                             <li><strong>4. </strong>Feel free to reach us in our help center or by creating tickets for your order related concerns</li>
                         </ul>
                     </div>
