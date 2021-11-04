@@ -974,6 +974,7 @@ class RetailerProductController extends Controller
             $response = $shop->api()->rest('POST', '/admin/api/2019-10/products.json', $productdata);
 
             if($response->errors){
+                dd($response);
                 return redirect()->back()->with('success','Something Went Wrong!');
             }
             $product_shopify_id =  $response->body->product->id;
