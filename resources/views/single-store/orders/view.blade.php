@@ -1047,6 +1047,7 @@
                                 </div>
                                 <div class="text-right mb-2">
                                     <div class="">
+                                        <img class="w-100" src="https://en.paylei.md/wp-content/uploads/cards-logo-pci.jpg">
                                         <button class="btn btn-primary btn-lg btn-block pay-btn" type="submit">Pay Now</button>
                                     </div>
                                 </div>
