@@ -5,6 +5,9 @@
 {{--        </script>--}}
     @php
         $usps_rate = $order->usps_shipping;
+        if($usps_rate <= 0){
+         $usps_rate = 5.00;
+        }
         $admin_settings = \App\AdminSetting::first();
     @endphp
     {!! $admin_settings->paypal_script_tag !!}
@@ -485,8 +488,6 @@
                                     </td>
                                     <td align="right" class="shipping_price_text">
 
-{{--                                        {{ shipping_rate }} USD--}}
-{{--                                        {{number_format($order->shipping_price,2)}} USD--}}
                                         {{ $usps_rate == 0 ? 'The Address is not Valid' : $usps_rate . 'USD'}}
                                      </td>
                                 </tr>
