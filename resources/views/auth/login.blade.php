@@ -16,9 +16,9 @@
             <li class="nav-item">
                 <a class="nav-link active" href="#by_email">Login</a>
             </li>
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="#by_store">By Store</a>--}}
-{{--            </li>--}}
+            <li class="nav-item">
+                <a class="nav-link" href="#by_store">By Store</a>
+            </li>
         </ul>
         <div class="block-content tab-content">
             <div class="tab-pane active" id="by_email" role="tabpanel">
@@ -65,31 +65,31 @@
                 </a>
                 </div>
             </div>
-{{--            <div class="tab-pane" id="by_store" role="tabpanel">--}}
-{{--                <div class="py-3">--}}
-{{--                    <form method="POST" action="{{ route('authenticate') }}">--}}
-{{--                        @csrf--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="shop">Domain</label>--}}
-{{--                            <input id="shop" name="shop" class="form-control form-control-alt form-control-lg"--}}
-{{--                                   type="text" autofocus="autofocus" placeholder="example.myshopify.com">--}}
+            <div class="tab-pane" id="by_store" role="tabpanel">
+                <div class="py-3">
+                    <form method="POST" action="{{ route('authenticate') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="shop">Domain</label>
+                            <input id="shop" name="shop" class="form-control form-control-alt form-control-lg"
+                                   type="text" autofocus="autofocus" placeholder="example.myshopify.com">
 
-{{--                        </div>--}}
+                        </div>
 
-{{--                        <div class="form-group row">--}}
-{{--                            <div class="col-md-6 col-xl-5 submit-column">--}}
-{{--                                <button type="submit" class="btn btn-block btn-success">--}}
-{{--                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-{{--                    <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">Forgot Password?</a>--}}
-{{--                    <a class="btn-block-option" href="{{route('register')}}" data-toggle="tooltip" data-placement="right" title="New Account">--}}
-{{--                        <i class="fa fa-user-plus"></i>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+                        <div class="form-group row">
+                            <div class="col-md-6 col-xl-5 submit-column">
+                                <button type="submit" class="btn btn-block btn-success">
+                                    <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">Forgot Password?</a>
+                    <a class="btn-block-option" href="{{route('register')}}" data-toggle="tooltip" data-placement="right" title="New Account">
+                        <i class="fa fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
