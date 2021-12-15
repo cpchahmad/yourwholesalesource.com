@@ -291,30 +291,30 @@
                         </div>
                     @endif
                 </div>
-                <div class="block">
-                    <div class="block-header">
-                        <div class="block-title ">
-                            <i class="fa fa-wallet text-success text-primary"></i>
-                            Your Wallet
-                        </div>
-                    </div>
-                    <div class="block-content pb-4 text-center" >
-                        <div class="font-w600">Your Balance</div>
-                        <div class="font-size-h3 font-w700 mt-2 text-danger">{{number_format($balance,2)}} USD</div>
-                        <button data-target="#bank_transfer_modal" data-toggle="modal" class="btn btn-outline-success btn-block d-block mt-4 p-2">Top up</button>
+{{--                <div class="block">--}}
+{{--                    <div class="block-header">--}}
+{{--                        <div class="block-title ">--}}
+{{--                            <i class="fa fa-wallet text-success text-primary"></i>--}}
+{{--                            Your Wallet--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="block-content pb-4 text-center" >--}}
+{{--                        <div class="font-w600">Your Balance</div>--}}
+{{--                        <div class="font-size-h3 font-w700 mt-2 text-danger">{{number_format($balance,2)}} USD</div>--}}
+{{--                        <button data-target="#bank_transfer_modal" data-toggle="modal" class="btn btn-outline-success btn-block d-block mt-4 p-2">Top up</button>--}}
 
-                        <div class="modal fade" id="bank_transfer_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-popout" role="document">
-                                <div class="modal-content text-left">
-                                    <div class="block block-themed block-transparent mb-0">
-                                        <div class="block-header bg-primary-dark">
-                                            <h3 class="block-title">TOPUP through Bank Transfer</h3>
-                                            <div class="block-options">
-                                                <button type="button" class="btn-block-option">
-                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+{{--                        <div class="modal fade" id="bank_transfer_modal" tabindex="-1" role="dialog" aria-labelledby="modal-block-popout" aria-hidden="true">--}}
+{{--                            <div class="modal-dialog modal-dialog-popout" role="document">--}}
+{{--                                <div class="modal-content text-left">--}}
+{{--                                    <div class="block block-themed block-transparent mb-0">--}}
+{{--                                        <div class="block-header bg-primary-dark">--}}
+{{--                                            <h3 class="block-title">TOPUP through Bank Transfer</h3>--}}
+{{--                                            <div class="block-options">--}}
+{{--                                                <button type="button" class="btn-block-option">--}}
+{{--                                                    <i class="fa fa-fw fa-times"  data-dismiss="modal" aria-label="Close"></i>--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
 {{--                                        <form action="{{route('store.user.wallet.request.topup')}}" method="post" enctype="multipart/form-data">--}}
 {{--                                            @csrf--}}
 {{--                                            <input type="hidden" value="{{$associated_user->id}}" name="user_id">--}}
@@ -394,13 +394,13 @@
 {{--                                                <button type="submit" class="btn btn-sm btn-primary" >Save</button>--}}
 {{--                                            </div>--}}
 {{--                                        </form>--}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </div>
-                </div>
+{{--                    </div>--}}
+{{--                </div>--}}
 {{--                <div class="block">--}}
 {{--                    <div class="block-header">--}}
 {{--                        <div class="block-title ">--}}
