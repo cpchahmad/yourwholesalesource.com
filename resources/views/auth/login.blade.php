@@ -78,16 +78,12 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 col-xl-5 submit-column">
-                                <button type="submit" class="btn btn-block btn-success">
+                                <button type="submit" class="btn btn-block btn-info">
                                     <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <a class="btn-block-option font-size-sm" href="{{ route('password.request') }}">Forgot Password?</a>
-                    <a class="btn-block-option" href="{{route('register')}}" data-toggle="tooltip" data-placement="right" title="New Account">
-                        <i class="fa fa-user-plus"></i>
-                    </a>
                 </div>
             </div>
         </div>
