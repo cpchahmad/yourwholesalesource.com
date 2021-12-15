@@ -162,10 +162,9 @@
                     @endphp
                     <div class="block-content">
                         @if($shipping != null)
-                            @php dd($shipping); @endphp
                             <p style="font-size: 14px">{{$shipping->first_name}} {{$shipping->last_name}}
                                 @if($order->custom == 0)
-                                <br> {{$shipping->company}}
+                                @if(isset($shipping->company)) <br> {{$shipping->company}}  @endif
                                 @endif
                                 <br> {{$shipping->address1}}
                                 <br> {{$shipping->address2}}
