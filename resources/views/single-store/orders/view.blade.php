@@ -445,7 +445,7 @@
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
-                            Summary ({{ $total_quantity }})
+                            Summary
                         </h3>
                     </div>
                     <div class="block-content">
@@ -467,7 +467,7 @@
                                         Shipping Price
                                     </td>
                                     <td align="right" class="shipping_price_text">
-                                        {{ number_format($total_shipping, 2) . 'USD'}}
+                                        {{ number_format($total_shipping, 2) . ' USD'}}
                                      </td>
                                 </tr>
 
