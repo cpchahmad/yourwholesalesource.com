@@ -5,9 +5,6 @@
 {{--        </script>--}}
     @php
         $usps_rate = $order->usps_shipping;
-        if($usps_rate <= 0){
-         $usps_rate = 5.00;
-        }
         $admin_settings = \App\AdminSetting::first();
     @endphp
     {!! $admin_settings->paypal_script_tag !!}
@@ -288,9 +285,14 @@
                             </thead>
                             <tbody>
 
-
+                            @php
+                                $total_quantity = 0;
+                            @endphp
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
+                                    @php
+                                        $total_quantity = $item->quantity + $total_quantity;
+                                    @endphp
                                     <tr>
                                         <td>
                                             @if($order->custom == 0)
@@ -351,15 +353,7 @@
                                             {{$item->name}}
 
                                         </td>
-{{--                                        <td>--}}
-{{--                                            @if($item->fulfilled_by == 'store')--}}
-{{--                                                <span class="badge badge-danger"> Store</span>--}}
-{{--                                            @elseif ($item->fulfilled_by == 'Fantasy')--}}
-{{--                                                <span class="badge badge-success"> Awareness Drop Shipping </span>--}}
-{{--                                            @else--}}
-{{--                                                <span class="badge badge-success"> {{$item->fulfilled_by}} </span>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
+
 
                                         <td>{{number_format($item->cost,2)}}  X {{$item->quantity}}  USD</td>
 
@@ -374,46 +368,10 @@
                                                 <span class="badge badge-success"> Fulfilled</span>
                                             @endif
                                         </td>
-{{--                                        <td>--}}
-{{--                                            @php--}}
-{{--                                                $out_of_stock = false;--}}
-{{--                                                if($item->linked_variant) {--}}
-{{--                                                    if($item->linked_variant->quantity == 0)--}}
-{{--                                                        $out_of_stock = true;--}}
-{{--                                                }--}}
-{{--                                                elseif($item->linked_product){--}}
-{{--                                                    if($item->linked_product->quantity == 0)--}}
-{{--                                                        $out_of_stock = true;--}}
-{{--                                                }--}}
-
-{{--                                            @endphp--}}
-
-{{--                                            @if($out_of_stock || ($item->linked_variant == null && $item->linked_product == null))--}}
-{{--                                                <span class="badge badge-danger" style="font-size: small"> Out of Stock </span>--}}
-{{--                                            @else--}}
-{{--                                                <span class="badge badge-success" style="font-size: small"> In Stock </span>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
-{{--                                        @if($order->paid == 0 && $item->has_associated_warehouse())--}}
-{{--                                            <td>--}}
-{{--                                                <select name="warehouse" id="" class="form-control warehouse-selector">--}}
-{{--                                                    @foreach($item->has_associated_warehouse() as $warehouse_inventory)--}}
-{{--                                                        <option  @if($warehouse_inventory->warehouse_id == 3) selected @endif type="text" value="{{ $warehouse_inventory->warehouse->id .','. $item->linked_product->linked_product->id . ','. $order->id . ',' . $item->id }}" >{{ $warehouse_inventory->warehouse->title }}</option>--}}
-{{--                                                    @endforeach--}}
-{{--                                                </select>--}}
-{{--                                            </td>--}}
-{{--                                        @else--}}
-{{--                                            <td>--}}
-{{--                                                {{ $item->has_warehouse->title }}--}}
-{{--                                            </td>--}}
-{{--                                        @endif--}}
                                     </tr>
                                 @endif
                             @endforeach
-
                             </tbody>
-
-
                         </table>
                     </div>
                 </div>
@@ -465,7 +423,7 @@
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
-                            Summary
+                            Summary ({{ $total_quantity }})
                         </h3>
                     </div>
                     <div class="block-content">
@@ -487,8 +445,7 @@
                                         Shipping Price
                                     </td>
                                     <td align="right" class="shipping_price_text">
-
-                                        {{ $usps_rate == 0 ? 'The Address is not Valid' : $usps_rate . 'USD'}}
+                                        {{ $usps_rate == 0 ? number_format(0,2) : number_format($usps_rate, 2) . 'USD'}}
                                      </td>
                                 </tr>
 
