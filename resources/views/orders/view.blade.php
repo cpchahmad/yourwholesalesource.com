@@ -97,8 +97,14 @@
                             <tbody>
 
 
+                            @php
+                                $total_quantity = 0;
+                            @endphp
                             @foreach($order->line_items as $item)
                                 @if($item->fulfilled_by != 'store')
+                                    @php
+                                        $total_quantity = $item->quantity + $total_quantity;
+                                    @endphp
                                     <tr>
                                         <td>
                                             @if($order->custom == 0)
