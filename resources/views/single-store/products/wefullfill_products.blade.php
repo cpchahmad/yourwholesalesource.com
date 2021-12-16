@@ -63,7 +63,7 @@
     <div class="row mb-2" style="padding: 0 14px;">
         @foreach($categories as $index => $category)
             @if($index < 11)
-                <div class="col-md-3 p-0 tooltip-ex">
+                <div class="col-md-1 p-0 tooltip-ex">
                     <span class="tooltip-ex-text bg-info ml-5">
                             <a style="" href="https://fundraisingforacause.com/pages/ribbon-color-meanings" class="text-white" target="_blank">Ribbon color meaning?</a>
                         </span>
@@ -77,7 +77,7 @@
                 </div>
             @endif
             @if($index == 11)
-                <div class="col-md-3 p-0 mt-4 see-more-block">
+                <div class="col-md-1 p-0 mt-4 see-more-block">
                     <div class="block pointer  m-0">
                         <div class="block-content p-3 text-center">
                             <p  class="m-0" style="font-size:14px;">See More ....</p>
