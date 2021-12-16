@@ -420,6 +420,28 @@
                         </div>
                     </div>
                 @endif
+                @php
+                    $total_shipping = 0;
+                    $total_handling_fee = 0;
+                    if($total_quantity > 1){
+                        $total_handling_fee = (($total_quantity - 1) * 0.5) + 2.5;
+                    }else{
+                        $total_handling_fee = 2.5;
+                    }
+
+                if($total_quantity > 0 && $total_quantity <= 10){
+                    $total_shipping =  4.99;
+                }elseif ($total_quantity > 10 && $total_quantity <= 20){
+                    $total_shipping =  6.99;
+                }elseif ($total_quantity > 20 && $total_quantity <= 30){
+                    $total_shipping =  8.99;
+                }elseif ($total_quantity > 30 && $total_quantity <= 50) {
+                     $total_shipping =  10.99;
+                }else{
+                    $total_shipping =  15.99;
+                }
+                $usps_rate = $total_shipping;
+                @endphp
                 <div class="block">
                     <div class="block-header block-header-default">
                         <h3 class="block-title">
@@ -445,7 +467,7 @@
                                         Shipping Price
                                     </td>
                                     <td align="right" class="shipping_price_text">
-                                        {{ $usps_rate == 0 ? number_format(0,2) : number_format($usps_rate, 2) . 'USD'}}
+                                        {{ number_format($total_shipping, 2) . 'USD'}}
                                      </td>
                                 </tr>
 
@@ -454,7 +476,7 @@
                                         Handling Fee
                                     </td>
                                     <td align="right" class="shipping_price_text">
-                                        {{ $order->handling_fee }} USD
+                                        {{ number_format($total_handling_fee, 2) }} USD
                                     </td>
                                 </tr>
 
@@ -463,7 +485,7 @@
                                         Total Cost @if($order->paid == 0) to Pay @endif
                                     </td>
                                     <td align="right" class="total">
-                                        {{number_format($order->total_cost + $usps_rate + $order->handling_fee ,2)}} USD
+                                        {{number_format($order->total_cost + $total_handling_fee + $total_shipping ,2)}} USD
                                     </td>
                                 </tr>
                                 <tr>

@@ -346,9 +346,6 @@ class RetailerOrder extends Model
             $shipping_rate = $shipping_rates->Package->Postage->Rate;
         else
             $shipping_rate = 0;
-
         return $shipping_rate;
-
-
     }
 }
