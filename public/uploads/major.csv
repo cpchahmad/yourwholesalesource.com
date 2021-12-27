@@ -1,3 +1,5 @@
-﻿Product,Varientid,ProductTitle,VariantTitle,ProductPrice,VariantPrice,Product-Compare-price,Variant-Compare-price,Product-Cost,Variant-Cost,Product-Quantity,Variant-Quantity,Product-SKU,Variant-SKU,Recommended-price
-3173,3299,Large Dark Blue Ribbon Thank You Cards,1 Pack//,5,5,,,5,5,500,500,TYC-8,TYC-8,9.99
-3173,3300,Large Dark Blue Ribbon Thank You Cards,1 Pack//_2,5,5,,,5,5,500,500,TYC-8,TYC-8,9.99
+﻿Product,Varientid,Product_Title,Variant_Title,SKU,Price,Compare_price,Cost,Quantity,Recommended_price
+2,1260,Silver Ribbon Earrings,Default Title//,RE-E-01,2.75,,2.75,0,11
+6,3,Butterfly Believe Blue & Yellow Ribbon Note Cards,1 Pack//,BBC-10,6.75,,6.75,0,12.99
+3173,3299,Large Dark Blue Ribbon Thank You Cards,1 Pack//,TYC-8,5,,5,500,9.99
+3173,3300,Large Dark Blue Ribbon Thank You Cards,1 Pack//_2,TYC-8,5,,5,500,9.99

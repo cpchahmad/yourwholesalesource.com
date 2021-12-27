@@ -414,7 +414,7 @@ class InventoryController extends Controller
 
 
 
-        $columns = array('Product','Varientid', 'ProductTitle','VariantTitle', 'ProductPrice','VariantPrice', 'Product-Compare-price','Variant-Compare-price', 'Product-Cost','Variant-Cost','Product-Quantity','Variant-Quantity','Product-SKU','Variant-SKU','Recommended-price');
+        $columns = array('Product','Varientid', 'Product_Title','Variant_Title','SKU', 'Price','Compare_price','Cost','Quantity','Recommended_price');
 
 
         $callback = function() use($products, $columns) {
@@ -432,19 +432,21 @@ class InventoryController extends Controller
             foreach ($variant as $get) {
         $row['Product'] = $getproduct->id;
         $row['Varientid'] = $get->id;
-        $row['ProductTitle'] = $getproduct->title;
-        $row['VariantTitle'] = $get->title;
-        $row['ProductPrice'] = $getproduct->price;
-        $row['VariantPrice'] = $get->price;
-        $row['Product-Compare-price'] = $getproduct->compare_price;
-        $row['Variant-Compare-price'] = $get->compare_price;
-        $row['Product-Cost'] = $getproduct->cost;
-        $row['Variant-Cost'] = $get->cost;
-        $row['Product-Quantity'] = $getproduct->quantity;
-        $row['Variant-Quantity'] = $get->quantity;
-        $row['Product-SKU'] = $getproduct->sku;
-        $row['Variant-SKU'] = $get->sku;
-        $row['Recommended-price'] = $getproduct->recommended_price;
+        $row['Product_Title'] = $getproduct->title;
+
+                $row['Variant_Title'] = $get->title;
+                $row['SKU'] = $get->sku;
+        $row['Price'] = $get->price;
+
+        $row['Compare_price'] = $get->compare_price;
+
+        $row['Cost'] = $get->cost;
+
+        $row['Quantity'] = $get->quantity;
+
+
+
+        $row['Recommended_price'] = $getproduct->recommended_price;
 
         //        $row['SKU'] = $getproduct->sku;
         fputcsv($file, $row);
@@ -467,19 +469,20 @@ class InventoryController extends Controller
 
             $row['Product'] = $getproduct->id;
             $row['Varientid'] = '';
-            $row['ProductTitle'] = $getproduct->title;
-            $row['VariantTitle'] = '';
-            $row['ProductPrice'] = $getproduct->price;
-            $row['VariantPrice'] = '';
-            $row['Product-Compare-price'] = $getproduct->compare_price;
-            $row['Variant-Compare-price'] = '';
-            $row['Product-Cost'] = $getproduct->cost;
-            $row['Variant-Cost'] = '';
-            $row['Product-Quantity'] = $getproduct->quantity;
-            $row['Variant-Quantity'] = '';
-            $row['Product-SKU'] = $getproduct->sku;
-            $row['Variant-SKU'] = '';
-            $row['Recommended-price'] = $getproduct->recommended_price;
+
+            $row['Product_Title'] = $getproduct->title;
+
+            $row['Variant_Title'] = '';
+            $row['SKU'] = $get->sku;
+            $row['Price'] = $getproduct->price;
+
+            $row['Compare_price'] = $getproduct->compare_price;
+
+            $row['Cost'] = $getproduct->cost;
+
+            $row['Quantity'] = $getproduct->quantity;
+
+            $row['Recommended_price'] = $getproduct->recommended_price;
 
 
     fputcsv($file, $row);
@@ -567,13 +570,16 @@ class InventoryController extends Controller
 
                         if(count($variant)>0){
 
-                            $get->title = $importData[2];
-                            $get->price = $importData[4];
-                            $get->compare_price = $importData[6];
-                            $get->cost = $importData[8];
-                            $get->quantity = $importData[10];
-                            $get->sku = $importData[12];
-                            $get->recommended_price = $importData[14];
+//                            $get->title = $importData[2];
+//                            $get->price = $importData[4];
+//                            $get->compare_price = $importData[6];
+//                            $get->cost = $importData[8];
+//                            $get->quantity = $importData[10];
+//                            $get->sku = $importData[12];
+//                            $get->recommended_price = $importData[14];
+
+                            $get->title=$importData[2];
+                            $get->recommended_price = $importData[9];
 
                             $variants=ProductVariant::where('id',$importData[1])->get();
 
@@ -582,12 +588,11 @@ class InventoryController extends Controller
                             foreach ($variants as $getvariant) {
 
                                 $getvariant->title = $importData[3];
+                                $getvariant->sku = $importData[4];
                                 $getvariant->price = $importData[5];
-                                $getvariant->compare_price = $importData[7];
-                                $getvariant->cost = $importData[9];
-                                $getvariant->quantity = $importData[11];
-                                $getvariant->sku = $importData[13];
-
+                                $getvariant->compare_price = $importData[6];
+                                $getvariant->cost = $importData[7];
+                                $getvariant->quantity = $importData[8];
 
                                 $getvariant->update();
 
@@ -603,12 +608,12 @@ class InventoryController extends Controller
                         else {
 
                             $get->title = $importData[2];
-                            $get->price = $importData[4];
+                            $get->sku = $importData[4];
+                            $get->price = $importData[5];
                             $get->compare_price = $importData[6];
-                            $get->cost = $importData[8];
-                            $get->quantity = $importData[10];
-                            $get->sku = $importData[12];
-                            $get->recommended_price = $importData[14];
+                            $get->cost = $importData[7];
+                            $get->quantity = $importData[8];
+                            $get->recommended_price = $importData[9];
                             $get->update();
                         }
                     }
