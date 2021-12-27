@@ -8,6 +8,10 @@ use Illuminate\Support\Str;
 
 class Product extends Model
 {
+
+
+    protected $fillable = ['title','price','compare_price','cost','quantity','sku','recommended_price'];
+
     use ProductVariantTrait;
     public function hasVariants(){
         return $this->hasMany('App\ProductVariant');

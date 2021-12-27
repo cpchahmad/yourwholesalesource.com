@@ -8,11 +8,14 @@ use App\Product;
 use App\ProductVariant;
 use App\RetailerOrder;
 use App\WarehouseInventory;
+use App\Csv;
 use Carbon\Carbon;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use Session;
+use Illuminate\Support\Facades\Auth;
 
 class InventoryController extends Controller
 {
@@ -375,6 +378,286 @@ class InventoryController extends Controller
 
         $product->quantity = (int) $inflow_product->totalQuantityOnHand;
         $product->save();
+
+    }
+
+
+
+    public function getinventory(){
+
+        $id = Auth::id();
+        $csv=Csv::where('user_id',$id)->get();
+
+        return view('inventory.inventory',compact('csv'));
+
+    }
+
+
+
+
+
+    public function exportCsv(Request $request){
+
+       $products=Product::all();
+
+
+        $fileName = 'tasks.csv';
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Encoding" => "UTF-8",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+
+
+        $columns = array('Product','Varientid', 'ProductTitle','VariantTitle', 'ProductPrice','VariantPrice', 'Product-Compare-price','Variant-Compare-price', 'Product-Cost','Variant-Cost','Product-Quantity','Variant-Quantity','Product-SKU','Variant-SKU','Recommended-price');
+
+
+        $callback = function() use($products, $columns) {
+
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, $columns);
+
+
+            foreach ($products as $getproduct) {
+                $variant=ProductVariant::where('product_id',$getproduct->id)->get();
+
+
+        if(count($variant)>0){
+            foreach ($variant as $get) {
+        $row['Product'] = $getproduct->id;
+        $row['Varientid'] = $get->id;
+        $row['ProductTitle'] = $getproduct->title;
+        $row['VariantTitle'] = $get->title;
+        $row['ProductPrice'] = $getproduct->price;
+        $row['VariantPrice'] = $get->price;
+        $row['Product-Compare-price'] = $getproduct->compare_price;
+        $row['Variant-Compare-price'] = $get->compare_price;
+        $row['Product-Cost'] = $getproduct->cost;
+        $row['Variant-Cost'] = $get->cost;
+        $row['Product-Quantity'] = $getproduct->quantity;
+        $row['Variant-Quantity'] = $get->quantity;
+        $row['Product-SKU'] = $getproduct->sku;
+        $row['Variant-SKU'] = $get->sku;
+        $row['Recommended-price'] = $getproduct->recommended_price;
+
+        //        $row['SKU'] = $getproduct->sku;
+        fputcsv($file, $row);
+    }
+}
+        else {
+
+
+//    $row['Product'] = $getproduct->id;
+//    $row['Title'] = $getproduct->title;
+//    $row['Price'] = $getproduct->price;
+//    $row['Compare-price'] = $getproduct->compare_price;;
+//    $row['Cost'] = $getproduct->cost;
+//    $row['Quantity'] = $getproduct->quantity;
+//    $row['SKU'] = $getproduct->sku;
+//    $row['Recommended-price'] = $getproduct->recommended_price;
+
+
+
+
+            $row['Product'] = $getproduct->id;
+            $row['Varientid'] = '';
+            $row['ProductTitle'] = $getproduct->title;
+            $row['VariantTitle'] = '';
+            $row['ProductPrice'] = $getproduct->price;
+            $row['VariantPrice'] = '';
+            $row['Product-Compare-price'] = $getproduct->compare_price;
+            $row['Variant-Compare-price'] = '';
+            $row['Product-Cost'] = $getproduct->cost;
+            $row['Variant-Cost'] = '';
+            $row['Product-Quantity'] = $getproduct->quantity;
+            $row['Variant-Quantity'] = '';
+            $row['Product-SKU'] = $getproduct->sku;
+            $row['Variant-SKU'] = '';
+            $row['Recommended-price'] = $getproduct->recommended_price;
+
+
+    fputcsv($file, $row);
+}
+            }
+
+            fclose($file);
+        };
+
+
+        return response()->stream($callback, 200, $headers);
+
+    }
+
+
+    public function importCsv(Request $request){
+
+        $file = $request->file('file');
+
+
+        $filename = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $tempPath = $file->getRealPath();
+        $fileSize = $file->getSize();
+        $mimeType = $file->getMimeType();
+
+        // Valid File Extensions
+        $valid_extension = array("csv");
+
+        // 2MB in Bytes
+        $maxFileSize = 2097152;
+
+        // Check file extension
+        if(in_array(strtolower($extension),$valid_extension)){
+
+            // Check file size
+            if($fileSize <= $maxFileSize){
+
+                // File upload location
+                $location = 'uploads';
+
+                // Upload file
+                $file->move($location,$filename);
+
+                // Import CSV to Database
+                $filepath = public_path($location."/".$filename);
+
+                // Reading file
+                $file = fopen($filepath,"r");
+
+                $importData_arr = array();
+                $i = 0;
+
+                while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+
+
+                    $num = count($filedata );
+
+                    // Skip first row (Remove below comment if you want to skip the first row)
+                    if($i == 0){
+                        $i++;
+                        continue;
+                    }
+                    for ($c=0; $c < $num; $c++) {
+                        $importData_arr[$i][] = $filedata [$c];
+                    }
+                    $i++;
+                }
+
+
+                fclose($file);
+
+
+                // Insert to MySQL database
+                foreach($importData_arr as $importData){
+
+
+
+                    $get=Product::where('id',$importData[0])->first();
+
+                    if(!empty($get)){
+
+
+                    $variant=ProductVariant::where('product_id',$importData[0])->get();
+
+                        if(count($variant)>0){
+
+                            $get->title = $importData[2];
+                            $get->price = $importData[4];
+                            $get->compare_price = $importData[6];
+                            $get->cost = $importData[8];
+                            $get->quantity = $importData[10];
+                            $get->sku = $importData[12];
+                            $get->recommended_price = $importData[14];
+
+                            $variants=ProductVariant::where('id',$importData[1])->get();
+
+
+
+                            foreach ($variants as $getvariant) {
+
+                                $getvariant->title = $importData[3];
+                                $getvariant->price = $importData[5];
+                                $getvariant->compare_price = $importData[7];
+                                $getvariant->cost = $importData[9];
+                                $getvariant->quantity = $importData[11];
+                                $getvariant->sku = $importData[13];
+
+
+                                $getvariant->update();
+
+
+                            }
+
+                            $get->update();
+
+
+
+                        }
+
+                        else {
+
+                            $get->title = $importData[2];
+                            $get->price = $importData[4];
+                            $get->compare_price = $importData[6];
+                            $get->cost = $importData[8];
+                            $get->quantity = $importData[10];
+                            $get->sku = $importData[12];
+                            $get->recommended_price = $importData[14];
+                            $get->update();
+                        }
+                    }
+//                    else {
+//                        $insertData = array(
+//                            "title"=>$importData[2],
+//                            "price"=>$importData[4],
+//                            "compare_price"=>$importData[6],
+//                            "cost"=>$importData[8],
+//                            "quantity"=>$importData[10],
+//                            "sku"=>$importData[12],
+//                            "recommended_price"=>$importData[14]
+//
+//                        );
+//
+//
+//
+//
+//                        Product::create($insertData);
+//                    }
+
+
+
+                }
+
+                $id = Auth::id();
+                $csv=new Csv;
+                $csv->user_id=$id;
+                $csv->filename=$filename;
+                $csv->save();
+
+
+
+                Session::flash('message','Import Successful.');
+
+            }else{
+                Session::flash('message','File too large. File must be less than 2MB.');
+
+            }
+
+        }else{
+            Session::flash('message','Invalid File Extension.');
+
+        }
+        return back();
+
+
+
+
 
     }
 }

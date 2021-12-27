@@ -535,6 +535,11 @@ Route::group(['middleware' => ['check_user_or_shop']], function () {
         Route::post('post/questionnaire', 'HelperController@SaveQuestionnaire')->name('app.questionaire.post');
 
         Route::get('/yourwholesalesource/university','DefaultSettingsController@showVideosSection')->name('university.index');
+
+
+
+
+
     });
 });
 
@@ -551,6 +556,19 @@ Route::get('getWebhooks', 'AdminOrderController@GetWebhooks');
 Route::get('fetch_stock.json', 'InventoryController@FetchQuantity');
 Route::get('/sync-inflow-product', 'InventoryController@syncInflowProducts');
 Route::get('/add-inflow-products', 'InventoryController@addInflowIds');
+
+
+
+
+
+//zain
+
+Route::get('/inventory','InventoryController@getinventory')->name('inventory.create');
+
+Route::post('/export','InventoryController@exportCsv')->name('inventory.export');
+
+Route::post('/import','InventoryController@importCsv')->name('inventory.import');
+
 
 Route::get('check/questionnaire', 'HelperController@QuestionnaireCheck')->name('app.questionaire.check');
 Route::get('test/emails', 'HelperController@testEmail');
