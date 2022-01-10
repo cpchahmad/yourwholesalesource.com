@@ -83,4 +83,10 @@ class Product extends Model
         return "https://wefullfill.com/wp-admin/post.php?post=". $this->woocommerce_id ."&action=edit";
     }
 
+
+
+    public function categoriesget(){
+        return $this->belongsToMany(Category::class, 'category_product');
+    }
+
 }

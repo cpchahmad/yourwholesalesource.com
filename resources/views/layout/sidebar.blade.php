@@ -64,7 +64,15 @@
                     <li class="nav-main-item">
                         <a class="nav-main-link" href="{{ route('inventory.create') }}">
                             <i class="nav-main-link-icon si si-bag"></i>
-                            <span class="nav-main-link-name">Inventory</span>
+                            <span class="nav-main-link-name">Bulk Inventory</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-main-item">
+                        <a class="nav-main-link" href="{{ route('product.allproducts') }}">
+                            <i class="nav-main-link-icon si si-bag"></i>
+                            <span class="nav-main-link-name">Export All Products</span>
                         </a>
                     </li>
 

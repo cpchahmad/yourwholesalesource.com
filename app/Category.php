@@ -10,4 +10,9 @@ class Category extends Model
     public function hasSub(){
         return $this->hasMany('App\SubCategory');
     }
+
+
+    public function category() {
+        return $this->belongsToMany(Product::class, 'category_product');
+    }
 }

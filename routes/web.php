@@ -570,6 +570,12 @@ Route::post('/export','InventoryController@exportCsv')->name('inventory.export')
 Route::post('/import','InventoryController@importCsv')->name('inventory.import');
 
 
+Route::get('/allproducts', 'ProductController@allproducts')->name('product.allproducts');
+Route::post('/exportallproducts','ProductController@exportallproducts')->name('product.exportallproducts');
+
+Route::post('/importallproducts','ProductController@importallproducts')->name('product.importallproducts');
+
+
 Route::get('check/questionnaire', 'HelperController@QuestionnaireCheck')->name('app.questionaire.check');
 Route::get('test/emails', 'HelperController@testEmail');
 
