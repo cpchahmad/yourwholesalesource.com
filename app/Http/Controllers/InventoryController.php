@@ -401,7 +401,7 @@ class InventoryController extends Controller
        $products=Product::all();
 
 
-        $fileName = 'tasks.csv';
+        $fileName = 'product 12-01-2021.csv';
 
         $headers = array(
             "Content-type"        => "text/csv",
@@ -647,7 +647,7 @@ class InventoryController extends Controller
 
 
 
-                Session::flash('message','Import Successful.');
+                return redirect()->back()->with('success', 'Inventory Updated Successfully');
 
             }else{
                 Session::flash('message','File too large. File must be less than 2MB.');
