@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use OhMyBrew\ShopifyApp\Models\Shop;
 use Session;
+use App\Allproductcsv;
 
 
 
@@ -3298,8 +3299,9 @@ class ProductController extends Controller
 
     public function allproducts(){
 
-
-        return view('exportallproduct.exportallproducts');
+        $id = Auth::id();
+        $csv=Allproductcsv::where('user_id',$id)->get();
+        return view('exportallproduct.exportallproducts',compact('csv'));
     }
 
 
@@ -3324,10 +3326,11 @@ class ProductController extends Controller
         );
 
 
+//For Images Column, comment for now
+        // $columns = array('Product','Varientid', 'Product_Title','Description','Type','Vendor','Tags','Weight','SKU','Processing_time','Slug','Price','Compare_price','Cost','Quantity','Recommended_price','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Category','Variant Barcode','Images');
 
-        $columns = array('Product','Varientid', 'Product_Title','Description','Type','Vendor','Tags','Weight','SKU','Processing_time','Slug','Price','Compare_price','Cost','Quantity','Recommended_price','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Category','Variant Barcode','Images');
-
-
+        $columns = array('Product','Varientid', 'Product_Title','Description','Type','Vendor','Tags','Weight','SKU','Processing_time','Slug','Price','Compare_price','Cost','Quantity','Recommended_price','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Category','Variant Barcode');
+        
         $callback = function() use($products, $columns) {
 
             $file = fopen('php://output', 'w');
@@ -3393,21 +3396,21 @@ class ProductController extends Controller
 
 
                         $row['Variant Barcode']=$get->barcode;
-                        if(count($image)>0){
+//                         if(count($image)>0){
 
 
-                            $getimage= implode(",",$image);
-//                            $getimage= json_encode( optional($image)->image);
+//                             $getimage= implode(",",$image);
+// //                            $getimage= json_encode( optional($image)->image);
 
-                            $row['Images'] =$getimage;
+//                             $row['Images'] =$getimage;
 
 
 
-                        }
-                        else{
+//                         }
+//                         else{
 
-                            $row['Images']='';
-                        }
+//                             $row['Images']='';
+//                         }
 
 
 
@@ -3467,18 +3470,18 @@ class ProductController extends Controller
                     $row['Category']=$getallttitle;
 
                     $row['Variant Barcode']='';
-                    if(count($image)>0){
+//                     if(count($image)>0){
 
 
-                        $getimage= implode(",",$image);
-//                            $getimage= json_encode( optional($image)->image);
+//                         $getimage= implode(",",$image);
+// //                            $getimage= json_encode( optional($image)->image);
 
-                        $row['Images'] =$getimage;
-                    }
-                    else{
+//                         $row['Images'] =$getimage;
+//                     }
+//                     else{
 
-                        $row['Images']='';
-                    }
+//                         $row['Images']='';
+//                     }
 
 
                     fputcsv($file, $row);
@@ -3650,27 +3653,41 @@ class ProductController extends Controller
                             }
 
 
-                            if(isset($importData[24])) {
-                                $ImageArray = explode(",", $importData[24]);
+                            // if(isset($importData[24])) {
+                            //     $ImageArray = explode(",", $importData[24]);
 
 
 
 
 
-                                foreach ($get->has_images as $imagess){
-                                    if( !in_array( $imagess->image ,$ImageArray ) ){
-                                                $imagess->delete();
-                                    }
+                            //     // foreach ($get->has_images as $imagess){
 
-                                }
+                                  
+
+                            //     //     foreach($ImageArray as $getimmg){
+
+                                      
+                            //     //         $imagess->image=$getimmg; 
+                            //     //         $imagess->update();
+                            //     //     }
+                                   
+
+                            //     // }
+
+
+                            //     // foreach ($get->has_images as $imagess){
+
+                                  
+                            //     //     if( !in_array( $imagess->image ,$ImageArray ) ){
+                            //     //                 $imagess->delete();
+                            //     //     }
+
+                            //     // }
 
 
 
 
-
-
-
-                            }
+                            // }
 
                             foreach ($variants as $getvariant) {
 
@@ -3803,11 +3820,11 @@ class ProductController extends Controller
 
                 }
 
-//                $id = Auth::id();
-//                $csv=new Csv;
-//                $csv->user_id=$id;
-//                $csv->filename=$filename;
-//                $csv->save();
+               $id = Auth::id();
+               $csv=new Allproductcsv;
+               $csv->user_id=$id;
+               $csv->filename=$filename;
+               $csv->save();
 
 
 

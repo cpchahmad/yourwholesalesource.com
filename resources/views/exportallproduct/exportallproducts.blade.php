@@ -9,7 +9,7 @@
                 <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-alt">
                         <li class="breadcrumb-item" aria-current="page">
-                            <a class="link-fx" href="">Inventory</a>
+                            <a class="link-fx" href="">Export All Products</a>
                         </li>
                         <li class="breadcrumb-item">Export All Products</li>
                     </ol>
@@ -98,25 +98,25 @@
                         @php
                             $i=1;
                         @endphp
-{{--                        @foreach($csv as $getcsv)--}}
-{{--                            <tr>--}}
-{{--                                <td class="">--}}
-{{--                                    {{$i++}}--}}
-{{--                                </td>--}}
-{{--                                <td class="font-w600" style="vertical-align: middle">--}}
-{{--                                    {{$getcsv->filename}}--}}
-{{--                                </td>--}}
+                       @foreach($csv as $getcsv)
+                           <tr>
+                             <td class="">
+                                    {{$i++}}
+                               </td>
+                                <td class="font-w600" style="vertical-align: middle">
+                                    {{$getcsv->filename}}
+                                </td>
 
-{{--                                <td class="font-w600" style="vertical-align: middle">--}}
-{{--                                    {{$getcsv->created_at}}--}}
-{{--                                </td>--}}
+                               <td class="font-w600" style="vertical-align: middle">
+                                    {{$getcsv->created_at}}
+                                </td>
 
-{{--                                <td>--}}
-{{--                                    <a href="{{asset('uploads/'.$getcsv->filename)}}" download="{{asset('uploads/'.$getcsv->filename)}}">Download</a>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
+                                <td>
+                                    <a href="{{asset('allproductsupload/'.$getcsv->filename)}}" download="{{asset('allproductsupload/'.$getcsv->filename)}}">Download</a>
+                                </td>
+                           </tr>
 
-{{--                        @endforeach--}}
+                       @endforeach
 
                         </tbody>
                     </table>
