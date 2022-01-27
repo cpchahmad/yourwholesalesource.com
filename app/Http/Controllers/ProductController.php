@@ -3670,6 +3670,11 @@ class ProductController extends Controller
                                 $get->weight = $importData[7];
                             }}
 
+                            if(isset($importData[8])) {
+                                $get->sku = $importData[8];
+                            }
+
+
                             if(isset($importData[9])) {
                                 if($importData[9]!="") {
                                 $get->processing_time = $importData[9];
@@ -3680,6 +3685,26 @@ class ProductController extends Controller
                                 $get->slug = $importData[10];
                             }}
 
+                            if(isset($importData[11])) {
+
+                                $get->price = $importData[11];
+                            }
+
+
+                            if(isset($importData[12])) {
+
+                                $get->compare_price = $importData[12];
+                            }
+
+                            if(isset($importData[13])) {
+
+                                $get->cost = $importData[13];
+                            }
+
+                            if(isset($importData[14])) {
+
+                                $get->quantity = $importData[14];
+                            }
                             if(isset($importData[16])) {
                                 if($importData[16]!="") {
                                 $get->attribute1 = $importData[16];
@@ -3818,6 +3843,9 @@ class ProductController extends Controller
                             if(isset($importData[7])) {
                                 $get->weight = $importData[7];
                             }
+
+
+
                             if(isset($importData[9])) {
                                 $get->processing_time = $importData[9];
                             }
@@ -4036,6 +4064,10 @@ class ProductController extends Controller
                             $product->description = $description;
                             $product->type = $type;
                             $product->vendor = $vendor;
+                            $product->price=$price;
+                            $product->compare_price=$compare_price;
+                            $product->cost=$cost;
+                            $product->quantity=$quantity;
                             $product->weight = $weight;
                             $product->sku = $sku;
                             $product->processing_time = $processing_time;
