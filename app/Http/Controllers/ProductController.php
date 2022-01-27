@@ -3330,7 +3330,7 @@ class ProductController extends Controller
         // $columns = array('Product','Varientid', 'Product_Title','Description','Type','Vendor','Tags','Weight','SKU','Processing_time','Slug','Price','Compare_price','Cost','Quantity','Recommended_price','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Category','Variant Barcode','Images');
 
         $columns = array('Product','Varientid', 'Product_Title','Description','Type','Vendor','Tags','Weight','SKU','Processing_time','Slug','Price','Compare_price','Cost','Quantity','Recommended_price','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Category','Variant Barcode');
-        
+
         $callback = function() use($products, $columns) {
 
             $file = fopen('php://output', 'w');
@@ -3344,44 +3344,64 @@ class ProductController extends Controller
 
 
                 if(count($variant)>0){
-                    foreach ($variant as $get) {
+                    foreach ($variant as $key=> $get) {
                         $row['Product'] = $getproduct->id;
                         $row['Varientid'] = $get->id;
-                        $row['Product_Title'] = $getproduct->title;
+
+
+                        if($key==0) {
+                            $row['Product_Title'] = "$getproduct->title";
 
 //                        $row['Variant_Title'] = $get->title;
 
-                        $row['Description']=$getproduct->description;
-                        $row['Type']=$getproduct->type;
-                        $row['Vendor']=$getproduct->vendor;
+                            $row['Description'] = "$getproduct->description";
+                            $row['Type'] = "$getproduct->type";
+                            $row['Vendor'] = "$getproduct->vendor";
 
 //                        $producttag=ProductTag::where('product_id',$getproduct->id)->get();
 //
-                        $gettag=$getproduct->tags()->pluck('name')->toArray();
+                            $gettag = $getproduct->tags()->pluck('name')->toArray();
 
-                        $getalltag= implode(",",$gettag);
-                        $row['Tags']=$getalltag;
-                        $row['Weight']=$getproduct->weight;
-
+                            $getalltag = implode(",", $gettag);
+                            $row['Tags'] = "$getalltag";
+                            $row['Weight'] = "$getproduct->weight";
+                        }
+                        else{
+                            $row['Product_Title'] = '';
+                            $row['Description'] = '';
+                            $row['Type'] = '';
+                            $row['Vendor'] = '';
+                            $row['Tags'] = '';
+                            $row['Weight'] = '';
+                        }
 
 
                         $row['SKU'] = $get->sku;
 
-                        $row['Processing_time']=$getproduct->processing_time;
-                        $row['Slug']=$getproduct->slug;
+                        if($key==0) {
+                            $row['Processing_time'] = "$getproduct->processing_time";
+                            $row['Slug'] = "$getproduct->slug";
+                        }
+                        else{
+                            $row['Processing_time'] = '';
+                            $row['Slug'] = '';
+                        }
+                        $row['Price'] = "$get->price";
 
-                        $row['Price'] = $get->price;
+                        $row['Compare_price'] = "$get->compare_price";
 
-                        $row['Compare_price'] = $get->compare_price;
+                        $row['Cost'] = "$get->cost";
 
-                        $row['Cost'] = $get->cost;
-
-                        $row['Quantity'] = $get->quantity;
+                        $row['Quantity'] = "$get->quantity";
 
 
+                        if($key==0) {
+                            $row['Recommended_price'] = "$getproduct->recommended_price";
+                        }
 
-                        $row['Recommended_price'] = $getproduct->recommended_price;
-
+                        else{
+                            $row['Recommended_price'] = '';
+                        }
 
                         $row['Option1 Name']=$getproduct->attribute1;
                         $row['Option1 Value']=$get->option1;
@@ -3390,10 +3410,14 @@ class ProductController extends Controller
                         $row['Option3 Name']=$getproduct->attribute3;
                         $row['Option3 Value']=$get->option3;
 
-                        $gettitle=$getproduct->categoriesget()->pluck('title')->toArray();
-                        $getallttitle= implode(",",$gettitle);
-                        $row['Category']=$getallttitle;
-
+                        if($key==0) {
+                            $gettitle = $getproduct->categoriesget()->pluck('title')->toArray();
+                            $getallttitle = implode(",", $gettitle);
+                            $row['Category'] = "$getallttitle";
+                        }
+                        else{
+                            $row['Category'] = '';
+                        }
 
                         $row['Variant Barcode']=$get->barcode;
 //                         if(count($image)>0){
@@ -3427,32 +3451,32 @@ class ProductController extends Controller
                     $row['Product'] = $getproduct->id;
                     $row['Varientid'] = '';
 
-                    $row['Product_Title'] = $getproduct->title;
+                    $row['Product_Title'] = "$getproduct->title";
 
 //                    $row['Variant_Title'] = '';
 
-                    $row['Description']=$getproduct->description;
-                    $row['Type']=$getproduct->type;
-                    $row['Vendor']=$getproduct->vendor;
+                    $row['Description']="$getproduct->description";
+                    $row['Type']="$getproduct->type";
+                    $row['Vendor']="$getproduct->vendor";
 
                     $gettag=$getproduct->tags()->pluck('name')->toArray();
 
                     $getalltag= implode(",",$gettag);
-                    $row['Tags']=$getalltag;
-                    $row['Weight']=$getproduct->weight;
-                    $row['SKU'] = $getproduct->sku;
+                    $row['Tags']="$getalltag";
+                    $row['Weight']="$getproduct->weight";
+                    $row['SKU'] = "$getproduct->sku";
 
-                    $row['Processing_time']=$getproduct->processing_time;
-                    $row['Slug']=$getproduct->slug;
-                    $row['Price'] = $getproduct->price;
+                    $row['Processing_time']="$getproduct->processing_time";
+                    $row['Slug']="$getproduct->slug";
+                    $row['Price'] = "$getproduct->price";
 
-                    $row['Compare_price'] = $getproduct->compare_price;
+                    $row['Compare_price'] = "$getproduct->compare_price";
 
-                    $row['Cost'] = $getproduct->cost;
+                    $row['Cost'] = "$getproduct->cost";
 
-                    $row['Quantity'] = $getproduct->quantity;
+                    $row['Quantity'] = "$getproduct->quantity";
 
-                    $row['Recommended_price'] = $getproduct->recommended_price;
+                    $row['Recommended_price'] ="$getproduct->recommended_price";
 
 
 
@@ -3467,7 +3491,7 @@ class ProductController extends Controller
 
                     $gettitle=$getproduct->categoriesget()->pluck('title')->toArray();
                     $getallttitle= implode(",",$gettitle);
-                    $row['Category']=$getallttitle;
+                    $row['Category']="$getallttitle";
 
                     $row['Variant Barcode']='';
 //                     if(count($image)>0){
@@ -3510,6 +3534,7 @@ class ProductController extends Controller
 
     public function importallproducts(Request $request){
 
+
         $file = $request->file('file');
 
 
@@ -3547,7 +3572,7 @@ class ProductController extends Controller
                 $importData_arr = array();
                 $i = 0;
 
-                while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+                while (($filedata = fgetcsv($file, 10000000, ",")) !== FALSE) {
 
 
                     $num = count($filedata );
@@ -3567,14 +3592,27 @@ class ProductController extends Controller
                 fclose($file);
 
 
+
+                $array_id=[];
+
+//                dump($importData_arr);
                 // Insert to MySQL database
-                foreach($importData_arr as $importData){
+                foreach($importData_arr as $key=> $importData){
+//if($key==185){
+//
+//
+//    dd($importData);
+//}
 
-
+//                    dump($importData[0]);
+                    array_push($array_id,$importData[0]);
 
                     $get=Product::where('id',$importData[0])->first();
 
+//                    dd($get);
+
                     if(!empty($get)){
+
 
 
                         $variant=ProductVariant::where('product_id',$importData[0])->get();
@@ -3583,57 +3621,84 @@ class ProductController extends Controller
 
 
                             if(isset($importData[2])) {
+                            if($importData[2]!="") {
                                 $get->title = $importData[2];
+                            }
                             }
 
                             if(isset($importData[3])) {
+
+                                if($importData[3]!="") {
                                 $get->description = $importData[3];
-                            }
+                            }}
                             if(isset($importData[4])) {
+                                if($importData[4]!="") {
                                 $get->type = $importData[4];
-                            }
+                            }}
 
                             if(isset($importData[5])) {
-                                $get->vendor = $importData[5];
+                                if ($importData[5] != "") {
+                                    $get->vendor = $importData[5];
+                                }
                             }
 
-
                             if(isset($importData[6])) {
-                                $tagArray = explode(",", $importData[6]);
+                                if($importData[6]!="") {
+                                    $tagArray = explode(",", $importData[6]);
 
-                             $gettag=Tag::whereIn('name',$tagArray)->pluck('id')->toArray();
+
+                                    foreach ($tagArray as $tags){
 
 
-                                $gettag1=$get->tags()->sync($gettag);
+                                        $newtag= Tag::where('name',$tags)->first();
+                                        if($newtag==null){
+                                            $newtag=new Tag();
+                                            $newtag->name=$tags;
+                                            $newtag->save();
+                                        }
+                                    }
 
+                                    $gettag = Tag::whereIn('name', $tagArray)->pluck('id')->toArray();
+
+
+                                    $gettag1 = $get->tags()->sync($gettag);
+                                }
                             }
 
                             if(isset($importData[7])) {
+                                if($importData[7]!="") {
                                 $get->weight = $importData[7];
-                            }
+                            }}
 
                             if(isset($importData[9])) {
+                                if($importData[9]!="") {
                                 $get->processing_time = $importData[9];
 
-                            }
+                            }}
                             if(isset($importData[10])) {
+                                if($importData[10]!="") {
                                 $get->slug = $importData[10];
-                            }
+                            }}
 
                             if(isset($importData[16])) {
+                                if($importData[16]!="") {
                                 $get->attribute1 = $importData[16];
 
-                            }
+                            }}
                          if(isset($importData[18])) {
+                             if($importData[18]!="") {
                              $get->attribute2 = $importData[18];
-                         }
+                         }}
 
                             if(isset($importData[20])) {
+                                if($importData[20]!="") {
                                 $get->attribute3 = $importData[20];
-                            }
+                            }}
 
                             if(isset($importData[15])) {
-                                $get->recommended_price = $importData[15];
+                                if ($importData[15] != "") {
+                                    $get->recommended_price = $importData[15];
+                                }
                             }
 
                             if(isset($importData[1])) {
@@ -3643,51 +3708,29 @@ class ProductController extends Controller
 
 
                             if(isset($importData[22])) {
-                                $categoryArray = explode(",", $importData[22]);
+                                if($importData[22]!="") {
+                                    $categoryArray = explode(",", $importData[22]);
 
-                                $getcategory=Category::whereIn('title',$categoryArray)->pluck('id')->toArray();
+                                    foreach ($categoryArray as $category){
 
 
-                                $getcat1=$get->categoriesget()->sync($getcategory);
+                                        $newcat= Category::where('title',$category)->first();
+                                        if($newcat==null){
+                                            $newcat=new Category();
+                                            $newcat->title=$category;
+                                            $newcat->save();
+                                        }
+                                    }
 
+                                    $getcategory = Category::whereIn('title', $categoryArray)->pluck('id')->toArray();
+
+
+                                    $getcat1 = $get->categoriesget()->sync($getcategory);
+                                }
                             }
 
 
-                            // if(isset($importData[24])) {
-                            //     $ImageArray = explode(",", $importData[24]);
 
-
-
-
-
-                            //     // foreach ($get->has_images as $imagess){
-
-                                  
-
-                            //     //     foreach($ImageArray as $getimmg){
-
-                                      
-                            //     //         $imagess->image=$getimmg; 
-                            //     //         $imagess->update();
-                            //     //     }
-                                   
-
-                            //     // }
-
-
-                            //     // foreach ($get->has_images as $imagess){
-
-                                  
-                            //     //     if( !in_array( $imagess->image ,$ImageArray ) ){
-                            //     //                 $imagess->delete();
-                            //     //     }
-
-                            //     // }
-
-
-
-
-                            // }
 
                             foreach ($variants as $getvariant) {
 
@@ -3755,6 +3798,17 @@ class ProductController extends Controller
                             if(isset($importData[6])) {
                                 $tagArray = explode(",", $importData[6]);
 
+//dd($tagArray);
+                                foreach ($tagArray as $tags){
+
+
+                                    $newtag= Tag::where('name',$tags)->first();
+                                    if($newtag==null){
+                                        $newtag=new Tag();
+                                        $newtag->name=$tags;
+                                        $newtag->save();
+                                    }
+                                }
                                 $gettag=Tag::whereIn('name',$tagArray)->pluck('id')->toArray();
 
 
@@ -3802,6 +3856,17 @@ class ProductController extends Controller
                             if(isset($importData[22])) {
                                 $categoryArray = explode(",", $importData[22]);
 
+                                foreach ($categoryArray as $category){
+
+
+                                    $newcat= Category::where('title',$category)->first();
+                                    if($newcat==null){
+                                        $newcat=new Category();
+                                        $newcat->title=$category;
+                                        $newcat->save();
+                                    }
+                                }
+
                                 $getcategory=Category::whereIn('title',$categoryArray)->pluck('id')->toArray();
 
 
@@ -3815,10 +3880,202 @@ class ProductController extends Controller
                         }
                     }
 
+                    else{
 
+//                        dd(1);
+
+//                        dd($importData[2]);
+//                            dump($importData[0],$key);
+    //                         dd($key);
+                            // Insert to MySQL database
+
+
+
+
+                            if(isset($importData[2])) {
+                                $title = $importData[2];
+                            }
+//                            dd($title);
+
+                            if(isset($importData[3])) {
+                                $description = $importData[3];
+                            }
+
+                            if(isset($importData[4])) {
+                                $type = $importData[4];
+                            }
+
+                            if(isset($importData[5])) {
+                                $vendor = $importData[5];
+                            }
+
+                        if(isset($importData[6])) {
+                            $tagArray = explode(",", $importData[6]);
+
+
+                            foreach ($tagArray as $tags){
+
+
+                                $newtag= Tag::where('name',$tags)->first();
+                                if($newtag==null){
+                                    $newtag=new Tag();
+                                    $newtag->name=$tags;
+                                    $newtag->save();
+                                }
+                            }
+                            $gettag=Tag::whereIn('name',$tagArray)->get();
+
+
+
+                        }
+                        if(isset($importData[7])) {
+                            $weight = $importData[7];
+                        }
+
+                        if(isset($importData[8])) {
+                            $sku = $importData[8];
+                        }
+
+                        if(isset($importData[9])) {
+                            $processing_time = $importData[9];
+                        }
+
+                        if(isset($importData[10])) {
+                            $slug = $importData[10];
+                        }
+
+
+                        if(isset($importData[11])) {
+                            $price = $importData[11];
+                        }
+
+
+                        if(isset($importData[12])) {
+                            $compare_price = $importData[12];
+                        }
+
+
+                        if(isset($importData[13])) {
+                            $cost = $importData[13];
+                        }
+
+
+                        if(isset($importData[14])) {
+                            $quantity = $importData[14];
+                        }
+
+
+
+
+                        if(isset($importData[15])) {
+                            $recommended_price = $importData[15];
+                        }
+
+
+                        if(isset($importData[16])) {
+                            $attribute1 = $importData[16];
+                        }
+
+
+                        if(isset($importData[17])) {
+                            $option1 = $importData[17];
+                        }
+
+                        if(isset($importData[18])) {
+                            $attribute2 = $importData[18];
+                        }
+
+
+                        if(isset($importData[19])) {
+                            $option2 = $importData[19];
+                        }
+
+                        if(isset($importData[20])) {
+                            $attribute3 = $importData[20];
+                        }
+
+                        if(isset($importData[21])) {
+                            $option3 = $importData[21];
+                        }
+
+
+                        if(isset($importData[22])) {
+                            $catArray = explode(",", $importData[22]);
+
+
+                            foreach ($catArray as $category){
+
+
+                                $newcat= Category::where('title',$category)->first();
+                                if($newcat==null){
+                                    $newcat=new Category();
+                                    $newcat->title=$category;
+                                    $newcat->save();
+                                }
+                            }
+                            $getcate=Category::whereIn('title',$catArray)->get();
+
+
+
+                        }
+
+
+
+                        if(isset($importData[23])) {
+                            $barcode = $importData[23];
+                        }
+
+
+
+                        if($title!='' || $title!=null) {
+                            $product = new Product();
+                            if ($importData[0] != null || $importData[0] != '') {
+                                $product->id = $importData[0];
+                            }
+                            $product->title = $title;
+                            $product->description = $description;
+                            $product->type = $type;
+                            $product->vendor = $vendor;
+                            $product->weight = $weight;
+                            $product->sku = $sku;
+                            $product->processing_time = $processing_time;
+                            $product->slug = $slug;
+                            $product->recommended_price = $recommended_price;
+                            $product->attribute1 = $attribute1;
+                            $product->attribute2 = $attribute2;
+                            $product->attribute3 = $attribute3;
+                            $product->save();
+                            $gettag1 = $product->tags()->sync($gettag);
+
+                            $getcat1 = $product->categoriesget()->sync($getcate);
+                        }
+                                $p_product=Product::orderby('created_at','desc')->first();
+                                $variantsadd=new ProductVariant();
+                                $variantsadd->title=$title;
+                                $variantsadd->price=$price;
+                                $variantsadd->product_id=$p_product->id;
+                                $variantsadd->compare_price=$compare_price;
+                                $variantsadd->cost=$cost;
+                                $variantsadd->quantity=$quantity;
+                                $variantsadd->option1=$option1;
+                                $variantsadd->option2=$option2;
+                                $variantsadd->option3=$option3;
+                                $variantsadd->barcode=$barcode;
+                                $variantsadd->sku=$sku;
+
+                                  $variantsadd->save();
+
+                            array_push($array_id,$product->id);
+
+
+                    }
 
 
                 }
+
+                ProductVariant::whereNotIn('product_id',$array_id)->delete();
+            Product::whereNotIn('id',$array_id)->delete();
+
 
                $id = Auth::id();
                $csv=new Allproductcsv;
@@ -3844,4 +4101,302 @@ class ProductController extends Controller
         return back();
 
     }
+
+
+
+
+    // public function importallproducts(Request $request){
+
+    //     if($request->has('file'))
+    //     {
+    //         $csv = file($request->file);
+
+    //         //chunking file
+    //         $chunks = array_chunk($csv,1000);
+    //         $path = resource_path('temp');
+
+    //         //convert chunk to new csv file
+    //         foreach ($chunks as $key => $chunk) {
+    //             $name = "/tmp{$key}.csv";
+    //             file_put_contents($path.$name,$chunk);
+    //         }
+
+    //         //getting all the file inside the directories
+    //         $files = glob("$path/*.csv");
+
+    //         $header = [];
+
+    //         foreach ($files as $key => $file) {
+
+    //             $data = array_map('str_getcsv', file($file));
+
+    //             if($key == 0){
+    //                 $header = $data[0];
+    //                 unset($data[0]);
+    //             }
+
+    //             foreach ($data as $sale) {
+    //                 $sellData = array_combine($header,$sale);
+
+
+
+    //                 $get=Product::where('id',$sale[0])->first();
+
+
+    //                 if(!empty($get)){
+
+
+    //                     $variant=ProductVariant::where('product_id',$sale[0])->get();
+
+    //                     if(count($variant)>0){
+
+
+    //                         if(isset($sale[2])) {
+    //                             $get->title = $sale[2];
+    //                         }
+
+    //                         if(isset($sale[3])) {
+    //                             $get->description = $sale[3];
+    //                         }
+    //                         if(isset($sale[4])) {
+    //                             $get->type = $sale[4];
+    //                         }
+
+    //                         if(isset($sale[5])) {
+    //                             $get->vendor = $sale[5];
+    //                         }
+
+
+    //                         if(isset($sale[6])) {
+    //                             $tagArray = explode(",", $sale[6]);
+
+    //                          $gettag=Tag::whereIn('name',$tagArray)->pluck('id')->toArray();
+
+
+    //                             $gettag1=$get->tags()->sync($gettag);
+
+    //                         }
+
+    //                         if(isset($sale[7])) {
+    //                             $get->weight = $sale[7];
+    //                         }
+
+    //                         if(isset($sale[9])) {
+    //                             $get->processing_time = $sale[9];
+
+    //                         }
+    //                         if(isset($sale[10])) {
+    //                             $get->slug = $sale[10];
+    //                         }
+
+    //                         if(isset($sale[16])) {
+    //                             $get->attribute1 = $sale[16];
+
+    //                         }
+    //                      if(isset($sale[18])) {
+    //                          $get->attribute2 = $sale[18];
+    //                      }
+
+    //                         if(isset($sale[20])) {
+    //                             $get->attribute3 = $sale[20];
+    //                         }
+
+    //                         if(isset($sale[15])) {
+    //                             $get->recommended_price = $sale[15];
+    //                         }
+
+    //                         if(isset($sale[1])) {
+    //                             $variants = ProductVariant::where('id', $sale[1])->get();
+
+    //                         }
+
+
+    //                         if(isset($sale[22])) {
+    //                             $categoryArray = explode(",", $sale[22]);
+
+    //                             $getcategory=Category::whereIn('title',$categoryArray)->pluck('id')->toArray();
+
+
+    //                             $getcat1=$get->categoriesget()->sync($getcategory);
+
+    //                         }
+
+
+    //                         // if(isset($importData[24])) {
+    //                         //     $ImageArray = explode(",", $importData[24]);
+
+
+
+
+
+    //                         //     // foreach ($get->has_images as $imagess){
+
+
+
+    //                         //     //     foreach($ImageArray as $getimmg){
+
+
+    //                         //     //         $imagess->image=$getimmg;
+    //                         //     //         $imagess->update();
+    //                         //     //     }
+
+
+    //                         //     // }
+
+
+    //                         //     // foreach ($get->has_images as $imagess){
+
+
+    //                         //     //     if( !in_array( $imagess->image ,$ImageArray ) ){
+    //                         //     //                 $imagess->delete();
+    //                         //     //     }
+
+    //                         //     // }
+
+
+
+
+    //                         // }
+
+    //                         foreach ($variants as $getvariant) {
+
+    //                             if(isset($sale[8])) {
+    //                                 $getvariant->sku = $sale[8];
+    //                             }
+
+    //                             if(isset($sale[11])) {
+    //                                 $getvariant->price = $sale[11];
+    //                             }
+
+    //                             if(isset($sale[12])) {
+    //                                 $getvariant->compare_price = $sale[12];
+    //                             }
+
+    //                             if(isset($sale[13])) {
+    //                                 $getvariant->cost = $sale[13];
+    //                             }
+
+    //                             if(isset($sale[14])) {
+    //                                 $getvariant->quantity = $sale[14];
+    //                             }
+    //                             if(isset($sale[17])) {
+    //                                 $getvariant->option1 = $sale[17];
+    //                             }
+
+    //                             if(isset($sale[19])) {
+    //                                 $getvariant->option2 = $sale[19];
+    //                             }
+    //                             if(isset($sale[21])) {
+    //                                 $getvariant->option3 = $sale[21];
+    //                             }
+
+    //                             if(isset($sale[23])) {
+
+    //                                 $getvariant->barcode = $sale[23];
+    //                             }
+    //                             $getvariant->update();
+
+
+    //                         }
+
+    //                         $get->update();
+
+
+
+    //                     }
+
+    //                     else {
+
+    //                         if(isset($sale[2])) {
+    //                             $get->title = $sale[2];
+    //                         }
+    //                         if(isset($sale[3])) {
+    //                         $get->description=$sale[3];
+    //                             }
+
+    //                         if(isset($sale[4])) {
+    //                             $get->type = $sale[4];
+    //                         }
+    //                         if(isset($sale[5])) {
+    //                             $get->vendor = $sale[5];
+    //                         }
+
+    //                         if(isset($sale[6])) {
+    //                             $tagArray = explode(",", $sale[6]);
+
+    //                             $gettag=Tag::whereIn('name',$tagArray)->pluck('id')->toArray();
+
+
+    //                             $gettag1=$get->tags()->sync($gettag);
+
+    //                         }
+    //                         if(isset($sale[7])) {
+    //                             $get->weight = $sale[7];
+    //                         }
+    //                         if(isset($sale[9])) {
+    //                             $get->processing_time = $sale[9];
+    //                         }
+
+    //                         if(isset($sale[10])) {
+    //                             $get->slug = $sale[10];
+    //                         }
+    //                         if(isset($sale[16])) {
+    //                             $get->attribute1 = $sale[16];
+    //                         }
+    //                         if(isset($sale[18])) {
+    //                             $get->attribute2 = $sale[18];
+    //                         }
+    //                         if(isset($sale[20])) {
+    //                             $get->attribute3 = $sale[20];
+    //                         }
+    //                         if(isset($sale[15])) {
+    //                             $get->recommended_price = $sale[15];
+    //                         }
+    //                         if(isset($sale[8])) {
+    //                             $get->sku = $sale[8];
+    //                         }
+    //                         if(isset($sale[11])) {
+    //                             $get->price = $sale[11];
+    //                         }
+    //                         if(isset($sale[12])) {
+    //                             $get->compare_price = $sale[12];
+    //                         }
+    //                         if(isset($sale[13])) {
+    //                             $get->cost = $sale[13];
+    //                         }
+    //                         if(isset($sale[14])) {
+    //                             $get->quantity = $sale[14];
+    //                         }
+
+    //                         if(isset($sale[22])) {
+    //                             $categoryArray = explode(",", $sale[22]);
+
+    //                             $getcategory=Category::whereIn('title',$categoryArray)->pluck('id')->toArray();
+
+
+    //                             $getcat1=$get->categoriesget()->sync($getcategory);
+
+    //                         }
+    //                         if(isset($sale[23])) {
+    //                             $get->barcode = $sale[23];
+    //                         }
+    //                         $get->update();
+    //                     }
+    //                 }
+
+    //             }
+
+    //             unlink($file);
+    //         }
+
+    //         return "stored";
+
+    //     }
+    //     return "please upload csv file";
+
+
+
+
+
+    // }
 }

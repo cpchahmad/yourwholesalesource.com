@@ -10,7 +10,7 @@ class Product extends Model
 {
 
 
-    protected $fillable = ['title','price','compare_price','cost','quantity','sku','recommended_price'];
+    protected $fillable = ['title','price','compare_price','cost','quantity','sku','recommended_price','description','type','vendor'];
 
     use ProductVariantTrait;
     public function hasVariants(){
