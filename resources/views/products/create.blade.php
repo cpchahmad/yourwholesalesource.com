@@ -128,7 +128,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <div class="col-xs-12 ">
-                                            <label>Weight</label>
+                                            <label>Metric</label>
                                             <input type="number" step="any" class="form-control" name="weight" placeholder="0.0Kg" required>
                                         </div>
                                     </div>

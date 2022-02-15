@@ -12,7 +12,7 @@
                             <a class="link-fx" href="">Inventory</a>
                         </li>
                         <li class="breadcrumb-item">Export or Import Inventory</li>
-                    </ol>
+                     </ol>
                 </nav>
             </div>
         </div>
